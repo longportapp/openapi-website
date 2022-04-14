@@ -1,25 +1,42 @@
-name: Build canary env
+name: Deploy canary
 
 on:
   push:
     branches:
       - canary
+  pull_request:
+    branches:
+      - canary
+
 jobs:
-  build:
-    name: Build canary
-    timeout-minutes: 60
+  deploy_canary:
+    name: build
+    timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
       - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: yarn
-      - name: Installation
+
+      - name: install dependency npm
         run: yarn
-      - name: Build docs
+
+      - name: build canary env dist file
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.FE_S3_OPEN_STATIC_CANARY_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.FE_S3_OPEN_STATIC_CANARY_ACCESS_KEY_SECRET }}
+          AWS_DEFAULT_REGION: ${{ secrets.CANARY_HK_AWS_DEFAULT_REGION }}
+          AWS_DEFAULT_BUCKET: ${{ secrets.FE_S3_OPEN_STATIC_CANARY_BUCKET }}
         run: |
-          yarn build --locale zh-CN
-          ls ./dist/
-          ls ./dist/canary
-          
+          yarn build:canary
+          export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+          export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+          aws --region=$AWS_DEFAULT_REGION s3 sync ./dist/canary s3://${AWS_DEFAULT_BUCKET}/openapi-website/canary/ --exclude "*.map" --cache-control max-age=31536000
+          aws --region=$AWS_DEFAULT_REGION s3 cp ./dist/canary/index.html s3://${AWS_DEFAULT_BUCKET}/openapi-website/canary/ --cache-control no-cache
+          aws --region=$AWS_DEFAULT_REGION s3 cp ./dist/canary/en/index.html s3://${AWS_DEFAULT_BUCKET}/openapi-website/canary/en/ --cache-control no-cache
+          aws --region=$AWS_DEFAULT_REGION s3 cp ./dist/canary/zh-HK/index.html s3://${AWS_DEFAULT_BUCKET}/openapi-website/canary/zh-HK/ --cache-control no-cache
