@@ -9,4 +9,4 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Test
-        run: echo $FE_CANARY_HK_AWS_DEFAULT_REGION
+        run: echo ${{ secrets.FE_CANARY_HK_AWS_DEFAULT_REGION }}
