@@ -1,0 +1,10 @@
+{
+  "label": "交易",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "交易接口介绍",
+    "slug": "/trade"
+  }
+}

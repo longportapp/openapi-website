@@ -1,0 +1,7 @@
+.idea
+node_modules
+.docusaurus
+yarn-error.log
+.DS_Store
+.cache-loader
+dist
