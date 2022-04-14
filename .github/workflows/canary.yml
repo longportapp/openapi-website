@@ -1,7 +1,7 @@
 name: Build canary env
 
 on:
-  pull_request:
+  push:
     branches:
       - canary
 jobs:
