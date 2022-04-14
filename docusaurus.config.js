@@ -8,7 +8,7 @@ const config = {
   title: 'Longbridge 开放平台',
   url: 'https://open.longbridgeapp.com',
   baseUrl: '/',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   i18n,
   favicon: 'https://pub.lbkrs.com/files/202107/gmrC7fXdNq1nwTsm/new-ico.png',
@@ -46,12 +46,12 @@ const config = {
           },
           {
             to: 'https://open.longbridgeapp.com/sdk',
-            label: 'SDK 下载',
+            label: 'SDK',
             position: 'left',
           },
           {
             href: '/docs',
-            label: 'API 文档',
+            label: '文档',
             position: 'left',
           },
           {
