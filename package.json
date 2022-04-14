@@ -7,7 +7,9 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "dev": "docusaurus start --port=8000",
-    "build": "yarn clear && docusaurus build --out-dir dist",
+    "build": "yarn clear && yarn build:canary",
+    "build:release": "yarn clear && docusaurus build --out-dir dist/release",
+    "build:canary": "yarn clear && docusaurus build --out-dir dist/canary",
     "clear": "docusaurus clear && mkdir -p dist && rm -rf dist",
     "serve": "docusaurus serve --dir dist --port=8008",
     "create:docs": "docusaurus docs:version",
