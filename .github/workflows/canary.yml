@@ -27,13 +27,15 @@ jobs:
         run: yarn
 
       - name: build canary env dist file
+        run: yarn build:canary
+
+      - name: upload canary dist to s3
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.FE_S3_OPEN_STATIC_CANARY_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.FE_S3_OPEN_STATIC_CANARY_ACCESS_KEY_SECRET }}
           AWS_DEFAULT_REGION: ${{ secrets.CANARY_HK_AWS_DEFAULT_REGION }}
           AWS_DEFAULT_BUCKET: ${{ secrets.FE_S3_OPEN_STATIC_CANARY_BUCKET }}
         run: |
-          yarn build:canary
           export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
           export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
           aws --region=$AWS_DEFAULT_REGION s3 sync ./dist/canary s3://${AWS_DEFAULT_BUCKET}/openapi-website/canary/ --exclude "*.map" --cache-control max-age=31536000
