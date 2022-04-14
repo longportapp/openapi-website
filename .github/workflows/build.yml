@@ -1,0 +1,12 @@
+name: Go
+on: [push]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
+
+      - name: Test
+        run: echo $FE_CANARY_HK_AWS_DEFAULT_REGION
