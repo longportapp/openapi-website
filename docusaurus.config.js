@@ -8,6 +8,9 @@ const config = {
   title: 'Longbridge 开放平台',
   url: 'https://open.longbridgeapp.com',
   baseUrl: '/',
+  organizationName: 'longbridgeapp',
+  projectName: 'openapi-website',
+  baseUrlIssueBanner: false,
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   i18n,
@@ -20,6 +23,13 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+          // todo i18n lang should redirect other dir
+          editUrl: ({locale, docPath}) => {
+            const nextVersionDocsDirPath = 'docs';
+            return `https://github.com/longbridgeapp/openapi-website/edit/main/${nextVersionDocsDirPath}/${docPath}`;
+          },
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
         },
         blog: false,
         theme: {
@@ -57,6 +67,11 @@ const config = {
           {
             type: 'localeDropdown',
             position: 'right',
+          },
+          {
+            href: "https://github.com/longbridgeapp/openapi-website",
+            label: "GitHub",
+            position: "right",
           },
         ],
       },
