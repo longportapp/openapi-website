@@ -2,20 +2,18 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github')
 const darkCodeTheme = require('prism-react-renderer/themes/dracula')
 const i18n = require('./i18n/config')
-const ssrTemplate = require("./ssr.html.template").default
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Longbridge 开放平台',
   url: 'https://open.longbridgeapp.com',
-  baseUrl: '/',
+  baseUrl: '/docs/',
   organizationName: 'longbridgeapp',
   projectName: 'openapi-website',
   baseUrlIssueBanner: false,
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   i18n,
-  ssrTemplate,
   favicon: 'https://pub.lbkrs.com/files/202107/gmrC7fXdNq1nwTsm/new-ico.png',
   plugins: ['docusaurus-plugin-sass'],
   presets: [
