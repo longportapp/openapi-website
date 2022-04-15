@@ -11,7 +11,9 @@
       "@site/*": [
         "./*"
       ]
-    }
+    },
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "**/*.ts",
