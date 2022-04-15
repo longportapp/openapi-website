@@ -8,8 +8,8 @@
     "docusaurus": "docusaurus",
     "dev": "docusaurus start --port=8000",
     "build": "yarn clear && yarn build:canary",
-    "build:release": "yarn clear && docusaurus build --out-dir dist/release",
-    "build:canary": "yarn clear && docusaurus build --out-dir dist/canary",
+    "build:release": "yarn clear && docusaurus build --out-dir dist",
+    "build:canary": "yarn clear && docusaurus build --out-dir dist",
     "clear": "docusaurus clear && mkdir -p dist && rm -rf dist",
     "serve": "docusaurus serve --dir dist --port=8008",
     "create:docs": "docusaurus docs:version",
@@ -21,16 +21,16 @@
     "@docusaurus/core": "2.0.0-beta.18",
     "@docusaurus/preset-classic": "2.0.0-beta.18",
     "@mdx-js/react": "^1.6.22",
+    "prism-react-renderer": "^1.3.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "prism-react-renderer": "^1.3.1"
+    "react-dom": "17.0.2"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.0.0-beta.18",
     "@tsconfig/docusaurus": "^1.0.5",
     "docusaurus-plugin-sass": "^0.2.2",
-    "typescript": "^4.6.3",
-    "sass": "^1.34.1"
+    "sass": "^1.34.1",
+    "typescript": "^4.6.3"
   },
   "browserslist": {
     "production": [
