@@ -3,7 +3,7 @@ name: Deploy canary
 on:
   push:
     tags:
-      - /^canary.*/
+      - ^canary.*
 
 jobs:
   deploy_canary:
