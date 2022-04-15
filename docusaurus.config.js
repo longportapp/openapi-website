@@ -7,7 +7,7 @@ const i18n = require('./i18n/config')
 const config = {
   title: 'Longbridge 开放平台',
   url: 'https://open.longbridgeapp.com',
-  baseUrl: '/',
+  baseUrl: '/docs/',
   organizationName: 'longbridgeapp',
   projectName: 'openapi-website',
   baseUrlIssueBanner: false,
