@@ -2,9 +2,11 @@ name: Deploy canary
 
 on:
   push:
-    tags:
-      - ^canary.*
-
+    branches:
+      - canary
+  pull_request:
+    branches:
+      - canary
 jobs:
   deploy_canary:
     name: build
