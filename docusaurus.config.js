@@ -2,6 +2,7 @@
 const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 const i18n = require("./i18n/config");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -15,7 +16,31 @@ const config = {
   onBrokenMarkdownLinks: "warn",
   i18n,
   favicon: "https://pub.lbkrs.com/files/202107/gmrC7fXdNq1nwTsm/new-ico.png",
-  plugins: ["docusaurus-plugin-sass"],
+  plugins: [
+    "docusaurus-plugin-sass",
+    function docsWebpackConfig(context, options) {
+      return {
+        name: "lb-docs-webpack-plugin",
+        configureWebpack(config, isServer, utils, content) {
+          if (isServer) return {};
+          const docsAssetPrefix = "openapi-website";
+          return {
+            output: {
+              filename: `assets/js/${docsAssetPrefix}_[name].[contenthash:8].js`,
+              chunkFilename: `assets/js/${docsAssetPrefix}_[name].[contenthash:8].js`
+            },
+            plugins: [
+              new MiniCssExtractPlugin({
+                filename: `assets/css/${docsAssetPrefix}_[name].[contenthash:8].css`,
+                chunkFilename: `assets/css/${docsAssetPrefix}_[name].[contenthash:8].css`,
+                ignoreOrder: true
+              })
+            ]
+          };
+        }
+      };
+    }
+  ],
   presets: [
     [
       "classic",
