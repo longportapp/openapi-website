@@ -32,7 +32,8 @@ const config = {
             plugins: [
               new MiniCssExtractPlugin({
                 filename: `assets/css/${docsAssetPrefix}_[name].[contenthash:8].css`,
-                chunkFilename: `assets/css/${docsAssetPrefix}_[name].[contenthash:8].css`
+                chunkFilename: `assets/css/${docsAssetPrefix}_[name].[contenthash:8].css`,
+                ignoreOrder: true
               })
             ]
           };
