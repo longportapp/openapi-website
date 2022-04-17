@@ -1,86 +1,110 @@
 // @ts-check
-const lightCodeTheme = require('prism-react-renderer/themes/github')
-const darkCodeTheme = require('prism-react-renderer/themes/dracula')
-const i18n = require('./i18n/config')
+const lightCodeTheme = require("prism-react-renderer/themes/github");
+const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const i18n = require("./i18n/config");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Longbridge 开放平台',
-  url: 'https://open.longbridgeapp.com',
-  baseUrl: '/docs/',
-  organizationName: 'longbridgeapp',
-  projectName: 'openapi-website',
+  title: "Longbridge 开放平台",
+  url: "https://open.longbridgeapp.com",
+  baseUrl: "/",
+  organizationName: "longbridgeapp",
+  projectName: "openapi-website",
   baseUrlIssueBanner: false,
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: "warn",
+  onBrokenMarkdownLinks: "warn",
   i18n,
-  favicon: 'https://pub.lbkrs.com/files/202107/gmrC7fXdNq1nwTsm/new-ico.png',
-  plugins: ['docusaurus-plugin-sass'],
+  favicon: "https://pub.lbkrs.com/files/202107/gmrC7fXdNq1nwTsm/new-ico.png",
+  plugins: [
+    "docusaurus-plugin-sass",
+    function docsWebpackConfig(context, options) {
+      return {
+        name: "lb-docs-webpack-plugin",
+        configureWebpack(config, isServer, utils, content) {
+          if (isServer) return {};
+          const docsAssetPrefix = "openapi-website";
+          return {
+            output: {
+              filename: `assets/js/${docsAssetPrefix}_[name].[contenthash:8].js`,
+              chunkFilename: `assets/js/${docsAssetPrefix}_[name].[contenthash:8].js`
+            },
+            plugins: [
+              new MiniCssExtractPlugin({
+                filename: `assets/css/${docsAssetPrefix}_[name].[contenthash:8].css`,
+                chunkFilename: `assets/css/${docsAssetPrefix}_[name].[contenthash:8].css`
+              })
+            ]
+          };
+        }
+      };
+    }
+  ],
   presets: [
     [
-      'classic',
+      "classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: require.resolve("./sidebars.js"),
           // todo i18n lang should redirect other dir
-          editUrl: ({locale, docPath}) => {
-            const nextVersionDocsDirPath = 'docs';
+          editUrl: ({ locale, docPath }) => {
+            const nextVersionDocsDirPath = "docs";
             return `https://github.com/longbridgeapp/openapi-website/edit/main/${nextVersionDocsDirPath}/${docPath}`;
           },
           showLastUpdateAuthor: true,
-          showLastUpdateTime: true,
+          showLastUpdateTime: true
         },
         blog: false,
         theme: {
-          customCss: [require.resolve('./src/css/custom.scss')],
-        },
-      }),
-    ],
+          customCss: [require.resolve("./src/css/custom.scss")]
+        }
+      })
+    ]
   ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'Longbridge OpenAPI',
+        title: "Longbridge OpenAPI",
         logo: {
-          alt: 'Longbridge',
-          src: 'https://pub.lbkrs.com/files/202107/gmrC7fXdNq1nwTsm/new-ico.png',
+          alt: "Longbridge",
+          src: "https://pub.lbkrs.com/files/202107/gmrC7fXdNq1nwTsm/new-ico.png"
         },
         items: [
           {
-            to: 'https://open.longbridgeapp.com/developers',
-            position: 'left',
-            label: '开发者认证',
+            to: "https://open.longbridgeapp.com/developers",
+            position: "left",
+            label: "开发者认证"
           },
           {
-            to: 'https://open.longbridgeapp.com/sdk',
-            label: 'SDK',
-            position: 'left',
+            to: "https://open.longbridgeapp.com/sdk",
+            label: "SDK",
+            position: "left"
           },
           {
-            href: '/docs',
-            label: '文档',
-            position: 'left',
+            href: "/docs",
+            label: "文档",
+            position: "left"
           },
           {
-            type: 'localeDropdown',
-            position: 'right',
+            type: "localeDropdown",
+            position: "right"
           },
           {
             href: "https://github.com/longbridgeapp/openapi-website",
             label: "GitHub",
-            position: "right",
-          },
-        ],
+            position: "right"
+          }
+        ]
       },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ['shell-session', 'http'],
-      },
-    }),
-}
+        additionalLanguages: ["shell-session", "http"]
+      }
+    })
+};
 
-module.exports = config
+module.exports = config;
