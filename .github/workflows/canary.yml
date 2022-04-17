@@ -1,5 +1,4 @@
 name: Deploy canary
-
 on:
   push:
     branches:
