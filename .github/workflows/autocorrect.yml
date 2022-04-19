@@ -1,5 +1,5 @@
 name: Autocorrect
-on: push
+on: [push, pull_request]
 jobs:
   autocorrect:
     name: Check text autocorrect
