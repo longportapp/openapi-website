@@ -12,4 +12,4 @@ $ yarn dev
 
 Before commit you should be run `autocorrect --fix .` first
 
-[How to use autocorrect](https://github.com/huacnlee/auto-correct)
+[How to use autocorrect](https://github.com/huacnlee/autocorrect)
