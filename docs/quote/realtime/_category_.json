@@ -1,0 +1,10 @@
+{
+  "label": "实时行情",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "实时行情",
+    "slug": "/quote/realtime"
+  }
+}

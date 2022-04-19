@@ -1,0 +1,10 @@
+{
+  "label": "订阅",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "订阅",
+    "slug": "/quote/subscribe"
+  }
+}
