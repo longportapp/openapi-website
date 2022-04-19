@@ -2,6 +2,17 @@
   table {
     display: table;
     width: 100%;
+    thead,
+    th,
+    tr,
+    td {
+      background-color: transparent;
+    }
+    thead {
+      tr {
+        border-bottom: none;
+      }
+    }
   }
   h1 {
     --ifm-h1-font-size: 32px;
