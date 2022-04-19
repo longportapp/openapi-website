@@ -1,0 +1,15 @@
+.markdown.theme-doc-markdown {
+  table {
+    display: table;
+    width: 100%;
+  }
+  h1 {
+    --ifm-h1-font-size: 32px;
+    &:first-child  {
+      --ifm-h1-font-size: 32px;
+    }
+  }
+  h2 {
+    --ifm-h2-font-size: 24px;
+  }
+}

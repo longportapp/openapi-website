@@ -1,6 +1,5 @@
-.markdown {
-  table {
-    display: table;
-    width: 100%;
-  }
+@import './components/doc-sidebar.scss';
+@import './components/markdown.scss';
+html {
+  font-size: 14px;
 }
