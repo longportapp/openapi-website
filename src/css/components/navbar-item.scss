@@ -57,6 +57,7 @@ $caret-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg
   }
 }
 .menu__list-item-collapsible {
+  padding-left: 12px;
   .menu__caret {
     padding-left: 0;
     order: -1;
@@ -87,13 +88,16 @@ $caret-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg
     }
     .menu__link {
       &.menu__link--sublist {
-        color: #82888D;
+        color: var(--ifm-menu-color);
       }
     }
   }
+  .menu__list {
+    padding-left: 32px !important;
+  }
 }
 .menu__list {
-  padding-left: 0!important;
+  padding-left: 12px !important;
   .menu__link {
     padding: 8px 24px;
     border-radius: 51px;
