@@ -8,6 +8,21 @@
 > * Markdown 文档需要提供规范的 Meta 信息
 
 
+#### 特别提示
+
+* Markdown 涉及到的静态资源例如：图片、视频等都需要上传到 CDN 再引用。 不要放到项目中引用
+
+  不推荐的写法（这样定义会导致加载资源失败的情况）
+  ```markdown
+  ![流程图片](../../static/xxxx.png)
+  ```
+  
+  推荐的写法（从后台上传到 CDN 拿到 CDN 地址，然后在 Markdown 中引用）
+  ``` markdown
+  ![流程图片](https://pub.lbkrs.com/xxx/xxx.png)
+  ```
+
+
 #### 文档 Meta 信息
 
 在每个 `.md` 文件的开头添加内容：
@@ -27,7 +42,7 @@ slug: "/xxx" # 注意前面必须加上 /， 例如 /trade-order-create 这样�
 ```json5
 {
   "position": 1, // 显示的顺序，数字越小越靠前
-  "label": "OpenAPI 介绍", // 文档分类名称，显示在左边栏
+  "label": "Open API 介绍", // 文档分类名称，显示在左边栏
   "link": {
     "type": "generated-index", // 固定为 generated-index
     "title": "Getting started", // 点击分类时页面的描述信息
