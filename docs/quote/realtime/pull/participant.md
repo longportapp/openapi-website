@@ -1,13 +1,13 @@
 ---
 id: quote_broker_ids
-title: 获取券商席位id
+title: 获取券商席位 id
 slug: quote-broker-ids
 ---
 
 ## get_participant_broker_ids
 
 ### 介绍：
-    获取券商席位id
+    获取券商席位 id
 ### 协议指令：
     16
 ### 响应
@@ -15,11 +15,11 @@ slug: quote-broker-ids
 
 | 名称 | 类型   | 描述  | 
 |-------|-------|-----|
-|participant_broker_numbers|object[]|券商席位|
-|∟broker_ids|int32[]|券商对应的多个席位id|
-|∟participant_name_cn|string|券商名称(简)|
-|∟participant_name_en|string|券商名称(英)|
-|∟participant_name_hk|string|券商名称(繁)|
+|participant_broker_numbers|object[]| 券商席位 |
+|∟broker_ids|int32[]| 券商对应的多个席位 id|
+|∟participant_name_cn|string| 券商名称 (简)|
+|∟participant_name_en|string| 券商名称 (英)|
+|∟participant_name_hk|string| 券商名称 (繁)|
 
 * proto
 ```
@@ -35,14 +35,14 @@ message ParticipantInfo {
 }
 ```
 ### 接口限制
-每秒平均请求次数10。瞬时并发次数5。
+每秒平均请求次数 10。瞬时并发次数 5。
 
 ### 错误码
 
-| 协议错误码 | 业务错误码   | 描述  | 排查建议|
+| 协议错误码 | 业务错误码   | 描述  | 排查建议 |
 |-------|-------|-----|----|
-|3 | 301600| 无效的请求|请求参数有误或解包失败|
-|3 | 301606| 限流|降低请求频次|
-|7 | 301602| 服务端内部错误||
+|3 | 301600| 无效的请求 | 请求参数有误或解包失败 |
+|3 | 301606| 限流 | 降低请求频次 |
+|7 | 301602| 服务端内部错误 ||
 
 

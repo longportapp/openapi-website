@@ -13,18 +13,18 @@ slug: push_depth
 
 | 名称 | 类型   | 描述  | 
 |-------|-------|-----|
-|symbol|string|标的代码|
-|sequence|int64|序列号|
-|ask|object[]|卖盘|
-|∟position|int32|档位|
-|∟price|string|价格|
-|∟volume|int64|挂单辆|
-|∟order_num|int64|订单数量|
-|bid|object[]|买盘|
-|∟position|int32|档位|
-|∟price|string|价格|
-|∟volume|int64|挂单辆|
-|∟order_num|int64|订单数量|
+|symbol|string| 标的代码 |
+|sequence|int64| 序列号 |
+|ask|object[]| 卖盘 |
+|∟position|int32| 档位 |
+|∟price|string| 价格 |
+|∟volume|int64| 挂单辆 |
+|∟order_num|int64| 订单数量 |
+|bid|object[]| 买盘 |
+|∟position|int32| 档位 |
+|∟price|string| 价格 |
+|∟volume|int64| 挂单辆 |
+|∟order_num|int64| 订单数量 |
 
 * proto
 ```

@@ -28,33 +28,33 @@ message MultiSecurityRequest {
 
 | 名称 | 类型   | 描述  | 
 |-------|-------|-----|
-|secu_quote|object[]|标的实时行情数据列表|
-|∟symbol|string|标的代码|
-|∟last_done|string|最新价|
-|∟prev_close|string|昨收价|
-|∟open|string|开盘价|
-|∟high|string|最高价|
-|∟low|string|最低价|
-|∟timestamp|int64|最新成交的交时间戳|
-|∟volume|int64|成交量|
-|∟turnover|string|成交额|
-|∟trade_status|TradeStatus|标的交易状态|
-|∟pre_market_quote|PrePostQuote|美股盘前交易行情|
-|∟∟last_done|string|最新价|
-|∟∟timestamp|int64|最新成交的交时间戳|
-|∟∟volume|int64|成交量|
-|∟∟turnover|string|成交额|
-|∟∟high|string|最高价|
-|∟∟low|string|最低价|
-|∟∟prev_close|string|上一个交易阶段的收盘价|
-|∟post_market_quote|PrePostQuote|美股盘后交易行情|
-|∟∟last_done|string|最新价|
-|∟∟timestamp|int64|最新成交的交时间戳|
-|∟∟volume|int64|成交量|
-|∟∟turnover|string|成交额|
-|∟∟high|string|最高价|
-|∟∟low|string|最低价|
-|∟∟prev_close|string|上一个交易阶段的收盘价|
+|secu_quote|object[]| 标的实时行情数据列表 |
+|∟symbol|string| 标的代码 |
+|∟last_done|string| 最新价 |
+|∟prev_close|string| 昨收价 |
+|∟open|string| 开盘价 |
+|∟high|string| 最高价 |
+|∟low|string| 最低价 |
+|∟timestamp|int64| 最新成交的交时间戳 |
+|∟volume|int64| 成交量 |
+|∟turnover|string| 成交额 |
+|∟trade_status|TradeStatus| 标的交易状态 |
+|∟pre_market_quote|PrePostQuote| 美股盘前交易行情 |
+|∟∟last_done|string| 最新价 |
+|∟∟timestamp|int64| 最新成交的交时间戳 |
+|∟∟volume|int64| 成交量 |
+|∟∟turnover|string| 成交额 |
+|∟∟high|string| 最高价 |
+|∟∟low|string| 最低价 |
+|∟∟prev_close|string| 上一个交易阶段的收盘价 |
+|∟post_market_quote|PrePostQuote| 美股盘后交易行情 |
+|∟∟last_done|string| 最新价 |
+|∟∟timestamp|int64| 最新成交的交时间戳 |
+|∟∟volume|int64| 成交量 |
+|∟∟turnover|string| 成交额 |
+|∟∟high|string| 最高价 |
+|∟∟low|string| 最低价 |
+|∟∟prev_close|string| 上一个交易阶段的收盘价 |
 
 * proto
 ```
@@ -88,15 +88,15 @@ message PrePostQuote {
 }
 ```
 ### 接口限制
-每秒平均请求次数10。瞬时并发次数5。   
+每秒平均请求次数 10。瞬时并发次数 5。   
 每次请求，接口参数 标的列表 支持传入的标的数量上限是 300 个。    
-港股 bmp 行情，超过20支的港股标的将响应延迟行情。
+港股 bmp 行情，超过 20 支的港股标的将响应延迟行情。
 
 ### 错误码
 
-| 协议错误码 | 业务错误码   | 描述  | 排查建议|
+| 协议错误码 | 业务错误码   | 描述  | 排查建议 |
 |-------|-------|-----|----|
-|3 | 301600| 无效的请求|请求参数有误或解包失败|
-|3 | 301606| 限流|降低请求频次|
-|7 | 301602| 服务端内部错误||
-|7 | 301607| 接口限制|请求的标的数量超限，请减少单次请求标的数量|
+|3 | 301600| 无效的请求 | 请求参数有误或解包失败 |
+|3 | 301606| 限流 | 降低请求频次 |
+|7 | 301602| 服务端内部错误 ||
+|7 | 301607| 接口限制 | 请求的标的数量超限，请减少单次请求标的数量 |
