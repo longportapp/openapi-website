@@ -1,0 +1,10 @@
+{
+  "label": "推送",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "推送",
+    "slug": "/quote/push"
+  }
+}
