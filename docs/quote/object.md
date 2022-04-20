@@ -105,3 +105,24 @@ enum AdjustType {
   FORWARD_ADJUST = 1;
 }
 ```
+
+### SubType
+* 说明：订阅数据的类型
+
+| id | 描述  | 
+|---- |-----|    
+|1|价格|
+|2|买卖盘口|
+|3|经纪队列|
+|4|逐笔明细|
+
+* proto
+```
+enum SubType {
+  UNKNOWN_TYPE = 0;
+  QUOTE = 1;
+  DEPTH = 2;
+  BROKERS = 3;
+  TRADE = 4;
+}
+```
