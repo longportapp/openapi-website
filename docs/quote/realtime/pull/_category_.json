@@ -1,0 +1,10 @@
+{
+  "label": "拉取",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "拉取",
+    "slug": "/quote/pull"
+  }
+}
