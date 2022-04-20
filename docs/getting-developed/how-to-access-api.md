@@ -8,7 +8,7 @@ slug: /how-to-access-api
 
 下图是 API 调用流程： 
 
-![how to access api flow](../../static/how-to-access-api-flow.png)
+![how to access api flow](https://pub.lbkrs.com/files/202204/KuqxBKUcPwUwXC6r/how-to-access-api-flow.png)
 
 ### 1. 获取 Access Key 
 
