@@ -54,7 +54,7 @@ start_at 和 end_at 的组合如下
 | data                                                                | object   |                                 |
 | <font color='grey'>∟</font>has_more                                 | bool     | 是否还有数据，如果为 true，则需要通过最后的时间再次请求。 |
 | <font color='grey'>∟</font>trades                                   | []object |                                 |
-| <font color='grey'>∟</font><font color='grey'>∟trade_id</font>      | string   | 成交 ID                           |
+| <font color='grey'>∟</font><font color='grey'>∟</font>trade_id      | string   | 成交 ID                           |
 | <font color='grey'>∟</font><font color='grey'>∟</font>order_id      | int64    | 订单 ID                           |
 | <font color='grey'>∟</font><font color='grey'>∟</font>symbol        | string   | 股票代码，使用 ticker.region 格式        |
 | <font color='grey'>∟</font><font color='grey'>∟</font>trade_done_at | int64    | 成交时间                            |
