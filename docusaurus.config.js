@@ -67,17 +67,23 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      colorMode: {
+        defaultMode: 'light',
+        disableSwitch: true,
+        respectPrefersColorScheme: false,
+      },
       navbar: {
-        title: "Longbridge OpenAPI",
+        title: "",
         logo: {
           alt: "Longbridge",
-          src: "https://pub.lbkrs.com/files/202107/gmrC7fXdNq1nwTsm/new-ico.png"
+          src: "https://pub.lbkrs.com/files/202204/U8NeviVyPf5Q7ecP/Group_156.png"
         },
         items: [
           {
             to: "https://open.longbridgeapp.com/developers",
             position: "left",
-            label: "开发者认证"
+            label: "开发者认证",
+            
           },
           {
             to: "https://open.longbridgeapp.com/sdk",
@@ -85,13 +91,10 @@ const config = {
             position: "left"
           },
           {
-            href: "/docs",
+            to: "/docs",
+            activeBasePath: "/docs",
             label: "文档",
             position: "left"
-          },
-          {
-            type: "localeDropdown",
-            position: "right"
           },
           {
             href: "https://github.com/longbridgeapp/openapi-website",
