@@ -12,4 +12,3 @@ jobs:
 
       - name: Exec autocorrect
         uses: huacnlee/autocorrect-action@main
-        run: autocorrect .
