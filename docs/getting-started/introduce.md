@@ -21,7 +21,7 @@ Longbridge 提供接入底层服务的 Https/Websocket 接口以及封装在上�
 待补充
 
 ### 如何开通
-第一步：登录 Longbridge App 或官网 [www.longbridgehk.com](www.longbridgehk.com) 完成长桥综合账户的开户（目前不支持长桥标准账户的接口服务）  
+第一步：登录 Longbridge App 或官网 [www.longbridgehk.com](www.longbridgehk.com) 完成长桥综合账户的开户（目前不支持长桥标准账户的接口服务）
 第二步：登录 [www.longbridgeapp.com](www.longbridgeapp.com) 进入开发者平台，完成开发者认证即 Open API 权限申请，获取令牌
 
 ### 使用权限及限制

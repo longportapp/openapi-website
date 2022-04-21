@@ -74,7 +74,7 @@ Authorization {这里是 token}
 SignedHeaders =
 Lowercase(HeaderName0) + ';' + Lowercase(HeaderName1) + ";" + ... + Lowercase(HeaderNameN)
 ```
-SignedHeaders 例子:
+SignedHeaders 例子：
 ```
 x-api-key;x-timestamp;authorization
 ```
