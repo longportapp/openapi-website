@@ -30,7 +30,7 @@ title: 当日成交
 | 名称     | 类型   | 必须 | 描述                              | 默认值 | 示例               |
 | -------- | ------ | ---- | --------------------------------- | ------ | ------------------ |
 | symbol   | string |      | 股票代码，使用 ticker.region 格式 |        | 700.HK             |
-| order_id | int64  |      | 订单 ID，用于指定订单 ID 查询     |        | 701276261045858304 |
+| order_id | string |      | 订单 ID，用于指定订单 ID 查询     |        | 701276261045858304 |
 
 
 
@@ -45,9 +45,9 @@ title: 当日成交
 | data                                                         | object   |                                   |
 | <font color="grey">∟</font>trades                            | []object |                                   |
 | <font color="grey">∟</font><font color="grey">∟</font>trade_id | string   | 成交 ID                           |
-| <font color="grey">∟</font><font color="grey">∟</font>order_id | int64    | 订单 ID                           |
+| <font color="grey">∟</font><font color="grey">∟</font>order_id | string   | 订单 ID                           |
 | <font color="grey">∟</font><font color="grey">∟</font>symbol | string   | 股票代码，使用 ticker.region 格式 |
-| <font color="grey">∟</font><font color="grey">∟</font>trade_done_at | int64    | 成交时间                          |
+| <font color="grey">∟</font><font color="grey">∟</font>trade_done_at | string   | 成交时间                          |
 | <font color="grey">∟</font><font color="grey">∟</font>price  | string   | 成交价格                          |
 | <font color="grey">∟</font><font color="grey">∟</font>quantity | string   | 成交数量                          |
 
@@ -65,7 +65,7 @@ title: 当日成交
       "quantity": "100",
       "symbol": "700.HK",
       "trade_done_at": "1648611351",
-      "trade_id": "693664675163312128-1648611351433741210"
+      "string": "693664675163312128-1648611351433741210"
     }
   ]
 }
