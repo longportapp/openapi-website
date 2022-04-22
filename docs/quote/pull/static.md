@@ -2,6 +2,7 @@
 id: quote_static
 title: 获取标的基础信息
 slug: quote-static
+sidebar_position: 1
 ---
 
 ## get_security_static_info

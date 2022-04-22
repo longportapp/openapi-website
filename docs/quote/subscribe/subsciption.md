@@ -2,6 +2,7 @@
 id: quote_subscription
 title: 获取已订阅标的行情
 slug: quote-subscription
+sidebar_position: 1
 ---
 
 ## get_subscription
@@ -25,7 +26,7 @@ message SubscriptionRequest {
 |-------|-------|-----|
 |sub_list|object[]| 订阅的数据 |
 |∟symbol|string| 标的代码 |
-|∟sub_type|SubType[]| 订阅的数据类型 |
+|∟sub_type|[SubType](../quote-object#SubType)[]| 订阅的数据类型 |
 
 * proto
 ```

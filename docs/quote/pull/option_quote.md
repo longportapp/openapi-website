@@ -2,6 +2,7 @@
 id: quote_option_quote
 title: 获取期权实时行情
 slug: quote-option-quote
+sidebar_position: 3
 ---
 
 ## get_option_quote
@@ -38,8 +39,8 @@ message MultiSecurityRequest {
 |∟timestamp|int64| 最新成交的交时间戳 |
 |∟volume|int64| 成交量 |
 |∟turnover|string| 成交额 |
-|∟trade_status|TradeStatus| 标的交易状态 |
-|∟option_extend|OptionExtend| 期权扩展行情 |
+|∟trade_status|[TradeStatus](../quote-object#TradeStatus)| 标的交易状态 |
+|∟option_extend|object| 期权扩展行情 |
 |∟∟implied_volatility|string| 隐含波动率 |
 |∟∟open_interest|int64| 未平仓数 |
 |∟∟expiry_date|string| 到期日 YYMMDD|

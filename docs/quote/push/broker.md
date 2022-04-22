@@ -1,8 +1,11 @@
 ---
 id: push_broker
 title: 实时经纪队列推送
-slug: push_broker
+slug: push-broker
+sidebar_position: 3
 ---
+
+##on_receive_brokers
 
 ### 介绍：
     订阅的标的的实时经纪队列推送。
@@ -17,10 +20,10 @@ slug: push_broker
 |sequence|int64| 序列号 |
 |ask_brokers|object[]| 卖盘经纪队列 |
 |∟position|int32| 档位 |
-|∟broker_ids|int32[]| 券商席位 Id|
+|∟broker_ids|int32[]| [券商席位](../pull/quote-broker-ids) Id|
 |bid_brokers|object[]| 买盘经纪队列 |
 |∟position|int32| 档位 |
-|∟broker_ids|int32[]| 券商席位 Id|
+|∟broker_ids|int32[]| [券商席位](../pull/quote-broker-ids) Id|
 
 * proto
 ```

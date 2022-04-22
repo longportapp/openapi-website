@@ -2,6 +2,7 @@
 id: quote_unsubscribe
 title: 取消订阅行情数据
 slug: quote-unsubscribe
+sidebar_position: 3
 ---
 
 ## unsubscribe
@@ -16,7 +17,7 @@ slug: quote-unsubscribe
 | 名称 | 类型   | 必须  | 描述      |  默认值  |  示例   |
 |-------|-------|-----|---------|-----|----|
 | symbol | string[]   | 是  | 取消订阅的标的代码  | | 00700.HK|
-| sub_type | SubType[] | 是 | 取消订阅的数据类型 | | 1,2|
+| sub_type | [SubType](../quote-object#SubType)[] | 是 | 取消订阅的数据类型 | | 1,2|
 | unsub_all | bool | 是 | 是否全部取消。symbol 为空时，取消所有标的的订阅。symbol 不为空时，取消这些标的的所有类型订阅。| | true|
 
 *proto

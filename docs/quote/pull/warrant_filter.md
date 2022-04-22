@@ -2,6 +2,7 @@
 id: quote_warrant_filter
 title: 获取轮证筛选列表
 slug: quote-warrant-filter
+sidebar_position: 14
 ---
 
 ## get_warrant_filter_list
@@ -18,15 +19,15 @@ slug: quote-warrant-filter
 | symbol | string   | 是  | 标的代码。ticker.region。  | | 00700.HK|
 | filter_config | FilterConfig   | 是  | 筛选条件  | | |
 |∟sort_by|int32| 是 | 根据哪一项数据进行排序。序号见响应数据排序序号字段。||1|
-|∟sort_order|int32| 是 | 升降顺序。0-升序 1-降序 ||0|
+|∟sort_order|int32| 是 | 升降顺序。0:升序 1:降序 ||0|
 |∟sort_offset|int32| 是 | 分页的第一条数据偏移量。||0|
 |∟sort_count|int32| 是 | 分页的每一页数量 ||20|
-|∟type|int32[]| 否 | 筛选轮证类型。0-认购 1-认沽 2-牛证 3-熊证 4-界内证 |||
-|∟issuer|int32[]| 否 | 筛选发行商。发行商 id 通过接口获取。|||
-|∟expiry_date|int32[]| 否 | 筛选轮证过期时间。1-<3 个月 2-3-6 个月 3-6-12 个月 4->12 个月 |||
+|∟type|int32[]| 否 | 筛选轮证类型。0:认购 1:认沽 2:牛证 3:熊证 4:界内证 |||
+|∟issuer|int32[]| 否 | [筛选发行商](./quote-issuer)。发行商 id 通过接口获取。|||
+|∟expiry_date|int32[]| 否 | 筛选轮证过期时间。1:<3 个月 2:3-6 个月 3:6-12 个月 4:>12 个月 |||
 |∟price_type|int32[]| 否 | 筛选价内/价外。1:价内 2:价外 |||
 |∟status|int32[]| 否 | 筛选状态 ||2:终止交易 3:等待上市 4:正常 |
-|language | int32   | 是  | 响应的语言。0-简体 1-english 2-繁体 | | 0|
+|language | int32   | 是  | 响应的语言。0:简体 1:english 2:繁体 | | 0|
 
 * proto
 ```
