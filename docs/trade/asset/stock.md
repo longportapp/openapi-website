@@ -1,13 +1,13 @@
 ---
 id: trade-asset-stock
 slug: trade-asset-stock
-title: 股票持仓信息
+title: 股票持仓
 ---
 
 #  查询股票持仓信息
 
 
-<font color='gray' size='2'>最后更新于 2022-04-19</font>
+<font color='gray' size='2'>最后更新于 2022-04-22</font>
 
 - 提供包括账户、股票代码、持仓股数、可用股数、持仓均价（按账户设置计算均价方式）、币种在内的持仓信息
 
@@ -15,9 +15,9 @@ title: 股票持仓信息
 
 | 基本信息        |                                              |
 |-------------|----------------------------------------------|
-| HTTP URL    | https://openapi.longbridge.sg/v1/trade/asset/GetHoldingStocksList |
-| HTTP Method | POST                                         |
-| 权限要求        | 交易权限                                         |
+| HTTP URL    | https://openapi.longbridge.xyz/v1/trade/asset/stock |
+| HTTP Method | GET                                         |
+| 权限要求        | 接口权限                                         |
 
 ### 请求头
 
@@ -119,5 +119,7 @@ title: 股票持仓信息
 
 | HTTP 状态码 | 错误码     | 描述                | 排查建议                                          |
 |---------|---------|-------------------|-----------------------------------------------|
-| 400     | 1470400 | bad request       | 一般可能是请求参数存在问题，导致请求失败，建议根据返回的具体错误进行排查          |
-| 403     | 1470403 | request forbidden | 一般可能是因为操作者没有操作权限，导致被禁止操作。比如没有任务的编辑权限，却修改任务状态等 |
+| 500     | 202001 | internal err      | 一般可能是系统内部发生错误导致，建议根据返回的具体错误进行排查          |
+| 500     | 202201 | get userinfo error      | 获取到的账号信息错误，一般是绑定的账号有问题，建议根据返回的具体错误进行排查          |
+| 500     | 202202 | request param error | 一般可能是由于参数错误致，建议根据返回的具体错误进行排查  |
+| 500     | 202203 | call inner interface err | 一般可能是由于内部系统接口调用错误，建议根据返回的具体错误进行排查  |

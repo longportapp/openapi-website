@@ -1,13 +1,13 @@
 ---
 id: trade-asset-fund
 slug: trade-asset-fund
-title: 基金持仓信息
+title: 基金持仓
 ---
 
 #  查询基金持仓信息
 
 
-<font color='gray' size='2'>最后更新于 2022-04-19</font>
+<font color='gray' size='2'>最后更新于 2022-04-22</font>
 
 - 提供包括账户、基金代码、持有份额、成本净值、当前净值、币种在内的基金持仓信息
 
@@ -15,9 +15,9 @@ title: 基金持仓信息
 
 | 基本信息        |                                              |
 |-------------|----------------------------------------------|
-| HTTP URL    | https://openapi.longbridge.sg/v1/trade/asset/GetHoldingFundsList |
-| HTTP Method | POST                                         |
-| 权限要求        | 交易权限                                         |
+| HTTP URL    | https://openapi.longbridge.xyz/v1/trade/asset/fund |
+| HTTP Method | GET                                         |
+| 权限要求        | 接口权限                                         |
 
 ### 请求头
 
@@ -47,7 +47,7 @@ title: 基金持仓信息
 | <font color="grey">++</font> fund_info          | object[]      |  基金详情            |
 | <font color="grey">+++</font> symbol | string       |    基金 isin 代码        |
 | <font color="grey">+++</font> current_net_asset_value | string       | 当前净值             |
-| <font color="grey">+++</font> net_asset_value_day | int       |  当前净值时间            |
+| <font color="grey">+++</font> net_asset_value_day | string       |  当前净值时间 (⚠️实际类型为 int)            |
 | <font color="grey">+++</font> symbol_name | string       |  基金名称            |
 | <font color="grey">+++</font> currency | string       |    币种          |
 | <font color="grey">++</font> cost_net_asset_value | string       |   成本净值           |
@@ -62,9 +62,13 @@ title: 基金持仓信息
         "list": [{
                 "account_channel": "lb",
                 "fund_info": [{
-                        "symbol": "123412",
-                        "current_net_asset_value": "0.01",
-                        "net_asset_value_day": 1649779200
+                        "symbol": "HK0000447943",
+                        "symbol_name": "GAOTENG EMERGING MARKETS PLUS  LONG/SHORT FIXED INCOME ALPHA FUND",
+                        "currency": "USD",
+                        "holding_units": "5.000",
+                        "current_net_asset_value": "0",
+                        "cost_net_asset_value": "0.00",
+                        "net_asset_value_day": 1649865600
                 }]
         }]
 }
@@ -74,5 +78,7 @@ title: 基金持仓信息
 
 | HTTP 状态码 | 错误码     | 描述                | 排查建议                                          |
 |---------|---------|-------------------|-----------------------------------------------|
-| 400     | 1470400 | bad request       | 一般可能是请求参数存在问题，导致请求失败，建议根据返回的具体错误进行排查          |
-| 403     | 1470403 | request forbidden | 一般可能是因为操作者没有操作权限，导致被禁止操作。比如没有任务的编辑权限，却修改任务状态等 |
+| 500     | 202001 | internal err      | 一般可能是系统内部发生错误导致，建议根据返回的具体错误进行排查          |
+| 500     | 202201 | get userinfo error      | 获取到的账号信息错误，一般是绑定的账号有问题，建议根据返回的具体错误进行排查          |
+| 500     | 202202 | request param error | 一般可能是由于参数错误致，建议根据返回的具体错误进行排查  |
+| 500     | 202203 | call inner interface err | 一般可能是由于内部系统接口调用错误，建议根据返回的具体错误进行排查  |
