@@ -68,13 +68,13 @@ slug: trade-definition
 | stock_name        | string | 公司名称                                                     |
 | quantity          | string | 委托数量                                                     |
 | symbol            | string | 订单标的                                                     |
-| order_type        | string | 订单类型                                                     |
+| order_type        | string | [订单类型](./trade-definition#ordertype)                     |
 | price             | string | 委托价格                                                     |
 | executed_quantity | string | 成交数量                                                     |
 | executed_price    | string | 成交价格                                                     |
 | order_id          | string | 订单 id                                                      |
 | currency          | string | 结算货币                                                     |
-| status            | string | 订单状态                                                     |
+| status            | string | [订单状态](./trade-definition#orderstatus)                   |
 | submitted_at      | string | 下单时间，格式为时间戳 (秒)                                  |
 | updated_at        | string | 最近更新时间                                                 |
 | trigger_price     | string | 触发价格                                                     |
@@ -91,26 +91,30 @@ slug: trade-definition
 
 ```JSON
 {
-	"side": "Buy",
-	"stock_name": "腾讯控股",
-	"quantity": "1000",
-	"symbol": "700.HK",
-	"order_type": "LO",
-	"price": "213.2",
-	"executed_quantity": "1000",
-	"executed_price": "213.2",
-	"order_id": "27",
-	"currency": "HKD",
-	"status": "NewStatus",
-	"submitted_at": "1562761893",
-	"updated_at": "1562761893",
-	"trigger_price": "213.0",
-	"msg": "Insufficient Qty - 1000",
-	"tag": "Normal",
-	"trigger_status": "NOT_ACTIVE",
-	"trigger_at": "1562761893",
-	"tailing_amount": "5",
-	"tailing_percent": "0.01",
-	"limit_offset": "0.01"
+	"event": "order_changed_lb",
+	"data": {
+		"side": "Buy",
+		"stock_name": "腾讯控股",
+		"quantity": "1000",
+		"symbol": "700.HK",
+		"order_type": "LO",
+		"price": "213.2",
+		"executed_quantity": "1000",
+		"executed_price": "213.2",
+		"order_id": "27",
+		"currency": "HKD",
+		"status": "NewStatus",
+		"submitted_at": "1562761893",
+		"updated_at": "1562761893",
+		"trigger_price": "213.0",
+		"msg": "Insufficient Qty - 1000",
+		"tag": "GTC",
+		"trigger_status": "ACTIVE",
+		"trigger_at": "1562761893",
+		"tailing_amount": "5",
+		"tailing_percent": "1",
+		"limit_offset": "0.01",
+		"account_no": "HK123445"
+	}
 }
 ```
