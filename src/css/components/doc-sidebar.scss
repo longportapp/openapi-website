@@ -13,11 +13,14 @@ $caret-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg
 nav.menu {
   padding: 40px;
 }
+.navbar-sidebar,
 .theme-doc-sidebar-menu {
   --ifm-menu-color-background-hover: transparent;
   --ifm-menu-color-background-active: #f0f8ff;
   --ifm-menu-color-active: #37a0ff;
   --ifm-menu-color: #82888d;
+ }
+.theme-doc-sidebar-menu {
   .navbar-sidebar__items {
     padding-left: 20px;
     .navbar-sidebar__back {
@@ -71,6 +74,7 @@ nav.menu {
   }
   .theme-doc-sidebar-item-category-level-2 {
     .menu__list-item-collapsible {
+      padding-left: 24px;
       .menu__caret {
         &::before {
           opacity: 0.3;
@@ -93,26 +97,22 @@ nav.menu {
   }
   .menu__list {
     padding-left: 12px !important;
-    .menu__link {
-      padding: 8px 24px;
-      border-radius: 51px;
-      &.menu__link--sublist {
-        padding-left: 0;
-        color: #000;
-        font-weight: 600;
-      }
-      &:not(.menu__link--active):not(.menu__link--sublist) {
-        &:hover {
-          opacity: 0.7;
-        }
+  }
+  .menu__link {
+    padding: 8px 24px;
+    border-radius: 51px;
+    &.menu__link--sublist {
+      padding-left: 0;
+      color: #000;
+      font-weight: 600;
+    }
+    &:not(.menu__link--active):not(.menu__link--sublist) {
+      &:hover {
+        opacity: 0.7;
       }
     }
   }
   
-  
-}
-.theme-doc-sidebar-container,
-.navbar-sidebar {
 }
 .theme-doc-sidebar-container {
   border: none !important;
