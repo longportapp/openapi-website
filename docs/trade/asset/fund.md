@@ -47,7 +47,7 @@ title: 基金持仓
 | <font color="grey">++</font> fund_info          | object[]      |  基金详情            |
 | <font color="grey">+++</font> symbol | string       |    基金 isin 代码        |
 | <font color="grey">+++</font> current_net_asset_value | string       | 当前净值             |
-| <font color="grey">+++</font> net_asset_value_day | string       |  当前净值时间 (⚠️实际类型为int)            |
+| <font color="grey">+++</font> net_asset_value_day | string       |  当前净值时间 (⚠️实际类型为 int)            |
 | <font color="grey">+++</font> symbol_name | string       |  基金名称            |
 | <font color="grey">+++</font> currency | string       |    币种          |
 | <font color="grey">++</font> cost_net_asset_value | string       |   成本净值           |
@@ -79,6 +79,6 @@ title: 基金持仓
 | HTTP 状态码 | 错误码     | 描述                | 排查建议                                          |
 |---------|---------|-------------------|-----------------------------------------------|
 | 500     | 202001 | internal err      | 一般可能是系统内部发生错误导致，建议根据返回的具体错误进行排查          |
-| 500     | 202201 | get userinfo error      | 获取到的账号信息错误,一般是绑定的账号有问题，建议根据返回的具体错误进行排查          |
+| 500     | 202201 | get userinfo error      | 获取到的账号信息错误，一般是绑定的账号有问题，建议根据返回的具体错误进行排查          |
 | 500     | 202202 | request param error | 一般可能是由于参数错误致，建议根据返回的具体错误进行排查  |
 | 500     | 202203 | call inner interface err | 一般可能是由于内部系统接口调用错误，建议根据返回的具体错误进行排查  |

@@ -43,8 +43,8 @@ title: 账户资金
 | data                                    | object   |              |
 | <font color="grey">+</font>list      | object[]      | 账户资金信息信息     |
 | <font color="grey">++</font> total_cash       | string |      现金总额        |
-| <font color="grey">++</font> max_finance_amount          | string      |   最大融资金额 (⚠️实际类型为int)            |
-| <font color="grey">++</font> remaining_finance_amount | string       |    剩余融资金额  (⚠️实际类型为int)         |
+| <font color="grey">++</font> max_finance_amount          | string      |   最大融资金额 (⚠️实际类型为 int)            |
+| <font color="grey">++</font> remaining_finance_amount | string       |    剩余融资金额  (⚠️实际类型为 int)         |
 | <font color="grey">++</font> risk_level | string       | 风控等级             |
 | <font color="grey">++</font> margin_call | string       |  追缴保证金            |
 | <font color="grey">++</font> currency | string       |  币种         |
@@ -92,6 +92,6 @@ title: 账户资金
 | HTTP 状态码 | 错误码     | 描述                | 排查建议                                          |
 |---------|---------|-------------------|-----------------------------------------------|
 | 500     | 202001 | internal err      | 一般可能是系统内部发生错误导致，建议根据返回的具体错误进行排查          |
-| 500     | 202201 | get userinfo error      | 获取到的账号信息错误,一般是绑定的账号有问题，建议根据返回的具体错误进行排查          |
+| 500     | 202201 | get userinfo error      | 获取到的账号信息错误，一般是绑定的账号有问题，建议根据返回的具体错误进行排查          |
 | 500     | 202202 | request param error | 一般可能是由于参数错误致，建议根据返回的具体错误进行排查  |
 | 500     | 202203 | call inner interface err | 一般可能是由于内部系统接口调用错误，建议根据返回的具体错误进行排查  |

@@ -29,12 +29,12 @@ title: 资金流水
 
 | 名称              | 类型     | 必须  | 描述                                                   | 默认值 | 示例      |
 |-----------------|--------|-----|------------------------------------------------------|-----|---------|
-| start_time          | string | 否   | 开始时间     (⚠️实际类型为int)                                           |     | 1650037563 |
-| end_time          | string | 否   | 终止时间      (⚠️实际类型为int)                                           |     | 1650337563 |
-| business_type          | string | 否   | 资金类型; 1:现金 2:股票 3:基金 (⚠️实际类型为int)                                         |    | 2 |
+| start_time          | string | 否   | 开始时间     (⚠️实际类型为 int)                                           |     | 1650037563 |
+| end_time          | string | 否   | 终止时间      (⚠️实际类型为 int)                                           |     | 1650337563 |
+| business_type          | string | 否   | 资金类型; 1:现金 2:股票 3:基金 (⚠️实际类型为 int)                                         |    | 2 |
 | symbol          | string | 否   | 标的代码                                                 |     | AAPL.US |
-| page          | string | 否   | 分页(⚠️实际类型为int)                                                 |     | 1 |
-| size      | string | 是   | 每页大小(⚠️实际类型为int)      |     | 50      |
+| page          | string | 否   | 分页 (⚠️实际类型为 int)                                                 |     | 1 |
+| size      | string | 是   | 每页大小 (⚠️实际类型为 int)      |     | 50      |
 
 ## 响应
 
@@ -47,11 +47,11 @@ title: 资金流水
 | data                                    | object   |              |
 | <font color="grey">+</font>list      | object[]      | 流水信息     |
 | <font color="grey">++</font> transaction_flow_name       | string |      流水名称        |
-| <font color="grey">++</font> direction          | string      |  流出方向；1:流出 2:流入  (⚠️实际类型为int)           |
-| <font color="grey">++</font> business_type | string       |    资金类别 1:现金，2:股票，3:基金  (⚠️实际类型为int)         |
+| <font color="grey">++</font> direction          | string      |  流出方向；1:流出 2:流入  (⚠️实际类型为 int)           |
+| <font color="grey">++</font> business_type | string       |    资金类别 1:现金，2:股票，3:基金  (⚠️实际类型为 int)         |
 | <font color="grey">++</font> balance | string       | 资金金额             |
 | <font color="grey">++</font> currency | string       |  资金币种            |
-| <font color="grey">++</font> business_time | string       |  业务时间   (⚠️实际类型为int)          |
+| <font color="grey">++</font> business_time | string       |  业务时间   (⚠️实际类型为 int)          |
 | <font color="grey">++</font> symbol | string       |    关联股票代码信息，不一定所有的都有          |
 | <font color="grey">++</font> description | string       |   资金流水说明           |
 
@@ -87,6 +87,6 @@ title: 资金流水
 | HTTP 状态码 | 错误码     | 描述                | 排查建议                                          |
 |---------|---------|-------------------|-----------------------------------------------|
 | 500     | 202001 | internal err      | 一般可能是系统内部发生错误导致，建议根据返回的具体错误进行排查          |
-| 500     | 202201 | get userinfo error      | 获取到的账号信息错误,一般是绑定的账号有问题，建议根据返回的具体错误进行排查          |
+| 500     | 202201 | get userinfo error      | 获取到的账号信息错误，一般是绑定的账号有问题，建议根据返回的具体错误进行排查          |
 | 500     | 202202 | request param error | 一般可能是由于参数错误致，建议根据返回的具体错误进行排查  |
 | 500     | 202203 | call inner interface err | 一般可能是由于内部系统接口调用错误，建议根据返回的具体错误进行排查  |
