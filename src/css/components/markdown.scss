@@ -23,4 +23,12 @@
   h2 {
     --ifm-h2-font-size: 24px;
   }
+  .markdown-img-container {
+    text-align: center;
+    img {
+      max-height: 50vh;
+      cursor: zoom-in;
+    }
+  }
+  
 }
