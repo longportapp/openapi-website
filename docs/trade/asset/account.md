@@ -1,13 +1,13 @@
 ---
 id: trade-asset-account
 slug: trade-asset-account
-title: 账户资金信息
+title: 账户资金
 ---
 
 #  查询账户资金信息
 
 
-<font color='gray' size='2'>最后更新于 2022-04-19</font>
+<font color='gray' size='2'>最后更新于 2022-04-22</font>
 
  - 返回每个币种可用、可取、冻结、待结算金额、在途资金（基金申购赎回、打新认购等场景）
 
@@ -15,9 +15,9 @@ title: 账户资金信息
 
 | 基本信息        |                                              |
 |-------------|----------------------------------------------|
-| HTTP URL    | https://openapi.longbridge.sg/v1/trade/asset/GetAccountCashInfo |
+| HTTP URL    | https://openapi.longbridge.xyz/v1/trade/asset/accountcashinfo |
 | HTTP Method | GET                                         |
-| 权限要求        | 资产查看权限                                         |
+| 权限要求        | 接口权限                                         |
 
 ### 请求头
 
@@ -43,11 +43,11 @@ title: 账户资金信息
 | data                                    | object   |              |
 | <font color="grey">+</font>list      | object[]      | 账户资金信息信息     |
 | <font color="grey">++</font> total_cash       | string |      现金总额        |
-| <font color="grey">++</font> max_finance_amount          | int      |   最大融资金额            |
-| <font color="grey">++</font> remaining_finance_amount | int       |    剩余融资金额          |
+| <font color="grey">++</font> max_finance_amount          | string      |   最大融资金额 (⚠️实际类型为int)            |
+| <font color="grey">++</font> remaining_finance_amount | string       |    剩余融资金额  (⚠️实际类型为int)         |
 | <font color="grey">++</font> risk_level | string       | 风控等级             |
 | <font color="grey">++</font> margin_call | string       |  追缴保证金            |
-| <font color="grey">++</font> currency | int       |  币种            |
+| <font color="grey">++</font> currency | string       |  币种         |
 | <font color="grey">++</font> cashInfos | object[]       |    现金详情          |
 | <font color="grey">+++</font> withdraw_cash | string       |   可提现金           |
 | <font color="grey">+++</font> available_cash | string       |   可用现金          |
@@ -91,5 +91,7 @@ title: 账户资金信息
 
 | HTTP 状态码 | 错误码     | 描述                | 排查建议                                          |
 |---------|---------|-------------------|-----------------------------------------------|
-| 400     | 1470400 | bad request       | 一般可能是请求参数存在问题，导致请求失败，建议根据返回的具体错误进行排查          |
-| 403     | 1470403 | request forbidden | 一般可能是因为操作者没有操作权限，导致被禁止操作。比如没有任务的编辑权限，却修改任务状态等 |
+| 500     | 202001 | internal err      | 一般可能是系统内部发生错误导致，建议根据返回的具体错误进行排查          |
+| 500     | 202201 | get userinfo error      | 获取到的账号信息错误,一般是绑定的账号有问题，建议根据返回的具体错误进行排查          |
+| 500     | 202202 | request param error | 一般可能是由于参数错误致，建议根据返回的具体错误进行排查  |
+| 500     | 202203 | call inner interface err | 一般可能是由于内部系统接口调用错误，建议根据返回的具体错误进行排查  |
