@@ -33,7 +33,7 @@ title: 当日订单
 | status   | []string |      | [订单状态](../trade-definition#orderstatus) |        | ["FilledStatus", "PartialFilledStatus"] |
 | side     | string   |      | 买卖方向<br/>Buy: 买入<br/>Sell: 卖出       |        | Buy                                     |
 | market   | string   |      | [市场](../trade-definition#market)          |        | US                                      |
-| order_id | int64    |      | 订单 ID，用于指定订单 ID 查询               |        | 701276261045858304                      |
+| order_id | string   |      | 订单 ID，用于指定订单 ID 查询               |        | 701276261045858304                      |
 
 
 
@@ -47,15 +47,15 @@ title: 当日订单
 | msg                                                          | string   | 错误描述                                                     |
 | data                                                         | object   |                                                              |
 | <font color="grey">∟</font>orders                            | []object | 订单详情列表                                                 |
-| <font color="grey">∟</font><font color="grey">∟</font>order_id | int64    | 订单 id                                                       |
+| <font color="grey">∟</font><font color="grey">∟</font>order_id | string   | 订单 id                                                      |
 | <font color="grey">∟</font><font color="grey">∟</font>status | string   | 订单状态                                                     |
 | <font color="grey">∟</font><font color="grey">∟</font>stock_name | string   | 股票名称                                                     |
 | <font color="grey">∟</font><font color="grey">∟</font>quantity | string   | 下单数量                                                     |
 | <font color="grey">∟</font><font color="grey">∟</font>executed_qty | string   | 成交数量                                                     |
 | <font color="grey">∟</font><font color="grey">∟</font>price  | string   | 下单价格                                                     |
 | <font color="grey">∟</font><font color="grey">∟</font>executed_price | string   | 成交价格                                                     |
-| <font color="grey">∟</font><font color="grey">∟</font>submitted_at | int64    | 下单时间                                                     |
-| <font color="grey">∟</font><font color="grey">∟</font>action | string   | 买卖方向<br />Buy: 买入<br />Sell: 卖出                      |
+| <font color="grey">∟</font><font color="grey">∟</font>submitted_at | string   | 下单时间                                                     |
+| <font color="grey">∟</font><font color="grey">∟</font>side   | string   | 买卖方向<br />Buy: 买入<br />Sell: 卖出                      |
 | <font color="grey">∟</font><font color="grey">∟</font>symbol | string   | 股票代码，使用 ticker.region 格式                            |
 | <font color="grey">∟</font><font color="grey">∟</font>order_type | string   | 订单类型                                                     |
 | <font color="grey">∟</font><font color="grey">∟</font>last_done | string   | 最近成交价格                                                 |
@@ -63,13 +63,13 @@ title: 当日订单
 | <font color="grey">∟</font><font color="grey">∟</font>msg    | string   | 拒绝信息或备注                                               |
 | <font color="grey">∟</font><font color="grey">∟</font>tag    | string   | 订单标记<br />Normal 普通订单<br />GTC 长期单<br />Grey 暗盘单 |
 | <font color="grey">∟</font><font color="grey">∟</font>time_in_force | string   | 订单有效期类型<br />Day 当日有效<br />GTC 撤单前有效<br />GTD 到期前有效 |
-| <font color="grey">∟</font><font color="grey">∟</font>gtd    | string   | 长期单的有效时间 格式: 2020-01-01                            |
-| <font color="grey">∟</font><font color="grey">∟</font>updated_at | int64    | 最近更新时间                                                 |
-| <font color="grey">∟</font><font color="grey">∟</font>trigger_at | int64    | 条件单触发时间                                               |
+| <font color="grey">∟</font><font color="grey">∟</font>expire_date | string   | 长期单的有效时间 格式: 2020-01-01                            |
+| <font color="grey">∟</font><font color="grey">∟</font>updated_at | string   | 最近更新时间                                                 |
+| <font color="grey">∟</font><font color="grey">∟</font>trigger_at | string   | 条件单触发时间                                               |
 | <font color="grey">∟</font><font color="grey">∟</font>trailing_amount | string   | 条件单跟踪金额                                               |
 | <font color="grey">∟</font><font color="grey">∟</font>trailing_percent | string   | 条件单跟踪涨跌幅                                             |
 | <font color="grey">∟</font><font color="grey">∟</font>limit_offset | string   | 指定价差                                                     |
-| <font color="grey">∟</font><font color="grey">∟</font>trigger_status | number   | 条件单触发状态<br />NOT_ACTIVE 未激活 <br />DEACTIVE 已失效<br />ACTIVE 已激活 <br />RELEASED 已触发 |
+| <font color="grey">∟</font><font color="grey">∟</font>trigger_status | string   | 条件单触发状态<br />NOT_ACTIVE 未激活 <br />DEACTIVE 已失效<br />ACTIVE 已激活 <br />RELEASED 已触发 |
 | <font color="grey">∟</font><font color="grey">∟</font>currency | string   | 结算货币                                                     |
 | <font color="grey">∟</font><font color="grey">∟</font>outside_rth | string   | 美股是否允许盘前盘后<br /> RTH_ONLY 不允许盘前盘后<br />ANY_TIME 允许盘前盘后 |
 

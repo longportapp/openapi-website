@@ -27,21 +27,21 @@ title: 下单
 
 ### 请求体
 
-| 名称               | 类型   | 必须                                     | 描述                                                         | 默认值 | 示例       |
-| ------------------ | ------ | ---------------------------------------- | ------------------------------------------------------------ | ------ | ---------- |
-| symbol             | string | 是                                       | 股票代码，使用 ticker.region 格式                            |        | AAPL.US    |
-| order_type         | string | 是                                       | [订单类型](../trade-definition#ordertype)                    |        | LO         |
-| submitted_price    | string | LO / ELO /  ALO /   / ODD / LIT 订单必填 | 下单价格                                                     |        | 388.5      |
-| submitted_quantity | string | 是                                       | 下单数量                                                     |        | 100        |
-| trigger_price      | string | LIT / MIT 订单必填                       | 触发价格                                                     |        | 345.2      |
-| limit_offset       | string | TSLPAMT / TSLPPCT 订单必填               | 指定价差                                                     |        | 10.1       |
-| trailing_amount    | string | TSLPAMT / TSMAMT 订单必填                | 跟踪金额                                                     |        | 5.9        |
-| trailing_percent   | string | TSMPCT / TSLPPCT 订单必填                | 跟踪涨跌幅，如跟踪涨跌 10% 时，trailing_percent 为 10        |        | 10.3       |
-| expire_date        | string | time_in_force 为 GTD 时必填              | 长期单过期时间，格式为 YYYY-MM-DD                            |        | 2022-12-05 |
-| side               | string | 是                                       | 买卖方向<br/>Buy: 买入<br/>Sell: 卖出                        |        | Buy        |
-| outside_rth        | string | 美股订单必填                             | 美股是否允许盘前盘后<br/>RTH_ONLY: 不允许盘前盘后<br/>ANY_TIME:允许盘前盘后 |        | RTH_ONLY   |
-| time_in_force      | string | 是                                       | 订单有效期类型<br/>Day:当日有效<br/>GTC: 撤单前有效<br/>GTD: 到期前有效 |        | GTD        |
-| remark             | string |                                          | 备注，不超过 64 字符                                         |        |            |
+| 名称               | 类型   | 必须                                  | 描述                                                         | 默认值 | 示例       |
+| ------------------ | ------ | ------------------------------------- | ------------------------------------------------------------ | ------ | ---------- |
+| symbol             | string | 是                                    | 股票代码，使用 ticker.region 格式                            |        | AAPL.US    |
+| order_type         | string | 是                                    | [订单类型](../trade-definition#ordertype)                    |        | LO         |
+| submitted_price    | string | LO / ELO /  ALO /  ODD / LIT 订单必填 | 下单价格                                                     |        | 388.5      |
+| submitted_quantity | string | 是                                    | 下单数量                                                     |        | 100        |
+| trigger_price      | string | LIT / MIT 订单必填                    | 触发价格                                                     |        | 345.2      |
+| limit_offset       | string | TSLPAMT / TSLPPCT 订单必填            | 指定价差                                                     |        | 10.1       |
+| trailing_amount    | string | TSLPAMT / TSMAMT 订单必填             | 跟踪金额                                                     |        | 5.9        |
+| trailing_percent   | string | TSMPCT / TSLPPCT 订单必填             | 跟踪涨跌幅，如跟踪涨跌 10% 时，trailing_percent 为 10        |        | 10.3       |
+| expire_date        | string | time_in_force 为 GTD 时必填           | 长期单过期时间，格式为 YYYY-MM-DD                            |        | 2022-12-05 |
+| side               | string | 是                                    | 买卖方向<br/>Buy: 买入<br/>Sell: 卖出                        |        | Buy        |
+| outside_rth        | string | 美股订单必填                          | 美股是否允许盘前盘后<br/>RTH_ONLY: 不允许盘前盘后<br/>ANY_TIME:允许盘前盘后 |        | RTH_ONLY   |
+| time_in_force      | string | 是                                    | 订单有效期类型<br/>Day:当日有效<br/>GTC: 撤单前有效<br/>GTD: 到期前有效 |        | GTD        |
+| remark             | string |                                       | 备注，不超过 64 字符                                         |        |            |
 
 
 ## 响应
@@ -53,7 +53,7 @@ title: 下单
 | code                                | int    | 错误码，非 0 表示失败 |
 | msg                                 | string | 错误描述              |
 | data                                | object |                       |
-| <font color="grey">∟</font>order_id | int64  | 订单 id               |
+| <font color="grey">∟</font>order_id | string | 订单 id               |
 
 
 
