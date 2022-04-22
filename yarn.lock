@@ -6078,6 +6078,11 @@ react-loadable-ssr-addon-v5-slorber@^1.0.1:
   dependencies:
     "@babel/runtime" "^7.10.3"
 
+react-photo-view@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmmirror.com/react-photo-view/-/react-photo-view-1.0.0.tgz#bfbe01c15ea66bfb7d578f9725df5aba5de4fe0f"
+  integrity sha512-OSy2PRYqGT4ho6vC4Tq/hDrt6Y+FPcbY2M2LXd7waxSBVXjFuuCDK20NVlgs0y+oYT38NsMIRKKyrwTBoIMIcg==
+
 react-router-config@^5.1.1:
   version "5.1.1"
   resolved "https://registry.npmmirror.com/react-router-config/-/react-router-config-5.1.1.tgz#0f4263d1a80c6b2dc7b9c1902c9526478194a988"
