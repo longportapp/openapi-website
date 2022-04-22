@@ -2,12 +2,13 @@
 id: quote_quote
 title: 获取标的实时行情
 slug: quote-quote
+sidebar_position: 2
 ---
 
 ## get_security_quote
 
 ### 介绍：
-    获取标的的实时行情
+    获取标的的实时行情 (支持所有类型标的)
 ### 协议指令：
     11
 ### 请求
@@ -38,8 +39,8 @@ message MultiSecurityRequest {
 |∟timestamp|int64| 最新成交的交时间戳 |
 |∟volume|int64| 成交量 |
 |∟turnover|string| 成交额 |
-|∟trade_status|TradeStatus| 标的交易状态 |
-|∟pre_market_quote|PrePostQuote| 美股盘前交易行情 |
+|∟trade_status|[TradeStatus](../quote-object#TradeStatus)| 标的交易状态 |
+|∟pre_market_quote|object| 美股盘前交易行情 |
 |∟∟last_done|string| 最新价 |
 |∟∟timestamp|int64| 最新成交的交时间戳 |
 |∟∟volume|int64| 成交量 |
@@ -47,7 +48,7 @@ message MultiSecurityRequest {
 |∟∟high|string| 最高价 |
 |∟∟low|string| 最低价 |
 |∟∟prev_close|string| 上一个交易阶段的收盘价 |
-|∟post_market_quote|PrePostQuote| 美股盘后交易行情 |
+|∟post_market_quote|object| 美股盘后交易行情 |
 |∟∟last_done|string| 最新价 |
 |∟∟timestamp|int64| 最新成交的交时间戳 |
 |∟∟volume|int64| 成交量 |

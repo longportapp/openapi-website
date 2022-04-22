@@ -2,6 +2,7 @@
 id: quote_warrant_quote
 title: 获取轮证实时行情
 slug: quote-warrant-quote
+sidebar_position: 4
 ---
 
 ## get_warrant_quote
@@ -38,8 +39,8 @@ message MultiSecurityRequest {
 |∟timestamp|int64| 最新成交的交时间戳 |
 |∟volume|int64| 成交量 |
 |∟turnover|string| 成交额 |
-|∟trade_status|TradeStatus| 标的交易状态 |
-|∟warrant_extend|WarrantExtend| 轮证扩展行情 |
+|∟trade_status|[TradeStatus](../quote-object#TradeStatus)| 标的交易状态 |
+|∟warrant_extend|object| 轮证扩展行情 |
 |∟∟implied_volatility|string| 引申波幅 |
 |∟∟expiry_date|string| 到期日 YYMMDD|
 |∟∟last_trade_date|string| 最后交易日 YYMMDD|

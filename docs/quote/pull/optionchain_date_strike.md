@@ -2,6 +2,7 @@
 id: quote_optionchain_date_strike
 title: 获取标的的期权链到期日期权标的列表
 slug: quote-optionchain-date-strike
+sidebar_position: 12
 ---
 
 ## get_optionchain_date_strike_info
@@ -16,7 +17,7 @@ slug: quote-optionchain-date-strike
 | 名称 | 类型   | 必须  | 描述      |  默认值  |  示例   |
 |-------|-------|-----|---------|-----|----|
 | symbol | string   | 是  | 标的代码。ticker.region。  | | 00700.HK|
-| expiry_date | string   | 是  | 期权到期日。格式：YYMMDD  | | 20220404|
+| expiry_date | string   | 是  | [期权到期日](./quote-optionchain-date)。格式：YYMMDD  | | 20220404|
 
 * proto
 ```

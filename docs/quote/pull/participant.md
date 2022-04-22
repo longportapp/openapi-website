@@ -2,12 +2,13 @@
 id: quote_broker_ids
 title: 获取券商席位 id
 slug: quote-broker-ids
+sidebar_position: 7
 ---
 
 ## get_participant_broker_ids
 
 ### 介绍：
-    获取券商席位 id
+    获取券商席位 id (可每天同步一次)
 ### 协议指令：
     16
 ### 响应

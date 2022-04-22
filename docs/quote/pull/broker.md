@@ -1,15 +1,16 @@
 ---
-id: quote_intraday
-title: 获取标的当日分时
-slug: quote-intraday
+id: quote_brokers
+title: 获取标的经纪队列
+slug: quote-brokers
+sidebar_position: 6
 ---
 
-## get_security_intraday
+## get_security_brokers
 
 ### 介绍：
-    获取标的的当日分时
+    获取标的的经纪队列
 ### 协议指令：
-    18
+    15
 ### 请求
 * 参数
 
@@ -19,7 +20,7 @@ slug: quote-intraday
 
 * proto
 ```
-message SecurityIntradayRequest {
+message SecurityRequest {
   string symbol = 1;
 }
 ```
@@ -29,30 +30,29 @@ message SecurityIntradayRequest {
 | 名称 | 类型   | 描述  | 
 |-------|-------|-----|
 |symbol|string| 标的代码 |
-|lines|object[]| 分时数据 |
-|∟price|string| 当前分钟的收盘价格 |
-|∟timestamp|int64| 当前分钟的开始时间 |
-|∟volume|int64| 成交量 |
-|∟turnover|string| 成交额 |
-|∟avg_price|string| 均价 |
+|ask_brokers|object[]| 卖盘经纪队列 |
+|∟position|int32| 档位 |
+|∟broker_ids|int32[]| 券商席位 Id|
+|bid_brokers|object[]| 买盘经纪队列 |
+|∟position|int32| 档位 |
+|∟broker_ids|int32[]| [券商席位 Id](./quote-broker-ids)|
 
 * proto
 ```
-message SecurityIntradayResponse{
+message SecurityBrokersResponse {
   string symbol = 1;
-  repeated Line lines = 2;
+  repeated Brokers ask_brokers = 2;
+  repeated Brokers bid_brokers = 3;
 }
 
-message Line {
-  string price = 1;
-  int64 timestamp = 2;
-  int64 volume = 3;
-  string turnover = 4;
-  string avg_price = 5;
+message Brokers {
+  int32 position = 1;
+  repeated int32 broker_ids = 2;
 }
 ```
 ### 接口限制
 每秒平均请求次数 10。瞬时并发次数 5。
+仅港股标的存在经纪队列数据。
 
 ### 错误码
 
@@ -64,4 +64,5 @@ message Line {
 |7 | 301600| 请求标的不存在 | 检查请求的 symbol 是否正确 |
 |7 | 301603| 标的无行情 | 标的没有请求的行情数据 |
 |7 | 301604| 无权限 | 没有获取标的行情的权限 |
+
 

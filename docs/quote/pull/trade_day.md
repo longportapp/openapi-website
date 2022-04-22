@@ -1,13 +1,14 @@
 ---
 id: quote_trade_day
-title: 获取交易日
+title: 获取市场交易日
 slug: quote-trade-day
+sidebar_position: 16
 ---
 
 ## get_market_trade_day
 
 ### 介绍：
-    获取交易日
+    获取市场交易日
 ### 协议指令：
     9
 ### 请求

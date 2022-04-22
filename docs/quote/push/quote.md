@@ -1,8 +1,10 @@
 ---
 id: push_quote
 title: 实时价格推送
-slug: push_quote
+slug: push-quote
+sidebar_position: 1
 ---
+##on_receive_quote
 
 ### 介绍：
     订阅的标的的实时价格推送。只有有变化的字段才会填充数据。
@@ -22,8 +24,8 @@ slug: push_quote
 |timestamp|int64| 最新成交的时间戳 |
 |volume|int64| 成交量 |
 |turnover|string| 成交额 |
-|trade_status|TradeStatus| 交易状态 |
-|trade_session|TradeSession| 交易时段 |
+|trade_status|[TradeStatus](../quote-object#TradeStatus)| 交易状态 |
+|trade_session|[TradeSession](../quote-object#TradeSession)| 交易时段 |
 
 * proto
 ```
