@@ -5,8 +5,6 @@ slug: quote-trade
 sidebar_position: 8
 ---
 
-## get_security_trade
-
 ### 介绍：
     获取标的的成交明细
 ### 协议指令：

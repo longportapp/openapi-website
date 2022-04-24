@@ -5,8 +5,6 @@ slug: quote-unsubscribe
 sidebar_position: 3
 ---
 
-## unsubscribe
-
 ### 介绍：
     取消订阅行情数据
 ### 协议指令：

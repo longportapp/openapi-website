@@ -5,8 +5,6 @@ slug: quote-static
 sidebar_position: 1
 ---
 
-## get_security_static_info
-
 ### 介绍：   
     获取标的的基础信息
 ### 协议指令：

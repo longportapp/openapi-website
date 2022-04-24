@@ -5,8 +5,6 @@ slug: quote-optionchain-date-strike
 sidebar_position: 12
 ---
 
-## get_optionchain_date_strike_info
-
 ### 介绍：
     获取标的的期权链到期日期权标的列表
 ### 协议指令：

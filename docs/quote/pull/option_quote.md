@@ -5,8 +5,6 @@ slug: quote-option-quote
 sidebar_position: 3
 ---
 
-## get_option_quote
-
 ### 介绍：
     获取美股期权标的的实时行情，包括期权的特有数据
 ### 协议指令：

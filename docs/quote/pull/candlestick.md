@@ -5,7 +5,6 @@ slug: quote-candlestick
 sidebar_position: 10
 ---
 
-## get_security_candlestick
 
 ### 介绍：
     获取标的的 k 线数据

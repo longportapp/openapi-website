@@ -5,8 +5,6 @@ slug: push-broker
 sidebar_position: 3
 ---
 
-##on_receive_brokers
-
 ### 介绍：
     订阅的标的的实时经纪队列推送。
 ### 协议指令：

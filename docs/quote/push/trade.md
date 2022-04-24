@@ -5,8 +5,6 @@ slug: push-trade
 sidebar_position: 4
 ---
 
-##on_receive_trade
-
 ### 介绍：
     订阅的标的的实时逐笔成交明细推送。
 ### 协议指令：

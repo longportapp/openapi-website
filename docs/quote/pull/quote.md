@@ -5,8 +5,6 @@ slug: quote-quote
 sidebar_position: 2
 ---
 
-## get_security_quote
-
 ### 介绍：
     获取标的的实时行情 (支持所有类型标的)
 ### 协议指令：

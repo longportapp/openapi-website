@@ -5,8 +5,6 @@ slug: quote-subscription
 sidebar_position: 1
 ---
 
-## get_subscription
-
 ### 介绍：
     获取已订阅标的行情
 ### 协议指令：

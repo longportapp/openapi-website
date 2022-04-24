@@ -5,8 +5,6 @@ slug: quote-subscribe
 sidebar_position: 2
 ---
 
-## subscribe
-
 ### 介绍：
     订阅行情数据
 ### 协议指令：

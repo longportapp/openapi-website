@@ -5,8 +5,6 @@ slug: quote-warrant-filter
 sidebar_position: 14
 ---
 
-## get_warrant_filter_list
-
 ### 介绍：
     获取轮证筛选列表
 ### 协议指令：
@@ -17,8 +15,8 @@ sidebar_position: 14
 | 名称 | 类型   | 必须  | 描述      |  默认值  |  示例   |
 |-------|-------|-----|---------|-----|----|
 | symbol | string   | 是  | 标的代码。ticker.region。  | | 00700.HK|
-| filter_config | FilterConfig   | 是  | 筛选条件  | | |
-|∟sort_by|int32| 是 | 根据哪一项数据进行排序。序号见响应数据排序序号字段。||1|
+| filter_config | object   | 是  | 筛选条件  | | |
+|∟sort_by|int32| 是 | 根据哪一项数据进行排序。序号见响应数据"排序序号"字段。||1|
 |∟sort_order|int32| 是 | 升降顺序。0:升序 1:降序 ||0|
 |∟sort_offset|int32| 是 | 分页的第一条数据偏移量。||0|
 |∟sort_count|int32| 是 | 分页的每一页数量 ||20|

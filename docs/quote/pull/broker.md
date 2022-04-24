@@ -5,8 +5,6 @@ slug: quote-brokers
 sidebar_position: 6
 ---
 
-## get_security_brokers
-
 ### 介绍：
     获取标的的经纪队列
 ### 协议指令：

@@ -5,8 +5,6 @@ slug: quote-trade-day
 sidebar_position: 16
 ---
 
-## get_market_trade_day
-
 ### 介绍：
     获取市场交易日
 ### 协议指令：

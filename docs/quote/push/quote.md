@@ -4,7 +4,6 @@ title: 实时价格推送
 slug: push-quote
 sidebar_position: 1
 ---
-##on_receive_quote
 
 ### 介绍：
     订阅的标的的实时价格推送。只有有变化的字段才会填充数据。

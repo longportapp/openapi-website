@@ -5,8 +5,6 @@ slug: quote-trade-session
 sidebar_position: 15
 ---
 
-## get_market_trade_session
-
 ### 介绍：
     获取各市场当日交易时段
 ### 协议指令：

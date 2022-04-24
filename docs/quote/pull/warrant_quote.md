@@ -5,8 +5,6 @@ slug: quote-warrant-quote
 sidebar_position: 4
 ---
 
-## get_warrant_quote
-
 ### 介绍：
     获取港股轮证标的的实时行情，包括轮证的特有数据
 ### 协议指令：
