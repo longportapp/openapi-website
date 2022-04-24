@@ -20,7 +20,7 @@ slug: /how-to-access-api
 
 ### 3. 生成签名 
 
-先根据相应的 API 文档构造请求后， 通过 openapi sdk【链接】直接调用 API，sdk 会帮助生成签名， 或者根据授权与签名文档中的算法自己生成签名，并设置相应的请求参数。
+先根据相应的 API 文档构造请求后， 通过 openapi sdk【链接】直接调用 API，sdk 会帮助生成签名， 或者根据[如何对请求签名](./access-token-and-signature.md)中的算法生成签名，并设置相应的请求参数。
 
 ### 4. 调用 API 
 
@@ -33,7 +33,7 @@ slug: /how-to-access-api
 示例如下：
 
 ```bash
-curl -v http://127.0.0.1:8080/v1/test -H "X-Api-Signature: {签名}" -H "X-Api-Key: {access key}" -H "authorization: {token}" -H "X-Timestamp: {签名时间}"
+curl -v http://openapi.longbridge.sg/v1/test -H "X-Api-Signature: {签名}" -H "X-Api-Key: {access key}" -H "authorization: {token}" -H "X-Timestamp: {签名时间}"
 ```
 
 ## API 响应结果说明
