@@ -5,8 +5,6 @@ slug: quote-trade
 sidebar_position: 8
 ---
 
-## get_security_trade
-
 ### 介绍：
     获取标的的成交明细
 ### 协议指令：
@@ -38,7 +36,7 @@ message SecurityTradeRequest {
 |∟timestamp|int64| 成交时间 |
 |∟trade_type|string| 交易类型。*-场外交易 D-碎股交易 M-非自动对盘 P-开市前成交盘 U-竞价交易 X-同一券商非自动对盘 Y-同一券商自动对盘 |
 |∟direction|int32| 交易方向。0-nature 1-down 2-up|
-|∟trade_session|[TradeSession](../quote-object#TradeSession)| 交易时段 |
+|∟trade_session|[TradeSession](../quote-object#tradesession)| 交易时段 |
 
 * proto
 ```

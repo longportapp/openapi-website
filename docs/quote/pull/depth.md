@@ -5,8 +5,6 @@ slug: quote-depth
 sidebar_position: 5
 ---
 
-## get_security_depth
-
 ### 介绍：
     获取标的的盘口
 ### 协议指令：

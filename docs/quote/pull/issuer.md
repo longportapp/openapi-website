@@ -5,8 +5,6 @@ slug: quote-issuer
 sidebar_position: 13
 ---
 
-## get_warrant_issuer_info
-
 ### 介绍：
     获取轮证发行商 id
 ### 协议指令：

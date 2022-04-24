@@ -5,8 +5,6 @@ slug: quote-option-quote
 sidebar_position: 3
 ---
 
-## get_option_quote
-
 ### 介绍：
     获取美股期权标的的实时行情，包括期权的特有数据
 ### 协议指令：
@@ -39,7 +37,7 @@ message MultiSecurityRequest {
 |∟timestamp|int64| 最新成交的交时间戳 |
 |∟volume|int64| 成交量 |
 |∟turnover|string| 成交额 |
-|∟trade_status|[TradeStatus](../quote-object#TradeStatus)| 标的交易状态 |
+|∟trade_status|[TradeStatus](../quote-object#tradestatus)| 标的交易状态 |
 |∟option_extend|object| 期权扩展行情 |
 |∟∟implied_volatility|string| 隐含波动率 |
 |∟∟open_interest|int64| 未平仓数 |

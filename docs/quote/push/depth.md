@@ -5,8 +5,6 @@ slug: push-depth
 sidebar_position: 2
 ---
 
-##on_receive_depth
-
 ### 介绍：
     订阅的标的的实时盘口推送。
 ### 协议指令：

@@ -5,7 +5,6 @@ slug: quote-candlestick
 sidebar_position: 10
 ---
 
-## get_security_candlestick
 
 ### 介绍：
     获取标的的 k 线数据
@@ -17,9 +16,9 @@ sidebar_position: 10
 | 名称 | 类型   | 必须  | 描述      |  默认值  |  示例   |
 |-------|-------|-----|---------|-----|----|
 | symbol | string   | 是  | 标的代码。ticker.region。  | | 00700.HK|
-| period | [Period](../quote-object#Period) | 是 | k 线周期 | | 1000|
+| period | [Period](../quote-object#period) | 是 | k 线周期 | | 1000|
 | count | int32 | 是 | 数据数量 | | 100|
-| period | [AdjustType](../quote-object#AdjustType) | 是 | 复权类型 | | 0|
+| adjust_type | [AdjustType](../quote-object#adjusttype) | 是 | 复权类型 | | 0|
 
 * proto
 ```

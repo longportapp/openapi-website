@@ -5,8 +5,6 @@ slug: quote-intraday
 sidebar_position: 9
 ---
 
-## get_security_intraday
-
 ### 介绍：
     获取标的的当日分时
 ### 协议指令：

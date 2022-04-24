@@ -5,8 +5,6 @@ slug: quote-warrant-quote
 sidebar_position: 4
 ---
 
-## get_warrant_quote
-
 ### 介绍：
     获取港股轮证标的的实时行情，包括轮证的特有数据
 ### 协议指令：
@@ -39,7 +37,7 @@ message MultiSecurityRequest {
 |∟timestamp|int64| 最新成交的交时间戳 |
 |∟volume|int64| 成交量 |
 |∟turnover|string| 成交额 |
-|∟trade_status|[TradeStatus](../quote-object#TradeStatus)| 标的交易状态 |
+|∟trade_status|[TradeStatus](../quote-object#tradestatus)| 标的交易状态 |
 |∟warrant_extend|object| 轮证扩展行情 |
 |∟∟implied_volatility|string| 引申波幅 |
 |∟∟expiry_date|string| 到期日 YYMMDD|

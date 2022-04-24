@@ -5,8 +5,6 @@ slug: quote-optionchain-date
 sidebar_position: 11
 ---
 
-## get_optionchain_date_list
-
 ### 介绍：
     获取标的的期权链到期日列表
 ### 协议指令：

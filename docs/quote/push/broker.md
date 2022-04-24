@@ -5,8 +5,6 @@ slug: push-broker
 sidebar_position: 3
 ---
 
-##on_receive_brokers
-
 ### 介绍：
     订阅的标的的实时经纪队列推送。
 ### 协议指令：
@@ -20,10 +18,10 @@ sidebar_position: 3
 |sequence|int64| 序列号 |
 |ask_brokers|object[]| 卖盘经纪队列 |
 |∟position|int32| 档位 |
-|∟broker_ids|int32[]| [券商席位](../pull/quote-broker-ids) Id|
+|∟broker_ids|int32[]| [券商席位 Id](../pull/quote-broker-ids)|
 |bid_brokers|object[]| 买盘经纪队列 |
 |∟position|int32| 档位 |
-|∟broker_ids|int32[]| [券商席位](../pull/quote-broker-ids) Id|
+|∟broker_ids|int32[]| [券商席位 Id](../pull/quote-broker-ids)|
 
 * proto
 ```

@@ -5,8 +5,6 @@ slug: quote-brokers
 sidebar_position: 6
 ---
 
-## get_security_brokers
-
 ### 介绍：
     获取标的的经纪队列
 ### 协议指令：
@@ -32,7 +30,7 @@ message SecurityRequest {
 |symbol|string| 标的代码 |
 |ask_brokers|object[]| 卖盘经纪队列 |
 |∟position|int32| 档位 |
-|∟broker_ids|int32[]| 券商席位 Id|
+|∟broker_ids|int32[]| [券商席位 Id](./quote-broker-ids)|
 |bid_brokers|object[]| 买盘经纪队列 |
 |∟position|int32| 档位 |
 |∟broker_ids|int32[]| [券商席位 Id](./quote-broker-ids)|

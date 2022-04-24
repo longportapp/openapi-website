@@ -5,8 +5,6 @@ slug: quote-trade-session
 sidebar_position: 15
 ---
 
-## get_market_trade_session
-
 ### 介绍：
     获取各市场当日交易时段
 ### 协议指令：
@@ -21,7 +19,7 @@ sidebar_position: 15
 |∟trade_session|object[]| 交易时段 |
 |∟∟beg_time|string| 交易开始时间。格式：hhmm 例：900|
 |∟∟end_time|string| 交易结束时间。格式：hhmm 例：1400|
-|∟∟trade_session|[TradeSession](../quote-object#TradeSession)| 交易时段 |
+|∟∟trade_session|[TradeSession](../quote-object#tradesession)| 交易时段 |
 
 * proto
 ```
