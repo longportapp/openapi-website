@@ -26,7 +26,7 @@ message SubscriptionRequest {
 |-------|-------|-----|
 |sub_list|object[]| 订阅的数据 |
 |∟symbol|string| 标的代码 |
-|∟sub_type|[SubType](../quote-object#SubType)[]| 订阅的数据类型 |
+|∟sub_type|[SubType](../quote-object#subtype)[]| 订阅的数据类型 |
 
 * proto
 ```

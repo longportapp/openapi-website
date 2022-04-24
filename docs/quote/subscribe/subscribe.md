@@ -17,7 +17,7 @@ sidebar_position: 2
 | 名称 | 类型   | 必须  | 描述      |  默认值  |  示例   |
 |-------|-------|-----|---------|-----|----|
 | symbol | string[]   | 是  | 订阅的标的代码  | | 00700.HK|
-| sub_type | [SubType](../quote-object#SubType)[] | 是 | 订阅的数据类型 | | 1,2|
+| sub_type | [SubType](../quote-object#subtype)[] | 是 | 订阅的数据类型 | | 1,2|
 | is_first_push | bool | 是 | 订阅后是否立刻进行一次数据推送。(trade 不支持)| | true|
 
 *proto
@@ -37,7 +37,7 @@ message SubscribeRequest {
 |-------|-------|-----|
 |sub_list|object[]| 订阅的数据 |
 |∟symbol|string| 标的代码 |
-|∟sub_type|[SubType](../quote-object#SubType)[]| 订阅的数据类型 |
+|∟sub_type|[SubType](../quote-object#subtype)[]| 订阅的数据类型 |
 
 * proto
 ```

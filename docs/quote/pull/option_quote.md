@@ -39,7 +39,7 @@ message MultiSecurityRequest {
 |∟timestamp|int64| 最新成交的交时间戳 |
 |∟volume|int64| 成交量 |
 |∟turnover|string| 成交额 |
-|∟trade_status|[TradeStatus](../quote-object#TradeStatus)| 标的交易状态 |
+|∟trade_status|[TradeStatus](../quote-object#tradestatus)| 标的交易状态 |
 |∟option_extend|object| 期权扩展行情 |
 |∟∟implied_volatility|string| 隐含波动率 |
 |∟∟open_interest|int64| 未平仓数 |

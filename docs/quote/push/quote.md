@@ -24,8 +24,8 @@ sidebar_position: 1
 |timestamp|int64| 最新成交的时间戳 |
 |volume|int64| 成交量 |
 |turnover|string| 成交额 |
-|trade_status|[TradeStatus](../quote-object#TradeStatus)| 交易状态 |
-|trade_session|[TradeSession](../quote-object#TradeSession)| 交易时段 |
+|trade_status|[TradeStatus](../quote-object#tradestatus)| 交易状态 |
+|trade_session|[TradeSession](../quote-object#tradesession)| 交易时段 |
 
 * proto
 ```
