@@ -123,7 +123,7 @@ HMAC-SHA256|0e3de7dd1fd206284395484504660272f91d24cc
 
 ### 使用 api secret key 对字符串进行签名
 
-假设 api secret key 为 `1c1ca804eb3f2ac9f13d88da958e73a8d3ead1450f8ca2707a834709b1382e2d`, 签名算法为
+假设 api secret key 为 `1c1ca804eb3f2ac9f13d88da958e73a8d3ead1450f8ca2707a834709b1382e2d`， 签名算法为
 
 ```
 HMAC(HMAC-SHA256|0e3de7dd1fd206284395484504660272f91d24cc, 1c1ca804eb3f2ac9f13d88da958e73a8d3ead1450f8ca2707a834709b1382e2d)
@@ -131,7 +131,7 @@ HMAC(HMAC-SHA256|0e3de7dd1fd206284395484504660272f91d24cc, 1c1ca804eb3f2ac9f13d8
 
 计算结果为 `e8ae6b1d962d4e3218fa605d6fdd23107a94a985d62f8ab2903091098e9b09f6`。
 
-请求中添加签名,格式为：
+请求中添加签名，格式为：
 ```
 X-Api-Signature: $algorithm SignedHeaders=$SignedHeaders, Signature=$Signature
 ```
