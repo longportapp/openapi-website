@@ -2,9 +2,9 @@
   "position": 1,
   "label": "OpenAPI 介绍",
   "collapsible": true,
-  "collapsed": false,
+  "collapsed": true,
   "link": {
     "title": "Getting started",
-    "slug": "/getting-started"
+    "slug": "/"
   }
 }

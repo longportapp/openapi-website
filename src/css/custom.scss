@@ -1,8 +1,8 @@
 @import './components/doc-sidebar.scss';
-@import './components/markdown.scss';
 @import './components/navbar.scss';
 @import 'react-photo-view/dist/react-photo-view.css';
+@import './components/markdown.scss';
 
-html {
-  font-size: 14px;
+body {
+  color: #222;
 }
