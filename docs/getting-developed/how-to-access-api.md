@@ -6,7 +6,7 @@ slug: /how-to-access-api
 
 ## API 调用流程
 
-<img src="https://pub.lbkrs.com/files/202204/KuqxBKUcPwUwXC6r/how-to-access-api-flow.png" />
+<img src="https://pub.lbkrs.com/files/202204/KuqxBKUcPwUwXC6r/how-to-access-api-flow.png" style={{ width: "200px" }} />
 
 ### 1. 获取 Access Key
 
