@@ -1,24 +1,22 @@
 ---
-title: 如何调用服务端 API 
-id: how-to-access-api 
+title: 如何调用 API
+id: how-to-access-api
 slug: /how-to-access-api
 ---
 
 ## API 调用流程
 
-下图是 API 调用流程： 
+<img src="https://pub.lbkrs.com/files/202204/KuqxBKUcPwUwXC6r/how-to-access-api-flow.png" />
 
-![how to access api flow](https://pub.lbkrs.com/files/202204/KuqxBKUcPwUwXC6r/how-to-access-api-flow.png)
-
-### 1. 获取 Access Key 
+### 1. 获取 Access Key
 
 首先要申请 API Key 拿到 API Secret， 并设置相应权限。获取 API Key 与申请权限请参考 [链接]。
 
-### 2. 创建 Token 
+### 2. 创建 Token
 
-在开发者后台中创建 Token。详见【链接】。
+在开发者后台中创建 `Token`。详见【链接】。
 
-### 3. 生成签名 
+### 3. 生成签名
 
 先根据相应的 API 文档构造请求后， 通过 OpenAPI SDK 直接调用 API，SDK 会帮助生成签名， 或者通过以下流程创建签名。
 
@@ -73,8 +71,7 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 
 ```
 
-
-### 4. 调用 API 
+### 4. 调用 API
 
 使用 HTTP 客户端发送签名过后的请求。
 
@@ -82,31 +79,48 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 
 所有 API 的路径都以 `https://openapi.longbridge.sg` 开头。
 
-## API 调用方式
+## API Request
 
 调用服务端接口需要是用 HTTPS 协议，JSON 格式，并是用 UTF-8 编码。
 
 示例如下：
 
 ```bash
-curl -v http://openapi.longbridge.sg/v1/test -H "X-Api-Signature: ${签名}" -H "X-Api-Key: ${API key}" -H "Authorization: ${Token}" -H "X-Timestamp: ${签名时间戳}"
+curl -v http://127.0.0.1:8080/v1/test \
+    -H "X-Api-Signature: {签名}" -H "X-Api-Key: {access key}" \
+    -H "Authorization: {token}" -H "X-Timestamp: {签名时间}"
 ```
 
-## API 响应结果说明
+## API Response
 
-所有 API 相应体结构都包括 code, message, data 三个部分。code 是业务码，message 是错误信息，data 是请求结果。
-请求成功时 code 为 0，http status 为 200，当请求失败时 code 不为 0，并且 http status 不为 200。
+所有 API 相应体结构都包括 `code`, `message`, `data` 三个部分。`code` 是业务码，`message` 是 message，`data` 是请求结果。
 
-例如：
-``` json
-http code: 200
-http body: {
+HTTP Status 遵循 [RESTFull 风格](https://restfulapi.net/http-status-codes/)，请求成功时 `code = 0`, 否则 `code` 会描述具体的错误码。
+
+### HTTP Status
+
+- 1xx: Informational – Communicates transfer protocol-level information.
+- 2xx: Success – Indicates that the client’s request was accepted successfully.
+- 3xx: Redirection – Indicates that the client must take some additional action in order to complete their request.
+- 4xx: Client Error – This category of error status codes points the finger at clients.
+- 5xx: Server Error – The server takes responsibility for these error status codes.
+
+例如，请求成功，Response Body
+
+```json
+{
   "code": 0,
   "msg": "success"
+  "data": {
+    ...
+  }
 }
+```
 
-http code: 403 
-http body: {
+例如，失败的 Response Body
+
+```json
+{
   "code": 403201,
   "msg": "signature invalid"
 }

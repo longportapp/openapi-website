@@ -1,7 +1,7 @@
 $caret-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="7" viewBox="0 0 12 7" fill="none"><path d="M1.32289 0L6 4.47089L10.6771 0L12 1.26456L6 7L0 1.26456L1.32289 0Z" fill="black"/></svg>');
 
 @mixin after-icon() {
-  content: "";
+  content: '';
   width: 12px;
   height: 7px;
   background-image: $caret-icon;
@@ -18,8 +18,8 @@ nav.menu {
   --ifm-menu-color-background-hover: transparent;
   --ifm-menu-color-background-active: #f0f8ff;
   --ifm-menu-color-active: #37a0ff;
-  --ifm-menu-color: #82888d;
- }
+  --ifm-menu-color: #333;
+}
 .theme-doc-sidebar-menu {
   .navbar-sidebar__items {
     padding-left: 20px;
@@ -112,7 +112,6 @@ nav.menu {
       }
     }
   }
-  
 }
 .theme-doc-sidebar-container {
   border: none !important;
@@ -148,7 +147,7 @@ nav.menu {
               color: #000;
               background-color: transparent;
               &.menu__link--active {
-                color: var(--ifm-menu-color-active)
+                color: var(--ifm-menu-color-active);
               }
             }
           }
@@ -160,7 +159,6 @@ nav.menu {
           }
         }
       }
-      
     }
   }
 }

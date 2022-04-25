@@ -6,24 +6,30 @@ sidebar_position: 3
 ---
 
 ### 介绍：
+
     订阅的标的的实时经纪队列推送。
+
 ### 协议指令：
+
     103
+
 ### 数据格式
-* 参数
 
-| 名称 | 类型   | 描述  | 
-|-------|-------|-----|
-|symbol|string| 标的代码 |
-|sequence|int64| 序列号 |
-|ask_brokers|object[]| 卖盘经纪队列 |
-|∟position|int32| 档位 |
-|∟broker_ids|int32[]| [券商席位 Id](../pull/quote-broker-ids)|
-|bid_brokers|object[]| 买盘经纪队列 |
-|∟position|int32| 档位 |
-|∟broker_ids|int32[]| [券商席位 Id](../pull/quote-broker-ids)|
+- 参数
 
-* proto
+| 名称        | 类型     | 描述                              |
+| ----------- | -------- | --------------------------------- |
+| symbol      | string   | 标的代码                          |
+| sequence    | int64    | 序列号                            |
+| ask_brokers | object[] | 卖盘经纪队列                      |
+| ∟position   | int32    | 档位                              |
+| ∟broker_ids | int32[]  | [券商席位 Id](../pull/broker-ids) |
+| bid_brokers | object[] | 买盘经纪队列                      |
+| ∟position   | int32    | 档位                              |
+| ∟broker_ids | int32[]  | [券商席位 Id](../pull/broker-ids) |
+
+- proto
+
 ```
 message PushBrokers {
   string symbol = 1;

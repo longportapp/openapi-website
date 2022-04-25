@@ -4,39 +4,37 @@ slug: trade-order-history-orders
 title: 历史订单
 ---
 
-#  历史订单
+> Last Updated: 2022-04-24
 
-<font color='gray' size='2'>最后更新于 2022-04-21</font>
+## 历史订单查询
 
- - 历史订单查询
-
-## 请求
+### Request
 
 | 基本信息        |                                                            |
 |-------------|------------------------------------------------------------|
-| HTTP URL    | https://openapi.longbridge.sg/v1/trade/order/HistoryOrders |
+| HTTP URL    | /v1/trade/order/HistoryOrders |
 | HTTP Method | GET                                                        |
-| 权限要求        | 交易权限                                                       |
+| Permissions        | 交易权限                                                       |
 
-### 请求头
+### Headers
 
-| 名称            | 类型     | 必须  | 描述                                        |
+| Name            | Type     | Required  | Description                                        |
 |---------------|--------|-----|-------------------------------------------|
 | Authorization | string | 是   |                                           |
-| Content-Type  | string | 是   | **固定值**："application/json; charset=utf-8" |
+| Content-Type  | string | 是   | application/json; charset=utf-8 |
 
-### 请求参数
+### Parameters
 
-| 名称     | 类型     | 必须 | 描述                                        | 默认值 | 示例                                    |
-| -------- | -------- | ---- | ------------------------------------------- | ------ | --------------------------------------- |
-| symbol   | string   |      | 股票代码，使用 ticker.region 格式           |        | 700.HK                                  |
-| status   | []string |      | [订单状态](../trade-definition#orderstatus) |        | ["FilledStatus", "PartialFilledStatus"] |
-| side     | string   |      | 买卖方向<br/>Buy: 买入<br/>Sell: 卖出       |        | Buy                                     |
-| market   | string   |      | [市场](../trade-definition#market)          |        | US                                      |
-| start_at | string   |      | 开始时间，格式为时间戳 (秒)                 |        | 1650410999                              |
-| end_at   | string   |      | 结束时间，格式为时间戳 (秒)                 |        | 1650510999                              |
+| Name     | Type     | Required | Description                                        | Description                                 |
+| -------- | -------- | ---- | ------------------------------------------- | --------------------------------------- |
+| symbol   | string   |      | 股票代码，使用 ticker.region 格式           | 700.HK                                  |
+| status   | []string |      | [订单状态](../trade-definition#orderstatus) | ["FilledStatus", "PartialFilledStatus"] |
+| side     | string   |      | 买卖方向<br/>Buy: 买入<br/>Sell: 卖出       | Buy                                     |
+| market   | string   |      | [市场](../trade-definition#market)          | US                                      |
+| start_at | string   |      | 开始时间，格式为时间戳 (秒)                 | 1650410999                              |
+| end_at   | string   |      | 结束时间，格式为时间戳 (秒)                 | 1650510999                              |
 
-start_at 和 end_at 的组合如下
+`start_at` 和 `end_at` 的组合如下
 
 | Start 类型 | End 类型 | 说明                             |
 | :--------- | :------- | :------------------------------- |
@@ -45,11 +43,11 @@ start_at 和 end_at 的组合如下
 | string     | None     | end 为 start 往后 90 天          |
 | None       | None     | start 为往前 90 天，end 当前日期 |
 
-## 响应
+### Response
 
-### 响应体
+#### response.body
 
-| 名称                                                         | 类型     | 描述                                                         |
+| Name                                                         | Type     | Description                                                         |
 | ------------------------------------------------------------ | -------- | ------------------------------------------------------------ |
 | code                                                         | int      | 错误码，非 0 表示失败                                        |
 | msg                                                          | string   | 错误描述                                                     |
@@ -84,8 +82,7 @@ start_at 和 end_at 的组合如下
 
 
 
-
-### 响应体示例
+### Response 示例
 
 ```json
 {
@@ -122,9 +119,9 @@ start_at 和 end_at 的组合如下
 }
 ```
 
-### 错误码
+### Error Code
 
-| HTTP 状态码 | 错误码    | 描述                | 排查建议                                          |
+| HTTP Status | 错误码    | 描述                | 排查建议                                          |
 |----------|--------|-------------------|-----------------------------------------------|
 | 400      | 602001 | bad request       | 一般可能是请求参数存在问题，导致请求失败，建议根据返回的具体错误进行排查          |
 | 400      | 602002 | request forbidden | 一般可能是因为操作者没有操作权限，导致被禁止操作。比如没有任务的编辑权限，却修改任务状态等 |
