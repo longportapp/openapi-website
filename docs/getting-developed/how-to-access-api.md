@@ -38,7 +38,7 @@ curl -v http://127.0.0.1:8080/v1/test \
 
 ## API Response
 
-所有 API 相应体结构都包括 `code`, `message`, `data` 三个部分。`code` 是业务码，`message` 是错误信息，`data` 是请求结果。
+所有 API 相应体结构都包括 `code`, `message`, `data` 三个部分。`code` 是业务码，`message` 是 message，`data` 是请求结果。
 
 HTTP Status 遵循 [RESTFull 风格](https://restfulapi.net/http-status-codes/)，请求成功时 `code = 0`, 否则 `code` 会描述具体的错误码。
 

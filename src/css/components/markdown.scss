@@ -172,7 +172,6 @@
   font-weight: 600;
   padding-bottom: 0.3em;
   font-size: 2em;
-  border-bottom: 1px solid var(--color-border-muted);
 }
 
 .markdown mark {
@@ -748,12 +747,17 @@
 
 .markdown table th {
   font-weight: 600;
+  text-align: left;
 }
 
 .markdown table th,
 .markdown table td {
   padding: 6px 13px;
   border: 1px solid var(--color-border-default);
+}
+
+table thead tr {
+  border: 0;
 }
 
 .markdown table tr {

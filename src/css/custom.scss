@@ -1,8 +1,41 @@
-@import './components/doc-sidebar.scss';
 @import './components/navbar.scss';
 @import 'react-photo-view/dist/react-photo-view.css';
 @import './components/markdown.scss';
 
+:root {
+  --ifm-color-primary: #37a0ff;
+  --ifm-menu-color: #202020;
+  --ifm-menu-color-background-active: #f0f8ff;
+  --ifm-menu-color-active: #37a0ff;
+}
+
 body {
   color: #222;
+}
+
+.theme-doc-sidebar-menu {
+  color: #222;
+  font-size: 14px;
+  font-weight: normal;
+
+  .menu__link {
+    border-radius: 50px;
+  }
+  
+}
+
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu-link {
+  font-weight: bold;
+}
+
+
+.menu__link--sublist-caret:after {
+  width: 0.8rem;
+  height: 0.8rem;
+  min-width: 0.8em;
+  background-size: 1.5rem 1.5rem;
+}
+
+.theme-doc-toc-desktop {
+  top: 130px !important;
 }
