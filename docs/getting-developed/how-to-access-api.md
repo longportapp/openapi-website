@@ -62,7 +62,7 @@ def sign(method, uri, headers, params, body, secret):
 # 请求方法
 method = "POST"
 # 请求路径
-uri = "/v1/trade/order/Submit"
+uri = "/v1/trade/order/submit"
 # 请求参数 如 member_id=1&account_channel=2
 params = ""
 # 请求 body 如
@@ -141,7 +141,7 @@ from urllib.parse import quote
 # 请求方法
 method = "POST"
 # 请求路径
-uri = "/v1/trade/order/Submit"
+uri = "/v1/trade/order/submit"
 # 请求参数 如 member_id=1&account_channel=2
 params = ""
 # 请求 body
