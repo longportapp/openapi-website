@@ -22,7 +22,7 @@ slug: /refresh-token-api
 |---------------|--------|-----|-------------------------------------------|
 | Authorization | string | 是   |                                           |
 | Content-Type  | string | 是   | **固定值**："application/json; charset=utf-8" |
-| Account-Channel | string | 是  | lb - 长桥，pspl_sg - 新加坡辉立 |
+| Account-Channel | string | 是  | `lb` - 长桥，`pspl_sg` - 新加坡辉立 |
 
 ### 请求参数
 
