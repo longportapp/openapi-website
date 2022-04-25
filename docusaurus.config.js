@@ -15,7 +15,7 @@ const config = {
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   i18n,
-  favicon: 'https://pub.lbkrs.com/files/202107/gmrC7fXdNq1nwTsm/new-ico.png',
+  favicon: 'https://pub.lbkrs.com/files/202107/35tULHe3n4Pp4EtA/logo.png',
   plugins: [
     'docusaurus-plugin-sass',
     'docusaurus-tailwindcss',

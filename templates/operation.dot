@@ -1,0 +1,48 @@
+{{= data.tags.section }}
+
+{{ data.methodUpper = data.method.verb.toUpperCase(); }}
+{{ data.url = data.utils.slashes(data.baseUrl + data.method.path); }}
+{{ data.parameters = data.operation.parameters; }}
+{{ data.enums = []; }}
+{{ data.utils.fakeProdCons(data); }}
+{{ data.utils.fakeBodyParameter(data); }}
+{{ data.utils.mergePathParameters(data); }}
+{{ data.utils.getParameters(data); }}
+
+{{? data.options.codeSamples || data.operation["x-code-samples"] }}
+```
+Code samples
+```
+
+{{= data.utils.getCodeSamples(data) }}
+{{?}}
+
+## {{? data.operation.summary && !data.options.tocSummary}}{{= data.operation.summary }}{{?}}
+
+<div class="http-operation"><div class="http-verb">{{= data.methodUpper }}</div><div class="http-path">{{=data.method.path}}</div>{{? data.operation.deprecated }}<div class="http-operation-deprecated">Deprecated</div>{{?}}</div>
+
+
+{{? data.operation.access}}<div class="operation-access">权限需求：{{= data.operation.access }}</div>{{?}}
+
+{{? data.operation.description}}{{= data.operation.description }}{{?}}
+
+{{? data.operation.requestBody}}
+
+{{= data.utils.getBodyParameterExamples(data) }}
+{{?}}
+
+{{? data.parameters && data.parameters.length }}
+{{#def.parameters}}
+{{?}}
+
+{{#def.responses}}
+
+{{#def.callbacks}}
+
+{{ data.security = data.operation.security ? data.operation.security : data.api.security; }}
+{{? data.security && data.security.length }}
+{{#def.authentication}}
+{{??}}
+{{#def.authentication_none}}
+{{?}}
+{{= data.tags.endSection }}

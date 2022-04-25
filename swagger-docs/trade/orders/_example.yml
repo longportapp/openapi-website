@@ -1,0 +1,76 @@
+swagger: "2.0"
+info:
+  description: "订单接口提供完整的下单、取消下单等功能。"
+  version: "v1"
+  title: "委托订单"
+paths:
+  /trade/orders/submit:
+    post:
+      summary: "提交订单"
+      description: "订单接口介绍描述信息"
+      access: "登录 + 交易权限"
+      parameters:
+        - name: "quantity"
+          type: "integer"
+          description: "订单委托数量"
+          required: true
+        - name: "price"
+          type: "float"
+          description: "委托单价"
+          required: true
+        - name: "meta"
+          description: "订单信息"
+          schema:
+            $ref: "#/definitions/OrderMeta"
+      responses:
+        "200":
+          description: "提交成功，订单已委托。"
+          schema:
+            $ref: "#/definitions/CreateOrderResp"
+        "401":
+          description: "下单被拒绝，资金不足。"
+      request_body:
+        type: "json"
+        value: { "quantity": 100, "price": 100.21 }
+      response_body:
+        {
+          "code": 0,
+          "data": { "title": "Hello world", "quantity": 100, "done": 99 },
+        }
+  /trade/orders/cancel:
+    post:
+      deprecated: true
+      summary: "取消订单"
+      access: "登录 + 交易权限"
+      parameters:
+        - name: "order_id"
+          type: "integer"
+          description: "订单编号"
+          required: true
+      responses:
+        "200":
+          description: "提交成功，订单已委托。"
+          schema:
+            $ref: "#/definitions/CreateOrderResp"
+        "401":
+          description: "下单被拒绝，资金不足。"
+      request_body:
+        type: "json"
+        value: { "order_id": 881001 }
+      response_body: { "code": 0, "data": { "status": "cancelled" } }
+
+definitions:
+  OrderMeta:
+    type: "object"
+    properties:
+      allows_market_price:
+        type: "boolean"
+      slient:
+        type: "boolean"
+  CreateOrderResp:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      price:
+        type: "float"

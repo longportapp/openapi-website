@@ -6,9 +6,12 @@
   "private": false,
   "scripts": {
     "docusaurus": "docusaurus",
-    "dev": "docusaurus start --port=8000",
-    "build": "yarn clear && yarn build:canary",
-    "build:release": "yarn clear && docusaurus build --out-dir dist",
+    "dev": "yarn dev:docs",
+    "dev:docs": "docusaurus start --port=8000",
+    "dev:swagger": "WATCH=1 node swagger-watch.js",
+    "build:swagger": "node swagger-watch.js",
+    "build": "yarn clear && yarn build:swagger && yarn build:canary",
+    "build:release": "yarn clear && yarn build:swagger && docusaurus build --out-dir dist",
     "build:canary": "yarn clear && docusaurus build --out-dir dist",
     "clear": "docusaurus clear && mkdir -p dist && rm -rf dist",
     "serve": "docusaurus serve --dir dist --port=8008",
@@ -33,9 +36,14 @@
     "@docusaurus/module-type-aliases": "2.0.0-beta.18",
     "@tsconfig/docusaurus": "^1.0.5",
     "docusaurus-plugin-sass": "^0.2.2",
+    "js-yaml": "^4.1.0",
+    "json-beautify": "^1.1.1",
     "mini-css-extract-plugin": "^2.6.0",
+    "node-watch": "^0.7.3",
     "sass": "^1.34.1",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "widdershins": "^4.0.1",
+    "concurrently": "^7.0.0"
   },
   "browserslist": {
     "production": [
