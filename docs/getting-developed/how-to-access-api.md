@@ -20,7 +20,7 @@ slug: /how-to-access-api
 
 ### 3. 生成签名 
 
-先根据相应的 API 文档构造请求后， 通过 OpenAPI SDK【链接】直接调用 API，SDK 会帮助生成签名， 或者通过以下流程创建签名。
+先根据相应的 API 文档构造请求后， 通过 OpenAPI SDK 直接调用 API，SDK 会帮助生成签名， 或者通过以下流程创建签名。
 
 #### 添加 `X-Api-Key`、`X-Timestamp`
 
