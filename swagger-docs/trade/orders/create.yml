@@ -1,0 +1,33 @@
+swagger: "2.0"
+info:
+  description: "订单接口介绍描dd述信息"
+  version: "v1"
+  title: "委托订 单"
+paths:
+  /trade/orders/submit:
+    post:
+      operationId: "URL"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "委托订单参数体. [url](https://baidu.com)"
+          required: true
+          schema:
+            $ref: "#/definitions/CreateOrder"
+      responses:
+        "200":
+          description: "订单已委托"
+        "401":
+          description: "下单被拒绝，资金不足。"
+
+definitions:
+  CreateOrder:
+    type: "object"
+    properties:
+      quantity:
+        type: "integer"
+        format: "int32"
+      price:
+        type: "integer"
+        format: "float"
+        default: 100.92

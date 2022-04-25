@@ -4,7 +4,11 @@ const beautifyJson = require("json-beautify");
 const converter = require("widdershins");
 const fs = require("fs");
 
-let options = { user_templates: "./templates" };
+let options = {
+  user_templates: "./templates",
+  language_tabs: false,
+  debug: true
+};
 // options.templateCallback = myCallBackFunction;
 
 // function myCallBackFunction(templateName, stage, data) {
@@ -14,11 +18,18 @@ let options = { user_templates: "./templates" };
 //   return data;
 // }
 
-// JSON or YAML String -> JS object
-let jsContent = YAML.load(fs.readFileSync("./oas/trade/orders.yaml"));
-// JS Object -> pretty JSON string
-let apiObj = JSON.parse(beautifyJson(jsContent, null, 2));
-
-converter.convert(apiObj, options).then(str => {
-  fs.writeFileSync("./docs/test.md", str, "utf8");
+require("node-watch")("./swagger-docs/", { recursive: true }, function(
+  evt,
+  name
+) {
+  console.log("%s changed.", name);
+  let jsContent = YAML.load(fs.readFileSync(`./${name}`));
+  let apiObj = JSON.parse(beautifyJson(jsContent, null, 2));
+  const distPath = name
+    .replace("swagger-docs", "docs")
+    .replace(/\.(yml|yaml)/, ".md");
+  converter.convert(apiObj, options).then(str => {
+    console.log("generate md file: ", distPath);
+    fs.writeFileSync(distPath, str, "utf8");
+  });
 });

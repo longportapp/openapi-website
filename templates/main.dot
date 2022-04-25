@@ -1,5 +1,8 @@
 {{= data.tags.section }}
-<h1 id="{{=data.title_prefix}}">{{=data.api.info && data.api.info.title}} {{=data.version}}</h1>
+
+{{? data.api.info && data.api.info.description}}{{=data.api.info.description}}{{?}}
+
+### 请求头信息
 
 | 基本信息        |                                                            |
 |-------------|------------------------------------------------------------|
@@ -7,37 +10,10 @@
 | HTTP Method | GET                                                        |
 | 权限要求        | 交易权限                                                       |
 
-{{? data.api.info && data.api.info.description}}{{=data.api.info.description}}{{?}}
-
-{{? data.api.servers }}
-Base URLs:
-{{~data.api.servers :s}}
-* <a href="{{=s.url}}">{{=s.url}}</a>
-{{ for(var v in s.variables) { }}
-    * **{{=v}}** - {{=s.variables[v].description||''}} Default: {{=s.variables[v].default}}
-{{? s.variables[v].enum}}
-{{~ s.variables[v].enum :e}}
-        * {{= e}}
-{{~}}
-{{?}}
-{{ } }}
-{{~}}
-{{?}}
-
-{{? data.api.info && data.api.info.termsOfService}}<a href="{{=data.api.info.termsOfService}}">Terms of service</a>{{?}}
-{{? data.api.info && data.api.info.contact}}{{? data.api.info.contact.email}}Email: <a href="mailto:{{=data.api.info.contact.email}}">{{=data.api.info.contact.name || 'Support'}}</a> {{?}}{{? data.api.info.contact.url}}Web: <a href="{{=data.api.info.contact.url}}">{{= data.api.info.contact.name || 'Support'}}</a> {{?}}{{?}}
-{{? data.api.info && data.api.info.license}}{{? data.api.info.license.url}}License: <a href="{{=data.api.info.license.url}}">{{=data.api.info.license.name}}</a>{{??}} License: {{=data.api.info.license.name}}{{?}}{{?}}
-{{= data.tags.endSection }}
-
-{{? data.api.components && data.api.components.securitySchemes }}
-{{#def.security}}
-{{?}}
-
 {{ for (var r in data.resources) { }}
 {{ data.resource = data.resources[r]; }}
 
 {{= data.tags.section }}
-<h1 id="{{=data.title_prefix+'-'+data.utils.slugify(r)}}">{{= r}}</h1>
 
 {{? data.resource.description }}{{= data.resource.description}}{{?}}
 
@@ -67,7 +43,6 @@ Base URLs:
 
 {{= data.tags.section }}
 <h2 id="tocS_{{=s}}">{{=s}}</h2>
-{{ /* backwards compatibility */ }}
 <a id="schema{{=s.toLowerCase()}}"></a>
 <a id="schema_{{=s}}"></a>
 <a id="tocS{{=s.toLowerCase()}}"></a>
