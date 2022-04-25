@@ -8,7 +8,7 @@
     "docusaurus": "docusaurus",
     "dev": "yarn dev:docs",
     "dev:docs": "docusaurus start --port=8000",
-    "dev:swagger": "node convert-md.js",
+    "dev:swagger": "node swagger-watch.js",
     "build": "yarn clear && yarn build:canary",
     "build:release": "yarn clear && docusaurus build --out-dir dist",
     "build:canary": "yarn clear && docusaurus build --out-dir dist",
