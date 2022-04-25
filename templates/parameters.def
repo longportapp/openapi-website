@@ -3,9 +3,9 @@
 
 > Content-Type: application/json; charset=utf-8  
    
-|Name|Type|Required|Description| 
+| Name | Type | Required | Description | 
 |---|---|---|---|
-{{~ data.parameters :p}}|{{=p.name}}|{{=p.safeType}}|{{=p.required}}|{{=p.shortDesc || 'none'}}|
+{{~ data.parameters :p}}| {{=p.name}} | {{=p.safeType}} | {{=p.required}} | {{=p.shortDesc || 'none'}} |
 {{~}}
 
 {{? data.longDescs }}
@@ -19,9 +19,16 @@
 {{? data.operation.request_body }}
 #### Request Example
 
-```{{=data.operation.request_body.type}}
+
+{{? data.operation.request_body.type == "json"}}
+```json
 {{= JSON.stringify(data.operation.request_body.value || {}, null, 2) }}
 ```
+{{??}}
+```{{=data.operation.request_body.type}}
+{{= (data.operation.request_body.value || "").trim() }}
+```
+{{?}}
 {{?}}
 
 
@@ -44,9 +51,9 @@
 {{? data.enums && data.enums.length }}
 #### Enumerated Values
 
-|Parameter|Value|
+| Parameter | Value |
 |---|---|
-{{~ data.enums :e}}|{{=e.name}}|{{=data.utils.toPrimitive(e.value)}}|
+{{~ data.enums :e}}| {{=e.name}} | {{=data.utils.toPrimitive(e.value)}} |
 {{~}}
 {{?}}
 {{= data.tags.endSection }}

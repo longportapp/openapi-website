@@ -24,9 +24,9 @@
 
 #### Response Status
 
-|Status|Description|Schema|
+| Status | Description | Schema |
 |---|---|---|
-{{~ data.responses :r}}|{{=r.status}}|{{=r.description || 'none'}}|{{=r.schema}}|
+{{~ data.responses :r}}| {{=r.status}} | {{=r.description || 'none'}} | {{=r.schema}} |
 {{~}}
 
 {{ data.responseSchemas = false; }}
@@ -34,7 +34,9 @@
 {{ if (response.content && !response.$ref && !data.utils.isPrimitive(response.type)) data.responseSchemas = true; }}
 {{~}}
 {{? data.responseSchemas }}
+
 #### Response Schema
+
 {{~ data.responses :response}}
 {{? response.content && !response.$ref && !data.utils.isPrimitive(response.type)}}
 {{? Object.keys(response.content).length }}
@@ -59,9 +61,9 @@ Status Code **{{=response.status}}**
 {{~ blocks :block}}
 {{? block.title }}*{{=block.title}}*
 {{?}}
-|Name|Type|Required|Description|
+| Name | Type | Required | Description |
 |---|---|---|---|---|
-{{~block.rows :p}}|{{=p.displayName}}|{{=p.safeType}}|{{=p.required}}|{{=p.description||'none'}}|
+{{~block.rows :p}}| {{=p.displayName}} | {{=p.safeType}} | {{=p.required}} | {{=p.description||'none'}} |
 {{~}}
 {{~}}
 {{?}}
@@ -69,9 +71,9 @@ Status Code **{{=response.status}}**
 {{? enums.length > 0 }}
 #### Enumerated Values
 
-|Property|Value|
+| Property | Value |
 |---|---|
-{{~ enums :e}}|{{=e.name}}|{{=data.utils.toPrimitive(e.value)}}|
+{{~ enums :e}}| {{=e.name}} | {{=data.utils.toPrimitive(e.value)}} |
 {{~}}
 
 {{?}}
@@ -89,9 +91,9 @@ Status Code **{{=response.status}}**
 
 #### Response Headers
 
-|Status|Header|Type|Format|Description|
+| Status | Header | Type | Format | Description |
 |---|---|---|---|---|
-{{~ data.responseHeaders :h}}|{{=h.status}}|{{=h.header}}|{{=h.type}}|{{=h.format||''}}|{{=h.description||'none'}}|
+{{~ data.responseHeaders :h}}| {{=h.status}} | {{=h.header}} | {{=h.type}} | {{=h.format||''}} | {{=h.description||'none'}} |
 {{~}}
 
 {{?}}

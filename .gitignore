@@ -5,3 +5,4 @@ yarn-error.log
 .DS_Store
 .cache-loader
 dist
+*--autogen.md
