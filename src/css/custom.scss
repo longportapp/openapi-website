@@ -17,17 +17,16 @@ body {
   color: #222;
   font-size: 14px;
   font-weight: normal;
+  padding: 20px;
 
   .menu__link {
     border-radius: 50px;
   }
-  
 }
 
 .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu-link {
   font-weight: bold;
 }
-
 
 .menu__link--sublist-caret:after {
   width: 0.8rem;
@@ -38,4 +37,30 @@ body {
 
 .theme-doc-toc-desktop {
   top: 130px !important;
+}
+
+.container {
+  padding-top: 25px !important;
+  padding-bottom: 25px !important;
+  max-width: 1200px;
+}
+
+.breadcrumbs__item {
+  .breadcrumbs__link {
+    border-radius: 0;
+    background-color: transparent !important;
+    padding: 0 !important;
+    font-size: 14px !important;
+  }
+
+  &::after {
+    margin: 0 10px !important;
+    opacity: 0.4 !important;
+  }
+
+  &--active {
+    .breadcrumbs__link {
+      color: #333 !important;
+    }
+  }
 }

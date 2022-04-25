@@ -106,7 +106,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ['shell-session', 'http'],
+        additionalLanguages: ['shell-session', 'http', 'protobuf', 'rust'],
       },
     }),
 };

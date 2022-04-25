@@ -100,8 +100,8 @@
   margin: 0;
   color: var(--color-fg-default);
   background-color: var(--color-canvas-default);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
-    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji';
   font-size: 16px;
   line-height: 1.5;
   word-wrap: break-word;
@@ -329,8 +329,7 @@
 .markdown kbd {
   display: inline-block;
   padding: 3px 5px;
-  font: 11px ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
-    Liberation Mono, monospace;
+  font: 11px ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
   line-height: 10px;
   color: var(--color-fg-default);
   vertical-align: middle;
@@ -355,14 +354,15 @@
 
 .markdown h2 {
   font-weight: 600;
+  color: #101010;
   padding-bottom: 0.3em;
   font-size: 1.5em;
-  border-bottom: 1px solid var(--color-border-muted);
 }
 
 .markdown h3 {
   font-weight: 600;
-  font-size: 1.25em;
+  color: #0969da;
+  font-size: 1.2em;
 }
 
 .markdown h4 {
@@ -418,16 +418,14 @@
 
 .markdown tt,
 .markdown code {
-  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
-    Liberation Mono, monospace;
+  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
   font-size: 12px;
 }
 
 .markdown pre {
   margin-top: 0;
   margin-bottom: 0;
-  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
-    Liberation Mono, monospace;
+  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
   font-size: 12px;
   word-wrap: normal;
 }
@@ -745,15 +743,23 @@
   margin-bottom: 16px;
 }
 
+.markdown table {
+  width: 100%;
+  display: table;
+  font-size: 14px;
+}
+
 .markdown table th {
   font-weight: 600;
   text-align: left;
+  white-space: nowrap;
 }
 
 .markdown table th,
 .markdown table td {
   padding: 6px 13px;
   border: 1px solid var(--color-border-default);
+  vertical-align: top;
 }
 
 table thead tr {
@@ -882,6 +888,7 @@ table thead tr {
   font-size: 85%;
   background-color: var(--color-neutral-muted);
   border-radius: 6px;
+  border: 0;
 }
 
 .markdown code br,

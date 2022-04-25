@@ -21,8 +21,6 @@
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
-  "editor.formatOnPaste": false,
-  "editor.formatOnType": false,
   "prettier.requireConfig": true,
   "prettier.singleQuote": true,
   "editor.codeActionsOnSave": {
