@@ -53,9 +53,9 @@ slug: /refresh-token-api
 
 ```json
 {
-  'code': 0,
-  'message': '',
-  'data': {
+  "code": 0,
+  "message": "",
+  "data": {
     "token": "",
     "expired_at": "",
     "issued_at": "",
