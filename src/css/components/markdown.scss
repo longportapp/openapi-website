@@ -145,7 +145,8 @@
 .markdown a {
   background-color: transparent;
   color: var(--color-accent-fg);
-  text-decoration: none;
+  text-underline-offset: 20%;
+  text-decoration: underline;
 }
 
 .markdown a:active,
@@ -361,7 +362,7 @@
 
 .markdown h3 {
   font-weight: 600;
-  color: #0969da;
+  color: #0f70c7;
   font-size: 1.2em;
 }
 
