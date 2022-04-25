@@ -12,7 +12,7 @@
     "build:swagger": "node swagger-watch.js",
     "build": "yarn clear && yarn build:swagger && yarn build:canary",
     "build:release": "yarn clear && yarn build:swagger && docusaurus build --out-dir dist",
-    "build:canary": "yarn clear && docusaurus build --out-dir dist",
+    "build:canary": "yarn clear && yarn build:swagger && docusaurus build --out-dir dist",
     "clear": "docusaurus clear && mkdir -p dist && rm -rf dist",
     "serve": "docusaurus serve --dir dist --port=8008",
     "create:docs": "docusaurus docs:version",
