@@ -1,7 +1,7 @@
 ---
-title: 创建 token 接口 
-id: create-token-api
-slug: /create-token-api
+title: 刷新 token 接口 
+id: refresh-token-api
+slug: /refresh-token-api
 ---
 
 #  创建 token
@@ -14,7 +14,7 @@ slug: /create-token-api
 
 | 基本信息        |                                                            |
 |-------------|------------------------------------------------------------|
-| HTTP URL    | https://openapi.longbridge.sg/v1/openapi/accesskey/token |
+| HTTP URL    | /v1/openapi/token/refresh                                 |
 | HTTP Method | POST                                                        |
 | 权限要求        | 无                                                       |
 
@@ -30,7 +30,7 @@ slug: /create-token-api
 
 | 名称     | 类型     | 必须 | 描述                                        | 默认值 | 示例                                    |
 | -------- | -------- | ---- | ------------------------------------------- | ------ | --------------------------------------- |
-| expired_at  | string   |  是   | 格式           |  过期时间戳，格式：YYYY-MM-DDTHH:mm:ss.XXXZ     | 2023-04-14T12:13:57.859Z |
+| expired_at  | string   |  是   | 格式           |  过期时间戳，格式遵循 ![ISO8601](https://en.wikipedia.org/wiki/ISO_8601)规范     | 2023-04-14T12:13:57.859Z |
 | aaid      |   string |  是 |  token 账户  |  指定创建 token 的账户 |  |
 
 ## 响应
@@ -42,7 +42,7 @@ slug: /create-token-api
 | code                                                         | int      | 错误码，非 0 表示失败                                        |
 | msg                                                          | string   | 错误描述                                                     |
 | data                                                         | object   |                                                              |
-| <font color="grey">∟</font>token                             | string   | 生成的 token                                                      |
+| <font color="grey">∟</font>token                             | string   | 新的 token                                                      |
 | <font color="grey">∟</font>expired_at                      | string   | 过期的时间戳                                                     |
 | <font color="grey">∟</font>issued_at                       | string   | 颁发时间                                                     |
 | <font color="grey">∟</font>account_info                    | object   | 用户信息                                                         |
@@ -55,6 +55,9 @@ slug: /create-token-api
 
 ```json
 {
+  'code': 0,
+  'message': '',
+  'data': {
     "token": "",
     "expired_at": "",
     "issued_at": "",
@@ -62,6 +65,7 @@ slug: /create-token-api
         "member_id": "",
         "aaid": "",
         "account_channel": ""
+    }
   }
 }
 ```
