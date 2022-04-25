@@ -22,7 +22,7 @@ slug: /how-to-access-api
 
 #### 添加 `X-Api-Key`、`X-Timestamp`
 
-设置请求参数头部信息， `X-Api-Key`、 `Authorization`、`X-Timestamp` 将在签名函数中被使用
+设置请求参数头部信息， `X-Api-Key`、 `Authorization`、`X-Timestamp` 将在签名函数中被使用。
 ```python
 headers = {}
 headers['X-Api-Key'] = '${这里设置 API Key}'
@@ -33,7 +33,7 @@ headers['Content-Type'] = 'application/json; charset=utf-8',
 
 #### 使用签名函数对请求签名
 
-签名函数如下:
+签名函数如下：
 ```python
 // python3 签名函数
 def sign(method, uri, headers, params, body, secret):
@@ -53,7 +53,7 @@ def sign(method, uri, headers, params, body, secret):
 
 ```
 
-使用签名函数进行签名， 并设置签名到请求头部  `X-Api-Signature` 中: 
+使用签名函数进行签名， 并设置签名到请求头部  `X-Api-Signature` 中： 
 
 ```python
 # 请求方法
