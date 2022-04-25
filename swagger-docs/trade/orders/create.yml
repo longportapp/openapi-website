@@ -1,8 +1,9 @@
 swagger: "2.0"
 info:
-  description: "订单接口介绍描dd述信息"
+  custom: mixbo
+  description: "订单接口介绍描述信息ddd"
   version: "v1"
-  title: "委托订 单"
+  title: "委托订单"
 paths:
   /trade/orders/submit:
     post:
@@ -10,7 +11,7 @@ paths:
       parameters:
         - in: "body"
           name: "body"
-          description: "委托订单参数体. [url](https://baidu.com)"
+          description: "dd委托订单参数体 [url](https://baidu.com)"
           required: true
           schema:
             $ref: "#/definitions/CreateOrder"

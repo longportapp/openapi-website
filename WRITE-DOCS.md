@@ -3,6 +3,7 @@
 用于维护 Open API 文档库，目前采用第三方框架 [Docusaurus](https://docusaurus.io/) 构建。
 
 > 文档需要严格遵守以下规范提供内容：
+> * 文档规范 https://longbridge.feishu.cn/wiki/wikcnb0RtZ8OEuAodGBXaOL6Nxh#
 > * 提供多语言版本的文档，目前要支持 en、zh-CN(默认）、zh-HK 三种语言
 > * 中文文档放到 docs 目录下，其他语言文档放到 i18n/{lang}/docusaurus-plugin-content-docs/current 目录，结构保持和 docs 一致
 > * Markdown 文档需要提供规范的 Meta 信息

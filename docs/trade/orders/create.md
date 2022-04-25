@@ -1,5 +1,5 @@
 ---
-title: 委托订 单 v1
+title: 委托订单 v1
 language_tabs: false
 toc_footers: []
 includes: []
@@ -9,7 +9,7 @@ headingLevel: 2
 
 ---
 
-订单接口介绍描dd述信息
+订单接口介绍描述信息ddd
 
 ### 请求头信息
 
@@ -42,7 +42,7 @@ headingLevel: 2
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[CreateOrder](#schemacreateorder)|true|委托订单参数体. [url](https://baidu.com)|
+|body|body|[CreateOrder](#schemacreateorder)|true|dd委托订单参数体 [url](https://baidu.com)|
 
 <h3 id="url-responses">Responses</h3>
 
@@ -61,24 +61,6 @@ headingLevel: 2
 <a id="schema_CreateOrder"></a>
 <a id="tocScreateorder"></a>
 <a id="tocscreateorder"></a>
-
-```json
-{
-  "type": "object",
-  "properties": {
-    "quantity": {
-      "type": "integer",
-      "format": "int32"
-    },
-    "price": {
-      "type": "integer",
-      "format": "float",
-      "default": 100.92
-    }
-  }
-}
-
-```
 
 ### Properties
 

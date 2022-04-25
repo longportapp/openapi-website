@@ -1,4 +1,3 @@
-"use strict";
 const YAML = require("js-yaml");
 const beautifyJson = require("json-beautify");
 const converter = require("widdershins");
@@ -9,15 +8,10 @@ let options = {
   language_tabs: false,
   debug: true
 };
-// options.templateCallback = myCallBackFunction;
 
-// function myCallBackFunction(templateName, stage, data) {
-//   let statusString = "Template name: " + templateName + "\n";
-//   statusString += "Stage: " + stage + "\n";
-//   data.append = statusString;
-//   return data;
-// }
+console.log("Watching swagger-docs yaml| yml for changes...");
 
+// more info https://github.com/Mermade/widdershins
 require("node-watch")("./swagger-docs/", { recursive: true }, function(
   evt,
   name
