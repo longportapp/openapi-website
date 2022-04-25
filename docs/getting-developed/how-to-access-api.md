@@ -76,7 +76,11 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 
 ### 4. 调用 API 
 
-使用 http 客户端发送签名过后的请求。
+使用 HTTP 客户端发送签名过后的请求。
+
+## 基本路径 
+
+所有 API 的路径都以 `https://openapi.longbridge.sg` 开头。
 
 ## API 调用方式
 
@@ -85,7 +89,7 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 示例如下：
 
 ```bash
-curl -v http://openapi.longbridge.sg/v1/test -H "X-Api-Signature: ${签名}" -H "X-Api-Key: ${API key}" -H "Authorization: ${token}" -H "X-Timestamp: ${签名时间}"
+curl -v http://openapi.longbridge.sg/v1/test -H "X-Api-Signature: ${签名}" -H "X-Api-Key: ${API key}" -H "Authorization: ${Token}" -H "X-Timestamp: ${签名时间戳}"
 ```
 
 ## API 响应结果说明
