@@ -84,7 +84,7 @@
     --color-fg-subtle: #6e7781;
     --color-canvas-default: #ffffff;
     --color-canvas-subtle: #f6f8fa;
-    --color-border-default: #d0d7de;
+    --color-border-default: #c1cedb78;
     --color-border-muted: hsla(210, 18%, 87%, 1);
     --color-neutral-muted: rgba(175, 184, 193, 0.2);
     --color-accent-fg: #0969da;
@@ -363,7 +363,7 @@
 .markdown h3 {
   font-weight: 600;
   color: #0f70c7;
-  font-size: 1.2em;
+  font-size: 1.3em;
 }
 
 .markdown h4 {
@@ -373,7 +373,7 @@
 
 .markdown h5 {
   font-weight: 600;
-  font-size: 0.875em;
+  font-size: 0.7em;
 }
 
 .markdown h6 {
@@ -763,17 +763,14 @@
   vertical-align: top;
 }
 
-table thead tr {
+.markdown table thead tr {
   border: 0;
+  background-color: var(--color-canvas-subtle);
 }
 
 .markdown table tr {
   background-color: var(--color-canvas-default);
   border-top: 1px solid var(--color-border-muted);
-}
-
-.markdown table tr:nth-child(2n) {
-  background-color: var(--color-canvas-subtle);
 }
 
 .markdown table img {
@@ -1055,4 +1052,46 @@ table thead tr {
 
 .theme-code-block {
   box-shadow: 0 0 0 !important;
+}
+
+.markdown {
+  h2,
+  h3,
+  h4 {
+  }
+
+  .operation-access {
+    @apply py-2 px-4 border bg-yellow-50 text-yellow-800 rounded mb-4 text-sm;
+  }
+
+  .http-operation {
+    @apply font-mono flex items-center space-x-2 text-lg mb-5 leading-none;
+
+    .http-verb {
+      background: #e9ebf4;
+      border-radius: 8px;
+      padding: 3px 10px;
+      color: #8089aa;
+      font-size: 0.85em;
+      line-height: 100%;
+    }
+
+    .http-path {
+      color: #303030;
+    }
+
+    .http-operation-deprecated {
+      @apply text-xs p-1 px-2 rounded bg-pink-100 text-pink-800;
+    }
+  }
+}
+
+.markdown .copyButton_node_modules-\@docusaurus-theme-classic-lib-next-theme-CodeBlock-CopyButton-styles-module {
+  border: 0;
+  background: transparent;
+
+  svg {
+    height: 18px;
+    fill: var(--color-fg-muted);
+  }
 }

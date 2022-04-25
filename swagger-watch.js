@@ -14,10 +14,12 @@ console.log('Watching swagger-docs yaml| yml for changes...');
 
 function generateSwaggerDoc(file) {
   const fileName = file;
-  let jsContent = YAML.load(fs.readFileSync(`./${fileName}`));
-  let apiObj = JSON.parse(beautifyJson(jsContent, null, 2));
-  const distPath = fileName.replace('swagger-docs', 'docs').replace(/\.(yml|yaml)/, '.md');
+
   try {
+    let jsContent = YAML.load(fs.readFileSync(`./${fileName}`));
+    let apiObj = JSON.parse(beautifyJson(jsContent, null, 2));
+    const distPath = fileName.replace('swagger-docs', 'docs').replace(/\.(yml|yaml)/, '.md');
+
     converter
       .convert(apiObj, options)
       .then((str) => {

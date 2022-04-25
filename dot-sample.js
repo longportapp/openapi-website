@@ -3,8 +3,8 @@
 //   api: {
 //     openapi: '3.0.0',
 //       info: {
-//       custom: 'mixbo',
-//         description: '订单接口介绍描dd述信息',
+//       path: '/trade/orders/submit',
+//         description: '订单接口介绍描 dd 述信息',
 //         version: 'v1',
 //         title: '委托订单'
 //     },

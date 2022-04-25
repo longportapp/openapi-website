@@ -2,14 +2,6 @@
 
 {{? data.api.info && data.api.info.description}}{{=data.api.info.description}}{{?}}
 
-### 请求头信息
-
-| 基本信息        |                                                            |
-|-------------|------------------------------------------------------------|
-| HTTP URL    | https://openapi.longbridge.sg/v1/trade/order/HistoryOrders |
-| HTTP Method | GET                                                        |
-| 权限要求        | 交易权限                                                       |
-
 {{ for (var r in data.resources) { }}
 {{ data.resource = data.resources[r]; }}
 
@@ -35,27 +27,18 @@
 {{? data.api.components && data.api.components.schemas }}
 {{= data.tags.section }}
 
-# Schemas
+## Schemas
 
 {{ for (var s in data.components.schemas) { }}
 {{ var origSchema = data.components.schemas[s]; }}
 {{ var schema = data.api.components.schemas[s]; }}
 
 {{= data.tags.section }}
-<h2 id="tocS_{{=s}}">{{=s}}</h2>
-<a id="schema{{=s.toLowerCase()}}"></a>
-<a id="schema_{{=s}}"></a>
-<a id="tocS{{=s.toLowerCase()}}"></a>
-<a id="tocs{{=s.toLowerCase()}}"></a>
+### {{=s}}
 
-{{? data.options.yaml }}
-```yaml
-{{=data.utils.yaml.stringify(data.utils.getSample(schema,data.options,{quiet:true},data.api))}}
-{{??}}
-```json
-{{=data.utils.safejson(data.utils.getSample(schema,data.options,{quiet:true},data.api),null,2)}}
-{{?}}
-```
+<a id="schema{{=s}}"></a>
+<a id="schema{{=s.toLowerCase()}}"></a>
+
 
 {{ var enums = []; }}
 {{ var blocks = data.utils.schemaToArray(origSchema,-1,{trim:true,join:true},data); }}
@@ -79,12 +62,11 @@
 {{? block===blocks[0] }}
 {{= data.tags.section }}
 
-### Properties
 {{?}}
 
-{{? block.rows.length}}|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|{{?}}
-{{~ block.rows :p}}|{{=p.displayName}}|{{=p.safeType}}|{{=p.required}}|{{=p.restrictions||'none'}}|{{=p.description||'none'}}|
+{{? block.rows.length}}|Name|Type|Required|Description|
+|---|---|---|---|{{?}}
+{{~ block.rows :p}}|{{=p.displayName}}|{{=p.safeType}}|{{=p.required}}|{{=p.description||' '}}|
 {{~}}
 {{~}}
 {{? (blocks[0].rows.length === 0) && (blocks.length === 1) }}
@@ -94,7 +76,7 @@
 {{? enums.length > 0 }}
 {{= data.tags.section }}
 
-#### Enumerated Values
+##### Enumerated Values
 
 |Property|Value|
 |---|---|

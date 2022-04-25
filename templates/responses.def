@@ -5,17 +5,28 @@
 {{~}}
 
 {{? data.responseSchemas }}
-> Example responses
-
-{{= data.utils.getResponseExamples(data) }}
 {{?}}
 
 {{= data.tags.section }}
-<h3 id="{{=data.operationUniqueSlug}}-responses">Responses</h3>
+### Responses
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-{{~ data.responses :r}}|{{=r.status}}|{{=r.meaning}}|{{=r.description || 'none'}}|{{=r.schema}}|
+#### Respones Headers
+
+- Content-Type: application/json
+
+{{? data.operation.request_body }}
+#### Response Example
+
+```json
+{{= JSON.stringify(data.operation.response_body || {}, null, 2) }}
+```
+{{?}}
+
+#### Response Status
+
+|Status|Description|Schema|
+|---|---|---|
+{{~ data.responses :r}}|{{=r.status}}|{{=r.description || 'none'}}|{{=r.schema}}|
 {{~}}
 
 {{ data.responseSchemas = false; }}
@@ -23,7 +34,7 @@
 {{ if (response.content && !response.$ref && !data.utils.isPrimitive(response.type)) data.responseSchemas = true; }}
 {{~}}
 {{? data.responseSchemas }}
-<h3 id="{{=data.operationUniqueSlug}}-responseschema">Response Schema</h3>
+#### Response Schema
 {{~ data.responses :response}}
 {{? response.content && !response.$ref && !data.utils.isPrimitive(response.type)}}
 {{? Object.keys(response.content).length }}
@@ -48,9 +59,9 @@ Status Code **{{=response.status}}**
 {{~ blocks :block}}
 {{? block.title }}*{{=block.title}}*
 {{?}}
-|Name|Type|Required|Restrictions|Description|
+|Name|Type|Required|Description|
 |---|---|---|---|---|
-{{~block.rows :p}}|{{=p.displayName}}|{{=p.safeType}}|{{=p.required}}|{{=p.restrictions||'none'}}|{{=p.description||'none'}}|
+{{~block.rows :p}}|{{=p.displayName}}|{{=p.safeType}}|{{=p.required}}|{{=p.description||'none'}}|
 {{~}}
 {{~}}
 {{?}}
@@ -76,7 +87,7 @@ Status Code **{{=response.status}}**
 {{ data.responseHeaders = data.utils.getResponseHeaders(data); }}
 {{? data.responseHeaders.length }}
 
-### Response Headers
+#### Response Headers
 
 |Status|Header|Type|Format|Description|
 |---|---|---|---|---|

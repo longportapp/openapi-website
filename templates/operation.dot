@@ -10,14 +10,19 @@
 {{ data.utils.getParameters(data); }}
 
 {{? data.options.codeSamples || data.operation["x-code-samples"] }}
-> Code samples
+```
+Code samples
+```
 
 {{= data.utils.getCodeSamples(data) }}
 {{?}}
 
-`{{= data.methodUpper}} {{=data.method.path}}`
+## {{? data.operation.summary && !data.options.tocSummary}}{{= data.operation.summary }}{{?}}
 
-{{? data.operation.summary && !data.options.tocSummary}}*{{= data.operation.summary }}*{{?}}
+<div class="http-operation"><div class="http-verb">{{= data.methodUpper }}</div><div class="http-path">{{=data.method.path}}</div>{{? data.operation.deprecated }}<div class="http-operation-deprecated">Deprecated</div>{{?}}</div>
+
+
+{{? data.operation.access}}<div class="operation-access">权限需求：{{= data.operation.access }}</div>{{?}}
 
 {{? data.operation.description}}{{= data.operation.description }}{{?}}
 

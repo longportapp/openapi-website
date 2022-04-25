@@ -1,9 +1,11 @@
 {{= data.tags.section }}
-<h3 id="{{=data.operationUniqueSlug}}-parameters">Parameters</h3>
+### Parameters 
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-{{~ data.parameters :p}}|{{=p.name}}|{{=p.in}}|{{=p.safeType}}|{{=p.required}}|{{=p.shortDesc || 'none'}}|
+> Content-Type: application/json; charset=utf-8  
+   
+|Name|Type|Required|Description| 
+|---|---|---|---|
+{{~ data.parameters :p}}|{{=p.name}}|{{=p.safeType}}|{{=p.required}}|{{=p.shortDesc || 'none'}}|
 {{~}}
 
 {{? data.longDescs }}
@@ -12,6 +14,16 @@
 **{{=p.name}}**: {{=p.description}}{{?}}
 {{~}}
 {{?}}
+
+
+{{? data.operation.request_body }}
+#### Request Example
+
+```{{=data.operation.request_body.type}}
+{{= JSON.stringify(data.operation.request_body.value || {}, null, 2) }}
+```
+{{?}}
+
 
 {{~ data.parameters :p}}
 

@@ -9,63 +9,132 @@ headingLevel: 2
 
 ---
 
-订单接口介绍描述信息ddd
+订单接口提供完整的下单、取消下单等功能。
 
-### 请求头信息
+## 提交订单
 
-| 基本信息        |                                                            |
-|-------------|------------------------------------------------------------|
-| HTTP URL    | https://openapi.longbridge.sg/v1/trade/order/HistoryOrders |
-| HTTP Method | GET                                                        |
-| 权限要求        | 交易权限                                                       |
+<div class="http-operation"><div class="http-verb">POST</div><div class="http-path">/trade/orders/submit</div></div>
 
-`POST /trade/orders/submit`
+<div class="operation-access">权限需求：登录 + 交易权限</div>
+
+订单接口介绍描述信息
+
+### Parameters 
+
+> Content-Type: application/json; charset=utf-8  
+   
+|Name|Type|Required|Description| 
+|---|---|---|---|
+|quantity|integer|true|订单委托数量|
+|price|float|true|委托单价|
+|meta|[OrderMeta](#schemaordermeta)|false|订单信息|
+
+#### Request Example
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "quantity": {
-      "type": "integer",
-      "format": "int32"
-    },
-    "price": {
-      "type": "integer",
-      "format": "float",
-      "default": 100.92
-    }
+  "quantity": 100,
+  "price": 100.21
+}
+```
+
+### Responses
+
+#### Respones Headers
+
+- Content-Type: application/json
+
+#### Response Example
+
+```json
+{
+  "code": 0,
+  "data": {
+    "title": "Hello world",
+    "quantity": 100,
+    "done": 99
   }
 }
 ```
 
-<h3 id="url-parameters">Parameters</h3>
+#### Response Status
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|[CreateOrder](#schemacreateorder)|true|dd委托订单参数体 [url](https://baidu.com)|
-
-<h3 id="url-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|订单已委托|None|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|下单被拒绝，资金不足。|None|
+|Status|Description|Schema|
+|---|---|---|
+|200|提交成功，订单已委托。|[CreateOrderResp](#schemacreateorderresp)|
+|401|下单被拒绝，资金不足。|None|
 
 <aside class="success">
 </aside>
 
-# Schemas
+## 取消订单
 
-<h2 id="tocS_CreateOrder">CreateOrder</h2>
-<a id="schemacreateorder"></a>
-<a id="schema_CreateOrder"></a>
-<a id="tocScreateorder"></a>
-<a id="tocscreateorder"></a>
+<div class="http-operation"><div class="http-verb">POST</div><div class="http-path">/trade/orders/cancel</div><div class="http-operation-deprecated">Deprecated</div></div>
 
-### Properties
+<div class="operation-access">权限需求：登录 + 交易权限</div>
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|quantity|integer(int32)|false|none|none|
-|price|integer(float)|false|none|none|
+### Parameters 
+
+> Content-Type: application/json; charset=utf-8  
+   
+|Name|Type|Required|Description| 
+|---|---|---|---|
+|order_id|integer|true|订单编号|
+
+#### Request Example
+
+```json
+{
+  "order_id": 881001
+}
+```
+
+### Responses
+
+#### Respones Headers
+
+- Content-Type: application/json
+
+#### Response Example
+
+```json
+{
+  "code": 0,
+  "data": {
+    "status": "cancelled"
+  }
+}
+```
+
+#### Response Status
+
+|Status|Description|Schema|
+|---|---|---|
+|200|提交成功，订单已委托。|[CreateOrderResp](#schemacreateorderresp)|
+|401|下单被拒绝，资金不足。|None|
+
+<aside class="success">
+</aside>
+
+## Schemas
+
+### OrderMeta
+
+<a id="schemaOrderMeta"></a>
+<a id="schemaordermeta"></a>
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|allows_market_price|boolean|false| |
+|slient|boolean|false| |
+
+### CreateOrderResp
+
+<a id="schemaCreateOrderResp"></a>
+<a id="schemacreateorderresp"></a>
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+|title|string|false| |
+|price|float|false| |
 
