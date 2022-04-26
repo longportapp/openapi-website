@@ -7,23 +7,23 @@ sidebar_position: 16
 
 获取市场交易日
 
-## 协议指令
+:::info
 
-```
-9
-```
+协议指令：`9`
 
-## 请求
+:::
 
-### 参数
+## Request
 
-| 名称    | 类型   | 必须 | 描述                         | 默认值 | 示例       |
-| ------- | ------ | ---- | ---------------------------- | ------ | ---------- |
-| market  | string | 是   | 市场，可选：[US, HK, CN, SG] |        | `US`       |
-| beg_day | string | 是   | 开始时间，格式：`YYMMDD`     |        | `20220501` |
-| end_day | string | 是   | 结束时间，格式：`YYMMDD`     |        | `20220510` |
+### Parameters
 
-### proto
+| 名称    | 类型   | 必须 | 描述                                                                                                | 示例       |
+| ------- | ------ | ---- | --------------------------------------------------------------------------------------------------- | ---------- |
+| market  | string | 是   | 市场，可选：<br/><br/>`US` - 美股市场<br/>`HK` - 港股市场<br/>`CN` - A 股市场<br/>`SG` - 新加坡市场 | `US`       |
+| beg_day | string | 是   | 开始时间，格式：`YYMMDD`                                                                            | `20220501` |
+| end_day | string | 是   | 结束时间，格式：`YYMMDD`                                                                            | `20220510` |
+
+### Protobuf
 
 ```protobuf
 message MarketTradeDayRequest {
@@ -33,16 +33,16 @@ message MarketTradeDayRequest {
 }
 ```
 
-## 响应
+## Response
 
-### 参数
+### Response Properties
 
 | 名称           | 类型     | 描述                   |
 | -------------- | -------- | ---------------------- |
 | trade_day      | string[] | 交易日，格式：`YYMMDD` |
 | half_trade_day | string[] | 半日市，格式：`YYMMDD` |
 
-### proto
+### Protobuf
 
 ```protobuf
 message MarketTradeDayResponse {
@@ -53,8 +53,12 @@ message MarketTradeDayResponse {
 
 ## 接口限制
 
-- 每秒平均请求数 10 次。瞬时并发数 5 次。
+:::caution
+
+- 每秒平均请求数 10 次，瞬时并发数 5 次。
 - 每次请求间隔时间不能超过一个月。
+
+:::
 
 ## 错误码
 

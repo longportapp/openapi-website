@@ -1,21 +1,19 @@
 ---
 id: quote_broker_ids
-title: 获取券商席位 id
+title: 获取券商席位 ID
 slug: broker-ids
 sidebar_position: 7
 ---
 
-获取券商席位 id (可每天同步一次)
+获取券商席位 ID (可每天同步一次)
 
-## 协议指令
+:::info
+协议指令：`16`
+:::
 
-```
-16
-```
+## Response
 
-## 响应
-
-### 参数
+### Response Properties
 
 | 名称                       | 类型     | 描述                  |
 | -------------------------- | -------- | --------------------- |
@@ -25,7 +23,7 @@ sidebar_position: 7
 | ∟participant_name_en       | string   | 券商名称 (英)         |
 | ∟participant_name_hk       | string   | 券商名称 (繁)         |
 
-### proto
+### Protobuf
 
 ```protobuf
 message ParticipantBrokerIdsResponse {
@@ -42,8 +40,12 @@ message ParticipantInfo {
 
 ## 接口限制
 
+:::caution
+
 - 每秒平均请求次数 10。
 - 瞬时并发次数 5。
+
+:::
 
 ## 错误码
 

@@ -7,21 +7,21 @@ sidebar_position: 5
 
 获取标的的盘口
 
-## 协议指令
+:::info
 
-```
-14
-```
+协议指令：`14`
 
-## 请求
+:::
 
-### 参数
+## Request
 
-| 名称   | 类型   | 必须 | 描述                        | 默认值 | 示例       |
-| ------ | ------ | ---- | --------------------------- | ------ | ---------- |
-| symbol | string | 是   | 标的代码，`ticker.region`。 |        | `00700.HK` |
+### Parameters
 
-### proto
+| 名称   | 类型   | 必须 | 描述                        | 示例       |
+| ------ | ------ | ---- | --------------------------- | ---------- |
+| symbol | string | 是   | 标的代码，`ticker.region`。 | `00700.HK` |
+
+### Protobuf
 
 ```protobuf
 message SecurityRequest {
@@ -29,9 +29,9 @@ message SecurityRequest {
 }
 ```
 
-## 响应
+## Response
 
-### 参数
+### Response Properties
 
 | 名称       | 类型     | 描述     |
 | ---------- | -------- | -------- |
@@ -47,7 +47,7 @@ message SecurityRequest {
 | ∟volume    | int64    | 挂单辆   |
 | ∟order_num | int64    | 订单数量 |
 
-### proto
+### Protobuf
 
 ```protobuf
 message SecurityDepthResponse {
@@ -66,8 +66,12 @@ message Depth {
 
 ## 接口限制
 
+:::caution
+
 - 每秒平均请求次数 10。
 - 瞬时并发次数 5。
+
+:::
 
 ## 错误码
 

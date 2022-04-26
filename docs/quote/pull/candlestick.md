@@ -1,30 +1,30 @@
 ---
 id: quote_candlestick
-title: 获取标的 k 线
+title: 获取标的 K 线
 slug: candlestick
 sidebar_position: 10
 ---
 
-获取标的的 k 线数据
+获取标的的 K 线数据
 
-## 协议指令
+:::info
 
-```
-19
-```
+协议指令：`19`
 
-## 请求
+:::
 
-### 参数
+## Request
 
-| 名称        | 类型                               | 必须 | 描述                        | 默认值 | 示例       |
-| ----------- | ---------------------------------- | ---- | --------------------------- | ------ | ---------- |
-| symbol      | string                             | 是   | 标的代码，`ticker.region`。 |        | `00700.HK` |
-| period      | [Period](../object#period)         | 是   | k 线周期                    |        | 1000       |
-| count       | int32                              | 是   | 数据数量                    |        | 100        |
-| adjust_type | [AdjustType](../object#adjusttype) | 是   | 复权类型                    |        | 0          |
+### Parameters
 
-### proto
+| 名称        | 类型                               | 必须 | 描述                        | 示例       |
+| ----------- | ---------------------------------- | ---- | --------------------------- | ---------- |
+| symbol      | string                             | 是   | 标的代码，`ticker.region`。 | `00700.HK` |
+| period      | [Period](../object#period)         | 是   | k 线周期                    | `1000`     |
+| count       | int32                              | 是   | 数据数量                    | `100`      |
+| adjust_type | [AdjustType](../object#adjusttype) | 是   | 复权类型                    | `0`        |
+
+### Protobuf
 
 ```protobuf
 message SecurityCandlestickRequest {
@@ -35,23 +35,23 @@ message SecurityCandlestickRequest {
 }
 ```
 
-## 响应
+## Response
 
-### 参数
+### Response Properties
 
-| 名称         | 类型     | 描述             |
-| ------------ | -------- | ---------------- |
-| symbol       | string   | 标的代码         |
-| candlesticks | object[] | k 线数据         |
-| ∟close       | string   | 当前周期收盘价   |
-| ∟open        | string   | 当前周期开盘价   |
-| ∟low         | string   | 当前周期最低价   |
-| ∟high        | string   | 当前周期最高价   |
-| ∟volume      | int64    | 当前周期成交量   |
-| ∟turnover    | string   | 当前周期成交额   |
-| ∟timestamp   | int64    | 当前周期的时间戳 |
+| 名称         | 类型     | 描述                      |
+| ------------ | -------- | ------------------------- |
+| symbol       | string   | 标的代码，例如：`AAPL.US` |
+| candlesticks | object[] | K 线数据                  |
+| ∟close       | string   | 当前周期收盘价            |
+| ∟open        | string   | 当前周期开盘价            |
+| ∟low         | string   | 当前周期最低价            |
+| ∟high        | string   | 当前周期最高价            |
+| ∟volume      | int64    | 当前周期成交量            |
+| ∟turnover    | string   | 当前周期成交额            |
+| ∟timestamp   | int64    | 当前周期的时间戳          |
 
-### proto
+### Protobuf
 
 ```protobuf
 message SecurityCandlestickResponse {
@@ -72,8 +72,12 @@ message Candlestick {
 
 ## 接口限制
 
-- 每秒平均请求次数 10。瞬时并发次数 5。
+:::caution
+
+- 每秒平均请求次数 10，瞬时并发次数 5。
 - 请求 k 线数量最大为 1000。
+
+:::
 
 ## 错误码
 

@@ -7,25 +7,25 @@ sidebar_position: 13
 
 获取轮证发行商 ID
 
-## 协议指令
+:::info
 
-```
-22
-```
+协议指令：`22`
 
-## 响应
+:::
 
-### 参数
+## Response
+
+### Parameters
 
 | 名称        | 类型     | 描述          |
 | ----------- | -------- | ------------- |
 | issuer_info | object[] | 券商席位      |
-| ∟id         | int32    | 机构 id       |
+| ∟id         | int32    | 机构 ID       |
 | ∟name_cn    | string   | 机构名称 (简) |
 | ∟name_en    | string   | 机构名称 (英) |
 | ∟name_hk    | string   | 机构名称 (繁) |
 
-### proto
+### Protobuf
 
 ```protobuf
 message IssuerInfoResponse {
@@ -42,8 +42,12 @@ message IssuerInfo {
 
 ## 接口限制
 
+:::caution
+
 - 平均请求次数 10 次/s
 - 瞬时并发次数 5 次/s。
+
+:::
 
 ## 错误码
 
