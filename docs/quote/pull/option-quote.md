@@ -31,30 +31,30 @@ message MultiSecurityRequest {
 
 ### Response Properties
 
-| 名称                    | 类型                                 | 描述                                    |
-| ----------------------- | ------------------------------------ | --------------------------------------- |
-| secu_quote              | object[]                             | 期权标的行情数据列表                    |
-| ∟symbol                 | string                               | 标的代码                                |
-| ∟last_done              | string                               | 最新价                                  |
-| ∟prev_close             | string                               | 昨收价                                  |
-| ∟open                   | string                               | 开盘价                                  |
-| ∟high                   | string                               | 最高价                                  |
-| ∟low                    | string                               | 最低价                                  |
-| ∟timestamp              | int64                                | 最新成交的交时间戳                      |
-| ∟volume                 | int64                                | 成交量                                  |
-| ∟turnover               | string                               | 成交额                                  |
-| ∟trade_status           | [TradeStatus](../object#tradestatus) | 标的交易状态                            |
-| ∟option_extend          | object                               | 期权扩展行情                            |
-| ∟∟implied_volatility    | string                               | 隐含波动率                              |
-| ∟∟open_interest         | int64                                | 未平仓数                                |
-| ∟∟expiry_date           | string                               | 到期日 YYMMDD                           |
-| ∟∟strike_price          | string                               | 行权价                                  |
-| ∟∟contract_multiplier   | string                               | 合约乘数                                |
-| ∟∟contract_type         | string                               | 期权类型                                |
-| ∟∟contract_size         | string                               | 合约规模                                |
-| ∟∟direction             | string                               | 方向: P 或 C 。 P 标识 put，C 标识 call |
-| ∟∟historical_volatility | string                               | 历史波动率                              |
-| ∟∟underlying_symbol     | string                               | 对应的正股标的代码                      |
+| 名称                    | 类型                                  | 描述                                    |
+| ----------------------- | ------------------------------------- | --------------------------------------- |
+| secu_quote              | object[]                              | 期权标的行情数据列表                    |
+| ∟symbol                 | string                                | 标的代码                                |
+| ∟last_done              | string                                | 最新价                                  |
+| ∟prev_close             | string                                | 昨收价                                  |
+| ∟open                   | string                                | 开盘价                                  |
+| ∟high                   | string                                | 最高价                                  |
+| ∟low                    | string                                | 最低价                                  |
+| ∟timestamp              | int64                                 | 最新成交的交时间戳                      |
+| ∟volume                 | int64                                 | 成交量                                  |
+| ∟turnover               | string                                | 成交额                                  |
+| ∟trade_status           | [TradeStatus](../objects#tradestatus) | 标的交易状态                            |
+| ∟option_extend          | object                                | 期权扩展行情                            |
+| ∟∟implied_volatility    | string                                | 隐含波动率                              |
+| ∟∟open_interest         | int64                                 | 未平仓数                                |
+| ∟∟expiry_date           | string                                | 到期日 YYMMDD                           |
+| ∟∟strike_price          | string                                | 行权价                                  |
+| ∟∟contract_multiplier   | string                                | 合约乘数                                |
+| ∟∟contract_type         | string                                | 期权类型                                |
+| ∟∟contract_size         | string                                | 合约规模                                |
+| ∟∟direction             | string                                | 方向: P 或 C 。 P 标识 put，C 标识 call |
+| ∟∟historical_volatility | string                                | 历史波动率                              |
+| ∟∟underlying_symbol     | string                                | 对应的正股标的代码                      |
 
 ### Protobuf
 

@@ -1,40 +1,40 @@
 ---
 id: quote_subscription
 title: 获取已订阅标的行情
-slug: quote-subscription
+slug: subscription
 sidebar_position: 1
 ---
 
-### 介绍：
+获取已订阅标的行情
 
-    获取已订阅标的行情
+:::info
 
-### 协议指令：
+协议指令：`5`
 
-    5
+:::
 
-### 请求
+## Request
 
-\*proto
+### Protobuf
 
-```
+```protobuf
 message SubscriptionRequest {
 }
 ```
 
-### 响应
+## Response
 
-- 参数
+### Response Properties
 
-| 名称      | 类型                           | 描述           |
-| --------- | ------------------------------ | -------------- |
-| sub_list  | object[]                       | 订阅的数据     |
-| ∟symbol   | string                         | 标的代码       |
-| ∟sub_type | [SubType](../object#subtype)[] | 订阅的数据类型 |
+| 名称      | 类型                            | 描述           |
+| --------- | ------------------------------- | -------------- |
+| sub_list  | object[]                        | 订阅的数据     |
+| ∟symbol   | string                          | 标的代码       |
+| ∟sub_type | [SubType](../objects#subtype)[] | 订阅的数据类型 |
 
-- proto
+### Protobuf
 
-```
+```protobuf
 message SubscriptionResponse {
   repeated SubTypeList sub_list = 1;
 }
@@ -45,11 +45,15 @@ message SubTypeList {
 }
 ```
 
-### 接口限制
+## 接口限制
 
-每秒平均请求次数 10。瞬时并发次数 5。
+:::caution
 
-### 错误码
+- 每秒平均请求次数 10，瞬时并发次数 5。
+
+:::
+
+## 错误码
 
 | 协议错误码 | 业务错误码 | 描述           | 排查建议               |
 | ---------- | ---------- | -------------- | ---------------------- |

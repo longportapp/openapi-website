@@ -33,32 +33,32 @@ message MultiSecurityRequest {
 
 ### Response Properties
 
-| 名称                 | 类型                                 | 描述                               |
-| -------------------- | ------------------------------------ | ---------------------------------- |
-| secu_quote           | object[]                             | 期权标的行情数据列表               |
-| ∟symbol              | string                               | 标的代码                           |
-| ∟last_done           | string                               | 最新价                             |
-| ∟prev_close          | string                               | 昨收价                             |
-| ∟open                | string                               | 开盘价                             |
-| ∟high                | string                               | 最高价                             |
-| ∟low                 | string                               | 最低价                             |
-| ∟timestamp           | int64                                | 最新成交的交时间戳                 |
-| ∟volume              | int64                                | 成交量                             |
-| ∟turnover            | string                               | 成交额                             |
-| ∟trade_status        | [TradeStatus](../object#tradestatus) | 标的交易状态                       |
-| ∟warrant_extend      | object                               | 轮证扩展行情                       |
-| ∟∟implied_volatility | string                               | 引申波幅                           |
-| ∟∟expiry_date        | string                               | 到期日 `YYMMDD`                    |
-| ∟∟last_trade_date    | string                               | 最后交易日 `YYMMDD`                |
-| ∟∟outstanding_ratio  | string                               | 街货比                             |
-| ∟∟outstanding_qty    | int64                                | 街货量                             |
-| ∟∟conversion_ratio   | string                               | 换股比率                           |
-| ∟∟category           | string                               | 轮证类型 Call/Put/Bull/Bear/Inline |
-| ∟∟strike_price       | string                               | 行权价                             |
-| ∟∟upper_strike_price | string                               | 上限价                             |
-| ∟∟lower_strike_price | string                               | 下限价                             |
-| ∟∟call_price         | string                               | 收回价                             |
-| ∟∟underlying_symbol  | string                               | 对应的正股标的代码                 |
+| 名称                 | 类型                                  | 描述                               |
+| -------------------- | ------------------------------------- | ---------------------------------- |
+| secu_quote           | object[]                              | 期权标的行情数据列表               |
+| ∟symbol              | string                                | 标的代码                           |
+| ∟last_done           | string                                | 最新价                             |
+| ∟prev_close          | string                                | 昨收价                             |
+| ∟open                | string                                | 开盘价                             |
+| ∟high                | string                                | 最高价                             |
+| ∟low                 | string                                | 最低价                             |
+| ∟timestamp           | int64                                 | 最新成交的交时间戳                 |
+| ∟volume              | int64                                 | 成交量                             |
+| ∟turnover            | string                                | 成交额                             |
+| ∟trade_status        | [TradeStatus](../objects#tradestatus) | 标的交易状态                       |
+| ∟warrant_extend      | object                                | 轮证扩展行情                       |
+| ∟∟implied_volatility | string                                | 引申波幅                           |
+| ∟∟expiry_date        | string                                | 到期日 `YYMMDD`                    |
+| ∟∟last_trade_date    | string                                | 最后交易日 `YYMMDD`                |
+| ∟∟outstanding_ratio  | string                                | 街货比                             |
+| ∟∟outstanding_qty    | int64                                 | 街货量                             |
+| ∟∟conversion_ratio   | string                                | 换股比率                           |
+| ∟∟category           | string                                | 轮证类型 Call/Put/Bull/Bear/Inline |
+| ∟∟strike_price       | string                                | 行权价                             |
+| ∟∟upper_strike_price | string                                | 上限价                             |
+| ∟∟lower_strike_price | string                                | 下限价                             |
+| ∟∟call_price         | string                                | 收回价                             |
+| ∟∟underlying_symbol  | string                                | 对应的正股标的代码                 |
 
 ### Protobuf
 

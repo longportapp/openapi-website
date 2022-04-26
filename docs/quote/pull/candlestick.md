@@ -17,12 +17,12 @@ sidebar_position: 10
 
 ### Parameters
 
-| 名称        | 类型                               | 必须 | 描述                        | 示例       |
-| ----------- | ---------------------------------- | ---- | --------------------------- | ---------- |
-| symbol      | string                             | 是   | 标的代码，`ticker.region`。 | `00700.HK` |
-| period      | [Period](../object#period)         | 是   | k 线周期                    | `1000`     |
-| count       | int32                              | 是   | 数据数量                    | `100`      |
-| adjust_type | [AdjustType](../object#adjusttype) | 是   | 复权类型                    | `0`        |
+| 名称        | 类型                                | 必须 | 描述                        | 示例       |
+| ----------- | ----------------------------------- | ---- | --------------------------- | ---------- |
+| symbol      | string                              | 是   | 标的代码，`ticker.region`。 | `00700.HK` |
+| period      | [Period](../objects#period)         | 是   | k 线周期                    | `1000`     |
+| count       | int32                               | 是   | 数据数量                    | `100`      |
+| adjust_type | [AdjustType](../objects#adjusttype) | 是   | 复权类型                    | `0`        |
 
 ### Protobuf
 

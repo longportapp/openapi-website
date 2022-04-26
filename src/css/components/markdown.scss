@@ -317,6 +317,10 @@
 .markdown td,
 .markdown th {
   padding: 0;
+
+  ul:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .markdown details summary {

@@ -1,53 +1,53 @@
 ---
-title: 刷新 token 接口 
+title: 刷新 Token
 id: refresh-token-api
 slug: /refresh-token-api
+sidebar_position: 2
 ---
 
-#  创建 token
+# 创建 Token
 
 > 最后更新于 2022-04-21
 
 ## 请求
 
-| 基本信息        |                                                            |
-|-------------|------------------------------------------------------------|
-| HTTP URL    | /v1/openapi/token/refresh                                 |
-| HTTP Method | POST                                                        |
-| 权限要求        | 无                                                       |
+| 基本信息    |                           |
+| ----------- | ------------------------- |
+| HTTP URL    | /v1/openapi/token/refresh |
+| HTTP Method | POST                      |
+| 权限要求    | 无                        |
 
 ### 请求头
 
-| 名称            | 类型     | 必须  | 描述                                        |
-|---------------|--------|-----|-------------------------------------------|
-| Authorization | string | 是   |                                           |
-| Content-Type  | string | 是   | **固定值**："application/json; charset=utf-8" |
-| Account-Channel | string | 是  | `lb` - 长桥，`pspl_sg` - 新加坡辉立 |
+| 名称            | 类型   | 必须 | 描述                                          |
+| --------------- | ------ | ---- | --------------------------------------------- |
+| Authorization   | string | 是   |                                               |
+| Content-Type    | string | 是   | **固定值**："application/json; charset=utf-8" |
+| Account-Channel | string | 是   | `lb` - 长桥，`pspl_sg` - 新加坡辉立           |
 
 ### 请求参数
 
-| 名称     | 类型     | 必须 | 描述                                        | 默认值 | 示例                                    |
-| -------- | -------- | ---- | ------------------------------------------- | ------ | --------------------------------------- |
-| expired_at  | string   |  是   | 格式     |  过期时间戳，格式遵循 [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) 规范     | 2023-04-14T12:13:57.859Z |
-| aaid      |   string |  是 |  token 账户  |  指定创建 token 的账户 |  |
+| 名称       | 类型   | 必须 | 描述       | 默认值                                                                      | 示例                     |
+| ---------- | ------ | ---- | ---------- | --------------------------------------------------------------------------- | ------------------------ |
+| expired_at | string | 是   | 格式       | 过期时间戳，格式遵循 [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) 规范 | 2023-04-14T12:13:57.859Z |
+| aaid       | string | 是   | token 账户 | 指定创建 token 的账户                                                       |                          |
 
 ## 响应
 
 ### 响应体
 
-| 名称                                                         | 类型     | 描述                                                         |
-| ------------------------------------------------------------ | -------- | ------------------------------------------------------------ |
-| code                                                         | int      | 错误码，非 0 表示失败                                        |
-| msg                                                          | string   | 错误描述                                                     |
-| data                                                         | object   |                                                              |
-| ∟token                             | string   | 新的 token                                                      |
-| ∟expired_at                      | string   | 过期的时间戳                                                     |
-| ∟issued_at                       | string   | 颁发时间                                                     |
-| ∟account_info                    | object   | 用户信息                                                         |
-| ∟∟member_id | string   | 用户 id                                                      |
-| ∟∟aaid | string   | aaid                                                     |
-| ∟∟account_channel | string   |  account_channel                                   |
-
+| 名称              | 类型   | 描述                  |
+| ----------------- | ------ | --------------------- |
+| code              | int    | 错误码，非 0 表示失败 |
+| msg               | string | 错误描述              |
+| data              | object |                       |
+| ∟token            | string | 新的 token            |
+| ∟expired_at       | string | 过期的时间戳          |
+| ∟issued_at        | string | 颁发时间              |
+| ∟account_info     | object | 用户信息              |
+| ∟∟member_id       | string | 用户 id               |
+| ∟∟aaid            | string | aaid                  |
+| ∟∟account_channel | string | account_channel       |
 
 ### 响应体示例
 
@@ -60,11 +60,10 @@ slug: /refresh-token-api
     "expired_at": "",
     "issued_at": "",
     "account_info": {
-        "member_id": "",
-        "aaid": "",
-        "account_channel": ""
+      "member_id": "",
+      "aaid": "",
+      "account_channel": ""
     }
   }
 }
 ```
-
