@@ -19,7 +19,7 @@ Code samples
 
 ## {{? data.operation.summary && !data.options.tocSummary}}{{= data.operation.summary }}{{?}}
 
-<div class="http-operation"><div class="http-verb">{{= data.methodUpper }}</div><div class="http-path">{{=data.method.path}}</div>{{? data.operation.deprecated }}<div class="http-operation-deprecated">Deprecated</div>{{?}}</div>
+<div className="http-operation"><div className="http-verb">{{= data.methodUpper }}</div><div className="http-path">{{=data.method.path}}</div>{{? data.operation.deprecated }}<div className="http-operation-deprecated">Deprecated</div>{{?}}</div>
 
 
 {{? data.operation.access}}

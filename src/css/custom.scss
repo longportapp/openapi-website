@@ -7,6 +7,9 @@
   --ifm-menu-color: #202020;
   --ifm-menu-color-background-active: #f0f8ff;
   --ifm-menu-color-active: #37a0ff;
+  --ifm-global-spacing: 2em;
+  --ifm-alert-padding-vertical: 10px;
+  --ifm-alert-padding-horizontal: 16px;
 }
 
 body {
@@ -24,7 +27,7 @@ body {
   }
 }
 
-.theme-doc-sidebar-item-category-level-1>.menu__list-item-collapsible>.menu-link {
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu-link {
   font-weight: bold;
 }
 
@@ -37,6 +40,11 @@ body {
 
 .theme-doc-toc-desktop {
   top: 130px !important;
+
+  .table-of-contents {
+    border-left: 0;
+    @apply text-sm;
+  }
 }
 
 .container {
