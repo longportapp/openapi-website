@@ -16,7 +16,7 @@ paths:
           required: true
         - name: "order_type"
           type: "string"
-          description: "订单类型，例如：`LO`，详见：[OrderType](../trade-definition#ordertype)"
+          description: "订单类型，例如：`LO`，详见：[OrderType](../trade-definition.md#ordertype)"
           required: true
         - name: "submitted_price"
           required: true

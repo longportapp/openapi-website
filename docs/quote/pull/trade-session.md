@@ -17,14 +17,14 @@ sidebar_position: 15
 
 ### Response Properties
 
-| 名称                 | 类型                                   | 描述                                                                                        |
-| -------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------- |
-| market_trade_session | object[]                               | 市场交易时段                                                                                |
-| ∟market              | string                                 | 市场<br/><br/>`US` - 美股市场<br/>`HK` - 港股市场<br/>`CN` - A 股市场<br/>`SG` - 新加坡市场 |
-| ∟trade_session       | object[]                               | 交易时段                                                                                    |
-| ∟∟beg_time           | string                                 | 交易开始时间，格式：`hhmm` 例：`900`                                                        |
-| ∟∟end_time           | string                                 | 交易结束时间，格式：`hhmm` 例：`1400`                                                       |
-| ∟∟trade_session      | [TradeSession](../object#tradesession) | 交易时段                                                                                    |
+| 名称                 | 类型                                    | 描述                                                                                        |
+| -------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------- |
+| market_trade_session | object[]                                | 市场交易时段                                                                                |
+| ∟market              | string                                  | 市场<br/><br/>`US` - 美股市场<br/>`HK` - 港股市场<br/>`CN` - A 股市场<br/>`SG` - 新加坡市场 |
+| ∟trade_session       | object[]                                | 交易时段                                                                                    |
+| ∟∟beg_time           | string                                  | 交易开始时间，格式：`hhmm` 例：`900`                                                        |
+| ∟∟end_time           | string                                  | 交易结束时间，格式：`hhmm` 例：`1400`                                                       |
+| ∟∟trade_session      | [TradeSession](../objects#tradesession) | 交易时段                                                                                    |
 
 ### Protobuf
 

@@ -7,7 +7,7 @@ sidebar_position: 9
 
 获取标的的当日分时。
 
-:::info
+:::tip
 
 协议指令：`18`
 
