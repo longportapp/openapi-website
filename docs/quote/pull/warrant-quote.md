@@ -7,21 +7,21 @@ sidebar_position: 4
 
 获取港股轮证标的的实时行情，包括轮证的特有数据。
 
-## 协议指令
+:::info
 
-```
-13
-```
+协议指令：`13`
 
-## 请求
+:::
 
-### 参数
+## Request
+
+### Parameters
 
 | 名称   | 类型     | 必须 | 描述     | 默认值 | 示例       |
 | ------ | -------- | ---- | -------- | ------ | ---------- |
 | symbol | string[] | 是   | 标的列表 |        | `13447.HK` |
 
-### proto
+### Protobuf
 
 ```protobuf
 message MultiSecurityRequest {
@@ -29,9 +29,9 @@ message MultiSecurityRequest {
 }
 ```
 
-## 响应
+## Response
 
-### 参数
+### Response Properties
 
 | 名称                 | 类型                                 | 描述                               |
 | -------------------- | ------------------------------------ | ---------------------------------- |
@@ -60,7 +60,7 @@ message MultiSecurityRequest {
 | ∟∟call_price         | string                               | 收回价                             |
 | ∟∟underlying_symbol  | string                               | 对应的正股标的代码                 |
 
-### proto
+### Protobuf
 
 ```protobuf
 message WarrantQuoteResponse {
@@ -99,9 +99,13 @@ message WarrantExtend {
 
 ## 接口限制
 
-- 每秒平均请求次数 10。瞬时并发次数 5。
-- 每次请求，接口参数 标的列表 支持传入的标的数量上限是 300 个。
+:::caution
+
+- 每秒平均请求次数 10，瞬时并发次数 5。
+- 每次请求，接口参数**标的列表**支持传入的标的数量上限是 300 个。
 - 港股 BMP 行情，超过 20 支的港股标的将响应延迟行情。
+
+:::
 
 ## 错误码
 

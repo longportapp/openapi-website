@@ -7,21 +7,19 @@ sidebar_position: 1
 
 获取标的的基础信息
 
-## 协议指令
+:::info
+协议指令：`10`
+:::
 
-```
-10
-```
+## Request
 
-## 请求
+### Parameters
 
-### 参数
+| 名称   | 类型     | 必须 | 描述                       | 示例       |
+| ------ | -------- | ---- | -------------------------- | ---------- |
+| symbol | string[] | 是   | 标的列表 - `ticker.region` | `00700.HK` |
 
-| 名称   | 类型     | 必须 | 描述                       | 默认值 | 示例       |
-| ------ | -------- | ---- | -------------------------- | ------ | ---------- |
-| symbol | string[] | 是   | 标的列表 - `ticker.region` |        | `00700.HK` |
-
-### proto
+### Protobuf
 
 ```protobuf
 message MultiSecurityRequest {
@@ -29,9 +27,9 @@ message MultiSecurityRequest {
 }
 ```
 
-## 响应
+## Response
 
-### 参数
+### Response Properties
 
 | 名称                | 类型     | 描述                                                     |
 | ------------------- | -------- | -------------------------------------------------------- |
@@ -52,7 +50,7 @@ message MultiSecurityRequest {
 | ∟dividend_yield     | string   | 股息                                                     |
 | ∟stock_derivatives  | int32[]  | 如果标的是正股。可提供的衍生品行情类型 1 - 期权 2 - 轮证 |
 
-### proto
+### Protobuf
 
 ```protobuf
 message SecurityStaticInfoResponse {
@@ -81,8 +79,12 @@ message StaticInfo {
 
 ## 接口限制
 
-- 每秒平均请求次数 10。瞬时并发次数 5。
-- 每次请求，接口参数 标的列表 支持传入的标的数量上限是 300 个。
+:::caution
+
+- 每秒平均请求次数 10，瞬时并发次数 5。
+- 每次请求，接口参数标的列表，支持传入的标的数量上限是 300 个。
+
+:::
 
 ## 错误码
 

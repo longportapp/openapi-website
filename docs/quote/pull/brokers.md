@@ -7,21 +7,19 @@ sidebar_position: 6
 
 获取标的的经纪队列
 
-## 协议指令
+:::info
+协议指令：`15`
+:::
 
-```
-15
-```
+## Request
 
-## 请求
+### Parameters
 
-### 参数
+| 名称   | 类型   | 必须 | 描述                       | 示例       |
+| ------ | ------ | ---- | -------------------------- | ---------- |
+| symbol | string | 是   | 标的代码 - `ticker.region` | `00700.HK` |
 
-| 名称   | 类型   | 必须 | 描述                       | 默认值 | 示例       |
-| ------ | ------ | ---- | -------------------------- | ------ | ---------- |
-| symbol | string | 是   | 标的代码 - `ticker.region` |        | `00700.HK` |
-
-### proto
+### Protobuf
 
 ```protobuf
 message SecurityRequest {
@@ -29,9 +27,9 @@ message SecurityRequest {
 }
 ```
 
-## 响应
+## Response
 
-### 参数
+### Response Properties
 
 | 名称        | 类型     | 描述                        |
 | ----------- | -------- | --------------------------- |
@@ -43,7 +41,7 @@ message SecurityRequest {
 | ∟position   | int32    | 档位                        |
 | ∟broker_ids | int32[]  | [券商席位 Id](./broker-ids) |
 
-### proto
+### Protobuf
 
 ```protobuf
 message SecurityBrokersResponse {
@@ -60,8 +58,12 @@ message Brokers {
 
 ## 接口限制
 
+:::caution
+
 - 每秒平均请求次数 10。瞬时并发次数 5。
 - 仅港股标的存在经纪队列数据。
+
+:::
 
 ## 错误码
 

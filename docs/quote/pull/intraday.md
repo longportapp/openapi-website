@@ -7,21 +7,21 @@ sidebar_position: 9
 
 获取标的的当日分时。
 
-### 协议指令
+:::info
 
-```
-18
-```
+协议指令：`18`
 
-## 请求
+:::
 
-### 参数
+## Request
 
-| 名称   | 类型   | 必须 | 描述                        | 默认值 | 示例       |
-| ------ | ------ | ---- | --------------------------- | ------ | ---------- |
-| symbol | string | 是   | 标的代码，`ticker.region`。 |        | `00700.HK` |
+### Parameters
 
-### proto
+| 名称   | 类型   | 必须 | 描述                        | 示例       |
+| ------ | ------ | ---- | --------------------------- | ---------- |
+| symbol | string | 是   | 标的代码，`ticker.region`。 | `00700.HK` |
+
+### Protobuf
 
 ```protobuf
 message SecurityIntradayRequest {
@@ -29,21 +29,21 @@ message SecurityIntradayRequest {
 }
 ```
 
-## 响应
+## Response
 
-### 参数
+### Response Properties
 
-| 名称       | 类型     | 描述               |
-| ---------- | -------- | ------------------ |
-| symbol     | string   | 标的代码           |
-| lines      | object[] | 分时数据           |
-| ∟price     | string   | 当前分钟的收盘价格 |
-| ∟timestamp | int64    | 当前分钟的开始时间 |
-| ∟volume    | int64    | 成交量             |
-| ∟turnover  | string   | 成交额             |
-| ∟avg_price | string   | 均价               |
+| 名称       | 类型     | 描述                      |
+| ---------- | -------- | ------------------------- |
+| symbol     | string   | 标的代码，例如：`AAPL.US` |
+| lines      | object[] | 分时数据                  |
+| ∟price     | string   | 当前分钟的收盘价格        |
+| ∟timestamp | int64    | 当前分钟的开始时间        |
+| ∟volume    | int64    | 成交量                    |
+| ∟turnover  | string   | 成交额                    |
+| ∟avg_price | string   | 均价                      |
 
-### proto
+### Protobuf
 
 ```
 message SecurityIntradayResponse{
@@ -62,8 +62,12 @@ message Line {
 
 ## 接口限制
 
+:::caution
+
 - 每秒平均请求次数 10。
 - 瞬时并发次数 5。
+
+:::
 
 ## 错误码
 

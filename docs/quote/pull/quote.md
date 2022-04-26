@@ -7,21 +7,19 @@ sidebar_position: 2
 
 获取标的的实时行情 (支持所有类型标的)
 
-## 协议指令
+:::info
+协议指令：`11`
+:::
 
-```
-11
-```
+## Request
 
-## 请求
+### Parameters
 
-### 参数
+| 名称   | 类型     | 必须 | 描述                         | 示例       |
+| ------ | -------- | ---- | ---------------------------- | ---------- |
+| symbol | string[] | 是   | 标的列表 - `ticker.region`。 | `00700.HK` |
 
-| 名称   | 类型     | 必须 | 描述                         | 默认值 | 示例       |
-| ------ | -------- | ---- | ---------------------------- | ------ | ---------- |
-| symbol | string[] | 是   | 标的列表 - `ticker.region`。 |        | `00700.HK` |
-
-### proto
+### Protobuf
 
 ```protobuf
 message MultiSecurityRequest {
@@ -29,9 +27,9 @@ message MultiSecurityRequest {
 }
 ```
 
-## 响应
+## Response
 
-### 参数
+### Response Properties
 
 | 名称               | 类型                                 | 描述                   |
 | ------------------ | ------------------------------------ | ---------------------- |
@@ -63,7 +61,7 @@ message MultiSecurityRequest {
 | ∟∟low              | string                               | 最低价                 |
 | ∟∟prev_close       | string                               | 上一个交易阶段的收盘价 |
 
-### proto
+### Protobuf
 
 ```protobuf
 message  SecurityQuoteResponse {
@@ -98,9 +96,13 @@ message PrePostQuote {
 
 ## 接口限制
 
+:::caution
+
 - 每秒平均请求次数 10。瞬时并发次数 5。
 - 每次请求，接口参数 标的列表 支持传入的标的数量上限是 300 个。
 - 港股 BMP 行情，超过 20 支的港股标的将响应延迟行情。
+
+:::
 
 ## 错误码
 
