@@ -22,7 +22,11 @@ Code samples
 <div class="http-operation"><div class="http-verb">{{= data.methodUpper }}</div><div class="http-path">{{=data.method.path}}</div>{{? data.operation.deprecated }}<div class="http-operation-deprecated">Deprecated</div>{{?}}</div>
 
 
-{{? data.operation.access}}<div class="operation-access">权限需求：{{= data.operation.access }}</div>{{?}}
+{{? data.operation.access}}
+:::info
+权限需求：{{= data.operation.access }}
+:::
+{{?}}
 
 {{? data.operation.description}}{{= data.operation.description }}{{?}}
 

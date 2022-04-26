@@ -6,15 +6,13 @@ slug: /how-to-access-api
 
 ## API 调用流程
 
-<img src="https://pub.lbkrs.com/files/202204/KuqxBKUcPwUwXC6r/how-to-access-api-flow.png" style={{ width: "200px" }} />
-
 ### 1. 获取 Access Key
 
 首先要申请 API Key 拿到 API Secret， 并设置相应权限。获取 API Key 与申请权限请参考 [链接]。
 
 ### 2. 创建 Token
 
-在开发者后台中创建 `Token`。详见【链接】。
+在开发者后台中创建 `Token`，详见 [链接]。
 
 ### 3. 生成签名
 
@@ -96,7 +94,9 @@ curl -v https://openapi.longbridge.sg/v1/test \
 
 所有 API 相应体结构都包括 `code`, `message`, `data` 三个部分。`code` 是业务码，`message` 是 message，`data` 是请求结果。
 
+:::tip
 HTTP Status 遵循 [RESTFull 风格](https://restfulapi.net/http-status-codes)，请求成功时 `code = 0`, 否则 `code` 会描述具体的错误码。
+:::
 
 ### HTTP Status
 

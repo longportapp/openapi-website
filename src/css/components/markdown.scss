@@ -1084,6 +1084,36 @@
       @apply text-xs p-1 px-2 rounded bg-pink-100 text-pink-800;
     }
   }
+
+  .admonition {
+    @apply mb-5 text-sm border shadow-none;
+
+    h5 {
+      @apply m-0 p-0 mb-2 leading-none;
+    }
+  }
+
+  .alert {
+    &--secondary {
+      @apply bg-gray-50 border-gray-300;
+    }
+
+    &--info {
+      @apply bg-blue-50 border-blue-300;
+    }
+
+    &--success {
+      @apply bg-green-50 border-green-300;
+    }
+
+    &--warning {
+      @apply bg-yellow-50 border-yellow-300;
+    }
+
+    &--danger {
+      @apply bg-red-50 border-red-300;
+    }
+  }
 }
 
 .markdown .copyButton_node_modules-\@docusaurus-theme-classic-lib-next-theme-CodeBlock-CopyButton-styles-module {
