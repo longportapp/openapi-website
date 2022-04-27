@@ -34,7 +34,8 @@
 {{ var schema = data.api.components.schemas[s]; }}
 
 {{= data.tags.section }}
-### {{=s}}
+### {{=schema.name}}
+
 
 <a id="schema{{=s}}"></a>
 <a id="schema{{=s.toLowerCase()}}"></a>
