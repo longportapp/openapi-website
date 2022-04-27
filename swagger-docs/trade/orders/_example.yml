@@ -61,7 +61,6 @@ paths:
 
 definitions:
   OrderMeta:
-    name: "OrderMeta Name"
     type: "object"
     properties:
       allows_market_price:
@@ -69,7 +68,6 @@ definitions:
       slient:
         type: "boolean"
   CreateOrderResp:
-    name: "CreateOrderResp Name"
     type: "object"
     properties:
       title:
