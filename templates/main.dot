@@ -34,13 +34,7 @@
 {{ var schema = data.api.components.schemas[s]; }}
 
 {{= data.tags.section }}
-
-{{? schema.name}}
 ### {{=schema.name}}
-{{?}}
-{{? !schema.name}}
-### {{=s}}
-{{?}}
 
 
 <a id="schema{{=s}}"></a>
