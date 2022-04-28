@@ -18,7 +18,7 @@ paths:
           required: false
         - name: "business_type"
           type: "string"
-          description: "资金类型 <br/><br/> <b>可选值</b> <br/>`1` - 现金 <br/>`2` - 股票<br/> `3` - 基金"
+          description: "资金类型 <br/><br/> <b>可选值:</b> <br/>`1` - 现金 <br/>`2` - 股票<br/> `3` - 基金"
           required: falsegit pull
         - name: "symbol"
           type: "string"
