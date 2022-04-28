@@ -2,7 +2,7 @@
 sidebar_position: 1
 id: quote_overview
 title: 行情概览
-slug: quote-overview
+slug: overview
 ---
 
 ### 行情接口概览
