@@ -5,25 +5,26 @@ slug: /refresh-token-api
 sidebar_position: 2
 ---
 
-# 创建 Token
+# 刷新 Token
+
+在老的 `token` 过期之前，通过调用该获取新的 `token`。调用成功后老的 `token` 就会作废。
 
 > 最后更新于 2022-04-21
 
 ## 请求
 
-| 基本信息    |                           |
-| ----------- | ------------------------- |
-| HTTP URL    | /v1/openapi/token/refresh |
-| HTTP Method | POST                      |
-| 权限要求    | 无                        |
+| 基本信息    |                   |
+| ----------- | ----------------- |
+| HTTP URL    | /v1/token/refresh |
+| HTTP Method | POST              |
+| 权限要求    | 无                |
 
 ### 请求头
 
-| 名称            | 类型   | 必须 | 描述                                          |
-| --------------- | ------ | ---- | --------------------------------------------- |
-| Authorization   | string | 是   |                                               |
-| Content-Type    | string | 是   | **固定值**："application/json; charset=utf-8" |
-| Account-Channel | string | 是   | `lb` - 长桥，`pspl_sg` - 新加坡辉立           |
+| 名称          | 类型   | 必须 | 描述                                          |
+| ------------- | ------ | ---- | --------------------------------------------- |
+| Authorization | string | 是   |                                               |
+| Content-Type  | string | 是   | **固定值**："application/json; charset=utf-8" |
 
 ### 请求参数
 
