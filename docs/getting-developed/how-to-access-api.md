@@ -25,7 +25,7 @@ sidebar_position: 1
 
 先根据相应的 API 文档构造请求后， 通过 OpenAPI SDK 直接调用 API，SDK 会帮助生成签名， 或者通过以下流程创建签名。
 
-#### 添加 `X-Api-Key`、`X-Timestamp`
+#### 添加 `X-Api-Key`、`X-Timestamp`、`Authorization`
 
 设置请求参数头部信息， `X-Api-Key`、 `Authorization`、`X-Timestamp` 将在签名函数中被使用。
 
