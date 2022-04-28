@@ -7,13 +7,17 @@ sidebar_position: 1
 
 ## API 调用流程
 
-### 1. 获取 Access Key
+### 1. 开通服务
 
-首先要申请 API Key 拿到 API Secret， 并设置相应权限。获取 API Key 与申请权限请参考 [链接]。
+参考 [Open API 介绍](../getting-started#如何开通) 开通相应服务。
 
-### 2. 创建 Token
+### 2. 获取 API Key 信息及 Token 令牌
 
-在开发者后台中创建 `Token`，详见 [链接]。
+在 [开发者后台](https://open.longbridge.com/account) 中获取 Token， API Key 以及 API Key Secret。
+
+:::tip
+开发者后台中的 Access Key 即是 API Key， Access Key Secret 即是 API Key Secret
+:::
 
 ### 3. 生成签名
 
