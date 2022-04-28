@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
-  description: "历史成交查询"
+  description: "该接口用于获取历史订单的成交明细"
   version: "v1"
-  title: "历史成交查询"
+  title: "获取历史成交明细"
 paths:
   /v1/trade/order/deal/history:
     get:
@@ -27,7 +27,7 @@ paths:
         "200":
           description: "查询成功"
           schema:
-            $ref: "#/definitions/deals"
+            $ref: "#/definitions/history_deals_rsp"
         "400":
           description: "查询失败，请求参数错误."
       request_body:
@@ -60,7 +60,7 @@ paths:
             },
         }
 definitions:
-  deals:
+  history_deals_rsp:
     properties:
       has_more:
         type: boolean

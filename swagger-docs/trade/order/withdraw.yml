@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
-  description: "订单撤单"
+  description: "该接口用于订单撤销"
   version: "v1"
-  title: "撤单"
+  title: "撤销订单"
 paths:
   /v1/trade/order:
     delete:

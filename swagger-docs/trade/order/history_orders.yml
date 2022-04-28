@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
-  description: "历史订单查询"
+  description: "该接口用于获取历史订单"
   version: "v1"
-  title: "历史订单查询"
+  title: "获取历史订单"
 paths:
   /v1/trade/order/history:
     get:
@@ -23,7 +23,7 @@ paths:
           in: query
           description: "
             买卖方向<br/><br/>
-            **可选项:**<br/>
+            **可选值:**<br/>
             `Buy` - 买入<br/>
             `Sell` - 卖出"
           required: false
@@ -32,7 +32,7 @@ paths:
           in: query
           description: "
             市场<br/><br/>
-            **可选项:**<br/>
+            **可选值:**<br/>
             `US` - 美股<br/>
             `HK` - 港股"
           required: false
@@ -48,7 +48,7 @@ paths:
         "200":
           description: "历史订单查询成功"
           schema:
-            $ref: "#/definitions/orders"
+            $ref: "#/definitions/history_orders_rsp"
         "400":
           description: "查询失败，请求参数错误."
       request_body:
@@ -101,7 +101,7 @@ paths:
             },
         }
 definitions:
-  orders:
+  history_orders_rsp:
     properties:
       orders:
         type: "arrary"
@@ -135,7 +135,7 @@ definitions:
             type: "string"
             description: "
               买卖方向<br/><br/>
-              **可选项:**<br/>
+              **可选值:**<br/>
               `Buy` - 买入<br/>
               `Sell` - 卖出"
           symbol:
@@ -156,7 +156,7 @@ definitions:
           tag:
             type: "string"
             description: "订单标记<br/><br/>
-              **可选项:**<br/>
+              **可选值:**<br/>
               `Normal` - 普通订单<br/>
               `GTC` - 长期单<br/>
               `Grey` - 暗盘单"
@@ -164,7 +164,7 @@ definitions:
             type: "string"
             description: "
               订单有效期类型<br/><br/>
-              **可选项:**<br/>
+              **可选值:**<br/>
               `Day` - 当日有效<br/>
               `GTC` - 撤单前有效<br/>
               `GTD` - 到期前有效"
@@ -189,7 +189,7 @@ definitions:
           trigger_status:
             type: "string"
             description: "条件单触发状态<br/><br/>
-              **可选项:**<br/>
+              **可选值:**<br/>
               `NOT_ACTIVE` - 未激活
               `DEACTIVE` - 已失效
               `ACTIVE` - 已激活
@@ -200,6 +200,6 @@ definitions:
           outside_rth:
             type: "string"
             description: 是否允许盘前盘后<br/><br/>
-              **可选项:**<br/>
+              **可选值:**<br/>
               `RTH_ONLY` - 不允许盘前盘后<br/>
               `ANY_TIME` - 允许盘前盘后"

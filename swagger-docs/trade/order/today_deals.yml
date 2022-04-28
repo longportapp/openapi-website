@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
-  description: "当日成交查询"
+  description: "该接口用于获取当日订单的成交明细"
   version: "v1"
-  title: "当日成交查询"
+  title: "获取当日成交"
 paths:
   /v1/trade/order/deal/today:
     get:
@@ -53,7 +53,7 @@ paths:
             },
         }
 definitions:
-  deals:
+  today_deals_rsp:
     properties:
       orders:
         type: "arrary"
