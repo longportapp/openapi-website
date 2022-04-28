@@ -1,10 +1,10 @@
 swagger: "2.0"
 info:
-  description: "返回每个币种可用、可取、冻结、待结算金额、在途资金（基金申购赎回)"
+  description: "该接口用于返回用户每个币种可用、可取、冻结、待结算金额、在途资金（基金申购赎回)"
   version: "v1"
   title: "获取账户资金信息"
 paths:
-  /v1/openapi/asset/accountcashinfo:
+  /v1/trade/asset/account:
     get:
       access:
       responses:
@@ -25,8 +25,8 @@ paths:
             from longbridge.http import *
             auth = Auth("${API_KEY}", "${API_KEY_SECRET}", "${TOKEN}")
             config = Config(base_url = "https://open.longbridgeapp.com/")
-            client = Client(auth, config)
-            result = client.get("/v1/openapi/asset/accountcashinfo")
+            client = HttpClient(auth, config)
+            result = client.get("/v1/trade/asset/account")
       response_body: { "code": 0, "data": {
         "list": [{
           "total_cash": "1759070010.72",
