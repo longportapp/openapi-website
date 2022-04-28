@@ -19,16 +19,18 @@ Code samples
 
 ## {{? data.operation.summary && !data.options.tocSummary}}{{= data.operation.summary }}{{?}}
 
-<div className="http-operation"><div className="http-verb">{{= data.methodUpper }}</div><div className="http-path">{{=data.method.path}}</div>{{? data.operation.deprecated }}<div className="http-operation-deprecated">Deprecated</div>{{?}}</div>
-
-
-{{? data.operation.access}}
-:::info
-权限需求：{{= data.operation.access }}
-:::
-{{?}}
-
 {{? data.operation.description}}{{= data.operation.description }}{{?}}
+
+### Request
+
+<table className="http-basic">
+<tbody>
+<tr><td className="http-basic-key">HTTP Method</td><td>{{= data.methodUpper }}</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>{{=data.method.path}} {{? data.operation.deprecated }}<div className="http-operation-deprecated">Deprecated</div>{{?}}
+</td></tr>
+<tr><td className="http-basic-key">权限需求</td><td>{{= data.operation.access }}</td></tr>
+</tbody>
+</table>
 
 {{? data.operation.requestBody}}
 

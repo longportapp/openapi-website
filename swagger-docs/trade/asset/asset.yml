@@ -20,8 +20,8 @@ paths:
           required: false
         - name: "business_type"
           type: "string"
-          description: "资金类型 <br/><br/> <b>可选值</b> <br/>`1` - 现金 <br/>`2` - 股票<br/> `3` - 基金"
-          required: falsegit pull
+          description: "资金类型 <br/><br/><b>可选值</b> <br/>`1` - 现金 <br/>`2` - 股票<br/>`3` - 基金"
+          required: false
         - name: "symbol"
           type: "string"
           description: "标的代码，例如：`AAPL.US`"
@@ -55,25 +55,34 @@ paths:
             config = Config(base_url = "https://open.longbridgeapp.com/")
             client = Client(auth, config)
             result = client.get("/v1/openapi/asset/cashflow")
-      response_body: { "code": 0, "data": {
-        "list": [{
-          "transaction_flow_name": "股票买入成交",
-          "direction": 1,
-          "balance": "-248.60",
-          "currency": "USD",
-          "business_time": 1621507957,
-          "symbol": "AAPL.US",
-          "description": "AAPL"
-        }, {
-          "transaction_flow_name": "股票买入成交",
-          "direction": 1,
-          "balance": "-125.16",
-          "currency": "USD",
-          "business_time": 1621504824,
-          "symbol": "AAPL.US",
-          "description": "AAPL"
-        }]
-      } }
+      response_body:
+        {
+          "code": 0,
+          "data":
+            {
+              "list":
+                [
+                  {
+                    "transaction_flow_name": "股票买入成交",
+                    "direction": 1,
+                    "balance": "-248.60",
+                    "currency": "USD",
+                    "business_time": 1621507957,
+                    "symbol": "AAPL.US",
+                    "description": "AAPL",
+                  },
+                  {
+                    "transaction_flow_name": "股票买入成交",
+                    "direction": 1,
+                    "balance": "-125.16",
+                    "currency": "USD",
+                    "business_time": 1621504824,
+                    "symbol": "AAPL.US",
+                    "description": "AAPL",
+                  },
+                ],
+            },
+        }
   /v1/trade/asset/stock:
     get:
       summary: "股票持仓"
@@ -104,62 +113,80 @@ paths:
             config = Config(base_url = "https://open.longbridgeapp.com/")
             client = Client(auth, config)
             result = client.get("/v1/openapi/asset/stock")
-      response_body: { "code": 0, "data": {
-        "list": [{
-          "account_channel": "lb",
-          "stock_info": [{
-            "symbol": "700.HK",
-            "symbol_name": "腾讯控股",
-            "currency": "HK",
-            "quality": "650",
-            "available_quality": "-450",
-            "cost_price": "457.53"
-          }, {
-            "symbol": "9991.HK",
-            "symbol_name": "宝尊电商-SW",
-            "currency": "HK",
-            "quality": "200",
-            "available_quality": "0",
-            "cost_price": "32.25"
-          }, {
-            "symbol": "TCEHY.US",
-            "symbol_name": "腾讯控股 (ADR)",
-            "currency": "US",
-            "quality": "10",
-            "available_quality": "10"
-          }, {
-            "symbol": "2628.HK",
-            "symbol_name": "中国人寿",
-            "currency": "HK",
-            "quality": "9000",
-            "available_quality": "0"
-          }, {
-            "symbol": "5.HK",
-            "symbol_name": "汇丰控股",
-            "currency": "HK",
-            "quality": "2400",
-            "available_quality": "2000"
-          }, {
-            "symbol": "BABA.US",
-            "symbol_name": "阿里巴巴",
-            "currency": "US",
-            "quality": "2000209",
-            "available_quality": "2000209"
-          }, {
-            "symbol": "2.HK",
-            "symbol_name": "中电控股",
-            "currency": "HK",
-            "quality": "2000",
-            "available_quality": "2000"
-          },{
-            "symbol": "NOK.US",
-            "symbol_name": "诺基亚",
-            "currency": "US",
-            "quality": "1",
-            "available_quality": "0"
-          }]
-        }]
-      } }
+      response_body:
+        {
+          "code": 0,
+          "data":
+            {
+              "list":
+                [
+                  {
+                    "account_channel": "lb",
+                    "stock_info":
+                      [
+                        {
+                          "symbol": "700.HK",
+                          "symbol_name": "腾讯控股",
+                          "currency": "HK",
+                          "quality": "650",
+                          "available_quality": "-450",
+                          "cost_price": "457.53",
+                        },
+                        {
+                          "symbol": "9991.HK",
+                          "symbol_name": "宝尊电商-SW",
+                          "currency": "HK",
+                          "quality": "200",
+                          "available_quality": "0",
+                          "cost_price": "32.25",
+                        },
+                        {
+                          "symbol": "TCEHY.US",
+                          "symbol_name": "腾讯控股 (ADR)",
+                          "currency": "US",
+                          "quality": "10",
+                          "available_quality": "10",
+                        },
+                        {
+                          "symbol": "2628.HK",
+                          "symbol_name": "中国人寿",
+                          "currency": "HK",
+                          "quality": "9000",
+                          "available_quality": "0",
+                        },
+                        {
+                          "symbol": "5.HK",
+                          "symbol_name": "汇丰控股",
+                          "currency": "HK",
+                          "quality": "2400",
+                          "available_quality": "2000",
+                        },
+                        {
+                          "symbol": "BABA.US",
+                          "symbol_name": "阿里巴巴",
+                          "currency": "US",
+                          "quality": "2000209",
+                          "available_quality": "2000209",
+                        },
+                        {
+                          "symbol": "2.HK",
+                          "symbol_name": "中电控股",
+                          "currency": "HK",
+                          "quality": "2000",
+                          "available_quality": "2000",
+                        },
+                        {
+                          "symbol": "NOK.US",
+                          "symbol_name": "诺基亚",
+                          "currency": "US",
+                          "quality": "1",
+                          "available_quality": "0",
+                        },
+                      ],
+                  },
+                ],
+            },
+        }
   /v1/trade/asset/fund:
     get:
       summary: "基金持仓"
@@ -190,20 +217,31 @@ paths:
             config = Config(base_url = "https://open.longbridgeapp.com/")
             client = Client(auth, config)
             result = client.get("/v1/openapi/asset/fund")
-      response_body: { "code": 0, "data": {
-        "list": [ {
-          "account_channel": "lb",
-          "fund_info": [ {
-            "symbol": "HK0000447943",
-            "symbol_name": "GAOTENG EMERGING MARKETS PLUS  LONG/SHORT FIXED INCOME ALPHA FUND",
-            "currency": "USD",
-            "holding_units": "5.000",
-            "current_net_asset_value": "0",
-            "cost_net_asset_value": "0.00",
-            "net_asset_value_day": 1649865600
-          } ]
-        } ]
-      } }
+      response_body:
+        {
+          "code": 0,
+          "data":
+            {
+              "list":
+                [
+                  {
+                    "account_channel": "lb",
+                    "fund_info":
+                      [
+                        {
+                          "symbol": "HK0000447943",
+                          "symbol_name": "GAOTENG EMERGING MARKETS PLUS  LONG/SHORT FIXED INCOME ALPHA FUND",
+                          "currency": "USD",
+                          "holding_units": "5.000",
+                          "current_net_asset_value": "0",
+                          "cost_net_asset_value": "0.00",
+                          "net_asset_value_day": 1649865600,
+                        },
+                      ],
+                  },
+                ],
+            },
+        }
   /v1/trade/asset/accountcashinfo:
     get:
       summary: "查询账户资金信息"
@@ -229,29 +267,41 @@ paths:
             config = Config(base_url = "https://open.longbridgeapp.com/")
             client = Client(auth, config)
             result = client.get("/v1/openapi/asset/accountcashinfo")
-      response_body: { "code": 0, "data": {
-        "list": [{
-          "total_cash": "1759070010.72",
-          "max_finance_amount": "977582000",
-          "remaining_finance_amount": "0",
-          "risk_level": "1",
-          "margin_call": "2598051051.50",
-          "currency": "HKD",
-          "cashInfos": [{
-            "withdraw_cash": "97592.30",
-            "available_cash": "195902464.37",
-            "frozen_cash": "11579339.13",
-            "settling_cash": "207288537.81",
-            "currency": "HKD"
-          }, {
-            "withdraw_cash": "199893416.74",
-            "available_cash": "199893416.74",
-            "frozen_cash": "28723.76",
-            "settling_cash": "-276806.51",
-            "currency": "USD"
-          }]
-        }]
-      } }
+      response_body:
+        {
+          "code": 0,
+          "data":
+            {
+              "list":
+                [
+                  {
+                    "total_cash": "1759070010.72",
+                    "max_finance_amount": "977582000",
+                    "remaining_finance_amount": "0",
+                    "risk_level": "1",
+                    "margin_call": "2598051051.50",
+                    "currency": "HKD",
+                    "cashInfos":
+                      [
+                        {
+                          "withdraw_cash": "97592.30",
+                          "available_cash": "195902464.37",
+                          "frozen_cash": "11579339.13",
+                          "settling_cash": "207288537.81",
+                          "currency": "HKD",
+                        },
+                        {
+                          "withdraw_cash": "199893416.74",
+                          "available_cash": "199893416.74",
+                          "frozen_cash": "28723.76",
+                          "settling_cash": "-276806.51",
+                          "currency": "USD",
+                        },
+                      ],
+                  },
+                ],
+            },
+        }
 
 definitions:
   cashflow_rsp:
@@ -358,20 +408,20 @@ definitions:
             type: "string"
             description: 现金总额
           max_finance_amount:
-              type: "string"
-              description: 最大融资金额
+            type: "string"
+            description: 最大融资金额
           remaining_finance_amount:
-              type: "string"
-              description: 剩余融资金额
+            type: "string"
+            description: 剩余融资金额
           risk_level:
-              type: "string"
-              description: 风控等级 <br/> <br/> <b>可选值:</b><br/> `1` - 低风险 <br/> `2` - 中低风险<br/> `3` - 中风险<br/> `4` - 中高风险 <br/> `5` - 高风险
+            type: "string"
+            description: 风控等级 <br/> <br/> <b>可选值:</b><br/> `1` - 低风险 <br/> `2` - 中低风险<br/> `3` - 中风险<br/> `4` - 中高风险 <br/> `5` - 高风险
           margin_call:
-              type: "string"
-              description: 追缴保证金
+            type: "string"
+            description: 追缴保证金
           currency:
-              type: "string"
-              description: 币种
+            type: "string"
+            description: 币种
           cashInfos:
             type: "object"
             description: 现金详情
