@@ -1,0 +1,18 @@
+{
+  "recommendations": [
+    "aeschli.vscode-css-formatter",
+    "bradlc.vscode-tailwindcss",
+    "csstools.postcss",
+    "dbaeumer.vscode-eslint",
+    "DigitalBrainstem.javascript-ejs-support",
+    "dsznajder.es7-react-js-snippets",
+    "eg2.vscode-npm-script",
+    "esbenp.prettier-vscode",
+    "huacnlee.auto-correct",
+    "PeterMekhaeil.vscode-tailwindcss-explorer",
+    "redhat.vscode-yaml",
+    "sibiraj-s.vscode-scss-formatter",
+    "bierner.markdown-preview-github-styles",
+    "allentong.dotjs"
+  ]
+}

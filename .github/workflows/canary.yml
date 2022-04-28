@@ -2,10 +2,7 @@ name: Deploy canary
 on:
   push:
     branches:
-      - canary
-  pull_request:
-    branches:
-      - canary
+      - main
 jobs:
   deploy_canary:
     name: build
@@ -25,7 +22,8 @@ jobs:
         run: yarn
 
       - name: build canary env dist file
-        run: yarn build:canary
+        run: |
+          yarn build:canary
 
       - name: upload canary dist to s3
         env:

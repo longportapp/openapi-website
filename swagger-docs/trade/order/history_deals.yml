@@ -1,0 +1,89 @@
+swagger: "2.0"
+info:
+  description: "历史成交查询"
+  version: "v1"
+  title: "历史成交查询"
+paths:
+  /v1/trade/order/deal/history:
+    get:
+      access: "交易权限"
+      parameters:
+        - name: "symbol"
+          type: "string"
+          in: query
+          description: "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
+          required: false
+        - name: "start_at"
+          type: "string"
+          in: query
+          required: false
+          description: "开始时间，格式为时间戳 (秒)，例如: `1650410999`"
+        - name: "end_at"
+          type: "string"
+          in: query
+          required: false
+          description: "结束时间，格式为时间戳 (秒)，例如: `1650410999`"
+      responses:
+        "200":
+          description: "查询成功"
+          schema:
+            $ref: "#/definitions/deals"
+        "400":
+          description: "查询失败，请求参数错误."
+      request_body:
+        type: "python"
+        value: |
+          def example():
+            from longbridge.http import *
+            auth = Auth("${API_KEY}", "${API_KEY_SECRET}", "${TOKEN}")
+            config = Config(base_url = "https://openapi.lbkrs.com")
+            client = Client(auth, config)
+            result = client.get("/v1/trade/order/deal/history", {"symbol": "700.HK", 
+              "start_at": "1650410999"})
+      response_body:
+        {
+          "code": 0,
+          "data":
+            {
+              "has_more": false,
+              "trades":
+                [
+                  {
+                    "order_id": "693664675163312128",
+                    "price": "388",
+                    "quantity": "100",
+                    "symbol": "700.HK",
+                    "trade_done_at": "1648611351",
+                    "trade_id": "693664675163312128-1648611351433741210",
+                  },
+                ],
+            },
+        }
+definitions:
+  deals:
+    properties:
+      has_more:
+        type: boolean
+        description: "是否还有更多数据"
+      orders:
+        type: "arrary"
+        description: 成交明细信息
+        properties:
+          order_id:
+            type: "string"
+            description: 订单 ID
+          trade_id:
+            type: "string"
+            description: 成交 ID
+          symbol:
+            type: "string"
+            description: "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
+          trade_done_at:
+            type: "string"
+            description: "成交时间，格式为时间戳 (秒)"
+          quantity:
+            type: "string"
+            description: 成交数量
+          price:
+            type: "string"
+            description: 成交价格

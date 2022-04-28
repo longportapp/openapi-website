@@ -1,0 +1,42 @@
+.navbar {
+  --ifm-navbar-padding-horizontal: 20px;
+  --ifm-navbar-padding-vertical: 12px;
+  @media screen and (min-width: 768px) {
+    --ifm-navbar-padding-horizontal: 40px;
+  }
+  .navbar__brand {
+    margin-right: 0;
+    .navbar__logo {
+      img {
+        width: 120px;
+        height: auto;
+      }
+    }
+    & + .navbar__item.navbar__link {
+      margin-left: 208px;
+    }
+  }
+  .navbar__items {
+    .navbar__item {
+      --ifm-navbar-link-hover-color: #37a0ff;
+      padding: 0;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    &:first-child {
+      .navbar__item {
+        margin-right: 52px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+    &:last-child {
+      .navbar__item {
+        font-size: 14px;
+        font-weight: normal;
+      }
+    }
+  }
+  
+}
