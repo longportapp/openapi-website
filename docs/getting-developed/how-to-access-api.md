@@ -7,19 +7,25 @@ sidebar_position: 1
 
 ## API 调用流程
 
-### 1. 获取 Access Key
+### 1. 开通服务
 
-首先要申请 API Key 拿到 API Secret， 并设置相应权限。获取 API Key 与申请权限请参考 [链接]。
+参考 [OpenAPI 介绍](../docs/#如何开通) 开通相应服务。
 
-### 2. 创建 Token
+### 2. 获取 API Key 信息及 Token 令牌
 
-在开发者后台中创建 `Token`，详见 [链接]。
+在 [开发者后台](https://open.longbridge.com/account) 中获取 Token， API Key 以及 API Key Secret。
+
+![开发者后台截图](https://pub.lbkrs.com/files/202204/y4YB4epqa5FCG6dD/Feishu20220428-191850.jpg)
+
+:::tip
+开发者后台中的 Access Key 即是 API Key， Access Key Secret 即是 API Key Secret
+:::
 
 ### 3. 生成签名
 
 先根据相应的 API 文档构造请求后， 通过 OpenAPI SDK 直接调用 API，SDK 会帮助生成签名， 或者通过以下流程创建签名。
 
-#### 添加 `X-Api-Key`、`X-Timestamp`
+#### 添加 `X-Api-Key`、`X-Timestamp`、`Authorization`
 
 设置请求参数头部信息， `X-Api-Key`、 `Authorization`、`X-Timestamp` 将在签名函数中被使用。
 
