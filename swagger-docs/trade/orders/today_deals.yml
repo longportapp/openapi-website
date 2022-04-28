@@ -32,7 +32,8 @@ paths:
             auth = Auth("${API_KEY}", "${API_KEY_SECRET}", "${TOKEN}")
             config = Config(base_url = "https://open.longbridgeapp.com/")
             client = Client(auth, config)
-            result = client.get("/v1/trade/order/deal/today")
+            result = client.get("/v1/trade/order/deal/today", {"symbol": "700.HK", 
+              "order_id": "693664675163312128"})
       response_body:
         {
           "code": 0,
@@ -66,10 +67,10 @@ definitions:
             description: 成交 ID
           symbol:
             type: "string"
-            description: 股票代码
+            description: "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
           trade_done_at:
             type: "string"
-            description: 成交时间
+            description: "成交时间，格式为时间戳 (秒)"
           quantity:
             type: "string"
             description: 成交数量
