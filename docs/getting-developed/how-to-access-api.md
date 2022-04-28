@@ -15,6 +15,8 @@ sidebar_position: 1
 
 在 [开发者后台](https://open.longbridge.com/account) 中获取 Token， API Key 以及 API Key Secret。
 
+![开发者后台截图](https://pub.lbkrs.com/files/202204/y4YB4epqa5FCG6dD/Feishu20220428-191850.jpg)
+
 :::tip
 开发者后台中的 Access Key 即是 API Key， Access Key Secret 即是 API Key Secret
 :::
