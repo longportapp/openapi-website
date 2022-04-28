@@ -9,7 +9,7 @@ sidebar_position: 1
 
 ### 1. 开通服务
 
-参考 [Open API 介绍](../docs/#如何开通) 开通相应服务。
+参考 [OpenAPI 介绍](../docs/#如何开通) 开通相应服务。
 
 ### 2. 获取 API Key 信息及 Token 令牌
 
