@@ -1,0 +1,199 @@
+swagger: "2.0"
+info:
+  description: "当日订单查询"
+  version: "v1"
+  title: "当日订单查询"
+paths:
+  /v1/trade/order/today:
+    get:
+      access: "交易权限"
+      parameters:
+        - name: "symbol"
+          type: "string"
+          in: query
+          description: "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
+          required: false
+        - name: "status"
+          type: string[]
+          in: query
+          description: "[订单状态](../trade-definition#orderstatus)"
+          required: false
+        - name: side
+          type: "string"
+          in: query
+          description: 买卖方向<br/><br/>
+            **可选项:**<br/>
+            `Buy` - 买入<br/>
+            `Sell` - 卖出
+          required: false
+        - name: market
+          type: "string"
+          in: query
+          description: 市场<br/><br/>
+            **可选项:**<br/>
+            `US` - 美股<br/>
+            `HK` - 港股
+          required: false
+        - name: "order_id"
+          type: "string"
+          required: false
+          description: "订单 ID，用于指定订单 ID 查询，例如: `701276261045858304`"
+      responses:
+        "200":
+          description: "当日订单查询成功"
+          schema:
+            $ref: "#/definitions/orders"
+        "400":
+          description: "查询失败，请求参数错误."
+      request_body:
+        type: "python"
+        value: |
+          def example():
+            from longbridge.http import *
+            auth = Auth("${API_KEY}", "${API_KEY_SECRET}", "${TOKEN}")
+            config = Config(base_url = "https://open.longbridgeapp.com/")
+            client = Client(auth, config)
+            result = client.get("/v1/trade/order/today", {
+                "symbol": "700.HK", "status": ["NewStatus", "WaitToNew"], 
+                "side": "Buy", "market": "HK",
+            })
+      response_body:
+        {
+          "code": 0,
+          "data":
+            {
+              "orders":
+                [
+                  {
+                    "currency": "HKD",
+                    "executed_price": "0",
+                    "executed_quantity": "0",
+                    "expire_date": "",
+                    "last_done": "",
+                    "limit_offset": "",
+                    "msg": "",
+                    "order_id": "701276261045858304",
+                    "order_type": 1,
+                    "outside_rth": 0,
+                    "price": "388",
+                    "quantity": "100",
+                    "side": 1,
+                    "status": 16,
+                    "stock_name": "腾讯控股",
+                    "submitted_at": "1650426089",
+                    "symbol": "700.HK",
+                    "tag": 1,
+                    "time_in_force": 0,
+                    "trailing_amount": "",
+                    "trailing_percent": "",
+                    "trigger_at": "0",
+                    "trigger_price": "",
+                    "trigger_status": 0,
+                    "updated_at": "1650442225",
+                  },
+                ],
+            },
+        }
+definitions:
+  orders:
+    properties:
+      orders:
+        type: "arrary"
+        description: 订单信息
+        properties:
+          order_id:
+            type: "string"
+            description: 订单 ID
+          status:
+            type: "string"
+            description: "[订单状态](../trade-definition#orderstatus)"
+          stock_name:
+            type: "string"
+            description: 股票名称
+          quantity:
+            type: "string"
+            description: 下单数量
+          executed_qty:
+            type: "string"
+            description: 成交数量
+          price:
+            type: "string"
+            description: 下单价格
+          executed_price:
+            type: "string"
+            description: 成交价格
+          submitted_at:
+            type: "string"
+            description: 下单时间
+          side:
+            type: "string"
+            description: "
+              买卖方向<br/><br/>
+              **可选项:**<br/>
+              `Buy` - 买入<br/>
+              `Sell` - 卖出"
+          symbol:
+            type: "string"
+            description: "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
+          order_type:
+            type: "string"
+            description: "[订单类型](../trade-definition#ordertype)"
+          last_done:
+            type: "string"
+            description: 最近成交价格
+          trigger_price:
+            type: "string"
+            description: "`LIT` / `MIT` 订单触发价格"
+          msg:
+            type: "string"
+            description: 拒绝信息或备注
+          tag:
+            type: "string"
+            description: "订单标记<br/><br/>
+              **可选项:**<br/>
+              `Normal` - 普通订单<br/>
+              `GTC` - 长期单<br/>
+              `Grey` - 暗盘单"
+          time_in_force:
+            type: "string"
+            description: "
+              订单有效期类型<br/><br/>
+              **可选项:**<br/>
+              `Day` - 当日有效<br/>
+              `GTC` - 撤单前有效<br/>
+              `GTD` - 到期前有效"
+          expire_date:
+            type: "string"
+            description: 长期单过期时间，格式为 `YYYY-MM-DD`, 例如：`2022-12-05`
+          updated_at:
+            type: "string"
+            description: 最近更新时间，格式为时间戳 (秒)
+          trigger_at:
+            type: "string"
+            description: 条件单触发时间，格式为时间戳 (秒)
+          trailing_amount:
+            type: "string"
+            description: "`TSLPAMT` / `TSMAMT` 订单跟踪金额"
+          trailing_percent:
+            type: "string"
+            description: "`TSLPPCT` / `TSMAPCT` 订单跟踪涨跌幅"
+          limit_offset:
+            type: "string"
+            description: "`TSLPAMT` / `TSLPPCT` 订单指定价差"
+          trigger_status:
+            type: "string"
+            description: "条件单触发状态<br/><br/>
+              **可选项:**<br/>
+              `NOT_ACTIVE` - 未激活
+              `DEACTIVE` - 已失效
+              `ACTIVE` - 已激活
+              `RELEASED` - 已触发"
+          currency:
+            type: "string"
+            description: 结算货币
+          outside_rth:
+            type: "string"
+            description: 是否允许盘前盘后<br/><br/>
+              **可选项:**<br/>
+              `RTH_ONLY` - 不允许盘前盘后<br/>
+              `ANY_TIME` - 允许盘前盘后"
