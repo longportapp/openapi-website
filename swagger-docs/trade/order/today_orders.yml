@@ -21,8 +21,7 @@ paths:
         - name: side
           type: "string"
           in: query
-          description: |
-            买卖方向<br/><br/>
+          description: 买卖方向<br/><br/>
             **可选项:**<br/>
             `Buy` - 买入<br/>
             `Sell` - 卖出
@@ -30,8 +29,7 @@ paths:
         - name: market
           type: "string"
           in: query
-          description: |
-            市场<br/><br/>
+          description: 市场<br/><br/>
             **可选项:**<br/>
             `US` - 美股<br/>
             `HK` - 港股

@@ -18,28 +18,23 @@ paths:
           required: true
         - name: "price"
           required: false
-          description: |
-            改单价格，例如：`388.5`<br/><br/>
+          description: 改单价格，例如：`388.5`<br/><br/>
             `LO` / `ELO` / `ALO` / `ODD` / `LIT` 订单必填
         - name: trigger_price
           required: false
-          description: |
-            触发价格，例如：`388.5`<br/><br/>
+          description: 触发价格，例如：`388.5`<br/><br/>
             `LIT` / `MIT` 订单必填
         - name: limit_offset
           required: false
-          description: |
-            指定价差<br/><br/>
+          description: 指定价差<br/><br/>
             `TSLPAMT` / `TSLPPCT` 订单必填
         - name: trailing_amount
           required: false
-          description: |
-            跟踪金额<br/><br/>
+          description: 跟踪金额<br/><br/>
             `TSLPAMT` / `TSMAMT` 订单必填
         - name: trailing_percent
           required: false
-          description: |
-            跟踪涨跌幅<br/><br/>
+          description: 跟踪涨跌幅<br/><br/>
             `TSLPPCT` / `TSMAPCT` 订单必填
         - name: remark
           required: false
