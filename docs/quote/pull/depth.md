@@ -17,9 +17,9 @@ sidebar_position: 5
 
 ### Parameters
 
-| 名称   | 类型   | 必须 | 描述                        | 示例       |
-| ------ | ------ | ---- | --------------------------- | ---------- |
-| symbol | string | 是   | 标的代码，`ticker.region`。 | `00700.HK` |
+| Name   | Type   | Required | Description                                         |
+| ------ | ------ | -------- | --------------------------------------------------- |
+| symbol | string | 是       | 标的代码，使用 `ticker.region` 格式，例如：`700.HK` |
 
 ### Protobuf
 
@@ -33,19 +33,19 @@ message SecurityRequest {
 
 ### Response Properties
 
-| 名称       | 类型     | 描述     |
-| ---------- | -------- | -------- |
-| symbol     | string   | 标的代码 |
-| ask        | object[] | 卖盘     |
-| ∟position  | int32    | 档位     |
-| ∟price     | string   | 价格     |
-| ∟volume    | int64    | 挂单辆   |
-| ∟order_num | int64    | 订单数量 |
-| bid        | object[] | 买盘     |
-| ∟position  | int32    | 档位     |
-| ∟price     | string   | 价格     |
-| ∟volume    | int64    | 挂单辆   |
-| ∟order_num | int64    | 订单数量 |
+| Name        | Type     | Description |
+| ----------- | -------- | ----------- |
+| symbol      | string   | 标的代码    |
+| ask         | object[] | 卖盘        |
+| ∟ position  | int32    | 档位        |
+| ∟ price     | string   | 价格        |
+| ∟ volume    | int64    | 挂单辆      |
+| ∟ order_num | int64    | 订单数量    |
+| bid         | object[] | 买盘        |
+| ∟ position  | int32    | 档位        |
+| ∟ price     | string   | 价格        |
+| ∟ volume    | int64    | 挂单辆      |
+| ∟ order_num | int64    | 订单数量    |
 
 ### Protobuf
 
@@ -64,14 +64,77 @@ message Depth {
 }
 ```
 
-## 接口限制
+### Response JSON Example
 
-:::caution
-
-- 每秒平均请求次数 10。
-- 瞬时并发次数 5。
-
-:::
+```json
+{
+  "symbol": "700.HK",
+  "ask": [
+    {
+      "position": 1,
+      "price": "335.000",
+      "volume": 500,
+      "order_num": 1
+    },
+    {
+      "position": 2,
+      "price": "335.200",
+      "volume": 400,
+      "order_num": 1
+    },
+    {
+      "position": 3,
+      "price": "335.400",
+      "volume": 500,
+      "order_num": 2
+    },
+    {
+      "position": 4,
+      "price": "335.600",
+      "volume": 1200,
+      "order_num": 3
+    },
+    {
+      "position": 5,
+      "price": "335.800",
+      "volume": 14000,
+      "order_num": 8
+    }
+  ],
+  "bid": [
+    {
+      "position": 1,
+      "price": "334.800",
+      "volume": 69400,
+      "order_num": 13
+    },
+    {
+      "position": 2,
+      "price": "334.600",
+      "volume": 266600,
+      "order_num": 27
+    },
+    {
+      "position": 3,
+      "price": "334.400",
+      "volume": 61300,
+      "order_num": 29
+    },
+    {
+      "position": 4,
+      "price": "334.200",
+      "volume": 125900,
+      "order_num": 31
+    },
+    {
+      "position": 5,
+      "price": "334.000",
+      "volume": 194600,
+      "order_num": 94
+    }
+  ]
+}
+```
 
 ## 错误码
 
@@ -79,7 +142,7 @@ message Depth {
 | ---------- | ---------- | -------------- | ---------------------------- |
 | 3          | 301600     | 无效的请求     | 请求参数有误或解包失败       |
 | 3          | 301606     | 限流           | 降低请求频次                 |
-| 7          | 301602     | 服务端内部错误 |                              |
+| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理     |
 | 7          | 301600     | 请求标的不存在 | 检查请求的 `symbol` 是否正确 |
 | 7          | 301603     | 标的无行情     | 标的没有请求的行情数据       |
 | 7          | 301604     | 无权限         | 没有获取标的行情的权限       |

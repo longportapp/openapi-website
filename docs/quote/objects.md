@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 id: quote_object
-title: 行情对象定义
+title: 行情命名词典
 slug: objects
 ---
 
