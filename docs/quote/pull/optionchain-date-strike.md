@@ -17,10 +17,10 @@ sidebar_position: 12
 
 ### Parameters
 
-| 名称        | 类型   | 必须 | 描述                                             | 示例       |
-| ----------- | ------ | ---- | ------------------------------------------------ | ---------- |
-| symbol      | string | 是   | 标的代码 `ticker.region`。                       | `00700.HK` |
-| expiry_date | string | 是   | [期权到期日](./optionchain-date)，格式：`YYMMDD` | `20220404` |
+| Name        | Type   | Required | Description                                                                                         |
+| ----------- | ------ | -------- | --------------------------------------------------------------------------------------------------- |
+| symbol      | string | 是       | 标的代码，使用 `ticker.region` 格式，例如：`700.HK`                                                 |
+| expiry_date | string | 是       | 期权到期日，使用 `YYMMDD` 格式，例如：`20220429`，通过 [期权到期日](./optionchain_date.md) 接口获取 |
 
 ### Protobuf
 
@@ -35,13 +35,13 @@ message OptionChainDateStrikeInfoRequest {
 
 ### Response Properties
 
-| 名称              | 类型     | 描述               |
+| Name              | Type     | Description        |
 | ----------------- | -------- | ------------------ |
 | strike_price_info | object[] | 到期日期权标的列表 |
-| ∟price            | string   | 行权价             |
-| ∟call_symbol      | string   | CALL 期权标的代码  |
-| ∟put_symbol       | string   | PUT 期权标的代码   |
-| ∟standard         | string   | 是否标准期权       |
+| ∟ price           | string   | 行权价             |
+| ∟ call_symbol     | string   | CALL 期权标的代码  |
+| ∟ put_symbol      | string   | PUT 期权标的代码   |
+| ∟ standard        | bool     | 是否标准期权       |
 
 ### Protobuf
 
@@ -58,14 +58,38 @@ message StrikePriceInfo {
 }
 ```
 
-## 接口限制
+### Response JSON Example
 
-:::caution
-
-- 每秒平均请求次数 10。
-- 瞬时并发次数 5。
-
-:::
+```json
+{
+  "strike_price_info": [
+    {
+      "price": "100",
+      "call_symbol": "AAPL220429C100000.US",
+      "put_symbol": "AAPL220429P100000.US",
+      "standard": true
+    },
+    {
+      "price": "105",
+      "call_symbol": "AAPL220429C105000.US",
+      "put_symbol": "AAPL220429P105000.US",
+      "standard": true
+    },
+    {
+      "price": "110",
+      "call_symbol": "AAPL220429C110000.US",
+      "put_symbol": "AAPL220429P110000.US",
+      "standard": true
+    },
+    {
+      "price": "115",
+      "call_symbol": "AAPL220429C115000.US",
+      "put_symbol": "AAPL220429P115000.US",
+      "standard": true
+    }
+  ]
+}
+```
 
 ## 错误码
 
@@ -73,5 +97,5 @@ message StrikePriceInfo {
 | ---------- | ---------- | -------------- | ------------------------------------------- |
 | 3          | 301600     | 无效的请求     | 请求参数有误或解包失败                      |
 | 3          | 301606     | 限流           | 降低请求频次                                |
-| 7          | 301602     | 服务端内部错误 |                                             |
+| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理                    |
 | 7          | 301600     | 请求数据非法   | 检查请求的 `symbol`，`expiry_date` 数据格式 |

@@ -1,11 +1,11 @@
 {{= data.tags.section }}
-### Parameters 
+#### Parameters
 
-> Content-Type: application/json; charset=utf-8  
-   
-| Name | Type | Required | Description | 
+> Content-Type: application/json; charset=utf-8
+
+| Name | Type | Required | Description |
 |---|---|---|---|
-{{~ data.parameters :p}}| {{=p.name}} | {{=p.safeType}} | {{=p.required}} | {{=p.shortDesc || 'none'}} |
+{{~ data.parameters :p}}| {{=p.name}} | {{=p.safeType}} | {{= p.required === true ? '是' : '否'}} | {{=p.shortDesc || 'none'}} |
 {{~}}
 
 {{? data.longDescs }}

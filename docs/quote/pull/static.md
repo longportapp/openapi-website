@@ -15,9 +15,9 @@ sidebar_position: 1
 
 ### Parameters
 
-| 名称   | 类型     | 必须 | 描述                       | 示例       |
-| ------ | -------- | ---- | -------------------------- | ---------- |
-| symbol | string[] | 是   | 标的列表 - `ticker.region` | `00700.HK` |
+| Name   | Type     | Required | Description                                                                                                                         |
+| ------ | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| symbol | string[] | 是       | 标的代码列表，使用 `ticker.region` 格式，例如：`[700.HK]` <br /><br />**校验规则：**<br />每次请求支持传入的标的数量上限是 `500` 个 |
 
 ### Protobuf
 
@@ -31,24 +31,24 @@ message MultiSecurityRequest {
 
 ### Response Properties
 
-| 名称                | 类型     | 描述                                                     |
-| ------------------- | -------- | -------------------------------------------------------- |
-| secu_quote          | object[] | 标的基础数据列表                                         |
-| ∟symbol             | string   | 标的代码                                                 |
-| ∟name_cn            | string   | 标的名称，例如：`中文 (简)`                              |
-| ∟name_en            | string   | 标的名称，例如：`英文`                                   |
-| ∟name_hk            | string   | 标的名称，例如：`中文 (繁)`                              |
-| ∟exchange           | string   | 标的所属交易所                                           |
-| ∟currency           | string   | 交易币种，例如：`SGD/USD/HKD/CNY`                        |
-| ∟lot_size           | int32    | 每手股数                                                 |
-| ∟total_shares       | int64    | 总股本                                                   |
-| ∟circulating_shares | int64    | 流通股本                                                 |
-| ∟hk_shares          | int64    | 港股股本 (仅港股)                                        |
-| ∟eps                | string   | 每股盈利                                                 |
-| ∟eps_ttm            | string   | 每股盈利 (TTM)                                           |
-| ∟bps                | string   | 每股净资产                                               |
-| ∟dividend_yield     | string   | 股息                                                     |
-| ∟stock_derivatives  | int32[]  | 如果标的是正股。可提供的衍生品行情类型 1 - 期权 2 - 轮证 |
+| Name                 | Type     | Description                                                                                      |
+| -------------------- | -------- | ------------------------------------------------------------------------------------------------ |
+| secu_quote           | object[] | 标的基础数据列表                                                                                 |
+| ∟ symbol             | string   | 标的代码                                                                                         |
+| ∟ name_cn            | string   | 中文简体标的名称                                                                                 |
+| ∟ name_en            | string   | 英文标的名称                                                                                     |
+| ∟ name_hk            | string   | 中文繁体标的名称                                                                                 |
+| ∟ exchange           | string   | 标的所属交易所                                                                                   |
+| ∟ currency           | string   | 交易币种 <br /><br />**可选值：**<br />`CNY` <br />`USD` <br />`SGD` <br />`HKD`                 |
+| ∟ lot_size           | int32    | 每手股数                                                                                         |
+| ∟ total_shares       | int64    | 总股本                                                                                           |
+| ∟ circulating_shares | int64    | 流通股本                                                                                         |
+| ∟ hk_shares          | int64    | 港股股本 (仅港股)                                                                                |
+| ∟ eps                | string   | 每股盈利                                                                                         |
+| ∟ eps_ttm            | string   | 每股盈利 (TTM)                                                                                   |
+| ∟ bps                | string   | 每股净资产                                                                                       |
+| ∟ dividend_yield     | string   | 股息                                                                                             |
+| ∟ stock_derivatives  | int32[]  | 如果标的是正股，可提供的衍生品行情类型 <br /><br />**可选值：**<br />`1` - 期权 <br />`2` - 轮证 |
 
 ### Protobuf
 
@@ -77,14 +77,46 @@ message StaticInfo {
 }
 ```
 
-## 接口限制
+### Response JSON Example
 
-:::caution
-
-- 每秒平均请求次数 10，瞬时并发次数 5。
-- 每次请求，接口参数标的列表，支持传入的标的数量上限是 300 个。
-
-:::
+```json
+{
+  "secu_static_info": [
+    {
+      "symbol": "700.HK",
+      "name_cn": "腾讯控股",
+      "name_en": "TENCENT",
+      "name_hk": "騰訊控股",
+      "exchange": "SEHK",
+      "currency": "HKD",
+      "lot_size": 100,
+      "total_shares": 9612464038,
+      "circulating_shares": 9612464038,
+      "hk_shares": 9612464038,
+      "eps": "28.4394",
+      "eps_ttm": "28.4394",
+      "bps": "103.40413",
+      "dividend_yield": "1.6",
+      "stock_derivatives": [2]
+    },
+    {
+      "symbol": "AAPL.US",
+      "name_cn": "苹果",
+      "name_en": "Apple Inc.",
+      "exchange": "NASD",
+      "currency": "USD",
+      "lot_size": 1,
+      "total_shares": 1631944100,
+      "circulating_shares": 16302661350,
+      "eps": "5.669",
+      "eps_ttm": "6.0771",
+      "bps": "4.40197",
+      "dividend_yield": "0.85",
+      "stock_derivatives": [1]
+    }
+  ]
+}
+```
 
 ## 错误码
 
@@ -92,5 +124,5 @@ message StaticInfo {
 | ---------- | ---------- | -------------- | ------------------------------------------ |
 | 3          | 301600     | 无效的请求     | 请求参数有误或解包失败                     |
 | 3          | 301606     | 限流           | 降低请求频次                               |
-| 7          | 301602     | 服务端内部错误 |                                            |
+| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理                   |
 | 7          | 301607     | 接口限制       | 请求的标的数量超限，请减少单次请求标的数量 |

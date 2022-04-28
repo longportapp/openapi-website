@@ -37,7 +37,7 @@
 //       secDefScopes: 'Scopes',
 //       anonymous: 'anonymous',
 //       continued: 'continued',
-//       indent: '»',
+//       indent: '∟',
 //       readOnly: 'read-only',
 //       writeOnly: 'write-only'
 //   },

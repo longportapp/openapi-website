@@ -8,9 +8,9 @@
 {{?}}
 
 {{= data.tags.section }}
-### Responses
+### Response
 
-#### Respones Headers
+#### Response Headers
 
 - Content-Type: application/json
 

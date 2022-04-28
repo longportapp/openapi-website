@@ -1083,9 +1083,15 @@
     .http-path {
       color: #303030;
     }
+  }
 
-    .http-operation-deprecated {
-      @apply text-xs p-1 px-2 rounded bg-pink-100 text-pink-800;
+  .http-operation-deprecated {
+    @apply inline-block text-xs py-0.5 px-2 rounded bg-pink-100 text-pink-800;
+  }
+
+  .http-basic {
+    .http-basic-key {
+      @apply bg-gray-50 w-40;
     }
   }
 

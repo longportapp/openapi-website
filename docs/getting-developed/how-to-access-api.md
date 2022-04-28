@@ -7,27 +7,28 @@ sidebar_position: 1
 
 ## API 调用流程
 
-### 1. 获取 Access Key
+### 1. 开通服务
 
-首先要申请 API Key 拿到 API Secret， 并设置相应权限。获取 API Key 与申请权限请参考 [链接]。
+参考 [OpenAPI 介绍](../docs/#如何开通) 开通相应服务。
 
-### 2. 创建 Token
+### 2. 获取 App Key 信息及 Access Token
 
-在开发者后台中创建 `Token`，详见 [链接]。
+在 [开发者后台](https://open.longbridgeapp.com/account) 中获取 Token， **App Key** 以及 **App Secret**。
 
 ### 3. 生成签名
 
 先根据相应的 API 文档构造请求后， 通过 OpenAPI SDK 直接调用 API，SDK 会帮助生成签名， 或者通过以下流程创建签名。
 
-#### 添加 `X-Api-Key`、`X-Timestamp`
+#### 添加 `X-Api-Key`、`X-Timestamp`、`Authorization`
 
 设置请求参数头部信息， `X-Api-Key`、 `Authorization`、`X-Timestamp` 将在签名函数中被使用。
 
 ```python
+import time
 headers = {}
-headers['X-Api-Key'] = '${这里设置 API Key}'
-headers['Authorization'] = '${这里设置 Token}'
-headers['X-Timestamp' =  str(time.time()) # 时间戳
+headers['X-Api-Key'] = '${app_key}'
+headers['Authorization'] = '${access_token}'
+headers['X-Timestamp' =  str(time.time()) # Unix Timestamp, eg: 1539095200.123
 headers['Content-Type'] = 'application/json; charset=utf-8',
 ```
 
@@ -39,11 +40,11 @@ headers['Content-Type'] = 'application/json; charset=utf-8',
 # python3 签名函数
 def sign(method, uri, headers, params, body, secret):
     ts = headers["X-Timestamp"]
-    token = headers["Authorization"]
-    api_key = headers["X-Api-Key"]
+    access_token = headers["Authorization"]
+    app_key = headers["X-Api-Key"]
     mtd = method.upper()
 
-    canical_request = mtd + "|" + uri + "|" + params + "|authorization:" + token + "\nx-api-key:" + api_key + "\nx-timestamp:" + ts + "\n|authorization;x-api-key;x-timestamp|"
+    canical_request = mtd + "|" + uri + "|" + params + "|authorization:" + access_token + "\nx-api-key:" + app_key + "\nx-timestamp:" + ts + "\n|authorization;x-api-key;x-timestamp|"
 
     if body != "":
         payload_hash = hashlib.sha1(body.encode("utf-8")).hexdigest()
@@ -77,7 +78,9 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 
 ## 基本路径
 
-所有 API 的路径都以 [https://openapi.longbridge.sg](https://openapi.longbridge.sg) 开头。
+所有 API 的路径都以 [https://openapi.lbkrs.com](https://openapi.lbkrs.com) 开头。
+
+> TIP: 也可以用 https://openapi.longbridge.global
 
 ## API Request
 
@@ -86,9 +89,9 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 示例如下：
 
 ```bash
-curl -v https://openapi.longbridge.sg/v1/test \
-    -H "X-Api-Signature: {签名}" -H "X-Api-Key: {access key}" \
-    -H "Authorization: {token}" -H "X-Timestamp: {签名时间}"
+curl -v https://openapi.lbkrs.com/v1/test \
+    -H "X-Api-Signature: {签名}" -H "X-Api-Key: {app_key}" \
+    -H "Authorization: {access_token}" -H "X-Timestamp: 1539095200.123"
 ```
 
 ## API Response
@@ -149,9 +152,9 @@ params = ""
 body = json.dumps({ "order_id": '683615454870679552' })
 # 请求头部信息
 headers = {}
-headers['X-Api-Key'] = '${这里设置 API Key}'
-headers['Authorization'] = '${这里设置 Token}'
-headers['X-Timestamp'] =  str(time.time())
+headers['X-Api-Key'] = '${app_key}'
+headers['Authorization'] = '${access_token}'
+headers['X-Timestamp'] =  str(time.time()) # Unix TimeStamp, eg. 1539095200.123
 headers['Content-Type'] = 'application/json; charset=utf-8'
 
 # API secret
@@ -160,10 +163,10 @@ api_secret = "${这里是 API Secret}"
 ## 签名方法
 def sign(method, uri, headers, params, body, secret):
     ts = headers["X-Timestamp"]
-    token = headers["Authorization"]
-    api_key = headers["X-Api-Key"]
+    access_token = headers["Authorization"]
+    app_key = headers["X-Api-Key"]
     mtd = method.upper()
-    canical_request = mtd + "|" + uri + "|" + params + "|authorization:" + token + "\nx-api-key:" + api_key + "\nx-timestamp:" + ts + "\n|authorization;x-api-key;x-timestamp|"
+    canical_request = mtd + "|" + uri + "|" + params + "|authorization:" + access_token + "\nx-api-key:" + app_key + "\nx-timestamp:" + ts + "\n|authorization;x-api-key;x-timestamp|"
     if body != "":
         payload_hash = hashlib.sha1(body.encode("utf-8")).hexdigest()
         canical_request = canical_request + payload_hash
@@ -176,7 +179,7 @@ def sign(method, uri, headers, params, body, secret):
 headers['X-Api-Signature'] = sign(method,  uri, headers, params, body, api_secret)
 
 # 请求接口
-response = requests.request(method, "https://openapi.longbridge.sg" + uri + '?' + params, headers=headers, data=body)
+response = requests.request(method, "https://openapi.lbkrs.com" + uri + '?' + params, headers=headers, data=body)
 
 print(response.text)
 
