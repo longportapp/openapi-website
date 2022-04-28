@@ -21,10 +21,6 @@ Longbridge OpenAPI 为有研发能力的投资者提供程序化行情交易接�
 
 Longbridge 提供接入底层服务的 HTTP / WebSockets 接口以及封装在上层的 SDK（Python / C++ ...）等多种接入方式，灵活选择。
 
-## 系统流程
-
-待补充
-
 ## 如何开通
 
 1. 登录 [Longbridge App](https://longbridgeapp.com/download) 或官网 [longbridgehk.com](https://longbridge.hk) 完成长桥综合账户的开户（目前不支持长桥标准账户的接口服务）；
@@ -60,7 +56,7 @@ Longbridge 提供接入底层服务的 HTTP / WebSockets 接口以及封装在�
         <td>证券类产品<br /><br />含股票、ETFs、窝轮、牛熊、界内证</td>
         <td rowspan="2">
             <ul>
-            <li>中国大陆客户：请购买 <font color="red">港股 Lv2 实时行情 + 实时恒生指数 - OpenAPI（仅限大陆地区使用）</font></li>   
+            <li>中国大陆客户：请购买 <font color="red">港股 Lv2 实时行情 + 实时恒生指数 - OpenAPI（仅限大陆地区使用）</font></li>
             <li>非中国大陆客户：请购买 <font color="red">港股 Lv2 实时行情 + 实时恒生指数 - OpenAPI（不限使用地区）</font></li>
             </ul>
         </td>
@@ -73,7 +69,7 @@ Longbridge 提供接入底层服务的 HTTP / WebSockets 接口以及封装在�
         <td>证券类产品<br /><br />含纽交所、美交所、纳斯达克上市的股票、ETFs</td>
         <td rowspan="2">
             <ul>
-            <li>Level 1：请购买 <font color="red">L1 Nasdaq Basic - OpenAPI</font></li>    
+            <li>Level 1：请购买 <font color="red">L1 Nasdaq Basic - OpenAPI</font></li>
             <li>Level 2：
                 <ul>
                 <li>非专业用户：请购买 <font color="red">L2 + Nasdaq TotalView - OpenAPI（非专业用户）</font></li>
@@ -100,7 +96,7 @@ Longbridge 提供接入底层服务的 HTTP / WebSockets 接口以及封装在�
         <td>证券类产品（含股票、ETFs）</td>
         <td rowspan="2">
         <ul>
-            <li>中国大陆个人客户：免费获取 Lv1 行情</li>   
+            <li>中国大陆个人客户：免费获取 Lv1 行情</li>
             <li>非中国大陆客户 / 机构客户：暂不支持</li>
         </ul>
         </td>
@@ -114,8 +110,8 @@ Longbridge 提供接入底层服务的 HTTP / WebSockets 接口以及封装在�
 
 :::caution
 
-- 一个账号同时只能建立一个长连接，最多同时订阅 500 个标的。
-- 1 秒内不超过 10 次调用，并发请求数不超过 5。
+- 一个账号同时只能建立一个长连接，最多同时订阅 500 个标的
+- 1 秒内不超过 10 次调用，并发请求数不超过 5
 
 :::
 
