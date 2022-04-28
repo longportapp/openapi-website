@@ -1,0 +1,98 @@
+swagger: "2.0"
+info:
+  description: "返回每个币种可用、可取、冻结、待结算金额、在途资金（基金申购赎回)"
+  version: "v1"
+  title: "获取账户资金信息"
+paths:
+  /v1/openapi/asset/accountcashinfo:
+    get:
+      access:
+      responses:
+        "200":
+          description: "返回成功"
+          schema:
+            $ref: "#/definitions/accountcash_rsp"
+        "202001":
+          description: "内部错误"
+        "202201":
+          description: "获取用户信息失败，检查下账号绑定关联是否正确"
+        "202202":
+          description: "参数错误，检查下参数是否和要求的不一致"
+      request_body:
+        type: "python"
+        value: |
+          def example():
+            from longbridge.http import *
+            auth = Auth("${API_KEY}", "${API_KEY_SECRET}", "${TOKEN}")
+            config = Config(base_url = "https://open.longbridgeapp.com/")
+            client = Client(auth, config)
+            result = client.get("/v1/openapi/asset/accountcashinfo")
+      response_body: { "code": 0, "data": {
+        "list": [{
+          "total_cash": "1759070010.72",
+          "max_finance_amount": "977582000",
+          "remaining_finance_amount": "0",
+          "risk_level": "1",
+          "margin_call": "2598051051.50",
+          "currency": "HKD",
+          "cashInfos": [{
+            "withdraw_cash": "97592.30",
+            "available_cash": "195902464.37",
+            "frozen_cash": "11579339.13",
+            "settling_cash": "207288537.81",
+            "currency": "HKD"
+          }, {
+            "withdraw_cash": "199893416.74",
+            "available_cash": "199893416.74",
+            "frozen_cash": "28723.76",
+            "settling_cash": "-276806.51",
+            "currency": "USD"
+          }]
+        }]
+      } }
+
+definitions:
+  accountcash_rsp:
+    properties:
+      list:
+        type: "arrary"
+        description: 账户资金信息
+        properties:
+          total_cash:
+            type: "string"
+            description: 现金总额
+          max_finance_amount:
+              type: "string"
+              description: 最大融资金额
+          remaining_finance_amount:
+              type: "string"
+              description: 剩余融资金额
+          risk_level:
+              type: "string"
+              description: 风控等级 <br/> <br/> <b>可选值:</b><br/> `1` - 低风险 <br/> `2` - 中低风险<br/> `3` - 中风险<br/> `4` - 中高风险 <br/> `5` - 高风险
+          margin_call:
+              type: "string"
+              description: 追缴保证金
+          currency:
+              type: "string"
+              description: 币种
+          cashInfos:
+            type: "object"
+            description: 现金详情
+            properties:
+              withdraw_cash:
+                type: "string"
+                description: 可提现金
+              available_cash:
+                type: "string"
+                description: 可用现金
+              frozen_cash:
+                type: "string"
+                description: 冻结现金
+              settling_cash:
+                type: "string"
+                description: 待结算现金
+              currency:
+                type: "string"
+                description: 币种
+                required: true
