@@ -10,7 +10,7 @@ paths:
       parameters:
         - name: "symbol"
           type: "string[]"
-          description: "基金代码，使用 `isin` 格式，例如：`HK0000676327`"
+          description: 基金代码，使用 `ISIN` 格式，例如：`HK0000676327` <a href="https://en.wikipedia.org/wiki/International_Securities_Identification_Number">ISIN解释</a>
           required: false
       responses:
         "200":

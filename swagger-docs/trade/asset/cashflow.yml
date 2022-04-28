@@ -26,11 +26,11 @@ paths:
           required: false
         - name: "page"
           type: "int"
-          description: "起始页 <br/><br/><b>默认值:</b> `1`  <br/><b>数据校验规则:</b><br/> <b>取值范围:</b>` >=1`"
+          description: "起始页 <br/><br/><b>默认值:</b> `1`  <br/><b>数据校验规则:</b><br/> <b>取值范围:</b> `>=1`"
           required: false
         - name: "size"
           type: "int"
-          description: "每页大小 <br/><br/><b>默认值:</b> `50` <br/><b>数据校验规则:</b>` 1~10000`"
+          description: "每页大小 <br/><br/><b>默认值:</b> `50` <br/><b>数据校验规则:</b> `1~10000`"
           required: false
 
       responses:
