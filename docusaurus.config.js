@@ -84,7 +84,14 @@ const config = {
           {
             to: 'https://open.longbridgeapp.com',
             position: 'left',
+            target: "_self",
             label: '开发者认证',
+          },
+          {
+            to: 'https://open.longbridgeapp.com/sdk',
+            label: 'SDK',
+            target: "_self",
+            position: 'left',
           },
           {
             to: '/docs',
