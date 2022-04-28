@@ -14,7 +14,7 @@ paths:
           required: true
       responses:
         "200":
-          description: "提交成功，订单已撤销."
+          description: "提交成功，订单已委托."
         "400":
           description: "撤单被拒绝，请求参数错误."
       request_body:

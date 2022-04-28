@@ -21,20 +21,20 @@ paths:
         - name: side
           type: "string"
           in: query
-          description: "
+          description: |
             买卖方向<br/><br/>
             **可选项:**<br/>
-            * `Buy` - 买入<br/>
-            * `Sell` - 卖出"
+            `Buy` - 买入<br/>
+            `Sell` - 卖出
           required: false
         - name: market
           type: "string"
           in: query
-          description: "
+          description: |
             市场<br/><br/>
             **可选项:**<br/>
-            * `US` - 美股<br/>
-            * `HK` - 港股"
+            `US` - 美股<br/>
+            `HK` - 港股
           required: false
         - name: "order_id"
           type: "string"
@@ -132,8 +132,8 @@ definitions:
             description: "
               买卖方向<br/><br/>
               **可选项:**<br/>
-              * `Buy` - 买入<br/>
-              * `Sell` - 卖出"
+              `Buy` - 买入<br/>
+              `Sell` - 卖出"
           symbol:
             type: "string"
             description: "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
@@ -153,16 +153,16 @@ definitions:
             type: "string"
             description: "订单标记<br/><br/>
               **可选项:**<br/>
-              * `Normal` - 普通订单<br/>
-              * `GTC` - 长期单<br/>
-              * `Grey` - 暗盘单"
+              `Normal` - 普通订单<br/>
+              `GTC` - 长期单<br/>
+              `Grey` - 暗盘单"
           time_in_force:
             type: "string"
             description: "
               订单有效期类型<br/><br/>
               **可选项:**<br/>
-              * `Day` - 当日有效<br/>
-              * `GTC` - 撤单前有效<br/>
+              `Day` - 当日有效<br/>
+              `GTC` - 撤单前有效<br/>
               `GTD` - 到期前有效"
           expire_date:
             type: "string"
@@ -186,10 +186,10 @@ definitions:
             type: "string"
             description: "条件单触发状态<br/><br/>
               **可选项:**<br/>
-              * `NOT_ACTIVE` - 未激活
-              * `DEACTIVE` - 已失效
-              * `ACTIVE` - 已激活
-              * `RELEASED` - 已触发"
+              `NOT_ACTIVE` - 未激活
+              `DEACTIVE` - 已失效
+              `ACTIVE` - 已激活
+              `RELEASED` - 已触发"
           currency:
             type: "string"
             description: 结算货币
@@ -197,5 +197,5 @@ definitions:
             type: "string"
             description: 是否允许盘前盘后<br/><br/>
               **可选项:**<br/>
-              * `RTH_ONLY` - 不允许盘前盘后<br/>
-              * `ANY_TIME` - 允许盘前盘后"
+              `RTH_ONLY` - 不允许盘前盘后<br/>
+              `ANY_TIME` - 允许盘前盘后"

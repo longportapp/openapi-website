@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   description: "港美股，窝轮，期权下单"
   version: "v1"
-  title: "委托订单"
+  title: "委托下单"
 paths:
   /v1/trade/order:
     post:
@@ -18,54 +18,58 @@ paths:
           required: true
         - name: "submitted_price"
           required: false
-          description: 下单价格，例如：`388.5`<br/><br/>
+          description: |
+            下单价格，例如：`388.5`<br/><br/>
             `LO` / `ELO` / `ALO` / `ODD` / `LIT` 订单必填
         - name: "submitted_quantity"
           required: true
           description: 下单数量，例如：`100`
         - name: trigger_price
           required: false
-          description: 触发价格，例如：`388.5`<br/><br/>
+          description: |
+            触发价格，例如：`388.5`<br/><br/>
             `LIT` / `MIT` 订单必填
         - name: limit_offset
           required: false
-          description: 指定价差<br/><br/>
+          description: |
+            指定价差<br/><br/>
             `TSLPAMT` / `TSLPPCT` 订单必填
         - name: trailing_amount
           required: false
-          description: 跟踪金额<br/><br/>
+          description: |
+            跟踪金额<br/><br/>
             `TSLPAMT` / `TSMAMT` 订单必填
         - name: trailing_percent
           required: false
-          description: 跟踪百分比<br/><br/>
+          description: 跟踪涨跌幅<br/><br/>
             `TSLPPCT` / `TSMAPCT` 订单必填
         - name: expire_date
           required: false
-          description:
+          description: |
             长期单过期时间，格式为 `YYYY-MM-DD`, 例如：`2022-12-05`<br/><br/>
             time_in_force 为 `GTD` 时必填
         - name: side
           type: "string"
-          description: "
+          description: |
             买卖方向<br/><br/>
             **可选项:**<br/>
-            * `Buy` - 买入<br/>
-            * `Sell` - 卖出"
+            `Buy` - 买入<br/>
+            `Sell` - 卖出
           required: true
         - name: outside_rth
           required: false
-          description: "
+          description: |
             是否允许盘前盘后, 美股必填<br/><br/>
             **可选项:**<br/>
-            * `RTH_ONLY` - 不允许盘前盘后<br/>
-            * `ANY_TIME` - 允许盘前盘后"
+            `RTH_ONLY` - 不允许盘前盘后<br/>
+            `ANY_TIME` - 允许盘前盘后
         - name: time_in_force
           required: true
-          description: "
+          description: |
             订单有效期类型<br/><br/>
             **可选项:**<br/>
-            * `Day` - 当日有效<br/>
-            * `GTC` - 撤单前有效<br/>
+            `Day` - 当日有效<br/>
+            `GTC` - 撤单前有效<br/>
             `GTD` - 到期前有效"
         - name: remark
           required: false
