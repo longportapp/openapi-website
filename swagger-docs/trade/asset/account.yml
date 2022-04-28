@@ -4,7 +4,7 @@ info:
   version: "v1"
   title: "获取账户资金信息"
 paths:
-  /v1/openapi/asset/accountcashinfo:
+  /v1/asset/accountcashinfo:
     get:
       access:
       responses:
@@ -26,7 +26,7 @@ paths:
             auth = Auth(APP_KEY, APP_SECRET, ACCESS_TOKEN)
             config = Config(base_url = "https://openapi.lbkrs.com")
             client = Client(auth, config)
-            result = client.get("/v1/openapi/asset/accountcashinfo")
+            result = client.get("/v1/asset/accountcashinfo")
       response_body:
         {
           "code": 0,
