@@ -5,7 +5,7 @@ slug: /protocol
 sidebar_position: 2
 ---
 
-该协议主要用于 `TCP` 和 `Websocket` 通信时使用。
+该协议主要用于 `TCP` 和 `WebSocket` 通信时使用。
 
 [字节序](https://zh.wikipedia.org/wiki/%E5%AD%97%E8%8A%82%E5%BA%8F)使用 BigEndian。
 
@@ -32,7 +32,7 @@ end
 
 ### 1.1.2 请求与响应
 
-协议支持，请求 <--> 响应的通信方式，即客户端发送一个请求，服务端返回一个响应。
+协议支持，`请求 <--> 响应` 的通信方式，即客户端发送一个请求，服务端返回一个响应。
 
 ```mermaid
 sequenceDiagram
@@ -75,7 +75,7 @@ server -->> client: push, data 2
 
 握手由客户端发送至服务端，共 2 个字节，用于协商协议版本和一些连接的元数据。
 
-> 通过 Websocket 进行连接时，握手信息通过 url query 进行传递
+> 通过 WebSocket 进行连接时，握手信息通过 URL Query 进行传递
 
 #### 1.2.1.1 结构
 
@@ -131,9 +131,9 @@ server -->> client: push, data 2
 
 | 字段    | 长度 (bit) | 说明                                          |
 | ------- | ---------- | --------------------------------------------- |
-| type    | 4          | 1 - request, 2 - resopnse, 3 - push           |
-| verify  | 1          | 数据是否加签标志 0 - 不加签 1 - 加签          |
-| gzip    | 1          | 数据是否使用 `gzip` 压缩: 1 - 压缩 0 - 不压缩 |
+| type    | 4          | `1` - request<br/>`2` - resopnse<br/>`3` - push           |
+| verify  | 1          | 数据是否加签标志<br/><br/>`0` - 不加签<br/>`1` - 加签          |
+| gzip    | 1          | 数据是否使用 `gzip` 压缩: <br/><br/>`1` - 压缩<br/>`0` - 不压缩 |
 | reserve | 2          | 预留                                          |
 
 例子
@@ -155,7 +155,7 @@ server -->> client: push, data 2
 
 #### 1.2.2.3 请求包
 
-请求本身的长度是可变的，由 body 长度和是否加签决定
+请求本身的长度是可变的，由 `body` 长度和是否加签决定
 
 ```
   0                   1                   2                   3
@@ -190,10 +190,10 @@ server -->> client: push, data 2
 | ---------- | -------------------------- | ------------------------------------- | ------------------------------------------------------------------------------- |
 | cmd_code   | 8                          | 1                                     | 指令 cmd 值                                                                     |
 | request_id | 32(uint32)                 | 4                                     | 请求 id，同一个连接的 id 需要唯一，从 1 开始，到达 4294967295 后从新开始。      |
-| timeout    | 16(uint16)                 | 2                                     | timeout 单位毫秒，最大 60000（60s）                                            |
-| body_len   | 24(uint32)                 | 3                                     | body 长度，单位：字节，最大 16MB 数据；如果 gzip 为 1，该值为 body 压缩后的长度 |
-| body       | 可变长度，由 body_len 决定 | 可变长度                              | body，最大 16 MB                                                                |
-| nonce      | 64                         | 8                                     | 仅当包头中的 verify 为 1 时存在                                                 |
+| timeout    | 16(uint16)                 | 2                                     | `timeout` 单位毫秒，最大 60000（60s）                                            |
+| body_len   | 24(uint32)                 | 3                                     | `body` 长度，单位：字节，最大 16 MB 数据；如果 gzip 为 1，该值为 `body` 压缩后的长度 |
+| body       | 可变长度，由 body_len 决定 | 可变长度                              | `body`，最大 16 MB                                                                |
+| nonce      | 64                         | 8                                     | 仅当包头中的 `verify` 为 1 时存在                                                 |
 | signature  | 128                        | 16 ｜ 仅当包头中的 verify 为 1 时存在 |
 
 #### 1.2.2.3 响应包
@@ -232,10 +232,10 @@ server -->> client: push, data 2
 | ---------- | -------------------------- | ------------------------------------- | ------------------------------------------------------------------------------- |
 | cmd_code   | 8                          | 1                                     | 指令 cmd 值                                                                     |
 | request_id | 32(uint32)                 | 4                                     | 请求 id，同一个连接的 id 需要唯一，从 1 开始，到达 4294967295 后从新开始。      |
-| status     | 8(uint8)                   | 1                                     | 状态码，0 - 成功；参考状态码表                                                  |
-| body_len   | 24(uint32)                 | 3                                     | body 长度，单位：字节，最大 16MB 数据；如果 gzip 为 1，该值为 body 压缩后的长度 |
-| body       | 可变长度，由 body_len 决定 | 可变长度                              | body，最大 16 MB                                                                |
-| nonce      | 64                         | 8                                     | 仅当包头中的 verify 为 1 时存在                                                 |
+| status     | 8(uint8)                   | 1                                     | 状态码 `0` - 成功；参考状态码表                                                  |
+| body_len   | 24(uint32)                 | 3                                     | `body` 长度，单位：字节，最大 16 MB 数据；如果 gzip 为 1，该值为 body 压缩后的长度 |
+| body       | 可变长度，由 body_len 决定 | 可变长度                              | `body`，最大 16 MB                                                                |
+| nonce      | 64                         | 8                                     | 仅当包头中的 `verify` 为 1 时存在                                                 |
 | signature  | 128                        | 16 ｜ 仅当包头中的 verify 为 1 时存在 |
 
 ##### 1.2.2.3.1 响应包状态码
@@ -281,10 +281,10 @@ server -->> client: push, data 2
 | 字段      | 长度 (bit)                 | 长度（字节）                         | 说明                                                                            |
 | --------- | -------------------------- | ------------------------------------- | ------------------------------------------------------------------------------- |
 | cmd_code  | 8                          | 1                                     | 指令 cmd 值                                                                     |
-| body_len  | 24(uint32)                 | 3                                     | body 长度，单位：字节，最大 16MB 数据；如果 gzip 为 1，该值为 body 压缩后的长度 |
-| body      | 可变长度，由 body_len 决定 | 可变长度                              | body，最大 16 MB                                                                |
-| nonce     | 64                         | 8                                     | 仅当包头中的 verify 为 1 时存在                                                 |
-| signature | 128                        | 16 ｜ 仅当包头中的 verify 为 1 时存在 |
+| body_len  | 24(uint32)                 | 3                                     | `body` 长度，单位：字节，最大 16 MB 数据；如果 gzip 为 1，该值为 `body` 压缩后的长度 |
+| body      | 可变长度，由 body_len 决定 | 可变长度                              | `body`，最大 16 MB                                                                |
+| nonce     | 64                         | 8                                     | 仅当包头中的 `verify` 为 1 时存在                                                 |
+| signature | 128                        | 16 ｜ 仅当包头中的 `verify` 为 1 时存在 |
 
 二、指令集
 
@@ -319,7 +319,7 @@ server -->> client: push, data 2
 6. Session 过期
 7. Session 重复建链
 
-这些信息会放到 body 内发送，pb 定义如下：
+这些信息会放到 `body` 内发送，Protobuf 定义如下：
 
 ```protobuf
 message Close {
@@ -343,9 +343,9 @@ message Close {
 指令：`1`
 :::
 
-一端可以通过向另一端发送心情请求，根据返回来判断链接的健康状态。心跳请求包没有指定接口，一端收到心跳请求后，仅需将 body 原封不动的返回回去即可。
+一端可以通过向另一端发送心情请求，根据返回来判断链接的健康状态。心跳请求包没有指定接口，一端收到心跳请求后，仅需将 `body` 原封不动的返回回去即可。
 
-> 保持连接的同时，也可以用于检测网络延时：心跳请求时，可在发送包 body 添加本端当前时间戳；当收到心跳响应，解析 body，用当前时间戳减去解析出来的时间戳，就可以得出链路的延时
+> 保持连接的同时，也可以用于检测网络延时：心跳请求时，可在发送包 `body` 添加本端当前时间戳；当收到心跳响应，解析 `body`，用当前时间戳减去解析出来的时间戳，就可以得出链路的延时
 
 ```mermaid
 sequenceDiagram
@@ -360,7 +360,7 @@ peer-a -->> peer-b: heartbeat response, req_id: 1
 end
 ```
 
-Body 的例子：
+`body` 的例子：
 
 ```protobuf
 message Heartbeat {
@@ -383,7 +383,7 @@ Server -->> Client: auth response, req_id: 1, session: xxx
 
 ```
 
-登录鉴权的 `token` 通过 rest 接口获取。
+登录鉴权的 `token` 通过 REST 接口获取。
 
 服务端在 token 校验成功后会给客户端返回一个 session，在 session 的有效期内，客户端可以使用 session 进行重新链接，不需要再获取 `token`。
 
@@ -427,17 +427,17 @@ message ReconnectResponse {
 
 [行情的业务指令](../quote/overview.md)
 
-# 三、Websocket 接入
+# 三、WebSocket 接入
 
-相对于 tcp，ws 接入有以下不同
+相对于 TCP，WebSocket 接入有以下不同
 
-- 在 http upgrade 成 ws 时进行握手，不需要另外的握手流程
-- ws 的上层应用数据不是面向流的，是面向 ws frame
-- 心跳直接使用 ws 协议本身的心跳机制
+- 在 HTTP upgrade 成 WebSocket 时进行握手，不需要另外的握手流程
+- WS 的上层应用数据不是面向流的，是面向 WS frame
+- 心跳直接使用 WS 协议本身的心跳机制
 
 ## 3.1 握手
 
-websocket 握手通过 url 的 query 参数就行
+WebSocket 握手通过 URL 的 query 参数就行
 
 | 字段     | 类型 | 说明          |
 | -------- | ---- | ------------- |
@@ -453,7 +453,7 @@ wss://openapi-quote.longbridge.gobal?version=1&codec=1&platform=9
 
 ## 3.2 心跳
 
-客户端和服务端进行心跳时，直接使用 websocket 协议自身的心跳
+客户端和服务端进行心跳时，直接使用 WebSocket 协议自身的心跳
 
 # 四、域名和业务
 
