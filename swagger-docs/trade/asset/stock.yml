@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
-  description: "该接口用于提供包括账户、股票代码、持仓股数、可用股数、持仓均价（按账户设置计算均价方式）、币种在内的股票持仓信息"
+  description: "该接口用于获取包括账户、股票代码、持仓股数、可用股数、持仓均价（按账户设置计算均价方式）、币种在内的股票持仓信息"
   version: "v1"
-  title: "获取股票持仓信息"
+  title: "获取股票持仓"
 paths:
   /v1/trade/asset/stock:
     get:

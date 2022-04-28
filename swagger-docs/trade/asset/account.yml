@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
-  description: "该接口用于返回用户每个币种可用、可取、冻结、待结算金额、在途资金（基金申购赎回)"
+  description: "该接口用于获取用户每个币种可用、可取、冻结、待结算金额、在途资金（基金申购赎回)信息"
   version: "v1"
-  title: "获取账户资金信息"
+  title: "获取账户资金"
 paths:
   /v1/trade/asset/account:
     get:

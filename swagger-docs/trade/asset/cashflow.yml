@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
-  description: "该接口用于提供资金流入/流出方向、资金类别、资金金额、发生时间、关联股票代码和资金流水说明信息"
+  description: "该接口用于获取资金流入/流出方向、资金类别、资金金额、发生时间、关联股票代码和资金流水说明信息"
   version: "v1"
-  title: "获取资金流水信息"
+  title: "获取资金流水"
 paths:
   /v1/trade/asset/cashflow:
     get:

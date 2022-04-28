@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
-  description: "该接口用于提供包括账户、基金代码、持有份额、成本净值、当前净值、币种在内的基金持仓信息"
+  description: "该接口用于获取包括账户、基金代码、持有份额、成本净值、当前净值、币种在内的基金持仓信息"
   version: "v1"
-  title: "获取基金持仓信息"
+  title: "获取基金持仓"
 paths:
   /v1/trade/asset/fund:
     get:
