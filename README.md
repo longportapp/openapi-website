@@ -1,4 +1,4 @@
-Longbridge Open API [docs](https://open.longbridgeapp.com/)
+Longbridge OpenAPI [docs](https://open.longbridgeapp.com)
 
 #### 本地开发环境搭建
 
@@ -35,13 +35,13 @@ $ yarn dev:swagger
 
 #### Swagger 格式文档
 
-> 支持在线编辑 [Swagger Editor](https://editor.swagger.io/) 将编辑后的文档拷贝到 `swagger-docs` 对应目录下
+> 支持在线编辑 [Swagger Editor](https://editor.swagger.io) 将编辑后的文档拷贝到 `swagger-docs` 对应目录下
 
 [Swagger 文档规范](https://swagger.io/specification/)
 
 #### Markdown 格式文档
 
-[Open API 文档规范](https://longbridge.feishu.cn/wiki/wikcnb0RtZ8OEuAodGBXaOL6Nxh)
+[OpenAPI 文档规范](https://longbridge.feishu.cn/wiki/wikcnb0RtZ8OEuAodGBXaOL6Nxh)
 
 ### 项目依赖
 
@@ -75,10 +75,10 @@ slug: '/xxx' # 注意前面必须加上 /， 例如 /trade-order-create 这样�
 ```json5
 {
   position: 1, // 显示的顺序，数字越小越靠前
-  label: 'Open API 介绍', // 文档分类名称，显示在左边栏
+  label: 'OpenAPI 介绍', // 文档分类名称，显示在左边栏
   link: {
     title: 'Getting started', // 点击分类时页面的描述信息
-    slug: '/getting-started', // 在浏览器中显示的地址例如： https://open.longbridgeapp.com/docs/getting-started
+    slug: '/getting-started', //
   },
 }
 ```
