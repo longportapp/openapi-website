@@ -2,6 +2,7 @@
 id: trade_push
 title: 交易推送
 slug: trade-push
+sidebar_position: 5
 ---
 
 客户端可以通过交易长连接网关获取到交易和资产的变更通知
