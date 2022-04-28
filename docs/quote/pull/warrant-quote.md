@@ -17,9 +17,9 @@ sidebar_position: 4
 
 ### Parameters
 
-| 名称   | 类型     | 必须 | 描述     | 默认值 | 示例       |
-| ------ | -------- | ---- | -------- | ------ | ---------- |
-| symbol | string[] | 是   | 标的列表 |        | `13447.HK` |
+| Name   | Type     | Required | Description                                                                                                                           |
+| ------ | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol | string[] | 是       | 标的代码列表，使用 `ticker.region` 格式，例如：`[13447.HK]` <br /><br />**校验规则：**<br />每次请求支持传入的标的数量上限是 `500` 个 |
 
 ### Protobuf
 
@@ -33,32 +33,32 @@ message MultiSecurityRequest {
 
 ### Response Properties
 
-| 名称                 | 类型                                  | 描述                               |
-| -------------------- | ------------------------------------- | ---------------------------------- |
-| secu_quote           | object[]                              | 期权标的行情数据列表               |
-| ∟symbol              | string                                | 标的代码                           |
-| ∟last_done           | string                                | 最新价                             |
-| ∟prev_close          | string                                | 昨收价                             |
-| ∟open                | string                                | 开盘价                             |
-| ∟high                | string                                | 最高价                             |
-| ∟low                 | string                                | 最低价                             |
-| ∟timestamp           | int64                                 | 最新成交的交时间戳                 |
-| ∟volume              | int64                                 | 成交量                             |
-| ∟turnover            | string                                | 成交额                             |
-| ∟trade_status        | [TradeStatus](../objects#tradestatus) | 标的交易状态                       |
-| ∟warrant_extend      | object                                | 轮证扩展行情                       |
-| ∟∟implied_volatility | string                                | 引申波幅                           |
-| ∟∟expiry_date        | string                                | 到期日 `YYMMDD`                    |
-| ∟∟last_trade_date    | string                                | 最后交易日 `YYMMDD`                |
-| ∟∟outstanding_ratio  | string                                | 街货比                             |
-| ∟∟outstanding_qty    | int64                                 | 街货量                             |
-| ∟∟conversion_ratio   | string                                | 换股比率                           |
-| ∟∟category           | string                                | 轮证类型 Call/Put/Bull/Bear/Inline |
-| ∟∟strike_price       | string                                | 行权价                             |
-| ∟∟upper_strike_price | string                                | 上限价                             |
-| ∟∟lower_strike_price | string                                | 下限价                             |
-| ∟∟call_price         | string                                | 收回价                             |
-| ∟∟underlying_symbol  | string                                | 对应的正股标的代码                 |
+| Name                  | Type     | Description                                                                                                                                 |
+| --------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| secu_quote            | object[] | 期权标的行情数据列表                                                                                                                        |
+| ∟ symbol              | string   | 标的代码                                                                                                                                    |
+| ∟ last_done           | string   | 最新价                                                                                                                                      |
+| ∟ prev_close          | string   | 昨收价                                                                                                                                      |
+| ∟ open                | string   | 开盘价                                                                                                                                      |
+| ∟ high                | string   | 最高价                                                                                                                                      |
+| ∟ low                 | string   | 最低价                                                                                                                                      |
+| ∟ timestamp           | int64    | 最新成交的交时间戳                                                                                                                          |
+| ∟ volume              | int64    | 成交量                                                                                                                                      |
+| ∟ turnover            | string   | 成交额                                                                                                                                      |
+| ∟ trade_status        | int32    | 标的交易状态，详见[TradeStatus](../objects#tradestatus---交易状态)                                                                          |
+| ∟ warrant_extend      | object   | 轮证扩展行情                                                                                                                                |
+| ∟∟ implied_volatility | string   | 引申波幅                                                                                                                                    |
+| ∟∟ expiry_date        | string   | 到期日，使用：`YYMMDD` 格式                                                                                                                 |
+| ∟∟ last_trade_date    | string   | 最后交易日，使用：`YYMMDD` 格式                                                                                                             |
+| ∟∟ outstanding_ratio  | string   | 街货比                                                                                                                                      |
+| ∟∟ outstanding_qty    | int64    | 街货量                                                                                                                                      |
+| ∟∟ conversion_ratio   | string   | 换股比率                                                                                                                                    |
+| ∟∟ category           | string   | 轮证类型 <br /><br />**可选值：**<br />`Call` - 认购证 <br />`Put` - 认沽证 <br />`Bull` - 牛证 <br />`Bear` - 熊证 <br />`Inline` - 界内证 |
+| ∟∟ strike_price       | string   | 行权价                                                                                                                                      |
+| ∟∟ upper_strike_price | string   | 上限价                                                                                                                                      |
+| ∟∟ lower_strike_price | string   | 下限价                                                                                                                                      |
+| ∟∟ call_price         | string   | 收回价                                                                                                                                      |
+| ∟∟ underlying_symbol  | string   | 对应的正股标的代码                                                                                                                          |
 
 ### Protobuf
 
@@ -97,12 +97,69 @@ message WarrantExtend {
 }
 ```
 
+### Response JSON Example
+
+```json
+{
+  "secu_quote": [
+    {
+      "symbol": "66642.HK",
+      "last_done": "0.345",
+      "prev_close": "0.365",
+      "open": "0.345",
+      "high": "0.345",
+      "low": "0.345",
+      "timestamp": 1651130421,
+      "volume": 200000,
+      "turnover": "69000.000",
+      "warrant_extend": {
+        "implied_volatility": "0.319",
+        "expiry_date": "20220830",
+        "last_trade_date": "20220829",
+        "outstanding_ratio": "0.0001",
+        "outstanding_qty": 20000,
+        "conversion_ratio": "10000",
+        "category": "Bear",
+        "strike_price": "23200.000",
+        "upper_strike_price": "0.000",
+        "lower_strike_price": "0.000",
+        "call_price": "23100.000",
+        "underlying_symbol": "HSI.HK"
+      }
+    },
+    {
+      "symbol": "14993.HK",
+      "last_done": "0.073",
+      "prev_close": "0.066",
+      "open": "0.069",
+      "high": "0.076",
+      "low": "0.069",
+      "timestamp": 1651130930,
+      "volume": 320825000,
+      "turnover": "23401125.000",
+      "warrant_extend": {
+        "implied_volatility": "0.404",
+        "expiry_date": "20220927",
+        "last_trade_date": "20220921",
+        "outstanding_ratio": "0.0247",
+        "outstanding_qty": 2465000,
+        "conversion_ratio": "10",
+        "category": "Call",
+        "strike_price": "70.050",
+        "upper_strike_price": "0.000",
+        "lower_strike_price": "0.000",
+        "call_price": "0.000",
+        "underlying_symbol": "2318.HK"
+      }
+    }
+  ]
+}
+```
+
 ## 接口限制
 
 :::caution
 
-- 每秒平均请求次数 10，瞬时并发次数 5。
-- 每次请求，接口参数**标的列表**支持传入的标的数量上限是 300 个。
 - 港股 BMP 行情，超过 20 支的港股标的将响应延迟行情。
 
 :::
@@ -113,5 +170,5 @@ message WarrantExtend {
 | ---------- | ---------- | -------------- | ------------------------------------------ |
 | 3          | 301600     | 无效的请求     | 请求参数有误或解包失败                     |
 | 3          | 301606     | 限流           | 降低请求频次                               |
-| 7          | 301602     | 服务端内部错误 |                                            |
+| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理                   |
 | 7          | 301607     | 接口限制       | 请求的标的数量超限，请减少单次请求标的数量 |

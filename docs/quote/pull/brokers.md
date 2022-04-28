@@ -5,7 +5,7 @@ slug: brokers
 sidebar_position: 6
 ---
 
-获取标的的经纪队列
+获取标的的实时经纪队列数据
 
 :::info
 协议指令：`15`
@@ -15,9 +15,9 @@ sidebar_position: 6
 
 ### Parameters
 
-| 名称   | 类型   | 必须 | 描述                       | 示例       |
-| ------ | ------ | ---- | -------------------------- | ---------- |
-| symbol | string | 是   | 标的代码 - `ticker.region` | `00700.HK` |
+| Name   | Type   | Required | Description                                          |
+| ------ | ------ | -------- | ---------------------------------------------------- |
+| symbol | string | 是       | 标的代码，使用 `ticker.region` 格式，例如： `700.HK` |
 
 ### Protobuf
 
@@ -31,15 +31,15 @@ message SecurityRequest {
 
 ### Response Properties
 
-| 名称        | 类型     | 描述                        |
-| ----------- | -------- | --------------------------- |
-| symbol      | string   | 标的代码                    |
-| ask_brokers | object[] | 卖盘经纪队列                |
-| ∟position   | int32    | 档位                        |
-| ∟broker_ids | int32[]  | [券商席位 Id](./broker-ids) |
-| bid_brokers | object[] | 买盘经纪队列                |
-| ∟position   | int32    | 档位                        |
-| ∟broker_ids | int32[]  | [券商席位 Id](./broker-ids) |
+| Name         | Type     | Description                                               |
+| ------------ | -------- | --------------------------------------------------------- |
+| symbol       | string   | 标的代码                                                  |
+| ask_brokers  | object[] | 卖盘经纪队列                                              |
+| ∟ position   | int32    | 档位                                                      |
+| ∟ broker_ids | int32[]  | 券商席位 ID，通过[获取券商席位 ID ](./broker-ids)接口获取 |
+| bid_brokers  | object[] | 买盘经纪队列                                              |
+| ∟ position   | int32    | 档位                                                      |
+| ∟ broker_ids | int32[]  | 券商席位 ID，通过[获取券商席位 ID ](./broker-ids)接口获取 |
 
 ### Protobuf
 
@@ -56,14 +56,32 @@ message Brokers {
 }
 ```
 
-## 接口限制
+### Response JSON Example
 
-:::caution
-
-- 每秒平均请求次数 10。瞬时并发次数 5。
-- 仅港股标的存在经纪队列数据。
-
-:::
+```json
+{
+  "symbol": "700.HK",
+  "ask_brokers": [
+    {
+      "position": 1,
+      "broker_ids": [7358, 9057, 9028, 7364]
+    },
+    {
+      "position": 2,
+      "broker_ids": [6968, 3448, 3348, 1049, 4973, 6997, 3448, 5465, 6997]
+    }
+  ],
+  "bid_brokers": [
+    {
+      "position": 1,
+      "broker_ids": [6996, 5465, 8026, 8304, 4978]
+    },
+    {
+      "position": 2
+    }
+  ]
+}
+```
 
 ## 错误码
 
@@ -71,7 +89,7 @@ message Brokers {
 | ---------- | ---------- | -------------- | ---------------------------- |
 | 3          | 301600     | 无效的请求     | 请求参数有误或解包失败       |
 | 3          | 301606     | 限流           | 降低请求频次                 |
-| 7          | 301602     | 服务端内部错误 |                              |
+| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理     |
 | 7          | 301600     | 请求标的不存在 | 检查请求的 `symbol` 是否正确 |
 | 7          | 301603     | 标的无行情     | 标的没有请求的行情数据       |
 | 7          | 301604     | 无权限         | 没有获取标的行情的权限       |

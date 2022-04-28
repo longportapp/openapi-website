@@ -5,7 +5,7 @@ title: 行情概览
 slug: quote-overview
 ---
 
-### 行情接口总览
+### 行情接口概览
 
 <table>
     <tr>
@@ -85,3 +85,20 @@ slug: quote-overview
         <td><a href="./push/push-trade">实时成交明细推送</a></td>
     </tr>
 </table>
+
+### 标的代码说明
+
+标的代码使用 `ticker.region` 格式，`ticker` 表示标的代码，各个市场的标的代码示例：
+
+- 美股市场 `region` 为 `US`，例如：`AAPL.US`
+- 港股市场：`region` 为 `HK`，例如：`700.HK`
+- A 股市场：`region` 上交所为 `SH`，深交所为 `SZ`，例如：`399001.SZ`，`600519.SH`
+- 新加坡市场：`region` 为 `SG`，例如：`D05.SG`
+
+### 接入方式
+
+使用私有协议，长连接方式进行接入。接入方法，参考 [链接]
+
+### Protobuf 下载地址
+
+[链接]
