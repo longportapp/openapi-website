@@ -56,6 +56,7 @@ const config = {
           },
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
+          remarkPlugins: [require('mdx-mermaid')],
         },
         blog: false,
         theme: {

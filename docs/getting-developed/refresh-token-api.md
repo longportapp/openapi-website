@@ -5,7 +5,7 @@ slug: /refresh-token-api
 sidebar_position: 2
 ---
 
-# 刷新 Token
+# 刷新 Access Token
 
 在老的 `access_token` 过期之前，通过调用该获取新的 `access_token`。调用成功后老的 `access_token` 就会作废。
 
