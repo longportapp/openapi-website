@@ -63,7 +63,7 @@ paths:
             **可选值:**<br/>
             `Day` - 当日有效<br/>
             `GTC` - 撤单前有效<br/>
-            `GTD` - 到期前有效"
+            `GTD` - 到期前有效
         - name: remark
           required: false
           description: "备注 (最大 64 字符)"
