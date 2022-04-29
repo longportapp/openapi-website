@@ -58,13 +58,13 @@ sidebar_position: 4
 
 ### 2.3 行情
 
-[行情的业务指令](../quote/overview.md)
+[行情的业务指令](../quote/overview)
 
 > 行情需要连接[行情网关](#41-行情)
 
 ### 2.4 交易
 
-[交易的业务指令](../trade/trade-push.md)
+[交易的业务指令](../trade/trade-push)
 
 > 交易需要连接[交易网关](#41-交易)
 
@@ -73,8 +73,8 @@ sidebar_position: 4
 相对于 TCP，WebSocket 接入有以下不同
 
 - 在 HTTP upgrade 成 WebSocket 时进行握手，不需要另外的握手流程
-- WS 的上层应用数据不是面向流的，是面向 WS frame
-- 心跳直接使用 WS 协议本身的心跳机制
+- WebSocket 的上层应用数据不是面向流的，是面向 WebSocket Frame
+- 心跳直接使用 WebSocket 协议本身的心跳机制
 
 ## 3.1 握手
 
