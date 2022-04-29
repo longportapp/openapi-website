@@ -2,7 +2,7 @@
 title: 获取长连接 OTP
 id: socket-otp-api
 slug: /socket-token-api
-sidebar_position: 12
+sidebar_position: 2
 ---
 
 # 获取长连接 OTP(One Time Password)
