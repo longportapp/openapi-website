@@ -5,11 +5,11 @@ slug: trade-day
 sidebar_position: 16
 ---
 
-获取市场交易日
+该接口用于获取市场的交易日信息。
 
 :::info
 
-协议指令：`9`
+[协议指令](../../socket/protocol/request)：`9`
 
 :::
 

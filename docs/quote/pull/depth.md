@@ -5,11 +5,11 @@ slug: depth
 sidebar_position: 5
 ---
 
-获取标的的盘口
+该接口用于获取标的的盘口数据。
 
 :::info
 
-协议指令：`14`
+[协议指令](../../socket/protocol/request)：`14`
 
 :::
 

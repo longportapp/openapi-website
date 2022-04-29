@@ -5,10 +5,10 @@ slug: broker-ids
 sidebar_position: 7
 ---
 
-获取券商席位 ID (可每天同步一次)
+该接口用于获取券商席位 ID 数据 (可每天同步一次)。
 
 :::info
-协议指令：`16`
+[协议指令](../../socket/protocol/request)：`16`
 :::
 
 ## Response

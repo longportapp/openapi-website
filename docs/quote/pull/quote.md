@@ -5,10 +5,10 @@ slug: quote
 sidebar_position: 2
 ---
 
-获取标的的实时行情 (支持所有类型标的)
+该接口用于获取标的的实时行情 (支持所有类型标的）。
 
 :::info
-协议指令：`11`
+[协议指令](../../socket/protocol/request)：`11`
 :::
 
 ## Request

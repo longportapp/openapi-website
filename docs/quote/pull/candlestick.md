@@ -5,11 +5,11 @@ slug: candlestick
 sidebar_position: 10
 ---
 
-获取标的的 K 线数据
+该接口用于获取标的的 K 线数据。
 
 :::info
 
-协议指令：`19`
+[协议指令](../../socket/protocol/request)：`19`
 
 :::
 

@@ -5,11 +5,11 @@ slug: intraday
 sidebar_position: 9
 ---
 
-获取标的的当日分时。
+该接口用于获取标的的当日分时数据。
 
 :::info
 
-协议指令：`18`
+[协议指令](../../socket/protocol/request)：`18`
 
 :::
 

@@ -5,11 +5,11 @@ slug: subscribe
 sidebar_position: 2
 ---
 
-订阅行情数据
+该接口用于订阅标的行情数据。
 
 :::info
 
-协议指令：`6`
+[协议指令](../../socket/protocol/request)：`6`
 
 :::
 

@@ -5,11 +5,11 @@ slug: subscription
 sidebar_position: 1
 ---
 
-获取已订阅标的行情
+该接口用于获取当前连接已订阅的标的行情。
 
 :::info
 
-协议指令：`5`
+[协议指令](../../socket/protocol/request)：`5`
 
 :::
 

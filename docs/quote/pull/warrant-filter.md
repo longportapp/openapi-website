@@ -5,11 +5,11 @@ slug: warrant-filter
 sidebar_position: 14
 ---
 
-获取轮证筛选列表
+该接口用于获取轮证行情列表数据，支持按不同字段排序和筛选轮证。
 
 :::info
 
-协议指令：`23`
+[协议指令](../../socket/protocol/request)：`23`
 
 :::
 
