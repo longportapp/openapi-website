@@ -41,9 +41,9 @@ paths:
           description: "备注 (最大 64 字符)"
       responses:
         "200":
-          description: "提交成功，订单已委托."
+          description: "提交成功，订单已委托。"
         "400":
-          description: "下单被拒绝，请求参数错误."
+          description: "下单被拒绝，请求参数错误。"
       request_body:
         type: "python"
         value: |

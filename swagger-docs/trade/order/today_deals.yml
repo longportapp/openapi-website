@@ -23,7 +23,7 @@ paths:
           schema:
             $ref: "#/definitions/deals"
         "400":
-          description: "查询失败，请求参数错误."
+          description: "查询失败，请求参数错误。"
       request_body:
         type: "python"
         value: |
