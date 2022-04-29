@@ -45,7 +45,7 @@ sidebar_position: 2
   "code": 0,
   "message": "",
   "data": {
-    "token": "xxxxxxxx"
+    "otp": "xxxxxxxx"
     }
   }
 }
