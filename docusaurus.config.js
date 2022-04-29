@@ -51,11 +51,18 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // todo i18n lang should redirect other dir
           editUrl: ({ locale, docPath }) => {
-            const nextVersionDocsDirPath = 'docs';
+            let nextVersionDocsDirPath = 'docs';
+            if (docPath.includes('--autogen.md')) {
+              docPath = docPath.replace('--autogen.md', '.yml');
+              nextVersionDocsDirPath = 'swagger-docs';
+            }
+
             return `https://github.com/longbridgeapp/openapi-website/edit/main/${nextVersionDocsDirPath}/${docPath}`;
           },
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
+          sidebarCollapsed: false,
+          sidebarCollapsible: false,
           remarkPlugins: [require('mdx-mermaid')],
         },
         blog: false,
@@ -84,7 +91,14 @@ const config = {
           {
             to: 'https://open.longbridgeapp.com',
             position: 'left',
+            target: "_self",
             label: '开发者认证',
+          },
+          {
+            to: 'https://open.longbridgeapp.com/sdk',
+            label: 'SDK',
+            target: "_self",
+            position: 'left',
           },
           {
             to: '/docs',

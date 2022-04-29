@@ -2,10 +2,7 @@ name: Deploy Release
 on:
   push:
     branches:
-      - master
-  pull_request:
-    branches:
-      - master
+      - main
 jobs:
   deploy_release:
     name: build
