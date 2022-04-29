@@ -4,6 +4,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const i18n = require('./i18n/config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const openapiDomain = 'https://open.longbridgeapp.com'
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Longbridge 开放平台',
@@ -85,17 +86,18 @@ const config = {
         title: '',
         logo: {
           alt: 'Longbridge',
+          href: openapiDomain,
           src: 'https://pub.lbkrs.com/files/202204/U8NeviVyPf5Q7ecP/Group_156.png',
         },
         items: [
           {
-            to: 'https://open.longbridgeapp.com',
+            to: openapiDomain,
             position: 'left',
             target: "_self",
             label: '开发者认证',
           },
           {
-            to: 'https://open.longbridgeapp.com/sdk',
+            to: `${openapiDomain}/sdk`,
             label: 'SDK',
             target: "_self",
             position: 'left',
