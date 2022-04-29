@@ -55,14 +55,14 @@ Example:
 
 > 这里方便展示使用 `JSON`，实际上需要通过 protobuf 序列化请求到服务端
 
-客户端也可以通过获取已订阅接口查看自己已经订阅的标的行情，[`prorobuf` 定义](../quote/subscribe/subscription)
+客户端也可以通过获取已订阅接口查看自己已经订阅的标的行情，[ prorobuf 定义](../quote/subscribe/subscription)
 
-订阅成功后，服务端会推送相应的标的行情到客户端，具体的数据可以查看[概览](../quote/overview)
+订阅成功后，服务端会推送相应的标的行情到客户端，具体的数据可以查看[行情概览](../quote/overview)
 
 ## 其他接口
 
-行情的数据拉去都是通过长连接网关的，具体可以[概览](../quote/overview)
+行情的数据拉去都是通过长连接网关的，具体可以查看[行情概览](../quote/overview)
 
 ## 协议
 
-我们使用的长连接[协议](./protocol/overview)
+想要订阅行情，必须先了解我们的协议，我们使用的长连接[协议](./protocol/overview)
