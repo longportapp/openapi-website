@@ -32,10 +32,14 @@ function generateSwaggerDoc(file) {
     let apiObj = JSON.parse(beautifyJson(jsContent, null, 2));
     const distPath = fileName.replace('swagger-docs', 'docs').replace(/\.(yml|yaml)/, '--autogen.md');
 
+    const titleRe = /^title:(.+)v[\d]+\n/m;
+
     converter
       .convert(apiObj, options)
       .then((body) => {
         body = body.replace(/^\-\-\-\n/m, `---\nslug: ${slug}\n`);
+        // 去掉 v1 的 title 后缀
+        body = body.replace(titleRe, 'title:$1\n');
 
         console.log('Generate Markdown: ', distPath);
         fs.writeFileSync(distPath, body, 'utf8');
