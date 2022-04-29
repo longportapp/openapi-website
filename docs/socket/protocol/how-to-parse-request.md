@@ -42,74 +42,16 @@ sidebar_position: 4
 
 包体字段说明如下：
 
-| 字段       | 长度 (bit)                 | 长度（字节）| 说明                                                                                 |
+| 字段       | 长度 (bit)                 | 长度（字节） | 说明                                                                                 |
 | ---------- | -------------------------- | ------------ | ------------------------------------------------------------------------------------ |
 | cmd_code   | 8                          | 1            | 指令 cmd 值                                                                          |
 | request_id | 32(uint32)                 | 4            | 请求 id，同一个连接的 id 需要唯一，从 1 开始，到达 4294967295 后从新开始。           |
-| timeout    | 16(uint16)                 | 2            | `timeout` 单位毫秒，最大 60000（60s）                                             |
+| timeout    | 16(uint16)                 | 2            | `timeout` 单位毫秒，最大 60000（60s）                                                |
 | body_len   | 24(uint32)                 | 3            | `body` 长度，单位：字节，最大 16 MB 数据；如果 gzip 为 1，该值为 `body` 压缩后的长度 |
 | body       | 可变长度，由 body_len 决定 | 可变长度     | `body`，最大 16 MB                                                                   |
 | nonce      | 64                         | 8            | 仅当包头中的 `verify` 为 1 时存在                                                    |
 | signature  | 128                        | 16           | 仅当包头中的 verify 为 1 时存在                                                      |
 
-二、指令集
-
-## 2.2 业务指令
-
-### 2.3 行情
-
-[行情的业务指令](../quote/overview)
-
-> 行情需要连接[行情网关](#41-行情)
-
-### 2.4 交易
-
-[交易的业务指令](../trade/trade-push)
-
-> 交易需要连接[交易网关](#41-交易)
-
-# 三、WebSocket 接入
-
-相对于 TCP，WebSocket 接入有以下不同
-
-- 在 HTTP upgrade 成 WebSocket 时进行握手，不需要另外的握手流程
-- WebSocket 的上层应用数据不是面向流的，是面向 WebSocket Frame
-- 心跳直接使用 WebSocket 协议本身的心跳机制
-
-## 3.1 握手
-
-WebSocket 握手通过 URL 的 query 参数就行
-
-| 字段     | 类型 | 说明          |
-| -------- | ---- | ------------- |
-| version  | int  | 仅支持：1     |
-| codec    | int  | 目前仅支持：1 |
-| platform | int  | 写死：9       |
-
-例子
-
-```
-wss://openapi-quote.longbridge.gobal?version=1&codec=1&platform=9
-```
-
-## 3.2 心跳
-
-客户端和服务端进行心跳时，直接使用 WebSocket 协议自身的心跳
-
-# 四、域名和业务
-
-目前我们行情和交易推送网关时分开的，可以根据所在物理位置选择要链接的域名
-
-## 4.1 行情
-
-| 域名                                       | 协议      | 地区     |
-| ------------------------------------------ | --------- | -------- |
-| tcp://openapi-quote.longbridge.global:2020 | tcp       | 中国香港 |
-| wss://openapi-quote.longbridge.global      | websocket | 中国香港 |
-
-## 4.1 交易
-
-| 域名                                       | 协议      | 地区     |
-| ------------------------------------------ | --------- | -------- |
-| tcp://openapi-trade.longbridge.global:2020 | tcp       | 中国香港 |
-| wss://openapi-trade.longbridge.global      | websocket | 中国香港 |
+:::info
+获取到数据包后，通过反序列化 `body` 得到具体的业务数据
+:::
