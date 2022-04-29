@@ -15,7 +15,7 @@ sidebar_position: 2
 
 | 基本信息    |                |
 | ----------- | -------------- |
-| HTTP URL    | /v1/socket/otp |
+| HTTP URL    | /v1/socket/token |
 | HTTP Method | GET            |
 
 ### 请求头
