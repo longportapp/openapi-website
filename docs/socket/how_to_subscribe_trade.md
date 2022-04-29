@@ -8,9 +8,9 @@ sidebar_position: 1
 客户端可以通过 Websocket 或者 TCP 和交易推送网关建立长连接，当订单状态更新时，客户端可以实时的接收通知。
 
 :::info
-WebSocket Endpoint: `wss://trade-feed.open.longbridgeapp.com`
+WebSocket Endpoint: `wss://openapi-trade.longbridge.global`
 
-TCP Endpoint: `trade-feed.open.longbridgeapp.com:2020`
+TCP Endpoint: `openapi-trade.longbridge.global`
 :::
 
 流程如下：
