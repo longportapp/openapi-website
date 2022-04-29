@@ -101,4 +101,4 @@ slug: overview
 
 ### Protobuf 下载地址
 
-行情 Protobuf 协议文档[下载地址](https://github.com/longbridgeapp/openapi-protobufs/blob/main/qoute/api.proto)。
+行情 Protobuf 协议文档[下载地址](https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto)。
