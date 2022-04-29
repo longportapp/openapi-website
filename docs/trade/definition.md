@@ -7,11 +7,11 @@ sidebar_position: 2
 
 ## OrderType
 
-* 说明：订单类型
+- 说明：订单类型
 
-| 枚举值 | 描述  |
-|---- |-----|
-|LO| 限价单                      |
+| 枚举值  | 描述                        |
+| ------- | --------------------------- |
+| LO      | 限价单                      |
 | ELO     | 增强限价单                  |
 | MO      | 市价单                      |
 | AO      | 竞价市价单                  |
@@ -21,14 +21,12 @@ sidebar_position: 2
 | MIT     | 触价市价单                  |
 | TSLPAMT | 跟踪止损限价单 (跟踪金额)   |
 | TSLPPCT | 跟踪止损限价单 (跟踪涨跌幅) |
-| TSMAMT  | 跟踪止损市价单 (跟踪金额) |
+| TSMAMT  | 跟踪止损市价单 (跟踪金额)   |
 | TSMPCT  | 跟踪止损市价单 (跟踪涨跌幅) |
-
-
 
 ## OrderStatus
 
-* 说明：订单状态
+- 说明：订单状态
 
 | 枚举值               | 描述              |
 | -------------------- | ----------------- |
@@ -52,7 +50,7 @@ sidebar_position: 2
 
 ## Market
 
-* 说明：市场
+- 说明：市场
 
 | 枚举值 | 描述 |
 | ------ | ---- |
@@ -61,32 +59,32 @@ sidebar_position: 2
 
 ## WebSocket 推送通知
 
-* WebSocket 推送通知字段说明
+- WebSocket 推送通知字段说明
 
-| 字段名            | 类型   | 注释                                                         |
-| ----------------- | ------ | ------------------------------------------------------------ |
-| side              | string | 买卖方向<br />Buy: 买入<br />Sell: 卖出                      |
-| stock_name        | string | 公司名称                                                     |
-| quantity          | string | 委托数量                                                     |
-| symbol            | string | 订单标的                                                     |
-| order_type        | string | [订单类型](./trade-definition#ordertype)                     |
-| price             | string | 委托价格                                                     |
-| executed_quantity | string | 成交数量                                                     |
-| executed_price    | string | 成交价格                                                     |
-| order_id          | string | 订单 id                                                      |
-| currency          | string | 结算货币                                                     |
-| status            | string | [订单状态](./trade-definition#orderstatus)                   |
-| submitted_at      | string | 下单时间，格式为时间戳 (秒)                                  |
-| updated_at        | string | 最近更新时间                                                 |
-| trigger_price     | string | 触发价格                                                     |
-| msg               | string | 拒绝理由，备注信息                                           |
-| tag               | string | 订单标记<br />Normal 普通订单<br />GTC 长期单<br />Grey 暗盘单 |
-| trigger_status    | string | 条件单触发状态<br />NOT_ACTIVE 未激活 <br />DEACTIVE 已失效<br />ACTIVE 已激活 <br />RELEASED 已触发 |
-| trigger_at        | string | 触发时间                                                     |
-| tailing_amount    | string | 条件单跟踪金额                                               |
-| tailing_percent   | string | 条件单跟踪涨跌幅                                             |
-| limit_offset      | string | 指定价差                                                     |
-| account_no        | string | 用户端账号                                                   |
+| 字段名            | 类型   | 注释                                                                                                                                   |
+| ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| side              | string | 买卖方向<br/><br/>**可选值**<br/>`Buy` - 买入<br />`Sell` - 卖出                                                                       |
+| stock_name        | string | 公司名称                                                                                                                               |
+| quantity          | string | 委托数量                                                                                                                               |
+| symbol            | string | 订单标的                                                                                                                               |
+| order_type        | string | [订单类型](./trade-definition#ordertype)                                                                                               |
+| price             | string | 委托价格                                                                                                                               |
+| executed_quantity | string | 成交数量                                                                                                                               |
+| executed_price    | string | 成交价格                                                                                                                               |
+| order_id          | string | 订单 id                                                                                                                                |
+| currency          | string | 结算货币                                                                                                                               |
+| status            | string | [订单状态](./trade-definition#orderstatus)                                                                                             |
+| submitted_at      | string | 下单时间，格式为时间戳 (秒)                                                                                                            |
+| updated_at        | string | 最近更新时间                                                                                                                           |
+| trigger_price     | string | 触发价格                                                                                                                               |
+| msg               | string | 拒绝理由，备注信息                                                                                                                     |
+| tag               | string | 订单标记<br/><br/>**可选值**<br/>`Normal` - 普通订单<br />`GTC` - 长期单<br />`Grey` - 暗盘单                                          |
+| trigger_status    | string | 条件单触发状态<br/><br/>**可选值**<br/>`NOT_ACTIVE` - 未激活 <br />`DEACTIVE` - 已失效<br />`ACTIVE` - 已激活<br />`RELEASED` - 已触发 |
+| trigger_at        | string | 触发时间                                                                                                                               |
+| tailing_amount    | string | 条件单跟踪金额                                                                                                                         |
+| tailing_percent   | string | 条件单跟踪涨跌幅                                                                                                                       |
+| limit_offset      | string | 指定价差                                                                                                                               |
+| account_no        | string | 用户端账号                                                                                                                             |
 
 ### 示例
 

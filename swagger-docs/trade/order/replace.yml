@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
-  description: "修改订单的价格和数量等"
+  description: "该接口用于修改订单的价格，数量"
   version: "v1"
-  title: "改单"
+  title: "修改订单"
 paths:
   /v1/trade/order:
     put:
