@@ -57,13 +57,13 @@ sidebar_position: 2
   "code": 0,
   "message": "",
   "data": {
-    "token": "",
-    "expired_at": "",
-    "issued_at": "",
+    "token": "xxxxxx",
+    "expired_at": "2022-05-14T12:13:57.859Z",
+    "issued_at": "2022-04-14T12:13:57.859Z",
     "account_info": {
-      "member_id": "",
-      "aaid": "",
-      "account_channel": ""
+      "member_id": 123,
+      "aaid": 13,
+      "account_channel": "lb"
     }
   }
 }
