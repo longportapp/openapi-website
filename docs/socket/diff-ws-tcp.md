@@ -12,4 +12,6 @@ sidebar_position: 6
 - Websocket 的[心跳](./control-command#心跳)通过 Websocket 协议本身的心跳 `Ping-Pong` 进行
 - Websocket 通信使用 TLS 进行加密，而 TCP 暂时没有
 
-可以根据自己的需求选择，我们的私有协议时都适用于两者的。
+可以根据自己的需求选择，我们的私有协议时适用于两者的。
+
+> 可以都先使用 `Websocket` 接入，较方便。如果对速度有更高的要求，行情可以接入 `TCP`。
