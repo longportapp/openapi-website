@@ -28,7 +28,6 @@ Code samples
 <tr><td className="http-basic-key">HTTP Method</td><td>{{= data.methodUpper }}</td></tr>
 <tr><td className="http-basic-key">HTTP URL</td><td>{{=data.method.path}} {{? data.operation.deprecated }}<div className="http-operation-deprecated">Deprecated</div>{{?}}
 </td></tr>
-<tr><td className="http-basic-key">权限需求</td><td>{{= data.operation.access }}</td></tr>
 </tbody>
 </table>
 
