@@ -2,6 +2,7 @@
 id: trade_definition
 title: 交易命名词典
 slug: trade-definition
+sidebar_position: 2
 ---
 
 ## OrderType
