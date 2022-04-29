@@ -97,8 +97,8 @@ slug: overview
 
 ### 接入方式
 
-使用私有协议，长连接方式进行接入。接入方法，参考 [链接]
+使用私有协议，长连接方式进行接入，接入方法请参考 [二进制通信协议](../socket/protocol/protocol_overview.md)
 
 ### Protobuf 下载地址
 
-[链接]
+行情 Protobuf 协议文档[下载地址](https://github.com/longbridgeapp/openapi-protobufs/blob/main/qoute/api.proto)。

@@ -5,11 +5,11 @@ slug: trade-session
 sidebar_position: 15
 ---
 
-获取各市场当日交易时段
+该接口用于获取各市场当日交易时段。
 
 :::info
 
-协议指令：`8`
+[协议指令](../../socket/protocol/request)：`8`
 
 :::
 
@@ -41,7 +41,7 @@ message MarketTradePeriod {
 message TradePeriod {
   int32 beg_time = 1;
   int32 end_time = 2;
-  int32 trade_session = 3;
+  TradeSession trade_session = 3;
 }
 ```
 

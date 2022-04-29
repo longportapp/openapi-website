@@ -5,11 +5,11 @@ slug: depth
 sidebar_position: 2
 ---
 
-订阅的标的的实时盘口推送。
+已订阅标的的实时盘口数据推送。
 
 :::info
 
-协议指令：`102`
+[协议指令](../../socket/protocol/push)：`102`
 
 :::
 

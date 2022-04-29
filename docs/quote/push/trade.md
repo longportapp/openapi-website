@@ -5,11 +5,11 @@ slug: trade
 sidebar_position: 4
 ---
 
-订阅的标的的实时逐笔成交明细推送。
+已订阅的标的的实时逐笔成交明细推送。
 
 :::info
 
-协议指令：`104`
+[协议指令](../../socket/protocol/push)：`104`
 
 :::
 

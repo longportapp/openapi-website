@@ -5,11 +5,11 @@ slug: broker
 sidebar_position: 3
 ---
 
-订阅的标的的实时经纪队列推送。
+已订阅标的的实时经纪队列数据推送。
 
 :::info
 
-协议指令：`103`
+[协议指令](../../socket/protocol/push)：`103`
 
 :::
 

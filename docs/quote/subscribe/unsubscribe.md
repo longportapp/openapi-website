@@ -5,11 +5,11 @@ slug: unsubscribe
 sidebar_position: 3
 ---
 
-取消订阅行情数据
+该接口用于取消订阅标的行情数据。
 
 :::info
 
-协议指令：`7`
+[协议指令](../../socket/protocol/request)：`7`
 
 :::
 

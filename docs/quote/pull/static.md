@@ -5,10 +5,10 @@ slug: static
 sidebar_position: 1
 ---
 
-获取标的的基础信息
+该接口用于获取标的的基础信息。
 
 :::info
-协议指令：`10`
+[协议指令](../../socket/protocol/request)：`10`
 :::
 
 ## Request
@@ -33,7 +33,7 @@ message MultiSecurityRequest {
 
 | Name                 | Type     | Description                                                                                      |
 | -------------------- | -------- | ------------------------------------------------------------------------------------------------ |
-| secu_quote           | object[] | 标的基础数据列表                                                                                 |
+| secu_static_info     | object[] | 标的基础数据列表                                                                                 |
 | ∟ symbol             | string   | 标的代码                                                                                         |
 | ∟ name_cn            | string   | 中文简体标的名称                                                                                 |
 | ∟ name_en            | string   | 英文标的名称                                                                                     |

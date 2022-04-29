@@ -5,11 +5,11 @@ slug: optionchain-date-strike
 sidebar_position: 12
 ---
 
-获取标的的期权链到期日期权标的列表
+该接口用于获取标的的期权链到期日期权标的列表。
 
 :::info
 
-协议指令：`21`
+[协议指令](../../socket/protocol/request)：`21`
 
 :::
 

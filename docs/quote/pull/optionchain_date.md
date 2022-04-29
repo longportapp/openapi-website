@@ -5,11 +5,11 @@ slug: optionchain-date
 sidebar_position: 11
 ---
 
-获取标的的期权链到期日列表
+该接口用于获取标的的期权链到期日列表。
 
 :::info
 
-协议指令：`20`
+[协议指令](../../socket/protocol/request)：`20`
 
 :::
 

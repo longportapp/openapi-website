@@ -5,11 +5,11 @@ slug: warrant-quote
 sidebar_position: 4
 ---
 
-获取港股轮证标的的实时行情，包括轮证的特有数据。
+该接口用于获取港股轮证标的的实时行情，包括轮证的特有数据。
 
 :::info
 
-协议指令：`13`
+[协议指令](../../socket/protocol/request)：`13`
 
 :::
 

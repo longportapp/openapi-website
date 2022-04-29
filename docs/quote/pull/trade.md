@@ -5,11 +5,11 @@ slug: trade
 sidebar_position: 8
 ---
 
-获取标的的成交明细
+该接口用于获取标的的成交明细数据。
 
 :::info
 
-协议指令：`17`
+[协议指令](../../socket/protocol/request)：`17`
 
 :::
 

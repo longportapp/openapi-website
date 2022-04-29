@@ -5,11 +5,11 @@ slug: issuer
 sidebar_position: 13
 ---
 
-获取轮证发行商 ID (可每天同步一次)
+该接口用于获取轮证发行商 ID 数据 (可每天同步一次)。
 
 :::info
 
-协议指令：`22`
+[协议指令](../../socket/protocol/request)：`22`
 
 :::
 

@@ -5,11 +5,11 @@ slug: quote
 sidebar_position: 1
 ---
 
-订阅的标的的实时价格推送。只有有变化的字段才会填充数据。
+已订阅标的的实时价格推送，推送的数据结构中，只有有变化的字段才会填充数据。
 
 :::info
 
-协议指令：`101`
+[协议指令](../../socket/protocol/push)：`101`
 
 :::
 
@@ -44,7 +44,7 @@ message PushQuote {
   int64 timestamp = 7;
   int64 volume = 8;
   string turnover = 9;
-  int32 trade_status = 10;
+  TradeStatus trade_status = 10;
   TradeSession trade_session = 11;
 }
 ```
@@ -62,6 +62,7 @@ message PushQuote {
   "timestamp": 1651089600,
   "volume": 88063191,
   "turnover": "13865092584.000",
+  "trade_status": 0,
   "trade_session": 0
 }
 ```
