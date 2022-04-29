@@ -100,3 +100,7 @@ message Notification {
 ### 订单通知
 
 查看[交易命名词典](./definition.md#websocket-推送通知)
+
+### `Protobuf`
+
+可以从我们的 [`Github` 仓库](https://github.com/longbridgeapp/openapi-protobufs/tree/main/trade) 获取最新交易相关 `Protobuf` 定义

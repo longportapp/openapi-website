@@ -5,7 +5,7 @@ slug: /socket/control-command
 sidebar_position: 4
 ---
 
-控制指令时基础指令，主要用于建立链接，保持会话使用。
+控制指令是基础指令，主要用于建立链接，保持会话使用。
 
 目前有 4 个控制指令：
 
