@@ -85,4 +85,9 @@ paths:
               "submitted_quantity": "100","symbol": "700.HK",
               "time_in_force": "Day",
             })
-      response_body: { "code": 0, "data": { "order_id": 683615454870679552 } }
+      response_body:
+        {
+          "code": 0,
+          "message": "success",
+          "data": { "order_id": 683615454870679552 },
+        }
