@@ -54,4 +54,4 @@ paths:
             client = HttpClient(auth, config)
             result = client.put("/v1/openapi/trade/order", {"order_id": "683615454870679552",
               "quantity": "100", "price":"300"})
-      response_body: { "code": 0, "data": { "message": "Success" } }
+      response_body: { "code": 0, "message": "success" }
