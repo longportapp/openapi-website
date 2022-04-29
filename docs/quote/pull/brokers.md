@@ -8,7 +8,7 @@ sidebar_position: 6
 该接口用于获取标的的实时经纪队列数据。
 
 :::info
-[协议指令](../../socket/protocol/request)：`15`
+[业务指令](../../socket/protocol/request)：`15`
 :::
 
 ## Request
