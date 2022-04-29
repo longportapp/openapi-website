@@ -1,10 +1,10 @@
 swagger: "2.0"
 info:
-  description: "返回每个币种可用、可取、冻结、待结算金额、在途资金（基金申购赎回)"
+  description: "该接口用于获取用户每个币种可用、可取、冻结、待结算金额、在途资金 (基金申购赎回) 信息"
   version: "v1"
-  title: "获取账户资金信息"
+  title: "获取账户资金"
 paths:
-  /v1/asset/account:
+  /v1/trade/asset/account:
     get:
       access:
       responses:
@@ -23,45 +23,33 @@ paths:
         value: |
           def example():
             from longbridge.http import *
-            auth = Auth(APP_KEY, APP_SECRET, ACCESS_TOKEN)
+            auth = Auth("${APP_KEY}", "${APP_SECRET}", "${ACCESS_TOKEN}")
             config = Config(base_url = "https://openapi.lbkrs.com")
-            client = Client(auth, config)
-            result = client.get("/v1/asset/account")
-      response_body:
-        {
-          "code": 0,
-          "data":
-            {
-              "list":
-                [
-                  {
-                    "total_cash": "1759070010.72",
-                    "max_finance_amount": "977582000",
-                    "remaining_finance_amount": "0",
-                    "risk_level": "1",
-                    "margin_call": "2598051051.50",
-                    "currency": "HKD",
-                    "cashInfos":
-                      [
-                        {
-                          "withdraw_cash": "97592.30",
-                          "available_cash": "195902464.37",
-                          "frozen_cash": "11579339.13",
-                          "settling_cash": "207288537.81",
-                          "currency": "HKD",
-                        },
-                        {
-                          "withdraw_cash": "199893416.74",
-                          "available_cash": "199893416.74",
-                          "frozen_cash": "28723.76",
-                          "settling_cash": "-276806.51",
-                          "currency": "USD",
-                        },
-                      ],
-                  },
-                ],
-            },
-        }
+            client = HttpClient(auth, config)
+            result = client.get("/v1/trade/asset/account")
+      response_body: { "code": 0, "data": {
+        "list": [{
+          "total_cash": "1759070010.72",
+          "max_finance_amount": "977582000",
+          "remaining_finance_amount": "0",
+          "risk_level": "1",
+          "margin_call": "2598051051.50",
+          "currency": "HKD",
+          "cashInfos": [{
+            "withdraw_cash": "97592.30",
+            "available_cash": "195902464.37",
+            "frozen_cash": "11579339.13",
+            "settling_cash": "207288537.81",
+            "currency": "HKD"
+          }, {
+            "withdraw_cash": "199893416.74",
+            "available_cash": "199893416.74",
+            "frozen_cash": "28723.76",
+            "settling_cash": "-276806.51",
+            "currency": "USD"
+          }]
+        }]
+      } }
 
 definitions:
   accountcash_rsp:
