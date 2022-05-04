@@ -5,7 +5,7 @@
 
 | Name | Type | Required | Description |
 |---|---|---|---|
-{{~ data.parameters :p}}| {{=p.name}} | {{=p.safeType}} | {{= p.required === true ? '是' : '否'}} | {{=p.shortDesc || 'none'}} |
+{{~ data.parameters :p}}| {{=p.name}} | {{=p.safeType}} | {{= p.required === true ? 'YES' : 'NO'}} | {{=p.shortDesc || 'none'}} |
 {{~}}
 
 {{? data.longDescs }}
