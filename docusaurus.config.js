@@ -4,7 +4,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const i18n = require('./i18n/config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const openapiDomain = 'https://open.longbridgeapp.com'
+const openapiDomain = 'https://open.longbridgeapp.com';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Longbridge 开放平台',
@@ -93,13 +93,13 @@ const config = {
           {
             to: openapiDomain,
             position: 'left',
-            target: "_self",
+            target: '_self',
             label: '开发者认证',
           },
           {
             to: `${openapiDomain}/sdk`,
             label: 'SDK',
-            target: "_self",
+            target: '_self',
             position: 'left',
           },
           {
@@ -107,6 +107,10 @@ const config = {
             activeBasePath: '/docs',
             label: '文档',
             position: 'left',
+          },
+          {
+            type: 'localeDropdown',
+            position: 'right',
           },
           {
             href: 'https://github.com/longbridgeapp/openapi-website',
