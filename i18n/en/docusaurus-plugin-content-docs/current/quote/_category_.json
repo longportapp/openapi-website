@@ -1,0 +1,10 @@
+{
+  "label": "行情",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "title": "行情接口介绍",
+    "slug": "/quote"
+  },
+  "position": 3
+}
