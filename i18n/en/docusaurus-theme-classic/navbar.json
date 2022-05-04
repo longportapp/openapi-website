@@ -1,6 +1,6 @@
 {
   "item.label.开发者认证": {
-    "message": "开发者认证",
+    "message": "Developers",
     "description": "Navbar item with label 开发者认证"
   },
   "item.label.SDK": {
@@ -8,7 +8,7 @@
     "description": "Navbar item with label SDK"
   },
   "item.label.文档": {
-    "message": "文档",
+    "message": "Docs",
     "description": "Navbar item with label 文档"
   },
   "item.label.GitHub": {
