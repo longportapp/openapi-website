@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Loading from '@site/src/components/Loading';
+import Loading from '@site/src/components/loading';
 import { domainWithLocalPath } from '@site/src/utils/use-locale-prefix';
 
 const SDKPageShouldRedirect = () => {
