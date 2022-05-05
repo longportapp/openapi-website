@@ -1,0 +1,18 @@
+{
+  "item.label.开发者认证": {
+    "message": "开发者认证",
+    "description": "Navbar item with label 开发者认证"
+  },
+  "item.label.SDK": {
+    "message": "SDK",
+    "description": "Navbar item with label SDK"
+  },
+  "item.label.文档": {
+    "message": "文档",
+    "description": "Navbar item with label 文档"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  }
+}

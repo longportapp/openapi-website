@@ -1,0 +1,57 @@
+swagger: "2.0"
+info:
+  description: "该接口用于修改订单的价格，数量"
+  version: "v1"
+  title: "修改订单"
+paths:
+  /v1/trade/order:
+    put:
+      access: "交易权限"
+      parameters:
+        - name: "order_id"
+          type: "string"
+          description: "订单 ID"
+          required: true
+        - name: "quantity"
+          type: "string"
+          description: "改单数量，例如: `200`"
+          required: true
+        - name: "price"
+          required: false
+          description: 改单价格，例如：`388.5`<br/><br/>
+            `LO` / `ELO` / `ALO` / `ODD` / `LIT` 订单必填
+        - name: trigger_price
+          required: false
+          description: 触发价格，例如：`388.5`<br/><br/>
+            `LIT` / `MIT` 订单必填
+        - name: limit_offset
+          required: false
+          description: 指定价差<br/><br/>
+            `TSLPAMT` / `TSLPPCT` 订单必填
+        - name: trailing_amount
+          required: false
+          description: 跟踪金额<br/><br/>
+            `TSLPAMT` / `TSMAMT` 订单必填
+        - name: trailing_percent
+          required: false
+          description: 跟踪涨跌幅<br/><br/>
+            `TSLPPCT` / `TSMAPCT` 订单必填
+        - name: remark
+          required: false
+          description: "备注 (最大 64 字符)"
+      responses:
+        "200":
+          description: "提交成功，订单已委托。"
+        "400":
+          description: "下单被拒绝，请求参数错误。"
+      request_body:
+        type: "python"
+        value: |
+          def example():
+            from longbridge.http import Auth, Config, HttpClient
+            auth = Auth("${API_KEY}", "${API_KEY_SECRET}", "${TOKEN}")
+            config = Config(base_url = "https://openapi.lbkrs.com")
+            client = HttpClient(auth, config)
+            result = client.put("/v1/openapi/trade/order", {"order_id": "683615454870679552",
+              "quantity": "100", "price":"300"})
+      response_body: { "code": 0, "message": "success" }
