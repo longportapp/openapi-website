@@ -81,8 +81,8 @@ sidebar_position: 2
 | tag               | string | 订单标记<br/><br/>**可选值**<br/>`Normal` - 普通订单<br />`GTC` - 长期单<br />`Grey` - 暗盘单                                          |
 | trigger_status    | string | 条件单触发状态<br/><br/>**可选值**<br/>`NOT_ACTIVE` - 未激活 <br />`DEACTIVE` - 已失效<br />`ACTIVE` - 已激活<br />`RELEASED` - 已触发 |
 | trigger_at        | string | 触发时间                                                                                                                               |
-| tailing_amount    | string | 条件单跟踪金额                                                                                                                         |
-| tailing_percent   | string | 条件单跟踪涨跌幅                                                                                                                       |
+| trailing_amount   | string | 条件单跟踪金额                                                                                                                         |
+| trailing_percent  | string | 条件单跟踪涨跌幅                                                                                                                       |
 | limit_offset      | string | 指定价差                                                                                                                               |
 | account_no        | string | 用户端账号                                                                                                                             |
 
@@ -110,8 +110,8 @@ sidebar_position: 2
 		"tag": "GTC",
 		"trigger_status": "ACTIVE",
 		"trigger_at": "1562761893",
-		"tailing_amount": "5",
-		"tailing_percent": "1",
+		"trailing_amount": "5",
+		"trailing_percent": "1",
 		"limit_offset": "0.01",
 		"account_no": "HK123445"
 	}
