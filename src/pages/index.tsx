@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { domainWithLocalPath } from '@site/src/utils/use-locale-prefix';
+import Loading from '@site/src/components/loading';
 
 const IndexPageShouldRedirect = () => {
-  window.location.href = domainWithLocalPath('https://open.longbridgeapp.com', '');
-  return <></>;
+  const path = domainWithLocalPath('https://open.longbridgeapp.com', '');
+  useEffect(() => {
+    window.location.href = path;
+  }, []);
+  return <Loading />;
 };
 export default IndexPageShouldRedirect;
