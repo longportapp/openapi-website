@@ -41,5 +41,5 @@ export const LocaleDropdown: FC = () => {
     location.href = url.toString()
   }
 
-  return <Dropdown items={items} value={locale} onChange={onChange} />
+  return <Dropdown className="hidden-in-mobile-sidebar" items={items} value={locale} onChange={onChange} />
 }
