@@ -35,6 +35,7 @@ export const LocaleDropdown: FC = () => {
     } else {
       pathname = `/${value}${pathname}`
     }
+    pathname = pathname.replace('/zh-CN', '')
     const url = new URL(location.href)
     url.pathname = pathname
     location.href = url.toString()
