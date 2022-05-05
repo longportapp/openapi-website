@@ -91,13 +91,13 @@ const config = {
         },
         items: [
           {
-            to: openapiDomain,
+            to: '/',
             position: 'left',
             target: '_self',
             label: '开发者认证',
           },
           {
-            to: `${openapiDomain}/sdk`,
+            to: `/sdk`,
             label: 'SDK',
             target: '_self',
             position: 'left',
