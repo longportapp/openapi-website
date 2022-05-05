@@ -1,0 +1,53 @@
+// 计划会用在 docs 项目中，所以没有用自定义的 tailwind
+$hover-bg: #f5f6f6;
+$brand-color: #37a0ff;
+$border-color: #eeeeee;
+
+@keyframes translate {
+  0% {
+    z-index: -1;
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    z-index: 1;
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+}
+
+:local(.dropdown) {
+  --dropdown-hover-bg: #{$hover-bg};
+  --dropdown-border-color: #{$border-color};
+  --dropdown-brand-color: #{$brand-color};
+  @apply relative text-sm;
+  :global(.trigger) {
+    @apply cursor-pointer py-1 px-2 rounded-full text-base font-medium;
+    &:hover {
+      background-color: var(--dropdown-hover-bg);
+    }
+
+  }
+  :global(.content) {
+    @apply hidden absolute right-0 py-2 bg-white rounded-lg;
+
+    top: calc(100% + 4px);
+    width: max-content;
+    border: 1px solid $border-color;
+    box-shadow: 0 0 #000000, 0 0 #000000, 0 0 #000000, 0 0 #000000, 0 0 #000000;
+    animation: translate .15s;
+    &:global(.content-visible) {
+      @apply block;
+    }
+  }
+  :global(.dropdown-menu__item) {
+    @apply p-2 cursor-pointer;
+    &:hover {
+      background-color: var(--dropdown-hover-bg);
+    }
+    &:global(.dropdown-menu__item--selected) {
+      color: var( --dropdown-brand-color);
+    }
+  }
+}
