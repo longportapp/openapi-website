@@ -1,18 +1,18 @@
 {
-  "title": {
-    "message": "Longbridge OpenAPI",
-    "description": "The title in the navbar"
-  },
   "item.label.开发者认证": {
-    "message": "开发者认证",
+    "message": "Developers",
     "description": "Navbar item with label 开发者认证"
   },
-  "item.label.SDK 下载": {
-    "message": "SDK 下载",
-    "description": "Navbar item with label SDK 下载"
+  "item.label.SDK": {
+    "message": "SDK",
+    "description": "Navbar item with label SDK"
   },
-  "item.label.API 文档": {
-    "message": "API 文档",
-    "description": "Navbar item with label API 文档"
+  "item.label.文档": {
+    "message": "Docs",
+    "description": "Navbar item with label 文档"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
   }
 }

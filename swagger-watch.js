@@ -3,6 +3,7 @@ const beautifyJson = require('json-beautify');
 const converter = require('widdershins');
 const fs = require('fs');
 const glob = require('glob');
+const path = require('path');
 
 let options = {
   user_templates: './templates',
@@ -22,6 +23,8 @@ function generateSwaggerDoc(file) {
     return;
   }
 
+  const locale = fileName.match(/swagger-docs\/(en|zh-HK)/)?.[1];
+
   try {
     const slug = fileName
       .split('/')
@@ -30,7 +33,15 @@ function generateSwaggerDoc(file) {
 
     let jsContent = YAML.load(fs.readFileSync(`./${fileName}`));
     let apiObj = JSON.parse(beautifyJson(jsContent, null, 2));
-    const distPath = fileName.replace('swagger-docs', 'docs').replace(/\.(yml|yaml)/, '--autogen.md');
+
+    let distPath = fileName.replace('swagger-docs', 'docs').replace(/\.(yml|yaml)/, '--autogen.md');
+    distPath = path.resolve(__dirname, distPath);
+    if (locale) {
+      distPath = distPath
+        .replace(`${locale}/`, '')
+        .replace('docs', `i18n/${locale}/docusaurus-plugin-content-docs/current`)
+        .replace(/\.(yml|yaml)/, '--autogen.md');
+    }
 
     const titleRe = /^title:(.+)v[\d]+\n/m;
 
@@ -53,7 +64,7 @@ function generateSwaggerDoc(file) {
 }
 
 function generateAllDocs() {
-  glob('./swagger-docs/**/*.yml', function (err, files) {
+  glob('./swagger-docs/**/*.yml', function(err, files) {
     files.forEach((file) => {
       generateSwaggerDoc(file);
     });
@@ -75,7 +86,7 @@ if (process.env.WATCH === '1') {
         return false;
       },
     },
-    function (evt, name) {
+    function(evt, name) {
       console.log('%s changed.', name);
 
       if (/\/swagger\-docs\//.test(name)) {

@@ -9,7 +9,7 @@ sidebar_position: 15
 
 :::info
 
-[协议指令](../../socket/protocol/request)：`8`
+[业务指令](../../socket/protocol/request)：`8`
 
 :::
 

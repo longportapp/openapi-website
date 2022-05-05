@@ -9,7 +9,7 @@ sidebar_position: 2
 
 :::info
 
-[协议指令](../../socket/protocol/push)：`102`
+[业务指令](../../socket/protocol/push)：`102`
 
 :::
 
