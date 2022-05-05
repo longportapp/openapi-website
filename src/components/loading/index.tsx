@@ -1,8 +1,9 @@
 import React from 'react';
+import styled from './index.module.scss';
 
-const Loading = () => {
+const Index = () => {
   return (
-    <div className={'loading-container'}>
+    <div className={styled['loading-container']}>
       <svg
         version="1.1"
         id="Layer_1"
@@ -91,4 +92,4 @@ const Loading = () => {
     </div>
   );
 };
-export default Loading;
+export default Index;
