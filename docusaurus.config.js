@@ -95,6 +95,7 @@ const config = {
             position: 'left',
             target: '_self',
             label: '开发者认证',
+            activeBaseRegex: '^/$',
           },
           {
             to: `/sdk`,
