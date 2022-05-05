@@ -1,5 +1,5 @@
 import React, { FC, useState, useMemo } from 'react'
-import { getBasenameLocale, getDefaultLocale } from '@site/src/utils'
+import { useBasenameLocale, useDefaultLocale } from '@site/src/utils'
 import Cookies from 'js-cookie'
 import Dropdown from './dropdown'
 
@@ -24,11 +24,11 @@ export const LocaleDropdown: FC = () => {
       },
     ]
   }, [])
-  const [locale, setLocale] = useState(getDefaultLocale())
+  const [locale, setLocale] = useState(useDefaultLocale())
+  const pathLocale = useBasenameLocale()
   const onChange = (value: string) => {
     Cookies.set('locale', value)
     setLocale(value)
-    const pathLocale = getBasenameLocale()
     let pathname = location.pathname
     if (pathLocale) {
       pathname = pathname.replace(`/${pathLocale}`, `/${value}`)
