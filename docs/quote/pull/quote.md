@@ -8,7 +8,7 @@ sidebar_position: 2
 该接口用于获取标的的实时行情 (支持所有类型标的）。
 
 :::info
-[协议指令](../../socket/protocol/request)：`11`
+[业务指令](../../socket/protocol/request)：`11`
 :::
 
 ## Request

@@ -8,7 +8,7 @@ sidebar_position: 3
 该接口用于获取美股期权标的的实时行情，包括期权的特有数据。
 
 :::info
-[协议指令](../../socket/protocol/request)：`12`
+[业务指令](../../socket/protocol/request)：`12`
 :::
 
 ## Request

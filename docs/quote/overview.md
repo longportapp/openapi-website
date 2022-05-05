@@ -90,15 +90,24 @@ slug: overview
 
 标的代码使用 `ticker.region` 格式，`ticker` 表示标的代码，各个市场的标的代码示例：
 
-- 美股市场 `region` 为 `US`，例如：`AAPL.US`
+- 美股市场：`region` 为 `US`，例如：`AAPL.US`
 - 港股市场：`region` 为 `HK`，例如：`700.HK`
 - A 股市场：`region` 上交所为 `SH`，深交所为 `SZ`，例如：`399001.SZ`，`600519.SH`
 - 新加坡市场：`region` 为 `SG`，例如：`D05.SG`
 
 ### 接入方式
 
-使用私有协议，长连接方式进行接入，接入方法请参考 [二进制通信协议](../socket/protocol/protocol_overview.md)
+1. 使用私有协议，长连接方式进行接入，接入方法请参考 <a href="../socket/protocol/overview" target="_blank">二进制通信协议</a>。
+2. 使用 SDK 进行接入，[SDK 介绍及下载地址](https://open.longbridgeapp.com/sdk)。
 
-### Protobuf 下载地址
+
+### 业务数据序列化方式
+
+行情的请求、响应、推送数据作为业务数据，存放在私有协议的数据包 body 部分。   
+我们使用 [Protobuf](https://developers.google.cn/protocol-buffers) 协议对业务数据进行序列化，相较于常见的文本协议（如 JSON, XML 等），Protobuf 协议具有如下优点：
+
+- 序列化时间快
+- 数据包体积小
+- 较强的版本前向后向兼容性
 
 行情 Protobuf 协议文档[下载地址](https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto)。

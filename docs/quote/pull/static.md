@@ -8,7 +8,7 @@ sidebar_position: 1
 该接口用于获取标的的基础信息。
 
 :::info
-[协议指令](../../socket/protocol/request)：`10`
+[业务指令](../../socket/protocol/request)：`10`
 :::
 
 ## Request
