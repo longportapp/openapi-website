@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - canary
 jobs:
   deploy_canary:
     name: build
