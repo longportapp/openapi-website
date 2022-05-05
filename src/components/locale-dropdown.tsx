@@ -27,7 +27,9 @@ export const LocaleDropdown: FC = () => {
   const [locale, setLocale] = useState(useDefaultLocale())
   const pathLocale = useBasenameLocale()
   const onChange = (value: string) => {
-    Cookies.set('locale', value)
+    Cookies.set('locale', value, {
+      domain: location.hostname.replace('open.', '')
+    })
     setLocale(value)
     let pathname = location.pathname
     if (pathLocale) {
