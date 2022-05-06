@@ -1,99 +1,99 @@
 ---
 id: trade_definition
-title: 交易命名词典
+title: Trade Definition
 slug: trade-definition
 sidebar_position: 2
 ---
 
 ## OrderType
 
-- 说明：订单类型
+- Description: Order Type
 
-| 枚举值  | 描述                        |
-| ------- | --------------------------- |
-| LO      | 限价单                      |
-| ELO     | 增强限价单                  |
-| MO      | 市价单                      |
-| AO      | 竞价市价单                  |
-| ALO     | 竞价限价单                  |
-| ODD     | 碎股单挂单                  |
-| LIT     | 触价限价单                  |
-| MIT     | 触价市价单                  |
-| TSLPAMT | 跟踪止损限价单 (跟踪金额)   |
-| TSLPPCT | 跟踪止损限价单 (跟踪涨跌幅) |
-| TSMAMT  | 跟踪止损市价单 (跟踪金额)   |
-| TSMPCT  | 跟踪止损市价单 (跟踪涨跌幅) |
+| Enum    | Description                                   |
+| ------- | --------------------------------------------- |
+| LO      | Limit Order                                   |
+| ELO     | Enhanced Limit Order                          |
+| MO      | Market Order                                  |
+| AO      | At-auction Order                              |
+| ALO     | At-auction Limit Order                        |
+| ODD     | Odd Lots Order                                |
+| LIT     | Limit If Touched                              |
+| MIT     | Market If Touched                             |
+| TSLPAMT | Trailing Limit If Touched (Trailing Amount)   |
+| TSLPPCT | Trailing Limit If Touched (Trailing Percent)  |
+| TSMAMT  | Trailing Market If Touched (Trailing Amount)  |
+| TSMPCT  | Trailing Market If Touched (Trailing Percent) |
 
 ## OrderStatus
 
-- 说明：订单状态
+- Description: Order Status
 
-| 枚举值               | 描述              |
-| -------------------- | ----------------- |
-| NotReported          | 待提交            |
-| ReplacedNotReported  | 待提交 (改单成功) |
-| ProtectedNotReported | 待提交 (保价订单) |
-| VarietiesNotReported | 待提交 (条件单)   |
-| FilledStatus         | 已成交            |
-| WaitToNew            | 已提待报          |
-| NewStatus            | 已委托            |
-| WaitToReplace        | 修改待报          |
-| PendingReplaceStatus | 待修改            |
-| ReplacedStatus       | 已修改            |
-| PartialFilledStatus  | 部分成交          |
-| WaitToCancel         | 撤销待报          |
-| PendingCancelStatus  | 待撤回            |
-| RejectedStatus       | 已拒绝            |
-| CanceledStatus       | 已撤单            |
-| ExpiredStatus        | 已过期            |
-| PartialWithdrawal    | 部分撤单          |
+| Enum                 | Description                     |
+| -------------------- | ------------------------------- |
+| NotReported          | NotReported                     |
+| ReplacedNotReported  | NotReported (Replaced Order)    |
+| ProtectedNotReported | NotReported (Protected Order)   |
+| VarietiesNotReported | NotReported (Conditional Order) |
+| FilledStatus         | Filled                          |
+| WaitToNew            | Wait To New                     |
+| NewStatus            | New                             |
+| WaitToReplace        | Wait To Replace                 |
+| PendingReplaceStatus | Pending Replace                 |
+| ReplacedStatus       | Replaced                        |
+| PartialFilledStatus  | Partial Filled                  |
+| WaitToCancel         | Wait To Cancel                  |
+| PendingCancelStatus  | Pending Cancel                  |
+| RejectedStatus       | Rejected                        |
+| CanceledStatus       | Canceled                        |
+| ExpiredStatus        | Expired                         |
+| PartialWithdrawal    | Partial Withdrawal              |
 
 ## Market
 
-- 说明：市场
+- Description: Market
 
-| 枚举值 | 描述 |
-| ------ | ---- |
-| HK     | 港股 |
-| US     | 美股 |
+| Enum | Description                     |
+| ---- | ------------------------------- |
+| HK   | Hong Kong Market                |
+| US   | United States of America Market |
 
-## WebSocket 推送通知
+## WebSocket Notification
 
-- WebSocket 推送通知字段说明
+- Description: Push notification field description
 
-| 字段名            | 类型   | 注释                                                                                                                                   |
-| ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------- |
-| side              | string | 买卖方向<br/><br/>**可选值**<br/>`Buy` - 买入<br />`Sell` - 卖出                                                                       |
-| stock_name        | string | 公司名称                                                                                                                               |
-| quantity          | string | 委托数量                                                                                                                               |
-| symbol            | string | 订单标的                                                                                                                               |
-| order_type        | string | [订单类型](./trade-definition#ordertype)                                                                                               |
-| price             | string | 委托价格                                                                                                                               |
-| executed_quantity | string | 成交数量                                                                                                                               |
-| executed_price    | string | 成交价格                                                                                                                               |
-| order_id          | string | 订单 id                                                                                                                                |
-| currency          | string | 结算货币                                                                                                                               |
-| status            | string | [订单状态](./trade-definition#orderstatus)                                                                                             |
-| submitted_at      | string | 下单时间，格式为时间戳 (秒)                                                                                                            |
-| updated_at        | string | 最近更新时间                                                                                                                           |
-| trigger_price     | string | 触发价格                                                                                                                               |
-| msg               | string | 拒绝理由，备注信息                                                                                                                     |
-| tag               | string | 订单标记<br/><br/>**可选值**<br/>`Normal` - 普通订单<br />`GTC` - 长期单<br />`Grey` - 暗盘单                                          |
-| trigger_status    | string | 条件单触发状态<br/><br/>**可选值**<br/>`NOT_ACTIVE` - 未激活 <br />`DEACTIVE` - 已失效<br />`ACTIVE` - 已激活<br />`RELEASED` - 已触发 |
-| trigger_at        | string | 触发时间                                                                                                                               |
-| tailing_amount    | string | 条件单跟踪金额                                                                                                                         |
-| tailing_percent   | string | 条件单跟踪涨跌幅                                                                                                                       |
-| limit_offset      | string | 指定价差                                                                                                                               |
-| account_no        | string | 用户端账号                                                                                                                             |
+| field             | type   | Description                                                                                                             |
+| ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
+| side              | string | order side<br/><br/>**Enum Value**<br/>`Buy`<br />`Sell`                                                                |
+| stock_name        | string | stock name                                                                                                              |
+| quantity          | string | submitted quantity                                                                                                      |
+| symbol            | string | order symbol                                                                                                            |
+| order_type        | string | [Order Type](./trade-definition#ordertype)                                                                              |
+| price             | string | submitted price                                                                                                         |
+| executed_quantity | string | executed quantity                                                                                                       |
+| executed_price    | string | executed price                                                                                                          |
+| order_id          | string | order id                                                                                                                |
+| currency          | string | currency                                                                                                                |
+| status            | string | [order status](./trade-definition#orderstatus)                                                                          |
+| submitted_at      | string | submitted time，formatted as a timestamp (second)                                                                       |
+| updated_at        | string | last updated time ，formatted as a timestamp (second)                                                                   |
+| trigger_price     | string | "`LIT` / `MIT` order trigger price"                                                                                     |
+| msg               | string | rejected message or remark                                                                                              |
+| tag               | string | order tag<br/><br/>**Enum Value**<br/>`Normal` - Normal Order<br />`GTC` - Longterm Order<br />`Grey` - Grey Order      |
+| trigger_status    | string | conditional order trigger status<br/><br/>**Enum Value**<br/>`NOT_ACTIVE`<br />`DEACTIVE`<br />`ACTIVE`<br />`RELEASED` |
+| trigger_at        | string | conditional order trigger time. formatted as a timestamp (second)                                                       |
+| trailing_amount   | string | "`TSMAMT` / `TSLPAMT` order trailing amount"                                                                            |
+| trailing_percent  | string | "`TSMPCT` / `TSLPPCT` order trailing percent"                                                                           |
+| limit_offset      | string | "`TSLPAMT` / `TSLPPCT` order limit offset amount"                                                                       |
+| account_no        | string | account no                                                                                                              |
 
-### 示例
+### example
 
 ```JSON
 {
 	"event": "order_changed_lb",
 	"data": {
 		"side": "Buy",
-		"stock_name": "腾讯控股",
+		"stock_name": "Tencent Holdings Ltd.",
 		"quantity": "1000",
 		"symbol": "700.HK",
 		"order_type": "LO",
@@ -110,8 +110,8 @@ sidebar_position: 2
 		"tag": "GTC",
 		"trigger_status": "ACTIVE",
 		"trigger_at": "1562761893",
-		"tailing_amount": "5",
-		"tailing_percent": "1",
+		"trailing_amount": "5",
+		"trailing_percent": "1",
 		"limit_offset": "0.01",
 		"account_no": "HK123445"
 	}

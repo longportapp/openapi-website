@@ -1,56 +1,54 @@
 swagger: "2.0"
 info:
-  description: "该接口用于获取历史订单"
+  description: "Get History Order Or Get Order By OrderId"
   version: "v1"
-  title: "获取历史订单"
+  title: "Get History Order"
 paths:
   /v1/trade/order/history:
     get:
-      access: "交易权限"
+      access: "Trading Permissions"
       parameters:
         - name: "symbol"
           type: "string"
           in: query
-          description: "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
+          description: "stock symbol，use `ticker.region` format，example：`AAPL.US`"
           required: false
         - name: "status"
           type: string[]
           in: query
-          description: "[订单状态](../trade-definition#orderstatus)"
+          description: "[order status](../trade-definition#orderstatus)"
           required: false
         - name: side
           type: "string"
           in: query
-          description: "
-            买卖方向<br/><br/>
-            **可选值:**<br/>
-            `Buy` - 买入<br/>
-            `Sell` - 卖出"
+          description: order side<br/><br/>
+            **Enum Value:**<br/>
+            `Buy`<br/>
+            `Sell`
           required: false
         - name: market
           type: "string"
           in: query
-          description: "
-            市场<br/><br/>
-            **可选值:**<br/>
-            `US` - 美股<br/>
-            `HK` - 港股"
+          description: market<br/><br/>
+            **Enum Value:**<br/>
+            `US` - United States of America Market<br/>
+            `HK` - Hong Kong Market
           required: false
         - name: "start_at"
           type: "string"
           required: false
-          description: "开始时间，格式为时间戳 (秒)，例如: `1650410999`"
+          description: "start time，formatted as a timestamp (second), example: `1650410999`"
         - name: "end_at"
           type: "string"
           required: false
-          description: "结束时间，格式为时间戳 (秒)，例如: `1650410999`"
+          description: "end time，formatted as a timestamp (second), example: `1650410999`"
       responses:
         "200":
-          description: "历史订单查询成功"
+          description: "Get History Orders Success"
           schema:
             $ref: "#/definitions/history_orders_rsp"
         "400":
-          description: "查询失败，请求参数错误。"
+          description: "The query failed with an error in the request parameter."
       request_body:
         type: "python"
         value: |
@@ -106,17 +104,17 @@ definitions:
     properties:
       orders:
         type: "arrary"
-        description: 订单信息
+        description: Order Detail
         properties:
           order_id:
             type: "string"
-            description: 订单 ID
+            description: Order ID
           status:
             type: "string"
-            description: "[订单状态](../trade-definition#orderstatus)"
+            description: "[Order Status](../trade-definition#orderstatus)"
           stock_name:
             type: "string"
-            description: 股票名称
+            description: Stock Name
           quantity:
             type: "string"
             description: 下单数量

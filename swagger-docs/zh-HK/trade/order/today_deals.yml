@@ -1,29 +1,29 @@
 swagger: "2.0"
 info:
-  description: "该接口用于获取当日订单的成交明细"
+  description: "該接口用於獲取當日訂單的成交明細"
   version: "v1"
-  title: "获取当日成交"
+  title: "獲取當日成交"
 paths:
   /v1/trade/order/deal/today:
     get:
-      access: "交易权限"
+      access: "交易權限"
       parameters:
         - name: "symbol"
           type: "string"
           in: query
-          description: "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
+          description: "股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US`"
           required: false
         - name: "order_id"
           type: "string"
           required: false
-          description: "订单 ID，用于指定订单 ID 查询，例如: `701276261045858304`"
+          description: "訂單 ID，用於指定訂單 ID 查詢，例如: `701276261045858304`"
       responses:
         "200":
-          description: "查询成功"
+          description: "查詢成功"
           schema:
             $ref: "#/definitions/deals"
         "400":
-          description: "查询失败，请求参数错误。"
+          description: "查詢失敗，請求參數錯誤。"
       request_body:
         type: "python"
         value: |
@@ -58,23 +58,23 @@ definitions:
     properties:
       orders:
         type: "arrary"
-        description: 成交明细信息
+        description: 成交明細信息
         properties:
           order_id:
             type: "string"
-            description: 订单 ID
+            description: 訂單 ID
           trade_id:
             type: "string"
             description: 成交 ID
           symbol:
             type: "string"
-            description: "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
+            description: "股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US`"
           trade_done_at:
             type: "string"
-            description: "成交时间，格式为时间戳 (秒)"
+            description: "成交時间，格式為時间戳 (秒)"
           quantity:
             type: "string"
-            description: 成交数量
+            description: 成交數量
           price:
             type: "string"
-            description: 成交价格
+            description: 成交價格

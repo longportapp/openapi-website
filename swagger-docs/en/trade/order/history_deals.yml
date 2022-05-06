@@ -1,35 +1,35 @@
 swagger: "2.0"
 info:
-  description: "该接口用于获取历史订单的成交明细"
+  description: "Get History Deals"
   version: "v1"
-  title: "获取历史成交明细"
+  title: "Get History Deals"
 paths:
   /v1/trade/order/deal/history:
     get:
-      access: "交易权限"
+      access: "Trading Permissions"
       parameters:
         - name: "symbol"
           type: "string"
           in: query
-          description: "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
+          description: "stock symbol，use `ticker.region` format，example：`AAPL.US`"
           required: false
         - name: "start_at"
           type: "string"
           in: query
           required: false
-          description: "开始时间，格式为时间戳 (秒)，例如: `1650410999`"
+          description: "start time，formatted as a timestamp (second), example: `1650410999`"
         - name: "end_at"
           type: "string"
           in: query
           required: false
-          description: "结束时间，格式为时间戳 (秒)，例如: `1650410999`"
+          description: "end time，formatted as a timestamp (second), example: `1650410999`"
       responses:
         "200":
-          description: "查询成功"
+          description: "Get History Deals Success"
           schema:
             $ref: "#/definitions/history_deals_rsp"
         "400":
-          description: "查询失败，请求参数错误。"
+          description: "The query failed with an error in the request parameter."
       request_body:
         type: "python"
         value: |
@@ -62,28 +62,25 @@ paths:
 definitions:
   history_deals_rsp:
     properties:
-      has_more:
-        type: boolean
-        description: "是否还有更多数据"
       orders:
         type: "arrary"
-        description: 成交明细信息
+        description: Deal Detail
         properties:
           order_id:
             type: "string"
-            description: 订单 ID
+            description: Order ID
           trade_id:
             type: "string"
-            description: 成交 ID
+            description: Deal ID
           symbol:
             type: "string"
-            description: "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
+            description: "stock symbol，use `ticker.region` format，example：`AAPL.US`"
           trade_done_at:
             type: "string"
-            description: "成交时间，格式为时间戳 (秒)"
+            description: trade done time ，formatted as a timestamp (second)
           quantity:
             type: "string"
-            description: 成交数量
+            description: executed quantity
           price:
             type: "string"
-            description: 成交价格
+            description: executed price

@@ -1,22 +1,22 @@
 swagger: "2.0"
 info:
-  description: "该接口用于订单撤销"
+  description: "Withdraw an open order"
   version: "v1"
-  title: "撤销订单"
+  title: "Withdraw Order"
 paths:
   /v1/trade/order:
     delete:
-      access: "交易权限"
+      access: "Trading Permissions"
       parameters:
         - name: "order_id"
           type: "string"
-          description: "订单 ID"
+          description: "Order ID"
           required: true
       responses:
         "200":
-          description: "提交成功，订单已委托。"
+          description: "The submission was successful and the order was commissioned."
         "400":
-          description: "撤单被拒绝，请求参数错误。"
+          description: "The withdrawal was rejected with an incorrect request parameter."
       request_body:
         type: "python"
         value: |
