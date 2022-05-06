@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import React from 'react'
+import { useClickAway } from 'ahooks'
 import styles from './index.module.scss'
 
 export type IDropdownProps = {
@@ -16,9 +17,13 @@ export type IDropdownProps = {
 const Dropdown: React.FC<IDropdownProps> = ({ value, content, className, children, onChange, items = [] }) => {
   const [showContent, setShowContent] = React.useState(false)
   const selectedItem = items.find(item => item.value === value)
+  const containerRef = React.useRef(null)
+  useClickAway(() => {
+    setShowContent(false)
+  }, containerRef)
 
   return (
-    <div className={classNames(styles.dropdown, className)}>
+    <div className={classNames(styles.dropdown, className)} ref={containerRef}>
       <div className="trigger" onClick={() => setShowContent(!showContent)}>
         {selectedItem ? (
           <div className="flex items-center">
