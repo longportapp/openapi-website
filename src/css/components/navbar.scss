@@ -43,3 +43,8 @@
   }
   
 }
+.navbar-sidebar {
+  .hidden-in-mobile-sidebar {
+    display: none !important;
+  }
+}
