@@ -57,7 +57,7 @@ Swagger / OpenAPI 2.0 definitions are converted automatically.
 ### Common to all templates
 
 * `openapi` - the top-level OpenAPI / Swagger document
-* `header` - the front-matter of the Slate/Shins markdown document
+* `header` - the front-matter of the Slate/Shins Markdown document
 * `host` - the (computed) host of the API
 * `protocol` - the default/first protocol of the API
 * `baseUrl` - the (computed) baseUrl of the API (including protocol and host)

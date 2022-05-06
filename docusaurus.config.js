@@ -50,7 +50,7 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // todo i18n lang should redirect other dir
+          // todo I18n lang should redirect other dir
           editUrl: ({ locale, docPath }) => {
             let nextVersionDocsDirPath = 'docs';
             if (docPath.includes('--autogen.md')) {

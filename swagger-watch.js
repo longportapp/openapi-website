@@ -14,7 +14,7 @@ let options = {
   theme: '',
 };
 
-console.log('Watching swagger-docs yaml| yml for changes...');
+console.log('Watching swagger-docs yaml| YML for changes...');
 
 function generateSwaggerDoc(file) {
   const fileName = file;

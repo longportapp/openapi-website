@@ -74,7 +74,7 @@ definitions:
             properties:
               symbol:
                 type: "string"
-                description: 基金 isin 代码
+                description: 基金 ISIN 代码
               current_net_asset_value:
                 type: "string"
                 description: 当前净值
