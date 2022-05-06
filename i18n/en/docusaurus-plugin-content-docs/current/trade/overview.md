@@ -36,15 +36,15 @@ sidebar_position: 1
     </tr>
 <tr>
         <td rowspan="4">资产</td>
-        <td><a href="./asset/account">获取账户资金信息</a></td>
+        <td><a href="./asset/account">Get account balance information</a></td>
     </tr>
     <tr>
-        <td><a href="./asset/cashflow">获取资金流水信息</a></td>
+        <td><a href="./asset/cashflow">Get cash flow information</a></td>
     </tr>
 <tr>
-        <td><a href="./asset/fund">获取基金持仓信息</a></td>
+        <td><a href="./asset/fund">Get fund position information</a></td>
     </tr>
 <tr>
-        <td><a href="./asset/stock">获取股票持仓信息</a></td>
+        <td><a href="./asset/stock">Get stock position information</a></td>
     </tr>
 </table>
