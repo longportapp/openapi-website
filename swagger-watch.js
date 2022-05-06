@@ -23,7 +23,7 @@ function generateSwaggerDoc(file) {
     return;
   }
 
-  const locale = fileName.match(/swagger-docs\/(en|zh-HK)/)?.[1];
+  const locale = fileName.match(/swagger-docs\/(en|zh-HK|zh-CN)/)?.[1];
 
   try {
     const slug = fileName
@@ -36,11 +36,14 @@ function generateSwaggerDoc(file) {
 
     let distPath = fileName.replace('swagger-docs', 'docs').replace(/\.(yml|yaml)/, '--autogen.md');
     distPath = path.resolve(__dirname, distPath);
-    if (locale) {
+    if (locale !== 'zh-CN') {
       distPath = distPath
         .replace(`${locale}/`, '')
         .replace('docs', `i18n/${locale}/docusaurus-plugin-content-docs/current`)
         .replace(/\.(yml|yaml)/, '--autogen.md');
+    } else {
+      // default locale should put /docs directory
+      distPath = distPath.replace(`${locale}/`, '').replace(/\.(yml|yaml)/, '--autogen.md');
     }
 
     const titleRe = /^title:(.+)v[\d]+\n/m;
