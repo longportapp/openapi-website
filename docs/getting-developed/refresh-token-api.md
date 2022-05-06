@@ -16,15 +16,13 @@ sidebar_position: 2
 | 基本信息    |                   |
 | ----------- | ----------------- |
 | HTTP URL    | /v1/token/refresh |
-| HTTP Method | POST              |
-| 权限要求    | 无                |
+| HTTP Method | GET              |
 
 ### 请求头
 
 | 名称          | 类型   | 必须 | 描述                                          |
 | ------------- | ------ | ---- | --------------------------------------------- |
 | Authorization | string | 是   |                                               |
-| Content-Type  | string | 是   | **固定值**："application/json; charset=utf-8" |
 
 ### 请求参数
 
