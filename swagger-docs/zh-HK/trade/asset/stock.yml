@@ -45,7 +45,7 @@ paths:
                       [
                         {
                           "symbol": "700.HK",
-                          "symbol_name": "腾讯控股",
+                          "symbol_name": "騰訊控股",
                           "currency": "HK",
                           "quality": "650",
                           "available_quality": "-450",
@@ -53,7 +53,7 @@ paths:
                         },
                         {
                           "symbol": "9991.HK",
-                          "symbol_name": "宝尊电商-SW",
+                          "symbol_name": "寶尊電商-SW",
                           "currency": "HK",
                           "quality": "200",
                           "available_quality": "0",
@@ -61,21 +61,21 @@ paths:
                         },
                         {
                           "symbol": "TCEHY.US",
-                          "symbol_name": "腾讯控股 (ADR)",
+                          "symbol_name": "騰訊控股 (ADR)",
                           "currency": "US",
                           "quality": "10",
                           "available_quality": "10",
                         },
                         {
                           "symbol": "2628.HK",
-                          "symbol_name": "中国人寿",
+                          "symbol_name": "中國人壽",
                           "currency": "HK",
                           "quality": "9000",
                           "available_quality": "0",
                         },
                         {
                           "symbol": "5.HK",
-                          "symbol_name": "汇丰控股",
+                          "symbol_name": "匯豐控股",
                           "currency": "HK",
                           "quality": "2400",
                           "available_quality": "2000",
@@ -89,14 +89,14 @@ paths:
                         },
                         {
                           "symbol": "2.HK",
-                          "symbol_name": "中电控股",
+                          "symbol_name": "中電控股",
                           "currency": "HK",
                           "quality": "2000",
                           "available_quality": "2000",
                         },
                         {
                           "symbol": "NOK.US",
-                          "symbol_name": "诺基亚",
+                          "symbol_name": "諾基亞",
                           "currency": "US",
                           "quality": "1",
                           "available_quality": "0",

@@ -61,7 +61,7 @@ paths:
               "list":
                 [
                   {
-                    "transaction_flow_name": "股票买入成交",
+                    "transaction_flow_name": "股票買入成交",
                     "direction": 1,
                     "balance": "-248.60",
                     "currency": "USD",
@@ -70,7 +70,7 @@ paths:
                     "description": "AAPL",
                   },
                   {
-                    "transaction_flow_name": "股票买入成交",
+                    "transaction_flow_name": "股票買入成交",
                     "direction": 1,
                     "balance": "-125.16",
                     "currency": "USD",
