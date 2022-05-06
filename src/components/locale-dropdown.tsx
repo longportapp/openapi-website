@@ -1,5 +1,5 @@
 import React, { FC, useState, useMemo } from 'react'
-import { useBasenameLocale, useDefaultLocale } from '@site/src/utils'
+import { useBasenameLocale, useDefaultLocale, getRootDomain } from '@site/src/utils'
 import Cookies from 'js-cookie'
 import Dropdown from './dropdown'
 
@@ -28,7 +28,7 @@ export const LocaleDropdown: FC = () => {
   const pathLocale = useBasenameLocale()
   const onChange = (value: string) => {
     Cookies.set('locale', value, {
-      domain: location.hostname.replace('open.', '')
+      domain: getRootDomain(location.hostname)
     })
     setLocale(value)
     let pathname = location.pathname
