@@ -69,11 +69,11 @@ Longbridge 提供接入底层服务的 HTTP / WebSockets 接口以及封装在�
         <td>证券类产品<br /><br />含纽交所、美交所、纳斯达克上市的股票、ETFs</td>
         <td rowspan="2">
             <ul>
-            <li>Level 1：请购买 <font color="red">L1 Nasdaq Basic - OpenAPI</font></li>
+            <li>Level 1：请购买 <font color="red">L1 NASDAQ Basic - OpenAPI</font></li>
             <li>Level 2：
                 <ul>
-                <li>非专业用户：请购买 <font color="red">L2 + Nasdaq TotalView - OpenAPI（非专业用户）</font></li>
-                <li>专业用户：请购买 <font color="red">L2 + Nasdaq TotalView - OpenAPI（专业用户）</font></li>
+                <li>非专业用户：请购买 <font color="red">L2 + NASDAQ TotalView - OpenAPI（非专业用户）</font></li>
+                <li>专业用户：请购买 <font color="red">L2 + NASDAQ TotalView - OpenAPI（专业用户）</font></li>
                 </ul>
             </li>
             </ul>

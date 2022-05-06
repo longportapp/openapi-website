@@ -136,7 +136,7 @@ nav.menu {
         padding: 0;
         .menu__list {
           padding: 0 20px;
-          // 不算末尾的 github
+          // 不算末尾的 GitHub
           .menu__list-item:not(:last-child) {
             padding: 16px 0;
             border-bottom: 1px solid #eaebec;

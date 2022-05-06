@@ -32,7 +32,7 @@ sidebar_position: 2
 | -------- | ---------- | ----------------------------- |
 | ver      | 4          | 协议版本，目前仅 `1` 一个版本 |
 | codec    | 4          | Body 序列化类型：1 - protobuf |
-| platform | 4          | 0b1001 - openapi              |
+| platform | 4          | 0b1001 - OpenAPI              |
 | reserve  | 4          | 预留，当前为 0b0000           |
 
 ### 例子
@@ -49,9 +49,9 @@ sidebar_position: 2
 0b00001001
 ```
 
-## Websocket 链接如何握手
+## WebSocket 链接如何握手
 
-Websocket 在从 Http 升级升 Websocket 的过程中，我们可以读取 HTTP 请求的相关信息，我们这里通过 url query 进行握手
+WebSocket 在从 HTTP 升级升 WebSocket 的过程中，我们可以读取 HTTP 请求的相关信息，我们这里通过 URL query 进行握手
 
 ### Query 参数
 

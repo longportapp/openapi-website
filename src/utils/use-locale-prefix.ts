@@ -1,7 +1,7 @@
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
-// sdk with en locale -> en/sdk
-// sdk with zh-CN locale -> sdk
+// SDK with en locale -> en/sdk
+// SDK with zh-CN locale -> SDK
 export default function useLocalePrefix(path: string) {
   // normalize path
   let rawPath = path;
