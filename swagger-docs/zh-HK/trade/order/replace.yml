@@ -1,49 +1,49 @@
 swagger: "2.0"
 info:
-  description: "该接口用于修改订单的价格，数量"
+  description: "該接口用於修改訂單的價格，數量"
   version: "v1"
-  title: "修改订单"
+  title: "修改訂單"
 paths:
   /v1/trade/order:
     put:
-      access: "交易权限"
+      access: "交易權限"
       parameters:
         - name: "order_id"
           type: "string"
-          description: "订单 ID"
+          description: "訂單 ID"
           required: true
         - name: "quantity"
           type: "string"
-          description: "改单数量，例如: `200`"
+          description: "改單數量，例如: `200`"
           required: true
         - name: "price"
           required: false
-          description: 改单价格，例如：`388.5`<br/><br/>
-            `LO` / `ELO` / `ALO` / `ODD` / `LIT` 订单必填
+          description: 改單價格，例如：`388.5`<br/><br/>
+            `LO` / `ELO` / `ALO` / `ODD` / `LIT` 訂單必填
         - name: trigger_price
           required: false
-          description: 触发价格，例如：`388.5`<br/><br/>
-            `LIT` / `MIT` 订单必填
+          description: 觸發價格，例如：`388.5`<br/><br/>
+            `LIT` / `MIT` 訂單必填
         - name: limit_offset
           required: false
-          description: 指定价差<br/><br/>
-            `TSLPAMT` / `TSLPPCT` 订单必填
+          description: 指定價差<br/><br/>
+            `TSLPAMT` / `TSLPPCT` 訂單必填
         - name: trailing_amount
           required: false
-          description: 跟踪金额<br/><br/>
-            `TSLPAMT` / `TSMAMT` 订单必填
+          description: 跟蹤金额<br/><br/>
+            `TSLPAMT` / `TSMAMT` 訂單必填
         - name: trailing_percent
           required: false
-          description: 跟踪涨跌幅<br/><br/>
-            `TSLPPCT` / `TSMAPCT` 订单必填
+          description: 跟蹤漲跌幅<br/><br/>
+            `TSLPPCT` / `TSMAPCT` 訂單必填
         - name: remark
           required: false
-          description: "备注 (最大 64 字符)"
+          description: "備注 (最大 64 字符)"
       responses:
         "200":
-          description: "提交成功，订单已委托。"
+          description: "提交成功，訂單已委托。"
         "400":
-          description: "下单被拒绝，请求参数错误。"
+          description: "下單被拒絕，請求參數錯誤。"
       request_body:
         type: "python"
         value: |

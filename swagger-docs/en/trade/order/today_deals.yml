@@ -1,29 +1,29 @@
 swagger: "2.0"
 info:
-  description: "该接口用于获取当日订单的成交明细"
+  description: "Get Today Deals"
   version: "v1"
-  title: "获取当日成交"
+  title: "Get Today Deals"
 paths:
   /v1/trade/order/deal/today:
     get:
-      access: "交易权限"
+      access: "Trading Permissions"
       parameters:
         - name: "symbol"
           type: "string"
           in: query
-          description: "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
+          description: "stock symbol，use `ticker.region` format，example：`AAPL.US`"
           required: false
         - name: "order_id"
           type: "string"
           required: false
-          description: "订单 ID，用于指定订单 ID 查询，例如: `701276261045858304`"
+          description: "Order ID，example: `701276261045858304`"
       responses:
         "200":
-          description: "查询成功"
+          description: "Get Today Deals Success"
           schema:
             $ref: "#/definitions/deals"
         "400":
-          description: "查询失败，请求参数错误。"
+          description: "The query failed with an error in the request parameter."
       request_body:
         type: "python"
         value: |
@@ -58,23 +58,23 @@ definitions:
     properties:
       orders:
         type: "arrary"
-        description: 成交明细信息
+        description: Deal Detail
         properties:
           order_id:
             type: "string"
-            description: 订单 ID
+            description: Order ID
           trade_id:
             type: "string"
-            description: 成交 ID
+            description: Deal ID
           symbol:
             type: "string"
-            description: "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
+            description: "stock symbol，use `ticker.region` format，example：`AAPL.US`"
           trade_done_at:
             type: "string"
-            description: "成交时间，格式为时间戳 (秒)"
+            description: trade done time ，formatted as a timestamp (second)
           quantity:
             type: "string"
-            description: 成交数量
+            description: executed quantity
           price:
             type: "string"
-            description: 成交价格
+            description: executed price

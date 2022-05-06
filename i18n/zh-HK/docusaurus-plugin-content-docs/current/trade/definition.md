@@ -1,90 +1,90 @@
 ---
 id: trade_definition
-title: 交易命名词典
+title: 交易命名詞典
 slug: trade-definition
 sidebar_position: 2
 ---
 
 ## OrderType
 
-- 说明：订单类型
+- 說明：訂單類型
 
-| 枚举值  | 描述                        |
+| 枚舉值  | 描述                        |
 | ------- | --------------------------- |
-| LO      | 限价单                      |
-| ELO     | 增强限价单                  |
-| MO      | 市价单                      |
-| AO      | 竞价市价单                  |
-| ALO     | 竞价限价单                  |
-| ODD     | 碎股单挂单                  |
-| LIT     | 触价限价单                  |
-| MIT     | 触价市价单                  |
-| TSLPAMT | 跟踪止损限价单 (跟踪金额)   |
-| TSLPPCT | 跟踪止损限价单 (跟踪涨跌幅) |
-| TSMAMT  | 跟踪止损市价单 (跟踪金额)   |
-| TSMPCT  | 跟踪止损市价单 (跟踪涨跌幅) |
+| LO      | 限價單                      |
+| ELO     | 增強限價單                  |
+| MO      | 市價單                      |
+| AO      | 競價市價單                  |
+| ALO     | 競價限價單                  |
+| ODD     | 碎股單掛單                  |
+| LIT     | 觸價限價單                  |
+| MIT     | 觸價市價單                  |
+| TSLPAMT | 跟蹤止損限價單 (跟蹤金额)   |
+| TSLPPCT | 跟蹤止損限價單 (跟蹤漲跌幅) |
+| TSMAMT  | 跟蹤止損市價單 (跟蹤金额)   |
+| TSMPCT  | 跟蹤止損市價單 (跟蹤漲跌幅) |
 
 ## OrderStatus
 
-- 说明：订单状态
+- 說明：訂單狀態
 
-| 枚举值               | 描述              |
+| 枚舉值               | 描述              |
 | -------------------- | ----------------- |
 | NotReported          | 待提交            |
-| ReplacedNotReported  | 待提交 (改单成功) |
-| ProtectedNotReported | 待提交 (保价订单) |
-| VarietiesNotReported | 待提交 (条件单)   |
+| ReplacedNotReported  | 待提交 (改單成功) |
+| ProtectedNotReported | 待提交 (保價訂單) |
+| VarietiesNotReported | 待提交 (條件單)   |
 | FilledStatus         | 已成交            |
-| WaitToNew            | 已提待报          |
+| WaitToNew            | 已提待報          |
 | NewStatus            | 已委托            |
-| WaitToReplace        | 修改待报          |
+| WaitToReplace        | 修改待報          |
 | PendingReplaceStatus | 待修改            |
 | ReplacedStatus       | 已修改            |
 | PartialFilledStatus  | 部分成交          |
-| WaitToCancel         | 撤销待报          |
+| WaitToCancel         | 撤銷待報          |
 | PendingCancelStatus  | 待撤回            |
-| RejectedStatus       | 已拒绝            |
-| CanceledStatus       | 已撤单            |
-| ExpiredStatus        | 已过期            |
-| PartialWithdrawal    | 部分撤单          |
+| RejectedStatus       | 已拒絕            |
+| CanceledStatus       | 已撤單            |
+| ExpiredStatus        | 已過期            |
+| PartialWithdrawal    | 部分撤單          |
 
 ## Market
 
-- 说明：市场
+- 說明：市場
 
-| 枚举值 | 描述 |
+| 枚舉值 | 描述 |
 | ------ | ---- |
 | HK     | 港股 |
 | US     | 美股 |
 
 ## WebSocket 推送通知
 
-- WebSocket 推送通知字段说明
+- WebSocket 推送通知字段說明
 
-| 字段名            | 类型   | 注释                                                                                                                                   |
+| 字段名            | 類型   | 注釋                                                                                                                                   |
 | ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------- |
-| side              | string | 买卖方向<br/><br/>**可选值**<br/>`Buy` - 买入<br />`Sell` - 卖出                                                                       |
-| stock_name        | string | 公司名称                                                                                                                               |
-| quantity          | string | 委托数量                                                                                                                               |
-| symbol            | string | 订单标的                                                                                                                               |
-| order_type        | string | [订单类型](./trade-definition#ordertype)                                                                                               |
-| price             | string | 委托价格                                                                                                                               |
-| executed_quantity | string | 成交数量                                                                                                                               |
-| executed_price    | string | 成交价格                                                                                                                               |
-| order_id          | string | 订单 id                                                                                                                                |
-| currency          | string | 结算货币                                                                                                                               |
-| status            | string | [订单状态](./trade-definition#orderstatus)                                                                                             |
-| submitted_at      | string | 下单时间，格式为时间戳 (秒)                                                                                                            |
-| updated_at        | string | 最近更新时间                                                                                                                           |
-| trigger_price     | string | 触发价格                                                                                                                               |
-| msg               | string | 拒绝理由，备注信息                                                                                                                     |
-| tag               | string | 订单标记<br/><br/>**可选值**<br/>`Normal` - 普通订单<br />`GTC` - 长期单<br />`Grey` - 暗盘单                                          |
-| trigger_status    | string | 条件单触发状态<br/><br/>**可选值**<br/>`NOT_ACTIVE` - 未激活 <br />`DEACTIVE` - 已失效<br />`ACTIVE` - 已激活<br />`RELEASED` - 已触发 |
-| trigger_at        | string | 触发时间                                                                                                                               |
-| tailing_amount    | string | 条件单跟踪金额                                                                                                                         |
-| tailing_percent   | string | 条件单跟踪涨跌幅                                                                                                                       |
-| limit_offset      | string | 指定价差                                                                                                                               |
-| account_no        | string | 用户端账号                                                                                                                             |
+| side              | string | 買賣方向<br/><br/>**可選值**<br/>`Buy` - 買入<br />`Sell` - 賣出                                                                       |
+| stock_name        | string | 公司名稱                                                                                                                               |
+| quantity          | string | 委托數量                                                                                                                               |
+| symbol            | string | 訂單標的                                                                                                                               |
+| order_type        | string | [訂單類型](./trade-definition#ordertype)                                                                                               |
+| price             | string | 委托價格                                                                                                                               |
+| executed_quantity | string | 成交數量                                                                                                                               |
+| executed_price    | string | 成交價格                                                                                                                               |
+| order_id          | string | 訂單 id                                                                                                                                |
+| currency          | string | 結算貨幣                                                                                                                               |
+| status            | string | [訂單狀態](./trade-definition#orderstatus)                                                                                             |
+| submitted_at      | string | 下單時间，格式為時间戳 (秒)                                                                                                            |
+| updated_at        | string | 最近更新時间                                                                                                                           |
+| trigger_price     | string | 觸發價格                                                                                                                               |
+| msg               | string | 拒絕理由，備注信息                                                                                                                     |
+| tag               | string | 訂單標記<br/><br/>**可選值**<br/>`Normal` - 普通訂單<br />`GTC` - 长期單<br />`Grey` - 暗盤單                                          |
+| trigger_status    | string | 條件單觸發狀態<br/><br/>**可選值**<br/>`NOT_ACTIVE` - 未激活 <br />`DEACTIVE` - 已失效<br />`ACTIVE` - 已激活<br />`RELEASED` - 已觸發 |
+| trigger_at        | string | 觸發時间                                                                                                                               |
+| tailing_amount    | string | 條件單跟蹤金额                                                                                                                         |
+| tailing_percent   | string | 條件單跟蹤漲跌幅                                                                                                                       |
+| limit_offset      | string | 指定價差                                                                                                                               |
+| account_no        | string | 用戶端賬號                                                                                                                             |
 
 ### 示例
 
@@ -93,7 +93,7 @@ sidebar_position: 2
 	"event": "order_changed_lb",
 	"data": {
 		"side": "Buy",
-		"stock_name": "腾讯控股",
+		"stock_name": "騰訊控股",
 		"quantity": "1000",
 		"symbol": "700.HK",
 		"order_type": "LO",
