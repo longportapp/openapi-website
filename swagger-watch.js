@@ -46,6 +46,10 @@ function generateSwaggerDoc(file) {
       distPath = distPath.replace(`${locale}/`, '').replace(/\.(yml|yaml)/, '--autogen.md');
     }
 
+    const distDir = path.dirname(distPath);
+    if (!fs.existsSync(distDir)) {
+      fs.mkdirSync(distDir, { recursive: true });
+    }
     const titleRe = /^title:(.+)v[\d]+\n/m;
 
     converter
