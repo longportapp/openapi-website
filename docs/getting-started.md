@@ -29,7 +29,7 @@ Longbridge OpenAPI SDK 基于 Rust 底层提供标准实现，通过 FFI 提供�
 
 ## 环境需求
 
-- Python 3+
+- [Python 3](https://www.python.org/)
 - Pip
 
 ## 安装 SDK
@@ -98,7 +98,7 @@ python3 main.py
 {
   "list": [
     {
-      "cashInfos": [
+      "cash_infos": [
         {
           "available_cash": "32966.49",
           "currency": "HKD",
