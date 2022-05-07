@@ -1,44 +1,44 @@
 ---
-title: 获取长连接 OTP
+title: 獲取長連接 OTP
 id: socket-otp-api
 slug: /socket-token-api
 sidebar_position: 2
 ---
 
-# 获取长连接 OTP(One Time Password)
+# 獲取長連接 OTP(One Time Password)
 
-获取长连接使用的 `Token`(One time password)，长连接的 `Token` 可以用来连接行情和交易的长连接网关，是一次性的，使用过后就会作废。
+獲取長連接使用的 `Token`(One time password)，長連接的 `Token` 可以用來連接行情和交易的長連接網關，是一次性的，使用過後就會作廢。
 
-> 最后更新于 2022-04-28
+> 最後更新於 2022-04-28
 
-## 请求
+## 請求
 
 | 基本信息    |                |
 | ----------- | -------------- |
 | HTTP URL    | /v1/socket/token |
 | HTTP Method | GET            |
 
-### 请求头
+### 請求頭
 
-| 名称          | 类型   | 必须 | 描述                                          |
+| 名稱          | 類型   | 必須 | 描述                                          |
 | ------------- | ------ | ---- | --------------------------------------------- |
 | Authorization | string | 是   |                                               |
 | Content-Type  | string | 是   | **固定值**："application/json; charset=utf-8" |
 
-### 请求参数
+### 請求參數
 
-## 响应
+## 響應
 
-### 响应体
+### 響應體
 
-| 名称 | 类型   | 描述                  |
+| 名稱 | 類型   | 描述                  |
 | ---- | ------ | --------------------- |
-| code | int    | 错误码，非 0 表示失败 |
-| msg  | string | 错误描述              |
+| code | int    | 錯誤碼，非 0 表示失敗 |
+| msg  | string | 錯誤描述              |
 | data | object |                       |
-| ∟otp | string | 获取到的 token        |
+| ∟otp | string | 獲取到的 token        |
 
-### 响应体示例
+### 響應體示例
 
 ```json
 {

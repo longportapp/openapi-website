@@ -1,36 +1,36 @@
 ---
-title: 协议概览
+title: 協議概覽
 id: protocol-overview
 slug: /socket/protocol/overview
 sidebar_position: 0
 ---
 
-我们使用二进制的私有协议进行数据交互，协议同时支持 `Websocket` 和 `TCP` 连接。
+我們使用二進制的私有協議進行數據交互，協議同時支持 `Websocket` 和 `TCP` 連接。
 
 :::info
-使用的字节序是 `BigEndian`
+使用的字節序是 `BigEndian`
 :::
 
-业务的 `Websocket` 和 `TCP` 接入地址可以查看[业务地址](../hosts.md)
+業務的 `Websocket` 和 `TCP` 接入地址可以查看[業務地址](../hosts.md)
 
-在开始协议解析前我们需要先了解[通信过程](./connect)，这里我们将通信分为三类：
+在開始協議解析前我們需要先了解[通信過程](./connect)，這裏我們將通信分爲三類：
 
-- 握手 - 建立连接
-- 请求响应 - 请求和响应一对一
-- 推送 - 一端向另一端发送数据，无需响应
+- 握手 - 建立連接
+- 請求響應 - 請求和響應一對一
+- 推送 - 一端向另一端發送數據，無需響應
 
-根据上面的通信模型，我们可以将我们传递的数据包分为四类：
+根據上面的通信模型，我們可以將我們傳遞的數據包分爲四類：
 
 - [握手包](./handshake)
-- [请求包](./request)
-- [响应包](./response)
+- [請求包](./request)
+- [響應包](./response)
 - [推送包](./push)
 
-我们的业务数据都存放在数据包内的 `body` 部分，目前使用 [`Protobuf`](https://developers.google.com/protocol-buffers) 作为 `body` 的序列化方法。
+我們的業務數據都存放在數據包內的 `body` 部分，目前使用 [`Protobuf`](https://developers.google.com/protocol-buffers) 作爲 `body` 的序列化方法。
 
-> `Protobuf` 同时满足了可表达性、快速、数据紧凑的特点。
+> `Protobuf` 同時滿足了可表達性、快速、數據緊湊的特點。
 
-具体的业务数据的 `Protobuf` 定义可以在了解协议解析后查看：
+具體的業務數據的 `Protobuf` 定義可以在瞭解協議解析後查看：
 
 - [控制指令](../control-command)
-- [业务指令](../biz-command)
+- [業務指令](../biz-command)
