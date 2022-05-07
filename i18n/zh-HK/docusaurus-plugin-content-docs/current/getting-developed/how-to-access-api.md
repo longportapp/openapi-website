@@ -13,7 +13,7 @@ sidebar_position: 1
 
 ### 2. 獲取 App Key 信息及 Access Token
 
-在 [開發者後台](https://open.longbridgeapp.com/account) 中獲取 Token， **App Key** 以及 **App Secret**。
+在 [開發者後台](https://open.longbridgeapp.com/account) 中獲取 **Access Token**， **App Key** 以及 **App Secret**。
 
 ### 3. 生成簽名
 
@@ -139,7 +139,6 @@ import json
 import time
 import hashlib
 import hmac
-from urllib.parse import quote
 
 # request 請求信息
 # 請求方法
@@ -157,8 +156,8 @@ headers['Authorization'] = '${access_token}'
 headers['X-Timestamp'] =  str(time.time()) # Unix TimeStamp, eg. 1539095200.123
 headers['Content-Type'] = 'application/json; charset=utf-8'
 
-# API secret
-api_secret = "${這裡是 API Secret}"
+# App Secret
+app_secret = "${app_secret}"
 
 ## 簽名方法
 def sign(method, uri, headers, params, body, secret):
@@ -176,7 +175,7 @@ def sign(method, uri, headers, params, body, secret):
     return "HMAC-SHA256 SignedHeaders=authorization;x-api-key;x-timestamp, Signature=" + signature
 
 # 設置簽名
-headers['X-Api-Signature'] = sign(method,  uri, headers, params, body, api_secret)
+headers['X-Api-Signature'] = sign(method,  uri, headers, params, body, app_secret)
 
 # 請求接口
 response = requests.request(method, "https://openapi.lbkrs.com" + uri + '?' + params, headers=headers, data=body)
