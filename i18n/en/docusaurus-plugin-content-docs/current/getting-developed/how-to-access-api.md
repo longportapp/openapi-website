@@ -159,7 +159,7 @@ headers['Authorization'] = '${access_token}'
 headers['X-Timestamp'] =  str(time.time()) # Unix TimeStamp, eg. 1539095200.123
 headers['Content-Type'] = 'application/json; charset=utf-8'
 
-# APP secret
+# App Secret
 app_secret = "${app_secret}"
 
 ## signature function 
