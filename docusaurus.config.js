@@ -87,6 +87,7 @@ const config = {
         logo: {
           alt: 'Longbridge',
           href: openapiDomain,
+          target: '_self',
           src: 'https://pub.lbkrs.com/files/202204/U8NeviVyPf5Q7ecP/Group_156.png',
         },
         items: [
