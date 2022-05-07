@@ -35,16 +35,16 @@ sidebar_position: 1
         <td><a href="./order/history_deals">Get History Deals</a></td>
     </tr>
 <tr>
-        <td rowspan="4">资产</td>
-        <td><a href="./asset/account">获取账户资金信息</a></td>
+        <td rowspan="4">Asset</td>
+        <td><a href="./asset/account">Get Account Balance </a></td>
     </tr>
     <tr>
-        <td><a href="./asset/cashflow">获取资金流水信息</a></td>
+        <td><a href="./asset/cashflow">Get Cash Flow </a></td>
     </tr>
 <tr>
-        <td><a href="./asset/fund">获取基金持仓信息</a></td>
+        <td><a href="./asset/fund">Get Fund Positions </a></td>
     </tr>
 <tr>
-        <td><a href="./asset/stock">获取股票持仓信息</a></td>
+        <td><a href="./asset/stock">Get Stock Positions </a></td>
     </tr>
 </table>

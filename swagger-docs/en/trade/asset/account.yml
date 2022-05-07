@@ -1,23 +1,23 @@
 swagger: "2.0"
 info:
-  description: "该接口用于获取用户每个币种可用、可取、冻结、待结算金额、在途资金 (基金申购赎回) 信息"
+  description: "The API is used to obtain the available, desirable, frozen, to-be-settled, and in-transit funds (fund purchase and redemption) information for each currency of the user"
   version: "v1"
-  title: "获取账户资金"
+  title: "Get Account Balance"
 paths:
   /v1/asset/account:
     get:
       access:
       responses:
         "200":
-          description: "返回成功"
+          description: "Success"
           schema:
             $ref: "#/definitions/accountcash_rsp"
         "202001":
-          description: "内部错误"
+          description: "Internal Error"
         "202201":
-          description: "获取用户信息失败，检查下账号绑定关联是否正确"
+          description: "Failed to obtain user information, check whether the account binding association is correct"
         "202202":
-          description: "参数错误，检查下参数是否和要求的不一致"
+          description: "Parameter error, check whether the parameters are inconsistent with the requirements"
       request_body:
         type: "python"
         value: |
@@ -68,43 +68,43 @@ definitions:
     properties:
       list:
         type: "arrary"
-        description: 账户资金信息
+        description: Account Balance
         properties:
           total_cash:
             type: "string"
-            description: 现金总额
+            description: Total Cash
           max_finance_amount:
             type: "string"
-            description: 最大融资金额
+            description: Maximum Financing Amount
           remaining_finance_amount:
             type: "string"
-            description: 剩余融资金额
+            description: Remaining Financing Amount
           risk_level:
             type: "string"
-            description: 风控等级 <br/> <br/> <b>可选值:</b><br/> `1` - 低风险 <br/> `2` - 中低风险<br/> `3` - 中风险<br/> `4` - 中高风险 <br/> `5` - 高风险
+            description: Risk control level  <br/> <br/> <b>Option:</b><br/> `1` - low risk <br/> `2` - low to medium risk<br/> `3` - medium risk<br/> `4` - medium to high risk  <br/> `5` - high risk
           margin_call:
             type: "string"
-            description: 追缴保证金
+            description: Margin Call
           currency:
             type: "string"
-            description: 币种
+            description: Currency
           cashInfos:
             type: "object"
-            description: 现金详情
+            description: Cash Details
             properties:
               withdraw_cash:
                 type: "string"
-                description: 可提现金
+                description: Withdraw Cash
               available_cash:
                 type: "string"
-                description: 可用现金
+                description: Available Cash
               frozen_cash:
                 type: "string"
-                description: 冻结现金
+                description: Frozen Cash
               settling_cash:
                 type: "string"
-                description: 待结算现金
+                description: Cash to be Settled
               currency:
                 type: "string"
-                description: 币种
+                description: Currency
                 required: true
