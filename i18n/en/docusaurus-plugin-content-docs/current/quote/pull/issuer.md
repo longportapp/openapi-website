@@ -17,13 +17,13 @@ This API is used to obtain the warrant issuer IDs data (which can be synchronize
 
 ### Parameters
 
-| Name        | Type     | Description           |
-| ----------- | -------- | --------------------- |
-| issuer_info | object[] | Issuer information    |
-| ∟ id        | int32    | Issuer ID             |
-| ∟ name_cn   | string   | Issuer Name (简)      |
-| ∟ name_en   | string   | Issuer Name (English) |
-| ∟ name_hk   | string   | Issuer Name (繁)      |
+| Name        | Type     | Description         |
+| ----------- | -------- | ------------------- |
+| issuer_info | object[] | Issuer information  |
+| ∟ id        | int32    | Issuer ID           |
+| ∟ name_cn   | string   | Issuer Name (zh-CN) |
+| ∟ name_en   | string   | Issuer Name (en)    |
+| ∟ name_hk   | string   | Issuer Name (zh-HK) |
 
 ### Protobuf
 

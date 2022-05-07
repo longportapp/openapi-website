@@ -15,13 +15,13 @@ This API is used to obtain participant IDs data (which can be synchronized once 
 
 ### Response Properties
 
-| Name                       | Type     | Description                |
-| -------------------------- | -------- | -------------------------- |
-| participant_broker_numbers | object[] | participant data           |
-| ∟ broker_ids               | int32[]  | broker IDs                 |
-| ∟ participant_name_cn      | string   | participant name (简)      |
-| ∟ participant_name_en      | string   | participant name (english) |
-| ∟ participant_name_hk      | string   | participant name (繁)      |
+| Name                       | Type     | Description              |
+| -------------------------- | -------- | ------------------------ |
+| participant_broker_numbers | object[] | participant data         |
+| ∟ broker_ids               | int32[]  | broker IDs               |
+| ∟ participant_name_cn      | string   | participant name (zh-CN) |
+| ∟ participant_name_en      | string   | participant name (en)    |
+| ∟ participant_name_hk      | string   | participant name (zh-HK) |
 
 ### Protobuf
 

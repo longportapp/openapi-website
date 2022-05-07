@@ -35,9 +35,9 @@ message MultiSecurityRequest {
 | -------------------- | -------- | ---------------------------------------------------------------------------------------------------- |
 | secu_static_info     | object[] | Securities Basic Information                                                                         |
 | ∟ symbol             | string   | Security code                                                                                        |
-| ∟ name_cn            | string   | Security name (简)                                                                                   |
-| ∟ name_en            | string   | Security name (English)                                                                              |
-| ∟ name_hk            | string   | Security name (繁)                                                                                   |
+| ∟ name_cn            | string   | Security name (zh-CN)                                                                                |
+| ∟ name_en            | string   | Security name (en)                                                                                   |
+| ∟ name_hk            | string   | Security name (zh-HK)                                                                                |
 | ∟ exchange           | string   | Exchange which the security belongs to                                                               |
 | ∟ currency           | string   | Trading currency <br /><br />**Optional value: **<br />`CNY` <br />`USD` <br />`SGD` <br />`HKD`     |
 | ∟ lot_size           | int32    | Lot size                                                                                             |

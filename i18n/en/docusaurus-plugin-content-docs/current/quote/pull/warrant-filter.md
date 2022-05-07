@@ -30,7 +30,7 @@ This API is used to obtain the quotes of HK warrants, and supports sorting and f
 | ∟ expiry_date | int32[] | No       | Filter expiry date, example: `[1]` <br /><br />**Optional value:**<br />`1` - Less than 3 months<br />`2` - 3 - 6 months<br />`3` - 6 - 12 months<br />`4` - greater than 12 months |
 | ∟ price_type  | int32[] | No       | Filter in/out of bounds, for example: `[2]` <br /><br />**Optional value:**<br />`1` - In bounds<br />`2` - Out bounds                                                              |
 | ∟ status      | int32[] | No       | Filter status, for example: `[2]` <br /><br />**Optional value:**<br />`2 `- Suspend trading<br />`3` - Papare List<br />`4` - Normal                                               |
-| language      | int32   | Yes      | Language, for example: `[1]` <br /><br />**Optional value:**<br />`0` - 简体<br />`1` - English<br />`2` - 繁體                                                                     |
+| language      | int32   | Yes      | Language, for example: `[1]` <br /><br />**Optional value:**<br />`0` - zh-CN<br />`1` - en<br />`2` - zh-HK                                                                        |
 
 ### Protobuf
 
