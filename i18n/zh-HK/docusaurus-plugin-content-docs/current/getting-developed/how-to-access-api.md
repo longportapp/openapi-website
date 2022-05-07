@@ -139,7 +139,6 @@ import json
 import time
 import hashlib
 import hmac
-from urllib.parse import quote
 
 # request 請求信息
 # 請求方法

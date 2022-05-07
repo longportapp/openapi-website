@@ -140,8 +140,6 @@ import json
 import time
 import hashlib
 import hmac
-from urllib.parse import quote
-
 
 # request information 
 # request method 
