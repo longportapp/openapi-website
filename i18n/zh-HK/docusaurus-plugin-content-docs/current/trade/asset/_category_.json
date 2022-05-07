@@ -1,10 +1,10 @@
 {
   "position": 4,
-  "label": "资产",
+  "label": "資產",
   "collapsible": true,
   "collapsed": true,
   "link": {
-    "title": "资产信息介绍",
+    "title": "資產信息介紹",
     "slug": "/trade/asset"
   }
 }

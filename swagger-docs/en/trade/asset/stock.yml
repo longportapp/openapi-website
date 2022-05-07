@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
-  description: "该接口用于获取包括账户、股票代码、持仓股数、可用股数、持仓均价（按账户设置计算均价方式）、币种在内的股票持仓信息"
+  description: "The API is used to obtain stock position information including account, stock code, number of shares held, number of available shares, average position price (calculated according to account settings), and currency."
   version: "v1"
-  title: "获取股票持仓"
+  title: "Get stock positions"
 paths:
   /v1/asset/stock:
     get:
@@ -10,19 +10,19 @@ paths:
       parameters:
         - name: "symbol"
           type: "string[]"
-          description: "基金代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
+          description: "fund code，use `ticker.region` format，E.g：`AAPL.US`"
           required: false
       responses:
         "200":
-          description: "返回成功"
+          description: "success"
           schema:
             $ref: "#/definitions/stock_rsp"
         "202001":
-          description: "内部错误"
+          description: "internal error"
         "202201":
-          description: "获取用户信息失败，检查下账号绑定关联是否正确"
+          description: "Failed to obtain user information, check whether the account binding association is correct"
         "202202":
-          description: "参数错误，检查下参数是否和要求的不一致"
+          description: "Parameter error, check whether the parameters are inconsistent with the requirements"
       request_body:
         type: "python"
         value: |
@@ -45,7 +45,7 @@ paths:
                       [
                         {
                           "symbol": "700.HK",
-                          "symbol_name": "腾讯控股",
+                          "symbol_name": "TENCENT",
                           "currency": "HK",
                           "quality": "650",
                           "available_quality": "-450",
@@ -53,7 +53,7 @@ paths:
                         },
                         {
                           "symbol": "9991.HK",
-                          "symbol_name": "宝尊电商-SW",
+                          "symbol_name": "BAOZUN-SW",
                           "currency": "HK",
                           "quality": "200",
                           "available_quality": "0",
@@ -61,42 +61,42 @@ paths:
                         },
                         {
                           "symbol": "TCEHY.US",
-                          "symbol_name": "腾讯控股 (ADR)",
+                          "symbol_name": "Tencent (ADR)",
                           "currency": "US",
                           "quality": "10",
                           "available_quality": "10",
                         },
                         {
                           "symbol": "2628.HK",
-                          "symbol_name": "中国人寿",
+                          "symbol_name": "CHINA LIFE",
                           "currency": "HK",
                           "quality": "9000",
                           "available_quality": "0",
                         },
                         {
                           "symbol": "5.HK",
-                          "symbol_name": "汇丰控股",
+                          "symbol_name": "HSBC HOLDINGS",
                           "currency": "HK",
                           "quality": "2400",
                           "available_quality": "2000",
                         },
                         {
                           "symbol": "BABA.US",
-                          "symbol_name": "阿里巴巴",
+                          "symbol_name": "Alibaba",
                           "currency": "US",
                           "quality": "2000209",
                           "available_quality": "2000209",
                         },
                         {
                           "symbol": "2.HK",
-                          "symbol_name": "中电控股",
+                          "symbol_name": "CLP HOLDINGS",
                           "currency": "HK",
                           "quality": "2000",
                           "available_quality": "2000",
                         },
                         {
                           "symbol": "NOK.US",
-                          "symbol_name": "诺基亚",
+                          "symbol_name": "Nokia",
                           "currency": "US",
                           "quality": "1",
                           "available_quality": "0",
@@ -112,30 +112,30 @@ definitions:
     properties:
       list:
         type: "arrary"
-        description: "股票持仓信息"
+        description: "stock holding information"
         properties:
           account_channel:
             type: string
-            description: 账户类型
+            description: account type
           stock_info:
             type: "arrary"
-            description: 股票列表
+            description: stock list
             properties:
               symbol:
                 type: "string"
-                description: 股票代码
+                description: stock code
               symbol_name:
                 type: "string"
-                description: 股票名称
+                description: stock name
               quality:
                 type: "string"
-                description: 持仓股数
+                description: number of shares held
               available_quality:
                 type: "string"
-                description: 可用股数
+                description: available shares
               currency:
                 type: "string"
-                description: 币种
+                description: currency
               cost_price:
                 type: "string"
-                description: 成本价格 (具体根据客户端选择平均买入还是摊薄成本)
+                description: cost price(According to the client's choice of average purchase or diluted cost)
