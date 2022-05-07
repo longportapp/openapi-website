@@ -74,7 +74,7 @@ $ export LONGBRIDGE_ACCESS_TOKEN=从页面上获取到的 Access Token
 
 ### 获取资产总览
 
-创建一个 `main.py` 贴入下面的代码：
+创建一个 `account_asset.py` 贴入下面的代码：
 
 ```py
 import os
@@ -88,10 +88,10 @@ resp = http.get("/v1/asset/account")
 print(json.dumps(resp.data, indent=2))
 ```
 
-运行 `main.py` 后，会输出如下：
+运行 `account_asset.py` 后，会输出如下：
 
 ```bash
-python3 main.py
+python account_asset.py
 ```
 
 ```json
@@ -190,7 +190,7 @@ while True:
 启动行情订阅：
 
 ```bash
-$ python3 subscribe_quote.py
+$ python subscribe_quote.py
 ```
 
 我们可以看到这样的结果：
@@ -246,7 +246,7 @@ except Exception as e:
   print(f"Submit order error\ncode: {e.code}\nmessage: {e.message}")
 ```
 
-执行 `python3 submit_order.py` 后，会输出如下：
+执行 `python submit_order.py` 后，会输出如下：
 
 ```json
 {
