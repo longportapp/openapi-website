@@ -54,11 +54,49 @@ $ pip3 install longbridge
 
 在页面上会给出 “应用凭证” 凭证信息，我们拿到以后设置环境变量，便于后面开发使用方便。
 
+### macOS / Linux 环境下设置环境变量
+
+打开终端，输入下面的命令即可：
+
 ```bash
-$ export LONGBRIDGE_APP_KEY=从页面上获取到的 App Key
-$ export LONGBRIDGE_APP_SECRET=从页面上获取到的 App Secret
-$ export LONGBRIDGE_ACCESS_TOKEN=从页面上获取到的 Access Token
+$ export LONGBRIDGE_APP_KEY="从页面上获取到的 App Key"
+$ export LONGBRIDGE_APP_SECRET="从页面上获取到的 App Secret"
+$ export LONGBRIDGE_ACCESS_TOKEN="从页面上获取到的 Access Token"
 ```
+
+### Windows 下设置环境变量
+
+Windows 要稍微复杂一些，按下 `Win + R` 快捷键，输入 `cmd` 命令启动命令行（建议使用 [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) 获得更好的开发体验）。 
+
+在命令行里面输入下面的命令设置环境变量：
+
+```bash
+C:\Users\jason> setx LONGBRIDGE_APP_KEY "从页面上获取到的 App Key"
+成功: 指定的值已得到保存。
+
+C:\Users\jason> setx LONGBRIDGE_APP_SECRET "从页面上获取到的 App Secret"
+成功: 指定的值已得到保存。
+
+C:\Users\jason> setx LONGBRIDGE_ACCESS_TOKEN "从页面上获取到的 Access Token"
+成功: 指定的值已得到保存。
+```
+
+:::caution
+
+Windows 环境变量限制，当上面 3 条命令执行成功以后，你需要重新启动 Windows 或者注销后重新登录一次，才可以读取到。
+
+:::
+
+注销或重新启动后，再次打开命令行，输入下面的命令验证一下环境变量是否设置正确：
+
+```bash
+C:\Users\jason> set LONGBRIDGE
+LONGBRIDGE_APP_KEY=xxxxxxx
+LONGBRIDGE_APP_SECRET=xxxxxx
+LONGBRIDGE_ACCESS_TOKEN=xxxxxxx
+```
+
+如果能正确打印你刚才设置的值，那么环境变量就是对了。
 
 :::tip
 建议您设置好 `LONGBRIDGE_APP_KEY`, `LONGBRIDGE_APP_SECRET`, `LONGBRIDGE_ACCESS_TOKEN` 这几个环境变量。我们为了演示方便，后面各章节文档中的示例代码都会使用这几个环境变量。
