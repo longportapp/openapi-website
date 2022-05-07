@@ -87,7 +87,7 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 示例如下：
 
 ```bash
-curl -v https://openapi.longbridge.sg/v1/test \
+curl -v https://openapi.lbkrs.com/v1/test \
     -H "X-Api-Signature: {签名}" -H "X-Api-Key: {access key}" \
     -H "Authorization: {token}" -H "X-Timestamp: {签名时间}"
 ```
