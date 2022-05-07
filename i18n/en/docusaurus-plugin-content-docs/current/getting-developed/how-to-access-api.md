@@ -159,8 +159,8 @@ headers['Authorization'] = '${access_token}'
 headers['X-Timestamp'] =  str(time.time()) # Unix TimeStamp, eg. 1539095200.123
 headers['Content-Type'] = 'application/json; charset=utf-8'
 
-# API secret
-api_secret = "${app_secret}"
+# APP secret
+app_secret = "${app_secret}"
 
 ## signature function 
 def sign(method, uri, headers, params, body, secret):
@@ -178,7 +178,7 @@ def sign(method, uri, headers, params, body, secret):
     return "HMAC-SHA256 SignedHeaders=authorization;x-api-key;x-timestamp, Signature=" + signature
 
 # set signature header 
-headers['X-Api-Signature'] = sign(method,  uri, headers, params, body, api_secret)
+headers['X-Api-Signature'] = sign(method,  uri, headers, params, body, app_secret)
 
 # call an API 
 response = requests.request(method, "https://openapi.lbkrs.com" + uri + '?' + params, headers=headers, data=body)
