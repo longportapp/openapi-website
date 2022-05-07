@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   description: "The API is used to obtain capital inflow/outflow direction, capital type, capital amount, occurrence time, associated stock code and capital flow description information"
   version: "v1"
-  title: "Get cash flow"
+  title: "Get Cash Flow"
 paths:
   /v1/asset/cashflow:
     get:
@@ -10,7 +10,7 @@ paths:
       parameters:
         - name: "start_time"
           type: "string"
-          description: "starting time timestamp，in `seconds`，E.g：`1650037563`"
+          description: "start time timestamp，in `seconds`，E.g：`1650037563`"
           required: true
         - name: "end_time"
           type: "string"
@@ -18,11 +18,11 @@ paths:
           required: true
         - name: "business_type"
           type: "string"
-          description: "balance type<br/><br/> <b>Option:</b> <br/>`1` - cash <br/>`2` - stock<br/> `3` - fund"
+          description: "Balance type<br/><br/> <b>Option:</b> <br/>`1` - cash <br/>`2` - stock<br/> `3` - fund"
           required: false
         - name: "symbol"
           type: "string"
-          description: "target code，E.g：`AAPL.US`"
+          description: "Target code，E.g：`AAPL.US`"
           required: false
         - name: "page"
           type: "string"
@@ -35,11 +35,11 @@ paths:
 
       responses:
         "200":
-          description: "success"
+          description: "Success"
           schema:
             $ref: "#/definitions/cashflow_rsp"
         "202001":
-          description: "internal error"
+          description: "Internal Error"
         "202201":
           description: "Failed to obtain user information, check whether the account binding association is correct"
         "202202":
@@ -87,30 +87,30 @@ definitions:
     properties:
       list:
         type: "arrary"
-        description: cash flow info
+        description: Cash flow info
         properties:
           transaction_flow_name:
             type: string
-            description: cash flow name
+            description: Cash flow name
           direction:
             type: "string"
             description: outflow direction <br/><br/><b>Option:</b> <br/>`1` - outflow <br/>  `2` - inflow
           business_type:
             type: "string"
-            description: funding Category <br/><br/><b>Option:</b> <br/>`1` - cash <br/> `2` - stock <br/> `3` - fund
+            description: Funding Category <br/><br/><b>Option:</b> <br/>`1` - cash <br/> `2` - stock <br/> `3` - fund
           balance:
             type: "string"
-            description: funding amount
+            description: Cash amount
           currency:
             type: "string"
-            description: fund currency
+            description: Cash Currency
           business_time:
             type: "string"
-            description: business hours
+            description: business time
           symbol:
             type: "string"
-            description: associated stock code information
+            description: associated Stock code information
             required: true
           description:
             type: "string"
-            description: capital flow description
+            description: Cash flow description

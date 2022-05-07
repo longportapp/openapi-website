@@ -35,16 +35,16 @@ sidebar_position: 1
         <td><a href="./order/history_deals">Get History Deals</a></td>
     </tr>
 <tr>
-        <td rowspan="4">资产</td>
-        <td><a href="./asset/account">Get account balance information</a></td>
+        <td rowspan="4">Asset</td>
+        <td><a href="./asset/account">Get Account Balance </a></td>
     </tr>
     <tr>
-        <td><a href="./asset/cashflow">Get cash flow information</a></td>
+        <td><a href="./asset/cashflow">Get Cash Flow </a></td>
     </tr>
 <tr>
-        <td><a href="./asset/fund">Get fund position information</a></td>
+        <td><a href="./asset/fund">Get Fund Positions </a></td>
     </tr>
 <tr>
-        <td><a href="./asset/stock">Get stock position information</a></td>
+        <td><a href="./asset/stock">Get Stock Positions </a></td>
     </tr>
 </table>

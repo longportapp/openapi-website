@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   description: "The API is used to obtain fund position information including account, fund code, holding share, cost net worth, current net worth, and currency."
   version: "v1"
-  title: "Get fund positions"
+  title: "Get Fund Positions"
 paths:
   /v1/asset/fund:
     get:
@@ -10,15 +10,15 @@ paths:
       parameters:
         - name: "symbol"
           type: "string[]"
-          description: fund code, in `ISIN` format，E.g：`HK0000676327` <a href="https://en.wikipedia.org/wiki/International_Securities_Identification_Number">ISIN explain</a>
+          description: Fund code, in `ISIN` format，E.g：`HK0000676327` <a href="https://en.wikipedia.org/wiki/International_Securities_Identification_Number">ISIN explain</a>
           required: false
       responses:
         "200":
-          description: "success"
+          description: "Success"
           schema:
             $ref: "#/definitions/fund_rsp"
         "202001":
-          description: "internal error"
+          description: "Internal Error"
         "202201":
           description: "Failed to obtain user information, check whether the account binding association is correct"
         "202202":
@@ -70,23 +70,23 @@ definitions:
             description: account type
           fund_info:
             type: "arrary"
-            description: fund Details
+            description: Fund Details
             properties:
               symbol:
                 type: "string"
-                description: fund ISIN code
+                description: Fund ISIN code
               current_net_asset_value:
                 type: "string"
-                description: current equity
+                description: current Equity
               net_asset_value_day:
                 type: "string"
-                description: current equity time
+                description: current Equity time
               symbol_name:
                 type: "string"
-                description: fund name
+                description: Fund name
               currency:
                 type: "string"
-                description: currency
+                description: Currency
               cost_net_asset_value:
                 type: "string"
-                description: net cost
+                description: Net Cost
