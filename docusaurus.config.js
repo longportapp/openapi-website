@@ -16,6 +16,9 @@ const config = {
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   i18n,
+  customFields: {
+    isDev: process.env.STAGE === 'dev',
+  },
   favicon: 'https://pub.lbkrs.com/files/202107/35tULHe3n4Pp4EtA/logo.png',
   plugins: [
     'docusaurus-plugin-sass',
@@ -92,7 +95,7 @@ const config = {
         },
         items: [
           {
-            to: '/',
+            to: openapiDomain,
             position: 'left',
             target: '_self',
             label: '开发者认证',
