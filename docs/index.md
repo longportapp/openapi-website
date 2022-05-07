@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: -999
 slug: /
 title: OpenAPI 介绍
 id: getting_started_introduce

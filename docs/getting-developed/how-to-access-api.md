@@ -17,6 +17,14 @@ sidebar_position: 1
 
 ### 3. 生成签名
 
+:::tip
+
+我们提供的 [SDK](/sdk) 已经完整实现了，你如果是 [SDK](/sdk) 用户，可以直接忽略签名认证部分。
+
+此部分内容是为了给非 SDK 用户提供参考。
+
+:::
+
 先根据相应的 API 文档构造请求后， 通过 OpenAPI SDK 直接调用 API，SDK 会帮助生成签名， 或者通过以下流程创建签名。
 
 #### 添加 `X-Api-Key`、`X-Timestamp`、`Authorization`
@@ -78,7 +86,8 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 
 ## 基本路径
 
-所有 API 的路径都以 [https://openapi.longbridge.sg](https://openapi.longbridge.sg) 开头。
+- HTTP API - `https://openapi.lbkrs.com`
+- WebSocket - `wss://openapi-quote.longbridge.global`
 
 ## API Request
 
