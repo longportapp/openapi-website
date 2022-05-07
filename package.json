@@ -9,7 +9,7 @@
     "dev": "yarn dev:docs",
     "dev:en": "yarn dev:docs --locale en",
     "dev:zh-HK": "yarn dev:docs --locale zh-HK",
-    "dev:docs": "docusaurus start --port=8000",
+    "dev:docs": "STAGE=dev docusaurus start --port=8000",
     "dev:swagger": "WATCH=1 node swagger-watch.js",
     "build:swagger": "node swagger-watch.js",
     "build": "yarn clear && yarn build:swagger && yarn build:canary",
