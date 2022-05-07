@@ -78,7 +78,7 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 
 ## 基本路徑
 
-所有 API 的路徑都以 [https://openapi.lbkrs.com](https://openapi.lbkrs.com) 開頭。
+所有 API 的路徑都以 [https://openapi.longbridge.global](https://openapi.longbridge.global) 開頭。
 
 > TIP: 也可以用 https://openapi.longbridge.global
 
@@ -89,7 +89,7 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 示例如下：
 
 ```bash
-curl -v https://openapi.lbkrs.com/v1/test \
+curl -v https://openapi.longbridge.global/v1/test \
     -H "X-Api-Signature: {簽名}" -H "X-Api-Key: {app_key}" \
     -H "Authorization: {access_token}" -H "X-Timestamp: 1539095200.123"
 ```
@@ -178,7 +178,7 @@ def sign(method, uri, headers, params, body, secret):
 headers['X-Api-Signature'] = sign(method,  uri, headers, params, body, app_secret)
 
 # 請求接口
-response = requests.request(method, "https://openapi.lbkrs.com" + uri + '?' + params, headers=headers, data=body)
+response = requests.request(method, "https://openapi.longbridge.global" + uri + '?' + params, headers=headers, data=body)
 
 print(response.text)
 

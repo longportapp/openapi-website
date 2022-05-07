@@ -24,7 +24,7 @@ Longbridge OpenAPI SDK 基于 Rust 底层提供标准实现，通过 FFI 提供�
 
 ## API Host
 
-- HTTP API - `https://openapi.lbkrs.com`
+- HTTP API - `https://openapi.longbridge.global`
 - WebSocket - `wss://openapi-quote.longbridge.global`
 
 ## 环境需求
@@ -82,7 +82,7 @@ import json
 from longbridge.http import Auth, Config, HttpClient
 
 auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.lbkrs.com"))
+http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
 
 resp = http.get("/v1/asset/account")
 print(json.dumps(resp.data, indent=2))
@@ -136,8 +136,16 @@ python3 main.py
 
 运行前访问 [开发者中心](https://open.longbridgeapp.com/account)，检查确保账户有正确的行情权限。
 
-> NOTE: 如没有开通行情权限，可以通过 "长桥" 手机客户端，并进入 “我的 - 我的行情 - 行情商城“ 购买开通行情权限。
-> https://longbridgeapp.com/download
+:::info
+
+如没有开通行情权限，可以通过 "长桥" 手机客户端，并进入 “我的 - 我的行情 - 行情商城“ 购买开通行情权限。
+
+https://longbridgeapp.com/download
+:::
+
+当你有正确的行情权限，看起来可能会是这样：
+
+<img src="https://pub.lbkrs.com/files/202205/JjCceNDSqeBJpaWv/SCR-20220507-rnm.png" className="max-w-2xl" />
 
 创建一个 `subscribe_quote.py` 并写入下面的代码：
 
@@ -164,7 +172,7 @@ class MyWsCallback(WsCallback):
         print(f"Received state -> {state}")
 
 auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.lbkrs.com"))
+http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
 ws = WsClient("wss://openapi-quote.longbridge.global", http, MyWsCallback())
 
 req = SubscribeRequest(symbol=["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], sub_type=[SubType.QUOTE], is_first_push=True)
@@ -219,7 +227,7 @@ import json
 from longbridge.http import Auth, Config, HttpClient
 
 auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.lbkrs.com"))
+http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
 
 payload = {
     "side": "Buy",
@@ -262,7 +270,7 @@ import json
 from longbridge.http import Auth, Config, HttpClient
 
 auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.lbkrs.com"))
+http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
 
 resp = http.get("/v1/trade/order/today")
 print(json.dumps(resp.data, indent=2))

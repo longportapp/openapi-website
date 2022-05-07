@@ -1,21 +1,21 @@
 ---
-title: How to access an API 
+title: How to access an API
 id: how-to-access-api
 slug: /how-to-access-api
 sidebar_position: 1
 ---
 
-## API access process 
+## API access process
 
 ### 1. Enable OpenAPI service
 
-Refer to [Introduction to OpenAPI](... /docs/#How to open) to open the corresponding service. 
+Refer to [Introduction to OpenAPI](... /docs/#How to open) to open the corresponding service.
 
 ### 2. Get App Key and Access Token information
 
 To get **Access Token**, **App Key** and **App Secret** on [Developer Website](https://open.longbridgeapp.com/account).
 
-### 3. Calculate signature 
+### 3. Calculate signature
 
 After constructing a request based on an corresponding API documentation, call the API directly through the OpenAPI SDK, which will help generate a signature, or create a signature through the following process.
 
@@ -32,7 +32,7 @@ headers['X-Timestamp' =  str(time.time()) # Unix Timestamp, eg: 1539095200.123
 headers['Content-Type'] = 'application/json; charset=utf-8',
 ```
 
-#### Sign requests 
+#### Sign requests
 
 The example of signature function：
 
@@ -59,15 +59,15 @@ def sign(method, uri, headers, params, body, secret):
 Signing the request and sets the signature in the request header `X-Api-Signature`.
 
 ```py
-# request method 
+# request method
 method = "POST"
-# request path 
+# request path
 uri = "/v1/trade/order/submit"
 # request params, for example member_id=1&account_channel=2
 params = ""
-# request body 
+# request body
 body = json.dumps({ "order_id": '683615454870679552' })
-# signing requests and set signature it on the X-Api-Signature 
+# signing requests and set signature it on the X-Api-Signature
 headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 
 ```
@@ -78,7 +78,7 @@ Use the HTTP client to send signed requests.
 
 ## 基本路径
 
-All API paths start with [https://openapi.lbkrs.com](https://openapi.lbkrs.com).
+All API paths start with [https://openapi.longbridge.global](https://openapi.longbridge.global).
 
 > TIP: You can also use https://openapi.longbridge.global
 
@@ -89,7 +89,7 @@ The call to the server-side interface needs to be in HTTPS protocol, JSON format
 For example：
 
 ```bash
-curl -v https://openapi.lbkrs.com/v1/test \
+curl -v https://openapi.longbridge.global/v1/test \
     -H "X-Api-Signature: {signature}" -H "X-Api-Key: {app_key}" \
     -H "Authorization: {access_token}" -H "X-Timestamp: 1539095200.123"
 ```
@@ -124,7 +124,6 @@ For example, the response body of a successful request:
 
 the response body of a failed request:
 
-
 ```json
 {
   "code": 403201,
@@ -141,16 +140,16 @@ import time
 import hashlib
 import hmac
 
-# request information 
-# request method 
+# request information
+# request method
 method = "POST"
-# request path 
+# request path
 uri = "/v1/trade/order/submit"
 # request params, for example member_id=1&account_channel=2
 params = ""
 # request body
 body = json.dumps({ "order_id": '683615454870679552' })
-# request headers 
+# request headers
 headers = {}
 headers['X-Api-Key'] = '${app_key}'
 headers['Authorization'] = '${access_token}'
@@ -160,7 +159,7 @@ headers['Content-Type'] = 'application/json; charset=utf-8'
 # App Secret
 app_secret = "${app_secret}"
 
-## signature function 
+## signature function
 def sign(method, uri, headers, params, body, secret):
     ts = headers["X-Timestamp"]
     access_token = headers["Authorization"]
@@ -175,11 +174,11 @@ def sign(method, uri, headers, params, body, secret):
     signature = hmac.new(secret.encode('utf-8'), sign_str.encode('utf-8'), digestmod=hashlib.sha256).hexdigest()
     return "HMAC-SHA256 SignedHeaders=authorization;x-api-key;x-timestamp, Signature=" + signature
 
-# set signature header 
+# set signature header
 headers['X-Api-Signature'] = sign(method,  uri, headers, params, body, app_secret)
 
-# call an API 
-response = requests.request(method, "https://openapi.lbkrs.com" + uri + '?' + params, headers=headers, data=body)
+# call an API
+response = requests.request(method, "https://openapi.longbridge.global" + uri + '?' + params, headers=headers, data=body)
 
 print(response.text)
 
