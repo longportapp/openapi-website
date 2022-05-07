@@ -3,8 +3,5 @@
   "label": "资产",
   "collapsible": true,
   "collapsed": true,
-  "link": {
-    "title": "资产信息介绍",
-    "slug": "/trade/asset"
-  }
+  "link": null
 }

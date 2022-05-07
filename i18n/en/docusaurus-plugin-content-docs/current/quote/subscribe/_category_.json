@@ -2,9 +2,6 @@
   "label": "Subscription",
   "collapsible": true,
   "collapsed": true,
-  "link": {
-    "title": "Subscription",
-    "slug": "/quote/subscribe"
-  },
+  "link": null,
   "position": 3
 }

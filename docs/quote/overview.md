@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 id: quote_overview
-title: 行情概览
+title: 行情
 slug: overview
 ---
 
@@ -100,10 +100,9 @@ slug: overview
 1. 使用私有协议，长连接方式进行接入，接入方法请参考 <a href="../socket/protocol/overview" target="_blank">二进制通信协议</a>。
 2. 使用 SDK 进行接入，[SDK 介绍及下载地址](https://open.longbridgeapp.com/sdk)。
 
-
 ### 业务数据序列化方式
 
-行情的请求、响应、推送数据作为业务数据，存放在私有协议的数据包 body 部分。   
+行情的请求、响应、推送数据作为业务数据，存放在私有协议的数据包 body 部分。  
 我们使用 [Protobuf](https://developers.google.cn/protocol-buffers) 协议对业务数据进行序列化，相较于常见的文本协议（如 JSON, XML 等），Protobuf 协议具有如下优点：
 
 - 序列化时间快

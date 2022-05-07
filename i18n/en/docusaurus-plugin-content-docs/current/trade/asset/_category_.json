@@ -3,8 +3,5 @@
   "label": "Assets",
   "collapsible": true,
   "collapsed": true,
-  "link": {
-    "title": "Asset Information Introduction",
-    "slug": "/trade/asset"
-  }
+  "link": null
 }

@@ -2,9 +2,6 @@
   "label": "訂閱",
   "collapsible": true,
   "collapsed": true,
-  "link": {
-    "title": "訂閱",
-    "slug": "/quote/subscribe"
-  },
+  "link": null,
   "position": 3
 }

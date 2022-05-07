@@ -3,8 +3,5 @@
   "collapsible": true,
   "collapsed": true,
   "position": 4,
-  "link": {
-    "title": "交易接口介绍",
-    "slug": "/trade"
-  }
+  "link": null
 }
