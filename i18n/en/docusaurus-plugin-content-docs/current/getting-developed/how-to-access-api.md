@@ -13,7 +13,7 @@ Refer to [Introduction to OpenAPI](... /docs/#How to open) to open the correspon
 
 ### 2. Get App Key and Access Token information
 
-To get **Token**, **App Key** and **App Secret** on [Developer Website](https://open.longbridgeapp.com/account).
+To get **Access Token**, **App Key** and **App Secret** on [Developer Website](https://open.longbridgeapp.com/account).
 
 ### 3. Calculate signature 
 
