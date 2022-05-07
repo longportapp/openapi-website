@@ -1,104 +1,112 @@
 ---
 sidebar_position: 1
 id: quote_overview
-title: 行情概览
+title: Quote Overview
 slug: overview
 ---
 
-### 行情接口概览
+### Quote API Overview
 
 <table>
     <tr>
-        <td>类型</td>
-        <td>功能简介</td>
+        <td>Type</td>
+        <td>Description</td>
     </tr>
     <tr>
-        <td rowspan="16">拉取</td>
-        <td><a href="./pull/static">获取标的基础信息</a></td>
+        <td rowspan="16">Pull</td>
+        <td><a href="./pull/static">Get Basic Information Of Securities</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/quote">获取标的实时行情</a></td>
+        <td><a href="./pull/quote">Get Real-time Quotes Of Securities</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/option-quote">获取期权实时行情</a></td>
+        <td><a href="./pull/option-quote">Get Real-time Quotes Of Option Securities</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/warrant-quote">获取轮证实时行情</a></td>
+        <td><a href="./pull/warrant-quote">Get Real-time Quotes Of Warrant Securities</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/depth">获取标的盘口</a></td>
+        <td><a href="./pull/depth">Get Security Depth</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/brokers">获取标的经纪队列</a></td>
+        <td><a href="./pull/brokers">Get Security Brokers</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/broker-ids">获取券商席位 id</a></td>
+        <td><a href="./pull/broker-ids">Get Broker IDs</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/trade">获取标的成交明细</a></td>
+        <td><a href="./pull/trade">Get Security Trades</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/intraday">获取标的分时</a></td>
+        <td><a href="./pull/intraday">Get Security Intraday</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/candlestick">获取标的 k 线</a></td>
+        <td><a href="./pull/candlestick">Get Security Candlestick</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/optionchain-date">获取标的的期权链到期日列表</a></td>
+        <td><a href="./pull/optionchain-date">Get Option Chain Expiry Date List</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/optionchain-date-strike">获取标的的期权链到期日期权标的列表</a></td>
+        <td><a href="./pull/optionchain-date-strike">Get Option Chain Info By Date</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/issuer">获取轮证发行商 id</a></td>
+        <td><a href="./pull/issuer">Get Warrant Issuer IDs</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/warrant-filter">获取轮证筛选列表</a></td>
+        <td><a href="./pull/warrant-filter">Get Filtered Warrant</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/trade-session">获取各市场当日交易时段</a></td>
+        <td><a href="./pull/trade-session">Get Trading Session Of The Day</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/trade-day">获取市场交易日</a></td>
+        <td><a href="./pull/trade-day">Get Market Trading Days</a></td>
     </tr>
     <tr>
-        <td rowspan="3">订阅</td>
-        <td><a href="./subscribe/subscription">获取已订阅标的行情</a></td>
+        <td rowspan="3">Subscription</td>
+        <td><a href="./subscribe/subscription">Get Subscription Information</a></td>
     </tr>
     <tr>
-        <td><a href="./subscribe/subscribe">订阅行情数据</a></td>
+        <td><a href="./subscribe/subscribe">Subscribe Quote</a></td>
     </tr>
     <tr>
-        <td><a href="./subscribe/unsubscribe">取消订阅行情数据</a></td>
+        <td><a href="./subscribe/unsubscribe">Unsubscribe Quote</a></td>
     </tr>
     <tr>
-        <td rowspan="4">推送</td>
-        <td><a href="./push/push-quote">实时价格推送</a></td>
+        <td rowspan="4">Push</td>
+        <td><a href="./push/push-quote">Push Real-time Quote</a></td>
     </tr>
     <tr>
-        <td><a href="./push/push-depth">实时盘口推送</a></td>
+        <td><a href="./push/push-depth">Push Real-time Depth</a></td>
     </tr>
     <tr>
-        <td><a href="./push/push-broker">实时经纪队列推送</a></td>
+        <td><a href="./push/push-broker">Push Real-time Brokers</a></td>
     </tr>
     <tr>
-        <td><a href="./push/push-trade">实时成交明细推送</a></td>
+        <td><a href="./push/push-trade">Push Real-time Trades</a></td>
     </tr>
 </table>
 
-### 标的代码说明
+### Description Of Security Code
 
-标的代码使用 `ticker.region` 格式，`ticker` 表示标的代码，各个市场的标的代码示例：
+The security code uses the `ticker.region` format, `ticker` represents the code, and example for each market:
 
-- 美股市场 `region` 为 `US`，例如：`AAPL.US`
-- 港股市场：`region` 为 `HK`，例如：`700.HK`
-- A 股市场：`region` 上交所为 `SH`，深交所为 `SZ`，例如：`399001.SZ`，`600519.SH`
-- 新加坡市场：`region` 为 `SG`，例如：`D05.SG`
+- US Market: `region` is `US`, for example: `AAPL.US`.
+- HK Market: `region` is `HK`, for example: `700.HK`.
+- CN Market: `region` is `SH` for Shanghai Stock Exchange and `SZ` for Shenzhen Stock Exchange, for example: `399001.SZ`, `600519.SH`.
+- SG Market: `region` is `SG`, for example: `D05.SG`.
 
-### 接入方式
+### Access Method
 
-使用私有协议，长连接方式进行接入，接入方法请参考 [二进制通信协议](../socket/protocol/protocol_overview.md)
+1. Use private protocol and long connection mode to access, please refer to <a href="../socket/protocol/overview" target="_blank">Binary Communication Protocol</a> for access method.
+2. Use SDK for access, [SDK introduction and download address](https://open.longbridgeapp.com/sdk).
 
-### Protobuf 下载地址
+### Business Data Serialization
 
-行情 Protobuf 协议文档[下载地址](https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto)。
+The market request, response and push data are stored as business data in the body part of the data package of the private protocol.  
+We use the [Protobuf](https://developers.google.cn/protocol-buffers) protocol to serialize business data. Compared with common text protocols (such as JSON, XML, etc.), the Protobuf protocol has the following advantages:
+
+- Faster serialization time.
+- Smaller packet size.
+- Strongger version forward and backward compatibility.
+
+Quote Protobuf protocol document [download link](https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto).

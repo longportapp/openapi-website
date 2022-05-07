@@ -1,23 +1,23 @@
 ---
 id: quote_quote
-title: 获取标的实时行情
+title: Get Real-time Quotes Of Securities
 slug: quote
 sidebar_position: 2
 ---
 
-该接口用于获取标的的实时行情 (支持所有类型标的）。
+This API is used to obtain the real-time quotes of securities, and supports all types of securities.
 
 :::info
-[协议指令](../../socket/protocol/request)：`11`
+[Business Command](../../socket/protocol/request): `11`
 :::
 
 ## Request
 
 ### Parameters
 
-| Name   | Type     | Required | Description                                                                                                                         |
-| ------ | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| symbol | string[] | 是       | 标的代码列表，使用 `ticker.region` 格式，例如：`[700.HK]` <br /><br />**校验规则：**<br />每次请求支持传入的标的数量上限是 `500` 个 |
+| Name   | Type     | Required | Description                                                                                                                                                     |
+| ------ | -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol | string[] | Yes      | Security code list, in `ticker.region` format, for example: `[700.HK]` <br /><br />**Check rules:**<br />The maximum number of symbols in each request is `500` |
 
 ### Protobuf
 
@@ -31,35 +31,35 @@ message MultiSecurityRequest {
 
 ### Response Properties
 
-| Name                | Type     | Description                                                         |
-| ------------------- | -------- | ------------------------------------------------------------------- |
-| secu_quote          | object[] | 标的实时行情数据列表                                                |
-| ∟ symbol            | string   | 标的代码                                                            |
-| ∟ last_done         | string   | 最新价                                                              |
-| ∟ prev_close        | string   | 昨收价                                                              |
-| ∟ open              | string   | 开盘价                                                              |
-| ∟ high              | string   | 最高价                                                              |
-| ∟ low               | string   | 最低价                                                              |
-| ∟ timestamp         | int64    | 最新成交的交时间戳                                                  |
-| ∟ volume            | int64    | 成交量                                                              |
-| ∟ turnover          | string   | 成交额                                                              |
-| ∟ trade_status      | int32    | 标的交易状态，详见 [TradeStatus](../objects#tradestatus---交易状态) |
-| ∟ pre_market_quote  | object   | 美股盘前交易行情                                                    |
-| ∟∟ last_done        | string   | 最新价                                                              |
-| ∟∟ timestamp        | int64    | 最新成交的交时间戳                                                  |
-| ∟∟ volume           | int64    | 成交量                                                              |
-| ∟∟ turnover         | string   | 成交额                                                              |
-| ∟∟ high             | string   | 最高价                                                              |
-| ∟∟ low              | string   | 最低价                                                              |
-| ∟∟ prev_close       | string   | 上一个交易阶段的收盘价                                              |
-| ∟ post_market_quote | object   | 美股盘后交易行情                                                    |
-| ∟∟ last_done        | string   | 最新价                                                              |
-| ∟∟ timestamp        | int64    | 最新成交的交时间戳                                                  |
-| ∟∟ volume           | int64    | 成交量                                                              |
-| ∟∟ turnover         | string   | 成交额                                                              |
-| ∟∟ high             | string   | 最高价                                                              |
-| ∟∟ low              | string   | 最低价                                                              |
-| ∟∟ prev_close       | string   | 上一个交易阶段的收盘价                                              |
+| Name                | Type     | Description                                                                          |
+| ------------------- | -------- | ------------------------------------------------------------------------------------ |
+| secu_quote          | object[] | Securities quote                                                                     |
+| ∟ symbol            | string   | Security code                                                                        |
+| ∟ last_done         | string   | Latest price                                                                         |
+| ∟ prev_close        | string   | Yesterday's close                                                                    |
+| ∟ open              | string   | Open                                                                                 |
+| ∟ high              | string   | High                                                                                 |
+| ∟ low               | string   | Low                                                                                  |
+| ∟ timestamp         | int64    | Time of latest price                                                                 |
+| ∟ volume            | int64    | Volume                                                                               |
+| ∟ turnover          | string   | Turnover                                                                             |
+| ∟ trade_status      | int32    | Security trading status, see [TradeStatus](../objects#tradestatus---security-status) |
+| ∟ pre_market_quote  | object   | Quote of US pre market                                                               |
+| ∟∟ last_done        | string   | Latest price                                                                         |
+| ∟∟ timestamp        | int64    | Time of latest price                                                                 |
+| ∟∟ volume           | int64    | Volume                                                                               |
+| ∟∟ turnover         | string   | Turnover                                                                             |
+| ∟∟ high             | string   | High                                                                                 |
+| ∟∟ low              | string   | Low                                                                                  |
+| ∟∟ prev_close       | string   | Close of the last trade session                                                      |
+| ∟ post_market_quote | object   | Quote of US post market                                                              |
+| ∟∟ last_done        | string   | Latest price                                                                         |
+| ∟∟ timestamp        | int64    | Time of latest price                                                                 |
+| ∟∟ volume           | int64    | Volume                                                                               |
+| ∟∟ turnover         | string   | Turnover                                                                             |
+| ∟∟ high             | string   | High                                                                                 |
+| ∟∟ low              | string   | Low                                                                                  |
+| ∟∟ prev_close       | string   | Close of the last trade session                                                      |
 
 ### Protobuf
 
@@ -143,19 +143,19 @@ message PrePostQuote {
 }
 ```
 
-## 接口限制
+## API Restrictions
 
 :::caution
 
-- 港股 BMP 行情，超过 20 支的港股标的将响应延迟行情。
+- The HK stocks quotation beyond the 20th will be delayed if the quote level is BMP.
 
 :::
 
-## 错误码
+## Error Code
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                                   |
-| ---------- | ---------- | -------------- | ------------------------------------------ |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败                     |
-| 3          | 301606     | 限流           | 降低请求频次                               |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理                   |
-| 7          | 301607     | 接口限制       | 请求的标的数量超限，请减少单次请求标的数量 |
+| Protocol Error Code | Business Error Code | Description              | Troubleshooting Suggestions                                   |
+| ------------------- | ------------------- | ------------------------ | ------------------------------------------------------------- |
+| 3                   | 301600              | Invalid request          | Invalid request parameters or unpacking request failed        |
+| 3                   | 301606              | Request rate limit       | Reduce the frequency of requests                              |
+| 7                   | 301602              | Server error             | Please try again or contact a technician to resolve the issue |
+| 7                   | 301607              | Too many request symbols | Reduce the number of symbols in a request                     |

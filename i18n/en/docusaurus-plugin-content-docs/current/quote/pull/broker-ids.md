@@ -1,27 +1,27 @@
 ---
 id: quote_broker_ids
-title: 获取券商席位 ID
+title: Get Broker IDs
 slug: broker-ids
 sidebar_position: 7
 ---
 
-该接口用于获取券商席位 ID 数据 (可每天同步一次)。
+This API is used to obtain participant IDs data (which can be synchronized once a day).
 
 :::info
-[协议指令](../../socket/protocol/request)：`16`
+[Business Command](../../socket/protocol/request): `16`
 :::
 
 ## Response
 
 ### Response Properties
 
-| Name                       | Type     | Description           |
-| -------------------------- | -------- | --------------------- |
-| participant_broker_numbers | object[] | 券商席位              |
-| ∟ broker_ids               | int32[]  | 券商对应的多个席位 ID |
-| ∟ participant_name_cn      | string   | 券商名称 (简)         |
-| ∟ participant_name_en      | string   | 券商名称 (英)         |
-| ∟ participant_name_hk      | string   | 券商名称 (繁)         |
+| Name                       | Type     | Description                |
+| -------------------------- | -------- | -------------------------- |
+| participant_broker_numbers | object[] | participant data           |
+| ∟ broker_ids               | int32[]  | broker IDs                 |
+| ∟ participant_name_cn      | string   | participant name (简)      |
+| ∟ participant_name_en      | string   | participant name (english) |
+| ∟ participant_name_hk      | string   | participant name (繁)      |
 
 ### Protobuf
 
@@ -65,10 +65,10 @@ message ParticipantInfo {
 }
 ```
 
-## 错误码
+## Error Code
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                 |
-| ---------- | ---------- | -------------- | ------------------------ |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败   |
-| 3          | 301606     | 限流           | 降低请求频次             |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理 |
+| Proto Error Code | Business Error Code | Descrption         | Troubleshooting Suggestions                                   |
+| ---------------- | ------------------- | ------------------ | ------------------------------------------------------------- |
+| 3                | 301600              | Invalid request    | Invalid request parameters or unpacking request failed        |
+| 3                | 301606              | Request rate limit | Reduce the frequency of requests                              |
+| 7                | 301602              | Server error       | Please try again or contact a technician to resolve the issue |

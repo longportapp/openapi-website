@@ -1,23 +1,23 @@
 ---
 id: quote_static
-title: 获取标的基础信息
+title: Get Basic Information Of Securities
 slug: static
 sidebar_position: 1
 ---
 
-该接口用于获取标的的基础信息。
+This API is used to obtain the basic information of securities.
 
 :::info
-[协议指令](../../socket/protocol/request)：`10`
+[Business Command](../../socket/protocol/request): `10`
 :::
 
 ## Request
 
 ### Parameters
 
-| Name   | Type     | Required | Description                                                                                                                         |
-| ------ | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| symbol | string[] | 是       | 标的代码列表，使用 `ticker.region` 格式，例如：`[700.HK]` <br /><br />**校验规则：**<br />每次请求支持传入的标的数量上限是 `500` 个 |
+| Name   | Type     | Required | Description                                                                                                                                                     |
+| ------ | -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol | string[] | Yes      | Security code list, in `ticker.region` format, for example: `[700.HK]` <br /><br />**Check rules:**<br />The maximum number of symbols in each request is `500` |
 
 ### Protobuf
 
@@ -31,24 +31,24 @@ message MultiSecurityRequest {
 
 ### Response Properties
 
-| Name                 | Type     | Description                                                                                      |
-| -------------------- | -------- | ------------------------------------------------------------------------------------------------ |
-| secu_static_info     | object[] | 标的基础数据列表                                                                                 |
-| ∟ symbol             | string   | 标的代码                                                                                         |
-| ∟ name_cn            | string   | 中文简体标的名称                                                                                 |
-| ∟ name_en            | string   | 英文标的名称                                                                                     |
-| ∟ name_hk            | string   | 中文繁体标的名称                                                                                 |
-| ∟ exchange           | string   | 标的所属交易所                                                                                   |
-| ∟ currency           | string   | 交易币种 <br /><br />**可选值：**<br />`CNY` <br />`USD` <br />`SGD` <br />`HKD`                 |
-| ∟ lot_size           | int32    | 每手股数                                                                                         |
-| ∟ total_shares       | int64    | 总股本                                                                                           |
-| ∟ circulating_shares | int64    | 流通股本                                                                                         |
-| ∟ hk_shares          | int64    | 港股股本 (仅港股)                                                                                |
-| ∟ eps                | string   | 每股盈利                                                                                         |
-| ∟ eps_ttm            | string   | 每股盈利 (TTM)                                                                                   |
-| ∟ bps                | string   | 每股净资产                                                                                       |
-| ∟ dividend_yield     | string   | 股息                                                                                             |
-| ∟ stock_derivatives  | int32[]  | 如果标的是正股，可提供的衍生品行情类型 <br /><br />**可选值：**<br />`1` - 期权 <br />`2` - 轮证 |
+| Name                 | Type     | Description                                                                                          |
+| -------------------- | -------- | ---------------------------------------------------------------------------------------------------- |
+| secu_static_info     | object[] | Securities Basic Information                                                                         |
+| ∟ symbol             | string   | Security code                                                                                        |
+| ∟ name_cn            | string   | Security name (简)                                                                                   |
+| ∟ name_en            | string   | Security name (English)                                                                              |
+| ∟ name_hk            | string   | Security name (繁)                                                                                   |
+| ∟ exchange           | string   | Exchange which the security belongs to                                                               |
+| ∟ currency           | string   | Trading currency <br /><br />**Optional value: **<br />`CNY` <br />`USD` <br />`SGD` <br />`HKD`     |
+| ∟ lot_size           | int32    | Lot size                                                                                             |
+| ∟ total_shares       | int64    | Total shares                                                                                         |
+| ∟ circulating_shares | int64    | Circulating shares                                                                                   |
+| ∟ hk_shares          | int64    | HK shares (only HK stocks)                                                                           |
+| ∟ eps                | string   | Earnings per share                                                                                   |
+| ∟ eps_ttm            | string   | Earnings per share (TTM)                                                                             |
+| ∟ bps                | string   | Net assets per share                                                                                 |
+| ∟ dividend_yield     | string   | Dividend yield                                                                                       |
+| ∟ stock_derivatives  | int32[]  | Types of supported derivatives <br /><br />**Optional value:**<br />`1` - Option <br />`2` - Warrant |
 
 ### Protobuf
 
@@ -118,11 +118,11 @@ message StaticInfo {
 }
 ```
 
-## 错误码
+## Error Code
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                                   |
-| ---------- | ---------- | -------------- | ------------------------------------------ |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败                     |
-| 3          | 301606     | 限流           | 降低请求频次                               |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理                   |
-| 7          | 301607     | 接口限制       | 请求的标的数量超限，请减少单次请求标的数量 |
+| Protocol Error Code | Business Error Code | Description              | Troubleshooting Suggestions                                   |
+| ------------------- | ------------------- | ------------------------ | ------------------------------------------------------------- |
+| 3                   | 301600              | Invalid request          | Invalid request parameters or unpacking request failed        |
+| 3                   | 301606              | Request rate limit       | Reduce the frequency of requests                              |
+| 7                   | 301602              | Server error             | Please try again or contact a technician to resolve the issue |
+| 7                   | 301607              | Too many request symbols | Reduce the number of symbols in a request                     |

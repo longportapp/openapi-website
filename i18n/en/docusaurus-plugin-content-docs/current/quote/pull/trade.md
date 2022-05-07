@@ -1,15 +1,15 @@
 ---
 id: quote_trade
-title: 获取标的成交明细
+title: Get Security Trades
 slug: trade
 sidebar_position: 8
 ---
 
-该接口用于获取标的的成交明细数据。
+This API is used to obtain the trades data of security.
 
 :::info
 
-[协议指令](../../socket/protocol/request)：`17`
+[Business Command](../../socket/protocol/request): `17`
 
 :::
 
@@ -17,10 +17,10 @@ sidebar_position: 8
 
 ### Parameters
 
-| Name   | Type   | Required | Description                                                              |
-| ------ | ------ | -------- | ------------------------------------------------------------------------ |
-| symbol | string | 是       | 标的代码，使用 `ticker.region` 格式，例如：`700.HK`                      |
-| count  | int32  | 是       | 请求的逐笔明细数量 <br /><br />**校验规则：**<br />请求数量最大为 `1000` |
+| Name   | Type   | Required | Description                                                                                              |
+| ------ | ------ | -------- | -------------------------------------------------------------------------------------------------------- |
+| symbol | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK`                                           |
+| count  | int32  | Yes      | Count of trades <br /><br />**Check rules:**<br />The maximum number of trades in each request is `1000` |
 
 ### Protobuf
 
@@ -35,16 +35,16 @@ message SecurityTradeRequest {
 
 ### Response Properties
 
-| Name            | Type     | Description                                                                                                                                                                                           |
-| --------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| symbol          | string   | 标的代码                                                                                                                                                                                              |
-| trades          | object[] | 逐笔明细数据                                                                                                                                                                                          |
-| ∟ price         | string   | 价格                                                                                                                                                                                                  |
-| ∟ volume        | int64    | 成交量                                                                                                                                                                                                |
-| ∟ timestamp     | int64    | 成交时间                                                                                                                                                                                              |
-| ∟ trade_type    | string   | 交易类型 <br /><br />**可选值：**<br />`*` - 场外交易<br />`D` - 碎股交易<br />`M` - 非自动对盘<br />`P` - 开市前成交盘<br />`U` - 竞价交易<br />`X` - 同一券商非自动对盘<br />`Y` - 同一券商自动对盘 |
-| ∟ direction     | int32    | 交易方向 <br /><br />**可选值：**<br />`0` - nature<br />`1` - down<br />`2` - up                                                                                                                     |
-| ∟ trade_session | int32    | 交易时段，详见 [TradeSession](../objects#tradesession---交易时段)                                                                                                                                     |
+| Name            | Type     | Description                                                                                                                                                                                                                                                                             |
+| --------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol          | string   | Security code                                                                                                                                                                                                                                                                           |
+| trades          | object[] | Trades data                                                                                                                                                                                                                                                                             |
+| ∟ price         | string   | Price                                                                                                                                                                                                                                                                                   |
+| ∟ volume        | int64    | Volume                                                                                                                                                                                                                                                                                  |
+| ∟ timestamp     | int64    | Time of trading                                                                                                                                                                                                                                                                         |
+| ∟ trade_type    | string   | Trade type <br /><br />**Optional value:**<br />`*` - Overseas trade<br />`D` - Odd-lot trade<br />`M` - Non-direct off-exchange trade<br />`P` - Late trade (Off-exchange previous day)<br />`U` - Auction trade<br />`X` - Direct off-exchange trade<br />`Y` - Automtch internalized |
+| ∟ direction     | int32    | Trade direction <br /><br />**Optional value:**<br />`0` - nature<br />`1` - down<br />`2` - up                                                                                                                                                                                         |
+| ∟ trade_session | int32    | Trade session, see [TradeSession](../objects#tradesession---trading-session)                                                                                                                                                                                                            |
 
 ### Protobuf
 
@@ -95,14 +95,14 @@ message Trade {
 }
 ```
 
-## 错误码
+## Error Code
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                         |
-| ---------- | ---------- | -------------- | -------------------------------- |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败           |
-| 3          | 301606     | 限流           | 降低请求频次                     |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理         |
-| 7          | 301600     | 请求标的不存在 | 检查请求的 `symbol` 是否正确     |
-| 7          | 301603     | 标的无行情     | 标的没有请求的行情数据           |
-| 7          | 301604     | 无权限         | 没有获取标的行情的权限           |
-| 7          | 301607     | 接口限制       | 请求的数据数量超限，减少数据数量 |
+| Protocol Error Code | Business Error Code | Description              | Troubleshooting Suggestions                                   |
+| ------------------- | ------------------- | ------------------------ | ------------------------------------------------------------- |
+| 3                   | 301600              | Invalid request          | Invalid request parameters or unpacking request failed        |
+| 3                   | 301606              | Request rate limit       | Reduce the frequency of requests                              |
+| 7                   | 301602              | Server error             | Please try again or contact a technician to resolve the issue |
+| 7                   | 301600              | Symbol not found         | Check that the requested `symbol` is correct                  |
+| 7                   | 301603              | No quotes                | Security no quote                                             |
+| 7                   | 301604              | No access                | No access to security quote                                   |
+| 7                   | 301607              | Too many trades requeted | Reduce the amount of trades in each request                   |

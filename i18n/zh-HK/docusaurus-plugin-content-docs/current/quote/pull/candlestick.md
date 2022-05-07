@@ -1,15 +1,15 @@
 ---
 id: quote_candlestick
-title: 获取标的 K 线
+title: 獲取標的 K 線
 slug: candlestick
 sidebar_position: 10
 ---
 
-该接口用于获取标的的 K 线数据。
+該接口用於獲取標的的 K 線數據。
 
 :::info
 
-[协议指令](../../socket/protocol/request)：`19`
+[業務指令](../../socket/protocol/request)：`19`
 
 :::
 
@@ -19,10 +19,10 @@ sidebar_position: 10
 
 | Name        | Type   | Required | Description                                                                  |
 | ----------- | ------ | -------- | ---------------------------------------------------------------------------- |
-| symbol      | string | 是       | 标的代码，使用 `ticker.region` 格式，例如：`700.HK`                          |
-| period      | int32  | 是       | k 线周期，例如：`1000`，详见 [Period](../objects#period---k-线周期)          |
-| count       | int32  | 是       | 数据数量，例如：`100`<br /><br />**校验规则：** <br />请求数量最大为 `1000`  |
-| adjust_type | int32  | 是       | 复权类型，例如：`0`，详见 [AdjustType](../objects#adjusttype---k-线复权类型) |
+| symbol      | string | 是       | 標的代碼，使用 `ticker.region` 格式，例如：`700.HK`                          |
+| period      | int32  | 是       | k 線週期，例如：`1000`，详见 [Period](../objects#period---k-線週期)          |
+| count       | int32  | 是       | 數據數量，例如：`100`<br /><br />**校验规则：** <br />請求數量最大為 `1000`  |
+| adjust_type | int32  | 是       | 復權類型，例如：`0`，详见 [AdjustType](../objects#adjusttype---k-線復權類型) |
 
 ### Protobuf
 
@@ -41,15 +41,15 @@ message SecurityCandlestickRequest {
 
 | Name         | Type     | Description               |
 | ------------ | -------- | ------------------------- |
-| symbol       | string   | 标的代码，例如：`AAPL.US` |
-| candlesticks | object[] | K 线数据                  |
-| ∟ close      | string   | 当前周期收盘价            |
-| ∟ open       | string   | 当前周期开盘价            |
-| ∟ low        | string   | 当前周期最低价            |
-| ∟ high       | string   | 当前周期最高价            |
-| ∟ volume     | int64    | 当前周期成交量            |
-| ∟ turnover   | string   | 当前周期成交额            |
-| ∟ timestamp  | int64    | 当前周期的时间戳          |
+| symbol       | string   | 標的代碼，例如：`AAPL.US` |
+| candlesticks | object[] | K 線數據                  |
+| ∟ close      | string   | 當前週期收盤價            |
+| ∟ open       | string   | 當前週期開盤價            |
+| ∟ low        | string   | 當前週期最低價            |
+| ∟ high       | string   | 當前週期最高價            |
+| ∟ volume     | int64    | 當前週期成交量            |
+| ∟ turnover   | string   | 當前週期成交額            |
+| ∟ timestamp  | int64    | 當前週期的時間戳          |
 
 ### Protobuf
 
@@ -125,14 +125,14 @@ message Candlestick {
 }
 ```
 
-## 错误码
+## 錯誤碼
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                                                                 |
+| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                                                                 |
 | ---------- | ---------- | -------------- | ------------------------------------------------------------------------ |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败                                                   |
-| 3          | 301606     | 限流           | 降低请求频次                                                             |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理                                                 |
-| 7          | 301600     | 请求数据非法   | 检查请求的 `symbol`，`count`，`adjust_type`, `period` 数据是否在正确范围 |
-| 7          | 301603     | 标的无行情     | 标的没有请求的行情数据                                                   |
-| 7          | 301604     | 无权限         | 没有获取标的行情的权限                                                   |
-| 7          | 301607     | 接口限制       | 请求的数据数量超限，减少数据数量                                         |
+| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗                                                   |
+| 3          | 301606     | 限流           | 降低請求頻次                                                             |
+| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理                                                 |
+| 7          | 301600     | 請求數據非法   | 檢查請求的 `symbol`，`count`，`adjust_type`, `period` 數據是否在正確範圍 |
+| 7          | 301603     | 標的無行情     | 標的沒有請求的行情數據                                                   |
+| 7          | 301604     | 無權限         | 沒有獲取標的行情的權限                                                   |
+| 7          | 301607     | 接口限制       | 請求的數據數量超限，減少數據數量                                         |

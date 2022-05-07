@@ -24,7 +24,7 @@ sidebar_position: 14
 | ∟ sort_by     | int32   | 是       | 根据哪一项数据进行排序，例如：`0`，序号见响应数据 `OrderSequence` 字段。                                                                           |
 | ∟ sort_order  | int32   | 是       | 升降顺序，例如：`1` <br /><br />**可选值：**<br />`0` - 升序<br />`1` - 降序                                                                       |
 | ∟ sort_offset | int32   | 是       | 分页的第一条数据偏移量，例如 `0`                                                                                                                   |
-| ∟ sort_count  | int32   | 是       | 分页的每一页数量，例如 `20` <br /><br />**校验规则：**<br /> 每页数量最大为 500                                                                    |
+| ∟ sort_count  | int32   | 是       | 分页的每一页数量，例如 `20` <br /><br />**校验规则：**<br /> 每页数量最大为 `500`                                                                  |
 | ∟ type        | int32[] | 否       | 筛选轮证类型 例如：`[0,1]` <br /><br />**可选值：**<br />`0` - 认购<br />`1` - 认沽<br />`2` - 牛证<br />`3` - 熊证<br />`4` - 界内证              |
 | ∟ issuer      | int32[] | 否       | 筛选发行商，例如：`[12,14]`，[发行商 ID](./issuer) 通过接口获取                                                                                    |
 | ∟ expiry_date | int32[] | 否       | 筛选轮证过期时间，例如：`[1]` <br /><br />**可选值：**<br />`1` - 低于 3 个月<br />`2` - 3 - 6 个月<br />`3` - 6 - 12 个月<br />`4` - 大于 12 个月 |
@@ -60,7 +60,7 @@ message FilterConfig {
 
 | Name                 | Type     | Description                                                                    | OrderSequence |
 | -------------------- | -------- | ------------------------------------------------------------------------------ | ------------- |
-| warrant_list         | object[] | 标的代码                                                                       |               |
+| warrant_list         | object[] | 涡轮筛选数据列表                                                               |               |
 | ∟ symbol             | string   | 标的代码                                                                       |               |
 | ∟ name               | string   | 标的名称                                                                       |               |
 | ∟ last_done          | string   | 最新价                                                                         | 0             |
@@ -79,7 +79,7 @@ message FilterConfig {
 | ∟ implied_volatility | string   | 引伸波幅                                                                       | 13            |
 | ∟ delta              | string   | 对冲值                                                                         | 14            |
 | ∟ call_price         | string   | 收回价                                                                         | 15            |
-| ∟ to_call_price      | string   | 据收回价                                                                       | 16            |
+| ∟ to_call_price      | string   | 距收回价                                                                       | 16            |
 | ∟ effective_leverage | string   | 有效杠杆                                                                       | 17            |
 | ∟ leverage_ratio     | string   | 杠杆比率                                                                       | 18            |
 | ∟ conversion_ratio   | string   | 换股比率                                                                       | 19            |

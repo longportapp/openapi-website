@@ -1,9 +1,9 @@
 {
-  "label": "拉取",
+  "label": "Pull",
   "collapsible": true,
   "collapsed": true,
   "link": {
-    "title": "拉取",
+    "title": "Pull",
     "slug": "/quote/pull"
   },
   "position": 2

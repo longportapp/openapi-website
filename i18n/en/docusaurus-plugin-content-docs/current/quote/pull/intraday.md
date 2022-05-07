@@ -1,15 +1,15 @@
 ---
 id: quote_intraday
-title: 获取标的当日分时
+title: Get Security Intraday
 slug: intraday
 sidebar_position: 9
 ---
 
-该接口用于获取标的的当日分时数据。
+This API is used to obtain the intraday data of security.
 
 :::info
 
-[协议指令](../../socket/protocol/request)：`18`
+[Business Command](../../socket/protocol/request): `18`
 
 :::
 
@@ -17,9 +17,9 @@ sidebar_position: 9
 
 ### Parameters
 
-| Name   | Type   | Required | Description                                         |
-| ------ | ------ | -------- | --------------------------------------------------- |
-| symbol | string | 是       | 标的代码，使用 `ticker.region` 格式，例如：`700.HK` |
+| Name   | Type   | Required | Description                                                    |
+| ------ | ------ | -------- | -------------------------------------------------------------- |
+| symbol | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK` |
 
 ### Protobuf
 
@@ -33,15 +33,15 @@ message SecurityIntradayRequest {
 
 ### Response Properties
 
-| Name        | Type     | Description               |
-| ----------- | -------- | ------------------------- |
-| symbol      | string   | 标的代码，例如：`AAPL.US` |
-| lines       | object[] | 分时数据                  |
-| ∟ price     | string   | 当前分钟的收盘价格        |
-| ∟ timestamp | int64    | 当前分钟的开始时间        |
-| ∟ volume    | int64    | 成交量                    |
-| ∟ turnover  | string   | 成交额                    |
-| ∟ avg_price | string   | 均价                      |
+| Name        | Type     | Description                           |
+| ----------- | -------- | ------------------------------------- |
+| symbol      | string   | Security code, for example: `AAPL.US` |
+| lines       | object[] | Intraday line data                    |
+| ∟ price     | string   | Close price of the minute             |
+| ∟ timestamp | int64    | Start time stamp of the minute        |
+| ∟ volume    | int64    | Volume                                |
+| ∟ turnover  | string   | Turnover                              |
+| ∟ avg_price | string   | Average price                         |
 
 ### Protobuf
 
@@ -105,13 +105,13 @@ message Line {
 }
 ```
 
-## 错误码
+## Error Code
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                     |
-| ---------- | ---------- | -------------- | ---------------------------- |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败       |
-| 3          | 301606     | 限流           | 降低请求频次                 |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理     |
-| 7          | 301600     | 请求标的不存在 | 检查请求的 `symbol` 是否正确 |
-| 7          | 301603     | 标的无行情     | 标的没有请求的行情数据       |
-| 7          | 301604     | 无权限         | 没有获取标的行情的权限       |
+| Protocol Error Code | Business Error Code | Description        | Troubleshooting Suggestions                                   |
+| ------------------- | ------------------- | ------------------ | ------------------------------------------------------------- |
+| 3                   | 301600              | Invalid request    | Invalid request parameters or unpacking request failed        |
+| 3                   | 301606              | Request rate limit | Reduce the frequency of requests                              |
+| 7                   | 301602              | Server error       | Please try again or contact a technician to resolve the issue |
+| 7                   | 301600              | Symbol not found   | Check that the requested `symbol` is correct                  |
+| 7                   | 301603              | No quotes          | Security no quote                                             |
+| 7                   | 301604              | No access          | No access to security quote                                   |

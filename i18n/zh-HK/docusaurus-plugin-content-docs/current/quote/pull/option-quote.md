@@ -1,14 +1,14 @@
 ---
 id: quote_option_quote
-title: 获取期权实时行情
+title: 獲取期權實時行情
 slug: option-quote
 sidebar_position: 3
 ---
 
-该接口用于获取美股期权标的的实时行情，包括期权的特有数据。
+該接口用於獲取美股期權標的的實時行情，包括期權的特有數據。
 
 :::info
-[协议指令](../../socket/protocol/request)：`12`
+[業務指令](../../socket/protocol/request)：`12`
 :::
 
 ## Request
@@ -17,7 +17,7 @@ sidebar_position: 3
 
 | Name   | Type     | Required | Description                                                                                                                                                                                  |
 | ------ | -------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| symbol | string[] | 是       | 标的代码列表，通过[期权链接口](./optionchain-date-strike.md)获取期权标的的 symbol， 例如：`[BABA230120C160000.US]` <br /><br />**校验规则：**<br />每次请求支持传入的标的数量上限是 `500` 个 |
+| symbol | string[] | 是       | 標的代碼列表，通過[期權鏈接口](./optionchain-date-strike.md)獲取期權標的的 symbol， 例如：`[BABA230120C160000.US]` <br /><br />**校驗規則：**<br />每次請求支持傳入的標的數量上限是 `500` 個 |
 
 ### Protobuf
 
@@ -33,28 +33,28 @@ message MultiSecurityRequest {
 
 | Name                     | Type     | Description                                                         |
 | ------------------------ | -------- | ------------------------------------------------------------------- |
-| secu_quote               | object[] | 期权标的行情数据列表                                                |
-| ∟ symbol                 | string   | 标的代码                                                            |
-| ∟ last_done              | string   | 最新价                                                              |
-| ∟ prev_close             | string   | 昨收价                                                              |
-| ∟ open                   | string   | 开盘价                                                              |
-| ∟ high                   | string   | 最高价                                                              |
-| ∟ low                    | string   | 最低价                                                              |
-| ∟ timestamp              | int64    | 最新成交的交时间戳                                                  |
+| secu_quote               | object[] | 期權標的行情數據列表                                                |
+| ∟ symbol                 | string   | 標的代碼                                                            |
+| ∟ last_done              | string   | 最新價                                                              |
+| ∟ prev_close             | string   | 昨收價                                                              |
+| ∟ open                   | string   | 開盤價                                                              |
+| ∟ high                   | string   | 最高價                                                              |
+| ∟ low                    | string   | 最低價                                                              |
+| ∟ timestamp              | int64    | 最新成交的交時間戳                                                  |
 | ∟ volume                 | int64    | 成交量                                                              |
-| ∟ turnover               | string   | 成交额                                                              |
-| ∟ trade_status           | int32    | 标的交易状态，详见 [TradeStatus](../objects#tradestatus---交易状态) |
-| ∟ option_extend          | object   | 期权扩展行情                                                        |
-| ∟∟ implied_volatility    | string   | 隐含波动率                                                          |
-| ∟∟ open_interest         | int64    | 未平仓数                                                            |
+| ∟ turnover               | string   | 成交額                                                              |
+| ∟ trade_status           | int32    | 標的交易狀態，詳見 [TradeStatus](../objects#tradestatus---交易狀態) |
+| ∟ option_extend          | object   | 期權擴展行情                                                        |
+| ∟∟ implied_volatility    | string   | 隱含波動率                                                          |
+| ∟∟ open_interest         | int64    | 未平倉數                                                            |
 | ∟∟ expiry_date           | string   | 到期日，使用：`YYMMDD` 格式                                         |
-| ∟∟ strike_price          | string   | 行权价                                                              |
-| ∟∟ contract_multiplier   | string   | 合约乘数                                                            |
-| ∟∟ contract_type         | string   | 期权类型 <br /><br />**可选值：**<br />`A` - 美式 <br />`U` - 欧式  |
-| ∟∟ contract_size         | string   | 合约规模                                                            |
-| ∟∟ direction             | string   | 方向 <br /><br />**可选值：**<br />`P` - put <br />`C` - call       |
-| ∟∟ historical_volatility | string   | 对应正股的历史波动率                                                |
-| ∟∟ underlying_symbol     | string   | 对应的正股标的代码                                                  |
+| ∟∟ strike_price          | string   | 行權價                                                              |
+| ∟∟ contract_multiplier   | string   | 合約乘數                                                            |
+| ∟∟ contract_type         | string   | 期權類型 <br /><br />**可選值：**<br />`A` - 美式 <br />`U` - 歐式  |
+| ∟∟ contract_size         | string   | 合約規模                                                            |
+| ∟∟ direction             | string   | 方向 <br /><br />**可選值：**<br />`P` - put <br />`C` - call       |
+| ∟∟ historical_volatility | string   | 對應正股的歷史波動率                                                |
+| ∟∟ underlying_symbol     | string   | 對應的正股標的代碼                                                  |
 
 ### Protobuf
 
@@ -146,11 +146,11 @@ message OptionExtend {
 }
 ```
 
-## 错误码
+## 錯誤碼
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                                   |
+| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                                   |
 | ---------- | ---------- | -------------- | ------------------------------------------ |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败                     |
-| 3          | 301606     | 限流           | 降低请求频次                               |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理                   |
-| 7          | 301607     | 接口限制       | 请求的标的数量超限，请减少单次请求标的数量 |
+| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗                     |
+| 3          | 301606     | 限流           | 降低請求頻次                               |
+| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理                   |
+| 7          | 301607     | 接口限制       | 請求的標的數量超限，請減少單次請求標的數量 |

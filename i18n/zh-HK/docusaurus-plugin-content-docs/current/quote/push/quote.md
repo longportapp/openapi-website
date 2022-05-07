@@ -1,35 +1,35 @@
 ---
 id: push_quote
-title: 实时价格推送
+title: 實時價格推送
 slug: quote
 sidebar_position: 1
 ---
 
-已订阅标的的实时价格推送，推送的数据结构中，只有有变化的字段才会填充数据。
+已訂閱標的的實時價格推送，推送的數據結構中，只有有變化的字段才會填充數據。
 
 :::info
 
-[协议指令](../../socket/protocol/push)：`101`
+[業務指令](../../socket/protocol/push)：`101`
 
 :::
 
-## 数据格式
+## 數據格式
 
 ### Properties
 
 | Name          | Type   | Description                                                       |
 | ------------- | ------ | ----------------------------------------------------------------- |
-| symbol        | string | 标的代码，例如：`AAPL.US`                                         |
-| sequence      | int64  | 序列号                                                            |
-| last_done     | string | 最新价                                                            |
-| open          | string | 开盘价                                                            |
-| high          | string | 最高价                                                            |
-| low           | string | 最低价                                                            |
-| timestamp     | int64  | 最新成交的时间戳                                                  |
+| symbol        | string | 標的代碼，例如：`AAPL.US`                                         |
+| sequence      | int64  | 序列號                                                            |
+| last_done     | string | 最新價                                                            |
+| open          | string | 開盤價                                                            |
+| high          | string | 最高價                                                            |
+| low           | string | 最低價                                                            |
+| timestamp     | int64  | 最新成交的時間戳                                                  |
 | volume        | int64  | 成交量                                                            |
-| turnover      | string | 成交额                                                            |
-| trade_status  | int32  | 交易状态，详见 [TradeStatus](../objects#tradestatus---交易状态)   |
-| trade_session | int32  | 交易时段，详见 [TradeSession](../objects#tradesession---交易时段) |
+| turnover      | string | 成交額                                                            |
+| trade_status  | int32  | 交易狀態，詳見 [TradeStatus](../objects#tradestatus---交易狀態)   |
+| trade_session | int32  | 交易時段，詳見 [TradeSession](../objects#tradesession---交易時段) |
 
 ### Protobuf
 

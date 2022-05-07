@@ -1,32 +1,32 @@
 ---
 id: push_broker
-title: 实时经纪队列推送
+title: Push Real-time Brokers
 slug: broker
 sidebar_position: 3
 ---
 
-已订阅标的的实时经纪队列数据推送。
+Real-time brokers data push of the subscribed security.
 
 :::info
 
-[协议指令](../../socket/protocol/push)：`103`
+[Business Command](../../socket/protocol/push): `103`
 
 :::
 
-## 数据格式
+## Data Format
 
 ### Properties
 
-| Name         | Type     | Description                       |
-| ------------ | -------- | --------------------------------- |
-| symbol       | string   | 标的代码，例如：`AAPL.US`         |
-| sequence     | int64    | 序列号                            |
-| ask_brokers  | object[] | 卖盘经纪队列                      |
-| ∟ position   | int32    | 档位                              |
-| ∟ broker_ids | int32[]  | [券商席位 Id](../pull/broker-ids) |
-| bid_brokers  | object[] | 买盘经纪队列                      |
-| ∟ position   | int32    | 档位                              |
-| ∟ broker_ids | int32[]  | [券商席位 Id](../pull/broker-ids) |
+| Name         | Type     | Description                           |
+| ------------ | -------- | ------------------------------------- |
+| symbol       | string   | Security code, for example: `AAPL.US` |
+| sequence     | int64    | Sequence number                       |
+| ask_brokers  | object[] | Ask brokers                           |
+| ∟ position   | int32    | Position                              |
+| ∟ broker_ids | int32[]  | [Broker ID](../pull/broker-ids)       |
+| bid_brokers  | object[] | Bid brokers                           |
+| ∟ position   | int32    | Position                              |
+| ∟ broker_ids | int32[]  | [Broker ID](../pull/broker-ids)       |
 
 ### Protobuf
 

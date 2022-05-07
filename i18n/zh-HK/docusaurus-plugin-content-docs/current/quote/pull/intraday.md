@@ -1,15 +1,15 @@
 ---
 id: quote_intraday
-title: 获取标的当日分时
+title: 獲取標的當日分時
 slug: intraday
 sidebar_position: 9
 ---
 
-该接口用于获取标的的当日分时数据。
+該接口用於獲取標的的當日分時數據。
 
 :::info
 
-[协议指令](../../socket/protocol/request)：`18`
+[業務指令](../../socket/protocol/request)：`18`
 
 :::
 
@@ -19,7 +19,7 @@ sidebar_position: 9
 
 | Name   | Type   | Required | Description                                         |
 | ------ | ------ | -------- | --------------------------------------------------- |
-| symbol | string | 是       | 标的代码，使用 `ticker.region` 格式，例如：`700.HK` |
+| symbol | string | 是       | 標的代碼，使用 `ticker.region` 格式，例如：`700.HK` |
 
 ### Protobuf
 
@@ -35,13 +35,13 @@ message SecurityIntradayRequest {
 
 | Name        | Type     | Description               |
 | ----------- | -------- | ------------------------- |
-| symbol      | string   | 标的代码，例如：`AAPL.US` |
-| lines       | object[] | 分时数据                  |
-| ∟ price     | string   | 当前分钟的收盘价格        |
-| ∟ timestamp | int64    | 当前分钟的开始时间        |
+| symbol      | string   | 標的代碼，例如：`AAPL.US` |
+| lines       | object[] | 分時數據                  |
+| ∟ price     | string   | 當前分鐘的收盤價格        |
+| ∟ timestamp | int64    | 當前分鐘的開始時間        |
 | ∟ volume    | int64    | 成交量                    |
 | ∟ turnover  | string   | 成交额                    |
-| ∟ avg_price | string   | 均价                      |
+| ∟ avg_price | string   | 均價                      |
 
 ### Protobuf
 
@@ -105,13 +105,13 @@ message Line {
 }
 ```
 
-## 错误码
+## 錯誤碼
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                     |
+| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                     |
 | ---------- | ---------- | -------------- | ---------------------------- |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败       |
-| 3          | 301606     | 限流           | 降低请求频次                 |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理     |
-| 7          | 301600     | 请求标的不存在 | 检查请求的 `symbol` 是否正确 |
-| 7          | 301603     | 标的无行情     | 标的没有请求的行情数据       |
-| 7          | 301604     | 无权限         | 没有获取标的行情的权限       |
+| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗       |
+| 3          | 301606     | 限流           | 降低請求頻次                 |
+| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理     |
+| 7          | 301600     | 請求標的不存在 | 檢查請求的 `symbol` 是否正確 |
+| 7          | 301603     | 標的無行情     | 標的沒有請求的行情數據       |
+| 7          | 301604     | 無權限         | 沒有獲取標的行情的權限       |

@@ -1,15 +1,15 @@
 ---
 id: quote_trade_day
-title: 获取市场交易日
+title: Get Market Trading Days
 slug: trade-day
 sidebar_position: 16
 ---
 
-该接口用于获取市场的交易日信息。
+This API is used to obtain the trading days of the market.
 
 :::info
 
-[协议指令](../../socket/protocol/request)：`9`
+[Business Command](../../socket/protocol/request): `9`
 
 :::
 
@@ -17,11 +17,11 @@ sidebar_position: 16
 
 ### Parameters
 
-| Name    | Type   | Required | Description                                                                                                                                              |
-| ------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| market  | string | 是       | 市场 <br /><br />**可选值：**<br/>`US` - 美股市场<br/>`HK` - 港股市场<br/>`CN` - A 股市场<br/>`SG` - 新加坡市场                                          |
-| beg_day | string | 是       | 开始时间，使用 `YYMMDD` 格式，例如：`20220401`                                                                                                           |
-| end_day | string | 是       | 结束时间，使用 `YYMMDD` 格式，例如：`20220420` <br/><br/>**校验规则：**<br/> `开始时间` 和 `结束时间`，间隔不能大于一个月 <br/> 仅支持查询最近一年的数据 |
+| Name    | Type   | Required | Description                                                                                                                                                                                 |
+| ------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| market  | string | Yes      | Market <br /><br />**Optional value:**<br/>`US` - US market<br/>`HK` - HK market<br/>`CN` - CN market<br/>`SG` - SG market                                                                  |
+| beg_day | string | Yes      | begin day, in `YYMMDD` format, for example: `20220401`                                                                                                                                      |
+| end_day | string | Yes      | begin day, in `YYMMDD` format, for example: `20220420` <br/><br/>**Check rules:**<br/> The interval cannot be greater than one month <br/> Only supports query data of the most recent year |
 
 ### Protobuf
 
@@ -37,10 +37,10 @@ message MarketTradeDayRequest {
 
 ### Response Properties
 
-| Name           | Type     | Description                |
-| -------------- | -------- | -------------------------- |
-| trade_day      | string[] | 交易日，使用 `YYMMDD` 格式 |
-| half_trade_day | string[] | 半日市，使用 `YYMMDD` 格式 |
+| Name           | Type     | Description                           |
+| -------------- | -------- | ------------------------------------- |
+| trade_day      | string[] | Trading days, in `YYMMDD` format      |
+| half_trade_day | string[] | Half trading days, in `YYMMDD` format |
 
 ### Protobuf
 
@@ -73,11 +73,11 @@ message MarketTradeDayResponse {
 }
 ```
 
-## 错误码
+## Error Code
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                             |
-| ---------- | ---------- | -------------- | ------------------------------------ |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败               |
-| 3          | 301606     | 限流           | 降低请求频次                         |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理             |
-| 7          | 301600     | 请求数据非法   | 检查请求的市场，日期是否在正确范围内 |
+| Protocol Error Code | Business Error Code | Description                | Troubleshooting Suggestions                                        |
+| ------------------- | ------------------- | -------------------------- | ------------------------------------------------------------------ |
+| 3                   | 301600              | Invalid request            | Invalid request parameters or unpacking request failed             |
+| 3                   | 301606              | Request rate limit         | Reduce the frequency of requests                                   |
+| 7                   | 301602              | Server error               | Please try again or contact a technician to resolve the issue      |
+| 7                   | 301600              | Invalue request parameters | Please check the request parameter: `market`, `beg_day`, `end_day` |

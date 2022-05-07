@@ -1,15 +1,15 @@
 ---
 id: quote_optionchain_date_strike
-title: 获取标的的期权链到期日期权标的列表
+title: 獲取標的的期權鏈到期日期權標的列表
 slug: optionchain-date-strike
 sidebar_position: 12
 ---
 
-该接口用于获取标的的期权链到期日期权标的列表。
+該接口用於獲取標的的期權鏈到期日期權標的列表。
 
 :::info
 
-[协议指令](../../socket/protocol/request)：`21`
+[業務指令](../../socket/protocol/request)：`21`
 
 :::
 
@@ -19,8 +19,8 @@ sidebar_position: 12
 
 | Name        | Type   | Required | Description                                                                                         |
 | ----------- | ------ | -------- | --------------------------------------------------------------------------------------------------- |
-| symbol      | string | 是       | 标的代码，使用 `ticker.region` 格式，例如：`700.HK`                                                 |
-| expiry_date | string | 是       | 期权到期日，使用 `YYMMDD` 格式，例如：`20220429`，通过 [期权到期日](./optionchain_date.md) 接口获取 |
+| symbol      | string | 是       | 標的代碼，使用 `ticker.region` 格式，例如：`700.HK`                                                 |
+| expiry_date | string | 是       | 期權到期日，使用 `YYMMDD` 格式，例如：`20220429`，通過 [期權到期日](./optionchain_date.md) 接口獲取 |
 
 ### Protobuf
 
@@ -37,11 +37,11 @@ message OptionChainDateStrikeInfoRequest {
 
 | Name              | Type     | Description        |
 | ----------------- | -------- | ------------------ |
-| strike_price_info | object[] | 到期日期权标的列表 |
-| ∟ price           | string   | 行权价             |
-| ∟ call_symbol     | string   | CALL 期权标的代码  |
-| ∟ put_symbol      | string   | PUT 期权标的代码   |
-| ∟ standard        | bool     | 是否标准期权       |
+| strike_price_info | object[] | 到期日期權標的列表 |
+| ∟ price           | string   | 行權價             |
+| ∟ call_symbol     | string   | CALL 期權標的代碼  |
+| ∟ put_symbol      | string   | PUT 期權標的代碼   |
+| ∟ standard        | bool     | 是否標準期權       |
 
 ### Protobuf
 
@@ -91,11 +91,11 @@ message StrikePriceInfo {
 }
 ```
 
-## 错误码
+## 錯誤碼
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                                    |
+| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                                    |
 | ---------- | ---------- | -------------- | ------------------------------------------- |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败                      |
-| 3          | 301606     | 限流           | 降低请求频次                                |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理                    |
-| 7          | 301600     | 请求数据非法   | 检查请求的 `symbol`，`expiry_date` 数据格式 |
+| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗                      |
+| 3          | 301606     | 限流           | 降低請求頻次                                |
+| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理                    |
+| 7          | 301600     | 請求數據非法   | 檢查請求的 `symbol`，`expiry_date` 數據格式 |

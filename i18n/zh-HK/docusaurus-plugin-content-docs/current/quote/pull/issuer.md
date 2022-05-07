@@ -1,15 +1,15 @@
 ---
 id: quote_issuer
-title: 获取轮证发行商 ID
+title: 獲取輪證發行商 ID
 slug: issuer
 sidebar_position: 13
 ---
 
-该接口用于获取轮证发行商 ID 数据 (可每天同步一次)。
+該接口用於獲取輪證發行商 ID 數據 (可每天同步一次)。
 
 :::info
 
-[协议指令](../../socket/protocol/request)：`22`
+[業務指令](../../socket/protocol/request)：`22`
 
 :::
 
@@ -19,11 +19,11 @@ sidebar_position: 13
 
 | Name        | Type     | Description   |
 | ----------- | -------- | ------------- |
-| issuer_info | object[] | 券商席位      |
-| ∟ id        | int32    | 机构 ID       |
-| ∟ name_cn   | string   | 机构名称 (简) |
-| ∟ name_en   | string   | 机构名称 (英) |
-| ∟ name_hk   | string   | 机构名称 (繁) |
+| issuer_info | object[] | 發行機構信息  |
+| ∟ id        | int32    | 機構 ID       |
+| ∟ name_cn   | string   | 機構名稱 (简) |
+| ∟ name_en   | string   | 機構名稱 (英) |
+| ∟ name_hk   | string   | 機構名稱 (繁) |
 
 ### Protobuf
 
@@ -67,10 +67,10 @@ message IssuerInfo {
 }
 ```
 
-## 错误码
+## 錯誤碼
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                 |
+| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                 |
 | ---------- | ---------- | -------------- | ------------------------ |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败   |
-| 3          | 301606     | 限流           | 降低请求频次             |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理 |
+| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗   |
+| 3          | 301606     | 限流           | 降低請求頻次             |
+| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理 |

@@ -1,14 +1,14 @@
 ---
 id: quote_brokers
-title: 获取标的经纪队列
+title: 獲取標的經紀隊列
 slug: brokers
 sidebar_position: 6
 ---
 
-该接口用于获取标的的实时经纪队列数据。
+該接口用於獲取標的的實時經紀隊列數據。
 
 :::info
-[协议指令](../../socket/protocol/request)：`15`
+[業務指令](../../socket/protocol/request)：`15`
 :::
 
 ## Request
@@ -17,7 +17,7 @@ sidebar_position: 6
 
 | Name   | Type   | Required | Description                                          |
 | ------ | ------ | -------- | ---------------------------------------------------- |
-| symbol | string | 是       | 标的代码，使用 `ticker.region` 格式，例如： `700.HK` |
+| symbol | string | 是       | 標的代碼，使用 `ticker.region` 格式，例如： `700.HK` |
 
 ### Protobuf
 
@@ -33,13 +33,13 @@ message SecurityRequest {
 
 | Name         | Type     | Description                                               |
 | ------------ | -------- | --------------------------------------------------------- |
-| symbol       | string   | 标的代码                                                  |
-| ask_brokers  | object[] | 卖盘经纪队列                                              |
-| ∟ position   | int32    | 档位                                                      |
-| ∟ broker_ids | int32[]  | 券商席位 ID，通过[获取券商席位 ID ](./broker-ids)接口获取 |
-| bid_brokers  | object[] | 买盘经纪队列                                              |
-| ∟ position   | int32    | 档位                                                      |
-| ∟ broker_ids | int32[]  | 券商席位 ID，通过[获取券商席位 ID ](./broker-ids)接口获取 |
+| symbol       | string   | 標的代碼                                                  |
+| ask_brokers  | object[] | 賣槃經紀隊列                                              |
+| ∟ position   | int32    | 檔位                                                      |
+| ∟ broker_ids | int32[]  | 券商席位 ID，通过[獲取券商席位 ID ](./broker-ids)接口獲取 |
+| bid_brokers  | object[] | 買槃經紀隊列                                              |
+| ∟ position   | int32    | 檔位                                                      |
+| ∟ broker_ids | int32[]  | 券商席位 ID，通过[獲取券商席位 ID ](./broker-ids)接口獲取 |
 
 ### Protobuf
 
@@ -83,13 +83,13 @@ message Brokers {
 }
 ```
 
-## 错误码
+## 錯誤碼
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                     |
+| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                     |
 | ---------- | ---------- | -------------- | ---------------------------- |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败       |
-| 3          | 301606     | 限流           | 降低请求频次                 |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理     |
-| 7          | 301600     | 请求标的不存在 | 检查请求的 `symbol` 是否正确 |
-| 7          | 301603     | 标的无行情     | 标的没有请求的行情数据       |
-| 7          | 301604     | 无权限         | 没有获取标的行情的权限       |
+| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗       |
+| 3          | 301606     | 限流           | 降低請求頻次                 |
+| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理     |
+| 7          | 301600     | 請求標的不存在 | 检查请求的 `symbol` 是否正确 |
+| 7          | 301603     | 標的無行情     | 標的沒有請求的行情數據       |
+| 7          | 301604     | 無權限         | 沒有獲取標的行情的權限       |

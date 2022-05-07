@@ -1,15 +1,15 @@
 ---
 id: quote_trade_session
-title: 获取各市场当日交易时段
+title: 獲取各市場當日交易時段
 slug: trade-session
 sidebar_position: 15
 ---
 
-该接口用于获取各市场当日交易时段。
+該接口用於獲取各市場當日交易時段。
 
 :::info
 
-[协议指令](../../socket/protocol/request)：`8`
+[業務指令](../../socket/protocol/request)：`8`
 
 :::
 
@@ -19,12 +19,12 @@ sidebar_position: 15
 
 | Name                 | Type     | Description                                                                                 |
 | -------------------- | -------- | ------------------------------------------------------------------------------------------- |
-| market_trade_session | object[] | 市场交易时段                                                                                |
-| ∟ market             | string   | 市场<br/><br/>`US` - 美股市场<br/>`HK` - 港股市场<br/>`CN` - A 股市场<br/>`SG` - 新加坡市场 |
-| ∟ trade_session      | object[] | 交易时段                                                                                    |
-| ∟∟ beg_time          | string   | 交易开始时间，格式：`hhmm` 例如：`900`                                                      |
-| ∟∟ end_time          | string   | 交易结束时间，格式：`hhmm` 例如：`1400`                                                     |
-| ∟∟ trade_session     | int32    | 交易时段，详见 [TradeSession](../objects#tradesession---交易时段)                           |
+| market_trade_session | object[] | 市場交易時段                                                                                |
+| ∟ market             | string   | 市場<br/><br/>`US` - 美股市場<br/>`HK` - 港股市場<br/>`CN` - A 股市場<br/>`SG` - 新加坡市場 |
+| ∟ trade_session      | object[] | 交易時段                                                                                    |
+| ∟∟ beg_time          | string   | 交易開始時間，格式：`hhmm` 例如：`900`                                                      |
+| ∟∟ end_time          | string   | 交易結束時間，格式：`hhmm` 例如：`1400`                                                     |
+| ∟∟ trade_session     | int32    | 交易時段，詳見 [TradeSession](../objects#tradesession---交易時段)                           |
 
 ### Protobuf
 
@@ -112,10 +112,10 @@ message TradePeriod {
 }
 ```
 
-## 错误码
+## 錯誤碼
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                 |
+| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                 |
 | ---------- | ---------- | -------------- | ------------------------ |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败   |
-| 3          | 301606     | 限流           | 降低请求频次             |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理 |
+| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗   |
+| 3          | 301606     | 限流           | 降低請求頻次             |
+| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理 |
