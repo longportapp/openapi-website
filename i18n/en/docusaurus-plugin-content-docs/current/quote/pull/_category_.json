@@ -2,9 +2,6 @@
   "label": "Pull",
   "collapsible": true,
   "collapsed": true,
-  "link": {
-    "title": "Pull",
-    "slug": "/quote/pull"
-  },
+  "link": null,
   "position": 2
 }

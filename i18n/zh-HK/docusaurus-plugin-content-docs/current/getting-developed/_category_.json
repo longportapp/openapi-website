@@ -3,8 +3,5 @@
   "label": "準備開發",
   "collapsible": true,
   "collapsed": false,
-  "link": {
-    "title": "Getting Started",
-    "slug": "/getting-started"
-  }
+  "link": null
 }

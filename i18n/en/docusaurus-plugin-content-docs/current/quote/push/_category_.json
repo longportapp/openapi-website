@@ -2,9 +2,6 @@
   "label": "Push",
   "collapsible": true,
   "collapsed": true,
-  "link": {
-    "title": "Push",
-    "slug": "/quote/push"
-  },
+  "link": null,
   "position": 4
 }

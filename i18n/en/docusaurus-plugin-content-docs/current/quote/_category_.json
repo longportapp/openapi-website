@@ -2,9 +2,6 @@
   "label": "Quote",
   "collapsible": true,
   "collapsed": true,
-  "link": {
-    "title": "Quote Interface",
-    "slug": "/quote"
-  },
+  "link": null,
   "position": 3
 }

@@ -1,4 +1,5 @@
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { getValidLocale } from '.';
 
 // SDK with en locale -> en/sdk
 // SDK with zh-CN locale -> SDK
@@ -6,10 +7,7 @@ export default function useLocalePrefix(path: string) {
   // normalize path
   let rawPath = path;
   if (path.startsWith('/')) {
-    rawPath = path
-      .split('/')
-      .slice(1, path.split('/').length)
-      .join('/');
+    rawPath = path.split('/').slice(1, path.split('/').length).join('/');
   }
 
   // get locale from context
@@ -17,8 +15,10 @@ export default function useLocalePrefix(path: string) {
     i18n: { currentLocale },
   } = useDocusaurusContext();
 
+  let locale = getValidLocale(currentLocale);
+
   // compose locale prefix
-  return currentLocale === 'zh-CN' ? rawPath : `${currentLocale}/${rawPath}`;
+  return locale === 'zh-CN' ? rawPath : `${locale}/${rawPath}`;
 }
 
 export const domainWithLocalPath = (domain: string, path: string) => {

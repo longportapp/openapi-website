@@ -3,8 +3,5 @@
   "label": "訂單",
   "collapsible": true,
   "collapsed": true,
-  "link": {
-    "title": "訂單接口介紹",
-    "slug": "/trade/orders"
-  }
+  "link": null
 }

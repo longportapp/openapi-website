@@ -66,6 +66,7 @@ $ yarn dev:swagger
 title: '开放平台文档标题'
 id: $category_$file_name # category 指文檔分類 file_name 指文档的文件名以中横线分隔的字符串
 slug: '/xxx' # 注意前面必须加上 /， 例如 /trade-order-create 这样的 slug 保持和 id 一致
+sidebar_position: 1 // 显示的顺序，数字越小越靠前
 ---
 ```
 
@@ -79,10 +80,7 @@ slug: '/xxx' # 注意前面必须加上 /， 例如 /trade-order-create 这样�
 {
   position: 1, // 显示的顺序，数字越小越靠前
   label: 'OpenAPI 介绍', // 文档分类名称，显示在左边栏
-  link: {
-    title: 'Getting started', // 点击分类时页面的描述信息
-    slug: '/getting-started', //
-  },
+  link: null,
 }
 ```
 
