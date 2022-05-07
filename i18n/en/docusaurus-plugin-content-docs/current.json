@@ -32,7 +32,7 @@
     "description": "The label for category 订单 in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.资产": {
-    "message": "资产",
+    "message": "Asset",
     "description": "The label for category 资产 in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.长连接": {

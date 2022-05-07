@@ -26,12 +26,17 @@ paths:
       request_body:
         type: "python"
         value: |
-          def example():
-            from longbridge.http import Auth, Config, HttpClient
-            auth = Auth("${APP_KEY}", "${APP_SECRET}", "${ACCESS_TOKEN}")
-            config = Config(base_url = "https://openapi.longbridge.global")
-            client = HttpClient(auth, config)
-            result = client.get("/v1/asset/stock")
+          # Get Stock Positions
+          # https://open.longbridgeapp.com/docs/trade/asset/stock
+          import os
+          import json
+          from longbridge.http import Auth, Config, HttpClient
+
+          auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
+          http = HttpClient(auth, Config(base_url="https://openapi.lbkrs.com"))
+
+          resp = http.get("/v1/asset/stock")
+          print(json.dumps(resp.data, indent=2))
       response_body:
         {
           "code": 0,
