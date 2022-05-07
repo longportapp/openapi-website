@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "This interface is used to obtain capital inflow/outflow direction, capital type, capital amount, occurrence time, associated stock code and capital flow description information"
+  description: "The API is used to obtain capital inflow/outflow direction, capital type, capital amount, occurrence time, associated stock code and capital flow description information"
   version: "v1"
   title: "Get cash flow"
 paths:

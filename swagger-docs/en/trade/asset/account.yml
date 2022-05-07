@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "This interface is used to obtain the available, desirable, frozen, to-be-settled, and in-transit funds (fund purchase and redemption) information for each currency of the user"
+  description: "The API is used to obtain the available, desirable, frozen, to-be-settled, and in-transit funds (fund purchase and redemption) information for each currency of the user"
   version: "v1"
   title: "Get account Balance"
 paths:

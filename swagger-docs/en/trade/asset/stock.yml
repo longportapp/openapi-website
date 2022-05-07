@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "This interface is used to obtain stock position information including account, stock code, number of shares held, number of available shares, average position price (calculated according to account settings), and currency."
+  description: "The API is used to obtain stock position information including account, stock code, number of shares held, number of available shares, average position price (calculated according to account settings), and currency."
   version: "v1"
   title: "Get stock positions"
 paths:

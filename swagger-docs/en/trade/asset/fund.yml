@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "This interface is used to obtain fund position information including account, fund code, holding share, cost net worth, current net worth, and currency."
+  description: "The API is used to obtain fund position information including account, fund code, holding share, cost net worth, current net worth, and currency."
   version: "v1"
   title: "Get fund positions"
 paths:
