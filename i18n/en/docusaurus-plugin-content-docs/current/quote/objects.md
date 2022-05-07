@@ -1,27 +1,27 @@
 ---
 sidebar_position: 2
 id: quote_object
-title: 行情命名词典
+title: Quote Naming Dictionary
 slug: objects
 ---
 
-### TradeStatus - 交易状态
+### TradeStatus - Secrity Status
 
-交易状态
+Security Status
 
-| ID  | 描述            |
-| --- | --------------- |
-| 0   | 正常交易        |
-| 1   | 停牌            |
-| 2   | 退市            |
-| 3   | 熔断            |
-| 4   | 新股待上市      |
-| 5   | 代码变更        |
-| 6   | 待开盘          |
-| 7   | 拆合股暂停交易  |
-| 8   | 已到期 (衍生品) |
-| 9   | 轮证待上市      |
-| 10  | 终止交易        |
+| ID  | Description         |
+| --- | ------------------- |
+| 0   | Normal              |
+| 1   | Suspension          |
+| 2   | Delisted            |
+| 3   | Fuse                |
+| 4   | Papare List         |
+| 5   | Code Moved          |
+| 6   | To Be Opened        |
+| 7   | Split Stock Halts   |
+| 8   | Expired             |
+| 9   | Warrant To BeListed |
+| 10  | Suspend             |
 
 #### Protobuf
 
@@ -41,15 +41,15 @@ enum TradeStatus {
 }
 ```
 
-### TradeSession - 交易时段
+### TradeSession - Trading Session
 
-交易时段
+Trading Session
 
-| ID  | 描述     |
-| --- | -------- |
-| 0   | 盘中交易 |
-| 1   | 盘前交易 |
-| 2   | 盘后交易 |
+| ID  | Description   |
+| --- | ------------- |
+| 0   | Trading       |
+| 1   | Pre-Tradeing  |
+| 2   | Post-Tradeing |
 
 #### Protobuf
 
@@ -61,19 +61,19 @@ enum TradeSession {
 }
 ```
 
-### Period - K 线周期
+### Period - Candlestick Period
 
-| ID   | 描述          |
-| ---- | ------------- |
-| 1    | 一分钟 k 线   |
-| 5    | 五分钟 k 线   |
-| 15   | 十五分钟 k 线 |
-| 30   | 三十分钟 k 线 |
-| 60   | 六十分钟 k 线 |
-| 1000 | 日 k 线       |
-| 2000 | 周 k 线       |
-| 3000 | 月 k 线       |
-| 4000 | 年 k 线       |
+| ID   | Description     |
+| ---- | --------------- |
+| 1    | One Minute      |
+| 5    | Five Minutes    |
+| 15   | Fifteen Minutes |
+| 30   | Thirty Minutes  |
+| 60   | Sixty Minutes   |
+| 1000 | One Days        |
+| 2000 | One Week        |
+| 3000 | One Month       |
+| 4000 | One Year        |
 
 #### Protobuf
 
@@ -92,12 +92,12 @@ enum Period {
 }
 ```
 
-### AdjustType - K 线复权类型
+### AdjustType - Candlestick Adjustment Type
 
-| ID  | 描述   |
-| --- | ------ |
-| 0   | 除权   |
-| 1   | 前复权 |
+| ID  | Description    |
+| --- | -------------- |
+| 0   | Actual         |
+| 1   | Adjust forward |
 
 #### Protobuf
 
@@ -108,14 +108,14 @@ enum AdjustType {
 }
 ```
 
-### SubType - 订阅数据的类型
+### SubType - Quote Type Of Subscription
 
-| ID  | 描述     |
-| --- | -------- |
-| 1   | 价格     |
-| 2   | 买卖盘口 |
-| 3   | 经纪队列 |
-| 4   | 逐笔明细 |
+| ID  | Description |
+| --- | ----------- |
+| 1   | Quote       |
+| 2   | Depth       |
+| 3   | Broker      |
+| 4   | Trade       |
 
 #### Protobuf
 

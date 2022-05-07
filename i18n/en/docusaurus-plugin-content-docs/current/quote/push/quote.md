@@ -1,35 +1,35 @@
 ---
 id: push_quote
-title: 实时价格推送
+title: Push Real-time Quote
 slug: quote
 sidebar_position: 1
 ---
 
-已订阅标的的实时价格推送，推送的数据结构中，只有有变化的字段才会填充数据。
+Real-time quote push of the subscribed security. In the pushed data structure, only the fields that have changed will be filled with data.
 
 :::info
 
-[协议指令](../../socket/protocol/push)：`101`
+[Business Command](../../socket/protocol/push): `101`
 
 :::
 
-## 数据格式
+## Data Format
 
 ### Properties
 
-| Name          | Type   | Description                                                       |
-| ------------- | ------ | ----------------------------------------------------------------- |
-| symbol        | string | 标的代码，例如：`AAPL.US`                                         |
-| sequence      | int64  | 序列号                                                            |
-| last_done     | string | 最新价                                                            |
-| open          | string | 开盘价                                                            |
-| high          | string | 最高价                                                            |
-| low           | string | 最低价                                                            |
-| timestamp     | int64  | 最新成交的时间戳                                                  |
-| volume        | int64  | 成交量                                                            |
-| turnover      | string | 成交额                                                            |
-| trade_status  | int32  | 交易状态，详见 [TradeStatus](../objects#tradestatus---交易状态)   |
-| trade_session | int32  | 交易时段，详见 [TradeSession](../objects#tradesession---交易时段) |
+| Name          | Type   | Description                                                                          |
+| ------------- | ------ | ------------------------------------------------------------------------------------ |
+| symbol        | string | Security code, for example: `AAPL.US`                                                |
+| sequence      | int64  | Sequence number                                                                      |
+| last_done     | string | Latest price                                                                         |
+| open          | string | Open                                                                                 |
+| high          | string | High                                                                                 |
+| low           | string | Low                                                                                  |
+| timestamp     | int64  | Time of latest price                                                                 |
+| volume        | int64  | Volume                                                                               |
+| turnover      | string | Turnover                                                                             |
+| trade_status  | int32  | Security trading status, see [TradeStatus](../objects#tradestatus---security-status) |
+| trade_session | int32  | Trade session, see [TradeSession](../objects#tradesession---trading-session)         |
 
 ### Protobuf
 

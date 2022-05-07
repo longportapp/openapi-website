@@ -1,31 +1,31 @@
 ---
 id: push_broker
-title: 实时经纪队列推送
+title: 實時經紀隊列推送
 slug: broker
 sidebar_position: 3
 ---
 
-已订阅标的的实时经纪队列数据推送。
+已訂閱標的的實時經紀隊列數據推送。
 
 :::info
 
-[协议指令](../../socket/protocol/push)：`103`
+[業務指令](../../socket/protocol/push)：`103`
 
 :::
 
-## 数据格式
+## 數據格式
 
 ### Properties
 
 | Name         | Type     | Description                       |
 | ------------ | -------- | --------------------------------- |
-| symbol       | string   | 标的代码，例如：`AAPL.US`         |
-| sequence     | int64    | 序列号                            |
-| ask_brokers  | object[] | 卖盘经纪队列                      |
-| ∟ position   | int32    | 档位                              |
+| symbol       | string   | 標的代碼，例如：`AAPL.US`         |
+| sequence     | int64    | 序列號                            |
+| ask_brokers  | object[] | 賣槃經紀隊列                      |
+| ∟ position   | int32    | 檔位                              |
 | ∟ broker_ids | int32[]  | [券商席位 Id](../pull/broker-ids) |
-| bid_brokers  | object[] | 买盘经纪队列                      |
-| ∟ position   | int32    | 档位                              |
+| bid_brokers  | object[] | 買槃經紀隊列                      |
+| ∟ position   | int32    | 檔位                              |
 | ∟ broker_ids | int32[]  | [券商席位 Id](../pull/broker-ids) |
 
 ### Protobuf

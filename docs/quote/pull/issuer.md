@@ -19,7 +19,7 @@ sidebar_position: 13
 
 | Name        | Type     | Description   |
 | ----------- | -------- | ------------- |
-| issuer_info | object[] | 券商席位      |
+| issuer_info | object[] | 发行机构信息  |
 | ∟ id        | int32    | 机构 ID       |
 | ∟ name_cn   | string   | 机构名称 (简) |
 | ∟ name_en   | string   | 机构名称 (英) |

@@ -1,9 +1,9 @@
 {
-  "label": "推送",
+  "label": "Push",
   "collapsible": true,
   "collapsed": true,
   "link": {
-    "title": "推送",
+    "title": "Push",
     "slug": "/quote/push"
   },
   "position": 4

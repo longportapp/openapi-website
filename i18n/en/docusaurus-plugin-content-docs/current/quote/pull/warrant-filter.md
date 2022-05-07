@@ -1,15 +1,15 @@
 ---
 id: quote_warrant_filter
-title: 获取轮证筛选列表
+title: Get Filtered Warrant
 slug: warrant-filter
 sidebar_position: 14
 ---
 
-该接口用于获取轮证行情列表数据，支持按不同字段排序和筛选轮证。
+This API is used to obtain the quotes of HK warrants, and supports sorting and filtering.
 
 :::info
 
-[协议指令](../../socket/protocol/request)：`23`
+[Business Command](../../socket/protocol/request): `23`
 
 :::
 
@@ -17,20 +17,20 @@ sidebar_position: 14
 
 ### Parameters
 
-| Name          | Type    | Required | Description                                                                                                                                        |
-| ------------- | ------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| symbol        | string  | 是       | 标的代码，使用 `ticker.region` 格式，例如：`700.HK`                                                                                                |
-| filter_config | object  | 是       | 筛选条件                                                                                                                                           |
-| ∟ sort_by     | int32   | 是       | 根据哪一项数据进行排序，例如：`0`，序号见响应数据 `OrderSequence` 字段。                                                                           |
-| ∟ sort_order  | int32   | 是       | 升降顺序，例如：`1` <br /><br />**可选值：**<br />`0` - 升序<br />`1` - 降序                                                                       |
-| ∟ sort_offset | int32   | 是       | 分页的第一条数据偏移量，例如 `0`                                                                                                                   |
-| ∟ sort_count  | int32   | 是       | 分页的每一页数量，例如 `20` <br /><br />**校验规则：**<br /> 每页数量最大为 500                                                                    |
-| ∟ type        | int32[] | 否       | 筛选轮证类型 例如：`[0,1]` <br /><br />**可选值：**<br />`0` - 认购<br />`1` - 认沽<br />`2` - 牛证<br />`3` - 熊证<br />`4` - 界内证              |
-| ∟ issuer      | int32[] | 否       | 筛选发行商，例如：`[12,14]`，[发行商 ID](./issuer) 通过接口获取                                                                                    |
-| ∟ expiry_date | int32[] | 否       | 筛选轮证过期时间，例如：`[1]` <br /><br />**可选值：**<br />`1` - 低于 3 个月<br />`2` - 3 - 6 个月<br />`3` - 6 - 12 个月<br />`4` - 大于 12 个月 |
-| ∟ price_type  | int32[] | 否       | 筛选价内价外，例如：`[2]` <br /><br />**可选值：**<br />`1` - 价内<br />`2` - 价外                                                                 |
-| ∟ status      | int32[] | 否       | 筛选状态，例如：`[2]` <br /><br />**可选值：**<br />`2 `- 终止交易<br />`3` - 等待上市<br />`4` - 正常                                             |
-| language      | int32   | 是       | 响应的语言，例如：`[1]` <br /><br />**可选值：**<br />`0` - 简体<br />`1` - English<br />`2` - 繁体                                                |
+| Name          | Type    | Required | Description                                                                                                                                                                         |
+| ------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol        | string  | Yes      | Security code, in `ticker.region` format, for example:`700.HK`                                                                                                                      |
+| filter_config | object  | Yes      | Filter conditions                                                                                                                                                                   |
+| ∟ sort_by     | int32   | Yes      | Which data to sort by, for example: `0`, see the `OrderSequence` field of the response data for the sequence number.                                                                |
+| ∟ sort_order  | int32   | Yes      | Order, for example: `1` <br /><br />**Optional value:**<br />`0` - Ascending<br />`1` - Descending                                                                                  |
+| ∟ sort_offset | int32   | Yes      | The first data offset of paging, for example: `0`                                                                                                                                   |
+| ∟ sort_count  | int32   | Yes      | Number of paginated pages per page, for example: `20` <br /><br />**Check rules:**<br /> Up to `500` securities per page                                                            |
+| ∟ type        | int32[] | No       | Filter warrant type, for example: `[0,1]` <br /><br />**Optional value:**<br />`0` - Call<br />`1` - Put<br />`2` - Bull<br />`3` - Bear<br />`4` - Inline                          |
+| ∟ issuer      | int32[] | No       | Filter issuer example: `[12,14]`, obtain [Issuer ID](./issuer) through API                                                                                                          |
+| ∟ expiry_date | int32[] | No       | Filter expiry date, example: `[1]` <br /><br />**Optional value:**<br />`1` - Less than 3 months<br />`2` - 3 - 6 months<br />`3` - 6 - 12 months<br />`4` - greater than 12 months |
+| ∟ price_type  | int32[] | No       | Filter in/out of bounds, for example: `[2]` <br /><br />**Optional value:**<br />`1` - In bounds<br />`2` - Out bounds                                                              |
+| ∟ status      | int32[] | No       | Filter status, for example: `[2]` <br /><br />**Optional value:**<br />`2 `- Suspend trading<br />`3` - Papare List<br />`4` - Normal                                               |
+| language      | int32   | Yes      | Language, for example: `[1]` <br /><br />**Optional value:**<br />`0` - zh-CN<br />`1` - en<br />`2` - zh-HK                                                                        |
 
 ### Protobuf
 
@@ -58,34 +58,34 @@ message FilterConfig {
 
 ### Response Properties
 
-| Name                 | Type     | Description                                                                    | OrderSequence |
-| -------------------- | -------- | ------------------------------------------------------------------------------ | ------------- |
-| warrant_list         | object[] | 标的代码                                                                       |               |
-| ∟ symbol             | string   | 标的代码                                                                       |               |
-| ∟ name               | string   | 标的名称                                                                       |               |
-| ∟ last_done          | string   | 最新价                                                                         | 0             |
-| ∟ change_rate        | string   | 涨跌幅                                                                         | 1             |
-| ∟ change_val         | string   | 涨跌额                                                                         | 2             |
-| ∟ volume             | int64    | 成交量                                                                         | 3             |
-| ∟ turnover           | string   | 成交额                                                                         | 4             |
-| ∟ expiry_date        | string   | 到期日，使用 `YYMMDD` 格式                                                     | 5             |
-| ∟ strike_price       | string   | 行权价                                                                         | 6             |
-| ∟ upper_strike_price | string   | 上限价                                                                         | 7             |
-| ∟ lower_strike_price | string   | 下限价                                                                         | 8             |
-| ∟ outstanding_qty    | string   | 街货量                                                                         | 9             |
-| ∟ outstanding_ratio  | string   | 街货比                                                                         | 10            |
-| ∟ premium            | string   | 溢价率                                                                         | 11            |
-| ∟ itm_otm            | string   | 价内/价外                                                                      | 12            |
-| ∟ implied_volatility | string   | 引伸波幅                                                                       | 13            |
-| ∟ delta              | string   | 对冲值                                                                         | 14            |
-| ∟ call_price         | string   | 收回价                                                                         | 15            |
-| ∟ to_call_price      | string   | 据收回价                                                                       | 16            |
-| ∟ effective_leverage | string   | 有效杠杆                                                                       | 17            |
-| ∟ leverage_ratio     | string   | 杠杆比率                                                                       | 18            |
-| ∟ conversion_ratio   | string   | 换股比率                                                                       | 19            |
-| ∟ balance_point      | string   | 打和点                                                                         | 20            |
-| ∟ state              | string   | 状态，<br /><br />**可选值：**<br />`正常交易`<br />`等待上市`<br />`终止交易` | 21            |
-| total_count          | int32    | 符合条件的轮证总数量                                                           |               |
+| Name                 | Type     | Description                                                                     | OrderSequence |
+| -------------------- | -------- | ------------------------------------------------------------------------------- | ------------- |
+| warrant_list         | object[] | Filted warrant data list                                                        |               |
+| ∟ symbol             | string   | Security code                                                                   |               |
+| ∟ name               | string   | Security name                                                                   |               |
+| ∟ last_done          | string   | Latest price                                                                    | 0             |
+| ∟ change_rate        | string   | Quote change rate                                                               | 1             |
+| ∟ change_val         | string   | Quote change                                                                    | 2             |
+| ∟ volume             | int64    | Volume                                                                          | 3             |
+| ∟ turnover           | string   | Turnover                                                                        | 4             |
+| ∟ expiry_date        | string   | Expiry date, in `YYMMDD` format                                                 | 5             |
+| ∟ strike_price       | string   | Strike price                                                                    | 6             |
+| ∟ upper_strike_price | string   | Upper bound price                                                               | 7             |
+| ∟ lower_strike_price | string   | Lower bound price                                                               | 8             |
+| ∟ outstanding_qty    | string   | Outstanding quantity                                                            | 9             |
+| ∟ outstanding_ratio  | string   | Outstanding ratio                                                               | 10            |
+| ∟ premium            | string   | Premium                                                                         | 11            |
+| ∟ itm_otm            | string   | In/out of the bound                                                             | 12            |
+| ∟ implied_volatility | string   | Implied volatility                                                              | 13            |
+| ∟ delta              | string   | Greek value Delta                                                               | 14            |
+| ∟ call_price         | string   | Call price                                                                      | 15            |
+| ∟ to_call_price      | string   | Price interval from the call price                                              | 16            |
+| ∟ effective_leverage | string   | Effective leverage                                                              | 17            |
+| ∟ leverage_ratio     | string   | Leverage ratio                                                                  | 18            |
+| ∟ conversion_ratio   | string   | Conversion ratio                                                                | 19            |
+| ∟ balance_point      | string   | Breakeven point                                                                 | 20            |
+| ∟ state              | string   | Status, <br /><br />**Optional value:**<br />`Normal`<br />`New`<br />`Suspend` | 21            |
+| total_count          | int32    | Total number of eligible                                                        |               |
 
 ### Protobuf
 
@@ -130,7 +130,7 @@ message FilterWarrant {
   "warrant_list": [
     {
       "symbol": "13157.HK",
-      "name": "腾讯麦银二七沽 A",
+      "name": "MBTENCT@EP2207A",
       "last_done": "2.26",
       "change_rate": "-0.0216450216450218",
       "change_val": "-0.050000000000000266",
@@ -150,11 +150,11 @@ message FilterWarrant {
       "leverage_ratio": "3.0826882353970637",
       "conversion_ratio": "48.544",
       "balance_point": "332.52356000000003",
-      "state": "正常交易"
+      "state": "Normal"
     },
     {
       "symbol": "13649.HK",
-      "name": "腾讯摩通二五沽 A",
+      "name": "MBTENCT@EP2205A",
       "last_done": "1.14",
       "change_rate": "0",
       "change_val": "0",
@@ -174,21 +174,21 @@ message FilterWarrant {
       "leverage_ratio": "3.055678583813144",
       "conversion_ratio": "97.087",
       "balance_point": "334.54382000000004",
-      "state": "终止交易"
+      "state": "Normal"
     }
   ],
   "total_count": 1197
 }
 ```
 
-## 错误码
+## Error Code
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                     |
-| ---------- | ---------- | -------------- | ---------------------------- |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败       |
-| 3          | 301606     | 限流           | 降低请求频次                 |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理     |
-| 7          | 301600     | 请求标的不存在 | 检查请求的 `symbol` 是否正确 |
-| 7          | 301603     | 标的无行情     | 标的没有请求的行情数据       |
-| 7          | 301604     | 无权限         | 没有获取标的行情的权限       |
-| 7          | 301607     | 接口限制       | 减少每页数据数量             |
+| Protocol Error Code | Business Error Code | Description                  | Troubleshooting Suggestions                                   |
+| ------------------- | ------------------- | ---------------------------- | ------------------------------------------------------------- |
+| 3                   | 301600              | Invalid request              | Invalid request parameters or unpacking request failed        |
+| 3                   | 301606              | Request rate limit           | Reduce the frequency of requests                              |
+| 7                   | 301602              | Server error                 | Please try again or contact a technician to resolve the issue |
+| 7                   | 301600              | Symbol not found             | Check that the requested `symbol` is correct                  |
+| 7                   | 301603              | No quotes                    | Security no quote                                             |
+| 7                   | 301604              | No access                    | No access to security quote                                   |
+| 7                   | 301607              | Too many symbols in one page | Reduce the number of symbols in a page of request             |

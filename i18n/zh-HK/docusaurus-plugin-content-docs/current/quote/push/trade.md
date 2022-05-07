@@ -1,33 +1,33 @@
 ---
 id: push_trade
-title: 实时成交明细推送
+title: 實時成交明細推送
 slug: trade
 sidebar_position: 4
 ---
 
-已订阅的标的的实时逐笔成交明细推送。
+已訂閱的標的的實時逐筆成交明細推送。
 
 :::info
 
-[协议指令](../../socket/protocol/push)：`104`
+[業務指令](../../socket/protocol/push)：`104`
 
 :::
 
-## 数据格式
+## 數據格式
 
 ### Properties
 
 | Name            | Type     | Description                                                                                                                                                                                   |
 | --------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| symbol          | string   | 标的代码，例如：`AAPL.US`                                                                                                                                                                     |
-| sequence        | int64    | 序列号                                                                                                                                                                                        |
-| trades          | object[] | 逐笔明细数据                                                                                                                                                                                  |
-| ∟ price         | string   | 价格                                                                                                                                                                                          |
+| symbol          | string   | 標的代碼，例如：`AAPL.US`                                                                                                                                                                     |
+| sequence        | int64    | 序列號                                                                                                                                                                                        |
+| trades          | object[] | 逐筆明細數據                                                                                                                                                                                  |
+| ∟ price         | string   | 價格                                                                                                                                                                                          |
 | ∟ volume        | int64    | 成交量                                                                                                                                                                                        |
-| ∟ timestamp     | int64    | 成交时间                                                                                                                                                                                      |
-| ∟ trade_type    | string   | 交易类型 <br/><br />**可选值：**<br/>`*` - 场外交易<br/>`D` - 碎股交易<br/>`M` - 非自动对盘<br/>`P` - 开市前成交盘<br/>`U` - 竞价交易<br/>`X` - 同一券商非自动对盘<br/>`Y` - 同一券商自动对盘 |
-| ∟ direction     | int32    | 交易方向 <br/><br />**可选值：**<br/>`0` - nature<br/>`1` - down 2-up                                                                                                                         |
-| ∟ trade_session | int32    | 交易时段，详见 [TradeSession](../objects#tradesession---交易时段)                                                                                                                             |
+| ∟ timestamp     | int64    | 成交時間                                                                                                                                                                                      |
+| ∟ trade_type    | string   | 交易類型 <br/><br />**可選值：**<br/>`*` - 場外交易<br/>`D` - 碎股交易<br/>`M` - 非自動對盤<br/>`P` - 開市前成交盤<br/>`U` - 競價交易<br/>`X` - 同一券商非自動對盤<br/>`Y` - 同一券商自動對盤 |
+| ∟ direction     | int32    | 交易方向 <br/><br />**可選值：**<br/>`0` - nature<br/>`1` - down 2-up                                                                                                                         |
+| ∟ trade_session | int32    | 交易時段，詳見 [TradeSession](../objects#tradesession---交易時段)                                                                                                                             |
 
 ### Protobuf
 

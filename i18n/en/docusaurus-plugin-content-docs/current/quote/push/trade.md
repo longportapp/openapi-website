@@ -1,33 +1,33 @@
 ---
 id: push_trade
-title: 实时成交明细推送
+title: Push Real-time Trades
 slug: trade
 sidebar_position: 4
 ---
 
-已订阅的标的的实时逐笔成交明细推送。
+Real-time trades data push of the subscribed security.
 
 :::info
 
-[协议指令](../../socket/protocol/push)：`104`
+[Business Command](../../socket/protocol/push): `104`
 
 :::
 
-## 数据格式
+## Data Format
 
 ### Properties
 
-| Name            | Type     | Description                                                                                                                                                                                   |
-| --------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| symbol          | string   | 标的代码，例如：`AAPL.US`                                                                                                                                                                     |
-| sequence        | int64    | 序列号                                                                                                                                                                                        |
-| trades          | object[] | 逐笔明细数据                                                                                                                                                                                  |
-| ∟ price         | string   | 价格                                                                                                                                                                                          |
-| ∟ volume        | int64    | 成交量                                                                                                                                                                                        |
-| ∟ timestamp     | int64    | 成交时间                                                                                                                                                                                      |
-| ∟ trade_type    | string   | 交易类型 <br/><br />**可选值：**<br/>`*` - 场外交易<br/>`D` - 碎股交易<br/>`M` - 非自动对盘<br/>`P` - 开市前成交盘<br/>`U` - 竞价交易<br/>`X` - 同一券商非自动对盘<br/>`Y` - 同一券商自动对盘 |
-| ∟ direction     | int32    | 交易方向 <br/><br />**可选值：**<br/>`0` - nature<br/>`1` - down 2-up                                                                                                                         |
-| ∟ trade_session | int32    | 交易时段，详见 [TradeSession](../objects#tradesession---交易时段)                                                                                                                             |
+| Name            | Type     | Description                                                                                                                                                                                                                                                                             |
+| --------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol          | string   | Security code, for example: `AAPL.US`                                                                                                                                                                                                                                                   |
+| sequence        | int64    | Sequence number                                                                                                                                                                                                                                                                         |
+| trades          | object[] | Trades data                                                                                                                                                                                                                                                                             |
+| ∟ price         | string   | Price                                                                                                                                                                                                                                                                                   |
+| ∟ volume        | int64    | Volume                                                                                                                                                                                                                                                                                  |
+| ∟ timestamp     | int64    | Time of trading                                                                                                                                                                                                                                                                         |
+| ∟ trade_type    | string   | Trade type <br /><br />**Optional value:**<br />`*` - Overseas trade<br />`D` - Odd-lot trade<br />`M` - Non-direct off-exchange trade<br />`P` - Late trade (Off-exchange previous day)<br />`U` - Auction trade<br />`X` - Direct off-exchange trade<br />`Y` - Automtch internalized |
+| ∟ direction     | int32    | Trade direction <br /><br />**Optional value:**<br />`0` - nature<br />`1` - down<br />`2` - up                                                                                                                                                                                         |
+| ∟ trade_session | int32    | Trade session, see [TradeSession](../objects#tradesession---trading-session)                                                                                                                                                                                                            |
 
 ### Protobuf
 
