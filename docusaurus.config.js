@@ -95,7 +95,7 @@ const config = {
         },
         items: [
           {
-            to: '/',
+            to: openapiDomain,
             position: 'left',
             target: '_self',
             label: '开发者认证',
