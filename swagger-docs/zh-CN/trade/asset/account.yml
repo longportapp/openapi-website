@@ -93,7 +93,7 @@ definitions:
           currency:
             type: "string"
             description: 币种
-          cashInfos:
+          cash_infos:
             type: "object"
             description: 现金详情
             properties:
