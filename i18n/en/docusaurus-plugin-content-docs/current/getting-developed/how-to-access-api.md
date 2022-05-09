@@ -76,7 +76,7 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 
 Use the HTTP client to send signed requests.
 
-## 基本路径
+## API Path
 
 All API paths start with [https://openapi.longbridge.global](https://openapi.longbridge.global).
 
