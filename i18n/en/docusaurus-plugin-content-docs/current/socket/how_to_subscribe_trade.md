@@ -1,5 +1,5 @@
 ---
-title: 订阅交易推送
+title: Subscribe Trade Real-Time Pushing
 id: how-to-subscribe-trade
 slug: /socket/subscribe_trade
 sidebar_position: 1
@@ -7,36 +7,38 @@ sidebar_position: 1
 
 客户端可以通过 WebSocket 或者 TCP 和交易推送网关建立长连接，当订单状态更新时，客户端可以实时的接收通知。
 
+Client can access trade feed by `WebSocket` and `TCP`. After client subscribing, trade gateway can push real-time trade changings of user.
+
 :::info
 WebSocket Endpoint: `wss://openapi-trade.longbridge.global`
 
 TCP Endpoint: `openapi-trade.longbridge.global`
 :::
 
-流程如下：
+Flow：
 
 ```mermaid
 sequenceDiagram
 autonumber
-Client ->> Server: 握手
-Server -->> Client: 链接建立
-Client -->> Server: 登录鉴权
-Server -->> Client: 返回登录鉴权结果
+Client ->> Server: Handshake
+Server -->> Client: Establish Connection
+Client -->> Server: Auth Request
+Server -->> Client: Auth Response
 
 par 订阅
-Client -->> Server: 订阅行情请求，req_id: 10, cmd: 16
-Server -->> Client: 返回订阅行情响应，req_id: 10, cmd: 16
+Client -->> Server: Subscribe request，req_id: 10, cmd: 16
+Server -->> Client: Subscribe response ，req_id: 10, cmd: 16
 
-Server -->> Client: 实时订单变更推送，cmd: 18
-Server -->> Client: 实时订单变更推送，cmd: 18
+Server -->> Client: Push order updating，cmd: 18
+Server -->> Client: Push order updating，cmd: 18
 
 end
 
 ```
 
-## 订阅
+## Subscribe
 
-订阅的 Protobuf 定义可以[查看](../quote/trade/trade-push)
+Subscribe [protobuf defination](../quote/trade/trade-push)
 
 Example:
 
@@ -46,9 +48,9 @@ Example:
 }
 ```
 
-> 这里方便展示使用 `JSON`，实际上需要通过 protobuf 序列化请求到服务端
+> Here is `JSON` for easy showing case, actually need using protobuf encoding.
 
-## 推送例子
+## Pushing Example
 
 ```json
 {
@@ -60,17 +62,17 @@ Example:
 ```
 
 :::info
-`data` 是 `JSON` 字符串的二进制内容 (base64)
+`data` is binary(base64) content of `JSON` string
 :::
 
-`data` 的实际 `JSON` 内容如下
+The real `JSON` format of `data`:
 
 ```json
 {
   "event": "order_changed_lb",
   "data": {
     "side": "Buy",
-    "stock_name": "腾讯控股",
+    "stock_name": "Tecent",
     "quantity": "1000",
     "symbol": "700.HK",
     "order_type": "LO",
@@ -95,8 +97,10 @@ Example:
 }
 ```
 
-字段解释可以查看[交易命名词典-WebSocket 推送通知](../trade/trade-definition#websocket-推送通知)
+Field description is [here](../trade/trade-definition#websocket-push-notification)
+
+## Feed Protocol
+
+If you want subscribe trading data from socket, you must know more details of our [protocol](../protocol/overview)
 
 ## 协议
-
-我们使用的长连接[协议](./protocol/overview)

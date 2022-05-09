@@ -113,7 +113,7 @@ message AuthRequest {
 
 message AuthResponse {
   string session_id = 1;
-  string expires = 3;
+  int64 expires = 2;
 }
 ```
 
@@ -134,6 +134,10 @@ message ReconnectRequest {
 
 message ReconnectResponse {
   string session_id = 1;
-  string expires = 3;
+  int64 expires = 2;
 }
 ```
+
+## Protobuf
+
+所有控制指令相關的 `Protobuf` 都已經開源在 [GitHub](https://github.com/longbridgeapp/openapi-protobufs/blob/main/control/control.proto)

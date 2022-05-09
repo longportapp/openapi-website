@@ -1,68 +1,68 @@
 ---
-title: 控制指令
+title: Control command
 id: control-command
 slug: /socket/control-command
 sidebar_position: 4
 ---
 
-控制指令是基础指令，主要用于建立链接，保持会话使用。
+Control Commands are basic commands, using for create connection and keep connection alive.
 
-目前有 4 个控制指令：
+Control Commands:
 
-| cmd_code | 说明                                                  |
-| -------- | ----------------------------------------------------- |
-| 0        | 关闭 - 服务端在关闭链接前会向客户端推送关闭包         |
-| 1        | 心跳 - 用于保持链接                                   |
-| 2        | 鉴权 - 握手成功后，如果没有 session，则需要鉴权       |
-| 3        | 重连 - 链接断开后，如果有 session，用于链接合法性鉴权 |
+| cmd_code | description                                                                                |
+| -------- | ------------------------------------------------------------------------------------------ |
+| 0        | close - before server close the connection between client, server will send a close packet |
+| 1        | heartbeat - keep connection alive                                                          |
+| 2        | auth - auth connection                                                                     |
+| 3        | reconnect - use session to auth                                                            |
 
-## 关闭
+## Close
 
 :::info
-指令：`0`
+Cmd：`0`
 :::
 
-服务端主动关闭链接时，会向客户端推送一个关闭包。
+Before server close the connection between client, server will send a close packet.
 
-> 关闭包是推送类型，不需要回复
+> close packet is push type packet, no need response
 
-服务端主动关闭链接总共有一下几种情况：
+Cases server will close the connection:
 
-1. 心跳超时
-2. 服务端发生错误
-3. 服务端关闭
-4. 客户端发送数据解析失败
-5. 鉴权失败
-6. Session 过期
-7. Session 重复建链
+1. heartbeat timeout
+2. server internal error
+3. server shutdown
+4. client send invalid packet(can't parse by server)
+5. auth failed
+6. session expired when reconnect
+7. duplicate connection have been created
 
-这些信息会放到 `body` 内发送，Protobuf 定义如下：
+The reason why server close the connection will send by close packet, protobuf defination:
 
 ```protobuf
 message Close {
  enum Code {
-   HeartbeatTimeout  = 0; // 心跳超时
-   ServerError       = 1; // 服务端错误
-   ServerShutdown    = 2; // 服务端关闭
-   UnpackError       = 3; // 数据截取错误
-   AuthError         = 4; // 鉴权失败
-   SessExpired       = 5; // session 过期
-   ConnectDuplicate  = 6; // 单个 session 重复连接
+   HeartbeatTimeout  = 0; // Heartbeat timeout
+   ServerError       = 1; // Server internal error
+   ServerShutdown    = 2; // Server shutdown
+   UnpackError       = 3; // Server can't paser client packet
+   AuthError         = 4; // Auth failed
+   SessExpired       = 5; // Session expired
+   ConnectDuplicate  = 6; // create duplicated connection
   }
   Code code = 1;
   string reason = 2;
 }
 ```
 
-## 心跳
+## Heartbeat
 
 :::info
-指令：`1`
+Cmd：`1`
 :::
 
-一端可以通过向另一端发送心情请求，根据返回来判断链接的健康状态。心跳请求包没有指定接口，一端收到心跳请求后，仅需将 `body` 原封不动的返回回去即可。
+Oner peer and send heartbeat to another peer to known health of another peer. Heartbeat do not limit body structure, one peer receive a heartbeat packet, only need send the `body` back.
 
-> 保持连接的同时，也可以用于检测网络延时：心跳请求时，可在发送包 `body` 添加本端当前时间戳；当收到心跳响应，解析 `body`，用当前时间戳减去解析出来的时间戳，就可以得出链路的延时
+> Heartbeat not only can keep connection alive, but also can detect latency of the network between two peers. One peer can set current timestamp in heartbeat body, when receive the response, use current timestamp minus timestamp in the body to get lantency of network.
 
 ```mermaid
 sequenceDiagram
@@ -77,7 +77,7 @@ peer-a -->> peer-b: heartbeat response, req_id: 1
 end
 ```
 
-`body` 的例子：
+Example of heartbeat `body` ：
 
 ```protobuf
 message Heartbeat {
@@ -85,13 +85,13 @@ message Heartbeat {
 }
 ```
 
-## 登录鉴权
+## Auth
 
 :::info
-指令：`2`
+Cmd：`2`
 :::
 
-登陆鉴权用于校验连接的合法性，在握手建立连接以后发送的第一个包必须是登录鉴权请求或者重连请求。
+Client need prove connection is legal. After handshake with server, client send auth packet as first packet.
 
 ```mermaid
 sequenceDiagram
@@ -100,11 +100,11 @@ Server -->> Client: auth response, req_id: 1, session: xxx
 
 ```
 
-> 登录鉴权的 `token` 通过 [REST 接口](./socket-otp-api.md)获取。
+> Auth `token` can be created through [REST Api](./socket-token-api)
 
-服务端在 token 校验成功后会给客户端返回一个 session，在 session 的有效期内，客户端可以使用 session 进行重新链接，不需要再获取 `token`。
+After auth success, server will set session in auth response, client can use the session to reconnect and no need to request a new `token`.
 
-请求和返回的定义如下：
+Auth Request and Response protobuf：
 
 ```protobuf
 message AuthRequest {
@@ -113,19 +113,19 @@ message AuthRequest {
 
 message AuthResponse {
   string session_id = 1;
-  string expires = 3;
+  int64 expires = 2;
 }
 ```
 
-## 重连
+## Reconnect
 
 :::info
-指令：`3`
+Cmd：`3`
 :::
 
-重连是客户端断开链接后，通过 session 进行鉴权。和登录鉴权相似的是，服务在校验 session 过后会返回一个新的 session，下次客户端重连时可以使用。
+After client disconnect from server, client can use session to reconnect to server when session is not expired. After reconnect success, server will set new session in reconnect response body.
 
-请求和返回定义如下：
+Reconnect Request and Response：
 
 ```protobuf
 message ReconnectRequest {
@@ -134,6 +134,10 @@ message ReconnectRequest {
 
 message ReconnectResponse {
   string session_id = 1;
-  string expires = 3;
+  int64 expires = 2;
 }
 ```
+
+## Protobuf
+
+All control command protobuf definations are opensource in [GitHub](https://github.com/longbridgeapp/openapi-protobufs/blob/main/control/control.proto)

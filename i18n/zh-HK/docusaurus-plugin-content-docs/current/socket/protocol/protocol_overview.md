@@ -11,7 +11,7 @@ sidebar_position: 0
 使用的字節序是 `BigEndian`
 :::
 
-業務的 `Websocket` 和 `TCP` 接入地址可以查看[業務地址](../hosts.md)
+業務的 `Websocket` 和 `TCP` 接入地址可以查看[業務地址](../hosts)
 
 在開始協議解析前我們需要先了解[通信過程](./connect)，這裏我們將通信分爲三類：
 

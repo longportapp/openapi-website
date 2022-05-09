@@ -1,17 +1,17 @@
 ---
-title: 解析响应包
+title: Parse Response Packet
 id: how-to-parse-response
 slug: /socket/protocol/response
 sidebar_position: 5
 ---
 
-当服务端收到客户端的请求包后必须响应一个响应包回来
+One peer need send back a response packet after receiving and handlding request packet.
 
 :::info
-当包头中的 `type` 值为 `2` 时，数据包为请求包
+Packet type is `2`
 :::
 
-## 结构
+## Structure
 
 ```
  0                   1                   2                   3
@@ -39,26 +39,24 @@ sidebar_position: 5
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ```
 
-字段说明：
+Fields Descriptions：
 
-| 字段       | 长度 (bit)                 | 长度（字节）| 说明                                                                               |
-| ---------- | -------------------------- | ------------ | ---------------------------------------------------------------------------------- |
-| cmd_code   | 8                          | 1            | 指令 cmd 值                                                                        |
-| request_id | 32(uint32)                 | 4            | 请求 id，同一个连接的 id 需要唯一，从 1 开始，到达 4294967295 后从新开始。         |
-| status     | 8(uint8)                   | 1            | 状态码 `0` - 成功；参考状态码表                                                    |
-| body_len   | 24(uint32)                 | 3            | `body` 长度，单位：字节，最大 16 MB 数据；如果 gzip 为 1，该值为 body 压缩后的长度 |
-| body       | 可变长度，由 body_len 决定 | 可变长度     | `body`，最大 16 MB                                                                 |
-| nonce      | 64                         | 8            | 仅当包头中的 `verify` 为 1 时存在                                                  |
-| signature  | 128                        | 16           | 仅当包头中的 verify 为 1 时存在                                                    |
+| Field      | Length in bit                         | Length in byte  | description                                                                                           |
+| ---------- | ------------------------------------- | --------------- | ----------------------------------------------------------------------------------------------------- |
+| cmd_code   | 8                                     | 1               | Command                                                                                               |
+| request_id | 32(uint32)                            | 4               | Request id, need to be same as request packet for pairing                                             |
+| status     | 8(uint8)                              | 1               | status code: `0` - success; others show in [status code table](#status-code-table)                    |
+| body_len   | 24(uint32)                            | 3               | Then length of `body` in bytes. <br/> Max: 16 MB<br/> If gzip is enabled, the value is after compress |
+| body       | Variable length, decide by `body_len` | variable length | `body`，max size: 16 MB                                                                               |
+| nonce      | 64                                    | 8               | exists when `verify` is `1`                                                                           |
+| signature  | 128                                   | 16              | exists when `verify` is `1`                                                                           |
 
-## 响应包状态码
+## Status Code Table
 
-响应包有状态说明：
-
-| 值  | 标识                  | 说明                                      |
-| --- | --------------------- | ----------------------------------------- |
-| 0   | SUCCESS               | 成功，类似于 HTTP 200                     |
-| 1   | SERVER_TIMEOUT        | 服务端超时，类似于 HTTP 408               |
-| 3   | BAD_REQUEST           | 请求错误，通常为参数错误，类似于 HTTP 400 |
-| 5   | UNAUTHENTICATED       | 鉴权失败，类似于 HTTP 401                 |
-| 7   | SERVER_INTERNAL_ERROR | 服务端内部错误，类似于 HTTP 500           |
+| value | flag                  | description                   |
+| ----- | --------------------- | ----------------------------- |
+| 0     | SUCCESS               | Success like HTTP status 200  |
+| 1     | SERVER_TIMEOUT        | Timeout like HTTP status 408  |
+| 3     | BAD_REQUEST           | Bad Request like HTTP 400     |
+| 5     | UNAUTHENTICATED       | Unauthorized like HTTP 401    |
+| 7     | SERVER_INTERNAL_ERROR | Internal server like HTTP 500 |

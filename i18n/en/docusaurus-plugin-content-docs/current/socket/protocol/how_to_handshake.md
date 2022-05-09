@@ -1,23 +1,23 @@
 ---
-title: 解析握手包
+title: Parse Handshake
 id: how-to-handshake
 slug: /socket/protocol/handshake
 sidebar_position: 2
 ---
 
-握手是客户端和服务端建立连接后做的第一件事情，用于和服务端进行协议的协商，目前支持协商的内容如下：
+Handshake is first thing before client and server establish connection. Handshake negotiate thress things:
 
-- 协议版本 - 目前我们近支持一个版本，即：`1`
-- 数据包序列化方式 - 目前我们仅支持 `protobuf`，值：`1`
-- 客户端平台 - 目前仅为 `Open API`，目前值为：`9`
+- protocol version - right now only version `1`
+- data codec type - right now only support `protobuf`, value is `1`
+- client platform - value is `9` as `Open API`
 
-所以客户端握手包在我们的协议版本升级的情况下永远是一个固定的内容。
+So handshake is always fixed contents.
 
-## TCP 链接如何握手
+## How `TCP` do handshaking
 
-客户端发向服务端发送 2 个字节的我手包。
+Client need send two bytes handshake to server.
 
-### 结构
+### Data structure
 
 ```
  0 1 2 3 4 5 6 7
@@ -28,40 +28,42 @@ sidebar_position: 2
 +-+-+-+-+-+-+-+-+
 ```
 
-| 字段     | 长度 (bit) | 说明                          |
-| -------- | ---------- | ----------------------------- |
-| ver      | 4          | 协议版本，目前仅 `1` 一个版本 |
-| codec    | 4          | Body 序列化类型：1 - protobuf |
-| platform | 4          | 0b1001 - OpenAPI              |
-| reserve  | 4          | 预留，当前为 0b0000           |
+Fields Explain:
 
-### 例子
+| field    | length in bit | description                               |
+| -------- | ------------- | ----------------------------------------- |
+| ver      | 4             | protocol version: only value `1`          |
+| codec    | 4             | data codec: only value `1` for `protobuf` |
+| platform | 4             | client platform: 0b1001 - OpenAPI         |
+| reserve  | 4             | reserved                                  |
+
+### Example
 
 - ver - 0b0001
 - codec - 0b0001
 - platform - 0b1001
 - reserve - 0b0000
 
-两个字节的内容：
+Two bytes contents：
 
 ```
 0b00010001,
 0b00001001
 ```
 
-## WebSocket 链接如何握手
+## How `WebSocket` do handshaking
 
-WebSocket 在从 HTTP 升级升 WebSocket 的过程中，我们可以读取 HTTP 请求的相关信息，我们这里通过 URL query 进行握手
+`WebSocket` send handshake info by `URL Query`
 
-### Query 参数
+### Query Parameters
 
-| 字段     | 类型 | 说明          |
-| -------- | ---- | ------------- |
-| version  | int  | 仅支持：1     |
-| codec    | int  | 目前仅支持：1 |
-| platform | int  | 写死：9       |
+| Field    | Type | Description                               |
+| -------- | ---- | ----------------------------------------- |
+| version  | 4    | protocol version: only value `1`          |
+| codec    | 4    | data codec: only value `1` for `protobuf` |
+| platform | 4    | client platform: `9` - OpenAPI            |
 
-### 例子
+### Example
 
 ```
 wss://openapi-quote.longbridge.gobal?version=1&codec=1&platform=9

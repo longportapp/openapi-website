@@ -1,14 +1,14 @@
 ---
-title: 解析推送包
+title: Parse Push Packet
 id: how-to-parse-push
 slug: /socket/protocol/push
 sidebar_position: 6
 ---
 
-推送用于一端向另一端发送数据，接收方不需要进行回复
+Push is one side send data to another side, no need response.
 
 :::info
-当包头中的 `type` 值为 `1` 时，数据包为推送包
+Packet `type` value is `3`
 :::
 
 ```
@@ -33,12 +33,12 @@ sidebar_position: 6
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ```
 
-字段说明：
+Fields Descriptions：
 
-| 字段      | 长度 (bit)                 | 长度（字节）| 说明                                                                                 |
-| --------- | -------------------------- | ------------ | ------------------------------------------------------------------------------------ |
-| cmd_code  | 8                          | 1            | 指令 cmd 值                                                                          |
-| body_len  | 24(uint32)                 | 3            | `body` 长度，单位：字节，最大 16 MB 数据；如果 gzip 为 1，该值为 `body` 压缩后的长度 |
-| body      | 可变长度，由 body_len 决定 | 可变长度     | `body`，最大 16 MB                                                                   |
-| nonce     | 64                         | 8            | 仅当包头中的 `verify` 为 1 时存在                                                    |
-| signature | 128                        | 16           | 仅当包头中的 `verify` 为 1 时存在                                                    |
+| Field     | length in bit                         | Length in byte  | description                                                                                           |
+| --------- | ------------------------------------- | --------------- | ----------------------------------------------------------------------------------------------------- |
+| cmd_code  | 8                                     | 1               | Comand                                                                                                |
+| body_len  | 24(uint32)                            | 3               | Then length of `body` in bytes. <br/> Max: 16 MB<br/> If gzip is enabled, the value is after compress |
+| body      | Variable length, decide by `body_len` | variable length | `body`，max size: 16 MB                                                                               |
+| nonce     | 64                                    | 8               | exists when `verify` is `1`                                                                           |
+| signature | 128                                   | 16              | exists when `verify` is `1`                                                                           |

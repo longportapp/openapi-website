@@ -1,44 +1,44 @@
 ---
-title: 获取长连接 OTP
+title: Get Socket OTP(One time password)
 id: socket-otp-api
 slug: /socket-token-api
 sidebar_position: 2
 ---
 
-# 获取长连接 OTP(One Time Password)
+# Get OTP(One Time Password) API
 
-获取长连接使用的 `Token`(One time password)，长连接的 `Token` 可以用来连接行情和交易的长连接网关，是一次性的，使用过后就会作废。
+Our socket `Token` is one time password, you can use the `Token` to connect to quote or trade gateway. It will be expired after authing.
 
-> 最后更新于 2022-04-28
+> Last Update at 2022-04-28
 
-## 请求
+## API
 
-| 基本信息    |                |
-| ----------- | -------------- |
+| 基本信息    |                  |
+| ----------- | ---------------- |
 | HTTP URL    | /v1/socket/token |
-| HTTP Method | GET            |
+| HTTP Method | GET              |
 
-### 请求头
+### Request Headers
 
 | 名称          | 类型   | 必须 | 描述                                          |
 | ------------- | ------ | ---- | --------------------------------------------- |
 | Authorization | string | 是   |                                               |
 | Content-Type  | string | 是   | **固定值**："application/json; charset=utf-8" |
 
-### 请求参数
+### Request Parameters
 
-## 响应
+## Response
 
-### 响应体
+### Response Body
 
-| 名称 | 类型   | 描述                  |
-| ---- | ------ | --------------------- |
-| code | int    | 错误码，非 0 表示失败 |
-| msg  | string | 错误描述              |
-| data | object |                       |
-| ∟otp | string | 获取到的 token        |
+| field | type   | description                       |
+| ----- | ------ | --------------------------------- |
+| code  | int    | error code, failed if not equal 0 |
+| msg   | string | error description                 |
+| data  | object |                                   |
+| ∟otp  | string | token                             |
 
-### 响应体示例
+### Response Example
 
 ```json
 {
