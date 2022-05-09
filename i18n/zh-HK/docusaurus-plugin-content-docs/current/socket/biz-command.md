@@ -16,75 +16,75 @@ sidebar_position: 5
     </tr>
     <tr>
         <td rowspan="16">拉取</td>
-        <td><a href="./pull/static">獲取標的基礎信息</a></td>
+        <td><a href="../quote/pull/static">獲取標的基礎信息</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/quote">獲取標的實時行情</a></td>
+        <td><a href="../quote/pull/quote">獲取標的實時行情</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/option-quote">獲取期權實時行情</a></td>
+        <td><a href="../quote/pull/option-quote">獲取期權實時行情</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/warrant-quote">獲取輪證實時行情</a></td>
+        <td><a href="../quote/pull/warrant-quote">獲取輪證實時行情</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/depth">獲取標的盤口</a></td>
+        <td><a href="../quote/pull/depth">獲取標的盤口</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/brokers">獲取標的經紀隊列</a></td>
+        <td><a href="../quote/pull/brokers">獲取標的經紀隊列</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/broker-ids">獲取券商席位 id</a></td>
+        <td><a href="../quote/pull/broker-ids">獲取券商席位 id</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/trade">獲取標的成交明細</a></td>
+        <td><a href="../quote/pull/trade">獲取標的成交明細</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/intraday">獲取標的分時</a></td>
+        <td><a href="../quote/pull/intraday">獲取標的分時</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/candlestick">獲取標的 k 線</a></td>
+        <td><a href="../quote/pull/candlestick">獲取標的 k 線</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/optionchain-date">獲取標的的期權鏈到期日列表</a></td>
+        <td><a href="../quote/pull/optionchain-date">獲取標的的期權鏈到期日列表</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/optionchain-date-strike">獲取標的的期權鏈到期日期權標的列表</a></td>
+        <td><a href="../quote/pull/optionchain-date-strike">獲取標的的期權鏈到期日期權標的列表</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/issuer">獲取輪證發行商 id</a></td>
+        <td><a href="../quote/pull/issuer">獲取輪證發行商 id</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/warrant-filter">獲取輪證篩選列表</a></td>
+        <td><a href="../quote/pull/warrant-filter">獲取輪證篩選列表</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/trade-session">獲取各市場當日交易時段</a></td>
+        <td><a href="../quote/pull/trade-session">獲取各市場當日交易時段</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/trade-day">獲取市場交易日</a></td>
+        <td><a href="../quote/pull/trade-day">獲取市場交易日</a></td>
     </tr>
     <tr>
         <td rowspan="3">訂閱</td>
-        <td><a href="./subscribe/subscription">獲取已訂閱標的行情</a></td>
+        <td><a href="../quote/subscribe/subscription">獲取已訂閱標的行情</a></td>
     </tr>
     <tr>
-        <td><a href="./subscribe/subscribe">訂閱行情數據</a></td>
+        <td><a href="../quote/subscribe/subscribe">訂閱行情數據</a></td>
     </tr>
     <tr>
-        <td><a href="./subscribe/unsubscribe">取消訂閱行情數據</a></td>
+        <td><a href="../quote/subscribe/unsubscribe">取消訂閱行情數據</a></td>
     </tr>
     <tr>
         <td rowspan="4">推送</td>
-        <td><a href="./push/push-quote">實時價格推送</a></td>
+        <td><a href="../quote/push/push-quote">實時價格推送</a></td>
     </tr>
     <tr>
-        <td><a href="./push/push-depth">實時盤口推送</a></td>
+        <td><a href="../quote/push/push-depth">實時盤口推送</a></td>
     </tr>
     <tr>
-        <td><a href="./push/push-broker">實時經紀隊列推送</a></td>
+        <td><a href="../quote/push/push-broker">實時經紀隊列推送</a></td>
     </tr>
     <tr>
-        <td><a href="./push/push-trade">實時成交明細推送</a></td>
+        <td><a href="../quote/push/push-trade">實時成交明細推送</a></td>
     </tr>
 </table>
 
