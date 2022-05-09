@@ -1,0 +1,14 @@
+{{? data.operation.request_body }}
+#### Request Example
+
+
+{{? data.operation.request_body.type == "json"}}
+```json
+{{= JSON.stringify(data.operation.request_body.value || {}, null, 2) }}
+```
+{{??}}
+```{{=data.operation.request_body.type}}
+{{= (data.operation.request_body.value || "").trim() }}
+```
+{{?}}
+{{?}}
