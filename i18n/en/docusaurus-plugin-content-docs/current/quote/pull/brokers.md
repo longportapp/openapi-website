@@ -27,6 +27,36 @@ message SecurityRequest {
 }
 ```
 
+### Request Example
+
+```python
+# 获取标的经纪队列
+# https://open.longbridgeapp.com/docs/quote/pull/brokers
+import os
+import time
+from longbridge.http import Auth, Config, HttpClient
+from longbridge.ws import ReadyState, WsCallback, WsClient
+# Protobuf variables definition: https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto
+from longbridge.proto.quote_pb2 import (Command, SecurityRequest, SecurityBrokersResponse)
+
+class MyWsCallback(WsCallback):
+    def on_state(self, state: ReadyState):
+        print(f"-> state: {state}")
+
+auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
+http = HttpClient(auth, Config(base_url="https://openapi.lbkrs.com"))
+ws = WsClient("wss://openapi-quote.longbridge.global", http, MyWsCallback())
+
+# Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
+# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
+req = SecurityRequest(symbol="700.HK")
+result = ws.send_request(Command.QueryBrokers, req.SerializeToString())
+resp = SecurityBrokersResponse()
+resp.ParseFromString(result)
+
+print(f"Brokers:\n\n {resp}")
+```
+
 ## Response
 
 ### Response Properties
