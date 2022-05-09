@@ -4,8 +4,8 @@
     "description": "The label for version current"
   },
   "sidebar.docsSidebar.category.准备开发": {
-    "message": "准备开发",
-    "description": "The label for category 准备开发 in sidebar docsSidebar"
+    "message": "Getting Started",
+    "description": "The label for category getting started in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.行情": {
     "message": "行情",
