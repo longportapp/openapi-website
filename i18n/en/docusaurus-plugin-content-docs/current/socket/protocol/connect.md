@@ -5,14 +5,16 @@ slug: /socket/protocol/connect
 sidebar_position: 1
 ---
 
-客户端在和服务端交互时，会有三种数据包类型：
+There are three type packet will client and server send to each other:
 
-- 握手 - 建立连接
-- 请求 - 客户端向服务端发起请求
-- 响应 - 服务端向客户端响应请求
-- 推送 - 服务端向客户端推送数据
+- handshake - start establish connection
+- request - client send request to server
+- response - server send response to client
+- push - server push real-time data to client
 
-## 握手
+## Handshake
+
+Flow:
 
 ```mermaid
 sequenceDiagram
@@ -27,11 +29,13 @@ end
 
 ```
 
-客户端向服务端发送握手包后，链接就建立了，服务端会判断握手包是否合法，不合法则发送一个错误包，并且断开底层连接。如果链接的是 TCP 服务端可以同时发送握手包和第一个数据包。
+After client sending handshake packet server, the connection has been established. If handshake packet is invalid, server will push a close data to client. If access by `TCP`, client can send handshake packet and first data packet(auth) for accelerating communication.
 
-## 请求与响应
+## Request and Response
 
-协议支持，`请求 <--> 响应` 的通信方式，即客户端发送一个请求，服务端返回一个响应。
+`Request <--> Response`: Client send a request packet, server will send back a response packet.
+
+Flow:
 
 ```mermaid
 sequenceDiagram
@@ -53,13 +57,13 @@ end
 
 ```
 
-客户端和服务端握手成功后，双方就可以进行 `请求 <--> 响应` 的通信，请求和响应通过请求 `id` 进行关联。
+After client and server sucess handshaking, peers can use `Request <--> Response` to communicate. `Request` and `Response` are paired by `request_id`.
 
-## 推送
+> Client and Server can send heartbeat request to each other.
 
-推送是一端向另一端直接推送数据而不需要另一端响应。
+## Push
 
-> 目前仅存在服务端向客户端推送数据的场景。
+Push is one peer send data to another peer, and no need response.
 
 ```mermaid
 sequenceDiagram
@@ -67,3 +71,5 @@ server -->> client: push, data 1
 
 server -->> client: push, data 2
 ```
+
+> Right now, we only support server push data to client.

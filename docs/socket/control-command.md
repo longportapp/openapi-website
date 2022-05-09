@@ -60,7 +60,7 @@ message Close {
 指令：`1`
 :::
 
-一端可以通过向另一端发送心情请求，根据返回来判断链接的健康状态。心跳请求包没有指定接口，一端收到心跳请求后，仅需将 `body` 原封不动的返回回去即可。
+一端可以通过向另一端发送心情请求，根据返回来判断链接的健康状态。心跳请求包没有指定 `body` 的结构，一端收到心跳请求后，仅需将 `body` 原封不动的返回回去即可。
 
 > 保持连接的同时，也可以用于检测网络延时：心跳请求时，可在发送包 `body` 添加本端当前时间戳；当收到心跳响应，解析 `body`，用当前时间戳减去解析出来的时间戳，就可以得出链路的延时
 
@@ -113,7 +113,7 @@ message AuthRequest {
 
 message AuthResponse {
   string session_id = 1;
-  string expires = 3;
+  int64 expires = 2;
 }
 ```
 
@@ -134,6 +134,10 @@ message ReconnectRequest {
 
 message ReconnectResponse {
   string session_id = 1;
-  string expires = 3;
+  int64 expires = 2;
 }
 ```
+
+## Protobuf
+
+所有控制指令相关的 `Protobuf` 都已经开源在 [GitHub](https://github.com/longbridgeapp/openapi-protobufs/blob/main/control/control.proto)

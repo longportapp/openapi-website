@@ -1,17 +1,19 @@
 ---
-title: WS 和 TCP 接入的不同点
-id: h
+title: Access differences between WebSocket and TCP
+id: diff-ws-tcp
 slug: /socket/diff_ws_tcp
 sidebar_position: 6
 ---
 
-我们同时支持 `WebSocket` 和 `TCP` 的接入，不同点主要如下：
+Longbridge support `WebSocket` and `TCP` feed, the differences:
 
-- TCP 数据是流式的，客户端编写难度比 WebSocket 要大
-- `WebSocket` 握手包通过 [URL Query 发送](./protocol/handshake#websocket-链接如何握手)
-- `WebSocket` 的[心跳](./control-command#心跳)通过 `WebSocket` 协议本身的心跳 `Ping-Pong` 进行
-- `WebSocket` 通信使用 `TLS` 进行加密，而 `TCP` 暂时没有
+- Data of `TCP` is streaming, so coding client is hard than `WebSocket`.
+- `WebSocket` using URL Query to [Handshake](./protocol/handshake#websocket-how-to-handshake)
+- `WebSocket` using [ping-pong](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_servers#pings_and_pongs_the_heartbeat_of_websockets) to do Heartbeating, instead of sending heartbeat packet.
+- `WebSocket` using `TLS` to secure connection, but `TCP` do not.
 
 可以根据自己的需求选择，我们的私有协议时适用于两者的。
 
-> 可以都先使用 `WebSocket` 接入，较方便。如果对速度有更高的要求，行情可以接入 `TCP`。
+User can choice `TCP` or `WebSocket` on self demand.
+
+> Advice: Using `WebSocket` first, it is more simple. If want more quick stock quote real-time pushing, using `TCP` to access stock quote gateway.

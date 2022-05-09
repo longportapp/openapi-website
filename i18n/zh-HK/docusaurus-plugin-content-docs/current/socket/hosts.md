@@ -1,22 +1,22 @@
 ---
-title: 业务地址
+title: 業務地址
 id: socket-hosts
 slug: /socket/hosts
 sidebar_position: 5
 ---
 
-目前我们行情和交易推送网关时分开的，可以根据所在物理位置选择要链接的域名。
+目前我們行情和交易推送網關時分開的，可以根據所在物理位置選擇要鏈接的域名。
 
 ## 行情
 
-| 域名                                       | 协议      | 地区     |
+| 域名                                       | 協議      | 地區     |
 | ------------------------------------------ | --------- | -------- |
-| tcp://openapi-quote.longbridge.global:2020 | TCP       | 中国香港 |
-| wss://openapi-quote.longbridge.global      | WebSocket | 中国香港 |
+| tcp://openapi-quote.longbridge.global:2020 | TCP       | 中國香港 |
+| wss://openapi-quote.longbridge.global      | WebSocket | 中國香港 |
 
 ## 交易
 
-| 域名                                       | 协议      | 地区     |
+| 域名                                       | 協議      | 地區     |
 | ------------------------------------------ | --------- | -------- |
-| tcp://openapi-trade.longbridge.global:2020 | TCP       | 中国香港 |
-| wss://openapi-trade.longbridge.global      | WebSocket | 中国香港 |
+| tcp://openapi-trade.longbridge.global:2020 | TCP       | 中國香港 |
+| wss://openapi-trade.longbridge.global      | WebSocket | 中國香港 |

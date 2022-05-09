@@ -1,11 +1,11 @@
 ---
-title: 订阅行情推送
+title: 訂閱行情推送
 id: how-to-subscribe-quote
 slug: /socket/subscribe_quote
 sidebar_position: 1
 ---
 
-客户端可以通过 WebSocket 或者 TCP 和行情网关建立长连接，客户端订阅股票行情，行情网关会实时推送客户端订阅的实时行情。
+客戶端可以通過 WebSocket 或者 TCP 和行情網關建立長連接，客戶端訂閱股票行情，行情網關會實時推送客戶端訂閱的實時行情。
 
 :::info
 WebSocket Endpoint: `wss://openapi-quote.longbrdge.global`
@@ -19,28 +19,28 @@ TCP Endpoint: `openapi-quote.longbridge.global:2020`
 sequenceDiagram
 autonumber
 Client ->> Server: 握手
-Server -->> Client: 链接建立
-Client -->> Server: 登录鉴权
-Server -->> Client: 返回登录鉴权结果
+Server -->> Client: 鏈接建立
+Client -->> Server: 登錄鑑權
+Server -->> Client: 返回登錄鑑權結果
 
-par 订阅行情
-Client -->> Server: 订阅行情请求，req_id: 10, cmd: 6
-Server -->> Client: 返回订阅行情响应，req_id: 10, cmd: 6
+par 訂閱行情
+Client -->> Server: 訂閱行情請求，req_id: 10, cmd: 6
+Server -->> Client: 返回訂閱行情響應，req_id: 10, cmd: 6
 
-Server -->> Client: 实时价格推送，cmd: 101
-Server -->> Client: 实时盘口推送，cmd: 102
-Server -->> Client: 实时经纪队列推送，cmd: 103
-Server -->> Client: 实时成交明细推送，cmd: 104
+Server -->> Client: 實時價格推送，cmd: 101
+Server -->> Client: 實時盤口推送，cmd: 102
+Server -->> Client: 實時經紀隊列推送，cmd: 103
+Server -->> Client: 實時成交明細推送，cmd: 104
 
 end
 
 ```
 
-## 订阅
+## 訂閱
 
-客户端在和服务端建立连接后需要通过订阅行情的指令订阅不同类型的行情。
+客戶端在和服務端建立連接後需要通過訂閱行情的指令訂閱不同類型的行情。
 
-订阅的 Protobuf 定义可以[查看](../quote/subscribe/subscribe)
+訂閱的 Protobuf 定義可以[查看](../quote/subscribe/subscribe)
 
 Example:
 
@@ -53,16 +53,16 @@ Example:
 
 ```
 
-> 这里方便展示使用 `JSON`，实际上需要通过 protobuf 序列化请求到服务端
+> 這裏方便展示使用 `JSON`，實際上需要通過 protobuf 序列化請求到服務端
 
-客户端也可以通过获取已订阅接口查看自己已经订阅的标的行情，[ prorobuf 定义](../quote/subscribe/subscription)
+客戶端也可以通過獲取已訂閱接口查看自己已經訂閱的標的行情，[Protobuf 定義](../quote/subscribe/subscription)
 
-订阅成功后，服务端会推送相应的标的行情到客户端，具体的数据可以查看[行情概览](../quote/overview)
+訂閱成功後，服務端會推送相應的標的行情到客戶端，具體的數據可以查看[行情概覽](../quote/overview)
 
 ## 其他接口
 
-行情的数据拉去都是通过长连接网关的，具体可以查看[行情概览](../quote/overview)
+行情的數據拉去都是通過長連接網關的，具體可以查看[行情概覽](../quote/overview)
 
-## 协议
+## 協議
 
-想要订阅行情，必须先了解我们的协议，我们使用的长连接[协议](./protocol/overview)
+想要訂閱行情，必須先了解我們的協議，我們使用的長連接[協議](./protocol/overview)

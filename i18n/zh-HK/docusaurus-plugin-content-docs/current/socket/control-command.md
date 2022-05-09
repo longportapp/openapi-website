@@ -5,49 +5,49 @@ slug: /socket/control-command
 sidebar_position: 4
 ---
 
-控制指令是基础指令，主要用于建立链接，保持会话使用。
+控制指令是基礎指令，主要用於建立鏈接，保持會話使用。
 
-目前有 4 个控制指令：
+目前有 4 個控制指令：
 
-| cmd_code | 说明                                                  |
+| cmd_code | 說明                                                  |
 | -------- | ----------------------------------------------------- |
-| 0        | 关闭 - 服务端在关闭链接前会向客户端推送关闭包         |
-| 1        | 心跳 - 用于保持链接                                   |
-| 2        | 鉴权 - 握手成功后，如果没有 session，则需要鉴权       |
-| 3        | 重连 - 链接断开后，如果有 session，用于链接合法性鉴权 |
+| 0        | 關閉 - 服務端在關閉鏈接前會向客戶端推送關閉包         |
+| 1        | 心跳 - 用於保持鏈接                                   |
+| 2        | 鑑權 - 握手成功後，如果沒有 session，則需要鑑權       |
+| 3        | 重連 - 鏈接斷開後，如果有 session，用於鏈接合法性鑑權 |
 
-## 关闭
+## 關閉
 
 :::info
 指令：`0`
 :::
 
-服务端主动关闭链接时，会向客户端推送一个关闭包。
+服務端主動關閉鏈接時，會向客戶端推送一個關閉包。
 
-> 关闭包是推送类型，不需要回复
+> 關閉包是推送類型，不需要回復
 
-服务端主动关闭链接总共有一下几种情况：
+服務端主動關閉鏈接總共有一下幾種情況：
 
-1. 心跳超时
-2. 服务端发生错误
-3. 服务端关闭
-4. 客户端发送数据解析失败
-5. 鉴权失败
-6. Session 过期
-7. Session 重复建链
+1. 心跳超時
+2. 服務端發生錯誤
+3. 服務端關閉
+4. 客戶端發送數據解析失敗
+5. 鑑權失敗
+6. Session 過期
+7. Session 重複建鏈
 
-这些信息会放到 `body` 内发送，Protobuf 定义如下：
+這些信息會放到 `body` 內發送，Protobuf 定義如下：
 
 ```protobuf
 message Close {
  enum Code {
-   HeartbeatTimeout  = 0; // 心跳超时
-   ServerError       = 1; // 服务端错误
-   ServerShutdown    = 2; // 服务端关闭
-   UnpackError       = 3; // 数据截取错误
-   AuthError         = 4; // 鉴权失败
-   SessExpired       = 5; // session 过期
-   ConnectDuplicate  = 6; // 单个 session 重复连接
+   HeartbeatTimeout  = 0; // 心跳超時
+   ServerError       = 1; // 服務端錯誤
+   ServerShutdown    = 2; // 服務端關閉
+   UnpackError       = 3; // 數據截取錯誤
+   AuthError         = 4; // 鑑權失敗
+   SessExpired       = 5; // session 過期
+   ConnectDuplicate  = 6; // 單個 session 重複連接
   }
   Code code = 1;
   string reason = 2;
@@ -60,9 +60,9 @@ message Close {
 指令：`1`
 :::
 
-一端可以通过向另一端发送心情请求，根据返回来判断链接的健康状态。心跳请求包没有指定接口，一端收到心跳请求后，仅需将 `body` 原封不动的返回回去即可。
+一端可以通過向另一端發送心情請求，根據返回來判斷鏈接的健康狀態。心跳請求包沒有指定接口，一端收到心跳請求後，僅需將 `body` 原封不動的返回回去即可。
 
-> 保持连接的同时，也可以用于检测网络延时：心跳请求时，可在发送包 `body` 添加本端当前时间戳；当收到心跳响应，解析 `body`，用当前时间戳减去解析出来的时间戳，就可以得出链路的延时
+> 保持連接的同時，也可以用於檢測網絡延時：心跳請求時，可在發送包 `body` 添加本端當前時間戳；當收到心跳響應，解析 `body`，用當前時間戳減去解析出來的時間戳，就可以得出鏈路的延時
 
 ```mermaid
 sequenceDiagram
@@ -85,13 +85,13 @@ message Heartbeat {
 }
 ```
 
-## 登录鉴权
+## 登錄鑑權
 
 :::info
 指令：`2`
 :::
 
-登陆鉴权用于校验连接的合法性，在握手建立连接以后发送的第一个包必须是登录鉴权请求或者重连请求。
+登陸鑑權用於校驗連接的合法性，在握手建立連接以後發送的第一個包必須是登錄鑑權請求或者重連請求。
 
 ```mermaid
 sequenceDiagram
@@ -100,11 +100,11 @@ Server -->> Client: auth response, req_id: 1, session: xxx
 
 ```
 
-> 登录鉴权的 `token` 通过 [REST 接口](./socket-otp-api.md)获取。
+> 登錄鑑權的 `token` 通過 [REST 接口](./socket-otp-api.md)獲取。
 
-服务端在 token 校验成功后会给客户端返回一个 session，在 session 的有效期内，客户端可以使用 session 进行重新链接，不需要再获取 `token`。
+服務端在 token 校驗成功後會給客戶端返回一個 session，在 session 的有效期內，客戶端可以使用 session 進行重新鏈接，不需要再獲取 `token`。
 
-请求和返回的定义如下：
+請求和返回的定義如下：
 
 ```protobuf
 message AuthRequest {
@@ -113,19 +113,19 @@ message AuthRequest {
 
 message AuthResponse {
   string session_id = 1;
-  string expires = 3;
+  int64 expires = 2;
 }
 ```
 
-## 重连
+## 重連
 
 :::info
 指令：`3`
 :::
 
-重连是客户端断开链接后，通过 session 进行鉴权。和登录鉴权相似的是，服务在校验 session 过后会返回一个新的 session，下次客户端重连时可以使用。
+重連是客戶端斷開鏈接後，通過 session 進行鑑權。和登錄鑑權相似的是，服務在校驗 session 過後會返回一個新的 session，下次客戶端重連時可以使用。
 
-请求和返回定义如下：
+請求和返回定義如下：
 
 ```protobuf
 message ReconnectRequest {
@@ -134,6 +134,10 @@ message ReconnectRequest {
 
 message ReconnectResponse {
   string session_id = 1;
-  string expires = 3;
+  int64 expires = 2;
 }
 ```
+
+## Protobuf
+
+所有控制指令相關的 `Protobuf` 都已經開源在 [GitHub](https://github.com/longbridgeapp/openapi-protobufs/blob/main/control/control.proto)

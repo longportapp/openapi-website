@@ -1,11 +1,11 @@
 ---
-title: 订阅交易推送
+title: 訂閱交易推送
 id: how-to-subscribe-trade
 slug: /socket/subscribe_trade
 sidebar_position: 1
 ---
 
-客户端可以通过 WebSocket 或者 TCP 和交易推送网关建立长连接，当订单状态更新时，客户端可以实时的接收通知。
+客戶端可以通過 WebSocket 或者 TCP 和交易推送網關建立長連接，當訂單狀態更新時，客戶端可以實時的接收通知。
 
 :::info
 WebSocket Endpoint: `wss://openapi-trade.longbridge.global`
@@ -19,24 +19,24 @@ TCP Endpoint: `openapi-trade.longbridge.global`
 sequenceDiagram
 autonumber
 Client ->> Server: 握手
-Server -->> Client: 链接建立
-Client -->> Server: 登录鉴权
-Server -->> Client: 返回登录鉴权结果
+Server -->> Client: 鏈接建立
+Client -->> Server: 登錄鑑權
+Server -->> Client: 返回登錄鑑權結果
 
-par 订阅
-Client -->> Server: 订阅行情请求，req_id: 10, cmd: 16
-Server -->> Client: 返回订阅行情响应，req_id: 10, cmd: 16
+par 訂閱
+Client -->> Server: 訂閱行情請求，req_id: 10, cmd: 16
+Server -->> Client: 返回訂閱行情響應，req_id: 10, cmd: 16
 
-Server -->> Client: 实时订单变更推送，cmd: 18
-Server -->> Client: 实时订单变更推送，cmd: 18
+Server -->> Client: 實時訂單變更推送，cmd: 18
+Server -->> Client: 實時訂單變更推送，cmd: 18
 
 end
 
 ```
 
-## 订阅
+## 訂閱
 
-订阅的 Protobuf 定义可以[查看](../quote/trade/trade-push)
+訂閱的 Protobuf 定義可以[查看](../quote/trade/trade-push)
 
 Example:
 
@@ -46,7 +46,7 @@ Example:
 }
 ```
 
-> 这里方便展示使用 `JSON`，实际上需要通过 protobuf 序列化请求到服务端
+> 這裏方便展示使用 `JSON`，實際上需要通過 Protobuf 序列化請求到服務端
 
 ## 推送例子
 
@@ -60,17 +60,17 @@ Example:
 ```
 
 :::info
-`data` 是 `JSON` 字符串的二进制内容 (base64)
+`data` 是 `JSON` 字符串的二進制內容 (Base64)
 :::
 
-`data` 的实际 `JSON` 内容如下
+`data` 的實際 `JSON` 內容如下
 
 ```json
 {
   "event": "order_changed_lb",
   "data": {
     "side": "Buy",
-    "stock_name": "腾讯控股",
+    "stock_name": "騰訊控股",
     "quantity": "1000",
     "symbol": "700.HK",
     "order_type": "LO",
@@ -95,8 +95,8 @@ Example:
 }
 ```
 
-字段解释可以查看[交易命名词典-WebSocket 推送通知](../trade/trade-definition#websocket-推送通知)
+字段解釋可以查看[交易命名詞典-WebSocket 推送通知](../trade/trade-definition#websocket-推送通知)
 
-## 协议
+## 協議
 
-我们使用的长连接[协议](./protocol/overview)
+我們使用的長連接[協議](./protocol/overview)
