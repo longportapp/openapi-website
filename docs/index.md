@@ -53,11 +53,11 @@ Longbridge 提供接入底层服务的 HTTP / WebSockets 接口以及封装在�
     </tr>
     <tr>
         <td rowspan="2">港股市场</td>
-        <td>证券类产品<br /><br />含股票、ETFs、窝轮、牛熊、界内证</td>
+        <td>证券类产品（含股票、ETFs、窝轮、牛熊、界内证）</td>
         <td rowspan="2">
             <ul>
-            <li>中国大陆客户：请购买 <font color="red">港股 Lv2 实时行情 + 实时恒生指数 - OpenAPI（仅限大陆地区使用）</font></li>
-            <li>非中国大陆客户：请购买 <font color="red">港股 Lv2 实时行情 + 实时恒生指数 - OpenAPI（不限使用地区）</font></li>
+            <li>中国大陆客户：请购买 <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=HK">港股 Lv2 实时行情 - OpenAPI</a></font></li>
+            <li>非中国大陆客户：请购买 <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=HK">港股 Lv2 实时行情（国际版）- OpenAPI</a></font></li>
             </ul>
         </td>
     </tr>
@@ -66,16 +66,11 @@ Longbridge 提供接入底层服务的 HTTP / WebSockets 接口以及封装在�
     </tr>
     <tr>
         <td rowspan="3">美股市场</td>
-        <td>证券类产品<br /><br />含纽交所、美交所、纳斯达克上市的股票、ETFs</td>
+        <td>证券类产品（含纽交所、美交所、纳斯达克上市的股票、ETFs）</td>
         <td rowspan="2">
             <ul>
-            <li>Level 1：请购买 <font color="red">L1 Nasdaq Basic - OpenAPI</font></li>
-            <li>Level 2：
-                <ul>
-                <li>非专业用户：请购买 <font color="red">L2 + Nasdaq TotalView - OpenAPI（非专业用户）</font></li>
-                <li>专业用户：请购买 <font color="red">L2 + Nasdaq TotalView - OpenAPI（专业用户）</font></li>
-                </ul>
-            </li>
+            <li>Level 1：请购买 <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=US">L1 Nasdaq Basic - OpenAPI</a></font></li>
+            <li>Level 2：暂未上线，敬请期待。</li>
             </ul>
         </td>
     </tr>
@@ -86,8 +81,7 @@ Longbridge 提供接入底层服务的 HTTP / WebSockets 接口以及封装在�
         <td>OPRA 期权</td>
         <td>
             <ul>
-            <li>非专业用户：请购买 <font color="red">OPRA 期权实时行情 - OpenAPI（非专业用户）</font></li>
-            <li>专业用户：请购买 <font color="red">OPRA 期权实时行情 - OpenAPI（专业用户）</font></li>
+            暂未上线，敬请期待。
             </ul>
         </td>
     </tr>

@@ -16,8 +16,8 @@
     "description": "The label for category Pull in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.订阅": {
-    "message": "Subscrption",
-    "description": "The label for category Subscrption in sidebar docsSidebar"
+    "message": "Subscription",
+    "description": "The label for category Subscription in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.推送": {
     "message": "Push",
