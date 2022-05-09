@@ -11,6 +11,32 @@ sidebar_position: 7
 [业务指令](../../socket/protocol/request)：`16`
 :::
 
+## Request
+
+### Request Example
+```python
+from longbridge.http import Auth, Config, HttpClient
+from longbridge.ws import WsCallback, WsClient
+from quote_pb2 import (
+    Command,
+    ParticipantBrokerIdsResponse,
+)
+
+def example():
+    auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
+    config = Config(base_url="https://openapi.lbkrs.com")
+    http = HttpClient(auth, config)
+    ws = WsClient("wss://openapi-quote.longbridge.xyz", http, WsCallback)
+    result = ws.send_request(Command.QueryParticipantBrokerIds, "")
+    resp = ParticipantBrokerIdsResponse()
+    resp.ParseFromString(result)
+    print(f"{resp}")
+
+
+if __name__ == "__main__":
+    example()
+```
+
 ## Response
 
 ### Response Properties

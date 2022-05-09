@@ -40,13 +40,13 @@ message MultiSecurityRequest {
 | ∟ open              | string   | 開盤價                                                              |
 | ∟ high              | string   | 最高價                                                              |
 | ∟ low               | string   | 最低價                                                              |
-| ∟ timestamp         | int64    | 最新成交的交時間戳                                                  |
+| ∟ timestamp         | int64    | 最新成交的時間戳                                                    |
 | ∟ volume            | int64    | 成交量                                                              |
 | ∟ turnover          | string   | 成交額                                                              |
 | ∟ trade_status      | int32    | 標的交易狀態，詳見 [TradeStatus](../objects#tradestatus---交易狀態) |
 | ∟ pre_market_quote  | object   | 美股盤前交易行情                                                    |
 | ∟∟ last_done        | string   | 最新價                                                              |
-| ∟∟ timestamp        | int64    | 最新成交的交時間戳                                                  |
+| ∟∟ timestamp        | int64    | 最新成交的時間戳                                                    |
 | ∟∟ volume           | int64    | 成交量                                                              |
 | ∟∟ turnover         | string   | 成交額                                                              |
 | ∟∟ high             | string   | 最高價                                                              |
@@ -54,7 +54,7 @@ message MultiSecurityRequest {
 | ∟∟ prev_close       | string   | 上一個交易階段的收盤價                                              |
 | ∟ post_market_quote | object   | 美股盤後交易行情                                                    |
 | ∟∟ last_done        | string   | 最新價                                                              |
-| ∟∟ timestamp        | int64    | 最新成交的交時間戳                                                  |
+| ∟∟ timestamp        | int64    | 最新成交的時間戳                                                    |
 | ∟∟ volume           | int64    | 成交量                                                              |
 | ∟∟ turnover         | string   | 成交額                                                              |
 | ∟∟ high             | string   | 最高價                                                              |

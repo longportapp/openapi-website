@@ -40,7 +40,7 @@ message MultiSecurityRequest {
 | ∟ open                   | string   | 开盘价                                                              |
 | ∟ high                   | string   | 最高价                                                              |
 | ∟ low                    | string   | 最低价                                                              |
-| ∟ timestamp              | int64    | 最新成交的交时间戳                                                  |
+| ∟ timestamp              | int64    | 最新成交的时间戳                                                    |
 | ∟ volume                 | int64    | 成交量                                                              |
 | ∟ turnover               | string   | 成交额                                                              |
 | ∟ trade_status           | int32    | 标的交易状态，详见 [TradeStatus](../objects#tradestatus---交易状态) |
