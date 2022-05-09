@@ -50,11 +50,11 @@ Let's take obtaining assets as an example to demonstrate how to use the SDK.
 
 **_Get App Key, App Secret, Access Token and other information_**
 
-Login the Longbridge [Longbridge OpenAPI](https://open.longbridgeapp.com) website,  and enter the "User Center".
+Login the Longbridge [Longbridge OpenAPI](https://open.longbridgeapp.com) website, and enter the "User Center".
 
 The "application credential" credential information will be given on the page. After we get it, we will set the environment variable, which is convenient for later development and use.
 
-### Setting Environment Variables In MacOS / Linux Environment
+### Setting Environment Variables In macOS / Linux Environment
 
 Open the terminal and enter the following command:
 
@@ -172,7 +172,7 @@ python account_asset.py
 To subscribe to market data, please check the [Developer Center](https://open.longbridgeapp.com/account) - "Quote authority" is correct
 
 - HK Market - BMP basic quotation is unable to subscribe with WebSocket as it has no real-time quote push.
-- US Market - LV1 Nasdaq Basic (Only Open API).
+- US Market - LV1 NASDAQ Basic (Only Open API).
 
 Before running, visit the [Developer Center](https://open.longbridgeapp.com/account) and ensure that the account has the correct quote level.
 

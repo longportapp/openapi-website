@@ -31,10 +31,10 @@ Longbridge provides diversified access methods such as HTTP / WebSockets interfa
 
 ### Trading
 
-| Market     | Stock and ETF | Warrant&CBBC | Options |
-| -------- | -------- | ---- | ---- |
-| HK Market | ✓        | ✓    |      |
-| US Market | ✓        | ✓    | ✓    |
+| Market    | Stock and ETF | Warrant&CBBC | Options |
+| --------- | ------------- | ------------ | ------- |
+| HK Market | ✓             | ✓            |         |
+| US Market | ✓             | ✓            | ✓       |
 
 #### Rate Limiting
 
@@ -70,7 +70,7 @@ Longbridge provides diversified access methods such as HTTP / WebSockets interfa
         <td>Securities (including stocks, ETFs)</td>
         <td rowspan="2">
             <ul>
-            <li>Level 1: Please Purchase <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=US">L1 Nasdaq Basic - OpenAPI</a></font></li>
+            <li>Level 1: Please Purchase <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=US">L1 NASDAQ Basic - OpenAPI</a></font></li>
             <li>
                 Level 2: Coming Soon
             </li>
@@ -116,4 +116,4 @@ Longbridge does not charge any additional fees for activating or using interface
 
 ## Other
 
-The open API services are provided by Long Bridge Securities (HK) Limited and the applicable affiliates (subject to the agreement).
+The OpenAPI services are provided by Longbridge Securities (HK) Limited and the applicable affiliates (subject to the agreement).
