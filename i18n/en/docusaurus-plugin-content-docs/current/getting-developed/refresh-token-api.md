@@ -11,45 +11,44 @@ Call this to get a new `access_token` before the old `access_token` expires. The
 
 > Lasted 2022-04-21
 
-## Request 
+## Request
 
 | Basic Information |                   |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | HTTP URL          | /v1/token/refresh |
 | HTTP Method       | GET               |
 | Permission        | Not required      |
 
 ### Response Headers
 
-| Name          | Type   | Required | Description                                         |
-| ------------- | ------ | ---- | --------------------------------------------- |
-| Authorization | string | Yes   |                                               |
+| Name          | Type   | Required | Description |
+| ------------- | ------ | -------- | ----------- |
+| Authorization | string | Yes      |             |
 
 ### Response Parameters
 
-| Name       | Type   | Required | Description                                                                                                  | 示例                     |
-|------------|--------|----------|--------------------------------------------------------------------------------------------------------------|--------------------------|
-| expired_at | string | 是       | Expiration timestamp, formatted according to [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) specification | 2023-04-14T12:13:57.859Z |
-| aaid       | string | 是       | The account to create the token                                                                              |                          |
+| Name       | Type   | Required | Description                                                                                                  | Example                  |
+| ---------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------ | ------------------------ |
+| expired_at | string | Yes      | Expiration timestamp, formatted according to [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) specification | 2023-04-14T12:13:57.859Z |
 
-## Response 
+## Response
 
-### Response Body 
+### Response Body
 
-| Name              | Type   | Description                  |
-| ----------------- | ------ | --------------------- |
+| Name              | Type   | Description                        |
+| ----------------- | ------ | ---------------------------------- |
 | code              | int    | Error code, non-zero means failure |
-| msg               | string | Error message             |
-| data              | object |                       |
-| ∟token            | string | new access_token     |
+| msg               | string | Error message                      |
+| data              | object |                                    |
+| ∟token            | string | new access_token                   |
 | ∟expired_at       | string | access_token expired time          |
-| ∟issued_at        | string | issued time              |
-| ∟account_info     | object | user info              |
-| ∟∟member_id       | string | user id               |
-| ∟∟aaid            | string | aaid                  |
-| ∟∟account_channel | string | account_channel       |
+| ∟issued_at        | string | issued time                        |
+| ∟account_info     | object | user info                          |
+| ∟∟member_id       | string | user id                            |
+| ∟∟aaid            | string | aaid                               |
+| ∟∟account_channel | string | account_channel                    |
 
-### Response Example 
+### Response Example
 
 ```json
 {
