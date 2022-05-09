@@ -7,7 +7,7 @@ sidebar_position: 2
 
 # 刷新 Access Token
 
-在老的 `access_token` 過期之前，通過調用該獲取新的 `access_token`。調用成功後老的 `access_token` 就會作廢。
+在老的 `access_token` 過期之前，通過調用此接口獲取新的 `access_token`。調用成功後老的 `access_token` 就會作廢。
 
 > 最後更新於 2022-04-21
 
