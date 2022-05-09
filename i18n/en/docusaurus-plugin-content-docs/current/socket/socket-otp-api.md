@@ -1,11 +1,11 @@
 ---
-title: Get Socket OTP(One time password)
+title: Get Socket OTP (One time password)
 id: socket-otp-api
 slug: /socket-token-api
 sidebar_position: 2
 ---
 
-# Get OTP(One Time Password) API
+# Get OTP (One Time Password) API
 
 Our socket `Token` is one time password, you can use the `Token` to connect to quote or trade gateway. It will be expired after authing.
 
