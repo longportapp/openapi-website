@@ -13,17 +13,17 @@ Our socket `Token` is one time password, you can use the `Token` to connect to q
 
 ## API
 
-| 基本信息    |                  |
+| Info        |                  |
 | ----------- | ---------------- |
-| HTTP URL    | /v1/socket/token |
 | HTTP Method | GET              |
+| HTTP URL    | /v1/socket/token |
 
 ### Request Headers
 
-| 名称          | 类型   | 必须 | 描述                                          |
-| ------------- | ------ | ---- | --------------------------------------------- |
-| Authorization | string | 是   |                                               |
-| Content-Type  | string | 是   | **固定值**："application/json; charset=utf-8" |
+| Field         | Type   | Required | description                                           |
+| ------------- | ------ | -------- | ----------------------------------------------------- |
+| Authorization | string | Yes      |                                                       |
+| Content-Type  | string | Yes      | **Fixed Contents**："application/json; charset=utf-8" |
 
 ### Request Parameters
 
@@ -31,7 +31,7 @@ Our socket `Token` is one time password, you can use the `Token` to connect to q
 
 ### Response Body
 
-| field | type   | description                       |
+| Field | Type   | Description                       |
 | ----- | ------ | --------------------------------- |
 | code  | int    | error code, failed if not equal 0 |
 | msg   | string | error description                 |

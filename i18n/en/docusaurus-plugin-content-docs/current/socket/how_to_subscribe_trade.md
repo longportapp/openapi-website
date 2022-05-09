@@ -5,8 +5,6 @@ slug: /socket/subscribe_trade
 sidebar_position: 1
 ---
 
-客户端可以通过 WebSocket 或者 TCP 和交易推送网关建立长连接，当订单状态更新时，客户端可以实时的接收通知。
-
 Client can access trade feed by `WebSocket` and `TCP`. After client subscribing, trade gateway can push real-time trade changings of user.
 
 :::info
@@ -62,7 +60,7 @@ Example:
 ```
 
 :::info
-`data` is binary(base64) content of `JSON` string
+`data` is binary(Base64) content of `JSON` string
 :::
 
 The real `JSON` format of `data`:
@@ -102,5 +100,3 @@ Field description is [here](../trade/trade-definition#websocket-push-notificatio
 ## Feed Protocol
 
 If you want subscribe trading data from socket, you must know more details of our [protocol](../protocol/overview)
-
-## 协议

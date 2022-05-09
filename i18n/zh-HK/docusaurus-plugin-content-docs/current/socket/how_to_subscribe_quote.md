@@ -55,7 +55,7 @@ Example:
 
 > 這裏方便展示使用 `JSON`，實際上需要通過 protobuf 序列化請求到服務端
 
-客戶端也可以通過獲取已訂閱接口查看自己已經訂閱的標的行情，[ prorobuf 定義](../quote/subscribe/subscription)
+客戶端也可以通過獲取已訂閱接口查看自己已經訂閱的標的行情，[Protobuf 定義](../quote/subscribe/subscription)
 
 訂閱成功後，服務端會推送相應的標的行情到客戶端，具體的數據可以查看[行情概覽](../quote/overview)
 

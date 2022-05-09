@@ -46,7 +46,7 @@ Example:
 }
 ```
 
-> 這裏方便展示使用 `JSON`，實際上需要通過 protobuf 序列化請求到服務端
+> 這裏方便展示使用 `JSON`，實際上需要通過 Protobuf 序列化請求到服務端
 
 ## 推送例子
 
@@ -60,7 +60,7 @@ Example:
 ```
 
 :::info
-`data` 是 `JSON` 字符串的二進制內容 (base64)
+`data` 是 `JSON` 字符串的二進制內容 (Base64)
 :::
 
 `data` 的實際 `JSON` 內容如下

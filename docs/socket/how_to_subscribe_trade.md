@@ -60,7 +60,7 @@ Example:
 ```
 
 :::info
-`data` 是 `JSON` 字符串的二进制内容 (base64)
+`data` 是 `JSON` 字符串的二进制内容 (Base64)
 :::
 
 `data` 的实际 `JSON` 内容如下

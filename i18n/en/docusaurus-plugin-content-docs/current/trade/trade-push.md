@@ -13,7 +13,7 @@ sidebar_position: 5
 指令：`16`
 :::
 
-protobuf 定义如下：
+Protobuf 定义如下：
 
 ```protobuf
 // Sub is Sub command content, command is 16
@@ -46,7 +46,7 @@ message SubResponse {
 
 取消订阅用于取消订阅信息。
 
-protobuf 定义如下：
+Protobuf 定义如下：
 
 ```protobuf
 // Unsub is Unsub command content, command is 17
@@ -68,7 +68,7 @@ message UnsubResponse {
 
 当客户端订阅通知成功后，相应 `topic` 的消息达到服务端后，服务端会将通知推送给客户端。
 
-protobuf 定义如下：
+Protobuf 定义如下：
 
 ```protobuf
 // Dispatch type

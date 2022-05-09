@@ -36,7 +36,7 @@ end
 
 ```
 
-## Subscirbe
+## Subscribe
 
 Client can subscribe different quote type through subscribe commmand.
 
