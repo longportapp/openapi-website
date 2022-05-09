@@ -1,15 +1,15 @@
 ---
 id: quote_subscribe
-title: 订阅行情数据
+title: Subscribe Quote
 slug: subscribe
 sidebar_position: 2
 ---
 
-该接口用于订阅标的行情数据。
+This API is used to subscribe quote.
 
 :::info
 
-[协议指令](../../socket/protocol/request)：`6`
+[Business Command](../../socket/protocol/request): `6`
 
 :::
 
@@ -17,11 +17,11 @@ sidebar_position: 2
 
 ### Parameters
 
-| Name          | Type     | Required | Description                                                                                                                                              |
-| ------------- | -------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| symbol        | string[] | 是       | 订阅的标的代码，例如：`[00700.HK]` <br /><br />**校验规则：**<br />每次请求支持传入的标的数量上限是 `500` 个 <br /> 每个用户同时订阅标的数量最多为 `500` |
-| sub_type      | int32[]  | 是       | 订阅的数据类型，例如：`[1,2]`，详见 [SubType](../objects#subtype---订阅数据的类型)                                                                       |
-| is_first_push | bool     | 是       | 订阅后是否立刻进行一次数据推送。( trade 不支持)                                                                                                          |
+| Name          | Type     | Required | Description                                                                                                                                                                                                            |
+| ------------- | -------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol        | string[] | Yes      | Security code list, for example: `[00700.HK]` <br /><br />**Check rules:**<br />The maximum number of symbols that can be passed in each request is `500` <br /> The maximum number of subscriptions per user is `500` |
+| sub_type      | int32[]  | Yes      | Subscription type, for example: `[1,2]`, see [SubType](../objects#subtype---quote-type-of-subscription)                                                                                                                |
+| is_first_push | bool     | Yes      | Whether to perform a data push immediately after subscribing. (trade not supported)                                                                                                                                    |
 
 ### Protobuf
 
@@ -37,13 +37,13 @@ message SubscribeRequest {
 
 ### Response Properties
 
-返回本次请求订阅成功的标的和类型。
+Returns the securities and types of the successful subscription of this request.
 
-| Name       | Type     | Description                                                          |
-| ---------- | -------- | -------------------------------------------------------------------- |
-| sub_list   | object[] | 订阅的数据                                                           |
-| ∟ symbol   | string   | 标的代码                                                             |
-| ∟ sub_type | int32[]  | 订阅的数据类型，详见：[SubType](../objects#subtype---订阅数据的类型) |
+| Name       | Type     | Description                                                                       |
+| ---------- | -------- | --------------------------------------------------------------------------------- |
+| sub_list   | object[] | Subscription list                                                                 |
+| ∟ symbol   | string   | Seurity code                                                                      |
+| ∟ sub_type | int32[]  | Subscription type, see [SubType](../objects#subtype---quote-type-of-subscription) |
 
 ### Protobuf
 
@@ -75,20 +75,20 @@ message SubTypeList {
 }
 ```
 
-## 接口限制
+## API Restrictions
 
 :::caution
 
-- 港股 BMP 行情不支持行情数据推送。
+- HK BMP quote level does not support quote push.
 
 :::
 
-## 错误码
+## Error Code
 
-| 协议错误码 | 业务错误码 | 描述             | 排查建议                 |
-| ---------- | ---------- | ---------------- | ------------------------ |
-| 3          | 301600     | 无效的请求       | 请求参数有误或解包失败   |
-| 3          | 301606     | 限流             | 降低请求频次             |
-| 7          | 301602     | 服务端内部错误   | 请重试或联系技术人员处理 |
-| 7          | 301605     | 订阅数量超出限制 | 取消部分订阅             |
-| 7          | 301600     | 请求参数有误     | 检查请求的 `sub_type`    |
+| Protocol Error Code | Business Error Code | Description                | Troubleshooting Suggestions                                   |
+| ------------------- | ------------------- | -------------------------- | ------------------------------------------------------------- |
+| 3                   | 301600              | Invalid request            | Invalid request parameters or unpacking request failed        |
+| 3                   | 301606              | Request rate limit         | Reduce the frequency of requests                              |
+| 7                   | 301602              | Server error               | Please try again or contact a technician to resolve the issue |
+| 7                   | 301605              | Too many subscriptons      | Unsubscribe some subscribed securities                        |
+| 7                   | 301600              | Invalue request parameters | Please check the request parameter: `sub_type`                |

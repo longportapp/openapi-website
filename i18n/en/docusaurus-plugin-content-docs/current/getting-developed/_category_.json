@@ -1,10 +1,7 @@
 {
   "position": 2,
-  "label": "准备开发",
+  "label": "Getting Developed",
   "collapsible": true,
   "collapsed": false,
-  "link": {
-    "title": "Getting Started",
-    "slug": "/getting-started"
-  }
+  "link": null
 }

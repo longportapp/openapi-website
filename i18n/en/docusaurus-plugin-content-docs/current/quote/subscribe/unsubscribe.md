@@ -1,15 +1,15 @@
 ---
 id: quote_unsubscribe
-title: 取消订阅行情数据
+title: Unsubscribe Quote
 slug: unsubscribe
 sidebar_position: 3
 ---
 
-该接口用于取消订阅标的行情数据。
+This API is used to unsubscribe quote.
 
 :::info
 
-[协议指令](../../socket/protocol/request)：`7`
+[Business Command](../../socket/protocol/request): `7`
 
 :::
 
@@ -17,11 +17,11 @@ sidebar_position: 3
 
 ### Parameters
 
-| Name      | Type     | Required | Description                                                                                                        |
-| --------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------ | ------ |
-| symbol    | string[] | 是       | 订阅的标的代码，例如：`[00700.HK]` <br /><br />**校验规则：**<br />每次请求支持传入的标的数量上限是 `500` 个       |
-| sub_type  | int32[]  | 是       | 订阅的数据类型，例如：`[1,2]`，详见 [SubType](../objects#subtype---订阅数据的类型)                                 |
-| unsub_all | bool     | 是       | 是否全部取消。<br />- `symbol` 为空时，取消所有标的的订阅。<br />- `symbol` 不为空时，取消这些标的的所有类型订阅。 | `true` |
+| Name      | Type     | Required | Description                                                                                                                                                               |
+| --------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol    | string[] | Yes      | Security code list, for example: `[00700.HK]` <br /><br />**Check rules:**<br />The maximum number of symbols that can be passed in each request is `500`                 |
+| sub_type  | int32[]  | Yes      | Subscription type list, for example: `[1,2]`, see [SubType](../objects#subtype---quote-type-of-subscription)                                                              |
+| unsub_all | bool     | Yes      | Is unsubscribe all. <br />- When `symbol` is empty, unsubscribe all subscriptions<br />- When `symbol` is not empty, unsubscribe these all subscriptions of these symbols |
 
 ### Protobuf
 
@@ -42,11 +42,11 @@ message UnsubscribeResponse{
 }
 ```
 
-## 错误码
+## Error Code
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                 |
-| ---------- | ---------- | -------------- | ------------------------ |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败   |
-| 3          | 301606     | 限流           | 降低请求频次             |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理 |
-| 7          | 301600     | 请求参数有误   | 检查请求的 `sub_type`    |
+| Protocol Error Code | Business Error Code | Description                | Troubleshooting Suggestions                                   |
+| ------------------- | ------------------- | -------------------------- | ------------------------------------------------------------- |
+| 3                   | 301600              | Invalid request            | Invalid request parameters or unpacking request failed        |
+| 3                   | 301606              | Request rate limit         | Reduce the frequency of requests                              |
+| 7                   | 301602              | Server error               | Please try again or contact a technician to resolve the issue |
+| 7                   | 301600              | Invalue request parameters | Please check the request parameter: `sub_type`                |

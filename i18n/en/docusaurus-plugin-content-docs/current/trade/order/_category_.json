@@ -3,8 +3,5 @@
   "label": "Order",
   "collapsible": true,
   "collapsed": true,
-  "link": {
-    "title": "Order Introduction",
-    "slug": "/trade/orders"
-  }
+  "link": null
 }

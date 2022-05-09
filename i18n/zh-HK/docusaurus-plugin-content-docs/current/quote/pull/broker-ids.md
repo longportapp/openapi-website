@@ -1,14 +1,14 @@
 ---
 id: quote_broker_ids
-title: 获取券商席位 ID
+title: 獲取券商席位 ID
 slug: broker-ids
 sidebar_position: 7
 ---
 
-该接口用于获取券商席位 ID 数据 (可每天同步一次)。
+該接口用於獲取券商席位 ID 數據 (可每天同步一次)。
 
 :::info
-[协议指令](../../socket/protocol/request)：`16`
+[業務指令](../../socket/protocol/request)：`16`
 :::
 
 ## Response
@@ -18,10 +18,10 @@ sidebar_position: 7
 | Name                       | Type     | Description           |
 | -------------------------- | -------- | --------------------- |
 | participant_broker_numbers | object[] | 券商席位              |
-| ∟ broker_ids               | int32[]  | 券商对应的多个席位 ID |
-| ∟ participant_name_cn      | string   | 券商名称 (简)         |
-| ∟ participant_name_en      | string   | 券商名称 (英)         |
-| ∟ participant_name_hk      | string   | 券商名称 (繁)         |
+| ∟ broker_ids               | int32[]  | 券商對應的多個席位 ID |
+| ∟ participant_name_cn      | string   | 券商名稱 (简)         |
+| ∟ participant_name_en      | string   | 券商名稱 (英)         |
+| ∟ participant_name_hk      | string   | 券商名稱 (繁)         |
 
 ### Protobuf
 
@@ -65,10 +65,10 @@ message ParticipantInfo {
 }
 ```
 
-## 错误码
+## 錯誤碼
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                 |
+| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                 |
 | ---------- | ---------- | -------------- | ------------------------ |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败   |
-| 3          | 301606     | 限流           | 降低请求频次             |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理 |
+| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗   |
+| 3          | 301606     | 限流           | 降低請求頻次             |
+| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理 |

@@ -1,15 +1,15 @@
 ---
 id: quote_depth
-title: 获取标的盘口
+title: 獲取標的盤口
 slug: depth
 sidebar_position: 5
 ---
 
-该接口用于获取标的的盘口数据。
+該接口用於獲取標的的盤口數據。
 
 :::info
 
-[协议指令](../../socket/protocol/request)：`14`
+[業務指令](../../socket/protocol/request)：`14`
 
 :::
 
@@ -19,7 +19,7 @@ sidebar_position: 5
 
 | Name   | Type   | Required | Description                                         |
 | ------ | ------ | -------- | --------------------------------------------------- |
-| symbol | string | 是       | 标的代码，使用 `ticker.region` 格式，例如：`700.HK` |
+| symbol | string | 是       | 標的代碼，使用 `ticker.region` 格式，例如：`700.HK` |
 
 ### Protobuf
 
@@ -35,17 +35,17 @@ message SecurityRequest {
 
 | Name        | Type     | Description |
 | ----------- | -------- | ----------- |
-| symbol      | string   | 标的代码    |
-| ask         | object[] | 卖盘        |
-| ∟ position  | int32    | 档位        |
-| ∟ price     | string   | 价格        |
-| ∟ volume    | int64    | 挂单辆      |
-| ∟ order_num | int64    | 订单数量    |
-| bid         | object[] | 买盘        |
-| ∟ position  | int32    | 档位        |
-| ∟ price     | string   | 价格        |
-| ∟ volume    | int64    | 挂单辆      |
-| ∟ order_num | int64    | 订单数量    |
+| symbol      | string   | 標的代碼    |
+| ask         | object[] | 賣盤        |
+| ∟ position  | int32    | 檔位        |
+| ∟ price     | string   | 價格        |
+| ∟ volume    | int64    | 掛單輛      |
+| ∟ order_num | int64    | 訂單數量    |
+| bid         | object[] | 買盤        |
+| ∟ position  | int32    | 檔位        |
+| ∟ price     | string   | 價格        |
+| ∟ volume    | int64    | 掛單輛      |
+| ∟ order_num | int64    | 訂單數量    |
 
 ### Protobuf
 
@@ -136,13 +136,13 @@ message Depth {
 }
 ```
 
-## 错误码
+## 錯誤碼
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                     |
+| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                     |
 | ---------- | ---------- | -------------- | ---------------------------- |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败       |
-| 3          | 301606     | 限流           | 降低请求频次                 |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理     |
-| 7          | 301600     | 请求标的不存在 | 检查请求的 `symbol` 是否正确 |
-| 7          | 301603     | 标的无行情     | 标的没有请求的行情数据       |
-| 7          | 301604     | 无权限         | 没有获取标的行情的权限       |
+| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗       |
+| 3          | 301606     | 限流           | 降低請求頻次                 |
+| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理     |
+| 7          | 301600     | 請求標的不存在 | 檢查請求的 `symbol` 是否正確 |
+| 7          | 301603     | 標的無行情     | 標的沒有請求的行情數據       |
+| 7          | 301604     | 無權限         | 沒有獲取標的行情的權限       |

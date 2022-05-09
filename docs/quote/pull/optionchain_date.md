@@ -37,8 +37,6 @@ message SecurityRequest {
 | ----------- | -------- | ---------------------------------------------- |
 | expiry_date | string[] | 标的对应的期权链到期日列表，使用 `YYMMDD` 格式 |
 
-`
-
 ### Protobuf
 
 ```protobuf

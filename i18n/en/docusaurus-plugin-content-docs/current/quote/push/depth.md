@@ -1,36 +1,36 @@
 ---
 id: push_depth
-title: 实时盘口推送
+title: Push Real-time Depth
 slug: depth
 sidebar_position: 2
 ---
 
-已订阅标的的实时盘口数据推送。
+Real-time depth data push of the subscribed security.
 
 :::info
 
-[协议指令](../../socket/protocol/push)：`102`
+[Business Command](../../socket/protocol/push): `102`
 
 :::
 
-## 数据格式
+## Data Format
 
 ### Properties
 
-| Name        | Type     | Description               |
-| ----------- | -------- | ------------------------- |
-| symbol      | string   | 标的代码，例如：`AAPL.US` |
-| sequence    | int64    | 序列号                    |
-| ask         | object[] | 卖盘                      |
-| ∟ position  | int32    | 档位                      |
-| ∟ price     | string   | 价格                      |
-| ∟ volume    | int64    | 挂单辆                    |
-| ∟ order_num | int64    | 订单数量                  |
-| bid         | object[] | 买盘                      |
-| ∟ position  | int32    | 档位                      |
-| ∟ price     | string   | 价格                      |
-| ∟ volume    | int64    | 挂单辆                    |
-| ∟ order_num | int64    | 订单数量                  |
+| Name        | Type     | Description                           |
+| ----------- | -------- | ------------------------------------- |
+| symbol      | string   | Security code, for example: `AAPL.US` |
+| sequence    | int64    | Sequence number                       |
+| ask         | object[] | Ask depth                             |
+| ∟ position  | int32    | Position                              |
+| ∟ price     | string   | Price                                 |
+| ∟ volume    | int64    | Volume                                |
+| ∟ order_num | int64    | Number of orders                      |
+| bid         | object[] | Bid depth                             |
+| ∟ position  | int32    | Position                              |
+| ∟ price     | string   | Price                                 |
+| ∟ volume    | int64    | Volume                                |
+| ∟ order_num | int64    | Number of orders                      |
 
 ### Protobuf
 

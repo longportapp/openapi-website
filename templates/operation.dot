@@ -40,6 +40,10 @@ Code samples
 {{#def.parameters}}
 {{?}}
 
+{{? data.operation.request_body }}
+{{#def.request_example}}
+{{?}}
+
 {{#def.responses}}
 
 {{#def.callbacks}}

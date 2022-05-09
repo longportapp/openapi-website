@@ -1,15 +1,15 @@
 ---
 id: quote_optionchain_date
-title: 获取标的的期权链到期日列表
+title: Get Option Chain Expiry Date List
 slug: optionchain-date
 sidebar_position: 11
 ---
 
-该接口用于获取标的的期权链到期日列表。
+This API is used to obtain the the list of expiration dates of option chain
 
 :::info
 
-[协议指令](../../socket/protocol/request)：`20`
+[Business Command](../../socket/protocol/request): `20`
 
 :::
 
@@ -17,9 +17,9 @@ sidebar_position: 11
 
 ### Parameters
 
-| Name   | Type   | Required | Description                                         |
-| ------ | ------ | -------- | --------------------------------------------------- |
-| symbol | string | 是       | 标的代码，使用 `ticker.region` 格式，例如：`700.HK` |
+| Name   | Type   | Required | Description                                                    |
+| ------ | ------ | -------- | -------------------------------------------------------------- |
+| symbol | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK` |
 
 ### Protobuf
 
@@ -33,11 +33,9 @@ message SecurityRequest {
 
 ### Response Properties
 
-| Name        | Type     | Description                                    |
-| ----------- | -------- | ---------------------------------------------- |
-| expiry_date | string[] | 标的对应的期权链到期日列表，使用 `YYMMDD` 格式 |
-
-`
+| Name        | Type     | Description                                        |
+| ----------- | -------- | -------------------------------------------------- |
+| expiry_date | string[] | option chain expiry dates list，in `YYMMDD` format |
 
 ### Protobuf
 
@@ -75,11 +73,11 @@ message OptionChainDateListResponse {
 }
 ```
 
-## 错误码
+## Error Code
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                     |
-| ---------- | ---------- | -------------- | ---------------------------- |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败       |
-| 3          | 301606     | 限流           | 降低请求频次                 |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理     |
-| 7          | 301600     | 请求标的不存在 | 检查请求的 `symbol` 是否正确 |
+| Protocol Error Code | Business Error Code | Description        | Troubleshooting Suggestions                                   |
+| ------------------- | ------------------- | ------------------ | ------------------------------------------------------------- |
+| 3                   | 301600              | Invalid request    | Invalid request parameters or unpacking request failed        |
+| 3                   | 301606              | Request rate limit | Reduce the frequency of requests                              |
+| 7                   | 301602              | Server error       | Please try again or contact a technician to resolve the issue |
+| 7                   | 301600              | Symbol not found   | Check that the requested `symbol` is correct                  |

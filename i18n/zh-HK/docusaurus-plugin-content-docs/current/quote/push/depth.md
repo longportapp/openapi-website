@@ -1,36 +1,36 @@
 ---
 id: push_depth
-title: 实时盘口推送
+title: 實時盤口推送
 slug: depth
 sidebar_position: 2
 ---
 
-已订阅标的的实时盘口数据推送。
+已訂閱標的的實時盤口數據推送。
 
 :::info
 
-[协议指令](../../socket/protocol/push)：`102`
+[業務指令](../../socket/protocol/push)：`102`
 
 :::
 
-## 数据格式
+## 數據格式
 
 ### Properties
 
 | Name        | Type     | Description               |
 | ----------- | -------- | ------------------------- |
-| symbol      | string   | 标的代码，例如：`AAPL.US` |
-| sequence    | int64    | 序列号                    |
-| ask         | object[] | 卖盘                      |
-| ∟ position  | int32    | 档位                      |
-| ∟ price     | string   | 价格                      |
-| ∟ volume    | int64    | 挂单辆                    |
-| ∟ order_num | int64    | 订单数量                  |
-| bid         | object[] | 买盘                      |
-| ∟ position  | int32    | 档位                      |
-| ∟ price     | string   | 价格                      |
-| ∟ volume    | int64    | 挂单辆                    |
-| ∟ order_num | int64    | 订单数量                  |
+| symbol      | string   | 標的代碼，例如：`AAPL.US` |
+| sequence    | int64    | 序列號                    |
+| ask         | object[] | 賣盤                      |
+| ∟ position  | int32    | 檔位                      |
+| ∟ price     | string   | 價格                      |
+| ∟ volume    | int64    | 掛單輛                    |
+| ∟ order_num | int64    | 訂單數量                  |
+| bid         | object[] | 買盤                      |
+| ∟ position  | int32    | 檔位                      |
+| ∟ price     | string   | 價格                      |
+| ∟ volume    | int64    | 掛單輛                    |
+| ∟ order_num | int64    | 訂單數量                  |
 
 ### Protobuf
 

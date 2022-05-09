@@ -16,6 +16,9 @@ const config = {
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   i18n,
+  customFields: {
+    isDev: process.env.STAGE === 'dev',
+  },
   favicon: 'https://pub.lbkrs.com/files/202107/35tULHe3n4Pp4EtA/logo.png',
   plugins: [
     'docusaurus-plugin-sass',
@@ -87,11 +90,12 @@ const config = {
         logo: {
           alt: 'Longbridge',
           href: openapiDomain,
+          target: '_self',
           src: 'https://pub.lbkrs.com/files/202204/U8NeviVyPf5Q7ecP/Group_156.png',
         },
         items: [
           {
-            to: '/',
+            to: openapiDomain,
             position: 'left',
             target: '_self',
             label: '开发者认证',

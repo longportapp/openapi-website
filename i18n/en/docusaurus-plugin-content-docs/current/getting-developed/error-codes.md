@@ -1,5 +1,5 @@
 ---
-title: 通用错误码
+title: Common Error Codes 
 id: error-codes
 slug: /error-codes
 sidebar_position: 10
@@ -7,13 +7,13 @@ sidebar_position: 10
 
 ### 错误码
 
-| HTTP Status | code   | message                           | 说明                                                         |
-| ----------- | ------ | --------------------------------- | ------------------------------------------------------------ |
-| 403         | 403201 | signature invalid                 | 签名错误                                                     |
-| 403         | 403202 | duplicae request                  | 重复请求，同一个请求没有更换 `x-timestamp`                   |
-| 403         | 403203 | apikey illegal                    | `App Key` 无效                                               |
-| 401         | 401003 | Token 过期                        | Access Token 过期，或未登录，可以通过 Refresh Token 流程刷新 |
-| 401         | 401004 | 缺少 token 信息                   |                                                              |
-| 429         | 429001 | IP 限流                           | 请求太频繁                                                   |
-| 429         | 429303 | 网关自身熔断                      |                                                              |
-| 500         | 500000 | 服务内部错误， 请联系客服进行处理 |                                                              |
+| HTTP Status | code   | message                | 说明                                                               |
+|-------------|--------|------------------------|--------------------------------------------------------------------|
+| 403         | 403201 | signature invalid      | signature is invalid                                               |
+| 403         | 403202 | duplicae request       | Repeat request, same request without replacement `x-timestamp`     |
+| 403         | 403203 | apikey illegal         | `App Key` is illegal                                               |
+| 403         | 403205 | ip is not allowed      | IP address is not authorized to access                             |
+| 401         | 401003 | token expired          | `Access Token` expired，please refresh the Token                  |
+| 429         | 429001 | ip request ratelimit   | Too frequent requests as a same IP address, please try again later |
+| 429         | 429002 | api request is limited | Too frequent requests on an API, please try again later            |
+| 500         | 500000 | internal error         | server internal error, please contact customer support             |

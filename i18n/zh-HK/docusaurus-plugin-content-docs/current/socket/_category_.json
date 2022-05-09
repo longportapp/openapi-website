@@ -3,8 +3,5 @@
   "label": "長連接",
   "collapsible": true,
   "collapsed": false,
-  "link": {
-    "title": "Socket",
-    "slug": "/socket"
-  }
+  "link": null
 }

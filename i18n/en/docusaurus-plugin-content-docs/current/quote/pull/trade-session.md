@@ -1,15 +1,15 @@
 ---
 id: quote_trade_session
-title: 获取各市场当日交易时段
+title: Get Trading Session Of The Day
 slug: trade-session
 sidebar_position: 15
 ---
 
-该接口用于获取各市场当日交易时段。
+This API is used to obtain the daily trading hours of each market.
 
 :::info
 
-[协议指令](../../socket/protocol/request)：`8`
+[Business Command](../../socket/protocol/request): `8`
 
 :::
 
@@ -17,14 +17,14 @@ sidebar_position: 15
 
 ### Response Properties
 
-| Name                 | Type     | Description                                                                                 |
-| -------------------- | -------- | ------------------------------------------------------------------------------------------- |
-| market_trade_session | object[] | 市场交易时段                                                                                |
-| ∟ market             | string   | 市场<br/><br/>`US` - 美股市场<br/>`HK` - 港股市场<br/>`CN` - A 股市场<br/>`SG` - 新加坡市场 |
-| ∟ trade_session      | object[] | 交易时段                                                                                    |
-| ∟∟ beg_time          | string   | 交易开始时间，格式：`hhmm` 例如：`900`                                                      |
-| ∟∟ end_time          | string   | 交易结束时间，格式：`hhmm` 例如：`1400`                                                     |
-| ∟∟ trade_session     | int32    | 交易时段，详见 [TradeSession](../objects#tradesession---交易时段)                           |
+| Name                 | Type     | Description                                                                                     |
+| -------------------- | -------- | ----------------------------------------------------------------------------------------------- |
+| market_trade_session | object[] | Trading session data                                                                            |
+| ∟ market             | string   | Market<br/><br/>`US` - US market<br/>`HK` - HK market<br/>`CN` - CN market<br/>`SG` - SG market |
+| ∟ trade_session      | object[] | Trading session                                                                                 |
+| ∟∟ beg_time          | string   | Being trading time, in `hhmm` format, for example: `900`                                        |
+| ∟∟ end_time          | string   | End trading time, in `hhmm` format, for example: `1400`                                         |
+| ∟∟ trade_session     | int32    | Trading session, see [TradeSession](../objects#tradesession---trading-session)                  |
 
 ### Protobuf
 
@@ -112,10 +112,10 @@ message TradePeriod {
 }
 ```
 
-## 错误码
+## Error Code
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                 |
-| ---------- | ---------- | -------------- | ------------------------ |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败   |
-| 3          | 301606     | 限流           | 降低请求频次             |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理 |
+| Protocol Error Code | Business Error Code | Description        | Troubleshooting Suggestions                                   |
+| ------------------- | ------------------- | ------------------ | ------------------------------------------------------------- |
+| 3                   | 301600              | Invalid request    | Invalid request parameters or unpacking request failed        |
+| 3                   | 301606              | Request rate limit | Reduce the frequency of requests                              |
+| 7                   | 301602              | Server error       | Please try again or contact a technician to resolve the issue |

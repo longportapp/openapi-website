@@ -1,15 +1,15 @@
 ---
 id: quote_candlestick
-title: 获取标的 K 线
+title: Get Security Candlesticks
 slug: candlestick
 sidebar_position: 10
 ---
 
-该接口用于获取标的的 K 线数据。
+This API is used to obtain the candlestick data of security.
 
 :::info
 
-[协议指令](../../socket/protocol/request)：`19`
+[Business Command](../../socket/protocol/request): `19`
 
 :::
 
@@ -17,12 +17,12 @@ sidebar_position: 10
 
 ### Parameters
 
-| Name        | Type   | Required | Description                                                                  |
-| ----------- | ------ | -------- | ---------------------------------------------------------------------------- |
-| symbol      | string | 是       | 标的代码，使用 `ticker.region` 格式，例如：`700.HK`                          |
-| period      | int32  | 是       | k 线周期，例如：`1000`，详见 [Period](../objects#period---k-线周期)          |
-| count       | int32  | 是       | 数据数量，例如：`100`<br /><br />**校验规则：** <br />请求数量最大为 `1000`  |
-| adjust_type | int32  | 是       | 复权类型，例如：`0`，详见 [AdjustType](../objects#adjusttype---k-线复权类型) |
+| Name        | Type   | Required | Description                                                                                              |
+| ----------- | ------ | -------- | -------------------------------------------------------------------------------------------------------- |
+| symbol      | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK`                                           |
+| period      | int32  | Yes      | Candlestick period, for example: `1000`, see [Period](../objects#period---candlestick-period)            |
+| count       | int32  | Yes      | Count of cancdlestick, for example: `100`<br /><br />**Check rules:** <br />maximum count is `1000`      |
+| adjust_type | int32  | Yes      | Adjustment type, for example: `0`, see [AdjustType](../objects#adjusttype---candlestick-adjustment-type) |
 
 ### Protobuf
 
@@ -39,17 +39,17 @@ message SecurityCandlestickRequest {
 
 ### Response Properties
 
-| Name         | Type     | Description               |
-| ------------ | -------- | ------------------------- |
-| symbol       | string   | 标的代码，例如：`AAPL.US` |
-| candlesticks | object[] | K 线数据                  |
-| ∟ close      | string   | 当前周期收盘价            |
-| ∟ open       | string   | 当前周期开盘价            |
-| ∟ low        | string   | 当前周期最低价            |
-| ∟ high       | string   | 当前周期最高价            |
-| ∟ volume     | int64    | 当前周期成交量            |
-| ∟ turnover   | string   | 当前周期成交额            |
-| ∟ timestamp  | int64    | 当前周期的时间戳          |
+| Name         | Type     | Description                           |
+| ------------ | -------- | ------------------------------------- |
+| symbol       | string   | Security code, for example: `AAPL.US` |
+| candlesticks | object[] | Candlestick data                      |
+| ∟ close      | string   | Close price                           |
+| ∟ open       | string   | Open price                            |
+| ∟ low        | string   | Low price                             |
+| ∟ high       | string   | High price                            |
+| ∟ volume     | int64    | Volume                                |
+| ∟ turnover   | string   | Turnover                              |
+| ∟ timestamp  | int64    | Timestamp                             |
 
 ### Protobuf
 
@@ -125,14 +125,14 @@ message Candlestick {
 }
 ```
 
-## 错误码
+## Error Code
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                                                                 |
-| ---------- | ---------- | -------------- | ------------------------------------------------------------------------ |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败                                                   |
-| 3          | 301606     | 限流           | 降低请求频次                                                             |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理                                                 |
-| 7          | 301600     | 请求数据非法   | 检查请求的 `symbol`，`count`，`adjust_type`, `period` 数据是否在正确范围 |
-| 7          | 301603     | 标的无行情     | 标的没有请求的行情数据                                                   |
-| 7          | 301604     | 无权限         | 没有获取标的行情的权限                                                   |
-| 7          | 301607     | 接口限制       | 请求的数据数量超限，减少数据数量                                         |
+| Protocol Error Code | Business Error Code | Description                    | Troubleshooting Suggestions                                                    |
+| ------------------- | ------------------- | ------------------------------ | ------------------------------------------------------------------------------ |
+| 3                   | 301600              | Invalid request                | Invalid request parameters or unpacking request failed                         |
+| 3                   | 301606              | Request rate limit             | Reduce the frequency of requests                                               |
+| 7                   | 301602              | Server error                   | Please try again or contact a technician to resolve the issue                  |
+| 7                   | 301600              | Invalue request parameters     | Please check the request parameter: `symbol`, `count`, `adjust_type`, `period` |
+| 7                   | 301603              | No quotes                      | Security no quote                                                              |
+| 7                   | 301604              | No access                      | No access to security quote                                                    |
+| 7                   | 301607              | Too many candlesticks requeted | Reduce the amount of candlestick in each request                               |

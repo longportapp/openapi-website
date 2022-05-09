@@ -1,56 +1,55 @@
 ---
-title: 刷新 Token
+title: Refresh Token
 id: refresh-token-api
 slug: /refresh-token-api
 sidebar_position: 2
 ---
 
-# 刷新 Access Token
+# Refresh Access Token
 
-在老的 `access_token` 过期之前，通过调用该获取新的 `access_token`。调用成功后老的 `access_token` 就会作废。
+Call this to get a new `access_token` before the old `access_token` expires. The old `access_token` will be invalidated after a successful call.
 
-> 最后更新于 2022-04-21
+> Lasted 2022-04-21
 
-## 请求
+## Request 
 
-| 基本信息    |                   |
-| ----------- | ----------------- |
-| HTTP URL    | /v1/token/refresh |
-| HTTP Method | POST              |
-| 权限要求    | 无                |
+| Basic Information |                   |
+|-------------------|-------------------|
+| HTTP URL          | /v1/token/refresh |
+| HTTP Method       | GET               |
+| Permission        | Not required      |
 
-### 请求头
+### Response Headers
 
-| 名称          | 类型   | 必须 | 描述                                          |
+| Name          | Type   | Required | Description                                         |
 | ------------- | ------ | ---- | --------------------------------------------- |
-| Authorization | string | 是   |                                               |
-| Content-Type  | string | 是   | **固定值**："application/json; charset=utf-8" |
+| Authorization | string | Yes   |                                               |
 
-### 请求参数
+### Response Parameters
 
-| 名称       | 类型   | 必须 | 描述       | 默认值                                                                      | 示例                     |
-| ---------- | ------ | ---- | ---------- | --------------------------------------------------------------------------- | ------------------------ |
-| expired_at | string | 是   | 格式       | 过期时间戳，格式遵循 [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) 规范 | 2023-04-14T12:13:57.859Z |
-| aaid       | string | 是   | token 账户 | 指定创建 token 的账户                                                       |                          |
+| Name       | Type   | Required | Description                                                                                                  | 示例                     |
+|------------|--------|----------|--------------------------------------------------------------------------------------------------------------|--------------------------|
+| expired_at | string | 是       | Expiration timestamp, formatted according to [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) specification | 2023-04-14T12:13:57.859Z |
+| aaid       | string | 是       | The account to create the token                                                                              |                          |
 
-## 响应
+## Response 
 
-### 响应体
+### Response Body 
 
-| 名称              | 类型   | 描述                  |
+| Name              | Type   | Description                  |
 | ----------------- | ------ | --------------------- |
-| code              | int    | 错误码，非 0 表示失败 |
-| msg               | string | 错误描述              |
+| code              | int    | Error code, non-zero means failure |
+| msg               | string | Error message             |
 | data              | object |                       |
-| ∟token            | string | 新的 access_token     |
-| ∟expired_at       | string | 过期的时间戳          |
-| ∟issued_at        | string | 颁发时间              |
-| ∟account_info     | object | 用户信息              |
-| ∟∟member_id       | string | 用户 id               |
+| ∟token            | string | new access_token     |
+| ∟expired_at       | string | access_token expired time          |
+| ∟issued_at        | string | issued time              |
+| ∟account_info     | object | user info              |
+| ∟∟member_id       | string | user id               |
 | ∟∟aaid            | string | aaid                  |
 | ∟∟account_channel | string | account_channel       |
 
-### 响应体示例
+### Response Example 
 
 ```json
 {

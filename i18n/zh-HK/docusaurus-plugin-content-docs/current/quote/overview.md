@@ -1,104 +1,112 @@
 ---
 sidebar_position: 1
 id: quote_overview
-title: 行情概览
+title: 行情概覽
 slug: overview
 ---
 
-### 行情接口概览
+### 行情接口概覽
 
 <table>
     <tr>
-        <td>类型</td>
-        <td>功能简介</td>
+        <td>類型</td>
+        <td>功能簡介</td>
     </tr>
     <tr>
         <td rowspan="16">拉取</td>
-        <td><a href="./pull/static">获取标的基础信息</a></td>
+        <td><a href="./pull/static">獲取標的基礎信息</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/quote">获取标的实时行情</a></td>
+        <td><a href="./pull/quote">獲取標的實時行情</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/option-quote">获取期权实时行情</a></td>
+        <td><a href="./pull/option-quote">獲取期權實時行情</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/warrant-quote">获取轮证实时行情</a></td>
+        <td><a href="./pull/warrant-quote">獲取輪證實時行情</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/depth">获取标的盘口</a></td>
+        <td><a href="./pull/depth">獲取標的盤口</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/brokers">获取标的经纪队列</a></td>
+        <td><a href="./pull/brokers">獲取標的經紀隊列</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/broker-ids">获取券商席位 id</a></td>
+        <td><a href="./pull/broker-ids">獲取券商席位 id</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/trade">获取标的成交明细</a></td>
+        <td><a href="./pull/trade">獲取標的成交明細</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/intraday">获取标的分时</a></td>
+        <td><a href="./pull/intraday">獲取標的分時</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/candlestick">获取标的 k 线</a></td>
+        <td><a href="./pull/candlestick">獲取標的 k 線</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/optionchain-date">获取标的的期权链到期日列表</a></td>
+        <td><a href="./pull/optionchain-date">獲取標的的期權鏈到期日列表</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/optionchain-date-strike">获取标的的期权链到期日期权标的列表</a></td>
+        <td><a href="./pull/optionchain-date-strike">獲取標的的期權鏈到期日期權標的列表</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/issuer">获取轮证发行商 id</a></td>
+        <td><a href="./pull/issuer">獲取輪證發行商 id</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/warrant-filter">获取轮证筛选列表</a></td>
+        <td><a href="./pull/warrant-filter">獲取輪證篩選列表</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/trade-session">获取各市场当日交易时段</a></td>
+        <td><a href="./pull/trade-session">獲取各市場當日交易時段</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/trade-day">获取市场交易日</a></td>
+        <td><a href="./pull/trade-day">獲取市場交易日</a></td>
     </tr>
     <tr>
         <td rowspan="3">订阅</td>
-        <td><a href="./subscribe/subscription">获取已订阅标的行情</a></td>
+        <td><a href="./subscribe/subscription">獲取已訂閱標的行情</a></td>
     </tr>
     <tr>
-        <td><a href="./subscribe/subscribe">订阅行情数据</a></td>
+        <td><a href="./subscribe/subscribe">訂閱行情數據</a></td>
     </tr>
     <tr>
-        <td><a href="./subscribe/unsubscribe">取消订阅行情数据</a></td>
+        <td><a href="./subscribe/unsubscribe">取消訂閱行情數據</a></td>
     </tr>
     <tr>
         <td rowspan="4">推送</td>
-        <td><a href="./push/push-quote">实时价格推送</a></td>
+        <td><a href="./push/push-quote">實時價格推送</a></td>
     </tr>
     <tr>
-        <td><a href="./push/push-depth">实时盘口推送</a></td>
+        <td><a href="./push/push-depth">實時盤口推送</a></td>
     </tr>
     <tr>
-        <td><a href="./push/push-broker">实时经纪队列推送</a></td>
+        <td><a href="./push/push-broker">實時經紀隊列推送</a></td>
     </tr>
     <tr>
-        <td><a href="./push/push-trade">实时成交明细推送</a></td>
+        <td><a href="./push/push-trade">實時成交明細推送</a></td>
     </tr>
 </table>
 
-### 标的代码说明
+### 標的代碼說明
 
-标的代码使用 `ticker.region` 格式，`ticker` 表示标的代码，各个市场的标的代码示例：
+標的代碼使用 `ticker.region` 格式，`ticker` 表示標的代碼，各個市場的標的代碼示例：
 
-- 美股市场 `region` 为 `US`，例如：`AAPL.US`
-- 港股市场：`region` 为 `HK`，例如：`700.HK`
-- A 股市场：`region` 上交所为 `SH`，深交所为 `SZ`，例如：`399001.SZ`，`600519.SH`
-- 新加坡市场：`region` 为 `SG`，例如：`D05.SG`
+- 美股市場：`region` 為 `US`，例如：`AAPL.US`
+- 港股市場：`region` 為 `HK`，例如：`700.HK`
+- A 股市場：`region` 上交所為 `SH`，深交所為 `SZ`，例如：`399001.SZ`，`600519.SH`
+- 新加坡市場：`region` 為 `SG`，例如：`D05.SG`
 
 ### 接入方式
 
-使用私有协议，长连接方式进行接入，接入方法请参考 [二进制通信协议](../socket/protocol/protocol_overview.md)
+1. 使用私有協議，長連接方式進行接入，接入方法請參考 <a href="../socket/protocol/overview" target="_blank">二進制通信協議</a>。
+2. 使用 SDK 進行接入，[SDK 介紹及下載地址](https://open.longbridgeapp.com/sdk)。
 
-### Protobuf 下载地址
+### 業務數據序列化方式
 
-行情 Protobuf 协议文档[下载地址](https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto)。
+行情的請求、響應、推送數據作為業務數據，存放在私有協議的數據包 body 部分。
+我們使用 [Protobuf](https://developers.google.cn/protocol-buffers) 協議對業務數據進行序列化，相較於常見的文本協議（如 JSON, XML 等），Protobuf 協議具有如下優點：
+
+- 序列化時間快
+- 數據包體積小
+- 較強的版本前向後向兼容性
+
+行情 Protobuf 協議文檔[下載地址](https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto)。
