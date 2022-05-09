@@ -82,7 +82,7 @@ ws = WsClient("wss://openapi-quote.longbridge.global", http, MyWsCallback())
 # https://open.longbridgeapp.com/account
 #
 # - HK Market - BMP basic quotation is unable to subscribe with WebSocket as it has no real-time quote push.
-# - US Market - LV1 Nasdaq Basic (Only Open API).
+# - US Market - LV1 NASDAQ Basic (Only Open API).
 #
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
