@@ -1,5 +1,5 @@
 ---
-title: 通信过程
+title: Communication Model
 id: socket-protocol-connect
 slug: /socket/protocol/connect
 sidebar_position: 1
