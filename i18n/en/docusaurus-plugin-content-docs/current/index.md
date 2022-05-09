@@ -70,7 +70,7 @@ Longbridge provides diversified access methods such as HTTP / WebSockets interfa
         <td>Securities (including stocks, ETFs)</td>
         <td rowspan="2">
             <ul>
-            <li>Level 1: Please Purchase <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=US">L1 NASDAQ Basic - OpenAPI</a></font></li>
+            <li>Level 1: Please Purchase <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=US">L1 Nasdaq Basic - OpenAPI</a></font></li>
             <li>
                 Level 2: Coming Soon
             </li>

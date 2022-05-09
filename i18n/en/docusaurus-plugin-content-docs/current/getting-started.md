@@ -172,7 +172,7 @@ python account_asset.py
 To subscribe to market data, please check the [Developer Center](https://open.longbridgeapp.com/account) - "Quote authority" is correct
 
 - HK Market - BMP basic quotation is unable to subscribe with WebSocket as it has no real-time quote push.
-- US Market - LV1 NASDAQ Basic (Only Open API).
+- US Market - LV1 Nasdaq Basic (Only Open API).
 
 Before running, visit the [Developer Center](https://open.longbridgeapp.com/account) and ensure that the account has the correct quote level.
 
