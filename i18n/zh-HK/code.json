@@ -92,7 +92,7 @@
     "description": "The ARIA label for the navbar color mode toggle"
   },
   "theme.colorToggle.ariaLabel.mode.dark": {
-    "message": "黑暗模式",
+    "message": "暗模式",
     "description": "The name for the dark color mode"
   },
   "theme.colorToggle.ariaLabel.mode.light": {
@@ -155,7 +155,7 @@
     "description": "The label used for the latest version suggestion link label"
   },
   "theme.common.editThisPage": {
-    "message": "編輯這個頁面",
+    "message": "編輯頁面",
     "description": "The link label to edit the current page"
   },
   "theme.common.headingLinkTitle": {
@@ -183,7 +183,7 @@
     "description": "The label for the navbar versions dropdown on mobile view"
   },
   "theme.TOCCollapsible.toggleButtonLabel": {
-    "message": "在本頁面",
+    "message": "本頁總覽",
     "description": "The label used by the button on the collapsible TOC component"
   },
   "theme.tags.tagsListLabel": {

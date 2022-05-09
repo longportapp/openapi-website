@@ -155,7 +155,7 @@
     "description": "The label used for the latest version suggestion link label"
   },
   "theme.common.editThisPage": {
-    "message": "编辑这个页面",
+    "message": "编辑页面",
     "description": "The link label to edit the current page"
   },
   "theme.common.headingLinkTitle": {
@@ -183,7 +183,7 @@
     "description": "The label for the navbar versions dropdown on mobile view"
   },
   "theme.TOCCollapsible.toggleButtonLabel": {
-    "message": "在本页面",
+    "message": "本页总览",
     "description": "The label used by the button on the collapsible TOC component"
   },
   "theme.tags.tagsListLabel": {
