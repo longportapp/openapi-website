@@ -27,6 +27,36 @@ message MultiSecurityRequest {
 }
 ```
 
+### Request Example
+
+```python
+# 获取标的实时行情
+# https://open.longbridgeapp.com/docs/quote/pull/quote
+import os
+import time
+from longbridge.http import Auth, Config, HttpClient
+from longbridge.ws import ReadyState, WsCallback, WsClient
+# Protobuf 变量定义参见：https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto
+from longbridge.proto.quote_pb2 import (Command, MultiSecurityRequest, SecurityQuoteResponse)
+
+class MyWsCallback(WsCallback):
+    def on_state(self, state: ReadyState):
+        print(f"-> state: {state}")
+
+auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
+http = HttpClient(auth, Config(base_url="https://openapi.lbkrs.com"))
+ws = WsClient("wss://openapi-quote.longbridge.global", http, MyWsCallback())
+
+# 运行前请访问 “开发者中心“ 确保账户有正确的行情权限。
+# 如没有开通行情权限，可以通过 "长桥" 手机客户端，并进入 “我的 - 我的行情 - 行情商城“ 购买开通行情权限。
+req = MultiSecurityRequest(symbol=["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"])
+result = ws.send_request(Command.QuerySecurityQuote, req.SerializeToString())
+resp = SecurityQuoteResponse()
+resp.ParseFromString(result)
+
+print(f"Security quote:\n\n {resp.secu_quote}")
+```
+
 ## Response
 
 ### Response Properties
@@ -40,13 +70,13 @@ message MultiSecurityRequest {
 | ∟ open              | string   | 开盘价                                                              |
 | ∟ high              | string   | 最高价                                                              |
 | ∟ low               | string   | 最低价                                                              |
-| ∟ timestamp         | int64    | 最新成交的交时间戳                                                  |
+| ∟ timestamp         | int64    | 最新成交的时间戳                                                    |
 | ∟ volume            | int64    | 成交量                                                              |
 | ∟ turnover          | string   | 成交额                                                              |
 | ∟ trade_status      | int32    | 标的交易状态，详见 [TradeStatus](../objects#tradestatus---交易状态) |
 | ∟ pre_market_quote  | object   | 美股盘前交易行情                                                    |
 | ∟∟ last_done        | string   | 最新价                                                              |
-| ∟∟ timestamp        | int64    | 最新成交的交时间戳                                                  |
+| ∟∟ timestamp        | int64    | 最新成交的时间戳                                                    |
 | ∟∟ volume           | int64    | 成交量                                                              |
 | ∟∟ turnover         | string   | 成交额                                                              |
 | ∟∟ high             | string   | 最高价                                                              |
@@ -54,7 +84,7 @@ message MultiSecurityRequest {
 | ∟∟ prev_close       | string   | 上一个交易阶段的收盘价                                              |
 | ∟ post_market_quote | object   | 美股盘后交易行情                                                    |
 | ∟∟ last_done        | string   | 最新价                                                              |
-| ∟∟ timestamp        | int64    | 最新成交的交时间戳                                                  |
+| ∟∟ timestamp        | int64    | 最新成交的时间戳                                                    |
 | ∟∟ volume           | int64    | 成交量                                                              |
 | ∟∟ turnover         | string   | 成交额                                                              |
 | ∟∟ high             | string   | 最高价                                                              |

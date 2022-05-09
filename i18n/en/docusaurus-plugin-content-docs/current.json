@@ -8,20 +8,20 @@
     "description": "The label for category 准备开发 in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.行情": {
-    "message": "行情",
-    "description": "The label for category 行情 in sidebar docsSidebar"
+    "message": "Quote",
+    "description": "The label for category Quote in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.拉取": {
-    "message": "拉取",
-    "description": "The label for category 拉取 in sidebar docsSidebar"
+    "message": "Pull",
+    "description": "The label for category Pull in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.订阅": {
-    "message": "订阅",
-    "description": "The label for category 订阅 in sidebar docsSidebar"
+    "message": "Subscrption",
+    "description": "The label for category Subscrption in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.推送": {
-    "message": "推送",
-    "description": "The label for category 推送 in sidebar docsSidebar"
+    "message": "Push",
+    "description": "The label for category Push in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.交易": {
     "message": "交易",
