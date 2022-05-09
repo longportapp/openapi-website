@@ -9,7 +9,7 @@ sidebar_position: 1
 
 ### 1. Enable OpenAPI service
 
-Refer to [Introduction to OpenAPI](... /docs/#How to open) to open the corresponding service.
+Refer to [Introduction to OpenAPI](../docs/#How\ to\ enable) to open the corresponding service.
 
 ### 2. Get App Key and Access Token information
 
@@ -76,7 +76,7 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 
 Use the HTTP client to send signed requests.
 
-## 基本路径
+## API Path
 
 All API paths start with [https://openapi.longbridge.global](https://openapi.longbridge.global).
 
