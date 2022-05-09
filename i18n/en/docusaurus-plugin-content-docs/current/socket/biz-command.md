@@ -1,5 +1,5 @@
 ---
-title: Socket Command
+title: Data Commands
 id: biz-command
 slug: /socket/biz-command
 sidebar_position: 5

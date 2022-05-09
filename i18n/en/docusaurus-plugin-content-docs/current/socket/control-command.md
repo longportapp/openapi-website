@@ -1,5 +1,5 @@
 ---
-title: Control command
+title: Control commands
 id: control-command
 slug: /socket/control-command
 sidebar_position: 4

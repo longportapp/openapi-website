@@ -1,5 +1,5 @@
 ---
-title: Access differences between WS and TCP
+title: Access differences between WebSocket and TCP
 id: diff-ws-tcp
 slug: /socket/diff_ws_tcp
 sidebar_position: 6
