@@ -3,9 +3,9 @@
     "message": "Next",
     "description": "The label for version current"
   },
-  "sidebar.docsSidebar.category.准备开发": {
-    "message": "准备开发",
-    "description": "The label for category 准备开发 in sidebar docsSidebar"
+  "sidebar.docsSidebar.category.準備開發": {
+    "message": "準備開發",
+    "description": "The label for category 準備開發 in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.行情": {
     "message": "行情",
@@ -15,9 +15,9 @@
     "message": "拉取",
     "description": "The label for category 拉取 in sidebar docsSidebar"
   },
-  "sidebar.docsSidebar.category.订阅": {
-    "message": "订阅",
-    "description": "The label for category 订阅 in sidebar docsSidebar"
+  "sidebar.docsSidebar.category.訂閱": {
+    "message": "訂閱",
+    "description": "The label for category 訂閱 in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.推送": {
     "message": "推送",
@@ -27,20 +27,20 @@
     "message": "交易",
     "description": "The label for category 交易 in sidebar docsSidebar"
   },
-  "sidebar.docsSidebar.category.订单": {
-    "message": "订单",
-    "description": "The label for category 订单 in sidebar docsSidebar"
+  "sidebar.docsSidebar.category.訂單": {
+    "message": "訂單",
+    "description": "The label for category 訂單 in sidebar docsSidebar"
   },
-  "sidebar.docsSidebar.category.资产": {
+  "sidebar.docsSidebar.category.資產": {
     "message": "資產",
-    "description": "The label for category 资产 in sidebar docsSidebar"
+    "description": "The label for category 資產 in sidebar docsSidebar"
   },
-  "sidebar.docsSidebar.category.长连接": {
-    "message": "长连接",
-    "description": "The label for category 长连接 in sidebar docsSidebar"
+  "sidebar.docsSidebar.category.長連接": {
+    "message": "長連接",
+    "description": "The label for category 長連接 in sidebar docsSidebar"
   },
-  "sidebar.docsSidebar.category.通信协议": {
-    "message": "通信协议",
-    "description": "The label for category 通信协议 in sidebar docsSidebar"
+  "sidebar.docsSidebar.category.通信協議": {
+    "message": "通信協議",
+    "description": "The label for category 通信協議 in sidebar docsSidebar"
   }
 }
