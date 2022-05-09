@@ -55,13 +55,27 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // todo I18n lang should redirect other dir
           editUrl: ({ locale, docPath }) => {
+            const isAutoGenDoc = docPath.includes('--autogen.md');
+
             let nextVersionDocsDirPath = 'docs';
-            if (docPath.includes('--autogen.md')) {
+            if (isAutoGenDoc) {
               docPath = docPath.replace('--autogen.md', '.yml');
               nextVersionDocsDirPath = 'swagger-docs';
             }
 
-            return `https://github.com/longbridgeapp/openapi-website/edit/main/${nextVersionDocsDirPath}/${docPath}`;
+            if (locale !== 'zh-CN') {
+              let targetPath = `i18n/${locale}/docusaurus-plugin-content-docs/current/${docPath}`;
+              if (isAutoGenDoc) {
+                targetPath = `${nextVersionDocsDirPath}/${locale}/${docPath}`;
+              }
+              return `https://github.com/longbridgeapp/openapi-website/edit/main/${targetPath}`;
+            } else {
+              if (docPath.includes('--autogen.md')) {
+                docPath = docPath.replace('--autogen.md', '.yml');
+                nextVersionDocsDirPath = 'swagger-docs';
+              }
+              return `https://github.com/longbridgeapp/openapi-website/edit/main/${nextVersionDocsDirPath}/${docPath}`;
+            }
           },
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
