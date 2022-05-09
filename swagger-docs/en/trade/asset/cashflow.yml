@@ -26,11 +26,11 @@ paths:
           required: false
         - name: "page"
           type: "string"
-          description: "start page <br/><br/><b>default value:</b> `1`  <br/><b>data validation rules:</b><br/> <b>Ranges:</b> `>=1`"
+          description: "start page <br/><br/><b>Default value:</b> `1`  <br/><b>Data validation rules:</b><br/> <b>Ranges:</b> `>=1`"
           required: false
         - name: "size"
           type: "string"
-          description: "page size <br/><br/><b>default value:</b> `50` <br/><b>data validation rules:</b> `1~10000`"
+          description: "page size <br/><br/><b>Default value:</b> `50` <br/><b>Data validation rules:</b> `1~10000`"
           required: false
 
       responses:
