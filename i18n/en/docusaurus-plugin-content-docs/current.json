@@ -36,11 +36,11 @@
     "description": "The label for category 资产 in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.长连接": {
-    "message": "长连接",
-    "description": "The label for category 长连接 in sidebar docsSidebar"
+    "message": "Socket Feed",
+    "description": "The label for category Socket Feed in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.通信协议": {
-    "message": "通信协议",
-    "description": "The label for category 通信协议 in sidebar docsSidebar"
+    "message": "Protocol",
+    "description": "The label for category Protocol in sidebar docsSidebar"
   }
 }

@@ -5,15 +5,15 @@ slug: trade-push
 sidebar_position: 5
 ---
 
-客户端可以通过交易长连接网关获取到交易和资产的变更通知
+客戶端可以通過交易長連接網關獲取到交易和資產的變更通知
 
-## 订阅
+## 訂閱
 
 :::info
 指令：`16`
 :::
 
-protobuf 定义如下：
+protobuf 定義如下：
 
 ```protobuf
 // Sub is Sub command content, command is 16
@@ -27,26 +27,26 @@ message SubResponse {
     string topic = 1;
     string reason = 2;
   }
-  repeated string success = 1; // 订阅成功
-  repeated Fail fail = 2; // 订阅失败
-  repeated string current = 3;  // 当前订阅
+  repeated string success = 1; // 訂閱成功
+  repeated Fail fail = 2; // 訂閱失敗
+  repeated string current = 3;  // 當前訂閱
 }
 
 ```
 
 目前支持的 topic：
 
-- private - 交易和资产类的私有通知
+- private - 交易和資產類的私有通知
 
-## 取消订阅
+## 取消訂閱
 
 :::info
 指令：`17`
 :::
 
-取消订阅用于取消订阅信息。
+取消訂閱用於取消訂閱信息。
 
-protobuf 定义如下：
+protobuf 定義如下：
 
 ```protobuf
 // Unsub is Unsub command content, command is 17
@@ -56,7 +56,7 @@ message Unsub {
 
 // UnsubResponse is response of Unsub request
 message UnsubResponse {
-  repeated string current = 3; // 当前订阅
+  repeated string current = 3; // 當前訂閱
 }
 ```
 
@@ -66,9 +66,9 @@ message UnsubResponse {
 指令：`18`
 :::
 
-当客户端订阅通知成功后，相应 `topic` 的消息达到服务端后，服务端会将通知推送给客户端。
+當客戶端訂閱通知成功後，相應 `topic` 的消息達到服務端後，服務端會將通知推送給客戶端。
 
-protobuf 定义如下：
+protobuf 定義如下：
 
 ```protobuf
 // Dispatch type
@@ -93,14 +93,14 @@ message Notification {
 }
 ```
 
-## 业务数据
+## 業務數據
 
-交易推送业务数据为 `JSON` 格式，`Notification`.`ContentType` 为 `CONTENT_JSON`
+交易推送業務數據爲 `JSON` 格式，`Notification`.`ContentType` 爲 `CONTENT_JSON`
 
-### 订单通知
+### 訂單通知
 
-查看[交易命名词典](./definition.md#websocket-推送通知)
+查看[交易命名詞典](./definition.md#websocket-推送通知)
 
 ### `Protobuf`
 
-可以从我们的 [`Github` 仓库](https://github.com/longbridgeapp/openapi-protobufs/tree/main/trade) 获取最新交易相关 `Protobuf` 定义
+可以從我們的 [`Github` 倉庫](https://github.com/longbridgeapp/openapi-protobufs/tree/main/trade) 獲取最新交易相關 `Protobuf` 定義

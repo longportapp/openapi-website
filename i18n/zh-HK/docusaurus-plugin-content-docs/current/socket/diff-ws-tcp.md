@@ -1,5 +1,5 @@
 ---
-title: WS 和 TCP 接入的不同點
+title: WebSocket 和 TCP 接入的不同點
 id: diff-ws-tcp
 slug: /socket/diff_ws_tcp
 sidebar_position: 6
