@@ -1,38 +1,38 @@
 {
   "theme.ErrorPageContent.title": {
-    "message": "This page crashed.",
+    "message": "页面发生了错误",
     "description": "The title of the fallback page when the page crashed"
   },
   "theme.ErrorPageContent.tryAgain": {
-    "message": "Try again",
+    "message": "再试一次",
     "description": "The label of the button to try again when the page crashed"
   },
   "theme.NotFound.title": {
-    "message": "找不到網頁",
+    "message": "找不到网页",
     "description": "The title of the 404 page"
   },
   "theme.NotFound.p1": {
-    "message": "我們找不到您要找的東西。",
+    "message": "我们找不到您要找的东西。",
     "description": "The first paragraph of the 404 page"
   },
   "theme.NotFound.p2": {
-    "message": "請聯繫將您鏈接到原始 URL 的站點的所有者，並讓他們知道他們的鏈接已損壞。",
+    "message": "请联系将您链接到原始 URL 的站点的所有者，并让他们知道他们的链接已损坏。",
     "description": "The 2nd paragraph of the 404 page"
   },
   "theme.BackToTopButton.buttonAriaLabel": {
-    "message": "滾動回到頂部",
+    "message": "滚动回到顶部",
     "description": "The ARIA label for the back to top button"
   },
   "theme.blog.archive.title": {
-    "message": "檔案",
+    "message": "档案",
     "description": "The page & hero title of the blog archive page"
   },
   "theme.blog.archive.description": {
-    "message": "檔案",
+    "message": "档案",
     "description": "The page & hero description of the blog archive page"
   },
   "theme.AnnouncementBar.closeButtonAriaLabel": {
-    "message": "關閉",
+    "message": "关闭",
     "description": "The ARIA label for close button of announcement bar"
   },
   "theme.blog.paginator.navAriaLabel": {
@@ -84,7 +84,7 @@
     "description": "The title of the page for a blog tag"
   },
   "theme.tags.tagsPageLink": {
-    "message": "查看所有標籤",
+    "message": "查看所有标签",
     "description": "The label of the link targeting the tag list page"
   },
   "theme.colorToggle.ariaLabel": {
@@ -92,7 +92,7 @@
     "description": "The ARIA label for the navbar color mode toggle"
   },
   "theme.colorToggle.ariaLabel.mode.dark": {
-    "message": "黑暗模式",
+    "message": "暗模式",
     "description": "The name for the dark color mode"
   },
   "theme.colorToggle.ariaLabel.mode.light": {
@@ -100,11 +100,11 @@
     "description": "The name for the light color mode"
   },
   "theme.docs.DocCard.categoryDescription": {
-    "message": "{count} 項目",
+    "message": "{count} 项目",
     "description": "The default description for a category card in the generated index about how many items this category includes"
   },
   "theme.docs.paginator.navAriaLabel": {
-    "message": "文檔頁面導航",
+    "message": "文档页面导航",
     "description": "The ARIA label for the docs pagination"
   },
   "theme.docs.paginator.previous": {
@@ -116,15 +116,15 @@
     "description": "The label used to navigate to the next doc"
   },
   "theme.docs.sidebar.expandButtonTitle": {
-    "message": "展開側邊欄",
+    "message": "展开侧边栏",
     "description": "The ARIA label and title attribute for expand button of doc sidebar"
   },
   "theme.docs.sidebar.expandButtonAriaLabel": {
-    "message": "展開側邊欄",
+    "message": "展开侧边栏",
     "description": "The ARIA label and title attribute for expand button of doc sidebar"
   },
   "theme.DocSidebarItem.toggleCollapsedCategoryAriaLabel": {
-    "message": "切換可折疊側邊欄類別 '{label}'",
+    "message": "切换可折叠侧边栏类别 '{label}'",
     "description": "The ARIA label to toggle the collapsible sidebar category"
   },
   "theme.docs.tagDocListPageTitle.nDocsTagged": {
@@ -147,7 +147,7 @@
     "description": "The label used to tell the user that he's browsing an unmaintained doc version"
   },
   "theme.docs.versions.latestVersionSuggestionLabel": {
-    "message": "有關最新文檔，請參閱 {latestVersionLink} ({versionLabel}).",
+    "message": "有关最新文档，请参阅 {latestVersionLink} ({versionLabel}).",
     "description": "The label used to tell the user to check the latest version"
   },
   "theme.docs.versions.latestVersionLinkLabel": {
@@ -155,11 +155,11 @@
     "description": "The label used for the latest version suggestion link label"
   },
   "theme.common.editThisPage": {
-    "message": "編輯這個頁面",
+    "message": "编辑这个页面",
     "description": "The link label to edit the current page"
   },
   "theme.common.headingLinkTitle": {
-    "message": "鏈接到標題",
+    "message": "链接到标题",
     "description": "Title for link to heading"
   },
   "theme.lastUpdated.atDate": {
@@ -167,11 +167,11 @@
     "description": "The words used to describe on which date a page has been last updated"
   },
   "theme.lastUpdated.byUser": {
-    "message": " 經過 {user}",
+    "message": " 经过 {user}",
     "description": "The words used to describe by who the page has been last updated"
   },
   "theme.lastUpdated.lastUpdatedAtBy": {
-    "message": "最近更新時間{atDate}{byUser}",
+    "message": "最近更新时间 {atDate}{byUser}",
     "description": "The sentence used to display when a page has been last updated, and by who"
   },
   "theme.common.skipToMainContent": {
@@ -183,43 +183,43 @@
     "description": "The label for the navbar versions dropdown on mobile view"
   },
   "theme.TOCCollapsible.toggleButtonLabel": {
-    "message": "在本頁面",
+    "message": "在本页面",
     "description": "The label used by the button on the collapsible TOC component"
   },
   "theme.tags.tagsListLabel": {
-    "message": "標籤：",
+    "message": "标签：",
     "description": "The label alongside a tag list"
   },
   "theme.CodeBlock.copied": {
-    "message": "已復制",
+    "message": "已复制",
     "description": "The copied button label on code blocks"
   },
   "theme.CodeBlock.copyButtonAriaLabel": {
-    "message": "將代碼複製到剪貼板",
+    "message": "将代码复制到剪贴板",
     "description": "The ARIA label for copy code blocks button"
   },
   "theme.CodeBlock.copy": {
-    "message": "複製",
+    "message": "复制",
     "description": "The copy button label on code blocks"
   },
   "theme.navbar.mobileLanguageDropdown.label": {
-    "message": "語言",
+    "message": "语言",
     "description": "The label for the mobile language switcher dropdown"
   },
   "theme.docs.sidebar.collapseButtonTitle": {
-    "message": "收起側邊欄",
+    "message": "收起侧边栏",
     "description": "The title attribute for collapse button of doc sidebar"
   },
   "theme.docs.sidebar.collapseButtonAriaLabel": {
-    "message": "收起側邊欄",
+    "message": "收起侧边栏",
     "description": "The title attribute for collapse button of doc sidebar"
   },
   "theme.navbar.mobileSidebarSecondaryMenu.backButtonLabel": {
-    "message": "← 返回主菜單",
+    "message": "← 返回主菜单",
     "description": "The label of the back button to return to main menu, inside the mobile navbar sidebar secondary menu (notably used to display the docs sidebar)"
   },
   "theme.tags.tagsPageTitle": {
-    "message": "標籤",
+    "message": "标签",
     "description": "The title of the tag list page"
   }
 }
