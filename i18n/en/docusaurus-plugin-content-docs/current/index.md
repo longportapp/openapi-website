@@ -1,124 +1,119 @@
 ---
 sidebar_position: 1
 slug: /
-title: OpenAPI 介绍
+title: Introduction to OpenAPI
 id: getting_started_introduce
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## 简介
+## Introduction
 
-Longbridge OpenAPI 为有研发能力的投资者提供程序化行情交易接口，助力投资者根据自身投资策略搭建交易或行情策略分析工具。覆盖以下类别功能：
+Longbridge OpenAPI provides programmatic quote trading interfaces for investors with research and development capabilities and assists them to build trading or quote strategy analysis tools based on their own investment strategies. The functions fall into the following categories:
 
-- 交易类 - 创建、修改、撤销订单，当日/历史订单及成交记录的查询等
-- 行情类 - 实时行情报价、历史行情数的获取等
-- 资产类 - 实时账户资产、持仓、现金查询等
-- 实时订阅 - 提供行情实时报价以及订单状态实时变更信息推送
+- Trading - Create, amend, cancel orders, query today’s/past orders and transaction details, etc.
+- Quotes - Real-time quotes, acquisition of historical quotes, etc.
+- Portfolio - Real-time query of the account assets, positions, funds
+- Real-time subscription - Provides real-time quotes and push notifications for order status changes
 
-## 接口类型
+## Interface Type
 
-Longbridge 提供接入底层服务的 HTTP / WebSockets 接口以及封装在上层的 SDK（Python / C++ ...）等多种接入方式，灵活选择。
+Longbridge provides diversified access methods such as HTTP / WebSockets interfaces for accessing the underlying services and SDK (Python / C++, etc.) encapsulated in the upper layer, allowing flexible choices.
 
-## 如何开通
+## How to Enable OpenAPI
 
-1. 登录 [Longbridge App](https://longbridgeapp.com/download) 或官网 [longbridgehk.com](https://longbridge.hk) 完成长桥综合账户的开户（目前不支持长桥标准账户的接口服务）；
-2. 登录 [longbridgeapp.com](https://longbridgeapp.com) 进入开发者平台，完成开发者认证即 OpenAPI 权限申请，获取令牌。
+1. Log in to the [Longbridge App](https://longbridgeapp.com/download) or the official website [longbridgehk.com](https://longbridge.hk) to complete the account opening process of Longbridge Integrated A/C (the interface services of the Longbridge Standard A/C are not currently available);
 
-## 使用权限及限制
+2. Log in to the [longbridgeapp.com](https://longbridgeapp.com) and enter the developer platform, complete the developer verification (OpenAPI permission application), and obtain a token.
 
-### 交易类
+## Permissions and Restrictions
 
-| 市场     | 股票 ETF | 权证 | 期权 |
+### Trading
+
+| Market     | Stock and ETF | Warrant&CBBC | Options |
 | -------- | -------- | ---- | ---- |
-| 香港市场 | ✓        | ✓    |      |
-| 美国市场 | ✓        | ✓    | ✓    |
+| HK Market | ✓        | ✓    |      |
+| US Market | ✓        | ✓    | ✓    |
 
-#### 频次限制
+#### Rate Limiting
 
 :::caution
 
-- 30 秒内不超过 30 次调用，且每两次调用之间间隔不超过 0.02 秒
+- No more than 30 calls in a 30-second interval and the time between two successive calls should be more than 0.02 seconds
 
 :::
 
-### 行情类
+### Quotes
 
 <table>
     <tr>
-        <td>市场</td>
-        <td>标的</td>
-        <td>权限获取方式</td>
+        <td>Market</td>
+        <td>Symbol</td>
+        <td>Access Method</td>
     </tr>
     <tr>
-        <td rowspan="2">港股市场</td>
-        <td>证券类产品<br /><br />含股票、ETFs、窝轮、牛熊、界内证</td>
+        <td rowspan="2">HK Market</td>
+        <td>Securities (including equities, ETFs, Warrants, CBBCs)</td>
         <td rowspan="2">
             <ul>
-            <li>中国大陆客户：请购买 <font color="red">港股 Lv2 实时行情 + 实时恒生指数 - OpenAPI（仅限大陆地区使用）</font></li>
-            <li>非中国大陆客户：请购买 <font color="red">港股 Lv2 实时行情 + 实时恒生指数 - OpenAPI（不限使用地区）</font></li>
+            <li>Mainland China: Please Purchase <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=HK">L2 Advanced Quotes-OpenAPI - OpenAPI</a></font></li>
+            <li>Non-Mainland China: Please Purchase <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=HK">L2 Advanced Quotes (International) -OpenAPI</a></font></li>
             </ul>
         </td>
     </tr>
     <tr>
-        <td>恒生指数</td>
+        <td>Hang Seng Index</td>
     </tr>
     <tr>
-        <td rowspan="3">美股市场</td>
-        <td>证券类产品<br /><br />含纽交所、美交所、纳斯达克上市的股票、ETFs</td>
+        <td rowspan="3">US Market</td>
+        <td>Securities (including stocks, ETFs)</td>
         <td rowspan="2">
             <ul>
-            <li>Level 1：请购买 <font color="red">L1 Nasdaq Basic - OpenAPI</font></li>
-            <li>Level 2：
-                <ul>
-                <li>非专业用户：请购买 <font color="red">L2 + Nasdaq TotalView - OpenAPI（非专业用户）</font></li>
-                <li>专业用户：请购买 <font color="red">L2 + Nasdaq TotalView - OpenAPI（专业用户）</font></li>
-                </ul>
+            <li>Level 1: Please Purchase <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=US">L1 Nasdaq Basic - OpenAPI</a></font></li>
+            <li>
+                Level 2: Coming Soon
             </li>
             </ul>
         </td>
     </tr>
     <tr>
-        <td>纳斯达克指数</td>
+        <td>Nasdsaq Index</td>
     </tr>
     <tr>
-        <td>OPRA 期权</td>
+        <td>OPRA OPRA Options</td>
         <td>
-            <ul>
-            <li>非专业用户：请购买 <font color="red">OPRA 期权实时行情 - OpenAPI（非专业用户）</font></li>
-            <li>专业用户：请购买 <font color="red">OPRA 期权实时行情 - OpenAPI（专业用户）</font></li>
-            </ul>
+            Coming Soon
         </td>
     </tr>
     <tr>
-        <td rowspan="2">A 股市场</td>
-        <td>证券类产品（含股票、ETFs）</td>
+        <td rowspan="2">CN Market</td>
+        <td>Securities (including stocks, ETFs)</td>
         <td rowspan="2">
         <ul>
-            <li>中国大陆个人客户：免费获取 Lv1 行情</li>
-            <li>非中国大陆客户 / 机构客户：暂不支持</li>
+            <li>Mainland China: LV1 For Free</li>
+            <li>Non-Mainland China: Not Available</li>
         </ul>
         </td>
     </tr>
     <tr>
-        <td>指数</td>
+        <td>Index</td>
     </tr>
 </table>
 
-#### 频次限制
+#### Rate Limiting
 
 :::caution
 
-- 一个账号同时只能建立一个长连接，最多同时订阅 500 个标的
-- 1 秒内不超过 10 次调用，并发请求数不超过 5
+- One account can only create one long link and subscribe to a maximum of 500 symbols at the same time
+- No more than 10 calls in a 1-second interval and the number of concurrent requests should not exceed 5
 
 :::
 
-## 使用费用
+## Pricing
 
-长桥不针对接口服务额外收取开通或使用费用，只需开通长桥综合账户及 OpenAPI 服务权限后即可免费使用。实际交易产生佣金费用或高级行情产品费用参考 [官网收费](https://longbridge.hk/rate) 说明或咨询线上客服。
+Longbridge does not charge any additional fees for activating or using interface services. You only need to open a Longbridge Integrated A/C and get OpenAPI service permissions to use it for free. Please refer to [Pricing](https://longbridge.hk/rate) or consult online customer service for the actual commissions or advanced quotes fees incurred by transactions.
 
-## 其他
+## Other
 
-OpenAPI 服务由长桥证券（香港）有限公司及其适用的关联公司提供（具体以协议为准）。
+The open API services are provided by Long Bridge Securities (HK) Limited and the applicable affiliates (subject to the agreement).

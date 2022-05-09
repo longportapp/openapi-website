@@ -77,7 +77,7 @@ auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"),
 http = HttpClient(auth, Config(base_url="https://openapi.lbkrs.com"))
 ws = WsClient("wss://openapi-quote.longbridge.global", http, MyWsCallback())
 
-# To subscribe quotes data, please check whether "Developers - "Quote authority" is correct.
+# To subscribe quotes data, please check whether "Developers" - "Quote authority" is correct.
 # https://open.longbridgeapp.com/account
 #
 # - HK Market - BMP basic quotation is unable to subscribe with WebSocket as it has no real-time quote push.

@@ -78,13 +78,13 @@ auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"),
 http = HttpClient(auth, Config(base_url="https://openapi.lbkrs.com"))
 ws = WsClient("wss://openapi-quote.longbridge.global", http, MyWsCallback())
 
-# To subscribe quotes data, please check whether "Developers - "Quote authority" is correct.
+# To subscribe quotes data, please check whether "Developers" - "Quote authority" is correct.
 # https://open.longbridgeapp.com/account
 #
 # - HK Market - BMP basic quotation is unable to subscribe with WebSocket as it has no real-time quote push.
 # - US Market - LV1 Nasdaq Basic (Only Open API).
 #
-# Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
+# Before running, please visit the "Developers" to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
 req = SubscribeRequest(symbol=["700.HK", "AAPL.US"], sub_type=[SubType.DEPTH], is_first_push=True)
 result = ws.send_request(Command.Subscribe, req.SerializeToString())
