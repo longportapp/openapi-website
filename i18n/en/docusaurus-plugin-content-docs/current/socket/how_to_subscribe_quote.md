@@ -1,5 +1,5 @@
 ---
-title: Subscribe Market Quote Real-Time Pushing
+title: Subscribe Real-Time Market Data
 id: how-to-subscribe-quote
 slug: /socket/subscribe_quote
 sidebar_position: 1

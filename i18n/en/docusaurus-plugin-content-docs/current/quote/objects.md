@@ -5,7 +5,7 @@ title: Quote Naming Dictionary
 slug: objects
 ---
 
-### TradeStatus - Secrity Status
+### TradeStatus - Security Status
 
 Security Status
 
