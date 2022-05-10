@@ -370,3 +370,8 @@ https://github.com/longbridgeapp/openapi-python/tree/main/examples
 For detailed Python SDK API document, please visit:
 
 https://longbridge.readthedocs.io/en/latest/api.html
+
+## Contact & Feedback
+
+* You can send feedback to service@longbridge.global
+* Join Longbridge OpenAPI Server: https://discord.gg/2gUTSCS6
