@@ -29,10 +29,10 @@ sidebar_position: 1
         <td><a href="./order/history_orders">获取历史订单</a></td>
     </tr>
     <tr>
-        <td><a href="./order/today_deals">获取当日成交明细</a></td>
+        <td><a href="./execution/today_executions">获取当日成交明细</a></td>
     </tr>
     <tr>
-        <td><a href="./order/history_deals">获取历史成交明细</a></td>
+        <td><a href="./execution/history_executions">获取历史成交明细</a></td>
     </tr>
 <tr>
         <td rowspan="4">资产</td>

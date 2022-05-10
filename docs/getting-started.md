@@ -72,13 +72,13 @@ Windows 要稍微复杂一些，按下 `Win + R` 快捷键，输入 `cmd` 命令
 
 ```bash
 C:\Users\jason> setx LONGBRIDGE_APP_KEY "从页面上获取到的 App Key"
-成功: 指定的值已得到保存。
+成功：指定的值已得到保存。
 
 C:\Users\jason> setx LONGBRIDGE_APP_SECRET "从页面上获取到的 App Secret"
-成功: 指定的值已得到保存。
+成功：指定的值已得到保存。
 
 C:\Users\jason> setx LONGBRIDGE_ACCESS_TOKEN "从页面上获取到的 Access Token"
-成功: 指定的值已得到保存。
+成功：指定的值已得到保存。
 ```
 
 :::caution

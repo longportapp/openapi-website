@@ -29,10 +29,10 @@ sidebar_position: 1
         <td><a href="./order/history_orders">獲取曆史訂單</a></td>
     </tr>
     <tr>
-        <td><a href="./order/today_deals">獲取當日成交明細</a></td>
+        <td><a href="./execution/today_executions">獲取當日成交明細</a></td>
     </tr>
     <tr>
-        <td><a href="./order/history_deals">獲取曆史成交明細</a></td>
+        <td><a href="./execution/history_executions">獲取曆史成交明細</a></td>
     </tr>
 <tr>
         <td rowspan="4">資產</td>
