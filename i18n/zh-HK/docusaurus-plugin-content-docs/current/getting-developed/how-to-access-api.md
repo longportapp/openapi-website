@@ -17,6 +17,14 @@ sidebar_position: 1
 
 ### 3. 生成簽名
 
+:::tip
+
+本頁介紹的內容大部分，我們的 [OpenAPI SDK](/sdk) 已經完整實現了，你如果是 SDK 用戶，可以直接忽略簽名認證部分。
+
+此部分內容是為了給非 SDK 用戶提供參考。
+
+:::
+
 先根據相應的 API 文檔構造請求後， 通過 OpenAPI SDK 直接調用 API，SDK 會幫助生成簽名， 或者通過以下流程創建簽名。
 
 #### 添加 `X-Api-Key`、`X-Timestamp`、`Authorization`
