@@ -185,7 +185,7 @@ https://longbridgeapp.com/download
 
 When you have the correct Quote authority, it might look like this:
 
-<img src="https://pub.lbkrs.com/files/202205/JjCceNDSqeBJpaWv/SCR-20220507-rnm.png" className="max-w-2xl" />
+<img src="https://pub.lbkrs.com/files/202205/VeSgQksvfu3Q2iPN/SCR-20220510-gkx.png" className="max-w-2xl" />
 
 Create an `subscribe_quote.py` and paste the code below:
 
