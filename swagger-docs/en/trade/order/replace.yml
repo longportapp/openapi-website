@@ -14,15 +14,15 @@ paths:
           required: true
         - name: "quantity"
           type: "string"
-          description: Replaced quantity,example:`100`
+          description: Replaced quantity, example:`100`
           required: true
         - name: "price"
           required: false
-          description: Replaced price,example:`388.5`<br/><br/>
+          description: Replaced price, example:`388.5`<br/><br/>
             `LO` / `ELO` / `ALO` / `ODD` / `LIT` Order Required
         - name: trigger_price
           required: false
-          description: Trigger price,example:`388.5`<br/><br/>
+          description: Trigger price, example:`388.5`<br/><br/>
             `LIT` / `MIT` Order Required
         - name: limit_offset
           required: false
