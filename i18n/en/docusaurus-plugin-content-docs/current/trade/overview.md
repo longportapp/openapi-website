@@ -1,11 +1,11 @@
 ---
 id: trade_overview
-title: Trade OverView
+title: Trade Overview
 slug: trade-overview
 sidebar_position: 1
 ---
 
-### Trade OverView
+### Trade Overview
 
 <table>
     <tr>
@@ -29,10 +29,10 @@ sidebar_position: 1
         <td><a href="./order/history_orders">Get History Orders</a></td>
     </tr>
     <tr>
-        <td><a href="./order/today_deals">Get Today Deals</a></td>
+        <td><a href="./execution/today_executions">Get Today Executions</a></td>
     </tr>
     <tr>
-        <td><a href="./order/history_deals">Get History Deals</a></td>
+        <td><a href="./execution/history_executions">Get History Executions</a></td>
     </tr>
 <tr>
         <td rowspan="4">Asset</td>

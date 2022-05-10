@@ -76,16 +76,28 @@ paths:
       request_body:
         type: "python"
         value: |
-          def example():
-            from longbridge.http import Auth, Config, HttpClient
-            auth = Auth("${API_KEY}", "${API_KEY_SECRET}", "${TOKEN}")
-            config = Config(base_url = "https://openapi.longbridge.global")
-            client = HttpClient(auth, config)
-            result = client.post("/v1/openapi/trade/order", {
-              "order_type": "LO","side": "Buy","submitted_price": "388",
-              "submitted_quantity": "100","symbol": "700.HK",
+          import os
+          import json
+          from longbridge.http import Auth, Config, HttpClient
+
+          auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
+          http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
+
+          payload = {
+              "side": "Buy",
+              "symbol": "700.HK",
+              "order_type": "LO",
+              "submitted_price": "50",
+              "submitted_quantity": "200",
               "time_in_force": "Day",
-            })
+              "remark": "Hello from Python SDK"
+          }
+
+          try:
+            resp = http.post("/v1/trade/order", payload=payload)
+            print(json.dumps(resp.data, indent=2))
+          except Exception as e:
+            print(f"Submit order error\ncode: {e.code}\nmessage: {e.message}")
       response_body:
         {
           "code": 0,

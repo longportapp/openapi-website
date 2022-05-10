@@ -1,10 +1,10 @@
 swagger: "2.0"
 info:
-  description: "該接口用於獲取當日訂單的成交明細"
+  description: "該接口用於獲取歷史訂單的成交明細"
   version: "v1"
-  title: "獲取當日成交"
+  title: "獲取歷史成交明細"
 paths:
-  /v1/trade/order/deal/today:
+  /v1/trade/execution/history:
     get:
       access: "交易權限"
       parameters:
@@ -13,33 +13,42 @@ paths:
           in: query
           description: "股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US`"
           required: false
-        - name: "order_id"
+        - name: "start_at"
           type: "string"
+          in: query
           required: false
-          description: "訂單 ID，用於指定訂單 ID 查詢，例如: `701276261045858304`"
+          description: "開始時間，格式為時間戳 (秒)，例如: `1650410999`"
+        - name: "end_at"
+          type: "string"
+          in: query
+          required: false
+          description: "結束時間，格式為時間戳 (秒)，例如: `1650410999`"
       responses:
         "200":
           description: "查詢成功"
           schema:
-            $ref: "#/definitions/deals"
+            $ref: "#/definitions/history_executions_rsp"
         "400":
           description: "查詢失敗，請求參數錯誤。"
       request_body:
         type: "python"
         value: |
-          def example():
-            from longbridge.http import Auth, Config, HttpClient
-            auth = Auth("${API_KEY}", "${API_KEY_SECRET}", "${TOKEN}")
-            config = Config(base_url = "https://openapi.longbridge.global")
-            client = HttpClient(auth, config)
-            result = client.get("/v1/trade/order/deal/today", {"symbol": "700.HK", 
-              "order_id": "693664675163312128"})
+          import os
+          import json
+          from longbridge.http import Auth, Config, HttpClient
+
+          auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
+          http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
+
+          resp = http.get("/v1/trade/execution/history")
+          print(json.dumps(resp.data, indent=2))
       response_body:
         {
           "code": 0,
           "message": "success",
           "data":
             {
+              "has_more": false,
               "trades":
                 [
                   {
@@ -54,8 +63,11 @@ paths:
             },
         }
 definitions:
-  today_deals_rsp:
+  history_executions_rsp:
     properties:
+      has_more:
+        type: boolean
+        description: "是否還有更多數據"
       orders:
         type: "arrary"
         description: 成交明細信息
@@ -71,7 +83,7 @@ definitions:
             description: "股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US`"
           trade_done_at:
             type: "string"
-            description: "成交時间，格式為時间戳 (秒)"
+            description: "成交時間，格式為時間戳 (秒)"
           quantity:
             type: "string"
             description: 成交數量

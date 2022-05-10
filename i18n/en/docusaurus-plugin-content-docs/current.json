@@ -24,11 +24,15 @@
     "description": "The label for category Push in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.交易": {
-    "message": "交易",
+    "message": "Trade",
     "description": "The label for category 交易 in sidebar docsSidebar"
   },
+  "sidebar.docsSidebar.category.成交": {
+    "message": "Execution",
+    "description": "The label for category 成交 in sidebar docsSidebar"
+  },
   "sidebar.docsSidebar.category.订单": {
-    "message": "订单",
+    "message": "Order",
     "description": "The label for category 订单 in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.资产": {
