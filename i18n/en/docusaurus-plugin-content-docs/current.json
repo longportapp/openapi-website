@@ -4,24 +4,24 @@
     "description": "The label for version current"
   },
   "sidebar.docsSidebar.category.准备开发": {
-    "message": "准备开发",
-    "description": "The label for category 准备开发 in sidebar docsSidebar"
+    "message": "Getting Started",
+    "description": "The label for category getting started in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.行情": {
-    "message": "行情",
-    "description": "The label for category 行情 in sidebar docsSidebar"
+    "message": "Quote",
+    "description": "The label for category Quote in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.拉取": {
-    "message": "拉取",
-    "description": "The label for category 拉取 in sidebar docsSidebar"
+    "message": "Pull",
+    "description": "The label for category Pull in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.订阅": {
-    "message": "订阅",
-    "description": "The label for category 订阅 in sidebar docsSidebar"
+    "message": "Subscription",
+    "description": "The label for category Subscription in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.推送": {
-    "message": "推送",
-    "description": "The label for category 推送 in sidebar docsSidebar"
+    "message": "Push",
+    "description": "The label for category Push in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.交易": {
     "message": "Trade",
@@ -40,11 +40,11 @@
     "description": "The label for category 资产 in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.长连接": {
-    "message": "长连接",
-    "description": "The label for category 长连接 in sidebar docsSidebar"
+    "message": "Socket Feed",
+    "description": "The label for category Socket Feed in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.通信协议": {
-    "message": "通信协议",
-    "description": "The label for category 通信协议 in sidebar docsSidebar"
+    "message": "Protocol",
+    "description": "The label for category Protocol in sidebar docsSidebar"
   }
 }

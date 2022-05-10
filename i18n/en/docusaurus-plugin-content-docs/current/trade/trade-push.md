@@ -1,19 +1,19 @@
 ---
 id: trade_push
-title: 交易推送
+title: Trade Push
 slug: trade-push
 sidebar_position: 5
 ---
 
-客户端可以通过交易长连接网关获取到交易和资产的变更通知
+Client can get real-time trade updates from trade gateway.
 
-## 订阅
+## Subscribe
 
 :::info
-指令：`16`
+Cmd: `16`
 :::
 
-Protobuf 定义如下：
+Protobuf definition：
 
 ```protobuf
 // Sub is Sub command content, command is 16
@@ -27,26 +27,24 @@ message SubResponse {
     string topic = 1;
     string reason = 2;
   }
-  repeated string success = 1; // 订阅成功
-  repeated Fail fail = 2; // 订阅失败
-  repeated string current = 3;  // 当前订阅
+  repeated string success = 1; // success topics
+  repeated Fail fail = 2; // failed topics
+  repeated string current = 3;  // curent subscriptions after subscribe
 }
 
 ```
 
-目前支持的 topic：
+Current support topics：
 
-- private - 交易和资产类的私有通知
+- private - private notification for trade
 
-## 取消订阅
+## Cancel Subscribe
 
 :::info
-指令：`17`
+Cmd: `17`
 :::
 
-取消订阅用于取消订阅信息。
-
-Protobuf 定义如下：
+Protobuf defination：
 
 ```protobuf
 // Unsub is Unsub command content, command is 17
@@ -56,19 +54,19 @@ message Unsub {
 
 // UnsubResponse is response of Unsub request
 message UnsubResponse {
-  repeated string current = 3; // 当前订阅
+  repeated string current = 3; // current subscriptions after cancel subscribe
 }
 ```
 
-## 通知推送
+## Push Notification
 
 :::info
-指令：`18`
+Cmd: `18`
 :::
 
-当客户端订阅通知成功后，相应 `topic` 的消息达到服务端后，服务端会将通知推送给客户端。
+After client subscribe success, subscribed `topic` notification wiil be pushed to client.
 
-Protobuf 定义如下：
+Protobuf defination：
 
 ```protobuf
 // Dispatch type
@@ -93,14 +91,14 @@ message Notification {
 }
 ```
 
-## 业务数据
+## Data Format
 
-交易推送业务数据为 `JSON` 格式，`Notification`.`ContentType` 为 `CONTENT_JSON`
+Trade push data in `JSON` format, so `Notification.ContentType` is `CONTENT_JSON`
 
-### 订单通知
+### Order Notification
 
-查看[交易命名词典](./definition.md#websocket-推送通知)
+Order Notification Content is defined [here](./trade-definition#websocket-notification)
 
 ### `Protobuf`
 
-可以从我们的 [`Github` 仓库](https://github.com/longbridgeapp/openapi-protobufs/tree/main/trade) 获取最新交易相关 `Protobuf` 定义
+Our data protobuf defination is opensourced in [`Github`](https://github.com/longbridgeapp/openapi-protobufs/tree/main/trade).

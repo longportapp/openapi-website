@@ -35,6 +35,36 @@ message SecurityCandlestickRequest {
 }
 ```
 
+### Request Example
+
+```python
+# Get Security Candlesticks
+# https://open.longbridgeapp.com/docs/quote/pull/candlestick
+import os
+import time
+from longbridge.http import Auth, Config, HttpClient
+from longbridge.ws import ReadyState, WsCallback, WsClient
+# Protobuf variables definition: https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto
+from longbridge.proto.quote_pb2 import (Command, SecurityCandlestickRequest, SecurityCandlestickResponse)
+
+class MyWsCallback(WsCallback):
+    def on_state(self, state: ReadyState):
+        print(f"-> state: {state}")
+
+auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
+http = HttpClient(auth, Config(base_url="https://openapi.lbkrs.com"))
+ws = WsClient("wss://openapi-quote.longbridge.global", http, MyWsCallback())
+
+# Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
+# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
+req = SecurityCandlestickRequest(symbol="700.HK", period=1000, count=10, adjust_type=0)
+result = ws.send_request(Command.QueryCandlestick, req.SerializeToString())
+resp = SecurityCandlestickResponse()
+resp.ParseFromString(result)
+
+print(f"Candlesticks:\n\n {resp}")
+```
+
 ## Response
 
 ### Response Properties

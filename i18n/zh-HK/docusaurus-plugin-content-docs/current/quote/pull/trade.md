@@ -31,6 +31,36 @@ message SecurityTradeRequest {
 }
 ```
 
+### Request Example
+
+```python
+# 獲取標的成交明細
+# https://open.longbridgeapp.com/docs/quote/pull/trade
+import os
+import time
+from longbridge.http import Auth, Config, HttpClient
+from longbridge.ws import ReadyState, WsCallback, WsClient
+# Protobuf 變量定義參見：https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto
+from longbridge.proto.quote_pb2 import (Command, SecurityTradeRequest, SecurityTradeResponse)
+
+class MyWsCallback(WsCallback):
+    def on_state(self, state: ReadyState):
+        print(f"-> state: {state}")
+
+auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
+http = HttpClient(auth, Config(base_url="https://openapi.lbkrs.com"))
+ws = WsClient("wss://openapi-quote.longbridge.global", http, MyWsCallback())
+
+# 運行前請訪問 “開發者中心“ 確保賬戶有正確的行情權限。
+# 如沒有開通行情權限，可以通過 "長橋" 手機客戶端，並進入 “我的 - 我的行情 - 行情商城“ 購買開通行情權限。
+req = SecurityTradeRequest(symbol="700.HK", count=10)
+result = ws.send_request(Command.QueryTrade, req.SerializeToString())
+resp = SecurityTradeResponse()
+resp.ParseFromString(result)
+
+print(f"Trade:\n\n {resp}")
+```
+
 ## Response
 
 ### Response Properties

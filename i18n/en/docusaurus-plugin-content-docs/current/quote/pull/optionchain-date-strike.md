@@ -31,6 +31,36 @@ message OptionChainDateStrikeInfoRequest {
 }
 ```
 
+### Request Example
+
+```python
+# Get Option Chain Info By Date
+# https://open.longbridgeapp.com/docs/quote/pull/optionchain-date-strike
+import os
+import time
+from longbridge.http import Auth, Config, HttpClient
+from longbridge.ws import ReadyState, WsCallback, WsClient
+# Protobuf variables definition: https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto
+from longbridge.proto.quote_pb2 import (Command, OptionChainDateStrikeInfoRequest, OptionChainDateStrikeInfoResponse)
+
+class MyWsCallback(WsCallback):
+    def on_state(self, state: ReadyState):
+        print(f"-> state: {state}")
+
+auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
+http = HttpClient(auth, Config(base_url="https://openapi.lbkrs.com"))
+ws = WsClient("wss://openapi-quote.longbridge.global", http, MyWsCallback())
+
+# Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
+# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
+req = OptionChainDateStrikeInfoRequest(symbol="AAPL.US", expiry_date="20230120")
+result = ws.send_request(Command.QueryOptionChainDateStrikeInfo, req.SerializeToString())
+resp = OptionChainDateStrikeInfoResponse()
+resp.ParseFromString(result)
+
+print(f"Option chain info:\n\n {resp}")
+```
+
 ## Response
 
 ### Response Properties
