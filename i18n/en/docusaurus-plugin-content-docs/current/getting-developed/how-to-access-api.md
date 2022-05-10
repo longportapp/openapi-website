@@ -13,7 +13,7 @@ Refer to [Introduction to OpenAPI](../docs/#How\ to\ enable) to enable the corre
 
 ### 2. Get App Key and Access Token information
 
-To get **Access Token**, **App Key** and **App Secret** on [Developer Website](https://open.longbridgeapp.com/account).
+Get **Access Token**, **App Key** and **App Secret** on the [Developer Website](https://open.longbridgeapp.com/account).
 
 ### 3. Calculate signature
 
@@ -29,7 +29,7 @@ After constructing a request based on an corresponding API documentation, call t
 
 #### Add `X-Api-Key`、`X-Timestamp`、`Authorization` on headers
 
-Set the request parameter header information, `X-Api-Key`, `Authorization`, `X-Timestamp` will be used in the signature function.
+Set the request parameter header information, and `X-Api-Key`, `Authorization`, `X-Timestamp` will be used in the signature function.
 
 ```python
 import time
@@ -64,7 +64,7 @@ def sign(method, uri, headers, params, body, secret):
 
 ```
 
-Signing the request and sets the signature in the request header `X-Api-Signature`.
+Sign the request and set the signature in the request header `X-Api-Signature`.
 
 ```py
 # request method
