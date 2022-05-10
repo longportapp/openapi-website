@@ -12,8 +12,6 @@ Longbridge support `WebSocket` and `TCP` feed, the differences:
 - `WebSocket` using [ping-pong](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_servers#pings_and_pongs_the_heartbeat_of_websockets) to do Heartbeating, instead of sending heartbeat packet.
 - `WebSocket` using `TLS` to secure connection, but `TCP` do not.
 
-可以根据自己的需求选择，我们的私有协议时适用于两者的。
-
 User can choice `TCP` or `WebSocket` on self demand.
 
 > Advice: Using `WebSocket` first, it is more simple. If want more quick stock quote real-time pushing, using `TCP` to access stock quote gateway.
