@@ -183,7 +183,7 @@ https://longbridgeapp.com/download
 
 當你有正確的行情權限，看起來可能會是這樣：
 
-<img src="https://pub.lbkrs.com/files/202205/JjCceNDSqeBJpaWv/SCR-20220507-rnm.png" className="max-w-2xl" />
+<img src="https://pub.lbkrs.com/files/202205/CicZRBp7LAV577YN/SCR-20220510-gme.png" className="max-w-2xl" />
 
 創建一個 `subscribe_quote.py` 並寫入下面的代碼：
 
