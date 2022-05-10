@@ -10,20 +10,20 @@ paths:
       parameters:
         - name: "order_id"
           type: "string"
-          description: "订单 ID"
+          description: "Order ID"
           required: true
         - name: "quantity"
           type: "string"
-          description: Replaced quantity, example:`100`
+          description: "Replaced quantity, example: `100`"
           required: true
         - name: "price"
           required: false
-          description: Replaced price, example:`388.5`<br/><br/>
-            `LO` / `ELO` / `ALO` / `ODD` / `LIT` Order Required
+          description: "Replaced price, example: `388.5`<br/><br/>
+            `LO` / `ELO` / `ALO` / `ODD` / `LIT` Order Required"
         - name: trigger_price
           required: false
-          description: Trigger price, example:`388.5`<br/><br/>
-            `LIT` / `MIT` Order Required
+          description: "Trigger price, example: `388.5`<br/><br/>
+            `LIT` / `MIT` Order Required"
         - name: limit_offset
           required: false
           description: Limit offset amount<br/><br/>
