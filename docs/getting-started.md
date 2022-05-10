@@ -366,3 +366,9 @@ https://github.com/longbridgeapp/openapi-python/tree/main/examples
 Python SDK 的详细 API 文档请访问：
 
 https://longbridge.readthedocs.io/en/latest/api.html
+
+## 反馈及沟通
+
+* 可以给 Longbridge 服务邮箱发送反馈，邮箱地址是：service@longbridge.global
+* 加入 Longbridge Open API 微信沟通群，二维码如下：
+<img src="https://pub.lbkrs.com/files/202205/akTNrRTBrT5aMX4f/qrcode.jpg" className="max-w-2xl" />
