@@ -37,8 +37,10 @@ This article takes the Python SDK as an example to explain how to use the SDK to
 You can install the SDK via Pip, or directly visit the [Pypi Longbridge](https://pypi.org/project/longbridge/) page to download.
 
 ```bash
-$ pip3 install longbridge
+$ pip install longbridge
 ```
+
+> NOTE: In macOS system, the `pip` command default is Python 2. You may use `pip3` for use Python 3 version of Pypi.
 
 Let's take obtaining assets as an example to demonstrate how to use the SDK.
 
