@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "Replace Order, modify quantity or price"
+  description: "This API is used to replace order, modify quantity or price"
   version: "v1"
   title: "Replace Order"
 paths:

@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "Submit Order for HK and US stocks, warrant and option"
+  description: "This API is used to submit order for hk and us stocks, warrant and option"
   version: "v1"
   title: "Submit Order"
 paths:

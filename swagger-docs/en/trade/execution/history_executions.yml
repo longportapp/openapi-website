@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "Get History Executions"
+  description: "This API is used to get history executions"
   version: "v1"
   title: "Get History Executions"
 paths:

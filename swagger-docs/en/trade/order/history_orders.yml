@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "Get History Order Or Get Order By OrderId"
+  description: "This API is used to get history order"
   version: "v1"
   title: "Get History Order"
 paths:

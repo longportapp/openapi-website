@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "Get Today Executions"
+  description: "This API is used to get today executions"
   version: "v1"
   title: "Get Today Executions"
 paths:

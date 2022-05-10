@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "Withdraw an open order"
+  description: "This API is used to withdraw an open order"
   version: "v1"
   title: "Withdraw Order"
 paths:
