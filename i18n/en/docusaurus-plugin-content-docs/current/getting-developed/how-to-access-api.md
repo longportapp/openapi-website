@@ -17,6 +17,14 @@ To get **Access Token**, **App Key** and **App Secret** on [Developer Website](h
 
 ### 3. Calculate signature
 
+:::tip
+
+Most of the content introduced on this page has been fully implemented in our OpenAPI SDK. If you are an SDK user, you can directly ignore the signature authentication part.
+
+This section is intended as a reference for non-SDK users.
+
+:::
+
 After constructing a request based on an corresponding API documentation, call the API directly through the OpenAPI SDK, which will help generate a signature, or create a signature through the following process.
 
 #### Add `X-Api-Key`、`X-Timestamp`、`Authorization` on headers
