@@ -14,31 +14,31 @@ paths:
           required: true
         - name: "quantity"
           type: "string"
-          description: replaced quantity，example：`100`
+          description: Replaced quantity,example: `100`
           required: true
         - name: "price"
           required: false
-          description: replaced price，example：`388.5`<br/><br/>
+          description: Replaced price,example: `388.5`<br/><br/>
             `LO` / `ELO` / `ALO` / `ODD` / `LIT` Order Required
         - name: trigger_price
           required: false
-          description: trigger price，example：`388.5`<br/><br/>
+          description: Trigger price,example: `388.5`<br/><br/>
             `LIT` / `MIT` Order Required
         - name: limit_offset
           required: false
-          description: limit offset amount<br/><br/>
+          description: Limit offset amount<br/><br/>
             `TSLPAMT` / `TSLPPCT` Order Required
         - name: trailing_amount
           required: false
-          description: trailing amount<br/><br/>
+          description: Trailing amount<br/><br/>
             `TSLPAMT` / `TSMAMT` Order Required
         - name: trailing_percent
           required: false
-          description: trailing percent<br/><br/>
+          description: Trailing percent<br/><br/>
             `TSLPPCT` / `TSMAPCT` Order Required
         - name: remark
           required: false
-          description: "remark (Maximum 64 characters)"
+          description: "Remark (Maximum 64 characters)"
       responses:
         "200":
           description: "The submission was successful and the order was commissioned."

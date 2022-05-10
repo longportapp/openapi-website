@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "This API is used to submit order for hk and us stocks, warrant and option"
+  description: "This API is used to submit order for HK and US stocks, warrant and option"
   version: "v1"
   title: "Submit Order"
 paths:
@@ -10,7 +10,7 @@ paths:
       parameters:
         - name: "symbol"
           type: "string"
-          description: "stock symbol，use `ticker.region` format，example：`AAPL.US`"
+          description: "stock symbol,use `ticker.region` format,example: `AAPL.US`"
           required: true
         - name: "order_type"
           type: "string"
@@ -18,14 +18,14 @@ paths:
           required: true
         - name: "submitted_price"
           required: false
-          description: submitted price，example：`388.5`<br/><br/>
+          description: submitted price,example:`388.5`<br/><br/>
             `LO` / `ELO` / `ALO` / `ODD` / `LIT` Order Required
         - name: "submitted_quantity"
           required: true
-          description: submitted quantity，example：`100`
+          description: submitted quantity,example:`100`
         - name: trigger_price
           required: false
-          description: trigger price，example：`388.5`<br/><br/>
+          description: trigger price,example:`388.5`<br/><br/>
             `LIT` / `MIT` Order Required
         - name: limit_offset
           required: false
@@ -42,7 +42,7 @@ paths:
         - name: expire_date
           required: false
           description:
-            longterm order expire date， format `YYYY-MM-DD`, example：`2022-12-05`"
+            longterm order expire date, format `YYYY-MM-DD`, example:`2022-12-05`"
             when time_in_force is `GTD` Required
         - name: side
           type: "string"
