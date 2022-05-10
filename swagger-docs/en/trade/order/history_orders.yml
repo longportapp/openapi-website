@@ -186,7 +186,7 @@ definitions:
             description: "`TSLPAMT` / `TSLPPCT` order limit offset amount"
           trigger_status:
             type: "string"
-            description: Conditional order trigger status<br/><br/>
+            description: Conditional Order Trigger Status<br/><br/>
               **Enum Value**<br/>
               `NOT_ACTIVE`<br/>
               `DEACTIVE`<br />
@@ -197,7 +197,7 @@ definitions:
             description: Currency
           outside_rth:
             type: "string"
-            description: Enabled/Disable outside regular trading hours<br/><br/>
+            description: Enable or disable outside regular trading hours<br/><br/>
               **Enum Value:**<br/>
-              `RTH_ONLY` - regular trading hour only<br/>
-              `ANY_TIME` - any time"
+              `RTH_ONLY` - Regular trading hour only<br/>
+              `ANY_TIME` - Any time"
