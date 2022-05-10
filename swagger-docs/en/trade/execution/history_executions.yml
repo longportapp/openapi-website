@@ -25,7 +25,7 @@ paths:
           description: "end time，formatted as a timestamp (second), example: `1650410999`"
       responses:
         "200":
-          description: "Get History executions Success"
+          description: "Get History Executions Success"
           schema:
             $ref: "#/definitions/history_executions_rsp"
         "400":
@@ -67,14 +67,14 @@ definitions:
     properties:
       orders:
         type: "arrary"
-        description: execution Detail
+        description: Execution Detail
         properties:
           order_id:
             type: "string"
             description: Order ID
           trade_id:
             type: "string"
-            description: execution ID
+            description: Execution ID
           symbol:
             type: "string"
             description: "stock symbol，use `ticker.region` format，example：`AAPL.US`"

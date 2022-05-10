@@ -19,7 +19,7 @@ paths:
           description: "Order ID，example: `701276261045858304`"
       responses:
         "200":
-          description: "Get Today executions Success"
+          description: "Get Today Executions Success"
           schema:
             $ref: "#/definitions/executions"
         "400":
@@ -60,14 +60,14 @@ definitions:
     properties:
       orders:
         type: "arrary"
-        description: execution Detail
+        description: Execution Detail
         properties:
           order_id:
             type: "string"
             description: Order ID
           trade_id:
             type: "string"
-            description: execution ID
+            description: Execution ID
           symbol:
             type: "string"
             description: "stock symbol，use `ticker.region` format，example：`AAPL.US`"
