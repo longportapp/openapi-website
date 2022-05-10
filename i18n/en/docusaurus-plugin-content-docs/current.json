@@ -4,8 +4,8 @@
     "description": "The label for version current"
   },
   "sidebar.docsSidebar.category.准备开发": {
-    "message": "Getting Started",
-    "description": "The label for category getting started in sidebar docsSidebar"
+    "message": "API Basic",
+    "description": "The label for category API Basic in sidebar docsSidebar"
   },
   "sidebar.docsSidebar.category.行情": {
     "message": "Quote",
