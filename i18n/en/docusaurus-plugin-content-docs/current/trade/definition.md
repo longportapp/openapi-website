@@ -78,7 +78,7 @@ sidebar_position: 2
 | updated_at        | string | last updated time ，formatted as a timestamp (second)                                                                   |
 | trigger_price     | string | "`LIT` / `MIT` order trigger price"                                                                                     |
 | msg               | string | rejected message or remark                                                                                              |
-| tag               | string | order tag<br/><br/>**Enum Value**<br/>`Normal` - Normal Order<br />`GTC` - Longterm Order<br />`Grey` - Grey Order      |
+| tag               | string | order tag<br/><br/>**Enum Value**<br/>`Normal` - Normal Order<br />`GTC` - Long term Order<br />`Grey` - Grey Order     |
 | trigger_status    | string | conditional order trigger status<br/><br/>**Enum Value**<br/>`NOT_ACTIVE`<br />`DEACTIVE`<br />`ACTIVE`<br />`RELEASED` |
 | trigger_at        | string | conditional order trigger time. formatted as a timestamp (second)                                                       |
 | trailing_amount   | string | "`TSMAMT` / `TSLPAMT` order trailing amount"                                                                            |

@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "Get Today Executions"
+  description: "This API is used to get today executions"
   version: "v1"
   title: "Get Today Executions"
 paths:
@@ -11,12 +11,12 @@ paths:
         - name: "symbol"
           type: "string"
           in: query
-          description: "stock symbol，use `ticker.region` format，example：`AAPL.US`"
+          description: "Stock symbol, use `ticker.region` format, example: `AAPL.US`"
           required: false
         - name: "order_id"
           type: "string"
           required: false
-          description: "Order ID，example: `701276261045858304`"
+          description: "Order ID, example: `701276261045858304`"
       responses:
         "200":
           description: "Get Today Executions Success"
@@ -70,13 +70,13 @@ definitions:
             description: Execution ID
           symbol:
             type: "string"
-            description: "stock symbol，use `ticker.region` format，example：`AAPL.US`"
+            description: "Stock symbol, use `ticker.region` format, example: `AAPL.US`"
           trade_done_at:
             type: "string"
-            description: trade done time ，formatted as a timestamp (second)
+            description: Trade done time, formatted as a timestamp (second)
           quantity:
             type: "string"
-            description: executed quantity
+            description: Executed quantity
           price:
             type: "string"
-            description: executed price
+            description: Executed price

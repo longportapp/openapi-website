@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "Get Today Order Or Get Order By OrderId"
+  description: "This API is used to get today order or get order by order id"
   version: "v1"
   title: "Get Today Order"
 paths:
@@ -11,17 +11,17 @@ paths:
         - name: "symbol"
           type: "string"
           in: query
-          description: "stock symbol，use `ticker.region` format，example：`AAPL.US`"
+          description: "Stock symbol, use `ticker.region` format, example: `AAPL.US`"
           required: false
         - name: "status"
           type: string[]
           in: query
-          description: "[order status](../trade-definition#orderstatus)"
+          description: "[Order status](../trade-definition#orderstatus)"
           required: false
         - name: side
           type: "string"
           in: query
-          description: order side<br/><br/>
+          description: Order side<br/><br/>
             **Enum Value:**<br/>
             `Buy`<br/>
             `Sell`
@@ -29,7 +29,7 @@ paths:
         - name: market
           type: "string"
           in: query
-          description: market<br/><br/>
+          description: Market<br/><br/>
             **Enum Value:**<br/>
             `US` - United States of America Market<br/>
             `HK` - Hong Kong Market
@@ -37,7 +37,7 @@ paths:
         - name: "order_id"
           type: "string"
           required: false
-          description: "Order ID，example: `701276261045858304`"
+          description: "Order ID, example: `701276261045858304`"
       responses:
         "200":
           description: "Get Today Orders Success"
@@ -80,7 +80,7 @@ paths:
                     "quantity": "100",
                     "side": 1,
                     "status": 16,
-                    "stock_name": "腾讯控股",
+                    "stock_name": "Tencent Holdings Ltd.",
                     "submitted_at": "1650426089",
                     "symbol": "700.HK",
                     "tag": 1,
@@ -134,13 +134,13 @@ definitions:
               `Sell`
           symbol:
             type: "string"
-            description: "stock symbol，use `ticker.region` format，example：`AAPL.US`"
+            description: "Stock symbol, use `ticker.region` format, example: `AAPL.US`"
           order_type:
             type: "string"
             description: "[Order Type](../trade-definition#ordertype)"
           last_done:
             type: "string"
-            description: last done
+            description: Last done
           trigger_price:
             type: "string"
             description: "`LIT` / `MIT` Order Trigger Price"
@@ -149,10 +149,10 @@ definitions:
             description: Rejected Message Or Remark
           tag:
             type: "string"
-            description: order tag<br/><br/>
+            description: Order tag<br/><br/>
               **Enum Value**<br/>
               `Normal` - Normal Order<br/>
-              `GTC` - Longterm Order<br/>
+              `GTC` - Long term Order<br/>
               `Grey` - Grey Order
           time_in_force:
             type: "string"
@@ -160,17 +160,17 @@ definitions:
               Time in force Type<br/><br/>
               **Enum Value:**<br/>
               `Day` - Day Order<br/>
-              `GTC` - Good 'Til Canceled Order<br/>
-              `GTD` - Good 'Til Date Order"
+              `GTC` - Good Til Canceled Order<br/>
+              `GTD` - Good Til Date Order"
           expire_date:
             type: "string"
-            description: "longterm order expire date， format: `YYYY-MM-DD`, example：`2022-12-05`"
+            description: "Long term order expire date, format: `YYYY-MM-DD`, example: `2022-12-05`"
           updated_at:
             type: "string"
-            description: last updated time ，formatted as a timestamp (second)
+            description: Last updated time, formatted as a timestamp (second)
           trigger_at:
             type: "string"
-            description: conditional order trigger time. formatted as a timestamp (second)
+            description: Conditional order trigger time. formatted as a timestamp (second)
           trailing_amount:
             type: "string"
             description: "`TSMAMT` / `TSLPAMT` order trailing amount"
@@ -182,7 +182,7 @@ definitions:
             description: "`TSLPAMT` / `TSLPPCT` order limit offset amount"
           trigger_status:
             type: "string"
-            description: conditional order trigger status<br/><br/>
+            description: Conditional order trigger status<br/><br/>
               **Enum Value**<br/>
               `NOT_ACTIVE`<br/>
               `DEACTIVE`<br />
@@ -193,7 +193,7 @@ definitions:
             description: currency
           outside_rth:
             type: "string"
-            description: enabled/disable outside regular trading hours<br/><br/>
+            description: Enable or disable outside regular trading hours<br/><br/>
               **Enum Value:**<br/>
               `RTH_ONLY` - regular trading hour only<br/>
               `ANY_TIME` - any time"
