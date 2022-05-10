@@ -9,7 +9,7 @@ sidebar_position: 1
 
 ### 1. Enable OpenAPI service
 
-Refer to [Introduction to OpenAPI](../docs/#How\ to\ enable) to open the corresponding service.
+Refer to [Introduction to OpenAPI](../docs/#How\ to\ enable) to enable the corresponding services.
 
 ### 2. Get App Key and Access Token information
 
