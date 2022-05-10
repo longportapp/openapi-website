@@ -1,5 +1,5 @@
 ---
-title: Subscribe Trade Real-Time Pushing
+title: Subscribe Real-Time Trading Data
 id: how-to-subscribe-trade
 slug: /socket/subscribe_trade
 sidebar_position: 1
