@@ -43,7 +43,7 @@ paths:
           required: false
           description:
             "Long term order expire date, format `YYYY-MM-DD`, example: `2022-12-05`<br/><br/>
-            When time_in_force is `GTD` Required"
+            Required when `time_in_force` is `GTD`"
         - name: side
           type: "string"
           description: Order Side<br/><br/>
@@ -53,7 +53,7 @@ paths:
           required: true
         - name: outside_rth
           required: false
-          description: Enable/disable outside regular trading hours<br/><br/>
+          description: Enable or disable outside regular trading hours<br/><br/>
             **Enum Value:**<br/>
             `RTH_ONLY` - regular trading hour only<br/>
             `ANY_TIME` - any time"
