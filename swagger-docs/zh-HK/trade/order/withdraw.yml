@@ -4,8 +4,8 @@ info:
   version: "v1"
   title: "撤銷訂單"
 paths:
-  /v1/trade/order/withdraw:
-    post:
+  /v1/trade/order:
+    delete:
       access: "交易權限"
       parameters:
         - name: "order_id"
@@ -32,7 +32,7 @@ paths:
           }
 
           try:
-            resp = http.post("/v1/trade/order/withdraw", payload=payload)
+            resp = http.delete("/v1/trade/order", payload=payload)
             print(json.dumps(resp.data, indent=2))
           except Exception as e:
             print(f"Submit order error\ncode: {e.code}\nmessage: {e.message}")
