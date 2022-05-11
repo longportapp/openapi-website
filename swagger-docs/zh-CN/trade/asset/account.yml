@@ -12,12 +12,8 @@ paths:
           description: "返回成功"
           schema:
             $ref: "#/definitions/accountcash_rsp"
-        "202001":
+        "400":
           description: "内部错误"
-        "202201":
-          description: "获取用户信息失败，检查下账号绑定关联是否正确"
-        "202202":
-          description: "参数错误，检查下参数是否和要求的不一致"
       request_body:
         type: "python"
         value: |

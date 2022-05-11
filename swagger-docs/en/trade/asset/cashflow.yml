@@ -38,12 +38,8 @@ paths:
           description: "Success"
           schema:
             $ref: "#/definitions/cashflow_rsp"
-        "202001":
+        "400":
           description: "Internal Error"
-        "202201":
-          description: "Failed to obtain user information, check whether the account binding association is correct"
-        "202202":
-          description: "Parameter error, check whether the parameters are inconsistent with the requirements"
       request_body:
         type: "python"
         value: |

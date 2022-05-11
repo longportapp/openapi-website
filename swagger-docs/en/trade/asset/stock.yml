@@ -17,12 +17,8 @@ paths:
           description: "Success"
           schema:
             $ref: "#/definitions/stock_rsp"
-        "202001":
+        "400":
           description: "Internal Error"
-        "202201":
-          description: "Failed to obtain user information, check whether the account binding association is correct"
-        "202202":
-          description: "Parameter error, check whether the parameters are inconsistent with the requirements"
       request_body:
         type: "python"
         value: |
@@ -35,7 +31,7 @@ paths:
           auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
           http = HttpClient(auth, Config(base_url="https://openapi.lbkrs.com"))
 
-          resp = http.get("/v1/asset/stock")
+          resp = http.get("/v1/asset/stock?symbol=700.HK&symbol=BABA.US")
           print(json.dumps(resp.data, indent=2))
       response_body:
         {
