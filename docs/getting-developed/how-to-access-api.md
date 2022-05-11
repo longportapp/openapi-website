@@ -13,7 +13,7 @@ sidebar_position: 1
 
 ### 2. 获取 App Key 信息及 Access Token
 
-在 [开发者后台](https://open.longbridge.com/account) 中获取 **Access Token**， **App Key** 以及 **App Secret**。
+在 [开发者后台](https://open.longbridgeapp.com/account) 中获取 **Access Token**， **App Key** 以及 **App Secret**。
 
 ### 3. 生成签名
 
