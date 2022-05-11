@@ -38,12 +38,8 @@ paths:
           description: "返回成功"
           schema:
             $ref: "#/definitions/cashflow_rsp"
-        "202001":
+        "400":
           description: "內部錯誤"
-        "202201":
-          description: "獲取用戶信息失敗，檢查下賬號綁定關聯是否正確"
-        "202202":
-          description: "參數錯誤，檢查下參數是否和要求的不一致"
       request_body:
         type: "python"
         value: |

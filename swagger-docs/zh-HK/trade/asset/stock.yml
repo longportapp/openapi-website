@@ -10,19 +10,15 @@ paths:
       parameters:
         - name: "symbol"
           type: "string[]"
-          description: "基金代碼，使用 `ticker.region` 格式，例如：`AAPL.US`"
+          description: "股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US`"
           required: false
       responses:
         "200":
           description: "返回成功"
           schema:
             $ref: "#/definitions/stock_rsp"
-        "202001":
+        "400":
           description: "內部錯誤"
-        "202201":
-          description: "獲取用戶信息失敗，檢查下賬號綁定關聯是否正確"
-        "202202":
-          description: "參數錯誤，檢查下參數是否和要求的不一致"
       request_body:
         type: "python"
         value: |
@@ -35,7 +31,7 @@ paths:
           auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
           http = HttpClient(auth, Config(base_url="https://openapi.lbkrs.com"))
 
-          resp = http.get("/v1/asset/stock")
+          resp = http.get("/v1/asset/stock?symbol=700.HK&symbol=BABA.US")
           print(json.dumps(resp.data, indent=2))
       response_body:
         {
