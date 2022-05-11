@@ -26,7 +26,7 @@ This API is used to unsubscribe quote.
 ### Protobuf
 
 ```protobuf
-message SubscribeRequest {
+message UnsubscribeRequest {
   repeated string symbol = 1;
   repeated SubType sub_type = 2;
   bool unsub_all = 3;
