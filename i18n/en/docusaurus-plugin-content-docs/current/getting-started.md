@@ -374,4 +374,4 @@ https://longbridge.readthedocs.io/en/latest/api.html
 ## Contact & Feedback
 
 * You can send feedback to service@longbridge.global
-* Join Longbridge OpenAPI Server: https://discord.gg/2gUTSCS6
+* Join **Discord** Longbridge OpenAPI Server: https://discord.gg/2gUTSCS6
