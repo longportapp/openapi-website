@@ -1,7 +1,7 @@
 import React from 'react';
 import SdkPage from '@site/src/features/sdk';
-import CppVersions from '@site/i18n/zh-CN/sdk-versions/cpp/index.md';
-import PythonVersions from '@site/i18n/zh-CN/sdk-versions/python/index.md';
+import CppVersions from '@site/i18n/zh-HK/sdk-versions/cpp/index.md';
+import PythonVersions from '@site/i18n/zh-HK/sdk-versions/python/index.md';
 
 export default () => {
   return (

@@ -1,0 +1,28 @@
+:local(.container) {
+  --divide-border-color: #E2E3E4;
+  --ifm-tabs-padding-vertical: 12px;
+  @apply mx-auto relative p-5;
+  :global(.tabs) {
+    border-bottom: 0.5px solid var(--divide-border-color) !important;
+    :global(.tabs__item) {
+      &:hover {
+        background: none;
+        color: var(--ifm-tabs-color-active);
+      }
+    }
+  }
+  :global(.markdown) {
+    a {
+      // text-decoration: none;
+    }
+  }
+  @screen md {
+    @apply py-7 px-40;
+
+    max-width: 1920px;
+    @screen 2xl {
+      padding-left: 380px;
+      padding-right: 380px;
+    }
+  }
+} 
