@@ -16,7 +16,7 @@ paths:
         - name: "status"
           type: string[]
           in: query
-          description: "[訂單狀態](../trade-definition#orderstatus)"
+          description: "[訂單狀態](../trade-definition#orderstatus)<br/><br/>例如: `status=FilledStatus&status=NewStatus`"
           required: false
         - name: side
           type: "string"
