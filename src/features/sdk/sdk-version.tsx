@@ -3,6 +3,8 @@ import classnames from 'classnames';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import MDXContent from '@theme/MDXContent';
+import EditThisPage from '@theme/EditThisPage';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import styles from './sdk-version.module.scss';
 
 function useSdkLanguages() {
@@ -23,10 +25,15 @@ export type ISdkVersionProps = {
 }
 export const SdkVersion: React.FC<ISdkVersionProps> = ({ versions }) => {
   const options = useSdkLanguages();
+  const { i18n } = useDocusaurusContext()
+
+
   return (
     <div className={classnames(styles.container)}>
       <Tabs className="tabs" values={options} defaultValue={options[0].value}>
         {options.map(({ value }) => {
+          const editUrl = `https://github.com/longbridgeapp/openapi-website/edit/main/i18n/${i18n.currentLocale}/sdk-versions/${value}.md`
+
           return (
             <TabItem value={value} key={value}>
               <div className="pb-40 px-3 flex flex-col justify-start items-start">
@@ -35,8 +42,10 @@ export const SdkVersion: React.FC<ISdkVersionProps> = ({ versions }) => {
                 }} >
                   <MDXContent>
                     {versions[value]}
-
                   </MDXContent>
+                  <div className="mt-10">
+                    <EditThisPage editUrl={editUrl} />
+                  </div>
                 </div>
               </div>
             </TabItem>

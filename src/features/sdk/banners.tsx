@@ -1,13 +1,10 @@
 import React from 'react'
 import classnames from 'classnames'
+import Translate, {translate} from '@docusaurus/Translate';
 import styles from './banners.module.scss'
 
+
 export const Banners = () => {
-  const i18n = {
-    t() {
-      return '支持 Python 和 C++ 的 SDK 下載'
-    }
-  }
 
   return (
     <div className={classnames(styles['banners-container'])}>
@@ -15,7 +12,9 @@ export const Banners = () => {
         <div className="main-content">
           <div>
             <p className="title">SDK</p>
-            <p className="desc">{i18n.t('zZUtQKodyN5_c1O3tJpTe')}</p>
+            <p className="desc">{translate({
+              id: 'pages.sdk.banners.desc',
+            })}</p>
             <div className="mt-8">
               <img
                 className="w-[110px]"

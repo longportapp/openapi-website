@@ -2,8 +2,9 @@
 
 [https://github.com/longbridgeapp/openapi-python](!https://github.com/longbridgeapp/openapi-python)
 
-### 安装
-你可以通过 Pip 安装 SDK，或者直接访问 [Pypi Longbridge](https://pypi.org/project/longbridge/) 页面来下载。
+### 安裝 SDK
+
+你可以通過 Pip 安裝 SDK，或者直接訪問 [Pypi Longbridge](https://pypi.org/project/longbridge/) 頁面來下載。
 
 ```bash
 $ pip3 install longbridge

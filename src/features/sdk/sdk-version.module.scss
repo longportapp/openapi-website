@@ -5,24 +5,17 @@
   :global(.tabs) {
     border-bottom: 0.5px solid var(--divide-border-color) !important;
     :global(.tabs__item) {
+      min-width: 90px;
       &:hover {
         background: none;
         color: var(--ifm-tabs-color-active);
       }
     }
   }
-  :global(.markdown) {
-    a {
-      // text-decoration: none;
-    }
-  }
   @screen md {
-    @apply py-7 px-40;
-
-    max-width: 1920px;
+    @apply py-7 px-40 max-w-[1920px];
     @screen 2xl {
-      padding-left: 380px;
-      padding-right: 380px;
+      @apply px-[380px];
     }
   }
 } 

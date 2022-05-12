@@ -221,5 +221,9 @@
   "theme.tags.tagsPageTitle": {
     "message": "標籤",
     "description": "The title of the tag list page"
+  },
+  "pages.sdk.banners.desc": {
+    "message": "支持 Python 和 C++ 的 SDK 下載",
+    "description": "Sdk page banner description"
   }
 }
