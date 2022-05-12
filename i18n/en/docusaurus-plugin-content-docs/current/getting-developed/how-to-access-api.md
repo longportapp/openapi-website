@@ -15,6 +15,8 @@ Refer to [Introduction to OpenAPI](../docs/#How\ to\ enable) to enable the corre
 
 Get **Access Token**, **App Key** and **App Secret** on the [Developer Website](https://open.longbridgeapp.com/account).
 
+**Access Token** will expires in three months. Token can be reset in Developer Website after expiration. Also token can be refresh through invoking [Refresh Token](./refresh-token-api) API before token expired.
+
 ### 3. Calculate signature
 
 :::tip
