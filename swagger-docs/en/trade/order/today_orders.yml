@@ -55,7 +55,14 @@ paths:
           auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
           http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
 
-          resp = http.get("/v1/trade/order/today")
+          query = {
+            'symbol': '700.HK',
+            'status': ['FilledStatus', 'NewStatus'],
+            'side': 'Buy',
+            'market': 'HK',
+          }
+
+          resp = http.get("/v1/trade/order/today", query)
           print(json.dumps(resp.data, indent=2))
       response_body:
         {
@@ -193,7 +200,8 @@ definitions:
             description: currency
           outside_rth:
             type: "string"
-            description: Enable or disable outside regular trading hours<br/><br/>
+            description:
+              Enable or disable outside regular trading hours<br/><br/>
               **Enum Value:**<br/>
               `RTH_ONLY` - regular trading hour only<br/>
               `ANY_TIME` - any time"
