@@ -55,7 +55,9 @@ paths:
           http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
 
           payload = {
-              "side": "Buy",
+              "order_id": "709043056541253632",
+              "price": "300",
+              "quantity": "100",
           }
 
           try:
