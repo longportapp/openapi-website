@@ -88,9 +88,9 @@ Use the HTTP client to send signed requests.
 
 ## API Path
 
-All API paths start with [https://openapi.longbridge.global](https://openapi.longbridge.global).
+All API paths start with [https://openapi.longbridgeapp.com](https://openapi.longbridgeapp.com).
 
-> TIP: You can also use https://openapi.longbridge.global
+> TIP: You can also use https://openapi.longbridgeapp.com
 
 ## API Request
 
@@ -99,7 +99,7 @@ The call to the server-side interface needs to be in HTTPS protocol, JSON format
 For example：
 
 ```bash
-curl -v https://openapi.longbridge.global/v1/test \
+curl -v https://openapi.longbridgeapp.com/v1/test \
     -H "X-Api-Signature: {signature}" -H "X-Api-Key: {app_key}" \
     -H "Authorization: {access_token}" -H "X-Timestamp: 1539095200.123"
 ```
@@ -188,7 +188,7 @@ def sign(method, uri, headers, params, body, secret):
 headers['X-Api-Signature'] = sign(method,  uri, headers, params, body, app_secret)
 
 # call an API
-response = requests.request(method, "https://openapi.longbridge.global" + uri + '?' + params, headers=headers, data=body)
+response = requests.request(method, "https://openapi.longbridgeapp.com" + uri + '?' + params, headers=headers, data=body)
 
 print(response.text)
 

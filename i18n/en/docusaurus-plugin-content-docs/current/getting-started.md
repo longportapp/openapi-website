@@ -24,8 +24,9 @@ This article takes the Python SDK as an example to explain how to use the SDK to
 
 ## API Host
 
-- HTTP API - `https://openapi.longbridge.global`
-- WebSocket - `wss://openapi-quote.longbridge.global`
+- HTTP API - `https://openapi.longbridgeapp.com`
+- WebSocket Quote - `wss://openapi-quote.longbridgeapp.com`
+- WebSocket Trade - `wss://openapi-trade.longbridgeapp.com`
 
 ## Environment Requirements
 
@@ -124,7 +125,7 @@ import json
 from longbridge.http import Auth, Config, HttpClient
 
 auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
+http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
 
 resp = http.get("/v1/asset/account")
 print(json.dumps(resp.data, indent=2))
@@ -214,8 +215,8 @@ class MyWsCallback(WsCallback):
         print(f"Received state -> {state}")
 
 auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
-ws = WsClient("wss://openapi-quote.longbridge.global", http, MyWsCallback())
+http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
+ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
 
 req = SubscribeRequest(symbol=["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], sub_type=[SubType.QUOTE], is_first_push=True)
 result = ws.send_request(Command.Subscribe, req.SerializeToString())
@@ -269,7 +270,7 @@ import json
 from longbridge.http import Auth, Config, HttpClient
 
 auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
+http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
 
 payload = {
     "side": "Buy",
@@ -312,7 +313,7 @@ import json
 from longbridge.http import Auth, Config, HttpClient
 
 auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
+http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
 
 resp = http.get("/v1/trade/order/today")
 print(json.dumps(resp.data, indent=2))
@@ -373,5 +374,5 @@ https://longbridge.readthedocs.io/en/latest/api.html
 
 ## Contact & Feedback
 
-* You can send feedback to service@longbridge.global
-* Join **Discord** Longbridge OpenAPI Server: https://discord.gg/2gUTSCS6
+- You can send feedback to service@longbridge.global
+- Join **Discord** Longbridge OpenAPI Server: https://discord.gg/2gUTSCS6

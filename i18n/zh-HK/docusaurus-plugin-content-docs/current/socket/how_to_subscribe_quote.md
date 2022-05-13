@@ -10,7 +10,7 @@ sidebar_position: 1
 :::info
 WebSocket Endpoint: `wss://openapi-quote.longbrdge.global`
 
-TCP Endpoint: `openapi-quote.longbridge.global:2020`
+TCP Endpoint: `openapi-quote.longbridgeapp.com:2020`
 :::
 
 流程如下：

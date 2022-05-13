@@ -24,8 +24,9 @@ Longbridge OpenAPI SDK 基於 Rust 底層提供標準實現，通過 FFI 提供�
 
 ## API Host
 
-- HTTP API - `https://openapi.longbridge.global`
-- WebSocket - `wss://openapi-quote.longbridge.global`
+- HTTP API - `https://openapi.longbridgeapp.com`
+- WebSocket Quote - `wss://openapi-quote.longbridgeapp.com`
+- Webssocket Trade - `wss://openapi-trade.longbridgeapp.com`
 
 ## 環境需求
 
@@ -120,7 +121,7 @@ import json
 from longbridge.http import Auth, Config, HttpClient
 
 auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
+http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
 
 resp = http.get("/v1/asset/account")
 print(json.dumps(resp.data, indent=2))
@@ -210,8 +211,8 @@ class MyWsCallback(WsCallback):
         print(f"Received state -> {state}")
 
 auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
-ws = WsClient("wss://openapi-quote.longbridge.global", http, MyWsCallback())
+http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
+ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
 
 req = SubscribeRequest(symbol=["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], sub_type=[SubType.QUOTE], is_first_push=True)
 result = ws.send_request(Command.Subscribe, req.SerializeToString())
@@ -265,7 +266,7 @@ import json
 from longbridge.http import Auth, Config, HttpClient
 
 auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
+http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
 
 payload = {
     "side": "Buy",
@@ -308,7 +309,7 @@ import json
 from longbridge.http import Auth, Config, HttpClient
 
 auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
+http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
 
 resp = http.get("/v1/trade/order/today")
 print(json.dumps(resp.data, indent=2))

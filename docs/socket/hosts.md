@@ -9,14 +9,14 @@ sidebar_position: 5
 
 ## 行情
 
-| 域名                                       | 协议      | 地区     |
-| ------------------------------------------ | --------- | -------- |
-| tcp://openapi-quote.longbridge.global:2020 | TCP       | 中国香港 |
-| wss://openapi-quote.longbridge.global      | WebSocket | 中国香港 |
+| 域名                                       | 协议      |
+| ------------------------------------------ | --------- |
+| tcp://openapi-quote.longbridgeapp.com:2020 | TCP       |
+| wss://openapi-quote.longbridgeapp.com      | WebSocket |
 
 ## 交易
 
-| 域名                                       | 协议      | 地区     |
-| ------------------------------------------ | --------- | -------- |
-| tcp://openapi-trade.longbridge.global:2020 | TCP       | 中国香港 |
-| wss://openapi-trade.longbridge.global      | WebSocket | 中国香港 |
+| 域名                                       | 协议      |
+| ------------------------------------------ | --------- |
+| tcp://openapi-trade.longbridgeapp.com:2020 | TCP       |
+| wss://openapi-trade.longbridgeapp.com      | WebSocket |

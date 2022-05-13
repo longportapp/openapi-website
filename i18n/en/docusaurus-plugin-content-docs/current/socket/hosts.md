@@ -9,14 +9,14 @@ Longbridge split Market Quote and Trading real-time pushing endpoints.
 
 ## Market Quote
 
-| Endpoint                                   | Access Type | Region   |
-| ------------------------------------------ | ----------- | -------- |
-| tcp://openapi-quote.longbridge.global:2020 | TCP         | HongKong |
-| wss://openapi-quote.longbridge.global      | WebSocket   | HongHong |
+| Endpoint                                   | Access Type |
+| ------------------------------------------ | ----------- |
+| tcp://openapi-quote.longbridgeapp.com:2020 | TCP         |
+| wss://openapi-quote.longbridgeapp.com      | WebSocket   |
 
 ## Trading
 
-| Endpoint                                   | Access Type | Region   |
-| ------------------------------------------ | ----------- | -------- |
-| tcp://openapi-trade.longbridge.global:2020 | TCP         | HongKong |
-| wss://openapi-trade.longbridge.global      | WebSocket   | HongKong |
+| Endpoint                                   | Access Type |
+| ------------------------------------------ | ----------- |
+| tcp://openapi-trade.longbridgeapp.com:2020 | TCP         |
+| wss://openapi-trade.longbridgeapp.com      | WebSocket   |

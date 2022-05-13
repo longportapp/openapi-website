@@ -24,8 +24,9 @@ Longbridge OpenAPI SDK 基于 Rust 底层提供标准实现，通过 FFI 提供�
 
 ## API Host
 
-- HTTP API - `https://openapi.longbridge.global`
-- WebSocket - `wss://openapi-quote.longbridge.global`
+- HTTP API - `https://openapi.longbridgeapp.com`
+- WebSocket Quote - `wss://openapi-quote.longbridgeapp.com`
+- WebSocket Trade - `wss://openapi-trade.longbridgeapp.com`
 
 ## 环境需求
 
@@ -66,7 +67,7 @@ $ export LONGBRIDGE_ACCESS_TOKEN="从页面上获取到的 Access Token"
 
 ### Windows 下设置环境变量
 
-Windows 要稍微复杂一些，按下 `Win + R` 快捷键，输入 `cmd` 命令启动命令行（建议使用 [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) 获得更好的开发体验）。 
+Windows 要稍微复杂一些，按下 `Win + R` 快捷键，输入 `cmd` 命令启动命令行（建议使用 [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) 获得更好的开发体验）。
 
 在命令行里面输入下面的命令设置环境变量：
 
@@ -120,7 +121,7 @@ import json
 from longbridge.http import Auth, Config, HttpClient
 
 auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
+http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
 
 resp = http.get("/v1/asset/account")
 print(json.dumps(resp.data, indent=2))
@@ -210,8 +211,8 @@ class MyWsCallback(WsCallback):
         print(f"Received state -> {state}")
 
 auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
-ws = WsClient("wss://openapi-quote.longbridge.global", http, MyWsCallback())
+http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
+ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
 
 req = SubscribeRequest(symbol=["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], sub_type=[SubType.QUOTE], is_first_push=True)
 result = ws.send_request(Command.Subscribe, req.SerializeToString())
@@ -265,7 +266,7 @@ import json
 from longbridge.http import Auth, Config, HttpClient
 
 auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
+http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
 
 payload = {
     "side": "Buy",
@@ -308,7 +309,7 @@ import json
 from longbridge.http import Auth, Config, HttpClient
 
 auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
+http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
 
 resp = http.get("/v1/trade/order/today")
 print(json.dumps(resp.data, indent=2))
@@ -369,6 +370,6 @@ https://longbridge.readthedocs.io/en/latest/api.html
 
 ## 反馈及沟通
 
-* 可以给 Longbridge 服务邮箱发送反馈，邮箱地址是：service@longbridge.global
-* 加入 Longbridge OpenAPI 微信沟通群，二维码如下：
-<img src="https://pub.lbkrs.com/files/202205/akTNrRTBrT5aMX4f/qrcode.jpg" className="max-w-2xl" />
+- 可以给 Longbridge 服务邮箱发送反馈，邮箱地址是：service@longbridge.global
+- 加入 Longbridge OpenAPI 微信沟通群，二维码如下：
+  <img src="https://pub.lbkrs.com/files/202205/akTNrRTBrT5aMX4f/qrcode.jpg" className="max-w-2xl" />

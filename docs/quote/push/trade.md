@@ -73,8 +73,8 @@ class MyWsCallback(WsCallback):
         print(f"-> state: {state}")
 
 auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.lbkrs.com"))
-ws = WsClient("wss://openapi-quote.longbridge.global", http, MyWsCallback())
+http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
+ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
 
 # 订阅行情数据请检查 “开发者中心“ - “行情权限” 是否正确
 # https://open.longbridgeapp.com/account

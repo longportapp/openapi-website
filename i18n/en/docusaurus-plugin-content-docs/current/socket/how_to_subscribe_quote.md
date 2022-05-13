@@ -10,7 +10,7 @@ Client can access market quote feed by `WebSocket` and `TCP`. After client subsc
 :::info
 WebSocket Endpoint: `wss://openapi-quote.longbrdge.global`
 
-TCP Endpoint: `openapi-quote.longbridge.global:2020`
+TCP Endpoint: `openapi-quote.longbridgeapp.com:2020`
 :::
 
 Flow：
