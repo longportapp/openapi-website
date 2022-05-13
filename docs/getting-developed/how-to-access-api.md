@@ -88,8 +88,8 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 
 ## 基本路径
 
-- HTTP API - `https://openapi.longbridge.global`
-- WebSocket - `wss://openapi-quote.longbridge.global`
+- HTTP API - `https://openapi.longbridgeapp.com`
+- WebSocket - `wss://openapi-quote.longbridgeapp.com`
 
 ## API Request
 
@@ -98,7 +98,7 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 示例如下：
 
 ```bash
-curl -v https://openapi.longbridge.global/v1/test \
+curl -v https://openapi.longbridgeapp.com/v1/test \
     -H "X-Api-Signature: {签名}" -H "X-Api-Key: {access key}" \
     -H "Authorization: {token}" -H "X-Timestamp: {签名时间}"
 ```
@@ -187,7 +187,7 @@ def sign(method, uri, headers, params, body, secret):
 headers['X-Api-Signature'] = sign(method,  uri, headers, params, body, app_secret)
 
 # 请求接口
-response = requests.request(method, "https://openapi.longbridge.global" + uri + '?' + params, headers=headers, data=body)
+response = requests.request(method, "https://openapi.longbridgeapp.com" + uri + '?' + params, headers=headers, data=body)
 
 print(response.text)
 

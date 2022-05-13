@@ -53,7 +53,7 @@ paths:
           from longbridge.http import Auth, Config, HttpClient
 
           auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-          http = HttpClient(auth, Config(base_url="https://openapi.longbridge.global"))
+          http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
 
           query = {
             'symbol': '700.HK',

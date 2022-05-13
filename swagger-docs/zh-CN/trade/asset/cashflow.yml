@@ -50,7 +50,7 @@ paths:
           from longbridge.http import Auth, Config, HttpClient
 
           auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-          http = HttpClient(auth, Config(base_url="https://openapi.lbkrs.com"))
+          http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
 
           resp = http.get("/v1/asset/cashflow",{"start_time":"1623881671","end_time":"1626881673"})
           print(json.dumps(resp.data, indent=2))
