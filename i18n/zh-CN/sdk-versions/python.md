@@ -1,6 +1,6 @@
 ## Longbridge OpenAPI SDK for Python
 
-[https://github.com/longbridgeapp/openapi-python](!https://github.com/longbridgeapp/openapi-python)
+[https://github.com/longbridgeapp/openapi-python](https://github.com/longbridgeapp/openapi-python)
 
 ### 安装 SDK
 
