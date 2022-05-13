@@ -221,5 +221,9 @@
   "theme.tags.tagsPageTitle": {
     "message": "Tags",
     "description": "The title of the tag list page"
+  },
+  "pages.sdk.banners.desc": {
+    "message": "Support Python and C++",
+    "description": "Sdk page banner description"
   }
 }

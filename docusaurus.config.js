@@ -22,7 +22,16 @@ const config = {
   favicon: 'https://pub.lbkrs.com/files/202107/35tULHe3n4Pp4EtA/logo.png',
   plugins: [
     'docusaurus-plugin-sass',
-    'docusaurus-tailwindcss',
+    function docusaurusTailwindCss() {
+      return {
+        name: 'docusaurus-tailwindcss',
+        configurePostCss: function configurePostCss(postCssOptions) {
+          postCssOptions.plugins.push(require('tailwindcss'));
+          postCssOptions.plugins.push(require('autoprefixer'));
+          return postCssOptions;
+        }
+      };
+    },
     function docsWebpackConfig(context, options) {
       return {
         name: 'lb-docs-webpack-plugin',

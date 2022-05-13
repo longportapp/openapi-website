@@ -1,0 +1,46 @@
+:local(.banners-container) {
+  --page_bg_color: #F8F9FA;
+  background-color: var(--page_bg_color);
+}
+:local(.banner) {
+  @apply mx-auto relative text-center;
+
+  :global(.main-content) {
+    @apply flex flex-col px-5 py-10;
+  }
+  :global(.title) {
+    @apply mb-4 font-bold text-3xl;
+  }
+  :global(.desc) {
+    @apply text-xl;
+    color: var(--text_color_1_supplement)
+  }
+  :global(.code-picture) {
+    @apply mt-10 w-60;
+  }
+  :global(.bracket) {
+    @apply w-0 2xl:w-auto absolute right-40 top-[-72px];
+
+    height: calc(100% + 144px);
+  }
+  @screen md {
+    @apply text-left max-w-[1920px];
+    :global(.main-content) {
+      @apply justify-between items-center flex-row px-40 py-[60px];
+    }
+    :global(.title) {
+      @apply mb-5 text-5xl;
+    }
+    :global(.desc) {
+      @apply text-3xl;
+    }
+    :global(.code-picture) {
+      @apply w-[400px];
+    }
+  }
+  @screen 2xl {
+    :global(.main-content) {
+      @apply px-[380px];
+    }
+  }
+}
