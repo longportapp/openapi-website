@@ -63,14 +63,14 @@ definitions:
   fund_rsp:
     properties:
       list:
-        type: "arrary"
+        type: "object[]"
         description: "股票持仓信息"
         properties:
           account_channel:
             type: string
             description: 账户类型
           fund_info:
-            type: "arrary"
+            type: "object[]"
             description: 基金详情
             properties:
               symbol:

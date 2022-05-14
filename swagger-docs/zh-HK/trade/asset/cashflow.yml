@@ -87,7 +87,7 @@ definitions:
   cashflow_rsp:
     properties:
       list:
-        type: "arrary"
+        type: "object[]"
         description: 流水信息
         properties:
           transaction_flow_name:

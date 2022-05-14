@@ -68,7 +68,7 @@ definitions:
   accountcash_rsp:
     properties:
       list:
-        type: "arrary"
+        type: "object[]"
         description: Account Balance
         properties:
           total_cash:
@@ -90,7 +90,7 @@ definitions:
             type: "string"
             description: Currency
           cash_infos:
-            type: "object"
+            type: "object[]"
             description: Cash Details
             properties:
               withdraw_cash:

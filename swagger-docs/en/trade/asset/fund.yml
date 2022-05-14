@@ -63,14 +63,14 @@ definitions:
   fund_rsp:
     properties:
       list:
-        type: "arrary"
+        type: "object[]"
         description: "stock holding information"
         properties:
           account_channel:
             type: string
             description: account type
           fund_info:
-            type: "arrary"
+            type: "object[]"
             description: Fund Details
             properties:
               symbol:
