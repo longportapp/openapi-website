@@ -68,7 +68,7 @@ definitions:
   accountcash_rsp:
     properties:
       list:
-        type: "arrary"
+        type: "object[]"
         description: 賬戶資金信息
         properties:
           total_cash:
@@ -90,7 +90,7 @@ definitions:
             type: "string"
             description: 幣種
           cash_infos:
-            type: "object"
+            type: "object[]"
             description: 現金詳情
             properties:
               withdraw_cash:

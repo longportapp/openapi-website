@@ -112,14 +112,14 @@ definitions:
   stock_rsp:
     properties:
       list:
-        type: "arrary"
+        type: "object[]"
         description: "Stock holding information"
         properties:
           account_channel:
             type: string
             description: Account type
           stock_info:
-            type: "arrary"
+            type: "object[]"
             description: Stock list
             properties:
               symbol:
