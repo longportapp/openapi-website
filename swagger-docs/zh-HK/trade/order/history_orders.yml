@@ -114,7 +114,7 @@ definitions:
   history_orders_rsp:
     properties:
       orders:
-        type: "arrary"
+        type: "object[]"
         description: 訂單信息
         properties:
           order_id:

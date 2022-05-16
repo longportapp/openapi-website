@@ -74,8 +74,8 @@ definitions:
       has_more:
         type: boolean
         description: "是否还有更多数据"
-      orders:
-        type: "arrary"
+      trades:
+        type: "object[]"
         description: 成交明细信息
         properties:
           order_id:

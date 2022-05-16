@@ -16,7 +16,7 @@ paths:
         - name: "status"
           type: string[]
           in: query
-          description: "[Order status](../trade-definition#orderstatus)"
+          description: "[Order status](../trade-definition#orderstatus)<br/><br/>example: `status=FilledStatus&status=NewStatus`"
           required: false
         - name: side
           type: "string"
@@ -106,7 +106,7 @@ definitions:
   today_orders_rsp:
     properties:
       orders:
-        type: "arrary"
+        type: "object[]"
         description: Order Detail
         properties:
           order_id:

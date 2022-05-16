@@ -72,7 +72,7 @@ definitions:
   history_executions_rsp:
     properties:
       orders:
-        type: "arrary"
+        type: "object[]"
         description: Execution Detail
         properties:
           order_id:

@@ -16,7 +16,7 @@ paths:
         - name: "status"
           type: string[]
           in: query
-          description: "[订单状态](../trade-definition#orderstatus)"
+          description: "[订单状态](../trade-definition#orderstatus)<br/><br/>例如: `status=FilledStatus&status=NewStatus`"
           required: false
         - name: side
           type: "string"
@@ -106,7 +106,7 @@ definitions:
   today_orders_rsp:
     properties:
       orders:
-        type: "arrary"
+        type: "object[]"
         description: 订单信息
         properties:
           order_id:

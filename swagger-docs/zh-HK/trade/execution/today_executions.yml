@@ -63,7 +63,7 @@ definitions:
   today_executions_rsp:
     properties:
       orders:
-        type: "arrary"
+        type: "object[]"
         description: 成交明細信息
         properties:
           order_id:
