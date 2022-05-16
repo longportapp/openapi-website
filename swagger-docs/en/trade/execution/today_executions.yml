@@ -62,25 +62,40 @@ paths:
 definitions:
   today_executions_rsp:
     properties:
-      orders:
+      trades:
         type: "object[]"
         description: Execution Detail
+        required:
+          [
+            "order_id",
+            "trade_id",
+            "symbol",
+            "trade_done_at",
+            "quantity",
+            "price",
+          ]
         properties:
           order_id:
             type: "string"
             description: Order ID
+            required: true
           trade_id:
             type: "string"
             description: Execution ID
+            required: true
           symbol:
             type: "string"
             description: "Stock symbol, use `ticker.region` format, example: `AAPL.US`"
+            required: true
           trade_done_at:
             type: "string"
             description: Trade done time, formatted as a timestamp (second)
+            required: true
           quantity:
             type: "string"
             description: Executed quantity
+            required: true
           price:
             type: "string"
             description: Executed price
+            required: true

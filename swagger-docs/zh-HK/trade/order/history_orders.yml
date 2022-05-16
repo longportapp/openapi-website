@@ -82,53 +82,76 @@ paths:
                 [
                   {
                     "currency": "HKD",
-                    "executed_price": "0",
+                    "executed_price": "0.000",
                     "executed_quantity": "0",
                     "expire_date": "",
                     "last_done": "",
                     "limit_offset": "",
                     "msg": "",
-                    "order_id": "701276261045858304",
-                    "order_type": 1,
-                    "outside_rth": 0,
-                    "price": "388",
-                    "quantity": "100",
-                    "side": 1,
-                    "status": 16,
-                    "stock_name": "騰訊控股",
-                    "submitted_at": "1650426089",
-                    "symbol": "700.HK",
-                    "tag": 1,
-                    "time_in_force": 0,
+                    "order_id": "706388312699592704",
+                    "order_type": "ELO",
+                    "outside_rth": "UnknownOutsideRth",
+                    "price": "11.900",
+                    "quantity": "200",
+                    "side": "Buy",
+                    "status": "RejectedStatus",
+                    "stock_name": "東亞銀行",
+                    "submitted_at": "1651644897",
+                    "symbol": "23.HK",
+                    "tag": "Normal",
+                    "time_in_force": "Day",
                     "trailing_amount": "",
                     "trailing_percent": "",
                     "trigger_at": "0",
                     "trigger_price": "",
-                    "trigger_status": 0,
-                    "updated_at": "1650442225",
+                    "trigger_status": "NOT_USED",
+                    "updated_at": "1651644898",
                   },
                 ],
             },
         }
 definitions:
   history_orders_rsp:
+    required: ["has_more"]
     properties:
+      has_more:
+        type: boolean
+        description: "是否還有更多數據"
+        required: true
       orders:
         type: "object[]"
         description: 訂單信息
+        required:
+          [
+            "order_id",
+            "status",
+            "stock_name",
+            "quantity",
+            "submitted_at",
+            "side",
+            "symbol",
+            "order_type",
+            "tag",
+            "time_in_force",
+            "currency",
+          ]
         properties:
           order_id:
             type: "string"
             description: 訂單 ID
+            required: true
           status:
             type: "string"
             description: "[訂單狀態](../trade-definition#orderstatus)"
+            required: true
           stock_name:
             type: "string"
             description: 股票名稱
+            required: true
           quantity:
             type: "string"
             description: 下單數量
+            required: true
           executed_qty:
             type: "string"
             description: 成交數量
@@ -141,6 +164,7 @@ definitions:
           submitted_at:
             type: "string"
             description: 下單時間
+            required: true
           side:
             type: "string"
             description: "
@@ -148,12 +172,15 @@ definitions:
               **可選值:**<br/>
               `Buy` - 買入<br/>
               `Sell` - 賣出"
+            required: true
           symbol:
             type: "string"
             description: "股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US`"
+            required: true
           order_type:
             type: "string"
             description: "[訂單類型](../trade-definition#ordertype)"
+            required: true
           last_done:
             type: "string"
             description: 最近成交價格
@@ -170,6 +197,7 @@ definitions:
               `Normal` - 普通訂單<br/>
               `GTC` - 長期單<br/>
               `Grey` - 暗盤單"
+            required: true
           time_in_force:
             type: "string"
             description: "
@@ -178,6 +206,7 @@ definitions:
               `Day` - 當日有效<br/>
               `GTC` - 撤單前有效<br/>
               `GTD` - 到期前有效"
+            required: true
           expire_date:
             type: "string"
             description: 長期單過期時間，格式為 `YYYY-MM-DD`, 例如：`2022-12-05`
@@ -207,6 +236,7 @@ definitions:
           currency:
             type: "string"
             description: 結算貨幣
+            required: true
           outside_rth:
             type: "string"
             description: 是否允許盤前盤後<br/><br/>

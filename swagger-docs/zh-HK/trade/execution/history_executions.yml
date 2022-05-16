@@ -70,29 +70,46 @@ paths:
         }
 definitions:
   history_executions_rsp:
+    required: ["has_more"]
     properties:
       has_more:
         type: boolean
         description: "是否還有更多數據"
-      orders:
+        required: true
+      trades:
         type: "object[]"
         description: 成交明細信息
+        required:
+          [
+            "order_id",
+            "trade_id",
+            "symbol",
+            "trade_done_at",
+            "quantity",
+            "price",
+          ]
         properties:
           order_id:
             type: "string"
             description: 訂單 ID
+            required: true
           trade_id:
             type: "string"
             description: 成交 ID
+            required: true
           symbol:
             type: "string"
             description: "股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US`"
+            required: true
           trade_done_at:
             type: "string"
             description: "成交時間，格式為時間戳 (秒)"
+            required: true
           quantity:
             type: "string"
             description: 成交數量
+            required: true
           price:
             type: "string"
             description: 成交價格
+            required: true
