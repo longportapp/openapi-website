@@ -75,7 +75,7 @@ definitions:
         type: boolean
         description: "是否還有更多數據"
       orders:
-        type: "arrary"
+        type: "object[]"
         description: 成交明細信息
         properties:
           order_id:

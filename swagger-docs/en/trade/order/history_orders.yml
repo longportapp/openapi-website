@@ -112,7 +112,7 @@ definitions:
   history_orders_rsp:
     properties:
       orders:
-        type: "arrary"
+        type: "object[]"
         description: Order Detail
         properties:
           order_id:

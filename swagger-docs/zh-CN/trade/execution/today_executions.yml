@@ -62,8 +62,8 @@ paths:
 definitions:
   today_executions_rsp:
     properties:
-      orders:
-        type: "arrary"
+      trades:
+        type: "object[]"
         description: 成交明细信息
         properties:
           order_id:
