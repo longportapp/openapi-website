@@ -53,8 +53,8 @@ print(f"Market trade session:\n\n {resp.market_trade_session}")
 | market_trade_session | object[] | 市場交易時段                                                                                |
 | ∟ market             | string   | 市場<br/><br/>`US` - 美股市場<br/>`HK` - 港股市場<br/>`CN` - A 股市場<br/>`SG` - 新加坡市場 |
 | ∟ trade_session      | object[] | 交易時段                                                                                    |
-| ∟∟ beg_time          | string   | 交易開始時間，格式：`hhmm` 例如：`900`                                                      |
-| ∟∟ end_time          | string   | 交易結束時間，格式：`hhmm` 例如：`1400`                                                     |
+| ∟∟ beg_time          | int32    | 交易開始時間，格式：`hhmm` 例如：`900`                                                      |
+| ∟∟ end_time          | int32    | 交易結束時間，格式：`hhmm` 例如：`1400`                                                     |
 | ∟∟ trade_session     | int32    | 交易時段，詳見 [TradeSession](../objects#tradesession---交易時段)                           |
 
 ### Protobuf
