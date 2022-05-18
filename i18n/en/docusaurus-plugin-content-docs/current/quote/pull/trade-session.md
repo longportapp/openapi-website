@@ -53,8 +53,8 @@ print(f"Market trade session:\n\n {resp.market_trade_session}")
 | market_trade_session | object[] | Trading session data                                                                            |
 | ∟ market             | string   | Market<br/><br/>`US` - US market<br/>`HK` - HK market<br/>`CN` - CN market<br/>`SG` - SG market |
 | ∟ trade_session      | object[] | Trading session                                                                                 |
-| ∟∟ beg_time          | string   | Being trading time, in `hhmm` format, for example: `900`                                        |
-| ∟∟ end_time          | string   | End trading time, in `hhmm` format, for example: `1400`                                         |
+| ∟∟ beg_time          | int32    | Being trading time, in `hhmm` format, for example: `900`                                        |
+| ∟∟ end_time          | int32    | End trading time, in `hhmm` format, for example: `1400`                                         |
 | ∟∟ trade_session     | int32    | Trading session, see [TradeSession](../objects#tradesession---trading-session)                  |
 
 ### Protobuf
