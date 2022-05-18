@@ -15,10 +15,6 @@ If your are familiar with `Python` or `C++`, we provider [SDK](https://open.long
 
 If you want parse protocol by self, you can check our [Golang Implemetation](https://github.com/longbridgeapp/openapi-protocol/tree/main/go).
 
-如果是 `Python` 和 `C++` 用户可以直接使用我们的 [SDK](https://open.longbridgeapp.com/sdk)，不用关心具体的实现细节。
-
-如果想要自己实现协议解析，可以参考我们的 [Golang 实现](https://github.com/longbridgeapp/openapi-protocol/tree/main/go)。
-
 The endponts of `WebSocket` and `TCP` can be found [here](./hosts).
 
 Before start parse protocol, you should know our [communication model](./connect), we split to three type of communication:
