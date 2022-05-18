@@ -64,5 +64,5 @@ WebSocket 在從 HTTP 升級升 WebSocket 的過程中，我們可以讀取 HTTP
 ### 例子
 
 ```
-wss://openapi-quote.longbridge.gobal?version=1&codec=1&platform=9
+wss://openapi-quote.longbridgeapp.com?version=1&codec=1&platform=9
 ```

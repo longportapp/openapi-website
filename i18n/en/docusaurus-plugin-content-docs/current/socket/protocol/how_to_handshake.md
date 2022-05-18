@@ -66,5 +66,5 @@ Two bytes contents：
 ### Example
 
 ```
-wss://openapi-quote.longbridge.gobal?version=1&codec=1&platform=9
+wss://openapi-quote.longbridgeapp.com?version=1&codec=1&platform=9
 ```
