@@ -17,17 +17,50 @@ Real-time trades data push of the subscribed security.
 
 ### Properties
 
-| Name            | Type     | Description                                                                                                                                                                                                                                                                             |
-| --------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| symbol          | string   | Security code, for example: `AAPL.US`                                                                                                                                                                                                                                                   |
-| sequence        | int64    | Sequence number                                                                                                                                                                                                                                                                         |
-| trades          | object[] | Trades data                                                                                                                                                                                                                                                                             |
-| ∟ price         | string   | Price                                                                                                                                                                                                                                                                                   |
-| ∟ volume        | int64    | Volume                                                                                                                                                                                                                                                                                  |
-| ∟ timestamp     | int64    | Time of trading                                                                                                                                                                                                                                                                         |
-| ∟ trade_type    | string   | Trade type <br /><br />**Optional value:**<br />`*` - Overseas trade<br />`D` - Odd-lot trade<br />`M` - Non-direct off-exchange trade<br />`P` - Late trade (Off-exchange previous day)<br />`U` - Auction trade<br />`X` - Direct off-exchange trade<br />`Y` - Automtch internalized |
-| ∟ direction     | int32    | Trade direction <br /><br />**Optional value:**<br />`0` - nature<br />`1` - down<br />`2` - up                                                                                                                                                                                         |
-| ∟ trade_session | int32    | Trade session, see [TradeSession](../objects#tradesession---trading-session)                                                                                                                                                                                                            |
+| Name            | Type     | Description                                                                                     |
+| --------------- | -------- | ----------------------------------------------------------------------------------------------- |
+| symbol          | string   | Security code, for example: `AAPL.US`                                                           |
+| sequence        | int64    | Sequence number                                                                                 |
+| trades          | object[] | Trades data                                                                                     |
+| ∟ price         | string   | Price                                                                                           |
+| ∟ volume        | int64    | Volume                                                                                          |
+| ∟ timestamp     | int64    | Time of trading                                                                                 |
+| ∟ trade_type    | string   | [Trade type](#trade-type)                                                                       |
+| ∟ direction     | int32    | Trade direction <br /><br />**Optional value:**<br />`0` - nature<br />`1` - down<br />`2` - up |
+| ∟ trade_session | int32    | Trade session, see [TradeSession](../objects#tradesession---trading-session)                    |
+
+#### Trade Type
+
+HK
+
+- `*` - Overseas trade
+- `D` - Odd-lot trade
+- `M` - Non-direct off-exchange trade
+- `P` - Late trade (Off-exchange previous day)
+- `U` - Auction trade
+- `X` - Direct off-exchange trade
+- `Y` - Automatch internalized
+- ` ` - Automatch normal
+
+US
+
+- ` ` - Regular sale
+- `A` - Acquisition
+- `B` - Bunched trade
+- `D` - Distribution
+- `F` - Intermarket sweep
+- `G` - Bunched sold trades
+- `H` - Price variation trade
+- `I` - Odd lot trade
+- `K` - Rule 155 trde(NYSE MKT)
+- `M` - Market center close price
+- `P` - Prior reference price
+- `Q` - Market center open price
+- `S` - Split trade
+- `V` - Contingent trade
+- `W` - Average price trade
+- `X` - Cross trade
+- `1` - Stopped stock(Regular trade)
 
 ### Protobuf
 
