@@ -8,7 +8,7 @@ sidebar_position: 1
 Client can access market quote feed by `WebSocket` and `TCP`. After client subscribing stock quote, quote gateway can push real-time quote data to client.
 
 :::info
-WebSocket Endpoint: `wss://openapi-quote.longbrdge.global`
+WebSocket Endpoint: `wss://openapi-quote.longbridgeapp.com`
 
 TCP Endpoint: `openapi-quote.longbridgeapp.com:2020`
 :::
