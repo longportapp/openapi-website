@@ -11,6 +11,14 @@
     "message": "文檔",
     "description": "Navbar item with label 文檔"
   },
+  "item.label.社区": {
+    "message": "社群",
+    "description": "Navbar item with label community"
+  },
+  "item.label.市场": {
+    "message": "市場",
+    "description": "Navbar item with label market"
+  },
   "item.label.GitHub": {
     "message": "GitHub",
     "description": "Navbar item with label GitHub"

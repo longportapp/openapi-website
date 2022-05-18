@@ -5,6 +5,7 @@ const i18n = require('./i18n/config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const openapiDomain = 'https://open.longbridgeapp.com';
+const communityDomain = 'https://longbridgeapp.com'
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Longbridge 开放平台',
@@ -136,6 +137,19 @@ const config = {
             label: '文档',
             position: 'left',
           },
+          {
+            to: communityDomain,
+            label: '社区',
+            target: '_self',
+            position: 'left',
+          },
+          {
+            to: `${communityDomain}/quote`,
+            target: '_self',
+            label: '市场',
+            position: 'left',
+          },
+          
           {
             type: 'localeDropdown',
             position: 'right',
