@@ -144,7 +144,7 @@ const config = {
             position: 'left',
           },
           {
-            to: `${communityDomain}/quote`,
+            to: `${communityDomain}/markets`,
             target: '_self',
             label: '市场',
             position: 'left',
