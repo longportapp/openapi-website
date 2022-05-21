@@ -27,12 +27,12 @@ paths:
           auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
           http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
 
-          payload = {
+          query = {
               "order_id": "709043056541253632",
           }
 
           try:
-            resp = http.delete("/v1/trade/order", payload=payload)
+            resp = http.delete("/v1/trade/order", query=query)
             print(json.dumps(resp.data, indent=2))
           except Exception as e:
             print(f"Submit order error\ncode: {e.code}\nmessage: {e.message}")
