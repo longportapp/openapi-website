@@ -70,41 +70,63 @@ definitions:
       list:
         type: "object[]"
         description: Account Balance
+        required:
+          - total_cash
+          - max_finance_amount
+          - remaining_finance_amount
+          - risk_level
+          - margin_call
+          - currency
         properties:
           total_cash:
             type: "string"
             description: Total Cash
+            required: true
           max_finance_amount:
             type: "string"
             description: Maximum Financing Amount
+            required: true
           remaining_finance_amount:
             type: "string"
             description: Remaining Financing Amount
+            required: true
           risk_level:
             type: "string"
             description: Risk control level  <br/> <br/> <b>Option:</b><br/> `1` - low risk <br/> `2` - low to medium risk<br/> `3` - medium risk<br/> `4` - medium to high risk  <br/> `5` - high risk
+            required: true
           margin_call:
             type: "string"
             description: Margin Call
+            required: true
           currency:
             type: "string"
             description: Currency
+            required: true
           cash_infos:
             type: "object[]"
             description: Cash Details
+            required:
+              - currency
+              - withdraw_cash
+              - available_cash
+              - frozen_cash
+              - settling_cash
             properties:
               withdraw_cash:
                 type: "string"
                 description: Withdraw Cash
+                required: true
               available_cash:
                 type: "string"
                 description: Available Cash
+                required: true
               frozen_cash:
                 type: "string"
                 description: Frozen Cash
               settling_cash:
                 type: "string"
                 description: Cash to be Settled
+                required: true
               currency:
                 type: "string"
                 description: Currency

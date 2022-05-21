@@ -114,29 +114,43 @@ definitions:
       list:
         type: "object[]"
         description: "股票持仓信息"
+        required:
+          - account_channel
         properties:
           account_channel:
             type: string
             description: 账户类型
+            required: true
           stock_info:
             type: "object[]"
             description: 股票列表
+            required:
+              - symbol
+              - quality
+              - symbol_name
+              - currency
+              - cost_price
             properties:
               symbol:
                 type: "string"
                 description: 股票代码
+                required: true
               symbol_name:
                 type: "string"
                 description: 股票名称
+                required: true
               quality:
                 type: "string"
                 description: 持仓股数
+                required: true
               available_quality:
                 type: "string"
                 description: 可用股数
               currency:
                 type: "string"
                 description: 币种
+                required: true
               cost_price:
                 type: "string"
                 description: 成本价格 (具体根据客户端选择平均买入还是摊薄成本)
+                required: true

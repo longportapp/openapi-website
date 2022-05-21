@@ -89,29 +89,41 @@ definitions:
       list:
         type: "object[]"
         description: 流水信息
+        required:
+          - transaction_flow_name
+          - direction
+          - business_type
+          - balance
+          - currency
+          - business_time
         properties:
           transaction_flow_name:
             type: string
             description: 流水名稱
+            required: true
           direction:
             type: "string"
             description: 流出方向 <br/><br/><b>可選值:</b> <br/>`1` - 流出 <br/>  `2` - 流入
+            required: true
           business_type:
             type: "string"
             description: 资金类别 <br/><br/><b>可選值:</b> <br/>`1` - 現金 <br/> `2` - 股票 <br/> `3` - 基金
+            required: true
           balance:
             type: "string"
             description: 資金金額
+            required: true
           currency:
             type: "string"
             description: 資金幣種
+            required: true
           business_time:
             type: "string"
             description: 業務時間
+            required: true
           symbol:
             type: "string"
             description: 關聯股票代碼信息
-            required: true
           description:
             type: "string"
             description: 資金流水說明

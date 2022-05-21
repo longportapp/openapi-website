@@ -70,41 +70,64 @@ definitions:
       list:
         type: "object[]"
         description: 賬戶資金信息
+        required:
+          - total_cash
+          - max_finance_amount
+          - remaining_finance_amount
+          - risk_level
+          - margin_call
+          - currency
         properties:
           total_cash:
             type: "string"
             description: 現金總額
+            required: true
           max_finance_amount:
             type: "string"
             description: 最大融資金額
+            required: true
           remaining_finance_amount:
             type: "string"
             description: 剩餘融資金額
+            required: true
           risk_level:
             type: "string"
             description: 風控等級  <br/> <br/> <b>可選值:</b><br/> `1` - 低風險  <br/> `2` - 中低風險<br/> `3` - 中風險<br/> `4` - 中高風險 <br/> `5` - 高風險
+            required: true
           margin_call:
             type: "string"
             description: 追繳保證金
+            required: true
           currency:
             type: "string"
             description: 幣種
+            required: true
           cash_infos:
             type: "object[]"
             description: 現金詳情
+            required:
+              - currency
+              - withdraw_cash
+              - available_cash
+              - frozen_cash
+              - settling_cash
             properties:
               withdraw_cash:
                 type: "string"
                 description: 可提現金
+                required: true
               available_cash:
                 type: "string"
                 description: 可用現金
+                required: true
               frozen_cash:
                 type: "string"
                 description: 凍結現金
+                required: true
               settling_cash:
                 type: "string"
                 description: 待結算現金
+                required: true
               currency:
                 type: "string"
                 description: 幣種
