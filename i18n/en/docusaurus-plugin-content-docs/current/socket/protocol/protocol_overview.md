@@ -13,11 +13,11 @@ Endianness is `BigEndian`
 
 If your are familiar with `Python` or `C++`, we provider [SDK](https://open.longbridgeapp.com/en/sdk) for you.
 
-If you want parse protocol by self, you can check our [Golang Implemetation](https://github.com/longbridgeapp/openapi-protocol/tree/main/go).
+If you want parse protocol by self, you can check our [Go Implemetation](https://github.com/longbridgeapp/openapi-protocol/tree/main/go).
 
 The endponts of `WebSocket` and `TCP` can be found [here](./hosts).
 
-Before start parse protocol, you should know our [communication model](./connect), we split to three type of communication:
+Before start parse protocol, you should know our [Communication Model](./connect), we split to three type of communication:
 
 - Handshake - For establishing connection
 - Request and Response - Pairing data packet for handle api request
