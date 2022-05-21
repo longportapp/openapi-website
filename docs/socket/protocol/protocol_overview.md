@@ -15,7 +15,7 @@ sidebar_position: 0
 
 如果想要自己实现协议解析，可以参考我们的 [Go 实现](https://github.com/longbridgeapp/openapi-protocol/tree/main/go)。
 
-业务的 `Websocket` 和 `TCP` 接入地址可以查看[业务地址](../hosts)
+业务的 `WebSocket` 和 `TCP` 接入地址可以查看[业务地址](../hosts)
 
 在开始协议解析前我们需要先了解[通信过程](./connect)，这里我们将通信分为三类：
 
