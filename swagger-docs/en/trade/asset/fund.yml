@@ -65,29 +65,45 @@ definitions:
       list:
         type: "object[]"
         description: "stock holding information"
+        required:
+          - account_channel
         properties:
           account_channel:
             type: string
             description: account type
+            required: true
           fund_info:
             type: "object[]"
             description: Fund Details
+            required:
+              - symbol
+              - current_net_asset_value
+              - net_asset_value_day
+              - symbol_name
+              - currency
+              - cost_net_asset_value
             properties:
               symbol:
                 type: "string"
                 description: Fund ISIN code
+                required: true
               current_net_asset_value:
                 type: "string"
                 description: current Equity
+                required: true
               net_asset_value_day:
                 type: "string"
                 description: current Equity time
+                required: true
               symbol_name:
                 type: "string"
                 description: Fund name
+                required: true
               currency:
                 type: "string"
                 description: Currency
+                required: true
               cost_net_asset_value:
                 type: "string"
                 description: Net Cost
+                required: true

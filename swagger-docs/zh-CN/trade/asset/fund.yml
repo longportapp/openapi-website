@@ -65,29 +65,45 @@ definitions:
       list:
         type: "object[]"
         description: "股票持仓信息"
+        required:
+          - account_channel
         properties:
           account_channel:
             type: string
             description: 账户类型
+            required: true
           fund_info:
             type: "object[]"
             description: 基金详情
+            required:
+              - symbol
+              - current_net_asset_value
+              - net_asset_value_day
+              - symbol_name
+              - currency
+              - cost_net_asset_value
             properties:
               symbol:
                 type: "string"
                 description: 基金 ISIN 代码
+                required: true
               current_net_asset_value:
                 type: "string"
                 description: 当前净值
+                required: true
               net_asset_value_day:
                 type: "string"
                 description: 当前净值时间
+                required: true
               symbol_name:
                 type: "string"
                 description: 基金名称
+                required: true
               currency:
                 type: "string"
                 description: 币种
+                required: true
               cost_net_asset_value:
                 type: "string"
                 description: 成本净值
+                required: true

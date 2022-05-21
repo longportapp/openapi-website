@@ -89,29 +89,41 @@ definitions:
       list:
         type: "object[]"
         description: Cash flow info
+        required:
+          - transaction_flow_name
+          - direction
+          - business_type
+          - balance
+          - currency
+          - business_time
         properties:
           transaction_flow_name:
             type: string
             description: Cash flow name
+            required: true
           direction:
             type: "string"
             description: outflow direction <br/><br/><b>Option:</b> <br/>`1` - outflow <br/>  `2` - inflow
+            required: true
           business_type:
             type: "string"
+            required: true
             description: Funding Category <br/><br/><b>Option:</b> <br/>`1` - cash <br/> `2` - stock <br/> `3` - fund
           balance:
             type: "string"
             description: Cash amount
+            required: true
           currency:
             type: "string"
             description: Cash Currency
+            required: true
           business_time:
             type: "string"
             description: business time
+            required: true
           symbol:
             type: "string"
             description: associated Stock code information
-            required: true
           description:
             type: "string"
             description: Cash flow description

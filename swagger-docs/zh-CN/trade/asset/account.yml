@@ -70,41 +70,63 @@ definitions:
       list:
         type: "object[]"
         description: 账户资金信息
+        required:
+          - total_cash
+          - max_finance_amount
+          - remaining_finance_amount
+          - risk_level
+          - margin_call
+          - currency
         properties:
           total_cash:
             type: "string"
             description: 现金总额
+            required: true
           max_finance_amount:
             type: "string"
             description: 最大融资金额
+            required: true
           remaining_finance_amount:
             type: "string"
             description: 剩余融资金额
+            required: true
           risk_level:
             type: "string"
             description: 风控等级 <br/> <br/> <b>可选值:</b><br/> `1` - 低风险 <br/> `2` - 中低风险<br/> `3` - 中风险<br/> `4` - 中高风险 <br/> `5` - 高风险
+            required: true
           margin_call:
             type: "string"
             description: 追缴保证金
+            required: true
           currency:
             type: "string"
             description: 币种
+            required: true
           cash_infos:
             type: "object[]"
             description: 现金详情
+            required:
+              - currency
+              - withdraw_cash
+              - available_cash
+              - frozen_cash
+              - settling_cash
             properties:
               withdraw_cash:
                 type: "string"
                 description: 可提现金
+                required: true
               available_cash:
                 type: "string"
                 description: 可用现金
+                required: true
               frozen_cash:
                 type: "string"
                 description: 冻结现金
               settling_cash:
                 type: "string"
                 description: 待结算现金
+                required: true
               currency:
                 type: "string"
                 description: 币种
