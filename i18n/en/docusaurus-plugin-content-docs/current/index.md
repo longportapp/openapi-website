@@ -29,7 +29,11 @@ Longbridge provides diversified access methods such as HTTP / WebSockets interfa
 
 ## Permissions and Restrictions
 
-⚠️ All APIs have minimal invoke interval limitation, so same API can't be invoking in concurrency.
+:::caution
+
+All APIs have minimal invoke interval limitation, so same API can't be invoking in concurrency.
+
+:::
 
 ### Trading
 
