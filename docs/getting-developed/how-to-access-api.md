@@ -54,13 +54,13 @@ def sign(method, uri, headers, params, body, secret):
     app_key = headers["X-Api-Key"]
     mtd = method.upper()
 
-    canical_request = mtd + "|" + uri + "|" + params + "|authorization:" + access_token + "\nx-api-key:" + app_key + "\nx-timestamp:" + ts + "\n|authorization;x-api-key;x-timestamp|"
+    canonical_request = mtd + "|" + uri + "|" + params + "|authorization:" + access_token + "\nx-api-key:" + app_key + "\nx-timestamp:" + ts + "\n|authorization;x-api-key;x-timestamp|"
 
     if body != "":
         payload_hash = hashlib.sha1(body.encode("utf-8")).hexdigest()
-        canical_request = canical_request + payload_hash
+        canonical_request = canonical_request + payload_hash
 
-    sign_str = "HMAC-SHA256|" + hashlib.sha1(canical_request.encode("utf-8")).hexdigest()
+    sign_str = "HMAC-SHA256|" + hashlib.sha1(canonical_request.encode("utf-8")).hexdigest()
     signature = hmac.new(secret.encode('utf-8'), sign_str.encode('utf-8'), digestmod=hashlib.sha256).hexdigest()
     return "HMAC-SHA256 SignedHeaders=authorization;x-api-key;x-timestamp, Signature=" + signature
 
@@ -174,11 +174,11 @@ def sign(method, uri, headers, params, body, secret):
     access_token = headers["Authorization"]
     app_key = headers["X-Api-Key"]
     mtd = method.upper()
-    canical_request = mtd + "|" + uri + "|" + params + "|authorization:" + access_token + "\nx-api-key:" + app_key + "\nx-timestamp:" + ts + "\n|authorization;x-api-key;x-timestamp|"
+    canonical_request = mtd + "|" + uri + "|" + params + "|authorization:" + access_token + "\nx-api-key:" + app_key + "\nx-timestamp:" + ts + "\n|authorization;x-api-key;x-timestamp|"
     if body != "":
         payload_hash = hashlib.sha1(body.encode("utf-8")).hexdigest()
-        canical_request = canical_request + payload_hash
-    sign_str = "HMAC-SHA256|" + hashlib.sha1(canical_request.encode("utf-8")).hexdigest()
+        canonical_request = canonical_request + payload_hash
+    sign_str = "HMAC-SHA256|" + hashlib.sha1(canonical_request.encode("utf-8")).hexdigest()
 
     signature = hmac.new(secret.encode('utf-8'), sign_str.encode('utf-8'), digestmod=hashlib.sha256).hexdigest()
     return "HMAC-SHA256 SignedHeaders=authorization;x-api-key;x-timestamp, Signature=" + signature
