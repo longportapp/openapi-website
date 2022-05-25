@@ -36,7 +36,7 @@ Set the request parameter header information, and `X-Api-Key`, `Authorization`, 
 ```python
 import time
 headers = {}
-headers['X-pi-Key'] = '${app_key}'
+headers['X-Api-Key'] = '${app_key}'
 headers['Authorization'] = '${access_token}'
 headers['X-Timestamp' =  str(time.time()) # Unix Timestamp, eg: 1539095200.123
 headers['Content-Type'] = 'application/json; charset=utf-8',
