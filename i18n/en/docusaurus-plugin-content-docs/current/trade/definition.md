@@ -61,30 +61,30 @@ sidebar_position: 2
 
 - Description: Push notification field description
 
-| field             | type   | Description                                                                                                             |
-| ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
-| side              | string | order side<br/><br/>**Enum Value**<br/>`Buy`<br />`Sell`                                                                |
-| stock_name        | string | stock name                                                                                                              |
-| quantity          | string | submitted quantity                                                                                                      |
-| symbol            | string | order symbol                                                                                                            |
-| order_type        | string | [Order Type](./trade-definition#ordertype)                                                                              |
-| price             | string | submitted price                                                                                                         |
-| executed_quantity | string | executed quantity                                                                                                       |
-| executed_price    | string | executed price                                                                                                          |
-| order_id          | string | order id                                                                                                                |
-| currency          | string | currency                                                                                                                |
-| status            | string | [order status](./trade-definition#orderstatus)                                                                          |
-| submitted_at      | string | submitted time，formatted as a timestamp (second)                                                                       |
-| updated_at        | string | last updated time ，formatted as a timestamp (second)                                                                   |
-| trigger_price     | string | "`LIT` / `MIT` order trigger price"                                                                                     |
-| msg               | string | rejected message or remark                                                                                              |
-| tag               | string | order tag<br/><br/>**Enum Value**<br/>`Normal` - Normal Order<br />`GTC` - Long term Order<br />`Grey` - Grey Order     |
-| trigger_status    | string | conditional order trigger status<br/><br/>**Enum Value**<br/>`NOT_ACTIVE`<br />`DEACTIVE`<br />`ACTIVE`<br />`RELEASED` |
-| trigger_at        | string | conditional order trigger time. formatted as a timestamp (second)                                                       |
-| trailing_amount   | string | "`TSMAMT` / `TSLPAMT` order trailing amount"                                                                            |
-| trailing_percent  | string | "`TSMPCT` / `TSLPPCT` order trailing percent"                                                                           |
-| limit_offset      | string | "`TSLPAMT` / `TSLPPCT` order limit offset amount"                                                                       |
-| account_no        | string | account no                                                                                                              |
+| field             | type   | Description                                                                                                           |
+| ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
+| side              | string | order side<br/><br/>**Enum Value**<br/>`Buy`<br />`Sell`                                                              |
+| stock_name        | string | stock name                                                                                                            |
+| quantity          | string | submitted quantity                                                                                                    |
+| symbol            | string | order symbol                                                                                                          |
+| order_type        | string | [Order Type](./trade-definition#ordertype)                                                                            |
+| price             | string | submitted price                                                                                                       |
+| executed_quantity | string | executed quantity                                                                                                     |
+| executed_price    | string | executed price                                                                                                        |
+| order_id          | string | order id                                                                                                              |
+| currency          | string | currency                                                                                                              |
+| status            | string | [order status](./trade-definition#orderstatus)                                                                        |
+| submitted_at      | string | submitted time，formatted as a timestamp (second)                                                                     |
+| updated_at        | string | last updated time ，formatted as a timestamp (second)                                                                 |
+| trigger_price     | string | "`LIT` / `MIT` order trigger price"                                                                                   |
+| msg               | string | rejected message or remark                                                                                            |
+| tag               | string | order tag<br/><br/>**Enum Value**<br/>`Normal` - Normal Order<br />`GTC` - Long term Order<br />`Grey` - Grey Order   |
+| trigger_status    | string | conditional order trigger status<br/><br/>**Enum Value**<br/>`NOT_USED`<br />`DEACTIVE`<br />`ACTIVE`<br />`RELEASED` |
+| trigger_at        | string | conditional order trigger time. formatted as a timestamp (second)                                                     |
+| trailing_amount   | string | "`TSMAMT` / `TSLPAMT` order trailing amount"                                                                          |
+| trailing_percent  | string | "`TSMPCT` / `TSLPPCT` order trailing percent"                                                                         |
+| limit_offset      | string | "`TSLPAMT` / `TSLPPCT` order limit offset amount"                                                                     |
+| account_no        | string | account no                                                                                                            |
 
 ### example
 

@@ -152,7 +152,7 @@ definitions:
             type: "string"
             description: 下單數量
             required: true
-          executed_qty:
+          executed_quantity:
             type: "string"
             description: 成交數量
           price:
@@ -229,7 +229,7 @@ definitions:
             type: "string"
             description: "條件單觸發狀態<br/><br/>
               **可選值:**<br/>
-              `NOT_ACTIVE` - 未激活
+              `NOT_USED` - 未激活
               `DEACTIVE` - 已失效
               `ACTIVE` - 已激活
               `RELEASED` - 已觸發"

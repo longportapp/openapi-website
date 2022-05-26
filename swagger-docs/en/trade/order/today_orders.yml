@@ -139,7 +139,7 @@ definitions:
             type: "string"
             description: Submitted Quantity
             required: true
-          executed_qty:
+          executed_quantity:
             type: "string"
             description: Executed Quantity
           price:
@@ -215,7 +215,7 @@ definitions:
             type: "string"
             description: Conditional Order Trigger Status<br/><br/>
               **Enum Value**<br/>
-              `NOT_ACTIVE`<br/>
+              `NOT_USED`<br/>
               `DEACTIVE`<br />
               `ACTIVE`<br />
               `RELEASED`
