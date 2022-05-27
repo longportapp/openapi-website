@@ -17,6 +17,10 @@ function useSdkLanguages() {
       label: 'C++',
       value: 'cpp',
     },
+    {
+      label: 'Rust',
+      value: 'rust',
+    },
   ];
 }
 
@@ -36,7 +40,7 @@ export const SdkVersion: React.FC<ISdkVersionProps> = ({ versions }) => {
 
           return (
             <TabItem value={value} key={value}>
-              <div className="pb-40 px-3 flex flex-col justify-start items-start">
+              <div className="flex flex-col items-start justify-start px-3 pb-40">
                 <div className="theme-doc-markdown markdown" style={{
                   width: '100%'
                 }} >

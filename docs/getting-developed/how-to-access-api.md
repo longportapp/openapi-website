@@ -15,7 +15,7 @@ sidebar_position: 1
 
 在 [开发者后台](https://open.longbridgeapp.com/account) 中获取 **Access Token**， **App Key** 以及 **App Secret**。
 
-**Access Token** 的有效期是三个月，失效后可以在开发者后台重置。在失效之前，可以通过调用[刷新 Access Token](./refresh-token-api) API 进行刷新。
+**Access Token** 的有效期是三个月，失效后可以在开发者后台重置。在失效之前，可以通过调用 [刷新 Access Token](./refresh-token-api) API 进行刷新。
 
 ### 3. 生成签名
 
