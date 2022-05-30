@@ -55,29 +55,6 @@ message Depth {
 ```python
 # Push Real-time Depth
 # https://open.longbridgeapp.com/docs/quote/push/push-depth
-import os
-import time
-from longbridge.http import Auth, Config, HttpClient
-from longbridge.ws import ReadyState, WsCallback, WsClient
-# Protobuf variables definition: https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto
-from longbridge.proto.quote_pb2 import (Command, PushDepth, SubscribeRequest, SubscriptionResponse, SubType)
-
-class MyWsCallback(WsCallback):
-    def on_push(self, command: int, body: bytes):
-        if command == Command.PushDepthData:
-            quote = PushDepth()
-            quote.ParseFromString(body)
-            print(f"quote-> {quote}")
-        else:
-            print(f"-> unknow: {command}")
-
-    def on_state(self, state: ReadyState):
-        print(f"-> state: {state}")
-
-auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
-ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
-
 # To subscribe quotes data, please check whether "Developers" - "Quote authority" is correct.
 # https://open.longbridgeapp.com/account
 #
@@ -86,16 +63,18 @@ ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
 #
 # Before running, please visit the "Developers" to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
-req = SubscribeRequest(symbol=["700.HK", "AAPL.US"], sub_type=[SubType.DEPTH], is_first_push=True)
-result = ws.send_request(Command.Subscribe, req.SerializeToString())
-resp = SubscriptionResponse()
-resp.ParseFromString(result)
+from time import sleep
+from longbridge.openapi import QuoteContext, Config, SubType
 
-print(f"Subscribed symbol:\n\n {resp.sub_list}")
+class EventHandler:
+    def on_event(self, symbol: str, msg):
+        print(symbol, msg)
 
-print("\n\nWaiting for push...\nPress [Ctrl + c] to quit.")
-while True:
-    time.sleep(10)
+config = Config.from_env()
+ctx = QuoteContext(config, EventHandler())
+
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Depth], is_first_push = True)
+sleep(30)
 ```
 
 ### JSON Example

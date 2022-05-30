@@ -38,29 +38,6 @@ message SubscribeRequest {
 ```python
 # 訂閱行情數據
 # https://open.longbridgeapp.com/docs/quote/subscribe/subscribe
-import os
-import time
-from longbridge.http import Auth, Config, HttpClient
-from longbridge.ws import ReadyState, WsCallback, WsClient
-# Protobuf 變量定義參見：https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto
-from longbridge.proto.quote_pb2 import (Command, PushQuote, SubscribeRequest, SubscriptionResponse, SubType)
-
-class MyWsCallback(WsCallback):
-    def on_push(self, command: int, body: bytes):
-        if command == Command.PushQuoteData:
-            quote = PushQuote()
-            quote.ParseFromString(body)
-            print(f"quote-> {quote}")
-        else:
-            print(f"-> unknow: {command}")
-
-    def on_state(self, state: ReadyState):
-        print(f"-> state: {state}")
-
-auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
-ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
-
 # 訂閱行情數據請檢查 “開發者中心“ - “行情權限” 是否正確
 # https://open.longbridgeapp.com/account
 #
@@ -69,16 +46,18 @@ ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
 #
 # 運行前請訪問 “開發者中心“ 確保賬戶有正確的行情權限。
 # 如沒有開通行情權限，可以通過 "長橋" 手機客戶端，並進入 “我的 - 我的行情 - 行情商城“ 購買開通行情權限。
-req = SubscribeRequest(symbol=["700.HK", "AAPL.US"], sub_type=[SubType.QUOTE], is_first_push=True)
-result = ws.send_request(Command.Subscribe, req.SerializeToString())
-resp = SubscriptionResponse()
-resp.ParseFromString(result)
+from time import sleep
+from longbridge.openapi import QuoteContext, Config, SubType
 
-print(f"Subscribed symbol:\n\n {resp.sub_list}")
+class EventHandler:
+    def on_event(self, symbol: str, msg):
+        print(symbol, msg)
 
-print("\n\nWaiting for push...\nPress [Ctrl + c] to quit.")
-while True:
-    time.sleep(10)
+config = Config.from_env()
+ctx = QuoteContext(config, EventHandler())
+
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote], is_first_push = True)
+sleep(30)
 ```
 
 ## Response

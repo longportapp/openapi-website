@@ -36,29 +36,16 @@ message OptionChainDateStrikeInfoRequest {
 ```python
 # 获取标的的期权链到期日期权标的列表
 # https://open.longbridgeapp.com/docs/quote/pull/optionchain-date-strike
-import os
-import time
-from longbridge.http import Auth, Config, HttpClient
-from longbridge.ws import ReadyState, WsCallback, WsClient
-# Protobuf 变量定义参见：https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto
-from longbridge.proto.quote_pb2 import (Command, OptionChainDateStrikeInfoRequest, OptionChainDateStrikeInfoResponse)
-
-class MyWsCallback(WsCallback):
-    def on_state(self, state: ReadyState):
-        print(f"-> state: {state}")
-
-auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
-ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
-
 # 运行前请访问 “开发者中心“ 确保账户有正确的行情权限。
 # 如没有开通行情权限，可以通过 "长桥" 手机客户端，并进入 “我的 - 我的行情 - 行情商城“ 购买开通行情权限。
-req = OptionChainDateStrikeInfoRequest(symbol="AAPL.US", expiry_date="20230120")
-result = ws.send_request(Command.QueryOptionChainDateStrikeInfo, req.SerializeToString())
-resp = OptionChainDateStrikeInfoResponse()
-resp.ParseFromString(result)
+from datetime import date
+from longbridge.openapi import QuoteContext, Config
 
-print(f"Option chain info:\n\n {resp}")
+config = Config.from_env()
+ctx = QuoteContext(config)
+
+resp = ctx.option_chain_info_by_date("AAPL.US", date(2023, 1, 20))
+print(resp)
 ```
 
 ## Response

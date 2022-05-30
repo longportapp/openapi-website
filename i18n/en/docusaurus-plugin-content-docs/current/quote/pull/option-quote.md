@@ -32,29 +32,15 @@ message MultiSecurityRequest {
 ```python
 # Get Real-time Quotes Of Option Securities
 # https://open.longbridgeapp.com/docs/quote/pull/option-quote
-import os
-import time
-from longbridge.http import Auth, Config, HttpClient
-from longbridge.ws import ReadyState, WsCallback, WsClient
-# Protobuf variables definition: https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto
-from longbridge.proto.quote_pb2 import (Command, MultiSecurityRequest, OptionQuoteResponse)
-
-class MyWsCallback(WsCallback):
-    def on_state(self, state: ReadyState):
-        print(f"-> state: {state}")
-
-auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
-ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
-
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
-req = MultiSecurityRequest(symbol=["AAPL230317P160000.US"])
-result = ws.send_request(Command.QueryOptionQuote, req.SerializeToString())
-resp = OptionQuoteResponse()
-resp.ParseFromString(result)
+from longbridge.openapi import QuoteContext, Config
 
-print(f"Option quote:\n\n {resp.secu_quote}")
+config = Config.from_env()
+ctx = QuoteContext(config)
+
+resp = ctx.option_quote(["AAPL230317P160000.US"])
+print(resp)
 ```
 
 ## Response
