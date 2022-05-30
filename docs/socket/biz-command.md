@@ -75,16 +75,16 @@ sidebar_position: 5
     </tr>
     <tr>
         <td rowspan="4">推送</td>
-        <td><a href="../quote/push/push-quote">实时价格推送</a></td>
+        <td><a href="../quote/push/quote">实时价格推送</a></td>
     </tr>
     <tr>
-        <td><a href="../quote/push/push-depth">实时盘口推送</a></td>
+        <td><a href="../quote/push/depth">实时盘口推送</a></td>
     </tr>
     <tr>
-        <td><a href="../quote/push/push-broker">实时经纪队列推送</a></td>
+        <td><a href="../quote/push/broker">实时经纪队列推送</a></td>
     </tr>
     <tr>
-        <td><a href="../quote/push/push-trade">实时成交明细推送</a></td>
+        <td><a href="../quote/push/trade">实时成交明细推送</a></td>
     </tr>
 </table>
 

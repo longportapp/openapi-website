@@ -77,16 +77,16 @@ And stock quote and order have difference endpoints, [check here](./hosts).
     </tr>
     <tr>
         <td rowspan="4">Push</td>
-        <td><a href="../quote/push/push-quote">Push Real-time Quote</a></td>
+        <td><a href="../quote/push/quote">Push Real-time Quote</a></td>
     </tr>
     <tr>
-        <td><a href="../quote/push/push-depth">Push Real-time Depth</a></td>
+        <td><a href="../quote/push/depth">Push Real-time Depth</a></td>
     </tr>
     <tr>
-        <td><a href="../quote/push/push-broker">Push Real-time Brokers</a></td>
+        <td><a href="../quote/push/broker">Push Real-time Brokers</a></td>
     </tr>
     <tr>
-        <td><a href="../quote/push/push-trade">Push Real-time Trades</a></td>
+        <td><a href="../quote/push/trade">Push Real-time Trades</a></td>
     </tr>
 </table>
 

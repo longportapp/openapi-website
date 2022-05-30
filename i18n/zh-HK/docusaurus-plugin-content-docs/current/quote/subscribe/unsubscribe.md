@@ -38,29 +38,6 @@ message UnsubscribeRequest {
 ```python
 # 取消訂閱行情數據
 # https://open.longbridgeapp.com/docs/quote/subscribe/unsubscribe
-import os
-import time
-from longbridge.http import Auth, Config, HttpClient
-from longbridge.ws import ReadyState, WsCallback, WsClient
-# Protobuf 變量定義參見：https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto
-from longbridge.proto.quote_pb2 import (Command, PushQuote, SubscribeRequest, SubscriptionResponse, SubType, SubscriptionRequest, UnsubscribeRequest, UnsubscribeResponse)
-
-class MyWsCallback(WsCallback):
-    def on_push(self, command: int, body: bytes):
-        if command == Command.PushQuoteData:
-            quote = PushQuote()
-            quote.ParseFromString(body)
-            print(f"quote-> {quote}")
-        else:
-            print(f"-> unknow: {command}")
-
-    def on_state(self, state: ReadyState):
-        print(f"-> state: {state}")
-
-auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
-ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
-
 # 訂閱行情數據請檢查 “開發者中心“ - “行情權限” 是否正確
 # https://open.longbridgeapp.com/account
 #
@@ -69,27 +46,12 @@ ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
 #
 # 運行前請訪問 “開發者中心“ 確保賬戶有正確的行情權限。
 # 如沒有開通行情權限，可以通過 "長橋" 手機客戶端，並進入 “我的 - 我的行情 - 行情商城“ 購買開通行情權限。
+from longbridge.openapi import QuoteContext, Config, SubType
+config = Config.from_env()
+ctx = QuoteContext(config)
 
-#訂閱標的
-req = SubscribeRequest(symbol=["700.HK", "AAPL.US"], sub_type=[SubType.QUOTE], is_first_push=False)
-result = ws.send_request(Command.Subscribe, req.SerializeToString())
-resp = SubscriptionResponse()
-resp.ParseFromString(result)
-
-print(f"Subscribed symbol:\n\n {resp.sub_list}")
-
-#取消訂閱
-req = UnsubscribeRequest(unsub_all=True)
-result = ws.send_request(Command.Unsubscribe, req.SerializeToString())
-
-#查詢已訂閱標的
-req = SubscriptionRequest()
-result = ws.send_request(Command.Subscription, req.SerializeToString())
-resp = SubscriptionResponse()
-resp.ParseFromString(result)
-
-print("\n")
-print(f"After unsubscribing, subscribed symbol:\n\n {resp.sub_list}")
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote])
+ctx.unsubscribe(["AAPL.US"], [SubType.Quote])
 ```
 
 ## Response
