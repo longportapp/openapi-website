@@ -19,7 +19,7 @@ This API is used to unsubscribe quote.
 
 | Name      | Type     | Required | Description                                                                                                                                                               |
 | --------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| symbol    | string[] | Yes      | Security code list, for example: `[00700.HK]` <br /><br />**Check rules:**<br />The maximum number of symbols that can be passed in each request is `500`                 |
+| symbol    | string[] | Yes      | Security code list, for example: `[700.HK]` <br /><br />**Check rules:**<br />The maximum number of symbols that can be passed in each request is `500`                   |
 | sub_type  | int32[]  | Yes      | Subscription type list, for example: `[1,2]`, see [SubType](../objects#subtype---quote-type-of-subscription)                                                              |
 | unsub_all | bool     | Yes      | Is unsubscribe all. <br />- When `symbol` is empty, unsubscribe all subscriptions<br />- When `symbol` is not empty, unsubscribe these all subscriptions of these symbols |
 
