@@ -59,7 +59,7 @@ print(resp)
 | ∟ volume        | int64    | Volume                                                                                          |
 | ∟ timestamp     | int64    | Time of trading                                                                                 |
 | ∟ trade_type    | string   | [Trade type](#trade-type)                                                                       |
-| ∟ direction     | int32    | Trade direction <br /><br />**Optional value:**<br />`0` - nature<br />`1` - down<br />`2` - up |
+| ∟ direction     | int32    | Trade direction <br /><br />**Optional value:**<br />`0` - neutral<br />`1` - down<br />`2` - up |
 | ∟ trade_session | int32    | Trade session, see [TradeSession](../objects#tradesession---trading-session)                    |
 
 #### Trade Type
@@ -124,6 +124,7 @@ message Trade {
       "volume": 1,
       "timestamp": 1651103979,
       "trade_type": "I",
+      "direction": 0,
       "trade_session": 2
     },
     {
@@ -131,6 +132,7 @@ message Trade {
       "volume": 1,
       "timestamp": 1651103985,
       "trade_type": "I",
+      "direction": 0,
       "trade_session": 2
     },
     {
@@ -138,6 +140,7 @@ message Trade {
       "volume": 1,
       "timestamp": 1651103995,
       "trade_type": "I",
+      "direction": 0,
       "trade_session": 2
     }
   ]

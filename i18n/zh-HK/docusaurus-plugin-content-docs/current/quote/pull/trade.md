@@ -59,7 +59,7 @@ print(resp)
 | ∟ volume        | int64    | 成交量                                                                            |
 | ∟ timestamp     | int64    | 成交時間                                                                          |
 | ∟ trade_type    | string   | [交易類型說明](#交易類型)                                                         |
-| ∟ direction     | int32    | 交易方向 <br /><br />**可选值：**<br />`0` - nature<br />`1` - down<br />`2` - up |
+| ∟ direction     | int32    | 交易方向 <br /><br />**可选值：**<br />`0` - neutral<br />`1` - down<br />`2` - up |
 | ∟ trade_session | int32    | 交易時段，詳見 [TradeSession](../objects#tradesession---交易時段)                 |
 
 #### 交易類型
@@ -124,6 +124,7 @@ message Trade {
       "volume": 1,
       "timestamp": 1651103979,
       "trade_type": "I",
+      "direction": 0,
       "trade_session": 2
     },
     {
@@ -131,6 +132,7 @@ message Trade {
       "volume": 1,
       "timestamp": 1651103985,
       "trade_type": "I",
+      "direction": 0,
       "trade_session": 2
     },
     {
@@ -138,6 +140,7 @@ message Trade {
       "volume": 1,
       "timestamp": 1651103995,
       "trade_type": "I",
+      "direction": 0,
       "trade_session": 2
     }
   ]
