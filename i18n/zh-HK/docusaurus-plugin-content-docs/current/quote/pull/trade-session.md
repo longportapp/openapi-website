@@ -21,7 +21,7 @@ sidebar_position: 15
 # 獲取各市場當日交易時段
 # https://open.longbridgeapp.com/docs/quote/pull/trade-session
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過 "長橋" 手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
+# 如沒有開通行情權限，可以通過“長橋”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from longbridge.openapi import QuoteContext, Config
 
 config = Config.from_env()

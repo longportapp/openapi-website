@@ -75,7 +75,7 @@ http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
 ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
 
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過 "長橋" 手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
+# 如沒有開通行情權限，可以通過“長橋”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 filterConfig = FilterConfig(sort_by=0, sort_order=1, sort_offset=0, sort_count=10)
 req = WarrantFilterListRequest(symbol="700.HK", filter_config=filterConfig, language=1)
 result = ws.send_request(Command.QueryWarrantFilterList, req.SerializeToString())

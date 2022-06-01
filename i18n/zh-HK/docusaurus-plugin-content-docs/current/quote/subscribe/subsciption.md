@@ -57,7 +57,7 @@ ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
 # - 美股 - LV1 納斯達克最優報價 (只限 Open API）
 #
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過 "長橋" 手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
+# 如沒有開通行情權限，可以通過“長橋”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 
 #訂閱標的
 req = SubscribeRequest(symbol=["700.HK", "AAPL.US"], sub_type=[SubType.QUOTE], is_first_push=False)
