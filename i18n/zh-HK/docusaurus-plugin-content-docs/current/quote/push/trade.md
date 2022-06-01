@@ -26,7 +26,7 @@ sidebar_position: 4
 | ∟ volume        | int64    | 成交量                                                                |
 | ∟ timestamp     | int64    | 成交時間                                                              |
 | ∟ trade_type    | string   | [交易類型說明](#交易類型)                                             |
-| ∟ direction     | int32    | 交易方向 <br/><br />**可選值：**<br/>`0` - nature<br/>`1` - down 2-up |
+| ∟ direction     | int32    | 交易方向 <br/><br />**可選值：**<br/>`0` - neutral<br/>`1` - down 2-up |
 | ∟ trade_session | int32    | 交易時段，詳見 [TradeSession](../objects#tradesession---交易時段)     |
 
 #### 交易類型
@@ -120,6 +120,7 @@ sleep(30)
       "volume": 1,
       "timestamp": 1651103979,
       "trade_type": "I",
+      "direction": 0,
       "trade_session": 2
     },
     {
@@ -127,6 +128,7 @@ sleep(30)
       "volume": 1,
       "timestamp": 1651103985,
       "trade_type": "I",
+      "direction": 0,
       "trade_session": 2
     },
     {
@@ -134,6 +136,7 @@ sleep(30)
       "volume": 1,
       "timestamp": 1651103995,
       "trade_type": "I",
+      "direction": 0,
       "trade_session": 2
     }
   ]

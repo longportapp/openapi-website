@@ -73,16 +73,16 @@ slug: overview
     </tr>
     <tr>
         <td rowspan="4">Push</td>
-        <td><a href="./push/push-quote">Push Real-time Quote</a></td>
+        <td><a href="./push/quote">Push Real-time Quote</a></td>
     </tr>
     <tr>
-        <td><a href="./push/push-depth">Push Real-time Depth</a></td>
+        <td><a href="./push/depth">Push Real-time Depth</a></td>
     </tr>
     <tr>
-        <td><a href="./push/push-broker">Push Real-time Brokers</a></td>
+        <td><a href="./push/broker">Push Real-time Brokers</a></td>
     </tr>
     <tr>
-        <td><a href="./push/push-trade">Push Real-time Trades</a></td>
+        <td><a href="./push/trade">Push Real-time Trades</a></td>
     </tr>
 </table>
 

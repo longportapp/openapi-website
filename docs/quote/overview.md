@@ -73,16 +73,16 @@ slug: overview
     </tr>
     <tr>
         <td rowspan="4">推送</td>
-        <td><a href="./push/push-quote">实时价格推送</a></td>
+        <td><a href="./push/quote">实时价格推送</a></td>
     </tr>
     <tr>
-        <td><a href="./push/push-depth">实时盘口推送</a></td>
+        <td><a href="./push/depth">实时盘口推送</a></td>
     </tr>
     <tr>
-        <td><a href="./push/push-broker">实时经纪队列推送</a></td>
+        <td><a href="./push/broker">实时经纪队列推送</a></td>
     </tr>
     <tr>
-        <td><a href="./push/push-trade">实时成交明细推送</a></td>
+        <td><a href="./push/trade">实时成交明细推送</a></td>
     </tr>
 </table>
 
