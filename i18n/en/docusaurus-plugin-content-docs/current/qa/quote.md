@@ -5,13 +5,16 @@ slug: broker
 sidebar_position: 1
 ---
 
-##Q1: How to calculate the subscription quote, is it one or more subscriptions if I both subscribe depth and broker with the same security?
+## Q1: How to calculate the subscription quote, is it one or more subscriptions if I both subscribe depth and broker with the same security?
+
 A: The subscription quote is only calculated according to the security dimension, only one subscription will be calculted if you subscribe muilty quote type with one security.
 
-##Q2: What is the specific limit logic for request frequency limit?
+## Q2: What is the specific limit logic for request frequency limit?
+
 A: Use the token bucket to limit request and control the request rate. No more than 10 calls in 1 second, and no more than 5 concurrent requests.
 
-##Q3: What is the available subscribing securities and corresponding symbol formats?
+## Q3: What is the available subscribing securities and corresponding symbol formats?
+
 A: The security code uses the `ticker.region` format, `ticker` represents the code. Aavailable subscribing securities are as followes.
 
 <table>
@@ -56,7 +59,8 @@ A: The security code uses the `ticker.region` format, `ticker` represents the co
     </tr>
 </table>
 
-##Q4: What is the quote authority of OpenAPI? How to buy quote cards?
+## Q4: What is the quote authority of OpenAPI? How to buy quote cards?
+
 A:
 
 - Quote Authority
