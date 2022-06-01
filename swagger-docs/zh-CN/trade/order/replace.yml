@@ -14,7 +14,7 @@ paths:
           required: true
         - name: "quantity"
           type: "string"
-          description: "改单数量，例如: `200`"
+          description: "改单数量，例如：`200`"
           required: true
         - name: "price"
           required: false

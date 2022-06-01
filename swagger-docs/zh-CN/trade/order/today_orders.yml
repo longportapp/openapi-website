@@ -16,7 +16,7 @@ paths:
         - name: "status"
           type: string[]
           in: query
-          description: "[订单状态](../trade-definition#orderstatus)<br/><br/>例如: `status=FilledStatus&status=NewStatus`"
+          description: "[订单状态](../trade-definition#orderstatus)<br/><br/>例如：`status=FilledStatus&status=NewStatus`"
           required: false
         - name: side
           type: "string"
@@ -37,7 +37,7 @@ paths:
         - name: "order_id"
           type: "string"
           required: false
-          description: "订单 ID，用于指定订单 ID 查询，例如: `701276261045858304`"
+          description: "订单 ID，用于指定订单 ID 查询，例如：`701276261045858304`"
       responses:
         "200":
           description: "当日订单查询成功"

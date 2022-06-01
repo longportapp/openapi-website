@@ -16,7 +16,7 @@ paths:
         - name: "order_id"
           type: "string"
           required: false
-          description: "訂單 ID，用於指定訂單 ID 查詢，例如: `701276261045858304`"
+          description: "訂單 ID，用於指定訂單 ID 查詢，例如：`701276261045858304`"
       responses:
         "200":
           description: "查詢成功"

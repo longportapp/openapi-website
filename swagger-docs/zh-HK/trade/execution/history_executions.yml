@@ -17,12 +17,12 @@ paths:
           type: "string"
           in: query
           required: false
-          description: "開始時間，格式為時間戳 (秒)，例如: `1650410999`"
+          description: "開始時間，格式為時間戳 (秒)，例如：`1650410999`"
         - name: "end_at"
           type: "string"
           in: query
           required: false
-          description: "結束時間，格式為時間戳 (秒)，例如: `1650410999`"
+          description: "結束時間，格式為時間戳 (秒)，例如：`1650410999`"
       responses:
         "200":
           description: "查詢成功"

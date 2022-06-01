@@ -9,7 +9,7 @@ sidebar_position: 1
 A：僅按照標的維度計算訂閱額度，同一個標的同時訂閱多種行情，算同一個訂閱額度。
 
 ##Q2：請求限頻的具體限制邏輯是怎樣？
-A：使用令牌桶進行限流，控制請求速率。 1 秒內不超過 10 次調用，並發請求數不超過 5。
+A：使用令牌桶進行限流，控制請求速率。1 秒內不超過 10 次調用，並發請求數不超過 5。
 
 ##Q3：目前可以訂閱的標的（包括指數）和對應的 symbol 格式？
 A：標的代碼使用 `ticker.region` 格式，`ticker` 表示標的代碼。支持訂閱的標的如下：
@@ -60,7 +60,7 @@ A：標的代碼使用 `ticker.region` 格式，`ticker` 表示標的代碼。�
 A：
 
 - 行情權限
-  應交易所規則，OpenAPI 的權限是獨立的，和 Longbridge 的 App、PC、Web 權限不共享。比如，你在 Longbrdge App 上擁有的港股 Level 2 權限並不能同樣代入 OpenAPI 端使用。 Longbridge 也給 OpenAPI 用戶贈送了基礎的行情權益，如你需要更高級別的行情，可以通過購買行情卡激活高級別行情權限。
+  應交易所規則，OpenAPI 的權限是獨立的，和 Longbridge 的 App、PC、Web 權限不共享。比如，你在 Longbrdge App 上擁有的港股 Level 2 權限並不能同樣代入 OpenAPI 端使用。Longbridge 也給 OpenAPI 用戶贈送了基礎的行情權益，如你需要更高級別的行情，可以通過購買行情卡激活高級別行情權限。
 - 如何購買行情卡  
   Longbridge 用戶可以通過 Longbridge App 中的「行情商店」自行選擇想要購買的行情卡。
 - 行情權限一覽請見下表

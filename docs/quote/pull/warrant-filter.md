@@ -74,8 +74,8 @@ auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"),
 http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
 ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
 
-# 运行前请访问 “开发者中心“ 确保账户有正确的行情权限。
-# 如没有开通行情权限，可以通过 "长桥" 手机客户端，并进入 “我的 - 我的行情 - 行情商城“ 购买开通行情权限。
+# 运行前请访问“开发者中心”确保账户有正确的行情权限。
+# 如没有开通行情权限，可以通过“长桥”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
 filterConfig = FilterConfig(sort_by=0, sort_order=1, sort_offset=0, sort_count=10)
 req = WarrantFilterListRequest(symbol="700.HK", filter_config=filterConfig, language=1)
 result = ws.send_request(Command.QueryWarrantFilterList, req.SerializeToString())

@@ -51,9 +51,9 @@ $ pip3 install longbridge
 
 **_获取 App Key, App Secret, Access Token 等信息_**
 
-访问 [Longbridge OpenAPI](https://open.longbridgeapp.com) 网站，登录后，进入 “个人中心”。
+访问 [Longbridge OpenAPI](https://open.longbridgeapp.com) 网站，登录后，进入“个人中心”。
 
-在页面上会给出 “应用凭证” 凭证信息，我们拿到以后设置环境变量，便于后面开发使用方便。
+在页面上会给出“应用凭证”凭证信息，我们拿到以后设置环境变量，便于后面开发使用方便。
 
 ### macOS / Linux 环境下设置环境变量
 
@@ -168,7 +168,7 @@ python account_asset.py
 
 ### 订阅实时行情
 
-订阅行情数据请检查 [开发者中心](https://open.longbridgeapp.com/account) - “行情权限” 是否正确
+订阅行情数据请检查 [开发者中心](https://open.longbridgeapp.com/account) - “行情权限”是否正确
 
 - 港股 - BMP 基础报价，无实时行情推送，无法用 WebSocket 订阅
 - 美股 - LV1 纳斯达克最优报价 (只限 Open API）
@@ -177,7 +177,7 @@ python account_asset.py
 
 :::info
 
-如没有开通行情权限，可以通过 "长桥" 手机客户端，并进入 “我的 - 我的行情 - 行情商城“ 购买开通行情权限。
+如没有开通行情权限，可以通过“长桥”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
 
 https://longbridgeapp.com/download
 :::

@@ -38,8 +38,8 @@ message MarketTradeDayRequest {
 ```python
 # 獲取市場交易日
 # https://open.longbridgeapp.com/docs/quote/pull/trade-day
-# 運行前請訪問 “開發者中心“ 確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過 "長橋" 手機客戶端，並進入 “我的 - 我的行情 - 行情商城“ 購買開通行情權限。
+# 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
+# 如沒有開通行情權限，可以通過 "長橋" 手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from datetime import date
 from longbridge.openapi import QuoteContext, Config, Market
 

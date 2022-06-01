@@ -16,7 +16,7 @@ paths:
         - name: "status"
           type: string[]
           in: query
-          description: "[订单状态](../trade-definition#orderstatus)<br/><br/>例如: `status=FilledStatus&status=NewStatus`"
+          description: "[订单状态](../trade-definition#orderstatus)<br/><br/>例如：`status=FilledStatus&status=NewStatus`"
           required: false
         - name: side
           type: "string"
@@ -39,11 +39,11 @@ paths:
         - name: "start_at"
           type: "string"
           required: false
-          description: "开始时间，格式为时间戳 (秒)，例如: `1650410999`"
+          description: "开始时间，格式为时间戳 (秒)，例如：`1650410999`"
         - name: "end_at"
           type: "string"
           required: false
-          description: "结束时间，格式为时间戳 (秒)，例如: `1650410999`"
+          description: "结束时间，格式为时间戳 (秒)，例如：`1650410999`"
       responses:
         "200":
           description: "历史订单查询成功"

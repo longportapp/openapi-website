@@ -54,14 +54,14 @@ message PushQuote {
 ```python
 # 实时价格推送
 # https://open.longbridgeapp.com/docs/quote/push/push-quote
-# 订阅行情数据请检查 “开发者中心“ - “行情权限” 是否正确
+# 订阅行情数据请检查“开发者中心” - “行情权限”是否正确
 # https://open.longbridgeapp.com/account
 #
 # - 港股 - BMP 基础报价，无实时行情推送，无法用 WebSocket 订阅
 # - 美股 - LV1 纳斯达克最优报价 (只限 Open API）
 #
-# 运行前请访问 “开发者中心“ 确保账户有正确的行情权限。
-# 如没有开通行情权限，可以通过 "长桥" 手机客户端，并进入 “我的 - 我的行情 - 行情商城“ 购买开通行情权限。
+# 运行前请访问“开发者中心”确保账户有正确的行情权限。
+# 如没有开通行情权限，可以通过“长桥”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
 from time import sleep
 from longbridge.openapi import QuoteContext, Config, SubType
 

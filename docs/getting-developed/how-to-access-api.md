@@ -27,7 +27,7 @@ sidebar_position: 1
 
 :::
 
-先根据相应的 API 文档构造请求后， 通过 OpenAPI SDK 直接调用 API，SDK 会帮助生成签名， 或者通过以下流程创建签名。
+先根据相应的 API 文档构造请求后，通过 OpenAPI SDK 直接调用 API，SDK 会帮助生成签名，或者通过以下流程创建签名。
 
 #### 添加 `X-Api-Key`、`X-Timestamp`、`Authorization`
 
@@ -66,7 +66,7 @@ def sign(method, uri, headers, params, body, secret):
 
 ```
 
-使用签名函数进行签名， 并设置签名到请求头部 `X-Api-Signature` 中：
+使用签名函数进行签名，并设置签名到请求头部 `X-Api-Signature` 中：
 
 ```py
 # 请求方法

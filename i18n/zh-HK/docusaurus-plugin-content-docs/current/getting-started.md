@@ -51,9 +51,9 @@ $ pip3 install longbridge
 
 **_獲取 App Key, App Secret, Access Token 等信息_**
 
-訪問 [Longbridge OpenAPI](https://open.longbridgeapp.com) 網站，登錄後，進入 “個人中心”。
+訪問 [Longbridge OpenAPI](https://open.longbridgeapp.com) 網站，登錄後，進入“個人中心”。
 
-在頁面上會給出 “應用憑證” 憑證信息，我們拿到以後設置環境變量，便於後面開發使用方便。
+在頁面上會給出“應用憑證”憑證信息，我們拿到以後設置環境變量，便於後面開發使用方便。
 
 ### macOS / Linux 環境下設置環境變量
 
@@ -168,7 +168,7 @@ python account_asset.py
 
 ### 訂閱實時行情
 
-訂閱行情數據請檢查 [開發者中心](https://open.longbridgeapp.com/account) - “行情權限” 是否正確
+訂閱行情數據請檢查 [開發者中心](https://open.longbridgeapp.com/account) - “行情權限”是否正確
 
 - 港股 - BMP 基礎報價，無實時行情推送，無法用 WebSocket 訂閱
 - 美股 - LV1 納斯達克最優報價 (只限 Open API）
@@ -177,7 +177,7 @@ python account_asset.py
 
 :::info
 
-如沒有開通行情權限，可以通過 "長橋" 手機客戶端，並進入 “我的 - 我的行情 - 行情商城“ 購買開通行情權限。
+如沒有開通行情權限，可以通過 "長橋" 手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 
 https://longbridgeapp.com/download
 :::
@@ -256,7 +256,7 @@ Press [Ctrl + c] to quit.
 
 下面我們做一次 [委託下單](https://open.longbridgeapp.com/docs/trade/order/submit) 動作，我們假設要以 50 HKD 買入 `700.HK` 的數量為 `100`。
 
-> NOTE: 為了防止測試買入成功，這裡演示給了一個較低的價格，避免成交。 OpenAPI 操作均等同與線上交易，請謹慎操作，開發調試注意參數細節。
+> NOTE: 為了防止測試買入成功，這裡演示給了一個較低的價格，避免成交。OpenAPI 操作均等同與線上交易，請謹慎操作，開發調試注意參數細節。
 
 創建一個 `submit_order.py` 並寫入下面的代碼：
 

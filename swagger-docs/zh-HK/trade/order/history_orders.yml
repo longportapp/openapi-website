@@ -16,7 +16,7 @@ paths:
         - name: "status"
           type: string[]
           in: query
-          description: "[訂單狀態](../trade-definition#orderstatus)<br/><br/>例如: `status=FilledStatus&status=NewStatus`"
+          description: "[訂單狀態](../trade-definition#orderstatus)<br/><br/>例如：`status=FilledStatus&status=NewStatus`"
           required: false
         - name: side
           type: "string"
@@ -39,11 +39,11 @@ paths:
         - name: "start_at"
           type: "string"
           required: false
-          description: "開始時間，格式為時間戳 (秒)，例如: `1650410999`"
+          description: "開始時間，格式為時間戳 (秒)，例如：`1650410999`"
         - name: "end_at"
           type: "string"
           required: false
-          description: "結束時間，格式為時間戳 (秒)，例如: `1650410999`"
+          description: "結束時間，格式為時間戳 (秒)，例如：`1650410999`"
       responses:
         "200":
           description: "歷史訂單查詢成功"

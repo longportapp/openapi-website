@@ -16,7 +16,7 @@ paths:
         - name: "order_id"
           type: "string"
           required: false
-          description: "订单 ID，用于指定订单 ID 查询，例如: `701276261045858304`"
+          description: "订单 ID，用于指定订单 ID 查询，例如：`701276261045858304`"
       responses:
         "200":
           description: "查询成功"
