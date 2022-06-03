@@ -7,7 +7,7 @@ sidebar_position: 2
 
 ## OrderType
 
-- Description: Order Type
+- Description: HongKong stock support order type
 
 | Enum    | Description                                   |
 | ------- | --------------------------------------------- |
@@ -17,6 +17,19 @@ sidebar_position: 2
 | AO      | At-auction Order                              |
 | ALO     | At-auction Limit Order                        |
 | ODD     | Odd Lots Order                                |
+| LIT     | Limit If Touched                              |
+| MIT     | Market If Touched                             |
+| TSLPAMT | Trailing Limit If Touched (Trailing Amount)   |
+| TSLPPCT | Trailing Limit If Touched (Trailing Percent)  |
+| TSMAMT  | Trailing Market If Touched (Trailing Amount)  |
+| TSMPCT  | Trailing Market If Touched (Trailing Percent) |
+
+- Description: US stock support order type
+
+| Enum    | Description                                   |
+| ------- | --------------------------------------------- |
+| LO      | Limit Order                                   |
+| MO      | Market Order                                  |
 | LIT     | Limit If Touched                              |
 | MIT     | Market If Touched                             |
 | TSLPAMT | Trailing Limit If Touched (Trailing Amount)   |

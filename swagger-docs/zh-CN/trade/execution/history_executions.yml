@@ -17,12 +17,11 @@ paths:
           type: "string"
           in: query
           required: false
-          description: "开始时间，格式为时间戳 (秒)，例如：`1650410999`"
+          description: "开始时间，格式为时间戳 (秒)，例如：`1650410999`。<br/><br/>开始时间为空时，默认为结束时间或当前时间前九十天。"
         - name: "end_at"
           type: "string"
-          in: query
           required: false
-          description: "结束时间，格式为时间戳 (秒)，例如：`1650410999`"
+          description: "结束时间，格式为时间戳 (秒)，例如：`1650410999`。<br/><br/>结束时间为空时，默认为开始时间后九十天或当前时间。"
       responses:
         "200":
           description: "查询成功"
@@ -74,7 +73,7 @@ definitions:
     properties:
       has_more:
         type: boolean
-        description: "是否还有更多数据"
+        description: "是否还有更多数据。<br/><br/>每次查询最大订单数量为 1000，如果查询结果数量超过 1000，那么 has_more 就会为 true"
         required: true
       trades:
         type: "object[]"
