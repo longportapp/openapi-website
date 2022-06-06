@@ -72,3 +72,21 @@ body {
     }
   }
 }
+
+/** Tabs **/
+.tabs-container {
+  .tabs {
+    @apply pl-0 -mb-[5px] -mt-[5px];
+    &__item {
+      @apply text-sm font-normal p-[2px];
+
+      & + .tabs__item {
+        @apply ml-[10px];
+      }
+
+      &:hover {
+        background: unset;
+      }
+    }
+  }
+}
