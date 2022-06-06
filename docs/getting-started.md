@@ -10,20 +10,7 @@ import TabItem from '@theme/TabItem';
 
 ## 前言
 
-Longbridge OpenAPI SDK 基于 Rust 底层提供标准实现，通过 FFI 提供给各类语言使用，目前我们已经发布了 Python、C++ 的 SDK，其他语言的支持后面会陆续推出。
-
-- **Python** - https://github.com/longbridgeapp/openapi-python
-- **C++** - https://github.com/longbridgeapp/openapi-cpp
-
-目前，我们支持如下系统架构：
-
-- Linux - x86_64 & aarch64
-- macOS - x86_64 & aarch64
-- Windows - x86_64 & i686
-
-:::tip
-本文以 Python SDK 为例讲解如何使用 SDK 实现简单的功能。以便大家可以在短的时间内走通 OpenAPI 的几个关键流程，理解 OpenAPI 的机制。
-:::
+[Longbridge OpenAPI SDK](https://github.com/longbridgeapp/openapi-sdk) 基于 Rust 底层提供标准实现，目前我们已经发布了 Python、Node.js、Rust、C++ 的 SDK，其他语言的支持后面会陆续推出。
 
 ## API Host
 
@@ -33,16 +20,47 @@ Longbridge OpenAPI SDK 基于 Rust 底层提供标准实现，通过 FFI 提供�
 
 ## 环境需求
 
-- [Python 3](https://www.python.org/)
-- Pip
+<Tabs groupId="programming-language">
+  <TabItem value="python" label="Python" default>
+    <li><a href="https://www.python.org/">Python 3</a></li>
+    <li>Pip</li>
+  </TabItem>
+  <TabItem value="javascript" label="Javascript">
+    <li><a href="https://nodejs.org/">Node.js</a></li>
+    <li>Yarn</li>
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+    <li><a href="https://www.rust-lang.org/">Rust</a></li>
+  </TabItem>
+</Tabs>
 
 ## 安装 SDK
 
-你可以通过 Pip 安装 SDK，或者直接访问 [Pypi Longbridge](https://pypi.org/project/longbridge/) 页面来下载。
+<Tabs groupId="programming-language">
+  <TabItem value="python" label="Python" default>
 
 ```bash
-$ pip3 install longbridge
+pip3 install longbridge
 ```
+
+  </TabItem>
+  <TabItem value="javascript" label="Javascript">
+
+```bash
+yarn install longbridge
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+```toml
+[dependencies]
+longbridge = "*"
+tokio = { version = "1", features = "rt-multi-thread" }
+```
+
+  </TabItem>
+</Tabs>
 
 下面我们以获取资产为例，演示一下如何使用 SDK。
 
@@ -116,70 +134,113 @@ LONGBRIDGE_ACCESS_TOKEN=xxxxxxx
 
 ### 获取资产总览
 
-创建一个 `account_asset.py` 贴入下面的代码：
-
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>
 
-```py
-import os
-import json
-from longbridge.http import Auth, Config, HttpClient
+创建 `account_asset.py` 贴入下面的代码：
 
-auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
+```python
+from longbridge.openapi import TradeContext, Config
 
-resp = http.get("/v1/asset/account")
-print(json.dumps(resp.data, indent=2))
+config = Config.from_env()
+ctx = TradeContext(config)
+
+resp = ctx.account_balance()
+print(resp)
 ```
 
-  </TabItem>
-  <TabItem value="javascript" label="JavaScript">
-
-```javascript
-// I'm JavaScript
-```
-
-  </TabItem>
-</Tabs>
-
-运行 `account_asset.py` 后，会输出如下：
+运行
 
 ```bash
 python account_asset.py
 ```
 
-```json
-{
-  "list": [
-    {
-      "cash_infos": [
-        {
-          "available_cash": "32966.49",
-          "currency": "HKD",
-          "frozen_cash": "0.00",
-          "redemption_cash": "0",
-          "settling_cash": "0.00",
-          "withdraw_cash": "32966.49"
-        },
-        {
-          "available_cash": "-6582.61",
-          "currency": "USD",
-          "frozen_cash": "5.76",
-          "redemption_cash": "0",
-          "settling_cash": "0.00",
-          "withdraw_cash": "-6582.61"
-        }
-      ],
-      "currency": "HKD",
-      "margin_call": "3105871.08",
-      "max_finance_amount": "1093000",
-      "remaining_finance_amount": "702.348304552590266876",
-      "risk_level": "3",
-      "total_cash": "-2829.14"
+  </TabItem>
+  <TabItem value="javascript" label="JavaScript">
+
+创建 `account_asset.js` 贴入下面的代码：
+
+```javascript
+const { Config, TradeContext } = require("longbridge");
+
+let config = Config.fromEnv();
+let ctx = new TradeContext(config);
+
+ctx
+  .open()
+  .then(() => ctx.accountBalance())
+  .then((resp) => {
+    for (let obj of resp) {
+      console.log(obj.toString());
     }
-  ]
+  });
+```
+
+运行
+
+```bash
+nodejs account_asset.js
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+创建 `main.rs` 贴入下面的代码：
+
+```rust
+use std::sync::Arc;
+
+use longbridge::{trade::TradeContext, Config};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let config = Arc::new(Config::from_env()?);
+    let (ctx, _) = TradeContext::try_new(config).await?;
+
+    let resp = ctx.account_balance().await?;
+    println!("{:?}", resp);
+    Ok(())
 }
+```
+
+运行
+
+```bash
+cargo run
+```
+
+  </TabItem>
+</Tabs>
+
+运行后，会输出如下：
+
+```
+[
+  AccountBalance {
+    total_cash: 503898884.81,
+    max_finance_amount: 0.00,
+    remaining_finance_amount: 501403229.49,
+    risk_level: Some(1),
+    margin_call: 0,
+    currency: "HKD",
+    cash_infos: [
+      CashInfo {
+        withdraw_cash: 501214985.15,
+        available_cash: 501214985.15,
+        frozen_cash: 584438.25,
+        settling_cash: -3897793.90,
+        currency: "HKD",
+      },
+      CashInfo {
+        withdraw_cash: -25546.89,
+        available_cash: -25546.89,
+        frozen_cash: 295768.57,
+        settling_cash: 2326.60,
+        currency: "USD",
+      }
+    ]
+  }
+]
 ```
 
 ### 订阅实时行情
@@ -202,83 +263,141 @@ https://longbridgeapp.com/download
 
 <img src="https://pub.lbkrs.com/files/202205/JjCceNDSqeBJpaWv/SCR-20220507-rnm.png" className="max-w-2xl" />
 
-创建一个 `subscribe_quote.py` 并写入下面的代码：
-
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>
 
-```py
-# 订阅行情数据
-# https://open.longbridgeapp.com/docs/quote/subscribe/subscribe
-import os
-import time
-from longbridge.http import Auth, Config, HttpClient
-from longbridge.ws import ReadyState, WsCallback, WsClient
-# Protobuf 变量定义参见：https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto
-from longbridge.proto.quote_pb2 import (Command, PushQuote, SubscribeRequest, SubscriptionResponse, SubType)
+创建 `subscribe_quote.py` 贴入下面的代码：
 
-class MyWsCallback(WsCallback):
-    def on_push(self, command: int, body: bytes):
-        if command == Command.PushQuoteData:
-            quote = PushQuote()
-            quote.ParseFromString(body)
-            print(f"Received -> {quote}")
-        else:
-            print(f"Received unknown -> {command}")
+```python
+from time import sleep
+from longbridge.openapi import QuoteContext, Config, SubType
 
-    def on_state(self, state: ReadyState):
-        print(f"Received state -> {state}")
 
-auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
-ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
+class EventHandler:
+    def on_event(self, symbol: str, msg):
+        print(symbol, msg)
 
-req = SubscribeRequest(symbol=["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], sub_type=[SubType.QUOTE], is_first_push=True)
-result = ws.send_request(Command.Subscribe, req.SerializeToString())
-resp = SubscriptionResponse()
-resp.ParseFromString(result)
 
-print(f"Subscribed symbol: {resp.sub_list}")
+config = Config.from_env()
+ctx = QuoteContext(config, EventHandler())
 
-print("Waiting for push...\nPress [Ctrl + c] to quit.")
-while True:
-    time.sleep(10)
+symbols = ["700.HK", "AAPL.US", "TSLA.US",
+           "NFLX.US"]
+ctx.subscribe(symbols, [SubType.Quote], True)
+sleep(30)
+```
+
+运行
+
+```bash
+python subscribe_quote.py
 ```
 
   </TabItem>
   <TabItem value="javascript" label="JavaScript">
 
+创建 `subscribe_quote.js` 贴入下面的代码：
+
 ```javascript
-// I'm JavaScript
+const { Config, QuoteContext, SubType } = require("longbridge");
+
+let config = Config.fromEnv();
+let ctx = new QuoteContext(config, (_, event) => console.log(event.toString()));
+
+ctx
+  .open()
+  .then(() =>
+    ctx.subscribe(
+      ["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"],
+      [SubType.Quote],
+      true
+    )
+  );
+```
+
+运行
+
+```bash
+nodejs subscribe_quote.js
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+创建 `main.rs` 贴入下面的代码：
+
+```rust
+use std::sync::Arc;
+
+use longbridge::{
+    quote::{QuoteContext, SubFlags},
+    Config,
+};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let config = Arc::new(Config::from_env()?);
+    let (ctx, mut receiver) = QuoteContext::try_new(config).await?;
+
+    ctx.subscribe(
+        ["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"],
+        SubFlags::QUOTE,
+        true,
+    )
+    .await?;
+
+    while let Some(event) = receiver.recv().await {
+        println!("{:?}", event);
+    }
+    Ok(())
+}
+```
+
+运行
+
+```bash
+cargo run
 ```
 
   </TabItem>
 </Tabs>
 
-启动行情订阅：
-
-```bash
-$ python subscribe_quote.py
-```
-
-我们可以看到这样的结果：
+运行后，会输出如下：
 
 ```
-Received state -> ReadyState.OPEN
-Subscribed symbol:
-
-[symbol: "700.HK"
-sub_type: QUOTE
-, symbol: "AAPL.US"
-sub_type: QUOTE
-, symbol: "TSLA.US"
-sub_type: QUOTE
-, symbol: "NFLX.US"
-sub_type: QUOTE
-]
-
-Waiting for push...
-Press [Ctrl + c] to quit.
+700.HK PushQuote {
+    last_done: 367.000,
+    open: 362.000,
+    high: 369.400,
+    low: 356.000,
+    timestamp: "2022-06-06T08:10:00Z",
+    volume: 22377421,
+    turnover: 8081883405.000,
+    trade_status: Normal,
+    trade_session: Normal
+  }
+AAPL.US PushQuote {
+  last_done: 147.350,
+  open: 150.700,
+  high: 151.000,
+  low: 146.190,
+  timestamp: "2022-06-06T11:57:36Z",
+  volume: 3724407,
+  turnover: 550606662.815,
+  trade_status: Normal,
+  trade_session: Pre
+}
+NFLX.US PushQuote {
+  last_done: 201.250,
+  open: 205.990,
+  high: 205.990,
+  low: 200.110,
+  timestamp: "2022-06-06T11:57:26Z",
+  volume: 137821,
+  turnover: 27888085.590,
+  trade_status: Normal,
+  trade_session: Pre
+}
 ```
 
 ### 委托下单
@@ -287,115 +406,251 @@ Press [Ctrl + c] to quit.
 
 > NOTE: 为了防止测试买入成功，这里演示给了一个较低的价格，避免成交。OpenAPI 操作均等同与线上交易，请谨慎操作，开发调试注意参数细节。
 
-创建一个 `submit_order.py` 并写入下面的代码：
+<Tabs groupId="programming-language">
+  <TabItem value="python" label="Python" default>
 
-```py
-import os
-import json
-from longbridge.http import Auth, Config, HttpClient
+创建 `submit_order.py` 贴入下面的代码：
 
-auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
+```python
+from decimal import Decimal
+from longbridge.openapi import TradeContext, Config, OrderSide, OrderType, TimeInForceType
 
-payload = {
-    "side": "Buy",
-    "symbol": "700.HK",
-    "order_type": "LO",
-    "submitted_price": "50",
-    "submitted_quantity": "200",
-    "time_in_force": "Day",
-    "remark": "Hello from Python SDK"
+config = Config.from_env()
+ctx = TradeContext(config)
+
+resp = ctx.submit_order(
+    side=OrderSide.Buy,
+    symbol="700.HK",
+    order_type=OrderType.LO,
+    submitted_price=Decimal("50"),
+    submitted_quantity=Decimal("200"),
+    time_in_force=TimeInForceType.Day,
+    remark="Hello from Python SDK",
+)
+print(resp)
+```
+
+运行
+
+```bash
+python submit_order.py
+```
+
+  </TabItem>
+  <TabItem value="javascript" label="JavaScript">
+
+创建 `submit_order.js` 贴入下面的代码：
+
+```javascript
+const {
+  Config,
+  TradeContext,
+  SubmitOrderOptions,
+  Decimal,
+  OrderSide,
+  TimeInForceType,
+  OrderType,
+} = require("longbridge");
+
+let config = Config.fromEnv();
+let ctx = new TradeContext(config);
+
+ctx
+  .open()
+  .then(() =>
+    ctx.submitOrder(
+      new SubmitOrderOptions(
+        "700.HK",
+        OrderType.LO,
+        OrderSide.Buy,
+        new Decimal("200"),
+        TimeInForceType.Day
+      ).submittedPrice(new Decimal("50"))
+    )
+  )
+  .then((resp) => console.log(resp.toString()));
+```
+
+运行
+
+```bash
+nodejs submit_order.js
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+创建 `main.rs` 贴入下面的代码：
+
+```rust
+use std::sync::Arc;
+
+use longbridge::{
+    decimal,
+    trade::{OrderSide, OrderType, SubmitOrderOptions, TimeInForceType, TradeContext},
+    Config,
+};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let config = Arc::new(Config::from_env()?);
+    let (ctx, _) = TradeContext::try_new(config).await?;
+
+    let opts = SubmitOrderOptions::new(
+        "700.HK",
+        OrderType::LO,
+        OrderSide::Buy,
+        decimal!(200i32),
+        TimeInForceType::Day,
+    )
+    .submitted_price(decimal!(50i32));
+    let resp = ctx.submit_order(opts).await?;
+    println!("{:?}", resp);
+    Ok(())
 }
-
-try:
-  resp = http.post("/v1/trade/order", payload=payload)
-  print(json.dumps(resp.data, indent=2))
-except Exception as e:
-  print(f"Submit order error\ncode: {e.code}\nmessage: {e.message}")
 ```
 
-执行 `python submit_order.py` 后，会输出如下：
+运行
 
-```json
-{
-  "order_id": "707530744027713536"
-}
+```bash
+cargo run
 ```
 
-加入下单失败，你可能会看到这样的错误信息：
+  </TabItem>
+</Tabs>
+
+运行后，会输出如下：
 
 ```
-Submit order error
-code: 602035
-message: 委托价不符合最小价格变动单位
+SubmitOrderResponse { order_id: "718437534753550336" }
 ```
 
 ### 获取当日订单
 
-```py
-import os
-import json
-from longbridge.http import Auth, Config, HttpClient
+<Tabs groupId="programming-language">
+  <TabItem value="python" label="Python" default>
 
-auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
+创建 `today_orders.py` 贴入下面的代码：
 
-resp = http.get("/v1/trade/order/today")
-print(json.dumps(resp.data, indent=2))
+```python
+from longbridge.openapi import TradeContext, Config
+
+config = Config.from_env()
+ctx = TradeContext(config)
+
+resp = ctx.today_orders()
+print(resp)
 ```
 
-如果前面你有提交订单，你应该会看到这样的结果：
+运行
 
-```json
-{
-  "orders": [
-    {
-      "currency": "HKD",
-      "executed_price": "0",
-      "executed_quantity": "0",
-      "expire_date": "2022-05-10",
-      "last_done": "",
-      "limit_offset": "",
-      "msg": "",
-      "order_id": "707530744027713536",
-      "order_type": "LO",
-      "outside_rth": "UnknownOutsideRth",
-      "price": "50",
-      "quantity": "200",
-      "side": "Buy",
-      "status": "CanceledStatus",
-      "stock_name": "\u817e\u8baf\u63a7\u80a1",
-      "submitted_at": "1651917274",
-      "symbol": "700.HK",
-      "tag": "Normal",
-      "time_in_force": "Day",
-      "trailing_amount": "",
-      "trailing_percent": "",
-      "trigger_at": "0",
-      "trigger_price": "",
-      "trigger_status": "NOT_USED",
-      "updated_at": "1651917561"
-    },
-    {
-      // ...
+```bash
+python today_orders.py
+```
+
+  </TabItem>
+  <TabItem value="javascript" label="JavaScript">
+
+创建 `today_orders.js` 贴入下面的代码：
+
+```javascript
+const { Config, TradeContext } = require("longbridge");
+let config = Config.fromEnv();
+let ctx = new TradeContext(config);
+
+ctx
+  .open()
+  .then(() => ctx.todayOrders())
+  .then((resp) => {
+    for (let obj of resp) {
+      console.log(obj.toString());
     }
-  ]
+  });
+```
+
+运行
+
+```bash
+nodejs today_orders.js
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+创建 `main.rs` 贴入下面的代码：
+
+```rust
+use std::sync::Arc;
+
+use longbridge::{trade::TradeContext, Config};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let config = Arc::new(Config::from_env()?);
+    let (ctx, _) = TradeContext::try_new(config).await?;
+
+    let resp = ctx.today_orders(None).await?;
+    for obj in resp {
+        println!("{:?}", obj);
+    }
+    Ok(())
 }
 ```
 
-上面例子已经完整演示了如何使用 SDK 访问 OpenAPI 的接口，更多其他接口请详细阅读 [Longbridge OpenAPI 文档](https://open.longbridgeapp.com/docs)，根据不同的接口使用。
+运行
+
+```bash
+cargo run
+```
+
+  </TabItem>
+</Tabs>
+
+运行后，会输出如下：
+
+```
+Order {
+  order_id: "718437534753550336",
+  status: NotReported,
+  stock_name: "腾讯控股1",
+  quantity: 200,
+  executed_quantity: None,
+  price: Some(50.000),
+  executed_price: None,
+  submitted_at: 2022-06-06T12:14:16Z,
+  side: Buy,
+  symbol: "700.HK",
+  order_type: LO,
+  last_done: None,
+  trigger_price: Some(0.000),
+  msg: "",
+  tag: Normal,
+  time_in_force: Day,
+  expire_date: Some(NaiveDate(Date { year: 2022, ordinal: 158 })),
+  updated_at: Some(2022-06-06T12:14:16Z),
+  trigger_at: None,
+  trailing_amount: None,
+  trailing_percent: None,
+  limit_offset: None,
+  trigger_status: None,
+  currency: "HKD",
+  outside_rth: nonce
+}
+```
+
+上面例子已经完整演示了如何使用 SDK 访问 OpenAPI 的接口，更多其他接口请详细阅读 [Longbridge OpenAPI 文档](https://longbridgeapp.github.io/openapi-sdk/)，根据不同的接口使用。
 
 ## 更多例子
 
 我们在 Longbridge OpenAPI Python SDK 的 GitHub 仓库中提供了上面几个例子的完整代码，当然后期我们也会持续往里面补充或更新。
 
-https://github.com/longbridgeapp/openapi-python/tree/main/examples
+https://github.com/longbridgeapp/openapi-sdk/tree/master/examples
 
 ## SDK API 文档
 
-Python SDK 的详细 API 文档请访问：
+SDK 的详细 API 文档请访问：
 
-https://longbridge.readthedocs.io/en/latest/api.html
+https://longbridgeapp.github.io/openapi-sdk/
 
 ## 反馈及沟通
 
