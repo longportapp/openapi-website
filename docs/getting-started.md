@@ -5,6 +5,9 @@ title: 快速开始
 id: getting-started
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 ## 前言
 
 Longbridge OpenAPI SDK 基于 Rust 底层提供标准实现，通过 FFI 提供给各类语言使用，目前我们已经发布了 Python、C++ 的 SDK，其他语言的支持后面会陆续推出。
@@ -115,6 +118,9 @@ LONGBRIDGE_ACCESS_TOKEN=xxxxxxx
 
 创建一个 `account_asset.py` 贴入下面的代码：
 
+<Tabs groupId="programming-language">
+  <TabItem value="python" label="Python" default>
+
 ```py
 import os
 import json
@@ -126,6 +132,16 @@ http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
 resp = http.get("/v1/asset/account")
 print(json.dumps(resp.data, indent=2))
 ```
+
+  </TabItem>
+  <TabItem value="javascript" label="JavaScript">
+
+```javascript
+// I'm JavaScript
+```
+
+  </TabItem>
+</Tabs>
 
 运行 `account_asset.py` 后，会输出如下：
 
@@ -188,6 +204,9 @@ https://longbridgeapp.com/download
 
 创建一个 `subscribe_quote.py` 并写入下面的代码：
 
+<Tabs groupId="programming-language">
+  <TabItem value="python" label="Python" default>
+
 ```py
 # 订阅行情数据
 # https://open.longbridgeapp.com/docs/quote/subscribe/subscribe
@@ -225,6 +244,16 @@ print("Waiting for push...\nPress [Ctrl + c] to quit.")
 while True:
     time.sleep(10)
 ```
+
+  </TabItem>
+  <TabItem value="javascript" label="JavaScript">
+
+```javascript
+// I'm JavaScript
+```
+
+  </TabItem>
+</Tabs>
 
 启动行情订阅：
 
