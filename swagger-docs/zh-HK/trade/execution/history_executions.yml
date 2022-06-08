@@ -17,12 +17,11 @@ paths:
           type: "string"
           in: query
           required: false
-          description: "開始時間，格式為時間戳 (秒)，例如：`1650410999`"
+          description: "開始時間，格式為時間戳 (秒)，例如：`1650410999`。<br/><br/>開始時間為空時，默認為結束時間或當前時間前九十天。"
         - name: "end_at"
           type: "string"
-          in: query
           required: false
-          description: "結束時間，格式為時間戳 (秒)，例如：`1650410999`"
+          description: "結束時間，格式為時間戳 (秒)，例如：`1650410999`。<br/><br/>結束時間為空時，默認為開始時間後九十天或當前時間。"
       responses:
         "200":
           description: "查詢成功"
@@ -74,7 +73,7 @@ definitions:
     properties:
       has_more:
         type: boolean
-        description: "是否還有更多數據"
+        description: "是否還有更多數據。<br/><br/>每次查詢最大訂單數量為 1000，如果查詢結果數量超過 1000，那麽 has_more 就會為 true"
         required: true
       trades:
         type: "object[]"

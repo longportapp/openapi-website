@@ -39,11 +39,11 @@ paths:
         - name: "start_at"
           type: "string"
           required: false
-          description: "開始時間，格式為時間戳 (秒)，例如：`1650410999`"
+          description: "開始時間，格式為時間戳 (秒)，例如：`1650410999`。<br/><br/>開始時間為空時，默認為結束時間或當前時間前九十天。"
         - name: "end_at"
           type: "string"
           required: false
-          description: "結束時間，格式為時間戳 (秒)，例如：`1650410999`"
+          description: "結束時間，格式為時間戳 (秒)，例如：`1650410999`。<br/><br/>結束時間為空時，默認為開始時間後九十天或當前時間。"
       responses:
         "200":
           description: "歷史訂單查詢成功"
@@ -116,7 +116,7 @@ definitions:
     properties:
       has_more:
         type: boolean
-        description: "是否還有更多數據"
+        description: "是否還有更多數據。<br/><br/>每次查詢最大訂單數量為 1000，如果查詢結果數量超過 1000，那麽 has_more 就會為 true"
         required: true
       orders:
         type: "object[]"
@@ -127,13 +127,27 @@ definitions:
             "status",
             "stock_name",
             "quantity",
+            "executed_quantity",
+            "price",
+            "executed_price",
             "submitted_at",
             "side",
             "symbol",
             "order_type",
+            "last_done",
+            "trigger_price",
+            "msg",
             "tag",
             "time_in_force",
+            "expire_date",
+            "updated_at",
+            "trigger_at",
+            "trailing_amount",
+            "trailing_percent",
+            "limit_offset",
+            "trigger_status",
             "currency",
+            "outside_rth",
           ]
         properties:
           order_id:
@@ -154,13 +168,14 @@ definitions:
             required: true
           executed_quantity:
             type: "string"
-            description: 成交數量
+            description: 成交數量。<br/><br/>當訂單未成交時為 0
           price:
             type: "string"
-            description: 下單價格
+            description: 下單價格。<br/><br/>當市價條件單未觸發時為空字符串
+            required: true
           executed_price:
             type: "string"
-            description: 成交價格
+            description: 成交價。<br/><br/>當訂單未成交時為 0
           submitted_at:
             type: "string"
             description: 下單時間
@@ -183,13 +198,16 @@ definitions:
             required: true
           last_done:
             type: "string"
-            description: 最近成交價格
+            description: 最近成交價格。<br/><br/>當訂單未成交時為空字符串
+            required: true
           trigger_price:
             type: "string"
-            description: "`LIT` / `MIT` 訂單觸發價格"
+            description: "`LIT` / `MIT` 訂單觸發價格。<br/><br/>當訂單不是 `LIT` / `MIT` 訂單為空字符串"
+            required: true
           msg:
             type: "string"
-            description: 拒絕信息或備註
+            description: 拒絕信息或備註，默認為空字符串。
+            required: true
           tag:
             type: "string"
             description: "訂單標記<br/><br/>
@@ -209,25 +227,33 @@ definitions:
             required: true
           expire_date:
             type: "string"
-            description: 長期單過期時間，格式為 `YYYY-MM-DD`, 例如：`2022-12-05`
+            required: true
+            description: 長期單過期時間，格式為 `YYYY-MM-DD`, 例如：`2022-12-05。<br/><br/>不是長期單時，默認為空字符串。`
           updated_at:
             type: "string"
-            description: 最近更新時間，格式為時間戳 (秒)
+            required: true
+            description: 最近更新時間，格式為時間戳 (秒)，默認為 0。
           trigger_at:
             type: "string"
-            description: 條件單觸發時間，格式為時間戳 (秒)
+            required: true
+            description: 條件單觸發時間，格式為時間戳 (秒)，默認為 0。
           trailing_amount:
             type: "string"
-            description: "`TSLPAMT` / `TSMAMT` 訂單跟蹤金額"
+            required: true
+            description: "`TSLPAMT` / `TSMAMT` 訂單跟蹤金額。<br/><br/>當訂單不是 `TSLPAMT` / `TSMAMT` 訂單時為空字符串。"
           trailing_percent:
             type: "string"
-            description: "`TSLPPCT` / `TSMAPCT` 訂單跟蹤漲跌幅"
+            required: true
+            description: "`TSLPPCT` / `TSMAPCT` 訂單跟蹤漲跌幅。<br/><br/>當訂單不是 `TSLPPCT` / `TSMAPCT` 訂單時為空字符串。"
           limit_offset:
             type: "string"
-            description: "`TSLPAMT` / `TSLPPCT` 訂單指定價差"
+            required: true
+            description: "`TSLPAMT` / `TSLPPCT` 訂單指定價差。<br/><br/>當訂單不是 `TSLPAMT` / `TSLPPCT` 訂單時為空字符串。"
           trigger_status:
             type: "string"
-            description: "條件單觸發狀態<br/><br/>
+            required: true
+            description: "條件單觸發狀態<br/>
+              當訂單不是條件單或條件單未觸發時, 觸發狀態為 NOT_USED<br/><br/>
               **可選值:**<br/>
               `NOT_USED` - 未激活
               `DEACTIVE` - 已失效
@@ -239,7 +265,9 @@ definitions:
             required: true
           outside_rth:
             type: "string"
-            description: 是否允許盤前盤後<br/><br/>
+            required: true
+            description: 是否允許盤前盤後<br/>
+              當訂單不是美股時, 默認為 UnknownOutsideRth<br/><br/>
               **可選值:**<br/>
               `RTH_ONLY` - 不允許盤前盤後<br/>
               `ANY_TIME` - 允許盤前盤後"

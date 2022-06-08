@@ -17,12 +17,11 @@ paths:
           type: "string"
           in: query
           required: false
-          description: "Start time, formatted as a timestamp (second), example: `1650410999`"
+          description: "Start time, formatted as a timestamp (second), example: `1650410999`.<br/><br/> If the start time is null, the default is the 90 days before of the end time or 90 days before of the current time."
         - name: "end_at"
           type: "string"
-          in: query
           required: false
-          description: "End time, formatted as a timestamp (second), example: `1650410999`"
+          description: "End time, formatted as a timestamp (second), example: `1650410999`. <br/><br/> If the end time is null, the default is the current time or 90 days after of the start time."
       responses:
         "200":
           description: "Get History Executions Success"
@@ -74,7 +73,7 @@ definitions:
     properties:
       has_more:
         type: boolean
-        description: "has more executions record"
+        description: "has more orders record.<br/><br/>The maximum number of orders per query is 1000, if the number of results exceeds 1000, then has_more will be true"
         required: true
       trades:
         type: "object[]"
