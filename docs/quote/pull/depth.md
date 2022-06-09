@@ -55,12 +55,12 @@ print(resp)
 | ask         | object[] | 卖盘        |
 | ∟ position  | int32    | 档位        |
 | ∟ price     | string   | 价格        |
-| ∟ volume    | int64    | 挂单辆      |
+| ∟ volume    | int64    | 挂单量      |
 | ∟ order_num | int64    | 订单数量    |
 | bid         | object[] | 买盘        |
 | ∟ position  | int32    | 档位        |
 | ∟ price     | string   | 价格        |
-| ∟ volume    | int64    | 挂单辆      |
+| ∟ volume    | int64    | 挂单量      |
 | ∟ order_num | int64    | 订单数量    |
 
 ### Protobuf

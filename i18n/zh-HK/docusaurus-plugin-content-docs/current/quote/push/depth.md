@@ -24,12 +24,12 @@ sidebar_position: 2
 | ask         | object[] | 賣盤                      |
 | ∟ position  | int32    | 檔位                      |
 | ∟ price     | string   | 價格                      |
-| ∟ volume    | int64    | 掛單輛                    |
+| ∟ volume    | int64    | 掛單量                    |
 | ∟ order_num | int64    | 訂單數量                  |
 | bid         | object[] | 買盤                      |
 | ∟ position  | int32    | 檔位                      |
 | ∟ price     | string   | 價格                      |
-| ∟ volume    | int64    | 掛單輛                    |
+| ∟ volume    | int64    | 掛單量                    |
 | ∟ order_num | int64    | 訂單數量                  |
 
 ### Protobuf
