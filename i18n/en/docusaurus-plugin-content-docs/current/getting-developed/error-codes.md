@@ -1,5 +1,5 @@
 ---
-title: Common Error Codes 
+title: Common Error Codes
 id: error-codes
 slug: /error-codes
 sidebar_position: 10
@@ -8,9 +8,9 @@ sidebar_position: 10
 ### 错误码
 
 | HTTP Status | Code   | Message                | Description                                                        |
-|-------------|--------|------------------------|--------------------------------------------------------------------|
+| ----------- | ------ | ---------------------- | ------------------------------------------------------------------ |
 | 403         | 403201 | signature invalid      | signature is invalid                                               |
-| 403         | 403202 | duplicate request       | Repeat request, same request without replacement `x-timestamp`     |
+| 403         | 403202 | duplicate request      | Repeat request, same request without replacement `x-timestamp`     |
 | 403         | 403203 | apikey illegal         | `App Key` is illegal                                               |
 | 403         | 403205 | ip is not allowed      | IP address is not authorized to access                             |
 | 401         | 401003 | token expired          | `Access Token` expired，please refresh the Token                   |
