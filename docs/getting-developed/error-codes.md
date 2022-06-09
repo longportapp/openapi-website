@@ -10,7 +10,7 @@ sidebar_position: 10
 | HTTP Status | code   | message                | 说明                                     |
 |-------------|--------|------------------------|------------------------------------------|
 | 403         | 403201 | signature invalid      | 签名无效                                 |
-| 403         | 403202 | duplicae request       | 重复请求，同一个请求没有更换 X-Timestamp |
+| 403         | 403202 | duplicate request       | 重复请求，同一个请求没有更换 X-Timestamp |
 | 403         | 403203 | apikey illegal         | App Key 无效                             |
 | 403         | 403205 | ip is not allowed      | IP 地址无权访问                          |
 | 401         | 401003 | token expired          | Access Token 已过期，请刷新 Access Token |
