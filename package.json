@@ -9,8 +9,8 @@
     "dev": "yarn dev:docs",
     "dev:en": "yarn dev:docs --locale en",
     "dev:zh-HK": "yarn dev:docs --locale zh-HK",
-    "dev:docs": "STAGE=dev docusaurus start --port=8000",
-    "dev:swagger": "WATCH=1 node swagger-watch.js",
+    "dev:docs": "cross-env STAGE=dev docusaurus start --port=8000",
+    "dev:swagger": "cross-env WATCH=1 node swagger-watch.js",
     "build:swagger": "node swagger-watch.js",
     "build": "yarn clear && yarn build:swagger && yarn build:canary",
     "build:release": "yarn clear && yarn build:swagger && docusaurus build --out-dir dist",
@@ -24,8 +24,8 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-beta.18",
-    "@docusaurus/preset-classic": "2.0.0-beta.18",
+    "@docusaurus/core": "2.0.0-beta.21",
+    "@docusaurus/preset-classic": "2.0.0-beta.21",
     "@mdx-js/react": "^1.6.22",
     "@saucelabs/theme-github-codeblock": "^0.1.1",
     "ahooks": "^3.3.10",
@@ -40,9 +40,10 @@
     "tailwindcss": "^3.0.24"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "2.0.0-beta.18",
+    "@docusaurus/module-type-aliases": "2.0.0-beta.21",
     "@tsconfig/docusaurus": "^1.0.5",
     "concurrently": "^7.0.0",
+    "cross-env": "^7.0.3",
     "docusaurus-plugin-sass": "^0.2.2",
     "js-yaml": "^4.1.0",
     "json-beautify": "^1.1.1",

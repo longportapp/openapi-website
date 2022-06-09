@@ -5,22 +5,12 @@ title: Getting Started
 id: getting-started
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 ## Foreword
 
-Longbridge OpenAPI SDK is implemented based on Rust, and support other languages through FFI. At present, we have released SDK for Python and C++, and support for other languages will be launched in the future.
-
-- **Python** - https://github.com/longbridgeapp/openapi-python
-- **C++** - https://github.com/longbridgeapp/openapi-cpp
-
-Currently, we support the following systems:
-
-- Linux - x86_64 & aarch64
-- macOS - x86_64 & aarch64
-- Windows - x86_64 & i686
-
-:::tip
-This article takes the Python SDK as an example to explain how to use the SDK to implement simple functions. So that everyone can walk through several key processes of OpenAPI in a short time and understand the mechanism of OpenAPI.
-:::
+Longbridge OpenAPI SDK is implemented based on Rust we have released SDK for Python, Node.js, Rust and C++, and support for other languages will be launched in the future.
 
 ## API Host
 
@@ -30,18 +20,47 @@ This article takes the Python SDK as an example to explain how to use the SDK to
 
 ## Environment Requirements
 
-- [Python 3](https://www.python.org/)
-- Pip
+<Tabs groupId="programming-language">
+  <TabItem value="python" label="Python" default>
+    <li><a href="https://www.python.org/">Python 3</a></li>
+    <li>Pip</li>
+  </TabItem>
+  <TabItem value="javascript" label="Javascript">
+    <li><a href="https://nodejs.org/">Node.js</a></li>
+    <li>Yarn</li>
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+    <li><a href="https://www.rust-lang.org/">Rust</a></li>
+  </TabItem>
+</Tabs>
 
 ## Install SDK
 
-You can install the SDK via Pip, or directly visit the [Pypi Longbridge](https://pypi.org/project/longbridge/) page to download.
+<Tabs groupId="programming-language">
+  <TabItem value="python" label="Python" default>
 
 ```bash
-$ pip install longbridge
+pip3 install longbridge
 ```
 
-> NOTE: In macOS system, the `pip` command default is Python 2. You may use `pip3` for use Python 3 version of Pypi.
+  </TabItem>
+  <TabItem value="javascript" label="Javascript">
+
+```bash
+yarn install longbridge
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+```toml
+[dependencies]
+longbridge = "*"
+tokio = { version = "1", features = "rt-multi-thread" }
+```
+
+  </TabItem>
+</Tabs>
 
 Let's take obtaining assets as an example to demonstrate how to use the SDK.
 
@@ -117,57 +136,113 @@ Please pay attention to protect your **Access Token** information, anyone who ge
 
 ### Get Account Balance
 
-Create an `account_asset.py` and paste the code below:
+<Tabs groupId="programming-language">
+  <TabItem value="python" label="Python" default>
 
-```py
-import os
-import json
-from longbridge.http import Auth, Config, HttpClient
+Cteate `account_asset.py` and paste the code below:
 
-auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
+```python
+from longbridge.openapi import TradeContext, Config
 
-resp = http.get("/v1/asset/account")
-print(json.dumps(resp.data, indent=2))
+config = Config.from_env()
+ctx = TradeContext(config)
+
+resp = ctx.account_balance()
+print(resp)
 ```
 
-After running `account_asset.py`, the output is as follows:
+Run it
 
 ```bash
 python account_asset.py
 ```
 
-```json
-{
-  "list": [
-    {
-      "cash_infos": [
-        {
-          "available_cash": "32966.49",
-          "currency": "HKD",
-          "frozen_cash": "0.00",
-          "redemption_cash": "0",
-          "settling_cash": "0.00",
-          "withdraw_cash": "32966.49"
-        },
-        {
-          "available_cash": "-6582.61",
-          "currency": "USD",
-          "frozen_cash": "5.76",
-          "redemption_cash": "0",
-          "settling_cash": "0.00",
-          "withdraw_cash": "-6582.61"
-        }
-      ],
-      "currency": "HKD",
-      "margin_call": "3105871.08",
-      "max_finance_amount": "1093000",
-      "remaining_finance_amount": "702.348304552590266876",
-      "risk_level": "3",
-      "total_cash": "-2829.14"
+  </TabItem>
+  <TabItem value="javascript" label="JavaScript">
+
+Cteate `account_asset.js` and paste the code below:
+
+```javascript
+const { Config, TradeContext } = require("longbridge");
+
+let config = Config.fromEnv();
+let ctx = new TradeContext(config);
+
+ctx
+  .open()
+  .then(() => ctx.accountBalance())
+  .then((resp) => {
+    for (let obj of resp) {
+      console.log(obj.toString());
     }
-  ]
+  });
+```
+
+Run it
+
+```bash
+nodejs account_asset.js
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+Cteate `main.rs` and paste the code below:
+
+```rust
+use std::sync::Arc;
+
+use longbridge::{trade::TradeContext, Config};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let config = Arc::new(Config::from_env()?);
+    let (ctx, _) = TradeContext::try_new(config).await?;
+
+    let resp = ctx.account_balance().await?;
+    println!("{:?}", resp);
+    Ok(())
 }
+```
+
+Run it
+
+```bash
+cargo run
+```
+
+  </TabItem>
+</Tabs>
+
+After running, the output is as follows:
+
+```
+[
+  AccountBalance {
+    total_cash: 503898884.81,
+    max_finance_amount: 0.00,
+    remaining_finance_amount: 501403229.49,
+    risk_level: Some(1),
+    margin_call: 0,
+    currency: "HKD",
+    cash_infos: [
+      CashInfo {
+        withdraw_cash: 501214985.15,
+        available_cash: 501214985.15,
+        frozen_cash: 584438.25,
+        settling_cash: -3897793.90,
+        currency: "HKD",
+      },
+      CashInfo {
+        withdraw_cash: -25546.89,
+        available_cash: -25546.89,
+        frozen_cash: 295768.57,
+        settling_cash: 2326.60,
+        currency: "USD",
+      }
+    ]
+  }
+]
 ```
 
 ### Subscribe Quote
@@ -190,70 +265,141 @@ When you have the correct Quote authority, it might look like this:
 
 <img src="https://pub.lbkrs.com/files/202205/VeSgQksvfu3Q2iPN/SCR-20220510-gkx.png" className="max-w-2xl" />
 
-Create an `subscribe_quote.py` and paste the code below:
+<Tabs groupId="programming-language">
+  <TabItem value="python" label="Python" default>
 
-```py
-# Subscribe Quote
-# https://open.longbridgeapp.com/docs/quote/subscribe/subscribe
-import os
-import time
-from longbridge.http import Auth, Config, HttpClient
-from longbridge.ws import ReadyState, WsCallback, WsClient
-# Protobuf variables definition：https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto
-from longbridge.proto.quote_pb2 import (Command, PushQuote, SubscribeRequest, SubscriptionResponse, SubType)
+Create `subscribe_quote.py` and paste the code below:
 
-class MyWsCallback(WsCallback):
-    def on_push(self, command: int, body: bytes):
-        if command == Command.PushQuoteData:
-            quote = PushQuote()
-            quote.ParseFromString(body)
-            print(f"Received -> {quote}")
-        else:
-            print(f"Received unknown -> {command}")
+```python
+from time import sleep
+from longbridge.openapi import QuoteContext, Config, SubType
 
-    def on_state(self, state: ReadyState):
-        print(f"Received state -> {state}")
 
-auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
-ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
+class EventHandler:
+    def on_event(self, symbol: str, msg):
+        print(symbol, msg)
 
-req = SubscribeRequest(symbol=["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], sub_type=[SubType.QUOTE], is_first_push=True)
-result = ws.send_request(Command.Subscribe, req.SerializeToString())
-resp = SubscriptionResponse()
-resp.ParseFromString(result)
 
-print(f"Subscribed symbol: {resp.sub_list}")
+config = Config.from_env()
+ctx = QuoteContext(config, EventHandler())
 
-print("Waiting for push...\nPress [Ctrl + c] to quit.")
-while True:
-    time.sleep(10)
+symbols = ["700.HK", "AAPL.US", "TSLA.US",
+           "NFLX.US"]
+ctx.subscribe(symbols, [SubType.Quote], True)
+sleep(30)
 ```
 
-Start to subscribe quote:
+Run it
 
 ```bash
-$ python subscribe_quote.py
+python subscribe_quote.py
 ```
 
-We can see the result like this:
+  </TabItem>
+  <TabItem value="javascript" label="JavaScript">
+
+Create `subscribe_quote.js` and paste the code below：
+
+```javascript
+const { Config, QuoteContext, SubType } = require("longbridge");
+
+let config = Config.fromEnv();
+let ctx = new QuoteContext(config, (_, event) => console.log(event.toString()));
+
+ctx
+  .open()
+  .then(() =>
+    ctx.subscribe(
+      ["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"],
+      [SubType.Quote],
+      true
+    )
+  );
+```
+
+Run it
+
+```bash
+nodejs subscribe_quote.js
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+Create `main.rs` and paste the code below:
+
+```rust
+use std::sync::Arc;
+
+use longbridge::{
+    quote::{QuoteContext, SubFlags},
+    Config,
+};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let config = Arc::new(Config::from_env()?);
+    let (ctx, mut receiver) = QuoteContext::try_new(config).await?;
+
+    ctx.subscribe(
+        ["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"],
+        SubFlags::QUOTE,
+        true,
+    )
+    .await?;
+
+    while let Some(event) = receiver.recv().await {
+        println!("{:?}", event);
+    }
+    Ok(())
+}
+```
+
+Run it
+
+```bash
+cargo run
+```
+
+  </TabItem>
+</Tabs>
+
+After running, the output is as follows:
 
 ```
-Received state -> ReadyState.OPEN
-Subscribed symbol:
-
-[symbol: "700.HK"
-sub_type: QUOTE
-, symbol: "AAPL.US"
-sub_type: QUOTE
-, symbol: "TSLA.US"
-sub_type: QUOTE
-, symbol: "NFLX.US"
-sub_type: QUOTE
-]
-
-Waiting for push...
-Press [Ctrl + c] to quit.
+700.HK PushQuote {
+    last_done: 367.000,
+    open: 362.000,
+    high: 369.400,
+    low: 356.000,
+    timestamp: "2022-06-06T08:10:00Z",
+    volume: 22377421,
+    turnover: 8081883405.000,
+    trade_status: Normal,
+    trade_session: Normal
+  }
+AAPL.US PushQuote {
+  last_done: 147.350,
+  open: 150.700,
+  high: 151.000,
+  low: 146.190,
+  timestamp: "2022-06-06T11:57:36Z",
+  volume: 3724407,
+  turnover: 550606662.815,
+  trade_status: Normal,
+  trade_session: Pre
+}
+NFLX.US PushQuote {
+  last_done: 201.250,
+  open: 205.990,
+  high: 205.990,
+  low: 200.110,
+  timestamp: "2022-06-06T11:57:26Z",
+  volume: 137821,
+  turnover: 27888085.590,
+  trade_status: Normal,
+  trade_session: Pre
+}
 ```
 
 ### Submit Order
@@ -262,99 +408,235 @@ Next, we will do a [submit order](https://open.longbridgeapp.com/docs/trade/orde
 
 > NOTE: In order to prevent a successful test buy, the demo here gives a lower price and avoids the transaction. OpenAPI operations are equivalent to online transactions, please operate with caution, and pay attention to parameter details during development and debugging.
 
-Create an `submit_order.py` and paste the code below:
+<Tabs groupId="programming-language">
+  <TabItem value="python" label="Python" default>
 
-```py
-import os
-import json
-from longbridge.http import Auth, Config, HttpClient
+Create `submit_order.py` and paste the code below:
 
-auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
+```python
+from decimal import Decimal
+from longbridge.openapi import TradeContext, Config, OrderSide, OrderType, TimeInForceType
 
-payload = {
-    "side": "Buy",
-    "symbol": "700.HK",
-    "order_type": "LO",
-    "submitted_price": "50",
-    "submitted_quantity": "200",
-    "time_in_force": "Day",
-    "remark": "Hello from Python SDK"
+config = Config.from_env()
+ctx = TradeContext(config)
+
+resp = ctx.submit_order(
+    side=OrderSide.Buy,
+    symbol="700.HK",
+    order_type=OrderType.LO,
+    submitted_price=Decimal("50"),
+    submitted_quantity=Decimal("200"),
+    time_in_force=TimeInForceType.Day,
+    remark="Hello from Python SDK",
+)
+print(resp)
+```
+
+Run it
+
+```bash
+python submit_order.py
+```
+
+  </TabItem>
+  <TabItem value="javascript" label="JavaScript">
+
+Create `submit_order.js` and paste the code below:
+
+```javascript
+const {
+  Config,
+  TradeContext,
+  SubmitOrderOptions,
+  Decimal,
+  OrderSide,
+  TimeInForceType,
+  OrderType,
+} = require("longbridge");
+
+let config = Config.fromEnv();
+let ctx = new TradeContext(config);
+
+ctx
+  .open()
+  .then(() =>
+    ctx.submitOrder(
+      new SubmitOrderOptions(
+        "700.HK",
+        OrderType.LO,
+        OrderSide.Buy,
+        new Decimal("200"),
+        TimeInForceType.Day
+      ).submittedPrice(new Decimal("50"))
+    )
+  )
+  .then((resp) => console.log(resp.toString()));
+```
+
+Run it
+
+```bash
+nodejs submit_order.js
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+Create `main.rs` and paste the code below:
+
+```rust
+use std::sync::Arc;
+
+use longbridge::{
+    decimal,
+    trade::{OrderSide, OrderType, SubmitOrderOptions, TimeInForceType, TradeContext},
+    Config,
+};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let config = Arc::new(Config::from_env()?);
+    let (ctx, _) = TradeContext::try_new(config).await?;
+
+    let opts = SubmitOrderOptions::new(
+        "700.HK",
+        OrderType::LO,
+        OrderSide::Buy,
+        decimal!(200i32),
+        TimeInForceType::Day,
+    )
+    .submitted_price(decimal!(50i32));
+    let resp = ctx.submit_order(opts).await?;
+    println!("{:?}", resp);
+    Ok(())
 }
-
-try:
-  resp = http.post("/v1/trade/order", payload=payload)
-  print(json.dumps(resp.data, indent=2))
-except Exception as e:
-  print(f"Submit order error\ncode: {e.code}\nmessage: {e.message}")
 ```
 
-After running `python submit_order.py`, the output will be as follows:
+Run it
 
-```json
-{
-  "order_id": "707530744027713536"
-}
+```bash
+cargo run
 ```
 
-If submit the order fails, you may see an error message like this:
+  </TabItem>
+</Tabs>
+
+After running, the output is as follows:
 
 ```
-Submit order error
-code: 602035
-message: 委托价不符合最小价格变动单位
+SubmitOrderResponse { order_id: "718437534753550336" }
 ```
 
 ### Get Today Order
 
-```py
-import os
-import json
-from longbridge.http import Auth, Config, HttpClient
+<Tabs groupId="programming-language">
+  <TabItem value="python" label="Python" default>
 
-auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
+Create `today_orders.py` and paste the code below:
 
-resp = http.get("/v1/trade/order/today")
-print(json.dumps(resp.data, indent=2))
+```python
+from longbridge.openapi import TradeContext, Config
+
+config = Config.from_env()
+ctx = TradeContext(config)
+
+resp = ctx.today_orders()
+print(resp)
 ```
 
-If you submitted an order earlier, you should see something like this:
+Run it
 
-```json
-{
-  "orders": [
-    {
-      "currency": "HKD",
-      "executed_price": "0",
-      "executed_quantity": "0",
-      "expire_date": "2022-05-10",
-      "last_done": "",
-      "limit_offset": "",
-      "msg": "",
-      "order_id": "707530744027713536",
-      "order_type": "LO",
-      "outside_rth": "UnknownOutsideRth",
-      "price": "50",
-      "quantity": "200",
-      "side": "Buy",
-      "status": "CanceledStatus",
-      "stock_name": "\u817e\u8baf\u63a7\u80a1",
-      "submitted_at": "1651917274",
-      "symbol": "700.HK",
-      "tag": "Normal",
-      "time_in_force": "Day",
-      "trailing_amount": "",
-      "trailing_percent": "",
-      "trigger_at": "0",
-      "trigger_price": "",
-      "trigger_status": "NOT_USED",
-      "updated_at": "1651917561"
-    },
-    {
-      // ...
+```bash
+python today_orders.py
+```
+
+  </TabItem>
+  <TabItem value="javascript" label="JavaScript">
+
+Create `today_orders.js` and paste the code below:
+
+```javascript
+const { Config, TradeContext } = require("longbridge");
+let config = Config.fromEnv();
+let ctx = new TradeContext(config);
+
+ctx
+  .open()
+  .then(() => ctx.todayOrders())
+  .then((resp) => {
+    for (let obj of resp) {
+      console.log(obj.toString());
     }
-  ]
+  });
+```
+
+Run it
+
+```bash
+nodejs today_orders.js
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+Create `main.rs` and paste the code below:
+
+```rust
+use std::sync::Arc;
+
+use longbridge::{trade::TradeContext, Config};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let config = Arc::new(Config::from_env()?);
+    let (ctx, _) = TradeContext::try_new(config).await?;
+
+    let resp = ctx.today_orders(None).await?;
+    for obj in resp {
+        println!("{:?}", obj);
+    }
+    Ok(())
+}
+```
+
+Run it
+
+```bash
+cargo run
+```
+
+  </TabItem>
+</Tabs>
+
+After running, the output is as follows:
+
+```
+Order {
+  order_id: "718437534753550336",
+  status: NotReported,
+  stock_name: "腾讯控股1",
+  quantity: 200,
+  executed_quantity: None,
+  price: Some(50.000),
+  executed_price: None,
+  submitted_at: 2022-06-06T12:14:16Z,
+  side: Buy,
+  symbol: "700.HK",
+  order_type: LO,
+  last_done: None,
+  trigger_price: Some(0.000),
+  msg: "",
+  tag: Normal,
+  time_in_force: Day,
+  expire_date: Some(NaiveDate(Date { year: 2022, ordinal: 158 })),
+  updated_at: Some(2022-06-06T12:14:16Z),
+  trigger_at: None,
+  trailing_amount: None,
+  trailing_percent: None,
+  limit_offset: None,
+  trigger_status: None,
+  currency: "HKD",
+  outside_rth: nonce
 }
 ```
 
@@ -364,13 +646,13 @@ The above example has fully demonstrated how to use the SDK to access the OpenAP
 
 We provide the complete code of the above examples in the GitHub repository of Longbridge OpenAPI Python SDK, and we will continue to add or update it later.
 
-https://github.com/longbridgeapp/openapi-python/tree/main/examples
+https://github.com/longbridgeapp/openapi-sdk/tree/master/examples
 
 ## SDK API Document
 
-For detailed Python SDK API document, please visit:
+For detailed SDK API document, please visit:
 
-https://longbridge.readthedocs.io/en/latest/api.html
+https://longbridgeapp.github.io/openapi-sdk/
 
 ## Contact & Feedback
 
