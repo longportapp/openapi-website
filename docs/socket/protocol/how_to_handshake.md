@@ -15,7 +15,7 @@ sidebar_position: 2
 
 ## TCP 链接如何握手
 
-客户端发向服务端发送 2 个字节的我手包。
+客户端发向服务端发送 2 个字节的握手包。
 
 ### 结构
 
@@ -58,8 +58,8 @@ WebSocket 在从 HTTP 升级升 WebSocket 的过程中，我们可以读取 HTTP
 | 字段     | 类型 | 说明          |
 | -------- | ---- | ------------- |
 | version  | int  | 仅支持：1     |
-| codec    | int  | 目前仅支持：1 |
-| platform | int  | 写死：9       |
+| codec    | int  | 仅支持：1 |
+| platform | int  | 默认：9       |
 
 ### 例子
 
