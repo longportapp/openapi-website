@@ -19,15 +19,12 @@ paths:
         value: |
           # 获取账户资金
           # https://open.longbridgeapp.com/docs/trade/asset/account
-          import os
-          import json
-          from longbridge.http import Auth, Config, HttpClient
+          from longbridge.openapi import TradeContext, Config
 
-          auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-          http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
-
-          resp = http.get("/v1/asset/account")
-          print(json.dumps(resp.data, indent=2))
+          config = Config.from_env()
+          ctx = TradeContext(config)
+          resp = ctx.account_balance()
+          print(resp)
       response_body:
         {
           "code": 0,
@@ -42,6 +39,9 @@ paths:
                     "risk_level": "1",
                     "margin_call": "2598051051.50",
                     "currency": "HKD",
+                    "net_assets": "24145.90",
+                    "init_margin": "1540.09",
+                    "maintenance_margin": "1540.09",
                     "cash_infos":
                       [
                         {
@@ -77,6 +77,9 @@ definitions:
           - risk_level
           - margin_call
           - currency
+          - net_assets
+          - init_margin
+          - maintenance_margin
         properties:
           total_cash:
             type: "string"
@@ -92,15 +95,31 @@ definitions:
             required: true
           risk_level:
             type: "string"
-            description: 风控等级 <br/> <br/> <b>可选值:</b><br/> `1` - 低风险 <br/> `2` - 中低风险<br/> `3` - 中风险<br/> `4` - 中高风险 <br/> `5` - 高风险
+            description: 风控等级 <br/> <br/> <b>可选值:</b><br/> `0` - 安全 <br/> `1` - 中风险<br/> `2` - 预警<br/> `3` - 危险
             required: true
           margin_call:
             type: "string"
             description: 追缴保证金
             required: true
+          net_assets:
+            type: "string"
+            description: 净资产
+            required: true
+          init_margin:
+            type: "string"
+            description: 初始保证金
+            required: true
+          maintenance_margin:
+            type: "string"
+            description: 维持保证金
+            required: true
           currency:
             type: "string"
             description: 币种
+            required: true
+          market:
+            type: "string"
+            description: 市场
             required: true
           cash_infos:
             type: "object[]"

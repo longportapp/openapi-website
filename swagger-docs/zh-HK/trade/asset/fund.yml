@@ -24,15 +24,11 @@ paths:
         value: |
           # 獲取基金持倉
           # https://open.longbridgeapp.com/docs/trade/asset/fund
-          import os
-          import json
-          from longbridge.http import Auth, Config, HttpClient
+          from longbridge.openapi import TradeContext, Config
 
-          auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-          http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
-
-          resp = http.get("/v1/asset/fund")
-          print(json.dumps(resp.data, indent=2))
+          config = Config.from_env()
+          ctx = TradeContext(config)
+          resp = ctx.fund_positions()
       response_body:
         {
           "code": 0,
@@ -51,7 +47,7 @@ paths:
                           "holding_units": "5.000",
                           "current_net_asset_value": "0",
                           "cost_net_asset_value": "0.00",
-                          "net_asset_value_day": 1649865600,
+                          "net_asset_value_day": "1649865600",
                         },
                       ],
                   },
