@@ -128,3 +128,114 @@ enum SubType {
   TRADE = 4;
 }
 ```
+
+### SecurityType
+
+| ID  | 描述     |
+| --- | -------- |
+| 0   | 所有类型 |
+| 1   | 股票     |
+| 2   | ETF      |
+| 3   | 指数     |
+| 4   | Option   |
+| 5   | 指数     |
+| 6   | 指数     |
+| 7   | 指数     |
+| 8   | 指数     |
+| 9   | 指数     |
+| 10  | 指数     |
+
+### CalcIndex - 计算指标
+
+| ID  | 描述         | 支持的标的类型   |
+| --- | ------------ | ---------------- |
+| 1   | 最新价       | 所有类型         |
+| 2   | 涨跌额       | 所有类型         |
+| 3   | 涨跌幅       | 所有类型         |
+| 4   | 成交量       | 所有类型         |
+| 5   | 成交额       | 所有类型         |
+| 6   | 年初至今涨幅 | 期权、轮证不支持 |
+| 7   | 换手率       | 期权、轮证不支持 |
+| 8   | 总市值       | 期权、轮证不支持 |
+| 9   | 资金流向     | 期权、轮证不支持 |
+| 10  | 振幅         | 期权、轮证不支持 |
+| 11  | 量比         | 期权、轮证不支持 |
+| 12  | 市盈率 (TTM) | 期权、轮证不支持 |
+| 13  | 市净率       | 期权、轮证不支持 |
+| 14  | 股息率 (TTM) | 期权、轮证不支持 |
+| 15  | 五日涨幅     | 期权、轮证不支持 |
+| 16  | 十日涨幅     | 期权、轮证不支持 |
+| 17  | 半年涨幅     | 期权、轮证不支持 |
+| 18  | 五分钟涨幅   | 期权、轮证不支持 |
+| 19  | 到期日       | 仅期权、轮证支持 |
+| 20  | 行权价       | 仅期权、轮证支持 |
+| 21  | 上限价       | 仅轮证支持       |
+| 22  | 下限价       | 仅轮证支持       |
+| 23  | 街货量       | 仅轮证支持       |
+| 24  | 街货比       | 仅轮证支持       |
+| 24  | 街货比       | 仅轮证支持       |
+| 24  | 街货比       | 仅轮证支持       |
+| 25  | 溢价率       | 仅轮证支持       |
+| 26  | 价内/价外    | 仅轮证支持       |
+| 27  | 隐含波动率   | 仅期权、轮证支持 |
+| 28  | 对冲值       | 仅轮证支持       |
+| 29  | 收回价       | 仅轮证支持       |
+| 30  | 距收回价     | 仅轮证支持       |
+| 31  | 有效杠杆     | 仅轮证支持       |
+| 32  | 杠杆比率     | 仅轮证支持       |
+| 33  | 换股比率     | 仅轮证支持       |
+| 34  | 打和点       | 仅轮证支持       |
+| 35  | 未平仓数     | 仅期权支持       |
+| 36  | Delta        | 仅期权支持       |
+| 37  | Gamma        | 仅期权支持       |
+| 38  | Theta        | 仅期权支持       |
+| 39  | Vega         | 仅期权支持       |
+| 39  | Rho          | 仅期权支持       |
+
+#### Protobuf
+
+```protobuf
+enum CalcIndex {
+  CALCINDEX_UNKNOWN = 0;
+  CALCINDEX_LAST_DONE = 1;
+  CALCINDEX_CHANGE_VAL = 2;
+  CALCINDEX_CHANGE_RATE = 3;
+  CALCINDEX_VOLUME = 4;
+  CALCINDEX_TURNOVER = 5;
+  CALCINDEX_YTD_CHANGE_RATE = 6;
+  CALCINDEX_TURNOVER_RATE = 7;
+  CALCINDEX_TOTAL_MARKET_VALUE = 8;
+  CALCINDEX_CAPITAL_FLOW = 9;
+  CALCINDEX_AMPLITUDE = 10;
+  CALCINDEX_VOLUME_RATIO = 11;
+  CALCINDEX_PE_TTM_RATIO = 12;
+  CALCINDEX_PB_RATIO = 13;
+  CALCINDEX_DIVIDEND_RATIO_TTM = 14;
+  CALCINDEX_FIVE_DAY_CHANGE_RATE = 15;
+  CALCINDEX_TEN_DAY_CHANGE_RATE = 16;
+  CALCINDEX_HALF_YEAR_CHANGE_RATE = 17;
+  CALCINDEX_FIVE_MINUTES_CHANGE_RATE = 18;
+  CALCINDEX_EXPIRY_DATE = 19;
+  CALCINDEX_STRIKE_PRICE = 20;
+  CALCINDEX_UPPER_STRIKE_PRICE = 21;
+  CALCINDEX_LOWER_STRIKE_PRICE = 22;
+  CALCINDEX_OUTSTANDING_QTY = 23;
+  CALCINDEX_OUTSTANDING_RATIO = 24;
+  CALCINDEX_PREMIUM = 25;
+  CALCINDEX_ITM_OTM = 26;
+  CALCINDEX_IMPLIED_VOLATILITY = 27;
+  CALCINDEX_WARRANT_DELTA = 28;
+  CALCINDEX_CALL_PRICE = 29;
+  CALCINDEX_TO_CALL_PRICE = 30;
+  CALCINDEX_EFFECTIVE_LEVERAGE = 31;
+  CALCINDEX_LEVERAGE_RATIO = 32;
+  CALCINDEX_CONVERSION_RATIO = 33;
+  CALCINDEX_BALANCE_POINT = 34;
+  CALCINDEX_OPEN_INTEREST = 35;
+  CALCINDEX_DELTA = 36;
+  CALCINDEX_GAMMA = 37;
+  CALCINDEX_THETA = 38;
+  CALCINDEX_VEGA = 39;
+  CALCINDEX_RHO = 40;
+}
+```
