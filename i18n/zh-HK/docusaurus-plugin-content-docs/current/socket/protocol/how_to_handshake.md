@@ -59,7 +59,7 @@ WebSocket 在從 HTTP 升級升 WebSocket 的過程中，我們可以讀取 HTTP
 | -------- | ---- | ------------- |
 | version  | int  | 僅支持：1     |
 | codec    | int  | 目前僅支持：1 |
-| platform | int  | 默认：9，代表 Openapi      |
+| platform | int  | 默认：9，代表 OpenAPI      |
 
 ### 例子
 
