@@ -13,7 +13,7 @@ slug: overview
         <td>功能简介</td>
     </tr>
     <tr>
-        <td rowspan="16">拉取</td>
+        <td rowspan="19">拉取</td>
         <td><a href="./pull/static">获取标的基础信息</a></td>
     </tr>
     <tr>
@@ -60,6 +60,15 @@ slug: overview
     </tr>
     <tr>
         <td><a href="./pull/trade-day">获取市场交易日</a></td>
+    </tr>
+     <tr>
+        <td><a href="./pull/capital-flow-intraday">获取标的当日资金流向</a></td>
+    </tr>
+    <tr>
+        <td><a href="./pull/capital-distribution">获取标的当日资金分布</a></td>
+    </tr>
+    <tr>
+        <td><a href="./pull/calc-index">获取标的计算指标</a></td>
     </tr>
     <tr>
         <td rowspan="3">订阅</td>

@@ -39,8 +39,8 @@ from longbridge.openapi import QuoteContext, Config
 config = Config.from_env()
 ctx = QuoteContext(config)
 
-# resp = ctx.brokers("700.HK")
-# print(resp)
+resp = ctx.capital_distribution("700.HK")
+print(resp)
 ```
 
 ## Response

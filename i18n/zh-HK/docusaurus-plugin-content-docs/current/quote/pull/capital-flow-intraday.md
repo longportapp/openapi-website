@@ -1,14 +1,14 @@
 ---
 id: quote_capital_flow_intraday
-title: 获取标的当日资金流向
+title: 獲取標的當日資金流向
 slug: capital-flow-intraday
 sidebar_position: 17
 ---
 
-该接口用于获取标的当日的资金流向。
+該接口用於獲取標的當日的資金流向。
 
 :::info
-[业务指令](../../socket/protocol/request)：`24`
+[業務指令](../../socket/protocol/request)：`24`
 :::
 
 ## Request
@@ -17,7 +17,7 @@ sidebar_position: 17
 
 | Name   | Type   | Required | Description                                          |
 | ------ | ------ | -------- | ---------------------------------------------------- |
-| symbol | string | 是       | 标的代码，使用 `ticker.region` 格式，例如： `700.HK` |
+| symbol | string | 是       | 標的代碼，使用 `ticker.region` 格式，例如： `700.HK` |
 
 ### Protobuf
 
@@ -32,8 +32,8 @@ message CapitalFlowIntradayRequest {
 ```python
 # Get Security Capital Flow Intraday
 # https://open.longbridgeapp.com/docs/quote/pull/capital-flow-intraday
-# 运行前请访问“开发者中心”确保账户有正确的行情权限。
-# 如没有开通行情权限，可以通过“长桥”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
+# 運行前請訪問“開發者中心”確保賬戶有正確的行情權限。
+# 如沒有開通行情權限，可以通過“長橋”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from longbridge.openapi import QuoteContext, Config
 
 config = Config.from_env()
@@ -49,10 +49,10 @@ print(resp)
 
 | Name               | Type     | Description    |
 | ------------------ | -------- | -------------- |
-| symbol             | string   | 标的代码       |
-| capital_flow_lines | object[] | 资金流向数据   |
-| ∟ inflow           | string   | 净流入         |
-| ∟ timestamp        | int64    | 分钟开始时间戳 |
+| symbol             | string   | 標的代碼       |
+| capital_flow_lines | object[] | 資金流向數據   |
+| ∟ inflow           | string   | 淨流入         |
+| ∟ timestamp        | int64    | 分鐘開始時間戳 |
 
 ### Protobuf
 
@@ -82,13 +82,13 @@ message CapitalFlowIntradayResponse {
 }
 ```
 
-## 错误码
+## 錯誤碼
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                     |
+| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                     |
 | ---------- | ---------- | -------------- | ---------------------------- |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败       |
-| 3          | 301606     | 限流           | 降低请求频次                 |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理     |
-| 7          | 301600     | 请求标的不存在 | 检查请求的 `symbol` 是否正确 |
-| 7          | 301603     | 标的无行情     | 标的没有请求的行情数据       |
-| 7          | 301604     | 无权限         | 没有获取标的行情的权限       |
+| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗       |
+| 3          | 301606     | 限流           | 降低請求頻次                 |
+| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理     |
+| 7          | 301600     | 請求標的不存在 | 檢查請求的 `symbol` 是否正確 |
+| 7          | 301603     | 標的無行情     | 標的沒有請求的行情數據       |
+| 7          | 301604     | 無權限         | 沒有獲取標的行情的權限       |

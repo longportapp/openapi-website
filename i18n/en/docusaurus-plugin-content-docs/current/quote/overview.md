@@ -13,7 +13,7 @@ slug: overview
         <td>Description</td>
     </tr>
     <tr>
-        <td rowspan="16">Pull</td>
+        <td rowspan="19">Pull</td>
         <td><a href="./pull/static">Get Basic Information Of Securities</a></td>
     </tr>
     <tr>
@@ -61,6 +61,16 @@ slug: overview
     <tr>
         <td><a href="./pull/trade-day">Get Market Trading Days</a></td>
     </tr>
+    <tr>
+        <td><a href="./pull/capital-flow-intraday">Get Security Capital Flow Intraday</a></td>
+    </tr>
+    <tr>
+        <td><a href="./pull/capital-distribution">Get Security Capital Distribution</a></td>
+    </tr>
+    <tr>
+        <td><a href="./pull/calc-index">Get Calculate Indexes Of Securities</a></td>
+    </tr>
+    <tr>
     <tr>
         <td rowspan="3">Subscription</td>
         <td><a href="./subscribe/subscription">Get Subscription Information</a></td>
