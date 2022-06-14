@@ -14,16 +14,16 @@ function useSdkLanguages() {
       value: 'python',
     },
     {
-      label: 'C++',
-      value: 'cpp',
-    },
-    {
       label: 'Rust',
       value: 'rust',
     },
     {
       label: 'Node.js',
       value: 'nodejs',
+    },
+    {
+      label: 'C++',
+      value: 'cpp',
     },
   ]
 }
