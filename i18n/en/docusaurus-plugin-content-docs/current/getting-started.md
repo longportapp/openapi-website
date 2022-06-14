@@ -614,7 +614,7 @@ After running, the output is as follows:
 Order {
   order_id: "718437534753550336",
   status: NotReported,
-  stock_name: "腾讯控股1",
+  stock_name: "腾讯控股 1",
   quantity: 200,
   executed_quantity: None,
   price: Some(50.000),
