@@ -11,7 +11,7 @@ sidebar_position: 1
 | 推薦使用各自語言的 SDK, 而不是調用原生的接口 | [SDK 快速開始頁面](../docs/getting-started)       |
 | 閱讀 OpenAPI 介紹中開通相應服務              | [OpenAPI 如何開通](../docs/#如何開通)             |
 | 閱讀 OpenAPI 介紹中使用權限及限制            | [OpenAPI 使用權限及限制](../docs/#使用權限及限制) |
-| 了解通用錯誤碼， 便於查找調用接口出錯的原因   | [通用錯誤碼](../docs/error-codes)                 |
+| 了解通用錯誤碼，便於查找調用接口出錯的原因   | [通用錯誤碼](../docs/error-codes)                 |
 
 ## REST API 文檔約定格式
 服務端 REST API 文檔格式主要如下：
