@@ -1,4 +1,4 @@
-## Longbridge OpenAPI SDK for C++
+## Longbridge OpenAPI SDK for C++ [Deprecated]
 
 [https://github.com/longbridgeapp/openapi-cpp](https://github.com/longbridgeapp/openapi-cpp)
 

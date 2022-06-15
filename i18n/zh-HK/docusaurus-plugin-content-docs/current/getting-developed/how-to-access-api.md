@@ -4,6 +4,47 @@ id: how-to-access-api
 slug: /how-to-access-api
 sidebar_position: 1
 ---
+## 開發前須知
+
+| 注意事項                                     | 參考文檔                                          |
+|----------------------------------------------|---------------------------------------------------|
+| 推薦使用各自語言的 SDK, 而不是調用原生的接口 | [SDK 快速開始頁面](../docs/getting-started)       |
+| 閱讀 OpenAPI 介紹中開通相應服務              | [OpenAPI 如何開通](../docs/#如何開通)             |
+| 閱讀 OpenAPI 介紹中使用權限及限制            | [OpenAPI 使用權限及限制](../docs/#使用權限及限制) |
+| 了解通用錯誤碼，便於查找調用接口出錯的原因   | [通用錯誤碼](../docs/error-codes)                 |
+
+## REST API 文檔約定格式
+服務端 REST API 文檔格式主要如下：
+```
+Request:
+    Request Info 
+    Parameters 
+    Request Example 
+Response:
+    Response Headers 
+    Response Example
+    Response Status 
+```
+### Request Info
+介紹調用 API 所需要的請求方式、路徑。
+- HTTP URL：服務端 API 的 URL。
+- HTTP Method：服務端 API 僅支持 HTTP 協議的方法，如 GET、POST 等。
+
+### Parameters 
+介紹調用 API 所需傳遞的請求頭部，查詢參數或者請求體。
+:::tip
+
+GET 請求時默認所有參數為查詢參數，非 GET 請求時默認所有參數都是請求體，請求體格式為 JSON。
+
+:::
+
+### Request Example
+使用 SDK 調用接口的詳細例子。
+
+### Response
+- Response Headers: 返回內容頭部信息。
+- Response Example: 返回內容的文本示例。
+- Response Status: 接口返回內容中的 `status` 的具體解釋。
 
 ## API 調用流程
 
@@ -96,12 +137,29 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 
 調用服務端接口需要是用 HTTPS 協議，JSON 格式，並是用 `UTF-8` 編碼。
 
-示例如下：
+測試接口示例如下：
 
 ```bash
 curl -v https://openapi.longbridgeapp.com/v1/test \
-    -H "X-Api-Signature: {簽名}" -H "X-Api-Key: {app_key}" \
-    -H "Authorization: {access_token}" -H "X-Timestamp: 1539095200.123"
+    -H "X-Api-Signature: {簽名}" -H "X-Api-Key: {Appkey}" \
+    -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
+```
+
+獲取股票持倉接口是`GET`請求並需要傳遞參數，示例如下：
+
+```bash
+curl -v https://openapi.longbridgeapp.com/v1/asset/stock?symbol=700.HK&symbol=BABA.US \
+    -H "X-Api-Signature: {簽名}" -H "X-Api-Key: {AppKey}" \
+    -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
+```
+委託下單接口是`POST`請求並需要傳遞`Body`參數，示例如下：
+
+```bash
+curl -v -XPOST https://openapi.longbridgeapp.com/v1/trade/order \
+    -d '{ "side": "Buy", symbol": "700.HK", "order_type": "LO", "submitted_price": "50", "submitted_quantity": "200", "time_in_force": "Day", remark": "Hello from Shell"}' \
+    -H "X-Api-Signature: {簽名}" -H "X-Api-Key: {AppKey}" \
+    -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
+    -H "Content-Type: application/json; charset=utf-8"
 ```
 
 ## API Response

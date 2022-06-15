@@ -4,6 +4,48 @@ id: how-to-access-api
 slug: /how-to-access-api
 sidebar_position: 1
 ---
+## Pre-Development Notes
+
+| Precautions                                                                                          | Reference Documents                                                   |
+|------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| It is recommended to use the SDK of the respective language, instead of calling the native interface | [SDK Quick Start Page](../docs/getting-started)                    |
+| Read the OpenAPI introduction to enable the corresponding service                                    | [How to enable OpenAPI](../docs/#how-to-enable-openapi)                    |
+| Read about OpenAPI access and restrictions in OpenAPI Introduction                                   | [OpenAPI's permissions and restrictions](../docs/#permissions-and-restrictions) |
+| Common Error Codes for finding errors in interface calls                                             | [Common Error Codes](../docs/error-codes)                           |
+
+## REST API documentation convention format
+The main format of the server REST API documentation is as follows.
+```
+Request:
+    Request Info 
+    Parameters 
+    Request Example 
+Response:
+    Response Headers 
+    Response Example
+    Response Status 
+Response Status
+```
+### Request Info
+This section introduces the request method and path required to call the API.
+- HTTP URL: The URL of the server API.
+- HTTP Method: The server API only supports HTTP protocol methods, such as GET, POST, etc.
+
+### Parameters 
+Introduces the request headers, query parameters or request body to be passed to call the API.
+:::tip
+
+Parameters are query parameters by default for GET API, parameters are request bodies by default for not GET API, and the request body format is JSON.
+
+:::
+
+### Request Example
+Detailed example of calling an interface using the SDK.
+
+### Response
+- Response Headers: Returns content header information.
+- Response Example: Returns a text example of the content.
+- Response Status: Interface returns a specific explanation of the `status` of the content.
 
 ## API access process
 
@@ -96,13 +138,31 @@ All API paths start with [https://openapi.longbridgeapp.com](https://openapi.lon
 
 The call to the server-side interface needs to be in HTTPS protocol, JSON format, and encoded in `UTF-8`.
 
-For example：
+For a test example：
 
 ```bash
 curl -v https://openapi.longbridgeapp.com/v1/test \
-    -H "X-Api-Signature: {signature}" -H "X-Api-Key: {app_key}" \
-    -H "Authorization: {access_token}" -H "X-Timestamp: 1539095200.123"
+    -H "X-Api-Signature: {signature}" -H "X-Api-Key: {AppKey}" \
+    -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
 ```
+
+The method of Get Stock Positions interface is `GET` and needs to set query parameters. The example is as follows:
+
+```bash
+curl -v https://openapi.longbridgeapp.com/v1/asset/stock?symbol=700.HK&symbol=BABA.US \
+    -H "X-Api-Signature: {Signature}" -H "X-Api-Key: {AppKey}" \
+    -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123" 
+```
+
+The method of Submit Order interface is `POST` and needs to set the request body. The example is as follows:
+
+```bash
+curl -v -XPOST https://openapi.longbridgeapp.com/v1/trade/order \
+    -d '{ "side": "Buy", symbol": "700.HK", "order_type": "LO", "submitted_price": "50", "submitted_quantity": "200", "time_in_force": " Day", remark": "Hello from Shell"}' \
+    -H "X-Api-Signature: {Signature}" -H "X-Api-Key: {AppKey}" \
+    -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
+    -H "Content-Type: application/json; charset=utf-8"
+````
 
 ## API Response
 
