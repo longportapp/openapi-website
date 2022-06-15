@@ -19,15 +19,12 @@ paths:
         value: |
           # Get Account Balance
           # https://open.longbridgeapp.com/docs/trade/asset/account
-          import os
-          import json
-          from longbridge.http import Auth, Config, HttpClient
+          from longbridge.openapi import TradeContext, Config
 
-          auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-          http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
-
-          resp = http.get("/v1/asset/account")
-          print(json.dumps(resp.data, indent=2))
+          config = Config.from_env()
+          ctx = TradeContext(config)
+          resp = ctx.account_balance()
+          print(resp)
       response_body:
         {
           "code": 0,
@@ -42,6 +39,9 @@ paths:
                     "risk_level": "1",
                     "margin_call": "2598051051.50",
                     "currency": "HKD",
+                    "net_assets": "24145.90",
+                    "init_margin": "1540.09",
+                    "maintenance_margin": "1540.09",
                     "cash_infos":
                       [
                         {
@@ -77,6 +77,9 @@ definitions:
           - risk_level
           - margin_call
           - currency
+          - net_assets
+          - init_margin
+          - maintenance_margin
         properties:
           total_cash:
             type: "string"
@@ -92,11 +95,23 @@ definitions:
             required: true
           risk_level:
             type: "string"
-            description: Risk control level  <br/> <br/> <b>Option:</b><br/> `1` - low risk <br/> `2` - low to medium risk<br/> `3` - medium risk<br/> `4` - medium to high risk  <br/> `5` - high risk
+            description: Risk control level  <br/> <br/> <b>Option:</b><br/> `0` - safe <br/> `1` - medium risk<br/> `2` - early warning<br/> `3` - danger
             required: true
           margin_call:
             type: "string"
             description: Margin Call
+            required: true
+          net_assets:
+            type: "string"
+            description: net asset
+            required: true
+          init_margin:
+            type: "string"
+            description: initial margin
+            required: true
+          maintenance_margin:
+            type: "string"
+            description: maintenance margin
             required: true
           currency:
             type: "string"
