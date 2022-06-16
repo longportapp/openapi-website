@@ -36,13 +36,6 @@ message SecurityCalcQuoteRequest {
 # https://open.longbridgeapp.com/docs/quote/pull/calc-index
 # 運行前請訪問“開發者中心”確保賬戶有正確的行情權限。
 # 如沒有開通行情權限，可以通過“長橋”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
-from longbridge.openapi import QuoteContext, Config
-
-config = Config.from_env()
-ctx = QuoteContext(config)
-
-resp = ctx.calc_index(["700.HK"], [CalcIndex.CALCINDEX_LAST_DONE, CalcIndex.CALCINDEX_CHANGE_VAL])
-print(resp)
 ```
 
 ## Response

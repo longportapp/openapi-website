@@ -36,13 +36,6 @@ message SecurityCalcQuoteRequest {
 # https://open.longbridgeapp.com/docs/quote/pull/calc-index
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
-from longbridge.openapi import QuoteContext, Config, CalcIndex
-
-config = Config.from_env()
-ctx = QuoteContext(config)
-
-resp = ctx.calc_index(["700.HK"], [CalcIndex.CALCINDEX_LAST_DONE, CalcIndex.CALCINDEX_CHANGE_VAL])
-print(resp)
 ```
 
 ## Response

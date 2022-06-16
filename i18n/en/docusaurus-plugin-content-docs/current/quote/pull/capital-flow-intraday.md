@@ -34,13 +34,6 @@ message CapitalFlowIntradayRequest {
 # https://open.longbridgeapp.com/docs/quote/pull/capital-flow-intraday
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
-from longbridge.openapi import QuoteContext, Config
-
-config = Config.from_env()
-ctx = QuoteContext(config)
-
-resp = ctx.capital_flow_intraday("700.HK")
-print(resp)
 ```
 
 ## Response
