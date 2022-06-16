@@ -164,11 +164,8 @@ python account_asset.py
 const { Config, TradeContext } = require("longbridge");
 
 let config = Config.fromEnv();
-let ctx = new TradeContext(config);
-
-ctx
-  .open()
-  .then(() => ctx.accountBalance())
+TradeContext.new(config)
+  .then((ctx) => ctx.accountBalance())
   .then((resp) => {
     for (let obj of resp) {
       console.log(obj.toString());
@@ -270,19 +267,18 @@ https://longbridgeapp.com/download
 
 ```python
 from time import sleep
-from longbridge.openapi import QuoteContext, Config, SubType
+from longbridge.openapi import QuoteContext, Config, SubType, PushQuote
 
 
-class EventHandler:
-    def on_event(self, symbol: str, msg):
-        print(symbol, msg)
+def on_quote(symbol: str, quote: PushQuote):
+    print(symbol, quote)
 
 
 config = Config.from_env()
-ctx = QuoteContext(config, EventHandler())
+ctx = QuoteContext(config)
+ctx.set_on_quote(on_quote)
 
-symbols = ["700.HK", "AAPL.US", "TSLA.US",
-           "NFLX.US"]
+symbols = ["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"]
 ctx.subscribe(symbols, [SubType.Quote], True)
 sleep(30)
 ```
@@ -302,17 +298,14 @@ python subscribe_quote.py
 const { Config, QuoteContext, SubType } = require("longbridge");
 
 let config = Config.fromEnv();
-let ctx = new QuoteContext(config, (_, event) => console.log(event.toString()));
-
-ctx
-  .open()
-  .then(() =>
-    ctx.subscribe(
-      ["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"],
-      [SubType.Quote],
-      true
-    )
+QuoteContext.new(config).then((ctx) => {
+  ctx.setOnQuote((_, event) => console.log(event.toString()));
+  ctx.subscribe(
+    ["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"],
+    [SubType.Quote],
+    true
   );
+});
 ```
 
 運行
@@ -423,7 +416,7 @@ resp = ctx.submit_order(
     symbol="700.HK",
     order_type=OrderType.LO,
     submitted_price=Decimal("50"),
-    submitted_quantity=Decimal("200"),
+    submitted_quantity=200,
     time_in_force=TimeInForceType.Day,
     remark="Hello from Python SDK",
 )
@@ -453,17 +446,14 @@ const {
 } = require("longbridge");
 
 let config = Config.fromEnv();
-let ctx = new TradeContext(config);
-
-ctx
-  .open()
-  .then(() =>
+TradeContext.new(config)
+  .then((ctx) =>
     ctx.submitOrder(
       new SubmitOrderOptions(
         "700.HK",
         OrderType.LO,
         OrderSide.Buy,
-        new Decimal("200"),
+        "200",
         TimeInForceType.Day
       ).submittedPrice(new Decimal("50"))
     )
@@ -500,7 +490,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         "700.HK",
         OrderType::LO,
         OrderSide::Buy,
-        decimal!(200i32),
+        200,
         TimeInForceType::Day,
     )
     .submitted_price(decimal!(50i32));
@@ -555,12 +545,10 @@ python today_orders.py
 
 ```javascript
 const { Config, TradeContext } = require("longbridge");
-let config = Config.fromEnv();
-let ctx = new TradeContext(config);
 
-ctx
-  .open()
-  .then(() => ctx.todayOrders())
+let config = Config.fromEnv();
+TradeContext.new(config)
+  .then((ctx) => ctx.todayOrders())
   .then((resp) => {
     for (let obj of resp) {
       console.log(obj.toString());
