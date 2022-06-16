@@ -1,0 +1,28 @@
+name: Build
+on:
+  pull_request:
+  push:
+    branches:
+      - "!main"
+      - "!canary"
+jobs:
+  build:
+    name: Build Test
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: yarn
+
+      - name: install dependency npm
+        run: yarn
+
+      - name: build canary env dist file
+        run: |
+          yarn build:canary
