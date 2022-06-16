@@ -71,7 +71,6 @@ slug: overview
         <td><a href="./pull/calc-index">Get Calculate Indexes Of Securities</a></td>
     </tr>
     <tr>
-    <tr>
         <td rowspan="3">Subscription</td>
         <td><a href="./subscribe/subscription">Get Subscription Information</a></td>
     </tr>
