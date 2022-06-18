@@ -3,10 +3,11 @@
   --ifm-tabs-padding-vertical: 12px;
   @apply mx-auto relative p-5;
   :global(.tabs) {
+    @apply mb-8;
     border-bottom: 0.5px solid var(--divide-border-color) !important;
     :global(.tabs__item) {
       min-width: 90px;
-      @apply justify-center;
+      @apply justify-center py-2 px-6 text-lg;
       &:hover {
         background: none;
         color: var(--ifm-tabs-color-active);
