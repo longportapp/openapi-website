@@ -25,7 +25,7 @@ Longbridge OpenAPI SDK is implemented based on Rust we have released SDK for Pyt
     <li><a href="https://www.python.org/">Python 3</a></li>
     <li>Pip</li>
   </TabItem>
-  <TabItem value="javascript" label="Javascript">
+  <TabItem value="javascript" label="JavaScript">
     <li><a href="https://nodejs.org/">Node.js</a></li>
     <li>Yarn</li>
   </TabItem>
@@ -44,7 +44,7 @@ pip3 install longbridge
 ```
 
   </TabItem>
-  <TabItem value="javascript" label="Javascript">
+  <TabItem value="javascript" label="JavaScript">
 
 ```bash
 yarn install longbridge
@@ -163,16 +163,16 @@ python account_asset.py
 Cteate `account_asset.js` and paste the code below:
 
 ```javascript
-const { Config, TradeContext } = require("longbridge");
+const { Config, TradeContext } = require('longbridge')
 
-let config = Config.fromEnv();
+let config = Config.fromEnv()
 TradeContext.new(config)
   .then((ctx) => ctx.accountBalance())
   .then((resp) => {
     for (let obj of resp) {
-      console.log(obj.toString());
+      console.log(obj.toString())
     }
-  });
+  })
 ```
 
 Run it
@@ -297,17 +297,13 @@ python subscribe_quote.py
 Create `subscribe_quote.js` and paste the code below：
 
 ```javascript
-const { Config, QuoteContext, SubType } = require("longbridge");
+const { Config, QuoteContext, SubType } = require('longbridge')
 
-let config = Config.fromEnv();
+let config = Config.fromEnv()
 QuoteContext.new(config).then((ctx) => {
-  ctx.setOnQuote((_, event) => console.log(event.toString()));
-  ctx.subscribe(
-    ["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"],
-    [SubType.Quote],
-    true
-  );
-});
+  ctx.setOnQuote((_, event) => console.log(event.toString()))
+  ctx.subscribe(['700.HK', 'AAPL.US', 'TSLA.US', 'NFLX.US'], [SubType.Quote], true)
+})
 ```
 
 Run it
@@ -445,22 +441,18 @@ const {
   OrderSide,
   TimeInForceType,
   OrderType,
-} = require("longbridge");
+} = require('longbridge')
 
-let config = Config.fromEnv();
+let config = Config.fromEnv()
 TradeContext.new(config)
   .then((ctx) =>
     ctx.submitOrder(
-      new SubmitOrderOptions(
-        "700.HK",
-        OrderType.LO,
-        OrderSide.Buy,
-        "200",
-        TimeInForceType.Day
-      ).submittedPrice(new Decimal("50"))
+      new SubmitOrderOptions('700.HK', OrderType.LO, OrderSide.Buy, '200', TimeInForceType.Day).submittedPrice(
+        new Decimal('50')
+      )
     )
   )
-  .then((resp) => console.log(resp.toString()));
+  .then((resp) => console.log(resp.toString()))
 ```
 
 Run it
@@ -546,16 +538,16 @@ python today_orders.py
 Create `today_orders.js` and paste the code below:
 
 ```javascript
-const { Config, TradeContext } = require("longbridge");
+const { Config, TradeContext } = require('longbridge')
 
-let config = Config.fromEnv();
+let config = Config.fromEnv()
 TradeContext.new(config)
   .then((ctx) => ctx.todayOrders())
   .then((resp) => {
     for (let obj of resp) {
-      console.log(obj.toString());
+      console.log(obj.toString())
     }
-  });
+  })
 ```
 
 Run it

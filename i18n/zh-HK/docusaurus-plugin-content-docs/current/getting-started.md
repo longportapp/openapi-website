@@ -25,7 +25,7 @@ Longbridge OpenAPI SDK 基於 Rust 底層提供標準實現，目前我們已經
     <li><a href="https://www.python.org/">Python 3</a></li>
     <li>Pip</li>
   </TabItem>
-  <TabItem value="javascript" label="Javascript">
+  <TabItem value="javascript" label="JavaScript">
     <li><a href="https://nodejs.org/">Node.js</a></li>
     <li>Yarn</li>
   </TabItem>
@@ -44,7 +44,7 @@ pip3 install longbridge
 ```
 
   </TabItem>
-  <TabItem value="javascript" label="Javascript">
+  <TabItem value="javascript" label="JavaScript">
 
 ```bash
 yarn install longbridge
@@ -161,16 +161,16 @@ python account_asset.py
 創建 `account_asset.js` 貼入下面的代碼：
 
 ```javascript
-const { Config, TradeContext } = require("longbridge");
+const { Config, TradeContext } = require('longbridge')
 
-let config = Config.fromEnv();
+let config = Config.fromEnv()
 TradeContext.new(config)
   .then((ctx) => ctx.accountBalance())
   .then((resp) => {
     for (let obj of resp) {
-      console.log(obj.toString());
+      console.log(obj.toString())
     }
-  });
+  })
 ```
 
 運行
@@ -295,17 +295,13 @@ python subscribe_quote.py
 創建 `subscribe_quote.js` 貼入下面的代碼：
 
 ```javascript
-const { Config, QuoteContext, SubType } = require("longbridge");
+const { Config, QuoteContext, SubType } = require('longbridge')
 
-let config = Config.fromEnv();
+let config = Config.fromEnv()
 QuoteContext.new(config).then((ctx) => {
-  ctx.setOnQuote((_, event) => console.log(event.toString()));
-  ctx.subscribe(
-    ["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"],
-    [SubType.Quote],
-    true
-  );
-});
+  ctx.setOnQuote((_, event) => console.log(event.toString()))
+  ctx.subscribe(['700.HK', 'AAPL.US', 'TSLA.US', 'NFLX.US'], [SubType.Quote], true)
+})
 ```
 
 運行
@@ -443,22 +439,18 @@ const {
   OrderSide,
   TimeInForceType,
   OrderType,
-} = require("longbridge");
+} = require('longbridge')
 
-let config = Config.fromEnv();
+let config = Config.fromEnv()
 TradeContext.new(config)
   .then((ctx) =>
     ctx.submitOrder(
-      new SubmitOrderOptions(
-        "700.HK",
-        OrderType.LO,
-        OrderSide.Buy,
-        "200",
-        TimeInForceType.Day
-      ).submittedPrice(new Decimal("50"))
+      new SubmitOrderOptions('700.HK', OrderType.LO, OrderSide.Buy, '200', TimeInForceType.Day).submittedPrice(
+        new Decimal('50')
+      )
     )
   )
-  .then((resp) => console.log(resp.toString()));
+  .then((resp) => console.log(resp.toString()))
 ```
 
 運行
@@ -544,16 +536,16 @@ python today_orders.py
 創建 `today_orders.js` 貼入下面的代碼：
 
 ```javascript
-const { Config, TradeContext } = require("longbridge");
+const { Config, TradeContext } = require('longbridge')
 
-let config = Config.fromEnv();
+let config = Config.fromEnv()
 TradeContext.new(config)
   .then((ctx) => ctx.todayOrders())
   .then((resp) => {
     for (let obj of resp) {
-      console.log(obj.toString());
+      console.log(obj.toString())
     }
-  });
+  })
 ```
 
 運行
