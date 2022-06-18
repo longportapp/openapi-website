@@ -223,7 +223,7 @@
     "description": "The title of the tag list page"
   },
   "pages.sdk.banners.desc": {
-    "message": "支持 Python，Rust，Node.js 和 C++ 的 SDK 下载",
+    "message": "支持 Python，Rust，Node.js，C++ 和 Golang 的 SDK 下载",
     "description": "Sdk page banner description"
   }
 }
