@@ -25,6 +25,10 @@ function useSdkLanguages() {
       label: 'C++',
       value: 'cpp',
     },
+    {
+      label: 'Golang',
+      value: 'golang',
+    },
   ]
 }
 
