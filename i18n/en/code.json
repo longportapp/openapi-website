@@ -223,7 +223,7 @@
     "description": "The title of the tag list page"
   },
   "pages.sdk.banners.desc": {
-    "message": "Support Python, Node.js, Rust, C++ And Golang",
-    "description": "Sdk page banner description"
+    "message": "Support Python, Rust, Go, Node.js and C++",
+    "description": "SDK page banner description"
   }
 }

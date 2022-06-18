@@ -1,10 +1,11 @@
-## Longbridge OpenAPI SDK for Golang
+## Longbridge OpenAPI SDK for Go
 
 [https://github.com/longbridgeapp/openapi-go](https://github.com/longbridgeapp/openapi-go)
 
-### 安裝 SDK
+### 安装 SDK for Go
 
-golang 版本 >= 1.17
+Go 版本 >= 1.17
+
 
 ```bash
 $ go get github.com/longbridgeapp/openapi-go

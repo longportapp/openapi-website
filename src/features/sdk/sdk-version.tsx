@@ -18,16 +18,16 @@ function useSdkLanguages() {
       value: 'rust',
     },
     {
+      label: 'Go',
+      value: 'go',
+    },
+    {
       label: 'Node.js',
       value: 'nodejs',
     },
     {
       label: 'C++',
       value: 'cpp',
-    },
-    {
-      label: 'Golang',
-      value: 'golang',
     },
   ]
 }
@@ -41,7 +41,7 @@ export const SdkVersion: React.FC<ISdkVersionProps> = ({ versions }) => {
 
   return (
     <div className={classnames(styles.container)}>
-      <Tabs className="tabs" values={options} defaultValue={options[0].value}>
+      <Tabs className="tabs tabs-lg" values={options} defaultValue={options[0].value}>
         {options.map(({ value }) => {
           const editUrl = `https://github.com/longbridgeapp/openapi-website/edit/main/i18n/${i18n.currentLocale}/sdk-versions/${value}.md`
 
