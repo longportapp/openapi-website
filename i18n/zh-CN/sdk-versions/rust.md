@@ -4,7 +4,7 @@
 
 ### 安装 SDK
 
-_将以下行添加到您的 `Cargo.toml` 文件_
+将以下行添加到您的 `Cargo.toml` 文件
 
 ```toml
 [dependencies]
