@@ -32,6 +32,10 @@ Longbridge OpenAPI SDK is implemented based on Rust we have released SDK for Pyt
   <TabItem value="rust" label="Rust">
     <li><a href="https://www.rust-lang.org/">Rust</a></li>
   </TabItem>
+  <TabItem value="java" label="Java">
+    <li><a href="https://openjdk.org/">JDK</a></li>
+    <li><a href="https://maven.apache.org/">Maven</a></li>
+  </TabItem>
 </Tabs>
 
 ## Install SDK
@@ -57,6 +61,19 @@ yarn install longbridge
 [dependencies]
 longbridge = "*"
 tokio = { version = "1", features = "rt-multi-thread" }
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>io.github.longbridgeapp</groupId>
+        <artifactId>openapi-sdk</artifactId>
+        <version>0.2.18</version>
+    </dependency>
+</dependencies>
 ```
 
   </TabItem>
@@ -209,6 +226,32 @@ cargo run
 ```
 
   </TabItem>
+  <TabItem value="java" label="Java">
+
+Cteate `Main.java` and paste the code below:
+
+```java
+import com.longbridge.*;
+import com.longbridge.trade.*;
+
+class Main {
+    public static void main(String[] args) throws Exception {
+        try (Config config = Config.fromEnv(); TradeContext ctx = TradeContext.create(config).get()) {
+            for (AccountBalance obj : ctx.getAccountBalance().get()) {
+                System.out.println(obj);
+            }
+        }
+    }
+}
+```
+
+Run it
+
+```bash
+mvn compile exec:exec
+```
+
+  </TabItem>
 </Tabs>
 
 After running, the output is as follows:
@@ -348,6 +391,34 @@ Run it
 
 ```bash
 cargo run
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+Create `Main.java` and paste the code below:
+
+```java
+import com.longbridge.*;
+import com.longbridge.quote.*;
+
+class Main {
+    public static void main(String[] args) throws Exception {
+        try (Config config = Config.fromEnv(); QuoteContext ctx = QuoteContext.create(config).get()) {
+            ctx.setOnQuote((symbol, quote) -> {
+                System.out.printf("%s\t%s\n", symbol, quote);
+            });
+            ctx.subscribe(new String[] { "700.HK", "AAPL.US", "TSLA.US", "NFLX.US" }, SubFlags.Quote, true).get();
+            Thread.sleep(30000);
+        }
+    }
+}
+```
+
+Run it
+
+```bash
+mvn compile exec:exec
 ```
 
   </TabItem>
@@ -501,6 +572,37 @@ cargo run
 ```
 
   </TabItem>
+  <TabItem value="java" label="Java">
+
+Create `Main.java` and paste the code below:
+
+```java
+import com.longbridge.*;
+import com.longbridge.trade.*;
+import java.math.BigDecimal;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        try (Config config = Config.fromEnv(); TradeContext ctx = TradeContext.create(config).get()) {
+            SubmitOrderOptions opts = new SubmitOrderOptions("700.HK",
+                    OrderType.LO,
+                    OrderSide.Buy,
+                    200,
+                    TimeInForceType.Day).setSubmittedPrice(new BigDecimal(50));
+            SubmitOrderResponse resp = ctx.submitOrder(opts).get();
+            System.out.println(resp);
+        }
+    }
+}
+```
+
+Run it
+
+```bash
+mvn compile exec:exec
+```
+
+  </TabItem>
 </Tabs>
 
 After running, the output is as follows:
@@ -583,6 +685,33 @@ Run it
 
 ```bash
 cargo run
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+Create `Main.java` and paste the code below:
+
+```java
+import com.longbridge.*;
+import com.longbridge.trade.*;
+
+class Main {
+    public static void main(String[] args) throws Exception {
+        try (Config config = Config.fromEnv(); TradeContext ctx = TradeContext.create(config).get()) {
+            Order[] orders = ctx.getTodayOrders(null).get();
+            for (Order order : orders) {
+                System.out.println(order);
+            }
+        }
+    }
+}
+```
+
+Run it
+
+```bash
+mvn compile exec:exec
 ```
 
   </TabItem>
