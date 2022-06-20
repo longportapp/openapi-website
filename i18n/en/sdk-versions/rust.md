@@ -2,9 +2,9 @@
 
 [https://github.com/longbridgeapp/openapi-sdk/tree/master/rust](https://github.com/longbridgeapp/openapi-sdk/tree/master/rust)
 
-### 安装 SDK
+### Install SDK
 
-_Add the following line to your `Cargo.toml` file_
+Add the following line to your `Cargo.toml` file
 
 ```toml
 [dependencies]

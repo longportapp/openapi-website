@@ -26,6 +26,10 @@ function useSdkLanguages() {
       value: 'nodejs',
     },
     {
+      label: 'Java',
+      value: 'java',
+    },
+    {
       label: 'C++',
       value: 'cpp',
     },
