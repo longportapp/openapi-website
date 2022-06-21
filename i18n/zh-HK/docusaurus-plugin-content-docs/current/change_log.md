@@ -5,7 +5,6 @@ slug: log_change
 sidebar_position: 7
 ---
 
-
 ## 2022-06-20
 
 - 更新賬號資金接口
@@ -13,3 +12,8 @@ sidebar_position: 7
 - 更新持倉接口
   - `GET /v1/asset/stock` 支持用戶獲取期權持倉
 
+## 2022-06-15
+
+- 新增行情資金流接口
+  - 長連接 `Business Command：24` 獲取標的當日資金流向
+  - 長連接 `Business Command：25` 獲取標的當日資金分佈
