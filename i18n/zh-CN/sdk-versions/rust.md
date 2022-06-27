@@ -8,7 +8,7 @@
 
 ```toml
 [dependencies]
-longbridge = "0.2.3"
+longbridge = "0.2"
 ```
 
 [https://crates.io/crates/longbridge](https://crates.io/crates/longbridge)

@@ -71,7 +71,7 @@ tokio = { version = "1", features = "rt-multi-thread" }
     <dependency>
         <groupId>io.github.longbridgeapp</groupId>
         <artifactId>openapi-sdk</artifactId>
-        <version>0.2.18</version>
+        <version>LATEST</version>
     </dependency>
 </dependencies>
 ```
@@ -505,23 +505,25 @@ python submit_order.py
 const {
   Config,
   TradeContext,
-  SubmitOrderOptions,
-  Decimal,
-  OrderSide,
-  TimeInForceType,
   OrderType,
-} = require('longbridge')
+  OrderSide,
+  Decimal,
+  TimeInForceType,
+} = require("longbridge");
 
-let config = Config.fromEnv()
+let config = Config.fromEnv();
 TradeContext.new(config)
   .then((ctx) =>
-    ctx.submitOrder(
-      new SubmitOrderOptions('700.HK', OrderType.LO, OrderSide.Buy, '200', TimeInForceType.Day).submittedPrice(
-        new Decimal('50')
-      )
-    )
+    ctx.submitOrder({
+      symbol: "700.HK",
+      orderType: OrderType.LO,
+      side: OrderSide.Buy,
+      timeInForce: TimeInForceType.Day,
+      submittedQuantity: 200,
+      submittedPrice: new Decimal("300"),
+    })
   )
-  .then((resp) => console.log(resp.toString()))
+  .then((resp) => console.log(resp.toString()));
 ```
 
 運行
