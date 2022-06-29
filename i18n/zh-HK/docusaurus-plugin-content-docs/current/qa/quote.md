@@ -25,7 +25,7 @@ A：標的代碼使用 `ticker.region` 格式，`ticker` 表示標的代碼。�
         <td>Region</td>
     </tr>
     <tr>
-        <td rowspan="2">港股市場</td>
+        <td rowspan="4">港股市場</td>
         <td>證券類產品（含股票、ETFs、窩輪、牛熊、界內證）</td>
         <td>標的在交易所的官方代碼</td>
         <td>HK</td>
@@ -36,7 +36,17 @@ A：標的代碼使用 `ticker.region` 格式，`ticker` 表示標的代碼。�
         <td>HK</td>
     </tr>
     <tr>
-        <td rowspan="2">美股市場</td>
+        <td>國企指數</td>
+        <td>HSCEI</td>
+        <td>HK</td>
+    </tr>
+    <tr>
+        <td>恆生科技指數</td>
+        <td>HSTECH</td>
+        <td>HK</td>
+    </tr>
+    <tr>
+        <td rowspan="3">美股市場</td>
         <td>證券類產品（含紐交所、美交所、納斯達克上市的股票、ETFs）</td>
         <td>標的在交易所的官方代碼</td>
         <td>US</td>
@@ -44,6 +54,11 @@ A：標的代碼使用 `ticker.region` 格式，`ticker` 表示標的代碼。�
     <tr>
         <td>納斯達克指數</td>
         <td>.IXIC</td>
+        <td>US</td>
+    </tr>
+    <tr>
+        <td>道瓊斯指數</td>
+        <td>.DJI</td>
         <td>US</td>
     </tr>
     <tr>
@@ -58,6 +73,9 @@ A：標的代碼使用 `ticker.region` 格式，`ticker` 表示標的代碼。�
         <td>SH 或 SZ</td>
     </tr>
 </table>
+
+可以使用長橋 App 查看標的的 symbol
+<img src="https://pub.lbkrs.com/files/202206/7CSoiaDR4wGZPNCT/20220629-180013.jpeg" className="max-w-2xl" />
 
 ## Q4：OpenAPI 的行情权限是怎么样？如何购买行情卡？
 
@@ -122,3 +140,12 @@ A：
         <td>指數</td>
     </tr>
 </table>
+
+## Q5：各個市場的清盤時間
+
+A:
+
+- 美股市場：09:20:00 EDT/EST
+- 港股市場：08:50:00 CST
+- A 股市場：09:00:00 CST
+- 新加坡市場：08:20:00 CST

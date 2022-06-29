@@ -25,7 +25,7 @@ A: The security code uses the `ticker.region` format, `ticker` represents the co
         <td>Region</td>
     </tr>
     <tr>
-        <td rowspan="2">HK Market</td>
+        <td rowspan="4">HK Market</td>
         <td>Securities (including equities, ETFs, Warrants, CBBCs)</td>
         <td>The official code of the security on the exchange</td>
         <td>HK</td>
@@ -36,7 +36,17 @@ A: The security code uses the `ticker.region` format, `ticker` represents the co
         <td>HK</td>
     </tr>
     <tr>
-        <td rowspan="2">US Market</td>
+        <td>Hang Seng China Enterprises Index</td>
+        <td>HSCEI</td>
+        <td>HK</td>
+    </tr>
+    <tr>
+        <td>Hang Seng TECH Index</td>
+        <td>HSTECH</td>
+        <td>HK</td>
+    </tr>
+    <tr>
+        <td rowspan="3">US Market</td>
         <td>Securities (including stocks, ETFs)</td>
         <td>The official code of the security on the exchange</td>
         <td>US</td>
@@ -44,6 +54,11 @@ A: The security code uses the `ticker.region` format, `ticker` represents the co
     <tr>
         <td>Nasdsaq Index</td>
         <td>.IXIC</td>
+        <td>US</td>
+    </tr>
+    <tr>
+        <td>Dow Jones Industrial Average</td>
+        <td>.DJI</td>
         <td>US</td>
     </tr>
     <tr>
@@ -58,6 +73,9 @@ A: The security code uses the `ticker.region` format, `ticker` represents the co
         <td>SH or SZ</td>
     </tr>
 </table>
+
+You can also use Longbridge App to find the symbol of security
+<img src="https://pub.lbkrs.com/files/202206/7CSoiaDR4wGZPNCT/20220629-180013.jpeg" className="max-w-2xl" />
 
 ## Q4: What is the quote authority of OpenAPI? How to buy quote cards?
 
@@ -122,3 +140,12 @@ A:
         <td>Index</td>
     </tr>
 </table>
+
+## Q5：Quote Change By Date Time
+
+A:
+
+- US Market: 09:20:00 EDT/EST
+- HK Market: 08:50:00 CST
+- CN Market: 09:00:00 CST
+- SG Market: 08:20:00 CST
