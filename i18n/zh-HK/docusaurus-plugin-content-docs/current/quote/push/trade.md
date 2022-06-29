@@ -17,17 +17,17 @@ sidebar_position: 4
 
 ### Properties
 
-| Name            | Type     | Description                                                           |
-| --------------- | -------- | --------------------------------------------------------------------- |
-| symbol          | string   | 標的代碼，例如：`AAPL.US`                                             |
-| sequence        | int64    | 序列號                                                                |
-| trades          | object[] | 逐筆明細數據                                                          |
-| ∟ price         | string   | 價格                                                                  |
-| ∟ volume        | int64    | 成交量                                                                |
-| ∟ timestamp     | int64    | 成交時間                                                              |
-| ∟ trade_type    | string   | [交易類型說明](#交易類型)                                             |
-| ∟ direction     | int32    | 交易方向 <br/><br />**可選值：**<br/>`0` - neutral<br/>`1` - down 2-up |
-| ∟ trade_session | int32    | 交易時段，詳見 [TradeSession](../objects#tradesession---交易時段)     |
+| Name            | Type     | Description                                                                        |
+| --------------- | -------- | ---------------------------------------------------------------------------------- |
+| symbol          | string   | 標的代碼，例如：`AAPL.US`                                                          |
+| sequence        | int64    | 序列號                                                                             |
+| trades          | object[] | 逐筆明細數據                                                                       |
+| ∟ price         | string   | 價格                                                                               |
+| ∟ volume        | int64    | 成交量                                                                             |
+| ∟ timestamp     | int64    | 成交時間                                                                           |
+| ∟ trade_type    | string   | [交易類型說明](#交易類型)                                                          |
+| ∟ direction     | int32    | 交易方向 <br /><br />**可选值：**<br />`0` - neutral<br />`1` - down<br />`2` - up |
+| ∟ trade_session | int32    | 交易時段，詳見 [TradeSession](../objects#tradesession---交易時段)                  |
 
 #### 交易類型
 
