@@ -1,0 +1,89 @@
+swagger: "2.0"
+info:
+  description: "獲取關注分組"
+  version: "v1"
+  title: "獲取關注分組"
+paths:
+  /v1/watchlist/groups:
+    get:
+      access:
+      parameters:
+
+      responses:
+        "200":
+          description: "返回成功"
+          schema:
+            $ref: "#/definitions/groups_response"
+        "500":
+          description: "內部錯誤"
+      request_body:
+        type: "python"
+        value: |
+          GET https://openapi.longbridgeapp.com/v1/watchlist/groups
+
+      response_body:
+        {
+          "code": 0,
+          "data":
+            {
+              "groups":
+                [
+                  {
+                    "id": 28020,
+                    "name": "all",
+                    "securities":
+                      [
+                        {
+                          "symbol": "700.HK",
+                          "market": "HK",
+                          "name": "騰訊控股",
+                          "price": "364.4",
+                          "watched_at": 1652855022,
+                        },
+                      ],
+                  },
+                ],
+            },
+        }
+
+definitions:
+  groups_response:
+    properties:
+      groups:
+        type: "object[]"
+        description: 分組
+        required: ["id", "name", "securities"]
+        properties:
+          id:
+            type: "integer"
+            description: 分組 ID
+            required: true
+          name:
+            type: "string"
+            description: 名稱
+            required: true
+          securities:
+            type: "object[]"
+            description: 股票
+            required: ["symbol", "market", "name", "price", "watched_at"]
+            properties:
+              symbol:
+                type: "string"
+                description: 代碼
+                required: true
+              market:
+                type: "string"
+                description: 市場
+                required: true
+              name:
+                type: "string"
+                description: 名稱
+                required: true
+              price:
+                type: "string"
+                description: 價格
+                required: true
+              watched_at:
+                type: "integer"
+                description: 關注時間
+                required: true
