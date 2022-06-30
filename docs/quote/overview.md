@@ -93,6 +93,10 @@ slug: overview
     <tr>
         <td><a href="./push/trade">实时成交明细推送</a></td>
     </tr>
+    <tr>
+        <td rowspan="4">个性化</td>
+        <td><a href="./individual/watchlist_groups">获取关注分组</a></td>
+    </tr>
 </table>
 
 ### 标的代码说明
@@ -111,7 +115,7 @@ slug: overview
 
 ### 业务数据序列化方式
 
-行情的请求、响应、推送数据作为业务数据，存放在私有协议的数据包 body 部分。  
+行情的请求、响应、推送数据作为业务数据，存放在私有协议的数据包 body 部分。
 我们使用 [Protobuf](https://developers.google.cn/protocol-buffers) 协议对业务数据进行序列化，相较于常见的文本协议（如 JSON, XML 等），Protobuf 协议具有如下优点：
 
 - 序列化时间快
