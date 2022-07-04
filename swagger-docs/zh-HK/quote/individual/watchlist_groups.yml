@@ -19,7 +19,10 @@ paths:
       request_body:
         type: "python"
         value: |
-          GET https://openapi.longbridgeapp.com/v1/watchlist/groups
+          curl --request GET \
+            --url https://openapi.longbridgeapp.com/v1/watchlist/groups \
+            --header 'Authorization: LONGBRIDGE_ACCESS_TOKEN' \
+            --header 'Content-Type: application/json'
 
       response_body:
         {
