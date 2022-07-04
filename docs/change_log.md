@@ -5,6 +5,11 @@ slug: log_change
 sidebar_position: 7
 ---
 
+## 2022-06-30
+
+- 新增获取关注分组接口
+  - `GET /v1/watchlist/groups` 获取关注分组
+
 ## 2022-06-20
 
 - 更新账号资金接口

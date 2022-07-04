@@ -5,6 +5,11 @@ slug: log_change
 sidebar_position: 7
 ---
 
+## 2022-06-30
+
+- Add get watched groups interface
+  - `GET /v1/watchlist/groups` Get watched groups
+
 ## 2022-06-20
 
 - Update account balance interface
