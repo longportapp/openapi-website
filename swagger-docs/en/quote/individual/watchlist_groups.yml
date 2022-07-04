@@ -21,7 +21,7 @@ paths:
         value: |
           curl --request GET \
             --url https://openapi.longbridgeapp.com/v1/watchlist/groups \
-            --header 'Authorization: YOUR_TOKEN' \
+            --header 'Authorization: LONGBRIDGE_ACCESS_TOKEN' \
             --header 'Content-Type: application/json'
 
       response_body:
