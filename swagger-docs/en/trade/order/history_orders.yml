@@ -52,24 +52,21 @@ paths:
       request_body:
         type: "python"
         value: |
-          import os
-          import json
-          from longbridge.http import Auth, Config, HttpClient
+          from datetime import datetime
+          from longbridge.openapi import TradeContext, Config, OrderStatus, OrderSide, Market
 
-          auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-          http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
+          config = Config.from_env()
+          ctx = TradeContext(config)
 
-          query = {
-            'symbol': '700.HK',
-            'status': ['FilledStatus', 'NewStatus'],
-            'side': 'Buy',
-            'market': 'HK',
-            'start_at': '1652111483',
-            'end_at': '1652321483',
-          }
-
-          resp = http.get("/v1/trade/order/history", query)
-          print(json.dumps(resp.data, indent=2))
+          resp = ctx.history_orders(
+              symbol = "700.HK",
+              status = [OrderStatus.Filled, OrderStatus.New],
+              side = OrderSide.Buy,
+              market = Market.HK,
+              start_at = datetime(2022, 5, 9),
+              end_at = datetime(2022, 5, 12),
+          )
+          print(resp)
       response_body:
         {
           "code": 0,
