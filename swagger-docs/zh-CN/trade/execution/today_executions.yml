@@ -27,19 +27,13 @@ paths:
       request_body:
         type: "python"
         value: |
-          import os
-          import json
-          from longbridge.http import Auth, Config, HttpClient
+          from longbridge.openapi import TradeContext, Config
 
-          auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-          http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
+          config = Config.from_env()
+          ctx = TradeContext(config)
 
-          query = {
-            'symbol': '700.HK',
-          }
-
-          resp = http.get("/v1/trade/execution/today", query)
-          print(json.dumps(resp.data, indent=2))
+          resp = ctx.today_executions(symbol = "700.HK")
+          print(resp)
       response_body:
         {
           "code": 0,
