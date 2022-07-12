@@ -1,0 +1,46 @@
+Swagger: "2.0" 
+Info: 
+Description: "This interface is used to obtain the initial margin ratio, maintenance margin ratio and strong average margin ratio of stocks" 
+Version: "v1" 
+Title: "get margin ratio" 
+Paths: 
+/ v1/risk/margin-ratio: 
+Get: 
+Access: 
+Parameters: 
+-name: "symbol" 
+Type: "string" 
+Description: "Stock symbol, using the format `ticker.region`, for example: `AAPL.US`" 
+Required: false. 
+Responses: 
+"200": 
+Description: "return success" 
+Schema: 
+$ref: "# / definitions/margin_ratio_rsp" 
+"400": 
+Description: "Internal error" 
+Request_body: 
+Type: "python" 
+Value: |. 
+Todo. 
+Response_body: 
+{. 
+"code": 0. 
+"data": 
+{"im_factor": "0.1", "mm_factor": "0.1", "fm_factor": "0.1"}. 
+}. 
+Definitions: 
+Margin_ratio_rsp: 
+Properties: 
+Im_factor: 
+Type: "string" 
+Description: initial margin ratio. 
+Required: true. 
+Mm_factor: 
+Type: "string" 
+Description: maintain the margin ratio. 
+Required: true. 
+Fm_factor: 
+Type: "string" 
+Description: Qiang Ping margin ratio. 
+Required: true
