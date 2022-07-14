@@ -221,3 +221,32 @@ enum CalcIndex {
   CALCINDEX_RHO = 40;
 }
 ```
+
+### Board - Security Board
+
+| Board            | Description                                   |
+| ---------------- | --------------------------------------------- |
+| USMain           | US Main Board                                 |
+| USPink           | US Pink Board                                 |
+| USDJI            | Dow Jones Industrial Average                  |
+| USNSDQ           | Nasdsaq Index                                 |
+| USSector         | US Industry Board                             |
+| USOption         | US Option                                     |
+| USOptionS        | US Sepecial Option (market closed at 4:15 pm) |
+| HKEqualty        | Hong Kong Equity Securities                   |
+| HKPreIPO         | HK PreIPO Security                            |
+| HKWarrant        | HK Warrant                                    |
+| HKHS             | Hang Seng Index                               |
+| HKSector         | HK Industry Board                             |
+| SHMainConnect    | SH Main Board(Connect)                        |
+| SHMainNonConnect | SH Main Board(Non Connect)                    |
+| SHSTAR           | SH Science and Technology Innovation Board    |
+| CNIX             | CN Index                                      |
+| CNSector         | CN Industry Board                             |
+| SZMainConnect    | SZ Main Board(Connect)                        |
+| SZMainNonConnect | SZ Main Board(Non Connect)                    |
+| SZGEMConnect     | SZ Gem Board(Connect)                         |
+| SZGEMNonConnect  | SZ Gem Board(Non Connect)                     |
+| SGMain           | SG Main Board                                 |
+| STI              | Singapore Straits Index                       |
+| SGSector         | SG Industry Board                             |
