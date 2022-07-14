@@ -22,3 +22,8 @@ sidebar_position: 7
 - 新增行情資金流接口
   - 長連接 `Business Command：24` 獲取標的當日資金流向
   - 長連接 `Business Command：25` 獲取標的當日資金分佈
+
+## 2022-07-14
+
+- 新增獲取保證金比例接口
+  - `GET /v1/risk/margin-ratio` 獲取保證金比例
