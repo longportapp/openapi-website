@@ -40,7 +40,7 @@ paths:
                           "symbol": "700.HK",
                           "market": "HK",
                           "name": "騰訊控股",
-                          "price": "364.4",
+                          "watched_price": "364.4",
                           "watched_at": 1652855022,
                         },
                       ],
@@ -68,7 +68,8 @@ definitions:
           securities:
             type: "object[]"
             description: 股票
-            required: ["symbol", "market", "name", "price", "watched_at"]
+            required:
+              ["symbol", "market", "name", "watched_price", "watched_at"]
             properties:
               symbol:
                 type: "string"
@@ -82,9 +83,9 @@ definitions:
                 type: "string"
                 description: 名稱
                 required: true
-              price:
+              watched_price:
                 type: "string"
-                description: 價格
+                description: 關注時的價格
                 required: true
               watched_at:
                 type: "integer"

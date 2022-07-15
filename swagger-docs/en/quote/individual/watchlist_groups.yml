@@ -40,7 +40,7 @@ paths:
                           "symbol": "700.HK",
                           "market": "HK",
                           "name": "Tencent",
-                          "price": "364.4",
+                          "watched_price": "364.4",
                           "watched_at": 1652855022,
                         },
                       ],
@@ -68,7 +68,8 @@ definitions:
           securities:
             type: "object[]"
             description: Security
-            required: ["symbol", "market", "name", "price", "watched_at"]
+            required:
+              ["symbol", "market", "name", "watched_price", "watched_at"]
             properties:
               symbol:
                 type: "string"
@@ -82,9 +83,9 @@ definitions:
                 type: "string"
                 description: Name
                 required: true
-              price:
+              watched_price:
                 type: "string"
-                description: Price
+                description: Watched price
                 required: true
               watched_at:
                 type: "integer"
