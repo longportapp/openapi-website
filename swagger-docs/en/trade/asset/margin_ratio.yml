@@ -11,7 +11,7 @@ paths:
         - name: "symbol"
           type: "string"
           description: "Stock symbol, using the format `ticker.region`, for example: `AAPL.US`"
-          required: false
+          required: true
       responses:
         "200":
           description: "Success"
@@ -32,6 +32,10 @@ paths:
 
 definitions:
   margin_ratio_rsp:
+    required:
+      - im_factor
+      - mm_factor
+      - fm_factor
     properties:
       im_factor:
         type: "string"

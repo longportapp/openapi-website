@@ -11,7 +11,7 @@ paths:
         - name: "symbol"
           type: "string"
           description: "股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US`"
-          required: false
+          required: true
       responses:
         "200":
           description: "返回成功"
@@ -32,6 +32,10 @@ paths:
 
 definitions:
   margin_ratio_rsp:
+    required:
+      - im_factor
+      - mm_factor
+      - fm_factor
     properties:
       im_factor:
         type: "string"
