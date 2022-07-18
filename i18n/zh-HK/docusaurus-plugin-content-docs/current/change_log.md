@@ -5,6 +5,11 @@ slug: log_change
 sidebar_position: 7
 ---
 
+## 2022-07-18
+
+- 更新標的基礎信息接口
+  - 長連接 `Business Command：10` 響應增加 `board` 字段
+
 ## 2022-06-30
 
 - 新增獲取關注分組接口
