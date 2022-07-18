@@ -30,7 +30,7 @@ function useSdkLanguages() {
       value: 'java',
     },
     {
-      label: 'C++',
+      label: 'C/C++',
       value: 'cpp',
     },
   ]
