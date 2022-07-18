@@ -233,7 +233,7 @@ enum CalcIndex {
 | USSector         | US Industry Board                             |
 | USOption         | US Option                                     |
 | USOptionS        | US Sepecial Option (market closed at 4:15 pm) |
-| HKEqualty        | Hong Kong Equity Securities                   |
+| HKEquity         | Hong Kong Equity Securities                   |
 | HKPreIPO         | HK PreIPO Security                            |
 | HKWarrant        | HK Warrant                                    |
 | HKHS             | Hang Seng Index                               |

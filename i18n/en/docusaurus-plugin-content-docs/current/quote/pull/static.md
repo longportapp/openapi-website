@@ -116,7 +116,7 @@ message StaticInfo {
       "bps": "103.40413",
       "dividend_yield": "1.6",
       "stock_derivatives": [2],
-      "board": "HKEqualty"
+      "board": "HKEquity"
     },
     {
       "symbol": "AAPL.US",

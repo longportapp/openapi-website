@@ -233,7 +233,7 @@ enum CalcIndex {
 | USSector         | 美股行业概念                     |
 | USOption         | 美股期权                         |
 | USOptionS        | 美股特殊期权（收盘时间为 16:15） |
-| HKEqualty        | 港股股本证券                     |
+| HKEquity         | 港股股本证券                     |
 | HKPreIPO         | 港股暗盘                         |
 | HKWarrant        | 港股轮证                         |
 | HKHS             | 恒生指数                         |
