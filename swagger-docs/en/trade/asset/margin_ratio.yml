@@ -22,7 +22,13 @@ paths:
       request_body:
         type: "python"
         value: |
-          todo
+          from datetime import datetime
+          from longbridge.openapi import TradeContext, Config
+
+          config = Config.from_env()
+          ctx = TradeContext(config)
+          resp = ctx.margin_ratio("700.HK")
+          print(resp)
       response_body:
         {
           "code": 0,
