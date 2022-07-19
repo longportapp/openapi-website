@@ -5,6 +5,11 @@ slug: log_change
 sidebar_position: 7
 ---
 
+## 2022-07-18
+
+- Update security static info interface
+  - Long connection `Business Command：10`, response add `board` fields
+
 ## 2022-06-30
 
 - Add get watched groups interface
