@@ -19,10 +19,12 @@ paths:
       request_body:
         type: "python"
         value: |
-          curl --request GET \
-            --url https://openapi.longbridgeapp.com/v1/watchlist/groups \
-            --header 'Authorization: LONGBRIDGE_ACCESS_TOKEN' \
-            --header 'Content-Type: application/json'
+          from longbridge.openapi import QuoteContext, Config
+
+          config = Config.from_env()
+          ctx = QuoteContext(config)
+          resp = ctx.watch_list()
+          print(resp)
 
       response_body:
         {
