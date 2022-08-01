@@ -19,13 +19,13 @@ Call this to get a new `access_token` before the old `access_token` expires. The
 | HTTP Method       | GET               |
 | Permission        | Not required      |
 
-### Response Headers
+### Request Headers
 
 | Name          | Type   | Required | Description |
 | ------------- | ------ | -------- | ----------- |
 | Authorization | string | Yes      |             |
 
-### Response Parameters
+### Request Parameters
 
 | Name       | Type   | Required | Description                                                                                                  | Example                  |
 | ---------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------ | ------------------------ |
