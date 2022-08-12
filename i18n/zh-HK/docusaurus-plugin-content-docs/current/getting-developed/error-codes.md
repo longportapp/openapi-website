@@ -16,4 +16,4 @@ sidebar_position: 10
 | 401         | 401003 | token expired          | Access Token 已過期，請刷新 Access Token |
 | 429         | 429001 | ip request ratelimit   | IP 訪問過於頻繁，請稍後再試              |
 | 429         | 429002 | api request is limited | 接口訪問過於頻繁，請稍後再試             |
-| 500         | 500000 | internal error         | 服務內部錯誤，請聯繫客戶進行處理         |
+| 500         | 500000 | internal error         | 服務內部錯誤，請聯繫客戶經理進行處理         |
