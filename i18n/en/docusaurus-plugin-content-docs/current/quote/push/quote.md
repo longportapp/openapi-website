@@ -18,7 +18,7 @@ Real-time quote push of the subscribed security. In the pushed data structure, o
 ### Properties
 
 | Name          | Type   | Description                                                                          |
-| ------------- | ------ | ------------------------------------------------------------------------------------ |
+|---------------|--------|--------------------------------------------------------------------------------------|
 | symbol        | string | Security code, for example: `AAPL.US`                                                |
 | sequence      | int64  | Sequence number                                                                      |
 | last_done     | string | Latest price                                                                         |
@@ -63,16 +63,16 @@ message PushQuote {
 # Before running, please visit the "Developers" to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
 from time import sleep
-from longbridge.openapi import QuoteContext, Config, SubType
+from longbridge.openapi import QuoteContext, Config, SubType, PushQuote
 
-class EventHandler:
-    def on_event(self, symbol: str, msg):
-        print(symbol, msg)
+def on_quote(symbol: str, event: PushTrades):
+    print(symbol, event)
 
 config = Config.from_env()
-ctx = QuoteContext(config, EventHandler())
+ctx = QuoteContext(config)
+ctx.set_on_quote(on_quote)
 
-ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote], is_first_push = True)
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote], is_first_push=True)
 sleep(30)
 ```
 
