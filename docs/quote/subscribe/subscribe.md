@@ -17,11 +17,11 @@ sidebar_position: 2
 
 ### Parameters
 
-| Name          | Type     | Required | Description                                                                                                                                            |
-| ------------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Name          | Type     | Required | Description                                                                                                                                         |
+|---------------|----------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
 | symbol        | string[] | 是       | 订阅的标的代码，例如：`[700.HK]` <br /><br />**校验规则：**<br />每次请求支持传入的标的数量上限是 `500` 个 <br /> 每个用户同时订阅标的数量最多为 `500` |
 | sub_type      | int32[]  | 是       | 订阅的数据类型，例如：`[1,2]`，详见 [SubType](../objects#subtype---订阅数据的类型)                                                                     |
-| is_first_push | bool     | 是       | 订阅后是否立刻进行一次数据推送。( trade 不支持)                                                                                                        |
+| is_first_push | bool     | 是       | 订阅后是否立刻进行一次数据推送。( trade 不支持)                                                                                                      |
 
 ### Protobuf
 
@@ -47,16 +47,16 @@ message SubscribeRequest {
 # 运行前请访问“开发者中心”确保账户有正确的行情权限。
 # 如没有开通行情权限，可以通过“长桥”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
 from time import sleep
-from longbridge.openapi import QuoteContext, Config, SubType
+from longbridge.openapi import QuoteContext, Config, SubType, PushQuote
 
-class EventHandler:
-    def on_event(self, symbol: str, msg):
-        print(symbol, msg)
+def on_quote(symbol: str, event: PushTrades):
+    print(symbol, event)
 
 config = Config.from_env()
-ctx = QuoteContext(config, EventHandler())
+ctx = QuoteContext(config)
+ctx.set_on_quote(on_quote)
 
-ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote], is_first_push = True)
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote], is_first_push=True)
 sleep(30)
 ```
 
@@ -66,10 +66,10 @@ sleep(30)
 
 返回本次请求订阅成功的标的和类型。
 
-| Name       | Type     | Description                                                          |
-| ---------- | -------- | -------------------------------------------------------------------- |
-| sub_list   | object[] | 订阅的数据                                                           |
-| ∟ symbol   | string   | 标的代码                                                             |
+| Name       | Type     | Description                                                        |
+|------------|----------|--------------------------------------------------------------------|
+| sub_list   | object[] | 订阅的数据                                                         |
+| ∟ symbol   | string   | 标的代码                                                           |
 | ∟ sub_type | int32[]  | 订阅的数据类型，详见：[SubType](../objects#subtype---订阅数据的类型) |
 
 ### Protobuf
@@ -113,7 +113,7 @@ message SubTypeList {
 ## 错误码
 
 | 协议错误码 | 业务错误码 | 描述             | 排查建议                 |
-| ---------- | ---------- | ---------------- | ------------------------ |
+|------------|------------|----------------|----------------------|
 | 3          | 301600     | 无效的请求       | 请求参数有误或解包失败   |
 | 3          | 301606     | 限流             | 降低请求频次             |
 | 7          | 301602     | 服务端内部错误   | 请重试或联系技术人员处理 |

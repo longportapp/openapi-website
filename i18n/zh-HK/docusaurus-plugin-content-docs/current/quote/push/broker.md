@@ -18,8 +18,8 @@ sidebar_position: 3
 ### Properties
 
 | Name         | Type     | Description                       |
-| ------------ | -------- | --------------------------------- |
-| symbol       | string   | 標的代碼，例如：`AAPL.US`         |
+|--------------|----------|-----------------------------------|
+| symbol       | string   | 標的代碼，例如：`AAPL.US`           |
 | sequence     | int64    | 序列號                            |
 | ask_brokers  | object[] | 賣槃經紀隊列                      |
 | ∟ position   | int32    | 檔位                              |
@@ -58,16 +58,16 @@ message Brokers {
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
 # 如沒有開通行情權限，可以通過“長橋”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from time import sleep
-from longbridge.openapi import QuoteContext, Config, SubType
+from longbridge.openapi import QuoteContext, Config, SubType, PushQuote
 
-class EventHandler:
-    def on_event(self, symbol: str, msg):
-        print(symbol, msg)
+def on_brokers(symbol: str, event: PushBrokers):
+    print(symbol, event)
 
 config = Config.from_env()
-ctx = QuoteContext(config, EventHandler())
+ctx = QuoteContext(config)
+ctx.set_on_brokers(on_brokers)
 
-ctx.subscribe(["700.HK"], [SubType.Brokers], is_first_push = True)
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Brokers], is_first_push=True)
 sleep(30)
 ```
 

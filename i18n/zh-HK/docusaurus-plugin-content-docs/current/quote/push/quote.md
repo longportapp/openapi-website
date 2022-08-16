@@ -17,17 +17,17 @@ sidebar_position: 1
 
 ### Properties
 
-| Name          | Type   | Description                                                       |
-| ------------- | ------ | ----------------------------------------------------------------- |
-| symbol        | string | 標的代碼，例如：`AAPL.US`                                         |
-| sequence      | int64  | 序列號                                                            |
-| last_done     | string | 最新價                                                            |
-| open          | string | 開盤價                                                            |
-| high          | string | 最高價                                                            |
-| low           | string | 最低價                                                            |
-| timestamp     | int64  | 最新成交的時間戳                                                  |
-| volume        | int64  | 成交量                                                            |
-| turnover      | string | 成交額                                                            |
+| Name          | Type   | Description                                                      |
+|---------------|--------|------------------------------------------------------------------|
+| symbol        | string | 標的代碼，例如：`AAPL.US`                                          |
+| sequence      | int64  | 序列號                                                           |
+| last_done     | string | 最新價                                                           |
+| open          | string | 開盤價                                                           |
+| high          | string | 最高價                                                           |
+| low           | string | 最低價                                                           |
+| timestamp     | int64  | 最新成交的時間戳                                                 |
+| volume        | int64  | 成交量                                                           |
+| turnover      | string | 成交額                                                           |
 | trade_status  | int32  | 交易狀態，詳見 [TradeStatus](../objects#tradestatus---交易狀態)   |
 | trade_session | int32  | 交易時段，詳見 [TradeSession](../objects#tradesession---交易時段) |
 
@@ -63,16 +63,16 @@ message PushQuote {
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
 # 如沒有開通行情權限，可以通過“長橋”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from time import sleep
-from longbridge.openapi import QuoteContext, Config, SubType
+from longbridge.openapi import QuoteContext, Config, SubType, PushQuote
 
-class EventHandler:
-    def on_event(self, symbol: str, msg):
-        print(symbol, msg)
+def on_quote(symbol: str, event: PushTrades):
+    print(symbol, event)
 
 config = Config.from_env()
-ctx = QuoteContext(config, EventHandler())
+ctx = QuoteContext(config)
+ctx.set_on_quote(on_quote)
 
-ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote], is_first_push = True)
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote], is_first_push=True)
 sleep(30)
 ```
 

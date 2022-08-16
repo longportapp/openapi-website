@@ -17,20 +17,20 @@ sidebar_position: 2
 
 ### Properties
 
-| Name        | Type     | Description               |
-| ----------- | -------- | ------------------------- |
+| Name        | Type     | Description             |
+|-------------|----------|-------------------------|
 | symbol      | string   | 標的代碼，例如：`AAPL.US` |
-| sequence    | int64    | 序列號                    |
-| ask         | object[] | 賣盤                      |
-| ∟ position  | int32    | 檔位                      |
-| ∟ price     | string   | 價格                      |
-| ∟ volume    | int64    | 掛單量                    |
-| ∟ order_num | int64    | 訂單數量                  |
-| bid         | object[] | 買盤                      |
-| ∟ position  | int32    | 檔位                      |
-| ∟ price     | string   | 價格                      |
-| ∟ volume    | int64    | 掛單量                    |
-| ∟ order_num | int64    | 訂單數量                  |
+| sequence    | int64    | 序列號                  |
+| ask         | object[] | 賣盤                    |
+| ∟ position  | int32    | 檔位                    |
+| ∟ price     | string   | 價格                    |
+| ∟ volume    | int64    | 掛單量                  |
+| ∟ order_num | int64    | 訂單數量                |
+| bid         | object[] | 買盤                    |
+| ∟ position  | int32    | 檔位                    |
+| ∟ price     | string   | 價格                    |
+| ∟ volume    | int64    | 掛單量                  |
+| ∟ order_num | int64    | 訂單數量                |
 
 ### Protobuf
 
@@ -64,16 +64,16 @@ message Depth {
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
 # 如沒有開通行情權限，可以通過“長橋”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from time import sleep
-from longbridge.openapi import QuoteContext, Config, SubType
+from longbridge.openapi import QuoteContext, Config, SubType, PushQuote
 
-class EventHandler:
-    def on_event(self, symbol: str, msg):
-        print(symbol, msg)
+def on_depth(symbol: str, event: PushDepth):
+    print(symbol, event)
 
 config = Config.from_env()
-ctx = QuoteContext(config, EventHandler())
+ctx = QuoteContext(config)
+ctx.set_on_depth(on_depth)
 
-ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Depth], is_first_push = True)
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Depth], is_first_push=True)
 sleep(30)
 ```
 

@@ -17,17 +17,17 @@ Real-time trades data push of the subscribed security.
 
 ### Properties
 
-| Name            | Type     | Description                                                                                     |
-| --------------- | -------- | ----------------------------------------------------------------------------------------------- |
-| symbol          | string   | Security code, for example: `AAPL.US`                                                           |
-| sequence        | int64    | Sequence number                                                                                 |
-| trades          | object[] | Trades data                                                                                     |
-| ∟ price         | string   | Price                                                                                           |
-| ∟ volume        | int64    | Volume                                                                                          |
-| ∟ timestamp     | int64    | Time of trading                                                                                 |
-| ∟ trade_type    | string   | [Trade type](#trade-type)                                                                       |
+| Name            | Type     | Description                                                                                      |
+|-----------------|----------|--------------------------------------------------------------------------------------------------|
+| symbol          | string   | Security code, for example: `AAPL.US`                                                            |
+| sequence        | int64    | Sequence number                                                                                  |
+| trades          | object[] | Trades data                                                                                      |
+| ∟ price         | string   | Price                                                                                            |
+| ∟ volume        | int64    | Volume                                                                                           |
+| ∟ timestamp     | int64    | Time of trading                                                                                  |
+| ∟ trade_type    | string   | [Trade type](#trade-type)                                                                        |
 | ∟ direction     | int32    | Trade direction <br /><br />**Optional value:**<br />`0` - neutral<br />`1` - down<br />`2` - up |
-| ∟ trade_session | int32    | Trade session, see [TradeSession](../objects#tradesession---trading-session)                    |
+| ∟ trade_session | int32    | Trade session, see [TradeSession](../objects#tradesession---trading-session)                     |
 
 #### Trade Type
 
@@ -95,16 +95,16 @@ message Trade {
 # Before running, please visit the "Developers" to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
 from time import sleep
-from longbridge.openapi import QuoteContext, Config, SubType
+from longbridge.openapi import QuoteContext, Config, SubType, PushQuote
 
-class EventHandler:
-    def on_event(self, symbol: str, msg):
-        print(symbol, msg)
+def on_trades(symbol: str, event: PushTrades):
+    print(symbol, event)
 
 config = Config.from_env()
-ctx = QuoteContext(config, EventHandler())
+ctx = QuoteContext(config)
+ctx.set_on_trades(on_trade)
 
-ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Trade], is_first_push = True)
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Trade])
 sleep(30)
 ```
 
