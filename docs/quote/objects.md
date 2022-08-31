@@ -232,21 +232,21 @@ enum CalcIndex {
 | USNSDQ           | 纳斯达克指数                     |
 | USSector         | 美股行业概念                     |
 | USOption         | 美股期权                         |
-| USOptionS        | 美股特殊期权（收盘时间为 16:15） |
+| USOptionS        | 美股特殊期权（收盘时间为 16:15）|
 | HKEquity         | 港股股本证券                     |
 | HKPreIPO         | 港股暗盘                         |
 | HKWarrant        | 港股轮证                         |
 | HKHS             | 恒生指数                         |
 | HKSector         | 港股行业概念                     |
-| SHMainConnect    | 上证主板-互联互通                |
-| SHMainNonConnect | 上证主板-非互联互通              |
+| SHMainConnect    | 上证主板 - 互联互通                |
+| SHMainNonConnect | 上证主板 - 非互联互通              |
 | SHSTAR           | 科创板                           |
 | CNIX             | 沪深指数                         |
 | CNSector         | 沪深行业概念                     |
-| SZMainConnect    | 深证主板-互联互通                |
-| SZMainNonConnect | 深证主板-非互联互通              |
-| SZGEMConnect     | 创业板-互联互通                  |
-| SZGEMNonConnect  | 创业板-非互联互通                |
+| SZMainConnect    | 深证主板 - 互联互通                |
+| SZMainNonConnect | 深证主板 - 非互联互通              |
+| SZGEMConnect     | 创业板 - 互联互通                  |
+| SZGEMNonConnect  | 创业板 - 非互联互通                |
 | SGMain           | 新加坡主板                       |
 | STI              | 新加坡海峡指数                   |
 | SGSector         | 新加坡行业概念                   |
