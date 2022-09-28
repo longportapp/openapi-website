@@ -87,7 +87,7 @@ Longbridge 提供接入底层服务的 HTTP / WebSockets 接口以及封装在�
         <td>OPRA 期权</td>
         <td>
             <ul>
-            暂未上线，敬请期待。
+            <li>Level 1：请购买 <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=US">OPRA 期权-Open API</a></font></li>
             </ul>
         </td>
     </tr>

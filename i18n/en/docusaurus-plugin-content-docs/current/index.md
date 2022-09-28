@@ -89,7 +89,7 @@ All APIs have minimal invoke interval limitation, so same API can't be invoking 
     <tr>
         <td>OPRA OPRA Options</td>
         <td>
-            Coming Soon
+            <li>Level 1: Please Purchase <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=US">OPRA Options-Open API</a></font></li>
         </td>
     </tr>
     <tr>

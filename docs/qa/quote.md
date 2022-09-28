@@ -122,7 +122,7 @@ A：
         <td>OPRA 期权</td>
         <td>
             <ul>
-            暂未上线，敬请期待。
+            <li>Level 1：请购买 <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=US">OPRA 期权-Open API</a></font></li>
             </ul>
         </td>
     </tr>
