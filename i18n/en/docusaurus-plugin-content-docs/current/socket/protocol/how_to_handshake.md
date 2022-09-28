@@ -9,7 +9,7 @@ Handshake is first thing before client and server establish connection. Handshak
 
 - protocol version - right now only version `1`
 - data codec type - right now only support `protobuf`, value is `1`
-- client platform - value is `9` as `Open API`
+- client platform - value is `9` as `OpenAPI`
 
 So handshake is always fixed contents.
 
