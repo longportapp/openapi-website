@@ -97,8 +97,8 @@ A：
         <td>证券类产品（含股票、ETFs、窝轮、牛熊、界内证）</td>
         <td rowspan="2">
             <ul>
-            <li>中国大陆客户：请购买 <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=HK">港股 Lv2 实时行情 - OpenAPI</a></font></li>
-            <li>非中国大陆客户：请购买 <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=HK">港股 Lv2 实时行情（国际版）- OpenAPI</a></font></li>
+            <li>中国大陆客户：请购买 <a href="https://activity.lbkrs.com/spa/mall?market=HK">港股 Lv2 实时行情 - OpenAPI</a></li>
+            <li>非中国大陆客户：请购买 <a href="https://activity.lbkrs.com/spa/mall?market=HK">港股 Lv2 实时行情（国际版）- OpenAPI</a></li>
             </ul>
         </td>
     </tr>
@@ -110,7 +110,7 @@ A：
         <td>证券类产品（含纽交所、美交所、纳斯达克上市的股票、ETFs）</td>
         <td rowspan="2">
             <ul>
-            <li>Level 1：请购买 <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=US">L1 Nasdaq Basic - OpenAPI</a></font></li>
+            <li>Level 1：请购买 <a href="https://activity.lbkrs.com/spa/mall?market=US">L1 Nasdaq Basic - OpenAPI</a></li>
             <li>Level 2：暂未上线，敬请期待。</li>
             </ul>
         </td>
@@ -122,7 +122,7 @@ A：
         <td>OPRA 期权</td>
         <td>
             <ul>
-            <li>Level 1：请购买 <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=US">OPRA 期权-Open API</a></font></li>
+            <li>Level 1：请购买 <a href="https://activity.lbkrs.com/spa/mall?market=US">OPRA 期权-Open API</a></li>
             </ul>
         </td>
     </tr>
