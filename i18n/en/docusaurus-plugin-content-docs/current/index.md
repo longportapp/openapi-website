@@ -63,8 +63,8 @@ All APIs have minimal invoke interval limitation, so same API can't be invoking 
         <td>Securities (including equities, ETFs, Warrants, CBBCs)</td>
         <td rowspan="2">
             <ul>
-            <li>Mainland China: Please Purchase <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=HK">L2 Advanced Quotes-OpenAPI - OpenAPI</a></font></li>
-            <li>Non-Mainland China: Please Purchase <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=HK">L2 Advanced Quotes (International) -OpenAPI</a></font></li>
+            <li>Mainland China: Please Purchase <a href="https://activity.lbkrs.com/spa/mall?market=HK">L2 Advanced Quotes-OpenAPI - OpenAPI</a></li>
+            <li>Non-Mainland China: Please Purchase <a href="https://activity.lbkrs.com/spa/mall?market=HK">L2 Advanced Quotes (International) -OpenAPI</a></li>
             </ul>
         </td>
     </tr>
@@ -76,7 +76,7 @@ All APIs have minimal invoke interval limitation, so same API can't be invoking 
         <td>Securities (including stocks, ETFs)</td>
         <td rowspan="2">
             <ul>
-            <li>Level 1: Please Purchase <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=US">L1 Nasdaq Basic - OpenAPI</a></font></li>
+            <li>Level 1: Please Purchase <a href="https://activity.lbkrs.com/spa/mall?market=US">L1 Nasdaq Basic - OpenAPI</a></li>
             <li>
                 Level 2: Coming Soon
             </li>
@@ -89,7 +89,7 @@ All APIs have minimal invoke interval limitation, so same API can't be invoking 
     <tr>
         <td>OPRA OPRA Options</td>
         <td>
-            Coming Soon
+            <li>Level 1: Please Purchase <a href="https://activity.lbkrs.com/spa/mall?market=US">OPRA Options-Open API</a></li>
         </td>
     </tr>
     <tr>

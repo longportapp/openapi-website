@@ -5,7 +5,7 @@ slug: /socket/protocol/overview
 sidebar_position: 0
 ---
 
-我們使用二進制的私有協議進行數據交互，協議同時支持 `Websocket` 和 `TCP` 連接。
+我們使用二進制的私有協議進行數據交互，協議同時支持 `WebSocket` 和 `TCP` 連接。
 
 :::info
 使用的字節序是 `BigEndian`
