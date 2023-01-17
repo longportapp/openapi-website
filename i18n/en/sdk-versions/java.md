@@ -10,7 +10,7 @@ Add the following line to your `pom.xml` file
 <dependency>
   <groupId>io.github.longbridgeapp</groupId>
   <artifactId>openapi-sdk</artifactId>
-  <version>0.2.18</version>
+  <version>0.2.42</version>
 </dependency>
 ```
 
