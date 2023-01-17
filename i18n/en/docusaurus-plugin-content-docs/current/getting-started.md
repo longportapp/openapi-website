@@ -337,7 +337,7 @@ python subscribe_quote.py
   </TabItem>
   <TabItem value="javascript" label="JavaScript">
 
-Create `subscribe_quote.js` and paste the code below：
+Create `subscribe_quote.js` and paste the code below:
 
 ```javascript
 const { Config, QuoteContext, SubType } = require('longbridge')

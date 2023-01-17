@@ -13,7 +13,7 @@ Client can get real-time trade updates from trade gateway.
 Cmd: `16`
 :::
 
-Protobuf definition：
+Protobuf definition:
 
 ```protobuf
 // Sub is Sub command content, command is 16
@@ -34,7 +34,7 @@ message SubResponse {
 
 ```
 
-Current support topics：
+Current support topics:
 
 - private - private notification for trade
 
@@ -44,7 +44,7 @@ Current support topics：
 Cmd: `17`
 :::
 
-Protobuf defination：
+Protobuf defination:
 
 ```protobuf
 // Unsub is Unsub command content, command is 17
@@ -66,7 +66,7 @@ Cmd: `18`
 
 After client subscribe success, subscribed `topic` notification wiil be pushed to client.
 
-Protobuf defination：
+Protobuf defination:
 
 ```protobuf
 // Dispatch type

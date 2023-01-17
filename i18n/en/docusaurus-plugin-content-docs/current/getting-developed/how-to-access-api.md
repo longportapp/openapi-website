@@ -86,7 +86,7 @@ headers['Content-Type'] = 'application/json; charset=utf-8',
 
 #### Sign requests
 
-The example of signature function：
+The example of signature function:
 
 ```py
 # signature function on python3
@@ -138,7 +138,7 @@ All API paths start with [https://openapi.longbridgeapp.com](https://openapi.lon
 
 The call to the server-side interface needs to be in HTTPS protocol, JSON format, and encoded in `UTF-8`.
 
-For a test example：
+For a test example:
 
 ```bash
 curl -v https://openapi.longbridgeapp.com/v1/test \
@@ -175,7 +175,7 @@ HTTP Status follows [RESTFull style](https://restfulapi.net/http-status-codes) a
 ### HTTP Status
 
 - 1xx: Informational – Communicates transfer protocol-level information.
-- 2xx: Success – Indicates that the client’s request was accepted successfully.
+- 2xx: Success – Indicates that the client's request was accepted successfully.
 - 3xx: Redirection – Indicates that the client must take some additional action in order to complete their request.
 - 4xx: Client Error – This category of error status codes points the finger at clients.
 - 5xx: Server Error – The server takes responsibility for these error status codes.

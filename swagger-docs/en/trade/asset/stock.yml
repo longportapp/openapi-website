@@ -10,7 +10,7 @@ paths:
       parameters:
         - name: "symbol"
           type: "string[]"
-          description: "Stock code，use `ticker.region` format，E.g：`AAPL.US`"
+          description: "Stock code, use `ticker.region` format, E.g:`AAPL.US`"
           required: false
       responses:
         "200":

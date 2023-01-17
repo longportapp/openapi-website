@@ -10,7 +10,7 @@ paths:
       parameters:
         - name: "symbol"
           type: "string[]"
-          description: Fund code, in `ISIN` format，E.g：`HK0000676327` <a href="https://en.wikipedia.org/wiki/International_Securities_Identification_Number">ISIN explain</a>
+          description: Fund code, in `ISIN` format, E.g:`HK0000676327` <a href="https://en.wikipedia.org/wiki/International_Securities_Identification_Number">ISIN explain</a>
           required: false
       responses:
         "200":

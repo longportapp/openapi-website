@@ -52,10 +52,10 @@ print(resp)
 | symbol       | string   | 標的代碼                                                  |
 | ask_brokers  | object[] | 賣槃經紀隊列                                              |
 | ∟ position   | int32    | 檔位                                                      |
-| ∟ broker_ids | int32[]  | 券商席位 ID，通过[獲取券商席位 ID ](./broker-ids)接口獲取 |
+| ∟ broker_ids | int32[]  | 券商席位 ID，通过[獲取券商席位 ID ](./broker-ids) 接口獲取 |
 | bid_brokers  | object[] | 買槃經紀隊列                                              |
 | ∟ position   | int32    | 檔位                                                      |
-| ∟ broker_ids | int32[]  | 券商席位 ID，通过[獲取券商席位 ID ](./broker-ids)接口獲取 |
+| ∟ broker_ids | int32[]  | 券商席位 ID，通过[獲取券商席位 ID ](./broker-ids) 接口獲取 |
 
 ### Protobuf
 

@@ -10,11 +10,11 @@ paths:
       parameters:
         - name: "start_time"
           type: "string"
-          description: "start time timestamp，in `seconds`，E.g：`1650037563`"
+          description: "start time timestamp, in `seconds`, E.g:`1650037563`"
           required: true
         - name: "end_time"
           type: "string"
-          description: "end time timestamp，in `seconds`，E.g：`1650747581`"
+          description: "end time timestamp, in `seconds`, E.g:`1650747581`"
           required: true
         - name: "business_type"
           type: "string"
@@ -22,7 +22,7 @@ paths:
           required: false
         - name: "symbol"
           type: "string"
-          description: "Target code，E.g：`AAPL.US`"
+          description: "Target code, E.g:`AAPL.US`"
           required: false
         - name: "page"
           type: "string"

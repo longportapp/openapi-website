@@ -44,7 +44,7 @@ Fields Explain:
 - platform - 0b1001
 - reserve - 0b0000
 
-Two bytes contents：
+Two bytes contents:
 
 ```
 0b00010001,
