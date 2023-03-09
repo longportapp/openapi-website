@@ -14,9 +14,13 @@ import TabItem from '@theme/TabItem';
 
 ## API Host
 
-- HTTP API - `https://openapi.longbridgeapp.com`
-- WebSocket Quote - `wss://openapi-quote.longbridgeapp.com`
-- WebSocket Trade - `wss://openapi-trade.longbridgeapp.com`
+- HTTP API - `https://openapi.longportapp.com`
+- WebSocket Quote - `wss://openapi-quote.longportapp.com`
+- WebSocket Trade - `wss://openapi-trade.longportapp.com`
+
+:::tip
+中国大陆地区访问，建议采用 `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn` 以提升访问速度。
+:::
 
 ## 环境需求
 

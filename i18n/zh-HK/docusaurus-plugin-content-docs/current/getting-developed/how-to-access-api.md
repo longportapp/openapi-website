@@ -138,9 +138,9 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 
 ## 基本路徑
 
-所有 API 的路徑都以 [https://openapi.longbridgeapp.com](https://openapi.longbridgeapp.com) 開頭。
+所有 API 的路徑都以 [https://openapi.longportapp.com](https://openapi.longportapp.com) 開頭。
 
-> TIP: 也可以用 https://openapi.longbridgeapp.com
+> TIP: 也可以用 https://openapi.longportapp.com
 
 ## API Request
 
@@ -149,7 +149,7 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 測試接口示例如下：
 
 ```bash
-curl -v https://openapi.longbridgeapp.com/v1/test \
+curl -v https://openapi.longportapp.com/v1/test \
     -H "X-Api-Signature: {簽名}" -H "X-Api-Key: {Appkey}" \
     -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
 ```
@@ -157,7 +157,7 @@ curl -v https://openapi.longbridgeapp.com/v1/test \
 獲取股票持倉接口是`GET`請求並需要傳遞參數，示例如下：
 
 ```bash
-curl -v https://openapi.longbridgeapp.com/v1/asset/stock?symbol=700.HK&symbol=BABA.US \
+curl -v https://openapi.longportapp.com/v1/asset/stock?symbol=700.HK&symbol=BABA.US \
     -H "X-Api-Signature: {簽名}" -H "X-Api-Key: {AppKey}" \
     -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
 ```
@@ -165,7 +165,7 @@ curl -v https://openapi.longbridgeapp.com/v1/asset/stock?symbol=700.HK&symbol=BA
 委託下單接口是`POST`請求並需要傳遞`Body`參數，示例如下：
 
 ```bash
-curl -v -XPOST https://openapi.longbridgeapp.com/v1/trade/order \
+curl -v -XPOST https://openapi.longportapp.com/v1/trade/order \
     -d '{ "side": "Buy", symbol": "700.HK", "order_type": "LO", "submitted_price": "50", "submitted_quantity": "200", "time_in_force": "Day", remark": "Hello from Shell"}' \
     -H "X-Api-Signature: {簽名}" -H "X-Api-Key: {AppKey}" \
     -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
@@ -256,7 +256,7 @@ def sign(method, uri, headers, params, body, secret):
 headers['X-Api-Signature'] = sign(method,  uri, headers, params, body, app_secret)
 
 # 請求接口
-response = requests.request(method, "https://openapi.longbridgeapp.com" + uri + '?' + params, headers=headers, data=body)
+response = requests.request(method, "https://openapi.longportapp.com" + uri + '?' + params, headers=headers, data=body)
 
 print(response.text)
 

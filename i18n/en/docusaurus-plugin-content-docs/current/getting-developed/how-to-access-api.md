@@ -139,9 +139,9 @@ Use the HTTP client to send signed requests.
 
 ## API Path
 
-All API paths start with [https://openapi.longbridgeapp.com](https://openapi.longbridgeapp.com).
+All API paths start with [https://openapi.longportapp.com](https://openapi.longportapp.com).
 
-> TIP: You can also use https://openapi.longbridgeapp.com
+> TIP: You can also use https://openapi.longportapp.com
 
 ## API Request
 
@@ -150,7 +150,7 @@ The call to the server-side interface needs to be in HTTPS protocol, JSON format
 For a test example:
 
 ```bash
-curl -v https://openapi.longbridgeapp.com/v1/test \
+curl -v https://openapi.longportapp.com/v1/test \
     -H "X-Api-Signature: {signature}" -H "X-Api-Key: {AppKey}" \
     -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
 ```
@@ -158,7 +158,7 @@ curl -v https://openapi.longbridgeapp.com/v1/test \
 The method of Get Stock Positions interface is `GET` and needs to set query parameters. The example is as follows:
 
 ```bash
-curl -v https://openapi.longbridgeapp.com/v1/asset/stock?symbol=700.HK&symbol=BABA.US \
+curl -v https://openapi.longportapp.com/v1/asset/stock?symbol=700.HK&symbol=BABA.US \
     -H "X-Api-Signature: {Signature}" -H "X-Api-Key: {AppKey}" \
     -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
 ```
@@ -166,7 +166,7 @@ curl -v https://openapi.longbridgeapp.com/v1/asset/stock?symbol=700.HK&symbol=BA
 The method of Submit Order interface is `POST` and needs to set the request body. The example is as follows:
 
 ```bash
-curl -v -XPOST https://openapi.longbridgeapp.com/v1/trade/order \
+curl -v -XPOST https://openapi.longportapp.com/v1/trade/order \
     -d '{ "side": "Buy", symbol": "700.HK", "order_type": "LO", "submitted_price": "50", "submitted_quantity": "200", "time_in_force": " Day", remark": "Hello from Shell"}' \
     -H "X-Api-Signature: {Signature}" -H "X-Api-Key: {AppKey}" \
     -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
@@ -257,7 +257,7 @@ def sign(method, uri, headers, params, body, secret):
 headers['X-Api-Signature'] = sign(method,  uri, headers, params, body, app_secret)
 
 # call an API
-response = requests.request(method, "https://openapi.longbridgeapp.com" + uri + '?' + params, headers=headers, data=body)
+response = requests.request(method, "https://openapi.longportapp.com" + uri + '?' + params, headers=headers, data=body)
 
 print(response.text)
 

@@ -47,8 +47,8 @@ class MyWsCallback(WsCallback):
         print(f"-> state: {state}")
 
 auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
-ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
+http = HttpClient(auth, Config(base_url="https://openapi.longportapp.com"))
+ws = WsClient("wss://openapi-quote.longportapp.com", http, MyWsCallback())
 
 # To subscribe quotes data, please check whether "Developers" - "Quote authority" is correct.
 # https://open.longportapp.com/account

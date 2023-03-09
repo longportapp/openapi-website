@@ -138,8 +138,8 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 
 ## 基本路径
 
-- HTTP API - `https://openapi.longbridgeapp.com`
-- WebSocket - `wss://openapi-quote.longbridgeapp.com`
+- HTTP API - `https://openapi.longportapp.com`
+- WebSocket - `wss://openapi-quote.longportapp.com`
 
 ## API Request
 
@@ -148,7 +148,7 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 测试接口示例如下：
 
 ```bash
-curl -v https://openapi.longbridgeapp.com/v1/test \
+curl -v https://openapi.longportapp.com/v1/test \
     -H "X-Api-Signature: {签名}" -H "X-Api-Key: {Appkey}" \
     -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
 ```
@@ -156,7 +156,7 @@ curl -v https://openapi.longbridgeapp.com/v1/test \
 获取股票持仓接口是`GET`请求并需要传递参数，示例如下：
 
 ```bash
-curl -v https://openapi.longbridgeapp.com/v1/asset/stock?symbol=700.HK&symbol=BABA.US \
+curl -v https://openapi.longportapp.com/v1/asset/stock?symbol=700.HK&symbol=BABA.US \
     -H "X-Api-Signature: {签名}" -H "X-Api-Key: {AppKey}" \
     -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
 ```
@@ -164,7 +164,7 @@ curl -v https://openapi.longbridgeapp.com/v1/asset/stock?symbol=700.HK&symbol=BA
 委托下单接口是`POST`请求并需要传递`Body`参数，示例如下：
 
 ```bash
-curl -v -XPOST https://openapi.longbridgeapp.com/v1/trade/order \
+curl -v -XPOST https://openapi.longportapp.com/v1/trade/order \
     -d '{ "side": "Buy", symbol": "700.HK", "order_type": "LO", "submitted_price": "50", "submitted_quantity": "200", "time_in_force": "Day", remark": "Hello from Shell"}' \
     -H "X-Api-Signature: {签名}" -H "X-Api-Key: {AppKey}" \
     -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
@@ -255,7 +255,7 @@ def sign(method, uri, headers, params, body, secret):
 headers['X-Api-Signature'] = sign(method,  uri, headers, params, body, app_secret)
 
 # 请求接口
-response = requests.request(method, "https://openapi.longbridgeapp.com" + uri + '?' + params, headers=headers, data=body)
+response = requests.request(method, "https://openapi.longportapp.com" + uri + '?' + params, headers=headers, data=body)
 
 print(response.text)
 

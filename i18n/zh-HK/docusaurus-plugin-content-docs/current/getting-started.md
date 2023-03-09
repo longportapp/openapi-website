@@ -14,9 +14,13 @@ LongPort OpenAPI SDK 基於 Rust 底層提供標準實現，目前我們已經�
 
 ## API Host
 
-- HTTP API - `https://openapi.longbridgeapp.com`
-- WebSocket Quote - `wss://openapi-quote.longbridgeapp.com`
-- Webssocket Trade - `wss://openapi-trade.longbridgeapp.com`
+- HTTP API - `https://openapi.longportapp.com`
+- WebSocket Quote - `wss://openapi-quote.longportapp.com`
+- Webssocket Trade - `wss://openapi-trade.longportapp.com`
+
+:::tip
+中國大陸地區訪問，建議採用 `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn` 以提升訪問速度。
+:::
 
 ## 環境需求
 

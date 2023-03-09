@@ -14,9 +14,13 @@ LongPort OpenAPI SDK is implemented based on Rust we have released SDK for Pytho
 
 ## API Host
 
-- HTTP API - `https://openapi.longbridgeapp.com`
-- WebSocket Quote - `wss://openapi-quote.longbridgeapp.com`
-- WebSocket Trade - `wss://openapi-trade.longbridgeapp.com`
+- HTTP API - `https://openapi.longportapp.com`
+- WebSocket Quote - `wss://openapi-quote.longportapp.com`
+- WebSocket Trade - `wss://openapi-trade.longportapp.com`
+
+:::tip
+For access in mainland China, it is recommended to use `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn` to improve access speed.
+:::
 
 ## Environment Requirements
 

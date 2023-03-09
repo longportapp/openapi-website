@@ -123,4 +123,4 @@ LongPort does not charge any additional fees for activating or using interface s
 ## Other
 
 The OpenAPI services are provided by LongPort and the applicable affiliates (subject to the agreement).
-openapi-trade.longbridgeapp.com
+openapi-trade.longportapp.com
