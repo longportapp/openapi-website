@@ -85,7 +85,7 @@ Let's take obtaining assets as an example to demonstrate how to use the SDK.
 
 1. Open an account at [LongPort](https://longbridge.hk)
 2. Complete the Python 3 environment installation and install Pip
-3. Get App Key, App Secret, Access Token and other information from LongPort OpenAPI](https://open.longportapp.com) official website
+3. Get App Key, App Secret, Access Token and other information from [LongPort OpenAPI](https://open.longportapp.com) official website
 
 **_Get App Key, App Secret, Access Token and other information_**
 
