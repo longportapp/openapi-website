@@ -18,7 +18,7 @@ Real-time depth data push of the subscribed security.
 ### Properties
 
 | Name        | Type     | Description                           |
-|-------------|----------|---------------------------------------|
+| ----------- | -------- | ------------------------------------- |
 | symbol      | string   | Security code, for example: `AAPL.US` |
 | sequence    | int64    | Sequence number                       |
 | ask         | object[] | Ask depth                             |
@@ -54,15 +54,15 @@ message Depth {
 
 ```python
 # Push Real-time Depth
-# https://open.longbridgeapp.com/docs/quote/push/push-depth
+# https://open.longportapp.com/docs/quote/push/push-depth
 # To subscribe quotes data, please check whether "Developers" - "Quote authority" is correct.
-# https://open.longbridgeapp.com/account
+# https://open.longportapp.com/account
 #
 # - HK Market - BMP basic quotation is unable to subscribe with WebSocket as it has no real-time quote push.
 # - US Market - LV1 Nasdaq Basic (Only Open API).
 #
 # Before running, please visit the "Developers" to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
+# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile client.
 from time import sleep
 from longbridge.openapi import QuoteContext, Config, SubType, PushQuote
 

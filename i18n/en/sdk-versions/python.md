@@ -1,10 +1,10 @@
-## Longbridge OpenAPI SDK for Python
+## LongPort OpenAPI SDK for Python
 
 [https://github.com/longbridgeapp/openapi-python](https://github.com/longbridgeapp/openapi-python)
 
 ### Install SDK
 
-You can install the SDK via Pip, or directly visit the [Pypi Longbridge](https://pypi.org/project/longbridge/) page to download.
+You can install the SDK via Pip, or directly visit the [Pypi LongPort](https://pypi.org/project/longbridge/) page to download.
 
 ```bash
 $ pip install longbridge

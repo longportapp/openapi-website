@@ -1,4 +1,4 @@
-## Longbridge OpenAPI SDK for C/C++
+## LongPort OpenAPI SDK for C/C++
 
 [https://github.com/longbridgeapp/openapi-sdk/tree/master/cpp](https://github.com/longbridgeapp/openapi-sdk/tree/master/cpp)
 

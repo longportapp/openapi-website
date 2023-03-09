@@ -31,9 +31,9 @@ message SecurityRequest {
 
 ```python
 # 获取标的经纪队列
-# https://open.longbridgeapp.com/docs/quote/pull/brokers
+# https://open.longportapp.com/docs/quote/pull/brokers
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
+# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile client.
 from longbridge.openapi import QuoteContext, Config
 
 config = Config.from_env()

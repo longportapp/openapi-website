@@ -5,7 +5,7 @@ slug: /socket/hosts
 sidebar_position: 5
 ---
 
-Longbridge split Market Quote and Trading real-time pushing endpoints.
+LongPort split Market Quote and Trading real-time pushing endpoints.
 
 ## Market Quote
 

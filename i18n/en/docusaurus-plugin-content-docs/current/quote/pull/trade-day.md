@@ -37,9 +37,9 @@ message MarketTradeDayRequest {
 
 ```python
 # Get Market Trading Days
-# https://open.longbridgeapp.com/docs/quote/pull/trade-day
+# https://open.longportapp.com/docs/quote/pull/trade-day
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
+# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile client.
 from datetime import date
 from longbridge.openapi import QuoteContext, Config, Market
 

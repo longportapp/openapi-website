@@ -23,7 +23,7 @@ paths:
         type: "python"
         value: |
           # 獲取股票持倉
-          # https://open.longbridgeapp.com/docs/trade/asset/stock
+          # https://open.longportapp.com/docs/trade/asset/stock
           from longbridge.openapi import TradeContext, Config
 
           config = Config.from_env()
@@ -106,11 +106,11 @@ paths:
                           "market": "US",
                           "quantity": "1",
                           "available_quantity": "0",
-                        }
-                      ]
-                  }
-                ]
-            }
+                        },
+                      ],
+                  },
+                ],
+            },
         }
 
 definitions:

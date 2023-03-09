@@ -37,15 +37,15 @@ message UnsubscribeRequest {
 
 ```python
 # 取消訂閱行情數據
-# https://open.longbridgeapp.com/docs/quote/subscribe/unsubscribe
+# https://open.longportapp.com/docs/quote/subscribe/unsubscribe
 # 訂閱行情數據請檢查“開發者中心“ - “行情權限”是否正確
-# https://open.longbridgeapp.com/account
+# https://open.longportapp.com/account
 #
 # - 港股 - BMP 基礎報價，無實時行情推送，無法用 WebSocket 訂閱
 # - 美股 - LV1 納斯達克最優報價 (只限 Open API）
 #
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過“長橋”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
+# 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from longbridge.openapi import QuoteContext, Config, SubType
 config = Config.from_env()
 ctx = QuoteContext(config)

@@ -11,7 +11,7 @@ We use binary format data for communication, protocol support both `WebSocket` a
 Endianness is `BigEndian`
 :::
 
-If your are familiar with `Python` or `C++`, we provider [SDK](https://open.longbridgeapp.com/en/sdk) for you.
+If your are familiar with `Python` or `C++`, we provider [SDK](https://open.longportapp.com/en/sdk) for you.
 
 If you want parse protocol by self, you can check our [Go Implemetation](https://github.com/longbridgeapp/openapi-protocol/tree/main/go).
 

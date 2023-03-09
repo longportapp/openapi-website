@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 ## Foreword
 
-Longbridge OpenAPI SDK is implemented based on Rust we have released SDK for Python, Node.js, Rust and C++, and support for other languages will be launched in the future.
+LongPort OpenAPI SDK is implemented based on Rust we have released SDK for Python, Node.js, Rust and C++, and support for other languages will be launched in the future.
 
 ## API Host
 
@@ -69,7 +69,7 @@ tokio = { version = "1", features = "rt-multi-thread" }
 ```xml
 <dependencies>
     <dependency>
-        <groupId>io.github.longbridgeapp</groupId>
+        <groupId>io.github.longportapp</groupId>
         <artifactId>openapi-sdk</artifactId>
         <version>LATEST</version>
     </dependency>
@@ -83,13 +83,13 @@ Let's take obtaining assets as an example to demonstrate how to use the SDK.
 
 ## Configure Developer Account
 
-1. Open an account at [Longbridge](https://longbridge.hk)
+1. Open an account at [LongPort](https://longbridge.hk)
 2. Complete the Python 3 environment installation and install Pip
-3. Get App Key, App Secret, Access Token and other information from Longbridge [Longbridge OpenAPI](https://open.longbridgeapp.com) official website
+3. Get App Key, App Secret, Access Token and other information from LongPort [LongPort OpenAPI](https://open.longportapp.com) official website
 
 **_Get App Key, App Secret, Access Token and other information_**
 
-Login the Longbridge [Longbridge OpenAPI](https://open.longbridgeapp.com) website, and enter the "User Center".
+Login the LongPort [LongPort OpenAPI](https://open.longportapp.com) website, and enter the "User Center".
 
 The "application credential" credential information will be given on the page. After we get it, we will set the environment variable, which is convenient for later development and use.
 
@@ -287,18 +287,18 @@ After running, the output is as follows:
 
 ### Subscribe Quote
 
-To subscribe to market data, please check the [Developer Center](https://open.longbridgeapp.com/account) - "Quote authority" is correct
+To subscribe to market data, please check the [Developer Center](https://open.longportapp.com/account) - "Quote authority" is correct
 
 - HK Market - BMP basic quotation is unable to subscribe with WebSocket as it has no real-time quote push.
 - US Market - LV1 Nasdaq Basic (Only Open API).
 
-Before running, visit the [Developer Center](https://open.longbridgeapp.com/account) and ensure that the account has the correct quote level.
+Before running, visit the [Developer Center](https://open.longportapp.com/account) and ensure that the account has the correct quote level.
 
 :::info
 
-If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
+If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile client.
 
-https://longbridgeapp.com/download
+https://longportapp.com/download
 :::
 
 When you have the correct Quote authority, it might look like this:
@@ -464,7 +464,7 @@ NFLX.US PushQuote {
 
 ### Submit Order
 
-Next, we will do a [submit order](https://open.longbridgeapp.com/docs/trade/order/submit) action, we assume that to buy `700.HK` at 50 HKD and quantity is `100`.
+Next, we will do a [submit order](https://open.longportapp.com/docs/trade/order/submit) action, we assume that to buy `700.HK` at 50 HKD and quantity is `100`.
 
 > NOTE: In order to prevent a successful test buy, the demo here gives a lower price and avoids the transaction. OpenAPI operations are equivalent to online transactions, please operate with caution, and pay attention to parameter details during development and debugging.
 
@@ -504,28 +504,21 @@ python submit_order.py
 Create `submit_order.js` and paste the code below:
 
 ```javascript
-const {
-  Config,
-  TradeContext,
-  OrderType,
-  OrderSide,
-  Decimal,
-  TimeInForceType,
-} = require("longbridge");
+const { Config, TradeContext, OrderType, OrderSide, Decimal, TimeInForceType } = require('longbridge')
 
-let config = Config.fromEnv();
+let config = Config.fromEnv()
 TradeContext.new(config)
   .then((ctx) =>
     ctx.submitOrder({
-      symbol: "700.HK",
+      symbol: '700.HK',
       orderType: OrderType.LO,
       side: OrderSide.Buy,
       timeInForce: TimeInForceType.Day,
       submittedQuantity: 200,
-      submittedPrice: new Decimal("300"),
+      submittedPrice: new Decimal('300'),
     })
   )
-  .then((resp) => console.log(resp.toString()));
+  .then((resp) => console.log(resp.toString()))
 ```
 
 Run it
@@ -751,11 +744,11 @@ Order {
 }
 ```
 
-The above example has fully demonstrated how to use the SDK to access the OpenAPI interface. For more interfaces, please read the [Longbridge OpenAPI Documentation](https://open.longbridgeapp.com/docs) in detail and use them according to different interfaces.
+The above example has fully demonstrated how to use the SDK to access the OpenAPI interface. For more interfaces, please read the [LongPort OpenAPI Documentation](https://open.longportapp.com/docs) in detail and use them according to different interfaces.
 
 ## More Examples
 
-We provide the complete code of the above examples in the GitHub repository of Longbridge OpenAPI Python SDK, and we will continue to add or update it later.
+We provide the complete code of the above examples in the GitHub repository of LongPort OpenAPI Python SDK, and we will continue to add or update it later.
 
 https://github.com/longbridgeapp/openapi-sdk/tree/master/examples
 
@@ -768,4 +761,4 @@ https://longbridgeapp.github.io/openapi-sdk/
 ## Contact & Feedback
 
 - You can send feedback to service@longbridge.global
-- Join **Discord** Longbridge OpenAPI Server: https://discord.gg/2gUTSCS6
+- Join **Discord** LongPort OpenAPI Server: https://discord.gg/2gUTSCS6

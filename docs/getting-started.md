@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 ## 前言
 
-[Longbridge OpenAPI SDK](https://github.com/longbridgeapp/openapi-sdk) 基于 Rust 底层提供标准实现，目前我们已经发布了 Python、Node.js、Rust、C++ 的 SDK，其他语言的支持后面会陆续推出。
+[LongPort OpenAPI SDK](https://github.com/longbridgeapp/openapi-sdk) 基于 Rust 底层提供标准实现，目前我们已经发布了 Python、Node.js、Rust、C++ 的 SDK，其他语言的支持后面会陆续推出。
 
 ## API Host
 
@@ -69,7 +69,7 @@ tokio = { version = "1", features = "rt-multi-thread" }
 ```xml
 <dependencies>
     <dependency>
-        <groupId>io.github.longbridgeapp</groupId>
+        <groupId>io.github.longportapp</groupId>
         <artifactId>openapi-sdk</artifactId>
         <version>LATEST</version>
     </dependency>
@@ -83,13 +83,13 @@ tokio = { version = "1", features = "rt-multi-thread" }
 
 ## 配置开发者账户
 
-1. 在 [Longbridge](https://longbridge.hk) 开户
+1. 下载 [LongPort](https://longportapp.com/download)，并完成开户
 2. 完成 Python 3 环境安装，并安装 Pip
-3. 从 [Longbridge OpenAPI](https://open.longbridgeapp.com) 官网获取 ` App Key`, `App Secret`, `Access Token` 等信息。
+3. 从 [LongPort OpenAPI](https://open.longportapp.com) 官网获取 ` App Key`, `App Secret`, `Access Token` 等信息。
 
 **_获取 App Key, App Secret, Access Token 等信息_**
 
-访问 [Longbridge OpenAPI](https://open.longbridgeapp.com) 网站，登录后，进入“个人中心”。
+访问 [LongPort OpenAPI](https://open.longportapp.com) 网站，登录后，进入“个人中心”。
 
 在页面上会给出“应用凭证”凭证信息，我们拿到以后设置环境变量，便于后面开发使用方便。
 
@@ -285,18 +285,18 @@ mvn compile exec:exec
 
 ### 订阅实时行情
 
-订阅行情数据请检查 [开发者中心](https://open.longbridgeapp.com/account) - “行情权限”是否正确
+订阅行情数据请检查 [开发者中心](https://open.longportapp.com/account) - “行情权限”是否正确
 
 - 港股 - BMP 基础报价，无实时行情推送，无法用 WebSocket 订阅
 - 美股 - LV1 纳斯达克最优报价 (只限 Open API）
 
-运行前访问 [开发者中心](https://open.longbridgeapp.com/account)，检查确保账户有正确的行情权限。
+运行前访问 [开发者中心](https://open.longportapp.com/account)，检查确保账户有正确的行情权限。
 
 :::info
 
-如没有开通行情权限，可以通过“长桥”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
+如没有开通行情权限，可以通过“LongPort”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
 
-https://longbridgeapp.com/download
+https://longportapp.com/download
 :::
 
 当你有正确的行情权限，看起来可能会是这样：
@@ -462,7 +462,7 @@ NFLX.US PushQuote {
 
 ### 委托下单
 
-下面我们做一次 [委托下单](https://open.longbridgeapp.com/docs/trade/order/submit) 动作，我们假设要以 50 HKD 买入 `700.HK` 的数量为 `100`。
+下面我们做一次 [委托下单](https://open.longportapp.com/docs/trade/order/submit) 动作，我们假设要以 50 HKD 买入 `700.HK` 的数量为 `100`。
 
 > NOTE: 为了防止测试买入成功，这里演示给了一个较低的价格，避免成交。OpenAPI 操作均等同与线上交易，请谨慎操作，开发调试注意参数细节。
 
@@ -502,28 +502,21 @@ python submit_order.py
 创建 `submit_order.js` 贴入下面的代码：
 
 ```javascript
-const {
-  Config,
-  TradeContext,
-  OrderType,
-  OrderSide,
-  Decimal,
-  TimeInForceType,
-} = require("longbridge");
+const { Config, TradeContext, OrderType, OrderSide, Decimal, TimeInForceType } = require('longbridge')
 
-let config = Config.fromEnv();
+let config = Config.fromEnv()
 TradeContext.new(config)
   .then((ctx) =>
     ctx.submitOrder({
-      symbol: "700.HK",
+      symbol: '700.HK',
       orderType: OrderType.LO,
       side: OrderSide.Buy,
       timeInForce: TimeInForceType.Day,
       submittedQuantity: 200,
-      submittedPrice: new Decimal("300"),
+      submittedPrice: new Decimal('300'),
     })
   )
-  .then((resp) => console.log(resp.toString()));
+  .then((resp) => console.log(resp.toString()))
 ```
 
 运行
@@ -749,11 +742,11 @@ Order {
 }
 ```
 
-上面例子已经完整演示了如何使用 SDK 访问 OpenAPI 的接口，更多其他接口请详细阅读 [Longbridge OpenAPI 文档](https://longbridgeapp.github.io/openapi-sdk/)，根据不同的接口使用。
+上面例子已经完整演示了如何使用 SDK 访问 OpenAPI 的接口，更多其他接口请详细阅读 [LongPort OpenAPI 文档](https://longbridgeapp.github.io/openapi-sdk/)，根据不同的接口使用。
 
 ## 更多例子
 
-我们在 Longbridge OpenAPI Python SDK 的 GitHub 仓库中提供了上面几个例子的完整代码，当然后期我们也会持续往里面补充或更新。
+我们在 LongPort OpenAPI Python SDK 的 GitHub 仓库中提供了上面几个例子的完整代码，当然后期我们也会持续往里面补充或更新。
 
 https://github.com/longbridgeapp/openapi-sdk/tree/master/examples
 
@@ -765,6 +758,6 @@ https://longbridgeapp.github.io/openapi-sdk/
 
 ## 反馈及沟通
 
-- 可以给 Longbridge 服务邮箱发送反馈，邮箱地址是：service@longbridge.global
-- 加入 Longbridge OpenAPI 微信沟通群，二维码如下：
+- 可以给 LongPort 服务邮箱发送反馈，邮箱地址是：service@longbridge.global
+- 加入 LongPort OpenAPI 微信沟通群，二维码如下：
   <img src="https://pub.lbkrs.com/files/202205/akTNrRTBrT5aMX4f/qrcode.jpg" className="max-w-2xl" />

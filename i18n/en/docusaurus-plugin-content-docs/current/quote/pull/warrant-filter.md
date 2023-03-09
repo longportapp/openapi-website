@@ -58,7 +58,7 @@ message FilterConfig {
 
 ```python
 # Get Filtered Warrant
-# https://open.longbridgeapp.com/docs/quote/pull/warrant-filter
+# https://open.longportapp.com/docs/quote/pull/warrant-filter
 import os
 import time
 from longbridge.http import Auth, Config, HttpClient
@@ -75,7 +75,7 @@ http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
 ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
 
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
+# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile client.
 filterConfig = FilterConfig(sort_by=0, sort_order=1, sort_offset=0, sort_count=10)
 req = WarrantFilterListRequest(symbol="700.HK", filter_config=filterConfig, language=1)
 result = ws.send_request(Command.QueryWarrantFilterList, req.SerializeToString())

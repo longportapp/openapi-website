@@ -1,17 +1,17 @@
 // @ts-check
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-const i18n = require('./i18n/config');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const lightCodeTheme = require('prism-react-renderer/themes/github')
+const darkCodeTheme = require('prism-react-renderer/themes/dracula')
+const i18n = require('./i18n/config')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const openapiDomain = 'https://open.longbridgeapp.com';
-const communityDomain = 'https://longbridgeapp.com'
+const openapiDomain = 'https://open.longportapp.com'
+const communityDomain = 'https://longportapp.com'
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Longbridge 开放平台',
-  url: 'https://open.longbridgeapp.com',
+  title: 'LongPort 开放平台',
+  url: 'https://open.longportapp.com',
   baseUrl: '/',
-  organizationName: 'longbridgeapp',
+  organizationName: 'longportapp',
   projectName: 'openapi-website',
   baseUrlIssueBanner: false,
   onBrokenLinks: 'warn',
@@ -27,18 +27,18 @@ const config = {
       return {
         name: 'docusaurus-tailwindcss',
         configurePostCss: function configurePostCss(postCssOptions) {
-          postCssOptions.plugins.push(require('tailwindcss'));
-          postCssOptions.plugins.push(require('autoprefixer'));
-          return postCssOptions;
-        }
-      };
+          postCssOptions.plugins.push(require('tailwindcss'))
+          postCssOptions.plugins.push(require('autoprefixer'))
+          return postCssOptions
+        },
+      }
     },
     function docsWebpackConfig(context, options) {
       return {
         name: 'lb-docs-webpack-plugin',
         configureWebpack(config, isServer, utils, content) {
-          if (isServer) return {};
-          const docsAssetPrefix = 'openapi-website';
+          if (isServer) return {}
+          const docsAssetPrefix = 'openapi-website'
           return {
             output: {
               filename: `assets/js/${docsAssetPrefix}_[name].[contenthash:8].js`,
@@ -51,9 +51,9 @@ const config = {
                 ignoreOrder: true,
               }),
             ],
-          };
+          }
         },
-      };
+      }
     },
   ],
   presets: [
@@ -65,26 +65,26 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // todo I18n lang should redirect other dir
           editUrl: ({ locale, docPath }) => {
-            const isAutoGenDoc = docPath.includes('--autogen.md');
+            const isAutoGenDoc = docPath.includes('--autogen.md')
 
-            let nextVersionDocsDirPath = 'docs';
+            let nextVersionDocsDirPath = 'docs'
             if (isAutoGenDoc) {
-              docPath = docPath.replace('--autogen.md', '.yml');
-              nextVersionDocsDirPath = 'swagger-docs';
+              docPath = docPath.replace('--autogen.md', '.yml')
+              nextVersionDocsDirPath = 'swagger-docs'
             }
 
             if (locale !== 'zh-CN') {
-              let targetPath = `i18n/${locale}/docusaurus-plugin-content-docs/current/${docPath}`;
+              let targetPath = `i18n/${locale}/docusaurus-plugin-content-docs/current/${docPath}`
               if (isAutoGenDoc) {
-                targetPath = `${nextVersionDocsDirPath}/${locale}/${docPath}`;
+                targetPath = `${nextVersionDocsDirPath}/${locale}/${docPath}`
               }
-              return `https://github.com/longbridgeapp/openapi-website/edit/main/${targetPath}`;
+              return `https://github.com/longbridgeapp/openapi-website/edit/main/${targetPath}`
             } else {
               if (docPath.includes('--autogen.md')) {
-                docPath = docPath.replace('--autogen.md', '.yml');
-                nextVersionDocsDirPath = 'swagger-docs';
+                docPath = docPath.replace('--autogen.md', '.yml')
+                nextVersionDocsDirPath = 'swagger-docs'
               }
-              return `https://github.com/longbridgeapp/openapi-website/edit/main/${nextVersionDocsDirPath}/${docPath}`;
+              return `https://github.com/longbridgeapp/openapi-website/edit/main/${nextVersionDocsDirPath}/${docPath}`
             }
           },
           showLastUpdateAuthor: true,
@@ -112,7 +112,7 @@ const config = {
       navbar: {
         title: '',
         logo: {
-          alt: 'Longbridge',
+          alt: 'LongPort',
           href: openapiDomain,
           target: '_self',
           src: 'https://pub.lbkrs.com/files/202204/U8NeviVyPf5Q7ecP/Group_156.png',
@@ -149,7 +149,7 @@ const config = {
             label: '市场',
             position: 'left',
           },
-          
+
           {
             type: 'localeDropdown',
             position: 'right',
@@ -167,6 +167,6 @@ const config = {
         additionalLanguages: ['shell-session', 'http', 'protobuf', 'rust'],
       },
     }),
-};
+}
 
-module.exports = config;
+module.exports = config
