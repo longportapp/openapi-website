@@ -11,7 +11,7 @@ const config = {
   title: 'LongPort 开放平台',
   url: 'https://open.longportapp.com',
   baseUrl: '/',
-  organizationName: 'longportapp',
+  organizationName: 'longbridgeapp',
   projectName: 'openapi-website',
   baseUrlIssueBanner: false,
   onBrokenLinks: 'warn',
