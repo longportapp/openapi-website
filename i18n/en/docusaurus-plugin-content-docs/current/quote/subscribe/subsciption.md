@@ -57,7 +57,7 @@ ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
 # - US Market - LV1 Nasdaq Basic (Only Open API).
 #
 # Before running, please visit the "Developers" to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile client.
+# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
 
 #subscribe
 req = SubscribeRequest(symbol=["700.HK", "AAPL.US"], sub_type=[SubType.QUOTE], is_first_push=False)

@@ -33,7 +33,7 @@ message CapitalFlowIntradayRequest {
 # Get Security Capital Flow Intraday
 # https://open.longportapp.com/docs/quote/pull/capital-flow-intraday
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile client.
+# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
 ```
 
 ## Response

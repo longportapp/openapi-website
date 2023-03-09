@@ -296,7 +296,7 @@ Before running, visit the [Developer Center](https://open.longportapp.com/accoun
 
 :::info
 
-If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile client.
+If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
 
 https://longportapp.com/download
 :::
