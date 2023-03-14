@@ -23,6 +23,10 @@
     "message": "推送",
     "description": "The label for category 推送 in sidebar docsSidebar"
   },
+  "sidebar.docsSidebar.category.个性化": {
+    "message": "個性化",
+    "description": "The label for category 個性化 in sidebar docsSidebar"
+  },
   "sidebar.docsSidebar.category.交易": {
     "message": "交易",
     "description": "The label for category 交易 in sidebar docsSidebar"

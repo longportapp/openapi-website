@@ -128,3 +128,125 @@ enum SubType {
   TRADE = 4;
 }
 ```
+
+### CalcIndex - 計算指標
+
+| ID  | 描述         | 支持的標的類型   |
+| --- | ------------ | ---------------- |
+| 1   | 最新價       | 所有類型         |
+| 2   | 漲跌額       | 所有類型         |
+| 3   | 漲跌幅       | 所有類型         |
+| 4   | 成交量       | 所有類型         |
+| 5   | 成交額       | 所有類型         |
+| 6   | 年初至今漲幅 | 期權、輪證無數據 |
+| 7   | 換手率       | 期權、輪證無數據 |
+| 8   | 總市值       | 期權、輪證無數據 |
+| 9   | 資金流向     | 期權、輪證無數據 |
+| 10  | 振幅         | 期權、輪證無數據 |
+| 11  | 量比         | 期權、輪證無數據 |
+| 12  | 市盈率 (TTM) | 期權、輪證無數據 |
+| 13  | 市淨率       | 期權、輪證無數據 |
+| 14  | 股息率 (TTM) | 期權、輪證無數據 |
+| 15  | 五日漲幅     | 期權、輪證無數據 |
+| 16  | 十日漲幅     | 期權、輪證無數據 |
+| 17  | 半年漲幅     | 期權、輪證無數據 |
+| 18  | 五分鐘漲幅   | 期權、輪證無數據 |
+| 19  | 到期日       | 僅期權、輪證適用 |
+| 20  | 行權價       | 僅期權、輪證適用 |
+| 21  | 上限價       | 僅輪證適用       |
+| 22  | 下限價       | 僅輪證適用       |
+| 23  | 街貨量       | 僅輪證適用       |
+| 24  | 街貨比       | 僅輪證適用       |
+| 25  | 溢價率       | 僅期權、輪證適用 |
+| 26  | 價內/價外    | 僅輪證適用       |
+| 27  | 隱含波動率   | 僅期權、輪證適用 |
+| 28  | 對沖值       | 僅輪證適用       |
+| 29  | 收回價       | 僅輪證適用       |
+| 30  | 距收回價     | 僅輪證適用       |
+| 31  | 有效槓桿     | 僅輪證適用       |
+| 32  | 槓桿比率     | 僅輪證適用       |
+| 33  | 換股比率     | 僅輪證適用       |
+| 34  | 打和點       | 僅輪證適用       |
+| 35  | 未平倉數     | 僅期權適用       |
+| 36  | Delta        | 僅期權適用       |
+| 37  | Gamma        | 僅期權適用       |
+| 38  | Theta        | 僅期權適用       |
+| 39  | Vega         | 僅期權適用       |
+| 40  | Rho          | 僅期權適用       |
+
+#### Protobuf
+
+```protobuf
+enum CalcIndex {
+  CALCINDEX_UNKNOWN = 0;
+  CALCINDEX_LAST_DONE = 1;
+  CALCINDEX_CHANGE_VAL = 2;
+  CALCINDEX_CHANGE_RATE = 3;
+  CALCINDEX_VOLUME = 4;
+  CALCINDEX_TURNOVER = 5;
+  CALCINDEX_YTD_CHANGE_RATE = 6;
+  CALCINDEX_TURNOVER_RATE = 7;
+  CALCINDEX_TOTAL_MARKET_VALUE = 8;
+  CALCINDEX_CAPITAL_FLOW = 9;
+  CALCINDEX_AMPLITUDE = 10;
+  CALCINDEX_VOLUME_RATIO = 11;
+  CALCINDEX_PE_TTM_RATIO = 12;
+  CALCINDEX_PB_RATIO = 13;
+  CALCINDEX_DIVIDEND_RATIO_TTM = 14;
+  CALCINDEX_FIVE_DAY_CHANGE_RATE = 15;
+  CALCINDEX_TEN_DAY_CHANGE_RATE = 16;
+  CALCINDEX_HALF_YEAR_CHANGE_RATE = 17;
+  CALCINDEX_FIVE_MINUTES_CHANGE_RATE = 18;
+  CALCINDEX_EXPIRY_DATE = 19;
+  CALCINDEX_STRIKE_PRICE = 20;
+  CALCINDEX_UPPER_STRIKE_PRICE = 21;
+  CALCINDEX_LOWER_STRIKE_PRICE = 22;
+  CALCINDEX_OUTSTANDING_QTY = 23;
+  CALCINDEX_OUTSTANDING_RATIO = 24;
+  CALCINDEX_PREMIUM = 25;
+  CALCINDEX_ITM_OTM = 26;
+  CALCINDEX_IMPLIED_VOLATILITY = 27;
+  CALCINDEX_WARRANT_DELTA = 28;
+  CALCINDEX_CALL_PRICE = 29;
+  CALCINDEX_TO_CALL_PRICE = 30;
+  CALCINDEX_EFFECTIVE_LEVERAGE = 31;
+  CALCINDEX_LEVERAGE_RATIO = 32;
+  CALCINDEX_CONVERSION_RATIO = 33;
+  CALCINDEX_BALANCE_POINT = 34;
+  CALCINDEX_OPEN_INTEREST = 35;
+  CALCINDEX_DELTA = 36;
+  CALCINDEX_GAMMA = 37;
+  CALCINDEX_THETA = 38;
+  CALCINDEX_VEGA = 39;
+  CALCINDEX_RHO = 40;
+}
+```
+
+### Board - 標的板塊
+
+| 板塊             | 描述                             |
+| ---------------- | -------------------------------- |
+| USMain           | 美股主板                         |
+| USPink           | 粉單市場                         |
+| USDJI            | 道瓊斯指數                       |
+| USNSDQ           | 納斯達克指數                     |
+| USSector         | 美股行業概念                     |
+| USOption         | 美股期權                         |
+| USOptionS        | 美股特殊期權（收盤時間為 16:15）|
+| HKEquity         | 港股股本證券                     |
+| HKPreIPO         | 港股暗盤                         |
+| HKWarrant        | 港股輪證                         |
+| HKHS             | 恆生指數                         |
+| HKSector         | 港股行業概念                     |
+| SHMainConnect    | 上證主板 - 互聯互通                |
+| SHMainNonConnect | 上證主板 - 非互聯互通              |
+| SHSTAR           | 科創板                           |
+| CNIX             | 滬深指數                         |
+| CNSector         | 滬深行業概念                     |
+| SZMainConnect    | 深證主板 - 互聯互通                |
+| SZMainNonConnect | 深證主板 - 非互聯互通              |
+| SZGEMConnect     | 創業板 - 互聯互通                  |
+| SZGEMNonConnect  | 創業板 - 非互聯互通                |
+| SGMain           | 新加坡主板                       |
+| STI              | 新加坡海峽指數                   |
+| SGSector         | 新加坡行業概念                   |

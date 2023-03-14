@@ -37,26 +37,26 @@ message SubscribeRequest {
 
 ```python
 # 訂閱行情數據
-# https://open.longbridgeapp.com/docs/quote/subscribe/subscribe
+# https://open.longportapp.com/docs/quote/subscribe/subscribe
 # 訂閱行情數據請檢查“開發者中心“ - “行情權限”是否正確
-# https://open.longbridgeapp.com/account
+# https://open.longportapp.com/account
 #
 # - 港股 - BMP 基礎報價，無實時行情推送，無法用 WebSocket 訂閱
 # - 美股 - LV1 納斯達克最優報價 (只限 Open API）
 #
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過“長橋”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
+# 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from time import sleep
-from longbridge.openapi import QuoteContext, Config, SubType
+from longbridge.openapi import QuoteContext, Config, SubType, PushQuote
 
-class EventHandler:
-    def on_event(self, symbol: str, msg):
-        print(symbol, msg)
+def on_quote(symbol: str, event: PushTrades):
+    print(symbol, event)
 
 config = Config.from_env()
-ctx = QuoteContext(config, EventHandler())
+ctx = QuoteContext(config)
+ctx.set_on_quote(on_quote)
 
-ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote], is_first_push = True)
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote], is_first_push=True)
 sleep(30)
 ```
 

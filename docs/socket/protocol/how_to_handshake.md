@@ -7,15 +7,15 @@ sidebar_position: 2
 
 握手是客户端和服务端建立连接后做的第一件事情，用于和服务端进行协议的协商，目前支持协商的内容如下：
 
-- 协议版本 - 目前我们近支持一个版本，即：`1`
+- 协议版本 - 目前我们仅支持一个版本，即：`1`
 - 数据包序列化方式 - 目前我们仅支持 `protobuf`，值：`1`
-- 客户端平台 - 目前仅为 `Open API`，目前值为：`9`
+- 客户端平台 - 目前仅为 `OpenAPI`，目前值为：`9`
 
 所以客户端握手包在我们的协议版本升级的情况下永远是一个固定的内容。
 
 ## TCP 链接如何握手
 
-客户端发向服务端发送 2 个字节的我手包。
+客户端发向服务端发送 2 个字节的握手包。
 
 ### 结构
 
@@ -55,14 +55,14 @@ WebSocket 在从 HTTP 升级升 WebSocket 的过程中，我们可以读取 HTTP
 
 ### Query 参数
 
-| 字段     | 类型 | 说明          |
-| -------- | ---- | ------------- |
-| version  | int  | 仅支持：1     |
-| codec    | int  | 目前仅支持：1 |
-| platform | int  | 写死：9       |
+| 字段     | 类型 | 说明      |
+| -------- | ---- | --------- |
+| version  | int  | 仅支持：1 |
+| codec    | int  | 仅支持：1 |
+| platform | int  | 默认：9   |
 
 ### 例子
 
 ```
-wss://openapi-quote.longbridgeapp.com?version=1&codec=1&platform=9
+wss://openapi-quote.longportapp.com?version=1&codec=1&platform=9
 ```

@@ -5,6 +5,57 @@ slug: /how-to-access-api
 sidebar_position: 1
 ---
 
+## Pre-Development Notes
+
+| Precautions                                                                                          | Reference Documents                                                             |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| It is recommended to use the SDK of the respective language, instead of calling the native interface | [SDK Quick Start Page](../docs/getting-started)                                 |
+| Read the OpenAPI introduction to enable the corresponding service                                    | [How to enable OpenAPI](../docs/#how-to-enable-openapi)                         |
+| Read about OpenAPI access and restrictions in OpenAPI Introduction                                   | [OpenAPI's permissions and restrictions](../docs/#permissions-and-restrictions) |
+| Common Error Codes for finding errors in interface calls                                             | [Common Error Codes](../docs/error-codes)                                       |
+
+## REST API documentation convention format
+
+The main format of the server REST API documentation is as follows.
+
+```
+Request:
+    Request Info
+    Parameters
+    Request Example
+Response:
+    Response Headers
+    Response Example
+    Response Status
+Response Status
+```
+
+### Request Info
+
+This section introduces the request method and path required to call the API.
+
+- HTTP URL: The URL of the server API.
+- HTTP Method: The server API only supports HTTP protocol methods, such as GET, POST, etc.
+
+### Parameters
+
+Introduces the request headers, query parameters or request body to be passed to call the API.
+:::tip
+
+Parameters are query parameters by default for GET API, parameters are request bodies by default for not GET API, and the request body format is JSON.
+
+:::
+
+### Request Example
+
+Detailed example of calling an interface using the SDK.
+
+### Response
+
+- Response Headers: Returns content header information.
+- Response Example: Returns a text example of the content.
+- Response Status: Interface returns a specific explanation of the `status` of the content.
+
 ## API access process
 
 ### 1. Enable OpenAPI service
@@ -13,7 +64,7 @@ Refer to [Introduction to OpenAPI](../docs#how-to-enable) to enable the correspo
 
 ### 2. Get App Key and Access Token information
 
-Get **Access Token**, **App Key** and **App Secret** on the [Developer Website](https://open.longbridgeapp.com/account).
+Get **Access Token**, **App Key** and **App Secret** on the [Developer Website](https://open.longportapp.com/account).
 
 **Access Token** will expires in three months. Token can be reset in Developer Website after expiration. Also token can be refresh through invoking [Refresh Token](./refresh-token-api) API before token expired.
 
@@ -44,7 +95,7 @@ headers['Content-Type'] = 'application/json; charset=utf-8',
 
 #### Sign requests
 
-The example of signature function：
+The example of signature function:
 
 ```py
 # signature function on python3
@@ -88,20 +139,38 @@ Use the HTTP client to send signed requests.
 
 ## API Path
 
-All API paths start with [https://openapi.longbridgeapp.com](https://openapi.longbridgeapp.com).
+All API paths start with [https://openapi.longportapp.com](https://openapi.longportapp.com).
 
-> TIP: You can also use https://openapi.longbridgeapp.com
+> TIP: You can also use https://openapi.longportapp.com
 
 ## API Request
 
 The call to the server-side interface needs to be in HTTPS protocol, JSON format, and encoded in `UTF-8`.
 
-For example：
+For a test example:
 
 ```bash
-curl -v https://openapi.longbridgeapp.com/v1/test \
-    -H "X-Api-Signature: {signature}" -H "X-Api-Key: {app_key}" \
-    -H "Authorization: {access_token}" -H "X-Timestamp: 1539095200.123"
+curl -v https://openapi.longportapp.com/v1/test \
+    -H "X-Api-Signature: {signature}" -H "X-Api-Key: {AppKey}" \
+    -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
+```
+
+The method of Get Stock Positions interface is `GET` and needs to set query parameters. The example is as follows:
+
+```bash
+curl -v https://openapi.longportapp.com/v1/asset/stock?symbol=700.HK&symbol=BABA.US \
+    -H "X-Api-Signature: {Signature}" -H "X-Api-Key: {AppKey}" \
+    -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
+```
+
+The method of Submit Order interface is `POST` and needs to set the request body. The example is as follows:
+
+```bash
+curl -v -XPOST https://openapi.longportapp.com/v1/trade/order \
+    -d '{ "side": "Buy", symbol": "700.HK", "order_type": "LO", "submitted_price": "50", "submitted_quantity": "200", "time_in_force": " Day", remark": "Hello from Shell"}' \
+    -H "X-Api-Signature: {Signature}" -H "X-Api-Key: {AppKey}" \
+    -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
+    -H "Content-Type: application/json; charset=utf-8"
 ```
 
 ## API Response
@@ -115,7 +184,7 @@ HTTP Status follows [RESTFull style](https://restfulapi.net/http-status-codes) a
 ### HTTP Status
 
 - 1xx: Informational – Communicates transfer protocol-level information.
-- 2xx: Success – Indicates that the client’s request was accepted successfully.
+- 2xx: Success – Indicates that the client's request was accepted successfully.
 - 3xx: Redirection – Indicates that the client must take some additional action in order to complete their request.
 - 4xx: Client Error – This category of error status codes points the finger at clients.
 - 5xx: Server Error – The server takes responsibility for these error status codes.
@@ -188,7 +257,7 @@ def sign(method, uri, headers, params, body, secret):
 headers['X-Api-Signature'] = sign(method,  uri, headers, params, body, app_secret)
 
 # call an API
-response = requests.request(method, "https://openapi.longbridgeapp.com" + uri + '?' + params, headers=headers, data=body)
+response = requests.request(method, "https://openapi.longportapp.com" + uri + '?' + params, headers=headers, data=body)
 
 print(response.text)
 

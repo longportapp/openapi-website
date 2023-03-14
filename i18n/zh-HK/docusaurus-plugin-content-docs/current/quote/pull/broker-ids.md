@@ -17,9 +17,9 @@ sidebar_position: 7
 
 ```python
 # 獲取券商席位 id
-# https://open.longbridgeapp.com/docs/quote/pull/broker-ids
+# https://open.longportapp.com/docs/quote/pull/broker-ids
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過“長橋”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
+# 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from longbridge.openapi import QuoteContext, Config
 
 config = Config.from_env()

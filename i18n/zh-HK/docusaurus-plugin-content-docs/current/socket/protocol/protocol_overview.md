@@ -5,13 +5,13 @@ slug: /socket/protocol/overview
 sidebar_position: 0
 ---
 
-我們使用二進制的私有協議進行數據交互，協議同時支持 `Websocket` 和 `TCP` 連接。
+我們使用二進制的私有協議進行數據交互，協議同時支持 `WebSocket` 和 `TCP` 連接。
 
 :::info
 使用的字節序是 `BigEndian`
 :::
 
-如果是 `Python` 和 `C++` 用戶可以直接使用我們的 [SDK](https://open.longbridgeapp.com/zh-HK/sdk)，不用關具體的實現細節。
+如果是 `Python` 和 `C++` 用戶可以直接使用我們的 [SDK](https://open.longportapp.com/zh-HK/sdk)，不用關具體的實現細節。
 
 如果想要自己實現協議解析，可以參考我們的 [Go 實現](https://github.com/longbridgeapp/openapi-protocol/tree/main/go)。
 

@@ -1,0 +1,95 @@
+swagger: "2.0"
+info:
+  description: "Get watched groups"
+  version: "v1"
+  title: "Get watched groups"
+paths:
+  /v1/watchlist/groups:
+    get:
+      access:
+      parameters:
+
+      responses:
+        "200":
+          description: "Success"
+          schema:
+            $ref: "#/definitions/groups_response"
+        "500":
+          description: "Internal error"
+      request_body:
+        type: "python"
+        value: |
+          from longbridge.openapi import QuoteContext, Config
+
+          config = Config.from_env()
+          ctx = QuoteContext(config)
+          resp = ctx.watch_list()
+          print(resp)
+
+      response_body:
+        {
+          "code": 0,
+          "data":
+            {
+              "groups":
+                [
+                  {
+                    "id": 28020,
+                    "name": "all",
+                    "securities":
+                      [
+                        {
+                          "symbol": "700.HK",
+                          "market": "HK",
+                          "name": "Tencent",
+                          "watched_price": "364.4",
+                          "watched_at": 1652855022,
+                        },
+                      ],
+                  },
+                ],
+            },
+        }
+
+definitions:
+  groups_response:
+    properties:
+      groups:
+        type: "object[]"
+        description: Groups
+        required: ["id", "name", "securities"]
+        properties:
+          id:
+            type: "integer"
+            description: Group ID
+            required: true
+          name:
+            type: "string"
+            description: Name
+            required: true
+          securities:
+            type: "object[]"
+            description: Security
+            required:
+              ["symbol", "market", "name", "watched_price", "watched_at"]
+            properties:
+              symbol:
+                type: "string"
+                description: Symbol
+                required: true
+              market:
+                type: "string"
+                description: Market
+                required: true
+              name:
+                type: "string"
+                description: Name
+                required: true
+              watched_price:
+                type: "string"
+                description: Watched price
+                required: true
+              watched_at:
+                type: "integer"
+                description: Watched time
+                required: true

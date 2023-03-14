@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { domainWithLocalPath } from '@site/src/utils/use-locale-prefix';
-import Loading from '@site/src/components/loading';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import Loading from '@site/src/components/loading'
+import { domainWithLocalPath } from '@site/src/utils/use-locale-prefix'
+import React, { useEffect } from 'react'
 
 const IndexPageShouldRedirect = () => {
   const {
@@ -9,17 +9,17 @@ const IndexPageShouldRedirect = () => {
       customFields: { isDev },
     },
     i18n: { defaultLocale, currentLocale },
-  } = useDocusaurusContext();
-  let path = domainWithLocalPath('https://open.longbridgeapp.com', '');
+  } = useDocusaurusContext()
+  let path = domainWithLocalPath('https://open.longportapp.com', '')
 
   // local dev should redirect to /docs
   if (isDev) {
-    path = defaultLocale === currentLocale ? '/docs' : `/${currentLocale}/docs`;
+    path = defaultLocale === currentLocale ? '/docs' : `/${currentLocale}/docs`
   }
 
   useEffect(() => {
-    window.location.href = path;
-  }, []);
-  return <Loading />;
-};
-export default IndexPageShouldRedirect;
+    window.location.href = path
+  }, [])
+  return <Loading />
+}
+export default IndexPageShouldRedirect

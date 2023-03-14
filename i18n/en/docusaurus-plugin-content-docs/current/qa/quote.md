@@ -25,7 +25,7 @@ A: The security code uses the `ticker.region` format, `ticker` represents the co
         <td>Region</td>
     </tr>
     <tr>
-        <td rowspan="2">HK Market</td>
+        <td rowspan="4">HK Market</td>
         <td>Securities (including equities, ETFs, Warrants, CBBCs)</td>
         <td>The official code of the security on the exchange</td>
         <td>HK</td>
@@ -36,7 +36,17 @@ A: The security code uses the `ticker.region` format, `ticker` represents the co
         <td>HK</td>
     </tr>
     <tr>
-        <td rowspan="2">US Market</td>
+        <td>Hang Seng China Enterprises Index</td>
+        <td>HSCEI</td>
+        <td>HK</td>
+    </tr>
+    <tr>
+        <td>Hang Seng TECH Index</td>
+        <td>HSTECH</td>
+        <td>HK</td>
+    </tr>
+    <tr>
+        <td rowspan="3">US Market</td>
         <td>Securities (including stocks, ETFs)</td>
         <td>The official code of the security on the exchange</td>
         <td>US</td>
@@ -44,6 +54,11 @@ A: The security code uses the `ticker.region` format, `ticker` represents the co
     <tr>
         <td>Nasdsaq Index</td>
         <td>.IXIC</td>
+        <td>US</td>
+    </tr>
+    <tr>
+        <td>Dow Jones Industrial Average</td>
+        <td>.DJI</td>
         <td>US</td>
     </tr>
     <tr>
@@ -59,14 +74,17 @@ A: The security code uses the `ticker.region` format, `ticker` represents the co
     </tr>
 </table>
 
+You can also use LongPort App to find the symbol of security
+<img src="https://pub.lbkrs.com/files/202206/7CSoiaDR4wGZPNCT/20220629-180013.jpeg" className="max-w-2xl" />
+
 ## Q4: What is the quote authority of OpenAPI? How to buy quote cards?
 
 A:
 
 - Quote Authority
-  In accordance with the rules of the exchange, the authority of OpenAPI are independent, and are not shared with Longbridge's App, PC, and Web permissions. For example, the Hong Kong stock Level 2 authority you have on the Longbrdge App cannot be used on the OpenAPI side. Longbridge also presents basic market rights to OpenAPI users. If you need a higher-level market, you can activate the high-level quote authority by purchasing a market card.
+  In accordance with the rules of the exchange, the authority of OpenAPI are independent, and are not shared with LongPort's App, PC, and Web permissions. For example, the Hong Kong stock Level 2 authority you have on the Longbrdge App cannot be used on the OpenAPI side. LongPort also presents basic market rights to OpenAPI users. If you need a higher-level market, you can activate the high-level quote authority by purchasing a market card.
 - How to buy quote cards  
-  Longbridge users can choose the market cards they want to buy through the "Market Store" in the Longbridge App.
+  LongPort users can choose the market cards they want to buy through the "Market Store" in the LongPort App.
 - See the table below for a list of quote authority
 <table>
     <tr>
@@ -79,8 +97,8 @@ A:
         <td>Securities (including equities, ETFs, Warrants, CBBCs)</td>
         <td rowspan="2">
             <ul>
-            <li>Mainland China: Please Purchase <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=HK">L2 Advanced Quotes-OpenAPI - OpenAPI</a></font></li>
-            <li>Non-Mainland China: Please Purchase <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=HK">L2 Advanced Quotes (International) -OpenAPI</a></font></li>
+            <li>Mainland China: Please Purchase <a href="https://activity.lbkrs.com/spa/mall?market=HK">L2 Advanced Quotes-OpenAPI - OpenAPI</a></li>
+            <li>Non-Mainland China: Please Purchase <a href="https://activity.lbkrs.com/spa/mall?market=HK">L2 Advanced Quotes (International) -OpenAPI</a></li>
             </ul>
         </td>
     </tr>
@@ -92,7 +110,7 @@ A:
         <td>Securities (including stocks, ETFs)</td>
         <td rowspan="2">
             <ul>
-            <li>Level 1: Please Purchase <font color="red"><a href="https://activity.lbkrs.com/spa/mall?market=US">L1 Nasdaq Basic - OpenAPI</a></font></li>
+            <li>Level 1: Please Purchase <a href="https://activity.lbkrs.com/spa/mall?market=US">L1 Nasdaq Basic - OpenAPI</a></li>
             <li>
                 Level 2: Coming Soon
             </li>
@@ -105,7 +123,7 @@ A:
     <tr>
         <td>OPRA OPRA Options</td>
         <td>
-            Coming Soon
+            <li>Level 1: Please Purchase <a href="https://activity.lbkrs.com/spa/mall?market=US">OPRA Options-Open API</a></li>
         </td>
     </tr>
     <tr>
@@ -122,3 +140,12 @@ A:
         <td>Index</td>
     </tr>
 </table>
+
+## Q5: Quote Change By Date Time
+
+A:
+
+- US Market: 09:20:00 EDT/EST
+- HK Market: 08:50:00 CST
+- CN Market: 09:00:00 CST
+- SG Market: 08:20:00 CST

@@ -13,7 +13,7 @@ slug: overview
         <td>功能简介</td>
     </tr>
     <tr>
-        <td rowspan="16">拉取</td>
+        <td rowspan="19">拉取</td>
         <td><a href="./pull/static">获取标的基础信息</a></td>
     </tr>
     <tr>
@@ -61,6 +61,15 @@ slug: overview
     <tr>
         <td><a href="./pull/trade-day">获取市场交易日</a></td>
     </tr>
+     <tr>
+        <td><a href="./pull/capital-flow-intraday">获取标的当日资金流向</a></td>
+    </tr>
+    <tr>
+        <td><a href="./pull/capital-distribution">获取标的当日资金分布</a></td>
+    </tr>
+    <tr>
+        <td><a href="./pull/calc-index">获取标的计算指标</a></td>
+    </tr>
     <tr>
         <td rowspan="3">订阅</td>
         <td><a href="./subscribe/subscription">获取已订阅标的行情</a></td>
@@ -84,6 +93,10 @@ slug: overview
     <tr>
         <td><a href="./push/trade">实时成交明细推送</a></td>
     </tr>
+    <tr>
+        <td rowspan="4">个性化</td>
+        <td><a href="./individual/watchlist_groups">获取关注分组</a></td>
+    </tr>
 </table>
 
 ### 标的代码说明
@@ -98,11 +111,11 @@ slug: overview
 ### 接入方式
 
 1. 使用私有协议，长连接方式进行接入，接入方法请参考 <a href="../socket/protocol/overview" target="_blank">二进制通信协议</a>。
-2. 使用 SDK 进行接入，[SDK 介绍及下载地址](https://open.longbridgeapp.com/sdk)。
+2. 使用 SDK 进行接入，[SDK 介绍及下载地址](https://open.longportapp.com/sdk)。
 
 ### 业务数据序列化方式
 
-行情的请求、响应、推送数据作为业务数据，存放在私有协议的数据包 body 部分。  
+行情的请求、响应、推送数据作为业务数据，存放在私有协议的数据包 body 部分。
 我们使用 [Protobuf](https://developers.google.cn/protocol-buffers) 协议对业务数据进行序列化，相较于常见的文本协议（如 JSON, XML 等），Protobuf 协议具有如下优点：
 
 - 序列化时间快

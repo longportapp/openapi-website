@@ -13,7 +13,7 @@ slug: overview
         <td>功能簡介</td>
     </tr>
     <tr>
-        <td rowspan="16">拉取</td>
+        <td rowspan="19">拉取</td>
         <td><a href="./pull/static">獲取標的基礎信息</a></td>
     </tr>
     <tr>
@@ -62,6 +62,15 @@ slug: overview
         <td><a href="./pull/trade-day">獲取市場交易日</a></td>
     </tr>
     <tr>
+        <td><a href="./pull/capital-flow-intraday">獲取標的當日資金流向</a></td>
+    </tr>
+    <tr>
+        <td><a href="./pull/capital-distribution">獲取標的當日資金分佈</a></td>
+    </tr>
+    <tr>
+        <td><a href="./pull/calc-index">獲取標的計算指標</a></td>
+    </tr>
+    <tr>
         <td rowspan="3">订阅</td>
         <td><a href="./subscribe/subscription">獲取已訂閱標的行情</a></td>
     </tr>
@@ -98,7 +107,7 @@ slug: overview
 ### 接入方式
 
 1. 使用私有協議，長連接方式進行接入，接入方法請參考 <a href="../socket/protocol/overview" target="_blank">二進制通信協議</a>。
-2. 使用 SDK 進行接入，[SDK 介紹及下載地址](https://open.longbridgeapp.com/sdk)。
+2. 使用 SDK 進行接入，[SDK 介紹及下載地址](https://open.longportapp.com/sdk)。
 
 ### 業務數據序列化方式
 

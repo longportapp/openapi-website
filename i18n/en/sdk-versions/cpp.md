@@ -1,10 +1,7 @@
-## Longbridge OpenAPI SDK for C++
+## LongPort OpenAPI SDK for C/C++
 
-[https://github.com/longbridgeapp/openapi-cpp](https://github.com/longbridgeapp/openapi-cpp)
+[https://github.com/longbridgeapp/openapi-sdk/tree/master/cpp](https://github.com/longbridgeapp/openapi-sdk/tree/master/cpp)
 
 ### Download
-- [openapi-sdk-cpp-v1.0.1.darwin-amd64.tar](https://assets.lbkrs.com/downloads/openapi-sdk/openapi-sdk-cpp-v1.0.1.darwin-amd64.tar.gz)
 
-- [openapi-sdk-cpp-v1.0.1.linux-amd64.tar](https://assets.lbkrs.com/downloads/openapi-sdk/openapi-sdk-cpp-v1.0.1.linux-amd64.tar.gz)
-
-- [openapi-sdk-cpp-v1.0.1.windows-amd64.tar](https://assets.lbkrs.com/downloads/openapi-sdk/openapi-sdk-cpp-v1.0.1.windows-amd64.tar.gz)
+- [openapi-cpp-sdk-0.2.44.tar.gz](https://static.lbkrs.com/openapi-sdk/openapi-cpp-sdk-0.2.44.tar.gz)

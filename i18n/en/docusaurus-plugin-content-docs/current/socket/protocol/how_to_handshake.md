@@ -9,7 +9,7 @@ Handshake is first thing before client and server establish connection. Handshak
 
 - protocol version - right now only version `1`
 - data codec type - right now only support `protobuf`, value is `1`
-- client platform - value is `9` as `Open API`
+- client platform - value is `9` as `OpenAPI`
 
 So handshake is always fixed contents.
 
@@ -44,7 +44,7 @@ Fields Explain:
 - platform - 0b1001
 - reserve - 0b0000
 
-Two bytes contents：
+Two bytes contents:
 
 ```
 0b00010001,
@@ -66,5 +66,5 @@ Two bytes contents：
 ### Example
 
 ```
-wss://openapi-quote.longbridgeapp.com?version=1&codec=1&platform=9
+wss://openapi-quote.longportapp.com?version=1&codec=1&platform=9
 ```

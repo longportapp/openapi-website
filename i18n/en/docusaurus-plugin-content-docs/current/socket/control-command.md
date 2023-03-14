@@ -104,7 +104,7 @@ Server -->> Client: auth response, req_id: 1, session: xxx
 
 After auth success, server will set session in auth response, client can use the session to reconnect and no need to request a new `token`.
 
-Auth Request and Response protobuf：
+Auth Request and Response protobuf:
 
 ```protobuf
 message AuthRequest {
@@ -125,7 +125,7 @@ Cmd：`3`
 
 After client disconnect from server, client can use session to reconnect to server when session is not expired. After reconnect success, server will set new session in reconnect response body.
 
-Reconnect Request and Response：
+Reconnect Request and Response:
 
 ```protobuf
 message ReconnectRequest {

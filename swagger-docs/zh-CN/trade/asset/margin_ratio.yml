@@ -1,0 +1,57 @@
+swagger: "2.0"
+info:
+  description: "该接口用于获取股票初始保证金比例、维持保证金比例、强平保证金比例"
+  version: "v1"
+  title: "获取保证金比例"
+paths:
+  /v1/risk/margin-ratio:
+    get:
+      access:
+      parameters:
+        - name: "symbol"
+          type: "string"
+          description: "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
+          required: true
+      responses:
+        "200":
+          description: "返回成功"
+          schema:
+            $ref: "#/definitions/margin_ratio_rsp"
+        "400":
+          description: "内部错误"
+      request_body:
+        type: "python"
+        value: |
+          from datetime import datetime
+          from longbridge.openapi import TradeContext, Config
+
+          config = Config.from_env()
+          ctx = TradeContext(config)
+          resp = ctx.margin_ratio("700.HK")
+          print(resp)
+      response_body:
+        {
+          "code": 0,
+          "data":
+            { "im_factor": "0.1", "mm_factor": "0.1", "fm_factor": "0.1" },
+        }
+
+definitions:
+  margin_ratio_rsp:
+    required:
+      - im_factor
+      - mm_factor
+      - fm_factor
+    properties:
+      im_factor:
+        type: "string"
+        description: 初始保证金比例
+        required: true
+      mm_factor:
+        type: "string"
+        description: 维持保证金比例
+        required: true
+      fm_factor:
+        type: "string"
+        description: 强平保证金比例
+        required: true

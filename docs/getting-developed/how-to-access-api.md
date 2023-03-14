@@ -5,6 +5,56 @@ slug: /how-to-access-api
 sidebar_position: 1
 ---
 
+## 开发前须知
+
+| 注意事项                                     | 参考文档                                          |
+| -------------------------------------------- | ------------------------------------------------- |
+| 推荐使用各自语言的 SDK，而不是调用原生的接口 | [SDK 快速开始页面](../docs/getting-started)       |
+| 阅读 OpenAPI 介绍中开通相应服务              | [OpenAPI 如何开通](../docs/#如何开通)             |
+| 阅读 OpenAPI 介绍中使用权限及限制            | [OpenAPI 使用权限及限制](../docs/#使用权限及限制) |
+| 了解通用错误码，便于查找调用接口出错的原因   | [通用错误码](../docs/error-codes)                 |
+
+## REST API 文档约定格式
+
+服务端 REST API 文档格式主要如下：
+
+```
+Request:
+    Request Info
+    Parameters
+    Request Example
+Response:
+    Response Headers
+    Response Example
+    Response Status
+```
+
+### Request Info
+
+介绍调用 API 所需要的请求方式、路径。
+
+- HTTP URL：服务端 API 的 URL。
+- HTTP Method：服务端 API 仅支持 HTTP 协议的方法，如 GET、POST 等。
+
+### Parameters
+
+介绍调用 API 所需传递的请求头部，查询参数或者请求体。
+:::tip
+
+GET 请求时默认所有参数为查询参数，非 GET 请求时默认所有参数都是请求体，请求体格式为 JSON。
+
+:::
+
+### Request Example
+
+使用 SDK 调用接口的详细例子。
+
+### Response
+
+- Response Headers: 返回内容头部信息。
+- Response Example: 返回内容的文本示例。
+- Response Status: 接口返回内容中的 `status` 的具体解释。
+
 ## API 调用流程
 
 ### 1. 开通服务
@@ -13,7 +63,7 @@ sidebar_position: 1
 
 ### 2. 获取 App Key 信息及 Access Token
 
-在 [开发者后台](https://open.longbridgeapp.com/account) 中获取 **Access Token**， **App Key** 以及 **App Secret**。
+在 [开发者后台](https://open.longportapp.com/account) 中获取 **Access Token**， **App Key** 以及 **App Secret**。
 
 **Access Token** 的有效期是三个月，失效后可以在开发者后台重置。在失效之前，可以通过调用 [刷新 Access Token](./refresh-token-api) API 进行刷新。
 
@@ -88,19 +138,37 @@ headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 
 ## 基本路径
 
-- HTTP API - `https://openapi.longbridgeapp.com`
-- WebSocket - `wss://openapi-quote.longbridgeapp.com`
+- HTTP API - `https://openapi.longportapp.com`
+- WebSocket - `wss://openapi-quote.longportapp.com`
 
 ## API Request
 
 调用服务端接口需要是用 HTTPS 协议，JSON 格式，并是用 `UTF-8` 编码。
 
-示例如下：
+测试接口示例如下：
 
 ```bash
-curl -v https://openapi.longbridgeapp.com/v1/test \
-    -H "X-Api-Signature: {签名}" -H "X-Api-Key: {access key}" \
-    -H "Authorization: {token}" -H "X-Timestamp: {签名时间}"
+curl -v https://openapi.longportapp.com/v1/test \
+    -H "X-Api-Signature: {签名}" -H "X-Api-Key: {Appkey}" \
+    -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
+```
+
+获取股票持仓接口是`GET`请求并需要传递参数，示例如下：
+
+```bash
+curl -v https://openapi.longportapp.com/v1/asset/stock?symbol=700.HK&symbol=BABA.US \
+    -H "X-Api-Signature: {签名}" -H "X-Api-Key: {AppKey}" \
+    -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
+```
+
+委托下单接口是`POST`请求并需要传递`Body`参数，示例如下：
+
+```bash
+curl -v -XPOST https://openapi.longportapp.com/v1/trade/order \
+    -d '{ "side": "Buy", symbol": "700.HK", "order_type": "LO", "submitted_price": "50", "submitted_quantity": "200", "time_in_force": "Day", remark": "Hello from Shell"}' \
+    -H "X-Api-Signature: {签名}" -H "X-Api-Key: {AppKey}" \
+    -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
+    -H "Content-Type: application/json; charset=utf-8"
 ```
 
 ## API Response
@@ -114,7 +182,7 @@ HTTP Status 遵循 [RESTFull 风格](https://restfulapi.net/http-status-codes)�
 ### HTTP Status
 
 - 1xx: Informational – Communicates transfer protocol-level information.
-- 2xx: Success – Indicates that the client’s request was accepted successfully.
+- 2xx: Success – Indicates that the client's request was accepted successfully.
 - 3xx: Redirection – Indicates that the client must take some additional action in order to complete their request.
 - 4xx: Client Error – This category of error status codes points the finger at clients.
 - 5xx: Server Error – The server takes responsibility for these error status codes.
@@ -187,7 +255,7 @@ def sign(method, uri, headers, params, body, secret):
 headers['X-Api-Signature'] = sign(method,  uri, headers, params, body, app_secret)
 
 # 请求接口
-response = requests.request(method, "https://openapi.longbridgeapp.com" + uri + '?' + params, headers=headers, data=body)
+response = requests.request(method, "https://openapi.longportapp.com" + uri + '?' + params, headers=headers, data=body)
 
 print(response.text)
 

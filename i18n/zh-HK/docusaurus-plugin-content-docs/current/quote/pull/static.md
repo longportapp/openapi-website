@@ -31,9 +31,9 @@ message MultiSecurityRequest {
 
 ```python
 # 獲取標的基礎信息
-# https://open.longbridgeapp.com/docs/quote/pull/static
+# https://open.longportapp.com/docs/quote/pull/static
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過“長橋”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
+# 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from longbridge.openapi import QuoteContext, Config
 
 config = Config.from_env()
@@ -65,6 +65,7 @@ print(resp)
 | ∟ bps                | string   | 每股淨資產                                                                                       |
 | ∟ dividend_yield     | string   | 股息                                                                                             |
 | ∟ stock_derivatives  | int32[]  | 如果標的是正股，可提供的衍生品行情類型 <br /><br />**可選值：**<br />`1` - 期權 <br />`2` - 輪證 |
+| ∟ board              | string   | 標的所屬板塊，詳見 [Board](../objects#board---標的板塊)                                          |
 
 ### Protobuf
 
@@ -90,6 +91,7 @@ message StaticInfo {
   string bps = 14;
   string dividend_yield = 15;
   repeated int32 stock_derivatives = 16;
+  string board = 17;
 }
 ```
 
@@ -113,7 +115,8 @@ message StaticInfo {
       "eps_ttm": "28.4394",
       "bps": "103.40413",
       "dividend_yield": "1.6",
-      "stock_derivatives": [2]
+      "stock_derivatives": [2],
+      "board": "HKEquity"
     },
     {
       "symbol": "AAPL.US",
@@ -128,7 +131,8 @@ message StaticInfo {
       "eps_ttm": "6.0771",
       "bps": "4.40197",
       "dividend_yield": "0.85",
-      "stock_derivatives": [1]
+      "stock_derivatives": [1],
+      "board": "USMain"
     }
   ]
 }

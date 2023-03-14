@@ -1,14 +1,14 @@
-## Longbridge OpenAPI SDK for Rust
+## LongPort OpenAPI SDK for Rust
 
 [https://github.com/longbridgeapp/openapi-sdk/tree/master/rust](https://github.com/longbridgeapp/openapi-sdk/tree/master/rust)
 
-### 安装 SDK
+### Install SDK
 
-_Add the following line to your `Cargo.toml` file_
+Add the following line to your `Cargo.toml` file
 
 ```toml
 [dependencies]
-longbridge = "0.2.3"
+longbridge = "0.2"
 ```
 
 [https://crates.io/crates/longbridge](https://crates.io/crates/longbridge)

@@ -48,26 +48,26 @@ message Brokers {
 
 ```python
 # Push Real-time Brokers
-# https://open.longbridgeapp.com/docs/quote/push/push-brokers
+# https://open.longportapp.com/docs/quote/push/push-brokers
 # To subscribe quotes data, please check whether "Developers" - "Quote authority" is correct.
-# https://open.longbridgeapp.com/account
+# https://open.longportapp.com/account
 #
 # - HK Market - BMP basic quotation is unable to subscribe with WebSocket as it has no real-time quote push.
 # - US Market - LV1 Nasdaq Basic (Only Open API).
 #
 # Before running, please visit the "Developers" to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
+# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
 from time import sleep
-from longbridge.openapi import QuoteContext, Config, SubType
+from longbridge.openapi import QuoteContext, Config, SubType, PushQuote
 
-class EventHandler:
-    def on_event(self, symbol: str, msg):
-        print(symbol, msg)
+def on_brokers(symbol: str, event: PushBrokers):
+    print(symbol, event)
 
 config = Config.from_env()
-ctx = QuoteContext(config, EventHandler())
+ctx = QuoteContext(config)
+ctx.set_on_brokers(on_brokers)
 
-ctx.subscribe(["700.HK"], [SubType.Brokers], is_first_push = True)
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Brokers], is_first_push=True)
 sleep(30)
 ```
 

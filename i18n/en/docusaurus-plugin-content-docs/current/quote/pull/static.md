@@ -31,9 +31,9 @@ message MultiSecurityRequest {
 
 ```python
 # Get Basic Information Of Securities
-# https://open.longbridgeapp.com/docs/quote/pull/static
+# https://open.longportapp.com/docs/quote/pull/static
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
+# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
 from longbridge.openapi import QuoteContext, Config
 
 config = Config.from_env()
@@ -65,6 +65,7 @@ print(resp)
 | ∟ bps                | string   | Net assets per share                                                                                 |
 | ∟ dividend_yield     | string   | Dividend yield                                                                                       |
 | ∟ stock_derivatives  | int32[]  | Types of supported derivatives <br /><br />**Optional value:**<br />`1` - Option <br />`2` - Warrant |
+| ∟ board              | string   | The board to whitch the security belongs, see [Board](../objects#board---security-board) for details |
 
 ### Protobuf
 
@@ -90,6 +91,7 @@ message StaticInfo {
   string bps = 14;
   string dividend_yield = 15;
   repeated int32 stock_derivatives = 16;
+  string board = 17;
 }
 ```
 
@@ -113,7 +115,8 @@ message StaticInfo {
       "eps_ttm": "28.4394",
       "bps": "103.40413",
       "dividend_yield": "1.6",
-      "stock_derivatives": [2]
+      "stock_derivatives": [2],
+      "board": "HKEquity"
     },
     {
       "symbol": "AAPL.US",
@@ -128,7 +131,8 @@ message StaticInfo {
       "eps_ttm": "6.0771",
       "bps": "4.40197",
       "dividend_yield": "0.85",
-      "stock_derivatives": [1]
+      "stock_derivatives": [1],
+      "board": "USMain"
     }
   ]
 }

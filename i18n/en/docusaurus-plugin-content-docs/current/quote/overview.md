@@ -13,7 +13,7 @@ slug: overview
         <td>Description</td>
     </tr>
     <tr>
-        <td rowspan="16">Pull</td>
+        <td rowspan="19">Pull</td>
         <td><a href="./pull/static">Get Basic Information Of Securities</a></td>
     </tr>
     <tr>
@@ -62,6 +62,15 @@ slug: overview
         <td><a href="./pull/trade-day">Get Market Trading Days</a></td>
     </tr>
     <tr>
+        <td><a href="./pull/capital-flow-intraday">Get Security Capital Flow Intraday</a></td>
+    </tr>
+    <tr>
+        <td><a href="./pull/capital-distribution">Get Security Capital Distribution</a></td>
+    </tr>
+    <tr>
+        <td><a href="./pull/calc-index">Get Calculate Indexes Of Securities</a></td>
+    </tr>
+    <tr>
         <td rowspan="3">Subscription</td>
         <td><a href="./subscribe/subscription">Get Subscription Information</a></td>
     </tr>
@@ -98,7 +107,7 @@ The security code uses the `ticker.region` format, `ticker` represents the code,
 ### Access Method
 
 1. Use private protocol and long connection mode to access, please refer to <a href="../socket/protocol/overview" target="_blank">Binary Communication Protocol</a> for access method.
-2. Use SDK for access, [SDK introduction and download address](https://open.longbridgeapp.com/sdk).
+2. Use SDK for access, [SDK introduction and download address](https://open.longportapp.com/sdk).
 
 ### Business Data Serialization
 

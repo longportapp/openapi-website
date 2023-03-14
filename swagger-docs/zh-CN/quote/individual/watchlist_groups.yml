@@ -1,0 +1,95 @@
+swagger: "2.0"
+info:
+  description: "获取关注分组"
+  version: "v1"
+  title: "获取关注分组"
+paths:
+  /v1/watchlist/groups:
+    get:
+      access:
+      parameters:
+
+      responses:
+        "200":
+          description: "返回成功"
+          schema:
+            $ref: "#/definitions/groups_response"
+        "500":
+          description: "内部错误"
+      request_body:
+        type: "python"
+        value: |
+          from longbridge.openapi import QuoteContext, Config
+
+          config = Config.from_env()
+          ctx = QuoteContext(config)
+          resp = ctx.watch_list()
+          print(resp)
+
+      response_body:
+        {
+          "code": 0,
+          "data":
+            {
+              "groups":
+                [
+                  {
+                    "id": 28020,
+                    "name": "all",
+                    "securities":
+                      [
+                        {
+                          "symbol": "700.HK",
+                          "market": "HK",
+                          "name": "腾讯控股",
+                          "watched_price": "364.4",
+                          "watched_at": 1652855022,
+                        },
+                      ],
+                  },
+                ],
+            },
+        }
+
+definitions:
+  groups_response:
+    properties:
+      groups:
+        type: "object[]"
+        description: 分组
+        required: ["id", "name", "securities"]
+        properties:
+          id:
+            type: "integer"
+            description: 分组 ID
+            required: true
+          name:
+            type: "string"
+            description: 名称
+            required: true
+          securities:
+            type: "object[]"
+            description: 股票
+            required:
+              ["symbol", "market", "name", "watched_price", "watched_at"]
+            properties:
+              symbol:
+                type: "string"
+                description: 代码
+                required: true
+              market:
+                type: "string"
+                description: 市场
+                required: true
+              name:
+                type: "string"
+                description: 名称
+                required: true
+              watched_price:
+                type: "string"
+                description: 关注时的价格
+                required: true
+              watched_at:
+                type: "integer"
+                description: 关注时间
+                required: true
