@@ -20,7 +20,7 @@ const config = {
   customFields: {
     isDev: process.env.STAGE === 'dev',
   },
-  favicon: 'https://pub.lbkrs.com/files/202107/35tULHe3n4Pp4EtA/logo.png',
+  favicon: 'https://pub.lbkrs.com/static/offline/202211/qohHsXzN9qtQ23ox/longport_favicon.png',
   plugins: [
     'docusaurus-plugin-sass',
     function docusaurusTailwindCss() {
@@ -104,6 +104,16 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [
+        {
+          name: 'og:image',
+          content: 'https://pub.lbkrs.com/files/202211/sJswdGqSX1xDqrES/lonport-seo-img.png',
+        },
+        {
+          name: 'twitter:image',
+          content: 'https://pub.lbkrs.com/files/202211/sJswdGqSX1xDqrES/lonport-seo-img.png',
+        },
+      ],
       colorMode: {
         defaultMode: 'light',
         disableSwitch: true,
