@@ -115,7 +115,7 @@ const config = {
           alt: 'LongPort',
           href: openapiDomain,
           target: '_self',
-          src: 'https://pub.lbkrs.com/files/202204/U8NeviVyPf5Q7ecP/Group_156.png',
+          src: 'https://pub.lbkrs.com/files/202211/BoUn1BSQuAHDX4GY/logo-with-title.svg',
         },
         items: [
           {
