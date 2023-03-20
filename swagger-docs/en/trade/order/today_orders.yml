@@ -94,6 +94,7 @@ paths:
                     "trigger_price": "",
                     "trigger_status": "NOT_USED",
                     "updated_at": "1651644898",
+                    "remark": "",
                   },
                 ],
             },
@@ -131,6 +132,7 @@ definitions:
             "trigger_status",
             "currency",
             "outside_rth",
+            "remark",
           ]
         properties:
           order_id:
@@ -255,3 +257,7 @@ definitions:
               **Enum Value:**<br/>
               `RTH_ONLY` - Regular trading hour only<br/>
               `ANY_TIME` - Any time"
+          remark:
+            type: "string"
+            description: Remark
+            required: true
