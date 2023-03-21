@@ -1,4 +1,4 @@
-## Longbridge OpenAPI SDK for Java
+## LongPort OpenAPI SDK for Java
 
 [https://github.com/longbridgeapp/openapi-sdk/tree/master/java](https://github.com/longbridgeapp/openapi-sdk/tree/master/java)
 

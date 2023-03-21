@@ -2,7 +2,7 @@
   "name": "openapi-website",
   "version": "0.0.1",
   "license": "MIT",
-  "description": "Longbridge OpenAPI docs",
+  "description": "LongPort OpenAPI docs",
   "private": false,
   "scripts": {
     "docusaurus": "docusaurus",

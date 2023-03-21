@@ -26,7 +26,7 @@ message SubscriptionRequest {
 
 ```python
 # Get Subscription Information
-# https://open.longbridgeapp.com/docs/quote/subscribe/subscription
+# https://open.longportapp.com/docs/quote/subscribe/subscription
 import os
 import time
 from longbridge.http import Auth, Config, HttpClient
@@ -47,17 +47,17 @@ class MyWsCallback(WsCallback):
         print(f"-> state: {state}")
 
 auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longbridgeapp.com"))
-ws = WsClient("wss://openapi-quote.longbridgeapp.com", http, MyWsCallback())
+http = HttpClient(auth, Config(base_url="https://openapi.longportapp.com"))
+ws = WsClient("wss://openapi-quote.longportapp.com", http, MyWsCallback())
 
 # To subscribe quotes data, please check whether "Developers" - "Quote authority" is correct.
-# https://open.longbridgeapp.com/account
+# https://open.longportapp.com/account
 #
 # - HK Market - BMP basic quotation is unable to subscribe with WebSocket as it has no real-time quote push.
 # - US Market - LV1 Nasdaq Basic (Only Open API).
 #
 # Before running, please visit the "Developers" to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
+# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
 
 #subscribe
 req = SubscribeRequest(symbol=["700.HK", "AAPL.US"], sub_type=[SubType.QUOTE], is_first_push=False)

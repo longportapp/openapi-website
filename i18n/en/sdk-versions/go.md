@@ -1,4 +1,4 @@
-## Longbridge OpenAPI SDK for Go
+## LongPort OpenAPI SDK for Go
 
 [https://github.com/longbridgeapp/openapi-go](https://github.com/longbridgeapp/openapi-go)
 

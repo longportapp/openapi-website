@@ -107,7 +107,7 @@ slug: overview
 ### 接入方式
 
 1. 使用私有協議，長連接方式進行接入，接入方法請參考 <a href="../socket/protocol/overview" target="_blank">二進制通信協議</a>。
-2. 使用 SDK 進行接入，[SDK 介紹及下載地址](https://open.longbridgeapp.com/sdk)。
+2. 使用 SDK 進行接入，[SDK 介紹及下載地址](https://open.longportapp.com/sdk)。
 
 ### 業務數據序列化方式
 

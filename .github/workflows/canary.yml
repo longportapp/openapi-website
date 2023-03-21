@@ -4,6 +4,7 @@ on:
     branches:
       - main
       - canary
+      - rename-longport
 jobs:
   deploy_canary:
     name: build

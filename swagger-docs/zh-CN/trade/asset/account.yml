@@ -18,7 +18,7 @@ paths:
         type: "python"
         value: |
           # 获取账户资金
-          # https://open.longbridgeapp.com/docs/trade/asset/account
+          # https://open.longportapp.com/docs/trade/asset/account
           from longbridge.openapi import TradeContext, Config
 
           config = Config.from_env()

@@ -23,7 +23,7 @@ paths:
         type: "python"
         value: |
           # Get Stock Positions
-          # https://open.longbridgeapp.com/docs/trade/asset/stock
+          # https://open.longportapp.com/docs/trade/asset/stock
           from longbridge.openapi import TradeContext, Config
 
           config = Config.from_env()
@@ -33,78 +33,84 @@ paths:
       response_body:
         {
           "code": 0,
-          "data": {
-            "list": [ {
-              "account_channel": "lb",
-              "stock_info": [ {
-                "symbol": "700.HK",
-                "symbol_name": "TENCENT",
-                "currency": "HKD",
-                "quantity": "650",
-                "market": "HK",
-                "available_quantity": "-450",
-                "cost_price": "457.53"
-              },
-                {
-                  "symbol": "9991.HK",
-                  "symbol_name": "BAOZUN-SW",
-                  "currency": "HKD",
-                  "market": "HK",
-                  "quantity": "200",
-                  "available_quantity": "0",
-                  "cost_price": "32.25"
-                },
-                {
-                  "symbol": "TCEHY.US",
-                  "symbol_name": "Tencent (ADR)",
-                  "currency": "USD",
-                  "market": "US",
-                  "quantity": "10",
-                  "available_quantity": "10"
-                },
-                {
-                  "symbol": "2628.HK",
-                  "symbol_name": "CHINA LIFE",
-                  "currency": "HKD",
-                  "market": "HK",
-                  "quantity": "9000",
-                  "available_quantity": "0"
-                },
-                {
-                  "symbol": "5.HK",
-                  "symbol_name": "HSBC HOLDINGS",
-                  "currency": "HKD",
-                  "market": "HK",
-                  "quantity": "2400",
-                  "available_quantity": "2000"
-                },
-                {
-                  "symbol": "BABA.US",
-                  "symbol_name": "Alibaba",
-                  "currency": "USD",
-                  "market": "US",
-                  "quantity": "2000209",
-                  "available_quantity": "2000209"
-                },
-                {
-                  "symbol": "2.HK",
-                  "symbol_name": "CLP HOLDINGS",
-                  "currency": "HKD",
-                  "market": "HK",
-                  "quantity": "2000",
-                  "available_quantity": "2000"
-                },
-                {
-                  "symbol": "NOK.US",
-                  "symbol_name": "Nokia",
-                  "currency": "USD",
-                  "market": "US",
-                  "quantity": "1",
-                  "available_quantity": "0"
-                }
-              ]
-            } ]
-          }
+          "data":
+            {
+              "list":
+                [
+                  {
+                    "account_channel": "lb",
+                    "stock_info":
+                      [
+                        {
+                          "symbol": "700.HK",
+                          "symbol_name": "TENCENT",
+                          "currency": "HKD",
+                          "quantity": "650",
+                          "market": "HK",
+                          "available_quantity": "-450",
+                          "cost_price": "457.53",
+                        },
+                        {
+                          "symbol": "9991.HK",
+                          "symbol_name": "BAOZUN-SW",
+                          "currency": "HKD",
+                          "market": "HK",
+                          "quantity": "200",
+                          "available_quantity": "0",
+                          "cost_price": "32.25",
+                        },
+                        {
+                          "symbol": "TCEHY.US",
+                          "symbol_name": "Tencent (ADR)",
+                          "currency": "USD",
+                          "market": "US",
+                          "quantity": "10",
+                          "available_quantity": "10",
+                        },
+                        {
+                          "symbol": "2628.HK",
+                          "symbol_name": "CHINA LIFE",
+                          "currency": "HKD",
+                          "market": "HK",
+                          "quantity": "9000",
+                          "available_quantity": "0",
+                        },
+                        {
+                          "symbol": "5.HK",
+                          "symbol_name": "HSBC HOLDINGS",
+                          "currency": "HKD",
+                          "market": "HK",
+                          "quantity": "2400",
+                          "available_quantity": "2000",
+                        },
+                        {
+                          "symbol": "BABA.US",
+                          "symbol_name": "Alibaba",
+                          "currency": "USD",
+                          "market": "US",
+                          "quantity": "2000209",
+                          "available_quantity": "2000209",
+                        },
+                        {
+                          "symbol": "2.HK",
+                          "symbol_name": "CLP HOLDINGS",
+                          "currency": "HKD",
+                          "market": "HK",
+                          "quantity": "2000",
+                          "available_quantity": "2000",
+                        },
+                        {
+                          "symbol": "NOK.US",
+                          "symbol_name": "Nokia",
+                          "currency": "USD",
+                          "market": "US",
+                          "quantity": "1",
+                          "available_quantity": "0",
+                        },
+                      ],
+                  },
+                ],
+            },
         }
 definitions:
   stock_rsp:

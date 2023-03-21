@@ -1,4 +1,4 @@
-Longbridge OpenAPI [docs](https://open.longbridgeapp.com)
+LongPort OpenAPI [docs](https://open.longportapp.com)
 
 #### 本地开发环境搭建
 

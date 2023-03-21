@@ -74,7 +74,7 @@ A：标的代码使用 `ticker.region` 格式，`ticker` 表示标的代码。�
     </tr>
 </table>
 
-可以使用长桥 App 查看标的的 symbol
+可以使用 LongPort App 查看标的的 symbol
 <img src="https://pub.lbkrs.com/files/202206/7CSoiaDR4wGZPNCT/20220629-180013.jpeg" className="max-w-2xl" />
 
 ## Q4：OpenAPI 的行情权限是怎么样？如何购买行情卡？
@@ -82,9 +82,9 @@ A：标的代码使用 `ticker.region` 格式，`ticker` 表示标的代码。�
 A：
 
 - 行情权限
-  应交易所规则，OpenAPI 的权限是独立的，和 Longbridge 的 App、PC、Web 权限不共享。比如，你在 Longbrdge App 上拥有的港股 Level 2 权限并不能同样代入 OpenAPI 端使用。Longbridge 也给 OpenAPI 用户赠送了基础的行情权益，如你需要更高级别的行情，可以通过购买行情卡激活高级别行情权限。
+  应交易所规则，OpenAPI 的权限是独立的，和 LongPort 的 App、PC、Web 权限不共享。比如，你在 Longbrdge App 上拥有的港股 Level 2 权限并不能同样代入 OpenAPI 端使用。LongPort 也给 OpenAPI 用户赠送了基础的行情权益，如你需要更高级别的行情，可以通过购买行情卡激活高级别行情权限。
 - 如何购买行情卡  
-  Longbridge 用户可以通过 Longbridge App 中的「行情商店」自行选择想要购买的行情卡。
+  LongPort 用户可以通过 LongPort App 中的「行情商店」自行选择想要购买的行情卡。
 - 行情权限一览请见下表
 <table>
     <tr>
