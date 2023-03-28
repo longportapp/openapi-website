@@ -10,6 +10,8 @@
   --ifm-global-spacing: 2em;
   --ifm-alert-padding-vertical: 10px;
   --ifm-alert-padding-horizontal: 16px;
+  --ifm-breadcrumb-separator-size: 0.7em;
+  --ifm-breadcrumb-separator: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/></svg>');
 }
 @tailwind utilities;
 body {
@@ -53,6 +55,10 @@ body {
   max-width: 1200px;
 }
 
+.breadcrumbs {
+  @apply flex items-center;
+}
+
 .breadcrumbs__item {
   .breadcrumbs__link {
     border-radius: 0;
@@ -76,12 +82,13 @@ body {
 /** Tabs **/
 .tabs-container {
   .tabs {
-    @apply pl-0 -mb-[5px] -mt-[5px];
-    &__item {
-      @apply text-sm font-normal p-[2px];
+    @apply p-0 m-0 space-x-4 border;
 
-      & + .tabs__item {
-        @apply ml-[10px];
+    &__item {
+      @apply text-sm font-medium leading-none py-2 px-0;
+
+      &--active {
+        @apply text-blue-500 border-b-2;
       }
 
       &:hover {
@@ -89,4 +96,20 @@ body {
       }
     }
   }
+}
+
+/* Pagination */
+.pagination-nav__link {
+  @apply py-4 px-6 hover:bg-gray-50 hover:border-gray-300;
+
+  .pagination-nav__sublabel {
+    @apply hidden;
+  }
+  .pagination-nav__label {
+    @apply font-normal text-base text-gray-800;
+  }
+}
+
+.theme-edit-this-page {
+  @apply text-sm text-gray-600;
 }
