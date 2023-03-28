@@ -8,7 +8,7 @@ const openapiDomain = 'https://open.longportapp.com'
 const communityDomain = 'https://longportapp.com'
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'LongPort 开放平台',
+  title: 'LongPort OpenAPI',
   url: 'https://open.longportapp.com',
   baseUrl: '/',
   organizationName: 'longbridgeapp',
@@ -16,6 +16,10 @@ const config = {
   baseUrlIssueBanner: false,
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
   i18n,
   customFields: {
     isDev: process.env.STAGE === 'dev',
@@ -91,7 +95,6 @@ const config = {
           showLastUpdateTime: true,
           sidebarCollapsed: false,
           sidebarCollapsible: false,
-          remarkPlugins: [require('mdx-mermaid')],
         },
         blog: false,
         theme: {
@@ -132,7 +135,7 @@ const config = {
             to: openapiDomain,
             position: 'left',
             target: '_self',
-            label: '开发者认证',
+            label: 'Developer',
             activeBaseRegex: '^/$',
           },
           {
@@ -144,19 +147,19 @@ const config = {
           {
             to: '/docs',
             activeBasePath: '/docs',
-            label: '文档',
+            label: 'Docs',
             position: 'left',
           },
           {
             to: communityDomain,
-            label: '社区',
+            label: 'LongPort',
             target: '_self',
             position: 'left',
           },
           {
             to: `${communityDomain}/markets`,
             target: '_self',
-            label: '市场',
+            label: 'Market',
             position: 'left',
           },
 

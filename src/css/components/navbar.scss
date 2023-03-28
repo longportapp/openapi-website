@@ -4,16 +4,28 @@
   @media screen and (min-width: 768px) {
     --ifm-navbar-padding-horizontal: 40px;
   }
+
+  .navbar__toggle {
+    @apply mr-4 hover:bg-gray-100 active:bg-gray-200 rounded p-1;
+
+    svg {
+      @apply w-6 h-6;
+    }
+  }
+
   .navbar__brand {
-    margin-right: 0;
     .navbar__logo {
+      height: 23px;
+
       img {
         width: 120px;
-        height: auto;
       }
     }
     & + .navbar__item.navbar__link {
       margin-left: 208px;
+    }
+    .navbar__title {
+      @apply hidden;
     }
   }
   .navbar__items {
@@ -41,7 +53,6 @@
       }
     }
   }
-  
 }
 .navbar-sidebar {
   .hidden-in-mobile-sidebar {
