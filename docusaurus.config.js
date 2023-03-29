@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const openapiDomain = 'https://open.longportapp.com'
 const communityDomain = 'https://longportapp.com'
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'LongPort OpenAPI',
