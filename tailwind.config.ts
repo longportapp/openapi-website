@@ -1,6 +1,6 @@
-const colors = require('tailwindcss/colors')
+import colors from 'tailwindcss/colors'
 
-module.exports = {
+export default {
   content: [
     './src/**/*.{js,scss,css,ts,tsx,jsx}',
     './i18n/**/*.{js,scss,css,ts,tsx,jsx}',
