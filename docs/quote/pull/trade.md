@@ -35,9 +35,9 @@ message SecurityTradeRequest {
 
 ```python
 # 获取标的成交明细
-# https://open.longbridgeapp.com/docs/quote/pull/trade
+# https://open.longportapp.com/docs/quote/pull/trade
 # 运行前请访问“开发者中心”确保账户有正确的行情权限。
-# 如没有开通行情权限，可以通过“长桥”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
+# 如没有开通行情权限，可以通过“LongPort”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
 from longbridge.openapi import QuoteContext, Config
 
 config = Config.from_env()
@@ -51,16 +51,16 @@ print(resp)
 
 ### Response Properties
 
-| Name            | Type     | Description                                                                       |
-| --------------- | -------- | --------------------------------------------------------------------------------- |
-| symbol          | string   | 标的代码                                                                          |
-| trades          | object[] | 逐笔明细数据                                                                      |
-| ∟ price         | string   | 价格                                                                              |
-| ∟ volume        | int64    | 成交量                                                                            |
-| ∟ timestamp     | int64    | 成交时间                                                                          |
-| ∟ trade_type    | string   | [交易类型说明](#交易类型)                                                         |
+| Name            | Type     | Description                                                                        |
+| --------------- | -------- | ---------------------------------------------------------------------------------- |
+| symbol          | string   | 标的代码                                                                           |
+| trades          | object[] | 逐笔明细数据                                                                       |
+| ∟ price         | string   | 价格                                                                               |
+| ∟ volume        | int64    | 成交量                                                                             |
+| ∟ timestamp     | int64    | 成交时间                                                                           |
+| ∟ trade_type    | string   | [交易类型说明](#交易类型)                                                          |
 | ∟ direction     | int32    | 交易方向 <br /><br />**可选值：**<br />`0` - neutral<br />`1` - down<br />`2` - up |
-| ∟ trade_session | int32    | 交易时段，详见 [TradeSession](../objects#tradesession---交易时段)                 |
+| ∟ trade_session | int32    | 交易时段，详见 [TradeSession](../objects#tradesession---交易时段)                  |
 
 #### 交易类型
 

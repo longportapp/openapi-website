@@ -44,7 +44,7 @@ paths:
         type: "python"
         value: |
           # 獲取資金流水
-          # https://open.longbridgeapp.com/docs/trade/asset/cashflow
+          # https://open.longportapp.com/docs/trade/asset/cashflow
           from datetime import datetime
           from longbridge.openapi import TradeContext, Config
 

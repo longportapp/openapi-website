@@ -8,9 +8,9 @@ sidebar_position: 1
 Client can access trade feed by `WebSocket` and `TCP`. After client subscribing, trade gateway can push real-time trade changings of user.
 
 :::info
-WebSocket Endpoint: `wss://openapi-trade.longbridgeapp.com`
+WebSocket Endpoint: `wss://openapi-trade.longportapp.com`
 
-TCP Endpoint: `openapi-trade.longbridgeapp.com`
+TCP Endpoint: `openapi-trade.longportapp.com`
 :::
 
 Flow：

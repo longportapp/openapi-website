@@ -23,7 +23,7 @@ paths:
         type: "python"
         value: |
           # 获取基金持仓
-          # https://open.longbridgeapp.com/docs/trade/asset/fund
+          # https://open.longportapp.com/docs/trade/asset/fund
           from longbridge.openapi import TradeContext, Config
 
           config = Config.from_env()

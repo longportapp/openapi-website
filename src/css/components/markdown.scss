@@ -87,8 +87,8 @@
   --color-border-default: #c1cedb78;
   --color-border-muted: hsla(210, 18%, 87%, 1);
   --color-neutral-muted: rgba(175, 184, 193, 0.2);
-  --color-accent-fg: #0969da;
-  --color-accent-emphasis: #0969da;
+  --color-accent-fg: #1b7ff5;
+  --color-accent-emphasis: #1b7ff5;
   --color-attention-subtle: #fff8c5;
   --color-danger-fg: #cf222e;
 }
@@ -365,8 +365,8 @@
 }
 
 .markdown h3 {
+  @apply text-blue-700;
   font-weight: 600;
-  color: #0f70c7;
   font-size: 1.3em;
 }
 
@@ -629,7 +629,10 @@
 .markdown pre,
 .markdown details {
   margin-top: 0;
-  margin-bottom: 16px;
+
+  &:not(:last-child) {
+    margin-bottom: 16px;
+  }
 }
 
 .markdown blockquote > :first-child {
@@ -1099,24 +1102,26 @@
   }
 
   .alert {
+    @apply shadow-none border text-sm text-gray-900;
+
     &--secondary {
-      @apply bg-gray-50 border-gray-300;
+      @apply bg-gray-50 border-gray-200;
     }
 
     &--info {
-      @apply bg-blue-50 border-blue-300;
+      @apply bg-blue-50 border-blue-200;
     }
 
     &--success {
-      @apply bg-green-50 border-green-300;
+      @apply bg-green-50 border-green-200;
     }
 
     &--warning {
-      @apply bg-yellow-50 border-yellow-300;
+      @apply bg-yellow-50 border-yellow-200;
     }
 
     &--danger {
-      @apply bg-red-50 border-red-300;
+      @apply bg-red-50 border-red-200;
     }
   }
 }

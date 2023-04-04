@@ -23,7 +23,7 @@ paths:
         type: "python"
         value: |
           # Get Fund Position
-          # https://open.longbridgeapp.com/docs/trade/asset/fund
+          # https://open.longportapp.com/docs/trade/asset/fund
           from longbridge.openapi import TradeContext, Config
 
           config = Config.from_env()

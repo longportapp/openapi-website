@@ -5,7 +5,7 @@ slug: /socket/diff_ws_tcp
 sidebar_position: 6
 ---
 
-Longbridge support `WebSocket` and `TCP` feed, the differences:
+LongPort support `WebSocket` and `TCP` feed, the differences:
 
 - Data of `TCP` is streaming, so coding client is hard than `WebSocket`.
 - `WebSocket` using URL Query to [Handshake](./protocol/handshake#websocket-how-to-handshake)

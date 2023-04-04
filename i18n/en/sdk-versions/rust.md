@@ -1,4 +1,4 @@
-## Longbridge OpenAPI SDK for Rust
+## LongPort OpenAPI SDK for Rust
 
 [https://github.com/longbridgeapp/openapi-sdk/tree/master/rust](https://github.com/longbridgeapp/openapi-sdk/tree/master/rust)
 

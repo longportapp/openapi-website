@@ -155,7 +155,7 @@
     "description": "The label used for the latest version suggestion link label"
   },
   "theme.common.editThisPage": {
-    "message": "编辑页面",
+    "message": "Edit Page",
     "description": "The link label to edit the current page"
   },
   "theme.common.headingLinkTitle": {
@@ -215,7 +215,7 @@
     "description": "The title attribute for collapse button of doc sidebar"
   },
   "theme.navbar.mobileSidebarSecondaryMenu.backButtonLabel": {
-    "message": "← 返回主菜单",
+    "message": "返回主菜单",
     "description": "The label of the back button to return to main menu, inside the mobile navbar sidebar secondary menu (notably used to display the docs sidebar)"
   },
   "theme.tags.tagsPageTitle": {

@@ -31,9 +31,9 @@ message SecurityRequest {
 
 ```python
 # Get Security Brokers
-# https://open.longbridgeapp.com/docs/quote/pull/brokers
+# https://open.longportapp.com/docs/quote/pull/brokers
 # 运行前请访问“开发者中心”确保账户有正确的行情权限。
-# 如没有开通行情权限，可以通过“长桥”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
+# 如没有开通行情权限，可以通过“LongPort”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
 from longbridge.openapi import QuoteContext, Config
 
 config = Config.from_env()
@@ -47,14 +47,14 @@ print(resp)
 
 ### Response Properties
 
-| Name         | Type     | Description                                               |
-| ------------ | -------- | --------------------------------------------------------- |
-| symbol       | string   | 标的代码                                                  |
-| ask_brokers  | object[] | 卖盘经纪队列                                              |
-| ∟ position   | int32    | 档位                                                      |
+| Name         | Type     | Description                                                |
+| ------------ | -------- | ---------------------------------------------------------- |
+| symbol       | string   | 标的代码                                                   |
+| ask_brokers  | object[] | 卖盘经纪队列                                               |
+| ∟ position   | int32    | 档位                                                       |
 | ∟ broker_ids | int32[]  | 券商席位 ID，通过[获取券商席位 ID ](./broker-ids) 接口获取 |
-| bid_brokers  | object[] | 买盘经纪队列                                              |
-| ∟ position   | int32    | 档位                                                      |
+| bid_brokers  | object[] | 买盘经纪队列                                               |
+| ∟ position   | int32    | 档位                                                       |
 | ∟ broker_ids | int32[]  | 券商席位 ID，通过[获取券商席位 ID ](./broker-ids) 接口获取 |
 
 ### Protobuf

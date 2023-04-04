@@ -10,13 +10,17 @@ import TabItem from '@theme/TabItem';
 
 ## 前言
 
-Longbridge OpenAPI SDK 基於 Rust 底層提供標準實現，目前我們已經發布了 Python, Node.js, Rust 和 C++ SDK，其他語言的支持後面會陸續推出。
+LongPort OpenAPI SDK 基於 Rust 底層提供標準實現，目前我們已經發布了 Python, Node.js, Rust 和 C++ SDK，其他語言的支持後面會陸續推出。
 
 ## API Host
 
-- HTTP API - `https://openapi.longbridgeapp.com`
-- WebSocket Quote - `wss://openapi-quote.longbridgeapp.com`
-- Webssocket Trade - `wss://openapi-trade.longbridgeapp.com`
+- HTTP API - `https://openapi.longportapp.com`
+- WebSocket Quote - `wss://openapi-quote.longportapp.com`
+- Webssocket Trade - `wss://openapi-trade.longportapp.com`
+
+:::tip
+中國大陸地區訪問，建議採用 `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn` 以提升訪問速度。
+:::
 
 ## 環境需求
 
@@ -83,13 +87,13 @@ tokio = { version = "1", features = "rt-multi-thread" }
 
 ## 配置開發者賬戶
 
-1. 在 [Longbridge](https://longbridge.hk) 開戶
+1. 下載 [LongPort](https://longportapp.com/download) 並完成開戶。
 2. 完成 Python 3 環境安裝，並安裝 Pip
-3. 從 [Longbridge OpenAPI](https://open.longbridgeapp.com) 官網獲取 ` App Key`, `App Secret`, `Access Token` 等信息。
+3. 從 [LongPort OpenAPI](https://open.longportapp.com) 官網獲取 ` App Key`, `App Secret`, `Access Token` 等信息。
 
 **_獲取 App Key, App Secret, Access Token 等信息_**
 
-訪問 [Longbridge OpenAPI](https://open.longbridgeapp.com) 網站，登錄後，進入“個人中心”。
+訪問 [LongPort OpenAPI](https://open.longportapp.com) 網站，登錄後，進入“個人中心”。
 
 在頁面上會給出“應用憑證”憑證信息，我們拿到以後設置環境變量，便於後面開發使用方便。
 
@@ -285,18 +289,18 @@ mvn compile exec:exec
 
 ### 訂閱實時行情
 
-訂閱行情數據請檢查 [開發者中心](https://open.longbridgeapp.com/account) - “行情權限”是否正確
+訂閱行情數據請檢查 [開發者中心](https://open.longportapp.com/account) - “行情權限”是否正確
 
 - 港股 - BMP 基礎報價，無實時行情推送，無法用 WebSocket 訂閱
 - 美股 - LV1 納斯達克最優報價 (只限 Open API）
 
-運行前訪問 [開發者中心](https://open.longbridgeapp.com/account)，檢查確保賬戶有正確的行情權限。
+運行前訪問 [開發者中心](https://open.longportapp.com/account)，檢查確保賬戶有正確的行情權限。
 
 :::info
 
-如沒有開通行情權限，可以通過“長橋”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
+如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 
-https://longbridgeapp.com/download
+https://longportapp.com/download
 :::
 
 當你有正確的行情權限，看起來可能會是這樣：
@@ -462,7 +466,7 @@ NFLX.US PushQuote {
 
 ### 委託下單
 
-下面我們做一次 [委託下單](https://open.longbridgeapp.com/docs/trade/order/submit) 動作，我們假設要以 50 HKD 買入 `700.HK` 的數量為 `100`。
+下面我們做一次 [委託下單](https://open.longportapp.com/docs/trade/order/submit) 動作，我們假設要以 50 HKD 買入 `700.HK` 的數量為 `100`。
 
 > NOTE: 為了防止測試買入成功，這裡演示給了一個較低的價格，避免成交。OpenAPI 操作均等同與線上交易，請謹慎操作，開發調試注意參數細節。
 
@@ -502,28 +506,21 @@ python submit_order.py
 創建 `submit_order.js` 貼入下面的代碼：
 
 ```javascript
-const {
-  Config,
-  TradeContext,
-  OrderType,
-  OrderSide,
-  Decimal,
-  TimeInForceType,
-} = require("longbridge");
+const { Config, TradeContext, OrderType, OrderSide, Decimal, TimeInForceType } = require('longbridge')
 
-let config = Config.fromEnv();
+let config = Config.fromEnv()
 TradeContext.new(config)
   .then((ctx) =>
     ctx.submitOrder({
-      symbol: "700.HK",
+      symbol: '700.HK',
       orderType: OrderType.LO,
       side: OrderSide.Buy,
       timeInForce: TimeInForceType.Day,
       submittedQuantity: 200,
-      submittedPrice: new Decimal("300"),
+      submittedPrice: new Decimal('300'),
     })
   )
-  .then((resp) => console.log(resp.toString()));
+  .then((resp) => console.log(resp.toString()))
 ```
 
 運行
@@ -749,11 +746,11 @@ Order {
 }
 ```
 
-上面例子已經完整演示瞭如何使用 SDK 訪問 OpenAPI 的接口，更多其他接口請詳細閱讀 [Longbridge OpenAPI 文檔](https://open.longbridgeapp.com/docs)，根據不同的接口使用。
+上面例子已經完整演示瞭如何使用 SDK 訪問 OpenAPI 的接口，更多其他接口請詳細閱讀 [LongPort OpenAPI 文檔](https://open.longportapp.com/docs)，根據不同的接口使用。
 
 ## 更多例子
 
-我們在 Longbridge OpenAPI Python SDK 的 GitHub 倉庫中提供了上面幾個例子的完整代碼，當然後期我們也會持續往裡面補充或更新。
+我們在 LongPort OpenAPI Python SDK 的 GitHub 倉庫中提供了上面幾個例子的完整代碼，當然後期我們也會持續往裡面補充或更新。
 
 https://github.com/longbridgeapp/openapi-sdk/tree/master/examples
 

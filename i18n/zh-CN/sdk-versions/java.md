@@ -1,4 +1,4 @@
-## Longbridge OpenAPI SDK for Java
+## LongPort OpenAPI SDK for Java
 
 [https://github.com/longbridgeapp/openapi-sdk/tree/master/java](https://github.com/longbridgeapp/openapi-sdk/tree/master/java)
 
@@ -10,7 +10,7 @@
 <dependency>
   <groupId>io.github.longbridgeapp</groupId>
   <artifactId>openapi-sdk</artifactId>
-  <version>0.2.44</version>
+  <version>0.2.50</version>
 </dependency>
 ```
 

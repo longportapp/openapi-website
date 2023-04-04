@@ -23,7 +23,7 @@ paths:
         type: "python"
         value: |
           # 獲取基金持倉
-          # https://open.longbridgeapp.com/docs/trade/asset/fund
+          # https://open.longportapp.com/docs/trade/asset/fund
           from longbridge.openapi import TradeContext, Config
 
           config = Config.from_env()
@@ -103,5 +103,3 @@ definitions:
                 type: "string"
                 description: 成本淨值
                 required: true
-
-

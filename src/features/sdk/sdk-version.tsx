@@ -1,10 +1,10 @@
-import React from 'react'
-import classnames from 'classnames'
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
-import MDXContent from '@theme/MDXContent'
-import EditThisPage from '@theme/EditThisPage'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import EditThisPage from '@theme/EditThisPage'
+import MDXContent from '@theme/MDXContent'
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import classnames from 'classnames'
+import React from 'react'
 import styles from './sdk-version.module.scss'
 
 function useSdkLanguages() {

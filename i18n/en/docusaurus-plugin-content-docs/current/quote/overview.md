@@ -107,7 +107,7 @@ The security code uses the `ticker.region` format, `ticker` represents the code,
 ### Access Method
 
 1. Use private protocol and long connection mode to access, please refer to <a href="../socket/protocol/overview" target="_blank">Binary Communication Protocol</a> for access method.
-2. Use SDK for access, [SDK introduction and download address](https://open.longbridgeapp.com/sdk).
+2. Use SDK for access, [SDK introduction and download address](https://open.longportapp.com/sdk).
 
 ### Business Data Serialization
 

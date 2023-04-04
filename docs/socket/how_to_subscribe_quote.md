@@ -8,9 +8,9 @@ sidebar_position: 1
 客户端可以通过 WebSocket 或者 TCP 和行情网关建立长连接，客户端订阅股票行情，行情网关会实时推送客户端订阅的实时行情。
 
 :::info
-WebSocket Endpoint: `wss://openapi-quote.longbridgeapp.com`
+WebSocket Endpoint: `wss://openapi-quote.longportapp.com`
 
-TCP Endpoint: `openapi-quote.longbridgeapp.com:2020`
+TCP Endpoint: `openapi-quote.longportapp.com:2020`
 :::
 
 流程如下：

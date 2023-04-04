@@ -1,4 +1,4 @@
-## Longbridge OpenAPI SDK for Node.js
+## LongPort OpenAPI SDK for Node.js
 
 [https://github.com/longbridgeapp/openapi-sdk/tree/master/nodejs](https://github.com/longbridgeapp/openapi-sdk/tree/master/nodejs)
 

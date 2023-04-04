@@ -31,9 +31,9 @@ message MultiSecurityRequest {
 
 ```python
 # Get Real-time Quotes Of Option Securities
-# https://open.longbridgeapp.com/docs/quote/pull/option-quote
+# https://open.longportapp.com/docs/quote/pull/option-quote
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile client.
+# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
 from longbridge.openapi import QuoteContext, Config
 
 config = Config.from_env()

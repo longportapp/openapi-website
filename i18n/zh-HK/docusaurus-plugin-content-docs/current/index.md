@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 ## 簡介
 
-Longbridge OpenAPI 為有研發能力的投資者提供程序化行情交易接口，助力投資者根據自身投資策略搭建交易或行情策略分析工具。覆蓋以下類別功能：
+LongPort OpenAPI 為有研發能力的投資者提供程序化行情交易接口，助力投資者根據自身投資策略搭建交易或行情策略分析工具。覆蓋以下類別功能：
 
 - 交易類 - 創建、修改、撤銷訂單，當日/歷史訂單及成交記錄的查詢等
 - 行情類 - 實時行情報價、歷史行情數的獲取等
@@ -19,12 +19,12 @@ Longbridge OpenAPI 為有研發能力的投資者提供程序化行情交易接�
 
 ## 接口類型
 
-Longbridge 提供接入底層服務的 HTTP / WebSockets 接口以及封裝在上層的 SDK（Python / C++ ...）等多種接入方式，靈活選擇。
+LongPort 提供接入底層服務的 HTTP / WebSockets 接口以及封裝在上層的 SDK（Python / C++ ...）等多種接入方式，靈活選擇。
 
 ## 如何開通
 
-1. 登錄 [Longbridge App](https://longbridgeapp.com/download) 或官網 [longbridgehk.com](https://longbridge.hk) 完成長橋綜合賬戶的開戶（目前不支持長橋標準賬戶的接口服務）；
-2. 登錄 [longbridgeapp.com](https://longbridgeapp.com) 進入開發者平台，完成開發者認證即 OpenAPI 權限申請，獲取令牌。
+1. 登錄 [LongPort App](https://longportapp.com/download) 完成開戶；
+2. 登錄 [longportapp.com](https://longportapp.com) 進入開發者平台，完成開發者認證即 OpenAPI 權限申請，獲取令牌。
 
 ## 使用權限及限制
 
@@ -117,8 +117,8 @@ Longbridge 提供接入底層服務的 HTTP / WebSockets 接口以及封裝在�
 
 ## 使用費用
 
-長橋不針對接口服務額外收取開通或使用費用，只需開通長橋綜合賬戶及 OpenAPI 服務權限後即可免費使用。實際交易產生佣金費用或高級行情產品費用參考 [官網收費](https://longbridge.hk/rate) 說明或諮詢線上客服。
+LongPort 不針對接口服務額外收取開通或使用費用，只需開通 LongPort 賬戶及 OpenAPI 服務權限後即可免費使用。實際交易產生佣金費用或高級行情產品費用參考 [官網收費](https://longbridge.hk/rate) 說明或諮詢線上客服。
 
 ## 其他
 
-OpenAPI 服務由長橋證券（香港）有限公司及其適用的關聯公司提供（具體以協議為準）。
+OpenAPI 服務由 LongPort 及其適用的關聯公司提供（具體以協議為準）。

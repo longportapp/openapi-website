@@ -15,8 +15,8 @@ sidebar_position: 3
 
 ### Parameters
 
-| Name   | Type     | Required | Description                                                                                                                                                                                 |
-| ------ | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name   | Type     | Required | Description                                                                                                                                                                                  |
+| ------ | -------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | symbol | string[] | 是       | 标的代码列表，通过[期权链接口](./optionchain-date-strike.md) 获取期权标的的 symbol，例如：`[BABA230120C160000.US]` <br /><br />**校验规则：**<br />每次请求支持传入的标的数量上限是 `500` 个 |
 
 ### Protobuf
@@ -31,9 +31,9 @@ message MultiSecurityRequest {
 
 ```python
 # 获取期权实时行情
-# https://open.longbridgeapp.com/docs/quote/pull/option-quote
+# https://open.longportapp.com/docs/quote/pull/option-quote
 # 运行前请访问“开发者中心”确保账户有正确的行情权限。
-# 如没有开通行情权限，可以通过“长桥”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
+# 如没有开通行情权限，可以通过“LongPort”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
 from longbridge.openapi import QuoteContext, Config
 
 config = Config.from_env()

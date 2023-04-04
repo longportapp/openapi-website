@@ -33,9 +33,9 @@ message SecurityCalcQuoteRequest {
 
 ```python
 # Get Security Calc Index
-# https://open.longbridgeapp.com/docs/quote/pull/calc-index
+# https://open.longportapp.com/docs/quote/pull/calc-index
 # 運行前請訪問“開發者中心”確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過“長橋”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
+# 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 ```
 
 ## Response
@@ -57,7 +57,7 @@ message SecurityCalcQuoteRequest {
 | ∟ capital_flow             | string   | 流入資金                                     |
 | ∟ amplitude                | string   | 振幅 (返回百分比數據，不包含`%`符號)         |
 | ∟ volume_ratio             | string   | 量比                                         |
-| ∟ pe_ttm_ratio             | string   | 市盈率（TTM）                              |
+| ∟ pe_ttm_ratio             | string   | 市盈率（TTM）                                |
 | ∟ pb_ratio                 | string   | 市淨率                                       |
 | ∟ dividend_ratio_ttm       | string   | 股息率 (TTM)                                 |
 | ∟ five_day_change_rate     | string   | 五日漲幅 (返回百分比數據，不包含`%`符號)     |
