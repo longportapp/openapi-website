@@ -32,7 +32,7 @@ paths:
           required: false
         - name: order_id
           type: "string"
-          description: 訂單 ID, 獲取改單預估最大購買數量時必填
+          description: 訂單 ID，獲取改單預估最大購買數量時必填
           required: false
       responses:
         "200":

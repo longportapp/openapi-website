@@ -338,11 +338,11 @@ definitions:
             properties:
               price:
                 type: "string"
-                description: 成交展示成交价格, 过期、撤单、拒绝等状态展示提交价格
+                description: 成交展示成交价格，过期、撤单、拒绝等状态展示提交价格
                 required: true
               quantity:
                 type: "string"
-                description: 成交展示成交数量, 过期、撤单、拒绝等状态展示剩余数量
+                description: 成交展示成交数量，过期、撤单、拒绝等状态展示剩余数量
                 required: true
               status:
                 type: "string"
