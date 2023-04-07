@@ -22,7 +22,7 @@ paths:
         - name: side
           type: "string"
           description: Order side<<br/><br/>
-            **可选值:**<br/>
+            **Enum Value**<br/>
             `Buy` - Buy<br/>
             `Sell` - Sell (Short selling is only supported for US stocks)
           required: true
