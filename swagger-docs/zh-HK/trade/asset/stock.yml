@@ -174,5 +174,5 @@ definitions:
                 required: true
               init_quantity:
                 type: "string"
-                description: 开盘前初始持仓
+                description: 開盤前初始持倉
                 required: true
