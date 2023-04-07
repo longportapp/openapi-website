@@ -38,7 +38,7 @@ paths:
         - name: trailing_percent
           required: false
           description: 跟踪涨跌幅<br/><br/>
-            `TSLPPCT` / `TSMAPCT` 订单必填
+            `TSLPPCT` / `TSMPCT` 订单必填
         - name: expire_date
           required: false
           description:

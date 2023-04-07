@@ -1,72 +1,34 @@
 swagger: "2.0"
 info:
-  description: "該接口用於獲取歷史訂單"
+  description: "該接口用於訂單詳情查詢"
   version: "v1"
-  title: "獲取歷史訂單"
+  title: "訂單詳情"
 paths:
-  /v1/trade/order/history:
+  /v1/order/detail:
     get:
       access: "交易權限"
       parameters:
-        - name: "symbol"
+        - name: "order_id"
           type: "string"
-          in: query
-          description: "股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US`"
-          required: false
-        - name: "status"
-          type: string[]
-          in: query
-          description: "[訂單狀態](../trade-definition#orderstatus)<br/><br/>例如：`status=FilledStatus&status=NewStatus`"
-          required: false
-        - name: side
-          type: "string"
-          in: query
-          description: "
-            買賣方向<br/><br/>
-            **可選值:**<br/>
-            `Buy` - 買入<br/>
-            `Sell` - 賣出"
-          required: false
-        - name: market
-          type: "string"
-          in: query
-          description: "
-            市場<br/><br/>
-            **可選值:**<br/>
-            `US` - 美股<br/>
-            `HK` - 港股"
-          required: false
-        - name: "start_at"
-          type: "string"
-          required: false
-          description: "開始時間，格式為時間戳 (秒)，例如：`1650410999`。<br/><br/>開始時間為空時，默認為結束時間或當前時間前九十天。"
-        - name: "end_at"
-          type: "string"
-          required: false
-          description: "結束時間，格式為時間戳 (秒)，例如：`1650410999`。<br/><br/>結束時間為空時，默認為開始時間後九十天或當前時間。"
+          description: "訂單 ID，用於指定訂單 ID 查詢，例如：`701276261045858304`"
+          required: true
       responses:
         "200":
-          description: "歷史訂單查詢成功"
+          description: "訂單詳情查詢成功"
           schema:
-            $ref: "#/definitions/history_orders_rsp"
+            $ref: "#/definitions/order_detail_rsp"
         "400":
           description: "查詢失敗，請求參數錯誤。"
       request_body:
         type: "python"
         value: |
-          from datetime import datetime
-          from longbridge.openapi import TradeContext, Config, OrderStatus, OrderSide, Market
+          from longbridge.openapi import TradeContext, Config
 
           config = Config.from_env()
           ctx = TradeContext(config)
 
-          resp = ctx.history_orders(
-              symbol = "700.HK",
-              status = [OrderStatus.Filled, OrderStatus.New],
-              side = OrderSide.Buy,
-              market = Market.HK,
-              start_at = datetime(2022, 5, 9),
-              end_at = datetime(2022, 5, 12),
+          resp = ctx.order_detail(
+              order_id = "701276261045858304",
           )
           print(resp)
       response_body:
@@ -104,18 +66,46 @@ paths:
                     "trigger_status": "NOT_USED",
                     "updated_at": "1651644898",
                     "remark": "",
+                    "free_status": "None",
+                    "free_amount": "",
+                    "free_currency": "",
+                    "deductions_status": "NONE",
+                    "deductions_amount": "",
+                    "deductions_currency": "",
+                    "platform_deducted_status": "NONE",
+                    "platform_deducted_amount": "",
+                    "platform_deducted_currency": "",
+                    "history":
+                      [
+                        {
+                          "price": "381.0000",
+                          "quantity": "200",
+                          "status": "ReplacedStatus",
+                          "msg": "",
+                          "time": "1680856746",
+                        },
+                        {
+                          "price": "400.0000",
+                          "quantity": "100",
+                          "status": "NewStatus",
+                          "msg": "",
+                          "time": "1680856723",
+                        },
+                      ],
+                    "charge_detail":
+                      {
+                        "items":
+                          [{ "code": 2, "name": "第三方收費明細", "fees": [] }],
+                        "total_amount": "0.00",
+                        "currency": "HKD",
+                      },
                   },
                 ],
             },
         }
 definitions:
-  history_orders_rsp:
-    required: ["has_more"]
+  today_orders_rsp:
     properties:
-      has_more:
-        type: boolean
-        description: "是否還有更多數據。<br/><br/>每次查詢最大訂單數量為 1000，如果查詢結果數量超過 1000，那麽 has_more 就會為 true"
-        required: true
       orders:
         type: "object[]"
         description: 訂單信息
@@ -147,6 +137,17 @@ definitions:
             "currency",
             "outside_rth",
             "remark",
+            "free_status",
+            "free_amount",
+            "free_currency",
+            "deductions_status",
+            "deductions_amount",
+            "deductions_currency",
+            "platform_deducted_status",
+            "platform_deducted_amount",
+            "platform_deducted_currency",
+            "history",
+            "charge_detail",
           ]
         properties:
           order_id:
@@ -254,9 +255,9 @@ definitions:
             description: "條件單觸發狀態<br/>
               當訂單不是條件單或條件單未觸發時, 觸發狀態為 NOT_USED<br/><br/>
               **可選值:**<br/>
-              `NOT_USED` - 未激活
-              `DEACTIVE` - 已失效
-              `ACTIVE` - 已激活
+              `NOT_USED` - 未激活<br/>
+              `DEACTIVE` - 已失效<br/>
+              `ACTIVE` - 已激活<br/>
               `RELEASED` - 已觸發"
           currency:
             type: "string"
@@ -274,3 +275,143 @@ definitions:
             type: "string"
             description: 備註
             required: true
+          free_status:
+            type: "string"
+            required: true
+            description: 免傭狀態<br/><br/>
+              **可選值:**<br/>
+              `None` - 無<br/>
+              `Calculated` - 免傭額待計算<br/>
+              `Pending` - 待免傭<br/>
+              `Ready` - 已免傭"
+          free_amount:
+            type: "string"
+            required: true
+            description: 免佣金額
+          free_currency:
+            type: "string"
+            required: true
+            description: 免傭貨幣
+          deductions_status:
+            type: "string"
+            required: true
+            description: 抵扣狀態/返現狀態<br/><br/>
+              **可選值:**<br/>
+              `NONE` - 待結算 <br/>
+              `NO_DATA` - 已結算無數據<br/>
+              `PENDING` - 已結算待發放<br/>
+              `DONE` - 已結算已發放"
+          deductions_amount:
+            type: "string"
+            required: true
+            description: 抵扣金額
+          deductions_currency:
+            type: "string"
+            required: true
+            description: 抵扣貨幣
+          platform_deducted_status:
+            type: "string"
+            required: true
+            description: 平臺費抵扣狀態/返現狀態<br/><br/>
+              **可選值:**<br/>
+              `NONE` - 待結算 <br/>
+              `NO_DATA` - 已結算無數據<br/>
+              `PENDING` - 已結算待發放<br/>
+              `DONE` - 已結算已發放"
+          platform_deducted_amount:
+            type: "string"
+            required: true
+            description: 平臺費抵扣金額
+          platform_deducted_currency:
+            type: "string"
+            required: true
+            description: 平臺費抵扣貨幣
+          history:
+            type: "object[]"
+            description: 訂單歷史明細
+            required:
+              - price
+              - quantity
+              - status
+              - msg
+              - time
+            properties:
+              price:
+                type: "string"
+                description: 成交展示成交價格，過期、撤單、拒絕等狀態展示提交價格
+                required: true
+              quantity:
+                type: "string"
+                description: 成交展示成交數量，過期、撤單、拒絕等狀態展示剩餘數量
+                required: true
+              status:
+                type: "string"
+                description: 訂單狀態
+                required: true
+              msg:
+                type: "string"
+                description: 成交或錯誤信息
+                required: true
+              time:
+                type: "string"
+                description: 發生時間
+                required: true
+          charge_detail:
+            type: "object"
+            description: 訂單費用
+            required:
+              - items
+              - total_amount
+              - currency
+            properties:
+              total_amount:
+                type: "string"
+                description: 全部費用
+                required: true
+              currency:
+                type: "string"
+                description: 結算貨幣
+                required: true
+              itime:
+                type: "object[]"
+                description: 訂單費用明細
+                required:
+                  - code
+                  - name
+                  - fees
+                properties:
+                  code:
+                    type: "string"
+                    description: 收費類別代碼<br/><br/>
+                      **可選值:**<br/>
+                      `UNKNOWN`<br/>
+                      `BROKER_FEES`<br/>
+                      `THIRD_FEES`"
+                  name:
+                    type: "string"
+                    description: 收費類別名稱
+                  fees:
+                    type: "object[]"
+                    description: 收費明細
+                    required:
+                      - code
+                      - name
+                      - amount
+                      - currency
+                    properties:
+                      code:
+                        type: "string"
+                        description: 收費代碼
+                        required: true
+                      name:
+                        type: "string"
+                        description: 收費名稱
+                        required: true
+                      amount:
+                        type: "string"
+                        description: 單項收費金額
+                        required: true
+                      currency:
+                        type: "string"
+                        description: 收費貨幣
+                        required: true
