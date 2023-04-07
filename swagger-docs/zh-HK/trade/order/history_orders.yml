@@ -243,7 +243,7 @@ definitions:
           trailing_percent:
             type: "string"
             required: true
-            description: "`TSLPPCT` / `TSMAPCT` 訂單跟蹤漲跌幅。<br/><br/>當訂單不是 `TSLPPCT` / `TSMAPCT` 訂單時為空字符串。"
+            description: "`TSLPPCT` / `TSMPCT` 訂單跟蹤漲跌幅。<br/><br/>當訂單不是 `TSLPPCT` / `TSMPCT` 訂單時為空字符串。"
           limit_offset:
             type: "string"
             required: true
