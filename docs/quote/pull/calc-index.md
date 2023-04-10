@@ -57,7 +57,7 @@ message SecurityCalcQuoteRequest {
 | ∟ capital_flow             | string   | 流入资金                                     |
 | ∟ amplitude                | string   | 振幅 (返回百分比数据，不包含`%`符号)         |
 | ∟ volume_ratio             | string   | 量比                                         |
-| ∟ pe_ttm_ratio             | string   | 市盈率（TTM）                         |
+| ∟ pe_ttm_ratio             | string   | 市盈率（TTM）                               |
 | ∟ pb_ratio                 | string   | 市净率                                       |
 | ∟ dividend_ratio_ttm       | string   | 股息率 (TTM)                                 |
 | ∟ five_day_change_rate     | string   | 五日涨幅 (返回百分比数据，不包含`%`符号)     |
