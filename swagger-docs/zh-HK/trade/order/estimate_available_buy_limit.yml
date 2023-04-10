@@ -71,9 +71,9 @@ definitions:
         properties:
           cash_max_qty:
             type: "string"
-            description: 現金可買數量
+            description: 現金可買數量，默認為空字符串
             required: true
           margin_max_qty:
             type: "string"
-            description: 融資可買數量
+            description: 融資可買數量，默認為空字符串
             required: true

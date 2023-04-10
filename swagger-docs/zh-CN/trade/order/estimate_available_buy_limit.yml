@@ -71,9 +71,9 @@ definitions:
         properties:
           cash_max_qty:
             type: "string"
-            description: 现金可买数量
+            description: 现金可买数量，默认为空字符串
             required: true
           margin_max_qty:
             type: "string"
-            description: 融资可买数量
+            description: 融资可买数量，默认为空字符串
             required: true

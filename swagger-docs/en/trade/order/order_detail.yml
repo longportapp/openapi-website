@@ -276,54 +276,56 @@ definitions:
           free_status:
             type: "string"
             required: true
-            description: Commission-free Status<br/><br/>
+            description: Commission-free Status, default value is None<br/><br/>
               **Enum Value:**<br/>
               `None` - None<br/>
               `Calculated` - Commission-free amount to be calculated<br/>
               `Pending` - Pending commission-free<br/>
-              `Ready` - Commission-free applied"
+              `Ready` - Commission-free applied
           free_amount:
             type: "string"
             required: true
-            description: Commission-free amount
+            description: Commission-free amount, default value is empty string.
           free_currency:
             type: "string"
             required: true
-            description: Commission-free currency
+            description: Commission-free currency, default value is empty string.
           deductions_status:
             type: "string"
             required: true
-            description: Deduction status/Cashback Status<br/><br/>
+            description:
+              Deduction status/Cashback Status, default value is NONE<br/><br/>
               **Enum Value:**<br/>
               `NONE` - Pending Settlement <br/>
               `NO_DATA` - Settled with no data<br/>
               `PENDING` - Settled and pending distribution<br/>
-              `DONE` - Settled and distributed"
+              `DONE` - Settled and distributed
           deductions_amount:
             type: "string"
             required: true
-            description: Deduction amount
+            description: Deduction amount, default value is empty string.
           deductions_currency:
             type: "string"
             required: true
-            description: Deduction currency
+            description: Deduction currency, default value is empty string.
           platform_deducted_status:
             type: "string"
             required: true
-            description: Platform fee deduction status/Cashback Status<br/><br/>
+            description:
+              Platform fee deduction status/Cashback Status, default value is NONE<br/><br/>
               **Enum Value:**<br/>
               `NONE` - Pending Settlement <br/>
               `NO_DATA` - Settled with no data<br/>
               `PENDING` - Settled and pending distribution<br/>
-              `DONE` - Settled and distributed"
+              `DONE` - Settled and distributed
           platform_deducted_amount:
             type: "string"
             required: true
-            description: Platform fee deduction amount
+            description: Platform fee deduction amount, default value is empty string.
           platform_deducted_currency:
             type: "string"
             required: true
-            description: Platform fee deduction currency
+            description: Platform fee deduction currency, default value is empty string.
           history:
             type: "object[]"
             description: Order history details
@@ -384,7 +386,7 @@ definitions:
                       **Enum Value:**<br/>
                       `UNKNOWN`<br/>
                       `BROKER_FEES`<br/>
-                      `THIRD_FEES`"
+                      `THIRD_FEES`
                   name:
                     type: "string"
                     description: Charge category name
