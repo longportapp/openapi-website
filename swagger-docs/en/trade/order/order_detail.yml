@@ -371,7 +371,7 @@ definitions:
             type: "string"
             description: Settlement currency
             required: true
-          itime:
+          items:
             type: "object[]"
             description: Order charge details
             required:

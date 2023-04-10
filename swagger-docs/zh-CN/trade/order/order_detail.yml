@@ -370,7 +370,7 @@ definitions:
             type: "string"
             description: 结算货币
             required: true
-          itime:
+          items:
             type: "object[]"
             description: 订单费用明细
             required:

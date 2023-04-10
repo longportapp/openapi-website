@@ -370,7 +370,7 @@ definitions:
             type: "string"
             description: 結算貨幣
             required: true
-          itime:
+          items:
             type: "object[]"
             description: 訂單費用明細
             required:
