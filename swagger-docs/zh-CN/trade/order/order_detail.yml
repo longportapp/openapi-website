@@ -278,7 +278,7 @@ definitions:
           free_status:
             type: "string"
             required: true
-            description: 免佣状态, 默认为 None<br/><br/>
+            description: 免佣状态，默认为 None<br/><br/>
               **可选值:**<br/>
               `None` - 无<br/>
               `Calculated` - 免佣额待计算<br/>
@@ -287,15 +287,15 @@ definitions:
           free_amount:
             type: "string"
             required: true
-            description: 免佣金额, 默认为空字符串
+            description: 免佣金额，默认为空字符串
           free_currency:
             type: "string"
             required: true
-            description: 免佣货币, 默认为空字符串
+            description: 免佣货币，默认为空字符串
           deductions_status:
             type: "string"
             required: true
-            description: 抵扣状态/返现状态, 默认为 NONE<br/><br/>
+            description: 抵扣状态/返现状态，默认为 NONE<br/><br/>
               **可选值:**<br/>
               `NONE` - 待结算 <br/>
               `NO_DATA` - 已结算无数据<br/>
@@ -304,15 +304,15 @@ definitions:
           deductions_amount:
             type: "string"
             required: true
-            description: 抵扣金额, 默认为空字符串
+            description: 抵扣金额，默认为空字符串
           deductions_currency:
             type: "string"
             required: true
-            description: 抵扣货币, 默认为空字符串
+            description: 抵扣货币，默认为空字符串
           platform_deducted_status:
             type: "string"
             required: true
-            description: 平台费抵扣状态/返现状态, 默认为 NONE<br/><br/>
+            description: 平台费抵扣状态/返现状态，默认为 NONE<br/><br/>
               **可选值:**<br/>
               `NONE` - 待结算 <br/>
               `NO_DATA` - 已结算无数据<br/>
@@ -321,11 +321,11 @@ definitions:
           platform_deducted_amount:
             type: "string"
             required: true
-            description: 平台费抵扣金额, 默认为空字符串
+            description: 平台费抵扣金额，默认为空字符串
           platform_deducted_currency:
             type: "string"
             required: true
-            description: 平台费抵扣货币, 默认为空字符串
+            description: 平台费抵扣货币，默认为空字符串
           history:
             type: "object[]"
             description: 订单历史明细
