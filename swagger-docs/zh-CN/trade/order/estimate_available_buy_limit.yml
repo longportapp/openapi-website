@@ -4,7 +4,7 @@ info:
   version: "v1"
   title: "预估最大购买数量"
 paths:
-  /v1/order/estimate/buy_limit:
+  /v1/trade/estimate/buy_limit:
     get:
       access: "交易权限"
       parameters:
@@ -63,17 +63,15 @@ paths:
         }
 definitions:
   estimate_available_buy_limit_rsp:
+    type: "object"
+    description: 预估最大购买数量
+    required: ["cash_max_qty", "margin_max_qty"]
     properties:
-      orders:
-        type: "object[]"
-        description: 预估最大购买数量
-        required: ["cash_max_qty", "margin_max_qty"]
-        properties:
-          cash_max_qty:
-            type: "string"
-            description: 现金可买数量，默认为空字符串
-            required: true
-          margin_max_qty:
-            type: "string"
-            description: 融资可买数量，默认为空字符串
-            required: true
+      cash_max_qty:
+        type: "string"
+        description: 现金可买数量，默认为空字符串
+        required: true
+      margin_max_qty:
+        type: "string"
+        description: 融资可买数量，默认为空字符串
+        required: true
