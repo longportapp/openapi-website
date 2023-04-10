@@ -71,9 +71,9 @@ definitions:
         properties:
           cash_max_qty:
             type: "string"
-            description: Cash available quantity
+            description: Cash available quantity, default value is empty string.
             required: true
           margin_max_qty:
             type: "string"
-            description: Margin available quantity
+            description: Margin available quantity, default value is empty string.
             required: true
