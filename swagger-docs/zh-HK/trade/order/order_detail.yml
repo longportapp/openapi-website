@@ -4,7 +4,7 @@ info:
   version: "v1"
   title: "訂單詳情"
 paths:
-  /v1/order/detail:
+  /v1/trade/order/detail:
     get:
       access: "交易權限"
       parameters:
