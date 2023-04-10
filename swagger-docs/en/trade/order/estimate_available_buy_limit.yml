@@ -63,17 +63,15 @@ paths:
         }
 definitions:
   estimate_available_buy_limit_rsp:
+    type: "object"
+    description: Estimated Maximum Purchase Quantity
+    required: ["cash_max_qty", "margin_max_qty"]
     properties:
-      orders:
-        type: "object[]"
-        description: Estimated Maximum Purchase Quantity
-        required: ["cash_max_qty", "margin_max_qty"]
-        properties:
-          cash_max_qty:
-            type: "string"
-            description: Cash available quantity, default value is empty string.
-            required: true
-          margin_max_qty:
-            type: "string"
-            description: Margin available quantity, default value is empty string.
-            required: true
+      cash_max_qty:
+        type: "string"
+        description: Cash available quantity, default value is empty string.
+        required: true
+      margin_max_qty:
+        type: "string"
+        description: Margin available quantity, default value is empty string.
+        required: true
