@@ -4,7 +4,7 @@ info:
   version: "v1"
   title: "Order Details"
 paths:
-  /v1/trade/order/detail:
+  /v1/trade/order:
     get:
       access: "Trading Permissions"
       parameters:
