@@ -1,7 +1,7 @@
 ---
-id: log_change
-title: Change Log
-slug: log_change
+id: changelog
+title: Changelog
+slug: changelog
 sidebar_position: 7
 ---
 
