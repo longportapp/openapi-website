@@ -1,7 +1,7 @@
 ---
-id: log_change
+id: changelog
 title: 更新日志
-slug: log_change
+slug: changelog
 sidebar_position: 7
 ---
 
