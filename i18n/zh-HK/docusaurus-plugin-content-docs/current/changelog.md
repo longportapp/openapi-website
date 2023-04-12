@@ -18,6 +18,11 @@ sidebar_position: 7
 - 更新標的基礎信息接口
   - 長連接 `Business Command：10` 響應增加 `board` 字段
 
+## 2022-07-14
+
+- 新增獲取保證金比例接口
+  - `GET /v1/risk/margin-ratio` 獲取保證金比例
+
 ## 2022-06-30
 
 - 新增獲取關注分組接口
@@ -35,8 +40,3 @@ sidebar_position: 7
 - 新增行情資金流接口
   - 長連接 `Business Command：24` 獲取標的當日資金流向
   - 長連接 `Business Command：25` 獲取標的當日資金分佈
-
-## 2022-07-14
-
-- 新增獲取保證金比例接口
-  - `GET /v1/risk/margin-ratio` 獲取保證金比例
