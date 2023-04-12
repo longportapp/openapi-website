@@ -5,6 +5,14 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2023-04-11
+
+- 新增订单详情查询接口
+  - `GET /v1/trade/order` 获取订单详情
+- 新增预估最大购买数量接口
+  - `GET /v1/trade/estimate/buy_limit` 获取预估最大购买数量接口
+- 美股期权添加市价单和条件单支持
+
 ## 2022-07-18
 
 - 更新标的基础信息接口

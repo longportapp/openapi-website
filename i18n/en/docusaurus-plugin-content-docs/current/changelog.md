@@ -5,6 +5,14 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2023-04-11
+
+- Added order details query interface
+  - 'GET /v1/trade/order' Get the order details
+- Added the Estimate Maximum Purchase Quantity interface
+  - 'GET /v1/trade/estimate/buy_limit' Get the estimated maximum purchase quantity
+- U.S. stock options add market order and condition order support
+
 ## 2022-07-18
 
 - Update security static info interface
