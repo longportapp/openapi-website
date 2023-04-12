@@ -5,10 +5,23 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2023-04-11
+
+- 新增订单详情查询接口
+  - `GET /v1/trade/order` 获取订单详情
+- 新增预估最大购买数量接口
+  - `GET /v1/trade/estimate/buy_limit` 获取预估最大购买数量接口
+- 美股期权添加市价单和条件单支持
+
 ## 2022-07-18
 
 - 更新标的基础信息接口
-  - 长连接 `Business Command：10` 响应增加 `board` 字段
+  - 长连接 `Business Command: 10` 响应增加 `board` 字段
+
+## 2022-07-14
+
+- 新增获取保证金比例接口
+  - `GET /v1/risk/margin-ratio` 获取保证金比例
 
 ## 2022-06-30
 
@@ -27,8 +40,3 @@ sidebar_position: 7
 - 新增行情资金流接口
   - 长连接 `Business Command：24` 获取标的当日资金流向
   - 长连接 `Business Command：25` 获取标的当日资金分布
-
-## 2022-07-14
-
-- 新增获取保证金比例接口
-  - `GET /v1/risk/margin-ratio` 获取保证金比例

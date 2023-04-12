@@ -5,11 +5,24 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2023-04-11
+
+- Added order details query interface
+  - 'GET /v1/trade/order' Get the order details
+- Added the Estimate Maximum Purchase Quantity interface
+  - 'GET /v1/trade/estimate/buy_limit' Get the estimated maximum purchase quantity
+- U.S. stock options add market order and condition order support
+
 ## 2022-07-18
 
 - Update security static info interface
   - Long connection `Business Command：10`, response add `board` fields
 
+## 2022-07-14
+
+- Add get stock margin ratio interface
+  - `GET /v1/risk/margin-ratio` Get stock margin ratio
+  
 ## 2022-06-30
 
 - Add get watched groups interface
@@ -28,7 +41,3 @@ sidebar_position: 7
   - Long connection `Business Command:24`, obtain the daily capital distribution of security
   - Long connection `Business Command:25`, obtain the daily capital flow intraday of security
 
-## 2022-07-14
-
-- Add get stock margin ratio interface
-  - `GET /v1/risk/margin-ratio` Get stock margin ratio
