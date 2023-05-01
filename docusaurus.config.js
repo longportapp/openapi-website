@@ -6,9 +6,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const openapiDomain = 'https://open.longportapp.com'
 const communityDomain = 'https://longportapp.com'
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'LongPort 开放平台',
+  title: 'LongPort OpenAPI',
   url: 'https://open.longportapp.com',
   baseUrl: '/',
   organizationName: 'longbridgeapp',
@@ -16,11 +17,15 @@ const config = {
   baseUrlIssueBanner: false,
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
   i18n,
   customFields: {
     isDev: process.env.STAGE === 'dev',
   },
-  favicon: 'https://pub.lbkrs.com/files/202107/35tULHe3n4Pp4EtA/logo.png',
+  favicon: 'https://pub.lbkrs.com/static/offline/202211/qohHsXzN9qtQ23ox/longport_favicon.png',
   plugins: [
     'docusaurus-plugin-sass',
     function docusaurusTailwindCss() {
@@ -91,7 +96,6 @@ const config = {
           showLastUpdateTime: true,
           sidebarCollapsed: false,
           sidebarCollapsible: false,
-          remarkPlugins: [require('mdx-mermaid')],
         },
         blog: false,
         theme: {
@@ -104,6 +108,16 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [
+        {
+          name: 'og:image',
+          content: 'https://pub.lbkrs.com/files/202211/sJswdGqSX1xDqrES/lonport-seo-img.png',
+        },
+        {
+          name: 'twitter:image',
+          content: 'https://pub.lbkrs.com/files/202211/sJswdGqSX1xDqrES/lonport-seo-img.png',
+        },
+      ],
       colorMode: {
         defaultMode: 'light',
         disableSwitch: true,
@@ -149,7 +163,10 @@ const config = {
             label: '市场',
             position: 'left',
           },
-
+          {
+            type: 'search',
+            position: 'right',
+          },
           {
             type: 'localeDropdown',
             position: 'right',
@@ -165,6 +182,35 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
         additionalLanguages: ['shell-session', 'http', 'protobuf', 'rust'],
+      },
+      algolia: {
+        // The application ID provided by Algolia
+        appId: 'E5GVH515OK',
+
+        // Public API key: it is safe to commit it
+        apiKey: '3152b4284f83241dede1baeb60fe7788',
+
+        indexName: 'open-longportapp',
+
+        // Optional: see doc section below
+        contextualSearch: true,
+
+        // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+        externalUrlRegex: 'external\\.com|domain\\.com',
+
+        // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
+        // replaceSearchResultPathname: {
+        //   from: '/docs/', // or as RegExp: /\/docs\//
+        //   to: '/',
+        // },
+
+        // Optional: Algolia search parameters
+        searchParameters: {},
+
+        // Optional: path for search page that enabled by default (`false` to disable it)
+        searchPagePath: 'search',
+
+        //... other Algolia params
       },
     }),
 }

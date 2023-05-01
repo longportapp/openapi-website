@@ -1,0 +1,77 @@
+swagger: "2.0"
+info:
+  description: "该接口用于港美股，窝轮，期权的预估最大购买数量"
+  version: "v1"
+  title: "预估最大购买数量"
+paths:
+  /v1/trade/estimate/buy_limit:
+    get:
+      access: "交易权限"
+      parameters:
+        - name: "symbol"
+          type: "string"
+          description: "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
+          required: true
+        - name: "order_type"
+          type: "string"
+          description: "[订单类型](../trade-definition#ordertype)"
+          required: true
+        - name: "price"
+          required: false
+          description: 预估下单价格，例如：`388.5`
+        - name: side
+          type: "string"
+          description: 买卖方向<br/><br/>
+            **可选值:**<br/>
+            `Buy` - 买入<br/>
+            `Sell` - 卖出 卖出只支持美股卖空查询
+          required: true
+        - name: currency
+          type: "string"
+          description: 结算货币
+          required: false
+        - name: order_id
+          type: "string"
+          description: 订单 ID，获取改单预估最大购买数量时必填
+          required: false
+      responses:
+        "200":
+          description: "获取预估最大购买数量"
+          schema:
+            $ref: "#/definitions/estimate_available_buy_limit_rsp"
+        "400":
+          description: "查询失败，请求参数错误。"
+      request_body:
+        type: "python"
+        value: |
+          from longbridge.openapi import TradeContext, Config, OrderStatus, OrderType, OrderSide
+
+          config = Config.from_env()
+          ctx = TradeContext(config)
+
+          resp = ctx.estimate_available_buy_limit(
+              symbol = "700.HK",
+              order_type = OrderType.LO,
+              side = OrderSide.Buy,
+          )
+          print(resp)
+      response_body:
+        {
+          "code": 0,
+          "message": "success",
+          "data": { "cash_max_qty": "100", "margin_max_qty": "100" },
+        }
+definitions:
+  estimate_available_buy_limit_rsp:
+    type: "object"
+    description: 预估最大购买数量
+    required: ["cash_max_qty", "margin_max_qty"]
+    properties:
+      cash_max_qty:
+        type: "string"
+        description: 现金可买数量，默认为空字符串
+        required: true
+      margin_max_qty:
+        type: "string"
+        description: 融资可买数量，默认为空字符串
+        required: true

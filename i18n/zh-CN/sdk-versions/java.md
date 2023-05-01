@@ -10,7 +10,7 @@
 <dependency>
   <groupId>io.github.longbridgeapp</groupId>
   <artifactId>openapi-sdk</artifactId>
-  <version>0.2.44</version>
+  <version>0.2.50</version>
 </dependency>
 ```
 

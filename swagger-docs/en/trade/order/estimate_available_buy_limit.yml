@@ -1,0 +1,77 @@
+swagger: "2.0"
+info:
+  description: "This API is used for estimating the maximum purchase quantity for Hong Kong and US stocks, warrants, and options."
+  version: "v1"
+  title: "Estimate Maximum Purchase Quantity"
+paths:
+  /v1/trade/estimate/buy_limit:
+    get:
+      access: "Trading Permission"
+      parameters:
+        - name: "symbol"
+          type: "string"
+          description: "Stock code, using ticker.region format, for example: `AAPL.US`"
+          required: true
+        - name: "order_type"
+          type: "string"
+          description: "[Order Type](../trade-definition#ordertype)"
+          required: true
+        - name: "price"
+          required: false
+          description: "Estimated order price, for example: `388.5`"
+        - name: side
+          type: "string"
+          description: Order side<br/><br/>
+            **Enum Value**<br/>
+            `Buy` - Buy<br/>
+            `Sell` - Sell (Short selling is only supported for US stocks)
+          required: true
+        - name: currency
+          type: "string"
+          description: Settlement currency
+          required: false
+        - name: order_id
+          type: "string"
+          description: Order ID, required when estimating the maximum purchase quantity for a modified order
+          required: false
+      responses:
+        "200":
+          description: "Estimate Maximum Purchase Quantity Success"
+          schema:
+            $ref: "#/definitions/estimate_available_buy_limit_rsp"
+        "400":
+          description: "The query failed with an error in the request parameter."
+      request_body:
+        type: "python"
+        value: |
+          from longbridge.openapi import TradeContext, Config, OrderStatus, OrderType, OrderSide
+
+          config = Config.from_env()
+          ctx = TradeContext(config)
+
+          resp = ctx.estimate_available_buy_limit(
+              symbol = "700.HK",
+              order_type = OrderType.LO,
+              side = OrderSide.Buy,
+          )
+          print(resp)
+      response_body:
+        {
+          "code": 0,
+          "message": "success",
+          "data": { "cash_max_qty": "100", "margin_max_qty": "100" },
+        }
+definitions:
+  estimate_available_buy_limit_rsp:
+    type: "object"
+    description: Estimated Maximum Purchase Quantity
+    required: ["cash_max_qty", "margin_max_qty"]
+    properties:
+      cash_max_qty:
+        type: "string"
+        description: Cash available quantity, default value is empty string.
+        required: true
+      margin_max_qty:
+        type: "string"
+        description: Margin available quantity, default value is empty string.
+        required: true

@@ -103,6 +103,7 @@ paths:
                     "trigger_price": "",
                     "trigger_status": "NOT_USED",
                     "updated_at": "1651644898",
+                    "remark": "",
                   },
                 ],
             },
@@ -145,6 +146,7 @@ definitions:
             "trigger_status",
             "currency",
             "outside_rth",
+            "remark",
           ]
         properties:
           order_id:
@@ -241,7 +243,7 @@ definitions:
           trailing_percent:
             type: "string"
             required: true
-            description: "`TSLPPCT` / `TSMAPCT` 訂單跟蹤漲跌幅。<br/><br/>當訂單不是 `TSLPPCT` / `TSMAPCT` 訂單時為空字符串。"
+            description: "`TSLPPCT` / `TSMPCT` 訂單跟蹤漲跌幅。<br/><br/>當訂單不是 `TSLPPCT` / `TSMPCT` 訂單時為空字符串。"
           limit_offset:
             type: "string"
             required: true
@@ -268,3 +270,7 @@ definitions:
               **可選值:**<br/>
               `RTH_ONLY` - 不允許盤前盤後<br/>
               `ANY_TIME` - 允許盤前盤後"
+          remark:
+            type: "string"
+            description: 備註
+            required: true

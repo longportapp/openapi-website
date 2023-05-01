@@ -1,24 +1,13 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "@tsconfig/docusaurus/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "types": [
-      "node",
-      "@docusaurus/module-type-aliases",
-      "@docusaurus/theme-classic"
-    ],
+    "types": ["node", "@docusaurus/module-type-aliases", "@docusaurus/theme-classic"],
     "paths": {
-      "@site/*": [
-        "./*"
-      ]
+      "@site/*": ["./*"]
     },
     "jsx": "react",
     "allowSyntheticDefaultImports": true
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.js",
-    "**/*.jsx",
-  ]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 }

@@ -35,7 +35,7 @@ paths:
         - name: trailing_percent
           required: false
           description: Trailing percent<br/><br/>
-            `TSLPPCT` / `TSMAPCT` Order Required
+            `TSLPPCT` / `TSMPCT` Order Required
         - name: remark
           required: false
           description: "Remark (Maximum 64 characters)"

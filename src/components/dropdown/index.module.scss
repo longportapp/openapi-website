@@ -13,7 +13,6 @@ $border-color: #eeeeee;
     transform: translateY(0);
     opacity: 1;
   }
-  
 }
 
 :local(.dropdown) {
@@ -26,16 +25,12 @@ $border-color: #eeeeee;
     &:hover {
       background-color: var(--dropdown-hover-bg);
     }
-
   }
   :global(.content) {
-    @apply hidden absolute right-0 py-2 bg-white rounded-lg;
+    @apply hidden absolute right-0 bg-white rounded w-[140px] shadow-md border border-solid border-gray-200;
 
     top: calc(100% + 4px);
-    width: max-content;
-    border: 1px solid $border-color;
-    box-shadow: 0 0 #000000, 0 0 #000000, 0 0 #000000, 0 0 #000000, 0 0 #000000;
-    animation: translate .15s;
+    animation: translate 0.15s;
     &:global(.content-visible) {
       @apply block;
     }
@@ -43,10 +38,10 @@ $border-color: #eeeeee;
   :global(.dropdown-menu__item) {
     @apply p-2 cursor-pointer;
     &:hover {
-      background-color: var(--dropdown-hover-bg);
+      @apply bg-gray-100;
     }
     &:global(.dropdown-menu__item--selected) {
-      color: var( --dropdown-brand-color);
+      color: var(--dropdown-brand-color);
     }
   }
 }

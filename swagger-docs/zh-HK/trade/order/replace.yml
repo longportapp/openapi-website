@@ -35,7 +35,7 @@ paths:
         - name: trailing_percent
           required: false
           description: 跟蹤漲跌幅<br/><br/>
-            `TSLPPCT` / `TSMAPCT` 訂單必填
+            `TSLPPCT` / `TSMPCT` 訂單必填
         - name: remark
           required: false
           description: "備註 (最大 64 字符)"

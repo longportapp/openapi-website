@@ -1,0 +1,77 @@
+swagger: "2.0"
+info:
+  description: "該接口用於港美股，窩輪，期權的預估最大購買數量"
+  version: "v1"
+  title: "預估最大購買數量"
+paths:
+  /v1/trade/estimate/buy_limit:
+    get:
+      access: "交易權限"
+      parameters:
+        - name: "symbol"
+          type: "string"
+          description: "股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US`"
+          required: true
+        - name: "order_type"
+          type: "string"
+          description: "[訂單類型](../trade-definition#ordertype)"
+          required: true
+        - name: "price"
+          required: false
+          description: 預估下單價格，例如：`388.5`
+        - name: side
+          type: "string"
+          description: 買賣方向<br/><br/>
+            **可選值:**<br/>
+            `Buy` - 買入<br/>
+            `Sell` - 賣出 賣出只支持美股賣空查詢
+          required: true
+        - name: currency
+          type: "string"
+          description: 結算貨幣
+          required: false
+        - name: order_id
+          type: "string"
+          description: 訂單 ID，獲取改單預估最大購買數量時必填
+          required: false
+      responses:
+        "200":
+          description: "獲取預估最大購買數量"
+          schema:
+            $ref: "#/definitions/estimate_available_buy_limit_rsp"
+        "400":
+          description: "查詢失敗，請求參數錯誤。"
+      request_body:
+        type: "python"
+        value: |
+          from longbridge.openapi import TradeContext, Config, OrderStatus, OrderType, OrderSide
+
+          config = Config.from_env()
+          ctx = TradeContext(config)
+
+          resp = ctx.estimate_available_buy_limit(
+              symbol = "700.HK",
+              order_type = OrderType.LO,
+              side = OrderSide.Buy,
+          )
+          print(resp)
+      response_body:
+        {
+          "code": 0,
+          "message": "success",
+          "data": { "cash_max_qty": "100", "margin_max_qty": "100" },
+        }
+definitions:
+  estimate_available_buy_limit_rsp:
+    type: "object"
+    description: 預估最大購買數量
+    required: ["cash_max_qty", "margin_max_qty"]
+    properties:
+      cash_max_qty:
+        type: "string"
+        description: 現金可買數量，默認為空字符串
+        required: true
+      margin_max_qty:
+        type: "string"
+        description: 融資可買數量，默認為空字符串
+        required: true

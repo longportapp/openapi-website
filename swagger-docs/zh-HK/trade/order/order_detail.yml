@@ -1,0 +1,419 @@
+swagger: "2.0"
+info:
+  description: "該接口用於訂單詳情查詢"
+  version: "v1"
+  title: "訂單詳情"
+paths:
+  /v1/trade/order:
+    get:
+      access: "交易權限"
+      parameters:
+        - name: "order_id"
+          type: "string"
+          description: "訂單 ID，用於指定訂單 ID 查詢，例如：`701276261045858304`"
+          required: true
+      responses:
+        "200":
+          description: "訂單詳情查詢成功"
+          schema:
+            $ref: "#/definitions/order_detail_rsp"
+        "400":
+          description: "查詢失敗，請求參數錯誤。"
+      request_body:
+        type: "python"
+        value: |
+          from longbridge.openapi import TradeContext, Config
+
+          config = Config.from_env()
+          ctx = TradeContext(config)
+
+          resp = ctx.order_detail(
+              order_id = "701276261045858304",
+          )
+          print(resp)
+      response_body:
+        {
+          "code": 0,
+          "message": "success",
+          "data":
+            {
+              "order_id": "828940451093708800",
+              "status": "FilledStatus",
+              "stock_name": "蘋果",
+              "quantity": "10",
+              "executed_quantity": "10",
+              "price": "200.000",
+              "executed_price": "164.660",
+              "submitted_at": "1680863604",
+              "side": "Buy",
+              "symbol": "AAPL.US",
+              "order_type": "LO",
+              "last_done": "164.660",
+              "trigger_price": "0.0000",
+              "msg": "",
+              "tag": "Normal",
+              "time_in_force": "Day",
+              "expire_date": "2023-04-10",
+              "updated_at": "1681113000",
+              "trigger_at": "0",
+              "trailing_amount": "",
+              "trailing_percent": "",
+              "limit_offset": "",
+              "trigger_status": "NOT_USED",
+              "outside_rth": "ANY_TIME",
+              "currency": "USD",
+              "remark": "1680863603.927165",
+              "free_status": "None",
+              "free_amount": "",
+              "free_currency": "",
+              "deductions_status": "NONE",
+              "deductions_amount": "",
+              "deductions_currency": "",
+              "platform_deducted_status": "NONE",
+              "platform_deducted_amount": "",
+              "platform_deducted_currency": "",
+              "history":
+                [
+                  {
+                    "price": "164.6600",
+                    "quantity": "10",
+                    "status": "FilledStatus",
+                    "msg": "Execution of 10",
+                    "time": "1681113000",
+                  },
+                  {
+                    "price": "200.0000",
+                    "quantity": "10",
+                    "status": "NewStatus",
+                    "msg": "",
+                    "time": "1681113000",
+                  },
+                ],
+              "charge_detail":
+                {
+                  "items":
+                    [
+                      { "code": "BROKER_FEES", "name": "收費明細", "fees": [] },
+                      {
+                        "code": "THIRD_FEES",
+                        "name": "第三方收費明細",
+                        "fees": [],
+                      },
+                    ],
+                  "total_amount": "0",
+                  "currency": "USD",
+                },
+            },
+        }
+definitions:
+  order_detail_rsp:
+    type: "object"
+    description: 訂單信息
+    required:
+      [
+        "order_id",
+        "status",
+        "stock_name",
+        "quantity",
+        "executed_quantity",
+        "price",
+        "executed_price",
+        "submitted_at",
+        "side",
+        "symbol",
+        "order_type",
+        "last_done",
+        "trigger_price",
+        "msg",
+        "tag",
+        "time_in_force",
+        "expire_date",
+        "updated_at",
+        "trigger_at",
+        "trailing_amount",
+        "trailing_percent",
+        "limit_offset",
+        "trigger_status",
+        "currency",
+        "outside_rth",
+        "remark",
+        "free_status",
+        "free_amount",
+        "free_currency",
+        "deductions_status",
+        "deductions_amount",
+        "deductions_currency",
+        "platform_deducted_status",
+        "platform_deducted_amount",
+        "platform_deducted_currency",
+        "history",
+        "charge_detail",
+      ]
+    properties:
+      order_id:
+        type: "string"
+        description: 訂單 ID
+        required: true
+      status:
+        type: "string"
+        description: "[訂單狀態](../trade-definition#orderstatus)"
+        required: true
+      stock_name:
+        type: "string"
+        description: 股票名稱
+        required: true
+      quantity:
+        type: "string"
+        description: 下單數量
+        required: true
+      executed_quantity:
+        type: "string"
+        description: 成交數量。<br/><br/>當訂單未成交時為 0
+      price:
+        type: "string"
+        description: 下單價格。<br/><br/>當市價條件單未觸發時為空字符串
+        required: true
+      executed_price:
+        type: "string"
+        description: 成交價。<br/><br/>當訂單未成交時為 0
+      submitted_at:
+        type: "string"
+        description: 下單時間
+        required: true
+      side:
+        type: "string"
+        description: "
+          買賣方向<br/><br/>
+          **可選值:**<br/>
+          `Buy` - 買入<br/>
+          `Sell` - 賣出"
+        required: true
+      symbol:
+        type: "string"
+        description: "股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US`"
+        required: true
+      order_type:
+        type: "string"
+        description: "[訂單類型](../trade-definition#ordertype)"
+        required: true
+      last_done:
+        type: "string"
+        description: 最近成交價格。<br/><br/>當訂單未成交時為空字符串
+        required: true
+      trigger_price:
+        type: "string"
+        description: "`LIT` / `MIT` 訂單觸發價格。<br/><br/>當訂單不是 `LIT` / `MIT` 訂單為空字符串"
+        required: true
+      msg:
+        type: "string"
+        description: 拒絕信息或備註，默認為空字符串。
+        required: true
+      tag:
+        type: "string"
+        description: "訂單標記<br/><br/>
+          **可選值:**<br/>
+          `Normal` - 普通訂單<br/>
+          `GTC` - 長期單<br/>
+          `Grey` - 暗盤單"
+        required: true
+      time_in_force:
+        type: "string"
+        description: "
+          訂單有效期類型<br/><br/>
+          **可選值:**<br/>
+          `Day` - 當日有效<br/>
+          `GTC` - 撤單前有效<br/>
+          `GTD` - 到期前有效"
+        required: true
+      expire_date:
+        type: "string"
+        required: true
+        description:
+          "長期單過期時間，格式為 `YYYY-MM-DD`, 例如：`2022-12-05。<br/><br/>
+          不是長期單時，默認為空字符串。"
+      updated_at:
+        type: "string"
+        required: true
+        description: 最近更新時間，格式為時間戳 (秒)，默認為 0。
+      trigger_at:
+        type: "string"
+        required: true
+        description: 條件單觸發時間，格式為時間戳 (秒)，默認為 0。
+      trailing_amount:
+        type: "string"
+        required: true
+        description: "`TSLPAMT` / `TSMAMT` 訂單跟蹤金額。<br/><br/>當訂單不是 `TSLPAMT` / `TSMAMT` 訂單時為空字符串。"
+      trailing_percent:
+        type: "string"
+        required: true
+        description: "`TSLPPCT` / `TSMPCT` 訂單跟蹤漲跌幅。<br/><br/>當訂單不是 `TSLPPCT` / `TSMPCT` 訂單時為空字符串。"
+      limit_offset:
+        type: "string"
+        required: true
+        description: "`TSLPAMT` / `TSLPPCT` 訂單指定價差。<br/><br/>當訂單不是 `TSLPAMT` / `TSLPPCT` 訂單時為空字符串。"
+      trigger_status:
+        type: "string"
+        required: true
+        description: "條件單觸發狀態<br/>
+          當訂單不是條件單或條件單未觸發時, 觸發狀態為 NOT_USED<br/><br/>
+          **可選值:**<br/>
+          `NOT_USED` - 未激活<br/>
+          `DEACTIVE` - 已失效<br/>
+          `ACTIVE` - 已激活<br/>
+          `RELEASED` - 已觸發"
+      currency:
+        type: "string"
+        description: 結算貨幣
+        required: true
+      outside_rth:
+        type: "string"
+        required: true
+        description: 是否允許盤前盤後<br/>
+          當訂單不是美股時, 默認為 UnknownOutsideRth<br/><br/>
+          **可選值:**<br/>
+          `RTH_ONLY` - 不允許盤前盤後<br/>
+          `ANY_TIME` - 允許盤前盤後
+      remark:
+        type: "string"
+        description: 備註
+        required: true
+      free_status:
+        type: "string"
+        required: true
+        description: 免傭狀態，默認為 None<br/><br/>
+          **可選值:**<br/>
+          `None` - 無<br/>
+          `Calculated` - 免傭額待計算<br/>
+          `Pending` - 待免傭<br/>
+          `Ready` - 已免傭
+      free_amount:
+        type: "string"
+        required: true
+        description: 免佣金額，默認為空字符串
+      free_currency:
+        type: "string"
+        required: true
+        description: 免傭貨幣，默認為空字符串
+      deductions_status:
+        type: "string"
+        required: true
+        description: 抵扣狀態/返現狀態，默認為 NONE<br/><br/>
+          **可選值:**<br/>
+          `NONE` - 待結算 <br/>
+          `NO_DATA` - 已結算無數據<br/>
+          `PENDING` - 已結算待發放<br/>
+          `DONE` - 已結算已發放
+      deductions_amount:
+        type: "string"
+        required: true
+        description: 抵扣金額，默認為空字符串
+      deductions_currency:
+        type: "string"
+        required: true
+        description: 抵扣貨幣，默認為空字符串
+      platform_deducted_status:
+        type: "string"
+        required: true
+        description: 平臺費抵扣狀態/返現狀態，默認為 NONE<br/><br/>
+          **可選值:**<br/>
+          `NONE` - 待結算 <br/>
+          `NO_DATA` - 已結算無數據<br/>
+          `PENDING` - 已結算待發放<br/>
+          `DONE` - 已結算已發放
+      platform_deducted_amount:
+        type: "string"
+        required: true
+        description: 平臺費抵扣金額，默認為空字符串
+      platform_deducted_currency:
+        type: "string"
+        required: true
+        description: 平臺費抵扣貨幣，默認為空字符串
+      history:
+        type: "object[]"
+        description: 訂單歷史明細
+        required:
+          - price
+          - quantity
+          - status
+          - msg
+          - time
+        properties:
+          price:
+            type: "string"
+            description: 成交展示成交價格，過期、撤單、拒絕等狀態展示提交價格
+            required: true
+          quantity:
+            type: "string"
+            description: 成交展示成交數量，過期、撤單、拒絕等狀態展示剩餘數量
+            required: true
+          status:
+            type: "string"
+            description: 訂單狀態
+            required: true
+          msg:
+            type: "string"
+            description: 成交或錯誤信息
+            required: true
+          time:
+            type: "string"
+            description: 發生時間
+            required: true
+      charge_detail:
+        type: "object"
+        description: 訂單費用
+        required:
+          - items
+          - total_amount
+          - currency
+        properties:
+          total_amount:
+            type: "string"
+            description: 全部費用
+            required: true
+          currency:
+            type: "string"
+            description: 結算貨幣
+            required: true
+          items:
+            type: "object[]"
+            description: 訂單費用明細
+            required:
+              - code
+              - name
+              - fees
+            properties:
+              code:
+                type: "string"
+                description: 收費類別代碼<br/><br/>
+                  **可選值:**<br/>
+                  `UNKNOWN`<br/>
+                  `BROKER_FEES`<br/>
+                  `THIRD_FEES`
+              name:
+                type: "string"
+                description: 收費類別名稱
+              fees:
+                type: "object[]"
+                description: 收費明細
+                required:
+                  - code
+                  - name
+                  - amount
+                  - currency
+                properties:
+                  code:
+                    type: "string"
+                    description: 收費代碼
+                    required: true
+                  name:
+                    type: "string"
+                    description: 收費名稱
+                    required: true
+                  amount:
+                    type: "string"
+                    description: 單項收費金額
+                    required: true
+                  currency:
+                    type: "string"
+                    description: 收費貨幣
+                    required: true

@@ -18,7 +18,7 @@ import TabItem from '@theme/TabItem';
 - WebSocket Quote - `wss://openapi-quote.longportapp.com`
 - WebSocket Trade - `wss://openapi-trade.longportapp.com`
 
-:::tip
+:::info
 中国大陆地区访问，建议采用 `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn` 以提升访问速度。
 :::
 
