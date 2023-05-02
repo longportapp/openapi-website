@@ -188,8 +188,9 @@ const config = {
         appId: 'E5GVH515OK',
 
         // Public API key: it is safe to commit it
-        apiKey: '3152b4284f83241dede1baeb60fe7788',
+        apiKey: '06b2d0933abc228a5979d16d1af26c0b',
 
+        // 默认 index 是简体中文，其它语言需要动态切 indexName，逻辑在 SearchBar.tsx
         indexName: 'open-longportapp',
 
         // Optional: see doc section below
