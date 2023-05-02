@@ -188,16 +188,13 @@ const config = {
         appId: 'E5GVH515OK',
 
         // Public API key: it is safe to commit it
-        apiKey: '3152b4284f83241dede1baeb60fe7788',
+        apiKey: '06b2d0933abc228a5979d16d1af26c0b',
 
+        // 默认 index 是简体中文，其它语言需要动态切 indexName，逻辑在 SearchBar.tsx
         indexName: 'open-longportapp',
 
         // Optional: see doc section below
         contextualSearch: true,
-
-        // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
-        externalUrlRegex: 'external\\.com|domain\\.com',
-
         // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
         // replaceSearchResultPathname: {
         //   from: '/docs/', // or as RegExp: /\/docs\//

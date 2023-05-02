@@ -19,7 +19,7 @@ $border-color: #eeeeee;
   --dropdown-hover-bg: #{$hover-bg};
   --dropdown-border-color: #{$border-color};
   --dropdown-brand-color: #{$brand-color};
-  @apply relative text-sm;
+  @apply relative text-sm mr-[50px] md:mr-auto;
   :global(.trigger) {
     @apply cursor-pointer py-1 px-2 rounded-full text-base font-medium;
     &:hover {
