@@ -136,7 +136,7 @@ const config = {
             to: openapiDomain,
             position: 'left',
             target: '_self',
-            label: 'Developer',
+            label: '开发者认证',
             activeBaseRegex: '^/$',
           },
           {
@@ -148,19 +148,19 @@ const config = {
           {
             to: '/docs',
             activeBasePath: '/docs',
-            label: 'Docs',
+            label: '文档',
             position: 'left',
           },
           {
             to: communityDomain,
-            label: 'LongPort',
+            label: '社区',
             target: '_self',
             position: 'left',
           },
           {
             to: `${communityDomain}/markets`,
             target: '_self',
-            label: 'Market',
+            label: '市场',
             position: 'left',
           },
 
