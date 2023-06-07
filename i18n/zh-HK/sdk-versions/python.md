@@ -1,6 +1,6 @@
 ## LongPort OpenAPI SDK for Python
 
-[https://github.com/longbridgeapp/openapi-python](https://github.com/longbridgeapp/openapi-python)
+[https://github.com/longbridgeapp/openapi-sdk](https://github.com/longbridgeapp/openapi-sdk)
 
 ### 安裝 SDK
 
