@@ -25,6 +25,8 @@ We've tried to make editing an existing, public file as simple as possible.
 
 1. Using Markdown language, make your changes to the file. For info about how to edit content using Markdown, see the GitHub's [Mastering Markdown](https://guides.github.com/features/mastering-markdown/) documentation.
 
+   If your Longbridge staff, please reading and following the [Longbridge Writing Style Guide](https://longbridge.feishu.cn/wiki/wikcnqOEWHe43bdSLMP0S42vvvg) and the [OpenAPI Writing Guide](https://longbridge.feishu.cn/wiki/wikcnb0RtZ8OEuAodGBXaOL6Nxh).
+
 1. Make your suggested change, and then select **Preview changes** to make sure it looks correct.
 
    ![SCR-20230629-jov](https://github.com/longbridgeapp/openapi-website/assets/5518/47c5621a-64c3-4d75-bbc3-ed9aa8289d6a)
@@ -42,6 +44,48 @@ We've tried to make editing an existing, public file as simple as possible.
 1. Select **Create pull request** again to actually submit the pull request.
 
    The pull request is sent to the writer of the topic and your edits are reviewed. If your request is accepted, updates are published to their respective article.
+
+## Swagger Documentation
+
+There have a lot of Swagger documentation in this project for describe our API, you can find them in `swagger-docs` directory.
+
+[Swagger Editor](https://editor.swagger.io) is a tool can help us to edit and preview Swagger documentation. You can editing the document in the Swagger Editor, and then copy the document to `swagger-docs` directory.
+
+And please following the [Swagger Specification](https://swagger.io/specification/).
+
+## Editing documents locally
+
+> NOTE: We recommend using [Visual Studio Code](https://code.visualstudio.com/) to develop. This project comes with `.vscode` built-in VS Code plugins and configuration recommendations. Writing with VS Code can start the automatic formatting function.
+
+If you want to edit the documentation locally, you can follow the steps below.
+
+```shell
+$ yarn
+
+# Start docusaurus server
+$ yarn dev
+
+# Listening swagger to markdown convert
+$ yarn dev:swagger
+```
+
+### File structure
+
+```bash
+.
+├── README.md
+├── docs // All documentation in here
+├── swagger-docs // All swagger documentation
+├── templates // Template for Swagger to Markdown
+├── i18n // I18n translation files, when you change any files in `docs`, you need to update the translation files.
+├── src // Documentation website source code.
+├── convert-md.js // Script for convert Swagger to Markdown.
+├── sidebars.js // For describe the documentation sidebar.
+├── docusaurus.config.js // Documentation website contributions.
+├── tsconfig.json
+├── package.json
+└── yarn.lock
+```
 
 ## Resources
 
