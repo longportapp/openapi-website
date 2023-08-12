@@ -1,0 +1,29 @@
+swagger: "2.0"
+info:
+  description: "Delete watched group"
+  version: "v1"
+  title: "Delete watched group"
+paths:
+  /v1/watchlist/groups:
+    delete:
+      access:
+      parameters:
+        - name: "id"
+          type: "integer"
+          description: "Group ID"
+          required: true
+        - name: "purge"
+          type: "boolean"
+          description: "Whether to clear the securities under the group"
+          required: true
+
+      responses:
+        "200":
+          description: "Success"
+        "500":
+          description: "Internal error"
+      request_body:
+        type: "python"
+        value: |
+
+      response_body: { "code": 0 }

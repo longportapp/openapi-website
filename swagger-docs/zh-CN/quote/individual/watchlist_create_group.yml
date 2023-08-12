@@ -1,0 +1,35 @@
+swagger: "2.0"
+info:
+  description: "创建关注分组"
+  version: "v1"
+  title: "创建关注分组"
+paths:
+  /v1/watchlist/groups:
+    post:
+      access:
+      parameters:
+        - name: "name"
+          type: "string"
+          description: "分组名称"
+          required: true
+
+      responses:
+        "200":
+          description: "返回成功"
+          schema:
+            $ref: "#/definitions/create_group_response"
+        "500":
+          description: "内部错误"
+      request_body:
+        type: "python"
+        value: |
+
+      response_body: { "code": 0, "data": { "id": 10086 } }
+
+definitions:
+  create_group_response:
+    properties:
+      id:
+        type: "integer"
+        description: 分组 ID
+        required: true

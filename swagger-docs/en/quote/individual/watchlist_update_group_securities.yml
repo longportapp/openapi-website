@@ -1,0 +1,29 @@
+swagger: "2.0"
+info:
+  description: "Update securities under the watched group"
+  version: "v1"
+  title: "Update securities under the watched group"
+paths:
+  /v1/watchlist/group_securities:
+    put:
+      access:
+      parameters:
+        - name: "id"
+          type: "integer"
+          description: "Group ID"
+          required: true
+        - name: "securities"
+          type: "string[]"
+          description: "securities list"
+          required: true
+
+      responses:
+        "200":
+          description: "Success"
+        "500":
+          description: "Internal error"
+      request_body:
+        type: "python"
+        value: |
+
+      response_body: { "code": 0 }

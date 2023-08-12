@@ -1,0 +1,29 @@
+swagger: "2.0"
+info:
+  description: "刪除關註分組"
+  version: "v1"
+  title: "刪除關註分組"
+paths:
+  /v1/watchlist/groups:
+    delete:
+      access:
+      parameters:
+        - name: "id"
+          type: "integer"
+          description: "分組 ID"
+          required: true
+        - name: "purge"
+          type: "boolean"
+          description: "是否清除分組下的股票"
+          required: true
+
+      responses:
+        "200":
+          description: "返回成功"
+        "500":
+          description: "內部錯誤"
+      request_body:
+        type: "python"
+        value: |
+
+      response_body: { "code": 0 }

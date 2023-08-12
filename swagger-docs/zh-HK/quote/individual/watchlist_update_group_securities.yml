@@ -1,0 +1,29 @@
+swagger: "2.0"
+info:
+  description: "更新關註分組下的股票"
+  version: "v1"
+  title: "更新關註分組下的股票"
+paths:
+  /v1/watchlist/group_securities:
+    put:
+      access:
+      parameters:
+        - name: "id"
+          type: "integer"
+          description: "分組 ID"
+          required: true
+        - name: "securities"
+          type: "string[]"
+          description: "股票列表"
+          required: true
+
+      responses:
+        "200":
+          description: "返回成功"
+        "500":
+          description: "內部錯誤"
+      request_body:
+        type: "python"
+        value: |
+
+      response_body: { "code": 0 }
