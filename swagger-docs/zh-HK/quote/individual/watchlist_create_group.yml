@@ -10,14 +10,12 @@ paths:
       parameters:
         - name: "name"
           type: "string"
-          in: body
           description: "分組名稱，例如 `信息產業組`"
           required: true
         - name: "securities"
           type: "string[]"
-          in: body
-          description: 股票列表，例如 `["BABA.US","AAPL.US"]`<br>
-            分組下股票的展示順序，與此列表的順序壹致<br>
+          description: 股票列表，例如 `["BABA.US","AAPL.US"]`<br />
+            分組下股票的展示順序，與此列表的順序壹致<br />
             如果不傳此參數，則創建壹個空的分組
           required: false
 

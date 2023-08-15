@@ -16,8 +16,8 @@ paths:
         - name: "purge"
           type: "boolean"
           in: query
-          description: "是否清除分組下的股票<br>
-            為 `true`，則此分組下的股票將被取消關註<br>
+          description: "是否清除分組下的股票<br />
+            為 `true`，則此分組下的股票將被取消關註<br />
             為 `false`，則此分組下的股票會保留在`全部`分組中"
           required: true
 

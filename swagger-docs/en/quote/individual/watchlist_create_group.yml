@@ -10,12 +10,10 @@ paths:
       parameters:
         - name: "name"
           type: "string"
-          in: body
           description: "Group name, for example `Information Technology Group`. "
           required: true
         - name: "securities"
           type: "string[]"
-          in: body
           description: 'Security list, for example `["BABA.US", "AAPL.US"]`.
             Display order of securities in the group, in the same order as this list.
             If this parameter is not passed, create an empty group. '
