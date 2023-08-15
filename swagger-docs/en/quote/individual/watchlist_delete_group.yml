@@ -16,7 +16,7 @@ paths:
         - name: "purge"
           type: "boolean"
           in: query
-          description: "Whether to clear the securities under the group. if not, securities will be displayed in the all group"
+          description: "Whether to clear the securities under the group. If not, the securities will be displayed in the all group."
           required: true
 
       responses:
