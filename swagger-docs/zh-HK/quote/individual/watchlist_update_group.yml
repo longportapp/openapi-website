@@ -24,16 +24,16 @@ paths:
           required: false
         - name: "mode"
           type: "string"
-          description:
-            '操作方法，可選值為 `add` | `update` | `remove`<br /><br />
-
+          description: '操作方法
+            **可選值:**<br />
+            `add` - 添加<br />
+            `update` - 更新<br />
+            `remove` - 移除<br /><br />
             選 `add` 時，將上面列表中的股票依序添加到此分組中<br /><br />
-
             選 `update` 時，將上面列表中的股票全量覆蓋此分組下的股票<br />
             假如原來分組中的股票為 `APPL.US, BABA.US, TSLA.US`，使用 `["BABA.US","AAPL.US","MSFT.US"]`
             更新後變為 `["BABA.US","AAPL.US","MSFT.US"]`，
             對比之前，移除了 `TSLA.US`，添加了 `MSFT.US`，`BABA.US,AAPL.US` 調整了順序<br /><br />
-
             選 `remove` 時，將上面列表中的股票從此分組中移除'
           required: false
 
