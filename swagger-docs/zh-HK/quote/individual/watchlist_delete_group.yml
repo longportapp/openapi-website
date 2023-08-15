@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
-  description: "刪除關註分組"
+  description: "刪除自選股分組"
   version: "v1"
-  title: "刪除關註分組"
+  title: "刪除自選股分組"
 paths:
   /v1/watchlist/groups:
     delete:
@@ -11,12 +11,14 @@ paths:
         - name: "id"
           type: "integer"
           in: query
-          description: "分組 ID"
+          description: "分組 ID，例如 `10086`"
           required: true
         - name: "purge"
           type: "boolean"
           in: query
-          description: "是否清除分組下的股票。如果不清除，股票會展示在全部分組"
+          description: "是否清除分組下的股票<br>
+            為 `true`，則此分組下的股票將被取消關註<br>
+            為 `false`，則此分組下的股票會保留在`全部`分組中"
           required: true
 
       responses:

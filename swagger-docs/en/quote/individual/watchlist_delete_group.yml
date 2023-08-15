@@ -11,12 +11,14 @@ paths:
         - name: "id"
           type: "integer"
           in: query
-          description: "Group ID"
+          description: "Group ID, for example `10086`. "
           required: true
         - name: "purge"
           type: "boolean"
           in: query
-          description: "Whether to clear the securities under the group. If not, the securities will be displayed in the all group."
+          description: "Whether to clear the securities in the group.
+            If set to `true`, the securities in the group will be unfollowed.
+            If set to `false`, the securities in the group will remain in the `All` group. "
           required: true
 
       responses:

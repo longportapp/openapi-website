@@ -11,17 +11,35 @@ paths:
         - name: "id"
           type: "integer"
           in: body
-          description: "Group ID"
+          description: "Group ID, for example `10086`. "
           required: true
         - name: "name"
           type: "string"
           in: body
-          description: "Group name. No update if not passed."
+          description:
+            "Group name, for example `Information Technology Group`. <br>
+            If this parameter is not passed, the group name will not be updated. "
           required: false
         - name: "securities"
           type: "string[]"
           in: body
-          description: "Securities list under the group. No update if not passed. The order in the list will be used as the presentation order. Securities in the group that are not in this list will be removed from watch list"
+          description: 'Security list, for example `["BABA.US", "AAPL.US"]`.<br>
+            Combined with the `mode` parameter below, it can be used to add securities, remove securities, and sort the watchlist. '
+          required: false
+        - name: "mode"
+          type: "string"
+          in: body
+          description:
+            'Operation method, optional values are `add` | `update` | `remove`.<br><br>
+
+            When selecting `add`, the securities in the above list will be added to this group in order.<br><br>
+
+            When selecting `update`, the securities in the above list will completely replace the securities in this group.<br>
+            For example, if the original group contains `APPL.US, BABA.US, TSLA.US`,
+            and it is updated with `["BABA.US", "AAPL.US", "MSFT.US"]`,
+            it will become `BABA.US, AAPL.US, MSFT.US`, removing `TSLA.US` and adding `MSFT.US`, while adjusting the order of `BABA.US and AAPL.US`.<br><br>
+
+            When selecting `remove`, the securities in the above list will be removed from this group.'
           required: false
 
       responses:

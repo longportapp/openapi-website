@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
-  description: "创建关注分组"
+  description: "创建自选股分组"
   version: "v1"
-  title: "创建关注分组"
+  title: "创建自选股分组"
 paths:
   /v1/watchlist/groups:
     post:
@@ -11,12 +11,14 @@ paths:
         - name: "name"
           type: "string"
           in: body
-          description: "分组名称"
+          description: "分组名称，例如 `信息产业组`"
           required: true
         - name: "securities"
           type: "string[]"
           in: body
-          description: "分组下的股票列表。列表中的顺序将作为展示顺序"
+          description: '股票列表，例如 `["BABA.US","AAPL.US"]`<br>
+            分组下股票的展示顺序，与此列表的顺序一致<br>
+            如果不传此参数，则创建一个空的分组'
           required: false
 
       responses:
