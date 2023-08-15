@@ -16,7 +16,7 @@ paths:
         - name: "securities"
           type: "string[]"
           in: body
-          description: "securities list under the group. The order in the list will be used as the presentation order."
+          description: "Returns securities list under the group. The order in the list will be used as the presentation order."
           required: false
 
       responses:
