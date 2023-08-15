@@ -10,11 +10,13 @@ paths:
       parameters:
         - name: "id"
           type: "integer"
+          in: query
           description: "分组 ID"
           required: true
         - name: "purge"
           type: "boolean"
-          description: "是否清除分组下的股票"
+          in: query
+          description: "是否清除分组下的股票。如果不清除，股票会展示在全部分组"
           required: true
 
       responses:

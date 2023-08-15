@@ -10,12 +10,19 @@ paths:
       parameters:
         - name: "id"
           type: "integer"
+          in: body
           description: "Group ID"
           required: true
         - name: "name"
           type: "string"
-          description: "Group name"
-          required: true
+          in: body
+          description: "Group name. No update if not passed."
+          required: false
+        - name: "securities"
+          type: "string[]"
+          in: body
+          description: "Securities list under the group. No update if not passed. The order in the list will be used as the presentation order. Securities in the group that are not in this list will be removed from watch list"
+          required: false
 
       responses:
         "200":

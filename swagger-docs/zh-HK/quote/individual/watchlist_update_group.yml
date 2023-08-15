@@ -10,12 +10,19 @@ paths:
       parameters:
         - name: "id"
           type: "integer"
+          in: body
           description: "分組 ID"
           required: true
         - name: "name"
           type: "string"
-          description: "分組名稱"
-          required: true
+          in: body
+          description: "分組名稱。不傳遞則不更新。"
+          required: false
+        - name: "securities"
+          type: "string[]"
+          in: body
+          description: "分組下的股票列表。不傳遞則不更新。列表中的順序將作為展示順序。分組中不在此列表中的股票將被移除關註"
+          required: false
 
       responses:
         "200":

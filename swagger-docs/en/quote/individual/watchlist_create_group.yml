@@ -10,8 +10,14 @@ paths:
       parameters:
         - name: "name"
           type: "string"
+          in: body
           description: "Group name"
           required: true
+        - name: "securities"
+          type: "string[]"
+          in: body
+          description: "securities list under the group. The order in the list will be used as the presentation order."
+          required: false
 
       responses:
         "200":

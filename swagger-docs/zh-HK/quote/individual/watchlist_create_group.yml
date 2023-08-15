@@ -10,8 +10,14 @@ paths:
       parameters:
         - name: "name"
           type: "string"
+          in: body
           description: "分組名稱"
           required: true
+        - name: "securities"
+          type: "string[]"
+          in: body
+          description: "分組下的股票列表。列表中的順序將作為展示順序"
+          required: false
 
       responses:
         "200":

@@ -10,11 +10,13 @@ paths:
       parameters:
         - name: "id"
           type: "integer"
+          in: query
           description: "Group ID"
           required: true
         - name: "purge"
           type: "boolean"
-          description: "Whether to clear the securities under the group"
+          in: query
+          description: "Whether to clear the securities under the group. if not, securities will be displayed in the all group"
           required: true
 
       responses:
