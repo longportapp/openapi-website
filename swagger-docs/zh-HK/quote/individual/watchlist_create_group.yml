@@ -29,6 +29,12 @@ paths:
       request_body:
         type: "python"
         value: |
+          from longbridge.openapi import QuoteContext, Config
+
+          config = Config.from_env()
+          ctx = QuoteContext(config)
+          group_id = ctx.create_watch_list_group(name = "WatchList1", securities = ["700.HK", "AAPL.US"])
+          print(group_id)
 
       response_body: { "code": 0, "data": { "id": 10086 } }
 

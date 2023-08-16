@@ -29,5 +29,10 @@ paths:
       request_body:
         type: "python"
         value: |
+          from longbridge.openapi import QuoteContext, Config
+
+          config = Config.from_env()
+          ctx = QuoteContext(config)
+          ctx.delete_watch_list_group(10086)
 
       response_body: { "code": 0 }

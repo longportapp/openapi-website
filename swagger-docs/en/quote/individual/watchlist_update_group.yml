@@ -47,5 +47,10 @@ paths:
       request_body:
         type: "python"
         value: |
+          from longbridge.openapi import QuoteContext, Config, SecuritiesUpdateMode
+
+          config = Config.from_env()
+          ctx = QuoteContext(config)
+          ctx.update_watch_list_group(10086, name = "WatchList2", securities = ["700.HK", "AAPL.US"], SecuritiesUpdateMode.Replace)
 
       response_body: { "code": 0 }
