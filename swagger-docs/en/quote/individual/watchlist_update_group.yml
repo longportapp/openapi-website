@@ -29,14 +29,14 @@ paths:
           description: 'Operation method<br />
             **optional values:**<br />
             `add` - Add securities<br />
-            `update` - Update securities<br />
-            `remove` - Remove securities<br /><br />
+            `remove` - Remove securities<br />
+            `replace` - Update securities<br /><br />
             When selecting `add`, the securities in the above list will be added to this group in order.<br /><br />
+            When selecting `remove`, the securities in the above list will be removed from this group.<br /><br />
             When selecting `update`, the securities in the above list will completely replace the securities in this group.<br />
             For example, if the original group contains `APPL.US, BABA.US, TSLA.US`,
             and it is updated with `["BABA.US", "AAPL.US", "MSFT.US"]`,
-            it will become `BABA.US, AAPL.US, MSFT.US`, removing `TSLA.US` and adding `MSFT.US`, while adjusting the order of `BABA.US and AAPL.US`.<br /><br />
-            When selecting `remove`, the securities in the above list will be removed from this group.'
+            it will become `BABA.US, AAPL.US, MSFT.US`, removing `TSLA.US` and adding `MSFT.US`, while adjusting the order of `BABA.US and AAPL.US`.'
           required: false
 
       responses:
