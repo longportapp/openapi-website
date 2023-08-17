@@ -5,6 +5,17 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2023-08-17
+
+- 更新获取账户资金接口
+  - `GET /v1/asset/account` 增加入参 (currency) 字段
+
+## 2023-04-12
+
+- 更新获取股票持仓接口
+  - `GET /v1/asset/stock` 增加开盘前初始持仓 (init_quantity) 字段
+
+
 ## 2023-04-11
 
 - 新增订单详情查询接口
