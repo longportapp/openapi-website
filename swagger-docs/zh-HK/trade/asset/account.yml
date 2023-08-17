@@ -10,7 +10,7 @@ paths:
       parameters:
         - name: "currency"
           type: "string"
-          description: 幣種
+          description: 幣種（HKD、USD、CNH）
           required: false
       responses:
         "200":
