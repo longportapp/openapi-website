@@ -13,6 +13,11 @@ sidebar_position: 7
   - `GET /v1/trade/estimate/buy_limit` 获取预估最大购买数量接口
 - 美股期权添加市价单和条件单支持
 
+## 2023-04-07
+
+- 更新获取股票持仓接口
+  - `GET /v1/asset/stock` 增加开盘前初始持仓 (init_quantity) 字段
+
 ## 2022-07-18
 
 - 更新标的基础信息接口
