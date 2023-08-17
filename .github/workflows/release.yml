@@ -24,9 +24,7 @@ jobs:
         run: yarn
 
       - name: build release env dist file
-        run: |
-          yarn build:release
-          sh scripts/fix-assets-cdn.sh
+        run: yarn build:release
 
       - name: upload dist to bj
         env:
