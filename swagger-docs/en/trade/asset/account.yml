@@ -10,7 +10,7 @@ paths:
       parameters:
         - name: "currency"
           type: "string"
-          description: currency
+          description: Currency (HKD, USD, CNH)
           required: false
       responses:
         "200":
