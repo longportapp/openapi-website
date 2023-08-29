@@ -181,7 +181,7 @@ python account_asset.py
 
 创建 `account_asset.js` 贴入下面的代码：
 
-```javascript
+```js
 const { Config, TradeContext } = require('longbridge')
 
 let config = Config.fromEnv()
@@ -197,7 +197,7 @@ TradeContext.new(config)
 运行
 
 ```bash
-nodejs account_asset.js
+node account_asset.js
 ```
 
   </TabItem>
@@ -354,7 +354,7 @@ QuoteContext.new(config).then((ctx) => {
 运行
 
 ```bash
-nodejs subscribe_quote.js
+node subscribe_quote.js
 ```
 
   </TabItem>
@@ -439,7 +439,7 @@ mvn compile exec:exec
     turnover: 8081883405.000,
     trade_status: Normal,
     trade_session: Normal
-  }
+}
 AAPL.US PushQuote {
   last_done: 147.350,
   open: 150.700,
@@ -526,7 +526,7 @@ TradeContext.new(config)
 运行
 
 ```bash
-nodejs submit_order.js
+node submit_order.js
 ```
 
   </TabItem>
@@ -636,7 +636,7 @@ python today_orders.py
 
 创建 `today_orders.js` 贴入下面的代码：
 
-```javascript
+```js
 const { Config, TradeContext } = require('longbridge')
 
 let config = Config.fromEnv()
@@ -652,7 +652,7 @@ TradeContext.new(config)
 运行
 
 ```bash
-nodejs today_orders.js
+node today_orders.js
 ```
 
   </TabItem>
