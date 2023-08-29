@@ -102,7 +102,7 @@ sidebar_position: 2
 
 ### 示例
 
-```JSON
+```json
 {
 	"event": "order_changed_lb",
 	"data": {
