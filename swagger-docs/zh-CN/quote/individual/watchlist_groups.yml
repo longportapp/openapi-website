@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
-  description: "获取关注分组"
+  description: "获取自选股分组"
   version: "v1"
-  title: "获取关注分组"
+  title: "获取自选股分组"
 paths:
   /v1/watchlist/groups:
     get:
@@ -23,7 +23,7 @@ paths:
 
           config = Config.from_env()
           ctx = QuoteContext(config)
-          resp = ctx.watch_list()
+          resp = ctx.watchlist()
           print(resp)
 
       response_body:

@@ -20,6 +20,6 @@ const IndexPageShouldRedirect = () => {
   useEffect(() => {
     window.location.href = path
   }, [])
-  return <Loading />
+  return null
 }
 export default IndexPageShouldRedirect

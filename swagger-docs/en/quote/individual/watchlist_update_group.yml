@@ -1,0 +1,56 @@
+swagger: "2.0"
+info:
+  description: "Update watched group"
+  version: "v1"
+  title: "Update watched group"
+paths:
+  /v1/watchlist/groups:
+    put:
+      access:
+      parameters:
+        - name: "id"
+          type: "integer"
+          description: "Group ID, for example `10086`. "
+          required: true
+        - name: "name"
+          type: "string"
+          description:
+            "Group name, for example `Information Technology Group`. <br />
+            If this parameter is not passed, the group name will not be updated. "
+          required: false
+        - name: "securities"
+          type: "string[]"
+          description:
+            'Security list, for example `["BABA.US", "AAPL.US"]`.<br />
+            Combined with the `mode` parameter below, it can be used to add securities, remove securities, and sort the watchlist. '
+          required: false
+        - name: "mode"
+          type: "string"
+          description: 'Operation method<br />
+            **optional values:**<br />
+            `add` - Add securities<br />
+            `remove` - Remove securities<br />
+            `replace` - Update securities<br /><br />
+            When selecting `add`, the securities in the above list will be added to this group in order.<br /><br />
+            When selecting `remove`, the securities in the above list will be removed from this group.<br /><br />
+            When selecting `update`, the securities in the above list will completely replace the securities in this group.<br />
+            For example, if the original group contains `APPL.US, BABA.US, TSLA.US`,
+            and it is updated with `["BABA.US", "AAPL.US", "MSFT.US"]`,
+            it will become `BABA.US, AAPL.US, MSFT.US`, removing `TSLA.US` and adding `MSFT.US`, while adjusting the order of `BABA.US and AAPL.US`.'
+          required: false
+
+      responses:
+        "200":
+          description: "Success"
+        "500":
+          description: "Internal error"
+      request_body:
+        type: "python"
+        value: |
+          from longbridge.openapi import QuoteContext, Config, SecuritiesUpdateMode
+
+          config = Config.from_env()
+          ctx = QuoteContext(config)
+          ctx.update_watchlist_group(10086, name = "Watchlist2", securities = ["700.HK", "AAPL.US"], SecuritiesUpdateMode.Replace)
+
+      response_body: { "code": 0 }

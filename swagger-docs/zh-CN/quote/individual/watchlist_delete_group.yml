@@ -1,0 +1,38 @@
+swagger: "2.0"
+info:
+  description: "删除自选股分组"
+  version: "v1"
+  title: "删除自选股分组"
+paths:
+  /v1/watchlist/groups:
+    delete:
+      access:
+      parameters:
+        - name: "id"
+          type: "integer"
+          in: query
+          description: "分组 ID，例如 `10086`"
+          required: true
+        - name: "purge"
+          type: "boolean"
+          in: query
+          description: "是否清除分组下的股票<br />
+            为 `true`，则此分组下的股票将被取消关注<br />
+            为 `false`，则此分组下的股票会保留在`全部`分组中"
+          required: true
+
+      responses:
+        "200":
+          description: "返回成功"
+        "500":
+          description: "内部错误"
+      request_body:
+        type: "python"
+        value: |
+          from longbridge.openapi import QuoteContext, Config
+
+          config = Config.from_env()
+          ctx = QuoteContext(config)
+          ctx.delete_watchlist_group(10086)
+
+      response_body: { "code": 0 }

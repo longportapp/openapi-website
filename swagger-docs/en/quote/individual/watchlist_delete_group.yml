@@ -1,0 +1,38 @@
+swagger: "2.0"
+info:
+  description: "Delete watched group"
+  version: "v1"
+  title: "Delete watched group"
+paths:
+  /v1/watchlist/groups:
+    delete:
+      access:
+      parameters:
+        - name: "id"
+          type: "integer"
+          in: query
+          description: "Group ID, for example `10086`. "
+          required: true
+        - name: "purge"
+          type: "boolean"
+          in: query
+          description: "Whether to clear the securities in the group.
+            If set to `true`, the securities in the group will be unfollowed.
+            If set to `false`, the securities in the group will remain in the `All` group. "
+          required: true
+
+      responses:
+        "200":
+          description: "Success"
+        "500":
+          description: "Internal error"
+      request_body:
+        type: "python"
+        value: |
+          from longbridge.openapi import QuoteContext, Config
+
+          config = Config.from_env()
+          ctx = QuoteContext(config)
+          ctx.delete_watchlist_group(10086)
+
+      response_body: { "code": 0 }

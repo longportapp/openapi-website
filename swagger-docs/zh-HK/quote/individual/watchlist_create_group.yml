@@ -1,0 +1,47 @@
+swagger: "2.0"
+info:
+  description: "創建自選股分組"
+  version: "v1"
+  title: "創建自選股分組"
+paths:
+  /v1/watchlist/groups:
+    post:
+      access:
+      parameters:
+        - name: "name"
+          type: "string"
+          description: "分組名稱，例如 `信息產業組`"
+          required: true
+        - name: "securities"
+          type: "string[]"
+          description: 股票列表，例如 `["BABA.US","AAPL.US"]`<br />
+            分組下股票的展示順序，與此列表的順序壹致<br />
+            如果不傳此參數，則創建壹個空的分組
+          required: false
+
+      responses:
+        "200":
+          description: "返回成功"
+          schema:
+            $ref: "#/definitions/create_group_response"
+        "500":
+          description: "內部錯誤"
+      request_body:
+        type: "python"
+        value: |
+          from longbridge.openapi import QuoteContext, Config
+
+          config = Config.from_env()
+          ctx = QuoteContext(config)
+          group_id = ctx.create_watchlist_group(name = "Watchlist1", securities = ["700.HK", "AAPL.US"])
+          print(group_id)
+
+      response_body: { "code": 0, "data": { "id": 10086 } }
+
+definitions:
+  create_group_response:
+    properties:
+      id:
+        type: "integer"
+        description: 分組 ID
+        required: true

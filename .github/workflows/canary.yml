@@ -4,7 +4,7 @@ on:
     branches:
       - main
       - canary
-      - rename-longport
+      - build-test
 jobs:
   deploy_canary:
     name: build
@@ -32,7 +32,5 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.FE_S3_OPEN_STATIC_CANARY_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.FE_S3_OPEN_STATIC_CANARY_ACCESS_KEY_SECRET }}
         run: |
-          aws --region=${{ secrets.CANARY_HK_AWS_DEFAULT_REGION }} s3 sync ./dist s3://${{ secrets.FE_S3_OPEN_STATIC_CANARY_BUCKET }}/openapi-website/ --exclude "*.map" --cache-control max-age=31536000
-          aws --region=${{ secrets.CANARY_HK_AWS_DEFAULT_REGION }} s3 cp ./dist/docs/index.html s3://${{ secrets.FE_S3_OPEN_STATIC_CANARY_BUCKET }}/openapi-website/ --cache-control no-cache
-          aws --region=${{ secrets.CANARY_HK_AWS_DEFAULT_REGION }} s3 cp ./dist/en/docs/index.html s3://${{ secrets.FE_S3_OPEN_STATIC_CANARY_BUCKET }}/openapi-website/en/ --cache-control no-cache
-          aws --region=${{ secrets.CANARY_HK_AWS_DEFAULT_REGION }} s3 cp ./dist/zh-HK/docs/index.html s3://${{ secrets.FE_S3_OPEN_STATIC_CANARY_BUCKET }}/openapi-website/zh-HK/ --cache-control no-cache
+          aws --region=${{ secrets.CANARY_HK_AWS_DEFAULT_REGION }} s3 sync ./dist s3://${{ secrets.FE_S3_OPEN_STATIC_CANARY_BUCKET }}/openapi-website/ --exclude "*.map" --exclude "*.html" --exclude "*.xml" --cache-control max-age=31536000
+          aws --region=${{ secrets.CANARY_HK_AWS_DEFAULT_REGION }} s3 sync ./dist s3://${{ secrets.FE_S3_OPEN_STATIC_CANARY_BUCKET }}/openapi-website/ --exclude "*" --include "*.html" --include "*.xml" --cache-control no-cache

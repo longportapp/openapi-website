@@ -4,4 +4,4 @@
 
 ### 下载地址
 
-- [openapi-cpp-sdk-0.2.50.tar.gz](https://static.lbkrs.com/openapi-sdk/openapi-cpp-sdk-0.2.50.tar.gz)
+- [openapi-cpp-sdk-0.2.63.tar.gz](https://static.lbkrs.com/openapi-sdk/openapi-cpp-sdk-0.2.63.tar.gz)

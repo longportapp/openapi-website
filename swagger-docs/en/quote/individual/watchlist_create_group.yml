@@ -1,0 +1,46 @@
+swagger: "2.0"
+info:
+  description: "Create watched group"
+  version: "v1"
+  title: "Create watched group"
+paths:
+  /v1/watchlist/groups:
+    post:
+      access:
+      parameters:
+        - name: "name"
+          type: "string"
+          description: "Group name, for example `Information Technology Group`. "
+          required: true
+        - name: "securities"
+          type: "string[]"
+          description: 'Security list, for example `["BABA.US", "AAPL.US"]`.
+            Display order of securities in the group, in the same order as this list.
+            If this parameter is not passed, create an empty group. '
+          required: false
+
+      responses:
+        "200":
+          description: "Success"
+          schema:
+            $ref: "#/definitions/create_group_response"
+        "500":
+          description: "Internal error"
+      request_body:
+        type: "python"
+        value: |
+          from longbridge.openapi import QuoteContext, Config
+
+          config = Config.from_env()
+          ctx = QuoteContext(config)
+          group_id = ctx.create_watchlist_group(name = "Watchlist1", securities = ["700.HK", "AAPL.US"])
+          print(group_id)
+      response_body: { "code": 0, "data": { "id": 10086 } }
+
+definitions:
+  create_group_response:
+    properties:
+      id:
+        type: "integer"
+        description: Group ID
+        required: true
