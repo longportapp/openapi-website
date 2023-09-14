@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 id: quote_object
-title: Quote Naming Dictionary
+title: Definition
 slug: objects
 ---
 
