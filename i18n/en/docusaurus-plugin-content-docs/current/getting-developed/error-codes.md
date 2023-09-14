@@ -1,5 +1,5 @@
 ---
-title: Common Error Codes
+title: Error Codes
 id: error-codes
 slug: /error-codes
 sidebar_position: 10

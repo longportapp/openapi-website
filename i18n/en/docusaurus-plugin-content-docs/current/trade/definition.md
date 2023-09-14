@@ -1,6 +1,6 @@
 ---
 id: trade_definition
-title: Trade Definition
+title: Definition
 slug: trade-definition
 sidebar_position: 2
 ---
