@@ -4,7 +4,7 @@ on:
     branches:
       - main
       - canary
-      - rename-longport
+      - dist_to_oss
 jobs:
   deploy_canary:
     name: build
@@ -14,6 +14,15 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 1
+
+      - name: Download ossutils zip
+        run: |
+          wget https://github.com/aliyun/ossutil/releases/download/v.1.7.17/ossutil-v1.7.17-linux-amd64.zip
+          unzip ossutil-v1.7.17-linux-amd64.zip && cp ./ossutil-v1.7.17-linux-amd64/ossutil ${{github.workspace}}/ && chmod +x ${{github.workspace}}/ossutil
+
+      - name: Test ossutil cli is ok
+        run: |
+          ${{github.workspace}}/ossutil --version
 
       - uses: actions/setup-node@v3
         with:
@@ -27,12 +36,7 @@ jobs:
         run: |
           yarn build:canary
 
-      - name: upload canary dist to s3
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.FE_S3_OPEN_STATIC_CANARY_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.FE_S3_OPEN_STATIC_CANARY_ACCESS_KEY_SECRET }}
+      - name: upload canary dist to oss
         run: |
-          aws --region=${{ secrets.CANARY_HK_AWS_DEFAULT_REGION }} s3 sync ./dist s3://${{ secrets.FE_S3_OPEN_STATIC_CANARY_BUCKET }}/openapi-website/ --exclude "*.map" --cache-control max-age=31536000
-          aws --region=${{ secrets.CANARY_HK_AWS_DEFAULT_REGION }} s3 cp ./dist/docs/index.html s3://${{ secrets.FE_S3_OPEN_STATIC_CANARY_BUCKET }}/openapi-website/ --cache-control no-cache
-          aws --region=${{ secrets.CANARY_HK_AWS_DEFAULT_REGION }} s3 cp ./dist/en/docs/index.html s3://${{ secrets.FE_S3_OPEN_STATIC_CANARY_BUCKET }}/openapi-website/en/ --cache-control no-cache
-          aws --region=${{ secrets.CANARY_HK_AWS_DEFAULT_REGION }} s3 cp ./dist/zh-HK/docs/index.html s3://${{ secrets.FE_S3_OPEN_STATIC_CANARY_BUCKET }}/openapi-website/zh-HK/ --cache-control no-cache
+          ${{github.workspace}}/ossutil cp dist/ oss://lb-assets/github/canary/open.longportapp.com/docs/ -u -r -j 10 -e oss-cn-hangzhou.aliyuncs.com -i ${{ secrets.FE_LB_ASSET_ACCESS_KEY_ID }} -k ${{ secrets.FE_LB_ASSET_ACCESS_KEY_SECRET }} --exclude "*.html" --meta=Cache-Control:max-age=31536000
+          ${{github.workspace}}/ossutil cp dist/ oss://lb-assets/github/canary/open.longportapp.com/docs/ -u -r -j 10 -e oss-cn-hangzhou.aliyuncs.com -i ${{ secrets.FE_LB_ASSET_ACCESS_KEY_ID }} -k ${{ secrets.FE_LB_ASSET_ACCESS_KEY_SECRET }} --include "*.html" --meta=Cache-Control:no-cache

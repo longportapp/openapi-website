@@ -5,6 +5,16 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2023-08-17
+
+- Update the interface for Get Account Balance
+  - `GET /v1/asset/account` Add parameter (currency)
+
+## 2023-04-12
+
+- Update the interface for Get Stock Positions
+  - `GET /v1/asset/stock` Add response field (init_quantity)
+
 ## 2023-04-11
 
 - Added order details query interface

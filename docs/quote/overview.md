@@ -1,7 +1,7 @@
 ---
-sidebar_position: 1
+sidebar_position: 0
 id: quote_overview
-title: 行情
+title: Overview
 slug: overview
 ---
 
@@ -95,7 +95,16 @@ slug: overview
     </tr>
     <tr>
         <td rowspan="4">个性化</td>
-        <td><a href="./individual/watchlist_groups">获取关注分组</a></td>
+        <td><a href="./individual/watchlist_create_group">创建自选股分组</a></td>
+    </tr>
+    <tr>
+        <td><a href="./individual/watchlist_delete_group">删除自选股分组</a></td>
+    </tr>
+    <tr>
+        <td><a href="./individual/watchlist_groups">获取自选股分组</a></td>
+    </tr>
+    <tr>
+        <td><a href="./individual/watchlist_update_group">更新自选股分组</a></td>
     </tr>
 </table>
 

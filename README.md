@@ -1,61 +1,22 @@
-LongPort OpenAPI [docs](https://open.longportapp.com)
+LongPort OpenAPI Documentation
 
-#### 本地开发环境搭建
+https://open.longportapp.com
 
-```shell
-# 安装依赖
-$ yarn
+## CONTRIBUTING
 
-# 启动 docusaurus 服务
-$ yarn dev
+请阅读 [CONTRIBUTING.md](./CONTRIBUTING.md) 文档。
 
-# 启动监听 swagger 文档转成 markdown 文件服务
-$ yarn dev:swagger
-```
+Please following the [CONTRIBUTING.md](./CONTRIBUTING.md) document.
 
-### 目录结构
+## Style Guide
 
-```bash
-.
-├── README.md
-├── docs // 所有文档都在这个目录下
-├── swagger-docs // 所有 swagger 文档都在这个目录
-├── templates // swagger 文档转换成 markdown 模板配置文件
-├── i18n // 多语言配置文件
-├── src // 一般不用修复个目录文件。
-├── convert-md.js // 将 swagger 文档转换为 markdown 的脚本文件
-├── sidebars.js // 文档侧边栏配置文件
-├── docusaurus.config.js // 一般情况下不用修改
-├── tsconfig.json
-├── package.json
-└── yarn.lock
-```
-
-### 文档编写
-
-> NOTE: 最好用 VS Code 开发，此项目带有 `.vscode` 内置 VS Code 插件和配置推荐，用 VS Code 编写，能启动自动格式化功能。
-
-#### Swagger 格式文档
-
-> 支持在线编辑 [Swagger Editor](https://editor.swagger.io) 将编辑后的文档拷贝到 `swagger-docs` 对应目录下
-
-[Swagger 文档规范](https://swagger.io/specification/)
-
-#### Markdown 格式文档
-
-[OpenAPI 文档规范](https://longbridge.feishu.cn/wiki/wikcnb0RtZ8OEuAodGBXaOL6Nxh)
-
-### 项目依赖
-
-项目目前采用第三方框架 [Docusaurus](https://docusaurus.io/) 构建
-
-#### 文档需要遵守以下规范：
+### 文档需要遵守以下规范：
 
 - 遵循中英文书写规范，中英文加空格间隔，正确使用标点符号，正确用词，精确专业术语用词、大小写。
-- 文档规范 https://longbridge.feishu.cn/wiki/wikcnb0RtZ8OEuAodGBXaOL6Nxh
-- Markdown 文档需要提供规范的 Meta 信息
+- Longbridge 员工请阅读内部：[文案书写指导](https://longbridge.feishu.cn/wiki/wikcnqOEWHe43bdSLMP0S42vvvg) 与 [Open API 接口规范](https://longbridge.feishu.cn/wiki/wikcnb0RtZ8OEuAodGBXaOL6Nxh)。
+- Markdown 文档需要提供规范的 Meta 信息。
 
-#### Markdown Meta 信息格式
+### Markdown Meta 信息格式
 
 > 只针对非 Swagger 生成的 Markdown 文档
 

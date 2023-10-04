@@ -1,7 +1,7 @@
 ---
-sidebar_position: 1
+sidebar_position: 0
 id: quote_overview
-title: Quote Overview
+title: Overview
 slug: overview
 ---
 
@@ -93,6 +93,19 @@ slug: overview
     <tr>
         <td><a href="./push/trade">Push Real-time Trades</a></td>
     </tr>
+    <tr>
+        <td rowspan="4">个性化</td>
+        <td><a href="./individual/watchlist_create_group">Create watched group</a></td>
+    </tr>
+    <tr>
+        <td><a href="./individual/watchlist_delete_group">Delete watched group</a></td>
+    </tr>
+    <tr>
+        <td><a href="./individual/watchlist_groups">Get watched groups</a></td>
+    </tr>
+    <tr>
+        <td><a href="./individual/watchlist_update_group">Update watched group</a></td>
+    </tr>
 </table>
 
 ### Description Of Security Code
@@ -111,7 +124,7 @@ The security code uses the `ticker.region` format, `ticker` represents the code,
 
 ### Business Data Serialization
 
-The market request, response and push data are stored as business data in the body part of the data package of the private protocol.  
+The market request, response and push data are stored as business data in the body part of the data package of the private protocol.
 We use the [Protobuf](https://developers.google.cn/protocol-buffers) protocol to serialize business data. Compared with common text protocols (such as JSON, XML, etc.), the Protobuf protocol has the following advantages:
 
 - Faster serialization time.

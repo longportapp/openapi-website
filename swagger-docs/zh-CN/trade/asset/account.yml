@@ -7,6 +7,11 @@ paths:
   /v1/asset/account:
     get:
       access:
+      parameters:
+        - name: "currency"
+          type: "string"
+          description: 币种（HKD、USD、CNH）
+          required: false
       responses:
         "200":
           description: "返回成功"

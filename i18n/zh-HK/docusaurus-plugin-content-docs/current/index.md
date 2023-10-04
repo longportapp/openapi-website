@@ -51,69 +51,7 @@ LongPort 提供接入底層服務的 HTTP / WebSockets 接口以及封裝在上�
 
 ### 行情類
 
-<table>
-    <tr>
-        <td>市場</td>
-        <td>標的</td>
-        <td>權限獲取方式</td>
-    </tr>
-    <tr>
-        <td rowspan="2">港股市場</td>
-        <td>證券類產品（含股票、ETFs、窩輪、牛熊、界內證）</td>
-        <td rowspan="2">
-            <ul>
-            <li>中國大陸客戶：請購買 <a href="https://activity.lbkrs.com/spa/mall?market=HK">港股 Lv2 實時行情-OpenAPI - OpenAPI</a></li>
-            <li>非中國大陸客戶：請購買 <a href="https://activity.lbkrs.com/spa/mall?market=HK">港股 Lv2 實時行情（國際版）- OpenAPI</a></li>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>恆生指數</td>
-    </tr>
-    <tr>
-        <td rowspan="3">美股市場</td>
-        <td>證券類產品（含紐交所、美交所、納斯達克上市的股票、ETFs）</td>
-        <td rowspan="2">
-            <ul>
-            <li>Level 1：請購買 <a href="https://activity.lbkrs.com/spa/mall?market=US">L1 Nasdaq Basic - OpenAPI</a></li>
-            <li>Level 2：暫未上線，敬請期待。 </li>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>納斯達克指數</td>
-    </tr>
-    <tr>
-        <td>OPRA 期權</td>
-        <td>
-            <ul>
-            <li>Level 1：請購買 <a href="https://activity.lbkrs.com/spa/mall?market=US">OPRA 期權-Open API</a></li>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td rowspan="2">A 股市場</td>
-        <td>證券類產品（含股票、ETFs）</td>
-        <td rowspan="2">
-        <ul>
-            <li>中國大陸個人客戶：免費獲取 Lv1 行情</li>
-            <li>非中國大陸客戶 / 機構客戶：暫不支持</li>
-        </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>指數</td>
-    </tr>
-</table>
-
-#### 頻次限制
-
-:::caution
-
-- 一個賬號同時只能建立一個長連接，最多同時訂閱 500 個標的
-- 1 秒內不超過 10 次調用，並發請求數不超過 5
-
-:::
+請訪問閲讀：[行情權限與限制](/docs/quote/level)
 
 ## 使用費用
 

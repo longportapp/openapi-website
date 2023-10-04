@@ -4,7 +4,7 @@
 
 ### Install SDK
 
-You can install the SDK via npm.
+You can install the SDK via Npm.
 
 ```bash
 $ npm install longbridge --save
