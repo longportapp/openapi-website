@@ -139,8 +139,6 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
     }
   }, [i18n.currentLocale])
 
-  console.log('DocSearch-142', i18n.currentLocale, indexName)
-
   return (
     <>
       <Head>
