@@ -16,7 +16,7 @@ jobs:
 
       - name: Download ossutils zip
         run: |
-          wget https://github.com/aliyun/ossutil/releases/download/v.1.7.17/ossutil-v1.7.17-linux-amd64.zip
+          wget https://github.com/aliyun/ossutil/releases/download/v1.7.17/ossutil-v1.7.17-linux-amd64.zip
           unzip ossutil-v1.7.17-linux-amd64.zip && cp ./ossutil-v1.7.17-linux-amd64/ossutil ${{github.workspace}}/ && chmod +x ${{github.workspace}}/ossutil
 
       - name: Test ossutil cli is ok
