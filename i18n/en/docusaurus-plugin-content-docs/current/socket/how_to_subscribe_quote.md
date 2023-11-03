@@ -55,7 +55,7 @@ Example:
 
 > Here is `JSON` for easy showing case, actually need using protobuf encoding.
 
-Client can also check quote topics already subscribing, [protobuf defination](../quote/subscribe/subsciption).
+Client can also check quote topics already subscribing, [protobuf defination](../quote/subscribe/subscription).
 
 After client success subscribing quote, server will push real-time quote data to client, data [protobuf defination](../quote/overview).
 
@@ -65,4 +65,4 @@ All quote all should be fetched by our quote gateway, more details can be found 
 
 ## Feed Protocol
 
-If you want subscribe quote data from socket, you must know more details of our [protocol](../protocol/overview)
+If you want subscribe quote data from socket, you must know more details of our [protocol](./protocol/overview)
