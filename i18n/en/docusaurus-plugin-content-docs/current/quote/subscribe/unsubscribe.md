@@ -9,7 +9,7 @@ This API is used to unsubscribe quote.
 
 :::info
 
-[Business Command](../../socket/protocol/request): `7`
+[Business Command](../../socket/biz-command): `7`
 
 :::
 

@@ -9,7 +9,7 @@ This API is used to obtain the warrant issuer IDs data (which can be synchronize
 
 :::info
 
-[Business Command](../../socket/protocol/request): `22`
+[Business Command](../../socket/biz-command): `22`
 
 :::
 

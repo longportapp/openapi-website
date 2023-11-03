@@ -8,7 +8,7 @@ sidebar_position: 3
 This API is used to obtain the real-time quotes of US stock options, including the option-specific data.
 
 :::info
-[Business Command](../../socket/protocol/request): `12`
+[Business Command](../../socket/biz-command): `12`
 :::
 
 ## Request

@@ -9,7 +9,7 @@ This API is used to obtain the daily trading hours of each market.
 
 :::info
 
-[Business Command](../../socket/protocol/request): `8`
+[Business Command](../../socket/biz-command): `8`
 
 :::
 

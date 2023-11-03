@@ -64,6 +64,18 @@ sidebar_position: 5
         <td><a href="../quote/pull/trade-day">获取市场交易日</a></td>
     </tr>
     <tr>
+        <td><a href="../quote/pull/capital-flow-intraday">获取标的当日资金流向</a></td>
+    </tr>
+    <tr>
+        <td><a href="../quote/pull/capital-distribution">获取标的当日资金分布</a></td>
+    </tr>
+    <tr>
+        <td><a href="../quote/pull/calc-index">获取标的计算指标</a></td>
+    </tr>
+    <tr>
+        <td><a href="../quote/pull/history-candlestick">获取标的历史 k 线</a></td>
+    </tr>
+    <tr>
         <td rowspan="3">订阅</td>
         <td><a href="../quote/subscribe/subscription">获取已订阅标的行情</a></td>
     </tr>

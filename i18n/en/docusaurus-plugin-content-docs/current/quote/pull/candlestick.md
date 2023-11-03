@@ -9,7 +9,7 @@ This API is used to obtain the candlestick data of security.
 
 :::info
 
-[Business Command](../../socket/protocol/request): `19`
+[Business Command](../../socket/biz-command): `19`
 
 :::
 

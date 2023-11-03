@@ -8,7 +8,7 @@ sidebar_position: 1
 This API is used to obtain the basic information of securities.
 
 :::info
-[Business Command](../../socket/protocol/request): `10`
+[Business Command](../../socket/biz-command): `10`
 :::
 
 ## Request

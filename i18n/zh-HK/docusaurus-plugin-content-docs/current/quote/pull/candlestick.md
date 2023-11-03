@@ -9,7 +9,7 @@ sidebar_position: 10
 
 :::info
 
-[業務指令](../../socket/protocol/request)：`19`
+[業務指令](../../socket/biz-command)：`19`
 
 :::
 

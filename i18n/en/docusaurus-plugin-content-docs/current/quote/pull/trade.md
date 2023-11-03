@@ -9,7 +9,7 @@ This API is used to obtain the trades data of security.
 
 :::info
 
-[Business Command](../../socket/protocol/request): `17`
+[Business Command](../../socket/biz-command): `17`
 
 :::
 

@@ -9,7 +9,7 @@ This API is used to obtain the real-time quotes of HK warrants, including the wa
 
 :::info
 
-[Business Command](../../socket/protocol/request): `13`
+[Business Command](../../socket/biz-command): `13`
 
 :::
 

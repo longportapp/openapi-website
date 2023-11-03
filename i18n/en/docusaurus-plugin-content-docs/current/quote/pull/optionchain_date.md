@@ -9,7 +9,7 @@ This API is used to obtain the the list of expiration dates of option chain
 
 :::info
 
-[Business Command](../../socket/protocol/request): `20`
+[Business Command](../../socket/biz-command): `20`
 
 :::
 

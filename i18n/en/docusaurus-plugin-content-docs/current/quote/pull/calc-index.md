@@ -8,7 +8,7 @@ sidebar_position: 19
 This API is used to obtain the calculate indexes of securities.
 
 :::info
-[Business Command](../../socket/protocol/request)：`26`
+[Business Command](../../socket/biz-command)：`26`
 :::
 
 ## Request

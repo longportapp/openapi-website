@@ -9,7 +9,7 @@ This API is used to obtain the intraday data of security.
 
 :::info
 
-[Business Command](../../socket/protocol/request): `18`
+[Business Command](../../socket/biz-command): `18`
 
 :::
 
