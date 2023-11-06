@@ -29,7 +29,7 @@ sidebar_position: 20
 | offset_request | object | 否       | 按偏移查询时必填                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ∟ direction    | int32  | 是       | 查询方向 <br /><br />**可选值：**<br />`0` - 向历史数据方向查找 <br />`1` - 向最新数据方向查找                                                                                                                                                                                                                                                                                                                                                                             |
 | ∟ date         | string | 否       | 查询日期，格式为 `YYYYMMDD`，例如：20231016，为空时使用标的所在市场的最新交易日                                                                                                                                                                                                                                                                                                                                                                                            |
-| ∟ minute       | string | 否       | 查询时间，格式为 `HHMM`，例如：09:35，仅在查询分钟级别 k 线时有效                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ∟ minute       | string | 否       | 查询时间，格式为 `HHMM`，例如：09:35，仅在查询分钟级别 K 线时有效                                                                                                                                                                                                                                                                                                                                                                                                          |
 | ∟ count        | int32  | 否       | 查询数量，填写范围 `[1,1000]`，为空时默认查询 `10` 条                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 ### Protobuf
@@ -61,8 +61,9 @@ message SecurityHistoryCandlestickRequest {
 ### Request Example
 
 ```python
-# 获取标的历史 k 线
+# 获取标的历史 K 线
 # https://open.longportapp.com/docs/quote/pull/history-candlestick
+#
 # 运行前请访问“开发者中心”确保账户有正确的行情权限。
 # 如没有开通行情权限，可以通过“LongPort”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
 from datetime import date
