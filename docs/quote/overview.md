@@ -41,7 +41,7 @@ slug: overview
         <td><a href="./pull/intraday">获取标的分时</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/candlestick">获取标的 k 线</a></td>
+        <td><a href="./pull/candlestick">获取标的 K 线</a></td>
     </tr>
     <tr>
         <td><a href="./pull/optionchain-date">获取标的的期权链到期日列表</a></td>
