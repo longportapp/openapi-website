@@ -8,7 +8,7 @@ sidebar_position: 6
 This API is used to obtain the real-time broker queue data of security.
 
 :::info
-[Business Command](../../socket/protocol/request): `15`
+[Business Command](../../socket/biz-command): `15`
 :::
 
 ## Request

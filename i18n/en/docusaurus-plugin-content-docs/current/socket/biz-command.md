@@ -66,6 +66,18 @@ And stock quote and order have difference endpoints, [check here](./hosts).
         <td><a href="../quote/pull/trade-day">Get Market Trading Days</a></td>
     </tr>
     <tr>
+        <td><a href="../quote/pull/capital-flow-intraday">Get Security Capital Flow Intraday</a></td>
+    </tr>
+    <tr>
+        <td><a href="../quote/pull/capital-distribution">Get Security Capital Distribution</a></td>
+    </tr>
+    <tr>
+        <td><a href="../quote/pull/calc-index">Get Calculate Indexes Of Securities</a></td>
+    </tr>
+    <tr>
+        <td><a href="../quote/pull/history-candlestick">Get Security History Candlestick</a></td>
+    </tr>
+    <tr>
         <td rowspan="3">Subscription</td>
         <td><a href="../quote/subscribe/subscription">Get Subscription Information</a></td>
     </tr>

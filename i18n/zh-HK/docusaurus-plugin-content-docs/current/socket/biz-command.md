@@ -64,6 +64,18 @@ sidebar_position: 5
         <td><a href="../quote/pull/trade-day">獲取市場交易日</a></td>
     </tr>
     <tr>
+        <td><a href="../quote/pull/capital-flow-intraday">獲取標的當日資金流向</a></td>
+    </tr>
+    <tr>
+        <td><a href="../quote/pull/capital-distribution">獲取標的當日資金分佈</a></td>
+    </tr>
+    <tr>
+        <td><a href="../quote/pull/calc-index">獲取標的計算指標</a></td>
+    </tr>
+    <tr>
+        <td><a href="../quote/pull/history-candlestick">獲取標的曆史 K 線</a></td>
+    </tr>
+    <tr>
         <td rowspan="3">訂閱</td>
         <td><a href="../quote/subscribe/subscription">獲取已訂閱標的行情</a></td>
     </tr>

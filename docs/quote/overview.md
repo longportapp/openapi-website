@@ -41,7 +41,7 @@ slug: overview
         <td><a href="./pull/intraday">获取标的分时</a></td>
     </tr>
     <tr>
-        <td><a href="./pull/candlestick">获取标的 k 线</a></td>
+        <td><a href="./pull/candlestick">获取标的 K 线</a></td>
     </tr>
     <tr>
         <td><a href="./pull/optionchain-date">获取标的的期权链到期日列表</a></td>
@@ -61,7 +61,7 @@ slug: overview
     <tr>
         <td><a href="./pull/trade-day">获取市场交易日</a></td>
     </tr>
-     <tr>
+    <tr>
         <td><a href="./pull/capital-flow-intraday">获取标的当日资金流向</a></td>
     </tr>
     <tr>
@@ -69,6 +69,9 @@ slug: overview
     </tr>
     <tr>
         <td><a href="./pull/calc-index">获取标的计算指标</a></td>
+    </tr>
+    <tr>
+        <td><a href="./pull/history-candlestick">获取标的历史 k 线</a></td>
     </tr>
     <tr>
         <td rowspan="3">订阅</td>

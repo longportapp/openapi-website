@@ -9,7 +9,7 @@ This API is used to obtain the depth data of security.
 
 :::info
 
-[Business Command](../../socket/protocol/request): `14`
+[Business Command](../../socket/biz-command): `14`
 
 :::
 

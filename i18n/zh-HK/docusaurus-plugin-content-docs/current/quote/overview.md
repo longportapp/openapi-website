@@ -71,6 +71,9 @@ slug: overview
         <td><a href="./pull/calc-index">獲取標的計算指標</a></td>
     </tr>
     <tr>
+        <td><a href="./pull/history-candlestick">獲取標的曆史 K 線</a></td>
+    </tr>
+    <tr>
         <td rowspan="3">订阅</td>
         <td><a href="./subscribe/subscription">獲取已訂閱標的行情</a></td>
     </tr>

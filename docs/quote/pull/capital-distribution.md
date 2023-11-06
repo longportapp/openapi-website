@@ -8,7 +8,7 @@ sidebar_position: 18
 该接口用于获取标的当日的资金分布。
 
 :::info
-[业务指令](../../socket/protocol/request)：`25`
+[业务指令](../../socket/biz-command)：`25`
 :::
 
 ## Request

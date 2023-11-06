@@ -8,7 +8,7 @@ sidebar_position: 7
 该接口用于获取券商席位 ID 数据 (可每天同步一次)。
 
 :::info
-[业务指令](../../socket/protocol/request)：`16`
+[业务指令](../../socket/biz-command)：`16`
 :::
 
 ## Request

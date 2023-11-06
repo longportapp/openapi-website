@@ -8,7 +8,7 @@ sidebar_position: 6
 該接口用於獲取標的的實時經紀隊列數據。
 
 :::info
-[業務指令](../../socket/protocol/request)：`15`
+[業務指令](../../socket/biz-command)：`15`
 :::
 
 ## Request

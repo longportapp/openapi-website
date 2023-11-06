@@ -5,6 +5,11 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2022-11-03
+
+- Add quote history candlestick interface
+  - Long connection `Business Command：27`, obtain the history candlestick of security
+
 ## 2023-08-17
 
 - Update the interface for Get Account Balance
@@ -32,7 +37,7 @@ sidebar_position: 7
 
 - Add get stock margin ratio interface
   - `GET /v1/risk/margin-ratio` Get stock margin ratio
-  
+
 ## 2022-06-30
 
 - Add get watched groups interface
@@ -50,4 +55,3 @@ sidebar_position: 7
 - Add quote capital interface
   - Long connection `Business Command:24`, obtain the daily capital distribution of security
   - Long connection `Business Command:25`, obtain the daily capital flow intraday of security
-

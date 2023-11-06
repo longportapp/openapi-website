@@ -8,7 +8,7 @@ sidebar_position: 7
 This API is used to obtain participant IDs data (which can be synchronized once a day).
 
 :::info
-[Business Command](../../socket/protocol/request): `16`
+[Business Command](../../socket/biz-command): `16`
 :::
 
 ## Request

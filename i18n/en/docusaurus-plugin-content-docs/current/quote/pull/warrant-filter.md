@@ -9,7 +9,7 @@ This API is used to obtain the quotes of HK warrants, and supports sorting and f
 
 :::info
 
-[Business Command](../../socket/protocol/request): `23`
+[Business Command](../../socket/biz-command): `23`
 
 :::
 

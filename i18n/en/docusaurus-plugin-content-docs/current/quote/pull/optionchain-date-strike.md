@@ -9,7 +9,7 @@ This API is used to obtain a list of option securities by the option chain expir
 
 :::info
 
-[Business Command](../../socket/protocol/request): `21`
+[Business Command](../../socket/biz-command): `21`
 
 :::
 

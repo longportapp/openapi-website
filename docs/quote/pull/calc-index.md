@@ -8,7 +8,7 @@ sidebar_position: 19
 该接口用于获取标的计算指标数据，根据请求指定的计算指标返回数据。
 
 :::info
-[业务指令](../../socket/protocol/request)：`26`
+[业务指令](../../socket/biz-command)：`26`
 :::
 
 ## Request
@@ -57,7 +57,7 @@ message SecurityCalcQuoteRequest {
 | ∟ capital_flow             | string   | 流入资金                                     |
 | ∟ amplitude                | string   | 振幅 (返回百分比数据，不包含`%`符号)         |
 | ∟ volume_ratio             | string   | 量比                                         |
-| ∟ pe_ttm_ratio             | string   | 市盈率（TTM）                             |
+| ∟ pe_ttm_ratio             | string   | 市盈率（TTM）                                |
 | ∟ pb_ratio                 | string   | 市净率                                       |
 | ∟ dividend_ratio_ttm       | string   | 股息率 (TTM)                                 |
 | ∟ five_day_change_rate     | string   | 五日涨幅 (返回百分比数据，不包含`%`符号)     |

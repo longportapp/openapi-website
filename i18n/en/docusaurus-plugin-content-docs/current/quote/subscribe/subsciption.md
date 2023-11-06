@@ -9,7 +9,7 @@ This API is used to obtain the subscription information.
 
 :::info
 
-[Business Command](../../socket/protocol/request): `5`
+[Business Command](../../socket/biz-command): `5`
 
 :::
 

@@ -9,7 +9,7 @@ This API is used to obtain the trading days of the market.
 
 :::info
 
-[Business Command](../../socket/protocol/request): `9`
+[Business Command](../../socket/biz-command): `9`
 
 :::
 
