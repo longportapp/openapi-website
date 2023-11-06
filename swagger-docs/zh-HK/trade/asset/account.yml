@@ -46,7 +46,7 @@ paths:
                     "currency": "HKD",
                     "net_assets": "24145.90",
                     "init_margin": "1540.09",
-                    "maintenance_margin": "1540.09"
+                    "maintenance_margin": "1540.09",
                     "cash_infos":
                       [
                         {
