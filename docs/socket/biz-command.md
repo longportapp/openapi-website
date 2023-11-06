@@ -43,7 +43,7 @@ sidebar_position: 5
         <td><a href="../quote/pull/intraday">获取标的分时</a></td>
     </tr>
     <tr>
-        <td><a href="../quote/pull/candlestick">获取标的 k 线</a></td>
+        <td><a href="../quote/pull/candlestick">获取标的 K 线</a></td>
     </tr>
     <tr>
         <td><a href="../quote/pull/optionchain-date">获取标的的期权链到期日列表</a></td>
@@ -52,7 +52,7 @@ sidebar_position: 5
         <td><a href="../quote/pull/optionchain-date-strike">获取标的的期权链到期日期权标的列表</a></td>
     </tr>
     <tr>
-        <td><a href="../quote/pull/issuer">获取轮证发行商 id</a></td>
+        <td><a href="../quote/pull/issuer">获取轮证发行商 ID</a></td>
     </tr>
     <tr>
         <td><a href="../quote/pull/warrant-filter">获取轮证筛选列表</a></td>
@@ -73,7 +73,7 @@ sidebar_position: 5
         <td><a href="../quote/pull/calc-index">获取标的计算指标</a></td>
     </tr>
     <tr>
-        <td><a href="../quote/pull/history-candlestick">获取标的历史 k 线</a></td>
+        <td><a href="../quote/pull/history-candlestick">获取标的历史 K 线</a></td>
     </tr>
     <tr>
         <td rowspan="3">订阅</td>
