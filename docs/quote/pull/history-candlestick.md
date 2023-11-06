@@ -181,27 +181,27 @@ message Candlestick {
   </tr>
   <tr>
     <td>用户开户</td>
-    <td style="text-align: center">100</td>
+    <td><center>100</center></td>
   </tr>
   <tr>
     <td>总资产达 1 万 HKD  </td>
-    <td style="text-align: center">400</td>
+    <td><center>400</center></td>
   </tr>
   <tr>
     <td>总资产达 8 万 HKD</td>
-    <td style="text-align: center">600</td>
+    <td><center>600</center></td>
   </tr>
   <tr>
     <td>总资产达 40 万 HKD 或 月交易笔数大于 160 笔</td>
-    <td style="text-align: center">1000</td>
+    <td><center>1000</center></td>
   </tr>
   <tr>
     <td>总资产达 400 万 HKD 或 月交易笔数大于 1600 笔</td>
-    <td style="text-align: center">2000</td>
+    <td><center>2000</center></td>
   </tr>
   <tr>
     <td>总资产达 600 万 HKD 或 月交易笔数大于 2500 笔</td>
-    <td style="text-align: center">3000</td>
+    <td><center>3000</center></td>
   </tr>
 </table>
 

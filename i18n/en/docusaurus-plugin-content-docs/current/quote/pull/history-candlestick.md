@@ -181,27 +181,27 @@ According to the user’s assets and transactions in Changqiao, the number of ta
   </tr>
   <tr>
     <td>User account opening</td>
-    <td style="text-align: center">100</td>
+    <td><center>100</center></td>
   </tr>
   <tr>
     <td>Total assets reach HKD 10,000 </td>
-    <td style="text-align: center">400</td>
+    <td><center>400</center></td>
   </tr>
   <tr>
     <td>Total assets reach HKD 80,000</td>
-    <td style="text-align: center">600</td>
+    <td><center>600</center></td>
   </tr>
   <tr>
     <td>Total assets reach 400,000 HKD or the number of transactions per month is greater than 160</td>
-    <td style="text-align: center">1000</td>
+    <td><center>1000</center></td>
   </tr>
   <tr>
     <td>Total assets reach 4 million HKD or the number of transactions per month is greater than 1,600</td>
-    <td style="text-align: center">2000</td>
+    <td><center>2000</center></td>
   </tr>
   <tr>
     <td>Total assets reach 6 million HKD or the number of transactions per month is greater than 2,500</td>
-    <td style="text-align: center">3000</td>
+    <td><center>3000</center></td>
   </tr>
 </table>
 

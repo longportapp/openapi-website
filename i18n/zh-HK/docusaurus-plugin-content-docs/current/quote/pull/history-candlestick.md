@@ -181,27 +181,27 @@ message Candlestick {
   </tr>
   <tr>
     <td>用戶開戶</td>
-    <td style="text-align: center">100</td>
+    <td><center>100</center></td>
   </tr>
   <tr>
     <td>總資産達 1 萬 HKD  </td>
-    <td style="text-align: center">400</td>
+    <td><center>400</center></td>
   </tr>
   <tr>
     <td>總資産達 8 萬 HKD</td>
-    <td style="text-align: center">600</td>
+    <td><center>600</center></td>
   </tr>
   <tr>
     <td>總資産達 40 萬 HKD 或 月交易筆數大於 160 筆</td>
-    <td style="text-align: center">1000</td>
+    <td><center>1000</center></td>
   </tr>
   <tr>
     <td>總資産達 400 萬 HKD 或 月交易筆數大於 1600 筆</td>
-    <td style="text-align: center">2000</td>
+    <td><center>2000</center></td>
   </tr>
   <tr>
     <td>總資産達 600 萬 HKD 或 月交易筆數大於 2500 筆</td>
-    <td style="text-align: center">3000</td>
+    <td><center>3000</center></td>
   </tr>
 </table>
 
