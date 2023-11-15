@@ -55,7 +55,7 @@ LongPort 提供接入底層服務的 HTTP / WebSockets 接口以及封裝在上�
 
 ## 使用費用
 
-LongPort 不針對接口服務額外收取開通或使用費用，只需開通 LongPort 賬戶及 OpenAPI 服務權限後即可免費使用。實際交易產生佣金費用或高級行情產品費用參考 [官網收費](https://longbridge.hk/rate) 說明或諮詢線上客服。
+LongPort 不針對介面服務額外收取開通或使用費用，只需開通 LongPort 帳戶及 OpenAPI 服務權限即可免費使用。實際交易費率請洽詢您開通證券帳戶的券商。
 
 ## 其他
 

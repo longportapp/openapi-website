@@ -56,7 +56,7 @@ Please visit [Quote Permissions and Restrictions](/docs/quote/level) for details
 
 ## Pricing
 
-LongPort does not charge any additional fees for activating or using interface services. You only need to open a LongPort Integrated A/C and get OpenAPI service permissions to use it for free. Please refer to [Pricing](https://longbridge.hk/rate) or consult online customer service for the actual commissions or advanced quotes fees incurred by transactions.
+LongPort does not charge any additional fees for activating or using interface services. You only need to open a LongPort Integrated A/C and get OpenAPI service permissions to use it for free. For actual transaction fees, please contact the brokerage firm where you have opened your securities account.
 
 ## Other
 
