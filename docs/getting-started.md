@@ -762,6 +762,12 @@ https://longbridgeapp.github.io/openapi-sdk/
 
 ## 反馈及沟通
 
-- 可以给 LongPort 服务邮箱发送反馈，邮箱地址是：service@longbridge.global
-- 加入 LongPort OpenAPI 微信沟通群，二维码如下：
-  <img src="https://pub.lbkrs.com/files/202205/akTNrRTBrT5aMX4f/qrcode.jpg" className="max-w-2xl" />
+- GitHub Issues: https://github.com/longbridgeapp/openapi-sdk/
+
+- 微信沟通群（已满）：
+
+<img src="https://pub.lbkrs.com/files/202205/akTNrRTBrT5aMX4f/qrcode.jpg" className="max-w-2xl" />
+
+- 飞书沟通群：
+
+<img src="https://github.com/longbridgeapp/openapi-website/assets/5518/eb11fc36-25df-4d83-bb8b-bf8000094c98" className="max-w-2xl" />

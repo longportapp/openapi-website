@@ -764,5 +764,5 @@ https://longbridgeapp.github.io/openapi-sdk/
 
 ## Contact & Feedback
 
-- You can send feedback to service@longbridge.global
+- GitHub Issues: https://github.com/longbridgeapp/openapi-sdk
 - Join **Discord** LongPort OpenAPI Server: https://discord.gg/2gUTSCS6
