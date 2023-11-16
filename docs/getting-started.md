@@ -770,4 +770,4 @@ https://longbridgeapp.github.io/openapi-sdk/
 
 - 飞书沟通群：
 
-<img src="https://github.com/longbridgeapp/openapi-website/assets/5518/eb11fc36-25df-4d83-bb8b-bf8000094c98" className="max-w-2xl" />
+<img src="https://assets.lbkrs.com/uploads/2acb32b6-0718-4304-8d73-432a2d53aa97/feishu.png" className="max-w-2xl" />
