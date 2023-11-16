@@ -82,7 +82,7 @@ You can also use LongPort App to find the symbol of security
 A:
 
 - Quote Authority
-  In accordance with the rules of the exchange, the authority of OpenAPI are independent, and are not shared with App, PC, or Web permissions. For example, the Hong Kong stock Level 2 authority you have on the App cannot be used on the OpenAPI side. LongPort also presents basic market rights to OpenAPI users. If you need a higher-level market, you can activate the high-level quote authority by purchasing a market card through on-line Quote Store of brokers or Longport.
+  In accordance with the rules of the exchange, the authority of OpenAPI are independent, and are not shared with App, PC, or Web permissions. For example, the Hong Kong stock Level 2 authority you have on the App cannot be used on the OpenAPI side. LongPort also presents basic market rights to OpenAPI users. If you need a higher-level market, you can activate the high-level quote authority by purchasing a market card through on-line Quote Store of brokers or LongPort.
 - How to buy quote cards  
   LongPort users can choose the market cards they want to buy through the "Quote Store" in the LongPort App.
 
