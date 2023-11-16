@@ -9,21 +9,13 @@ slug: level
 <table>
     <thead>
       <tr>
-          <th width="80">市場</th>
+          <th width="160">市場</th>
           <th>標的</th>
-          <th>權限獲取方式</th>
       </tr>
     </thead>
     <tr>
-        <td width="80" rowspan="2">港股</td>
+        <td width="160" rowspan="2">港股</td>
         <td>證券類產品（含股票、ETFs、窩輪、牛熊、界內證）</td>
-        <td rowspan="2">
-          <p>請根據情況購買開通行情權限：</p>
-            <ul>
-            <li>中國大陸客户：<a href="https://activity.lbkrs.com/spa/mall?market=HK">港股 Lv2 實時行情 - OpenAPI</a></li>
-            <li>其他地區客户：<a href="https://activity.lbkrs.com/spa/mall?market=HK">港股 Lv2 實時行情（國際版）- OpenAPI</a></li>
-            </ul>
-        </td>
     </tr>
     <tr>
         <td>恆生指數</td>
@@ -31,33 +23,16 @@ slug: level
     <tr>
         <td rowspan="3">美股</td>
         <td>證券類產品（含紐交所、美交所、納斯達克上市的股票、ETFs）</td>
-        <td rowspan="2">
-            <ul>
-            <li>Level 1：請購買 <a href="https://activity.lbkrs.com/spa/mall?market=US">L1 Nasdaq Basic - OpenAPI</a></li>
-            <li>Level 2：暫未上線，敬請期待。</li>
-            </ul>
-        </td>
     </tr>
     <tr>
         <td>納斯達克指數</td>
     </tr>
     <tr>
         <td>OPRA 期權</td>
-        <td>
-            <ul>
-            <li>Level 1：請購買 <a href="https://activity.lbkrs.com/spa/mall?market=US">OPRA 期權-Open API</a></li>
-            </ul>
-        </td>
     </tr>
     <tr>
         <td rowspan="2">A 股</td>
         <td>證券類產品（含股票、ETFs）</td>
-        <td rowspan="2">
-        <ul>
-            <li>中國大陸個人客户：免費獲取 Lv1 行情</li>
-            <li>非中國大陸客户 / 機構客户：暫不支持</li>
-        </ul>
-        </td>
     </tr>
     <tr>
         <td>指數</td>
