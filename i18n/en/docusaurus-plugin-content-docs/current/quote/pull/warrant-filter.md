@@ -63,7 +63,7 @@ import os
 import time
 from longbridge.http import Auth, Config, HttpClient
 from longbridge.ws import ReadyState, WsCallback, WsClient
-# Protobuf variables definition: https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto
+# Protobuf variables definition: https://github.com/longportapp/openapi-protobufs/blob/main/quote/api.proto
 from longbridge.proto.quote_pb2 import (Command, FilterConfig, WarrantFilterListRequest, WarrantFilterListResponse)
 
 class MyWsCallback(WsCallback):

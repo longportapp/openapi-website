@@ -13,7 +13,7 @@ Endianness is `BigEndian`
 
 If your are familiar with `Python` or `C++`, we provider [SDK](https://open.longportapp.com/en/sdk) for you.
 
-If you want parse protocol by self, you can check our [Go Implemetation](https://github.com/longbridgeapp/openapi-protocol/tree/main/go).
+If you want parse protocol by self, you can check our [Go Implemetation](https://github.com/longportapp/openapi-protocol/tree/main/go).
 
 The endponts of `WebSocket` and `TCP` can be found [here](../hosts).
 

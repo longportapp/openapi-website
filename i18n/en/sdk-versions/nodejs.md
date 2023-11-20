@@ -1,6 +1,6 @@
 ## LongPort OpenAPI SDK for Node.js
 
-[https://github.com/longbridgeapp/openapi-sdk/tree/master/nodejs](https://github.com/longbridgeapp/openapi-sdk/tree/master/nodejs)
+[https://github.com/longportapp/openapi-sdk/tree/master/nodejs](https://github.com/longportapp/openapi-sdk/tree/master/nodejs)
 
 ### Install SDK
 

@@ -47,7 +47,7 @@ export const SdkVersion: React.FC<ISdkVersionProps> = ({ versions }) => {
     <div className={classnames(styles.container)}>
       <Tabs className="tabs tabs-lg" values={options} defaultValue={options[0].value}>
         {options.map(({ value }) => {
-          const editUrl = `https://github.com/longbridgeapp/openapi-website/edit/main/i18n/${i18n.currentLocale}/sdk-versions/${value}.md`
+          const editUrl = `https://github.com/longportapp/openapi-website/edit/main/i18n/${i18n.currentLocale}/sdk-versions/${value}.md`
 
           return (
             <TabItem value={value} key={value}>
