@@ -101,4 +101,4 @@ Order Notification Content is defined [here](./trade-definition#websocket-notifi
 
 ### `Protobuf`
 
-Our data protobuf defination is opensourced in [`Github`](https://github.com/longbridgeapp/openapi-protobufs/tree/main/trade).
+Our data protobuf defination is opensourced in [`Github`](https://github.com/longportapp/openapi-protobufs/tree/main/trade).

@@ -752,15 +752,15 @@ Order {
 
 我們在 LongPort OpenAPI Python SDK 的 GitHub 倉庫中提供了上面幾個例子的完整代碼，當然後期我們也會持續往裡面補充或更新。
 
-https://github.com/longbridgeapp/openapi-sdk/tree/master/examples
+https://github.com/longportapp/openapi-sdk/tree/master/examples
 
 ## SDK API 文檔
 
 SDK 的詳細 API 文檔請訪問：
 
-https://longbridgeapp.github.io/openapi-sdk/
+https://longportapp.github.io/openapi-sdk/
 
-- GitHub Issues: https://github.com/longbridgeapp/openapi-sdk/
+- GitHub Issues: https://github.com/longportapp/openapi-sdk/
 
 - 微信溝通羣（已滿）：
 

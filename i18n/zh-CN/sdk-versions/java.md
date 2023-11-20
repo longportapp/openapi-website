@@ -1,6 +1,6 @@
 ## LongPort OpenAPI SDK for Java
 
-[https://github.com/longbridgeapp/openapi-sdk/tree/master/java](https://github.com/longbridgeapp/openapi-sdk/tree/master/java)
+[https://github.com/longportapp/openapi-sdk/tree/master/java](https://github.com/longportapp/openapi-sdk/tree/master/java)
 
 ### 安装 SDK
 

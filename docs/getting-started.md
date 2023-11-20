@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 ## 前言
 
-[LongPort OpenAPI SDK](https://github.com/longbridgeapp/openapi-sdk) 基于 Rust 底层提供标准实现，目前我们已经发布了 Python、Node.js、Rust、C++ 的 SDK，其他语言的支持后面会陆续推出。
+[LongPort OpenAPI SDK](https://github.com/longportapp/openapi-sdk) 基于 Rust 底层提供标准实现，目前我们已经发布了 Python、Node.js、Rust、C++ 的 SDK，其他语言的支持后面会陆续推出。
 
 ## API Host
 
@@ -746,13 +746,13 @@ Order {
 }
 ```
 
-上面例子已经完整演示了如何使用 SDK 访问 OpenAPI 的接口，更多其他接口请详细阅读 [LongPort OpenAPI 文档](https://longbridgeapp.github.io/openapi-sdk/)，根据不同的接口使用。
+上面例子已经完整演示了如何使用 SDK 访问 OpenAPI 的接口，更多其他接口请详细阅读 [LongPort OpenAPI 文档](https://longportapp.github.io/openapi-sdk/)，根据不同的接口使用。
 
 ## 更多例子
 
 我们在 LongPort OpenAPI Python SDK 的 GitHub 仓库中提供了上面几个例子的完整代码，当然后期我们也会持续往里面补充或更新。
 
-https://github.com/longbridgeapp/openapi-sdk/tree/master/examples
+https://github.com/longportapp/openapi-sdk/tree/master/examples
 
 ## SDK API 文档
 
@@ -762,7 +762,7 @@ https://longbridgeapp.github.io/openapi-sdk/
 
 ## 反馈及沟通
 
-- GitHub Issues: https://github.com/longbridgeapp/openapi-sdk/
+- GitHub Issues: https://github.com/longportapp/openapi-sdk/
 
 - 微信沟通群（已满）：
 

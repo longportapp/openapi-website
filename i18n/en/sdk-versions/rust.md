@@ -1,6 +1,6 @@
 ## LongPort OpenAPI SDK for Rust
 
-[https://github.com/longbridgeapp/openapi-sdk/tree/master/rust](https://github.com/longbridgeapp/openapi-sdk/tree/master/rust)
+[https://github.com/longportapp/openapi-sdk/tree/master/rust](https://github.com/longportapp/openapi-sdk/tree/master/rust)
 
 ### Install SDK
 

@@ -31,7 +31,7 @@ import os
 import time
 from longbridge.http import Auth, Config, HttpClient
 from longbridge.ws import ReadyState, WsCallback, WsClient
-# Protobuf 变量定义参见：https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto
+# Protobuf 变量定义参见：https://github.com/longportapp/openapi-protobufs/blob/main/quote/api.proto
 from longbridge.proto.quote_pb2 import (Command, PushQuote, SubscribeRequest, SubscriptionResponse, SubType, SubscriptionRequest, UnsubscribeRequest, UnsubscribeResponse)
 
 class MyWsCallback(WsCallback):

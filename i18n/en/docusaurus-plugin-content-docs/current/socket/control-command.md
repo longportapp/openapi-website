@@ -140,4 +140,4 @@ message ReconnectResponse {
 
 ## Protobuf
 
-All control command protobuf definations are opensource in [GitHub](https://github.com/longbridgeapp/openapi-protobufs/blob/main/control/control.proto)
+All control command protobuf definations are opensource in [GitHub](https://github.com/longportapp/openapi-protobufs/blob/main/control/control.proto)

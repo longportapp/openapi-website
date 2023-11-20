@@ -134,4 +134,4 @@ We use the [Protobuf](https://developers.google.cn/protocol-buffers) protocol to
 - Smaller packet size.
 - Strongger version forward and backward compatibility.
 
-Quote Protobuf protocol document [download link](https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto).
+Quote Protobuf protocol document [download link](https://github.com/longportapp/openapi-protobufs/blob/main/quote/api.proto).

@@ -12,7 +12,7 @@ const config = {
   title: 'LongPort OpenAPI',
   url: 'https://open.longportapp.com',
   baseUrl: '/',
-  organizationName: 'longbridgeapp',
+  organizationName: 'longportapp',
   projectName: 'openapi-website',
   baseUrlIssueBanner: false,
   onBrokenLinks: 'warn',
@@ -83,13 +83,13 @@ const config = {
               if (isAutoGenDoc) {
                 targetPath = `${nextVersionDocsDirPath}/${locale}/${docPath}`
               }
-              return `https://github.com/longbridgeapp/openapi-website/edit/main/${targetPath}`
+              return `https://github.com/longportapp/openapi-website/edit/main/${targetPath}`
             } else {
               if (docPath.includes('--autogen.md')) {
                 docPath = docPath.replace('--autogen.md', '.yml')
                 nextVersionDocsDirPath = 'swagger-docs'
               }
-              return `https://github.com/longbridgeapp/openapi-website/edit/main/${nextVersionDocsDirPath}/${docPath}`
+              return `https://github.com/longportapp/openapi-website/edit/main/${nextVersionDocsDirPath}/${docPath}`
             }
           },
           showLastUpdateAuthor: true,
@@ -172,7 +172,7 @@ const config = {
             position: 'right',
           },
           {
-            href: 'https://github.com/longbridgeapp/openapi-website',
+            href: 'https://github.com/longportapp/openapi-website',
             label: 'GitHub',
             position: 'right',
           },

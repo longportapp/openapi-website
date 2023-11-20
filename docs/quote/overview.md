@@ -134,4 +134,4 @@ slug: overview
 - 数据包体积小
 - 较强的版本前向后向兼容性
 
-行情 Protobuf 协议文档[下载地址](https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto)。
+行情 Protobuf 协议文档[下载地址](https://github.com/longportapp/openapi-protobufs/blob/main/quote/api.proto)。
