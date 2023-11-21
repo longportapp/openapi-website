@@ -24,7 +24,7 @@ paths:
         value: |
           # 获取账户资金
           # https://open.longportapp.com/docs/trade/asset/account
-          from longbridge.openapi import TradeContext, Config
+          from longport.openapi import TradeContext, Config
 
           config = Config.from_env()
           ctx = TradeContext(config)

@@ -15,8 +15,8 @@ sidebar_position: 1
 
 ### Parameters
 
-| Name   | Type     | Required | Description                                                                                                                         |
-| ------ | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Name   | Type     | Required | Description                                                                                                                     |
+|--------|----------|----------|---------------------------------------------------------------------------------------------------------------------------------|
 | symbol | string[] | 是       | 標的代碼列表，使用 `ticker.region` 格式，例如：`[700.HK]` <br /><br />**校驗規則：**<br />每次請求支持傳入的標的數量上限是 `500` 個 |
 
 ### Protobuf
@@ -34,7 +34,7 @@ message MultiSecurityRequest {
 # https://open.longportapp.com/docs/quote/pull/static
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
 # 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
-from longbridge.openapi import QuoteContext, Config
+from longport.openapi import QuoteContext, Config
 
 config = Config.from_env()
 ctx = QuoteContext(config)
@@ -47,25 +47,25 @@ print(resp)
 
 ### Response Properties
 
-| Name                 | Type     | Description                                                                                      |
-| -------------------- | -------- | ------------------------------------------------------------------------------------------------ |
-| secu_static_info     | object[] | 標的基礎數據列表                                                                                 |
-| ∟ symbol             | string   | 標的代碼                                                                                         |
-| ∟ name_cn            | string   | 中文簡體標的名稱                                                                                 |
-| ∟ name_en            | string   | 英文標的名稱                                                                                     |
-| ∟ name_hk            | string   | 中文繁體標的名稱                                                                                 |
-| ∟ exchange           | string   | 標的所屬交易所                                                                                   |
-| ∟ currency           | string   | 交易幣種 <br /><br />**可選值：**<br />`CNY` <br />`USD` <br />`SGD` <br />`HKD`                 |
-| ∟ lot_size           | int32    | 每手股數                                                                                         |
-| ∟ total_shares       | int64    | 總股本                                                                                           |
-| ∟ circulating_shares | int64    | 流通股本                                                                                         |
-| ∟ hk_shares          | int64    | 港股股本 (僅港股)                                                                                |
-| ∟ eps                | string   | 每股盈利                                                                                         |
-| ∟ eps_ttm            | string   | 每股盈利 (TTM)                                                                                   |
-| ∟ bps                | string   | 每股淨資產                                                                                       |
-| ∟ dividend_yield     | string   | 股息                                                                                             |
+| Name                 | Type     | Description                                                                                    |
+|----------------------|----------|------------------------------------------------------------------------------------------------|
+| secu_static_info     | object[] | 標的基礎數據列表                                                                               |
+| ∟ symbol             | string   | 標的代碼                                                                                       |
+| ∟ name_cn            | string   | 中文簡體標的名稱                                                                               |
+| ∟ name_en            | string   | 英文標的名稱                                                                                   |
+| ∟ name_hk            | string   | 中文繁體標的名稱                                                                               |
+| ∟ exchange           | string   | 標的所屬交易所                                                                                 |
+| ∟ currency           | string   | 交易幣種 <br /><br />**可選值：**<br />`CNY` <br />`USD` <br />`SGD` <br />`HKD`                |
+| ∟ lot_size           | int32    | 每手股數                                                                                       |
+| ∟ total_shares       | int64    | 總股本                                                                                         |
+| ∟ circulating_shares | int64    | 流通股本                                                                                       |
+| ∟ hk_shares          | int64    | 港股股本 (僅港股)                                                                              |
+| ∟ eps                | string   | 每股盈利                                                                                       |
+| ∟ eps_ttm            | string   | 每股盈利 (TTM)                                                                                 |
+| ∟ bps                | string   | 每股淨資產                                                                                     |
+| ∟ dividend_yield     | string   | 股息                                                                                           |
 | ∟ stock_derivatives  | int32[]  | 如果標的是正股，可提供的衍生品行情類型 <br /><br />**可選值：**<br />`1` - 期權 <br />`2` - 輪證 |
-| ∟ board              | string   | 標的所屬板塊，詳見 [Board](../objects#board---標的板塊)                                          |
+| ∟ board              | string   | 標的所屬板塊，詳見 [Board](../objects#board---標的板塊)                                         |
 
 ### Protobuf
 
@@ -140,9 +140,9 @@ message StaticInfo {
 
 ## 錯誤碼
 
-| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                                   |
-| ---------- | ---------- | -------------- | ------------------------------------------ |
-| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗                     |
-| 3          | 301606     | 限流           | 降低請求頻次                               |
-| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理                   |
+| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                                  |
+|------------|------------|--------------|---------------------------------------|
+| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗                    |
+| 3          | 301606     | 限流           | 降低請求頻次                              |
+| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理                  |
 | 7          | 301607     | 接口限制       | 請求的標的數量超限，請減少單次請求標的數量 |

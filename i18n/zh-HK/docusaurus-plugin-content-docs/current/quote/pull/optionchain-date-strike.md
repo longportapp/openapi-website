@@ -17,9 +17,9 @@ sidebar_position: 12
 
 ### Parameters
 
-| Name        | Type   | Required | Description                                                                                         |
-| ----------- | ------ | -------- | --------------------------------------------------------------------------------------------------- |
-| symbol      | string | 是       | 標的代碼，使用 `ticker.region` 格式，例如：`700.HK`                                                 |
+| Name        | Type   | Required | Description                                                                                     |
+|-------------|--------|----------|-------------------------------------------------------------------------------------------------|
+| symbol      | string | 是       | 標的代碼，使用 `ticker.region` 格式，例如：`700.HK`                                                |
 | expiry_date | string | 是       | 期權到期日，使用 `YYMMDD` 格式，例如：`20220429`，通過 [期權到期日](./optionchain_date.md) 接口獲取 |
 
 ### Protobuf
@@ -36,7 +36,7 @@ message OptionChainDateStrikeInfoRequest {
 ### Response Properties
 
 | Name              | Type     | Description        |
-| ----------------- | -------- | ------------------ |
+|-------------------|----------|--------------------|
 | strike_price_info | object[] | 到期日期權標的列表 |
 | ∟ price           | string   | 行權價             |
 | ∟ call_symbol     | string   | CALL 期權標的代碼  |
@@ -66,7 +66,7 @@ message StrikePriceInfo {
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
 # 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from datetime import date
-from longbridge.openapi import QuoteContext, Config
+from longport.openapi import QuoteContext, Config
 
 config = Config.from_env()
 ctx = QuoteContext(config)
@@ -110,9 +110,9 @@ print(resp)
 
 ## 錯誤碼
 
-| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                                    |
-| ---------- | ---------- | -------------- | ------------------------------------------- |
-| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗                      |
-| 3          | 301606     | 限流           | 降低請求頻次                                |
-| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理                    |
+| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                                   |
+|------------|------------|--------------|----------------------------------------|
+| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗                     |
+| 3          | 301606     | 限流           | 降低請求頻次                               |
+| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理                   |
 | 7          | 301600     | 請求數據非法   | 檢查請求的 `symbol`，`expiry_date` 數據格式 |

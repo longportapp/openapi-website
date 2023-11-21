@@ -20,7 +20,7 @@ sidebar_position: 7
 # https://open.longportapp.com/docs/quote/pull/broker-ids
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
 # 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
-from longbridge.openapi import QuoteContext, Config
+from longport.openapi import QuoteContext, Config
 
 config = Config.from_env()
 ctx = QuoteContext(config)
@@ -34,7 +34,7 @@ print(resp)
 ### Response Properties
 
 | Name                       | Type     | Description           |
-| -------------------------- | -------- | --------------------- |
+|----------------------------|----------|-----------------------|
 | participant_broker_numbers | object[] | 券商席位              |
 | ∟ broker_ids               | int32[]  | 券商對應的多個席位 ID |
 | ∟ participant_name_cn      | string   | 券商名稱 (简)         |
@@ -86,7 +86,7 @@ message ParticipantInfo {
 ## 錯誤碼
 
 | 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                 |
-| ---------- | ---------- | -------------- | ------------------------ |
+|------------|------------|--------------|----------------------|
 | 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗   |
 | 3          | 301606     | 限流           | 降低請求頻次             |
 | 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理 |

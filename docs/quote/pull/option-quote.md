@@ -15,8 +15,8 @@ sidebar_position: 3
 
 ### Parameters
 
-| Name   | Type     | Required | Description                                                                                                                                                                                  |
-| ------ | -------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name   | Type     | Required | Description                                                                                                                                                                              |
+|--------|----------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | symbol | string[] | 是       | 标的代码列表，通过[期权链接口](./optionchain-date-strike.md) 获取期权标的的 symbol，例如：`[BABA230120C160000.US]` <br /><br />**校验规则：**<br />每次请求支持传入的标的数量上限是 `500` 个 |
 
 ### Protobuf
@@ -34,7 +34,7 @@ message MultiSecurityRequest {
 # https://open.longportapp.com/docs/quote/pull/option-quote
 # 运行前请访问“开发者中心”确保账户有正确的行情权限。
 # 如没有开通行情权限，可以通过“LongPort”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
-from longbridge.openapi import QuoteContext, Config
+from longport.openapi import QuoteContext, Config
 
 config = Config.from_env()
 ctx = QuoteContext(config)
@@ -47,30 +47,30 @@ print(resp)
 
 ### Response Properties
 
-| Name                     | Type     | Description                                                         |
-| ------------------------ | -------- | ------------------------------------------------------------------- |
-| secu_quote               | object[] | 期权标的行情数据列表                                                |
-| ∟ symbol                 | string   | 标的代码                                                            |
-| ∟ last_done              | string   | 最新价                                                              |
-| ∟ prev_close             | string   | 昨收价                                                              |
-| ∟ open                   | string   | 开盘价                                                              |
-| ∟ high                   | string   | 最高价                                                              |
-| ∟ low                    | string   | 最低价                                                              |
-| ∟ timestamp              | int64    | 最新成交的时间戳                                                    |
-| ∟ volume                 | int64    | 成交量                                                              |
-| ∟ turnover               | string   | 成交额                                                              |
+| Name                     | Type     | Description                                                        |
+|--------------------------|----------|--------------------------------------------------------------------|
+| secu_quote               | object[] | 期权标的行情数据列表                                               |
+| ∟ symbol                 | string   | 标的代码                                                           |
+| ∟ last_done              | string   | 最新价                                                             |
+| ∟ prev_close             | string   | 昨收价                                                             |
+| ∟ open                   | string   | 开盘价                                                             |
+| ∟ high                   | string   | 最高价                                                             |
+| ∟ low                    | string   | 最低价                                                             |
+| ∟ timestamp              | int64    | 最新成交的时间戳                                                   |
+| ∟ volume                 | int64    | 成交量                                                             |
+| ∟ turnover               | string   | 成交额                                                             |
 | ∟ trade_status           | int32    | 标的交易状态，详见 [TradeStatus](../objects#tradestatus---交易状态) |
-| ∟ option_extend          | object   | 期权扩展行情                                                        |
-| ∟∟ implied_volatility    | string   | 隐含波动率                                                          |
-| ∟∟ open_interest         | int64    | 未平仓数                                                            |
-| ∟∟ expiry_date           | string   | 到期日，使用：`YYMMDD` 格式                                         |
-| ∟∟ strike_price          | string   | 行权价                                                              |
-| ∟∟ contract_multiplier   | string   | 合约乘数                                                            |
+| ∟ option_extend          | object   | 期权扩展行情                                                       |
+| ∟∟ implied_volatility    | string   | 隐含波动率                                                         |
+| ∟∟ open_interest         | int64    | 未平仓数                                                           |
+| ∟∟ expiry_date           | string   | 到期日，使用：`YYMMDD` 格式                                          |
+| ∟∟ strike_price          | string   | 行权价                                                             |
+| ∟∟ contract_multiplier   | string   | 合约乘数                                                           |
 | ∟∟ contract_type         | string   | 期权类型 <br /><br />**可选值：**<br />`A` - 美式 <br />`U` - 欧式  |
-| ∟∟ contract_size         | string   | 合约规模                                                            |
+| ∟∟ contract_size         | string   | 合约规模                                                           |
 | ∟∟ direction             | string   | 方向 <br /><br />**可选值：**<br />`P` - put <br />`C` - call       |
-| ∟∟ historical_volatility | string   | 对应正股的历史波动率                                                |
-| ∟∟ underlying_symbol     | string   | 对应的正股标的代码                                                  |
+| ∟∟ historical_volatility | string   | 对应正股的历史波动率                                               |
+| ∟∟ underlying_symbol     | string   | 对应的正股标的代码                                                 |
 
 ### Protobuf
 
@@ -164,9 +164,9 @@ message OptionExtend {
 
 ## 错误码
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                                   |
-| ---------- | ---------- | -------------- | ------------------------------------------ |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败                     |
-| 3          | 301606     | 限流           | 降低请求频次                               |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理                   |
+| 协议错误码 | 业务错误码 | 描述           | 排查建议                                  |
+|------------|------------|--------------|---------------------------------------|
+| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败                    |
+| 3          | 301606     | 限流           | 降低请求频次                              |
+| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理                  |
 | 7          | 301607     | 接口限制       | 请求的标的数量超限，请减少单次请求标的数量 |

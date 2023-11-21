@@ -18,7 +18,7 @@ This API is used to obtain the candlestick data of security.
 ### Parameters
 
 | Name        | Type   | Required | Description                                                                                              |
-| ----------- | ------ | -------- | -------------------------------------------------------------------------------------------------------- |
+|-------------|--------|----------|----------------------------------------------------------------------------------------------------------|
 | symbol      | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK`                                           |
 | period      | int32  | Yes      | Candlestick period, for example: `1000`, see [Period](../objects#period---candlestick-period)            |
 | count       | int32  | Yes      | Count of cancdlestick, for example: `100`<br /><br />**Check rules:** <br />maximum count is `1000`      |
@@ -42,7 +42,7 @@ message SecurityCandlestickRequest {
 # https://open.longportapp.com/docs/quote/pull/candlestick
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
-from longbridge.openapi import QuoteContext, Config, Period, AdjustType
+from longport.openapi import QuoteContext, Config, Period, AdjustType
 
 config = Config.from_env()
 ctx = QuoteContext(config)
@@ -56,7 +56,7 @@ print(resp)
 ### Response Properties
 
 | Name         | Type     | Description                           |
-| ------------ | -------- | ------------------------------------- |
+|--------------|----------|---------------------------------------|
 | symbol       | string   | Security code, for example: `AAPL.US` |
 | candlesticks | object[] | Candlestick data                      |
 | ∟ close      | string   | Close price                           |
@@ -144,7 +144,7 @@ message Candlestick {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description                    | Troubleshooting Suggestions                                                    |
-| ------------------- | ------------------- | ------------------------------ | ------------------------------------------------------------------------------ |
+|---------------------|---------------------|--------------------------------|--------------------------------------------------------------------------------|
 | 3                   | 301600              | Invalid request                | Invalid request parameters or unpacking request failed                         |
 | 3                   | 301606              | Request rate limit             | Reduce the frequency of requests                                               |
 | 7                   | 301602              | Server error                   | Please try again or contact a technician to resolve the issue                  |

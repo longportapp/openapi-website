@@ -7,7 +7,7 @@
 You can install the SDK via Npm.
 
 ```bash
-$ npm install longbridge --save
+$ npm install longport --save
 ```
 
-[https://www.npmjs.com/package/longbridge](https://www.npmjs.com/package/longbridge)
+[https://www.npmjs.com/package/longport](https://www.npmjs.com/package/longport)

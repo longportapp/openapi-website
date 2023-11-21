@@ -24,7 +24,7 @@ paths:
         value: |
           # Get Stock Positions
           # https://open.longportapp.com/docs/trade/asset/stock
-          from longbridge.openapi import TradeContext, Config
+          from longport.openapi import TradeContext, Config
 
           config = Config.from_env()
           ctx = TradeContext(config)

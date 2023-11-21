@@ -48,14 +48,14 @@ import TabItem from '@theme/TabItem';
   <TabItem value="python" label="Python" default>
 
 ```bash
-pip3 install longbridge
+pip3 install longport
 ```
 
   </TabItem>
   <TabItem value="javascript" label="JavaScript">
 
 ```bash
-yarn install longbridge
+yarn install longport
 ```
 
   </TabItem>
@@ -63,7 +63,7 @@ yarn install longbridge
 
 ```toml
 [dependencies]
-longbridge = "*"
+longport = "1.0.0"
 tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
@@ -73,7 +73,7 @@ tokio = { version = "1", features = "rt-multi-thread" }
 ```xml
 <dependencies>
     <dependency>
-        <groupId>io.github.longbridgeapp</groupId>
+        <groupId>io.github.longportapp</groupId>
         <artifactId>openapi-sdk</artifactId>
         <version>LATEST</version>
     </dependency>
@@ -102,9 +102,9 @@ tokio = { version = "1", features = "rt-multi-thread" }
 打开终端，输入下面的命令即可：
 
 ```bash
-$ export LONGBRIDGE_APP_KEY="从页面上获取到的 App Key"
-$ export LONGBRIDGE_APP_SECRET="从页面上获取到的 App Secret"
-$ export LONGBRIDGE_ACCESS_TOKEN="从页面上获取到的 Access Token"
+$ export LONGPORT_APP_KEY="从页面上获取到的 App Key"
+$ export LONGPORT_APP_SECRET="从页面上获取到的 App Secret"
+$ export LONGPORT_ACCESS_TOKEN="从页面上获取到的 Access Token"
 ```
 
 ### Windows 下设置环境变量
@@ -114,13 +114,13 @@ Windows 要稍微复杂一些，按下 `Win + R` 快捷键，输入 `cmd` 命令
 在命令行里面输入下面的命令设置环境变量：
 
 ```bash
-C:\Users\jason> setx LONGBRIDGE_APP_KEY "从页面上获取到的 App Key"
+C:\Users\jason> setx LONGPORT_APP_KEY "从页面上获取到的 App Key"
 成功：指定的值已得到保存。
 
-C:\Users\jason> setx LONGBRIDGE_APP_SECRET "从页面上获取到的 App Secret"
+C:\Users\jason> setx LONGPORT_APP_SECRET "从页面上获取到的 App Secret"
 成功：指定的值已得到保存。
 
-C:\Users\jason> setx LONGBRIDGE_ACCESS_TOKEN "从页面上获取到的 Access Token"
+C:\Users\jason> setx LONGPORT_ACCESS_TOKEN "从页面上获取到的 Access Token"
 成功：指定的值已得到保存。
 ```
 
@@ -133,16 +133,16 @@ Windows 环境变量限制，当上面 3 条命令执行成功以后，你需要
 注销或重新启动后，再次打开命令行，输入下面的命令验证一下环境变量是否设置正确：
 
 ```bash
-C:\Users\jason> set LONGBRIDGE
-LONGBRIDGE_APP_KEY=xxxxxxx
-LONGBRIDGE_APP_SECRET=xxxxxx
-LONGBRIDGE_ACCESS_TOKEN=xxxxxxx
+C:\Users\jason> set LONGPORT
+LONGPORT_APP_KEY=xxxxxxx
+LONGPORT_APP_SECRET=xxxxxx
+LONGPORT_ACCESS_TOKEN=xxxxxxx
 ```
 
 如果能正确打印你刚才设置的值，那么环境变量就是对了。
 
 :::tip
-建议您设置好 `LONGBRIDGE_APP_KEY`, `LONGBRIDGE_APP_SECRET`, `LONGBRIDGE_ACCESS_TOKEN` 这几个环境变量。我们为了演示方便，后面各章节文档中的示例代码都会使用这几个环境变量。
+建议您设置好 `LONGPORT_APP_KEY`, `LONGPORT_APP_SECRET`, `LONGPORT_ACCESS_TOKEN` 这几个环境变量。我们为了演示方便，后面各章节文档中的示例代码都会使用这几个环境变量。
 
 如您在 Windows 环境不方便使用环境变量，可根据个人需要，修改代码。
 :::
@@ -161,7 +161,7 @@ LONGBRIDGE_ACCESS_TOKEN=xxxxxxx
 创建 `account_asset.py` 贴入下面的代码：
 
 ```python
-from longbridge.openapi import TradeContext, Config
+from longport.openapi import TradeContext, Config
 
 config = Config.from_env()
 ctx = TradeContext(config)
@@ -182,7 +182,7 @@ python account_asset.py
 创建 `account_asset.js` 贴入下面的代码：
 
 ```js
-const { Config, TradeContext } = require('longbridge')
+const { Config, TradeContext } = require('longport')
 
 let config = Config.fromEnv()
 TradeContext.new(config)
@@ -208,7 +208,7 @@ node account_asset.js
 ```rust
 use std::sync::Arc;
 
-use longbridge::{trade::TradeContext, Config};
+use longport::{trade::TradeContext, Config};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -233,8 +233,8 @@ cargo run
 创建 `Main.java` 贴入下面的代码：
 
 ```java
-import com.longbridge.*;
-import com.longbridge.trade.*;
+import com.longport.*;
+import com.longport.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
@@ -314,7 +314,7 @@ https://longportapp.com/download
 
 ```python
 from time import sleep
-from longbridge.openapi import QuoteContext, Config, SubType, PushQuote
+from longport.openapi import QuoteContext, Config, SubType, PushQuote
 
 
 def on_quote(symbol: str, quote: PushQuote):
@@ -342,7 +342,7 @@ python subscribe_quote.py
 创建 `subscribe_quote.js` 贴入下面的代码：
 
 ```javascript
-const { Config, QuoteContext, SubType } = require('longbridge')
+const { Config, QuoteContext, SubType } = require('longport')
 
 let config = Config.fromEnv()
 QuoteContext.new(config).then((ctx) => {
@@ -365,7 +365,7 @@ node subscribe_quote.js
 ```rust
 use std::sync::Arc;
 
-use longbridge::{
+use longport::{
     quote::{QuoteContext, SubFlags},
     Config,
 };
@@ -401,8 +401,8 @@ cargo run
 创建 `Main.java` 贴入下面的代码：
 
 ```java
-import com.longbridge.*;
-import com.longbridge.quote.*;
+import com.longport.*;
+import com.longport.quote.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
@@ -477,7 +477,7 @@ NFLX.US PushQuote {
 
 ```python
 from decimal import Decimal
-from longbridge.openapi import TradeContext, Config, OrderSide, OrderType, TimeInForceType
+from longport.openapi import TradeContext, Config, OrderSide, OrderType, TimeInForceType
 
 config = Config.from_env()
 ctx = TradeContext(config)
@@ -506,7 +506,7 @@ python submit_order.py
 创建 `submit_order.js` 贴入下面的代码：
 
 ```javascript
-const { Config, TradeContext, OrderType, OrderSide, Decimal, TimeInForceType } = require('longbridge')
+const { Config, TradeContext, OrderType, OrderSide, Decimal, TimeInForceType } = require('longport')
 
 let config = Config.fromEnv()
 TradeContext.new(config)
@@ -537,7 +537,7 @@ node submit_order.js
 ```rust
 use std::sync::Arc;
 
-use longbridge::{
+use longport::{
     decimal,
     trade::{OrderSide, OrderType, SubmitOrderOptions, TimeInForceType, TradeContext},
     Config,
@@ -574,8 +574,8 @@ cargo run
 创建 `Main.java` 贴入下面的代码：
 
 ```java
-import com.longbridge.*;
-import com.longbridge.trade.*;
+import com.longport.*;
+import com.longport.trade.*;
 import java.math.BigDecimal;
 
 public class Main {
@@ -616,7 +616,7 @@ SubmitOrderResponse { order_id: "718437534753550336" }
 创建 `today_orders.py` 贴入下面的代码：
 
 ```python
-from longbridge.openapi import TradeContext, Config
+from longport.openapi import TradeContext, Config
 
 config = Config.from_env()
 ctx = TradeContext(config)
@@ -637,7 +637,7 @@ python today_orders.py
 创建 `today_orders.js` 贴入下面的代码：
 
 ```js
-const { Config, TradeContext } = require('longbridge')
+const { Config, TradeContext } = require('longport')
 
 let config = Config.fromEnv()
 TradeContext.new(config)
@@ -663,7 +663,7 @@ node today_orders.js
 ```rust
 use std::sync::Arc;
 
-use longbridge::{trade::TradeContext, Config};
+use longport::{trade::TradeContext, Config};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -690,8 +690,8 @@ cargo run
 创建 `Main.java` 贴入下面的代码：
 
 ```java
-import com.longbridge.*;
-import com.longbridge.trade.*;
+import com.longport.*;
+import com.longport.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
@@ -758,7 +758,7 @@ https://github.com/longportapp/openapi-sdk/tree/master/examples
 
 SDK 的详细 API 文档请访问：
 
-https://longbridgeapp.github.io/openapi-sdk/
+https://longportapp.github.io/openapi-sdk/
 
 ## 反馈及沟通
 

@@ -18,7 +18,7 @@ This API is used to obtain the intraday data of security.
 ### Parameters
 
 | Name   | Type   | Required | Description                                                    |
-| ------ | ------ | -------- | -------------------------------------------------------------- |
+|--------|--------|----------|----------------------------------------------------------------|
 | symbol | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK` |
 
 ### Protobuf
@@ -36,7 +36,7 @@ message SecurityIntradayRequest {
 # https://open.longportapp.com/docs/quote/pull/intraday
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
-from longbridge.openapi import QuoteContext, Config
+from longport.openapi import QuoteContext, Config
 
 config = Config.from_env()
 ctx = QuoteContext(config)
@@ -50,7 +50,7 @@ print(resp)
 ### Response Properties
 
 | Name        | Type     | Description                           |
-| ----------- | -------- | ------------------------------------- |
+|-------------|----------|---------------------------------------|
 | symbol      | string   | Security code, for example: `AAPL.US` |
 | lines       | object[] | Intraday line data                    |
 | ∟ price     | string   | Close price of the minute             |
@@ -124,7 +124,7 @@ message Line {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description        | Troubleshooting Suggestions                                   |
-| ------------------- | ------------------- | ------------------ | ------------------------------------------------------------- |
+|---------------------|---------------------|--------------------|---------------------------------------------------------------|
 | 3                   | 301600              | Invalid request    | Invalid request parameters or unpacking request failed        |
 | 3                   | 301606              | Request rate limit | Reduce the frequency of requests                              |
 | 7                   | 301602              | Server error       | Please try again or contact a technician to resolve the issue |

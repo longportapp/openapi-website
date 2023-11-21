@@ -8,10 +8,10 @@
 
 ```xml
 <dependency>
-  <groupId>io.github.longbridgeapp</groupId>
+  <groupId>io.github.longportapp</groupId>
   <artifactId>openapi-sdk</artifactId>
   <version>LATEST</version>
 </dependency>
 ```
 
-[https://search.maven.org/artifact/io.github.longbridgeapp/openapi-sdk](https://search.maven.org/artifact/io.github.longbridgeapp/openapi-sdk)
+[https://search.maven.org/artifact/io.github.longportapp/openapi-sdk](https://search.maven.org/artifact/io.github.longportapp/openapi-sdk)

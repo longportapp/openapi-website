@@ -48,14 +48,14 @@ For access in mainland China, it is recommended to use `openapi.longportapp.cn`,
   <TabItem value="python" label="Python" default>
 
 ```bash
-pip3 install longbridge
+pip3 install longport
 ```
 
   </TabItem>
   <TabItem value="javascript" label="JavaScript">
 
 ```bash
-yarn install longbridge
+yarn install longport
 ```
 
   </TabItem>
@@ -63,7 +63,7 @@ yarn install longbridge
 
 ```toml
 [dependencies]
-longbridge = "*"
+longport = "1.0.0"
 tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
@@ -73,7 +73,7 @@ tokio = { version = "1", features = "rt-multi-thread" }
 ```xml
 <dependencies>
     <dependency>
-        <groupId>io.github.longbridgeapp</groupId>
+        <groupId>io.github.longportapp</groupId>
         <artifactId>openapi-sdk</artifactId>
         <version>LATEST</version>
     </dependency>
@@ -102,9 +102,9 @@ The "application credential" credential information will be given on the page. A
 Open the terminal and enter the following command:
 
 ```bash
-$ export LONGBRIDGE_APP_KEY="App Key get from user center"
-$ export LONGBRIDGE_APP_SECRET="App Secret get from user center"
-$ export LONGBRIDGE_ACCESS_TOKEN="Access Token get from user center"
+$ export LONGPORT_APP_KEY="App Key get from user center"
+$ export LONGPORT_APP_SECRET="App Secret get from user center"
+$ export LONGPORT_ACCESS_TOKEN="Access Token get from user center"
 ```
 
 ### Setting Environment Variables In Windows Environment
@@ -114,13 +114,13 @@ Windows is a little more complicated, press the `Win + R` shortcut keys and ente
 Enter the following command in the command line to set the environment variable:
 
 ```bash
-C:\Users\jason> setx LONGBRIDGE_APP_KEY "App Key get from user center"
+C:\Users\jason> setx LONGPORT_APP_KEY "App Key get from user center"
 Success: the specified value has been saved.
 
-C:\Users\jason> setx LONGBRIDGE_APP_SECRET "App Secret get from user center"
+C:\Users\jason> setx LONGPORT_APP_SECRET "App Secret get from user center"
 Success: the specified value has been saved.
 
-C:\Users\jason> setx LONGBRIDGE_ACCESS_TOKEN "Access Token get from user center"
+C:\Users\jason> setx LONGPORT_ACCESS_TOKEN "Access Token get from user center"
 Success: the specified value has been saved.
 ```
 
@@ -133,17 +133,17 @@ Windows environment variable restrictions, when the above 3 commands are execute
 After logging out or restarting, open the command line again and enter the following command to verify that the environment variables are set correctly:
 
 ```bash
-C:\Users\jason> set LONGBRIDGE
-LONGBRIDGE_APP_KEY=xxxxxxx
-LONGBRIDGE_APP_SECRET=xxxxxx
-LONGBRIDGE_ACCESS_TOKEN=xxxxxxx
+C:\Users\jason> set LONGPORT
+LONGPORT_APP_KEY=xxxxxxx
+LONGPORT_APP_SECRET=xxxxxx
+LONGPORT_ACCESS_TOKEN=xxxxxxx
 ```
 
 If it prints the value you just set correctly, then the environment variable is right.
 
 :::tip
 
-It is recommended that you set several environment variables such as `LONGBRIDGE_APP_KEY`, `LONGBRIDGE_APP_SECRET`, `LONGBRIDGE_ACCESS_TOKEN`. For the convenience of demonstration, these environment variables will be used in the sample code in the documents in the following chapters.
+It is recommended that you set several environment variables such as `LONGPORT_APP_KEY`, `LONGPORT_APP_SECRET`, `LONGPORT_ACCESS_TOKEN`. For the convenience of demonstration, these environment variables will be used in the sample code in the documents in the following chapters.
 
 If you are inconvenient to use environment variables in the Windows environment, you can modify the code according to your personal needs.
 
@@ -163,7 +163,7 @@ Please pay attention to protect your **Access Token** information, anyone who ge
 Cteate `account_asset.py` and paste the code below:
 
 ```python
-from longbridge.openapi import TradeContext, Config
+from longport.openapi import TradeContext, Config
 
 config = Config.from_env()
 ctx = TradeContext(config)
@@ -184,7 +184,7 @@ python account_asset.py
 Cteate `account_asset.js` and paste the code below:
 
 ```javascript
-const { Config, TradeContext } = require('longbridge')
+const { Config, TradeContext } = require('longport')
 
 let config = Config.fromEnv()
 TradeContext.new(config)
@@ -210,7 +210,7 @@ Cteate `main.rs` and paste the code below:
 ```rust
 use std::sync::Arc;
 
-use longbridge::{trade::TradeContext, Config};
+use longport::{trade::TradeContext, Config};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -235,8 +235,8 @@ cargo run
 Cteate `Main.java` and paste the code below:
 
 ```java
-import com.longbridge.*;
-import com.longbridge.trade.*;
+import com.longport.*;
+import com.longport.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
@@ -316,7 +316,7 @@ Create `subscribe_quote.py` and paste the code below:
 
 ```python
 from time import sleep
-from longbridge.openapi import QuoteContext, Config, SubType, PushQuote
+from longport.openapi import QuoteContext, Config, SubType, PushQuote
 
 
 def on_quote(symbol: str, quote: PushQuote):
@@ -344,7 +344,7 @@ python subscribe_quote.py
 Create `subscribe_quote.js` and paste the code below:
 
 ```javascript
-const { Config, QuoteContext, SubType } = require('longbridge')
+const { Config, QuoteContext, SubType } = require('longport')
 
 let config = Config.fromEnv()
 QuoteContext.new(config).then((ctx) => {
@@ -367,7 +367,7 @@ Create `main.rs` and paste the code below:
 ```rust
 use std::sync::Arc;
 
-use longbridge::{
+use longport::{
     quote::{QuoteContext, SubFlags},
     Config,
 };
@@ -403,8 +403,8 @@ cargo run
 Create `Main.java` and paste the code below:
 
 ```java
-import com.longbridge.*;
-import com.longbridge.quote.*;
+import com.longport.*;
+import com.longport.quote.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
@@ -479,7 +479,7 @@ Create `submit_order.py` and paste the code below:
 
 ```python
 from decimal import Decimal
-from longbridge.openapi import TradeContext, Config, OrderSide, OrderType, TimeInForceType
+from longport.openapi import TradeContext, Config, OrderSide, OrderType, TimeInForceType
 
 config = Config.from_env()
 ctx = TradeContext(config)
@@ -508,7 +508,7 @@ python submit_order.py
 Create `submit_order.js` and paste the code below:
 
 ```javascript
-const { Config, TradeContext, OrderType, OrderSide, Decimal, TimeInForceType } = require('longbridge')
+const { Config, TradeContext, OrderType, OrderSide, Decimal, TimeInForceType } = require('longport')
 
 let config = Config.fromEnv()
 TradeContext.new(config)
@@ -539,7 +539,7 @@ Create `main.rs` and paste the code below:
 ```rust
 use std::sync::Arc;
 
-use longbridge::{
+use longport::{
     decimal,
     trade::{OrderSide, OrderType, SubmitOrderOptions, TimeInForceType, TradeContext},
     Config,
@@ -576,8 +576,8 @@ cargo run
 Create `Main.java` and paste the code below:
 
 ```java
-import com.longbridge.*;
-import com.longbridge.trade.*;
+import com.longport.*;
+import com.longport.trade.*;
 import java.math.BigDecimal;
 
 public class Main {
@@ -618,7 +618,7 @@ SubmitOrderResponse { order_id: "718437534753550336" }
 Create `today_orders.py` and paste the code below:
 
 ```python
-from longbridge.openapi import TradeContext, Config
+from longport.openapi import TradeContext, Config
 
 config = Config.from_env()
 ctx = TradeContext(config)
@@ -639,7 +639,7 @@ python today_orders.py
 Create `today_orders.js` and paste the code below:
 
 ```javascript
-const { Config, TradeContext } = require('longbridge')
+const { Config, TradeContext } = require('longport')
 
 let config = Config.fromEnv()
 TradeContext.new(config)
@@ -665,7 +665,7 @@ Create `main.rs` and paste the code below:
 ```rust
 use std::sync::Arc;
 
-use longbridge::{trade::TradeContext, Config};
+use longport::{trade::TradeContext, Config};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -692,8 +692,8 @@ cargo run
 Create `Main.java` and paste the code below:
 
 ```java
-import com.longbridge.*;
-import com.longbridge.trade.*;
+import com.longport.*;
+import com.longport.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {

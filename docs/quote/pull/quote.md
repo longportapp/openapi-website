@@ -15,8 +15,8 @@ sidebar_position: 2
 
 ### Parameters
 
-| Name   | Type     | Required | Description                                                                                                                         |
-| ------ | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Name   | Type     | Required | Description                                                                                                                     |
+|--------|----------|----------|---------------------------------------------------------------------------------------------------------------------------------|
 | symbol | string[] | 是       | 标的代码列表，使用 `ticker.region` 格式，例如：`[700.HK]` <br /><br />**校验规则：**<br />每次请求支持传入的标的数量上限是 `500` 个 |
 
 ### Protobuf
@@ -34,7 +34,7 @@ message MultiSecurityRequest {
 # https://open.longportapp.com/docs/quote/pull/quote
 # 运行前请访问“开发者中心”确保账户有正确的行情权限。
 # 如没有开通行情权限，可以通过“LongPort”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
-from longbridge.openapi import QuoteContext, Config
+from longport.openapi import QuoteContext, Config
 
 config = Config.from_env()
 ctx = QuoteContext(config)
@@ -47,35 +47,35 @@ print(resp)
 
 ### Response Properties
 
-| Name                | Type     | Description                                                         |
-| ------------------- | -------- | ------------------------------------------------------------------- |
-| secu_quote          | object[] | 标的实时行情数据列表                                                |
-| ∟ symbol            | string   | 标的代码                                                            |
-| ∟ last_done         | string   | 最新价                                                              |
-| ∟ prev_close        | string   | 昨收价                                                              |
-| ∟ open              | string   | 开盘价                                                              |
-| ∟ high              | string   | 最高价                                                              |
-| ∟ low               | string   | 最低价                                                              |
-| ∟ timestamp         | int64    | 最新成交的时间戳                                                    |
-| ∟ volume            | int64    | 成交量                                                              |
-| ∟ turnover          | string   | 成交额                                                              |
+| Name                | Type     | Description                                                        |
+|---------------------|----------|--------------------------------------------------------------------|
+| secu_quote          | object[] | 标的实时行情数据列表                                               |
+| ∟ symbol            | string   | 标的代码                                                           |
+| ∟ last_done         | string   | 最新价                                                             |
+| ∟ prev_close        | string   | 昨收价                                                             |
+| ∟ open              | string   | 开盘价                                                             |
+| ∟ high              | string   | 最高价                                                             |
+| ∟ low               | string   | 最低价                                                             |
+| ∟ timestamp         | int64    | 最新成交的时间戳                                                   |
+| ∟ volume            | int64    | 成交量                                                             |
+| ∟ turnover          | string   | 成交额                                                             |
 | ∟ trade_status      | int32    | 标的交易状态，详见 [TradeStatus](../objects#tradestatus---交易状态) |
-| ∟ pre_market_quote  | object   | 美股盘前交易行情                                                    |
-| ∟∟ last_done        | string   | 最新价                                                              |
-| ∟∟ timestamp        | int64    | 最新成交的时间戳                                                    |
-| ∟∟ volume           | int64    | 成交量                                                              |
-| ∟∟ turnover         | string   | 成交额                                                              |
-| ∟∟ high             | string   | 最高价                                                              |
-| ∟∟ low              | string   | 最低价                                                              |
-| ∟∟ prev_close       | string   | 上一个交易阶段的收盘价                                              |
-| ∟ post_market_quote | object   | 美股盘后交易行情                                                    |
-| ∟∟ last_done        | string   | 最新价                                                              |
-| ∟∟ timestamp        | int64    | 最新成交的时间戳                                                    |
-| ∟∟ volume           | int64    | 成交量                                                              |
-| ∟∟ turnover         | string   | 成交额                                                              |
-| ∟∟ high             | string   | 最高价                                                              |
-| ∟∟ low              | string   | 最低价                                                              |
-| ∟∟ prev_close       | string   | 上一个交易阶段的收盘价                                              |
+| ∟ pre_market_quote  | object   | 美股盘前交易行情                                                   |
+| ∟∟ last_done        | string   | 最新价                                                             |
+| ∟∟ timestamp        | int64    | 最新成交的时间戳                                                   |
+| ∟∟ volume           | int64    | 成交量                                                             |
+| ∟∟ turnover         | string   | 成交额                                                             |
+| ∟∟ high             | string   | 最高价                                                             |
+| ∟∟ low              | string   | 最低价                                                             |
+| ∟∟ prev_close       | string   | 上一个交易阶段的收盘价                                             |
+| ∟ post_market_quote | object   | 美股盘后交易行情                                                   |
+| ∟∟ last_done        | string   | 最新价                                                             |
+| ∟∟ timestamp        | int64    | 最新成交的时间戳                                                   |
+| ∟∟ volume           | int64    | 成交量                                                             |
+| ∟∟ turnover         | string   | 成交额                                                             |
+| ∟∟ high             | string   | 最高价                                                             |
+| ∟∟ low              | string   | 最低价                                                             |
+| ∟∟ prev_close       | string   | 上一个交易阶段的收盘价                                             |
 
 ### Protobuf
 
@@ -169,9 +169,9 @@ message PrePostQuote {
 
 ## 错误码
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                                   |
-| ---------- | ---------- | -------------- | ------------------------------------------ |
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败                     |
-| 3          | 301606     | 限流           | 降低请求频次                               |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理                   |
+| 协议错误码 | 业务错误码 | 描述           | 排查建议                                  |
+|------------|------------|--------------|---------------------------------------|
+| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败                    |
+| 3          | 301606     | 限流           | 降低请求频次                              |
+| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理                  |
 | 7          | 301607     | 接口限制       | 请求的标的数量超限，请减少单次请求标的数量 |

@@ -29,10 +29,10 @@ message SubscriptionRequest {
 # https://open.longportapp.com/docs/quote/subscribe/subscription
 import os
 import time
-from longbridge.http import Auth, Config, HttpClient
-from longbridge.ws import ReadyState, WsCallback, WsClient
+from longport.http import Auth, Config, HttpClient
+from longport.ws import ReadyState, WsCallback, WsClient
 # Protobuf 變量定義參見：https://github.com/longportapp/openapi-protobufs/blob/main/quote/api.proto
-from longbridge.proto.quote_pb2 import (Command, PushQuote, SubscribeRequest, SubscriptionResponse, SubType, SubscriptionRequest, UnsubscribeRequest, UnsubscribeResponse)
+from longport.proto.quote_pb2 import (Command, PushQuote, SubscribeRequest, SubscriptionResponse, SubType, SubscriptionRequest, UnsubscribeRequest, UnsubscribeResponse)
 
 class MyWsCallback(WsCallback):
     def on_push(self, command: int, body: bytes):
@@ -46,7 +46,7 @@ class MyWsCallback(WsCallback):
     def on_state(self, state: ReadyState):
         print(f"-> state: {state}")
 
-auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
+auth = Auth(os.getenv("LONGPORT_APP_KEY"), os.getenv("LONGPORT_APP_SECRET"), access_token=os.getenv("LONGPORT_ACCESS_TOKEN"))
 http = HttpClient(auth, Config(base_url="https://openapi.longportapp.com"))
 ws = WsClient("wss://openapi-quote.longportapp.com", http, MyWsCallback())
 
@@ -98,10 +98,10 @@ print(f"Subscribed symbol:\n\n {resp.sub_list}")
 
 ### Response Properties
 
-| Name       | Type     | Description                                                         |
-| ---------- | -------- | ------------------------------------------------------------------- |
-| sub_list   | object[] | 訂閱的數據                                                          |
-| ∟ symbol   | string   | 標的代碼                                                            |
+| Name       | Type     | Description                                                        |
+|------------|----------|--------------------------------------------------------------------|
+| sub_list   | object[] | 訂閱的數據                                                         |
+| ∟ symbol   | string   | 標的代碼                                                           |
 | ∟ sub_type | []int32  | 訂閱的數據類型，詳見 [SubType](../objects#subtype---訂閱數據的類型) |
 
 ### Protobuf
@@ -137,7 +137,7 @@ message SubTypeList {
 ## 錯誤碼
 
 | 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                 |
-| ---------- | ---------- | -------------- | ------------------------ |
+|------------|------------|--------------|----------------------|
 | 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗   |
 | 3          | 301606     | 限流           | 降低請求頻次             |
 | 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理 |

@@ -15,8 +15,8 @@ sidebar_position: 6
 
 ### Parameters
 
-| Name   | Type   | Required | Description                                          |
-| ------ | ------ | -------- | ---------------------------------------------------- |
+| Name   | Type   | Required | Description                                       |
+|--------|--------|----------|---------------------------------------------------|
 | symbol | string | 是       | 标的代码，使用 `ticker.region` 格式，例如： `700.HK` |
 
 ### Protobuf
@@ -34,7 +34,7 @@ message SecurityRequest {
 # https://open.longportapp.com/docs/quote/pull/brokers
 # 运行前请访问“开发者中心”确保账户有正确的行情权限。
 # 如没有开通行情权限，可以通过“LongPort”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
-from longbridge.openapi import QuoteContext, Config
+from longport.openapi import QuoteContext, Config
 
 config = Config.from_env()
 ctx = QuoteContext(config)
@@ -47,14 +47,14 @@ print(resp)
 
 ### Response Properties
 
-| Name         | Type     | Description                                                |
-| ------------ | -------- | ---------------------------------------------------------- |
-| symbol       | string   | 标的代码                                                   |
-| ask_brokers  | object[] | 卖盘经纪队列                                               |
-| ∟ position   | int32    | 档位                                                       |
+| Name         | Type     | Description                                               |
+|--------------|----------|-----------------------------------------------------------|
+| symbol       | string   | 标的代码                                                  |
+| ask_brokers  | object[] | 卖盘经纪队列                                              |
+| ∟ position   | int32    | 档位                                                      |
 | ∟ broker_ids | int32[]  | 券商席位 ID，通过[获取券商席位 ID ](./broker-ids) 接口获取 |
-| bid_brokers  | object[] | 买盘经纪队列                                               |
-| ∟ position   | int32    | 档位                                                       |
+| bid_brokers  | object[] | 买盘经纪队列                                              |
+| ∟ position   | int32    | 档位                                                      |
 | ∟ broker_ids | int32[]  | 券商席位 ID，通过[获取券商席位 ID ](./broker-ids) 接口获取 |
 
 ### Protobuf
@@ -102,7 +102,7 @@ message Brokers {
 ## 错误码
 
 | 协议错误码 | 业务错误码 | 描述           | 排查建议                     |
-| ---------- | ---------- | -------------- | ---------------------------- |
+|------------|------------|--------------|--------------------------|
 | 3          | 301600     | 无效的请求     | 请求参数有误或解包失败       |
 | 3          | 301606     | 限流           | 降低请求频次                 |
 | 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理     |
