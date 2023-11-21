@@ -17,7 +17,7 @@ And stock quote and order have difference endpoints, [check here](./hosts).
         <td>Description</td>
     </tr>
     <tr>
-        <td rowspan="16">Pull</td>
+        <td rowspan="20">Pull</td>
         <td><a href="../quote/pull/static">Get Basic Information Of Securities</a></td>
     </tr>
     <tr>

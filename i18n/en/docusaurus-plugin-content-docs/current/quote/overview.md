@@ -13,7 +13,7 @@ slug: overview
         <td>Description</td>
     </tr>
     <tr>
-        <td rowspan="19">Pull</td>
+        <td rowspan="20">Pull</td>
         <td><a href="./pull/static">Get Basic Information Of Securities</a></td>
     </tr>
     <tr>

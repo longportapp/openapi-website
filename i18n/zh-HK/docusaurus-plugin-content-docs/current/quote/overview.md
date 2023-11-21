@@ -13,7 +13,7 @@ slug: overview
         <td>功能簡介</td>
     </tr>
     <tr>
-        <td rowspan="19">拉取</td>
+        <td rowspan="20">拉取</td>
         <td><a href="./pull/static">獲取標的基礎信息</a></td>
     </tr>
     <tr>

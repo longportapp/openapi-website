@@ -15,7 +15,7 @@ sidebar_position: 5
         <td>功能简介</td>
     </tr>
     <tr>
-        <td rowspan="16">拉取</td>
+        <td rowspan="20">拉取</td>
         <td><a href="../quote/pull/static">获取标的基础信息</a></td>
     </tr>
     <tr>
