@@ -3,6 +3,9 @@
   --ifm-navbar-padding-vertical: 12px;
   @media screen and (min-width: 768px) {
     --ifm-navbar-padding-horizontal: 40px;
+    .searchBox_node_modules-\@docusaurus-theme-classic-lib-theme-Navbar-Search-styles-module {
+      right: 90px;
+    }
   }
 
   .navbar__toggle {
@@ -34,6 +37,7 @@
       padding: 0;
       font-size: 16px;
       font-weight: bold;
+      white-space: nowrap;
     }
     &:first-child {
       .navbar__item {
