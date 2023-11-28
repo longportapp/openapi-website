@@ -181,7 +181,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ['shell-session', 'http', 'protobuf', 'rust'],
+        additionalLanguages: ['shell-session', 'http', 'protobuf', 'rust', 'java', 'go'],
       },
       algolia: {
         // The application ID provided by Algolia

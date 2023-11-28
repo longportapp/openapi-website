@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 ## 前言
 
-LongPort OpenAPI SDK 基於 Rust 底層提供標準實現，目前我們已經發布了 Python, Node.js, Rust 和 C++ SDK，其他語言的支持後面會陸續推出。
+LongPort OpenAPI SDK 基於 Rust 底層提供標準實現，目前我們已經發布了 Python, Node.js, Rust, C++/C, Java 等多種編程語言 SDK，其他語言的支持後面會陸續推出。
 
 ## API Host
 
