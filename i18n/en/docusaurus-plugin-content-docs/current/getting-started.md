@@ -40,6 +40,10 @@ For access in mainland China, it is recommended to use `openapi.longportapp.cn`,
     <li><a href="https://openjdk.org/">JDK</a></li>
     <li><a href="https://maven.apache.org/">Maven</a></li>
   </TabItem>
+  <TabItem value="go" label="Go">
+    <li><a href="https://go.dev">Go</a></li>
+    <li><a href="https://pkg.go.dev/github.com/longportapp/openapi-go">Go Docs</a></li>
+  </TabItem>
 </Tabs>
 
 ## Install SDK
@@ -81,6 +85,15 @@ tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+```shell
+go get github.com/longportapp/openapi-go
+```
+
+  </TabItem>
+
 </Tabs>
 
 Let's take obtaining assets as an example to demonstrate how to use the SDK.
@@ -102,9 +115,9 @@ The "application credential" credential information will be given on the page. A
 Open the terminal and enter the following command:
 
 ```bash
-$ export LONGPORT_APP_KEY="App Key get from user center"
-$ export LONGPORT_APP_SECRET="App Secret get from user center"
-$ export LONGPORT_ACCESS_TOKEN="Access Token get from user center"
+export LONGPORT_APP_KEY="App Key get from user center"
+export LONGPORT_APP_SECRET="App Secret get from user center"
+export LONGPORT_ACCESS_TOKEN="Access Token get from user center"
 ```
 
 ### Setting Environment Variables In Windows Environment
@@ -256,6 +269,53 @@ mvn compile exec:exec
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+Create `main.go` and paste the code below:
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "github.com/longportapp/openapi-go/config"
+    "github.com/longportapp/openapi-go/trade"
+)
+
+func main() {
+    // create trade context from environment variables
+    conf, err := config.New()
+    if err != nil {
+        log.Fatal(err)
+    }
+    tradeContext, err := trade.NewFromCfg(conf)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer tradeContext.Close()
+    ctx := context.Background()
+    // Get AccountBalance infomation
+    ab, err := tradeContext.AccountBalance(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Printf("%+v", ab)
+}
+```
+
+Run:
+
+```shell
+go mod tidy
+go run ./
+```
+
+  </TabItem>
+
 </Tabs>
 
 After running, the output is as follows:
@@ -302,7 +362,7 @@ Before running, visit the [Developer Center](https://open.longportapp.com/accoun
 
 If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
 
-https://longportapp.com/download
+<https://longportapp.com/download>
 :::
 
 When you have the correct Quote authority, it might look like this:
@@ -426,6 +486,74 @@ mvn compile exec:exec
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+Create file `main.go` and paste the code below:
+
+```go
+package main
+
+import (
+    "context"
+    "encoding/json"
+    "fmt"
+    "log"
+    "os"
+    "os/signal"
+    "syscall"
+    "time"
+
+    "github.com/longportapp/openapi-go/config"
+    "github.com/longportapp/openapi-go/quote"
+)
+
+func main() {
+ // create quote context from environment variables
+    conf, err := config.New()
+    if err != nil {
+        log.Fatal(err)
+    }
+    quoteContext, err := quote.NewFromCfg(conf)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+    defer quoteContext.Close()
+    ctx := context.Background()
+    quoteContext.OnQuote(func(pe *quote.PushQuote) {
+        bytes, _ := json.Marshal(pe)
+        fmt.Println(string(bytes))
+    })
+    quoteContext.OnDepth(func(d *quote.PushDepth) {
+        bytes, _ := json.Marshal(d)
+        if d.Sequence != 0 {
+            fmt.Print(time.UnixMicro(d.Sequence/1000).Format(time.RFC3339) + " ")
+        }
+        fmt.Println(string(bytes))
+    })
+
+    // Subscribe some symbols
+    err = quoteContext.Subscribe(ctx, []string{"700.HK", "AAPL.US", "NFLX.US"}, []quote.SubType{quote.SubTypeDepth}, true)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+
+    quitChannel := make(chan os.Signal, 1)
+    signal.Notify(quitChannel, syscall.SIGINT, syscall.SIGTERM)
+    <-quitChannel
+}
+```
+
+Run:
+
+```shell
+go run ./
+```
+
+  </TabItem>
+
 </Tabs>
 
 After running, the output is as follows:
@@ -602,6 +730,80 @@ mvn compile exec:exec
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+创建 `main.go`，贴入一下内容：
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "os"
+    "os/signal"
+    "syscall"
+
+    "github.com/shopspring/decimal"
+
+    "github.com/longportapp/openapi-go/config"
+    "github.com/longportapp/openapi-go/trade"
+)
+
+func main() {
+    // create trade context from environment variables
+    conf, err := config.New()
+    if err != nil {
+        log.Fatal(err)
+    }
+    tradeContext, err := trade.NewFromCfg(conf)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+
+
+    defer tradeContext.Close()
+
+    // subscribe order status
+    tradeContext.OnTrade(func(ev *trade.PushEvent) {
+        // handle order changing event
+    })
+
+    ctx := context.Background()
+    // submit order
+    order := &trade.SubmitOrder{
+        Symbol:            "700.HK",
+        OrderType:         trade.OrderTypeLO,
+        Side:              trade.OrderSideBuy,
+        SubmittedQuantity: 200,
+        TimeInForce:       trade.TimeTypeDay,
+        SubmittedPrice:    decimal.NewFromFloat(12),
+    }
+    orderId, err := tradeContext.SubmitOrder(ctx, order)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+    fmt.Printf("orderId: %v\n", orderId)
+
+
+    quitChannel := make(chan os.Signal, 1)
+    signal.Notify(quitChannel, syscall.SIGINT, syscall.SIGTERM)
+    <-quitChannel
+}
+```
+
+运行：
+
+```shell
+go run ./
+```
+
+  </TabItem>
+
 </Tabs>
 
 After running, the output is as follows:
@@ -714,6 +916,55 @@ mvn compile exec:exec
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+Create file `main.go` and paste the code below:
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "github.com/longportapp/openapi-go/config"
+    "github.com/longportapp/openapi-go/trade"
+)
+
+func main() {
+    // create trade context from environment variables
+    conf, err := config.New()
+    if err != nil {
+        log.Fatal(err)
+    }
+    tradeContext, err := trade.NewFromCfg(conf)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer tradeContext.Close()
+    ctx := context.Background()
+    // today orders
+    orders, err := tradeContext.TodayOrders(ctx, &trade.GetTodayOrders{})
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, order := range orders {
+        fmt.Printf("%+v\n", order)
+    }
+}
+```
+
+Run:
+
+```shell
+go run ./
+```
+
+  </TabItem>
+
 </Tabs>
 
 After running, the output is as follows:
@@ -754,15 +1005,15 @@ The above example has fully demonstrated how to use the SDK to access the OpenAP
 
 We provide the complete code of the above examples in the GitHub repository of LongPort OpenAPI Python SDK, and we will continue to add or update it later.
 
-https://github.com/longportapp/openapi-sdk/tree/master/examples
+<https://github.com/longportapp/openapi-sdk/tree/master/examples>
 
 ## SDK API Document
 
 For detailed SDK API document, please visit:
 
-https://longportapp.github.io/openapi-sdk/
+<https://longportapp.github.io/openapi-sdk/>
 
 ## Contact & Feedback
 
-- GitHub Issues: https://github.com/longportapp/openapi-sdk
-- Join **Discord** LongPort OpenAPI Server: https://discord.gg/2gUTSCS6
+- GitHub Issues: <https://github.com/longportapp/openapi-sdk>
+- Join **Discord** LongPort OpenAPI Server: <https://discord.gg/2gUTSCS6>

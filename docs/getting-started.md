@@ -20,6 +20,8 @@ import TabItem from '@theme/TabItem';
 
 :::info
 中国大陆地区访问，建议采用 `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn` 以提升访问速度。
+
+如果使用我们的 SDK，可以通过设置环境变量 `LONGPPORT_REGION=cn` 来使用中国大陆的接入点
 :::
 
 ## 环境需求
@@ -39,6 +41,10 @@ import TabItem from '@theme/TabItem';
   <TabItem value="java" label="Java">
     <li><a href="https://openjdk.org/">JDK</a></li>
     <li><a href="https://maven.apache.org/">Maven</a></li>
+  </TabItem>
+  <TabItem value="go" label="Go">
+    <li><a href="https://go.dev">Go</a></li>
+    <li><a href="https://pkg.go.dev/github.com/longportapp/openapi-go">Go Docs</a></li>
   </TabItem>
 </Tabs>
 
@@ -81,6 +87,15 @@ tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
   </TabItem>
+  <TabItem value="go" label="Go">
+
+```shell
+go env -w GOPROXY="https://goproxy.io,direct"
+go get github.com/longportapp/openapi-go
+```
+
+  </TabItem>
+
 </Tabs>
 
 下面我们以获取资产为例，演示一下如何使用 SDK。
@@ -89,7 +104,7 @@ tokio = { version = "1", features = "rt-multi-thread" }
 
 1. 下载 [LongPort](https://longportapp.com/download)，并完成开户
 2. 完成 Python 3 环境安装，并安装 Pip
-3. 从 [LongPort OpenAPI](https://open.longportapp.com) 官网获取 ` App Key`, `App Secret`, `Access Token` 等信息。
+3. 从 [LongPort OpenAPI](https://open.longportapp.com) 官网获取 `App Key`, `App Secret`, `Access Token` 等信息。
 
 **_获取 App Key, App Secret, Access Token 等信息_**
 
@@ -102,9 +117,9 @@ tokio = { version = "1", features = "rt-multi-thread" }
 打开终端，输入下面的命令即可：
 
 ```bash
-$ export LONGPORT_APP_KEY="从页面上获取到的 App Key"
-$ export LONGPORT_APP_SECRET="从页面上获取到的 App Secret"
-$ export LONGPORT_ACCESS_TOKEN="从页面上获取到的 Access Token"
+export LONGPORT_APP_KEY="从页面上获取到的 App Key"
+export LONGPORT_APP_SECRET="从页面上获取到的 App Secret"
+export LONGPORT_ACCESS_TOKEN="从页面上获取到的 Access Token"
 ```
 
 ### Windows 下设置环境变量
@@ -254,6 +269,52 @@ mvn compile exec:exec
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+创建 `main.go` 贴入如下代码：
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "github.com/longportapp/openapi-go/config"
+    "github.com/longportapp/openapi-go/trade"
+)
+
+func main() {
+    // create trade context from environment variables
+    conf, err := config.New()
+    if err != nil {
+        log.Fatal(err)
+    }
+    tradeContext, err := trade.NewFromCfg(conf)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer tradeContext.Close()
+    ctx := context.Background()
+    // Get AccountBalance infomation
+    ab, err := tradeContext.AccountBalance(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Printf("%+v", ab)
+}
+```
+
+运行：
+
+```shell
+go mod tidy
+go run ./
+```
+
+  </TabItem>
 </Tabs>
 
 运行后，会输出如下：
@@ -300,7 +361,7 @@ mvn compile exec:exec
 
 如没有开通行情权限，可以通过“LongPort”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
 
-https://longportapp.com/download
+<https://longportapp.com/download>
 :::
 
 当你有正确的行情权限，看起来可能会是这样：
@@ -424,6 +485,74 @@ mvn compile exec:exec
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+创建 `main.go`，贴入一下内容：
+
+```go
+package main
+
+import (
+    "context"
+    "encoding/json"
+    "fmt"
+    "log"
+    "os"
+    "os/signal"
+    "syscall"
+    "time"
+
+    "github.com/longportapp/openapi-go/config"
+    "github.com/longportapp/openapi-go/quote"
+)
+
+func main() {
+ // create quote context from environment variables
+    conf, err := config.New()
+    if err != nil {
+        log.Fatal(err)
+    }
+    quoteContext, err := quote.NewFromCfg(conf)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+    defer quoteContext.Close()
+    ctx := context.Background()
+    quoteContext.OnQuote(func(pe *quote.PushQuote) {
+        bytes, _ := json.Marshal(pe)
+        fmt.Println(string(bytes))
+    })
+    quoteContext.OnDepth(func(d *quote.PushDepth) {
+        bytes, _ := json.Marshal(d)
+        if d.Sequence != 0 {
+            fmt.Print(time.UnixMicro(d.Sequence/1000).Format(time.RFC3339) + " ")
+        }
+        fmt.Println(string(bytes))
+    })
+
+    // Subscribe some symbols
+    err = quoteContext.Subscribe(ctx, []string{"700.HK", "AAPL.US", "NFLX.US"}, []quote.SubType{quote.SubTypeDepth}, true)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+
+    quitChannel := make(chan os.Signal, 1)
+    signal.Notify(quitChannel, syscall.SIGINT, syscall.SIGTERM)
+    <-quitChannel
+}
+```
+
+运行：
+
+```shell
+go run ./
+```
+
+  </TabItem>
+
 </Tabs>
 
 运行后，会输出如下：
@@ -600,6 +729,80 @@ mvn compile exec:exec
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+创建 `main.go`，贴入一下内容：
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "os"
+    "os/signal"
+    "syscall"
+
+    "github.com/shopspring/decimal"
+
+    "github.com/longportapp/openapi-go/config"
+    "github.com/longportapp/openapi-go/trade"
+)
+
+func main() {
+    // create trade context from environment variables
+    conf, err := config.New()
+    if err != nil {
+        log.Fatal(err)
+    }
+    tradeContext, err := trade.NewFromCfg(conf)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+
+
+    defer tradeContext.Close()
+
+    // subscribe order status
+    tradeContext.OnTrade(func(ev *trade.PushEvent) {
+        // handle order changing event
+    })
+
+    ctx := context.Background()
+    // submit order
+    order := &trade.SubmitOrder{
+        Symbol:            "700.HK",
+        OrderType:         trade.OrderTypeLO,
+        Side:              trade.OrderSideBuy,
+        SubmittedQuantity: 200,
+        TimeInForce:       trade.TimeTypeDay,
+        SubmittedPrice:    decimal.NewFromFloat(12),
+    }
+    orderId, err := tradeContext.SubmitOrder(ctx, order)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+    fmt.Printf("orderId: %v\n", orderId)
+
+
+    quitChannel := make(chan os.Signal, 1)
+    signal.Notify(quitChannel, syscall.SIGINT, syscall.SIGTERM)
+    <-quitChannel
+}
+```
+
+运行：
+
+```shell
+go run ./
+```
+
+  </TabItem>
+
 </Tabs>
 
 运行后，会输出如下：
@@ -712,6 +915,48 @@ mvn compile exec:exec
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+创建 `main.go`，贴入以下内容：
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "github.com/longportapp/openapi-go/config"
+    "github.com/longportapp/openapi-go/trade"
+)
+
+func main() {
+    // create trade context from environment variables
+    conf, err := config.New()
+    if err != nil {
+        log.Fatal(err)
+    }
+    tradeContext, err := trade.NewFromCfg(conf)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer tradeContext.Close()
+    ctx := context.Background()
+    // today orders
+    orders, err := tradeContext.TodayOrders(ctx, &trade.GetTodayOrders{})
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, order := range orders {
+        fmt.Printf("%+v\n", order)
+    }
+}
+```
+
+  </TabItem>
 </Tabs>
 
 运行后，会输出如下：
@@ -752,17 +997,17 @@ Order {
 
 我们在 LongPort OpenAPI Python SDK 的 GitHub 仓库中提供了上面几个例子的完整代码，当然后期我们也会持续往里面补充或更新。
 
-https://github.com/longportapp/openapi-sdk/tree/master/examples
+<https://github.com/longportapp/openapi-sdk/tree/master/examples>
 
 ## SDK API 文档
 
 SDK 的详细 API 文档请访问：
 
-https://longportapp.github.io/openapi-sdk/
+<https://longportapp.github.io/openapi-sdk/>
 
 ## 反馈及沟通
 
-- GitHub Issues: https://github.com/longportapp/openapi-sdk/
+- GitHub Issues: <https://github.com/longportapp/openapi-sdk/>
 
 - 微信沟通群（已满）：
 

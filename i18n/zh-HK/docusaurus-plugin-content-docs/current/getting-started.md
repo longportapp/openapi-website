@@ -20,6 +20,8 @@ LongPort OpenAPI SDK 基於 Rust 底層提供標準實現，目前我們已經�
 
 :::tip
 中國大陸地區訪問，建議採用 `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn` 以提升訪問速度。
+
+如果您使用我們的 SDK，可以通過設置環境變量 LONGPPORT_REGION=cn 來使用位於中國大陸的接入點。
 :::
 
 ## 環境需求
@@ -39,6 +41,10 @@ LongPort OpenAPI SDK 基於 Rust 底層提供標準實現，目前我們已經�
   <TabItem value="java" label="Java">
     <li><a href="https://openjdk.org/">JDK</a></li>
     <li><a href="https://maven.apache.org/">Maven</a></li>
+  </TabItem>
+  <TabItem value="go" label="Go">
+    <li><a href="https://go.dev">Go</a></li>
+    <li><a href="https://pkg.go.dev/github.com/longportapp/openapi-go">Go Docs</a></li>
   </TabItem>
 </Tabs>
 
@@ -81,6 +87,15 @@ tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+```shell
+go get github.com/longportapp/openapi-go
+```
+
+  </TabItem>
+
 </Tabs>
 
 下面我們以獲取資產為例，演示一下如何使用 SDK。
@@ -89,7 +104,7 @@ tokio = { version = "1", features = "rt-multi-thread" }
 
 1. 下載 [LongPort](https://longportapp.com/download) 並完成開戶。
 2. 完成 Python 3 環境安裝，並安裝 Pip
-3. 從 [LongPort OpenAPI](https://open.longportapp.com) 官網獲取 ` App Key`, `App Secret`, `Access Token` 等信息。
+3. 從 [LongPort OpenAPI](https://open.longportapp.com) 官網獲取 `App Key`, `App Secret`, `Access Token` 等信息。
 
 **_獲取 App Key, App Secret, Access Token 等信息_**
 
@@ -102,9 +117,9 @@ tokio = { version = "1", features = "rt-multi-thread" }
 打開終端，輸入下面的命令即可：
 
 ```bash
-$ export LONGPORT_APP_KEY="從頁面上獲取到的 App Key"
-$ export LONGPORT_APP_SECRET="從頁面上獲取到的 App Secret"
-$ export LONGPORT_ACCESS_TOKEN="從頁面上獲取到的 Access Token"
+export LONGPORT_APP_KEY="從頁面上獲取到的 App Key"
+export LONGPORT_APP_SECRET="從頁面上獲取到的 App Secret"
+export LONGPORT_ACCESS_TOKEN="從頁面上獲取到的 Access Token"
 ```
 
 ### Windows 下設置環境變量
@@ -254,6 +269,53 @@ mvn compile exec:exec
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+創建 `main.go` 貼入如下代碼：
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "github.com/longportapp/openapi-go/config"
+    "github.com/longportapp/openapi-go/trade"
+)
+
+func main() {
+    // create trade context from environment variables
+    conf, err := config.New()
+    if err != nil {
+        log.Fatal(err)
+    }
+    tradeContext, err := trade.NewFromCfg(conf)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer tradeContext.Close()
+    ctx := context.Background()
+    // Get AccountBalance infomation
+    ab, err := tradeContext.AccountBalance(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Printf("%+v", ab)
+}
+```
+
+運行：
+
+```shell
+go mod tidy
+go run ./
+```
+
+  </TabItem>
+
 </Tabs>
 
 運行後會輸出如下：
@@ -300,7 +362,7 @@ mvn compile exec:exec
 
 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 
-https://longportapp.com/download
+<https://longportapp.com/download>
 :::
 
 當你有正確的行情權限，看起來可能會是這樣：
@@ -600,6 +662,74 @@ mvn compile exec:exec
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+創建 `main.go` 貼入下面的代碼：
+
+```go
+package main
+
+import (
+    "context"
+    "encoding/json"
+    "fmt"
+    "log"
+    "os"
+    "os/signal"
+    "syscall"
+    "time"
+
+    "github.com/longportapp/openapi-go/config"
+    "github.com/longportapp/openapi-go/quote"
+)
+
+func main() {
+ // create quote context from environment variables
+    conf, err := config.New()
+    if err != nil {
+        log.Fatal(err)
+    }
+    quoteContext, err := quote.NewFromCfg(conf)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+    defer quoteContext.Close()
+    ctx := context.Background()
+    quoteContext.OnQuote(func(pe *quote.PushQuote) {
+        bytes, _ := json.Marshal(pe)
+        fmt.Println(string(bytes))
+    })
+    quoteContext.OnDepth(func(d *quote.PushDepth) {
+        bytes, _ := json.Marshal(d)
+        if d.Sequence != 0 {
+            fmt.Print(time.UnixMicro(d.Sequence/1000).Format(time.RFC3339) + " ")
+        }
+        fmt.Println(string(bytes))
+    })
+
+    // Subscribe some symbols
+    err = quoteContext.Subscribe(ctx, []string{"700.HK", "AAPL.US", "NFLX.US"}, []quote.SubType{quote.SubTypeDepth}, true)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+
+    quitChannel := make(chan os.Signal, 1)
+    signal.Notify(quitChannel, syscall.SIGINT, syscall.SIGTERM)
+    <-quitChannel
+}
+```
+
+運行：
+
+```shell
+go run ./
+```
+
+  </TabItem>
+
 </Tabs>
 
 運行後會輸出如下：
@@ -712,6 +842,49 @@ mvn compile exec:exec
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+创建 `main.go`，贴入以下内容：
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "github.com/longportapp/openapi-go/config"
+    "github.com/longportapp/openapi-go/trade"
+)
+
+func main() {
+    // create trade context from environment variables
+    conf, err := config.New()
+    if err != nil {
+        log.Fatal(err)
+    }
+    tradeContext, err := trade.NewFromCfg(conf)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer tradeContext.Close()
+    ctx := context.Background()
+    // today orders
+    orders, err := tradeContext.TodayOrders(ctx, &trade.GetTodayOrders{})
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, order := range orders {
+        fmt.Printf("%+v\n", order)
+    }
+}
+```
+
+  </TabItem>
+
 </Tabs>
 
 運行後會輸出如下：
@@ -752,15 +925,15 @@ Order {
 
 我們在 LongPort OpenAPI Python SDK 的 GitHub 倉庫中提供了上面幾個例子的完整代碼，當然後期我們也會持續往裡面補充或更新。
 
-https://github.com/longportapp/openapi-sdk/tree/master/examples
+<https://github.com/longportapp/openapi-sdk/tree/master/examples>
 
 ## SDK API 文檔
 
 SDK 的詳細 API 文檔請訪問：
 
-https://longportapp.github.io/openapi-sdk/
+<https://longportapp.github.io/openapi-sdk/>
 
-- GitHub Issues: https://github.com/longportapp/openapi-sdk/
+- GitHub Issues: <https://github.com/longportapp/openapi-sdk/>
 
 - 微信溝通羣（已滿）：
 
