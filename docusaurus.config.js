@@ -166,15 +166,21 @@ const config = {
           {
             type: 'search',
             position: 'right',
+            className: 'search-container',
           },
           {
             type: 'localeDropdown',
             position: 'right',
           },
           {
-            href: 'https://github.com/longportapp/openapi-website',
-            label: 'GitHub',
+            type: 'html',
             position: 'right',
+            value: `
+            <a href="https://github.com/longportapp/openapi-website" target="_blank" rel="noopener noreferrer" style="display:inline-block;width:26px;height:26px">
+              <img src="https://assets.lbkrs.com/uploads/5bf731ed-c913-4036-8886-abb631498b6b/github.png"/>
+            </a>
+          `,
+            className: 'github-container',
           },
         ],
       },
