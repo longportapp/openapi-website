@@ -112,6 +112,16 @@ go get github.com/longportapp/openapi-go
 
 在頁面上會給出“應用憑證”憑證信息，我們拿到以後設置環境變量，便於後面開發使用方便。
 
+:::tip 關於環境變量
+
+建議您設置好 `LONGPORT_APP_KEY`, `LONGPORT_APP_SECRET`, `LONGPORT_ACCESS_TOKEN` 這幾個環境變量。我們為了演示方便，後面各章節文檔中的示例代碼都會使用這幾個環境變量。
+
+環境變量**非必要**條件，或設置環境變量不方便或遇到問題難以解決，可不設置環境變量，而是直接在代碼裏用參數來初始化。
+
+LongPort OpenAPI SDK 的 `Config` 均可以直接傳入 `app_key`, `app_secret`, `access_token` 等參數來初始化，注意看後面的例子註釋內 `Init config without ENV` 的部分。
+
+:::
+
 ### macOS / Linux 環境下設置環境變量
 
 打開終端，輸入下面的命令即可：
@@ -139,7 +149,7 @@ C:\Users\jason> setx LONGPORT_ACCESS_TOKEN "從頁面上獲取到的 Access Toke
 成功：指定的值已得到保存。
 ```
 
-:::caution
+:::caution 環境變量限制
 
 Windows 環境變量限制，當上面 3 條命令執行成功以後，你需要重新啟動 Windows 或者註銷後重新登錄一次，才可以讀取到。
 
@@ -155,12 +165,6 @@ LONGPORT_ACCESS_TOKEN=xxxxxxx
 ```
 
 如果能正確打印你剛才設置的值，那麼環境變量就是對了。
-
-:::tip
-建議您設置好 `LONGPORT_APP_KEY`, `LONGPORT_APP_SECRET`, `LONGPORT_ACCESS_TOKEN` 這幾個環境變量。我們為了演示方便，後面各章節文檔中的示例代碼都會使用這幾個環境變量。
-
-如您在 Windows 環境不方便使用環境變量，可根據個人需要，修改代碼。
-:::
 
 :::caution
 請注意保護好您的 **Access Token** 信息，任何人獲得到它，都可以通過 OpenAPI 來交易你的賬戶！
@@ -179,6 +183,10 @@ LONGPORT_ACCESS_TOKEN=xxxxxxx
 from longport.openapi import TradeContext, Config
 
 config = Config.from_env()
+
+# Init config without ENV
+# config = Config(app_key = "YOUR_APP_KEY", app_secret = "YOUR_APP_SECRET", access_token = "YOUR_ACCESS_TOKEN")
+
 ctx = TradeContext(config)
 
 resp = ctx.account_balance()
@@ -200,6 +208,10 @@ python account_asset.py
 const { Config, TradeContext } = require('longport')
 
 let config = Config.fromEnv()
+
+// Init config without ENV
+// let config = new Config({ app_key: "YOUR_APP_KEY", app_secret = "YOUR_APP_SECRET", access_token = "YOUR_ACCESS_TOKEN" })
+
 TradeContext.new(config)
   .then((ctx) => ctx.accountBalance())
   .then((resp) => {
@@ -228,6 +240,10 @@ use longport::{trade::TradeContext, Config};
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let config = Arc::new(Config::from_env()?);
+
+    // Init config without ENV
+    // let config = Arc::new(Config::new("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN")?);
+
     let (ctx, _) = TradeContext::try_new(config).await?;
 
     let resp = ctx.account_balance().await?;
@@ -253,7 +269,13 @@ import com.longport.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
-        try (Config config = Config.fromEnv(); TradeContext ctx = TradeContext.create(config).get()) {
+        Config config = Config.fromEnv();
+
+        // Init config without ENV
+        // https://longportapp.github.io/openapi-sdk/java/com/longport/ConfigBuilder.html
+        // Config config = ConfigBuilder("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN").build();
+
+        try (TradeContext ctx = TradeContext.create(config).get()) {
             for (AccountBalance obj : ctx.getAccountBalance().get()) {
                 System.out.println(obj);
             }
@@ -287,8 +309,12 @@ import (
 )
 
 func main() {
-    // create trade context from environment variables
     conf, err := config.New()
+
+    // Init config without ENV
+    // https://github.com/longportapp/openapi-go/blob/v0.9.2/config/config_test.go#L11
+    // conf, err := config.New(config.WithConfigKey("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN"))
+
     if err != nil {
         log.Fatal(err)
     }
