@@ -120,6 +120,16 @@ export LONGPORT_APP_SECRET="App Secret get from user center"
 export LONGPORT_ACCESS_TOKEN="Access Token get from user center"
 ```
 
+:::tip About ENV
+
+We recommend that you set the environment variables `LONGPORT_APP_KEY`, `LONGPORT_APP_SECRET`, `LONGPORT_ACCESS_TOKEN`. For the convenience of demonstration, these environment variables will be used in the sample code in the documents in the following chapters.
+
+The ENV variables are **not necessary** conditions, or it is inconvenient to set the ENV variables or encounter problems that are difficult to solve, you can not set the ENV variables, but directly use the parameters in the code to initialize.
+
+The `Config` in LongPort OpenAPI SDK can be directly passed in parameters such as `app_key`, `app_secret`, `access_token` to initialize, pay attention to the comments in the example code below `Init config without ENV`.
+
+:::
+
 ### Setting Environment Variables In Windows Environment
 
 Windows is a little more complicated, press the `Win + R` shortcut keys and enter the `cmd` command to start the command line (it is recommended to use [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) for a better development experience).
@@ -137,9 +147,9 @@ C:\Users\jason> setx LONGPORT_ACCESS_TOKEN "Access Token get from user center"
 Success: the specified value has been saved.
 ```
 
-:::caution
+:::caution Windows ENV Restrictions
 
-Windows environment variable restrictions, when the above 3 commands are executed successfully, you need to restart Windows or log out and log in again before you can read it.
+Windows ENV Restrictions, when the above 3 commands are executed successfully, you need to restart Windows or log out and log in again before you can read it.
 
 :::
 
@@ -153,14 +163,6 @@ LONGPORT_ACCESS_TOKEN=xxxxxxx
 ```
 
 If it prints the value you just set correctly, then the environment variable is right.
-
-:::tip
-
-It is recommended that you set several environment variables such as `LONGPORT_APP_KEY`, `LONGPORT_APP_SECRET`, `LONGPORT_ACCESS_TOKEN`. For the convenience of demonstration, these environment variables will be used in the sample code in the documents in the following chapters.
-
-If you are inconvenient to use environment variables in the Windows environment, you can modify the code according to your personal needs.
-
-:::
 
 :::caution
 Please pay attention to protect your **Access Token** information, anyone who gets it can trade your account through OpenAPI!
@@ -179,6 +181,10 @@ Cteate `account_asset.py` and paste the code below:
 from longport.openapi import TradeContext, Config
 
 config = Config.from_env()
+
+# Init config without ENV
+# config = Config(app_key = "YOUR_APP_KEY", app_secret = "YOUR_APP_SECRET", access_token = "YOUR_ACCESS_TOKEN")
+
 ctx = TradeContext(config)
 
 resp = ctx.account_balance()
@@ -200,6 +206,10 @@ Cteate `account_asset.js` and paste the code below:
 const { Config, TradeContext } = require('longport')
 
 let config = Config.fromEnv()
+
+// Init config without ENV
+// let config = new Config({ app_key: "YOUR_APP_KEY", app_secret = "YOUR_APP_SECRET", access_token = "YOUR_ACCESS_TOKEN" })
+
 TradeContext.new(config)
   .then((ctx) => ctx.accountBalance())
   .then((resp) => {
@@ -228,6 +238,10 @@ use longport::{trade::TradeContext, Config};
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let config = Arc::new(Config::from_env()?);
+
+    // Init config without ENV
+    // let config = Arc::new(Config::new("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN")?);
+
     let (ctx, _) = TradeContext::try_new(config).await?;
 
     let resp = ctx.account_balance().await?;
@@ -253,7 +267,13 @@ import com.longport.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
-        try (Config config = Config.fromEnv(); TradeContext ctx = TradeContext.create(config).get()) {
+        Config config = Config.fromEnv();
+
+        // Init config without ENV
+        // https://longportapp.github.io/openapi-sdk/java/com/longport/ConfigBuilder.html
+        // Config config = ConfigBuilder("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN").build();
+
+        try (TradeContext ctx = TradeContext.create(config).get()) {
             for (AccountBalance obj : ctx.getAccountBalance().get()) {
                 System.out.println(obj);
             }
@@ -287,8 +307,12 @@ import (
 )
 
 func main() {
-    // create trade context from environment variables
     conf, err := config.New()
+
+    // Init config without ENV
+    // https://github.com/longportapp/openapi-go/blob/v0.9.2/config/config_test.go#L11
+    // conf, err := config.New(config.WithConfigKey("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN"))
+
     if err != nil {
         log.Fatal(err)
     }
