@@ -116,7 +116,7 @@ go get github.com/longportapp/openapi-go
 
 建議您設置好 `LONGPORT_APP_KEY`, `LONGPORT_APP_SECRET`, `LONGPORT_ACCESS_TOKEN` 這幾個環境變量。我們為了演示方便，後面各章節文檔中的示例代碼都會使用這幾個環境變量。
 
-環境變量**非必要**條件，或設置環境變量不方便或遇到問題難以解決，可不設置環境變量，而是直接在代碼裏用參數來初始化。
+環境變量**非必要**條件，如設置不方便或遇到問題難以解決，可不設置環境變量，而是直接在代碼裏用參數來初始化。
 
 LongPort OpenAPI SDK 的 `Config` 均可以直接傳入 `app_key`, `app_secret`, `access_token` 等參數來初始化，注意看後面的例子註釋內 `Init config without ENV` 的部分。
 
