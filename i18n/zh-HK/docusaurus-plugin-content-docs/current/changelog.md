@@ -5,7 +5,7 @@ slug: changelog
 sidebar_position: 7
 ---
 
-## 2022-11-03
+## 2023-11-03
 
 - 新增行情曆史 K 線接口
   - 長連接 `Business Command：27` 獲取標的曆史 K 線
