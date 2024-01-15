@@ -1,9 +1,22 @@
 import React, { FC, useState, useMemo, useEffect } from 'react'
 import { useBasenameLocale, useDefaultLocale, getRootDomain } from '@site/src/utils'
 import { loadHighlight } from '@site/src/utils/highlight'
+import BrowserOnly from '@docusaurus/BrowserOnly'
 import Cookies from 'js-cookie'
 import Dropdown from './dropdown'
 
+const LoadHighlight = () => {
+  useEffect(() => {
+    loadHighlight()
+    return () => {
+      const xHighlights = document.querySelectorAll('.doc-highlight')
+      xHighlights.forEach((xHighlight) => {
+        document.body.removeChild(xHighlight)
+      })
+    }
+  }, [location.pathname])
+  return <></>
+}
 export const LocaleDropdown: FC = () => {
   // 为了方便复制粘贴，就不用组件了
   const items = useMemo(() => {
@@ -45,15 +58,9 @@ export const LocaleDropdown: FC = () => {
     location.href = url.toString()
   }
 
-  useEffect(() => {
-    loadHighlight()
-    return () => {
-      const xHighlights = document.querySelectorAll('.doc-highlight')
-      xHighlights.forEach((xHighlight) => {
-        document.body.removeChild(xHighlight)
-      })
-    }
-  }, [location.pathname])
-
-  return <Dropdown className="hidden-in-mobile-sidebar" items={items} value={locale} onChange={onChange} />
+  return (
+    <Dropdown className="hidden-in-mobile-sidebar" items={items} value={locale} onChange={onChange}>
+      <BrowserOnly>{() => <LoadHighlight />}</BrowserOnly>
+    </Dropdown>
+  )
 }
