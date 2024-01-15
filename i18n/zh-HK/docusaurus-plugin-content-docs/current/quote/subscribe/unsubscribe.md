@@ -9,7 +9,7 @@ sidebar_position: 3
 
 :::info
 
-[業務指令](../../socket/protocol/request)：`7`
+[業務指令](../../socket/biz-command)：`7`
 
 :::
 
@@ -17,10 +17,10 @@ sidebar_position: 3
 
 ### Parameters
 
-| Name      | Type     | Required | Description                                                                                                          |
-| --------- | -------- | -------- | -------------------------------------------------------------------------------------------------------------------- |
-| symbol    | string[] | 是       | 訂閱的標的代碼，例如：`[700.HK]` <br /><br />**校驗規則：**<br />每次請求支持傳入的標的數量上限是 `500` 個           |
-| sub_type  | int32[]  | 是       | 訂閱的數據類型，例如：`[1,2]`，詳見 [SubType](../objects#subtype---訂閱數據的類型)                                   |
+| Name      | Type     | Required | Description                                                                                                     |
+|-----------|----------|----------|-----------------------------------------------------------------------------------------------------------------|
+| symbol    | string[] | 是       | 訂閱的標的代碼，例如：`[700.HK]` <br /><br />**校驗規則：**<br />每次請求支持傳入的標的數量上限是 `500` 個         |
+| sub_type  | int32[]  | 是       | 訂閱的數據類型，例如：`[1,2]`，詳見 [SubType](../objects#subtype---訂閱數據的類型)                                 |
 | unsub_all | bool     | 是       | 是否全部取消。 <br />- `symbol` 為空時，取消所有標的的訂閱。 <br />- `symbol` 不為空時，取消這些標的的所有類型訂閱。 |
 
 ### Protobuf
@@ -46,7 +46,7 @@ message UnsubscribeRequest {
 #
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
 # 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
-from longbridge.openapi import QuoteContext, Config, SubType
+from longport.openapi import QuoteContext, Config, SubType
 config = Config.from_env()
 ctx = QuoteContext(config)
 
@@ -66,7 +66,7 @@ message UnsubscribeResponse{
 ## 錯誤碼
 
 | 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                 |
-| ---------- | ---------- | -------------- | ------------------------ |
+|------------|------------|--------------|----------------------|
 | 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗   |
 | 3          | 301606     | 限流           | 降低請求頻次             |
 | 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理 |

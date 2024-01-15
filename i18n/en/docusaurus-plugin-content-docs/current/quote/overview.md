@@ -13,7 +13,7 @@ slug: overview
         <td>Description</td>
     </tr>
     <tr>
-        <td rowspan="19">Pull</td>
+        <td rowspan="20">Pull</td>
         <td><a href="./pull/static">Get Basic Information Of Securities</a></td>
     </tr>
     <tr>
@@ -69,6 +69,9 @@ slug: overview
     </tr>
     <tr>
         <td><a href="./pull/calc-index">Get Calculate Indexes Of Securities</a></td>
+    </tr>
+    <tr>
+        <td><a href="./pull/history-candlestick">Get Security History Candlestick</a></td>
     </tr>
     <tr>
         <td rowspan="3">Subscription</td>
@@ -131,4 +134,4 @@ We use the [Protobuf](https://developers.google.cn/protocol-buffers) protocol to
 - Smaller packet size.
 - Strongger version forward and backward compatibility.
 
-Quote Protobuf protocol document [download link](https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto).
+Quote Protobuf protocol document [download link](https://github.com/longportapp/openapi-protobufs/blob/main/quote/api.proto).

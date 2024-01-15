@@ -8,7 +8,7 @@ sidebar_position: 18
 This API is used to obtain the daily capital distribution of security.
 
 :::info
-[Business Command](../../socket/protocol/request)：`25`
+[Business Command](../../socket/biz-command)：`25`
 :::
 
 ## Request

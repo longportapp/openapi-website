@@ -76,7 +76,7 @@ paths:
         type: "python"
         value: |
           from decimal import Decimal
-          from longbridge.openapi import TradeContext, Config, OrderType, OrderSide, TimeInForceType
+          from longport.openapi import TradeContext, Config, OrderType, OrderSide, TimeInForceType
 
           # Load configuration from environment variables
           config = Config.from_env()

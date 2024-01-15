@@ -9,7 +9,7 @@ sidebar_position: 8
 
 :::info
 
-[業務指令](../../socket/protocol/request)：`17`
+[業務指令](../../socket/biz-command)：`17`
 
 :::
 
@@ -17,9 +17,9 @@ sidebar_position: 8
 
 ### Parameters
 
-| Name   | Type   | Required | Description                                                              |
-| ------ | ------ | -------- | ------------------------------------------------------------------------ |
-| symbol | string | 是       | 標的代碼，使用 `ticker.region` 格式，例如：`700.HK`                      |
+| Name   | Type   | Required | Description                                                             |
+|--------|--------|----------|-------------------------------------------------------------------------|
+| symbol | string | 是       | 標的代碼，使用 `ticker.region` 格式，例如：`700.HK`                        |
 | count  | int32  | 是       | 請求的逐筆明細數量 <br /><br />**校驗規則：**<br />請求數量最大為 `1000` |
 
 ### Protobuf
@@ -38,7 +38,7 @@ message SecurityTradeRequest {
 # https://open.longportapp.com/docs/quote/pull/trade
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
 # 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
-from longbridge.openapi import QuoteContext, Config
+from longport.openapi import QuoteContext, Config
 
 config = Config.from_env()
 ctx = QuoteContext(config)
@@ -51,14 +51,14 @@ print(resp)
 
 ### Response Properties
 
-| Name            | Type     | Description                                                                        |
-| --------------- | -------- | ---------------------------------------------------------------------------------- |
-| symbol          | string   | 標的代碼                                                                           |
-| trades          | object[] | 逐筆明細數據                                                                       |
-| ∟ price         | string   | 價格                                                                               |
-| ∟ volume        | int64    | 成交量                                                                             |
-| ∟ timestamp     | int64    | 成交時間                                                                           |
-| ∟ trade_type    | string   | [交易類型說明](#交易類型)                                                          |
+| Name            | Type     | Description                                                                       |
+|-----------------|----------|-----------------------------------------------------------------------------------|
+| symbol          | string   | 標的代碼                                                                          |
+| trades          | object[] | 逐筆明細數據                                                                      |
+| ∟ price         | string   | 價格                                                                              |
+| ∟ volume        | int64    | 成交量                                                                            |
+| ∟ timestamp     | int64    | 成交時間                                                                          |
+| ∟ trade_type    | string   | [交易類型說明](#交易類型)                                                         |
 | ∟ direction     | int32    | 交易方向 <br /><br />**可选值：**<br />`0` - neutral<br />`1` - down<br />`2` - up |
 | ∟ trade_session | int32    | 交易時段，詳見 [TradeSession](../objects#tradesession---交易時段)                  |
 
@@ -149,12 +149,12 @@ message Trade {
 
 ## 錯誤碼
 
-| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                         |
-| ---------- | ---------- | -------------- | -------------------------------- |
-| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗           |
-| 3          | 301606     | 限流           | 降低請求頻次                     |
-| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理         |
-| 7          | 301600     | 請求標的不存在 | 檢查請求的 `symbol` 是否正確     |
-| 7          | 301603     | 標的無行情     | 標的沒有請求的行情數據           |
-| 7          | 301604     | 無權限         | 沒有獲取標的行情的權限           |
+| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                        |
+|------------|------------|--------------|-----------------------------|
+| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗          |
+| 3          | 301606     | 限流           | 降低請求頻次                    |
+| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理        |
+| 7          | 301600     | 請求標的不存在 | 檢查請求的 `symbol` 是否正確    |
+| 7          | 301603     | 標的無行情     | 標的沒有請求的行情數據          |
+| 7          | 301604     | 無權限         | 沒有獲取標的行情的權限          |
 | 7          | 301607     | 接口限制       | 請求的數據數量超限，減少數據數量 |

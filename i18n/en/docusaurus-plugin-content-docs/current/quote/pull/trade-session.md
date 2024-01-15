@@ -9,7 +9,7 @@ This API is used to obtain the daily trading hours of each market.
 
 :::info
 
-[Business Command](../../socket/protocol/request): `8`
+[Business Command](../../socket/biz-command): `8`
 
 :::
 
@@ -22,7 +22,7 @@ This API is used to obtain the daily trading hours of each market.
 # https://open.longportapp.com/docs/quote/pull/trade-session
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
-from longbridge.openapi import QuoteContext, Config
+from longport.openapi import QuoteContext, Config
 
 config = Config.from_env()
 ctx = QuoteContext(config)
@@ -36,7 +36,7 @@ print(resp)
 ### Response Properties
 
 | Name                 | Type     | Description                                                                                     |
-| -------------------- | -------- | ----------------------------------------------------------------------------------------------- |
+|----------------------|----------|-------------------------------------------------------------------------------------------------|
 | market_trade_session | object[] | Trading session data                                                                            |
 | ∟ market             | string   | Market<br/><br/>`US` - US market<br/>`HK` - HK market<br/>`CN` - CN market<br/>`SG` - SG market |
 | ∟ trade_session      | object[] | Trading session                                                                                 |
@@ -133,7 +133,7 @@ message TradePeriod {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description        | Troubleshooting Suggestions                                   |
-| ------------------- | ------------------- | ------------------ | ------------------------------------------------------------- |
+|---------------------|---------------------|--------------------|---------------------------------------------------------------|
 | 3                   | 301600              | Invalid request    | Invalid request parameters or unpacking request failed        |
 | 3                   | 301606              | Request rate limit | Reduce the frequency of requests                              |
 | 7                   | 301602              | Server error       | Please try again or contact a technician to resolve the issue |

@@ -140,4 +140,4 @@ message ReconnectResponse {
 
 ## Protobuf
 
-所有控制指令相关的 `Protobuf` 都已经开源在 [GitHub](https://github.com/longbridgeapp/openapi-protobufs/blob/main/control/control.proto)
+所有控制指令相关的 `Protobuf` 都已经开源在 [GitHub](https://github.com/longportapp/openapi-protobufs/blob/main/control/control.proto)

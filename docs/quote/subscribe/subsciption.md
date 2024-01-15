@@ -9,7 +9,7 @@ sidebar_position: 1
 
 :::info
 
-[业务指令](../../socket/protocol/request)：`5`
+[业务指令](../../socket/biz-command)：`5`
 
 :::
 
@@ -29,10 +29,10 @@ message SubscriptionRequest {
 # https://open.longportapp.com/docs/quote/subscribe/subscription
 import os
 import time
-from longbridge.http import Auth, Config, HttpClient
-from longbridge.ws import ReadyState, WsCallback, WsClient
-# Protobuf 变量定义参见：https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto
-from longbridge.proto.quote_pb2 import (Command, PushQuote, SubscribeRequest, SubscriptionResponse, SubType, SubscriptionRequest, UnsubscribeRequest, UnsubscribeResponse)
+from longport.http import Auth, Config, HttpClient
+from longport.ws import ReadyState, WsCallback, WsClient
+# Protobuf 变量定义参见：https://github.com/longportapp/openapi-protobufs/blob/main/quote/api.proto
+from longport.proto.quote_pb2 import (Command, PushQuote, SubscribeRequest, SubscriptionResponse, SubType, SubscriptionRequest, UnsubscribeRequest, UnsubscribeResponse)
 
 class MyWsCallback(WsCallback):
     def on_push(self, command: int, body: bytes):
@@ -46,7 +46,7 @@ class MyWsCallback(WsCallback):
     def on_state(self, state: ReadyState):
         print(f"-> state: {state}")
 
-auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
+auth = Auth(os.getenv("LONGPORT_APP_KEY"), os.getenv("LONGPORT_APP_SECRET"), access_token=os.getenv("LONGPORT_ACCESS_TOKEN"))
 http = HttpClient(auth, Config(base_url="https://openapi.longportapp.com"))
 ws = WsClient("wss://openapi-quote.longportapp.com", http, MyWsCallback())
 
@@ -98,10 +98,10 @@ print(f"Subscribed symbol:\n\n {resp.sub_list}")
 
 ### Response Properties
 
-| Name       | Type     | Description                                                         |
-| ---------- | -------- | ------------------------------------------------------------------- |
-| sub_list   | object[] | 订阅的数据                                                          |
-| ∟ symbol   | string   | 标的代码                                                            |
+| Name       | Type     | Description                                                        |
+|------------|----------|--------------------------------------------------------------------|
+| sub_list   | object[] | 订阅的数据                                                         |
+| ∟ symbol   | string   | 标的代码                                                           |
 | ∟ sub_type | []int32  | 订阅的数据类型，详见 [SubType](../objects#subtype---订阅数据的类型) |
 
 ### Protobuf
@@ -137,7 +137,7 @@ message SubTypeList {
 ## 错误码
 
 | 协议错误码 | 业务错误码 | 描述           | 排查建议                 |
-| ---------- | ---------- | -------------- | ------------------------ |
+|------------|------------|--------------|----------------------|
 | 3          | 301600     | 无效的请求     | 请求参数有误或解包失败   |
 | 3          | 301606     | 限流           | 降低请求频次             |
 | 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理 |

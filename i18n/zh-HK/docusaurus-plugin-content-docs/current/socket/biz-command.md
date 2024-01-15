@@ -15,7 +15,7 @@ sidebar_position: 5
         <td>功能簡介</td>
     </tr>
     <tr>
-        <td rowspan="16">拉取</td>
+        <td rowspan="20">拉取</td>
         <td><a href="../quote/pull/static">獲取標的基礎信息</a></td>
     </tr>
     <tr>
@@ -62,6 +62,18 @@ sidebar_position: 5
     </tr>
     <tr>
         <td><a href="../quote/pull/trade-day">獲取市場交易日</a></td>
+    </tr>
+    <tr>
+        <td><a href="../quote/pull/capital-flow-intraday">獲取標的當日資金流向</a></td>
+    </tr>
+    <tr>
+        <td><a href="../quote/pull/capital-distribution">獲取標的當日資金分佈</a></td>
+    </tr>
+    <tr>
+        <td><a href="../quote/pull/calc-index">獲取標的計算指標</a></td>
+    </tr>
+    <tr>
+        <td><a href="../quote/pull/history-candlestick">獲取標的曆史 K 線</a></td>
     </tr>
     <tr>
         <td rowspan="3">訂閱</td>

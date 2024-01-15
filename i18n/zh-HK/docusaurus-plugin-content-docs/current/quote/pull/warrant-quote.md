@@ -9,7 +9,7 @@ sidebar_position: 4
 
 :::info
 
-[業務指令](../../socket/protocol/request)：`13`
+[業務指令](../../socket/biz-command)：`13`
 
 :::
 
@@ -17,8 +17,8 @@ sidebar_position: 4
 
 ### Parameters
 
-| Name   | Type     | Required | Description                                                                                                                           |
-| ------ | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Name   | Type     | Required | Description                                                                                                                       |
+|--------|----------|----------|-----------------------------------------------------------------------------------------------------------------------------------|
 | symbol | string[] | 是       | 標的代碼列表，使用 `ticker.region` 格式，例如：`[13447.HK]` <br /><br />**校驗規則：**<br />每次請求支持傳入的標的數量上限是 `500` 个 |
 
 ### Protobuf
@@ -36,7 +36,7 @@ message MultiSecurityRequest {
 # https://open.longportapp.com/docs/quote/pull/warrant-quote
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
 # 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
-from longbridge.openapi import QuoteContext, Config
+from longport.openapi import QuoteContext, Config
 
 config = Config.from_env()
 ctx = QuoteContext(config)
@@ -49,32 +49,32 @@ print(resp)
 
 ### Response Properties
 
-| Name                  | Type     | Description                                                                                                                                 |
-| --------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| secu_quote            | object[] | 期權標的行情數據列表                                                                                                                        |
-| ∟ symbol              | string   | 標的代碼                                                                                                                                    |
-| ∟ last_done           | string   | 最新價                                                                                                                                      |
-| ∟ prev_close          | string   | 昨收價                                                                                                                                      |
-| ∟ open                | string   | 開盤價                                                                                                                                      |
-| ∟ high                | string   | 最高價                                                                                                                                      |
-| ∟ low                 | string   | 最低價                                                                                                                                      |
-| ∟ timestamp           | int64    | 最新成交的時間戳                                                                                                                            |
-| ∟ volume              | int64    | 成交量                                                                                                                                      |
-| ∟ turnover            | string   | 成交額                                                                                                                                      |
+| Name                  | Type     | Description                                                                                                                                |
+|-----------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| secu_quote            | object[] | 期權標的行情數據列表                                                                                                                       |
+| ∟ symbol              | string   | 標的代碼                                                                                                                                   |
+| ∟ last_done           | string   | 最新價                                                                                                                                     |
+| ∟ prev_close          | string   | 昨收價                                                                                                                                     |
+| ∟ open                | string   | 開盤價                                                                                                                                     |
+| ∟ high                | string   | 最高價                                                                                                                                     |
+| ∟ low                 | string   | 最低價                                                                                                                                     |
+| ∟ timestamp           | int64    | 最新成交的時間戳                                                                                                                           |
+| ∟ volume              | int64    | 成交量                                                                                                                                     |
+| ∟ turnover            | string   | 成交額                                                                                                                                     |
 | ∟ trade_status        | int32    | 標的交易狀態，詳見[TradeStatus](../objects#tradestatus---交易狀態)                                                                          |
-| ∟ warrant_extend      | object   | 輪證擴展行情                                                                                                                                |
-| ∟∟ implied_volatility | string   | 引申波幅                                                                                                                                    |
-| ∟∟ expiry_date        | string   | 到期日，使用：`YYMMDD` 格式                                                                                                                 |
-| ∟∟ last_trade_date    | string   | 最後交易日，使用：`YYMMDD` 格式                                                                                                             |
-| ∟∟ outstanding_ratio  | string   | 街貨比                                                                                                                                      |
-| ∟∟ outstanding_qty    | int64    | 街貨量                                                                                                                                      |
-| ∟∟ conversion_ratio   | string   | 換股比率                                                                                                                                    |
+| ∟ warrant_extend      | object   | 輪證擴展行情                                                                                                                               |
+| ∟∟ implied_volatility | string   | 引申波幅                                                                                                                                   |
+| ∟∟ expiry_date        | string   | 到期日，使用：`YYMMDD` 格式                                                                                                                  |
+| ∟∟ last_trade_date    | string   | 最後交易日，使用：`YYMMDD` 格式                                                                                                              |
+| ∟∟ outstanding_ratio  | string   | 街貨比                                                                                                                                     |
+| ∟∟ outstanding_qty    | int64    | 街貨量                                                                                                                                     |
+| ∟∟ conversion_ratio   | string   | 換股比率                                                                                                                                   |
 | ∟∟ category           | string   | 輪證類型 <br /><br />**可選值：**<br />`Call` - 認購證 <br />`Put` - 認沽證 <br />`Bull` - 牛證 <br />`Bear` - 熊證 <br />`Inline` - 界內證 |
-| ∟∟ strike_price       | string   | 行權價                                                                                                                                      |
-| ∟∟ upper_strike_price | string   | 上限價                                                                                                                                      |
-| ∟∟ lower_strike_price | string   | 下限價                                                                                                                                      |
-| ∟∟ call_price         | string   | 收回價                                                                                                                                      |
-| ∟∟ underlying_symbol  | string   | 對應的正股標的代碼                                                                                                                          |
+| ∟∟ strike_price       | string   | 行權價                                                                                                                                     |
+| ∟∟ upper_strike_price | string   | 上限價                                                                                                                                     |
+| ∟∟ lower_strike_price | string   | 下限價                                                                                                                                     |
+| ∟∟ call_price         | string   | 收回價                                                                                                                                     |
+| ∟∟ underlying_symbol  | string   | 對應的正股標的代碼                                                                                                                         |
 
 ### Protobuf
 
@@ -182,9 +182,9 @@ message WarrantExtend {
 
 ## 錯誤碼
 
-| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                                   |
-| ---------- | ---------- | -------------- | ------------------------------------------ |
-| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗                     |
-| 3          | 301606     | 限流           | 降低請求頻次                               |
-| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理                   |
+| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                                  |
+|------------|------------|--------------|---------------------------------------|
+| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗                    |
+| 3          | 301606     | 限流           | 降低請求頻次                              |
+| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理                  |
 | 7          | 301607     | 接口限制       | 請求的標的數量超限，請減少單次請求標的數量 |

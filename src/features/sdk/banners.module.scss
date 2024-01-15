@@ -1,6 +1,5 @@
 :local(.banners-container) {
-  --page_bg_color: #F8F9FA;
-  background-color: var(--page_bg_color);
+  background-color: #f8f9fa;
 }
 :local(.banner) {
   @apply mx-auto relative text-center;
@@ -9,11 +8,11 @@
     @apply flex flex-col px-5 py-10;
   }
   :global(.title) {
-    @apply mb-4 font-bold text-3xl;
+    @apply mb-4 font-bold text-2xl;
   }
   :global(.desc) {
     @apply text-xl;
-    color: var(--text_color_1_supplement)
+    color: var(--text_color_1_supplement);
   }
   :global(.code-picture) {
     @apply mt-10 w-60;
@@ -32,7 +31,7 @@
       @apply mb-5 text-5xl;
     }
     :global(.desc) {
-      @apply text-3xl;
+      @apply text-xl;
     }
     :global(.code-picture) {
       @apply w-[400px];

@@ -9,7 +9,7 @@ This API is used to obtain the subscription information.
 
 :::info
 
-[Business Command](../../socket/protocol/request): `5`
+[Business Command](../../socket/biz-command): `5`
 
 :::
 
@@ -29,10 +29,10 @@ message SubscriptionRequest {
 # https://open.longportapp.com/docs/quote/subscribe/subscription
 import os
 import time
-from longbridge.http import Auth, Config, HttpClient
-from longbridge.ws import ReadyState, WsCallback, WsClient
-# Protobuf variables definition: https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto
-from longbridge.proto.quote_pb2 import (Command, PushQuote, SubscribeRequest, SubscriptionResponse, SubType, SubscriptionRequest, UnsubscribeRequest, UnsubscribeResponse)
+from longport.http import Auth, Config, HttpClient
+from longport.ws import ReadyState, WsCallback, WsClient
+# Protobuf variables definition: https://github.com/longportapp/openapi-protobufs/blob/main/quote/api.proto
+from longport.proto.quote_pb2 import (Command, PushQuote, SubscribeRequest, SubscriptionResponse, SubType, SubscriptionRequest, UnsubscribeRequest, UnsubscribeResponse)
 
 class MyWsCallback(WsCallback):
     def on_push(self, command: int, body: bytes):
@@ -46,7 +46,7 @@ class MyWsCallback(WsCallback):
     def on_state(self, state: ReadyState):
         print(f"-> state: {state}")
 
-auth = Auth(os.getenv("LONGBRIDGE_APP_KEY"), os.getenv("LONGBRIDGE_APP_SECRET"), access_token=os.getenv("LONGBRIDGE_ACCESS_TOKEN"))
+auth = Auth(os.getenv("LONGPORT_APP_KEY"), os.getenv("LONGPORT_APP_SECRET"), access_token=os.getenv("LONGPORT_ACCESS_TOKEN"))
 http = HttpClient(auth, Config(base_url="https://openapi.longportapp.com"))
 ws = WsClient("wss://openapi-quote.longportapp.com", http, MyWsCallback())
 
@@ -99,7 +99,7 @@ print(f"Subscribed symbol:\n\n {resp.sub_list}")
 ### Response Properties
 
 | Name       | Type     | Description                                                                       |
-| ---------- | -------- | --------------------------------------------------------------------------------- |
+|------------|----------|-----------------------------------------------------------------------------------|
 | sub_list   | object[] | Subscribed data                                                                   |
 | ∟ symbol   | string   | Security code                                                                     |
 | ∟ sub_type | []int32  | Subscription type, see [SubType](../objects#subtype---quote-type-of-subscription) |
@@ -137,7 +137,7 @@ message SubTypeList {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description        | Troubleshooting Suggestions                                   |
-| ------------------- | ------------------- | ------------------ | ------------------------------------------------------------- |
+|---------------------|---------------------|--------------------|---------------------------------------------------------------|
 | 3                   | 301600              | Invalid request    | Invalid request parameters or unpacking request failed        |
 | 3                   | 301606              | Request rate limit | Reduce the frequency of requests                              |
 | 7                   | 301602              | Server error       | Please try again or contact a technician to resolve the issue |

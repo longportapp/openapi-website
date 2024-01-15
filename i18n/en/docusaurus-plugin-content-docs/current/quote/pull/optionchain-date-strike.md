@@ -9,7 +9,7 @@ This API is used to obtain a list of option securities by the option chain expir
 
 :::info
 
-[Business Command](../../socket/protocol/request): `21`
+[Business Command](../../socket/biz-command): `21`
 
 :::
 
@@ -17,9 +17,9 @@ This API is used to obtain a list of option securities by the option chain expir
 
 ### Parameters
 
-| Name        | Type   | Required | Description                                                                                                                  |
-| ----------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| symbol      | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK`                                                               |
+| Name        | Type   | Required | Description                                                                                                                 |
+|-------------|--------|----------|-----------------------------------------------------------------------------------------------------------------------------|
+| symbol      | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK`                                                              |
 | expiry_date | string | Yes      | Option expiry date，in `YYMMDD` format, for example: `20220429`, obtained by [Option Expiry Date](./optionchain_date.md) API |
 
 ### Protobuf
@@ -39,7 +39,7 @@ message OptionChainDateStrikeInfoRequest {
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
 from datetime import date
-from longbridge.openapi import QuoteContext, Config
+from longport.openapi import QuoteContext, Config
 
 config = Config.from_env()
 ctx = QuoteContext(config)
@@ -53,7 +53,7 @@ print(resp)
 ### Response Properties
 
 | Name              | Type     | Description                  |
-| ----------------- | -------- | ---------------------------- |
+|-------------------|----------|------------------------------|
 | strike_price_info | object[] | Option security info         |
 | ∟ price           | string   | Strike price                 |
 | ∟ call_symbol     | string   | Security code of call option |
@@ -111,8 +111,8 @@ message StrikePriceInfo {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description                | Troubleshooting Suggestions                                   |
-| ------------------- | ------------------- | -------------------------- | ------------------------------------------------------------- |
+|---------------------|---------------------|----------------------------|---------------------------------------------------------------|
 | 3                   | 301600              | Invalid request            | Invalid request parameters or unpacking request failed        |
 | 3                   | 301606              | Request rate limit         | Reduce the frequency of requests                              |
 | 7                   | 301602              | Server error               | Please try again or contact a technician to resolve the issue |
-| 7                   | 301600              | Invalue request parameters | Please check the request parameter: `symbol`，`expiry_date`   |
+| 7                   | 301600              | Invalue request parameters | Please check the request parameter: `symbol`，`expiry_date`    |

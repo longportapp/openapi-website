@@ -82,64 +82,9 @@ You can also use LongPort App to find the symbol of security
 A:
 
 - Quote Authority
-  In accordance with the rules of the exchange, the authority of OpenAPI are independent, and are not shared with LongPort's App, PC, and Web permissions. For example, the Hong Kong stock Level 2 authority you have on the Longbrdge App cannot be used on the OpenAPI side. LongPort also presents basic market rights to OpenAPI users. If you need a higher-level market, you can activate the high-level quote authority by purchasing a market card.
+  In accordance with the rules of the exchange, the authority of OpenAPI are independent, and are not shared with App, PC, or Web permissions. For example, the Hong Kong stock Level 2 authority you have on the App cannot be used on the OpenAPI side. LongPort also presents basic market rights to OpenAPI users. If you need a higher-level market, you can activate the high-level quote authority by purchasing a market card through on-line Quote Store of brokers or LongPort.
 - How to buy quote cards  
-  LongPort users can choose the market cards they want to buy through the "Market Store" in the LongPort App.
-- See the table below for a list of quote authority
-<table>
-    <tr>
-        <td>Market</td>
-        <td>Symbol</td>
-        <td>Access Method</td>
-    </tr>
-    <tr>
-        <td rowspan="2">HK Market</td>
-        <td>Securities (including equities, ETFs, Warrants, CBBCs)</td>
-        <td rowspan="2">
-            <ul>
-            <li>Mainland China: Please Purchase <a href="https://activity.lbkrs.com/spa/mall?market=HK">L2 Advanced Quotes-OpenAPI - OpenAPI</a></li>
-            <li>Non-Mainland China: Please Purchase <a href="https://activity.lbkrs.com/spa/mall?market=HK">L2 Advanced Quotes (International) -OpenAPI</a></li>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>Hang Seng Index</td>
-    </tr>
-    <tr>
-        <td rowspan="3">US Market</td>
-        <td>Securities (including stocks, ETFs)</td>
-        <td rowspan="2">
-            <ul>
-            <li>Level 1: Please Purchase <a href="https://activity.lbkrs.com/spa/mall?market=US">L1 Nasdaq Basic - OpenAPI</a></li>
-            <li>
-                Level 2: Coming Soon
-            </li>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>Nasdsaq Index</td>
-    </tr>
-    <tr>
-        <td>OPRA OPRA Options</td>
-        <td>
-            <li>Level 1: Please Purchase <a href="https://activity.lbkrs.com/spa/mall?market=US">OPRA Options-Open API</a></li>
-        </td>
-    </tr>
-    <tr>
-        <td rowspan="2">CN Market</td>
-        <td>Securities (including stocks, ETFs)</td>
-        <td rowspan="2">
-        <ul>
-            <li>Mainland China: LV1 For Free</li>
-            <li>Non-Mainland China: Not Available</li>
-        </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>Index</td>
-    </tr>
-</table>
+  LongPort users can choose the market cards they want to buy through the "Quote Store" in the LongPort App.
 
 ## Q5: Quote Change By Date Time
 

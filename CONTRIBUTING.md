@@ -12,7 +12,7 @@ We've tried to make editing an existing, public file as simple as possible.
 
 1. Then click the **Edit this page** or **Edit page** link.
 
-   ![SCR-20230629-jm3](https://github.com/longbridgeapp/openapi-website/assets/5518/491a7d72-156a-4db9-8d21-78e4a72fda89)
+   ![SCR-20230629-jm3](https://github.com/longportapp/openapi-website/assets/5518/491a7d72-156a-4db9-8d21-78e4a72fda89)
 
    If the link isn't present, the content might not be open to public contributions. Some pages are generated (for example, from inline documentation in code) and must be edited in the project they belong to.
 
@@ -21,7 +21,7 @@ We've tried to make editing an existing, public file as simple as possible.
 
 1. In GitHub, select the **Pencil** icon to edit the article. If the pencil icon is grayed out, you need to either sign in to your GitHub account or create a new account.
 
-   ![image](https://github.com/longbridgeapp/openapi-website/assets/5518/48ab67cd-7baf-458c-bad0-73eb46b94b6f)
+   ![image](https://github.com/longportapp/openapi-website/assets/5518/48ab67cd-7baf-458c-bad0-73eb46b94b6f)
 
 1. Using Markdown language, make your changes to the file. For info about how to edit content using Markdown, see the GitHub's [Mastering Markdown](https://guides.github.com/features/mastering-markdown/) documentation.
 
@@ -29,15 +29,15 @@ We've tried to make editing an existing, public file as simple as possible.
 
 1. Make your suggested change, and then select **Preview changes** to make sure it looks correct.
 
-   ![SCR-20230629-jov](https://github.com/longbridgeapp/openapi-website/assets/5518/47c5621a-64c3-4d75-bbc3-ed9aa8289d6a)
+   ![SCR-20230629-jov](https://github.com/longportapp/openapi-website/assets/5518/47c5621a-64c3-4d75-bbc3-ed9aa8289d6a)
 
 1. When you're finished editing, scroll to the bottom of the page. In the **Propose changes** area, enter a title and optionally a description for your changes. The title will be the first line of the commit message. Briefly state _what_ you changed. Select **Propose changes** to commit your changes:
 
-   ![image](https://github.com/longbridgeapp/openapi-website/assets/5518/091d76ce-4fbf-4193-bb5f-51af4c923994)
+   ![image](https://github.com/longportapp/openapi-website/assets/5518/091d76ce-4fbf-4193-bb5f-51af4c923994)
 
 1. The **Comparing changes** screen appears to show what the changes are between your fork and the original content. On the **Comparing changes** screen, you'll see if there are any problems with the file you're checking. If there are no problems, you'll see the message **Able to merge**.
 
-   ![SCR-20230629-jre](https://github.com/longbridgeapp/openapi-website/assets/5518/820007c9-016f-4941-a8b9-3e99395f3db8)
+   ![SCR-20230629-jre](https://github.com/longportapp/openapi-website/assets/5518/820007c9-016f-4941-a8b9-3e99395f3db8)
 
    Select **Create pull request**. Next, enter a title and description to give the approver the appropriate context about _why_ you're suggesting this change. Make sure that only your changed files are in this pull request; otherwise, you could overwrite changes from other people.
 

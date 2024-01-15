@@ -13,7 +13,7 @@ slug: overview
         <td>功能簡介</td>
     </tr>
     <tr>
-        <td rowspan="19">拉取</td>
+        <td rowspan="20">拉取</td>
         <td><a href="./pull/static">獲取標的基礎信息</a></td>
     </tr>
     <tr>
@@ -69,6 +69,9 @@ slug: overview
     </tr>
     <tr>
         <td><a href="./pull/calc-index">獲取標的計算指標</a></td>
+    </tr>
+    <tr>
+        <td><a href="./pull/history-candlestick">獲取標的曆史 K 線</a></td>
     </tr>
     <tr>
         <td rowspan="3">订阅</td>
@@ -131,4 +134,4 @@ slug: overview
 - 數據包體積小
 - 較強的版本前向後向兼容性
 
-行情 Protobuf 協議文檔[下載地址](https://github.com/longbridgeapp/openapi-protobufs/blob/main/quote/api.proto)。
+行情 Protobuf 協議文檔[下載地址](https://github.com/longportapp/openapi-protobufs/blob/main/quote/api.proto)。

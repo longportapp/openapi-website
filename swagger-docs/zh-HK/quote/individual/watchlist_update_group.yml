@@ -45,7 +45,7 @@ paths:
       request_body:
         type: "python"
         value: |
-          from longbridge.openapi import QuoteContext, Config, SecuritiesUpdateMode
+          from longport.openapi import QuoteContext, Config, SecuritiesUpdateMode
 
           config = Config.from_env()
           ctx = QuoteContext(config)

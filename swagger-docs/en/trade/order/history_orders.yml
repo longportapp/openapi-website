@@ -53,7 +53,7 @@ paths:
         type: "python"
         value: |
           from datetime import datetime
-          from longbridge.openapi import TradeContext, Config, OrderStatus, OrderSide, Market
+          from longport.openapi import TradeContext, Config, OrderStatus, OrderSide, Market
 
           config = Config.from_env()
           ctx = TradeContext(config)
