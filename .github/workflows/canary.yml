@@ -17,7 +17,7 @@ jobs:
 
       - name: Download ossutils zip
         run: |
-          wget https://github.com/aliyun/ossutil/releases/download/v.1.7.17/ossutil-v1.7.17-linux-amd64.zip
+          wget https://github.com/aliyun/ossutil/releases/download/v1.7.17/ossutil-v1.7.17-linux-amd64.zip
           unzip ossutil-v1.7.17-linux-amd64.zip && cp ./ossutil-v1.7.17-linux-amd64/ossutil ${{github.workspace}}/ && chmod +x ${{github.workspace}}/ossutil
 
       - name: Test ossutil cli is ok
@@ -36,7 +36,7 @@ jobs:
         run: |
           yarn build:canary
 
-      - name: upload canary dist to oss
+      - name: upload canary dist to OSS
         run: |
           ${{github.workspace}}/ossutil cp dist/ oss://lb-assets/github/canary/open.longportapp.com/docs/ -u -r -j 10 -e oss-cn-hangzhou.aliyuncs.com -i ${{ secrets.FE_LB_ASSET_ACCESS_KEY_ID }} -k ${{ secrets.FE_LB_ASSET_ACCESS_KEY_SECRET }} --exclude "*.html" --meta=Cache-Control:max-age=31536000
           ${{github.workspace}}/ossutil cp dist/ oss://lb-assets/github/canary/open.longportapp.com/docs/ -u -r -j 10 -e oss-cn-hangzhou.aliyuncs.com -i ${{ secrets.FE_LB_ASSET_ACCESS_KEY_ID }} -k ${{ secrets.FE_LB_ASSET_ACCESS_KEY_SECRET }} --include "*.html" --meta=Cache-Control:no-cache
