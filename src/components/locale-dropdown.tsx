@@ -1,5 +1,6 @@
-import React, { FC, useState, useMemo } from 'react'
+import React, { FC, useState, useMemo, useEffect } from 'react'
 import { useBasenameLocale, useDefaultLocale, getRootDomain } from '@site/src/utils'
+import { loadHighlight } from '@site/src/utils/highlight'
 import Cookies from 'js-cookie'
 import Dropdown from './dropdown'
 
@@ -43,6 +44,16 @@ export const LocaleDropdown: FC = () => {
     url.pathname = pathname
     location.href = url.toString()
   }
+
+  useEffect(() => {
+    loadHighlight()
+    return () => {
+      const xHighlights = document.querySelectorAll('.doc-highlight')
+      xHighlights.forEach((xHighlight) => {
+        document.body.removeChild(xHighlight)
+      })
+    }
+  }, [location.pathname])
 
   return <Dropdown className="hidden-in-mobile-sidebar" items={items} value={locale} onChange={onChange} />
 }
