@@ -11,6 +11,7 @@ export type IDropdownProps = {
   }[]
   className?: string
   content?: React.ReactNode
+  children?: React.ReactNode
   onChange?: (value: any) => void
   value?: string | number
 }

@@ -1,7 +1,11 @@
 import React, { FC, useState, useMemo } from 'react'
 import { useBasenameLocale, useDefaultLocale, getRootDomain } from '@site/src/utils'
+import { loadHighlight } from '@site/src/utils/highlight'
 import Cookies from 'js-cookie'
 import Dropdown from './dropdown'
+import useIsBrowser from '@docusaurus/useIsBrowser'
+
+let prePath = ''
 
 export const LocaleDropdown: FC = () => {
   // 为了方便复制粘贴，就不用组件了
@@ -42,6 +46,12 @@ export const LocaleDropdown: FC = () => {
     const url = new URL(location.href)
     url.pathname = pathname
     location.href = url.toString()
+  }
+
+  const isBrowser = useIsBrowser()
+  if (isBrowser && prePath !== location.pathname) {
+    loadHighlight()
+    prePath = location.pathname
   }
 
   return <Dropdown className="hidden-in-mobile-sidebar" items={items} value={locale} onChange={onChange} />
