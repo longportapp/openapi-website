@@ -15,6 +15,10 @@ export const loadHighlight = async () => {
     await loadScript('https://assets.lbkrs.com/uploads/4071868f-e64d-4dc9-ab10-8a3c398391fe/highlight.js')
   }
   highlightIsLoaded = true
+  const xHighlights = document.querySelectorAll('.doc-highlight')
+  xHighlights.forEach((xHighlight) => {
+    document.body.removeChild(xHighlight)
+  })
 
   setTimeout(() => {
     const newHighlightDom = document.createElement('x-highlight')
