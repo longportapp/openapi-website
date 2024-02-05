@@ -95,7 +95,7 @@ message Trade {
 # Before running, please visit the "Developers" to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
 from time import sleep
-from longport.openapi import QuoteContext, Config, SubType, PushQuote
+from longport.openapi import QuoteContext, Config, SubType, PushTrades
 
 def on_trades(symbol: str, event: PushTrades):
     print(symbol, event)

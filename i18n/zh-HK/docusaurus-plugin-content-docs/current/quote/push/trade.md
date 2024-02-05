@@ -95,7 +95,7 @@ message Trade {
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
 # 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from time import sleep
-from longport.openapi import QuoteContext, Config, SubType, PushQuote
+from longport.openapi import QuoteContext, Config, SubType, PushTrades
 
 def on_trades(symbol: str, event: PushTrades):
     print(symbol, event)

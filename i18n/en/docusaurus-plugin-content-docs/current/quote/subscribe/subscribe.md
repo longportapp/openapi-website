@@ -49,7 +49,7 @@ message SubscribeRequest {
 from time import sleep
 from longport.openapi import QuoteContext, Config, SubType, PushQuote
 
-def on_quote(symbol: str, event: PushTrades):
+def on_quote(symbol: str, event: PushQuote):
     print(symbol, event)
 
 config = Config.from_env()
