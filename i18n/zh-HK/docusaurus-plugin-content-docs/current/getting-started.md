@@ -21,7 +21,7 @@ LongPort OpenAPI SDK 基於 Rust 底層提供標準實現，目前我們已經�
 :::tip
 中國大陸地區訪問，建議採用 `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn` 以提升訪問速度。
 
-如果您使用我們的 SDK，可以通過設置環境變量 LONGPPORT_REGION=cn 來使用位於中國大陸的接入點。
+如果您使用我們的 SDK，可以通過設置環境變量 LONGPORT_REGION=cn 來使用位於中國大陸的接入點。
 :::
 
 ## 環境需求
