@@ -210,7 +210,7 @@ According to the user’s assets and transactions, the number of targets that di
 | Market             | Daily/Weekly/Monthly/Year period candlesticks | Minute candlesticks              | Description                                                                                                                                    |
 |--------------------|-----------------------------------------------|----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
 | Hong Kong stocks   | 2004-6-1 to present                           | 2022-09-28 to present            |                                                                                                                                                |
-| U.S. stocks        | 2010-6-1 to present                           | Data for the last 6 trading days | U.S. stock historical minutes K currently supports querying data for the past 6 trading days, and data for longer periods will be opened later |
+| U.S. stocks        | 2010-6-1 to present                           | 2023-12-4 to present |   |
 | U.S. stock options | -                                             | -                                | U.S. stock options historical data is currently not supported, and data for longer periods will be released later                              |
 | A shares           | 1999-11-1 to present                          | 2022-08-25 to present            |                                                                                                                                                |
 
