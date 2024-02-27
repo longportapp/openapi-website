@@ -4,4 +4,4 @@
 
 ### Download
 
-- [openapi-cpp-sdk-1.0.0.tar.gz](https://static.lbkrs.com/openapi-sdk/openapi-cpp-sdk-1.0.0.tar.gz)
+- [openapi-cpp-sdk-1.0.7.tar.gz](https://static.lbkrs.com/openapi-sdk/openapi-cpp-sdk-1.0.7.tar.gz)
