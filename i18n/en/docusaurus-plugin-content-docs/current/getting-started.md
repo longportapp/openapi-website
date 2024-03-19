@@ -20,7 +20,13 @@ LongPort OpenAPI SDK is implemented based on Rust we have released SDK for Pytho
 
 :::tip
 For access in mainland China, it is recommended to use `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn` to improve access speed.
+
+If you are use our SDK, the `LONGPORT_REGION=cn` env variable can to use to setup the API region (Current only support: `cn`, `hk`).
 :::
+
+## Time Format
+
+All API response are used [Unix Timestamp](https://en.wikipedia.org/wiki/Unix_time), timezone is UTC.
 
 ## Environment Requirements
 

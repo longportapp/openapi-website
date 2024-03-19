@@ -21,8 +21,12 @@ LongPort OpenAPI SDK 基於 Rust 底層提供標準實現，目前我們已經�
 :::tip
 中國大陸地區訪問，建議採用 `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn` 以提升訪問速度。
 
-如果您使用我們的 SDK，可以通過設置環境變量 LONGPORT_REGION=cn 來使用位於中國大陸的接入點。
+如果您使用我們的 SDK，可以通過設置環境變量 LONGPORT_REGION=cn 來使用位於中國大陸的接入點，目前我們只有 `hk` 和 `cn` 兩個地區可選。
 :::
+
+## 時間格式
+
+所有 API 傳回有關時間的字段，我們都採用 [Unix Timestamp](https://en.wikipedia.org/wiki/Unix_time) 時區為 UTC。
 
 ## 環境需求
 

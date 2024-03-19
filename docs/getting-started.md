@@ -21,8 +21,12 @@ import TabItem from '@theme/TabItem';
 :::info
 中国大陆地区访问，建议采用 `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn` 以提升访问速度。
 
-如果使用我们的 SDK，可以通过设置环境变量 `LONGPORT_REGION=cn` 来使用中国大陆的接入点
+如果使用我们的 SDK，可以通过设置环境变量 `LONGPORT_REGION=cn` 来使用中国大陆的接入点，当前我们仅有 `hk` 和 `cn` 两个地区可选。
 :::
+
+## 时间格式
+
+所有 API 返回有关时间的字段，我们都采用 [Unix Timestamp](https://en.wikipedia.org/wiki/Unix_time) 时区为 UTC。
 
 ## 环境需求
 
