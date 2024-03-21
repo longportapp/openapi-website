@@ -11,3 +11,7 @@ $ pip install longport
 ```
 
 > NOTE: In macOS system, the `pip` command default is Python 2. You may use `pip3` for use Python 3 version of PyPI.
+
+### API Documents
+
+https://longportapp.github.io/openapi-sdk/python/index.html

@@ -11,3 +11,7 @@ $ npm install longport --save
 ```
 
 [https://www.npmjs.com/package/longport](https://www.npmjs.com/package/longport)
+
+### API Documents
+
+https://longportapp.github.io/openapi-sdk/nodejs/index.html

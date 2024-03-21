@@ -15,3 +15,7 @@ Add the following line to your `pom.xml` file
 ```
 
 [https://search.maven.org/artifact/io.github.longportapp/openapi-sdk](https://search.maven.org/artifact/io.github.longportapp/openapi-sdk)
+
+### API Documents
+
+https://longportapp.github.io/openapi-sdk/java/index.html

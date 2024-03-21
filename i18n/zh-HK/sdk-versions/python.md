@@ -9,3 +9,7 @@
 ```bash
 $ pip3 install longport
 ```
+
+### API 文檔
+
+https://longportapp.github.io/openapi-sdk/python/index.html

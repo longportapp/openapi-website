@@ -15,3 +15,7 @@ $ pip install longport
 ```bash
 $ pip install longport -i https://mirrors.aliyun.com/pypi/simple
 ```
+
+### API 文档
+
+https://longportapp.github.io/openapi-sdk/python/index.html

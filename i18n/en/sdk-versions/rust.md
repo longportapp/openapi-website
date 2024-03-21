@@ -12,3 +12,7 @@ longport = "1.0.0"
 ```
 
 [https://crates.io/crates/longport](https://crates.io/crates/longport)
+
+### API Documents
+
+https://longportapp.github.io/openapi-sdk/rust/index.html
