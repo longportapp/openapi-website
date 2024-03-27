@@ -18,7 +18,7 @@ This API is used to obtain the quotes of HK warrants, and supports sorting and f
 ### Parameters
 
 | Name          | Type    | Required | Description                                                                                                                                                                         |
-|---------------|---------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | symbol        | string  | Yes      | Security code, in `ticker.region` format, for example:`700.HK`                                                                                                                      |
 | filter_config | object  | Yes      | Filter conditions                                                                                                                                                                   |
 | ∟ sort_by     | int32   | Yes      | Which data to sort by, for example: `0`, see the `OrderSequence` field of the response data for the sequence number.                                                                |
@@ -29,7 +29,7 @@ This API is used to obtain the quotes of HK warrants, and supports sorting and f
 | ∟ issuer      | int32[] | No       | Filter issuer example: `[12,14]`, obtain [Issuer ID](./issuer) through API                                                                                                          |
 | ∟ expiry_date | int32[] | No       | Filter expiry date, example: `[1]` <br /><br />**Optional value:**<br />`1` - Less than 3 months<br />`2` - 3 - 6 months<br />`3` - 6 - 12 months<br />`4` - greater than 12 months |
 | ∟ price_type  | int32[] | No       | Filter in/out of bounds, for example: `[2]` <br /><br />**Optional value:**<br />`1` - In bounds<br />`2` - Out bounds                                                              |
-| ∟ status      | int32[] | No       | Filter status, for example: `[2]` <br /><br />**Optional value:**<br />`2 `- Suspend trading<br />`3` - Papare List<br />`4` - Normal                                               |
+| ∟ status      | int32[] | No       | Filter status, for example: `[2]` <br /><br />**Optional value:**<br />`2`- Suspend trading<br />`3` - Papare List<br />`4` - Normal                                                |
 | language      | int32   | Yes      | Language, for example: `[1]` <br /><br />**Optional value:**<br />`0` - zh-CN<br />`1` - en<br />`2` - zh-HK                                                                        |
 
 ### Protobuf
@@ -89,34 +89,34 @@ print(f"Filtered warrant:\n\n {resp}")
 
 ### Response Properties
 
-| Name                 | Type     | Description                                                                     | OrderSequence |
-|----------------------|----------|---------------------------------------------------------------------------------|---------------|
-| warrant_list         | object[] | Filted warrant data list                                                        |               |
-| ∟ symbol             | string   | Security code                                                                   |               |
-| ∟ name               | string   | Security name                                                                   |               |
-| ∟ last_done          | string   | Latest price                                                                    | 0             |
-| ∟ change_rate        | string   | Quote change rate                                                               | 1             |
-| ∟ change_val         | string   | Quote change                                                                    | 2             |
-| ∟ volume             | int64    | Volume                                                                          | 3             |
-| ∟ turnover           | string   | Turnover                                                                        | 4             |
-| ∟ expiry_date        | string   | Expiry date, in `YYMMDD` format                                                 | 5             |
-| ∟ strike_price       | string   | Strike price                                                                    | 6             |
-| ∟ upper_strike_price | string   | Upper bound price                                                               | 7             |
-| ∟ lower_strike_price | string   | Lower bound price                                                               | 8             |
-| ∟ outstanding_qty    | string   | Outstanding quantity                                                            | 9             |
-| ∟ outstanding_ratio  | string   | Outstanding ratio                                                               | 10            |
-| ∟ premium            | string   | Premium                                                                         | 11            |
-| ∟ itm_otm            | string   | In/out of the bound                                                             | 12            |
-| ∟ implied_volatility | string   | Implied volatility                                                              | 13            |
-| ∟ delta              | string   | Greek value Delta                                                               | 14            |
-| ∟ call_price         | string   | Call price                                                                      | 15            |
-| ∟ to_call_price      | string   | Price interval from the call price                                              | 16            |
-| ∟ effective_leverage | string   | Effective leverage                                                              | 17            |
-| ∟ leverage_ratio     | string   | Leverage ratio                                                                  | 18            |
-| ∟ conversion_ratio   | string   | Conversion ratio                                                                | 19            |
-| ∟ balance_point      | string   | Breakeven point                                                                 | 20            |
-| ∟ state              | string   | Status, <br /><br />**Optional value:**<br />`Normal`<br />`New`<br />`Suspend` | 21            |
-| total_count          | int32    | Total number of eligible                                                        |               |
+| Name                 | Type     | Description                                                                                                | OrderSequence | Support_Call/Put | Support_Bull/Bear | Support_Inline |
+| -------------------- | -------- | ---------------------------------------------------------------------------------------------------------- | ------------- | ---------------- | ----------------- | -------------- |
+| warrant_list         | object[] | Filted warrant data list                                                                                   |               |                  |                   |                |
+| ∟ symbol             | string   | Security code                                                                                              |               | true             | true              | true           |
+| ∟ name               | string   | Security name                                                                                              |               | true             | true              | true           |
+| ∟ last_done          | string   | Latest price                                                                                               | 0             | true             | true              | true           |
+| ∟ change_rate        | string   | Quote change rate                                                                                          | 1             | true             | true              | true           |
+| ∟ change_val         | string   | Quote change                                                                                               | 2             | true             | true              | true           |
+| ∟ volume             | int64    | Volume                                                                                                     | 3             | true             | true              | true           |
+| ∟ turnover           | string   | Turnover                                                                                                   | 4             | true             | true              | true           |
+| ∟ expiry_date        | string   | Expiry date, in `YYMMDD` format                                                                            | 5             | true             | true              | true           |
+| ∟ strike_price       | string   | Strike price                                                                                               | 6             | true             | true              | false          |
+| ∟ upper_strike_price | string   | Upper bound price                                                                                          | 7             | false            | false             | true           |
+| ∟ lower_strike_price | string   | Lower bound price                                                                                          | 8             | false            | false             | true           |
+| ∟ outstanding_qty    | string   | Outstanding quantity                                                                                       | 9             | true             | true              | true           |
+| ∟ outstanding_ratio  | string   | Outstanding ratio                                                                                          | 10            | true             | true              | true           |
+| ∟ premium            | string   | Premium                                                                                                    | 11            | true             | true              | true           |
+| ∟ itm_otm            | string   | In/out of the bound                                                                                        | 12            | true             | true              | false          |
+| ∟ implied_volatility | string   | Implied volatility                                                                                         | 13            | true             | false             | false          |
+| ∟ delta              | string   | Greek value Delta                                                                                          | 14            | true             | false             | false          |
+| ∟ call_price         | string   | Call price                                                                                                 | 15            | false            | true              | false          |
+| ∟ to_call_price      | string   | Price interval from the call price                                                                         | 16            | false            | true              | false          |
+| ∟ effective_leverage | string   | Effective leverage                                                                                         | 17            | true             | false             | false          |
+| ∟ leverage_ratio     | string   | Leverage ratio                                                                                             | 18            | true             | true              | true           |
+| ∟ conversion_ratio   | string   | Conversion ratio                                                                                           | 19            | true             | true              | false          |
+| ∟ balance_point      | string   | Breakeven point                                                                                            | 20            | true             | true              | false          |
+| ∟ status             | int32    | Status, <br /><br />**Optional value:**<br />`2`- Suspend trading<br />`3` - Papare List<br />`4` - Normal | 21            | true             | true              | true           |
+| total_count          | int32    | Total number of eligible                                                                                   |               |                  |                   |                |
 
 ### Protobuf
 
@@ -150,7 +150,7 @@ message FilterWarrant {
   string leverage_ratio = 21;
   string conversion_ratio = 22;
   string balance_point = 23;
-  string state = 24;
+  int32 status = 24;
 }
 ```
 
@@ -181,7 +181,7 @@ message FilterWarrant {
       "leverage_ratio": "3.0826882353970637",
       "conversion_ratio": "48.544",
       "balance_point": "332.52356000000003",
-      "state": "Normal"
+      "status": 4
     },
     {
       "symbol": "13649.HK",
@@ -205,7 +205,7 @@ message FilterWarrant {
       "leverage_ratio": "3.055678583813144",
       "conversion_ratio": "97.087",
       "balance_point": "334.54382000000004",
-      "state": "Normal"
+      "status": 4
     }
   ],
   "total_count": 1197
@@ -215,7 +215,7 @@ message FilterWarrant {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description                  | Troubleshooting Suggestions                                   |
-|---------------------|---------------------|------------------------------|---------------------------------------------------------------|
+| ------------------- | ------------------- | ---------------------------- | ------------------------------------------------------------- |
 | 3                   | 301600              | Invalid request              | Invalid request parameters or unpacking request failed        |
 | 3                   | 301606              | Request rate limit           | Reduce the frequency of requests                              |
 | 7                   | 301602              | Server error                 | Please try again or contact a technician to resolve the issue |
