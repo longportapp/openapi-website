@@ -18,7 +18,7 @@ This API is used to obtain the quotes of HK warrants, and supports sorting and f
 ### Parameters
 
 | Name          | Type    | Required | Description                                                                                                                                                                         |
-| ------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|---------------|---------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | symbol        | string  | Yes      | Security code, in `ticker.region` format, for example:`700.HK`                                                                                                                      |
 | filter_config | object  | Yes      | Filter conditions                                                                                                                                                                   |
 | ∟ sort_by     | int32   | Yes      | Which data to sort by, for example: `0`, see the `OrderSequence` field of the response data for the sequence number.                                                                |
@@ -57,32 +57,13 @@ message FilterConfig {
 ### Request Example
 
 ```python
-# Get Filtered Warrant
-# https://open.longportapp.com/docs/quote/pull/warrant-filter
-import os
-import time
-from longport.http import Auth, Config, HttpClient
-from longport.ws import ReadyState, WsCallback, WsClient
-# Protobuf variables definition: https://github.com/longportapp/openapi-protobufs/blob/main/quote/api.proto
-from longport.proto.quote_pb2 import (Command, FilterConfig, WarrantFilterListRequest, WarrantFilterListResponse)
+from longport.openapi import QuoteContext, Config, WarrantSortBy, SortOrderType
 
-class MyWsCallback(WsCallback):
-    def on_state(self, state: ReadyState):
-        print(f"-> state: {state}")
+config = Config.from_env()
+ctx = QuoteContext(config)
 
-auth = Auth(os.getenv("LONGPORT_APP_KEY"), os.getenv("LONGPORT_APP_SECRET"), access_token=os.getenv("LONGPORT_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longportapp.com"))
-ws = WsClient("wss://openapi-quote.longportapp.com", http, MyWsCallback())
-
-# Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
-filterConfig = FilterConfig(sort_by=0, sort_order=1, sort_offset=0, sort_count=10)
-req = WarrantFilterListRequest(symbol="700.HK", filter_config=filterConfig, language=1)
-result = ws.send_request(Command.QueryWarrantFilterList, req.SerializeToString())
-resp = WarrantFilterListResponse()
-resp.ParseFromString(result)
-
-print(f"Filtered warrant:\n\n {resp}")
+resp = ctx.warrant_list("700.HK", WarrantSortBy.LastDone, SortOrderType.Ascending)
+print(resp)
 ```
 
 ## Response
@@ -90,7 +71,7 @@ print(f"Filtered warrant:\n\n {resp}")
 ### Response Properties
 
 | Name                 | Type     | Description                                                                                                | OrderSequence | Support_Call/Put | Support_Bull/Bear | Support_Inline |
-| -------------------- | -------- | ---------------------------------------------------------------------------------------------------------- | ------------- | ---------------- | ----------------- | -------------- |
+|----------------------|----------|------------------------------------------------------------------------------------------------------------|---------------|------------------|-------------------|----------------|
 | warrant_list         | object[] | Filted warrant data list                                                                                   |               |                  |                   |                |
 | ∟ symbol             | string   | Security code                                                                                              |               | true             | true              | true           |
 | ∟ name               | string   | Security name                                                                                              |               | true             | true              | true           |
@@ -215,7 +196,7 @@ message FilterWarrant {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description                  | Troubleshooting Suggestions                                   |
-| ------------------- | ------------------- | ---------------------------- | ------------------------------------------------------------- |
+|---------------------|---------------------|------------------------------|---------------------------------------------------------------|
 | 3                   | 301600              | Invalid request              | Invalid request parameters or unpacking request failed        |
 | 3                   | 301606              | Request rate limit           | Reduce the frequency of requests                              |
 | 7                   | 301602              | Server error                 | Please try again or contact a technician to resolve the issue |

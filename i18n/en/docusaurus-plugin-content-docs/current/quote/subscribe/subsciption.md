@@ -25,73 +25,16 @@ message SubscriptionRequest {
 ### Request Example
 
 ```python
-# Get Subscription Information
-# https://open.longportapp.com/docs/quote/subscribe/subscription
-import os
-import time
-from longport.http import Auth, Config, HttpClient
-from longport.ws import ReadyState, WsCallback, WsClient
-# Protobuf variables definition: https://github.com/longportapp/openapi-protobufs/blob/main/quote/api.proto
-from longport.proto.quote_pb2 import (Command, PushQuote, SubscribeRequest, SubscriptionResponse, SubType, SubscriptionRequest, UnsubscribeRequest, UnsubscribeResponse)
+from time import sleep
+from longport.openapi import QuoteContext, Config, SubType, PushQuote, Period, AdjustType
 
-class MyWsCallback(WsCallback):
-    def on_push(self, command: int, body: bytes):
-        if command == Command.PushQuoteData:
-            quote = PushQuote()
-            quote.ParseFromString(body)
-            print(f"quote-> {quote}")
-        else:
-            print(f"-> unknow: {command}")
+def on_quote(symbol: str, event: PushQuote):
+    print(symbol, event)
 
-    def on_state(self, state: ReadyState):
-        print(f"-> state: {state}")
-
-auth = Auth(os.getenv("LONGPORT_APP_KEY"), os.getenv("LONGPORT_APP_SECRET"), access_token=os.getenv("LONGPORT_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longportapp.com"))
-ws = WsClient("wss://openapi-quote.longportapp.com", http, MyWsCallback())
-
-# To subscribe quotes data, please check whether "Developers" - "Quote authority" is correct.
-# https://open.longportapp.com/account
-#
-# - HK Market - BMP basic quotation is unable to subscribe with WebSocket as it has no real-time quote push.
-# - US Market - LV1 Nasdaq Basic (Only Open API).
-#
-# Before running, please visit the "Developers" to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
-
-#subscribe
-req = SubscribeRequest(symbol=["700.HK", "AAPL.US"], sub_type=[SubType.QUOTE], is_first_push=False)
-result = ws.send_request(Command.Subscribe, req.SerializeToString())
-resp = SubscriptionResponse()
-resp.ParseFromString(result)
-
-print(f"Subscribed symbol:\n\n {resp.sub_list}")
-
-#unsubscribe
-req = UnsubscribeRequest(symbol=["700.HK"], unsub_all=True)
-result = ws.send_request(Command.Unsubscribe, req.SerializeToString())
-
-#query subscription
-req = SubscriptionRequest()
-result = ws.send_request(Command.Subscription, req.SerializeToString())
-resp = SubscriptionResponse()
-resp.ParseFromString(result)
-
-print("\n")
-print(f"Subscribed symbol:\n\n {resp.sub_list}")
-
-#unsubscribe
-req = UnsubscribeRequest(unsub_all=True)
-result = ws.send_request(Command.Unsubscribe, req.SerializeToString())
-
-#query subscription
-req = SubscriptionRequest()
-result = ws.send_request(Command.Subscription, req.SerializeToString())
-resp = SubscriptionResponse()
-resp.ParseFromString(result)
-
-print("\n")
-print(f"Subscribed symbol:\n\n {resp.sub_list}")
+config = Config.from_env()
+ctx = QuoteContext(config)
+ctx.set_on_quote(on_quote)
+ctx.subscribe(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], [SubType.Quote], is_first_push=True)
 ```
 
 ## Response

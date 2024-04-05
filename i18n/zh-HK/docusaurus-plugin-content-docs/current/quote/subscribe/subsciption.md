@@ -25,73 +25,16 @@ message SubscriptionRequest {
 ### Request Example
 
 ```python
-# 獲取已訂閱標的行情
-# https://open.longportapp.com/docs/quote/subscribe/subscription
-import os
-import time
-from longport.http import Auth, Config, HttpClient
-from longport.ws import ReadyState, WsCallback, WsClient
-# Protobuf 變量定義參見：https://github.com/longportapp/openapi-protobufs/blob/main/quote/api.proto
-from longport.proto.quote_pb2 import (Command, PushQuote, SubscribeRequest, SubscriptionResponse, SubType, SubscriptionRequest, UnsubscribeRequest, UnsubscribeResponse)
+from time import sleep
+from longport.openapi import QuoteContext, Config, SubType, PushQuote, Period, AdjustType
 
-class MyWsCallback(WsCallback):
-    def on_push(self, command: int, body: bytes):
-        if command == Command.PushQuoteData:
-            quote = PushQuote()
-            quote.ParseFromString(body)
-            print(f"quote-> {quote}")
-        else:
-            print(f"-> unknow: {command}")
+def on_quote(symbol: str, event: PushQuote):
+    print(symbol, event)
 
-    def on_state(self, state: ReadyState):
-        print(f"-> state: {state}")
-
-auth = Auth(os.getenv("LONGPORT_APP_KEY"), os.getenv("LONGPORT_APP_SECRET"), access_token=os.getenv("LONGPORT_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longportapp.com"))
-ws = WsClient("wss://openapi-quote.longportapp.com", http, MyWsCallback())
-
-# 訂閱行情數據請檢查“開發者中心“ - “行情權限”是否正確
-# https://open.longportapp.com/account
-#
-# - 港股 - BMP 基礎報價，無實時行情推送，無法用 WebSocket 訂閱
-# - 美股 - LV1 納斯達克最優報價 (只限 Open API）
-#
-# 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
-
-#訂閱標的
-req = SubscribeRequest(symbol=["700.HK", "AAPL.US"], sub_type=[SubType.QUOTE], is_first_push=False)
-result = ws.send_request(Command.Subscribe, req.SerializeToString())
-resp = SubscriptionResponse()
-resp.ParseFromString(result)
-
-print(f"Subscribed symbol:\n\n {resp.sub_list}")
-
-#取消訂閱
-req = UnsubscribeRequest(symbol=["700.HK"], unsub_all=True)
-result = ws.send_request(Command.Unsubscribe, req.SerializeToString())
-
-#查詢已訂閱標的
-req = SubscriptionRequest()
-result = ws.send_request(Command.Subscription, req.SerializeToString())
-resp = SubscriptionResponse()
-resp.ParseFromString(result)
-
-print("\n")
-print(f"Subscribed symbol:\n\n {resp.sub_list}")
-
-#取消訂閱
-req = UnsubscribeRequest(unsub_all=True)
-result = ws.send_request(Command.Unsubscribe, req.SerializeToString())
-
-#查詢已訂閱標的
-req = SubscriptionRequest()
-result = ws.send_request(Command.Subscription, req.SerializeToString())
-resp = SubscriptionResponse()
-resp.ParseFromString(result)
-
-print("\n")
-print(f"Subscribed symbol:\n\n {resp.sub_list}")
+config = Config.from_env()
+ctx = QuoteContext(config)
+ctx.set_on_quote(on_quote)
+ctx.subscribe(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], [SubType.Quote], is_first_push=True)
 ```
 
 ## Response
