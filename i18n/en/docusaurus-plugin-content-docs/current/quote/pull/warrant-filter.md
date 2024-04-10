@@ -18,13 +18,13 @@ This API is used to obtain the quotes of HK warrants, and supports sorting and f
 ### Parameters
 
 | Name          | Type    | Required | Description                                                                                                                                                                         |
-|---------------|---------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | symbol        | string  | Yes      | Security code, in `ticker.region` format, for example:`700.HK`                                                                                                                      |
 | filter_config | object  | Yes      | Filter conditions                                                                                                                                                                   |
 | ∟ sort_by     | int32   | Yes      | Which data to sort by, for example: `0`, see the `OrderSequence` field of the response data for the sequence number.                                                                |
 | ∟ sort_order  | int32   | Yes      | Order, for example: `1` <br /><br />**Optional value:**<br />`0` - Ascending<br />`1` - Descending                                                                                  |
 | ∟ sort_offset | int32   | Yes      | The first data offset of paging, for example: `0`                                                                                                                                   |
-| ∟ sort_count  | int32   | Yes      | Number of paginated pages per page, for example: `20` <br /><br />**Check rules:**<br /> Up to `500` securities per page                                                            |
+| ∟ sort_count  | int32   | Yes      | Number of paginated pages per page, for example: `20`, no pagination when filling in `0`                                                                                            |
 | ∟ type        | int32[] | No       | Filter warrant type, for example: `[0,1]` <br /><br />**Optional value:**<br />`0` - Call<br />`1` - Put<br />`2` - Bull<br />`3` - Bear<br />`4` - Inline                          |
 | ∟ issuer      | int32[] | No       | Filter issuer example: `[12,14]`, obtain [Issuer ID](./issuer) through API                                                                                                          |
 | ∟ expiry_date | int32[] | No       | Filter expiry date, example: `[1]` <br /><br />**Optional value:**<br />`1` - Less than 3 months<br />`2` - 3 - 6 months<br />`3` - 6 - 12 months<br />`4` - greater than 12 months |
@@ -71,7 +71,7 @@ print(resp)
 ### Response Properties
 
 | Name                 | Type     | Description                                                                                                | OrderSequence | Support_Call/Put | Support_Bull/Bear | Support_Inline |
-|----------------------|----------|------------------------------------------------------------------------------------------------------------|---------------|------------------|-------------------|----------------|
+| -------------------- | -------- | ---------------------------------------------------------------------------------------------------------- | ------------- | ---------------- | ----------------- | -------------- |
 | warrant_list         | object[] | Filted warrant data list                                                                                   |               |                  |                   |                |
 | ∟ symbol             | string   | Security code                                                                                              |               | true             | true              | true           |
 | ∟ name               | string   | Security name                                                                                              |               | true             | true              | true           |
@@ -196,7 +196,7 @@ message FilterWarrant {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description                  | Troubleshooting Suggestions                                   |
-|---------------------|---------------------|------------------------------|---------------------------------------------------------------|
+| ------------------- | ------------------- | ---------------------------- | ------------------------------------------------------------- |
 | 3                   | 301600              | Invalid request              | Invalid request parameters or unpacking request failed        |
 | 3                   | 301606              | Request rate limit           | Reduce the frequency of requests                              |
 | 7                   | 301602              | Server error                 | Please try again or contact a technician to resolve the issue |
