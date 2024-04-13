@@ -1,9 +1,11 @@
 ---
 sidebar_position: 2
 id: quote_object
-title: 行情命名词典
+title: 命名词典
 slug: objects
 ---
+
+# 行情命名词典
 
 ### TradeStatus - 交易状态
 
@@ -238,15 +240,15 @@ enum CalcIndex {
 | HKWarrant        | 港股轮证                         |
 | HKHS             | 恒生指数                         |
 | HKSector         | 港股行业概念                     |
-| SHMainConnect    | 上证主板 - 互联互通                |
-| SHMainNonConnect | 上证主板 - 非互联互通              |
+| SHMainConnect    | 上证主板 - 互联互通              |
+| SHMainNonConnect | 上证主板 - 非互联互通            |
 | SHSTAR           | 科创板                           |
 | CNIX             | 沪深指数                         |
 | CNSector         | 沪深行业概念                     |
-| SZMainConnect    | 深证主板 - 互联互通                |
-| SZMainNonConnect | 深证主板 - 非互联互通              |
-| SZGEMConnect     | 创业板 - 互联互通                  |
-| SZGEMNonConnect  | 创业板 - 非互联互通                |
+| SZMainConnect    | 深证主板 - 互联互通              |
+| SZMainNonConnect | 深证主板 - 非互联互通            |
+| SZGEMConnect     | 创业板 - 互联互通                |
+| SZGEMNonConnect  | 创业板 - 非互联互通              |
 | SGMain           | 新加坡主板                       |
 | STI              | 新加坡海峡指数                   |
 | SGSector         | 新加坡行业概念                   |

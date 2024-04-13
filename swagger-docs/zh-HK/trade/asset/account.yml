@@ -24,7 +24,7 @@ paths:
         value: |
           # 獲取賬戶資金
           # https://open.longportapp.com/docs/trade/asset/account
-          from longbridge.openapi import TradeContext, Config
+          from longport.openapi import TradeContext, Config
 
           config = Config.from_env()
           ctx = TradeContext(config)
@@ -46,7 +46,7 @@ paths:
                     "currency": "HKD",
                     "net_assets": "24145.90",
                     "init_margin": "1540.09",
-                    "maintenance_margin": "1540.09"
+                    "maintenance_margin": "1540.09",
                     "cash_infos":
                       [
                         {

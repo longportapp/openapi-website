@@ -1,11 +1,11 @@
 ---
 id: trade_overview
-title: Trade Overview
+title: Overview
 slug: trade-overview
 sidebar_position: 1
 ---
 
-### Trade Overview
+# Trade Overview
 
 <table>
     <tr>

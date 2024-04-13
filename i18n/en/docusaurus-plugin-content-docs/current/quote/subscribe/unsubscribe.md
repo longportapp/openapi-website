@@ -9,7 +9,7 @@ This API is used to unsubscribe quote.
 
 :::info
 
-[Business Command](../../socket/protocol/request): `7`
+[Business Command](../../socket/biz-command): `7`
 
 :::
 
@@ -18,7 +18,7 @@ This API is used to unsubscribe quote.
 ### Parameters
 
 | Name      | Type     | Required | Description                                                                                                                                                               |
-| --------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------|----------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | symbol    | string[] | Yes      | Security code list, for example: `[700.HK]` <br /><br />**Check rules:**<br />The maximum number of symbols that can be passed in each request is `500`                   |
 | sub_type  | int32[]  | Yes      | Subscription type list, for example: `[1,2]`, see [SubType](../objects#subtype---quote-type-of-subscription)                                                              |
 | unsub_all | bool     | Yes      | Is unsubscribe all. <br />- When `symbol` is empty, unsubscribe all subscriptions<br />- When `symbol` is not empty, unsubscribe these all subscriptions of these symbols |
@@ -46,7 +46,7 @@ message UnsubscribeRequest {
 #
 # Before running, please visit the "Developers" to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
-from longbridge.openapi import QuoteContext, Config, SubType
+from longport.openapi import QuoteContext, Config, SubType
 config = Config.from_env()
 ctx = QuoteContext(config)
 
@@ -66,7 +66,7 @@ message UnsubscribeResponse{
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description                | Troubleshooting Suggestions                                   |
-| ------------------- | ------------------- | -------------------------- | ------------------------------------------------------------- |
+|---------------------|---------------------|----------------------------|---------------------------------------------------------------|
 | 3                   | 301600              | Invalid request            | Invalid request parameters or unpacking request failed        |
 | 3                   | 301606              | Request rate limit         | Reduce the frequency of requests                              |
 | 7                   | 301602              | Server error               | Please try again or contact a technician to resolve the issue |

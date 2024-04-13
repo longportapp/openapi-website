@@ -8,7 +8,7 @@ sidebar_position: 17
 該接口用於獲取標的當日的資金流向。
 
 :::info
-[業務指令](../../socket/protocol/request)：`24`
+[業務指令](../../socket/biz-command)：`24`
 :::
 
 ## Request

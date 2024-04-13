@@ -103,4 +103,4 @@ message Notification {
 
 ### `Protobuf`
 
-可以从我们的 [`Github` 仓库](https://github.com/longbridgeapp/openapi-protobufs/tree/main/trade) 获取最新交易相关 `Protobuf` 定义
+可以从我们的 [`Github` 仓库](https://github.com/longportapp/openapi-protobufs/tree/main/trade) 获取最新交易相关 `Protobuf` 定义

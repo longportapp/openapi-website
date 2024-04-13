@@ -99,4 +99,4 @@ Field description is [here](../trade/trade-definition#websocket-push-notificatio
 
 ## Feed Protocol
 
-If you want subscribe trading data from socket, you must know more details of our [protocol](../protocol/overview)
+If you want subscribe trading data from socket, you must know more details of our [protocol](./protocol/overview)

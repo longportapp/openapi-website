@@ -44,12 +44,12 @@ paths:
       request_body:
         type: "python"
         value: |
-          from longbridge.openapi import TradeContext, Config, OrderStatus, OrderType, OrderSide
+          from longport.openapi import TradeContext, Config, OrderStatus, OrderType, OrderSide
 
           config = Config.from_env()
           ctx = TradeContext(config)
 
-          resp = ctx.estimate_available_buy_limit(
+          resp = ctx.estimate_max_purchase_quantity(
               symbol = "700.HK",
               order_type = OrderType.LO,
               side = OrderSide.Buy,

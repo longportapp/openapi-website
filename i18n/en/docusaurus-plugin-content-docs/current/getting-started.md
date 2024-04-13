@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 ## Foreword
 
-LongPort OpenAPI SDK is implemented based on Rust we have released SDK for Python, Node.js, Rust and C++, and support for other languages will be launched in the future.
+LongPort OpenAPI SDK is implemented based on Rust we have released SDK for Python, Node.js, Rust, C++/C and Java ..., and support for other languages will be launched in the future.
 
 ## API Host
 
@@ -20,7 +20,13 @@ LongPort OpenAPI SDK is implemented based on Rust we have released SDK for Pytho
 
 :::tip
 For access in mainland China, it is recommended to use `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn` to improve access speed.
+
+If you are use our SDK, the `LONGPORT_REGION=cn` env variable can to use to setup the API region (Current only support: `cn`, `hk`).
 :::
+
+## Time Format
+
+All API response are used [Unix Timestamp](https://en.wikipedia.org/wiki/Unix_time), timezone is UTC.
 
 ## Environment Requirements
 
@@ -40,6 +46,10 @@ For access in mainland China, it is recommended to use `openapi.longportapp.cn`,
     <li><a href="https://openjdk.org/">JDK</a></li>
     <li><a href="https://maven.apache.org/">Maven</a></li>
   </TabItem>
+  <TabItem value="go" label="Go">
+    <li><a href="https://go.dev">Go</a></li>
+    <li><a href="https://pkg.go.dev/github.com/longportapp/openapi-go">Go Docs</a></li>
+  </TabItem>
 </Tabs>
 
 ## Install SDK
@@ -48,14 +58,14 @@ For access in mainland China, it is recommended to use `openapi.longportapp.cn`,
   <TabItem value="python" label="Python" default>
 
 ```bash
-pip3 install longbridge
+pip3 install longport
 ```
 
   </TabItem>
   <TabItem value="javascript" label="JavaScript">
 
 ```bash
-yarn install longbridge
+yarn install longport
 ```
 
   </TabItem>
@@ -63,7 +73,7 @@ yarn install longbridge
 
 ```toml
 [dependencies]
-longbridge = "*"
+longport = "1.0.0"
 tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
@@ -73,7 +83,7 @@ tokio = { version = "1", features = "rt-multi-thread" }
 ```xml
 <dependencies>
     <dependency>
-        <groupId>io.github.longbridgeapp</groupId>
+        <groupId>io.github.longportapp</groupId>
         <artifactId>openapi-sdk</artifactId>
         <version>LATEST</version>
     </dependency>
@@ -81,13 +91,22 @@ tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+```shell
+go get github.com/longportapp/openapi-go
+```
+
+  </TabItem>
+
 </Tabs>
 
 Let's take obtaining assets as an example to demonstrate how to use the SDK.
 
 ## Configure Developer Account
 
-1. Open an account at [LongPort](https://longbridge.hk)
+1. Download App and open an account.
 2. Complete the Python 3 environment installation and install Pip
 3. Get App Key, App Secret, Access Token and other information from [LongPort OpenAPI](https://open.longportapp.com) official website
 
@@ -102,10 +121,20 @@ The "application credential" credential information will be given on the page. A
 Open the terminal and enter the following command:
 
 ```bash
-$ export LONGBRIDGE_APP_KEY="App Key get from user center"
-$ export LONGBRIDGE_APP_SECRET="App Secret get from user center"
-$ export LONGBRIDGE_ACCESS_TOKEN="Access Token get from user center"
+export LONGPORT_APP_KEY="App Key get from user center"
+export LONGPORT_APP_SECRET="App Secret get from user center"
+export LONGPORT_ACCESS_TOKEN="Access Token get from user center"
 ```
+
+:::tip About ENV
+
+We recommend that you set the environment variables `LONGPORT_APP_KEY`, `LONGPORT_APP_SECRET`, `LONGPORT_ACCESS_TOKEN`. For the convenience of demonstration, these environment variables will be used in the sample code in the documents in the following chapters.
+
+The ENV variables are **not necessary** conditions, if it is inconvenient to set the ENV variables or encounter problems that are difficult to solve, you can not set the ENV variables, but directly use the parameters in the code to initialize.
+
+The `Config` in LongPort OpenAPI SDK can be directly passed in parameters such as `app_key`, `app_secret`, `access_token` to initialize, pay attention to the comments in the example code below `Init config without ENV`.
+
+:::
 
 ### Setting Environment Variables In Windows Environment
 
@@ -114,40 +143,32 @@ Windows is a little more complicated, press the `Win + R` shortcut keys and ente
 Enter the following command in the command line to set the environment variable:
 
 ```bash
-C:\Users\jason> setx LONGBRIDGE_APP_KEY "App Key get from user center"
+C:\Users\jason> setx LONGPORT_APP_KEY "App Key get from user center"
 Success: the specified value has been saved.
 
-C:\Users\jason> setx LONGBRIDGE_APP_SECRET "App Secret get from user center"
+C:\Users\jason> setx LONGPORT_APP_SECRET "App Secret get from user center"
 Success: the specified value has been saved.
 
-C:\Users\jason> setx LONGBRIDGE_ACCESS_TOKEN "Access Token get from user center"
+C:\Users\jason> setx LONGPORT_ACCESS_TOKEN "Access Token get from user center"
 Success: the specified value has been saved.
 ```
 
-:::caution
+:::caution Windows ENV Restrictions
 
-Windows environment variable restrictions, when the above 3 commands are executed successfully, you need to restart Windows or log out and log in again before you can read it.
+Windows ENV Restrictions, when the above 3 commands are executed successfully, you need to restart Windows or log out and log in again before you can read it.
 
 :::
 
 After logging out or restarting, open the command line again and enter the following command to verify that the environment variables are set correctly:
 
 ```bash
-C:\Users\jason> set LONGBRIDGE
-LONGBRIDGE_APP_KEY=xxxxxxx
-LONGBRIDGE_APP_SECRET=xxxxxx
-LONGBRIDGE_ACCESS_TOKEN=xxxxxxx
+C:\Users\jason> set LONGPORT
+LONGPORT_APP_KEY=xxxxxxx
+LONGPORT_APP_SECRET=xxxxxx
+LONGPORT_ACCESS_TOKEN=xxxxxxx
 ```
 
 If it prints the value you just set correctly, then the environment variable is right.
-
-:::tip
-
-It is recommended that you set several environment variables such as `LONGBRIDGE_APP_KEY`, `LONGBRIDGE_APP_SECRET`, `LONGBRIDGE_ACCESS_TOKEN`. For the convenience of demonstration, these environment variables will be used in the sample code in the documents in the following chapters.
-
-If you are inconvenient to use environment variables in the Windows environment, you can modify the code according to your personal needs.
-
-:::
 
 :::caution
 Please pay attention to protect your **Access Token** information, anyone who gets it can trade your account through OpenAPI!
@@ -163,9 +184,13 @@ Please pay attention to protect your **Access Token** information, anyone who ge
 Cteate `account_asset.py` and paste the code below:
 
 ```python
-from longbridge.openapi import TradeContext, Config
+from longport.openapi import TradeContext, Config
 
 config = Config.from_env()
+
+# Init config without ENV
+# config = Config(app_key = "YOUR_APP_KEY", app_secret = "YOUR_APP_SECRET", access_token = "YOUR_ACCESS_TOKEN")
+
 ctx = TradeContext(config)
 
 resp = ctx.account_balance()
@@ -184,9 +209,13 @@ python account_asset.py
 Cteate `account_asset.js` and paste the code below:
 
 ```javascript
-const { Config, TradeContext } = require('longbridge')
+const { Config, TradeContext } = require('longport')
 
 let config = Config.fromEnv()
+
+// Init config without ENV
+// let config = new Config({ app_key: "YOUR_APP_KEY", app_secret = "YOUR_APP_SECRET", access_token = "YOUR_ACCESS_TOKEN" })
+
 TradeContext.new(config)
   .then((ctx) => ctx.accountBalance())
   .then((resp) => {
@@ -210,11 +239,15 @@ Cteate `main.rs` and paste the code below:
 ```rust
 use std::sync::Arc;
 
-use longbridge::{trade::TradeContext, Config};
+use longport::{trade::TradeContext, Config};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let config = Arc::new(Config::from_env()?);
+
+    // Init config without ENV
+    // let config = Arc::new(Config::new("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN")?);
+
     let (ctx, _) = TradeContext::try_new(config).await?;
 
     let resp = ctx.account_balance().await?;
@@ -235,12 +268,18 @@ cargo run
 Cteate `Main.java` and paste the code below:
 
 ```java
-import com.longbridge.*;
-import com.longbridge.trade.*;
+import com.longport.*;
+import com.longport.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
-        try (Config config = Config.fromEnv(); TradeContext ctx = TradeContext.create(config).get()) {
+        Config config = Config.fromEnv();
+
+        // Init config without ENV
+        // https://longportapp.github.io/openapi-sdk/java/com/longport/ConfigBuilder.html
+        // Config config = ConfigBuilder("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN").build();
+
+        try (TradeContext ctx = TradeContext.create(config).get()) {
             for (AccountBalance obj : ctx.getAccountBalance().get()) {
                 System.out.println(obj);
             }
@@ -256,6 +295,57 @@ mvn compile exec:exec
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+Create `main.go` and paste the code below:
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "github.com/longportapp/openapi-go/config"
+    "github.com/longportapp/openapi-go/trade"
+)
+
+func main() {
+    conf, err := config.New()
+
+    // Init config without ENV
+    // https://github.com/longportapp/openapi-go/blob/v0.9.2/config/config_test.go#L11
+    // conf, err := config.New(config.WithConfigKey("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN"))
+
+    if err != nil {
+        log.Fatal(err)
+    }
+    tradeContext, err := trade.NewFromCfg(conf)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer tradeContext.Close()
+    ctx := context.Background()
+    // Get AccountBalance infomation
+    ab, err := tradeContext.AccountBalance(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Printf("%+v", ab)
+}
+```
+
+Run:
+
+```shell
+go mod tidy
+go run ./
+```
+
+  </TabItem>
+
 </Tabs>
 
 After running, the output is as follows:
@@ -302,7 +392,7 @@ Before running, visit the [Developer Center](https://open.longportapp.com/accoun
 
 If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
 
-https://longportapp.com/download
+<https://longportapp.com/download>
 :::
 
 When you have the correct Quote authority, it might look like this:
@@ -316,7 +406,7 @@ Create `subscribe_quote.py` and paste the code below:
 
 ```python
 from time import sleep
-from longbridge.openapi import QuoteContext, Config, SubType, PushQuote
+from longport.openapi import QuoteContext, Config, SubType, PushQuote
 
 
 def on_quote(symbol: str, quote: PushQuote):
@@ -344,7 +434,7 @@ python subscribe_quote.py
 Create `subscribe_quote.js` and paste the code below:
 
 ```javascript
-const { Config, QuoteContext, SubType } = require('longbridge')
+const { Config, QuoteContext, SubType } = require('longport')
 
 let config = Config.fromEnv()
 QuoteContext.new(config).then((ctx) => {
@@ -367,7 +457,7 @@ Create `main.rs` and paste the code below:
 ```rust
 use std::sync::Arc;
 
-use longbridge::{
+use longport::{
     quote::{QuoteContext, SubFlags},
     Config,
 };
@@ -403,8 +493,8 @@ cargo run
 Create `Main.java` and paste the code below:
 
 ```java
-import com.longbridge.*;
-import com.longbridge.quote.*;
+import com.longport.*;
+import com.longport.quote.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
@@ -426,6 +516,74 @@ mvn compile exec:exec
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+Create file `main.go` and paste the code below:
+
+```go
+package main
+
+import (
+    "context"
+    "encoding/json"
+    "fmt"
+    "log"
+    "os"
+    "os/signal"
+    "syscall"
+    "time"
+
+    "github.com/longportapp/openapi-go/config"
+    "github.com/longportapp/openapi-go/quote"
+)
+
+func main() {
+ // create quote context from environment variables
+    conf, err := config.New()
+    if err != nil {
+        log.Fatal(err)
+    }
+    quoteContext, err := quote.NewFromCfg(conf)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+    defer quoteContext.Close()
+    ctx := context.Background()
+    quoteContext.OnQuote(func(pe *quote.PushQuote) {
+        bytes, _ := json.Marshal(pe)
+        fmt.Println(string(bytes))
+    })
+    quoteContext.OnDepth(func(d *quote.PushDepth) {
+        bytes, _ := json.Marshal(d)
+        if d.Sequence != 0 {
+            fmt.Print(time.UnixMicro(d.Sequence/1000).Format(time.RFC3339) + " ")
+        }
+        fmt.Println(string(bytes))
+    })
+
+    // Subscribe some symbols
+    err = quoteContext.Subscribe(ctx, []string{"700.HK", "AAPL.US", "NFLX.US"}, []quote.SubType{quote.SubTypeDepth}, true)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+
+    quitChannel := make(chan os.Signal, 1)
+    signal.Notify(quitChannel, syscall.SIGINT, syscall.SIGTERM)
+    <-quitChannel
+}
+```
+
+Run:
+
+```shell
+go run ./
+```
+
+  </TabItem>
+
 </Tabs>
 
 After running, the output is as follows:
@@ -479,7 +637,7 @@ Create `submit_order.py` and paste the code below:
 
 ```python
 from decimal import Decimal
-from longbridge.openapi import TradeContext, Config, OrderSide, OrderType, TimeInForceType
+from longport.openapi import TradeContext, Config, OrderSide, OrderType, TimeInForceType
 
 config = Config.from_env()
 ctx = TradeContext(config)
@@ -508,7 +666,7 @@ python submit_order.py
 Create `submit_order.js` and paste the code below:
 
 ```javascript
-const { Config, TradeContext, OrderType, OrderSide, Decimal, TimeInForceType } = require('longbridge')
+const { Config, TradeContext, OrderType, OrderSide, Decimal, TimeInForceType } = require('longport')
 
 let config = Config.fromEnv()
 TradeContext.new(config)
@@ -539,7 +697,7 @@ Create `main.rs` and paste the code below:
 ```rust
 use std::sync::Arc;
 
-use longbridge::{
+use longport::{
     decimal,
     trade::{OrderSide, OrderType, SubmitOrderOptions, TimeInForceType, TradeContext},
     Config,
@@ -576,8 +734,8 @@ cargo run
 Create `Main.java` and paste the code below:
 
 ```java
-import com.longbridge.*;
-import com.longbridge.trade.*;
+import com.longport.*;
+import com.longport.trade.*;
 import java.math.BigDecimal;
 
 public class Main {
@@ -602,6 +760,80 @@ mvn compile exec:exec
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+创建 `main.go`，贴入一下内容：
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "os"
+    "os/signal"
+    "syscall"
+
+    "github.com/shopspring/decimal"
+
+    "github.com/longportapp/openapi-go/config"
+    "github.com/longportapp/openapi-go/trade"
+)
+
+func main() {
+    // create trade context from environment variables
+    conf, err := config.New()
+    if err != nil {
+        log.Fatal(err)
+    }
+    tradeContext, err := trade.NewFromCfg(conf)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+
+
+    defer tradeContext.Close()
+
+    // subscribe order status
+    tradeContext.OnTrade(func(ev *trade.PushEvent) {
+        // handle order changing event
+    })
+
+    ctx := context.Background()
+    // submit order
+    order := &trade.SubmitOrder{
+        Symbol:            "700.HK",
+        OrderType:         trade.OrderTypeLO,
+        Side:              trade.OrderSideBuy,
+        SubmittedQuantity: 200,
+        TimeInForce:       trade.TimeTypeDay,
+        SubmittedPrice:    decimal.NewFromFloat(12),
+    }
+    orderId, err := tradeContext.SubmitOrder(ctx, order)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+    fmt.Printf("orderId: %v\n", orderId)
+
+
+    quitChannel := make(chan os.Signal, 1)
+    signal.Notify(quitChannel, syscall.SIGINT, syscall.SIGTERM)
+    <-quitChannel
+}
+```
+
+运行：
+
+```shell
+go run ./
+```
+
+  </TabItem>
+
 </Tabs>
 
 After running, the output is as follows:
@@ -618,7 +850,7 @@ SubmitOrderResponse { order_id: "718437534753550336" }
 Create `today_orders.py` and paste the code below:
 
 ```python
-from longbridge.openapi import TradeContext, Config
+from longport.openapi import TradeContext, Config
 
 config = Config.from_env()
 ctx = TradeContext(config)
@@ -639,7 +871,7 @@ python today_orders.py
 Create `today_orders.js` and paste the code below:
 
 ```javascript
-const { Config, TradeContext } = require('longbridge')
+const { Config, TradeContext } = require('longport')
 
 let config = Config.fromEnv()
 TradeContext.new(config)
@@ -665,7 +897,7 @@ Create `main.rs` and paste the code below:
 ```rust
 use std::sync::Arc;
 
-use longbridge::{trade::TradeContext, Config};
+use longport::{trade::TradeContext, Config};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -692,8 +924,8 @@ cargo run
 Create `Main.java` and paste the code below:
 
 ```java
-import com.longbridge.*;
-import com.longbridge.trade.*;
+import com.longport.*;
+import com.longport.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
@@ -714,6 +946,55 @@ mvn compile exec:exec
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+Create file `main.go` and paste the code below:
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "github.com/longportapp/openapi-go/config"
+    "github.com/longportapp/openapi-go/trade"
+)
+
+func main() {
+    // create trade context from environment variables
+    conf, err := config.New()
+    if err != nil {
+        log.Fatal(err)
+    }
+    tradeContext, err := trade.NewFromCfg(conf)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer tradeContext.Close()
+    ctx := context.Background()
+    // today orders
+    orders, err := tradeContext.TodayOrders(ctx, &trade.GetTodayOrders{})
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, order := range orders {
+        fmt.Printf("%+v\n", order)
+    }
+}
+```
+
+Run:
+
+```shell
+go run ./
+```
+
+  </TabItem>
+
 </Tabs>
 
 After running, the output is as follows:
@@ -754,15 +1035,15 @@ The above example has fully demonstrated how to use the SDK to access the OpenAP
 
 We provide the complete code of the above examples in the GitHub repository of LongPort OpenAPI Python SDK, and we will continue to add or update it later.
 
-https://github.com/longbridgeapp/openapi-sdk/tree/master/examples
+<https://github.com/longportapp/openapi-sdk/tree/master/examples>
 
 ## SDK API Document
 
 For detailed SDK API document, please visit:
 
-https://longbridgeapp.github.io/openapi-sdk/
+<https://longportapp.github.io/openapi-sdk/>
 
 ## Contact & Feedback
 
-- You can send feedback to service@longbridge.global
-- Join **Discord** LongPort OpenAPI Server: https://discord.gg/2gUTSCS6
+- GitHub Issues: <https://github.com/longportapp/openapi-sdk>
+- Join **Discord** LongPort OpenAPI Server: <https://discord.gg/2gUTSCS6>

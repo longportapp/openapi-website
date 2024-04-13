@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 ## 前言
 
-[LongPort OpenAPI SDK](https://github.com/longbridgeapp/openapi-sdk) 基于 Rust 底层提供标准实现，目前我们已经发布了 Python、Node.js、Rust、C++ 的 SDK，其他语言的支持后面会陆续推出。
+[LongPort OpenAPI SDK](https://github.com/longportapp/openapi-sdk) 基于 Rust 底层提供标准实现，目前我们已经发布了 Python、Node.js、Rust、C++/C、Java 等多种编程语言 SDK，其他语言的支持后面会陆续推出。
 
 ## API Host
 
@@ -20,7 +20,13 @@ import TabItem from '@theme/TabItem';
 
 :::info
 中国大陆地区访问，建议采用 `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn` 以提升访问速度。
+
+如果使用我们的 SDK，可以通过设置环境变量 `LONGPORT_REGION=cn` 来使用中国大陆的接入点，当前我们仅有 `hk` 和 `cn` 两个地区可选。
 :::
+
+## 时间格式
+
+所有 API 返回有关时间的字段，我们都采用 [Unix Timestamp](https://en.wikipedia.org/wiki/Unix_time) 时区为 UTC。
 
 ## 环境需求
 
@@ -40,6 +46,10 @@ import TabItem from '@theme/TabItem';
     <li><a href="https://openjdk.org/">JDK</a></li>
     <li><a href="https://maven.apache.org/">Maven</a></li>
   </TabItem>
+  <TabItem value="go" label="Go">
+    <li><a href="https://go.dev">Go</a></li>
+    <li><a href="https://pkg.go.dev/github.com/longportapp/openapi-go">Go Docs</a></li>
+  </TabItem>
 </Tabs>
 
 ## 安装 SDK
@@ -48,14 +58,14 @@ import TabItem from '@theme/TabItem';
   <TabItem value="python" label="Python" default>
 
 ```bash
-pip3 install longbridge
+pip3 install longport
 ```
 
   </TabItem>
   <TabItem value="javascript" label="JavaScript">
 
 ```bash
-yarn install longbridge
+yarn add longport
 ```
 
   </TabItem>
@@ -63,7 +73,7 @@ yarn install longbridge
 
 ```toml
 [dependencies]
-longbridge = "*"
+longport = "1.0.0"
 tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
@@ -73,7 +83,7 @@ tokio = { version = "1", features = "rt-multi-thread" }
 ```xml
 <dependencies>
     <dependency>
-        <groupId>io.github.longbridgeapp</groupId>
+        <groupId>io.github.longportapp</groupId>
         <artifactId>openapi-sdk</artifactId>
         <version>LATEST</version>
     </dependency>
@@ -81,6 +91,15 @@ tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
   </TabItem>
+  <TabItem value="go" label="Go">
+
+```shell
+go env -w GOPROXY="https://goproxy.io,direct"
+go get github.com/longportapp/openapi-go
+```
+
+  </TabItem>
+
 </Tabs>
 
 下面我们以获取资产为例，演示一下如何使用 SDK。
@@ -89,7 +108,7 @@ tokio = { version = "1", features = "rt-multi-thread" }
 
 1. 下载 [LongPort](https://longportapp.com/download)，并完成开户
 2. 完成 Python 3 环境安装，并安装 Pip
-3. 从 [LongPort OpenAPI](https://open.longportapp.com) 官网获取 ` App Key`, `App Secret`, `Access Token` 等信息。
+3. 从 [LongPort OpenAPI](https://open.longportapp.com) 官网获取 `App Key`, `App Secret`, `Access Token` 等信息。
 
 **_获取 App Key, App Secret, Access Token 等信息_**
 
@@ -97,14 +116,24 @@ tokio = { version = "1", features = "rt-multi-thread" }
 
 在页面上会给出“应用凭证”凭证信息，我们拿到以后设置环境变量，便于后面开发使用方便。
 
+:::tip 关于环境变量
+
+建议您设置好 `LONGPORT_APP_KEY`, `LONGPORT_APP_SECRET`, `LONGPORT_ACCESS_TOKEN` 这几个环境变量。我们为了演示方便，后面各章节文档中的示例代码都会使用这几个环境变量。
+
+环境变量**非必要**条件，如设置不方便或遇到问题难以解决，可不用环境变量，而是直接在代码里用参数来初始化。
+
+LongPort OpenAPI SDK 的 `Config` 均可以直接传入 `app_key`, `app_secret`, `access_token` 等参数来初始化，注意看后面的例子注释内 `Init config without ENV` 的部分。
+
+:::
+
 ### macOS / Linux 环境下设置环境变量
 
 打开终端，输入下面的命令即可：
 
 ```bash
-$ export LONGBRIDGE_APP_KEY="从页面上获取到的 App Key"
-$ export LONGBRIDGE_APP_SECRET="从页面上获取到的 App Secret"
-$ export LONGBRIDGE_ACCESS_TOKEN="从页面上获取到的 Access Token"
+export LONGPORT_APP_KEY="从页面上获取到的 App Key"
+export LONGPORT_APP_SECRET="从页面上获取到的 App Secret"
+export LONGPORT_ACCESS_TOKEN="从页面上获取到的 Access Token"
 ```
 
 ### Windows 下设置环境变量
@@ -114,17 +143,17 @@ Windows 要稍微复杂一些，按下 `Win + R` 快捷键，输入 `cmd` 命令
 在命令行里面输入下面的命令设置环境变量：
 
 ```bash
-C:\Users\jason> setx LONGBRIDGE_APP_KEY "从页面上获取到的 App Key"
+C:\Users\jason> setx LONGPORT_APP_KEY "从页面上获取到的 App Key"
 成功：指定的值已得到保存。
 
-C:\Users\jason> setx LONGBRIDGE_APP_SECRET "从页面上获取到的 App Secret"
+C:\Users\jason> setx LONGPORT_APP_SECRET "从页面上获取到的 App Secret"
 成功：指定的值已得到保存。
 
-C:\Users\jason> setx LONGBRIDGE_ACCESS_TOKEN "从页面上获取到的 Access Token"
+C:\Users\jason> setx LONGPORT_ACCESS_TOKEN "从页面上获取到的 Access Token"
 成功：指定的值已得到保存。
 ```
 
-:::caution
+:::caution Windows 环境变量
 
 Windows 环境变量限制，当上面 3 条命令执行成功以后，你需要重新启动 Windows 或者注销后重新登录一次，才可以读取到。
 
@@ -133,19 +162,13 @@ Windows 环境变量限制，当上面 3 条命令执行成功以后，你需要
 注销或重新启动后，再次打开命令行，输入下面的命令验证一下环境变量是否设置正确：
 
 ```bash
-C:\Users\jason> set LONGBRIDGE
-LONGBRIDGE_APP_KEY=xxxxxxx
-LONGBRIDGE_APP_SECRET=xxxxxx
-LONGBRIDGE_ACCESS_TOKEN=xxxxxxx
+C:\Users\jason> set LONGPORT
+LONGPORT_APP_KEY=xxxxxxx
+LONGPORT_APP_SECRET=xxxxxx
+LONGPORT_ACCESS_TOKEN=xxxxxxx
 ```
 
 如果能正确打印你刚才设置的值，那么环境变量就是对了。
-
-:::tip
-建议您设置好 `LONGBRIDGE_APP_KEY`, `LONGBRIDGE_APP_SECRET`, `LONGBRIDGE_ACCESS_TOKEN` 这几个环境变量。我们为了演示方便，后面各章节文档中的示例代码都会使用这几个环境变量。
-
-如您在 Windows 环境不方便使用环境变量，可根据个人需要，修改代码。
-:::
 
 :::caution
 请注意保护好您的 **Access Token** 信息，任何人获得到它，都可以通过 OpenAPI 来交易你的账户！
@@ -161,9 +184,13 @@ LONGBRIDGE_ACCESS_TOKEN=xxxxxxx
 创建 `account_asset.py` 贴入下面的代码：
 
 ```python
-from longbridge.openapi import TradeContext, Config
+from longport.openapi import TradeContext, Config
 
 config = Config.from_env()
+
+# Init config without ENV
+# config = Config(app_key = "YOUR_APP_KEY", app_secret = "YOUR_APP_SECRET", access_token = "YOUR_ACCESS_TOKEN")
+
 ctx = TradeContext(config)
 
 resp = ctx.account_balance()
@@ -182,9 +209,13 @@ python account_asset.py
 创建 `account_asset.js` 贴入下面的代码：
 
 ```js
-const { Config, TradeContext } = require('longbridge')
+const { Config, TradeContext } = require('longport')
 
 let config = Config.fromEnv()
+
+// Init config without ENV
+// let config = new Config({ app_key: "YOUR_APP_KEY", app_secret = "YOUR_APP_SECRET", access_token = "YOUR_ACCESS_TOKEN" })
+
 TradeContext.new(config)
   .then((ctx) => ctx.accountBalance())
   .then((resp) => {
@@ -208,11 +239,15 @@ node account_asset.js
 ```rust
 use std::sync::Arc;
 
-use longbridge::{trade::TradeContext, Config};
+use longport::{trade::TradeContext, Config};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let config = Arc::new(Config::from_env()?);
+
+    // Init config without ENV
+    // let config = Arc::new(Config::new("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN")?);
+
     let (ctx, _) = TradeContext::try_new(config).await?;
 
     let resp = ctx.account_balance().await?;
@@ -233,12 +268,18 @@ cargo run
 创建 `Main.java` 贴入下面的代码：
 
 ```java
-import com.longbridge.*;
-import com.longbridge.trade.*;
+import com.longport.*;
+import com.longport.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
-        try (Config config = Config.fromEnv(); TradeContext ctx = TradeContext.create(config).get()) {
+        Config config = Config.fromEnv();
+
+        // Init config without ENV
+        // https://longportapp.github.io/openapi-sdk/java/com/longport/ConfigBuilder.html
+        // Config config = ConfigBuilder("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN").build();
+
+        try (TradeContext ctx = TradeContext.create(config).get()) {
             for (AccountBalance obj : ctx.getAccountBalance().get()) {
                 System.out.println(obj);
             }
@@ -251,6 +292,56 @@ class Main {
 
 ```bash
 mvn compile exec:exec
+```
+
+  </TabItem>
+
+  <TabItem value="go" label="Go">
+
+创建 `main.go` 贴入如下代码：
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "github.com/longportapp/openapi-go/config"
+    "github.com/longportapp/openapi-go/trade"
+)
+
+func main() {
+    conf, err := config.New()
+
+    // Init config without ENV
+    // https://github.com/longportapp/openapi-go/blob/v0.9.2/config/config_test.go#L11
+    // conf, err := config.New(config.WithConfigKey("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN"))
+
+    if err != nil {
+        log.Fatal(err)
+    }
+    tradeContext, err := trade.NewFromCfg(conf)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer tradeContext.Close()
+    ctx := context.Background()
+    // Get AccountBalance infomation
+    ab, err := tradeContext.AccountBalance(ctx)
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Printf("%+v", ab)
+}
+```
+
+运行：
+
+```shell
+go mod tidy
+go run ./
 ```
 
   </TabItem>
@@ -300,7 +391,7 @@ mvn compile exec:exec
 
 如没有开通行情权限，可以通过“LongPort”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
 
-https://longportapp.com/download
+<https://longportapp.com/download>
 :::
 
 当你有正确的行情权限，看起来可能会是这样：
@@ -314,7 +405,7 @@ https://longportapp.com/download
 
 ```python
 from time import sleep
-from longbridge.openapi import QuoteContext, Config, SubType, PushQuote
+from longport.openapi import QuoteContext, Config, SubType, PushQuote
 
 
 def on_quote(symbol: str, quote: PushQuote):
@@ -342,7 +433,7 @@ python subscribe_quote.py
 创建 `subscribe_quote.js` 贴入下面的代码：
 
 ```javascript
-const { Config, QuoteContext, SubType } = require('longbridge')
+const { Config, QuoteContext, SubType } = require('longport')
 
 let config = Config.fromEnv()
 QuoteContext.new(config).then((ctx) => {
@@ -365,7 +456,7 @@ node subscribe_quote.js
 ```rust
 use std::sync::Arc;
 
-use longbridge::{
+use longport::{
     quote::{QuoteContext, SubFlags},
     Config,
 };
@@ -401,8 +492,8 @@ cargo run
 创建 `Main.java` 贴入下面的代码：
 
 ```java
-import com.longbridge.*;
-import com.longbridge.quote.*;
+import com.longport.*;
+import com.longport.quote.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
@@ -424,6 +515,74 @@ mvn compile exec:exec
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+创建 `main.go`，贴入一下内容：
+
+```go
+package main
+
+import (
+    "context"
+    "encoding/json"
+    "fmt"
+    "log"
+    "os"
+    "os/signal"
+    "syscall"
+    "time"
+
+    "github.com/longportapp/openapi-go/config"
+    "github.com/longportapp/openapi-go/quote"
+)
+
+func main() {
+ // create quote context from environment variables
+    conf, err := config.New()
+    if err != nil {
+        log.Fatal(err)
+    }
+    quoteContext, err := quote.NewFromCfg(conf)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+    defer quoteContext.Close()
+    ctx := context.Background()
+    quoteContext.OnQuote(func(pe *quote.PushQuote) {
+        bytes, _ := json.Marshal(pe)
+        fmt.Println(string(bytes))
+    })
+    quoteContext.OnDepth(func(d *quote.PushDepth) {
+        bytes, _ := json.Marshal(d)
+        if d.Sequence != 0 {
+            fmt.Print(time.UnixMicro(d.Sequence/1000).Format(time.RFC3339) + " ")
+        }
+        fmt.Println(string(bytes))
+    })
+
+    // Subscribe some symbols
+    err = quoteContext.Subscribe(ctx, []string{"700.HK", "AAPL.US", "NFLX.US"}, []quote.SubType{quote.SubTypeDepth}, true)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+
+    quitChannel := make(chan os.Signal, 1)
+    signal.Notify(quitChannel, syscall.SIGINT, syscall.SIGTERM)
+    <-quitChannel
+}
+```
+
+运行：
+
+```shell
+go run ./
+```
+
+  </TabItem>
+
 </Tabs>
 
 运行后，会输出如下：
@@ -477,7 +636,7 @@ NFLX.US PushQuote {
 
 ```python
 from decimal import Decimal
-from longbridge.openapi import TradeContext, Config, OrderSide, OrderType, TimeInForceType
+from longport.openapi import TradeContext, Config, OrderSide, OrderType, TimeInForceType
 
 config = Config.from_env()
 ctx = TradeContext(config)
@@ -506,7 +665,7 @@ python submit_order.py
 创建 `submit_order.js` 贴入下面的代码：
 
 ```javascript
-const { Config, TradeContext, OrderType, OrderSide, Decimal, TimeInForceType } = require('longbridge')
+const { Config, TradeContext, OrderType, OrderSide, Decimal, TimeInForceType } = require('longport')
 
 let config = Config.fromEnv()
 TradeContext.new(config)
@@ -537,7 +696,7 @@ node submit_order.js
 ```rust
 use std::sync::Arc;
 
-use longbridge::{
+use longport::{
     decimal,
     trade::{OrderSide, OrderType, SubmitOrderOptions, TimeInForceType, TradeContext},
     Config,
@@ -574,8 +733,8 @@ cargo run
 创建 `Main.java` 贴入下面的代码：
 
 ```java
-import com.longbridge.*;
-import com.longbridge.trade.*;
+import com.longport.*;
+import com.longport.trade.*;
 import java.math.BigDecimal;
 
 public class Main {
@@ -600,6 +759,80 @@ mvn compile exec:exec
 ```
 
   </TabItem>
+
+  <TabItem value="go" label="Go">
+
+创建 `main.go`，贴入一下内容：
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "os"
+    "os/signal"
+    "syscall"
+
+    "github.com/shopspring/decimal"
+
+    "github.com/longportapp/openapi-go/config"
+    "github.com/longportapp/openapi-go/trade"
+)
+
+func main() {
+    // create trade context from environment variables
+    conf, err := config.New()
+    if err != nil {
+        log.Fatal(err)
+    }
+    tradeContext, err := trade.NewFromCfg(conf)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+
+
+    defer tradeContext.Close()
+
+    // subscribe order status
+    tradeContext.OnTrade(func(ev *trade.PushEvent) {
+        // handle order changing event
+    })
+
+    ctx := context.Background()
+    // submit order
+    order := &trade.SubmitOrder{
+        Symbol:            "700.HK",
+        OrderType:         trade.OrderTypeLO,
+        Side:              trade.OrderSideBuy,
+        SubmittedQuantity: 200,
+        TimeInForce:       trade.TimeTypeDay,
+        SubmittedPrice:    decimal.NewFromFloat(12),
+    }
+    orderId, err := tradeContext.SubmitOrder(ctx, order)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+    fmt.Printf("orderId: %v\n", orderId)
+
+
+    quitChannel := make(chan os.Signal, 1)
+    signal.Notify(quitChannel, syscall.SIGINT, syscall.SIGTERM)
+    <-quitChannel
+}
+```
+
+运行：
+
+```shell
+go run ./
+```
+
+  </TabItem>
+
 </Tabs>
 
 运行后，会输出如下：
@@ -616,7 +849,7 @@ SubmitOrderResponse { order_id: "718437534753550336" }
 创建 `today_orders.py` 贴入下面的代码：
 
 ```python
-from longbridge.openapi import TradeContext, Config
+from longport.openapi import TradeContext, Config
 
 config = Config.from_env()
 ctx = TradeContext(config)
@@ -637,7 +870,7 @@ python today_orders.py
 创建 `today_orders.js` 贴入下面的代码：
 
 ```js
-const { Config, TradeContext } = require('longbridge')
+const { Config, TradeContext } = require('longport')
 
 let config = Config.fromEnv()
 TradeContext.new(config)
@@ -663,7 +896,7 @@ node today_orders.js
 ```rust
 use std::sync::Arc;
 
-use longbridge::{trade::TradeContext, Config};
+use longport::{trade::TradeContext, Config};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -690,8 +923,8 @@ cargo run
 创建 `Main.java` 贴入下面的代码：
 
 ```java
-import com.longbridge.*;
-import com.longbridge.trade.*;
+import com.longport.*;
+import com.longport.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
@@ -709,6 +942,48 @@ class Main {
 
 ```bash
 mvn compile exec:exec
+```
+
+  </TabItem>
+
+  <TabItem value="go" label="Go">
+
+创建 `main.go`，贴入以下内容：
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "github.com/longportapp/openapi-go/config"
+    "github.com/longportapp/openapi-go/trade"
+)
+
+func main() {
+    // create trade context from environment variables
+    conf, err := config.New()
+    if err != nil {
+        log.Fatal(err)
+    }
+    tradeContext, err := trade.NewFromCfg(conf)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer tradeContext.Close()
+    ctx := context.Background()
+    // today orders
+    orders, err := tradeContext.TodayOrders(ctx, &trade.GetTodayOrders{})
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, order := range orders {
+        fmt.Printf("%+v\n", order)
+    }
+}
 ```
 
   </TabItem>
@@ -746,22 +1021,28 @@ Order {
 }
 ```
 
-上面例子已经完整演示了如何使用 SDK 访问 OpenAPI 的接口，更多其他接口请详细阅读 [LongPort OpenAPI 文档](https://longbridgeapp.github.io/openapi-sdk/)，根据不同的接口使用。
+上面例子已经完整演示了如何使用 SDK 访问 OpenAPI 的接口，更多其他接口请详细阅读 [LongPort OpenAPI 文档](https://longportapp.github.io/openapi-sdk/)，根据不同的接口使用。
 
 ## 更多例子
 
 我们在 LongPort OpenAPI Python SDK 的 GitHub 仓库中提供了上面几个例子的完整代码，当然后期我们也会持续往里面补充或更新。
 
-https://github.com/longbridgeapp/openapi-sdk/tree/master/examples
+<https://github.com/longportapp/openapi-sdk/tree/master/examples>
 
 ## SDK API 文档
 
 SDK 的详细 API 文档请访问：
 
-https://longbridgeapp.github.io/openapi-sdk/
+<https://longportapp.github.io/openapi-sdk/>
 
 ## 反馈及沟通
 
-- 可以给 LongPort 服务邮箱发送反馈，邮箱地址是：service@longbridge.global
-- 加入 LongPort OpenAPI 微信沟通群，二维码如下：
-  <img src="https://pub.lbkrs.com/files/202205/akTNrRTBrT5aMX4f/qrcode.jpg" className="max-w-2xl" />
+- GitHub Issues: <https://github.com/longportapp/openapi-sdk/>
+
+- 微信沟通群（已满）：
+
+<img src="https://pub.lbkrs.com/files/202205/akTNrRTBrT5aMX4f/qrcode.jpg" className="max-w-2xl" />
+
+- 飞书沟通群：
+
+<img src="https://assets.lbkrs.com/uploads/2acb32b6-0718-4304-8d73-432a2d53aa97/feishu.png" className="max-w-2xl" />

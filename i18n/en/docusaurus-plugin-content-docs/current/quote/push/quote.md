@@ -17,19 +17,22 @@ Real-time quote push of the subscribed security. In the pushed data structure, o
 
 ### Properties
 
-| Name          | Type   | Description                                                                          |
-| ------------- | ------ | ------------------------------------------------------------------------------------ |
-| symbol        | string | Security code, for example: `AAPL.US`                                                |
-| sequence      | int64  | Sequence number                                                                      |
-| last_done     | string | Latest price                                                                         |
-| open          | string | Open                                                                                 |
-| high          | string | High                                                                                 |
-| low           | string | Low                                                                                  |
-| timestamp     | int64  | Time of latest price                                                                 |
-| volume        | int64  | Volume                                                                               |
-| turnover      | string | Turnover                                                                             |
-| trade_status  | int32  | Security trading status, see [TradeStatus](../objects#tradestatus---security-status) |
-| trade_session | int32  | Trade session, see [TradeSession](../objects#tradesession---trading-session)         |
+| Name             | Type   | Description                                                                                                     |
+| ---------------- | ------ | --------------------------------------------------------------------------------------------------------------- |
+| symbol           | string | Security code, for example: `AAPL.US`                                                                           |
+| sequence         | int64  | Sequence number                                                                                                 |
+| last_done        | string | Latest price                                                                                                    |
+| open             | string | Open                                                                                                            |
+| high             | string | High                                                                                                            |
+| low              | string | Low                                                                                                             |
+| timestamp        | int64  | Time of latest price                                                                                            |
+| volume           | int64  | Volume                                                                                                          |
+| turnover         | string | Turnover                                                                                                        |
+| trade_status     | int32  | Security trading status, see [TradeStatus](../objects#tradestatus---security-status)                            |
+| trade_session    | int32  | Trade session, see [TradeSession](../objects#tradesession---trading-session)                                    |
+| current_volume   | int32  | Increase volume between pushes                                                                                  |
+| current_turnover | string | Increase turnover between pushes                                                                                |
+| tag              | int32  | Price tag <br /><br />**Optional value:**<br />`0` - Real-time quote<br />`1` - Revised data after market close |
 
 ### Protobuf
 
@@ -63,9 +66,9 @@ message PushQuote {
 # Before running, please visit the "Developers" to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
 from time import sleep
-from longbridge.openapi import QuoteContext, Config, SubType, PushQuote
+from longport.openapi import QuoteContext, Config, SubType, PushQuote
 
-def on_quote(symbol: str, event: PushTrades):
+def on_quote(symbol: str, event: PushQuote):
     print(symbol, event)
 
 config = Config.from_env()
@@ -90,6 +93,9 @@ sleep(30)
   "volume": 88063191,
   "turnover": "13865092584.000",
   "trade_status": 0,
-  "trade_session": 0
+  "trade_session": 0,
+  "current_volume": 111234,
+  "current_turnover": "23234343454.000",
+  "tag": 0
 }
 ```

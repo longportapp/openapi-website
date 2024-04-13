@@ -13,7 +13,7 @@ sidebar_position: 0
 
 如果是 `Python` 和 `C++` 用戶可以直接使用我們的 [SDK](https://open.longportapp.com/zh-HK/sdk)，不用關具體的實現細節。
 
-如果想要自己實現協議解析，可以參考我們的 [Go 實現](https://github.com/longbridgeapp/openapi-protocol/tree/main/go)。
+如果想要自己實現協議解析，可以參考我們的 [Go 實現](https://github.com/longportapp/openapi-protocol/tree/main/go)。
 
 業務的 `WebSocket` 和 `TCP` 接入地址可以查看[業務地址](../hosts)
 

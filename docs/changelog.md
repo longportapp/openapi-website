@@ -5,6 +5,11 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2023-11-03
+
+- 新增行情历史 K 线接口
+  - 长连接 `Business Command：27` 获取标的历史 K 线
+
 ## 2023-08-17
 
 - 更新获取账户资金接口
@@ -14,7 +19,6 @@ sidebar_position: 7
 
 - 更新获取股票持仓接口
   - `GET /v1/asset/stock` 增加开盘前初始持仓 (init_quantity) 字段
-
 
 ## 2023-04-11
 
