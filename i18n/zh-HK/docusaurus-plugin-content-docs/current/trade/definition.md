@@ -99,6 +99,7 @@ sidebar_position: 2
 | tailing_percent    | string | 條件單跟蹤漲跌幅                                                                                                                     |
 | limit_offset       | string | 指定價差                                                                                                                             |
 | account_no         | string | 用戶端賬號                                                                                                                           |
+| remark         | string | 備注																																													 |
 
 ### 示例
 
@@ -127,7 +128,8 @@ sidebar_position: 2
 		"tailing_amount": "5",
 		"tailing_percent": "1",
 		"limit_offset": "0.01",
-		"account_no": "HK123445"
+		"account_no": "HK123445",
+		"remark": "abc"
 	}
 }
 ```

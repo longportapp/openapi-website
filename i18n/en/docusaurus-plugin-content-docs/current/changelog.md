@@ -5,6 +5,10 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2024-04-13
+
+- Trade push add `remark` field
+
 ## 2023-11-03
 
 - Add quote history candlestick interface

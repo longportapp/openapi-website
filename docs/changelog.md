@@ -5,6 +5,10 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2024-04-13
+
+- 新增交易推送添加 `remark`
+
 ## 2023-11-03
 
 - 新增行情历史 K 线接口
