@@ -99,6 +99,7 @@ sidebar_position: 2
 | trailing_percent   | string | 条件单跟踪涨跌幅                                                                                                                     |
 | limit_offset       | string | 指定价差                                                                                                                             |
 | account_no         | string | 用户端账号                                                                                                                           |
+| remark         | string | 备注                                                                                                                           |
 
 ### 示例
 
@@ -127,7 +128,8 @@ sidebar_position: 2
 		"trailing_amount": "5",
 		"trailing_percent": "1",
 		"limit_offset": "0.01",
-		"account_no": "HK123445"
+		"account_no": "HK123445",
+		"remark": "abc"
 	}
 }
 ```

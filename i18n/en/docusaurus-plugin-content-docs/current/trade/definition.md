@@ -99,6 +99,7 @@ sidebar_position: 2
 | trailing_percent   | string | "`TSMPCT` / `TSLPPCT` order trailing percent"                                                                         |
 | limit_offset       | string | "`TSLPAMT` / `TSLPPCT` order limit offset amount"                                                                     |
 | account_no         | string | account no                                                                                                            |
+| remark         | string | remark message                                                                                                           |
 
 ### example
 
@@ -127,7 +128,8 @@ sidebar_position: 2
 		"trailing_amount": "5",
 		"trailing_percent": "1",
 		"limit_offset": "0.01",
-		"account_no": "HK123445"
+		"account_no": "HK123445",
+		"remark": "abc"
 	}
 }
 ```
