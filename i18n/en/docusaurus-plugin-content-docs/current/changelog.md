@@ -7,7 +7,7 @@ sidebar_position: 7
 
 ## 2024-04-13
 
-- Trade push add `remark` field
+- Add `remark` field to [Trade push](https://open.longportapp.com/en/docs/trade/trade-definition#websocket-notification).
 
 ## 2023-11-03
 
