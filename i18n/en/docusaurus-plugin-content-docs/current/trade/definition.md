@@ -100,6 +100,8 @@ sidebar_position: 2
 | limit_offset       | string | "`TSLPAMT` / `TSLPPCT` order limit offset amount"                                                                     |
 | account_no         | string | account no                                                                                                            |
 | remark         | string | remark message                                                                                                           |
+| last_share         | string | last share |
+| last_price         | string | last price |
 
 ### example
 
@@ -129,6 +131,8 @@ sidebar_position: 2
 		"trailing_percent": "1",
 		"limit_offset": "0.01",
 		"account_no": "HK123445",
+		"last_share": "100",
+		"last_price": "234",
 		"remark": "abc"
 	}
 }

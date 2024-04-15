@@ -100,6 +100,8 @@ sidebar_position: 2
 | limit_offset       | string | 指定价差                                                                                                                             |
 | account_no         | string | 用户端账号                                                                                                                           |
 | remark         | string | 备注                                                                                                                           |
+| last_share         | string | 最新成交数量																																													 |
+| last_price         | string | 最新成交价格																																													 |
 
 ### 示例
 
@@ -129,6 +131,8 @@ sidebar_position: 2
 		"trailing_percent": "1",
 		"limit_offset": "0.01",
 		"account_no": "HK123445",
+		"last_share": "100",
+		"last_price": "234",
 		"remark": "abc"
 	}
 }
