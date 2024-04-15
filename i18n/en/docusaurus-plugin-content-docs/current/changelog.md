@@ -5,6 +5,10 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2024-04-15
+
+- Add `last_share`, `last_price` field to [Trade push](https://open.longportapp.com/en/docs/trade/trade-definition#websocket-notification).
+
 ## 2024-04-13
 
 - Add `remark` field to [Trade push](https://open.longportapp.com/en/docs/trade/trade-definition#websocket-notification).
