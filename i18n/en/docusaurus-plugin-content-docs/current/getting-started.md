@@ -214,7 +214,7 @@ const { Config, TradeContext } = require('longport')
 let config = Config.fromEnv()
 
 // Init config without ENV
-// let config = new Config({ app_key: "YOUR_APP_KEY", app_secret = "YOUR_APP_SECRET", access_token = "YOUR_ACCESS_TOKEN" })
+// let config = new Config({ appKey: "YOUR_APP_KEY", appSecret: "YOUR_APP_SECRET", accessToken: "YOUR_ACCESS_TOKEN" })
 
 TradeContext.new(config)
   .then((ctx) => ctx.accountBalance())
