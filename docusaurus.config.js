@@ -78,7 +78,7 @@ const config = {
             let nextVersionDocsDirPath = 'docs'
             if (isAutoGenDoc) {
               docPath = docPath.replace('--autogen.md', '.yml')
-              nextVersionDocsDirPath = 'swagger-docs'
+              nextVersionDocsDirPath = 'openapi'
             }
 
             if (locale !== 'zh-CN') {
@@ -90,7 +90,7 @@ const config = {
             } else {
               if (docPath.includes('--autogen.md')) {
                 docPath = docPath.replace('--autogen.md', '.yml')
-                nextVersionDocsDirPath = 'swagger-docs'
+                nextVersionDocsDirPath = 'openapi'
               }
               return `https://github.com/longportapp/openapi-website/edit/main/${nextVersionDocsDirPath}/${docPath}`
             }
@@ -106,6 +106,7 @@ const config = {
         },
       }),
     ],
+    ['redocusaurus', {}],
   ],
 
   themeConfig:
