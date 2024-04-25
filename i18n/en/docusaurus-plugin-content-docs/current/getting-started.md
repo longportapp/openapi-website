@@ -392,7 +392,7 @@ Before running, visit the [Developer Center](https://open.longportapp.com/accoun
 
 If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
 
-<https://longportapp.com/download>
+https://longportapp.com/download
 :::
 
 When you have the correct Quote authority, it might look like this:
@@ -1035,15 +1035,15 @@ The above example has fully demonstrated how to use the SDK to access the OpenAP
 
 We provide the complete code of the above examples in the GitHub repository of LongPort OpenAPI Python SDK, and we will continue to add or update it later.
 
-<https://github.com/longportapp/openapi-sdk/tree/master/examples>
+https://github.com/longportapp/openapi-sdk/tree/master/examples
 
 ## SDK API Document
 
 For detailed SDK API document, please visit:
 
-<https://longportapp.github.io/openapi-sdk/>
+https://longportapp.github.io/openapi-sdk/
 
 ## Contact & Feedback
 
-- GitHub Issues: <https://github.com/longportapp/openapi-sdk>
-- Join **Discord** LongPort OpenAPI Server: <https://discord.gg/2gUTSCS6>
+- GitHub Issues: https://github.com/longportapp/openapi-sdk
+- Join **Discord** LongPort OpenAPI Server: https://discord.gg/2gUTSCS6

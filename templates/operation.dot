@@ -26,8 +26,7 @@ Code samples
 <table className="http-basic">
 <tbody>
 <tr><td className="http-basic-key">HTTP Method</td><td>{{= data.methodUpper }}</td></tr>
-<tr><td className="http-basic-key">HTTP URL</td><td>{{=data.method.path}} {{? data.operation.deprecated }}<div className="http-operation-deprecated">Deprecated</div>{{?}}
-</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>{{=data.method.path}} {{? data.operation.deprecated }}<div className="http-operation-deprecated">Deprecated</div>{{?}}</td></tr>
 </tbody>
 </table>
 

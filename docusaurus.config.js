@@ -1,6 +1,7 @@
 // @ts-check
-const lightCodeTheme = require('prism-react-renderer/themes/github')
-const darkCodeTheme = require('prism-react-renderer/themes/dracula')
+import { themes } from 'prism-react-renderer'
+import tailwindcss from 'tailwindcss'
+import autoprefixer from 'autoprefixer'
 const i18n = require('./i18n/config')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -27,14 +28,15 @@ const config = {
   },
   favicon: 'https://pub.lbkrs.com/static/offline/202211/qohHsXzN9qtQ23ox/longport_favicon.png',
   plugins: [
-    'docusaurus-plugin-sass',
-    function docusaurusTailwindCss() {
+    // 'docusaurus-plugin-openapi',
+    async function tailwind() {
       return {
-        name: 'docusaurus-tailwindcss',
-        configurePostCss: function configurePostCss(postCssOptions) {
-          postCssOptions.plugins.push(require('tailwindcss'))
-          postCssOptions.plugins.push(require('autoprefixer'))
-          return postCssOptions
+        name: 'tailwindcss',
+        configurePostCss(postcssOptions) {
+          // Appends TailwindCSS and AutoPrefixer.
+          postcssOptions.plugins.push(tailwindcss)
+          postcssOptions.plugins.push(autoprefixer)
+          return postcssOptions
         },
       }
     },
@@ -60,6 +62,7 @@ const config = {
         },
       }
     },
+    'docusaurus-plugin-sass',
   ],
   presets: [
     [
@@ -187,8 +190,8 @@ const config = {
         ],
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: themes.github,
+        darkTheme: themes.dracula,
         additionalLanguages: ['shell-session', 'http', 'protobuf', 'rust', 'java', 'go'],
       },
       algolia: {

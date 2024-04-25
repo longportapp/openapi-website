@@ -392,7 +392,7 @@ go run ./
 
 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 
-<https://longportapp.com/download>
+https://longportapp.com/download
 :::
 
 當你有正確的行情權限，看起來可能會是這樣：
@@ -955,15 +955,15 @@ Order {
 
 我們在 LongPort OpenAPI Python SDK 的 GitHub 倉庫中提供了上面幾個例子的完整代碼，當然後期我們也會持續往裡面補充或更新。
 
-<https://github.com/longportapp/openapi-sdk/tree/master/examples>
+https://github.com/longportapp/openapi-sdk/tree/master/examples
 
 ## SDK API 文檔
 
 SDK 的詳細 API 文檔請訪問：
 
-<https://longportapp.github.io/openapi-sdk/>
+https://longportapp.github.io/openapi-sdk/
 
-- GitHub Issues: <https://github.com/longportapp/openapi-sdk/>
+- GitHub Issues: https://github.com/longportapp/openapi-sdk/
 
 - 微信溝通羣（已滿）：
 
