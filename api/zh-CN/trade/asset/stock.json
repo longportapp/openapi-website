@@ -1,0 +1,190 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "该接口用于获取包括账户、股票代码、持仓股数、可用股数、持仓均价（按账户设置计算均价方式）、币种在内的股票持仓信息",
+    "version": "v1",
+    "title": "获取股票持仓"
+  },
+  "paths": {
+    "/v1/asset/stock": {
+      "get": {
+        "summary": "获取股票持仓",
+        "description": "该接口用于获取包括账户、股票代码、持仓股数、可用股数、持仓均价（按账户设置计算均价方式）、币种在内的股票持仓信息",
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`",
+            "required": false,
+            "schema": {
+              "type": "string[]"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "返回成功",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/stock_rsp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "内部错误"
+          }
+        },
+        "request_body": {
+          "type": "python",
+          "value": "# 获取股票持仓\n# https://open.longportapp.com/docs/trade/asset/stock\nfrom longport.openapi import TradeContext, Config\n\nconfig = Config.from_env()\nctx = TradeContext(config)\nresp = ctx.stock_positions()\nprint(resp)\n"
+        },
+        "response_body": {
+          "code": 0,
+          "data": {
+            "list": [
+              {
+                "account_channel": "lb",
+                "stock_info": [
+                  {
+                    "symbol": "700.HK",
+                    "symbol_name": "腾讯控股",
+                    "currency": "HKD",
+                    "quantity": "650",
+                    "market": "HK",
+                    "available_quantity": "-450",
+                    "cost_price": "457.53",
+                    "init_quantity": "214"
+                  },
+                  {
+                    "symbol": "9991.HK",
+                    "symbol_name": "宝尊电商-SW",
+                    "currency": "HKD",
+                    "market": "HK",
+                    "quantity": "200",
+                    "available_quantity": "0",
+                    "cost_price": "32.25",
+                    "init_quantity": "214"
+                  },
+                  {
+                    "symbol": "TCEHY.US",
+                    "symbol_name": "腾讯控股 (ADR)",
+                    "currency": "USD",
+                    "market": "US",
+                    "quantity": "10",
+                    "available_quantity": "10",
+                    "init_quantity": "18"
+                  },
+                  {
+                    "symbol": "2628.HK",
+                    "symbol_name": "中国人寿",
+                    "currency": "HKD",
+                    "market": "HK",
+                    "quantity": "9000",
+                    "available_quantity": "0",
+                    "init_quantity": "8000"
+                  },
+                  {
+                    "symbol": "5.HK",
+                    "symbol_name": "汇丰控股",
+                    "currency": "HKD",
+                    "market": "HK",
+                    "quantity": "2400",
+                    "available_quantity": "2000",
+                    "init_quantity": "2000"
+                  },
+                  {
+                    "symbol": "BABA.US",
+                    "symbol_name": "阿里巴巴",
+                    "currency": "USD",
+                    "market": "US",
+                    "quantity": "2000209",
+                    "available_quantity": "2000209",
+                    "init_quantity": "214"
+                  },
+                  {
+                    "symbol": "2.HK",
+                    "symbol_name": "中电控股",
+                    "currency": "HKD",
+                    "market": "HK",
+                    "quantity": "2000",
+                    "available_quantity": "2000",
+                    "init_quantity": "2000"
+                  },
+                  {
+                    "symbol": "NOK.US",
+                    "symbol_name": "诺基亚",
+                    "currency": "USD",
+                    "market": "US",
+                    "quantity": "1",
+                    "available_quantity": "0",
+                    "init_quantity": "1"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "stock_rsp": {
+        "properties": {
+          "list": {
+            "type": "array",
+            "description": "股票持仓信息",
+            "required": ["account_channel"],
+            "properties": {
+              "account_channel": {
+                "type": "string",
+                "description": "账户类型"
+              },
+              "stock_info": {
+                "type": "array",
+                "description": "股票列表",
+                "required": ["symbol", "quantity", "symbol_name", "currency", "cost_price", "market"],
+                "properties": {
+                  "symbol": {
+                    "type": "string",
+                    "description": "股票代码"
+                  },
+                  "symbol_name": {
+                    "type": "string",
+                    "description": "股票名称"
+                  },
+                  "quantity": {
+                    "type": "string",
+                    "description": "持仓股数"
+                  },
+                  "available_quantity": {
+                    "type": "string",
+                    "description": "可用股数"
+                  },
+                  "currency": {
+                    "type": "string",
+                    "description": "币种"
+                  },
+                  "market": {
+                    "type": "string",
+                    "description": "市场"
+                  },
+                  "cost_price": {
+                    "type": "string",
+                    "description": "成本价格 (具体根据客户端选择平均买入还是摊薄成本)"
+                  },
+                  "init_quantity": {
+                    "type": "string",
+                    "description": "开盘前初始持仓"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

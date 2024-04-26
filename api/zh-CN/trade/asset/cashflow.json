@@ -1,0 +1,162 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "该接口用于获取资金流入/流出方向、资金类别、资金金额、发生时间、关联股票代码和资金流水说明信息",
+    "version": "v1",
+    "title": "获取资金流水"
+  },
+  "paths": {
+    "/v1/asset/cashflow": {
+      "get": {
+        "summary": "获取资金流水",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "start_time",
+            "description": "开始时间，时间戳，以 `秒` 为单位，例如：`1650037563`",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "end_time",
+            "description": "结束时间，时间戳，以 `秒` 为单位，例如：`1650747581`",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "business_type",
+            "description": "资金类型 <br/><br/> <b>可选值:</b> <br/>`1` - 现金 <br/>`2` - 股票<br/> `3` - 基金",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "symbol",
+            "description": "标的代码，例如：`AAPL.US`",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "description": "起始页 <br/><br/><b>默认值:</b> `1`  <br/><b>数据校验规则:</b><br/> <b>取值范围:</b> `>=1`",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "description": "每页大小 <br/><br/><b>默认值:</b> `50` <br/><b>数据校验规则:</b> `1~10000`",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "返回成功",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/cashflow_rsp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "内部错误"
+          }
+        },
+        "request_body": {
+          "type": "python",
+          "value": "# 获取资金流水\n# https://open.longportapp.com/docs/trade/asset/cashflow\nfrom datetime import datetime\nfrom longport.openapi import TradeContext, Config\n\nconfig = Config.from_env()\nctx = TradeContext(config)\nresp = ctx.cash_flow(\n    start_at = datetime(2022, 5, 9),\n    end_at = datetime(2022, 5, 12),\n)\nprint(resp)\n"
+        },
+        "response_body": {
+          "code": 0,
+          "data": {
+            "list": [
+              {
+                "transaction_flow_name": "股票买入成交",
+                "direction": 1,
+                "balance": "-248.60",
+                "currency": "USD",
+                "business_time": "1621507957",
+                "symbol": "AAPL.US",
+                "description": "AAPL"
+              },
+              {
+                "transaction_flow_name": "股票买入成交",
+                "direction": 1,
+                "balance": "-125.16",
+                "currency": "USD",
+                "business_time": "1621504824",
+                "symbol": "AAPL.US",
+                "description": "AAPL"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "cashflow_rsp": {
+        "properties": {
+          "list": {
+            "type": "object[]",
+            "description": "流水信息",
+            "required": ["transaction_flow_name", "direction", "business_type", "balance", "currency", "business_time"],
+            "properties": {
+              "transaction_flow_name": {
+                "type": "string",
+                "description": "流水名称"
+              },
+              "direction": {
+                "type": "string",
+                "description": "流出方向 <br/><br/><b>可选值:</b> <br/>`1` - 流出 <br/>  `2` - 流入"
+              },
+              "business_type": {
+                "type": "string",
+                "description": "资金类别 <br/><br/><b>可选值:</b> <br/>`1` - 现金 <br/> `2` - 股票 <br/> `3` - 基金"
+              },
+              "balance": {
+                "type": "string",
+                "description": "资金金额"
+              },
+              "currency": {
+                "type": "string",
+                "description": "资金币种"
+              },
+              "business_time": {
+                "type": "string",
+                "description": "业务时间"
+              },
+              "symbol": {
+                "type": "string",
+                "description": "关联股票代码信息"
+              },
+              "description": {
+                "type": "string",
+                "description": "资金流水说明"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

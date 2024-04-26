@@ -6,6 +6,8 @@ info:
 paths:
   /v1/trade/order:
     get:
+      description: "該接口用於訂單詳情查詢",
+      summary: "訂單詳情",
       access: "交易權限"
       parameters:
         - name: "order_id"

@@ -1,0 +1,111 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "该接口用于获取当日订单的成交明细",
+    "version": "v1",
+    "title": "获取当日成交明细"
+  },
+  "paths": {
+    "/v1/trade/execution/today": {
+      "get": {
+        "description": "该接口用于获取当日订单的成交明细",
+        "summary": "获取当日成交明细",
+        "access": "交易权限",
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order_id",
+            "in": "query",
+            "required": false,
+            "description": "订单 ID，用于指定订单 ID 查询，例如：`701276261045858304`",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/today_executions_rsp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "查询失败，请求参数错误。"
+          }
+        },
+        "request_body": {
+          "type": "python",
+          "value": "from longport.openapi import TradeContext, Config\n\nconfig = Config.from_env()\nctx = TradeContext(config)\n\nresp = ctx.today_executions(symbol = \"700.HK\")\nprint(resp)\n"
+        },
+        "response_body": {
+          "code": 0,
+          "message": "success",
+          "data": {
+            "trades": [
+              {
+                "order_id": "693664675163312128",
+                "price": "388",
+                "quantity": "100",
+                "symbol": "700.HK",
+                "trade_done_at": "1648611351",
+                "trade_id": "693664675163312128-1648611351433741210"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "today_executions_rsp": {
+        "properties": {
+          "trades": {
+            "type": "array",
+            "description": "成交明细信息",
+            "required": ["order_id", "trade_id", "symbol", "trade_done_at", "quantity", "price"],
+            "properties": {
+              "order_id": {
+                "type": "string",
+                "description": "订单 ID"
+              },
+              "trade_id": {
+                "type": "string",
+                "description": "成交 ID"
+              },
+              "symbol": {
+                "type": "string",
+                "description": "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
+              },
+              "trade_done_at": {
+                "type": "string",
+                "description": "成交时间，格式为时间戳 (秒)"
+              },
+              "quantity": {
+                "type": "string",
+                "description": "成交数量"
+              },
+              "price": {
+                "type": "string",
+                "description": "成交价格"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

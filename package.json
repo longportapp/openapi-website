@@ -32,16 +32,18 @@
     "ahooks": "^3.3.10",
     "autoprefixer": "^10.4.19",
     "classnames": "^2.3.1",
+    "docusaurus-preset-openapi": "^0.7.4",
+    "file-loader": "^6.2.0",
     "js-cookie": "^3.0.1",
     "postcss": "^8.4.38",
     "prism-react-renderer": "^2",
     "react": "^18.2",
     "react-dom": "^18.2",
     "react-photo-view": "^1.0.0",
-    "redocusaurus": "^2.0.2",
     "sass": "^1.75.0",
     "sass-loader": "^14.2.1",
-    "tailwindcss": "^3.4.3"
+    "tailwindcss": "^3.4.3",
+    "url-loader": "^4.1.1"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.2.1",

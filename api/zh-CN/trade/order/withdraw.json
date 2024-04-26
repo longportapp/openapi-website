@@ -1,0 +1,45 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "该接口用于订单撤销",
+    "version": "v1",
+    "title": "撤销订单"
+  },
+  "paths": {
+    "/v1/trade/order": {
+      "delete": {
+        "description": "该接口用于订单撤销",
+        "summary": "撤销订单",
+        "access": "交易权限",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "query",
+            "description": "订单 ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "提交成功，订单已委托。"
+          },
+          "400": {
+            "description": "撤单被拒绝，请求参数错误。"
+          }
+        },
+        "request_body": {
+          "type": "python",
+          "value": "from longport.openapi import TradeContext, Config\n\nconfig = Config.from_env()\nctx = TradeContext(config)\n\nctx.cancel_order(\"709043056541253632\")\n"
+        },
+        "response_body": {
+          "code": 0,
+          "message": "success",
+          "data": {}
+        }
+      }
+    }
+  }
+}

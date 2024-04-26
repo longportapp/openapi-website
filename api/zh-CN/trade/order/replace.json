@@ -1,0 +1,108 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "该接口用于修改订单的价格，数量",
+    "version": "v1",
+    "title": "修改订单"
+  },
+  "paths": {
+    "/v1/trade/order": {
+      "put": {
+        "description": "该接口用于修改订单的价格，数量",
+        "summary": "修改订单",
+        "access": "交易权限",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "query",
+            "description": "订单 ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "quantity",
+            "in": "query",
+            "description": "改单数量，例如：`200`",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "price",
+            "in": "query",
+            "required": false,
+            "description": "改单价格，例如：`388.5`<br/><br/> `LO` / `ELO` / `ALO` / `ODD` / `LIT` 订单必填",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "trigger_price",
+            "in": "query",
+            "required": false,
+            "description": "触发价格，例如：`388.5`<br/><br/> `LIT` / `MIT` 订单必填",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit_offset",
+            "in": "query",
+            "required": false,
+            "description": "指定价差<br/><br/> `TSLPAMT` / `TSLPPCT` 订单必填",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "trailing_amount",
+            "in": "query",
+            "required": false,
+            "description": "跟踪金额<br/><br/> `TSLPAMT` / `TSMAMT` 订单必填",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "trailing_percent",
+            "in": "query",
+            "required": false,
+            "description": "跟踪涨跌幅<br/><br/> `TSLPPCT` / `TSMPCT` 订单必填",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "remark",
+            "in": "query",
+            "required": false,
+            "description": "备注 (最大 64 字符)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "提交成功，订单已委托。"
+          },
+          "400": {
+            "description": "下单被拒绝，请求参数错误。"
+          }
+        },
+        "request_body": {
+          "type": "python",
+          "value": "from decimal import Decimal\nfrom longport.openapi import TradeContext, Config\n\nconfig = Config.from_env()\nctx = TradeContext(config)\n\nctx.replace_order(\n    order_id = \"709043056541253632\",\n    quantity = 100,\n    price = Decimal(\"100\"),\n)\n"
+        },
+        "response_body": {
+          "code": 0,
+          "message": "success",
+          "data": {}
+        }
+      }
+    }
+  }
+}

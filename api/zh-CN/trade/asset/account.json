@@ -1,0 +1,171 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "该接口用于获取用户每个币种可用、可取、冻结、待结算金额、在途资金 (基金申购赎回) 信息",
+    "version": "v1",
+    "title": "获取账户资金"
+  },
+  "paths": {
+    "/v1/asset/account": {
+      "get": {
+        "summary": "获取账户资金",
+        "parameters": [
+          {
+            "name": "currency",
+            "in": "query",
+            "description": "币种（HKD、USD、CNH）",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "返回成功",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/accountcash_rsp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "内部错误"
+          }
+        },
+        "request_body": {
+          "type": "python",
+          "value": "# 获取账户资金\n# https://open.longportapp.com/docs/trade/asset/account\nfrom longport.openapi import TradeContext, Config\n\nconfig = Config.from_env()\nctx = TradeContext(config)\nresp = ctx.account_balance()\nprint(resp)\n"
+        },
+        "response_body": {
+          "code": 0,
+          "data": {
+            "list": [
+              {
+                "total_cash": "1759070010.72",
+                "max_finance_amount": "977582000",
+                "remaining_finance_amount": "0",
+                "risk_level": "1",
+                "margin_call": "2598051051.50",
+                "currency": "HKD",
+                "net_assets": "24145.90",
+                "init_margin": "1540.09",
+                "maintenance_margin": "1540.09",
+                "cash_infos": [
+                  {
+                    "withdraw_cash": "97592.30",
+                    "available_cash": "195902464.37",
+                    "frozen_cash": "11579339.13",
+                    "settling_cash": "207288537.81",
+                    "currency": "HKD"
+                  },
+                  {
+                    "withdraw_cash": "199893416.74",
+                    "available_cash": "199893416.74",
+                    "frozen_cash": "28723.76",
+                    "settling_cash": "-276806.51",
+                    "currency": "USD"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "accountcash_rsp": {
+        "properties": {
+          "list": {
+            "type": "array",
+            "description": "账户资金信息",
+            "required": [
+              "total_cash",
+              "max_finance_amount",
+              "remaining_finance_amount",
+              "risk_level",
+              "margin_call",
+              "currency",
+              "net_assets",
+              "init_margin",
+              "maintenance_margin"
+            ],
+            "properties": {
+              "total_cash": {
+                "type": "string",
+                "description": "现金总额"
+              },
+              "max_finance_amount": {
+                "type": "string",
+                "description": "最大融资金额"
+              },
+              "remaining_finance_amount": {
+                "type": "string",
+                "description": "剩余融资金额"
+              },
+              "risk_level": {
+                "type": "string",
+                "description": "风控等级 <br/> <br/> <b>可选值:</b><br/> `0` - 安全 <br/> `1` - 中风险<br/> `2` - 预警<br/> `3` - 危险"
+              },
+              "margin_call": {
+                "type": "string",
+                "description": "追缴保证金"
+              },
+              "net_assets": {
+                "type": "string",
+                "description": "净资产"
+              },
+              "init_margin": {
+                "type": "string",
+                "description": "初始保证金"
+              },
+              "maintenance_margin": {
+                "type": "string",
+                "description": "维持保证金"
+              },
+              "currency": {
+                "type": "string",
+                "description": "币种"
+              },
+              "market": {
+                "type": "string",
+                "description": "市场"
+              },
+              "cash_infos": {
+                "type": "array",
+                "description": "现金详情",
+                "required": ["currency", "withdraw_cash", "available_cash", "frozen_cash", "settling_cash"],
+                "properties": {
+                  "withdraw_cash": {
+                    "type": "string",
+                    "description": "可提现金"
+                  },
+                  "available_cash": {
+                    "type": "string",
+                    "description": "可用现金"
+                  },
+                  "frozen_cash": {
+                    "type": "string",
+                    "description": "冻结现金"
+                  },
+                  "settling_cash": {
+                    "type": "string",
+                    "description": "待结算现金"
+                  },
+                  "currency": {
+                    "type": "string",
+                    "description": "币种"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

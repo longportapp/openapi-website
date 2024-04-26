@@ -1,12 +1,36 @@
 // @ts-check
 import { themes } from 'prism-react-renderer'
 import tailwindcss from 'tailwindcss'
+import path from 'path'
 import autoprefixer from 'autoprefixer'
 const i18n = require('./i18n/config')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-
 const openapiDomain = 'https://open.longportapp.com'
 const communityDomain = 'https://longportapp.com'
+
+const editUrl = ({ locale, docPath }) => {
+  const isAutoGenDoc = docPath.includes('--autogen.md')
+
+  let nextVersionDocsDirPath = 'docs'
+  if (isAutoGenDoc) {
+    docPath = docPath.replace('--autogen.md', '.yml')
+    nextVersionDocsDirPath = 'openapi'
+  }
+
+  if (locale !== 'zh-CN') {
+    let targetPath = `i18n/${locale}/docusaurus-plugin-content-docs/current/${docPath}`
+    if (isAutoGenDoc) {
+      targetPath = `${nextVersionDocsDirPath}/${locale}/${docPath}`
+    }
+    return `https://github.com/longportapp/openapi-website/edit/main/${targetPath}`
+  } else {
+    if (docPath.includes('--autogen.md')) {
+      docPath = docPath.replace('--autogen.md', '.yml')
+      nextVersionDocsDirPath = 'openapi'
+    }
+    return `https://github.com/longportapp/openapi-website/edit/main/${nextVersionDocsDirPath}/${docPath}`
+  }
+}
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -21,14 +45,13 @@ const config = {
   markdown: {
     mermaid: true,
   },
-  themes: ['@docusaurus/theme-mermaid'],
+  // themes: ['@docusaurus/theme-mermaid'],
   i18n,
   customFields: {
     isDev: process.env.STAGE === 'dev',
   },
   favicon: 'https://pub.lbkrs.com/static/offline/202211/qohHsXzN9qtQ23ox/longport_favicon.png',
   plugins: [
-    // 'docusaurus-plugin-openapi',
     async function tailwind() {
       return {
         name: 'tailwindcss',
@@ -47,6 +70,9 @@ const config = {
           if (isServer) return {}
           const docsAssetPrefix = 'openapi-website'
           return {
+            resolve: {
+              fallback: { url: false },
+            },
             output: {
               filename: `assets/js/${docsAssetPrefix}_[name].[contenthash:8].js`,
               chunkFilename: `assets/js/${docsAssetPrefix}_[name].[contenthash:8].js`,
@@ -63,38 +89,23 @@ const config = {
       }
     },
     'docusaurus-plugin-sass',
+    [
+      'docusaurus-plugin-openapi',
+      {
+        id: 'multi-spec',
+        path: 'api',
+        routeBasePath: 'docs/api',
+      },
+    ],
   ],
   presets: [
     [
-      'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
+      'docusaurus-preset-openapi',
+      /** @type {import('docusaurus-preset-openapi').Options} */
+      {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // todo I18n lang should redirect other dir
-          editUrl: ({ locale, docPath }) => {
-            const isAutoGenDoc = docPath.includes('--autogen.md')
-
-            let nextVersionDocsDirPath = 'docs'
-            if (isAutoGenDoc) {
-              docPath = docPath.replace('--autogen.md', '.yml')
-              nextVersionDocsDirPath = 'openapi'
-            }
-
-            if (locale !== 'zh-CN') {
-              let targetPath = `i18n/${locale}/docusaurus-plugin-content-docs/current/${docPath}`
-              if (isAutoGenDoc) {
-                targetPath = `${nextVersionDocsDirPath}/${locale}/${docPath}`
-              }
-              return `https://github.com/longportapp/openapi-website/edit/main/${targetPath}`
-            } else {
-              if (docPath.includes('--autogen.md')) {
-                docPath = docPath.replace('--autogen.md', '.yml')
-                nextVersionDocsDirPath = 'openapi'
-              }
-              return `https://github.com/longportapp/openapi-website/edit/main/${nextVersionDocsDirPath}/${docPath}`
-            }
-          },
+          editUrl,
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
           sidebarCollapsed: false,
@@ -104,14 +115,13 @@ const config = {
         theme: {
           customCss: [require.resolve('./src/css/custom.scss')],
         },
-      }),
+      },
     ],
-    ['redocusaurus', {}],
   ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
+    {
       metadata: [
         {
           name: 'og:image',
@@ -193,7 +203,7 @@ const config = {
       prism: {
         theme: themes.github,
         darkTheme: themes.dracula,
-        additionalLanguages: ['shell-session', 'http', 'protobuf', 'rust', 'java', 'go'],
+        additionalLanguages: ['shell-session', 'http', 'protobuf', 'rust', 'java', 'scala', 'go'],
       },
       algolia: {
         // The application ID provided by Algolia
@@ -222,7 +232,7 @@ const config = {
 
         //... other Algolia params
       },
-    }),
+    },
 }
 
 module.exports = config

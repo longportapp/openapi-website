@@ -1,0 +1,256 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "管理自选股分组",
+    "version": "v1",
+    "title": "自选股分组"
+  },
+  "paths": {
+    "/v1/watchlist/groups": {
+      "get": {
+        "summary": "获取自选股分组",
+        "responses": {
+          "200": {
+            "description": "返回成功",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/groups_response"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "内部错误"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Python",
+            "source": "from longport.openapi import QuoteContext, Config\n\nconfig = Config.from_env()\nctx = QuoteContext(config)\nresp = ctx.watchlist()\nprint(resp)\n"
+          }
+        ],
+        "responseBody": {
+          "code": 0,
+          "data": {
+            "groups": [
+              {
+                "id": 28020,
+                "name": "all",
+                "securities": [
+                  {
+                    "symbol": "700.HK",
+                    "market": "HK",
+                    "name": "腾讯控股",
+                    "watched_price": "364.4",
+                    "watched_at": 1652855022
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "post": {
+        "summary": "创建自选股分组",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "分组名称，例如 `信息产业组`",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "securities",
+            "in": "query",
+            "description": "股票列表，例如 `[\"BABA.US\",\"AAPL.US\"]`<br /> 分组下股票的展示顺序，与此列表的顺序一致<br /> 如果不传此参数，则创建一个空的分组",
+            "required": false,
+            "schema": {
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "返回成功",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/create_group_response"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "内部错误"
+          }
+        },
+        "requestBody": {
+          "type": "python",
+          "value": "from longport.openapi import QuoteContext, Config\n\nconfig = Config.from_env()\nctx = QuoteContext(config)\ngroup_id = ctx.create_watchlist_group(name = \"Watchlist1\", securities = [\"700.HK\", \"AAPL.US\"])\nprint(group_id)\n"
+        },
+        "responseBody": {
+          "code": 0,
+          "data": {
+            "id": 10086
+          }
+        }
+      },
+      "delete": {
+        "summary": "删除自选股分组",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "分组 ID，例如 `10086`",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "purge",
+            "in": "query",
+            "description": "是否清除分组下的股票<br /> 为 `true`，则此分组下的股票将被取消关注<br /> 为 `false`，则此分组下的股票会保留在`全部`分组中",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "返回成功"
+          },
+          "500": {
+            "description": "内部错误"
+          }
+        },
+        "request_body": {
+          "type": "python",
+          "value": "from longport.openapi import QuoteContext, Config\n\nconfig = Config.from_env()\nctx = QuoteContext(config)\nctx.delete_watchlist_group(10086)\n"
+        },
+        "response_body": {
+          "code": 0
+        }
+      },
+      "put": {
+        "summary": "更新自选股分组",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "分组 ID，例如 `10086`",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "分组名称，例如 `信息产业组`<br /> 如果不传递此参数，则分组名称不会更新",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "securities",
+            "in": "query",
+            "description": "股票列表，例如 `[\"BABA.US\",\"AAPL.US\"]`<br /> 配合下面的 `mode` 参数，可完成添加股票、移除股票、对关注列表进行排序等操作",
+            "required": false,
+            "schema": {
+              "type": "array"
+            }
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "description": "操作方法\n\n**可选值:**\n\n- `add` - 添加\n- `remove` - 移除\n- `replace` - 替换\n\n选 `add` 时，将上面列表中的股票依序添加到此分组，选 `remove` 时，将上面列表中的股票从此分组中移除。选 `replace` 时，将上面列表中的股票全量覆盖此分组下的股票<br /> 假如原来分组中的股票为 `APPL.US, BABA.US,\nTSLA.US`，使用 `[\"BABA.US\",\"AAPL.US\",\"MSFT.US\"]`。更新后变为 `[\"BABA.US\",\"AAPL.US\",\"MSFT.US\"]`，对比之前，移除了 `TSLA.US`，添加了 `MSFT.US`，`BABA.US,AAPL.US` 调整了顺序\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "返回成功"
+          },
+          "500": {
+            "description": "内部错误"
+          }
+        },
+        "request_body": {
+          "type": "python",
+          "value": "from longport.openapi import QuoteContext, Config, SecuritiesUpdateMode\n\nconfig = Config.from_env()\nctx = QuoteContext(config)\nctx.update_watchlist_group(10086, name = \"WatchList2\", securities = [\"700.HK\", \"AAPL.US\"], SecuritiesUpdateMode.Replace)\n"
+        },
+        "response_body": {
+          "code": 0
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "create_group_response": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "分组 ID"
+          }
+        }
+      },
+      "groups_response": {
+        "properties": {
+          "groups": {
+            "type": "array",
+            "description": "分组",
+            "required": ["id", "name", "securities"],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "分组 ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "名称"
+              },
+              "securities": {
+                "type": "array",
+                "description": "股票",
+                "required": ["symbol", "market", "name", "watched_price", "watched_at"],
+                "properties": {
+                  "symbol": {
+                    "type": "string",
+                    "description": "代码"
+                  },
+                  "market": {
+                    "type": "string",
+                    "description": "市场"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "名称"
+                  },
+                  "watched_price": {
+                    "type": "string",
+                    "description": "关注时的价格"
+                  },
+                  "watched_at": {
+                    "type": "integer",
+                    "description": "关注时间"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
