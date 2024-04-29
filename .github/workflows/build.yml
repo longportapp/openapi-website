@@ -15,14 +15,13 @@ jobs:
         with:
           fetch-depth: 1
 
-      - uses: actions/setup-node@v3
+      - uses: oven-sh/setup-bun@v1
         with:
-          node-version: 22
-          cache: yarn
+          bun-version: latest
 
-      - name: install dependency npm
-        run: yarn
+      - name: Bun Install
+        run: bun install
 
-      - name: build canary env dist file
+      - name: Build Canary
         run: |
-          yarn build:canary
+          bun run build:canary

@@ -23,17 +23,15 @@ jobs:
         run: |
           ${{github.workspace}}/ossutil --version
 
-      - uses: actions/setup-node@v3
+      - uses: oven-sh/setup-bun@v1
         with:
-          node-version: 22
-          cache: yarn
+          bun-version: latest
 
-      - name: install dependency npm
-        run: yarn
+      - name: Bun Install
+        run: bun install
 
-      - name: build canary env dist file
-        run: |
-          yarn build:canary
+      - name: Build Canary
+        run: bun run build:canary
 
       - name: upload canary dist to oss
         run: |

@@ -1,9 +1,7 @@
 // @ts-check
 import { themes } from 'prism-react-renderer'
-import tailwindcss from 'tailwindcss'
-import autoprefixer from 'autoprefixer'
+
 const i18n = require('./i18n/config')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const openapiDomain = 'https://open.longportapp.com'
 const communityDomain = 'https://longportapp.com'
@@ -28,45 +26,14 @@ const config = {
   },
   favicon: 'https://pub.lbkrs.com/static/offline/202211/qohHsXzN9qtQ23ox/longport_favicon.png',
   plugins: [
+    require('./config/tailwindcss'),
+    require('./config/webpack'),
     // 'docusaurus-plugin-openapi',
-    async function tailwind() {
-      return {
-        name: 'tailwindcss',
-        configurePostCss(postcssOptions) {
-          // Appends TailwindCSS and AutoPrefixer.
-          postcssOptions.plugins.push(tailwindcss)
-          postcssOptions.plugins.push(autoprefixer)
-          return postcssOptions
-        },
-      }
-    },
-    function docsWebpackConfig(context, options) {
-      return {
-        name: 'lb-docs-webpack-plugin',
-        configureWebpack(config, isServer, utils, content) {
-          if (isServer) return {}
-          const docsAssetPrefix = 'openapi-website'
-          return {
-            output: {
-              filename: `assets/js/${docsAssetPrefix}_[name].[contenthash:8].js`,
-              chunkFilename: `assets/js/${docsAssetPrefix}_[name].[contenthash:8].js`,
-            },
-            plugins: [
-              new MiniCssExtractPlugin({
-                filename: `assets/css/${docsAssetPrefix}_[name].[contenthash:8].css`,
-                chunkFilename: `assets/css/${docsAssetPrefix}_[name].[contenthash:8].css`,
-                ignoreOrder: true,
-              }),
-            ],
-          }
-        },
-      }
-    },
     'docusaurus-plugin-sass',
   ],
   presets: [
     [
-      'classic',
+      '@docusaurus/preset-classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
@@ -102,7 +69,7 @@ const config = {
         },
         blog: false,
         theme: {
-          customCss: [require.resolve('./src/css/custom.scss')],
+          customCss: require.resolve('./src/css/custom.scss'),
         },
       }),
     ],
