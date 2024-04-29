@@ -226,11 +226,11 @@ definitions:
           trailing_amount:
             type: "string"
             required: true
-            description: "`TSMAMT` / `TSLPAMT` order trailing amount.<br/><br/>When the order is not `TSMAMT` / `TSLPAMT` order, value is empty string"
+            description: "`TSLPAMT` order trailing amount.<br/><br/>When the order is not `TSLPAMT` order, value is empty string"
           trailing_percent:
             type: "string"
             required: true
-            description: "`TSMPCT` / `TSLPPCT` order trailing percent.<br/><br/>When the order is not `TSMPCT` / `TSLPPCT` order, value is empty string"
+            description: "`TSLPPCT` order trailing percent.<br/><br/>When the order is not `TSLPPCT` order, value is empty string"
           limit_offset:
             type: "string"
             required: true

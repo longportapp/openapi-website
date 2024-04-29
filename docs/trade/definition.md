@@ -21,8 +21,6 @@ sidebar_position: 2
 | MIT     | 触价市价单                  |
 | TSLPAMT | 跟踪止损限价单 (跟踪金额)   |
 | TSLPPCT | 跟踪止损限价单 (跟踪涨跌幅) |
-| TSMAMT  | 跟踪止损市价单 (跟踪金额)   |
-| TSMPCT  | 跟踪止损市价单 (跟踪涨跌幅) |
 | SLO     | 特殊限价单，不支持改单      |
 
 - 说明：美股支持订单类型
@@ -35,8 +33,6 @@ sidebar_position: 2
 | MIT     | 触价市价单                  |
 | TSLPAMT | 跟踪止损限价单 (跟踪金额)   |
 | TSLPPCT | 跟踪止损限价单 (跟踪涨跌幅) |
-| TSMAMT  | 跟踪止损市价单 (跟踪金额)   |
-| TSMPCT  | 跟踪止损市价单 (跟踪涨跌幅) |
 
 ## OrderStatus
 

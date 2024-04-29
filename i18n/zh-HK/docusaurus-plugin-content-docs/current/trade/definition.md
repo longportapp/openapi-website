@@ -21,8 +21,6 @@ sidebar_position: 2
 | MIT     | 觸價市價單                  |
 | TSLPAMT | 跟蹤止損限價單 (跟蹤金额)   |
 | TSLPPCT | 跟蹤止損限價單 (跟蹤漲跌幅) |
-| TSMAMT  | 跟蹤止損市價單 (跟蹤金额)   |
-| TSMPCT  | 跟蹤止損市價單 (跟蹤漲跌幅) |
 | SLO     | 特殊限價單，不支持改單      |
 
 - 說明：美股支持訂單類型
@@ -35,8 +33,6 @@ sidebar_position: 2
 | MIT     | 觸價市價單                  |
 | TSLPAMT | 跟蹤止損限價單 (跟蹤金额)   |
 | TSLPPCT | 跟蹤止損限價單 (跟蹤漲跌幅) |
-| TSMAMT  | 跟蹤止損市價單 (跟蹤金额)   |
-| TSMPCT  | 跟蹤止損市價單 (跟蹤漲跌幅) |
 
 ## OrderStatus
 

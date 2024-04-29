@@ -34,11 +34,11 @@ paths:
         - name: trailing_amount
           required: false
           description: Trailing amount<br/><br/>
-            `TSLPAMT` / `TSMAMT` Order Required
+            `TSLPAMT` Order Required
         - name: trailing_percent
           required: false
           description: Trailing percent<br/><br/>
-            `TSLPPCT` / `TSMPCT` Order Required
+            `TSLPPCT` Order Required
         - name: expire_date
           required: false
           description:

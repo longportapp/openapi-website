@@ -239,11 +239,11 @@ definitions:
           trailing_amount:
             type: "string"
             required: true
-            description: "`TSLPAMT` / `TSMAMT` 订单跟踪金额。<br/><br/>当订单不是 `TSLPAMT` / `TSMAMT` 订单时为空字符串。"
+            description: "`TSLPAMT` 订单跟踪金额。<br/><br/>当订单不是 `TSLPAMT` 订单时为空字符串。"
           trailing_percent:
             type: "string"
             required: true
-            description: "`TSLPPCT` / `TSMPCT` 订单跟踪涨跌幅。<br/><br/>当订单不是 `TSLPPCT` / `TSMPCT` 订单时为空字符串。"
+            description: "`TSLPPCT` 订单跟踪涨跌幅。<br/><br/>当订单不是 `TSLPPCT` 订单时为空字符串。"
           limit_offset:
             type: "string"
             required: true
