@@ -31,11 +31,11 @@ paths:
         - name: trailing_amount
           required: false
           description: 跟蹤金額<br/><br/>
-            `TSLPAMT` / `TSMAMT` 訂單必填
+            `TSLPAMT` 訂單必填
         - name: trailing_percent
           required: false
           description: 跟蹤漲跌幅<br/><br/>
-            `TSLPPCT` / `TSMPCT` 訂單必填
+            `TSLPPCT` 訂單必填
         - name: remark
           required: false
           description: "備註 (最大 64 字符)"
