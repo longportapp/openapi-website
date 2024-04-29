@@ -36,7 +36,7 @@ end
 
 ## 订阅
 
-订阅的 Protobuf 定义可以[查看](../quote/trade/trade-push)
+订阅的 Protobuf 定义可以[查看](../trade/trade-push)
 
 Example:
 

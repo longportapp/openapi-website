@@ -36,7 +36,7 @@ end
 
 ## Subscribe
 
-Subscribe [protobuf defination](../quote/trade/trade-push)
+Subscribe [protobuf defination](../trade/trade-push)
 
 Example:
 
