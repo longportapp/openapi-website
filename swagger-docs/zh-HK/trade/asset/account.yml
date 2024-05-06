@@ -47,6 +47,7 @@ paths:
                     "net_assets": "24145.90",
                     "init_margin": "1540.09",
                     "maintenance_margin": "1540.09",
+                    "buy_power": "1759070.12",
                     "cash_infos":
                       [
                         {
@@ -121,6 +122,10 @@ definitions:
           currency:
             type: "string"
             description: 幣種
+            required: true
+          buy_power:
+            type: "string"
+            description: 購買力
             required: true
           cash_infos:
             type: "object[]"
