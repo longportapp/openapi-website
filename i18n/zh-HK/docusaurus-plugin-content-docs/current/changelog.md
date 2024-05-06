@@ -4,6 +4,10 @@ title: 更新日誌
 slug: changelog
 sidebar_position: 7
 ---
+## 2024-05-06
+
+- 更新獲取賬戶資金接口
+  - `GET /v1/asset/account` 增加 (buy_power) 返回字段
 
 ## 2024-04-29
 
