@@ -86,6 +86,7 @@ definitions:
           - net_assets
           - init_margin
           - maintenance_margin
+          - buy_power
         properties:
           total_cash:
             type: "string"
