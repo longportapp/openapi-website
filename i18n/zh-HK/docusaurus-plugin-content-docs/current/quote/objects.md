@@ -50,6 +50,7 @@ enum TradeStatus {
 | 0   | 盤中交易 |
 | 1   | 盤前交易 |
 | 2   | 盤後交易 |
+| 3   | 夜盤交易 |
 
 #### Protobuf
 
@@ -232,21 +233,21 @@ enum CalcIndex {
 | USNSDQ           | 納斯達克指數                     |
 | USSector         | 美股行業概念                     |
 | USOption         | 美股期權                         |
-| USOptionS        | 美股特殊期權（收盤時間為 16:15）|
+| USOptionS        | 美股特殊期權（收盤時間為 16:15） |
 | HKEquity         | 港股股本證券                     |
 | HKPreIPO         | 港股暗盤                         |
 | HKWarrant        | 港股輪證                         |
 | HKHS             | 恆生指數                         |
 | HKSector         | 港股行業概念                     |
-| SHMainConnect    | 上證主板 - 互聯互通                |
-| SHMainNonConnect | 上證主板 - 非互聯互通              |
+| SHMainConnect    | 上證主板 - 互聯互通              |
+| SHMainNonConnect | 上證主板 - 非互聯互通            |
 | SHSTAR           | 科創板                           |
 | CNIX             | 滬深指數                         |
 | CNSector         | 滬深行業概念                     |
-| SZMainConnect    | 深證主板 - 互聯互通                |
-| SZMainNonConnect | 深證主板 - 非互聯互通              |
-| SZGEMConnect     | 創業板 - 互聯互通                  |
-| SZGEMNonConnect  | 創業板 - 非互聯互通                |
+| SZMainConnect    | 深證主板 - 互聯互通              |
+| SZMainNonConnect | 深證主板 - 非互聯互通            |
+| SZGEMConnect     | 創業板 - 互聯互通                |
+| SZGEMNonConnect  | 創業板 - 非互聯互通              |
 | SGMain           | 新加坡主板                       |
 | STI              | 新加坡海峽指數                   |
 | SGSector         | 新加坡行業概念                   |

@@ -45,11 +45,12 @@ enum TradeStatus {
 
 Trading Session
 
-| ID  | Description   |
-| --- | ------------- |
-| 0   | Trading       |
-| 1   | Pre-Tradeing  |
-| 2   | Post-Tradeing |
+| ID  | Description       |
+| --- | ----------------- |
+| 0   | Trading           |
+| 1   | Pre-Tradeing      |
+| 2   | Post-Tradeing     |
+| 3   | OverNight-Trading |
 
 #### Protobuf
 

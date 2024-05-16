@@ -94,3 +94,23 @@ A:
 - HK Market: 08:50:00 CST
 - CN Market: 09:00:00 CST
 - SG Market: 08:20:00 CST
+
+## Q6: 如何获取夜盘行情
+
+A:
+
+- The night market quotation needs to be actively enabled by filling in the key `need_over_night_quote`, value `true` in the `metadata` field of the authentication interface.
+
+```protobuf
+message AuthRequest {
+  string token = 1;
+  map<string, string> metadata = 2;
+}
+
+message ReconnectRequest {
+  string session_id = 1;
+  map<string, string> metadata = 2;
+}
+```
+
+- After turning on the night trading quotations, both the pull and push interfaces will be able to obtain the night trading quotations during the night trading period.
