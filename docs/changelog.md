@@ -4,6 +4,10 @@ title: 更新日志
 slug: changelog
 sidebar_position: 7
 ---
+## 2024-05-17
+
+- 新增获取标的列表接口
+  - `GET /v1/quote/get_security_list` 获取标的列表
 
 ## 2024-05-06
 
