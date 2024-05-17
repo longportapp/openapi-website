@@ -109,6 +109,10 @@ slug: overview
     <tr>
         <td><a href="./individual/watchlist_update_group">Update watched group</a></td>
     </tr>
+    <tr>
+        <td rowspan="1">Security</td>
+        <td><a href="./security/security_list">Get Security List</a></td>
+    </tr>
 </table>
 
 ### Description Of Security Code

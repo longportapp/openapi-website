@@ -4,6 +4,11 @@ title: Changelog
 slug: changelog
 sidebar_position: 7
 ---
+## 2024-05-17
+
+-	Add an interface to retrieve the list of securities
+	- `GET /v1/quote/get_security_list` to retrieve the list of securities
+
 ## 2024-05-06
 
 - Update the interface for Get Account Balance
