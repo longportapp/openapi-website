@@ -32,8 +32,6 @@ Retrieve the List of Securities
 | -------- | ------ | -------- | ------------------------------------------- |
 | market   | string | YES      | Market, currently only supports US          |
 | category | string | YES      | Market subcategory, only supports Overnight |
-| page     | int32  | YES      | Page ID, pagination must be >= 1            |
-| size     | int32  | YES      | Number of items per page, limit is [1,2000] |
 
 #### Request Example
 
@@ -42,7 +40,7 @@ from longport.openapi import QuoteContext, Config
 
 config = Config.from_env()
 ctx = QuoteContext(config)
-resp = ctx.security_list("US", "Overnight", 1, 500)
+resp = ctx.security_list("US", "Overnight")
 print(resp)
 ```
 

@@ -32,8 +32,6 @@ headingLevel: 2
 | -------- | ------ | -------- | -------------------------------- |
 | market   | string | YES      | 市场，目前只支持 US              |
 | category | string | YES      | 市场下分类，目前只支持 Overnight |
-| page     | int32  | YES      | 分页 id，分页数必须 >= 1         |
-| size     | int32  | YES      | 每页数量，数量限制为 [1,2000]    |
 
 #### Request Example
 
@@ -42,7 +40,7 @@ from longport.openapi import QuoteContext, Config
 
 config = Config.from_env()
 ctx = QuoteContext(config)
-resp = ctx.security_list("US", "Overnight", 1, 500)
+resp = ctx.security_list("US", "Overnight")
 print(resp)
 ```
 
