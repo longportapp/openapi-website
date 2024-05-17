@@ -256,7 +256,8 @@ definitions:
               Default is `UnknownOutsideRth` when the order is not a US stock<br/><br/>
               **Enum Value:**<br/>
               `RTH_ONLY` - Regular trading hour only<br/>
-              `ANY_TIME` - Any time"
+              `ANY_TIME` - Any time<br/>
+              `OVERNIGHT` - Overnight"
           remark:
             type: "string"
             description: Remark

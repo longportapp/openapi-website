@@ -5,6 +5,10 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2024-05-17
+
+- 添加夜盘交易支持
+
 ## 2024-04-29
 
 - 删除 `TSMPCT`, `TSMAMT` 订单类型

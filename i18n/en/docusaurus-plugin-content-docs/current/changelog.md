@@ -5,6 +5,10 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2024-05-17
+
+- Add support for overnight trading
+
 ## 2024-04-29
 
 - Remove `TSMPCT`, `TSMAMT` Order type
