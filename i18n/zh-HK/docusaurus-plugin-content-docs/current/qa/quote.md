@@ -94,3 +94,23 @@ A:
 - 港股市場：08:50:00 CST
 - A 股市場：09:00:00 CST
 - 新加坡市場：08:20:00 CST
+
+## Q6：如何取得夜盤行情
+
+A:
+
+- 夜盤行情需要主動開啟，方式為在鑑權接口的 `metadata` 欄位填入 key `need_over_night_quote`, value `true`。
+
+```protobuf
+message AuthRequest {
+  string token = 1;
+  map<string, string> metadata = 2;
+}
+
+message ReconnectRequest {
+  string session_id = 1;
+  map<string, string> metadata = 2;
+}
+```
+
+- 開啟夜盤行情後，拉取和推送接口都將可以在夜盤交易時段，取得到夜盤盤情。
