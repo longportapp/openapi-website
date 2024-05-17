@@ -272,7 +272,8 @@ definitions:
           當訂單不是美股時, 默認為 UnknownOutsideRth<br/><br/>
           **可選值:**<br/>
           `RTH_ONLY` - 不允許盤前盤後<br/>
-          `ANY_TIME` - 允許盤前盤後
+          `ANY_TIME` - 允許盤前盤後<br/>
+          `OVERNIGHT` - 夜盤
       remark:
         type: "string"
         description: 備註

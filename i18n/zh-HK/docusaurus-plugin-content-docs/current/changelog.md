@@ -18,6 +18,14 @@ sidebar_position: 7
 
 - 刪除 `TSMPCT`, `TSMAMT` 訂單類型
 
+## 2024-05-17
+
+- 添加夜盤交易支持
+
+## 2024-04-29
+
+- 刪除 `TSMPCT`, `TSMAMT` 訂單類型
+
 ## 2024-04-15
 
 - [交易推送](https://open.longportapp.com/docs/trade/trade-definition#websocket-%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5) 新增`last_share`, `last_price`。

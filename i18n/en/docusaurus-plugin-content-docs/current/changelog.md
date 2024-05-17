@@ -18,6 +18,14 @@ sidebar_position: 7
 
 - Remove `TSMPCT`, `TSMAMT` Order type
 
+## 2024-05-17
+
+- Add support for overnight trading
+
+## 2024-04-29
+
+- Remove `TSMPCT`, `TSMAMT` Order type
+
 ## 2024-04-15
 
 - Add `last_share`, `last_price` field to [Trade push](https://open.longportapp.com/en/docs/trade/trade-definition#websocket-notification).
