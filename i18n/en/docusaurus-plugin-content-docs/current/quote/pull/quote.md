@@ -16,7 +16,7 @@ This API is used to obtain the real-time quotes of securities, and supports all 
 ### Parameters
 
 | Name   | Type     | Required | Description                                                                                                                                                     |
-|--------|----------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------ | -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | symbol | string[] | Yes      | Security code list, in `ticker.region` format, for example: `[700.HK]` <br /><br />**Check rules:**<br />The maximum number of symbols in each request is `500` |
 
 ### Protobuf
@@ -48,7 +48,7 @@ print(resp)
 ### Response Properties
 
 | Name                | Type     | Description                                                                          |
-|---------------------|----------|--------------------------------------------------------------------------------------|
+| ------------------- | -------- | ------------------------------------------------------------------------------------ |
 | secu_quote          | object[] | Securities quote                                                                     |
 | ∟ symbol            | string   | Security code                                                                        |
 | ∟ last_done         | string   | Latest price                                                                         |
@@ -69,6 +69,14 @@ print(resp)
 | ∟∟ low              | string   | Low                                                                                  |
 | ∟∟ prev_close       | string   | Close of the last trade session                                                      |
 | ∟ post_market_quote | object   | Quote of US post market                                                              |
+| ∟∟ last_done        | string   | Latest price                                                                         |
+| ∟∟ timestamp        | int64    | Time of latest price                                                                 |
+| ∟∟ volume           | int64    | Volume                                                                               |
+| ∟∟ turnover         | string   | Turnover                                                                             |
+| ∟∟ high             | string   | High                                                                                 |
+| ∟∟ low              | string   | Low                                                                                  |
+| ∟∟ prev_close       | string   | Close of the last trade session                                                      |
+| ∟ over_night_quote  | object   | Quote of US overnight market                                                         |
 | ∟∟ last_done        | string   | Latest price                                                                         |
 | ∟∟ timestamp        | int64    | Time of latest price                                                                 |
 | ∟∟ volume           | int64    | Volume                                                                               |
@@ -170,7 +178,7 @@ message PrePostQuote {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description              | Troubleshooting Suggestions                                   |
-|---------------------|---------------------|--------------------------|---------------------------------------------------------------|
+| ------------------- | ------------------- | ------------------------ | ------------------------------------------------------------- |
 | 3                   | 301600              | Invalid request          | Invalid request parameters or unpacking request failed        |
 | 3                   | 301606              | Request rate limit       | Reduce the frequency of requests                              |
 | 7                   | 301602              | Server error             | Please try again or contact a technician to resolve the issue |

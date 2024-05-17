@@ -109,6 +109,10 @@ slug: overview
     <tr>
         <td><a href="./individual/watchlist_update_group">更新自选股分组</a></td>
     </tr>
+    <tr>
+        <td rowspan="1">标的</td>
+        <td><a href="./security/security_list">获取标的列表</a></td>
+    </tr>
 </table>
 
 ### 标的代码说明
