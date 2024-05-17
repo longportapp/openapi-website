@@ -9,6 +9,11 @@ sidebar_position: 7
 
 - 添加夜盘交易支持
 
+## 2024-05-06
+
+- 更新获取账户资金接口
+  - `GET /v1/asset/account` 增加 (buy_power) 返回字段
+
 ## 2024-04-29
 
 - 删除 `TSMPCT`, `TSMAMT` 订单类型
