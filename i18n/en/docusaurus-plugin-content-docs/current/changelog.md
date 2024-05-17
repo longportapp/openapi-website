@@ -7,7 +7,12 @@ sidebar_position: 7
 
 ## 2024-05-17
 
-- Add support for overnight trading
+- Expand `outside_rth` field to support overnight trading in order placement and query APIs
+
+## 2024-05-06
+
+- Update the interface for Get Account Balance
+  - `GET /v1/asset/account` Add response field (buy_power)
 
 ## 2024-04-29
 
