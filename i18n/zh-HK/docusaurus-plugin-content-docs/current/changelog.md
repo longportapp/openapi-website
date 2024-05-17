@@ -4,19 +4,6 @@ title: 更新日誌
 slug: changelog
 sidebar_position: 7
 ---
-## 2024-05-17
-
--	新增獲取標的列表接口
-	- `GET /v1/quote/get_security_list` 獲取標的列表
-
-## 2024-05-06
-
-- 更新獲取賬戶資金接口
-  - `GET /v1/asset/account` 增加 (buy_power) 返回字段
-
-## 2024-04-29
-
-- 刪除 `TSMPCT`, `TSMAMT` 訂單類型
 
 ## 2024-05-17
 
