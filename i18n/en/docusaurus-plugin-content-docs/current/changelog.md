@@ -7,7 +7,7 @@ sidebar_position: 7
 
 ## 2024-05-17
 
-- Add support for overnight trading
+- Expand `outside_rth` field to support overnight trading in order placement and query APIs
 
 ## 2024-05-06
 
