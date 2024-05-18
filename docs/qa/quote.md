@@ -117,6 +117,8 @@ message ReconnectRequest {
 
 ## Q7：OpenApi SDK 中开启夜盘行情
 
+A:
+
 - 從環境變數建立 `Config` 對象
 
 設定環境變數 `LONGPORT_ENABLE_OVERNIGHT` 為 `true`

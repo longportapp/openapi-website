@@ -117,6 +117,8 @@ message ReconnectRequest {
 
 ## Q7：如何開啟夜盤行情
 
+A:
+
 - Create `Config` from environment variables
 
 Set environment variable `LONGPORT_ENABLE_OVERNIGHT` to `true`

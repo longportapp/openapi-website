@@ -117,6 +117,8 @@ message ReconnectRequest {
 
 ## Q7：Enable Overnight quote in OpenApi SDK
 
+A:
+
 - Create `Config` from environment variables
 
 Set environment variable `LONGPORT_ENABLE_OVERNIGHT` to `true`
