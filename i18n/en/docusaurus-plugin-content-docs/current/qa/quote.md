@@ -95,7 +95,7 @@ A:
 - CN Market: 09:00:00 CST
 - SG Market: 08:20:00 CST
 
-## Q6: 如何获取夜盘行情
+## Q6: How to enable Overnight quote
 
 A:
 
@@ -114,3 +114,15 @@ message ReconnectRequest {
 ```
 
 - After turning on the night trading quotations, both the pull and push interfaces will be able to obtain the night trading quotations during the night trading period.
+
+## Q7：Enable Overnight quote in OpenApi SDK
+
+- Create `Config` from environment variables
+
+Set environment variable `LONGPORT_ENABLE_OVERNIGHT` to `true`
+
+- Create `Config` object from constructor
+
+```python
+config = Config(app_key="your_app_key", app_secret="your_app_secret", access_token="your_access_token", enable_overnight=True)
+```
