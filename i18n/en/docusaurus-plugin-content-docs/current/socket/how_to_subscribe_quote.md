@@ -5,14 +5,6 @@ slug: /socket/subscribe_quote
 sidebar_position: 1
 ---
 
-:::success NOTE
-Our OpenAPI SDK has fully implemented the function of subscribing to quotes, and you can use the SDK directly.
-
-https://open.longportapp.com/sdk
-
-The documentation in this chapter provides API details for your reference.
-:::
-
 Client can access market quote feed by `WebSocket` and `TCP`. After client subscribing stock quote, quote gateway can push real-time quote data to client.
 
 :::info

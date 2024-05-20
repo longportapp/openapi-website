@@ -5,14 +5,6 @@ slug: /socket/subscribe_quote
 sidebar_position: 1
 ---
 
-:::success NOTE
-我们的 OpenAPI SDK 已经完整实现了订阅行情的功能，你可以直接使用 SDK。
-
-https://open.longportapp.com/sdk
-
-本章节文档提供给大家参考 API 细节。
-:::
-
 客户端可以通过 WebSocket 或者 TCP 和行情网关建立长连接，客户端订阅股票行情，行情网关会实时推送客户端订阅的实时行情。
 
 :::info
