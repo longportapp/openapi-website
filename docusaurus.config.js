@@ -1,8 +1,7 @@
 // @ts-check
-const lightCodeTheme = require('prism-react-renderer/themes/github')
-const darkCodeTheme = require('prism-react-renderer/themes/dracula')
+import { themes } from 'prism-react-renderer'
+
 const i18n = require('./i18n/config')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const openapiDomain = 'https://open.longportapp.com'
 const communityDomain = 'https://longportapp.com'
@@ -27,43 +26,14 @@ const config = {
   },
   favicon: 'https://pub.lbkrs.com/static/offline/202211/qohHsXzN9qtQ23ox/longport_favicon.png',
   plugins: [
+    require('./config/tailwindcss'),
+    require('./config/webpack'),
+    // 'docusaurus-plugin-openapi',
     'docusaurus-plugin-sass',
-    function docusaurusTailwindCss() {
-      return {
-        name: 'docusaurus-tailwindcss',
-        configurePostCss: function configurePostCss(postCssOptions) {
-          postCssOptions.plugins.push(require('tailwindcss'))
-          postCssOptions.plugins.push(require('autoprefixer'))
-          return postCssOptions
-        },
-      }
-    },
-    function docsWebpackConfig(context, options) {
-      return {
-        name: 'lb-docs-webpack-plugin',
-        configureWebpack(config, isServer, utils, content) {
-          if (isServer) return {}
-          const docsAssetPrefix = 'openapi-website'
-          return {
-            output: {
-              filename: `assets/js/${docsAssetPrefix}_[name].[contenthash:8].js`,
-              chunkFilename: `assets/js/${docsAssetPrefix}_[name].[contenthash:8].js`,
-            },
-            plugins: [
-              new MiniCssExtractPlugin({
-                filename: `assets/css/${docsAssetPrefix}_[name].[contenthash:8].css`,
-                chunkFilename: `assets/css/${docsAssetPrefix}_[name].[contenthash:8].css`,
-                ignoreOrder: true,
-              }),
-            ],
-          }
-        },
-      }
-    },
   ],
   presets: [
     [
-      'classic',
+      '@docusaurus/preset-classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
@@ -99,7 +69,7 @@ const config = {
         },
         blog: false,
         theme: {
-          customCss: [require.resolve('./src/css/custom.scss')],
+          customCss: require.resolve('./src/css/custom.scss'),
         },
       }),
     ],
@@ -187,8 +157,8 @@ const config = {
         ],
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: themes.github,
+        darkTheme: themes.dracula,
         additionalLanguages: ['shell-session', 'http', 'protobuf', 'rust', 'java', 'go'],
       },
       algolia: {

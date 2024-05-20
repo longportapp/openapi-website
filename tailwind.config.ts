@@ -1,6 +1,10 @@
 import colors from 'tailwindcss/colors'
 
+/** @type {import('tailwindcss').Config} */
 export default {
+  corePlugins: {
+    preflight: false,
+  },
   content: [
     './src/**/*.{js,scss,css,ts,tsx,jsx}',
     './i18n/**/*.{js,scss,css,ts,tsx,jsx}',
