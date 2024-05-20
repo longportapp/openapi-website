@@ -2,6 +2,6 @@
   "position": 5,
   "label": "长连接",
   "collapsible": true,
-  "collapsed": false,
+  "collapsed": true,
   "link": null
 }

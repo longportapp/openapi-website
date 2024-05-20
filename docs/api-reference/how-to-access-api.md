@@ -1,22 +1,30 @@
 ---
-title: 如何調用 API
+title: Overview
 id: how-to-access-api
 slug: /how-to-access-api
 sidebar_position: 1
 ---
 
-## 開發前須知
+本部分内容主要介绍 LongPort OpenAPI 的基础信息，包括如何访问 API、如何使用 API、如何获取 API 接口文档等，内容比较原始。
 
-| 注意事項                                     | 參考文檔                                          |
+:::success 提示
+建议可以直接采用 SDK 的方式访问 API，SDK 已经封装了 API 的调用方式，使用起来更加方便。
+
+https://open.longportapp.com/sdk
+:::
+
+## API 须知
+
+| 注意事项                                     | 参考文档                                          |
 | -------------------------------------------- | ------------------------------------------------- |
-| 推薦使用各自語言的 SDK，而不是調用原生的接口 | [SDK 快速開始頁面](../docs/getting-started)       |
-| 閱讀 OpenAPI 介紹中開通相應服務              | [OpenAPI 如何開通](../docs/#如何開通)             |
-| 閱讀 OpenAPI 介紹中使用權限及限制            | [OpenAPI 使用權限及限制](../docs/#使用權限及限制) |
-| 了解通用錯誤碼，便於查找調用接口出錯的原因   | [通用錯誤碼](../docs/error-codes)                 |
+| 推荐使用各自语言的 SDK，而不是调用原生的接口 | [SDK 快速开始页面](../docs/getting-started)       |
+| 阅读 OpenAPI 介绍中开通相应服务              | [OpenAPI 如何开通](../docs/#如何开通)             |
+| 阅读 OpenAPI 介绍中使用权限及限制            | [OpenAPI 使用权限及限制](../docs/#使用权限及限制) |
+| 了解通用错误码，便于查找调用接口出错的原因   | [通用错误码](../docs/error-codes)                 |
 
-## REST API 文檔約定格式
+## REST API 文档约定格式
 
-服務端 REST API 文檔格式主要如下：
+服务端 REST API 文档格式主要如下：
 
 ```
 Request:
@@ -31,57 +39,57 @@ Response:
 
 ### Request Info
 
-介紹調用 API 所需要的請求方式、路徑。
+介绍调用 API 所需要的请求方式、路径。
 
-- HTTP URL：服務端 API 的 URL。
-- HTTP Method：服務端 API 僅支持 HTTP 協議的方法，如 GET、POST 等。
+- HTTP URL：服务端 API 的 URL。
+- HTTP Method：服务端 API 仅支持 HTTP 协议的方法，如 GET、POST 等。
 
 ### Parameters
 
-介紹調用 API 所需傳遞的請求頭部，查詢參數或者請求體。
+介绍调用 API 所需传递的请求头部，查询参数或者请求体。
 :::tip
 
-GET 請求時默認所有參數為查詢參數，非 GET 請求時默認所有參數都是請求體，請求體格式為 JSON。
+GET 请求时默认所有参数为查询参数，非 GET 请求时默认所有参数都是请求体，请求体格式为 JSON。
 
 :::
 
 ### Request Example
 
-使用 SDK 調用接口的詳細例子。
+使用 SDK 调用接口的详细例子。
 
 ### Response
 
-- Response Headers: 返回內容頭部信息。
-- Response Example: 返回內容的文本示例。
-- Response Status: 接口返回內容中的 `status` 的具體解釋。
+- Response Headers: 返回内容头部信息。
+- Response Example: 返回内容的文本示例。
+- Response Status: 接口返回内容中的 `status` 的具体解释。
 
-## API 調用流程
+## API 调用流程
 
-### 1. 開通服務
+### 1. 开通服务
 
-參考 [OpenAPI 介紹](../docs/#如何開通) 開通相應服務。
+参考 [OpenAPI 介绍](../docs/#如何开通) 开通相应服务。
 
-### 2. 獲取 App Key 信息及 Access Token
+### 2. 获取 App Key 信息及 Access Token
 
-在 [開發者後台](https://open.longportapp.com/account) 中獲取 **Access Token**， **App Key** 以及 **App Secret**。
+在 [开发者后台](https://open.longportapp.com/account) 中获取 **Access Token**， **App Key** 以及 **App Secret**。
 
-**Access Token** 的有效期是三個月，失效後可以在開發者後臺重置。在失效之前，可以通過調用 [刷新 Access Token](./refresh-token-api) API 進行刷新。
+**Access Token** 的有效期是三个月，失效后可以在开发者后台重置。在失效之前，可以通过调用 [刷新 Access Token](./refresh-token-api) API 进行刷新。
 
-### 3. 生成簽名
+### 3. 生成签名
 
 :::tip
 
-本頁介紹的內容大部分，我們的 [OpenAPI SDK](/sdk) 已經完整實現了，你如果是 SDK 用戶，可以直接忽略簽名認證部分。
+本页介绍的内容大部分，我们的 [OpenAPI SDK](/sdk) 已经完整实现了，你如果是 [SDK](/sdk) 用户，可以直接忽略签名认证部分。
 
-此部分內容是為了給非 SDK 用戶提供參考。
+此部分内容是为了给非 SDK 用户提供参考。
 
 :::
 
-先根據相應的 API 文檔構造請求後，通過 OpenAPI SDK 直接調用 API，SDK 會幫助生成簽名，或者通過以下流程創建簽名。
+先根据相应的 API 文档构造请求后，通过 OpenAPI SDK 直接调用 API，SDK 会帮助生成签名，或者通过以下流程创建签名。
 
 #### 添加 `X-Api-Key`、`X-Timestamp`、`Authorization`
 
-設置請求參數頭部信息， `X-Api-Key`、 `Authorization`、`X-Timestamp` 將在簽名函數中被使用。
+设置请求参数头部信息， `X-Api-Key`、 `Authorization`、`X-Timestamp` 将在签名函数中被使用。
 
 ```python
 import time
@@ -92,12 +100,12 @@ headers['X-Timestamp' =  str(time.time()) # Unix Timestamp, eg: 1539095200.123
 headers['Content-Type'] = 'application/json; charset=utf-8',
 ```
 
-#### 使用簽名函數對請求籤名
+#### 使用签名函数对请求签名
 
-簽名函數如下：
+签名函数如下：
 
 ```py
-# python3 簽名函數
+# python3 签名函数
 def sign(method, uri, headers, params, body, secret):
     ts = headers["X-Timestamp"]
     access_token = headers["Authorization"]
@@ -116,68 +124,67 @@ def sign(method, uri, headers, params, body, secret):
 
 ```
 
-使用簽名函數進行簽名，並設置簽名到請求頭部 `X-Api-Signature` 中：
+使用签名函数进行签名，并设置签名到请求头部 `X-Api-Signature` 中：
 
 ```py
-# 請求方法
+# 请求方法
 method = "POST"
-# 請求路徑
+# 请求路径
 uri = "/v1/trade/order/submit"
-# 請求參數 如 member_id=1&account_channel=2
+# 请求参数 如 member_id=1&account_channel=2
 params = ""
-# 請求 body 如
+# 请求 body 如
 body = json.dumps({ "order_id": '683615454870679552' })
-# 簽名並設置
+# 签名并设置
 headers['X-Api-Signature'] = sign(method, uri, headers, params, body, secret)
 
 ```
 
-### 4. 調用 API
+### 4. 调用 API
 
-使用 HTTP 客戶端發送簽名過後的請求。
+使用 HTTP 客户端发送签名过后的请求。
 
-## 基本路徑
+## 基本路径
 
-所有 API 的路徑都以 [https://openapi.longportapp.com](https://openapi.longportapp.com) 開頭。
-
-> TIP: 也可以用 https://openapi.longportapp.com
+- HTTP API - `https://openapi.longportapp.com`
+- WebSocket - `wss://openapi-quote.longportapp.com`
 
 ## API Request
 
-調用服務端接口需要是用 HTTPS 協議，JSON 格式，並是用 `UTF-8` 編碼。
+调用服务端接口需要是用 HTTPS 协议，JSON 格式，并是用 `UTF-8` 编码。
 
-測試接口示例如下：
+测试接口示例如下：
 
 ```bash
 curl -v https://openapi.longportapp.com/v1/test \
-    -H "X-Api-Signature: {簽名}" -H "X-Api-Key: {Appkey}" \
+    -H "X-Api-Signature: {签名}" -H "X-Api-Key: {Appkey}" \
     -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
 ```
 
-獲取股票持倉接口是`GET`請求並需要傳遞參數，示例如下：
+获取股票持仓接口是`GET`请求并需要传递参数，示例如下：
 
 ```bash
 curl -v https://openapi.longportapp.com/v1/asset/stock?symbol=700.HK&symbol=BABA.US \
-    -H "X-Api-Signature: {簽名}" -H "X-Api-Key: {AppKey}" \
+    -H "X-Api-Signature: {签名}" -H "X-Api-Key: {AppKey}" \
     -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
 ```
 
-委託下單接口是`POST`請求並需要傳遞`Body`參數，示例如下：
+委托下单接口是`POST`请求并需要传递`Body`参数，示例如下：
 
 ```bash
 curl -v -XPOST https://openapi.longportapp.com/v1/trade/order \
     -d '{ "side": "Buy", symbol": "700.HK", "order_type": "LO", "submitted_price": "50", "submitted_quantity": "200", "time_in_force": "Day", remark": "Hello from Shell"}' \
-    -H "X-Api-Signature: {簽名}" -H "X-Api-Key: {AppKey}" \
+    -H "X-Api-Signature: {签名}" -H "X-Api-Key: {AppKey}" \
     -H "Authorization: {AccessToken}" -H "X-Timestamp: 1539095200.123"
     -H "Content-Type: application/json; charset=utf-8"
 ```
 
 ## API Response
 
-所有 API 相應體結構都包括 `code`, `message`, `data` 三個部分。 `code` 是業務碼，`message` 是 message，`data` 是請求結果。
+所有 API 相应体结构都包括 `code`, `message`, `data` 三个部分。`code` 是业务码，`message` 是 message，`data` 是请求结果。
 
 :::tip
-HTTP Status 遵循 [RESTFull 風格](https://restfulapi.net/http-status-codes)，請求成功時 `code = 0`, 否則 `code` 會描述具體的錯誤碼。
+HTTP Status 遵循 [RESTFull 风格](https://restfulapi.net/http-status-codes)，请求成功时 `code = 0`, 否则 `code` 会描述具体的错误码。
 :::
 
 ### HTTP Status
@@ -188,7 +195,7 @@ HTTP Status 遵循 [RESTFull 風格](https://restfulapi.net/http-status-codes)�
 - 4xx: Client Error – This category of error status codes points the finger at clients.
 - 5xx: Server Error – The server takes responsibility for these error status codes.
 
-例如，請求成功，Response Body
+例如，请求成功，Response Body
 
 ```json
 {
@@ -200,7 +207,7 @@ HTTP Status 遵循 [RESTFull 風格](https://restfulapi.net/http-status-codes)�
 }
 ```
 
-例如，失敗的 Response Body
+例如，失败的 Response Body
 
 ```json
 {
@@ -209,7 +216,7 @@ HTTP Status 遵循 [RESTFull 風格](https://restfulapi.net/http-status-codes)�
 }
 ```
 
-## 完整的調用 API 例子
+## 完整的调用 API 例子
 
 ```py
 import requests
@@ -218,16 +225,16 @@ import time
 import hashlib
 import hmac
 
-# request 請求信息
-# 請求方法
+# request 请求信息
+# 请求方法
 method = "POST"
-# 請求路徑
+# 请求路径
 uri = "/v1/trade/order/submit"
-# 請求參數 如 member_id=1&account_channel=2
+# 请求参数 如 member_id=1&account_channel=2
 params = ""
-# 請求 body
+# 请求 body
 body = json.dumps({ "order_id": '683615454870679552' })
-# 請求頭部信息
+# 请求头部信息
 headers = {}
 headers['X-Api-Key'] = '${app_key}'
 headers['Authorization'] = '${access_token}'
@@ -237,7 +244,7 @@ headers['Content-Type'] = 'application/json; charset=utf-8'
 # App Secret
 app_secret = "${app_secret}"
 
-## 簽名方法
+## 签名方法
 def sign(method, uri, headers, params, body, secret):
     ts = headers["X-Timestamp"]
     access_token = headers["Authorization"]
@@ -252,10 +259,10 @@ def sign(method, uri, headers, params, body, secret):
     signature = hmac.new(secret.encode('utf-8'), sign_str.encode('utf-8'), digestmod=hashlib.sha256).hexdigest()
     return "HMAC-SHA256 SignedHeaders=authorization;x-api-key;x-timestamp, Signature=" + signature
 
-# 設置簽名
+# 设置签名
 headers['X-Api-Signature'] = sign(method,  uri, headers, params, body, app_secret)
 
-# 請求接口
+# 请求接口
 response = requests.request(method, "https://openapi.longportapp.com" + uri + '?' + params, headers=headers, data=body)
 
 print(response.text)

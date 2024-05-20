@@ -1,11 +1,19 @@
 ---
-title: How to access an API
+title: Overview
 id: how-to-access-api
 slug: /how-to-access-api
 sidebar_position: 1
 ---
 
-## Pre-Development Notes
+This section mainly introduces the basic information of LongPort OpenAPI, including how to access the API, how to use the API, how to obtain the API interface document, etc., the content is relatively primitive.
+
+:::success Tip
+It is recommended to directly use the SDK to access the API, the SDK has encapsulated the API call method, which is more convenient to use.
+
+https://open.longportapp.com/sdk
+:::
+
+## Notes
 
 | Precautions                                                                                          | Reference Documents                                                             |
 | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
