@@ -7,6 +7,8 @@ sidebar_position: 18
 
 該接口用於獲取標的當日的資金分佈。
 
+<SDKLinks module="quote" klass="QuoteContext" method="capital_distribution" />
+
 :::info
 [業務指令](../../socket/biz-command)：`25`
 :::

@@ -7,6 +7,8 @@ sidebar_position: 7
 
 該接口用於獲取券商席位 ID 數據 (可每天同步一次)。
 
+<SDKLinks module="quote" klass="QuoteContext" method="participants" />
+
 :::info
 [業務指令](../../socket/biz-command)：`16`
 :::
@@ -34,7 +36,7 @@ print(resp)
 ### Response Properties
 
 | Name                       | Type     | Description           |
-|----------------------------|----------|-----------------------|
+| -------------------------- | -------- | --------------------- |
 | participant_broker_numbers | object[] | 券商席位              |
 | ∟ broker_ids               | int32[]  | 券商對應的多個席位 ID |
 | ∟ participant_name_cn      | string   | 券商名稱 (简)         |
@@ -86,7 +88,7 @@ message ParticipantInfo {
 ## 錯誤碼
 
 | 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                 |
-|------------|------------|--------------|----------------------|
+| ---------- | ---------- | -------------- | ------------------------ |
 | 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗   |
 | 3          | 301606     | 限流           | 降低請求頻次             |
 | 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理 |

@@ -114,3 +114,17 @@ message ReconnectRequest {
 ```
 
 - 開啟夜盤行情後，拉取和推送接口都將可以在夜盤交易時段，取得到夜盤盤情。
+
+## Q7：如何開啟夜盤行情
+
+A:
+
+- 從環境變數建立 `Config` 對象
+
+設定環境變數 `LONGPORT_ENABLE_OVERNIGHT` 為 `true`
+
+- 從建構函式建立 `Config` 對象
+
+```python
+config = Config(app_key="your_app_key", app_secret="your_app_secret", access_token="your_access_token", enable_overnight=True)
+```

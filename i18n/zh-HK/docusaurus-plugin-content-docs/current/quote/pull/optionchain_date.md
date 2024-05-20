@@ -7,6 +7,8 @@ sidebar_position: 11
 
 該接口用於獲取標的的期權鏈到期日列表。
 
+<SDKLinks module="quote" klass="QuoteContext" method="option_chain_expiry_date_list" />
+
 :::info
 
 [業務指令](../../socket/biz-command)：`20`
@@ -17,8 +19,8 @@ sidebar_position: 11
 
 ### Parameters
 
-| Name   | Type   | Required | Description                                      |
-|--------|--------|----------|--------------------------------------------------|
+| Name   | Type   | Required | Description                                         |
+| ------ | ------ | -------- | --------------------------------------------------- |
 | symbol | string | 是       | 標的代碼，使用 `ticker.region` 格式，例如：`700.HK` |
 
 ### Protobuf
@@ -49,8 +51,8 @@ print(resp)
 
 ### Response Properties
 
-| Name        | Type     | Description                                   |
-|-------------|----------|-----------------------------------------------|
+| Name        | Type     | Description                                    |
+| ----------- | -------- | ---------------------------------------------- |
 | expiry_date | string[] | 標的對應的期權鏈到期日列表，使用 `YYMMDD` 格式 |
 
 ### Protobuf
@@ -92,7 +94,7 @@ message OptionChainDateListResponse {
 ## 錯誤碼
 
 | 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                     |
-|------------|------------|--------------|--------------------------|
+| ---------- | ---------- | -------------- | ---------------------------- |
 | 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗       |
 | 3          | 301606     | 限流           | 降低請求頻次                 |
 | 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理     |

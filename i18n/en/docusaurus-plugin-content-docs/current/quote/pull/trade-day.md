@@ -7,6 +7,8 @@ sidebar_position: 16
 
 This API is used to obtain the trading days of the market.
 
+<SDKLinks module="quote" klass="QuoteContext" method="trading_days" />
+
 :::info
 
 [Business Command](../../socket/biz-command): `9`
@@ -18,7 +20,7 @@ This API is used to obtain the trading days of the market.
 ### Parameters
 
 | Name    | Type   | Required | Description                                                                                                                                                                                 |
-|---------|--------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | market  | string | Yes      | Market <br /><br />**Optional value:**<br/>`US` - US market<br/>`HK` - HK market<br/>`CN` - CN market<br/>`SG` - SG market                                                                  |
 | beg_day | string | Yes      | begin day, in `YYMMDD` format, for example: `20220401`                                                                                                                                      |
 | end_day | string | Yes      | begin day, in `YYMMDD` format, for example: `20220420` <br/><br/>**Check rules:**<br/> The interval cannot be greater than one month <br/> Only supports query data of the most recent year |
@@ -55,7 +57,7 @@ print(resp)
 ### Response Properties
 
 | Name           | Type     | Description                           |
-|----------------|----------|---------------------------------------|
+| -------------- | -------- | ------------------------------------- |
 | trade_day      | string[] | Trading days, in `YYMMDD` format      |
 | half_trade_day | string[] | Half trading days, in `YYMMDD` format |
 
@@ -93,7 +95,7 @@ message MarketTradeDayResponse {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description                | Troubleshooting Suggestions                                        |
-|---------------------|---------------------|----------------------------|--------------------------------------------------------------------|
+| ------------------- | ------------------- | -------------------------- | ------------------------------------------------------------------ |
 | 3                   | 301600              | Invalid request            | Invalid request parameters or unpacking request failed             |
 | 3                   | 301606              | Request rate limit         | Reduce the frequency of requests                                   |
 | 7                   | 301602              | Server error               | Please try again or contact a technician to resolve the issue      |

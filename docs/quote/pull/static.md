@@ -7,6 +7,8 @@ sidebar_position: 1
 
 该接口用于获取标的的基础信息。
 
+<SDKLinks module="quote" klass="QuoteContext" method="static_info" />
+
 :::info
 [业务指令](../../socket/biz-command)：`10`
 :::
@@ -15,8 +17,8 @@ sidebar_position: 1
 
 ### Parameters
 
-| Name   | Type     | Required | Description                                                                                                                     |
-|--------|----------|----------|---------------------------------------------------------------------------------------------------------------------------------|
+| Name   | Type     | Required | Description                                                                                                                         |
+| ------ | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | symbol | string[] | 是       | 标的代码列表，使用 `ticker.region` 格式，例如：`[700.HK]` <br /><br />**校验规则：**<br />每次请求支持传入的标的数量上限是 `500` 个 |
 
 ### Protobuf
@@ -28,6 +30,12 @@ message MultiSecurityRequest {
 ```
 
 ### Request Example
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+<TabItem value="py" label="Python">
 
 ```python
 # 获取标的基础信息
@@ -43,29 +51,50 @@ resp = ctx.static_info(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"])
 print(resp)
 ```
 
+</TabItem>
+<TableItem value="js" label="JavaScript">
+
+https://longportapp.github.io/openapi-sdk/rust/longport/quote/struct.QuoteContext.html#method.static_info
+
+```js
+const { Config, QuoteContext } = require('longport')
+
+let config = Config.fromEnv()
+QuoteContext.new(config)
+  .then((ctx) => ctx.staticInfo(['700.HK', 'AAPL.US', 'TSLA.US', 'NFLX.US']))
+  .then((resp) => {
+    for (let obj of resp) {
+      console.log(obj.toString())
+    }
+  })
+```
+
+</TableItem>
+</Tabs>
+
 ## Response
 
 ### Response Properties
 
-| Name                 | Type     | Description                                                                                    |
-|----------------------|----------|------------------------------------------------------------------------------------------------|
-| secu_static_info     | object[] | 标的基础数据列表                                                                               |
-| ∟ symbol             | string   | 标的代码                                                                                       |
-| ∟ name_cn            | string   | 中文简体标的名称                                                                               |
-| ∟ name_en            | string   | 英文标的名称                                                                                   |
-| ∟ name_hk            | string   | 中文繁体标的名称                                                                               |
-| ∟ exchange           | string   | 标的所属交易所                                                                                 |
-| ∟ currency           | string   | 交易币种 <br /><br />**可选值：**<br />`CNY` <br />`USD` <br />`SGD` <br />`HKD`                |
-| ∟ lot_size           | int32    | 每手股数                                                                                       |
-| ∟ total_shares       | int64    | 总股本                                                                                         |
-| ∟ circulating_shares | int64    | 流通股本                                                                                       |
-| ∟ hk_shares          | int64    | 港股股本 (仅港股)                                                                              |
-| ∟ eps                | string   | 每股盈利                                                                                       |
-| ∟ eps_ttm            | string   | 每股盈利 (TTM)                                                                                 |
-| ∟ bps                | string   | 每股净资产                                                                                     |
-| ∟ dividend_yield     | string   | 股息                                                                                           |
+| Name                 | Type     | Description                                                                                      |
+| -------------------- | -------- | ------------------------------------------------------------------------------------------------ |
+| secu_static_info     | object[] | 标的基础数据列表                                                                                 |
+| ∟ symbol             | string   | 标的代码                                                                                         |
+| ∟ name_cn            | string   | 中文简体标的名称                                                                                 |
+| ∟ name_en            | string   | 英文标的名称                                                                                     |
+| ∟ name_hk            | string   | 中文繁体标的名称                                                                                 |
+| ∟ exchange           | string   | 标的所属交易所                                                                                   |
+| ∟ currency           | string   | 交易币种 <br /><br />**可选值：**<br />`CNY` <br />`USD` <br />`SGD` <br />`HKD`                 |
+| ∟ lot_size           | int32    | 每手股数                                                                                         |
+| ∟ total_shares       | int64    | 总股本                                                                                           |
+| ∟ circulating_shares | int64    | 流通股本                                                                                         |
+| ∟ hk_shares          | int64    | 港股股本 (仅港股)                                                                                |
+| ∟ eps                | string   | 每股盈利                                                                                         |
+| ∟ eps_ttm            | string   | 每股盈利 (TTM)                                                                                   |
+| ∟ bps                | string   | 每股净资产                                                                                       |
+| ∟ dividend_yield     | string   | 股息                                                                                             |
 | ∟ stock_derivatives  | int32[]  | 如果标的是正股，可提供的衍生品行情类型 <br /><br />**可选值：**<br />`1` - 期权 <br />`2` - 轮证 |
-| ∟ board              | string   | 标的所属板块，详见 [Board](../objects#board---标的板块)                                         |
+| ∟ board              | string   | 标的所属板块，详见 [Board](../objects#board---标的板块)                                          |
 
 ### Protobuf
 
@@ -140,9 +169,9 @@ message StaticInfo {
 
 ## 错误码
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                                  |
-|------------|------------|--------------|---------------------------------------|
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败                    |
-| 3          | 301606     | 限流           | 降低请求频次                              |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理                  |
+| 协议错误码 | 业务错误码 | 描述           | 排查建议                                   |
+| ---------- | ---------- | -------------- | ------------------------------------------ |
+| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败                     |
+| 3          | 301606     | 限流           | 降低请求频次                               |
+| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理                   |
 | 7          | 301607     | 接口限制       | 请求的标的数量超限，请减少单次请求标的数量 |

@@ -1,36 +1,39 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "该接口用于获取历史订单的成交明细"
-  version: "v1"
-  title: "获取历史成交明细"
+  description: |
+    该接口用于获取历史订单的成交明细，包括买入和卖出的成交记录。
+
+    <SDKLinks module="trade" klass="TradeContext" method="history_executions" />
+  version: 'v1'
+  title: '获取历史成交明细'
 paths:
   /v1/trade/execution/history:
     get:
-      access: "交易权限"
+      access: '交易权限'
       parameters:
-        - name: "symbol"
-          type: "string"
+        - name: 'symbol'
+          type: 'string'
           in: query
-          description: "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
+          description: '股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`'
           required: false
-        - name: "start_at"
-          type: "string"
+        - name: 'start_at'
+          type: 'string'
           in: query
           required: false
-          description: "开始时间，格式为时间戳 (秒)，例如：`1650410999`。<br/><br/>开始时间为空时，默认为结束时间或当前时间前九十天。"
-        - name: "end_at"
-          type: "string"
+          description: '开始时间，格式为时间戳 (秒)，例如：`1650410999`。<br/><br/>开始时间为空时，默认为结束时间或当前时间前九十天。'
+        - name: 'end_at'
+          type: 'string'
           required: false
-          description: "结束时间，格式为时间戳 (秒)，例如：`1650410999`。<br/><br/>结束时间为空时，默认为开始时间后九十天或当前时间。"
+          description: '结束时间，格式为时间戳 (秒)，例如：`1650410999`。<br/><br/>结束时间为空时，默认为开始时间后九十天或当前时间。'
       responses:
-        "200":
-          description: "查询成功"
+        '200':
+          description: '查询成功'
           schema:
-            $ref: "#/definitions/history_executions_rsp"
-        "400":
-          description: "查询失败，请求参数错误。"
+            $ref: '#/definitions/history_executions_rsp'
+        '400':
+          description: '查询失败，请求参数错误。'
       request_body:
-        type: "python"
+        type: 'python'
         value: |
           from datetime import datetime
           from longport.openapi import TradeContext, Config
@@ -46,66 +49,58 @@ paths:
           print(resp)
       response_body:
         {
-          "code": 0,
-          "message": "success",
-          "data":
+          'code': 0,
+          'message': 'success',
+          'data':
             {
-              "has_more": false,
-              "trades":
+              'has_more': false,
+              'trades':
                 [
                   {
-                    "order_id": "693664675163312128",
-                    "price": "388",
-                    "quantity": "100",
-                    "symbol": "700.HK",
-                    "trade_done_at": "1648611351",
-                    "trade_id": "693664675163312128-1648611351433741210",
+                    'order_id': '693664675163312128',
+                    'price': '388',
+                    'quantity': '100',
+                    'symbol': '700.HK',
+                    'trade_done_at': '1648611351',
+                    'trade_id': '693664675163312128-1648611351433741210',
                   },
                 ],
             },
         }
 definitions:
   history_executions_rsp:
-    required: ["has_more"]
+    required: ['has_more']
     properties:
       has_more:
         type: boolean
-        description: "是否还有更多数据。<br/><br/>每次查询最大订单数量为 1000，如果查询结果数量超过 1000，那么 has_more 就会为 true"
+        description: '是否还有更多数据。<br/><br/>每次查询最大订单数量为 1000，如果查询结果数量超过 1000，那么 has_more 就会为 true'
         required: true
       trades:
-        type: "object[]"
+        type: 'object[]'
         description: 成交明细信息
-        required:
-          [
-            "order_id",
-            "trade_id",
-            "symbol",
-            "trade_done_at",
-            "quantity",
-            "price",
-          ]
+        required: ['order_id', 'trade_id', 'symbol', 'trade_done_at', 'quantity', 'price']
         properties:
           order_id:
-            type: "string"
+            type: 'string'
             description: 订单 ID
             required: true
           trade_id:
-            type: "string"
+            type: 'string'
             description: 成交 ID
             required: true
           symbol:
-            type: "string"
-            description: "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
+            type: 'string'
+            description: '股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`'
             required: true
           trade_done_at:
-            type: "string"
-            description: "成交时间，格式为时间戳 (秒)"
+            type: 'string'
+            description: '成交时间，格式为时间戳 (秒)'
             required: true
           quantity:
-            type: "string"
+            type: 'string'
             description: 成交数量
             required: true
           price:
-            type: "string"
+            type: 'string'
             description: 成交价格
             required: true

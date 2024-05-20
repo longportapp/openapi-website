@@ -7,6 +7,8 @@ sidebar_position: 4
 
 已订阅的标的的实时逐笔成交明细推送。
 
+<SDKLinks module="quote" klass="QuoteContext" method="set_on_trades" go="OnTrade" />
+
 :::info
 
 [业务指令](../../socket/protocol/push)：`104`
@@ -17,15 +19,15 @@ sidebar_position: 4
 
 ### Properties
 
-| Name            | Type     | Description                                                                       |
-|-----------------|----------|-----------------------------------------------------------------------------------|
-| symbol          | string   | 标的代码，例如：`AAPL.US`                                                           |
-| sequence        | int64    | 序列号                                                                            |
-| trades          | object[] | 逐笔明细数据                                                                      |
-| ∟ price         | string   | 价格                                                                              |
-| ∟ volume        | int64    | 成交量                                                                            |
-| ∟ timestamp     | int64    | 成交时间                                                                          |
-| ∟ trade_type    | string   | [交易类型说明](#交易类型)                                                         |
+| Name            | Type     | Description                                                                        |
+| --------------- | -------- | ---------------------------------------------------------------------------------- |
+| symbol          | string   | 标的代码，例如：`AAPL.US`                                                          |
+| sequence        | int64    | 序列号                                                                             |
+| trades          | object[] | 逐笔明细数据                                                                       |
+| ∟ price         | string   | 价格                                                                               |
+| ∟ volume        | int64    | 成交量                                                                             |
+| ∟ timestamp     | int64    | 成交时间                                                                           |
+| ∟ trade_type    | string   | [交易类型说明](#交易类型)                                                          |
 | ∟ direction     | int32    | 交易方向 <br /><br />**可选值：**<br />`0` - neutral<br />`1` - down<br />`2` - up |
 | ∟ trade_session | int32    | 交易时段，详见 [TradeSession](../objects#tradesession---交易时段)                  |
 

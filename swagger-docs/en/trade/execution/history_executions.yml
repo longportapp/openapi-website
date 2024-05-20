@@ -1,36 +1,39 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "This API is used to get history executions"
-  version: "v1"
-  title: "Get History Executions"
+  description: |
+    This API is used to get history executions, including the sell and buy records.
+
+    <SDKLinks module="trade" klass="TradeContext" method="history_executions" />
+  version: 'v1'
+  title: 'Get History Executions'
 paths:
   /v1/trade/execution/history:
     get:
-      access: "Trading Permissions"
+      access: 'Trading Permissions'
       parameters:
-        - name: "symbol"
-          type: "string"
+        - name: 'symbol'
+          type: 'string'
           in: query
-          description: "Stock symbol, use `ticker.region` format, example: `AAPL.US`"
+          description: 'Stock symbol, use `ticker.region` format, example: `AAPL.US`'
           required: false
-        - name: "start_at"
-          type: "string"
+        - name: 'start_at'
+          type: 'string'
           in: query
           required: false
-          description: "Start time, formatted as a timestamp (second), example: `1650410999`.<br/><br/> If the start time is null, the default is the 90 days before of the end time or 90 days before of the current time."
-        - name: "end_at"
-          type: "string"
+          description: 'Start time, formatted as a timestamp (second), example: `1650410999`.<br/><br/> If the start time is null, the default is the 90 days before of the end time or 90 days before of the current time.'
+        - name: 'end_at'
+          type: 'string'
           required: false
-          description: "End time, formatted as a timestamp (second), example: `1650410999`. <br/><br/> If the end time is null, the default is the current time or 90 days after of the start time."
+          description: 'End time, formatted as a timestamp (second), example: `1650410999`. <br/><br/> If the end time is null, the default is the current time or 90 days after of the start time.'
       responses:
-        "200":
-          description: "Get History Executions Success"
+        '200':
+          description: 'Get History Executions Success'
           schema:
-            $ref: "#/definitions/history_executions_rsp"
-        "400":
-          description: "The query failed with an error in the request parameter."
+            $ref: '#/definitions/history_executions_rsp'
+        '400':
+          description: 'The query failed with an error in the request parameter.'
       request_body:
-        type: "python"
+        type: 'python'
         value: |
           from datetime import datetime
           from longport.openapi import TradeContext, Config
@@ -46,66 +49,58 @@ paths:
           print(resp)
       response_body:
         {
-          "code": 0,
-          "message": "success",
-          "data":
+          'code': 0,
+          'message': 'success',
+          'data':
             {
-              "has_more": false,
-              "trades":
+              'has_more': false,
+              'trades':
                 [
                   {
-                    "order_id": "693664675163312128",
-                    "price": "388",
-                    "quantity": "100",
-                    "symbol": "700.HK",
-                    "trade_done_at": "1648611351",
-                    "trade_id": "693664675163312128-1648611351433741210",
+                    'order_id': '693664675163312128',
+                    'price': '388',
+                    'quantity': '100',
+                    'symbol': '700.HK',
+                    'trade_done_at': '1648611351',
+                    'trade_id': '693664675163312128-1648611351433741210',
                   },
                 ],
             },
         }
 definitions:
   history_executions_rsp:
-    required: ["has_more"]
+    required: ['has_more']
     properties:
       has_more:
         type: boolean
-        description: "has more orders record.<br/><br/>The maximum number of orders per query is 1000, if the number of results exceeds 1000, then has_more will be true"
+        description: 'has more orders record.<br/><br/>The maximum number of orders per query is 1000, if the number of results exceeds 1000, then has_more will be true'
         required: true
       trades:
-        type: "object[]"
+        type: 'object[]'
         description: Execution Detail
-        required:
-          [
-            "order_id",
-            "trade_id",
-            "symbol",
-            "trade_done_at",
-            "quantity",
-            "price",
-          ]
+        required: ['order_id', 'trade_id', 'symbol', 'trade_done_at', 'quantity', 'price']
         properties:
           order_id:
-            type: "string"
+            type: 'string'
             description: Order ID
             required: true
           trade_id:
-            type: "string"
+            type: 'string'
             description: Execution ID
             required: true
           symbol:
-            type: "string"
-            description: "Stock symbol, use `ticker.region` format,example: `AAPL.US`"
+            type: 'string'
+            description: 'Stock symbol, use `ticker.region` format,example: `AAPL.US`'
             required: true
           trade_done_at:
-            type: "string"
+            type: 'string'
             description: Trade done time, formatted as a timestamp (second)
             required: true
           quantity:
-            type: "string"
+            type: 'string'
             description: Executed quantity
             required: true
           price:
-            type: "string"
+            type: 'string'
             description: Executed price
             required: true

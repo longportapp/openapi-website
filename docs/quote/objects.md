@@ -7,7 +7,7 @@ slug: objects
 
 # 行情命名词典
 
-### TradeStatus - 交易状态
+## TradeStatus - 交易状态
 
 交易状态
 
@@ -25,7 +25,7 @@ slug: objects
 | 9   | 轮证待上市      |
 | 10  | 终止交易        |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum TradeStatus {
@@ -43,7 +43,7 @@ enum TradeStatus {
 }
 ```
 
-### TradeSession - 交易时段
+## TradeSession - 交易时段
 
 交易时段
 
@@ -54,7 +54,7 @@ enum TradeStatus {
 | 2   | 盘后交易 |
 | 3   | 夜盘交易 |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum TradeSession {
@@ -64,7 +64,7 @@ enum TradeSession {
 }
 ```
 
-### Period - K 线周期
+## Period - K 线周期
 
 | ID   | 描述          |
 | ---- | ------------- |
@@ -78,7 +78,7 @@ enum TradeSession {
 | 3000 | 月 k 线       |
 | 4000 | 年 k 线       |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum Period {
@@ -95,14 +95,14 @@ enum Period {
 }
 ```
 
-### AdjustType - K 线复权类型
+## AdjustType - K 线复权类型
 
 | ID  | 描述   |
 | --- | ------ |
 | 0   | 除权   |
 | 1   | 前复权 |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum AdjustType {
@@ -111,7 +111,7 @@ enum AdjustType {
 }
 ```
 
-### SubType - 订阅数据的类型
+## SubType - 订阅数据的类型
 
 | ID  | 描述     |
 | --- | -------- |
@@ -120,7 +120,7 @@ enum AdjustType {
 | 3   | 经纪队列 |
 | 4   | 逐笔明细 |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum SubType {
@@ -132,7 +132,7 @@ enum SubType {
 }
 ```
 
-### CalcIndex - 计算指标
+## CalcIndex - 计算指标
 
 | ID  | 描述         | 支持的标的类型   |
 | --- | ------------ | ---------------- |
@@ -177,7 +177,7 @@ enum SubType {
 | 39  | Vega         | 仅期权适用       |
 | 40  | Rho          | 仅期权适用       |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum CalcIndex {
@@ -225,7 +225,7 @@ enum CalcIndex {
 }
 ```
 
-### Board - 标的板块
+## Board - 标的板块
 
 | 板块             | 描述                             |
 | ---------------- | -------------------------------- |

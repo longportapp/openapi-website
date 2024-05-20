@@ -1037,12 +1037,8 @@ SDK 的详细 API 文档请访问：
 
 ## 反馈及沟通
 
-- GitHub Issues: <https://github.com/longportapp/openapi-sdk/>
-
-- 微信沟通群（已满）：
-
-<img src="https://pub.lbkrs.com/files/202205/akTNrRTBrT5aMX4f/qrcode.jpg" className="max-w-2xl" />
-
-- 飞书沟通群：
-
-<img src="https://assets.lbkrs.com/uploads/2acb32b6-0718-4304-8d73-432a2d53aa97/feishu.png" className="max-w-2xl" />
+| 渠道               | 二维码 / 链接                                                                                  |
+| ------------------ | ---------------------------------------------------------------------------------------------- |
+| GitHub Issues      | <https://github.com/longportapp/openapi-sdk/issues>                                            |
+| 微信沟通群（已满） | <img src="https://pub.lbkrs.com/files/202205/akTNrRTBrT5aMX4f/qrcode.jpg" />                   |
+| 飞书沟通群         | <img src="https://assets.lbkrs.com/uploads/2acb32b6-0718-4304-8d73-432a2d53aa97/feishu.png" /> |

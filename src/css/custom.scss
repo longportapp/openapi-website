@@ -116,21 +116,6 @@ body {
   @apply text-sm text-gray-600;
 }
 
-.search-container {
-  .DocSearch-Button:hover {
-    background: var(--docsearch-searchbox-background);
-    color: var(--docsearch-muted-color);
-    box-shadow: inset 0 0 0 1px var(--docsearch-primary-color);
-  }
-  .DocSearch-Button-Keys {
-    visibility: hidden;
-  }
-  .DocSearch-Search-Icon {
-    width: 14px;
-    color: #a8acb3 !important;
-  }
-}
-
 .github-container {
   height: 36px;
   a {

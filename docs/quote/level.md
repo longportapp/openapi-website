@@ -39,7 +39,7 @@ slug: level
     </tr>
 </table>
 
-#### 频次限制
+## 频次限制
 
 :::caution
 

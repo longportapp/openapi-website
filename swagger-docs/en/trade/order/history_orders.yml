@@ -1,25 +1,28 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "This API is used to get history order"
-  version: "v1"
-  title: "Get History Order"
+  description: |
+    This API is used to get history order.
+
+    <SDKLinks module="trade" klass="TradeContext" method="history_orders" />
+  version: 'v1'
+  title: 'Get History Order'
 paths:
   /v1/trade/order/history:
     get:
-      access: "Trading Permissions"
+      access: 'Trading Permissions'
       parameters:
-        - name: "symbol"
-          type: "string"
+        - name: 'symbol'
+          type: 'string'
           in: query
-          description: "Stock symbol, use `ticker.region` format, example: `AAPL.US`"
+          description: 'Stock symbol, use `ticker.region` format, example: `AAPL.US`'
           required: false
-        - name: "status"
+        - name: 'status'
           type: string[]
           in: query
-          description: "[Order status](../trade-definition#orderstatus)<br/><br/>example: `status=FilledStatus&status=NewStatus`"
+          description: '[Order status](../trade-definition#orderstatus)<br/><br/>example: `status=FilledStatus&status=NewStatus`'
           required: false
         - name: side
-          type: "string"
+          type: 'string'
           in: query
           description: Order side<br/><br/>
             **Enum Value:**<br/>
@@ -27,30 +30,30 @@ paths:
             `Sell`
           required: false
         - name: market
-          type: "string"
+          type: 'string'
           in: query
           description: Market<br/><br/>
             **Enum Value:**<br/>
             `US` - United States of America Market<br/>
             `HK` - Hong Kong Market
           required: false
-        - name: "start_at"
-          type: "string"
+        - name: 'start_at'
+          type: 'string'
           required: false
-          description: "Start time, formatted as a timestamp (second), example: `1650410999`.<br/><br/> If the start time is null, the default is the 90 days before of the end time or 90 days before of the current time."
-        - name: "end_at"
-          type: "string"
+          description: 'Start time, formatted as a timestamp (second), example: `1650410999`.<br/><br/> If the start time is null, the default is the 90 days before of the end time or 90 days before of the current time.'
+        - name: 'end_at'
+          type: 'string'
           required: false
-          description: "End time, formatted as a timestamp (second), example: `1650410999`. <br/><br/> If the end time is null, the default is the current time or 90 days after of the start time."
+          description: 'End time, formatted as a timestamp (second), example: `1650410999`. <br/><br/> If the end time is null, the default is the current time or 90 days after of the start time.'
       responses:
-        "200":
-          description: "Get History Orders Success"
+        '200':
+          description: 'Get History Orders Success'
           schema:
-            $ref: "#/definitions/history_orders_rsp"
-        "400":
-          description: "The query failed with an error in the request parameter."
+            $ref: '#/definitions/history_orders_rsp'
+        '400':
+          description: 'The query failed with an error in the request parameter.'
       request_body:
-        type: "python"
+        type: 'python'
         value: |
           from datetime import datetime
           from longport.openapi import TradeContext, Config, OrderStatus, OrderSide, Market
@@ -69,145 +72,145 @@ paths:
           print(resp)
       response_body:
         {
-          "code": 0,
-          "message": "success",
-          "data":
+          'code': 0,
+          'message': 'success',
+          'data':
             {
-              "orders":
+              'orders':
                 [
                   {
-                    "currency": "HKD",
-                    "executed_price": "0.000",
-                    "executed_quantity": "0",
-                    "expire_date": "",
-                    "last_done": "",
-                    "limit_offset": "",
-                    "msg": "",
-                    "order_id": "706388312699592704",
-                    "order_type": "ELO",
-                    "outside_rth": "UnknownOutsideRth",
-                    "price": "11.900",
-                    "quantity": "200",
-                    "side": "Buy",
-                    "status": "RejectedStatus",
-                    "stock_name": "Bank of East Asia Ltd/The",
-                    "submitted_at": "1651644897",
-                    "symbol": "23.HK",
-                    "tag": "Normal",
-                    "time_in_force": "Day",
-                    "trailing_amount": "",
-                    "trailing_percent": "",
-                    "trigger_at": "0",
-                    "trigger_price": "",
-                    "trigger_status": "NOT_USED",
-                    "updated_at": "1651644898",
-                    "remark": "",
+                    'currency': 'HKD',
+                    'executed_price': '0.000',
+                    'executed_quantity': '0',
+                    'expire_date': '',
+                    'last_done': '',
+                    'limit_offset': '',
+                    'msg': '',
+                    'order_id': '706388312699592704',
+                    'order_type': 'ELO',
+                    'outside_rth': 'UnknownOutsideRth',
+                    'price': '11.900',
+                    'quantity': '200',
+                    'side': 'Buy',
+                    'status': 'RejectedStatus',
+                    'stock_name': 'Bank of East Asia Ltd/The',
+                    'submitted_at': '1651644897',
+                    'symbol': '23.HK',
+                    'tag': 'Normal',
+                    'time_in_force': 'Day',
+                    'trailing_amount': '',
+                    'trailing_percent': '',
+                    'trigger_at': '0',
+                    'trigger_price': '',
+                    'trigger_status': 'NOT_USED',
+                    'updated_at': '1651644898',
+                    'remark': '',
                   },
                 ],
             },
         }
 definitions:
   history_orders_rsp:
-    required: ["has_more"]
+    required: ['has_more']
     properties:
       has_more:
         type: boolean
-        description: "has more orders record.<br/><br/>The maximum number of orders per query is 1000, if the number of results exceeds 1000, then has_more will be true"
+        description: 'has more orders record.<br/><br/>The maximum number of orders per query is 1000, if the number of results exceeds 1000, then has_more will be true'
         required: true
       orders:
-        type: "object[]"
+        type: 'object[]'
         description: Order Detail
         required:
           [
-            "order_id",
-            "status",
-            "stock_name",
-            "quantity",
-            "executed_quantity",
-            "price",
-            "executed_price",
-            "submitted_at",
-            "side",
-            "symbol",
-            "order_type",
-            "last_done",
-            "trigger_price",
-            "msg",
-            "tag",
-            "time_in_force",
-            "expire_date",
-            "updated_at",
-            "trigger_at",
-            "trailing_amount",
-            "trailing_percent",
-            "limit_offset",
-            "trigger_status",
-            "currency",
-            "outside_rth",
-            "remark",
+            'order_id',
+            'status',
+            'stock_name',
+            'quantity',
+            'executed_quantity',
+            'price',
+            'executed_price',
+            'submitted_at',
+            'side',
+            'symbol',
+            'order_type',
+            'last_done',
+            'trigger_price',
+            'msg',
+            'tag',
+            'time_in_force',
+            'expire_date',
+            'updated_at',
+            'trigger_at',
+            'trailing_amount',
+            'trailing_percent',
+            'limit_offset',
+            'trigger_status',
+            'currency',
+            'outside_rth',
+            'remark',
           ]
         properties:
           order_id:
-            type: "string"
+            type: 'string'
             description: Order ID
             required: true
           status:
-            type: "string"
-            description: "[Order Status](../trade-definition#orderstatus)"
+            type: 'string'
+            description: '[Order Status](../trade-definition#orderstatus)'
             required: true
           stock_name:
-            type: "string"
+            type: 'string'
             description: Stock Name
             required: true
           quantity:
-            type: "string"
+            type: 'string'
             description: Submitted Quantity
             required: true
           executed_quantity:
-            type: "string"
+            type: 'string'
             description: Executed Quantity.<br/><br/>when the order is not filled, value is 0
             required: true
           price:
-            type: "string"
+            type: 'string'
             description: Submitted Price.<br/><br/>when market condition order is not triggered, value is empty string
             required: true
           executed_price:
-            type: "string"
+            type: 'string'
             description: Executed Price.<br/><br/>when the order is not filled, value is 0
             required: true
           submitted_at:
-            type: "string"
+            type: 'string'
             description: Submitted Time
             required: true
           side:
-            type: "string"
+            type: 'string'
             description: Order Side<br/><br/>
               **Enum Value:**<br/>
               `Buy`<br/>
               `Sell`
             required: true
           symbol:
-            type: "string"
-            description: "Stock symbol, use `ticker.region` format, example: `AAPL.US`"
+            type: 'string'
+            description: 'Stock symbol, use `ticker.region` format, example: `AAPL.US`'
             required: true
           order_type:
-            type: "string"
-            description: "[Order Type](../trade-definition#ordertype)"
+            type: 'string'
+            description: '[Order Type](../trade-definition#ordertype)'
             required: true
           last_done:
-            type: "string"
+            type: 'string'
             description: Last done.<br/><br/>when the order is not filled, value is empty string
             required: true
           trigger_price:
-            type: "string"
-            description: "`LIT` / `MIT` Order Trigger Price.<br/><br/>When the order is not `LIT` / `MIT` order, value is empty string"
+            type: 'string'
+            description: '`LIT` / `MIT` Order Trigger Price.<br/><br/>When the order is not `LIT` / `MIT` order, value is empty string'
             required: true
           msg:
-            type: "string"
+            type: 'string'
             description: Rejected message or remark, default value is empty string.
             required: true
           tag:
-            type: "string"
+            type: 'string'
             description: Order tag<br/><br/>
               **Enum Value**<br/>
               `Normal` - Normal Order<br/>
@@ -215,40 +218,40 @@ definitions:
               `Grey` - Grey Order
             required: true
           time_in_force:
-            type: "string"
-            description: "
+            type: 'string'
+            description: '
               Time in force Type<br/><br/>
               **Enum Value:**<br/>
               `Day` - Day Order<br/>
               `GTC` - Good Til Canceled Order<br/>
-              `GTD` - Good Til Date Order"
+              `GTD` - Good Til Date Order'
             required: true
           expire_date:
-            type: "string"
-            description: "Long term order expire date, format: `YYYY-MM-DD`, example: `2022-12-05`.<br/><br/>When not a long term order, default value is empty string"
+            type: 'string'
+            description: 'Long term order expire date, format: `YYYY-MM-DD`, example: `2022-12-05`.<br/><br/>When not a long term order, default value is empty string'
             required: true
           updated_at:
-            type: "string"
+            type: 'string'
             required: true
             description: Last updated time, formatted as a timestamp (second)
           trigger_at:
-            type: "string"
+            type: 'string'
             required: true
             description: Conditional order trigger time. formatted as a timestamp (second)
           trailing_amount:
-            type: "string"
+            type: 'string'
             required: true
-            description: "`TSLPAMT` order trailing amount.<br/><br/>When the order is not `TSLPAMT` order, value is empty string"
+            description: '`TSLPAMT` order trailing amount.<br/><br/>When the order is not `TSLPAMT` order, value is empty string'
           trailing_percent:
-            type: "string"
+            type: 'string'
             required: true
-            description: "`TSLPPCT` order trailing percent.<br/><br/>When the order is not `TSLPPCT` order, value is empty string"
+            description: '`TSLPPCT` order trailing percent.<br/><br/>When the order is not `TSLPPCT` order, value is empty string'
           limit_offset:
-            type: "string"
+            type: 'string'
             required: true
-            description: "`TSLPPCT` order limit offset amount.<br/><br/>When the order is not `TSLPPCT` order, value is empty string"
+            description: '`TSLPPCT` order limit offset amount.<br/><br/>When the order is not `TSLPPCT` order, value is empty string'
           trigger_status:
-            type: "string"
+            type: 'string'
             required: true
             description: Conditional Order Trigger Status<br/>
               When an order is not a conditional order or a conditional order is not triggered, the trigger status is NOT_USED<br/><br/>
@@ -258,11 +261,11 @@ definitions:
               `ACTIVE`<br />
               `RELEASED`
           currency:
-            type: "string"
+            type: 'string'
             description: Currency
             required: true
           outside_rth:
-            type: "string"
+            type: 'string'
             required: true
             description: Enable or disable outside regular trading hours<br/>
               Default is `UnknownOutsideRth` when the order is not a US stock<br/><br/>
@@ -271,6 +274,6 @@ definitions:
               `ANY_TIME` - Any time<br/>
               `OVERNIGHT` - Overnight"
           remark:
-            type: "string"
+            type: 'string'
             description: Remark
             required: true

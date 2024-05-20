@@ -963,12 +963,10 @@ SDK 的詳細 API 文檔請訪問：
 
 <https://longportapp.github.io/openapi-sdk/>
 
-- GitHub Issues: <https://github.com/longportapp/openapi-sdk/>
+## 回饋及溝通
 
-- 微信溝通羣（已滿）：
-
-<img src="https://pub.lbkrs.com/files/202205/akTNrRTBrT5aMX4f/qrcode.jpg" className="max-w-2xl" />
-
-- 飛書溝通羣：
-
-<img src="https://assets.lbkrs.com/uploads/2acb32b6-0718-4304-8d73-432a2d53aa97/feishu.png" className="max-w-2xl" />
+| 頻道                 | 二維碼 / 連結                                                                                  |
+| -------------------- | ---------------------------------------------------------------------------------------------- |
+| GitHub Issues        | <https://github.com/longportapp/openapi-sdk/issues>                                            |
+| 微信溝通群（已完成） | <img src="https://pub.lbkrs.com/files/202205/akTNrRTBrT5aMX4f/qrcode.jpg" />                   |
+| 飛書溝通群           | <img src="https://assets.lbkrs.com/uploads/2acb32b6-0718-4304-8d73-432a2d53aa97/feishu.png" /> |

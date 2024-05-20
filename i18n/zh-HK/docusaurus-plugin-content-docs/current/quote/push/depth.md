@@ -7,6 +7,8 @@ sidebar_position: 2
 
 已訂閱標的的實時盤口數據推送。
 
+<SDKLinks module="quote" klass="QuoteContext" method="set_on_depth" go="OnDepth" />
+
 :::info
 
 [業務指令](../../socket/protocol/push)：`102`
@@ -17,20 +19,20 @@ sidebar_position: 2
 
 ### Properties
 
-| Name        | Type     | Description             |
-|-------------|----------|-------------------------|
+| Name        | Type     | Description               |
+| ----------- | -------- | ------------------------- |
 | symbol      | string   | 標的代碼，例如：`AAPL.US` |
-| sequence    | int64    | 序列號                  |
-| ask         | object[] | 賣盤                    |
-| ∟ position  | int32    | 檔位                    |
-| ∟ price     | string   | 價格                    |
-| ∟ volume    | int64    | 掛單量                  |
-| ∟ order_num | int64    | 訂單數量                |
-| bid         | object[] | 買盤                    |
-| ∟ position  | int32    | 檔位                    |
-| ∟ price     | string   | 價格                    |
-| ∟ volume    | int64    | 掛單量                  |
-| ∟ order_num | int64    | 訂單數量                |
+| sequence    | int64    | 序列號                    |
+| ask         | object[] | 賣盤                      |
+| ∟ position  | int32    | 檔位                      |
+| ∟ price     | string   | 價格                      |
+| ∟ volume    | int64    | 掛單量                    |
+| ∟ order_num | int64    | 訂單數量                  |
+| bid         | object[] | 買盤                      |
+| ∟ position  | int32    | 檔位                      |
+| ∟ price     | string   | 價格                      |
+| ∟ volume    | int64    | 掛單量                    |
+| ∟ order_num | int64    | 訂單數量                  |
 
 ### Protobuf
 

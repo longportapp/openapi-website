@@ -1,26 +1,29 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "该接口用于获取用户每个币种可用、可取、冻结、待结算金额、在途资金 (基金申购赎回) 信息"
-  version: "v1"
-  title: "获取账户资金"
+  description: |
+    该接口用于获取用户每个币种可用、可取、冻结、待结算金额、在途资金 (基金申购赎回) 信息。
+
+    <SDKLinks module="trade" klass="TradeContext" method="account_balance" />
+  version: 'v1'
+  title: '获取账户资金'
 paths:
   /v1/asset/account:
     get:
       access:
       parameters:
-        - name: "currency"
-          type: "string"
+        - name: 'currency'
+          type: 'string'
           description: 币种（HKD、USD、CNH）
           required: false
       responses:
-        "200":
-          description: "返回成功"
+        '200':
+          description: '返回成功'
           schema:
-            $ref: "#/definitions/accountcash_rsp"
-        "400":
-          description: "内部错误"
+            $ref: '#/definitions/accountcash_rsp'
+        '400':
+          description: '内部错误'
       request_body:
-        type: "python"
+        type: 'python'
         value: |
           # 获取账户资金
           # https://open.longportapp.com/docs/trade/asset/account
@@ -32,37 +35,37 @@ paths:
           print(resp)
       response_body:
         {
-          "code": 0,
-          "data":
+          'code': 0,
+          'data':
             {
-              "list":
+              'list':
                 [
                   {
-                    "total_cash": "1759070010.72",
-                    "max_finance_amount": "977582000",
-                    "remaining_finance_amount": "0",
-                    "risk_level": "1",
-                    "margin_call": "2598051051.50",
-                    "currency": "HKD",
-                    "net_assets": "24145.90",
-                    "init_margin": "1540.09",
-                    "maintenance_margin": "1540.09",
-                    "buy_power": "1759070.12",
-                    "cash_infos":
+                    'total_cash': '1759070010.72',
+                    'max_finance_amount': '977582000',
+                    'remaining_finance_amount': '0',
+                    'risk_level': '1',
+                    'margin_call': '2598051051.50',
+                    'currency': 'HKD',
+                    'net_assets': '24145.90',
+                    'init_margin': '1540.09',
+                    'maintenance_margin': '1540.09',
+                    'buy_power': '1759070.12',
+                    'cash_infos':
                       [
                         {
-                          "withdraw_cash": "97592.30",
-                          "available_cash": "195902464.37",
-                          "frozen_cash": "11579339.13",
-                          "settling_cash": "207288537.81",
-                          "currency": "HKD",
+                          'withdraw_cash': '97592.30',
+                          'available_cash': '195902464.37',
+                          'frozen_cash': '11579339.13',
+                          'settling_cash': '207288537.81',
+                          'currency': 'HKD',
                         },
                         {
-                          "withdraw_cash": "199893416.74",
-                          "available_cash": "199893416.74",
-                          "frozen_cash": "28723.76",
-                          "settling_cash": "-276806.51",
-                          "currency": "USD",
+                          'withdraw_cash': '199893416.74',
+                          'available_cash': '199893416.74',
+                          'frozen_cash': '28723.76',
+                          'settling_cash': '-276806.51',
+                          'currency': 'USD',
                         },
                       ],
                   },
@@ -74,7 +77,7 @@ definitions:
   accountcash_rsp:
     properties:
       list:
-        type: "object[]"
+        type: 'object[]'
         description: 账户资金信息
         required:
           - total_cash
@@ -89,51 +92,51 @@ definitions:
           - buy_power
         properties:
           total_cash:
-            type: "string"
+            type: 'string'
             description: 现金总额
             required: true
           max_finance_amount:
-            type: "string"
+            type: 'string'
             description: 最大融资金额
             required: true
           remaining_finance_amount:
-            type: "string"
+            type: 'string'
             description: 剩余融资金额
             required: true
           risk_level:
-            type: "string"
+            type: 'string'
             description: 风控等级 <br/> <br/> <b>可选值:</b><br/> `0` - 安全 <br/> `1` - 中风险<br/> `2` - 预警<br/> `3` - 危险
             required: true
           margin_call:
-            type: "string"
+            type: 'string'
             description: 追缴保证金
             required: true
           net_assets:
-            type: "string"
+            type: 'string'
             description: 净资产
             required: true
           init_margin:
-            type: "string"
+            type: 'string'
             description: 初始保证金
             required: true
           maintenance_margin:
-            type: "string"
+            type: 'string'
             description: 维持保证金
             required: true
           currency:
-            type: "string"
+            type: 'string'
             description: 币种
             required: true
           market:
-            type: "string"
+            type: 'string'
             description: 市场
             required: true
           buy_power:
-            type: "string"
+            type: 'string'
             description: 购买力
             required: true
           cash_infos:
-            type: "object[]"
+            type: 'object[]'
             description: 现金详情
             required:
               - currency
@@ -143,21 +146,21 @@ definitions:
               - settling_cash
             properties:
               withdraw_cash:
-                type: "string"
+                type: 'string'
                 description: 可提现金
                 required: true
               available_cash:
-                type: "string"
+                type: 'string'
                 description: 可用现金
                 required: true
               frozen_cash:
-                type: "string"
+                type: 'string'
                 description: 冻结现金
               settling_cash:
-                type: "string"
+                type: 'string'
                 description: 待结算现金
                 required: true
               currency:
-                type: "string"
+                type: 'string'
                 description: 币种
                 required: true

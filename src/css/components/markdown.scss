@@ -334,7 +334,14 @@
 .markdown kbd {
   display: inline-block;
   padding: 3px 5px;
-  font: 11px ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  font:
+    11px ui-monospace,
+    SFMono-Regular,
+    SF Mono,
+    Menlo,
+    Consolas,
+    Liberation Mono,
+    monospace;
   line-height: 10px;
   color: var(--color-fg-default);
   vertical-align: middle;
@@ -423,14 +430,28 @@
 
 .markdown tt,
 .markdown code {
-  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    SF Mono,
+    Menlo,
+    Consolas,
+    Liberation Mono,
+    monospace;
   font-size: 12px;
 }
 
 .markdown pre {
   margin-top: 0;
   margin-bottom: 0;
-  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    SF Mono,
+    Menlo,
+    Consolas,
+    Liberation Mono,
+    monospace;
   font-size: 12px;
   word-wrap: normal;
 }
@@ -892,7 +913,7 @@
   margin: 0;
   font-size: 85%;
   background-color: var(--color-neutral-muted);
-  border-radius: 6px;
+  border-radius: 3px;
   border: 0;
 }
 
@@ -938,7 +959,7 @@
   font-size: 85%;
   line-height: 1.45;
   background-color: var(--color-canvas-subtle);
-  border-radius: 6px;
+  border-radius: 3px;
 }
 
 .markdown pre code,

@@ -1,5 +1,5 @@
 {{? data.operation.request_body }}
-#### Request Example
+### Request Example
 
 
 {{? data.operation.request_body.type == "json"}}
