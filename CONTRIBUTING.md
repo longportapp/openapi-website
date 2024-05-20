@@ -59,6 +59,8 @@ And please following the [Swagger Specification](https://swagger.io/specificatio
 
 If you want to edit the documentation locally, you can follow the steps below.
 
+Install [Bun](https://bun.sh) first.
+
 ```shell
 $ bun install
 
