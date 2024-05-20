@@ -43,7 +43,7 @@ ctx.unsubscribe([TopicType.Private])
 <SDKLinks title={false} module="trade" klass="TradeContext" method="subscribe" />
 
 :::info
-指令: `16`
+指令：`16`
 :::
 
 我们可以通过 `subscribe` 方法订阅交易推送，订阅成功后，服务端会将相应的推送消息推送给客户端，SDK 的 `set_on_order_changed` 可以设置推送消息的回调函数，当收到交易推送消息时，会调用该回调函数。
@@ -103,7 +103,7 @@ message UnsubResponse {
 <SDKLinks title={false} module="trade" klass="TradeContext" method="set_on_order_changed" go="OnTrade" />
 
 :::info
-指令: `18`
+指令：`18`
 :::
 
 Protobuf 定义如下：
