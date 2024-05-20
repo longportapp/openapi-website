@@ -119,11 +119,11 @@ message ReconnectRequest {
 
 A:
 
-- 從環境變數建立 `Config` 對象
+-  从环境变量创建 `Config` 对象
 
-設定環境變數 `LONGPORT_ENABLE_OVERNIGHT` 為 `true`
+设置环境变量 `LONGPORT_ENABLE_OVERNIGHT` 为 `true`
 
-- 從建構函式建立 `Config` 對象
+- 从构造函数创建 `Config` 对象
 
 ```python
 config = Config(app_key="your_app_key", app_secret="your_app_secret", access_token="your_access_token", enable_overnight=True)
