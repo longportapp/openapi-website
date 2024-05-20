@@ -115,7 +115,7 @@ message ReconnectRequest {
 
 - After turning on the night trading quotations, both the pull and push interfaces will be able to obtain the night trading quotations during the night trading period.
 
-## Q7：Enable Overnight quote in OpenApi SDK
+## Q7: Enable Overnight quote in OpenApi SDK
 
 A:
 
