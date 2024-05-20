@@ -7,6 +7,8 @@ sidebar_position: 17
 
 該接口用於獲取標的當日的資金流向。
 
+<SDKLinks module="quote" klass="QuoteContext" method="capital_flow" />
+
 :::info
 [業務指令](../../socket/biz-command)：`24`
 :::

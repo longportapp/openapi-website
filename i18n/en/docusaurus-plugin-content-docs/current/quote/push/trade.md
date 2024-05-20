@@ -7,6 +7,8 @@ sidebar_position: 4
 
 Real-time trades data push of the subscribed security.
 
+<SDKLinks module="quote" klass="QuoteContext" method="set_on_trades" go="OnTrade" />
+
 :::info
 
 [Business Command](../../socket/protocol/push): `104`
@@ -18,7 +20,7 @@ Real-time trades data push of the subscribed security.
 ### Properties
 
 | Name            | Type     | Description                                                                                      |
-|-----------------|----------|--------------------------------------------------------------------------------------------------|
+| --------------- | -------- | ------------------------------------------------------------------------------------------------ |
 | symbol          | string   | Security code, for example: `AAPL.US`                                                            |
 | sequence        | int64    | Sequence number                                                                                  |
 | trades          | object[] | Trades data                                                                                      |

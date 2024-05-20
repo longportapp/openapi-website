@@ -5,7 +5,7 @@ title: Definition
 slug: objects
 ---
 
-### TradeStatus - Security Status
+## TradeStatus - Security Status
 
 Security Status
 
@@ -23,7 +23,7 @@ Security Status
 | 9   | Warrant To BeListed |
 | 10  | Suspend             |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum TradeStatus {
@@ -41,7 +41,7 @@ enum TradeStatus {
 }
 ```
 
-### TradeSession - Trading Session
+## TradeSession - Trading Session
 
 Trading Session
 
@@ -52,7 +52,7 @@ Trading Session
 | 2   | Post-Tradeing     |
 | 3   | OverNight-Trading |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum TradeSession {
@@ -62,7 +62,7 @@ enum TradeSession {
 }
 ```
 
-### Period - Candlestick Period
+## Period - Candlestick Period
 
 | ID   | Description     |
 | ---- | --------------- |
@@ -76,7 +76,7 @@ enum TradeSession {
 | 3000 | One Month       |
 | 4000 | One Year        |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum Period {
@@ -93,14 +93,14 @@ enum Period {
 }
 ```
 
-### AdjustType - Candlestick Adjustment Type
+## AdjustType - Candlestick Adjustment Type
 
 | ID  | Description    |
 | --- | -------------- |
 | 0   | Actual         |
 | 1   | Adjust forward |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum AdjustType {
@@ -109,7 +109,7 @@ enum AdjustType {
 }
 ```
 
-### SubType - Quote Type Of Subscription
+## SubType - Quote Type Of Subscription
 
 | ID  | Description |
 | --- | ----------- |
@@ -118,7 +118,7 @@ enum AdjustType {
 | 3   | Broker      |
 | 4   | Trade       |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum SubType {
@@ -130,7 +130,7 @@ enum SubType {
 }
 ```
 
-### CalcIndex - Calculate Index
+## CalcIndex - Calculate Index
 
 | ID  | Description                        | Applicable Security Type |
 | --- | ---------------------------------- | ------------------------ |
@@ -175,7 +175,7 @@ enum SubType {
 | 39  | Vega                               | Only Option              |
 | 40  | Rho                                | Only Option              |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum CalcIndex {
@@ -223,7 +223,7 @@ enum CalcIndex {
 }
 ```
 
-### Board - Security Board
+## Board - Security Board
 
 | Board            | Description                                   |
 | ---------------- | --------------------------------------------- |

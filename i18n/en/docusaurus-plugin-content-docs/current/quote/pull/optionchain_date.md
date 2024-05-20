@@ -7,6 +7,8 @@ sidebar_position: 11
 
 This API is used to obtain the the list of expiration dates of option chain
 
+<SDKLinks module="quote" klass="QuoteContext" method="option_chain_expiry_date_list" />
+
 :::info
 
 [Business Command](../../socket/biz-command): `20`
@@ -18,7 +20,7 @@ This API is used to obtain the the list of expiration dates of option chain
 ### Parameters
 
 | Name   | Type   | Required | Description                                                    |
-|--------|--------|----------|----------------------------------------------------------------|
+| ------ | ------ | -------- | -------------------------------------------------------------- |
 | symbol | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK` |
 
 ### Protobuf
@@ -49,8 +51,8 @@ print(resp)
 
 ### Response Properties
 
-| Name        | Type     | Description                                       |
-|-------------|----------|---------------------------------------------------|
+| Name        | Type     | Description                                        |
+| ----------- | -------- | -------------------------------------------------- |
 | expiry_date | string[] | option chain expiry dates list，in `YYMMDD` format |
 
 ### Protobuf
@@ -92,7 +94,7 @@ message OptionChainDateListResponse {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description        | Troubleshooting Suggestions                                   |
-|---------------------|---------------------|--------------------|---------------------------------------------------------------|
+| ------------------- | ------------------- | ------------------ | ------------------------------------------------------------- |
 | 3                   | 301600              | Invalid request    | Invalid request parameters or unpacking request failed        |
 | 3                   | 301606              | Request rate limit | Reduce the frequency of requests                              |
 | 7                   | 301602              | Server error       | Please try again or contact a technician to resolve the issue |

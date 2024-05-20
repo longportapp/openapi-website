@@ -7,6 +7,8 @@ sidebar_position: 15
 
 This API is used to obtain the daily trading hours of each market.
 
+<SDKLinks module="quote" klass="QuoteContext" method="trading_session" />
+
 :::info
 
 [Business Command](../../socket/biz-command): `8`
@@ -36,7 +38,7 @@ print(resp)
 ### Response Properties
 
 | Name                 | Type     | Description                                                                                     |
-|----------------------|----------|-------------------------------------------------------------------------------------------------|
+| -------------------- | -------- | ----------------------------------------------------------------------------------------------- |
 | market_trade_session | object[] | Trading session data                                                                            |
 | ∟ market             | string   | Market<br/><br/>`US` - US market<br/>`HK` - HK market<br/>`CN` - CN market<br/>`SG` - SG market |
 | ∟ trade_session      | object[] | Trading session                                                                                 |
@@ -133,7 +135,7 @@ message TradePeriod {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description        | Troubleshooting Suggestions                                   |
-|---------------------|---------------------|--------------------|---------------------------------------------------------------|
+| ------------------- | ------------------- | ------------------ | ------------------------------------------------------------- |
 | 3                   | 301600              | Invalid request    | Invalid request parameters or unpacking request failed        |
 | 3                   | 301606              | Request rate limit | Reduce the frequency of requests                              |
 | 7                   | 301602              | Server error       | Please try again or contact a technician to resolve the issue |

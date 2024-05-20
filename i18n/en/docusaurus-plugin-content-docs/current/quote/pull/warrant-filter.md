@@ -7,6 +7,8 @@ sidebar_position: 14
 
 This API is used to obtain the quotes of HK warrants, and supports sorting and filtering.
 
+<SDKLinks module="quote" klass="QuoteContext" method="warrant_list" />
+
 :::info
 
 [Business Command](../../socket/biz-command): `23`

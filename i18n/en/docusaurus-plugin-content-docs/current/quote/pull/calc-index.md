@@ -7,6 +7,8 @@ sidebar_position: 19
 
 This API is used to obtain the calculate indexes of securities.
 
+<SDKLinks module="quote" klass="QuoteContext" method="calc_indexes" go="CalcIndex" />
+
 :::info
 [Business Command](../../socket/biz-command)：`26`
 :::

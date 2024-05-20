@@ -2,10 +2,12 @@
 id: quote_unsubscribe
 title: Unsubscribe Quote
 slug: unsubscribe
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 This API is used to unsubscribe quote.
+
+<SDKLinks module="quote" klass="QuoteContext" method="unsubscribe" />
 
 :::info
 
@@ -18,7 +20,7 @@ This API is used to unsubscribe quote.
 ### Parameters
 
 | Name      | Type     | Required | Description                                                                                                                                                               |
-|-----------|----------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | symbol    | string[] | Yes      | Security code list, for example: `[700.HK]` <br /><br />**Check rules:**<br />The maximum number of symbols that can be passed in each request is `500`                   |
 | sub_type  | int32[]  | Yes      | Subscription type list, for example: `[1,2]`, see [SubType](../objects#subtype---quote-type-of-subscription)                                                              |
 | unsub_all | bool     | Yes      | Is unsubscribe all. <br />- When `symbol` is empty, unsubscribe all subscriptions<br />- When `symbol` is not empty, unsubscribe these all subscriptions of these symbols |
@@ -37,7 +39,7 @@ message UnsubscribeRequest {
 
 ```python
 # Unsubscribe Quote
-# https://open.longportapp.com/docs/quote/subscribe/unsubscribe
+#
 # To subscribe quotes data, please check whether "Developers" - "Quote authority" is correct.
 # https://open.longportapp.com/account
 #
@@ -66,7 +68,7 @@ message UnsubscribeResponse{
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description                | Troubleshooting Suggestions                                   |
-|---------------------|---------------------|----------------------------|---------------------------------------------------------------|
+| ------------------- | ------------------- | -------------------------- | ------------------------------------------------------------- |
 | 3                   | 301600              | Invalid request            | Invalid request parameters or unpacking request failed        |
 | 3                   | 301606              | Request rate limit         | Reduce the frequency of requests                              |
 | 7                   | 301602              | Server error               | Please try again or contact a technician to resolve the issue |
