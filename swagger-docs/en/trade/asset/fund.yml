@@ -1,26 +1,30 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "The API is used to obtain fund position information including account, fund code, holding share, cost net worth, current net worth, and currency."
-  version: "v1"
-  title: "Get Fund Positions"
+  description: |
+    The API is used to obtain fund position information including account, fund code, holding share, cost net worth,
+    current net worth, and currency.
+
+    <SDKLinks module="trade" klass="TradeContext" method="fund_positions" />
+  version: 'v1'
+  title: 'Get Fund Positions'
 paths:
   /v1/asset/fund:
     get:
       access:
       parameters:
-        - name: "symbol"
-          type: "string[]"
+        - name: 'symbol'
+          type: 'string[]'
           description: Fund code, in `ISIN` format, E.g:`HK0000676327` <a href="https://en.wikipedia.org/wiki/International_Securities_Identification_Number">ISIN explain</a>
           required: false
       responses:
-        "200":
-          description: "Success"
+        '200':
+          description: 'Success'
           schema:
-            $ref: "#/definitions/fund_rsp"
-        "400":
-          description: "Internal Error"
+            $ref: '#/definitions/fund_rsp'
+        '400':
+          description: 'Internal Error'
       request_body:
-        type: "python"
+        type: 'python'
         value: |
           # Get Fund Position
           # https://open.longportapp.com/docs/trade/asset/fund
@@ -32,23 +36,23 @@ paths:
           print(resp)
       response_body:
         {
-          "code": 0,
-          "data":
+          'code': 0,
+          'data':
             {
-              "list":
+              'list':
                 [
                   {
-                    "account_channel": "lb",
-                    "fund_info":
+                    'account_channel': 'lb',
+                    'fund_info':
                       [
                         {
-                          "symbol": "HK0000447943",
-                          "symbol_name": "GAOTENG EMERGING MARKETS PLUS  LONG/SHORT FIXED INCOME ALPHA FUND",
-                          "currency": "USD",
-                          "holding_units": "5.000",
-                          "current_net_asset_value": "0",
-                          "cost_net_asset_value": "0.00",
-                          "net_asset_value_day": "1649865600",
+                          'symbol': 'HK0000447943',
+                          'symbol_name': 'GAOTENG EMERGING MARKETS PLUS  LONG/SHORT FIXED INCOME ALPHA FUND',
+                          'currency': 'USD',
+                          'holding_units': '5.000',
+                          'current_net_asset_value': '0',
+                          'cost_net_asset_value': '0.00',
+                          'net_asset_value_day': '1649865600',
                         },
                       ],
                   },
@@ -60,8 +64,8 @@ definitions:
   fund_rsp:
     properties:
       list:
-        type: "object[]"
-        description: "stock holding information"
+        type: 'object[]'
+        description: 'stock holding information'
         required:
           - account_channel
         properties:
@@ -70,7 +74,7 @@ definitions:
             description: account type
             required: true
           fund_info:
-            type: "object[]"
+            type: 'object[]'
             description: Fund Details
             required:
               - symbol
@@ -81,26 +85,26 @@ definitions:
               - cost_net_asset_value
             properties:
               symbol:
-                type: "string"
+                type: 'string'
                 description: Fund ISIN code
                 required: true
               current_net_asset_value:
-                type: "string"
+                type: 'string'
                 description: current Equity
                 required: true
               net_asset_value_day:
-                type: "string"
+                type: 'string'
                 description: current Equity time
                 required: true
               symbol_name:
-                type: "string"
+                type: 'string'
                 description: Fund name
                 required: true
               currency:
-                type: "string"
+                type: 'string'
                 description: Currency
                 required: true
               cost_net_asset_value:
-                type: "string"
+                type: 'string'
                 description: Net Cost
                 required: true

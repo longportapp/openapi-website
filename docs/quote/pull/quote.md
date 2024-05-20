@@ -7,6 +7,8 @@ sidebar_position: 2
 
 该接口用于获取标的的实时行情 (支持所有类型标的）。
 
+<SDKLinks module="quote" klass="QuoteContext" method="quote" />
+
 :::info
 [业务指令](../../socket/biz-command)：`11`
 :::

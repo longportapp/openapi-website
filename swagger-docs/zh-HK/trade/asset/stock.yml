@@ -1,26 +1,29 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "該接口用於獲取包括賬戶、股票代碼、持倉股數、可用股數、持倉均價（按賬戶設置計算均價方式）、幣種在內的股票持倉信息"
-  version: "v1"
-  title: "獲取股票持倉"
+  description: |
+    該接口用於獲取包括賬戶、股票代碼、持倉股數、可用股數、持倉均價（按賬戶設置計算均價方式）、幣種在內的股票持倉信息。
+
+    <SDKLinks module="trade" klass="TradeContext" method="stock_positions" />
+  version: 'v1'
+  title: '獲取股票持倉'
 paths:
   /v1/asset/stock:
     get:
       access:
       parameters:
-        - name: "symbol"
-          type: "string[]"
-          description: "股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US`"
+        - name: 'symbol'
+          type: 'string[]'
+          description: '股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US`'
           required: false
       responses:
-        "200":
-          description: "返回成功"
+        '200':
+          description: '返回成功'
           schema:
-            $ref: "#/definitions/stock_rsp"
-        "400":
-          description: "內部錯誤"
+            $ref: '#/definitions/stock_rsp'
+        '400':
+          description: '內部錯誤'
       request_body:
-        type: "python"
+        type: 'python'
         value: |
           # 獲取股票持倉
           # https://open.longportapp.com/docs/trade/asset/stock
@@ -32,88 +35,88 @@ paths:
           print(resp)
       response_body:
         {
-          "code": 0,
-          "data":
+          'code': 0,
+          'data':
             {
-              "list":
+              'list':
                 [
                   {
-                    "account_channel": "lb",
-                    "stock_info":
+                    'account_channel': 'lb',
+                    'stock_info':
                       [
                         {
-                          "symbol": "700.HK",
-                          "symbol_name": "騰訊控股",
-                          "currency": "HKD",
-                          "quantity": "650",
-                          "market": "HK",
-                          "available_quantity": "-450",
-                          "cost_price": "457.53",
-                          "init_quantity": "214"
+                          'symbol': '700.HK',
+                          'symbol_name': '騰訊控股',
+                          'currency': 'HKD',
+                          'quantity': '650',
+                          'market': 'HK',
+                          'available_quantity': '-450',
+                          'cost_price': '457.53',
+                          'init_quantity': '214',
                         },
                         {
-                          "symbol": "9991.HK",
-                          "symbol_name": "寶尊電商-SW",
-                          "currency": "HKD",
-                          "market": "HK",
-                          "quantity": "200",
-                          "available_quantity": "0",
-                          "cost_price": "32.25",
-                          "init_quantity": "214"
+                          'symbol': '9991.HK',
+                          'symbol_name': '寶尊電商-SW',
+                          'currency': 'HKD',
+                          'market': 'HK',
+                          'quantity': '200',
+                          'available_quantity': '0',
+                          'cost_price': '32.25',
+                          'init_quantity': '214',
                         },
                         {
-                          "symbol": "TCEHY.US",
-                          "symbol_name": "騰訊控股 (ADR)",
-                          "currency": "USD",
-                          "market": "US",
-                          "quantity": "10",
-                          "available_quantity": "10",
-                          "init_quantity": "18"
+                          'symbol': 'TCEHY.US',
+                          'symbol_name': '騰訊控股 (ADR)',
+                          'currency': 'USD',
+                          'market': 'US',
+                          'quantity': '10',
+                          'available_quantity': '10',
+                          'init_quantity': '18',
                         },
                         {
-                          "symbol": "2628.HK",
-                          "symbol_name": "中國人壽",
-                          "currency": "HKD",
-                          "market": "HK",
-                          "quantity": "9000",
-                          "available_quantity": "0",
-                          "init_quantity": "8000"
+                          'symbol': '2628.HK',
+                          'symbol_name': '中國人壽',
+                          'currency': 'HKD',
+                          'market': 'HK',
+                          'quantity': '9000',
+                          'available_quantity': '0',
+                          'init_quantity': '8000',
                         },
                         {
-                          "symbol": "5.HK",
-                          "symbol_name": "匯豐控股",
-                          "currency": "HKD",
-                          "market": "HK",
-                          "quantity": "2400",
-                          "available_quantity": "2000",
-                          "init_quantity": "2000"
+                          'symbol': '5.HK',
+                          'symbol_name': '匯豐控股',
+                          'currency': 'HKD',
+                          'market': 'HK',
+                          'quantity': '2400',
+                          'available_quantity': '2000',
+                          'init_quantity': '2000',
                         },
                         {
-                          "symbol": "BABA.US",
-                          "symbol_name": "阿里巴巴",
-                          "currency": "USD",
-                          "market": "US",
-                          "quantity": "2000209",
-                          "available_quantity": "2000209",
-                          "init_quantity": "214"
+                          'symbol': 'BABA.US',
+                          'symbol_name': '阿里巴巴',
+                          'currency': 'USD',
+                          'market': 'US',
+                          'quantity': '2000209',
+                          'available_quantity': '2000209',
+                          'init_quantity': '214',
                         },
                         {
-                          "symbol": "2.HK",
-                          "symbol_name": "中電控股",
-                          "currency": "HKD",
-                          "market": "HK",
-                          "quantity": "2000",
-                          "available_quantity": "2000",
-                          "init_quantity": "2000"
+                          'symbol': '2.HK',
+                          'symbol_name': '中電控股',
+                          'currency': 'HKD',
+                          'market': 'HK',
+                          'quantity': '2000',
+                          'available_quantity': '2000',
+                          'init_quantity': '2000',
                         },
                         {
-                          "symbol": "NOK.US",
-                          "symbol_name": "諾基亞",
-                          "currency": "USD",
-                          "market": "US",
-                          "quantity": "1",
-                          "available_quantity": "0",
-                          "init_quantity": "1"
+                          'symbol': 'NOK.US',
+                          'symbol_name': '諾基亞',
+                          'currency': 'USD',
+                          'market': 'US',
+                          'quantity': '1',
+                          'available_quantity': '0',
+                          'init_quantity': '1',
                         },
                       ],
                   },
@@ -125,8 +128,8 @@ definitions:
   stock_rsp:
     properties:
       list:
-        type: "object[]"
-        description: "股票持倉信息"
+        type: 'object[]'
+        description: '股票持倉信息'
         required:
           - account_channel
         properties:
@@ -135,7 +138,7 @@ definitions:
             description: 賬戶類型
             required: true
           stock_info:
-            type: "object[]"
+            type: 'object[]'
             description: 股票列表
             required:
               - symbol
@@ -146,33 +149,33 @@ definitions:
               - market
             properties:
               symbol:
-                type: "string"
+                type: 'string'
                 description: 股票代碼
                 required: true
               symbol_name:
-                type: "string"
+                type: 'string'
                 description: 股票名稱
                 required: true
               quantity:
-                type: "string"
+                type: 'string'
                 description: 持倉股數
                 required: true
               available_quantity:
-                type: "string"
+                type: 'string'
                 description: 可用股數
               currency:
-                type: "string"
+                type: 'string'
                 description: 幣種
                 required: true
               market:
-                type: "string"
+                type: 'string'
                 description: 市場
                 required: true
               cost_price:
-                type: "string"
+                type: 'string'
                 description: 成本價格 (具體根據客戶端選擇平均買入還是攤薄成本)
                 required: true
               init_quantity:
-                type: "string"
+                type: 'string'
                 description: 開盤前初始持倉
                 required: true

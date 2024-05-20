@@ -7,6 +7,8 @@ sidebar_position: 10
 
 This API is used to obtain the candlestick data of security.
 
+<SDKLinks module="quote" klass="QuoteContext" method="candlesticks" />
+
 :::info
 
 [Business Command](../../socket/biz-command): `19`
@@ -18,7 +20,7 @@ This API is used to obtain the candlestick data of security.
 ### Parameters
 
 | Name        | Type   | Required | Description                                                                                              |
-|-------------|--------|----------|----------------------------------------------------------------------------------------------------------|
+| ----------- | ------ | -------- | -------------------------------------------------------------------------------------------------------- |
 | symbol      | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK`                                           |
 | period      | int32  | Yes      | Candlestick period, for example: `1000`, see [Period](../objects#period---candlestick-period)            |
 | count       | int32  | Yes      | Count of cancdlestick, for example: `100`<br /><br />**Check rules:** <br />maximum count is `1000`      |
@@ -56,7 +58,7 @@ print(resp)
 ### Response Properties
 
 | Name         | Type     | Description                           |
-|--------------|----------|---------------------------------------|
+| ------------ | -------- | ------------------------------------- |
 | symbol       | string   | Security code, for example: `AAPL.US` |
 | candlesticks | object[] | Candlestick data                      |
 | ∟ close      | string   | Close price                           |
@@ -144,7 +146,7 @@ message Candlestick {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description                    | Troubleshooting Suggestions                                                    |
-|---------------------|---------------------|--------------------------------|--------------------------------------------------------------------------------|
+| ------------------- | ------------------- | ------------------------------ | ------------------------------------------------------------------------------ |
 | 3                   | 301600              | Invalid request                | Invalid request parameters or unpacking request failed                         |
 | 3                   | 301606              | Request rate limit             | Reduce the frequency of requests                                               |
 | 7                   | 301602              | Server error                   | Please try again or contact a technician to resolve the issue                  |

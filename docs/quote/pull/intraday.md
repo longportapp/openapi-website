@@ -7,6 +7,8 @@ sidebar_position: 9
 
 该接口用于获取标的的当日分时数据。
 
+<SDKLinks module="quote" klass="QuoteContext" method="intraday" />
+
 :::info
 
 [业务指令](../../socket/biz-command)：`18`
@@ -17,8 +19,8 @@ sidebar_position: 9
 
 ### Parameters
 
-| Name   | Type   | Required | Description                                      |
-|--------|--------|----------|--------------------------------------------------|
+| Name   | Type   | Required | Description                                         |
+| ------ | ------ | -------- | --------------------------------------------------- |
 | symbol | string | 是       | 标的代码，使用 `ticker.region` 格式，例如：`700.HK` |
 
 ### Protobuf
@@ -49,15 +51,15 @@ print(resp)
 
 ### Response Properties
 
-| Name        | Type     | Description             |
-|-------------|----------|-------------------------|
+| Name        | Type     | Description               |
+| ----------- | -------- | ------------------------- |
 | symbol      | string   | 标的代码，例如：`AAPL.US` |
-| lines       | object[] | 分时数据                |
-| ∟ price     | string   | 当前分钟的收盘价格      |
-| ∟ timestamp | int64    | 当前分钟的开始时间      |
-| ∟ volume    | int64    | 成交量                  |
-| ∟ turnover  | string   | 成交额                  |
-| ∟ avg_price | string   | 均价                    |
+| lines       | object[] | 分时数据                  |
+| ∟ price     | string   | 当前分钟的收盘价格        |
+| ∟ timestamp | int64    | 当前分钟的开始时间        |
+| ∟ volume    | int64    | 成交量                    |
+| ∟ turnover  | string   | 成交额                    |
+| ∟ avg_price | string   | 均价                      |
 
 ### Protobuf
 
@@ -124,7 +126,7 @@ message Line {
 ## 错误码
 
 | 协议错误码 | 业务错误码 | 描述           | 排查建议                     |
-|------------|------------|--------------|--------------------------|
+| ---------- | ---------- | -------------- | ---------------------------- |
 | 3          | 301600     | 无效的请求     | 请求参数有误或解包失败       |
 | 3          | 301606     | 限流           | 降低请求频次                 |
 | 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理     |

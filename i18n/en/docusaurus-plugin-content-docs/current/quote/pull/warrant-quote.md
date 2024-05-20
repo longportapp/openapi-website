@@ -7,6 +7,8 @@ sidebar_position: 4
 
 This API is used to obtain the real-time quotes of HK warrants, including the warrant-specific data.
 
+<SDKLinks module="quote" klass="QuoteContext" method="warrant_quote" />
+
 :::info
 
 [Business Command](../../socket/biz-command): `13`
@@ -18,7 +20,7 @@ This API is used to obtain the real-time quotes of HK warrants, including the wa
 ### Parameters
 
 | Name   | Type     | Required | Description                                                                                                                                                       |
-|--------|----------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------ | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | symbol | string[] | Yes      | Security code list, in `ticker.region` format, for example: `[13447.HK]` <br /><br />**Check rules:**<br />The maximum number of symbols in each request is `500` |
 
 ### Protobuf
@@ -50,7 +52,7 @@ print(resp)
 ### Response Properties
 
 | Name                  | Type     | Description                                                                                                    |
-|-----------------------|----------|----------------------------------------------------------------------------------------------------------------|
+| --------------------- | -------- | -------------------------------------------------------------------------------------------------------------- |
 | secu_quote            | object[] | Warrants quote                                                                                                 |
 | ∟ symbol              | string   | Security code                                                                                                  |
 | ∟ last_done           | string   | Latest price                                                                                                   |
@@ -183,7 +185,7 @@ message WarrantExtend {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description              | Troubleshooting Suggestions                                   |
-|---------------------|---------------------|--------------------------|---------------------------------------------------------------|
+| ------------------- | ------------------- | ------------------------ | ------------------------------------------------------------- |
 | 3                   | 301600              | Invalid request          | Invalid request parameters or unpacking request failed        |
 | 3                   | 301606              | Request rate limit       | Reduce the frequency of requests                              |
 | 7                   | 301602              | Server error             | Please try again or contact a technician to resolve the issue |

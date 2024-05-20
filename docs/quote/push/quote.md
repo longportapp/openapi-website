@@ -7,6 +7,8 @@ sidebar_position: 1
 
 已订阅标的的实时价格推送，推送的数据结构中，只有有变化的字段才会填充数据。
 
+<SDKLinks module="quote" klass="QuoteContext" method="set_on_quote" go="OnQuote" />
+
 :::info
 
 [业务指令](../../socket/protocol/push)：`101`

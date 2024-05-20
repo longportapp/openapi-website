@@ -1,31 +1,34 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "該接口用於獲取當日訂單的成交明細"
-  version: "v1"
-  title: "獲取當日成交明細"
+  description: |
+    該接口用於獲取當日訂單的成交明細。
+
+    <SDKLinks module="trade" klass="TradeContext" method="today_executions" />
+  version: 'v1'
+  title: '獲取當日成交明細'
 paths:
   /v1/trade/execution/today:
     get:
-      access: "交易權限"
+      access: '交易權限'
       parameters:
-        - name: "symbol"
-          type: "string"
+        - name: 'symbol'
+          type: 'string'
           in: query
-          description: "股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US`"
+          description: '股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US`'
           required: false
-        - name: "order_id"
-          type: "string"
+        - name: 'order_id'
+          type: 'string'
           required: false
-          description: "訂單 ID，用於指定訂單 ID 查詢，例如：`701276261045858304`"
+          description: '訂單 ID，用於指定訂單 ID 查詢，例如：`701276261045858304`'
       responses:
-        "200":
-          description: "查詢成功"
+        '200':
+          description: '查詢成功'
           schema:
-            $ref: "#/definitions/executions"
-        "400":
-          description: "查詢失敗，請求參數錯誤。"
+            $ref: '#/definitions/executions'
+        '400':
+          description: '查詢失敗，請求參數錯誤。'
       request_body:
-        type: "python"
+        type: 'python'
         value: |
           from longport.openapi import TradeContext, Config
 
@@ -36,19 +39,19 @@ paths:
           print(resp)
       response_body:
         {
-          "code": 0,
-          "message": "success",
-          "data":
+          'code': 0,
+          'message': 'success',
+          'data':
             {
-              "trades":
+              'trades':
                 [
                   {
-                    "order_id": "693664675163312128",
-                    "price": "388",
-                    "quantity": "100",
-                    "symbol": "700.HK",
-                    "trade_done_at": "1648611351",
-                    "trade_id": "693664675163312128-1648611351433741210",
+                    'order_id': '693664675163312128',
+                    'price': '388',
+                    'quantity': '100',
+                    'symbol': '700.HK',
+                    'trade_done_at': '1648611351',
+                    'trade_id': '693664675163312128-1648611351433741210',
                   },
                 ],
             },
@@ -57,39 +60,31 @@ definitions:
   today_executions_rsp:
     properties:
       trades:
-        type: "object[]"
+        type: 'object[]'
         description: 成交明細信息
-        required:
-          [
-            "order_id",
-            "trade_id",
-            "symbol",
-            "trade_done_at",
-            "quantity",
-            "price",
-          ]
+        required: ['order_id', 'trade_id', 'symbol', 'trade_done_at', 'quantity', 'price']
         properties:
           order_id:
-            type: "string"
+            type: 'string'
             description: 訂單 ID
             required: true
           trade_id:
-            type: "string"
+            type: 'string'
             description: 成交 ID
             required: true
           symbol:
-            type: "string"
-            description: "股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US`"
+            type: 'string'
+            description: '股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US`'
             required: true
           trade_done_at:
-            type: "string"
-            description: "成交時間，格式為時間戳 (秒)"
+            type: 'string'
+            description: '成交時間，格式為時間戳 (秒)'
             required: true
           quantity:
-            type: "string"
+            type: 'string'
             description: 成交數量
             required: true
           price:
-            type: "string"
+            type: 'string'
             description: 成交價格
             required: true

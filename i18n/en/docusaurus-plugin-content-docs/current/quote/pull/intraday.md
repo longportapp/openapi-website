@@ -7,6 +7,8 @@ sidebar_position: 9
 
 This API is used to obtain the intraday data of security.
 
+<SDKLinks module="quote" klass="QuoteContext" method="intraday" />
+
 :::info
 
 [Business Command](../../socket/biz-command): `18`
@@ -18,7 +20,7 @@ This API is used to obtain the intraday data of security.
 ### Parameters
 
 | Name   | Type   | Required | Description                                                    |
-|--------|--------|----------|----------------------------------------------------------------|
+| ------ | ------ | -------- | -------------------------------------------------------------- |
 | symbol | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK` |
 
 ### Protobuf
@@ -50,7 +52,7 @@ print(resp)
 ### Response Properties
 
 | Name        | Type     | Description                           |
-|-------------|----------|---------------------------------------|
+| ----------- | -------- | ------------------------------------- |
 | symbol      | string   | Security code, for example: `AAPL.US` |
 | lines       | object[] | Intraday line data                    |
 | ∟ price     | string   | Close price of the minute             |
@@ -124,7 +126,7 @@ message Line {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description        | Troubleshooting Suggestions                                   |
-|---------------------|---------------------|--------------------|---------------------------------------------------------------|
+| ------------------- | ------------------- | ------------------ | ------------------------------------------------------------- |
 | 3                   | 301600              | Invalid request    | Invalid request parameters or unpacking request failed        |
 | 3                   | 301606              | Request rate limit | Reduce the frequency of requests                              |
 | 7                   | 301602              | Server error       | Please try again or contact a technician to resolve the issue |

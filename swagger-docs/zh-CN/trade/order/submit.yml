@@ -1,26 +1,29 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "该接口用于港美股，窝轮，期权的委托下单"
-  version: "v1"
-  title: "委托下单"
+  description: |
+    该接口用于港美股，窝轮，期权的委托下单。
+
+    <SDKLinks module="trade" klass="TradeContext" method="submit_order" />
+  version: 'v1'
+  title: '委托下单'
 paths:
   /v1/trade/order:
     post:
-      access: "交易权限"
+      access: '交易权限'
       parameters:
-        - name: "symbol"
-          type: "string"
-          description: "股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`"
+        - name: 'symbol'
+          type: 'string'
+          description: '股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`'
           required: true
-        - name: "order_type"
-          type: "string"
-          description: "[订单类型](../trade-definition#ordertype)"
+        - name: 'order_type'
+          type: 'string'
+          description: '[订单类型](../trade-definition#ordertype)'
           required: true
-        - name: "submitted_price"
+        - name: 'submitted_price'
           required: false
           description: 下单价格，例如：`388.5`<br/><br/>
             `LO` / `ELO` / `ALO` / `ODD` / `LIT` 订单必填
-        - name: "submitted_quantity"
+        - name: 'submitted_quantity'
           required: true
           description: 下单数量，例如：`100`
         - name: trigger_price
@@ -41,11 +44,10 @@ paths:
             `TSLPPCT` 订单必填
         - name: expire_date
           required: false
-          description:
-            长期单过期时间，格式为 `YYYY-MM-DD`, 例如：`2022-12-05`<br/><br/>
+          description: 长期单过期时间，格式为 `YYYY-MM-DD`, 例如：`2022-12-05`<br/><br/>
             time_in_force 为 `GTD` 时必填
         - name: side
-          type: "string"
+          type: 'string'
           description: 买卖方向<br/><br/>
             **可选值:**<br/>
             `Buy` - 买入<br/>
@@ -67,14 +69,14 @@ paths:
             `GTD` - 到期前有效
         - name: remark
           required: false
-          description: "备注 (最大 64 字符)"
+          description: '备注 (最大 64 字符)'
       responses:
-        "200":
-          description: "提交成功，订单已委托。"
-        "400":
-          description: "下单被拒绝，请求参数错误。"
+        '200':
+          description: '提交成功，订单已委托。'
+        '400':
+          description: '下单被拒绝，请求参数错误。'
       request_body:
-        type: "python"
+        type: 'python'
         value: |
           from decimal import Decimal
           from longport.openapi import TradeContext, Config, OrderType, OrderSide, TimeInForceType
@@ -89,9 +91,4 @@ paths:
           resp = ctx.submit_order("700.HK", OrderType.LO, OrderSide.Buy, Decimal(
             "500"), TimeInForceType.Day, submitted_price=Decimal("50"), remark="Hello from Python SDK")
           print(resp)
-      response_body:
-        {
-          "code": 0,
-          "message": "success",
-          "data": { "order_id": 683615454870679552 },
-        }
+      response_body: { 'code': 0, 'message': 'success', 'data': { 'order_id': 683615454870679552 } }

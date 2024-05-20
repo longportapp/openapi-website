@@ -7,6 +7,8 @@ sidebar_position: 1
 
 This API is used to obtain the basic information of securities.
 
+<SDKLinks module="quote" klass="QuoteContext" method="static_info" />
+
 :::info
 [Business Command](../../socket/biz-command): `10`
 :::
@@ -16,7 +18,7 @@ This API is used to obtain the basic information of securities.
 ### Parameters
 
 | Name   | Type     | Required | Description                                                                                                                                                     |
-|--------|----------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------ | -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | symbol | string[] | Yes      | Security code list, in `ticker.region` format, for example: `[700.HK]` <br /><br />**Check rules:**<br />The maximum number of symbols in each request is `500` |
 
 ### Protobuf
@@ -48,7 +50,7 @@ print(resp)
 ### Response Properties
 
 | Name                 | Type     | Description                                                                                          |
-|----------------------|----------|------------------------------------------------------------------------------------------------------|
+| -------------------- | -------- | ---------------------------------------------------------------------------------------------------- |
 | secu_static_info     | object[] | Securities Basic Information                                                                         |
 | ∟ symbol             | string   | Security code                                                                                        |
 | ∟ name_cn            | string   | Security name (zh-CN)                                                                                |
@@ -141,7 +143,7 @@ message StaticInfo {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description              | Troubleshooting Suggestions                                   |
-|---------------------|---------------------|--------------------------|---------------------------------------------------------------|
+| ------------------- | ------------------- | ------------------------ | ------------------------------------------------------------- |
 | 3                   | 301600              | Invalid request          | Invalid request parameters or unpacking request failed        |
 | 3                   | 301606              | Request rate limit       | Reduce the frequency of requests                              |
 | 7                   | 301602              | Server error             | Please try again or contact a technician to resolve the issue |

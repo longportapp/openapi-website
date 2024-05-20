@@ -5,16 +5,15 @@ language_tabs: false
 toc_footers: []
 includes: []
 search: true
-highlight_theme: ""
+highlight_theme: ''
 headingLevel: 2
-
 ---
 
 获取标的列表
 
-## 
+<SDKLinks module="quote" klass="QuoteContext" method="security_list" />
 
-### Request
+## Request
 
 <table className="http-basic">
 <tbody>
@@ -24,16 +23,16 @@ headingLevel: 2
 </tbody>
 </table>
 
-#### Parameters
+### Parameters
 
 > Content-Type: application/json; charset=utf-8
 
-| Name     | Type   | Required | Description                     |
-|----------|--------|----------|---------------------------------|
+| Name     | Type   | Required | Description                      |
+| -------- | ------ | -------- | -------------------------------- |
 | market   | string | YES      | 市场，目前只支持 US              |
 | category | string | YES      | 市场下分类，目前只支持 Overnight |
 
-#### Request Example
+### Request Example
 
 ```python
 from longport.openapi import QuoteContext, Config, Market, SecurityListCategory
@@ -44,13 +43,13 @@ resp = ctx.security_list(Market.US, SecurityListCategory.Overnight)
 print(resp)
 ```
 
-### Response
+## Response
 
-#### Response Headers
+### Response Headers
 
 - Content-Type: application/json
 
-#### Response Example
+### Response Example
 
 ```json
 {
@@ -83,7 +82,7 @@ print(resp)
 #### Response Status
 
 | Status | Description | Schema                                      |
-|--------|-------------|---------------------------------------------|
+| ------ | ----------- | ------------------------------------------- |
 | 200    | 返回成功    | [security_response](#get_security_list_rsp) |
 | 400    | 参数错误    | None                                        |
 
@@ -97,17 +96,16 @@ print(resp)
 <a id="get_security_list_rsp"></a>
 
 | Name      | Type     | Required | Description |
-|-----------|----------|----------|-------------|
+| --------- | -------- | -------- | ----------- |
 | list      | object[] | false    | 列表        |
 | ∟ symbol  | integer  | true     | 标的代码    |
 | ∟ name_cn | string   | true     | 中文名称    |
 | ∟ name_hk | string   | true     | 繁体名称    |
 | ∟ name_en | string   | true     | 英文名称    |
 
-
 ## 错误码
 
 | 业务错误码 | 描述           | 排查建议                 |
-|------------|--------------|----------------------|
+| ---------- | -------------- | ------------------------ |
 | 310010     | 无效的请求     | 请求参数有误             |
 | 310011     | 服务端内部错误 | 请重试或联系技术人员处理 |

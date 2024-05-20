@@ -7,6 +7,8 @@ sidebar_position: 3
 
 已訂閱標的的實時經紀隊列數據推送。
 
+<SDKLinks module="quote" klass="QuoteContext" method="set_on_brokers" go="OnBrokers" />
+
 :::info
 
 [業務指令](../../socket/protocol/push)：`103`
@@ -18,8 +20,8 @@ sidebar_position: 3
 ### Properties
 
 | Name         | Type     | Description                       |
-|--------------|----------|-----------------------------------|
-| symbol       | string   | 標的代碼，例如：`AAPL.US`           |
+| ------------ | -------- | --------------------------------- |
+| symbol       | string   | 標的代碼，例如：`AAPL.US`         |
 | sequence     | int64    | 序列號                            |
 | ask_brokers  | object[] | 賣槃經紀隊列                      |
 | ∟ position   | int32    | 檔位                              |

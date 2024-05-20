@@ -7,6 +7,8 @@ sidebar_position: 13
 
 This API is used to obtain the warrant issuer IDs data (which can be synchronized once a day).
 
+<SDKLinks module="quote" klass="QuoteContext" method="warrant_issuers" />
+
 :::info
 
 [Business Command](../../socket/biz-command): `22`
@@ -36,7 +38,7 @@ print(resp)
 ### Parameters
 
 | Name        | Type     | Description         |
-|-------------|----------|---------------------|
+| ----------- | -------- | ------------------- |
 | issuer_info | object[] | Issuer information  |
 | ∟ id        | int32    | Issuer ID           |
 | ∟ name_cn   | string   | Issuer Name (zh-CN) |
@@ -88,7 +90,7 @@ message IssuerInfo {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description        | Troubleshooting Suggestions                                   |
-|---------------------|---------------------|--------------------|---------------------------------------------------------------|
+| ------------------- | ------------------- | ------------------ | ------------------------------------------------------------- |
 | 3                   | 301600              | Invalid request    | Invalid request parameters or unpacking request failed        |
 | 3                   | 301606              | Request rate limit | Reduce the frequency of requests                              |
 | 7                   | 301602              | Server error       | Please try again or contact a technician to resolve the issue |

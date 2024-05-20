@@ -8,21 +8,21 @@
 {{?}}
 
 {{= data.tags.section }}
-### Response
+## Response
 
-#### Response Headers
+### Response Headers
 
 - Content-Type: application/json
 
 {{? data.operation.request_body }}
-#### Response Example
+### Response Example
 
 ```json
 {{= JSON.stringify(data.operation.response_body || {}, null, 2) }}
 ```
 {{?}}
 
-#### Response Status
+### Response Status
 
 | Status | Description | Schema |
 |---|---|---|
@@ -35,7 +35,7 @@
 {{~}}
 {{? data.responseSchemas }}
 
-#### Response Schema
+### Response Schema
 
 {{~ data.responses :response}}
 {{? response.content && !response.$ref && !data.utils.isPrimitive(response.type)}}
@@ -69,7 +69,7 @@ Status Code **{{=response.status}}**
 {{?}}
 
 {{? enums.length > 0 }}
-#### Enumerated Values
+### Enumerated Values
 
 | Property | Value |
 |---|---|
@@ -89,7 +89,7 @@ Status Code **{{=response.status}}**
 {{ data.responseHeaders = data.utils.getResponseHeaders(data); }}
 {{? data.responseHeaders.length }}
 
-#### Response Headers
+### Response Headers
 
 | Status | Header | Type | Format | Description |
 |---|---|---|---|---|
