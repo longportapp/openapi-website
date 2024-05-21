@@ -438,7 +438,6 @@
     Consolas,
     Liberation Mono,
     monospace;
-  font-size: 12px;
 }
 
 .markdown pre {
@@ -452,7 +451,6 @@
     Consolas,
     Liberation Mono,
     monospace;
-  font-size: 12px;
   word-wrap: normal;
 }
 
@@ -954,9 +952,9 @@
 
 .markdown .highlight pre,
 .markdown pre {
-  padding: 16px;
+  padding: 12px 16px;
   overflow: auto;
-  font-size: 85%;
+  font-size: 0.85em;
   line-height: 1.45;
   background-color: var(--color-canvas-subtle);
   border-radius: 3px;
@@ -1125,6 +1123,15 @@
   .alert {
     @apply shadow-none border text-sm text-gray-900;
 
+    border-radius: 3px;
+
+    .admonitionIcon_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-styles-module {
+      svg {
+        width: 1em;
+        height: 1em;
+      }
+    }
+
     &--secondary {
       @apply bg-gray-50 border-gray-200;
     }
@@ -1144,15 +1151,5 @@
     &--danger {
       @apply bg-red-50 border-red-200;
     }
-  }
-}
-
-.markdown .copyButton_node_modules-\@docusaurus-theme-classic-lib-next-theme-CodeBlock-CopyButton-styles-module {
-  border: 0;
-  background: transparent;
-
-  svg {
-    height: 18px;
-    fill: var(--color-fg-muted);
   }
 }

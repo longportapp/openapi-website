@@ -33,7 +33,7 @@ message SecurityIntradayRequest {
 
 ### Request Example
 
-```python
+```py
 # 获取标的分时
 # https://open.longportapp.com/docs/quote/pull/intraday
 # 运行前请访问“开发者中心”确保账户有正确的行情权限。
@@ -63,7 +63,7 @@ print(resp)
 
 ### Protobuf
 
-```
+```protobuf
 message SecurityIntradayResponse{
   string symbol = 1;
   repeated Line lines = 2;

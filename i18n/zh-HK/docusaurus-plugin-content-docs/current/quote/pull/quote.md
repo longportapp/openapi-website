@@ -90,7 +90,7 @@ print(resp)
 ### Protobuf
 
 ```protobuf
-message  SecurityQuoteResponse {
+message SecurityQuoteResponse {
   repeated SecurityQuote secu_quote = 1;
 }
 
