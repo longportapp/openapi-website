@@ -7,6 +7,8 @@ sidebar_position: 6
 
 該接口用於獲取標的的實時經紀隊列數據。
 
+<SDKLinks module="quote" klass="QuoteContext" method="brokers" />
+
 :::info
 [業務指令](../../socket/biz-command)：`15`
 :::
@@ -15,8 +17,8 @@ sidebar_position: 6
 
 ### Parameters
 
-| Name   | Type   | Required | Description                                       |
-|--------|--------|----------|---------------------------------------------------|
+| Name   | Type   | Required | Description                                          |
+| ------ | ------ | -------- | ---------------------------------------------------- |
 | symbol | string | 是       | 標的代碼，使用 `ticker.region` 格式，例如： `700.HK` |
 
 ### Protobuf
@@ -47,14 +49,14 @@ print(resp)
 
 ### Response Properties
 
-| Name         | Type     | Description                                               |
-|--------------|----------|-----------------------------------------------------------|
-| symbol       | string   | 標的代碼                                                  |
-| ask_brokers  | object[] | 賣槃經紀隊列                                              |
-| ∟ position   | int32    | 檔位                                                      |
+| Name         | Type     | Description                                                |
+| ------------ | -------- | ---------------------------------------------------------- |
+| symbol       | string   | 標的代碼                                                   |
+| ask_brokers  | object[] | 賣槃經紀隊列                                               |
+| ∟ position   | int32    | 檔位                                                       |
 | ∟ broker_ids | int32[]  | 券商席位 ID，通过[獲取券商席位 ID ](./broker-ids) 接口獲取 |
-| bid_brokers  | object[] | 買槃經紀隊列                                              |
-| ∟ position   | int32    | 檔位                                                      |
+| bid_brokers  | object[] | 買槃經紀隊列                                               |
+| ∟ position   | int32    | 檔位                                                       |
 | ∟ broker_ids | int32[]  | 券商席位 ID，通过[獲取券商席位 ID ](./broker-ids) 接口獲取 |
 
 ### Protobuf
@@ -102,7 +104,7 @@ message Brokers {
 ## 錯誤碼
 
 | 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                     |
-|------------|------------|--------------|--------------------------|
+| ---------- | ---------- | -------------- | ---------------------------- |
 | 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗       |
 | 3          | 301606     | 限流           | 降低請求頻次                 |
 | 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理     |

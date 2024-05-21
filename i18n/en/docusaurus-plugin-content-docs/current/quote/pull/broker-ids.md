@@ -7,6 +7,8 @@ sidebar_position: 7
 
 This API is used to obtain participant IDs data (which can be synchronized once a day).
 
+<SDKLinks module="quote" klass="QuoteContext" method="participants" />
+
 :::info
 [Business Command](../../socket/biz-command): `16`
 :::
@@ -34,7 +36,7 @@ print(resp)
 ### Response Properties
 
 | Name                       | Type     | Description              |
-|----------------------------|----------|--------------------------|
+| -------------------------- | -------- | ------------------------ |
 | participant_broker_numbers | object[] | participant data         |
 | ∟ broker_ids               | int32[]  | broker IDs               |
 | ∟ participant_name_cn      | string   | participant name (zh-CN) |
@@ -86,7 +88,7 @@ message ParticipantInfo {
 ## Error Code
 
 | Proto Error Code | Business Error Code | Descrption         | Troubleshooting Suggestions                                   |
-|------------------|---------------------|--------------------|---------------------------------------------------------------|
+| ---------------- | ------------------- | ------------------ | ------------------------------------------------------------- |
 | 3                | 301600              | Invalid request    | Invalid request parameters or unpacking request failed        |
 | 3                | 301606              | Request rate limit | Reduce the frequency of requests                              |
 | 7                | 301602              | Server error       | Please try again or contact a technician to resolve the issue |

@@ -1,24 +1,27 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "该接口用于订单撤销"
-  version: "v1"
-  title: "撤销订单"
+  description: |
+    该接口用于订单撤销。
+
+    <SDKLinks module="trade" klass="TradeContext" method="cancel_order" />
+  version: 'v1'
+  title: '撤销订单'
 paths:
   /v1/trade/order:
     delete:
-      access: "交易权限"
+      access: '交易权限'
       parameters:
-        - name: "order_id"
-          type: "string"
-          description: "订单 ID"
+        - name: 'order_id'
+          type: 'string'
+          description: '订单 ID'
           required: true
       responses:
-        "200":
-          description: "提交成功，订单已委托。"
-        "400":
-          description: "撤单被拒绝，请求参数错误。"
+        '200':
+          description: '提交成功，订单已委托。'
+        '400':
+          description: '撤单被拒绝，请求参数错误。'
       request_body:
-        type: "python"
+        type: 'python'
         value: |
           from longport.openapi import TradeContext, Config
 
@@ -26,4 +29,4 @@ paths:
           ctx = TradeContext(config)
 
           ctx.cancel_order("709043056541253632")
-      response_body: { "code": 0, "message": "success", "data": {} }
+      response_body: { 'code': 0, 'message': 'success', 'data': {} }

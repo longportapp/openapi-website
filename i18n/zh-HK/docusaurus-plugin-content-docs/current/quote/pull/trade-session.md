@@ -7,6 +7,8 @@ sidebar_position: 15
 
 該接口用於獲取各市場當日交易時段。
 
+<SDKLinks module="quote" klass="QuoteContext" method="trading_session" />
+
 :::info
 
 [業務指令](../../socket/biz-command)：`8`
@@ -36,13 +38,13 @@ print(resp)
 ### Response Properties
 
 | Name                 | Type     | Description                                                                                 |
-|----------------------|----------|---------------------------------------------------------------------------------------------|
+| -------------------- | -------- | ------------------------------------------------------------------------------------------- |
 | market_trade_session | object[] | 市場交易時段                                                                                |
 | ∟ market             | string   | 市場<br/><br/>`US` - 美股市場<br/>`HK` - 港股市場<br/>`CN` - A 股市場<br/>`SG` - 新加坡市場 |
 | ∟ trade_session      | object[] | 交易時段                                                                                    |
-| ∟∟ beg_time          | int32    | 交易開始時間，格式：`hhmm` 例如：`900`                                                         |
-| ∟∟ end_time          | int32    | 交易結束時間，格式：`hhmm` 例如：`1400`                                                        |
-| ∟∟ trade_session     | int32    | 交易時段，詳見 [TradeSession](../objects#tradesession---交易時段)                            |
+| ∟∟ beg_time          | int32    | 交易開始時間，格式：`hhmm` 例如：`900`                                                      |
+| ∟∟ end_time          | int32    | 交易結束時間，格式：`hhmm` 例如：`1400`                                                     |
+| ∟∟ trade_session     | int32    | 交易時段，詳見 [TradeSession](../objects#tradesession---交易時段)                           |
 
 ### Protobuf
 
@@ -133,7 +135,7 @@ message TradePeriod {
 ## 錯誤碼
 
 | 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                 |
-|------------|------------|--------------|----------------------|
+| ---------- | ---------- | -------------- | ------------------------ |
 | 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗   |
 | 3          | 301606     | 限流           | 降低請求頻次             |
 | 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理 |

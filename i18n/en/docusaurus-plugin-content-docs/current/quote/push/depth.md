@@ -7,6 +7,8 @@ sidebar_position: 2
 
 Real-time depth data push of the subscribed security.
 
+<SDKLinks module="quote" klass="QuoteContext" method="set_on_depth" go="OnDepth" />
+
 :::info
 
 [Business Command](../../socket/protocol/push): `102`
@@ -18,7 +20,7 @@ Real-time depth data push of the subscribed security.
 ### Properties
 
 | Name        | Type     | Description                           |
-|-------------|----------|---------------------------------------|
+| ----------- | -------- | ------------------------------------- |
 | symbol      | string   | Security code, for example: `AAPL.US` |
 | sequence    | int64    | Sequence number                       |
 | ask         | object[] | Ask depth                             |

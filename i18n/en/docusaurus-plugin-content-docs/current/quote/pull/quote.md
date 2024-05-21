@@ -7,6 +7,8 @@ sidebar_position: 2
 
 This API is used to obtain the real-time quotes of securities, and supports all types of securities.
 
+<SDKLinks module="quote" klass="QuoteContext" method="quote" />
+
 :::info
 [Business Command](../../socket/biz-command): `11`
 :::

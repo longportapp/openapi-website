@@ -7,6 +7,8 @@ sidebar_position: 8
 
 This API is used to obtain the trades data of security.
 
+<SDKLinks module="quote" klass="QuoteContext" method="trades" />
+
 :::info
 
 [Business Command](../../socket/biz-command): `17`
@@ -18,7 +20,7 @@ This API is used to obtain the trades data of security.
 ### Parameters
 
 | Name   | Type   | Required | Description                                                                                              |
-|--------|--------|----------|----------------------------------------------------------------------------------------------------------|
+| ------ | ------ | -------- | -------------------------------------------------------------------------------------------------------- |
 | symbol | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK`                                           |
 | count  | int32  | Yes      | Count of trades <br /><br />**Check rules:**<br />The maximum number of trades in each request is `1000` |
 
@@ -52,7 +54,7 @@ print(resp)
 ### Response Properties
 
 | Name            | Type     | Description                                                                                      |
-|-----------------|----------|--------------------------------------------------------------------------------------------------|
+| --------------- | -------- | ------------------------------------------------------------------------------------------------ |
 | symbol          | string   | Security code                                                                                    |
 | trades          | object[] | Trades data                                                                                      |
 | ∟ price         | string   | Price                                                                                            |
@@ -150,7 +152,7 @@ message Trade {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description              | Troubleshooting Suggestions                                   |
-|---------------------|---------------------|--------------------------|---------------------------------------------------------------|
+| ------------------- | ------------------- | ------------------------ | ------------------------------------------------------------- |
 | 3                   | 301600              | Invalid request          | Invalid request parameters or unpacking request failed        |
 | 3                   | 301606              | Request rate limit       | Reduce the frequency of requests                              |
 | 7                   | 301602              | Server error             | Please try again or contact a technician to resolve the issue |

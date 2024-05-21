@@ -5,14 +5,15 @@ language_tabs: false
 toc_footers: []
 includes: []
 search: true
-highlight_theme: ""
+highlight_theme: ''
 headingLevel: 2
-
 ---
 
 Retrieve the List of Securities
 
-## 
+<SDKLinks module="quote" klass="QuoteContext" method="security_list" />
+
+##
 
 ### Request
 
@@ -29,7 +30,7 @@ Retrieve the List of Securities
 > Content-Type: application/json; charset=utf-8
 
 | Name     | Type   | Required | Description                                 |
-|----------|--------|----------|---------------------------------------------|
+| -------- | ------ | -------- | ------------------------------------------- |
 | market   | string | YES      | Market, currently only supports US          |
 | category | string | YES      | Market subcategory, only supports Overnight |
 
@@ -83,7 +84,7 @@ print(resp)
 #### Response Status
 
 | Status | Description       | Schema                                      |
-|--------|-------------------|---------------------------------------------|
+| ------ | ----------------- | ------------------------------------------- |
 | 200    | Successful return | [security_response](#get_security_list_rsp) |
 | 400    | Parameter error   | None                                        |
 
@@ -97,17 +98,16 @@ print(resp)
 <a id="get_security_list_rsp"></a>
 
 | Name      | Type     | Required | Description              |
-|-----------|----------|----------|--------------------------|
+| --------- | -------- | -------- | ------------------------ |
 | list      | object[] | false    | List                     |
 | ∟ symbol  | integer  | true     | Security code            |
 | ∟ name_cn | string   | true     | Chinese name             |
 | ∟ name_hk | string   | true     | Traditional Chinese name |
 | ∟ name_en | string   | true     | English name             |
 
-
 ## Error Code
 
 | Business Error Code | Description           | Troubleshooting Suggestion                |
-|---------------------|-----------------------|-------------------------------------------|
+| ------------------- | --------------------- | ----------------------------------------- |
 | 310010              | Invalid request       | Check the request parameters              |
 | 310011              | Internal server error | Please retry or contact technical support |

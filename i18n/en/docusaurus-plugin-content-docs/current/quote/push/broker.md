@@ -7,6 +7,8 @@ sidebar_position: 3
 
 Real-time brokers data push of the subscribed security.
 
+<SDKLinks module="quote" klass="QuoteContext" method="set_on_brokers" go="OnBrokers" />
+
 :::info
 
 [Business Command](../../socket/protocol/push): `103`
@@ -18,7 +20,7 @@ Real-time brokers data push of the subscribed security.
 ### Properties
 
 | Name         | Type     | Description                           |
-|--------------|----------|---------------------------------------|
+| ------------ | -------- | ------------------------------------- |
 | symbol       | string   | Security code, for example: `AAPL.US` |
 | sequence     | int64    | Sequence number                       |
 | ask_brokers  | object[] | Ask brokers                           |

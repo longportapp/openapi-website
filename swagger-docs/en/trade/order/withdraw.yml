@@ -1,24 +1,27 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "This API is used to withdraw an open order"
-  version: "v1"
-  title: "Withdraw Order"
+  description: |
+    This API is used to withdraw an open order.
+
+    <SDKLinks module="trade" klass="TradeContext" method="cancel_order" />
+  version: 'v1'
+  title: 'Withdraw Order'
 paths:
   /v1/trade/order:
     delete:
-      access: "Trading Permissions"
+      access: 'Trading Permissions'
       parameters:
-        - name: "order_id"
-          type: "string"
-          description: "Order ID"
+        - name: 'order_id'
+          type: 'string'
+          description: 'Order ID'
           required: true
       responses:
-        "200":
-          description: "The submission was successful and the order was commissioned."
-        "400":
-          description: "The withdrawal was rejected with an incorrect request parameter."
+        '200':
+          description: 'The submission was successful and the order was commissioned.'
+        '400':
+          description: 'The withdrawal was rejected with an incorrect request parameter.'
       request_body:
-        type: "python"
+        type: 'python'
         value: |
           from longport.openapi import TradeContext, Config
 
@@ -26,4 +29,4 @@ paths:
           ctx = TradeContext(config)
 
           ctx.cancel_order("709043056541253632")
-      response_body: { "code": 0, "message": "success", "data": {} }
+      response_body: { 'code': 0, 'message': 'success', 'data': {} }

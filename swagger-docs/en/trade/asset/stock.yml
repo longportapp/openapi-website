@@ -1,26 +1,30 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "The API is used to obtain stock position information including account, stock code, number of shares held, number of available shares, average position price (calculated according to account settings), and currency."
-  version: "v1"
-  title: "Get Stock Positions"
+  description: |
+    The API is used to obtain stock position information including account, stock code, number of shares held,
+    number of available shares, average position price (calculated according to account settings), and currency.
+
+    <SDKLinks module="trade" klass="TradeContext" method="stock_positions" />
+  version: 'v1'
+  title: 'Get Stock Positions'
 paths:
   /v1/asset/stock:
     get:
       access:
       parameters:
-        - name: "symbol"
-          type: "string[]"
-          description: "Stock code, use `ticker.region` format, E.g:`AAPL.US`"
+        - name: 'symbol'
+          type: 'string[]'
+          description: 'Stock code, use `ticker.region` format, E.g:`AAPL.US`'
           required: false
       responses:
-        "200":
-          description: "Success"
+        '200':
+          description: 'Success'
           schema:
-            $ref: "#/definitions/stock_rsp"
-        "400":
-          description: "Internal Error"
+            $ref: '#/definitions/stock_rsp'
+        '400':
+          description: 'Internal Error'
       request_body:
-        type: "python"
+        type: 'python'
         value: |
           # Get Stock Positions
           # https://open.longportapp.com/docs/trade/asset/stock
@@ -32,88 +36,88 @@ paths:
           print(resp)
       response_body:
         {
-          "code": 0,
-          "data":
+          'code': 0,
+          'data':
             {
-              "list":
+              'list':
                 [
                   {
-                    "account_channel": "lb",
-                    "stock_info":
+                    'account_channel': 'lb',
+                    'stock_info':
                       [
                         {
-                          "symbol": "700.HK",
-                          "symbol_name": "TENCENT",
-                          "currency": "HKD",
-                          "quantity": "650",
-                          "market": "HK",
-                          "available_quantity": "-450",
-                          "cost_price": "457.53",
-                          "init_quantity": "214"
+                          'symbol': '700.HK',
+                          'symbol_name': 'TENCENT',
+                          'currency': 'HKD',
+                          'quantity': '650',
+                          'market': 'HK',
+                          'available_quantity': '-450',
+                          'cost_price': '457.53',
+                          'init_quantity': '214',
                         },
                         {
-                          "symbol": "9991.HK",
-                          "symbol_name": "BAOZUN-SW",
-                          "currency": "HKD",
-                          "market": "HK",
-                          "quantity": "200",
-                          "available_quantity": "0",
-                          "cost_price": "32.25",
-                          "init_quantity": "214"
+                          'symbol': '9991.HK',
+                          'symbol_name': 'BAOZUN-SW',
+                          'currency': 'HKD',
+                          'market': 'HK',
+                          'quantity': '200',
+                          'available_quantity': '0',
+                          'cost_price': '32.25',
+                          'init_quantity': '214',
                         },
                         {
-                          "symbol": "TCEHY.US",
-                          "symbol_name": "Tencent (ADR)",
-                          "currency": "USD",
-                          "market": "US",
-                          "quantity": "10",
-                          "available_quantity": "10",
-                          "init_quantity": "18"
+                          'symbol': 'TCEHY.US',
+                          'symbol_name': 'Tencent (ADR)',
+                          'currency': 'USD',
+                          'market': 'US',
+                          'quantity': '10',
+                          'available_quantity': '10',
+                          'init_quantity': '18',
                         },
                         {
-                          "symbol": "2628.HK",
-                          "symbol_name": "CHINA LIFE",
-                          "currency": "HKD",
-                          "market": "HK",
-                          "quantity": "9000",
-                          "available_quantity": "0",
-                          "init_quantity": "8000"
+                          'symbol': '2628.HK',
+                          'symbol_name': 'CHINA LIFE',
+                          'currency': 'HKD',
+                          'market': 'HK',
+                          'quantity': '9000',
+                          'available_quantity': '0',
+                          'init_quantity': '8000',
                         },
                         {
-                          "symbol": "5.HK",
-                          "symbol_name": "HSBC HOLDINGS",
-                          "currency": "HKD",
-                          "market": "HK",
-                          "quantity": "2400",
-                          "available_quantity": "2000",
-                          "init_quantity": "2000"
+                          'symbol': '5.HK',
+                          'symbol_name': 'HSBC HOLDINGS',
+                          'currency': 'HKD',
+                          'market': 'HK',
+                          'quantity': '2400',
+                          'available_quantity': '2000',
+                          'init_quantity': '2000',
                         },
                         {
-                          "symbol": "BABA.US",
-                          "symbol_name": "Alibaba",
-                          "currency": "USD",
-                          "market": "US",
-                          "quantity": "2000209",
-                          "available_quantity": "2000209",
-                          "init_quantity": "214"
+                          'symbol': 'BABA.US',
+                          'symbol_name': 'Alibaba',
+                          'currency': 'USD',
+                          'market': 'US',
+                          'quantity': '2000209',
+                          'available_quantity': '2000209',
+                          'init_quantity': '214',
                         },
                         {
-                          "symbol": "2.HK",
-                          "symbol_name": "CLP HOLDINGS",
-                          "currency": "HKD",
-                          "market": "HK",
-                          "quantity": "2000",
-                          "available_quantity": "2000",
-                          "init_quantity": "2000"
+                          'symbol': '2.HK',
+                          'symbol_name': 'CLP HOLDINGS',
+                          'currency': 'HKD',
+                          'market': 'HK',
+                          'quantity': '2000',
+                          'available_quantity': '2000',
+                          'init_quantity': '2000',
                         },
                         {
-                          "symbol": "NOK.US",
-                          "symbol_name": "Nokia",
-                          "currency": "USD",
-                          "market": "US",
-                          "quantity": "1",
-                          "available_quantity": "0",
-                          "init_quantity": "1"
+                          'symbol': 'NOK.US',
+                          'symbol_name': 'Nokia',
+                          'currency': 'USD',
+                          'market': 'US',
+                          'quantity': '1',
+                          'available_quantity': '0',
+                          'init_quantity': '1',
                         },
                       ],
                   },
@@ -124,8 +128,8 @@ definitions:
   stock_rsp:
     properties:
       list:
-        type: "object[]"
-        description: "Stock holding information"
+        type: 'object[]'
+        description: 'Stock holding information'
         required:
           - account_channel
         properties:
@@ -134,7 +138,7 @@ definitions:
             description: Account type
             required: true
           stock_info:
-            type: "object[]"
+            type: 'object[]'
             description: Stock list
             required:
               - symbol
@@ -145,33 +149,33 @@ definitions:
               - market
             properties:
               symbol:
-                type: "string"
+                type: 'string'
                 description: Stock code
                 required: true
               symbol_name:
-                type: "string"
+                type: 'string'
                 description: Stock name
                 required: true
               quantity:
-                type: "string"
+                type: 'string'
                 description: The number of holdings
                 required: true
               available_quantity:
-                type: "string"
+                type: 'string'
                 description: Available quantity
               currency:
-                type: "string"
+                type: 'string'
                 description: Currency
                 required: true
               market:
-                type: "string"
+                type: 'string'
                 description: market
                 required: true
               cost_price:
-                type: "string"
+                type: 'string'
                 description: Cost Price(According to the client's choice of average purchase or diluted cost)
                 required: true
               init_quantity:
-                type: "string"
+                type: 'string'
                 description: Initial position before market opening
                 required: true

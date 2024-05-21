@@ -1045,5 +1045,7 @@ For detailed SDK API document, please visit:
 
 ## Contact & Feedback
 
-- GitHub Issues: <https://github.com/longportapp/openapi-sdk>
-- Join **Discord** LongPort OpenAPI Server: <https://discord.gg/2gUTSCS6>
+| Contact | Description                                         |
+| ------- | --------------------------------------------------- |
+| GitHub  | <https://github.com/longportapp/openapi-sdk/issues> |
+| Discord | <https://discord.gg/2gUTSCS6>                       |

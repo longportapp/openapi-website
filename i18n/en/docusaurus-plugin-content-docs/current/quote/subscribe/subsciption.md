@@ -2,10 +2,12 @@
 id: quote_subscription
 title: Get Subscription Information
 slug: subscription
-sidebar_position: 1
+sidebar_position: 3
 ---
 
 This API is used to obtain the subscription information.
+
+<SDKLinks module="quote" klass="QuoteContext" method="subscriptions" />
 
 :::info
 
@@ -25,16 +27,13 @@ message SubscriptionRequest {
 ### Request Example
 
 ```python
-from time import sleep
-from longport.openapi import QuoteContext, Config, SubType, PushQuote, Period, AdjustType
-
-def on_quote(symbol: str, event: PushQuote):
-    print(symbol, event)
-
+from longport.openapi import QuoteContext, Config, SubType
 config = Config.from_env()
 ctx = QuoteContext(config)
-ctx.set_on_quote(on_quote)
-ctx.subscribe(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], [SubType.Quote], is_first_push=True)
+
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote])
+resp = ctx.subscriptions()
+print(resp)
 ```
 
 ## Response
@@ -42,7 +41,7 @@ ctx.subscribe(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], [SubType.Quote], is_f
 ### Response Properties
 
 | Name       | Type     | Description                                                                       |
-|------------|----------|-----------------------------------------------------------------------------------|
+| ---------- | -------- | --------------------------------------------------------------------------------- |
 | sub_list   | object[] | Subscribed data                                                                   |
 | ∟ symbol   | string   | Security code                                                                     |
 | ∟ sub_type | []int32  | Subscription type, see [SubType](../objects#subtype---quote-type-of-subscription) |
@@ -80,7 +79,7 @@ message SubTypeList {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description        | Troubleshooting Suggestions                                   |
-|---------------------|---------------------|--------------------|---------------------------------------------------------------|
+| ------------------- | ------------------- | ------------------ | ------------------------------------------------------------- |
 | 3                   | 301600              | Invalid request    | Invalid request parameters or unpacking request failed        |
 | 3                   | 301606              | Request rate limit | Reduce the frequency of requests                              |
 | 7                   | 301602              | Server error       | Please try again or contact a technician to resolve the issue |
