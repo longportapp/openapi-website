@@ -104,19 +104,42 @@ go get github.com/longportapp/openapi-go
 
 Let's take obtaining assets as an example to demonstrate how to use the SDK.
 
-## Configure Developer Account
+## Configuration
 
 1. Download App and open an account.
-2. Complete the Python 3 environment installation and install Pip
-3. Get App Key, App Secret, Access Token and other information from [LongPort OpenAPI](https://open.longportapp.com) official website
+2. Get App Key, App Secret, Access Token and other information from [LongPort OpenAPI](https://open.longportapp.com) official website
 
-**_Get App Key, App Secret, Access Token and other information_**
+   **_Get App Key, App Secret, Access Token and other information_**
 
-Login the [LongPort OpenAPI](https://open.longportapp.com) website, and enter the "User Center".
+   Login the [LongPort OpenAPI](https://open.longportapp.com) website, and enter the "User Center".
 
-The "application credential" credential information will be given on the page. After we get it, we will set the environment variable, which is convenient for later development and use.
+   The "application credential" credential information will be given on the page. After we get it, we will set the environment variable, which is convenient for later development and use.
 
-### Setting Environment Variables In macOS / Linux Environment
+### Environment Variables
+
+:::caution
+Please pay attention to protect your **Access Token** information, anyone who gets it can trade your account through OpenAPI!
+:::
+
+| 环境变量                    | 说明                                                               | 值范围          |
+| --------------------------- | ------------------------------------------------------------------ | --------------- |
+| `LONGPORT_APP_KEY`          | App Key get from developer center                                  |                 |
+| `LONGPORT_APP_SECRET`       | App Secret get from developer center                               |                 |
+| `LONGPORT_ACCESS_TOKEN`     | Access Token get from developer center                             |                 |
+| `LONGPORT_REGION`           | The region of the API, `cn` for mainland China, `hk` for Hong Kong | `cn`, `hk`      |
+| `LONGPORT_ENABLE_OVERNIGHT` | Set `true` to enable overnight quote                               | `true`, `false` |
+
+We recommend that you set the environment variables. For the convenience of demonstration, these environment variables will be used in the sample code in the documents in the following chapters.
+
+:::tip About ENV
+
+The ENV variables are **not necessary** conditions, if it is inconvenient to set the ENV variables or encounter problems that are difficult to solve, you can not set the ENV variables, but directly use the parameters in the code to initialize.
+
+The `Config` in LongPort OpenAPI SDK can be directly passed in parameters such as `app_key`, `app_secret`, `access_token` to initialize, pay attention to the comments in the example code below `Init config without ENV`.
+
+:::
+
+#### Set Environment for macOS / Linux
 
 Open the terminal and enter the following command:
 
@@ -126,53 +149,49 @@ export LONGPORT_APP_SECRET="App Secret get from user center"
 export LONGPORT_ACCESS_TOKEN="Access Token get from user center"
 ```
 
-:::tip About ENV
+#### Set Environment for Windows
 
-We recommend that you set the environment variables `LONGPORT_APP_KEY`, `LONGPORT_APP_SECRET`, `LONGPORT_ACCESS_TOKEN`. For the convenience of demonstration, these environment variables will be used in the sample code in the documents in the following chapters.
+Windows is a little more complicated, we provide two methods to set the environment variables.
 
-The ENV variables are **not necessary** conditions, if it is inconvenient to set the ENV variables or encounter problems that are difficult to solve, you can not set the ENV variables, but directly use the parameters in the code to initialize.
+1. **Through the GUI**: Right click on "My Computer" on the desktop, select "Properties", click "Advanced system settings" in the pop-up window.
 
-The `Config` in LongPort OpenAPI SDK can be directly passed in parameters such as `app_key`, `app_secret`, `access_token` to initialize, pay attention to the comments in the example code below `Init config without ENV`.
+   - Click "Environment Variables" in the pop-up window.
 
-:::
+     <img src="https://assets.lbkrs.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
 
-### Setting Environment Variables In Windows Environment
+   - Click "New" in the pop-up window, then enter the environment variable name, such as `LONGPORT_APP_KEY`, `Value` respectively fill in the App Key, App Secret, Access Token, Region obtained from the page.
 
-Windows is a little more complicated, press the `Win + R` shortcut keys and enter the `cmd` command to start the command line (it is recommended to use [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) for a better development experience).
+2. **Through the CMD**: Press the `Win + R` shortcut keys and enter the `cmd` command to start the command line (it is recommended to use [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) for a better development experience).
 
-Enter the following command in the command line to set the environment variable:
+   Enter the following command in the command line to set the environment variable:
 
-```bash
-C:\Users\jason> setx LONGPORT_APP_KEY "App Key get from user center"
-Success: the specified value has been saved.
+   ```bash
+   C:\Users\jason> setx LONGPORT_APP_KEY "App Key get from user center"
+   Success: the specified value has been saved.
 
-C:\Users\jason> setx LONGPORT_APP_SECRET "App Secret get from user center"
-Success: the specified value has been saved.
+   C:\Users\jason> setx LONGPORT_APP_SECRET "App Secret get from user center"
+   Success: the specified value has been saved.
 
-C:\Users\jason> setx LONGPORT_ACCESS_TOKEN "Access Token get from user center"
-Success: the specified value has been saved.
-```
+   C:\Users\jason> setx LONGPORT_ACCESS_TOKEN "Access Token get from user center"
+   Success: the specified value has been saved.
+   ```
 
-:::caution Windows ENV Restrictions
+   :::caution Windows ENV Restrictions
 
-Windows ENV Restrictions, when the above 3 commands are executed successfully, you need to restart Windows or log out and log in again before you can read it.
+   Windows ENV Restrictions, when the above commands are executed successfully, you need to restart Windows or log out and log in again before you can read it.
 
-:::
+   :::
 
-After logging out or restarting, open the command line again and enter the following command to verify that the environment variables are set correctly:
+   After logging out or restarting, open the command line again and enter the following command to verify that the environment variables are set correctly:
 
-```bash
-C:\Users\jason> set LONGPORT
-LONGPORT_APP_KEY=xxxxxxx
-LONGPORT_APP_SECRET=xxxxxx
-LONGPORT_ACCESS_TOKEN=xxxxxxx
-```
+   ```bash
+   C:\Users\jason> set LONGPORT
+   LONGPORT_APP_KEY=xxxxxxx
+   LONGPORT_APP_SECRET=xxxxxx
+   LONGPORT_ACCESS_TOKEN=xxxxxxx
+   ```
 
-If it prints the value you just set correctly, then the environment variable is right.
-
-:::caution
-Please pay attention to protect your **Access Token** information, anyone who gets it can trade your account through OpenAPI!
-:::
+   If it prints the value you just set correctly, then the environment variable is right.
 
 ## Scene Demonstration
 

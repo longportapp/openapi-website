@@ -99,80 +99,110 @@ go get github.com/longportapp/openapi-go
 ```
 
   </TabItem>
-
 </Tabs>
 
 下面我們以獲取資產為例，演示一下如何使用 SDK。
 
-## 配置開發者賬戶
+## 配置
 
 1. 下載 [LongPort](https://longportapp.com/download) 並完成開戶。
-2. 完成 Python 3 環境安裝，並安裝 Pip
-3. 從 [LongPort OpenAPI](https://open.longportapp.com) 官網獲取 `App Key`, `App Secret`, `Access Token` 等信息。
+2. 從 [LongPort OpenAPI](https://open.longportapp.com) 官網獲取 `App Key`, `App Secret`, `Access Token` 等信息。
 
-**_獲取 App Key, App Secret, Access Token 等信息_**
+   **_獲取 App Key, App Secret, Access Token 等信息_**
 
-訪問 [LongPort OpenAPI](https://open.longportapp.com) 網站，登錄後，進入“個人中心”。
+   訪問 [LongPort OpenAPI](https://open.longportapp.com) 網站，登錄後，進入“個人中心”。
 
-在頁面上會給出“應用憑證”憑證信息，我們拿到以後設置環境變量，便於後面開發使用方便。
+   在頁面上會給出“應用憑證”憑證信息，我們拿到以後設置環境變量，便於後面開發使用方便。
+
+### 開通開發中帳戶
+
+1. 下載 [LongPort](https://longportapp.com/download)，並完成開戶
+2. 從 [LongPort OpenAPI](https://open.longportapp.com) 官網取得 `App Key`, `App Secret`, `Access Token` 等資訊。
+
+   **_取得 App Key, App Secret, Access Token 等資訊_**
+
+   造訪 [LongPort OpenAPI](https://open.longportapp.com) 網站，登入後，進入「個人中心」。
+
+   在頁面上會給出「應用憑證」憑證訊息，我們拿到以後設定環境變量，方便後面開發使用方便。
+
+### 環境變量
+
+:::caution
+請注意保護好您的 **Access Token** 訊息，任何人獲得到它，都可以透過 OpenAPI 來交易你的帳戶！
+:::
+
+| 環境變量                    | 說明                                                         | 值範圍          |
+| --------------------------- | ------------------------------------------------------------ | --------------- |
+| `LONGPORT_APP_KEY`          | 從頁面上取得到的 App Key                                     |                 |
+| `LONGPORT_APP_SECRET`       | 從頁面取得到的 App Secret                                    |                 |
+| `LONGPORT_ACCESS_TOKEN`     | 從頁面上取得到的 Access Token                                |                 |
+| `LONGPORT_REGION`           | API 伺服器存取點，請根據您所在地區設置，以獲得更好的連線速度 | `hk`, `cn`      |
+| `LONGPORT_ENABLE_OVERNIGHT` | 是否開啟夜盤行情，設定 `true` 開啟，`false` 關閉             | `true`, `false` |
+
+建議您設定好這幾個環境變量，我們後面各章節文件中的範例程式碼都會使用這幾個環境變量。
 
 :::tip 關於環境變量
 
-建議您設置好 `LONGPORT_APP_KEY`, `LONGPORT_APP_SECRET`, `LONGPORT_ACCESS_TOKEN` 這幾個環境變量。我們為了演示方便，後面各章節文檔中的示例代碼都會使用這幾個環境變量。
+環境變量**非必要**條件，如設定不方便或遇到問題難以解決，可不用環境變量，而是直接在程式碼裡用參數來初始化。
 
-環境變量**非必要**條件，如設置不方便或遇到問題難以解決，可不設置環境變量，而是直接在代碼裏用參數來初始化。
-
-LongPort OpenAPI SDK 的 `Config` 均可以直接傳入 `app_key`, `app_secret`, `access_token` 等參數來初始化，注意看後面的例子註釋內 `Init config without ENV` 的部分。
+LongPort OpenAPI SDK 的 `Config` 都可以直接傳入 `app_key`, `app_secret`, `access_token` 等參數來初始化，注意看後面的例子註釋內 `Init config without ENV` 的部分。
 
 :::
 
-### macOS / Linux 環境下設置環境變量
+#### macOS / Linux 環境下設定環境變量
 
 打開終端，輸入下面的命令即可：
 
 ```bash
-export LONGPORT_APP_KEY="從頁面上獲取到的 App Key"
-export LONGPORT_APP_SECRET="從頁面上獲取到的 App Secret"
-export LONGPORT_ACCESS_TOKEN="從頁面上獲取到的 Access Token"
+export LONGPORT_APP_KEY="從頁面上取得到的 App Key"
+export LONGPORT_APP_SECRET="從頁面取得到的 App Secret"
+export LONGPORT_ACCESS_TOKEN="從頁面取得到的 Access Token"
+
 ```
 
-### Windows 下設置環境變量
+#### Windows 下設定環境變量
 
-Windows 要稍微複雜一些，按下 `Win + R` 快捷鍵，輸入 `cmd` 命令啟動命令行（建議使用 [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) 獲得更好的開發體驗）。
+Windows 要稍微複雜一些，有以下兩種方式可以設定環境變量：
 
-在命令行里面輸入下面的命令設置環境變量：
+1. **透過圖形介面設定**：在桌面上找到“我的電腦”，右鍵點擊，選擇“屬性”，在彈出的視窗中點擊“高級系統設定”。
 
-```bash
-C:\Users\jason> setx LONGPORT_APP_KEY "從頁面上獲取到的 App Key"
-成功：指定的值已得到保存。
+   - 在彈出的視窗中點選「環境變量」。
 
-C:\Users\jason> setx LONGPORT_APP_SECRET "從頁面上獲取到的 App Secret"
-成功：指定的值已得到保存。
+     <img src="https://assets.lbkrs.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
 
-C:\Users\jason> setx LONGPORT_ACCESS_TOKEN "從頁面上獲取到的 Access Token"
-成功：指定的值已得到保存。
-```
+   - 在彈出的視窗中點擊“新建”，然後輸入環境變量名稱，例如 `LONGPORT_APP_KEY`，`Value` 分別填寫從頁面上取得到的 App Key，App Secret，Access Token，Region。
 
-:::caution 環境變量限制
+2. **CMD 命令列設定**：按下`Win + R` 快捷鍵，輸入`cmd` 命令啟動命令列（建議使用[Windows Terminal](https://apps.microsoft.com/store/detail /windows-terminal/9N0DX20HK701) 獲得更好的開發體驗）。
 
-Windows 環境變量限制，當上面 3 條命令執行成功以後，你需要重新啟動 Windows 或者註銷後重新登錄一次，才可以讀取到。
+   在命令列裡面輸入下面的命令設定環境變量：
 
-:::
+   ```bash
+   C:\Users\jason> setx LONGPORT_APP_KEY "從頁面上取得到的 App Key"
+   成功：指定的值已儲存。
 
-註銷或重新啟動後，再次打開命令行，輸入下面的命令驗證一下環境變量是否設置正確：
+   C:\Users\jason> setx LONGPORT_APP_SECRET "從頁面取得到的 App Secret"
+   成功：指定的值已儲存。
 
-```bash
-C:\Users\jason> set LONGPORT
-LONGPORT_APP_KEY=xxxxxxx
-LONGPORT_APP_SECRET=xxxxxx
-LONGPORT_ACCESS_TOKEN=xxxxxxx
-```
+   C:\Users\jason> setx LONGPORT_ACCESS_TOKEN "從頁面取得到的 Access Token"
+   成功：指定的值已儲存。
+   ```
 
-如果能正確打印你剛才設置的值，那麼環境變量就是對了。
+   :::caution Windows 環境變量
 
-:::caution
-請注意保護好您的 **Access Token** 信息，任何人獲得到它，都可以通過 OpenAPI 來交易你的賬戶！
-:::
+   Windows 環境變量限制，當上面指令執行成功以後，你需要重新啟動 Windows 或登出後重新登入一次，才可以讀取。
+
+   :::
+
+   登出或重新啟動後，再次開啟命令列，輸入下面的命令以驗證環境變量是否設定正確：
+
+   ```bash
+   C:\Users\jason> set LONGPORT
+   LONGPORT_APP_KEY=xxxxxxx
+   LONGPORT_APP_SECRET=xxxxxx
+   LONGPORT_ACCESS_TOKEN=xxxxxxx
+   ```
+
+   如果你能正確列印你剛才設定的值，那麼環境變量就是對了。
 
 ## 場景示範
 
