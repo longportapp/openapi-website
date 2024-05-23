@@ -73,8 +73,6 @@ Supported trading functions include:
 
 ## Rate Limit {#rate-limit}
 
-All APIs have a minimum interval limit, so theoretically, the same API does not support concurrent calls.
-
 | Category  | Limitation                                                                                                                                                                                                                            |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Quote API | <ul><li>One account can only create one long link and subscribe to a maximum of 500 symbols at the same time</li><li>No more than 10 calls in a 1-second interval and the number of concurrent requests should not exceed 5</li></ul> |
