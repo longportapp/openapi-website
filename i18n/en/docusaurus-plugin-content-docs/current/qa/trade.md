@@ -8,7 +8,7 @@ A: Trading hours for paper accounts for Hong Kong stocks are the same as in the 
 
 ## Q3: How can I trade overnight sessions for U.S. stocks?
 
-A: To place orders for overnight trading, you can specify overnight trading by passing the OVERNIGHT value to the outside\_rth parameter in the order placement API.
+A: To place orders for overnight trading, you can specify overnight trading by passing the OVERNIGHT value to the `outside_rth` parameter in the order placement API.
 
 ## Q4: What are the trading rules for paper accounts?
 
@@ -26,7 +26,7 @@ A: After placing orders through the OpenAPI, you can check the real-time status 
 
 ## Q7: How can I know if my account has sufficient funds for trading?
 
-A: You can use the trading API /v1/trade/estimate/buy\_limit to estimate the available cash & margin buying power, and short selling quantity in your account. Due to the complexity of risk control requirements, it's not recommended to calculate the tradable quantity manually.
+A: You can use the trading API `/v1/trade/estimate/buy_limit` to estimate the available cash & margin buying power, and short selling quantity in your account. Due to the complexity of risk control requirements, it's not recommended to calculate the tradable quantity manually.
 
 ## Q8: What does it mean when the order placement API returns "User authentication failed"?
 
