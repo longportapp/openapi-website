@@ -9,7 +9,7 @@ A: 我们以提供了模拟账户，你可以用模拟账户来完成 OpenAPI �
 
 ## Q2: 如何开通模拟账户调试？
 
-A: 请访问 [开发中中心](/account) 开启**模拟账户**并获得模拟账户对应的 App Key & Secret 以及 Access Token 等信息。
+A: 请访问 [开发中中心](/account/) 开启**模拟账户**并获得模拟账户对应的 App Key & Secret 以及 Access Token 等信息。
 
 ## Q3: 模拟调试的行情交易权限与真实账户相同吗？
 
