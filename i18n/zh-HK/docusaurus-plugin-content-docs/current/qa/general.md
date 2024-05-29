@@ -9,7 +9,7 @@ A: 我們以提供了模擬帳戶，你可以用模擬帳戶來完成 OpenAPI �
 
 ## Q2: 如何開通模擬帳戶調試？
 
-A: 請造訪 [開發中中心](/account) 開啟**模擬帳號**並取得模擬帳號對應的 App Key & Secret 以及 Access Token 等資訊。
+A: 請造訪 [開發中中心](/account/) 開啟**模擬帳號**並取得模擬帳號對應的 App Key & Secret 以及 Access Token 等資訊。
 
 ## Q3: 模擬偵錯的行情交易權限與真實帳戶相同嗎？
 
