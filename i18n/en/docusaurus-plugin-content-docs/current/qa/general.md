@@ -1,14 +1,18 @@
-## Q1: What languages does Longport OpenAPI support?
+---
+title: General
+---
 
-A: We provide SDKs in various languages, including Python, Rust, Go, Node.js, Java, C, and C++. If these SDKs do not meet your needs, you can still integrate by directly calling the native APIs.
+## Q1: What languages does LongPort OpenAPI support?
 
-## Q2: Is it necessary to open a live account to use Longport OpenAPI?
+A: We provide [LongPort OpenAPI SDK](/sdk) in various languages. If these SDKs do not meet your needs, you can still integrate by directly calling the [APIs](/docs/how-to-access-api).
 
-A: Not necessarily. You can also debug the Longport OpenAPI by using a paper account to access market data and trading interfaces.
+## Q2: Is it necessary to open a live account to use LongPort OpenAPI?
+
+A: Not necessarily. You can also debug the LongPort OpenAPI by using a paper account to access market data and trading interfaces.
 
 ## Q3: How can I debug using a paper account?
 
-A: You can open a paper account through the mobile app or the Longport OpenAPI developer center. After obtaining the corresponding App Key/Secret and Access Token, you can directly call the market data and trading interfaces for debugging.
+A: You can open a paper account through the mobile app or the LongPort OpenAPI developer center. After obtaining the corresponding App Key/Secret and Access Token, you can directly call the market data and trading interfaces for debugging.
 
 ## Q4: Are the market data and trading permissions the same for paper account debugging as for live accounts?
 
@@ -34,7 +38,7 @@ Up to 10 calls within 1 second, with a maximum of 5 concurrent requests.
 
 Trading-related APIs:
 
-Up to 30 calls within 30 seconds, with an interval of at least 0.02 seconds between each call.
+Up to `30` calls within 30 seconds, with an interval of at least `20 ms` between each call.
 
 ## Q7: How are API call limits handled for multiple accounts?
 
