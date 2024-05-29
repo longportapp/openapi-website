@@ -1,49 +1,35 @@
 ---
-title: General
+title: General Questions
 ---
 
-## Q1: What languages does LongPort OpenAPI support?
+## Q1: Do I need to open a live account to call LongPort OpenAPI?
 
-A: We provide [LongPort OpenAPI SDK](/sdk) in various languages. If these SDKs do not meet your needs, you can still integrate by directly calling the [APIs](/docs/how-to-access-api).
+A: We provide a paper account, you can use it to complete the debugging of the OpenAPI quote and trading interfaces.
 
-## Q2: Is it necessary to open a live account to use LongPort OpenAPI?
+## Q2: How to open a paper account for debugging?
 
-A: Not necessarily. You can also debug the LongPort OpenAPI by using a paper account to access market data and trading interfaces.
+A: Please visit [Development Center](/account) to enable the paper account and obtain the corresponding App Key & Secret and Access Token.
 
-## Q3: How can I debug using a paper account?
+## Q3: Are the trading permissions for simulation debugging the same as for real accounts?
 
-A: You can open a paper account through the mobile app or the LongPort OpenAPI developer center. After obtaining the corresponding App Key/Secret and Access Token, you can directly call the market data and trading interfaces for debugging.
+A: Quote is the same, trading might be different.
 
-## Q4: Are the market data and trading permissions the same for paper account debugging as for live accounts?
+Paper accounts and live accounts share the same App Key & Secret, but have different Access Tokens. Quote permissions are associated with the App Key & Secret, while trading permissions are associated with the Access Token. Therefore, under paper accounts and live accounts, quote permissions are the same, but trading permissions are associated with the securities account and may differ.
 
-A: The market data permissions are the same, but the trading permissions are different. Paper and live accounts share the same App Key & Secret but have different Access Tokens. Market data permissions are associated with the App Key & Secret, while trading permissions are associated with the Access Token. Therefore, the market data permissions are the same for both paper and live accounts, but the trading permissions may differ based on seperate accounts.
+## Q4: Which markets and types of securities are supported for quote and trading in paper account debugging?
 
-## Q5: What markets and instruments are supported for market data and trading in paper accounts?
+A: Market: Supports real-time market data for Hong Kong stocks, US stocks, and A-share markets. For advanced market data such as full US market data and Hong Kong Level2 data, they can be purchased through the online market store and accessed via OpenAPI.
 
-A: Market Data:
+Trading: Supports trading of Hong Kong and US stocks, ETFs, and Hong Kong warrant trading. Short selling is supported for US stocks. OTC stocks, pre & post market trading, and options trading are not supported in paper accounts.
 
-Supports real-time market data for Hong Kong stocks, US stocks, and A-share markets. Advanced market data such as full US market data and Hong Kong Level 2 data can be purchased through the online market data store and accessed via OpenAPI after acquiring the corresponding market data rights.
+## Q5: Interface call frequency limits
 
-Trading:
+A: Please visit [Rate Limit](docs/#rate-limit) for specific descriptions.
 
-Supports trading of Hong Kong and US stocks, ETFs, and Hong Kong warrants. Short selling is supported for US stocks. However, OTC trading, pre-market, after-hours trading, and options trading are not supported in paper accounts.
+## Q6: How are interface call frequency limits applied in the case of multiple accounts?
 
-## Q6: What are the frequency limits for API calls?
+A: If a customer holds multiple securities accounts, such as intraday financing or other sub-accounts, the trading interface call frequency limits are calculated and controlled based on different securities accounts, while quote interface calls are not affected by multiple accounts and are uniformly limited.
 
-A: Market-related APIs:
+## Q7: Are there additional charges for trading operations through LongPort OpenAPI?
 
-Only one long connection can be established per account, with a maximum of 500 subscriptions at the same time.
-
-Up to 10 calls within 1 second, with a maximum of 5 concurrent requests.
-
-Trading-related APIs:
-
-Up to `30` calls within 30 seconds, with an interval of at least `20 ms` between each call.
-
-## Q7: How are API call limits handled for multiple accounts?
-
-A: If a customer holds multiple securities accounts, such as day trading or other sub-accounts, the frequency and quantity limits for trading APIs are counted and controlled separately for each securities account. However, market data APIs are not affected by multiple accounts and are subject to unified limits.
-
-## Q8: Is there an additional charge for trading operations via OpenAPI?
-
-A: All operations through OpenAPI are free, including accessing OpenAPI SDK or directly calling the native APIs for querying, subscribing, placing orders, etc..
+A: We do not charge additional fees for accessing market queries, trading, etc., via OpenAPI. For account-related fees such as trading commissions, platform fees, and market permissions, please refer to the information provided by the app and the official website.
