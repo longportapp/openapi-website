@@ -1,5 +1,6 @@
 ---
-title: General Questions
+title: General
+sidebar_position: 0
 ---
 
 ## Q1: Do I need to open a live account to call LongPort OpenAPI?
@@ -8,7 +9,7 @@ A: We provide a paper account, you can use it to complete the debugging of the O
 
 ## Q2: How to open a paper account for debugging?
 
-A: Please visit [Development Center](/account) to enable the paper account and obtain the corresponding App Key & Secret and Access Token.
+A: Please visit [Development Center](/account/) to enable the paper account and obtain the corresponding App Key & Secret and Access Token.
 
 ## Q3: Are the trading permissions for simulation debugging the same as for real accounts?
 
