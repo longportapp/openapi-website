@@ -1,5 +1,6 @@
 ---
 title: 通用問題
+sidebar_position: 0
 ---
 
 ## Q1: 一定要開通真實帳號才能呼叫 LongPort OpenAPI 嗎？
