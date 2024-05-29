@@ -1,4 +1,4 @@
-name: Autocorrect
+name: AutoCorrect
 on: [pull_request]
 jobs:
   autocorrect:
@@ -10,7 +10,7 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Exec autocorrect
+      - name: Check
         uses: huacnlee/autocorrect-action@main
         with:
           use_npm: true
