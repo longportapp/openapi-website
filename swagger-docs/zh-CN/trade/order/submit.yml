@@ -88,7 +88,6 @@ paths:
           ctx = TradeContext(config)
 
           # Submit order
-          resp = ctx.submit_order("700.HK", OrderType.LO, OrderSide.Buy, Decimal(
-            "500"), TimeInForceType.Day, submitted_price=Decimal("50"), remark="Hello from Python SDK")
+          resp = ctx.submit_order("700.HK", OrderType.LO, OrderSide.Buy, 500, TimeInForceType.Day, submitted_price=Decimal("50"), remark="Hello from Python SDK")
           print(resp)
       response_body: { 'code': 0, 'message': 'success', 'data': { 'order_id': 683615454870679552 } }
