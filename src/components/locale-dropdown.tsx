@@ -54,5 +54,5 @@ export const LocaleDropdown: FC = () => {
     prePath = location.pathname
   }
 
-  return <Dropdown className="hidden-in-mobile-sidebar" items={items} value={locale} onChange={onChange} />
+  return <Dropdown className="navbar__item hidden-in-mobile-sidebar" items={items} value={locale} onChange={onChange} />
 }
