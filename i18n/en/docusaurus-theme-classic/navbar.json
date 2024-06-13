@@ -23,7 +23,7 @@
     "message": "GitHub",
     "description": "Navbar item with label GitHub"
   },
-  "item.label.问题与讨论": {
+  "item.label.讨论 & 反馈": {
     "message": "Discussion",
     "description": "Navbar item with label Issues"
   }

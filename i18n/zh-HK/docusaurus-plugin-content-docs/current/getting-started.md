@@ -995,8 +995,16 @@ SDK 的詳細 API 文檔請訪問：
 
 ## 回饋及溝通
 
-| 頻道                 | 二維碼 / 連結                                                                                  |
-| -------------------- | ---------------------------------------------------------------------------------------------- |
-| GitHub Issues        | <https://github.com/longportapp/openapi-sdk/issues>                                            |
-| 微信溝通群（已完成） | <img src="https://pub.lbkrs.com/files/202205/akTNrRTBrT5aMX4f/qrcode.jpg" />                   |
-| 飛書溝通群           | <img src="https://assets.lbkrs.com/uploads/2acb32b6-0718-4304-8d73-432a2d53aa97/feishu.png" /> |
+如果您在使用 SDK 的過程中遇到任何問題，歡迎透過以下方式返回或與我們討論，我們會盡力協助您解決問題。
+
+### GitHub Issues
+
+在 GitHub 上，也有很多歷史的討論和問題可以參考，你也可以試著搜尋一下，或許也能找到問題的解決方案。
+
+訪問網址：<https://github.com/longportapp/openapi-sdk/issues>
+
+### 飛書回饋
+
+如果你有使用[飛書](https://www.feishu.cn/)，可以掃打開在飛書話題群中提出你的問題：
+
+<img src="https://assets.lbkrs.com/uploads/412f8cd8-2268-45ff-a367-98f280d0ee09/openapi-feishu-qrcode.png" style={{ width: "200px" }} />

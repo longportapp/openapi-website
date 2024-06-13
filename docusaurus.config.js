@@ -152,27 +152,15 @@ const config = {
             position: 'left',
           },
           {
-            to: communityDomain,
-            label: '社区',
-            target: '_self',
-            position: 'left',
-          },
-          {
-            to: `${communityDomain}/markets`,
-            target: '_self',
-            label: '市场',
+            label: '讨论 & 反馈',
+            to: 'https://github.com/longportapp/openapi-sdk/issues',
+            className: 'navbar-item--icon navbar-item--discussion',
             position: 'left',
           },
           {
             type: 'search',
             position: 'right',
             className: 'search-container',
-          },
-          {
-            label: '问题与讨论',
-            to: 'https://github.com/longportapp/openapi-sdk/issues',
-            className: 'navbar-item--icon navbar-item--discussion',
-            position: 'right',
           },
           {
             type: 'localeDropdown',
