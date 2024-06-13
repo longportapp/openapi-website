@@ -1064,7 +1064,8 @@ For detailed SDK API document, please visit:
 
 ## Contact & Feedback
 
-| Contact | Description                                         |
-| ------- | --------------------------------------------------- |
-| GitHub  | <https://github.com/longportapp/openapi-sdk/issues> |
-| Discord | <https://discord.gg/2gUTSCS6>                       |
+If there are any questions or suggestions, please feel free to post an issue on GitHub, we will reply as soon as possible.
+
+Or there have a lot old discussion in the GitHub issue, you can search the issue to find the answer.
+
+- GitHub: https://github.com/longportapp/openapi-sdk/issues

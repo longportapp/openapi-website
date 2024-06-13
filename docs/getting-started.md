@@ -1058,8 +1058,16 @@ SDK 的详细 API 文档请访问：
 
 ## 反馈及沟通
 
-| 渠道               | 二维码 / 链接                                                                                  |
-| ------------------ | ---------------------------------------------------------------------------------------------- |
-| GitHub Issues      | <https://github.com/longportapp/openapi-sdk/issues>                                            |
-| 微信沟通群（已满） | <img src="https://pub.lbkrs.com/files/202205/akTNrRTBrT5aMX4f/qrcode.jpg" />                   |
-| 飞书沟通群         | <img src="https://assets.lbkrs.com/uploads/2acb32b6-0718-4304-8d73-432a2d53aa97/feishu.png" /> |
+如果您在使用 SDK 的过程中遇到任何问题，欢迎通过以下方式返回或与我们讨论，我们会尽力帮助您解决问题。
+
+### GitHub Issues
+
+在 GitHub 上，也有很多历史的讨论和问题可以参考，你也可以试着搜索一下，或许也能找到问题的解决方案。
+
+访问地址：<https://github.com/longportapp/openapi-sdk/issues>
+
+### 飞书回馈
+
+如果你有使用[飞书](https://www.feishu.cn/)，可以扫打开在飞书话题群中提出你的问题：
+
+<img src="https://assets.lbkrs.com/uploads/412f8cd8-2268-45ff-a367-98f280d0ee09/openapi-feishu-qrcode.png" style={{ width: "200px" }} />
