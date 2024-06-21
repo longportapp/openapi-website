@@ -17,7 +17,7 @@ paths:
           required: true
         - name: 'securities'
           type: 'string[]'
-          description: 'Security list, for example `["BABA.US", "AAPL.US"]`.
+          description: 'Security list, for example `["BABA.US", "AAPL.US"]`, limit upto 1000 items.
             Display order of securities in the group, in the same order as this list.
             If this parameter is not passed, create an empty group. '
           required: false
