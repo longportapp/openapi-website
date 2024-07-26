@@ -168,7 +168,7 @@ Windows 要稍微複雜一些，有以下兩種方式可以設定環境變量：
 
    - 在彈出的視窗中點選「環境變量」。
 
-     <img src="https://assets.lbkrs.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
+     <img src="https://assets.lbctrl.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
 
    - 在彈出的視窗中點擊“新建”，然後輸入環境變量名稱，例如 `LONGPORT_APP_KEY`，`Value` 分別填寫從頁面上取得到的 App Key，App Secret，Access Token，Region。
 
@@ -427,7 +427,7 @@ go run ./
 
 當你有正確的行情權限，看起來可能會是這樣：
 
-<img src="https://pub.lbkrs.com/files/202205/CicZRBp7LAV577YN/SCR-20220510-gme.png" className="max-w-2xl" />
+<img src="https://pub.pbkrs.com/files/202205/CicZRBp7LAV577YN/SCR-20220510-gme.png" className="max-w-2xl" />
 
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>
@@ -1007,4 +1007,4 @@ SDK 的詳細 API 文檔請訪問：
 
 如果你有使用[飛書](https://www.feishu.cn/)，可以掃打開在飛書話題群中提出你的問題：
 
-<img src="https://assets.lbkrs.com/uploads/412f8cd8-2268-45ff-a367-98f280d0ee09/openapi-feishu-qrcode.png" style={{ width: "200px" }} />
+<img src="https://assets.lbctrl.com/uploads/412f8cd8-2268-45ff-a367-98f280d0ee09/openapi-feishu-qrcode.png" style={{ width: "200px" }} />

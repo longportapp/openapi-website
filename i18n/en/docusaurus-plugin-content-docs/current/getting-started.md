@@ -157,7 +157,7 @@ Windows is a little more complicated, we provide two methods to set the environm
 
    - Click "Environment Variables" in the pop-up window.
 
-     <img src="https://assets.lbkrs.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
+     <img src="https://assets.lbctrl.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
 
    - Click "New" in the pop-up window, then enter the environment variable name, such as `LONGPORT_APP_KEY`, `Value` respectively fill in the App Key, App Secret, Access Token, Region obtained from the page.
 
@@ -416,7 +416,7 @@ If you do not have the quotes authority, you can enter "Me - My Quotes - Store" 
 
 When you have the correct Quote authority, it might look like this:
 
-<img src="https://pub.lbkrs.com/files/202205/VeSgQksvfu3Q2iPN/SCR-20220510-gkx.png" className="max-w-2xl" />
+<img src="https://pub.pbkrs.com/files/202205/VeSgQksvfu3Q2iPN/SCR-20220510-gkx.png" className="max-w-2xl" />
 
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>

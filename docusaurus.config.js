@@ -25,7 +25,7 @@ const config = {
   customFields: {
     isDev: process.env.STAGE === 'dev',
   },
-  favicon: 'https://pub.lbkrs.com/static/offline/202211/qohHsXzN9qtQ23ox/longport_favicon.png',
+  favicon: 'https://pub.pbkrs.com/static/offline/202211/qohHsXzN9qtQ23ox/longport_favicon.png',
   plugins: [
     'docusaurus-plugin-sass',
     function docusaurusTailwindCss() {
@@ -111,11 +111,11 @@ const config = {
       metadata: [
         {
           name: 'og:image',
-          content: 'https://pub.lbkrs.com/files/202211/sJswdGqSX1xDqrES/lonport-seo-img.png',
+          content: 'https://pub.pbkrs.com/files/202211/sJswdGqSX1xDqrES/lonport-seo-img.png',
         },
         {
           name: 'twitter:image',
-          content: 'https://pub.lbkrs.com/files/202211/sJswdGqSX1xDqrES/lonport-seo-img.png',
+          content: 'https://pub.pbkrs.com/files/202211/sJswdGqSX1xDqrES/lonport-seo-img.png',
         },
       ],
       colorMode: {
@@ -129,7 +129,7 @@ const config = {
           alt: 'LongPort',
           href: openapiDomain,
           target: '_self',
-          src: 'https://pub.lbkrs.com/files/202211/BoUn1BSQuAHDX4GY/logo-with-title.svg',
+          src: 'https://pub.pbkrs.com/files/202211/BoUn1BSQuAHDX4GY/logo-with-title.svg',
         },
         items: [
           {

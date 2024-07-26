@@ -75,7 +75,7 @@ A: The security code uses the `ticker.region` format, `ticker` represents the co
 </table>
 
 You can also use LongPort App to find the symbol of security
-<img src="https://pub.lbkrs.com/files/202206/7CSoiaDR4wGZPNCT/20220629-180013.jpeg" className="max-w-2xl" />
+<img src="https://pub.pbkrs.com/files/202206/7CSoiaDR4wGZPNCT/20220629-180013.jpeg" className="max-w-2xl" />
 
 ## Q4: What is the quote authority of OpenAPI? How to buy quote cards?
 
