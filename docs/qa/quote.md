@@ -75,7 +75,7 @@ A：标的代码使用 `ticker.region` 格式，`ticker` 表示标的代码。�
 </table>
 
 可以使用 LongPort App 查看标的的 symbol
-<img src="https://pub.lbkrs.com/files/202206/7CSoiaDR4wGZPNCT/20220629-180013.jpeg" className="max-w-2xl" />
+<img src="https://pub.pbkrs.com/files/202206/7CSoiaDR4wGZPNCT/20220629-180013.jpeg" className="max-w-2xl" />
 
 ## Q4：OpenAPI 的行情权限是怎么样？如何购买行情卡？
 

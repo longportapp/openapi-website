@@ -30,7 +30,7 @@ const Dropdown: React.FC<IDropdownProps> = ({ value, content, className, childre
           <div className="flex items-center">
             <span>{selectedItem.shortLabel || selectedItem.label}</span>
             <div className="text-[8px] ml-1">
-              <img src="https://pub.lbkrs.com/static/offline/202111/oPFw5UmKNxErcZsQ/caret-down.svg" alt="caret-down" />
+              <img src="https://pub.pbkrs.com/static/offline/202111/oPFw5UmKNxErcZsQ/caret-down.svg" alt="caret-down" />
             </div>
           </div>
         ) : (
@@ -44,7 +44,7 @@ const Dropdown: React.FC<IDropdownProps> = ({ value, content, className, childre
         onClick={() => setShowContent(false)}
       >
         {items.length > 0 &&
-          items.map(item => {
+          items.map((item) => {
             return (
               <div
                 key={item.value}

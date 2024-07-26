@@ -58,7 +58,7 @@ Markdown 涉及到的静态资源例如：图片、视频等都需要上传到 C
 推荐的写法（从后台上传到 CDN 拿到 CDN 地址，然后在 Markdown 中引用）
 
 ```md
-![流程图片](https://pub.lbkrs.com/xxx/xxx.png)
+![流程图片](https://pub.pbkrs.com/xxx/xxx.png)
 ```
 
 > Before commit you should be run `autocorrect --fix .` first

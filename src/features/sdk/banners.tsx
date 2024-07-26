@@ -19,10 +19,10 @@ export const Banners = () => {
           <div>
             <img
               className="code-picture"
-              src="https://pub.lbkrs.com/files/202204/iANK9jB2vYWW2tyN/Frame_3.png"
+              src="https://pub.pbkrs.com/files/202204/iANK9jB2vYWW2tyN/Frame_3.png"
               alt=""
             />
-            <img className="bracket" src="https://pub.lbkrs.com/files/202204/mspw6cx2Um4YYm3k/___1_.png" alt="" />
+            <img className="bracket" src="https://pub.pbkrs.com/files/202204/mspw6cx2Um4YYm3k/___1_.png" alt="" />
           </div>
         </div>
       </div>
