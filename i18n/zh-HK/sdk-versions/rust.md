@@ -15,4 +15,4 @@ longport = "1.0.0"
 
 ### API 文檔
 
-https://longportapp.github.io/openapi-sdk/rust/index.html
+[https://longportapp.github.io/openapi-sdk/rust/index.html](https://longportapp.github.io/openapi-sdk/rust/longport/index.html)
