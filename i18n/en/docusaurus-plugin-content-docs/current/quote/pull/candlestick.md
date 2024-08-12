@@ -2,10 +2,14 @@
 id: quote_candlestick
 title: Get Security Candlesticks
 slug: candlestick
-sidebar_position: 10
+sidebar_position: 20
 ---
 
 This API is used to obtain the candlestick data of security.
+
+:::info
+Note: This interface can only retrieve the last 1000 candlesticks. To obtain longer historical data, please visit the interface: Get Security History Candlesticks.
+:::
 
 <SDKLinks module="quote" klass="QuoteContext" method="candlesticks" />
 
