@@ -2,7 +2,7 @@
 id: quote_history_candlestick
 title: 獲取標的曆史 K 線
 slug: history-candlestick
-sidebar_position: 20
+sidebar_position: 10
 ---
 
 該接口用於獲取標的的曆史 K 線數據。
