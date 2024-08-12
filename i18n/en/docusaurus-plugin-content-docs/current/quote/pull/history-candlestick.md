@@ -2,7 +2,7 @@
 id: quote_history_candlestick
 title: Get Security History Candlesticks
 slug: history-candlestick
-sidebar_position: 20
+sidebar_position: 10
 ---
 
 This API is used to obtain the history candlestick data of security.
