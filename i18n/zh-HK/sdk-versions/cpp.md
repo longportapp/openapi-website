@@ -4,7 +4,7 @@
 
 ### 下載地址
 
-- [openapi-cpp-sdk-1.0.23.tar.gz](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-1.0.23.tar.gz)
+- [openapi-cpp-sdk-1.0.31.tar.gz](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-1.0.31.tar.gz)
 
 ### API 文檔
 
