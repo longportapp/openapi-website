@@ -5,6 +5,10 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2024-08-28
+
+- SDK 中 `Depth.price` 字段从 `Decimal` 类型改为 `Optional[Decimal]` 类型
+
 ## 2024-05-17
 
 - 下單及訂單查詢接口擴展 `outside_rth` 字段支持夜盤交易

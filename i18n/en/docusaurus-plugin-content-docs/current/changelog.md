@@ -5,6 +5,11 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2024-08-28
+
+- Change the `Depth.price` field in the SDK from `Decimal` type to `Optional[Decimal]` type
+
+
 ## 2024-05-17
 
 - Expand `outside_rth` field to support overnight trading in order placement and query APIs
