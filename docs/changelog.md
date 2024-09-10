@@ -5,6 +5,11 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2024-09-11
+
+- 更新获取标的列表接口
+  - `GET /v1/quote/get_security_list` 返回的多语言名称根据请求头 `accept-language` 返回对应字段，不再一次性返回三种语言名称
+
 ## 2024-08-28
 
 - SDK 中 `Depth.price` 字段从 `Decimal` 类型改为 `Optional[Decimal]` 类型
