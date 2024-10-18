@@ -1,35 +1,35 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
   description: |
     This API is used to submit order for HK and US stocks, warrant and option.
 
     <SDKLinks module="trade" klass="TradeContext" method="submit_order" />
-  version: 'v1'
-  title: 'Submit Order'
+  version: "v1"
+  title: "Submit Order"
 paths:
   /v1/trade/order:
     post:
-      access: 'Trading Permissions'
+      access: "Trading Permissions"
       parameters:
-        - name: 'symbol'
-          type: 'string'
-          description: 'Stock symbol, use `ticker.region` format, example: `AAPL.US`'
+        - name: "symbol"
+          type: "string"
+          description: "Stock symbol, use `ticker.region` format, example: `AAPL.US`"
           required: true
-        - name: 'order_type'
-          type: 'string'
-          description: '[Order Type](../trade-definition#ordertype)'
+        - name: "order_type"
+          type: "string"
+          description: "[Order Type](../trade-definition#ordertype)"
           required: true
-        - name: 'submitted_price'
+        - name: "submitted_price"
           required: false
-          description: 'Submitted price, example: `388.5`<br/><br/>
-            `LO` / `ELO` / `ALO` / `ODD` / `LIT` Order Required'
-        - name: 'submitted_quantity'
+          description: "Submitted price, example: `388.5`<br/><br/>
+            `LO` / `ELO` / `ALO` / `ODD` / `LIT` Order Required"
+        - name: "submitted_quantity"
           required: true
-          description: 'Submitted quantity, example: `100`'
+          description: "Submitted quantity, example: `100`"
         - name: trigger_price
           required: false
-          description: 'Trigger price, example: `388.5`<br/><br/>
-            `LIT` / `MIT` Order Required'
+          description: "Trigger price, example: `388.5`<br/><br/>
+            `LIT` / `MIT` Order Required"
         - name: limit_offset
           required: false
           description: Limit offset amount<br/><br/>
@@ -44,10 +44,11 @@ paths:
             `TSLPPCT` Order Required
         - name: expire_date
           required: false
-          description: 'Long term order expire date, format `YYYY-MM-DD`, example: `2022-12-05`<br/><br/>
-            Required when `time_in_force` is `GTD`'
+          description:
+            "Long term order expire date, format `YYYY-MM-DD`, example: `2022-12-05`<br/><br/>
+            Required when `time_in_force` is `GTD`"
         - name: side
-          type: 'string'
+          type: "string"
           description: Order Side<br/><br/>
             **Enum Value:**<br/>
             `Buy`<br/>
@@ -62,22 +63,22 @@ paths:
             `OVERNIGHT` - Overnight"
         - name: time_in_force
           required: true
-          description: '
+          description: "
             Time in force Type<br/><br/>
             **Enum Value:**<br/>
             `Day` - Day Order<br/>
             `GTC` - Good Til Canceled Order<br/>
-            `GTD` - Good Til Date Order'
+            `GTD` - Good Til Date Order"
         - name: remark
           required: false
-          description: 'remark (Maximum 64 characters)'
+          description: "remark (Maximum 64 characters)"
       responses:
-        '200':
-          description: 'The submission was successful and the order was commissioned.'
-        '400':
-          description: 'The submit was rejected with an incorrect request parameter.'
+        "200":
+          description: "The submission was successful and the order was commissioned."
+        "400":
+          description: "The submit was rejected with an incorrect request parameter."
       request_body:
-        type: 'python'
+        type: "python"
         value: |
           from decimal import Decimal
           from longport.openapi import TradeContext, Config, OrderType, OrderSide, TimeInForceType
@@ -89,6 +90,11 @@ paths:
           ctx = TradeContext(config)
 
           # Submit order
-          resp = ctx.submit_order("700.HK", OrderType.LO, OrderSide.Buy, 500, TimeInForceType.Day, submitted_price=Decimal("50"), remark="Hello from Python SDK")
+          resp = ctx.submit_order("700.HK", OrderType.LO, OrderSide.Buy, Decimal(500), TimeInForceType.Day, submitted_price=Decimal(50), remark="Hello from Python SDK")
           print(resp)
-      response_body: { 'code': 0, 'message': 'success', 'data': { 'order_id': 683615454870679552 } }
+      response_body:
+        {
+          "code": 0,
+          "message": "success",
+          "data": { "order_id": 683615454870679552 },
+        }

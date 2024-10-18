@@ -5,6 +5,13 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2024-10-09
+
+### SDK 2.0.0
+
+- Print the opened quote packages when connected to the server.
+- The quantity type in the trading API has changed from `int` to `Decimal`.
+
 ## 2024-08-28
 
 - Change the `Depth.price` field in the SDK from `Decimal` type to `Optional[Decimal]` type

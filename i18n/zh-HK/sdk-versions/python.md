@@ -12,4 +12,5 @@ $ pip3 install longport
 
 ### API 文檔
 
-https://longportapp.github.io/openapi-sdk/python/index.html
+- [v1](https://longportapp.github.io/openapi-sdk/v1/python/index.html)
+- [v2](https://longportapp.github.io/openapi-sdk/v2/python/index.html)

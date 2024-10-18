@@ -23,21 +23,21 @@ headingLevel: 3
 
 > Content-Type: application/json; charset=utf-8
 
-| Name               | Type   | Required | Description                                                                                                                               |
-| ------------------ | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| symbol             | string | YES      | 股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`                                                                                      |
-| order_type         | string | YES      | [订单类型](../trade-definition#ordertype)                                                                                                 |
+| Name               | Type   | Required | Description                                                                                                                             |
+|--------------------|--------|----------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| symbol             | string | YES      | 股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`                                                                                       |
+| order_type         | string | YES      | [订单类型](../trade-definition#ordertype)                                                                                               |
 | submitted_price    | string | NO       | 下单价格，例如：`388.5`<br/><br/> `LO` / `ELO` / `ALO` / `ODD` / `LIT` 订单必填                                                           |
 | submitted_quantity | string | YES      | 下单数量，例如：`100`                                                                                                                     |
 | trigger_price      | string | NO       | 触发价格，例如：`388.5`<br/><br/> `LIT` / `MIT` 订单必填                                                                                  |
-| limit_offset       | string | NO       | 指定价差，例如 "1.2" 表示价差 1.2 USD (如果是美股)<br/><br/> `TSLPAMT` / `TSLPPCT` 订单必填                                               |
-| trailing_amount    | string | NO       | 跟踪金额<br/><br/> `TSLPAMT` 订单必填                                                                                                     |
+| limit_offset       | string | NO       | 指定价差，例如 "1.2" 表示价差 1.2 USD (如果是美股)<br/><br/> `TSLPAMT` / `TSLPPCT` 订单必填                                              |
+| trailing_amount    | string | NO       | 跟踪金额<br/><br/> `TSLPAMT` 订单必填                                                                                                   |
 | trailing_percent   | string | NO       | 跟踪涨跌幅，单位为百分比，例如 "2.5" 表示 "2.5%"<br/><br/> `TSLPPCT` 订单必填                                                             |
 | expire_date        | string | NO       | 长期单过期时间，格式为 `YYYY-MM-DD`, 例如：`2022-12-05`<br/><br/> time_in_force 为 `GTD` 时必填                                           |
-| side               | string | YES      | 买卖方向<br/><br/> **可选值：**<br/> `Buy` - 买入<br/> `Sell` - 卖出                                                                      |
+| side               | string | YES      | 买卖方向<br/><br/> **可选值：**<br/> `Buy` - 买入<br/> `Sell` - 卖出                                                                     |
 | outside_rth        | string | NO       | 是否允许盘前盘后，美股必填<br/><br/> **可选值：**<br/> `RTH_ONLY` - 不允许盘前盘后<br/> `ANY_TIME` - 允许盘前盘后<br/> `OVERNIGHT` - 夜盘 |
-| time_in_force      | string | YES      | 订单有效期类型<br/><br/> **可选值：**<br/> `Day` - 当日有效<br/> `GTC` - 撤单前有效<br/> `GTD` - 到期前有效                               |
-| remark             | string | NO       | 备注 (最大 64 字符)                                                                                                                       |
+| time_in_force      | string | YES      | 订单有效期类型<br/><br/> **可选值：**<br/> `Day` - 当日有效<br/> `GTC` - 撤单前有效<br/> `GTD` - 到期前有效                              |
+| remark             | string | NO       | 备注 (最大 64 字符)                                                                                                                     |
 
 ## Examples
 
@@ -61,9 +61,9 @@ resp = ctx.submit_order(
     "700.HK",
     OrderType.LO,
     OrderSide.Buy,
-    100,
+    Decimal(100),
     TimeInForceType.Day,
-    submitted_price=Decimal("380"),
+    submitted_price=Decimal(380),
     remark="Hello from Python SDK",
 )
 ```
@@ -83,7 +83,7 @@ ctx.submit_order(
     "700.HK",
     OrderType.MO,
     OrderSide.Sell,
-    100,
+    Decimal(100),
     TimeInForceType.Day,
     remark="Hello from Python SDK",
 )
@@ -107,7 +107,7 @@ ctx.submit_order(
     "NVDA.US",
     OrderType.LIT,
     OrderSide.Sell,
-    100,
+    Decimal(100),
     TimeInForceType.GoodTilCanceled,
     Decimal("999.00"),
     trigger_price=Decimal("1000.00"),
@@ -134,7 +134,7 @@ ctx.submit_order(
     "NVDA.US",
     OrderType.TSLPPCT,
     OrderSide.Sell,
-    100,
+    Decimal(100),
     TimeInForceType.GoodTilDate,
     expire_date=datetime.date(2024, 6, 30),
     trailing_percent=Decimal("0.5"),

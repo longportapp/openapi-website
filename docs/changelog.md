@@ -5,6 +5,13 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2024-10-09
+
+### SDK 2.0.0
+
+- 连接到服务器时打印已开通的行情包
+- 交易 API 中的数量类型从 `int` 更改为 `Decimal`。
+
 ## 2024-08-28
 
 - SDK 中 `Depth.price` 字段从 `Decimal` 类型改为 `Optional[Decimal]` 类型

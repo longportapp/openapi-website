@@ -18,4 +18,5 @@
 
 ### API 文档
 
-https://longportapp.github.io/openapi-sdk/java/index.html
+- [v1](https://longportapp.github.io/openapi-sdk/v1/java/index.html)
+- [v2](https://longportapp.github.io/openapi-sdk/v2/java/index.html)

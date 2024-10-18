@@ -14,4 +14,5 @@ $ npm install longport --save
 
 ### API 文档
 
-https://longportapp.github.io/openapi-sdk/nodejs/index.html
+- [v1](https://longportapp.github.io/openapi-sdk/v1/nodejs/index.html)
+- [v2](https://longportapp.github.io/openapi-sdk/v2/nodejs/index.html)

@@ -131,11 +131,11 @@ go get github.com/longportapp/openapi-go
 請注意保護好您的 **Access Token** 訊息，任何人獲得到它，都可以透過 OpenAPI 來交易你的帳戶！
 :::
 
-| 環境變量                    | 說明                                                         | 值範圍          |
-| --------------------------- | ------------------------------------------------------------ | --------------- |
-| `LONGPORT_APP_KEY`          | 從頁面上取得到的 App Key                                     |                 |
-| `LONGPORT_APP_SECRET`       | 從頁面取得到的 App Secret                                    |                 |
-| `LONGPORT_ACCESS_TOKEN`     | 從頁面上取得到的 Access Token                                |                 |
+| 環境變量                    | 說明                                                       | 值範圍          |
+|-----------------------------|----------------------------------------------------------|-----------------|
+| `LONGPORT_APP_KEY`          | 從頁面上取得到的 App Key                                   |                 |
+| `LONGPORT_APP_SECRET`       | 從頁面取得到的 App Secret                                  |                 |
+| `LONGPORT_ACCESS_TOKEN`     | 從頁面上取得到的 Access Token                              |                 |
 | `LONGPORT_REGION`           | API 伺服器存取點，請根據您所在地區設置，以獲得更好的連線速度 | `hk`, `cn`      |
 | `LONGPORT_ENABLE_OVERNIGHT` | 是否開啟夜盤行情，設定 `true` 開啟，`false` 關閉             | `true`, `false` |
 
@@ -608,8 +608,8 @@ resp = ctx.submit_order(
     side=OrderSide.Buy,
     symbol="700.HK",
     order_type=OrderType.LO,
-    submitted_price=Decimal("50"),
-    submitted_quantity=200,
+    submitted_price=Decimal(50),
+    submitted_quantity=Decimal(200),
     time_in_force=TimeInForceType.Day,
     remark="Hello from Python SDK",
 )
@@ -638,8 +638,8 @@ TradeContext.new(config)
       orderType: OrderType.LO,
       side: OrderSide.Buy,
       timeInForce: TimeInForceType.Day,
-      submittedQuantity: 200,
-      submittedPrice: new Decimal('300'),
+      submittedQuantity: new Decimal(200),
+      submittedPrice: new Decimal(300),
     })
   )
   .then((resp) => console.log(resp.toString()))
@@ -674,7 +674,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         "700.HK",
         OrderType::LO,
         OrderSide::Buy,
-        200,
+        decimal!(200),
         TimeInForceType::Day,
     )
     .submitted_price(decimal!(50i32));
@@ -706,7 +706,7 @@ public class Main {
             SubmitOrderOptions opts = new SubmitOrderOptions("700.HK",
                     OrderType.LO,
                     OrderSide.Buy,
-                    200,
+                    new BigDecimal(200),
                     TimeInForceType.Day).setSubmittedPrice(new BigDecimal(50));
             SubmitOrderResponse resp = ctx.submitOrder(opts).get();
             System.out.println(resp);

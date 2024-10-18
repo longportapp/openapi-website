@@ -15,4 +15,5 @@ longport = "1.0.0"
 
 ### API Documents
 
-[https://longportapp.github.io/openapi-sdk/rust/index.html](https://longportapp.github.io/openapi-sdk/rust/longport/index.html)
+- [v1](https://longportapp.github.io/openapi-sdk/v1/rust/longport/index.html)
+- [v2](https://longportapp.github.io/openapi-sdk/v2/rust/longport/index.html)

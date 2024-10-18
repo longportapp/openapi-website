@@ -1,32 +1,32 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
   description: |
     This API is used to replace order, modify quantity or price.
 
     <SDKLinks module="trade" klass="TradeContext" method="replace_order" />
-  version: 'v1'
-  title: 'Replace Order'
+  version: "v1"
+  title: "Replace Order"
 paths:
   /v1/trade/order:
     put:
-      access: 'Trading Permissions'
+      access: "Trading Permissions"
       parameters:
-        - name: 'order_id'
-          type: 'string'
-          description: 'Order ID'
+        - name: "order_id"
+          type: "string"
+          description: "Order ID"
           required: true
-        - name: 'quantity'
-          type: 'string'
-          description: 'Replaced quantity, example: `100`'
+        - name: "quantity"
+          type: "string"
+          description: "Replaced quantity, example: `100`"
           required: true
-        - name: 'price'
+        - name: "price"
           required: false
-          description: 'Replaced price, example: `388.5`<br/><br/>
-            `LO` / `ELO` / `ALO` / `ODD` / `LIT` Order Required'
+          description: "Replaced price, example: `388.5`<br/><br/>
+            `LO` / `ELO` / `ALO` / `ODD` / `LIT` Order Required"
         - name: trigger_price
           required: false
-          description: 'Trigger price, example: `388.5`<br/><br/>
-            `LIT` / `MIT` Order Required'
+          description: "Trigger price, example: `388.5`<br/><br/>
+            `LIT` / `MIT` Order Required"
         - name: limit_offset
           required: false
           description: Limit offset amount<br/><br/>
@@ -41,14 +41,14 @@ paths:
             `TSLPPCT` Order Required
         - name: remark
           required: false
-          description: 'Remark (Maximum 64 characters)'
+          description: "Remark (Maximum 64 characters)"
       responses:
-        '200':
-          description: 'The submission was successful and the order was commissioned.'
-        '400':
-          description: 'The replace was rejected with an incorrect request parameter.'
+        "200":
+          description: "The submission was successful and the order was commissioned."
+        "400":
+          description: "The replace was rejected with an incorrect request parameter."
       request_body:
-        type: 'python'
+        type: "python"
         value: |
           from decimal import Decimal
           from longport.openapi import TradeContext, Config
@@ -58,7 +58,7 @@ paths:
 
           ctx.replace_order(
               order_id = "709043056541253632",
-              quantity = 100,
-              price = Decimal("100"),
+              quantity = Decimal(100),
+              price = Decimal(50),
           )
-      response_body: { 'code': 0, 'message': 'success', 'data': {} }
+      response_body: { "code": 0, "message": "success", "data": {} }
