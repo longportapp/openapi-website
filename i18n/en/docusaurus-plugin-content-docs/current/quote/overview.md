@@ -97,7 +97,7 @@ slug: overview
         <td><a href="./push/trade">Push Real-time Trades</a></td>
     </tr>
     <tr>
-        <td rowspan="4">个性化</td>
+        <td rowspan="4">Individual</td>
         <td><a href="./individual/watchlist_create_group">Create watched group</a></td>
     </tr>
     <tr>
