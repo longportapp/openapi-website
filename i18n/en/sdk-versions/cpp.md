@@ -5,7 +5,7 @@
 ### Download
 
 - [1.1.7](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-1.1.7.tar.gz)
-- [2.1.8](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-2.1.8.tar.gz)
+- [2.1.10](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-2.1.10.tar.gz)
 
 ### API Documents
 
