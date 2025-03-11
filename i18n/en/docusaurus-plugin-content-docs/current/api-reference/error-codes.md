@@ -5,7 +5,7 @@ slug: /error-codes
 sidebar_position: 10
 ---
 
-### 错误码
+### Error Codes
 
 | HTTP Status | Code   | Message                | Description                                                        |
 | ----------- | ------ | ---------------------- | ------------------------------------------------------------------ |
