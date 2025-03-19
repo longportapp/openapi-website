@@ -1,0 +1,203 @@
+# LongPort OpenAPI Documentation
+
+## Introduction
+
+LongPort OpenAPI provides programmatic quote trading interfaces for investors with research and development capabilities and assists them to build trading or quote strategy analysis tools based on their own investment strategies. The functions fall into the following categories:
+
+- **Trading** - Create, amend, cancel orders, query today's/past orders and transaction details, etc.
+- **Quotes** - Real-time quotes, acquisition of historical quotes, etc.
+- **Portfolio** - Real-time query of the account assets, positions, funds
+- **Real-time subscription** - Provides real-time quotes and push notifications for order status changes
+
+## Interface Type
+
+LongPort provides diversified access methods such as HTTP / WebSockets interfaces for accessing the underlying services and SDK (Python / C++, etc.) encapsulated in the upper layer, allowing flexible choices.
+
+## How to Enable OpenAPI
+
+1. Log in to the [LongPort App](https://longportapp.com/download) to complete the account opening process;
+
+2. Log in to the [longportapp.com](https://longportapp.com) and enter the developer platform, complete the developer verification (OpenAPI permission application), and obtain a token.
+
+## Quote Coverage
+
+<table>
+    <thead>
+    <tr>
+        <th>Market</th>
+        <th>Symbol</th>
+    </tr>
+    </thead>
+    <tr>
+        <td width="160" rowspan="2">HK Market</td>
+        <td>Securities (including equities, ETFs, Warrants, CBBCs)</td>
+    </tr>
+    <tr>
+        <td>Hang Seng Index</td>
+    </tr>
+    <tr>
+        <td rowspan="3">US Market</td>
+        <td>Securities (including stocks, ETFs)</td>
+    </tr>
+    <tr>
+        <td>Nasdsaq Index</td>
+    </tr>
+    <tr>
+        <td>OPRA Options</td>
+    </tr>
+    <tr>
+        <td rowspan="2">CN Market</td>
+        <td>Securities (including stocks, ETFs)</td>
+    </tr>
+    <tr>
+        <td>Index</td>
+    </tr>
+</table>
+
+## Trading
+
+Supported trading functions include:
+
+| Market    | Stock and ETF | Warrant & CBBC | Options |
+| --------- | ------------- | -------------- | ------- |
+| HK Market | ✓             | ✓              |         |
+| US Market | ✓             | ✓              | ✓       |
+
+## Rate Limit {#rate-limit}
+
+| Category  | Limitation                                                                                                                                                                                                                            |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Quote API | <ul><li>One account can only create one long link and subscribe to a maximum of 500 symbols at the same time</li><li>No more than 10 calls in a 1-second interval and the number of concurrent requests should not exceed 5</li></ul> |
+| Trade API | <ul><li>No more than 30 calls in a 30-second interval, and the interval between two calls should not be less than 0.02 seconds</li></ul>                                                                                              |
+
+:::success
+
+The [OpenAPI SDK](https://open.longportapp.com/sdk) has done effective frequency control internally:
+
+- Quote: The methods under `QuoteContext` will be actively controlled by the SDK according to the server's rate limit. When the request is too fast, the SDK will automatically delay the request. Therefore, you do not need to implement the frequency control details separately.
+- Trade: The methods under `TradeContext` are not limited by the SDK. Due to the special nature of the trading order placement scenario, this is left to the user to handle.
+
+:::
+
+## Pricing {#pricing}
+
+LongPort does not charge any additional fees for activating or using interface services. You only need to open a LongPort Integrated A/C and get OpenAPI service permissions to use it for free. For actual transaction fees, please contact the brokerage firm where you have opened your securities account.
+
+## Other
+
+The OpenAPI services are provided by LongPort and the applicable affiliates (subject to the agreement).
+openapi-trade.longportapp.com
+
+## SDK 
+
+- [Getting Started](/en/docs/getting-started.md)
+- [Introduction](/en/docs/index.md)
+
+## Api-reference
+
+- [Error Codes](/en/docs/error-codes.md)
+- [Overview](/en/docs/how-to-access-api.md)
+- [Refresh Token](/en/docs/refresh-token-api.md)
+
+## Socket
+
+- [Get Socket OTP (One time password)](/en/docs/socket-token-api.md)
+
+## Socket
+
+- [Data Commands](/en/docs/socket/biz-command.md)
+- [Control commands](/en/docs/socket/control-command.md)
+- [Access differences between WebSocket and TCP](/en/docs/socket/diff_ws_tcp.md)
+- [Endpoints](/en/docs/socket/hosts.md)
+- [Subscribe Real-Time Market Data](/en/docs/socket/subscribe_quote.md)
+- [Subscribe Real-Time Trading Data](/en/docs/socket/subscribe_trade.md)
+
+## Qa
+
+- [Quote Releated](/en/docs/broker.md)
+- [General](/en/docs/en/qa/general.md)
+- [Trade](/en/docs/en/qa/trade.md)
+
+## Quote
+
+- [Permissions](/en/docs/level.md)
+- [Definition](/en/docs/objects.md)
+- [Overview](/en/docs/overview.md)
+
+## Individual
+
+- [Create watched group](/en/docs/watchlist_create_group.md)
+- [Delete watched group](/en/docs/watchlist_delete_group.md)
+- [Get watched groups](/en/docs/watchlist_groups.md)
+- [Update watched group](/en/docs/watchlist_update_group.md)
+
+## Pull
+
+- [Get Broker IDs](/en/docs/broker-ids.md)
+- [Get Security Brokers](/en/docs/brokers.md)
+- [Get Calculate Indexes Of Securities](/en/docs/calc-index.md)
+- [Get Security Candlesticks](/en/docs/candlestick.md)
+- [Get Security Capital Distribution](/en/docs/capital-distribution.md)
+- [Get Security Capital Flow Intraday](/en/docs/capital-flow-intraday.md)
+- [Get Security Depth](/en/docs/depth.md)
+- [Get Security History Candlesticks](/en/docs/history-candlestick.md)
+- [Get Security Intraday](/en/docs/intraday.md)
+- [Get Warrant Issuer IDs](/en/docs/issuer.md)
+- [Get Real-time Quotes Of Option Securities](/en/docs/option-quote.md)
+- [Get Option Chain Info By Date](/en/docs/optionchain-date-strike.md)
+- [Get Option Chain Expiry Date List](/en/docs/optionchain-date.md)
+- [Get Real-time Quotes Of Securities](/en/docs/quote.md)
+- [Get Basic Information Of Securities](/en/docs/static.md)
+- [Get Market Trading Days](/en/docs/trade-day.md)
+- [Get Trading Session Of The Day](/en/docs/trade-session.md)
+- [Get Security Trades](/en/docs/trade.md)
+- [Get Filtered Warrant](/en/docs/warrant-filter.md)
+- [Get Real-time Quotes Of Warrant Securities](/en/docs/warrant-quote.md)
+
+## Push
+
+- [Push Real-time Brokers](/en/docs/broker.md)
+- [Push Real-time Depth](/en/docs/depth.md)
+- [Push Real-time Quote](/en/docs/quote.md)
+- [Push Real-time Trades](/en/docs/trade.md)
+
+## Security
+
+- [Retrieve the List of Securities](/en/docs/security_list.md)
+
+## Subscribe
+
+- [Subscribe Quote](/en/docs/subscribe.md)
+- [Get Subscription Information](/en/docs/subscription.md)
+- [Unsubscribe Quote](/en/docs/unsubscribe.md)
+
+## Trade
+
+- [Definition](/en/docs/trade-definition.md)
+- [Overview](/en/docs/trade-overview.md)
+- [Trade Push](/en/docs/trade-push.md)
+
+## Asset
+
+- [Get Account Balance](/en/docs/account.md)
+- [Get Cash Flow](/en/docs/cashflow.md)
+- [Get Fund Positions](/en/docs/fund.md)
+- [Get margin ratio](/en/docs/margin_ratio.md)
+- [Get Stock Positions](/en/docs/stock.md)
+
+## Execution
+
+- [Get History Executions](/en/docs/history_executions.md)
+- [Get Today Executions](/en/docs/today_executions.md)
+
+## Order
+
+- [Estimate Maximum Purchase Quantity](/en/docs/estimate_available_buy_limit.md)
+- [Get History Deals](/en/docs/history_deals.md)
+- [Get History Order](/en/docs/history_orders.md)
+- [Order Details](/en/docs/order_detail.md)
+- [Replace Order](/en/docs/replace.md)
+- [Submit Order](/en/docs/submit.md)
+- [Get Today Deals](/en/docs/today_deals.md)
+- [Get Today Order](/en/docs/today_orders.md)
+- [Withdraw Order](/en/docs/withdraw.md)
