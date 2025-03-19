@@ -17,11 +17,37 @@ function extractMarkdownInfo(filePath, rootDir) {
     // Extract title
     const title = data.title || path.basename(filePath, path.extname(filePath))
     // Extract slug and ensure correct format (starts with / and ends with .md)
-    let slug = data.slug || path.relative(rootDir, filePath).replace(path.extname(filePath), '')
-    if (!slug.startsWith('/')) slug = `/${slug}`
+    let slug
+    if (data.slug) {
+      // If data.slug exists, combine file relative path with slug
+      const dirPath = path.dirname(path.relative(rootDir, filePath))
+      slug = dirPath !== '.' ? `/${dirPath}/${data.slug}` : `/${data.slug}`
+    } else {
+      // Otherwise use file relative path
+      slug = `/${path.relative(rootDir, filePath).replace(path.extname(filePath), '')}`
+    }
     // If slug equals "/", replace with "index"
     if (slug === '/') slug = '/index'
-    slug = `/en/docs${slug}.md`
+    // Ensure slug starts with /en/
+    if (!slug.startsWith('/en/')) {
+      slug = `/en${slug}`
+    }
+    
+    // Add docs segment to the path
+    if (!slug.includes('/docs/')) {
+      const parts = slug.split('/')
+      // Find the position of 'en' and add 'docs' after it
+      const enIndex = parts.findIndex(part => part === 'en')
+      if (enIndex !== -1) {
+        parts.splice(enIndex + 1, 0, 'docs')
+        slug = parts.join('/')
+      }
+    }
+    
+    // Ensure slug ends with .md
+    if (!slug.endsWith('.md')) {
+      slug = `${slug}.md`
+    }
 
     // Extract description
     let description = ''
