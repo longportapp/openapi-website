@@ -40,8 +40,9 @@ jobs:
         run: |
           yarn build:canary
 
-      - name: upload canary dist to OSS
+      - name: upload canary dist to oss
         run: |
           ${{github.workspace}}/ossutil cp autogen-markdown/ oss://lb-assets/github/canary/open.longportapp.com/docs/raw/ -u -r -j 10 -e oss-cn-hangzhou.aliyuncs.com -i ${{ secrets.FE_LB_ASSET_ACCESS_KEY_ID }} -k ${{ secrets.FE_LB_ASSET_ACCESS_KEY_SECRET }} --include "*.md" --meta=Content-Type:text/markdown\;charset=utf-8,Cache-Control:no-cache
+          ${{github.workspace}}/ossutil cp ./llms.txt oss://lb-assets/github/canary/open.longportapp.com/docs/raw/ -f -e oss-cn-hangzhou.aliyuncs.com -i ${{ secrets.FE_LB_ASSET_ACCESS_KEY_ID }} -k ${{ secrets.FE_LB_ASSET_ACCESS_KEY_SECRET }} --meta=Content-Type:text/plain\;charset=utf-8,Cache-Control:no-cache
           ${{github.workspace}}/ossutil cp dist/ oss://lb-assets/github/canary/open.longportapp.com/docs/ -u -r -j 10 -e oss-cn-hangzhou.aliyuncs.com -i ${{ secrets.FE_LB_ASSET_ACCESS_KEY_ID }} -k ${{ secrets.FE_LB_ASSET_ACCESS_KEY_SECRET }} --exclude "*.html" --meta=Cache-Control:max-age=31536000
           ${{github.workspace}}/ossutil cp dist/ oss://lb-assets/github/canary/open.longportapp.com/docs/ -u -r -j 10 -e oss-cn-hangzhou.aliyuncs.com -i ${{ secrets.FE_LB_ASSET_ACCESS_KEY_ID }} -k ${{ secrets.FE_LB_ASSET_ACCESS_KEY_SECRET }} --include "*.html" --meta=Cache-Control:no-cache
