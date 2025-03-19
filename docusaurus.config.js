@@ -150,6 +150,13 @@ const config = {
             activeBasePath: '/docs',
             label: '文档',
             position: 'left',
+            activeBaseRegex: '!^/docs/llm',
+          },
+          {
+            label: 'LLM',
+            to: '/docs/llm',
+            activeBasePath: '/docs/llm',
+            position: 'left',
           },
           {
             label: '讨论 & 反馈',
