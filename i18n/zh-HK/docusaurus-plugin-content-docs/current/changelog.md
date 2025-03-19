@@ -12,6 +12,10 @@ sidebar_position: 7
 - 連接伺服器時列印已開啟的行情包
 - 交易 API 中的數量類型從 `int` 變更為 `Decimal`
 
+## 2024-09-11
+
+- 更新獲取標的列表接口
+  - `GET /v1/quote/get_security_list` 返回的多語言名稱根據請求頭 `accept-language` 返回對應字段，不再一次性返回三種語言名稱
 
 ## 2024-08-28
 
