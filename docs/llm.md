@@ -16,7 +16,7 @@ id: llm
 
 ## LLMs 文本
 
-OpenAPI 文档遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](/llms.txt) 以及每个文档的 Markdown 文件。
+OpenAPI 文档遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https://open.longportapp.com/llms.txt) 以及每个文档的 Markdown 文件。
 
 - [https://open.longportapp.com/llms.txt](https://open.longportapp.com/llms.txt) - 大约 2104 个 token。
 

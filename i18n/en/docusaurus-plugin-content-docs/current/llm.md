@@ -16,7 +16,7 @@ Yes, you can do it via LongPort OpenAPI with our LLM components, start today!
 
 ## LLMs Text
 
-The OpenAPI Docs follow [LLMs Text](https://llmstxt.org/) to provide [llms.txt](/llms.txt) and Markdown files for each documents.
+The OpenAPI Docs follow [LLMs Text](https://llmstxt.org/) to provide [llms.txt](https://open.longportapp.com/llms.txt) and Markdown files for each documents.
 
 - [https://open.longportapp.com/llms.txt](https://open.longportapp.com/llms.txt) - About 2104 tokens.
 
