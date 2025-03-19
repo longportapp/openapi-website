@@ -90,114 +90,114 @@ openapi-trade.longportapp.com
 
 ## SDK 
 
-- [Getting Started](/en/docs//getting-started.md)
-- [Introduction](/en/docs//.md)
+- [Getting Started](https://open.longportapp.com/en/docs/getting-started.md)
+- [Introduction](https://open.longportapp.com/en/docs/index.md)
 
 ## Api-reference
 
-- [Error Codes](/en/docs/api-reference//error-codes.md)
-- [Overview](/en/docs/api-reference//how-to-access-api.md)
-- [Refresh Token](/en/docs/api-reference//refresh-token-api.md)
+- [Error Codes](https://open.longportapp.com/en/docs/error-codes.md)
+- [Overview](https://open.longportapp.com/en/docs/how-to-access-api.md)
+- [Refresh Token](https://open.longportapp.com/en/docs/refresh-token-api.md)
 
 ## Socket
 
-- [Get Socket OTP (One time password)](/en/docs/api-reference/socket//socket-token-api.md)
+- [Get Socket OTP (One time password)](https://open.longportapp.com/en/docs/socket-token-api.md)
 
 ## Socket
 
-- [Data Commands](/en/docs/api-reference/socket/socket//socket/biz-command.md)
-- [Control commands](/en/docs/api-reference/socket/socket//socket/control-command.md)
-- [Access differences between WebSocket and TCP](/en/docs/api-reference/socket/socket//socket/diff_ws_tcp.md)
-- [Endpoints](/en/docs/api-reference/socket/socket//socket/hosts.md)
-- [Subscribe Real-Time Market Data](/en/docs/api-reference/socket/socket//socket/subscribe_quote.md)
-- [Subscribe Real-Time Trading Data](/en/docs/api-reference/socket/socket//socket/subscribe_trade.md)
+- [Data Commands](https://open.longportapp.com/en/docs/socket/biz-command.md)
+- [Control commands](https://open.longportapp.com/en/docs/socket/control-command.md)
+- [Access differences between WebSocket and TCP](https://open.longportapp.com/en/docs/socket/diff_ws_tcp.md)
+- [Endpoints](https://open.longportapp.com/en/docs/socket/hosts.md)
+- [Subscribe Real-Time Market Data](https://open.longportapp.com/en/docs/socket/subscribe_quote.md)
+- [Subscribe Real-Time Trading Data](https://open.longportapp.com/en/docs/socket/subscribe_trade.md)
 
 ## Qa
 
-- [Quote Releated](/en/docs/qa/broker.md)
-- [General](/en/docs/qa/general.md)
-- [Trade](/en/docs/qa/trade.md)
+- [Quote Releated](https://open.longportapp.com/en/docs/qa/broker.md)
+- [General](https://open.longportapp.com/en/docs/qa/general.md)
+- [Trade](https://open.longportapp.com/en/docs/qa/trade.md)
 
 ## Quote
 
-- [Permissions](/en/docs/quote/level.md)
-- [Definition](/en/docs/quote/objects.md)
-- [Overview](/en/docs/quote/overview.md)
+- [Permissions](https://open.longportapp.com/en/docs/quote/level.md)
+- [Definition](https://open.longportapp.com/en/docs/quote/objects.md)
+- [Overview](https://open.longportapp.com/en/docs/quote/overview.md)
 
 ## Individual
 
-- [Create watched group](/en/docs/quote/individual/watchlist_create_group.md)
-- [Delete watched group](/en/docs/quote/individual/watchlist_delete_group.md)
-- [Get watched groups](/en/docs/quote/individual/watchlist_groups.md)
-- [Update watched group](/en/docs/quote/individual/watchlist_update_group.md)
+- [Create watched group](https://open.longportapp.com/en/docs/quote/individual/watchlist_create_group.md)
+- [Delete watched group](https://open.longportapp.com/en/docs/quote/individual/watchlist_delete_group.md)
+- [Get watched groups](https://open.longportapp.com/en/docs/quote/individual/watchlist_groups.md)
+- [Update watched group](https://open.longportapp.com/en/docs/quote/individual/watchlist_update_group.md)
 
 ## Pull
 
-- [Get Broker IDs](/en/docs/quote/pull/broker-ids.md)
-- [Get Security Brokers](/en/docs/quote/pull/brokers.md)
-- [Get Calculate Indexes Of Securities](/en/docs/quote/pull/calc-index.md)
-- [Get Security Candlesticks](/en/docs/quote/pull/candlestick.md)
-- [Get Security Capital Distribution](/en/docs/quote/pull/capital-distribution.md)
-- [Get Security Capital Flow Intraday](/en/docs/quote/pull/capital-flow-intraday.md)
-- [Get Security Depth](/en/docs/quote/pull/depth.md)
-- [Get Security History Candlesticks](/en/docs/quote/pull/history-candlestick.md)
-- [Get Security Intraday](/en/docs/quote/pull/intraday.md)
-- [Get Warrant Issuer IDs](/en/docs/quote/pull/issuer.md)
-- [Get Real-time Quotes Of Option Securities](/en/docs/quote/pull/option-quote.md)
-- [Get Option Chain Info By Date](/en/docs/quote/pull/optionchain-date-strike.md)
-- [Get Option Chain Expiry Date List](/en/docs/quote/pull/optionchain-date.md)
-- [Get Real-time Quotes Of Securities](/en/docs/quote/pull/quote.md)
-- [Get Basic Information Of Securities](/en/docs/quote/pull/static.md)
-- [Get Market Trading Days](/en/docs/quote/pull/trade-day.md)
-- [Get Trading Session Of The Day](/en/docs/quote/pull/trade-session.md)
-- [Get Security Trades](/en/docs/quote/pull/trade.md)
-- [Get Filtered Warrant](/en/docs/quote/pull/warrant-filter.md)
-- [Get Real-time Quotes Of Warrant Securities](/en/docs/quote/pull/warrant-quote.md)
+- [Get Broker IDs](https://open.longportapp.com/en/docs/quote/pull/broker-ids.md)
+- [Get Security Brokers](https://open.longportapp.com/en/docs/quote/pull/brokers.md)
+- [Get Calculate Indexes Of Securities](https://open.longportapp.com/en/docs/quote/pull/calc-index.md)
+- [Get Security Candlesticks](https://open.longportapp.com/en/docs/quote/pull/candlestick.md)
+- [Get Security Capital Distribution](https://open.longportapp.com/en/docs/quote/pull/capital-distribution.md)
+- [Get Security Capital Flow Intraday](https://open.longportapp.com/en/docs/quote/pull/capital-flow-intraday.md)
+- [Get Security Depth](https://open.longportapp.com/en/docs/quote/pull/depth.md)
+- [Get Security History Candlesticks](https://open.longportapp.com/en/docs/quote/pull/history-candlestick.md)
+- [Get Security Intraday](https://open.longportapp.com/en/docs/quote/pull/intraday.md)
+- [Get Warrant Issuer IDs](https://open.longportapp.com/en/docs/quote/pull/issuer.md)
+- [Get Real-time Quotes Of Option Securities](https://open.longportapp.com/en/docs/quote/pull/option-quote.md)
+- [Get Option Chain Info By Date](https://open.longportapp.com/en/docs/quote/pull/optionchain-date-strike.md)
+- [Get Option Chain Expiry Date List](https://open.longportapp.com/en/docs/quote/pull/optionchain-date.md)
+- [Get Real-time Quotes Of Securities](https://open.longportapp.com/en/docs/quote/pull/quote.md)
+- [Get Basic Information Of Securities](https://open.longportapp.com/en/docs/quote/pull/static.md)
+- [Get Market Trading Days](https://open.longportapp.com/en/docs/quote/pull/trade-day.md)
+- [Get Trading Session Of The Day](https://open.longportapp.com/en/docs/quote/pull/trade-session.md)
+- [Get Security Trades](https://open.longportapp.com/en/docs/quote/pull/trade.md)
+- [Get Filtered Warrant](https://open.longportapp.com/en/docs/quote/pull/warrant-filter.md)
+- [Get Real-time Quotes Of Warrant Securities](https://open.longportapp.com/en/docs/quote/pull/warrant-quote.md)
 
 ## Push
 
-- [Push Real-time Brokers](/en/docs/quote/push/broker.md)
-- [Push Real-time Depth](/en/docs/quote/push/depth.md)
-- [Push Real-time Quote](/en/docs/quote/push/quote.md)
-- [Push Real-time Trades](/en/docs/quote/push/trade.md)
+- [Push Real-time Brokers](https://open.longportapp.com/en/docs/quote/push/broker.md)
+- [Push Real-time Depth](https://open.longportapp.com/en/docs/quote/push/depth.md)
+- [Push Real-time Quote](https://open.longportapp.com/en/docs/quote/push/quote.md)
+- [Push Real-time Trades](https://open.longportapp.com/en/docs/quote/push/trade.md)
 
 ## Security
 
-- [Retrieve the List of Securities](/en/docs/quote/security/security_list.md)
+- [Retrieve the List of Securities](https://open.longportapp.com/en/docs/quote/security/security_list.md)
 
 ## Subscribe
 
-- [Subscribe Quote](/en/docs/quote/subscribe/subscribe.md)
-- [Get Subscription Information](/en/docs/quote/subscribe/subscription.md)
-- [Unsubscribe Quote](/en/docs/quote/subscribe/unsubscribe.md)
+- [Subscribe Quote](https://open.longportapp.com/en/docs/quote/subscribe/subscribe.md)
+- [Get Subscription Information](https://open.longportapp.com/en/docs/quote/subscribe/subscription.md)
+- [Unsubscribe Quote](https://open.longportapp.com/en/docs/quote/subscribe/unsubscribe.md)
 
 ## Trade
 
-- [Definition](/en/docs/trade/trade-definition.md)
-- [Overview](/en/docs/trade/trade-overview.md)
-- [Trade Push](/en/docs/trade/trade-push.md)
+- [Definition](https://open.longportapp.com/en/docs/trade/trade-definition.md)
+- [Overview](https://open.longportapp.com/en/docs/trade/trade-overview.md)
+- [Trade Push](https://open.longportapp.com/en/docs/trade/trade-push.md)
 
 ## Asset
 
-- [Get Account Balance](/en/docs/trade/asset/account.md)
-- [Get Cash Flow](/en/docs/trade/asset/cashflow.md)
-- [Get Fund Positions](/en/docs/trade/asset/fund.md)
-- [Get margin ratio](/en/docs/trade/asset/margin_ratio.md)
-- [Get Stock Positions](/en/docs/trade/asset/stock.md)
+- [Get Account Balance](https://open.longportapp.com/en/docs/trade/asset/account.md)
+- [Get Cash Flow](https://open.longportapp.com/en/docs/trade/asset/cashflow.md)
+- [Get Fund Positions](https://open.longportapp.com/en/docs/trade/asset/fund.md)
+- [Get margin ratio](https://open.longportapp.com/en/docs/trade/asset/margin_ratio.md)
+- [Get Stock Positions](https://open.longportapp.com/en/docs/trade/asset/stock.md)
 
 ## Execution
 
-- [Get History Executions](/en/docs/trade/execution/history_executions.md)
-- [Get Today Executions](/en/docs/trade/execution/today_executions.md)
+- [Get History Executions](https://open.longportapp.com/en/docs/trade/execution/history_executions.md)
+- [Get Today Executions](https://open.longportapp.com/en/docs/trade/execution/today_executions.md)
 
 ## Order
 
-- [Estimate Maximum Purchase Quantity](/en/docs/trade/order/estimate_available_buy_limit.md)
-- [Get History Deals](/en/docs/trade/order/history_deals.md)
-- [Get History Order](/en/docs/trade/order/history_orders.md)
-- [Order Details](/en/docs/trade/order/order_detail.md)
-- [Replace Order](/en/docs/trade/order/replace.md)
-- [Submit Order](/en/docs/trade/order/submit.md)
-- [Get Today Deals](/en/docs/trade/order/today_deals.md)
-- [Get Today Order](/en/docs/trade/order/today_orders.md)
-- [Withdraw Order](/en/docs/trade/order/withdraw.md)
+- [Estimate Maximum Purchase Quantity](https://open.longportapp.com/en/docs/trade/order/estimate_available_buy_limit.md)
+- [Get History Deals](https://open.longportapp.com/en/docs/trade/order/history_deals.md)
+- [Get History Order](https://open.longportapp.com/en/docs/trade/order/history_orders.md)
+- [Order Details](https://open.longportapp.com/en/docs/trade/order/order_detail.md)
+- [Replace Order](https://open.longportapp.com/en/docs/trade/order/replace.md)
+- [Submit Order](https://open.longportapp.com/en/docs/trade/order/submit.md)
+- [Get Today Deals](https://open.longportapp.com/en/docs/trade/order/today_deals.md)
+- [Get Today Order](https://open.longportapp.com/en/docs/trade/order/today_orders.md)
+- [Withdraw Order](https://open.longportapp.com/en/docs/trade/order/withdraw.md)
