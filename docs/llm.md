@@ -44,8 +44,8 @@ Visit [https://github.com/longportapp/openapi/releases](https://github.com/longp
 When you installed successfully, you will have a `longport-mcp` command line tool.
 
 > NOTE: You must follow [Getting Started](/docs/getting-started) to configure your environment.
-
-The environment `LONGPORT_APP_KEY`, `LONGPORT_APP_SECRET` and `LONGPORT_ACCESS_TOKEN` must be set before you start the MCP server.
+>
+> The environment `LONGPORT_APP_KEY`, `LONGPORT_APP_SECRET` and `LONGPORT_ACCESS_TOKEN` must be set before you start the MCP server.
 
 Start MCP server (STDIO) in local:
 
@@ -53,8 +53,24 @@ Start MCP server (STDIO) in local:
 longport-mcp
 ```
 
-If you want to start as a SSE mode, you can use the following command:
+#### Configuration LongPort MCP in your AI Chat
+
+This part we will show you how to configure LongPort MCP in your AI chat (The screenshot have used [Cherry Studio](https://cherry-studio.com/)).
+
+**Use STDIO mode:**
+
+Ensure you have already configured your environment variables and install the `longport-mcp` command line tool in your system.
+
+![](https://pub.lbkrs.com/files/202503/QdJeE6WUP9VjFSL7/SCR-20250319-smit.png)
+
+**Use SSE mode:**
+
+You must to start SSE server first, you can use the following command:
 
 ```bash
 longport-mcp --sse
 ```
+
+And then configure your AI chat to use `http://localhost:8000`.
+
+![](https://pub.lbkrs.com/files/202503/PhUVovCsMqD2w2rL/SCR-20250319-snro.png)
