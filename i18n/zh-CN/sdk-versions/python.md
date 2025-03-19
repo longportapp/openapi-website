@@ -1,6 +1,6 @@
 ## LongPort OpenAPI SDK for Python
 
-[https://github.com/longportapp/openapi-sdk/tree/master/python](https://github.com/longportapp/openapi-sdk/tree/master/python)
+[https://github.com/longportapp/openapi/tree/master/python](https://github.com/longportapp/openapi/tree/master/python)
 
 ### 安装 SDK
 
@@ -18,4 +18,5 @@ $ pip install longport -i https://mirrors.aliyun.com/pypi/simple
 
 ### API 文档
 
-https://longportapp.github.io/openapi-sdk/python/index.html
+- [v1](https://longportapp.github.io/openapi-sdk/v1/python/index.html)
+- [v2](https://longportapp.github.io/openapi-sdk/v2/python/index.html)

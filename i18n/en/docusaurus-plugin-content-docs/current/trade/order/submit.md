@@ -24,7 +24,7 @@ This API is used for placing orders for Hong Kong and US stocks, warrants, and o
 > Content-Type: application/json; charset=utf-8
 
 | Name               | Type   | Required | Description                                                                                                                                                                    |
-| ------------------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|--------------------|--------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | symbol             | string | YES      | Stock symbol, use `ticker.region` format, example: `AAPL.US`                                                                                                                   |
 | order_type         | string | YES      | [Order Type](../trade-definition#ordertype)                                                                                                                                    |
 | submitted_price    | string | NO       | Submitted price, example: `388.5`<br/><br/> `LO` / `ELO` / `ALO` / `ODD` / `LIT` Order Required                                                                                |
@@ -61,9 +61,9 @@ resp = ctx.submit_order(
     "700.HK",
     OrderType.LO,
     OrderSide.Buy,
-    100,
+    Decimal(100),
     TimeInForceType.Day,
-    submitted_price=Decimal("380"),
+    submitted_price=Decimal(380),
     remark="Hello from Python SDK",
 )
 ```
@@ -83,7 +83,7 @@ ctx.submit_order(
     "700.HK",
     OrderType.MO,
     OrderSide.Sell,
-    100,
+    Decimal(100),
     TimeInForceType.Day,
     remark="Hello from Python SDK",
 )
@@ -107,7 +107,7 @@ ctx.submit_order(
     "NVDA.US",
     OrderType.LIT,
     OrderSide.Sell,
-    100,
+    Decimal(100),
     TimeInForceType.GoodTilCanceled,
     Decimal("999.00"),
     trigger_price=Decimal("1000.00"),
@@ -134,7 +134,7 @@ ctx.submit_order(
     "NVDA.US",
     OrderType.TSLPPCT,
     OrderSide.Sell,
-    100,
+    Decimal(100),
     TimeInForceType.GoodTilDate,
     expire_date=datetime.date(2024, 6, 30),
     trailing_percent=Decimal("0.5"),

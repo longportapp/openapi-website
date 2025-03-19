@@ -5,6 +5,13 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2024-10-09
+
+### SDK 2.0.0
+
+- Print the opened quote packages when connected to the server.
+- The quantity type in the trading API has changed from `int` to `Decimal`.
+
 ## 2024-09-11
 
 - Updated Get Security List API

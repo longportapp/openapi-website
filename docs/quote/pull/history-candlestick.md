@@ -74,11 +74,11 @@ config = Config.from_env()
 ctx = QuoteContext(config)
 
 # Query after 2023-01-01
-resp = ctx.history_candlesticks_by_offset("700.HK", Period.Day, AdjustType.NoAdjust, True, datetime(2023, 1, 1), 10)
+resp = ctx.history_candlesticks_by_offset("700.HK", Period.Day, AdjustType.NoAdjust, True, 10, datetime(2023, 1, 1))
 print(resp)
 
 # Query before 2023-01-01
-resp = ctx.history_candlesticks_by_offset("700.HK", Period.Day, AdjustType.NoAdjust, False, datetime(2023, 1, 1), 10)
+resp = ctx.history_candlesticks_by_offset("700.HK", Period.Day, AdjustType.NoAdjust, False, 10, datetime(2023, 1, 1))
 print(resp)
 
 # Query 2023-01-01 to 2023-02-01

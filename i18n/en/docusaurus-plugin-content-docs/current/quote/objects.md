@@ -64,17 +64,26 @@ enum TradeSession {
 
 ## Period - Candlestick Period
 
-| ID   | Description     |
-| ---- | --------------- |
-| 1    | One Minute      |
-| 5    | Five Minutes    |
-| 15   | Fifteen Minutes |
-| 30   | Thirty Minutes  |
-| 60   | Sixty Minutes   |
-| 1000 | One Days        |
-| 2000 | One Week        |
-| 3000 | One Month       |
-| 4000 | One Year        |
+| ID   | Description        |
+| ---- | ------------------ |
+| 1    | One Minute         |
+| 2    | Two Minutes        |
+| 3    | Three Minutes      |
+| 5    | Five Minutes       |
+| 10   | Ten Minutes        |
+| 15   | Fifteen Minutes    |
+| 20   | Twenty Minutes     |
+| 30   | Thirty Minutes     |
+| 45   | Forty-five Minutes |
+| 60   | Sixty Minutes      |
+| 120  | Two Hours          |
+| 180  | Three Hours        |
+| 240  | Four Hours         |
+| 1000 | One Days           |
+| 2000 | One Week           |
+| 3000 | One Month          |
+| 3500 | One Quarter        |
+| 4000 | One Year           |
 
 ### Protobuf
 

@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 ## 前言
 
-[LongPort OpenAPI SDK](https://github.com/longportapp/openapi-sdk) 基于 Rust 底层提供标准实现，目前我们已经发布了 Python、Node.js、Rust、C++/C、Java 等多种编程语言 SDK，其他语言的支持后面会陆续推出。
+[LongPort OpenAPI SDK](https://github.com/longportapp/openapi) 基于 Rust 底层提供标准实现，目前我们已经发布了 Python、Node.js、Rust、C++/C、Java 等多种编程语言 SDK，其他语言的支持后面会陆续推出。
 
 ## API Host
 
@@ -666,8 +666,8 @@ resp = ctx.submit_order(
     side=OrderSide.Buy,
     symbol="700.HK",
     order_type=OrderType.LO,
-    submitted_price=Decimal("50"),
-    submitted_quantity=200,
+    submitted_price=Decimal(50),
+    submitted_quantity=Decimal(200),
     time_in_force=TimeInForceType.Day,
     remark="Hello from Python SDK",
 )
@@ -696,7 +696,7 @@ TradeContext.new(config)
       orderType: OrderType.LO,
       side: OrderSide.Buy,
       timeInForce: TimeInForceType.Day,
-      submittedQuantity: 200,
+      submittedQuantity: new Decimal(200),
       submittedPrice: new Decimal('300'),
     })
   )
@@ -732,7 +732,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         "700.HK",
         OrderType::LO,
         OrderSide::Buy,
-        200,
+        decimal!(200i32),
         TimeInForceType::Day,
     )
     .submitted_price(decimal!(50i32));
@@ -764,7 +764,7 @@ public class Main {
             SubmitOrderOptions opts = new SubmitOrderOptions("700.HK",
                     OrderType.LO,
                     OrderSide.Buy,
-                    200,
+                    new BigDecimal(200),
                     TimeInForceType.Day).setSubmittedPrice(new BigDecimal(50));
             SubmitOrderResponse resp = ctx.submitOrder(opts).get();
             System.out.println(resp);
@@ -1048,7 +1048,7 @@ Order {
 
 我们在 LongPort OpenAPI Python SDK 的 GitHub 仓库中提供了上面几个例子的完整代码，当然后期我们也会持续往里面补充或更新。
 
-<https://github.com/longportapp/openapi-sdk/tree/master/examples>
+<https://github.com/longportapp/openapi/tree/master/examples>
 
 ## SDK API 文档
 
@@ -1064,7 +1064,7 @@ SDK 的详细 API 文档请访问：
 
 在 GitHub 上，也有很多历史的讨论和问题可以参考，你也可以试着搜索一下，或许也能找到问题的解决方案。
 
-访问地址：<https://github.com/longportapp/openapi-sdk/issues>
+访问地址：<https://github.com/longportapp/openapi/issues>
 
 ### 飞书回馈
 

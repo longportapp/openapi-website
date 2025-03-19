@@ -608,8 +608,8 @@ resp = ctx.submit_order(
     side=OrderSide.Buy,
     symbol="700.HK",
     order_type=OrderType.LO,
-    submitted_price=Decimal("50"),
-    submitted_quantity=200,
+    submitted_price=Decimal(50),
+    submitted_quantity=Decimal(200),
     time_in_force=TimeInForceType.Day,
     remark="Hello from Python SDK",
 )
@@ -638,8 +638,8 @@ TradeContext.new(config)
       orderType: OrderType.LO,
       side: OrderSide.Buy,
       timeInForce: TimeInForceType.Day,
-      submittedQuantity: 200,
-      submittedPrice: new Decimal('300'),
+      submittedQuantity: new Decimal(200),
+      submittedPrice: new Decimal(300),
     })
   )
   .then((resp) => console.log(resp.toString()))
@@ -674,7 +674,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         "700.HK",
         OrderType::LO,
         OrderSide::Buy,
-        200,
+        decimal!(200),
         TimeInForceType::Day,
     )
     .submitted_price(decimal!(50i32));
@@ -706,7 +706,7 @@ public class Main {
             SubmitOrderOptions opts = new SubmitOrderOptions("700.HK",
                     OrderType.LO,
                     OrderSide.Buy,
-                    200,
+                    new BigDecimal(200),
                     TimeInForceType.Day).setSubmittedPrice(new BigDecimal(50));
             SubmitOrderResponse resp = ctx.submitOrder(opts).get();
             System.out.println(resp);
@@ -985,7 +985,7 @@ Order {
 
 我們在 LongPort OpenAPI Python SDK 的 GitHub 倉庫中提供了上面幾個例子的完整代碼，當然後期我們也會持續往裡面補充或更新。
 
-<https://github.com/longportapp/openapi-sdk/tree/master/examples>
+<https://github.com/longportapp/openapi/tree/master/examples>
 
 ## SDK API 文檔
 
@@ -1001,7 +1001,7 @@ SDK 的詳細 API 文檔請訪問：
 
 在 GitHub 上，也有很多歷史的討論和問題可以參考，你也可以試著搜尋一下，或許也能找到問題的解決方案。
 
-訪問網址：<https://github.com/longportapp/openapi-sdk/issues>
+訪問網址：<https://github.com/longportapp/openapi/issues>
 
 ### 飛書回饋
 

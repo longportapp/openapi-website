@@ -1,6 +1,6 @@
 ## LongPort OpenAPI SDK for Java
 
-[https://github.com/longportapp/openapi-sdk/tree/master/java](https://github.com/longportapp/openapi-sdk/tree/master/java)
+[https://github.com/longportapp/openapi/tree/master/java](https://github.com/longportapp/openapi/tree/master/java)
 
 ### Install SDK
 
@@ -14,8 +14,9 @@ Add the following line to your `pom.xml` file
 </dependency>
 ```
 
-[https://search.maven.org/artifact/io.github.longportapp/openapi-sdk](https://search.maven.org/artifact/io.github.longportapp/openapi-sdk)
+[https://search.maven.org/artifact/io.github.longportapp/openapi](https://search.maven.org/artifact/io.github.longportapp/openapi)
 
 ### API Documents
 
-https://longportapp.github.io/openapi-sdk/java/index.html
+- [v1](https://longportapp.github.io/openapi-sdk/v1/java/index.html)
+- [v2](https://longportapp.github.io/openapi-sdk/v2/java/index.html)

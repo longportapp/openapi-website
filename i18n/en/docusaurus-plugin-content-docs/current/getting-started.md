@@ -665,8 +665,8 @@ resp = ctx.submit_order(
     side=OrderSide.Buy,
     symbol="700.HK",
     order_type=OrderType.LO,
-    submitted_price=Decimal("50"),
-    submitted_quantity=200,
+    submitted_price=Decimal(50),
+    submitted_quantity=Decimal(200),
     time_in_force=TimeInForceType.Day,
     remark="Hello from Python SDK",
 )
@@ -695,8 +695,8 @@ TradeContext.new(config)
       orderType: OrderType.LO,
       side: OrderSide.Buy,
       timeInForce: TimeInForceType.Day,
-      submittedQuantity: 200,
-      submittedPrice: new Decimal('300'),
+      submittedQuantity: new Decimal(200),
+      submittedPrice: new Decimal(300),
     })
   )
   .then((resp) => console.log(resp.toString()))
@@ -731,7 +731,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         "700.HK",
         OrderType::LO,
         OrderSide::Buy,
-        200,
+        decimal!(200i32),
         TimeInForceType::Day,
     )
     .submitted_price(decimal!(50i32));
@@ -763,7 +763,7 @@ public class Main {
             SubmitOrderOptions opts = new SubmitOrderOptions("700.HK",
                     OrderType.LO,
                     OrderSide.Buy,
-                    200,
+                    new BigDecimal(200),
                     TimeInForceType.Day).setSubmittedPrice(new BigDecimal(50));
             SubmitOrderResponse resp = ctx.submitOrder(opts).get();
             System.out.println(resp);
@@ -1054,7 +1054,7 @@ The above example has fully demonstrated how to use the SDK to access the OpenAP
 
 We provide the complete code of the above examples in the GitHub repository of LongPort OpenAPI Python SDK, and we will continue to add or update it later.
 
-<https://github.com/longportapp/openapi-sdk/tree/master/examples>
+<https://github.com/longportapp/openapi/tree/master/examples>
 
 ## SDK API Document
 
@@ -1068,4 +1068,4 @@ If there are any questions or suggestions, please feel free to post an issue on 
 
 Or there have a lot old discussion in the GitHub issue, you can search the issue to find the answer.
 
-- GitHub: https://github.com/longportapp/openapi-sdk/issues
+- GitHub: https://github.com/longportapp/openapi/issues
