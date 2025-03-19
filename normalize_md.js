@@ -70,9 +70,18 @@ function generateSDKLinksMarkdown({ module = 'quote', klass, method, go, java, l
     markdown += `${'#'.repeat(level)} ${title}\n\n`
   }
 
-  // Create table
-  markdown += '| SDK | 链接 |\n'
-  markdown += '| --- | --- |\n'
+  // Create table with localized headers
+  if (locale === 'en') {
+    markdown += '| Language | Link |\n'
+    markdown += '| --- | --- |\n'
+  } else if (locale === 'zh-HK') {
+    markdown += '| SDK | 链接 |\n'
+    markdown += '| --- | --- |\n'
+  } else {
+    // Default to zh-CN
+    markdown += '| SDK | 链接 |\n'
+    markdown += '| --- | --- |\n'
+  }
 
   // Add a row for each SDK link
   links.forEach(({ title, color, label, url }) => {
@@ -182,7 +191,7 @@ function parseSDKLinks(content, locale) {
 
   return content.replace(
     sdkLinksRegex,
-    (match, module = 'quote', klass = 'QuoteContext', method, go, java, level = '2', title = 'SDK 示例代码') => {
+    (match, module = 'quote', klass = 'QuoteContext', method, go, java, level = '2', title = 'SDK') => {
       // Process method names according to the logic in SDKLinks.tsx
       const snakeMethod = method
         .replace(/([A-Z])/g, '_$1')
