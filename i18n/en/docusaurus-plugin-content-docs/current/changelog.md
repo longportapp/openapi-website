@@ -5,6 +5,39 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2024-10-09
+
+### SDK 2.0.0
+
+- Print the opened quote packages when connected to the server.
+- The quantity type in the trading API has changed from `int` to `Decimal`.
+
+## 2024-08-28
+
+- Change the `Depth.price` field in the SDK from `Decimal` type to `Optional[Decimal]` type
+
+
+## 2024-05-17
+
+- Expand `outside_rth` field to support overnight trading in order placement and query APIs
+
+## 2024-05-06
+
+- Update the interface for Get Account Balance
+  - `GET /v1/asset/account` Add response field (buy_power)
+
+## 2024-04-29
+
+- Remove `TSMPCT`, `TSMAMT` Order type
+
+## 2024-04-15
+
+- Add `last_share`, `last_price` field to [Trade push](https://open.longportapp.com/en/docs/trade/trade-definition#websocket-notification).
+
+## 2024-04-13
+
+- Add `remark` field to [Trade push](https://open.longportapp.com/en/docs/trade/trade-definition#websocket-notification).
+
 ## 2023-11-03
 
 - Add quote history candlestick interface

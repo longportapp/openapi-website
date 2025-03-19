@@ -8,7 +8,12 @@
 
 ```toml
 [dependencies]
-longport = "1.0.0"
+longport = "2.0.0"
 ```
 
 [https://crates.io/crates/longport](https://crates.io/crates/longport)
+
+### API 文档
+
+- [v1](https://longportapp.github.io/openapi-sdk/v1/rust/longport/index.html)
+- [v2](https://longportapp.github.io/openapi-sdk/v2/rust/longport/index.html)

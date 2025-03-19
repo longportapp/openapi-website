@@ -27,6 +27,10 @@
     "message": "Individual",
     "description": "The label for category Individual in sidebar docsSidebar"
   },
+  "sidebar.docsSidebar.category.标的": {
+    "message": "Security",
+    "description": "The label for Security in sidebar docsSidebar"
+  },
   "sidebar.docsSidebar.category.交易": {
     "message": "Trade",
     "description": "The label for category 交易 in sidebar docsSidebar"
@@ -50,5 +54,9 @@
   "sidebar.docsSidebar.category.通信协议": {
     "message": "Protocol",
     "description": "The label for category Protocol in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.API 附录": {
+    "message": "API Reference",
+    "description": "The label for category Quote in sidebar docsSidebar"
   }
 }

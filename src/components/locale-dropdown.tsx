@@ -1,23 +1,9 @@
-import React, { FC, useState, useMemo, useEffect } from 'react'
+import React, { FC, useState, useMemo } from 'react'
 import { useBasenameLocale, useDefaultLocale, getRootDomain } from '@site/src/utils'
 import { loadHighlight } from '@site/src/utils/highlight'
 import Cookies from 'js-cookie'
 import Dropdown from './dropdown'
 import useIsBrowser from '@docusaurus/useIsBrowser'
-
-const LoadHighlight = () => {
-  useEffect(() => {
-    console.log(123)
-    loadHighlight()
-    return () => {
-      const xHighlights = document.querySelectorAll('.doc-highlight')
-      xHighlights.forEach((xHighlight) => {
-        document.body.removeChild(xHighlight)
-      })
-    }
-  }, [location.pathname])
-  return <></>
-}
 
 let prePath = ''
 
@@ -68,5 +54,5 @@ export const LocaleDropdown: FC = () => {
     prePath = location.pathname
   }
 
-  return <Dropdown className="hidden-in-mobile-sidebar" items={items} value={locale} onChange={onChange} />
+  return <Dropdown className="navbar__item hidden-in-mobile-sidebar" items={items} value={locale} onChange={onChange} />
 }

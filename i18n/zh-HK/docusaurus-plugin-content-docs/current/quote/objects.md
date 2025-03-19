@@ -5,7 +5,7 @@ title: 行情命名詞典
 slug: objects
 ---
 
-### TradeStatus - 交易狀態
+## TradeStatus - 交易狀態
 
 交易狀態
 
@@ -23,7 +23,7 @@ slug: objects
 | 9   | 輪證待上市      |
 | 10  | 終止交易        |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum TradeStatus {
@@ -41,7 +41,7 @@ enum TradeStatus {
 }
 ```
 
-### TradeSession - 交易時段
+## TradeSession - 交易時段
 
 交易時段
 
@@ -50,8 +50,9 @@ enum TradeStatus {
 | 0   | 盤中交易 |
 | 1   | 盤前交易 |
 | 2   | 盤後交易 |
+| 3   | 夜盤交易 |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum TradeSession {
@@ -61,21 +62,30 @@ enum TradeSession {
 }
 ```
 
-### Period - K 線週期
+## Period - K 線週期
 
-| ID   | 描述          |
-| ---- | ------------- |
-| 1    | 一分鐘 k 線   |
-| 5    | 五分鐘 k 線   |
-| 15   | 十五分鐘 k 線 |
-| 30   | 三十分鐘 k 線 |
-| 60   | 六十分鐘 k 線 |
-| 1000 | 日 k 線       |
-| 2000 | 週 k 線       |
-| 3000 | 月 k 線       |
-| 4000 | 年 k 線       |
+| ID   | 描述            |
+| ---- | --------------- |
+| 1    | 一分鐘 k 線     |
+| 2    | 兩分鐘 k 線     |
+| 3    | 三分鐘 k 線     |
+| 5    | 五分鐘 k 線     |
+| 10   | 十分鐘 k 線     |
+| 15   | 十五分鐘 k 線   |
+| 20   | 二十分鐘 k 線   |
+| 30   | 三十分鐘 k 線   |
+| 45   | 四十五分鐘 k 線 |
+| 60   | 六十分鐘 k 線   |
+| 120  | 兩小時 k 線     |
+| 180  | 三小時 k 線     |
+| 240  | 四小時 k 線     |
+| 1000 | 日 k 線         |
+| 2000 | 週 k 線         |
+| 3000 | 月 k 線         |
+| 3500 | 季 k 線         |
+| 4000 | 年 k 線         |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum Period {
@@ -92,14 +102,14 @@ enum Period {
 }
 ```
 
-### AdjustType - K 線復權類型
+## AdjustType - K 線復權類型
 
 | ID  | 描述   |
 | --- | ------ |
 | 0   | 除權   |
 | 1   | 前復權 |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum AdjustType {
@@ -108,7 +118,7 @@ enum AdjustType {
 }
 ```
 
-### SubType - 訂閱數據的類型
+## SubType - 訂閱數據的類型
 
 | ID  | 描述     |
 | --- | -------- |
@@ -117,7 +127,7 @@ enum AdjustType {
 | 3   | 經紀隊列 |
 | 4   | 逐筆明細 |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum SubType {
@@ -129,7 +139,7 @@ enum SubType {
 }
 ```
 
-### CalcIndex - 計算指標
+## CalcIndex - 計算指標
 
 | ID  | 描述         | 支持的標的類型   |
 | --- | ------------ | ---------------- |
@@ -174,7 +184,7 @@ enum SubType {
 | 39  | Vega         | 僅期權適用       |
 | 40  | Rho          | 僅期權適用       |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum CalcIndex {
@@ -222,7 +232,7 @@ enum CalcIndex {
 }
 ```
 
-### Board - 標的板塊
+## Board - 標的板塊
 
 | 板塊             | 描述                             |
 | ---------------- | -------------------------------- |
@@ -232,21 +242,21 @@ enum CalcIndex {
 | USNSDQ           | 納斯達克指數                     |
 | USSector         | 美股行業概念                     |
 | USOption         | 美股期權                         |
-| USOptionS        | 美股特殊期權（收盤時間為 16:15）|
+| USOptionS        | 美股特殊期權（收盤時間為 16:15） |
 | HKEquity         | 港股股本證券                     |
 | HKPreIPO         | 港股暗盤                         |
 | HKWarrant        | 港股輪證                         |
 | HKHS             | 恆生指數                         |
 | HKSector         | 港股行業概念                     |
-| SHMainConnect    | 上證主板 - 互聯互通                |
-| SHMainNonConnect | 上證主板 - 非互聯互通              |
+| SHMainConnect    | 上證主板 - 互聯互通              |
+| SHMainNonConnect | 上證主板 - 非互聯互通            |
 | SHSTAR           | 科創板                           |
 | CNIX             | 滬深指數                         |
 | CNSector         | 滬深行業概念                     |
-| SZMainConnect    | 深證主板 - 互聯互通                |
-| SZMainNonConnect | 深證主板 - 非互聯互通              |
-| SZGEMConnect     | 創業板 - 互聯互通                  |
-| SZGEMNonConnect  | 創業板 - 非互聯互通                |
+| SZMainConnect    | 深證主板 - 互聯互通              |
+| SZMainNonConnect | 深證主板 - 非互聯互通            |
+| SZGEMConnect     | 創業板 - 互聯互通                |
+| SZGEMNonConnect  | 創業板 - 非互聯互通              |
 | SGMain           | 新加坡主板                       |
 | STI              | 新加坡海峽指數                   |
 | SGSector         | 新加坡行業概念                   |

@@ -7,6 +7,8 @@ sidebar_position: 4
 
 Real-time trades data push of the subscribed security.
 
+<SDKLinks module="quote" klass="QuoteContext" method="set_on_trades" go="OnTrade" />
+
 :::info
 
 [Business Command](../../socket/protocol/push): `104`
@@ -18,7 +20,7 @@ Real-time trades data push of the subscribed security.
 ### Properties
 
 | Name            | Type     | Description                                                                                      |
-|-----------------|----------|--------------------------------------------------------------------------------------------------|
+| --------------- | -------- | ------------------------------------------------------------------------------------------------ |
 | symbol          | string   | Security code, for example: `AAPL.US`                                                            |
 | sequence        | int64    | Sequence number                                                                                  |
 | trades          | object[] | Trades data                                                                                      |
@@ -95,7 +97,7 @@ message Trade {
 # Before running, please visit the "Developers" to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
 from time import sleep
-from longport.openapi import QuoteContext, Config, SubType, PushQuote
+from longport.openapi import QuoteContext, Config, SubType, PushTrades
 
 def on_trades(symbol: str, event: PushTrades):
     print(symbol, event)

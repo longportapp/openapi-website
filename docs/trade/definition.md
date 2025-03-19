@@ -21,8 +21,6 @@ sidebar_position: 2
 | MIT     | 触价市价单                  |
 | TSLPAMT | 跟踪止损限价单 (跟踪金额)   |
 | TSLPPCT | 跟踪止损限价单 (跟踪涨跌幅) |
-| TSMAMT  | 跟踪止损市价单 (跟踪金额)   |
-| TSMPCT  | 跟踪止损市价单 (跟踪涨跌幅) |
 | SLO     | 特殊限价单，不支持改单      |
 
 - 说明：美股支持订单类型
@@ -35,8 +33,6 @@ sidebar_position: 2
 | MIT     | 触价市价单                  |
 | TSLPAMT | 跟踪止损限价单 (跟踪金额)   |
 | TSLPPCT | 跟踪止损限价单 (跟踪涨跌幅) |
-| TSMAMT  | 跟踪止损市价单 (跟踪金额)   |
-| TSMPCT  | 跟踪止损市价单 (跟踪涨跌幅) |
 
 ## OrderStatus
 
@@ -99,6 +95,9 @@ sidebar_position: 2
 | trailing_percent   | string | 条件单跟踪涨跌幅                                                                                                                     |
 | limit_offset       | string | 指定价差                                                                                                                             |
 | account_no         | string | 用户端账号                                                                                                                           |
+| remark         | string | 备注                                                                                                                           |
+| last_share         | string | 最新成交数量																																													 |
+| last_price         | string | 最新成交价格																																													 |
 
 ### 示例
 
@@ -127,7 +126,10 @@ sidebar_position: 2
 		"trailing_amount": "5",
 		"trailing_percent": "1",
 		"limit_offset": "0.01",
-		"account_no": "HK123445"
+		"account_no": "HK123445",
+		"last_share": "100",
+		"last_price": "234",
+		"remark": "abc"
 	}
 }
 ```

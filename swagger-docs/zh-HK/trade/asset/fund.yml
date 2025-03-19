@@ -1,26 +1,29 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "該接口用於獲取包括賬戶、基金代碼、持有份額、成本淨值、當前淨值、幣種在內的基金持倉信息"
-  version: "v1"
-  title: "獲取基金持倉"
+  description: |
+    該接口用於獲取包括賬戶、基金代碼、持有份額、成本淨值、當前淨值、幣種在內的基金持倉信息。
+
+    <SDKLinks module="trade" klass="TradeContext" method="fund_positions" />
+  version: 'v1'
+  title: '獲取基金持倉'
 paths:
   /v1/asset/fund:
     get:
       access:
       parameters:
-        - name: "symbol"
-          type: "string[]"
+        - name: 'symbol'
+          type: 'string[]'
           description: 基金代碼，使用 `ISIN` 格式，例如：`HK0000676327` <a href="https://en.wikipedia.org/wiki/International_Securities_Identification_Number">ISIN 解釋</a>
           required: false
       responses:
-        "200":
-          description: "返回成功"
+        '200':
+          description: '返回成功'
           schema:
-            $ref: "#/definitions/fund_rsp"
-        "400":
-          description: "內部錯誤"
+            $ref: '#/definitions/fund_rsp'
+        '400':
+          description: '內部錯誤'
       request_body:
-        type: "python"
+        type: 'python'
         value: |
           # 獲取基金持倉
           # https://open.longportapp.com/docs/trade/asset/fund
@@ -31,23 +34,23 @@ paths:
           resp = ctx.fund_positions()
       response_body:
         {
-          "code": 0,
-          "data":
+          'code': 0,
+          'data':
             {
-              "list":
+              'list':
                 [
                   {
-                    "account_channel": "lb",
-                    "fund_info":
+                    'account_channel': 'lb',
+                    'fund_info':
                       [
                         {
-                          "symbol": "HK0000447943",
-                          "symbol_name": "高騰亞洲收益基金",
-                          "currency": "USD",
-                          "holding_units": "5.000",
-                          "current_net_asset_value": "0",
-                          "cost_net_asset_value": "0.00",
-                          "net_asset_value_day": "1649865600",
+                          'symbol': 'HK0000447943',
+                          'symbol_name': '高騰亞洲收益基金',
+                          'currency': 'USD',
+                          'holding_units': '5.000',
+                          'current_net_asset_value': '0',
+                          'cost_net_asset_value': '0.00',
+                          'net_asset_value_day': '1649865600',
                         },
                       ],
                   },
@@ -59,8 +62,8 @@ definitions:
   fund_rsp:
     properties:
       list:
-        type: "object[]"
-        description: "股票持倉信息"
+        type: 'object[]'
+        description: '股票持倉信息'
         required:
           - account_channel
         properties:
@@ -69,7 +72,7 @@ definitions:
             description: 賬戶類型
             required: true
           fund_info:
-            type: "object[]"
+            type: 'object[]'
             description: 基金詳情
             required:
               - symbol
@@ -80,26 +83,26 @@ definitions:
               - cost_net_asset_value
             properties:
               symbol:
-                type: "string"
+                type: 'string'
                 description: 基金 ISIN 代碼
                 required: true
               current_net_asset_value:
-                type: "string"
+                type: 'string'
                 description: 當前淨值
                 required: true
               net_asset_value_day:
-                type: "string"
+                type: 'string'
                 description: 當前淨值時間
                 required: true
               symbol_name:
-                type: "string"
+                type: 'string'
                 description: 基金名稱
                 required: true
               currency:
-                type: "string"
+                type: 'string'
                 description: 幣種
                 required: true
               cost_net_asset_value:
-                type: "string"
+                type: 'string'
                 description: 成本淨值
                 required: true

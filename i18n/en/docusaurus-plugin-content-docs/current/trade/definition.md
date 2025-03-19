@@ -21,8 +21,6 @@ sidebar_position: 2
 | MIT     | Market If Touched                               |
 | TSLPAMT | Trailing Limit If Touched (Trailing Amount)     |
 | TSLPPCT | Trailing Limit If Touched (Trailing Percent)    |
-| TSMAMT  | Trailing Market If Touched (Trailing Amount)    |
-| TSMPCT  | Trailing Market If Touched (Trailing Percent)   |
 | SLO     | Special Limit Order. Not Support Replace Order. |
 
 - Description: US stock support order type
@@ -35,8 +33,6 @@ sidebar_position: 2
 | MIT     | Market If Touched                             |
 | TSLPAMT | Trailing Limit If Touched (Trailing Amount)   |
 | TSLPPCT | Trailing Limit If Touched (Trailing Percent)  |
-| TSMAMT  | Trailing Market If Touched (Trailing Amount)  |
-| TSMPCT  | Trailing Market If Touched (Trailing Percent) |
 
 ## OrderStatus
 
@@ -95,10 +91,13 @@ sidebar_position: 2
 | tag                | string | order tag<br/><br/>**Enum Value**<br/>`Normal` - Normal Order<br />`GTC` - Long term Order<br />`Grey` - Grey Order   |
 | trigger_status     | string | conditional order trigger status<br/><br/>**Enum Value**<br/>`NOT_USED`<br />`DEACTIVE`<br />`ACTIVE`<br />`RELEASED` |
 | trigger_at         | string | conditional order trigger time. formatted as a timestamp (second)                                                     |
-| trailing_amount    | string | "`TSMAMT` / `TSLPAMT` order trailing amount"                                                                          |
-| trailing_percent   | string | "`TSMPCT` / `TSLPPCT` order trailing percent"                                                                         |
+| trailing_amount    | string | "`TSLPAMT` order trailing amount"                                                                          |
+| trailing_percent   | string | "`TSLPPCT` order trailing percent"                                                                         |
 | limit_offset       | string | "`TSLPAMT` / `TSLPPCT` order limit offset amount"                                                                     |
 | account_no         | string | account no                                                                                                            |
+| remark         | string | remark message                                                                                                           |
+| last_share         | string | last share |
+| last_price         | string | last price |
 
 ### example
 
@@ -127,7 +126,10 @@ sidebar_position: 2
 		"trailing_amount": "5",
 		"trailing_percent": "1",
 		"limit_offset": "0.01",
-		"account_no": "HK123445"
+		"account_no": "HK123445",
+		"last_share": "100",
+		"last_price": "234",
+		"remark": "abc"
 	}
 }
 ```

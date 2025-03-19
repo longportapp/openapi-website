@@ -2,10 +2,12 @@
 id: quote_subscribe
 title: 訂閱行情數據
 slug: subscribe
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 該接口用於訂閱標的行情數據。
+
+<SDKLinks module="quote" klass="QuoteContext" method="subscriptions" />
 
 :::info
 
@@ -17,11 +19,11 @@ sidebar_position: 2
 
 ### Parameters
 
-| Name          | Type     | Required | Description                                                                                                                                         |
-|---------------|----------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Name          | Type     | Required | Description                                                                                                                                            |
+| ------------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | symbol        | string[] | 是       | 訂閱的標的代碼，例如：`[700.HK]` <br /><br />**校驗規則：**<br />每次請求支持傳入的標的數量上限是 `500` 個 <br /> 每個用戶同時訂閱標的數量最多為 `500` |
 | sub_type      | int32[]  | 是       | 訂閱的數據類型，例如：`[1,2]`，詳見 [SubType](../objects#subtype---訂閱數據的類型)                                                                     |
-| is_first_push | bool     | 是       | 訂閱後是否立刻進行一次數據推送。 ( trade 不支持)                                                                                                     |
+| is_first_push | bool     | 是       | 訂閱後是否立刻進行一次數據推送。 ( trade 不支持)                                                                                                       |
 
 ### Protobuf
 
@@ -37,7 +39,7 @@ message SubscribeRequest {
 
 ```python
 # 訂閱行情數據
-# https://open.longportapp.com/docs/quote/subscribe/subscribe
+#
 # 訂閱行情數據請檢查“開發者中心“ - “行情權限”是否正確
 # https://open.longportapp.com/account
 #
@@ -49,7 +51,7 @@ message SubscribeRequest {
 from time import sleep
 from longport.openapi import QuoteContext, Config, SubType, PushQuote
 
-def on_quote(symbol: str, event: PushTrades):
+def on_quote(symbol: str, event: PushQuote):
     print(symbol, event)
 
 config = Config.from_env()
@@ -66,10 +68,10 @@ sleep(30)
 
 返回本次請求訂閱成功的標的和類型。
 
-| Name       | Type     | Description                                                        |
-|------------|----------|--------------------------------------------------------------------|
-| sub_list   | object[] | 訂閱的數據                                                         |
-| ∟ symbol   | string   | 標的代碼                                                           |
+| Name       | Type     | Description                                                          |
+| ---------- | -------- | -------------------------------------------------------------------- |
+| sub_list   | object[] | 訂閱的數據                                                           |
+| ∟ symbol   | string   | 標的代碼                                                             |
 | ∟ sub_type | int32[]  | 訂閱的數據類型，詳見：[SubType](../objects#subtype---訂閱數據的類型) |
 
 ### Protobuf
@@ -113,7 +115,7 @@ message SubTypeList {
 ## 錯誤碼
 
 | 協議錯誤碼 | 業務錯誤碼 | 描述             | 排查建議                 |
-|------------|------------|----------------|----------------------|
+| ---------- | ---------- | ---------------- | ------------------------ |
 | 3          | 301600     | 無效的請求       | 請求參數有誤或解包失敗   |
 | 3          | 301606     | 限流             | 降低請求頻次             |
 | 7          | 301602     | 服務端內部錯誤   | 請重試或聯繫技術人員處理 |

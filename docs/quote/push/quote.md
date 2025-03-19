@@ -7,6 +7,8 @@ sidebar_position: 1
 
 已订阅标的的实时价格推送，推送的数据结构中，只有有变化的字段才会填充数据。
 
+<SDKLinks module="quote" klass="QuoteContext" method="set_on_quote" go="OnQuote" />
+
 :::info
 
 [业务指令](../../socket/protocol/push)：`101`
@@ -17,19 +19,22 @@ sidebar_position: 1
 
 ### Properties
 
-| Name          | Type   | Description                                                      |
-|---------------|--------|------------------------------------------------------------------|
-| symbol        | string | 标的代码，例如：`AAPL.US`                                          |
-| sequence      | int64  | 序列号                                                           |
-| last_done     | string | 最新价                                                           |
-| open          | string | 开盘价                                                           |
-| high          | string | 最高价                                                           |
-| low           | string | 最低价                                                           |
-| timestamp     | int64  | 最新成交的时间戳                                                 |
-| volume        | int64  | 成交量                                                           |
-| turnover      | string | 成交额                                                           |
-| trade_status  | int32  | 交易状态，详见 [TradeStatus](../objects#tradestatus---交易状态)   |
-| trade_session | int32  | 交易时段，详见 [TradeSession](../objects#tradesession---交易时段) |
+| Name             | Type   | Description                                                                           |
+| ---------------- | ------ | ------------------------------------------------------------------------------------- |
+| symbol           | string | 标的代码，例如：`AAPL.US`                                                             |
+| sequence         | int64  | 序列号                                                                                |
+| last_done        | string | 最新价                                                                                |
+| open             | string | 开盘价                                                                                |
+| high             | string | 最高价                                                                                |
+| low              | string | 最低价                                                                                |
+| timestamp        | int64  | 最新成交的时间戳                                                                      |
+| volume           | int64  | 成交量                                                                                |
+| turnover         | string | 成交额                                                                                |
+| trade_status     | int32  | 交易状态，详见 [TradeStatus](../objects#tradestatus---交易状态)                       |
+| trade_session    | int32  | 交易时段，详见 [TradeSession](../objects#tradesession---交易时段)                     |
+| current_volume   | int32  | 两次推送之间增加的成交量                                                              |
+| current_turnover | string | 两次推送之间增加的成交额                                                              |
+| tag              | int32  | 价格数据标签 <br /><br />**可选值：**<br />`0` - 实时行情<br />`1` - 收盘后的修正数据 |
 
 ### Protobuf
 
@@ -65,7 +70,7 @@ message PushQuote {
 from time import sleep
 from longport.openapi import QuoteContext, Config, SubType, PushQuote
 
-def on_quote(symbol: str, event: PushTrades):
+def on_quote(symbol: str, event: PushQuote):
     print(symbol, event)
 
 config = Config.from_env()
@@ -90,6 +95,9 @@ sleep(30)
   "volume": 88063191,
   "turnover": "13865092584.000",
   "trade_status": 0,
-  "trade_session": 0
+  "trade_session": 0,
+  "current_volume": 111234,
+  "current_turnover": "23234343454.000",
+  "tag": 0
 }
 ```

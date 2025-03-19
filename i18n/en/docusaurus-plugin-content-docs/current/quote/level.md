@@ -39,7 +39,7 @@ slug: level
     </tr>
 </table>
 
-#### Rate Limiting
+## Rate Limiting
 
 :::caution
 

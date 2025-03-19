@@ -5,6 +5,39 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2024-10-09
+
+### SDK 2.0.0
+
+- 連接伺服器時列印已開啟的行情包
+- 交易 API 中的數量類型從 `int` 變更為 `Decimal`
+
+
+## 2024-08-28
+
+- SDK 中 `Depth.price` 字段从 `Decimal` 类型改为 `Optional[Decimal]` 类型
+
+## 2024-05-17
+
+- 下單及訂單查詢接口擴展 `outside_rth` 字段支持夜盤交易
+
+## 2024-05-06
+
+- 更新獲取賬戶資金接口
+  - `GET /v1/asset/account` 增加 (buy_power) 返回字段
+
+## 2024-04-29
+
+- 刪除 `TSMPCT`, `TSMAMT` 訂單類型
+
+## 2024-04-15
+
+- [交易推送](https://open.longportapp.com/docs/trade/trade-definition#websocket-%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5) 新增`last_share`, `last_price`。
+
+## 2024-04-13
+
+- [交易推送](https://open.longportapp.com/docs/trade/trade-definition#websocket-%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5) 新增`remark`。
+
 ## 2023-11-03
 
 - 新增行情曆史 K 線接口

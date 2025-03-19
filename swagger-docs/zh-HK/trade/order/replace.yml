@@ -1,6 +1,9 @@
 swagger: "2.0"
 info:
-  description: "該接口用於修改訂單的價格，數量"
+  description: |
+    該接口用於修改訂單的價格，數量。
+
+    <SDKLinks module="trade" klass="TradeContext" method="replace_order" />
   version: "v1"
   title: "修改訂單"
 paths:
@@ -31,11 +34,11 @@ paths:
         - name: trailing_amount
           required: false
           description: 跟蹤金額<br/><br/>
-            `TSLPAMT` / `TSMAMT` 訂單必填
+            `TSLPAMT` 訂單必填
         - name: trailing_percent
           required: false
           description: 跟蹤漲跌幅<br/><br/>
-            `TSLPPCT` / `TSMPCT` 訂單必填
+            `TSLPPCT` 訂單必填
         - name: remark
           required: false
           description: "備註 (最大 64 字符)"
@@ -55,7 +58,7 @@ paths:
 
           ctx.replace_order(
               order_id = "709043056541253632",
-              quantity = 100,
-              price = Decimal("100"),
+              quantity = Decimal(100),
+              price = Decimal(50),
           )
       response_body: { "code": 0, "message": "success", "data": {} }

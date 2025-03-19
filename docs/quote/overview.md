@@ -5,7 +5,7 @@ title: Overview
 slug: overview
 ---
 
-### 行情接口概览
+# 行情接口概览
 
 <table>
     <tr>
@@ -109,9 +109,13 @@ slug: overview
     <tr>
         <td><a href="./individual/watchlist_update_group">更新自选股分组</a></td>
     </tr>
+    <tr>
+        <td rowspan="1">标的</td>
+        <td><a href="./security/security_list">获取标的列表</a></td>
+    </tr>
 </table>
 
-### 标的代码说明
+## 标的代码说明
 
 标的代码使用 `ticker.region` 格式，`ticker` 表示标的代码，各个市场的标的代码示例：
 
@@ -120,12 +124,12 @@ slug: overview
 - A 股市场：`region` 上交所为 `SH`，深交所为 `SZ`，例如：`399001.SZ`，`600519.SH`
 - 新加坡市场：`region` 为 `SG`，例如：`D05.SG`
 
-### 接入方式
+## 接入方式
 
 1. 使用私有协议，长连接方式进行接入，接入方法请参考 <a href="../socket/protocol/overview" target="_blank">二进制通信协议</a>。
 2. 使用 SDK 进行接入，[SDK 介绍及下载地址](https://open.longportapp.com/sdk)。
 
-### 业务数据序列化方式
+## 业务数据序列化方式
 
 行情的请求、响应、推送数据作为业务数据，存放在私有协议的数据包 body 部分。
 我们使用 [Protobuf](https://developers.google.cn/protocol-buffers) 协议对业务数据进行序列化，相较于常见的文本协议（如 JSON, XML 等），Protobuf 协议具有如下优点：

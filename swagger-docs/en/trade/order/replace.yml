@@ -1,6 +1,9 @@
 swagger: "2.0"
 info:
-  description: "This API is used to replace order, modify quantity or price"
+  description: |
+    This API is used to replace order, modify quantity or price.
+
+    <SDKLinks module="trade" klass="TradeContext" method="replace_order" />
   version: "v1"
   title: "Replace Order"
 paths:
@@ -31,11 +34,11 @@ paths:
         - name: trailing_amount
           required: false
           description: Trailing amount<br/><br/>
-            `TSLPAMT` / `TSMAMT` Order Required
+            `TSLPAMT` Order Required
         - name: trailing_percent
           required: false
           description: Trailing percent<br/><br/>
-            `TSLPPCT` / `TSMPCT` Order Required
+            `TSLPPCT` Order Required
         - name: remark
           required: false
           description: "Remark (Maximum 64 characters)"
@@ -55,7 +58,7 @@ paths:
 
           ctx.replace_order(
               order_id = "709043056541253632",
-              quantity = 100,
-              price = Decimal("100"),
+              quantity = Decimal(100),
+              price = Decimal(50),
           )
       response_body: { "code": 0, "message": "success", "data": {} }

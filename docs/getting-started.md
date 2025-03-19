@@ -21,8 +21,12 @@ import TabItem from '@theme/TabItem';
 :::info
 中国大陆地区访问，建议采用 `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn` 以提升访问速度。
 
-如果使用我们的 SDK，可以通过设置环境变量 `LONGPPORT_REGION=cn` 来使用中国大陆的接入点
+如果使用我们的 SDK，可以通过设置环境变量 `LONGPORT_REGION=cn` 来使用中国大陆的接入点，当前我们仅有 `hk` 和 `cn` 两个地区可选。
 :::
+
+## 时间格式
+
+所有 API 返回有关时间的字段，我们都采用 [Unix Timestamp](https://en.wikipedia.org/wiki/Unix_time) 时区为 UTC。
 
 ## 环境需求
 
@@ -100,21 +104,36 @@ go get github.com/longportapp/openapi-go
 
 下面我们以获取资产为例，演示一下如何使用 SDK。
 
-## 配置开发者账户
+## 配置
+
+### 开通开发中账户
 
 1. 下载 [LongPort](https://longportapp.com/download)，并完成开户
-2. 完成 Python 3 环境安装，并安装 Pip
-3. 从 [LongPort OpenAPI](https://open.longportapp.com) 官网获取 `App Key`, `App Secret`, `Access Token` 等信息。
+2. 从 [LongPort OpenAPI](https://open.longportapp.com) 官网获取 `App Key`, `App Secret`, `Access Token` 等信息。
 
-**_获取 App Key, App Secret, Access Token 等信息_**
+   **_获取 App Key, App Secret, Access Token 等信息_**
 
-访问 [LongPort OpenAPI](https://open.longportapp.com) 网站，登录后，进入“个人中心”。
+   访问 [LongPort OpenAPI](https://open.longportapp.com) 网站，登录后，进入“个人中心”。
 
-在页面上会给出“应用凭证”凭证信息，我们拿到以后设置环境变量，便于后面开发使用方便。
+   在页面上会给出“应用凭证”凭证信息，我们拿到以后设置环境变量，便于后面开发使用方便。
+
+### 环境变量
+
+:::caution
+请注意保护好您的 **Access Token** 信息，任何人获得到它，都可以通过 OpenAPI 来交易你的账户！
+:::
+
+| 环境变量                    | 说明                                                       | 值范围          |
+|-----------------------------|----------------------------------------------------------|-----------------|
+| `LONGPORT_APP_KEY`          | 从页面上获取到的 App Key                                   |                 |
+| `LONGPORT_APP_SECRET`       | 从页面上获取到的 App Secret                                |                 |
+| `LONGPORT_ACCESS_TOKEN`     | 从页面上获取到的 Access Token                              |                 |
+| `LONGPORT_REGION`           | API 服务器接入点，请根据你所在地区设置，以获得更好的连接速度 | `hk`, `cn`      |
+| `LONGPORT_ENABLE_OVERNIGHT` | 是否开启夜盘行情，设置 `true` 开启，`false` 关闭             | `true`, `false` |
+
+建议您设置好这几个环境变量，我们后面各章节文档中的示例代码都会使用这几个环境变量。
 
 :::tip 关于环境变量
-
-建议您设置好 `LONGPORT_APP_KEY`, `LONGPORT_APP_SECRET`, `LONGPORT_ACCESS_TOKEN` 这几个环境变量。我们为了演示方便，后面各章节文档中的示例代码都会使用这几个环境变量。
 
 环境变量**非必要**条件，如设置不方便或遇到问题难以解决，可不用环境变量，而是直接在代码里用参数来初始化。
 
@@ -122,7 +141,7 @@ LongPort OpenAPI SDK 的 `Config` 均可以直接传入 `app_key`, `app_secret`,
 
 :::
 
-### macOS / Linux 环境下设置环境变量
+#### macOS / Linux 环境下设置环境变量
 
 打开终端，输入下面的命令即可：
 
@@ -132,43 +151,49 @@ export LONGPORT_APP_SECRET="从页面上获取到的 App Secret"
 export LONGPORT_ACCESS_TOKEN="从页面上获取到的 Access Token"
 ```
 
-### Windows 下设置环境变量
+#### Windows 下设置环境变量
 
-Windows 要稍微复杂一些，按下 `Win + R` 快捷键，输入 `cmd` 命令启动命令行（建议使用 [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) 获得更好的开发体验）。
+Windows 要稍微复杂一些，有下面两种方式可以设置环境变量：
 
-在命令行里面输入下面的命令设置环境变量：
+1. **通过图形界面设置**：在桌面上找到“我的电脑”，右键点击，选择“属性”，在弹出的窗口中点击“高级系统设置”。
 
-```bash
-C:\Users\jason> setx LONGPORT_APP_KEY "从页面上获取到的 App Key"
-成功：指定的值已得到保存。
+   - 在弹出的窗口中点击“环境变量”。
 
-C:\Users\jason> setx LONGPORT_APP_SECRET "从页面上获取到的 App Secret"
-成功：指定的值已得到保存。
+     <img src="https://assets.lbctrl.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
 
-C:\Users\jason> setx LONGPORT_ACCESS_TOKEN "从页面上获取到的 Access Token"
-成功：指定的值已得到保存。
-```
+   - 在弹出的窗口中点击“新建”，然后输入环境变量名称，比如 `LONGPORT_APP_KEY`，`Value` 分别填写从页面上获取到的 App Key，App Secret，Access Token，Region。
 
-:::caution Windows 环境变量
+2. **CMD 命令行设置**：按下 `Win + R` 快捷键，输入 `cmd` 命令启动命令行（建议使用 [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) 获得更好的开发体验）。
 
-Windows 环境变量限制，当上面 3 条命令执行成功以后，你需要重新启动 Windows 或者注销后重新登录一次，才可以读取到。
+   在命令行里面输入下面的命令设置环境变量：
 
-:::
+   ```bash
+   C:\Users\jason> setx LONGPORT_APP_KEY "从页面上获取到的 App Key"
+   成功：指定的值已得到保存。
 
-注销或重新启动后，再次打开命令行，输入下面的命令验证一下环境变量是否设置正确：
+   C:\Users\jason> setx LONGPORT_APP_SECRET "从页面上获取到的 App Secret"
+   成功：指定的值已得到保存。
 
-```bash
-C:\Users\jason> set LONGPORT
-LONGPORT_APP_KEY=xxxxxxx
-LONGPORT_APP_SECRET=xxxxxx
-LONGPORT_ACCESS_TOKEN=xxxxxxx
-```
+   C:\Users\jason> setx LONGPORT_ACCESS_TOKEN "从页面上获取到的 Access Token"
+   成功：指定的值已得到保存。
+   ```
 
-如果能正确打印你刚才设置的值，那么环境变量就是对了。
+   :::caution Windows 环境变量
 
-:::caution
-请注意保护好您的 **Access Token** 信息，任何人获得到它，都可以通过 OpenAPI 来交易你的账户！
-:::
+   Windows 环境变量限制，当上面命令执行成功以后，你需要重新启动 Windows 或者注销后重新登录一次，才可以读取到。
+
+   :::
+
+   注销或重新启动后，再次打开命令行，输入下面的命令验证一下环境变量是否设置正确：
+
+   ```bash
+   C:\Users\jason> set LONGPORT
+   LONGPORT_APP_KEY=xxxxxxx
+   LONGPORT_APP_SECRET=xxxxxx
+   LONGPORT_ACCESS_TOKEN=xxxxxxx
+   ```
+
+   如果能正确打印你刚才设置的值，那么环境变量就是对了。
 
 ## 场景示范
 
@@ -210,7 +235,7 @@ const { Config, TradeContext } = require('longport')
 let config = Config.fromEnv()
 
 // Init config without ENV
-// let config = new Config({ app_key: "YOUR_APP_KEY", app_secret = "YOUR_APP_SECRET", access_token = "YOUR_ACCESS_TOKEN" })
+// let config = new Config({ appKey: "YOUR_APP_KEY", appSecret: "YOUR_APP_SECRET", accessToken: "YOUR_ACCESS_TOKEN" })
 
 TradeContext.new(config)
   .then((ctx) => ctx.accountBalance())
@@ -392,7 +417,7 @@ go run ./
 
 当你有正确的行情权限，看起来可能会是这样：
 
-<img src="https://pub.lbkrs.com/files/202205/JjCceNDSqeBJpaWv/SCR-20220507-rnm.png" className="max-w-2xl" />
+<img src="https://pub.pbkrs.com/files/202205/JjCceNDSqeBJpaWv/SCR-20220507-rnm.png" className="max-w-2xl" />
 
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>
@@ -641,8 +666,8 @@ resp = ctx.submit_order(
     side=OrderSide.Buy,
     symbol="700.HK",
     order_type=OrderType.LO,
-    submitted_price=Decimal("50"),
-    submitted_quantity=200,
+    submitted_price=Decimal(50),
+    submitted_quantity=Decimal(200),
     time_in_force=TimeInForceType.Day,
     remark="Hello from Python SDK",
 )
@@ -671,7 +696,7 @@ TradeContext.new(config)
       orderType: OrderType.LO,
       side: OrderSide.Buy,
       timeInForce: TimeInForceType.Day,
-      submittedQuantity: 200,
+      submittedQuantity: new Decimal(200),
       submittedPrice: new Decimal('300'),
     })
   )
@@ -707,7 +732,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         "700.HK",
         OrderType::LO,
         OrderSide::Buy,
-        200,
+        decimal!(200i32),
         TimeInForceType::Day,
     )
     .submitted_price(decimal!(50i32));
@@ -739,7 +764,7 @@ public class Main {
             SubmitOrderOptions opts = new SubmitOrderOptions("700.HK",
                     OrderType.LO,
                     OrderSide.Buy,
-                    200,
+                    new BigDecimal(200),
                     TimeInForceType.Day).setSubmittedPrice(new BigDecimal(50));
             SubmitOrderResponse resp = ctx.submitOrder(opts).get();
             System.out.println(resp);
@@ -1033,12 +1058,16 @@ SDK 的详细 API 文档请访问：
 
 ## 反馈及沟通
 
-- GitHub Issues: <https://github.com/longportapp/openapi-sdk/>
+如果您在使用 SDK 的过程中遇到任何问题，欢迎通过以下方式返回或与我们讨论，我们会尽力帮助您解决问题。
 
-- 微信沟通群（已满）：
+### GitHub Issues
 
-<img src="https://pub.lbkrs.com/files/202205/akTNrRTBrT5aMX4f/qrcode.jpg" className="max-w-2xl" />
+在 GitHub 上，也有很多历史的讨论和问题可以参考，你也可以试着搜索一下，或许也能找到问题的解决方案。
 
-- 飞书沟通群：
+访问地址：<https://github.com/longportapp/openapi-sdk/issues>
 
-<img src="https://assets.lbkrs.com/uploads/2acb32b6-0718-4304-8d73-432a2d53aa97/feishu.png" className="max-w-2xl" />
+### 飞书回馈
+
+如果你有使用[飞书](https://www.feishu.cn/)，可以扫打开在飞书话题群中提出你的问题：
+
+<img src="https://assets.lbctrl.com/uploads/412f8cd8-2268-45ff-a367-98f280d0ee09/openapi-feishu-qrcode.png" style={{ width: "200px" }} />

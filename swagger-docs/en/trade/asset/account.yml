@@ -1,26 +1,30 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "The API is used to obtain the available, desirable, frozen, to-be-settled, and in-transit funds (fund purchase and redemption) information for each currency of the user"
-  version: "v1"
-  title: "Get Account Balance"
+  description: |
+    The API is used to obtain the available, desirable, frozen, to-be-settled, and in-transit
+    funds (fund purchase and redemption) information for each currency of the user.
+
+    <SDKLinks module="trade" klass="TradeContext" method="account_balance" />
+  version: 'v1'
+  title: 'Get Account Balance'
 paths:
   /v1/asset/account:
     get:
       access:
       parameters:
-        - name: "currency"
-          type: "string"
+        - name: 'currency'
+          type: 'string'
           description: Currency (HKD, USD, CNH)
           required: false
       responses:
-        "200":
-          description: "Success"
+        '200':
+          description: 'Success'
           schema:
-            $ref: "#/definitions/accountcash_rsp"
-        "400":
-          description: "Internal Error"
+            $ref: '#/definitions/accountcash_rsp'
+        '400':
+          description: 'Internal Error'
       request_body:
-        type: "python"
+        type: 'python'
         value: |
           # Get Account Balance
           # https://open.longportapp.com/docs/trade/asset/account
@@ -32,36 +36,37 @@ paths:
           print(resp)
       response_body:
         {
-          "code": 0,
-          "data":
+          'code': 0,
+          'data':
             {
-              "list":
+              'list':
                 [
                   {
-                    "total_cash": "1759070010.72",
-                    "max_finance_amount": "977582000",
-                    "remaining_finance_amount": "0",
-                    "risk_level": "1",
-                    "margin_call": "2598051051.50",
-                    "currency": "HKD",
-                    "net_assets": "24145.90",
-                    "init_margin": "1540.09",
-                    "maintenance_margin": "1540.09",
-                    "cash_infos":
+                    'total_cash': '1759070010.72',
+                    'max_finance_amount': '977582000',
+                    'remaining_finance_amount': '0',
+                    'risk_level': '1',
+                    'margin_call': '2598051051.50',
+                    'currency': 'HKD',
+                    'net_assets': '24145.90',
+                    'init_margin': '1540.09',
+                    'maintenance_margin': '1540.09',
+                    'buy_power': '1759070.12',
+                    'cash_infos':
                       [
                         {
-                          "withdraw_cash": "97592.30",
-                          "available_cash": "195902464.37",
-                          "frozen_cash": "11579339.13",
-                          "settling_cash": "207288537.81",
-                          "currency": "HKD",
+                          'withdraw_cash': '97592.30',
+                          'available_cash': '195902464.37',
+                          'frozen_cash': '11579339.13',
+                          'settling_cash': '207288537.81',
+                          'currency': 'HKD',
                         },
                         {
-                          "withdraw_cash": "199893416.74",
-                          "available_cash": "199893416.74",
-                          "frozen_cash": "28723.76",
-                          "settling_cash": "-276806.51",
-                          "currency": "USD",
+                          'withdraw_cash': '199893416.74',
+                          'available_cash': '199893416.74',
+                          'frozen_cash': '28723.76',
+                          'settling_cash': '-276806.51',
+                          'currency': 'USD',
                         },
                       ],
                   },
@@ -73,7 +78,7 @@ definitions:
   accountcash_rsp:
     properties:
       list:
-        type: "object[]"
+        type: 'object[]'
         description: Account Balance
         required:
           - total_cash
@@ -85,45 +90,50 @@ definitions:
           - net_assets
           - init_margin
           - maintenance_margin
+          - buy_power
         properties:
           total_cash:
-            type: "string"
+            type: 'string'
             description: Total Cash
             required: true
           max_finance_amount:
-            type: "string"
+            type: 'string'
             description: Maximum Financing Amount
             required: true
           remaining_finance_amount:
-            type: "string"
+            type: 'string'
             description: Remaining Financing Amount
             required: true
           risk_level:
-            type: "string"
+            type: 'string'
             description: Risk control level  <br/> <br/> <b>Option:</b><br/> `0` - safe <br/> `1` - medium risk<br/> `2` - early warning<br/> `3` - danger
             required: true
           margin_call:
-            type: "string"
+            type: 'string'
             description: Margin Call
             required: true
           net_assets:
-            type: "string"
+            type: 'string'
             description: net asset
             required: true
           init_margin:
-            type: "string"
+            type: 'string'
             description: initial margin
             required: true
           maintenance_margin:
-            type: "string"
+            type: 'string'
             description: maintenance margin
             required: true
           currency:
-            type: "string"
+            type: 'string'
             description: Currency
             required: true
+          buy_power:
+            type: 'string'
+            description: Buy Power
+            required: true
           cash_infos:
-            type: "object[]"
+            type: 'object[]'
             description: Cash Details
             required:
               - currency
@@ -133,21 +143,21 @@ definitions:
               - settling_cash
             properties:
               withdraw_cash:
-                type: "string"
+                type: 'string'
                 description: Withdraw Cash
                 required: true
               available_cash:
-                type: "string"
+                type: 'string'
                 description: Available Cash
                 required: true
               frozen_cash:
-                type: "string"
+                type: 'string'
                 description: Frozen Cash
               settling_cash:
-                type: "string"
+                type: 'string'
                 description: Cash to be Settled
                 required: true
               currency:
-                type: "string"
+                type: 'string'
                 description: Currency
                 required: true

@@ -4,4 +4,10 @@
 
 ### Download
 
-- [openapi-cpp-sdk-1.0.0.tar.gz](https://static.lbkrs.com/openapi-sdk/openapi-cpp-sdk-1.0.0.tar.gz)
+- [1.1.7](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-1.1.7.tar.gz)
+- [2.1.10](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-2.1.10.tar.gz)
+
+### API Documents
+
+- [v1](https://longportapp.github.io/openapi-sdk/v1/cpp/index.html)
+- [v2](https://longportapp.github.io/openapi-sdk/v2/cpp/index.html)

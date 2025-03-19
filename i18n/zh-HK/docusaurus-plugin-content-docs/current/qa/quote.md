@@ -75,7 +75,7 @@ A：標的代碼使用 `ticker.region` 格式，`ticker` 表示標的代碼。�
 </table>
 
 可以使用 LongPort App 查看標的的 symbol
-<img src="https://pub.lbkrs.com/files/202206/7CSoiaDR4wGZPNCT/20220629-180013.jpeg" className="max-w-2xl" />
+<img src="https://pub.pbkrs.com/files/202206/7CSoiaDR4wGZPNCT/20220629-180013.jpeg" className="max-w-2xl" />
 
 ## Q4：OpenAPI 的行情权限是怎么样？如何购买行情卡？
 
@@ -94,3 +94,37 @@ A:
 - 港股市場：08:50:00 CST
 - A 股市場：09:00:00 CST
 - 新加坡市場：08:20:00 CST
+
+## Q6：如何取得夜盤行情
+
+A:
+
+- 夜盤行情需要主動開啟，方式為在鑑權接口的 `metadata` 欄位填入 key `need_over_night_quote`, value `true`。
+
+```protobuf
+message AuthRequest {
+  string token = 1;
+  map<string, string> metadata = 2;
+}
+
+message ReconnectRequest {
+  string session_id = 1;
+  map<string, string> metadata = 2;
+}
+```
+
+- 開啟夜盤行情後，拉取和推送接口都將可以在夜盤交易時段，取得到夜盤盤情。
+
+## Q7：如何開啟夜盤行情
+
+A:
+
+- 從環境變數建立 `Config` 對象
+
+設定環境變數 `LONGPORT_ENABLE_OVERNIGHT` 為 `true`
+
+- 從建構函式建立 `Config` 對象
+
+```python
+config = Config(app_key="your_app_key", app_secret="your_app_secret", access_token="your_access_token", enable_overnight=True)
+```

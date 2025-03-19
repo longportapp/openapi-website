@@ -5,7 +5,7 @@ title: Overview
 slug: overview
 ---
 
-### Quote API Overview
+# Quote API Overview
 
 <table>
     <tr>
@@ -97,7 +97,7 @@ slug: overview
         <td><a href="./push/trade">Push Real-time Trades</a></td>
     </tr>
     <tr>
-        <td rowspan="4">个性化</td>
+        <td rowspan="4">Individual</td>
         <td><a href="./individual/watchlist_create_group">Create watched group</a></td>
     </tr>
     <tr>
@@ -109,9 +109,13 @@ slug: overview
     <tr>
         <td><a href="./individual/watchlist_update_group">Update watched group</a></td>
     </tr>
+    <tr>
+        <td rowspan="1">Security</td>
+        <td><a href="./security/security_list">Get Security List</a></td>
+    </tr>
 </table>
 
-### Description Of Security Code
+## Description Of Security Code
 
 The security code uses the `ticker.region` format, `ticker` represents the code, and example for each market:
 
@@ -120,12 +124,12 @@ The security code uses the `ticker.region` format, `ticker` represents the code,
 - CN Market: `region` is `SH` for Shanghai Stock Exchange and `SZ` for Shenzhen Stock Exchange, for example: `399001.SZ`, `600519.SH`.
 - SG Market: `region` is `SG`, for example: `D05.SG`.
 
-### Access Method
+## Access Method
 
 1. Use private protocol and long connection mode to access, please refer to <a href="../socket/protocol/overview" target="_blank">Binary Communication Protocol</a> for access method.
 2. Use SDK for access, [SDK introduction and download address](https://open.longportapp.com/sdk).
 
-### Business Data Serialization
+## Business Data Serialization
 
 The market request, response and push data are stored as business data in the body part of the data package of the private protocol.
 We use the [Protobuf](https://developers.google.cn/protocol-buffers) protocol to serialize business data. Compared with common text protocols (such as JSON, XML, etc.), the Protobuf protocol has the following advantages:

@@ -21,8 +21,6 @@ sidebar_position: 2
 | MIT     | 觸價市價單                  |
 | TSLPAMT | 跟蹤止損限價單 (跟蹤金额)   |
 | TSLPPCT | 跟蹤止損限價單 (跟蹤漲跌幅) |
-| TSMAMT  | 跟蹤止損市價單 (跟蹤金额)   |
-| TSMPCT  | 跟蹤止損市價單 (跟蹤漲跌幅) |
 | SLO     | 特殊限價單，不支持改單      |
 
 - 說明：美股支持訂單類型
@@ -35,8 +33,6 @@ sidebar_position: 2
 | MIT     | 觸價市價單                  |
 | TSLPAMT | 跟蹤止損限價單 (跟蹤金额)   |
 | TSLPPCT | 跟蹤止損限價單 (跟蹤漲跌幅) |
-| TSMAMT  | 跟蹤止損市價單 (跟蹤金额)   |
-| TSMPCT  | 跟蹤止損市價單 (跟蹤漲跌幅) |
 
 ## OrderStatus
 
@@ -95,11 +91,14 @@ sidebar_position: 2
 | tag                | string | 訂單標記<br/><br/>**可選值**<br/>`Normal` - 普通訂單<br />`GTC` - 长期單<br />`Grey` - 暗盤單                                        |
 | trigger_status     | string | 條件單觸發狀態<br/><br/>**可選值**<br/>`NOT_USED` - 未激活 <br />`DEACTIVE` - 已失效<br />`ACTIVE` - 已激活<br />`RELEASED` - 已觸發 |
 | trigger_at         | string | 觸發時间                                                                                                                             |
-| tailing_amount     | string | 條件單跟蹤金额                                                                                                                       |
-| tailing_percent    | string | 條件單跟蹤漲跌幅                                                                                                                     |
+| trailing_amount     | string | 條件單跟蹤金额                                                                                                                       |
+| trailing_percent    | string | 條件單跟蹤漲跌幅                                                                                                                     |
 | limit_offset       | string | 指定價差                                                                                                                             |
 | account_no         | string | 用戶端賬號                                                                                                                           |
-
+| remark         | string | 備注																																													 |
+| last_share         | string | 最新成交數量																																													 |
+| last_price         | string | 最新成交價格																																													 |
+	
 ### 示例
 
 ```JSON
@@ -124,10 +123,13 @@ sidebar_position: 2
 		"tag": "GTC",
 		"trigger_status": "ACTIVE",
 		"trigger_at": "1562761893",
-		"tailing_amount": "5",
-		"tailing_percent": "1",
+		"trailing_amount": "5",
+		"trailing_percent": "1",
 		"limit_offset": "0.01",
-		"account_no": "HK123445"
+		"account_no": "HK123445",
+		"last_share": "100",
+		"last_price": "234",
+		"remark": "abc"
 	}
 }
 ```

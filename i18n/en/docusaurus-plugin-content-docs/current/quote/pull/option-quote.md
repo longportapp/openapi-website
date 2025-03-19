@@ -7,6 +7,8 @@ sidebar_position: 3
 
 This API is used to obtain the real-time quotes of US stock options, including the option-specific data.
 
+<SDKLinks module="quote" klass="QuoteContext" method="option_quote" />
+
 :::info
 [Business Command](../../socket/biz-command): `12`
 :::
@@ -16,7 +18,7 @@ This API is used to obtain the real-time quotes of US stock options, including t
 ### Parameters
 
 | Name   | Type     | Required | Description                                                                                                                                                                                                                                      |
-|--------|----------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------ | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | symbol | string[] | Yes      | Security code list. obtain the symbol of the options through the [optionchain](./optionchain-date-strike.md) API, for example: `[BABA230120C160000.US]` <br /><br />**Check rules:**<br />The maximum number of symbols in each request is `500` |
 
 ### Protobuf
@@ -48,7 +50,7 @@ print(resp)
 ### Response Properties
 
 | Name                     | Type     | Description                                                                          |
-|--------------------------|----------|--------------------------------------------------------------------------------------|
+| ------------------------ | -------- | ------------------------------------------------------------------------------------ |
 | secu_quote               | object[] | Options quote                                                                        |
 | ∟ symbol                 | string   | Security code                                                                        |
 | ∟ last_done              | string   | Latest price                                                                         |
@@ -165,7 +167,7 @@ message OptionExtend {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description              | Troubleshooting Suggestions                                   |
-|---------------------|---------------------|--------------------------|---------------------------------------------------------------|
+| ------------------- | ------------------- | ------------------------ | ------------------------------------------------------------- |
 | 3                   | 301600              | Invalid request          | Invalid request parameters or unpacking request failed        |
 | 3                   | 301606              | Request rate limit       | Reduce the frequency of requests                              |
 | 7                   | 301602              | Server error             | Please try again or contact a technician to resolve the issue |

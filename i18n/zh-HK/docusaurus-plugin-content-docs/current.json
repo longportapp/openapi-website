@@ -27,6 +27,10 @@
     "message": "個性化",
     "description": "The label for category 個性化 in sidebar docsSidebar"
   },
+  "sidebar.docsSidebar.category.标的": {
+    "message": "標的",
+    "description": "The label for category 標的 in sidebar docsSidebar"
+  },
   "sidebar.docsSidebar.category.交易": {
     "message": "交易",
     "description": "The label for category 交易 in sidebar docsSidebar"
@@ -46,5 +50,9 @@
   "sidebar.docsSidebar.category.通信协议": {
     "message": "通信協議",
     "description": "The label for category 通信協議 in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.API 附录": {
+    "message": "API Reference",
+    "description": "The label for category Quote in sidebar docsSidebar"
   }
 }

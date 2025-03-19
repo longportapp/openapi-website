@@ -7,7 +7,7 @@ slug: objects
 
 # 行情命名词典
 
-### TradeStatus - 交易状态
+## TradeStatus - 交易状态
 
 交易状态
 
@@ -25,7 +25,7 @@ slug: objects
 | 9   | 轮证待上市      |
 | 10  | 终止交易        |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum TradeStatus {
@@ -43,7 +43,7 @@ enum TradeStatus {
 }
 ```
 
-### TradeSession - 交易时段
+## TradeSession - 交易时段
 
 交易时段
 
@@ -52,8 +52,9 @@ enum TradeStatus {
 | 0   | 盘中交易 |
 | 1   | 盘前交易 |
 | 2   | 盘后交易 |
+| 3   | 夜盘交易 |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum TradeSession {
@@ -63,21 +64,30 @@ enum TradeSession {
 }
 ```
 
-### Period - K 线周期
+## Period - K 线周期
 
-| ID   | 描述          |
-| ---- | ------------- |
-| 1    | 一分钟 k 线   |
-| 5    | 五分钟 k 线   |
-| 15   | 十五分钟 k 线 |
-| 30   | 三十分钟 k 线 |
-| 60   | 六十分钟 k 线 |
-| 1000 | 日 k 线       |
-| 2000 | 周 k 线       |
-| 3000 | 月 k 线       |
-| 4000 | 年 k 线       |
+| ID   | 描述            |
+| ---- | --------------- |
+| 1    | 一分钟 k 线     |
+| 2    | 两分钟 k 线     |
+| 3    | 三分钟 k 线     |
+| 5    | 五分钟 k 线     |
+| 10   | 十分钟 k 线     |
+| 15   | 十五分钟 k 线   |
+| 20   | 二十分钟 k 线   |
+| 30   | 三十分钟 k 线   |
+| 45   | 四十五分钟 k 线 |
+| 60   | 六十分钟 k 线   |
+| 120  | 两小时 k 线     |
+| 180  | 三小时 k 线     |
+| 240  | 四小时 k 线     |
+| 1000 | 日 k 线         |
+| 2000 | 周 k 线         |
+| 3000 | 月 k 线         |
+| 3500 | 季 k 线         |
+| 4000 | 年 k 线         |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum Period {
@@ -94,14 +104,14 @@ enum Period {
 }
 ```
 
-### AdjustType - K 线复权类型
+## AdjustType - K 线复权类型
 
 | ID  | 描述   |
 | --- | ------ |
 | 0   | 除权   |
 | 1   | 前复权 |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum AdjustType {
@@ -110,7 +120,7 @@ enum AdjustType {
 }
 ```
 
-### SubType - 订阅数据的类型
+## SubType - 订阅数据的类型
 
 | ID  | 描述     |
 | --- | -------- |
@@ -119,7 +129,7 @@ enum AdjustType {
 | 3   | 经纪队列 |
 | 4   | 逐笔明细 |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum SubType {
@@ -131,7 +141,7 @@ enum SubType {
 }
 ```
 
-### CalcIndex - 计算指标
+## CalcIndex - 计算指标
 
 | ID  | 描述         | 支持的标的类型   |
 | --- | ------------ | ---------------- |
@@ -176,7 +186,7 @@ enum SubType {
 | 39  | Vega         | 仅期权适用       |
 | 40  | Rho          | 仅期权适用       |
 
-#### Protobuf
+### Protobuf
 
 ```protobuf
 enum CalcIndex {
@@ -224,7 +234,7 @@ enum CalcIndex {
 }
 ```
 
-### Board - 标的板块
+## Board - 标的板块
 
 | 板块             | 描述                             |
 | ---------------- | -------------------------------- |
@@ -234,7 +244,7 @@ enum CalcIndex {
 | USNSDQ           | 纳斯达克指数                     |
 | USSector         | 美股行业概念                     |
 | USOption         | 美股期权                         |
-| USOptionS        | 美股特殊期权（收盘时间为 16:15）|
+| USOptionS        | 美股特殊期权（收盘时间为 16:15） |
 | HKEquity         | 港股股本证券                     |
 | HKPreIPO         | 港股暗盘                         |
 | HKWarrant        | 港股轮证                         |

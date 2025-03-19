@@ -4,6 +4,11 @@ on:
     branches:
       - main
       - release
+      
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+  
 jobs:
   deploy_release:
     name: build

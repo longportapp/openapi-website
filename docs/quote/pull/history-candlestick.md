@@ -2,10 +2,12 @@
 id: quote_history_candlestick
 title: 获取标的历史 K 线
 slug: history-candlestick
-sidebar_position: 20
+sidebar_position: 10
 ---
 
 该接口用于获取标的的历史 K 线数据。
+
+<SDKLinks module="quote" klass="QuoteContext" method="history_candlesticks_by_offset" />
 
 :::info
 
@@ -62,17 +64,25 @@ message SecurityHistoryCandlestickRequest {
 
 ```python
 # 获取标的历史 K 线
-# https://open.longportapp.com/docs/quote/pull/history-candlestick
 #
 # 运行前请访问“开发者中心”确保账户有正确的行情权限。
 # 如没有开通行情权限，可以通过“LongPort”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
-from datetime import date
+from datetime import datetime, date
 from longport.openapi import QuoteContext, Config, Period, AdjustType
 
 config = Config.from_env()
 ctx = QuoteContext(config)
 
-resp = ctx.history_candlesticks_by_offset("700.HK", Period.Day, AdjustType.NoAdjust, false, date(2023, 1, 1), 10)
+# Query after 2023-01-01
+resp = ctx.history_candlesticks_by_offset("700.HK", Period.Day, AdjustType.NoAdjust, True, 10, datetime(2023, 1, 1))
+print(resp)
+
+# Query before 2023-01-01
+resp = ctx.history_candlesticks_by_offset("700.HK", Period.Day, AdjustType.NoAdjust, False, 10, datetime(2023, 1, 1))
+print(resp)
+
+# Query 2023-01-01 to 2023-02-01
+resp = ctx.history_candlesticks_by_date("700.HK", Period.Day, AdjustType.NoAdjust, date(2023, 1, 1), date(2023, 2, 1))
 print(resp)
 ```
 
@@ -208,12 +218,12 @@ message Candlestick {
 
 ## 历史 K 线区间说明
 
-| 市场     | 日/周/月/年 K 线 | 分钟 K 线             | 说明                                                                    |
-|---------|------------------|-----------------------|-------------------------------------------------------------------------|
-| 港股     | 2004-6-1 至今    | 2022-09-28 至今       |                                                                         |
-| 美股     | 2010-6-1 至今    | 最近 6 个交易日的数据 | 美股历史分钟 K 目前支持查询近 6 个交易日的数据，待后续开放更长时段的数据 |
-| 美股期权 | -                | -                     | 美股期权历史数据目前暂不支持，待后续开放更长时段的数据                   |
-| A 股     | 1999-11-1 至今   | 2022-08-25 至今       |                                                                         |
+| 市场     | 日/周/月/年 K 线 | 分钟 K 线       | 说明                                                  |
+|---------|------------------|-----------------|-------------------------------------------------------|
+| 港股     | 2004-6-1 至今    | 2022-09-28 至今 |                                                       |
+| 美股     | 2010-6-1 至今    | 2023-12-4 至今  |                                                       |
+| 美股期权 | -                | -               | 美股期权历史数据目前暂不支持，待后续开放更长时段的数据 |
+| A 股     | 1999-11-1 至今   | 2022-08-25 至今 |                                                       |
 
 ## 频次限制
 

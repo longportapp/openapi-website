@@ -1,6 +1,9 @@
 swagger: "2.0"
 info:
-  description: "該接口用於港美股，窩輪，期權的委托下單"
+  description: |
+    該接口用於港美股，窩輪，期權的委托下單。
+
+    <SDKLinks module="trade" klass="TradeContext" method="submit_order" />
   version: "v1"
   title: "委托下單"
 paths:
@@ -34,11 +37,11 @@ paths:
         - name: trailing_amount
           required: false
           description: 跟蹤金額<br/><br/>
-            `TSLPAMT` / `TSMAMT` 訂單必填
+            `TSLPAMT` 訂單必填
         - name: trailing_percent
           required: false
           description: 跟蹤漲跌幅<br/><br/>
-            `TSLPPCT` / `TSMPCT` 訂單必填
+            `TSLPPCT` 訂單必填
         - name: expire_date
           required: false
           description:
@@ -56,7 +59,8 @@ paths:
           description: 是否允許盤前盤後，美股必填<br/><br/>
             **可選值:**<br/>
             `RTH_ONLY` - 不允許盤前盤後<br/>
-            `ANY_TIME` - 允許盤前盤後
+            `ANY_TIME` - 允許盤前盤後<br/>
+            `OVERNIGHT` - 夜盤
         - name: time_in_force
           required: true
           description: 訂單有效期類型<br/><br/>
@@ -85,8 +89,7 @@ paths:
           ctx = TradeContext(config)
 
           # Submit order
-          resp = ctx.submit_order("700.HK", OrderType.LO, OrderSide.Buy, Decimal(
-            "500"), TimeInForceType.Day, submitted_price=Decimal("50"), remark="Hello from Python SDK")
+          resp = ctx.submit_order("700.HK", OrderType.LO, OrderSide.Buy, Decimal(500), TimeInForceType.Day, submitted_price=Decimal(50), remark="Hello from Python SDK")
           print(resp)
       response_body:
         {

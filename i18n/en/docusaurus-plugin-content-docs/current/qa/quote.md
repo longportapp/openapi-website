@@ -75,7 +75,7 @@ A: The security code uses the `ticker.region` format, `ticker` represents the co
 </table>
 
 You can also use LongPort App to find the symbol of security
-<img src="https://pub.lbkrs.com/files/202206/7CSoiaDR4wGZPNCT/20220629-180013.jpeg" className="max-w-2xl" />
+<img src="https://pub.pbkrs.com/files/202206/7CSoiaDR4wGZPNCT/20220629-180013.jpeg" className="max-w-2xl" />
 
 ## Q4: What is the quote authority of OpenAPI? How to buy quote cards?
 
@@ -94,3 +94,37 @@ A:
 - HK Market: 08:50:00 CST
 - CN Market: 09:00:00 CST
 - SG Market: 08:20:00 CST
+
+## Q6: How to enable Overnight quote
+
+A:
+
+- The night market quotation needs to be actively enabled by filling in the key `need_over_night_quote`, value `true` in the `metadata` field of the authentication interface.
+
+```protobuf
+message AuthRequest {
+  string token = 1;
+  map<string, string> metadata = 2;
+}
+
+message ReconnectRequest {
+  string session_id = 1;
+  map<string, string> metadata = 2;
+}
+```
+
+- After turning on the night trading quotations, both the pull and push interfaces will be able to obtain the night trading quotations during the night trading period.
+
+## Q7: Enable Overnight quote in OpenApi SDK
+
+A:
+
+- Create `Config` from environment variables
+
+Set environment variable `LONGPORT_ENABLE_OVERNIGHT` to `true`
+
+- Create `Config` object from constructor
+
+```python
+config = Config(app_key="your_app_key", app_secret="your_app_secret", access_token="your_access_token", enable_overnight=True)
+```

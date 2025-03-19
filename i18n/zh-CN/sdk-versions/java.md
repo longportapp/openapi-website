@@ -15,3 +15,8 @@
 ```
 
 [https://search.maven.org/artifact/io.github.longportapp/openapi-sdk](https://search.maven.org/artifact/io.github.longportapp/openapi-sdk)
+
+### API 文档
+
+- [v1](https://longportapp.github.io/openapi-sdk/v1/java/index.html)
+- [v2](https://longportapp.github.io/openapi-sdk/v2/java/index.html)

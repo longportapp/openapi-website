@@ -7,6 +7,8 @@ sidebar_position: 14
 
 該接口用於獲取輪證行情列表數據，支持按不同字段排序和篩選輪證。
 
+<SDKLinks module="quote" klass="QuoteContext" method="warrant_list" />
+
 :::info
 
 [業務指令](../../socket/biz-command)：`23`
@@ -17,19 +19,19 @@ sidebar_position: 14
 
 ### Parameters
 
-| Name          | Type    | Required | Description                                                                                                                                     |
-|---------------|---------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| Name          | Type    | Required | Description                                                                                                                                        |
+| ------------- | ------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | symbol        | string  | 是       | 標的代碼，使用 `ticker.region` 格式，例如：`700.HK`                                                                                                |
-| filter_config | object  | 是       | 篩選條件                                                                                                                                        |
-| ∟ sort_by     | int32   | 是       | 根據哪一項數據進行排序，例如：`0`，序號見響應數據 `OrderSequence` 字段。                                                                            |
+| filter_config | object  | 是       | 篩選條件                                                                                                                                           |
+| ∟ sort_by     | int32   | 是       | 根據哪一項數據進行排序，例如：`0`，序號見響應數據 `OrderSequence` 字段。                                                                           |
 | ∟ sort_order  | int32   | 是       | 升降順序，例如：`1` <br /><br />**可选值：**<br />`0` - 升序<br />`1` - 降序                                                                       |
-| ∟ sort_offset | int32   | 是       | 分頁的第一條數據偏移量，例如 `0`                                                                                                                 |
-| ∟ sort_count  | int32   | 是       | 分頁的每一頁數量，例如 `20` <br /><br />**校验规则：**<br /> 每頁數量最大為 `500`                                                                 |
-| ∟ type        | int32[] | 否       | 篩選輪證類型 例如：`[0,1]` <br /><br />**可选值：**<br />`0` - 認購<br />`1` - 認沽<br />`2` - 牛證<br />`3` - 熊證<br />`4` - 界內證             |
+| ∟ sort_offset | int32   | 是       | 分頁的第一條數據偏移量，例如 `0`                                                                                                                   |
+| ∟ sort_count  | int32   | 是       | 分頁的每一頁數量，例如 `20`, 填 `0` 時不分頁                                                                                                       |
+| ∟ type        | int32[] | 否       | 篩選輪證類型 例如：`[0,1]` <br /><br />**可选值：**<br />`0` - 認購<br />`1` - 認沽<br />`2` - 牛證<br />`3` - 熊證<br />`4` - 界內證              |
 | ∟ issuer      | int32[] | 否       | 篩選發行商，例如：`[12,14]`，[發行商 ID](./issuer) 通過接口獲取                                                                                    |
 | ∟ expiry_date | int32[] | 否       | 篩選輪證過期時間，例如：`[1]` <br /><br />**可選值：**<br />`1` - 低於 3 個月<br />`2` - 3 - 6 個月<br />`3` - 6 - 12 個月<br />`4` - 大於 12 個月 |
 | ∟ price_type  | int32[] | 否       | 篩選價內價外，例如：`[2]` <br /><br />**可选值：**<br />`1` - 價內<br />`2` - 價外                                                                 |
-| ∟ status      | int32[] | 否       | 篩選狀態，例如：`[2]` <br /><br />**可选值：**<br />`2 `- 終止交易<br />`3` - 等待上市<br />`4` - 正常                                             |
+| ∟ status      | int32[] | 否       | 篩選狀態，例如：`[2]` <br /><br />**可选值：**<br />`2` - 終止交易<br />`3` - 等待上市<br />`4` - 正常                                             |
 | language      | int32   | 是       | 響應的語言，例如：`[1]` <br /><br />**可选值：**<br />`0` - 簡體<br />`1` - English<br />`2` - 繁体                                                |
 
 ### Protobuf
@@ -57,66 +59,47 @@ message FilterConfig {
 ### Request Example
 
 ```python
-# 獲取輪證篩選列表
-# https://open.longportapp.com/docs/quote/pull/warrant-filter
-import os
-import time
-from longport.http import Auth, Config, HttpClient
-from longport.ws import ReadyState, WsCallback, WsClient
-# Protobuf 變量定義參見：https://github.com/longportapp/openapi-protobufs/blob/main/quote/api.proto
-from longport.proto.quote_pb2 import (Command, FilterConfig, WarrantFilterListRequest, WarrantFilterListResponse)
+from longport.openapi import QuoteContext, Config, WarrantSortBy, SortOrderType
 
-class MyWsCallback(WsCallback):
-    def on_state(self, state: ReadyState):
-        print(f"-> state: {state}")
+config = Config.from_env()
+ctx = QuoteContext(config)
 
-auth = Auth(os.getenv("LONGPORT_APP_KEY"), os.getenv("LONGPORT_APP_SECRET"), access_token=os.getenv("LONGPORT_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longportapp.com"))
-ws = WsClient("wss://openapi-quote.longportapp.com", http, MyWsCallback())
-
-# 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
-filterConfig = FilterConfig(sort_by=0, sort_order=1, sort_offset=0, sort_count=10)
-req = WarrantFilterListRequest(symbol="700.HK", filter_config=filterConfig, language=1)
-result = ws.send_request(Command.QueryWarrantFilterList, req.SerializeToString())
-resp = WarrantFilterListResponse()
-resp.ParseFromString(result)
-
-print(f"Filtered warrant:\n\n {resp}")
+resp = ctx.warrant_list("700.HK", WarrantSortBy.LastDone, SortOrderType.Ascending)
+print(resp)
 ```
 
 ## Response
 
 ### Response Properties
 
-| Name                 | Type     | Description                                                                  | OrderSequence |
-|----------------------|----------|------------------------------------------------------------------------------|---------------|
-| warrant_list         | object[] | 渦輪篩選數據列表                                                             |               |
-| ∟ symbol             | string   | 標的代碼                                                                     |               |
-| ∟ name               | string   | 標的名稱                                                                     |               |
-| ∟ last_done          | string   | 最新價                                                                       | 0             |
-| ∟ change_rate        | string   | 漲跌幅                                                                       | 1             |
-| ∟ change_val         | string   | 漲跌額                                                                       | 2             |
-| ∟ volume             | int64    | 成交量                                                                       | 3             |
-| ∟ turnover           | string   | 成交額                                                                       | 4             |
-| ∟ expiry_date        | string   | 到期日，使用 `YYMMDD` 格式                                                    | 5             |
-| ∟ strike_price       | string   | 行權價                                                                       | 6             |
-| ∟ upper_strike_price | string   | 上限價                                                                       | 7             |
-| ∟ lower_strike_price | string   | 下限價                                                                       | 8             |
-| ∟ outstanding_qty    | string   | 街貨量                                                                       | 9             |
-| ∟ outstanding_ratio  | string   | 街貨比                                                                       | 10            |
-| ∟ premium            | string   | 溢價率                                                                       | 11            |
-| ∟ itm_otm            | string   | 價內/價外                                                                    | 12            |
-| ∟ implied_volatility | string   | 引伸波幅                                                                     | 13            |
-| ∟ delta              | string   | 對沖值                                                                       | 14            |
-| ∟ call_price         | string   | 收回價                                                                       | 15            |
-| ∟ to_call_price      | string   | 距收回價                                                                     | 16            |
-| ∟ effective_leverage | string   | 有效槓桿                                                                     | 17            |
-| ∟ leverage_ratio     | string   | 槓桿比率                                                                     | 18            |
-| ∟ conversion_ratio   | string   | 換股比率                                                                     | 19            |
-| ∟ balance_point      | string   | 打和點                                                                       | 20            |
-| ∟ state              | string   | 狀態，<br /><br />**可選值：**<br />`正常交易`<br />`等待上市`<br />`終止交易` | 21            |
-| total_count          | int32    | 符合條件的輪證總數量                                                         |               |
+| Name                 | Type     | Description                                                                            | OrderSequence | Support_Call/Put | Support_Bull/Bear | Support_Inline |
+| -------------------- | -------- | -------------------------------------------------------------------------------------- | ------------- | ---------------- | ----------------- | -------------- |
+| warrant_list         | object[] | 渦輪篩選數據列表                                                                       |               |                  |                   |                |
+| ∟ symbol             | string   | 標的代碼                                                                               |               | true             | true              | true           |
+| ∟ name               | string   | 標的名稱                                                                               |               | true             | true              | true           |
+| ∟ last_done          | string   | 最新價                                                                                 | 0             | true             | true              | true           |
+| ∟ change_rate        | string   | 漲跌幅                                                                                 | 1             | true             | true              | true           |
+| ∟ change_val         | string   | 漲跌額                                                                                 | 2             | true             | true              | true           |
+| ∟ volume             | int64    | 成交量                                                                                 | 3             | true             | true              | true           |
+| ∟ turnover           | string   | 成交額                                                                                 | 4             | true             | true              | true           |
+| ∟ expiry_date        | string   | 到期日，使用 `YYMMDD` 格式                                                             | 5             | true             | true              | true           |
+| ∟ strike_price       | string   | 行權價                                                                                 | 6             | true             | true              | false          |
+| ∟ upper_strike_price | string   | 上限價                                                                                 | 7             | false            | false             | true           |
+| ∟ lower_strike_price | string   | 下限價                                                                                 | 8             | false            | false             | true           |
+| ∟ outstanding_qty    | string   | 街貨量                                                                                 | 9             | true             | true              | true           |
+| ∟ outstanding_ratio  | string   | 街貨比                                                                                 | 10            | true             | true              | true           |
+| ∟ premium            | string   | 溢價率                                                                                 | 11            | true             | true              | true           |
+| ∟ itm_otm            | string   | 價內/價外                                                                              | 12            | true             | true              | false          |
+| ∟ implied_volatility | string   | 引伸波幅                                                                               | 13            | true             | false             | false          |
+| ∟ delta              | string   | 對沖值                                                                                 | 14            | true             | false             | false          |
+| ∟ call_price         | string   | 收回價                                                                                 | 15            | false            | true              | false          |
+| ∟ to_call_price      | string   | 距收回價                                                                               | 16            | false            | true              | false          |
+| ∟ effective_leverage | string   | 有效槓桿                                                                               | 17            | true             | false             | false          |
+| ∟ leverage_ratio     | string   | 槓桿比率                                                                               | 18            | true             | true              | true           |
+| ∟ conversion_ratio   | string   | 換股比率                                                                               | 19            | true             | true              | false          |
+| ∟ balance_point      | string   | 打和點                                                                                 | 20            | true             | true              | false          |
+| ∟ status             | int32    | 狀態，<br /><br />**可選值：**<br />`2` - 終止交易<br />`3` - 等待上市<br />`4` - 正常 | 21            | true             | true              | true           |
+| total_count          | int32    | 符合條件的輪證總數量                                                                   |               |                  |                   |                |
 
 ### Protobuf
 
@@ -150,7 +133,7 @@ message FilterWarrant {
   string leverage_ratio = 21;
   string conversion_ratio = 22;
   string balance_point = 23;
-  string state = 24;
+  int32 status = 24;
 }
 ```
 
@@ -181,7 +164,7 @@ message FilterWarrant {
       "leverage_ratio": "3.0826882353970637",
       "conversion_ratio": "48.544",
       "balance_point": "332.52356000000003",
-      "state": "正常交易"
+      "status": 4
     },
     {
       "symbol": "13649.HK",
@@ -205,7 +188,7 @@ message FilterWarrant {
       "leverage_ratio": "3.055678583813144",
       "conversion_ratio": "97.087",
       "balance_point": "334.54382000000004",
-      "state": "終止交易"
+      "status": 4
     }
   ],
   "total_count": 1197
@@ -215,7 +198,7 @@ message FilterWarrant {
 ## 錯誤碼
 
 | 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                     |
-|------------|------------|--------------|--------------------------|
+| ---------- | ---------- | -------------- | ---------------------------- |
 | 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗       |
 | 3          | 301606     | 限流           | 降低請求頻次                 |
 | 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理     |

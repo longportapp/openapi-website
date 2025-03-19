@@ -334,7 +334,14 @@
 .markdown kbd {
   display: inline-block;
   padding: 3px 5px;
-  font: 11px ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  font:
+    11px ui-monospace,
+    SFMono-Regular,
+    SF Mono,
+    Menlo,
+    Consolas,
+    Liberation Mono,
+    monospace;
   line-height: 10px;
   color: var(--color-fg-default);
   vertical-align: middle;
@@ -423,15 +430,27 @@
 
 .markdown tt,
 .markdown code {
-  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
-  font-size: 12px;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    SF Mono,
+    Menlo,
+    Consolas,
+    Liberation Mono,
+    monospace;
 }
 
 .markdown pre {
   margin-top: 0;
   margin-bottom: 0;
-  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
-  font-size: 12px;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    SF Mono,
+    Menlo,
+    Consolas,
+    Liberation Mono,
+    monospace;
   word-wrap: normal;
 }
 
@@ -753,7 +772,7 @@
 
 .markdown table {
   width: 100%;
-  display: table;
+  // display: table;
   font-size: 14px;
 }
 
@@ -892,7 +911,7 @@
   margin: 0;
   font-size: 85%;
   background-color: var(--color-neutral-muted);
-  border-radius: 6px;
+  border-radius: 3px;
   border: 0;
 }
 
@@ -933,12 +952,12 @@
 
 .markdown .highlight pre,
 .markdown pre {
-  padding: 16px;
+  padding: 12px 16px;
   overflow: auto;
-  font-size: 85%;
+  font-size: 0.85em;
   line-height: 1.45;
   background-color: var(--color-canvas-subtle);
-  border-radius: 6px;
+  border-radius: 3px;
 }
 
 .markdown pre code,
@@ -1049,7 +1068,7 @@
 }
 
 .markdown-img-container {
-  @apply text-center;
+  @apply text-left;
 
   img {
     @apply w-full lg:w-auto;
@@ -1104,6 +1123,15 @@
   .alert {
     @apply shadow-none border text-sm text-gray-900;
 
+    border-radius: 3px;
+
+    .admonitionIcon_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-styles-module {
+      svg {
+        width: 1em;
+        height: 1em;
+      }
+    }
+
     &--secondary {
       @apply bg-gray-50 border-gray-200;
     }
@@ -1123,15 +1151,5 @@
     &--danger {
       @apply bg-red-50 border-red-200;
     }
-  }
-}
-
-.markdown .copyButton_node_modules-\@docusaurus-theme-classic-lib-next-theme-CodeBlock-CopyButton-styles-module {
-  border: 0;
-  background: transparent;
-
-  svg {
-    height: 18px;
-    fill: var(--color-fg-muted);
   }
 }

@@ -1,5 +1,5 @@
 {{= data.tags.section }}
-#### Parameters
+### Parameters
 
 > Content-Type: application/json; charset=utf-8
 
@@ -9,7 +9,7 @@
 {{~}}
 
 {{? data.longDescs }}
-#### Detailed descriptions
+### Detailed descriptions
 {{~ data.parameters :p}}{{? p.shortDesc !== p.description}}
 **{{=p.name}}**: {{=p.description}}{{?}}
 {{~}}
@@ -32,7 +32,7 @@
 {{~}}
 
 {{? data.enums && data.enums.length }}
-#### Enumerated Values
+### Enumerated Values
 
 | Parameter | Value |
 |---|---|

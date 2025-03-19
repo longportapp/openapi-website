@@ -7,6 +7,8 @@ sidebar_position: 3
 
 已訂閱標的的實時經紀隊列數據推送。
 
+<SDKLinks module="quote" klass="QuoteContext" method="set_on_brokers" go="OnBrokers" />
+
 :::info
 
 [業務指令](../../socket/protocol/push)：`103`
@@ -18,8 +20,8 @@ sidebar_position: 3
 ### Properties
 
 | Name         | Type     | Description                       |
-|--------------|----------|-----------------------------------|
-| symbol       | string   | 標的代碼，例如：`AAPL.US`           |
+| ------------ | -------- | --------------------------------- |
+| symbol       | string   | 標的代碼，例如：`AAPL.US`         |
 | sequence     | int64    | 序列號                            |
 | ask_brokers  | object[] | 賣槃經紀隊列                      |
 | ∟ position   | int32    | 檔位                              |
@@ -58,7 +60,7 @@ message Brokers {
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
 # 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from time import sleep
-from longport.openapi import QuoteContext, Config, SubType, PushQuote
+from longport.openapi import QuoteContext, Config, SubType, PushBrokers
 
 def on_brokers(symbol: str, event: PushBrokers):
     print(symbol, event)

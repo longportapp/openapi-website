@@ -20,7 +20,13 @@ LongPort OpenAPI SDK is implemented based on Rust we have released SDK for Pytho
 
 :::tip
 For access in mainland China, it is recommended to use `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn` to improve access speed.
+
+If you are use our SDK, the `LONGPORT_REGION=cn` env variable can to use to setup the API region (Current only support: `cn`, `hk`).
 :::
+
+## Time Format
+
+All API response are used [Unix Timestamp](https://en.wikipedia.org/wiki/Unix_time), timezone is UTC.
 
 ## Environment Requirements
 
@@ -98,19 +104,42 @@ go get github.com/longportapp/openapi-go
 
 Let's take obtaining assets as an example to demonstrate how to use the SDK.
 
-## Configure Developer Account
+## Configuration
 
 1. Download App and open an account.
-2. Complete the Python 3 environment installation and install Pip
-3. Get App Key, App Secret, Access Token and other information from [LongPort OpenAPI](https://open.longportapp.com) official website
+2. Get App Key, App Secret, Access Token and other information from [LongPort OpenAPI](https://open.longportapp.com) official website
 
-**_Get App Key, App Secret, Access Token and other information_**
+   **_Get App Key, App Secret, Access Token and other information_**
 
-Login the [LongPort OpenAPI](https://open.longportapp.com) website, and enter the "User Center".
+   Login the [LongPort OpenAPI](https://open.longportapp.com) website, and enter the "User Center".
 
-The "application credential" credential information will be given on the page. After we get it, we will set the environment variable, which is convenient for later development and use.
+   The "application credential" credential information will be given on the page. After we get it, we will set the environment variable, which is convenient for later development and use.
 
-### Setting Environment Variables In macOS / Linux Environment
+### Environment Variables
+
+:::caution
+Please pay attention to protect your **Access Token** information, anyone who gets it can trade your account through OpenAPI!
+:::
+
+| 环境变量                    | 说明                                                               | 值范围          |
+|-----------------------------|--------------------------------------------------------------------|-----------------|
+| `LONGPORT_APP_KEY`          | App Key get from developer center                                  |                 |
+| `LONGPORT_APP_SECRET`       | App Secret get from developer center                               |                 |
+| `LONGPORT_ACCESS_TOKEN`     | Access Token get from developer center                             |                 |
+| `LONGPORT_REGION`           | The region of the API, `cn` for mainland China, `hk` for Hong Kong | `cn`, `hk`      |
+| `LONGPORT_ENABLE_OVERNIGHT` | Set `true` to enable overnight quote                               | `true`, `false` |
+
+We recommend that you set the environment variables. For the convenience of demonstration, these environment variables will be used in the sample code in the documents in the following chapters.
+
+:::tip About ENV
+
+The ENV variables are **not necessary** conditions, if it is inconvenient to set the ENV variables or encounter problems that are difficult to solve, you can not set the ENV variables, but directly use the parameters in the code to initialize.
+
+The `Config` in LongPort OpenAPI SDK can be directly passed in parameters such as `app_key`, `app_secret`, `access_token` to initialize, pay attention to the comments in the example code below `Init config without ENV`.
+
+:::
+
+#### Set Environment for macOS / Linux
 
 Open the terminal and enter the following command:
 
@@ -120,53 +149,49 @@ export LONGPORT_APP_SECRET="App Secret get from user center"
 export LONGPORT_ACCESS_TOKEN="Access Token get from user center"
 ```
 
-:::tip About ENV
+#### Set Environment for Windows
 
-We recommend that you set the environment variables `LONGPORT_APP_KEY`, `LONGPORT_APP_SECRET`, `LONGPORT_ACCESS_TOKEN`. For the convenience of demonstration, these environment variables will be used in the sample code in the documents in the following chapters.
+Windows is a little more complicated, we provide two methods to set the environment variables.
 
-The ENV variables are **not necessary** conditions, if it is inconvenient to set the ENV variables or encounter problems that are difficult to solve, you can not set the ENV variables, but directly use the parameters in the code to initialize.
+1. **Through the GUI**: Right click on "My Computer" on the desktop, select "Properties", click "Advanced system settings" in the pop-up window.
 
-The `Config` in LongPort OpenAPI SDK can be directly passed in parameters such as `app_key`, `app_secret`, `access_token` to initialize, pay attention to the comments in the example code below `Init config without ENV`.
+   - Click "Environment Variables" in the pop-up window.
 
-:::
+     <img src="https://assets.lbctrl.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
 
-### Setting Environment Variables In Windows Environment
+   - Click "New" in the pop-up window, then enter the environment variable name, such as `LONGPORT_APP_KEY`, `Value` respectively fill in the App Key, App Secret, Access Token, Region obtained from the page.
 
-Windows is a little more complicated, press the `Win + R` shortcut keys and enter the `cmd` command to start the command line (it is recommended to use [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) for a better development experience).
+2. **Through the CMD**: Press the `Win + R` shortcut keys and enter the `cmd` command to start the command line (it is recommended to use [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) for a better development experience).
 
-Enter the following command in the command line to set the environment variable:
+   Enter the following command in the command line to set the environment variable:
 
-```bash
-C:\Users\jason> setx LONGPORT_APP_KEY "App Key get from user center"
-Success: the specified value has been saved.
+   ```bash
+   C:\Users\jason> setx LONGPORT_APP_KEY "App Key get from user center"
+   Success: the specified value has been saved.
 
-C:\Users\jason> setx LONGPORT_APP_SECRET "App Secret get from user center"
-Success: the specified value has been saved.
+   C:\Users\jason> setx LONGPORT_APP_SECRET "App Secret get from user center"
+   Success: the specified value has been saved.
 
-C:\Users\jason> setx LONGPORT_ACCESS_TOKEN "Access Token get from user center"
-Success: the specified value has been saved.
-```
+   C:\Users\jason> setx LONGPORT_ACCESS_TOKEN "Access Token get from user center"
+   Success: the specified value has been saved.
+   ```
 
-:::caution Windows ENV Restrictions
+   :::caution Windows ENV Restrictions
 
-Windows ENV Restrictions, when the above 3 commands are executed successfully, you need to restart Windows or log out and log in again before you can read it.
+   Windows ENV Restrictions, when the above commands are executed successfully, you need to restart Windows or log out and log in again before you can read it.
 
-:::
+   :::
 
-After logging out or restarting, open the command line again and enter the following command to verify that the environment variables are set correctly:
+   After logging out or restarting, open the command line again and enter the following command to verify that the environment variables are set correctly:
 
-```bash
-C:\Users\jason> set LONGPORT
-LONGPORT_APP_KEY=xxxxxxx
-LONGPORT_APP_SECRET=xxxxxx
-LONGPORT_ACCESS_TOKEN=xxxxxxx
-```
+   ```bash
+   C:\Users\jason> set LONGPORT
+   LONGPORT_APP_KEY=xxxxxxx
+   LONGPORT_APP_SECRET=xxxxxx
+   LONGPORT_ACCESS_TOKEN=xxxxxxx
+   ```
 
-If it prints the value you just set correctly, then the environment variable is right.
-
-:::caution
-Please pay attention to protect your **Access Token** information, anyone who gets it can trade your account through OpenAPI!
-:::
+   If it prints the value you just set correctly, then the environment variable is right.
 
 ## Scene Demonstration
 
@@ -208,7 +233,7 @@ const { Config, TradeContext } = require('longport')
 let config = Config.fromEnv()
 
 // Init config without ENV
-// let config = new Config({ app_key: "YOUR_APP_KEY", app_secret = "YOUR_APP_SECRET", access_token = "YOUR_ACCESS_TOKEN" })
+// let config = new Config({ appKey: "YOUR_APP_KEY", appSecret: "YOUR_APP_SECRET", accessToken: "YOUR_ACCESS_TOKEN" })
 
 TradeContext.new(config)
   .then((ctx) => ctx.accountBalance())
@@ -391,7 +416,7 @@ If you do not have the quotes authority, you can enter "Me - My Quotes - Store" 
 
 When you have the correct Quote authority, it might look like this:
 
-<img src="https://pub.lbkrs.com/files/202205/VeSgQksvfu3Q2iPN/SCR-20220510-gkx.png" className="max-w-2xl" />
+<img src="https://pub.pbkrs.com/files/202205/VeSgQksvfu3Q2iPN/SCR-20220510-gkx.png" className="max-w-2xl" />
 
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>
@@ -640,8 +665,8 @@ resp = ctx.submit_order(
     side=OrderSide.Buy,
     symbol="700.HK",
     order_type=OrderType.LO,
-    submitted_price=Decimal("50"),
-    submitted_quantity=200,
+    submitted_price=Decimal(50),
+    submitted_quantity=Decimal(200),
     time_in_force=TimeInForceType.Day,
     remark="Hello from Python SDK",
 )
@@ -670,8 +695,8 @@ TradeContext.new(config)
       orderType: OrderType.LO,
       side: OrderSide.Buy,
       timeInForce: TimeInForceType.Day,
-      submittedQuantity: 200,
-      submittedPrice: new Decimal('300'),
+      submittedQuantity: new Decimal(200),
+      submittedPrice: new Decimal(300),
     })
   )
   .then((resp) => console.log(resp.toString()))
@@ -706,7 +731,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         "700.HK",
         OrderType::LO,
         OrderSide::Buy,
-        200,
+        decimal!(200i32),
         TimeInForceType::Day,
     )
     .submitted_price(decimal!(50i32));
@@ -738,7 +763,7 @@ public class Main {
             SubmitOrderOptions opts = new SubmitOrderOptions("700.HK",
                     OrderType.LO,
                     OrderSide.Buy,
-                    200,
+                    new BigDecimal(200),
                     TimeInForceType.Day).setSubmittedPrice(new BigDecimal(50));
             SubmitOrderResponse resp = ctx.submitOrder(opts).get();
             System.out.println(resp);
@@ -1039,5 +1064,8 @@ For detailed SDK API document, please visit:
 
 ## Contact & Feedback
 
-- GitHub Issues: <https://github.com/longportapp/openapi-sdk>
-- Join **Discord** LongPort OpenAPI Server: <https://discord.gg/2gUTSCS6>
+If there are any questions or suggestions, please feel free to post an issue on GitHub, we will reply as soon as possible.
+
+Or there have a lot old discussion in the GitHub issue, you can search the issue to find the answer.
+
+- GitHub: https://github.com/longportapp/openapi-sdk/issues

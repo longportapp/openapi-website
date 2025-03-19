@@ -2,10 +2,12 @@
 id: quote_subscription
 title: 获取已订阅标的行情
 slug: subscription
-sidebar_position: 1
+sidebar_position: 3
 ---
 
 该接口用于获取当前连接已订阅的标的行情。
+
+<SDKLinks module="quote" klass="QuoteContext" method="subscriptions" />
 
 :::info
 
@@ -25,83 +27,23 @@ message SubscriptionRequest {
 ### Request Example
 
 ```python
-# 获取已订阅标的行情
-# https://open.longportapp.com/docs/quote/subscribe/subscription
-import os
-import time
-from longport.http import Auth, Config, HttpClient
-from longport.ws import ReadyState, WsCallback, WsClient
-# Protobuf 变量定义参见：https://github.com/longportapp/openapi-protobufs/blob/main/quote/api.proto
-from longport.proto.quote_pb2 import (Command, PushQuote, SubscribeRequest, SubscriptionResponse, SubType, SubscriptionRequest, UnsubscribeRequest, UnsubscribeResponse)
+from longport.openapi import QuoteContext, Config, SubType
+config = Config.from_env()
+ctx = QuoteContext(config)
 
-class MyWsCallback(WsCallback):
-    def on_push(self, command: int, body: bytes):
-        if command == Command.PushQuoteData:
-            quote = PushQuote()
-            quote.ParseFromString(body)
-            print(f"quote-> {quote}")
-        else:
-            print(f"-> unknow: {command}")
-
-    def on_state(self, state: ReadyState):
-        print(f"-> state: {state}")
-
-auth = Auth(os.getenv("LONGPORT_APP_KEY"), os.getenv("LONGPORT_APP_SECRET"), access_token=os.getenv("LONGPORT_ACCESS_TOKEN"))
-http = HttpClient(auth, Config(base_url="https://openapi.longportapp.com"))
-ws = WsClient("wss://openapi-quote.longportapp.com", http, MyWsCallback())
-
-# 订阅行情数据请检查“开发者中心” - “行情权限”是否正确
-# https://open.longportapp.com/account
-#
-# - 港股 - BMP 基础报价，无实时行情推送，无法用 WebSocket 订阅
-# - 美股 - LV1 纳斯达克最优报价 (只限 Open API）
-#
-# 运行前请访问“开发者中心”确保账户有正确的行情权限。
-# 如没有开通行情权限，可以通过“LongPort”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
-
-#订阅标的
-req = SubscribeRequest(symbol=["700.HK", "AAPL.US"], sub_type=[SubType.QUOTE], is_first_push=False)
-result = ws.send_request(Command.Subscribe, req.SerializeToString())
-resp = SubscriptionResponse()
-resp.ParseFromString(result)
-
-print(f"Subscribed symbol:\n\n {resp.sub_list}")
-
-#取消订阅
-req = UnsubscribeRequest(symbol=["700.HK"], unsub_all=True)
-result = ws.send_request(Command.Unsubscribe, req.SerializeToString())
-
-#查询已订阅标的
-req = SubscriptionRequest()
-result = ws.send_request(Command.Subscription, req.SerializeToString())
-resp = SubscriptionResponse()
-resp.ParseFromString(result)
-
-print("\n")
-print(f"Subscribed symbol:\n\n {resp.sub_list}")
-
-#取消订阅
-req = UnsubscribeRequest(unsub_all=True)
-result = ws.send_request(Command.Unsubscribe, req.SerializeToString())
-
-#查询已订阅标的
-req = SubscriptionRequest()
-result = ws.send_request(Command.Subscription, req.SerializeToString())
-resp = SubscriptionResponse()
-resp.ParseFromString(result)
-
-print("\n")
-print(f"Subscribed symbol:\n\n {resp.sub_list}")
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote])
+resp = ctx.subscriptions()
+print(resp)
 ```
 
 ## Response
 
 ### Response Properties
 
-| Name       | Type     | Description                                                        |
-|------------|----------|--------------------------------------------------------------------|
-| sub_list   | object[] | 订阅的数据                                                         |
-| ∟ symbol   | string   | 标的代码                                                           |
+| Name       | Type     | Description                                                         |
+| ---------- | -------- | ------------------------------------------------------------------- |
+| sub_list   | object[] | 订阅的数据                                                          |
+| ∟ symbol   | string   | 标的代码                                                            |
 | ∟ sub_type | []int32  | 订阅的数据类型，详见 [SubType](../objects#subtype---订阅数据的类型) |
 
 ### Protobuf
@@ -137,7 +79,7 @@ message SubTypeList {
 ## 错误码
 
 | 协议错误码 | 业务错误码 | 描述           | 排查建议                 |
-|------------|------------|--------------|----------------------|
+| ---------- | ---------- | -------------- | ------------------------ |
 | 3          | 301600     | 无效的请求     | 请求参数有误或解包失败   |
 | 3          | 301606     | 限流           | 降低请求频次             |
 | 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理 |
