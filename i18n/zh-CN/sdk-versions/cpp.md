@@ -1,6 +1,6 @@
 ## LongPort OpenAPI SDK for C/C++
 
-[https://github.com/longportapp/openapi-sdk/tree/master/cpp](https://github.com/longportapp/openapi-sdk/tree/master/cpp)
+[https://github.com/longportapp/openapi/tree/master/cpp](https://github.com/longportapp/openapi/tree/master/cpp)
 
 ### 下载地址
 

@@ -122,7 +122,7 @@ Please pay attention to protect your **Access Token** information, anyone who ge
 :::
 
 | 环境变量                    | 说明                                                               | 值范围          |
-|-----------------------------|--------------------------------------------------------------------|-----------------|
+| --------------------------- | ------------------------------------------------------------------ | --------------- |
 | `LONGPORT_APP_KEY`          | App Key get from developer center                                  |                 |
 | `LONGPORT_APP_SECRET`       | App Secret get from developer center                               |                 |
 | `LONGPORT_ACCESS_TOKEN`     | Access Token get from developer center                             |                 |
@@ -1054,7 +1054,7 @@ The above example has fully demonstrated how to use the SDK to access the OpenAP
 
 We provide the complete code of the above examples in the GitHub repository of LongPort OpenAPI Python SDK, and we will continue to add or update it later.
 
-<https://github.com/longportapp/openapi-sdk/tree/master/examples>
+<https://github.com/longportapp/openapi/tree/master/examples>
 
 ## SDK API Document
 
@@ -1068,4 +1068,4 @@ If there are any questions or suggestions, please feel free to post an issue on 
 
 Or there have a lot old discussion in the GitHub issue, you can search the issue to find the answer.
 
-- GitHub: https://github.com/longportapp/openapi-sdk/issues
+- GitHub: https://github.com/longportapp/openapi/issues
