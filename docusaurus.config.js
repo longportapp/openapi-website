@@ -153,7 +153,7 @@ const config = {
           },
           {
             label: '讨论 & 反馈',
-            to: 'https://github.com/longportapp/openapi-sdk/issues',
+            to: 'https://github.com/longportapp/openapi/issues',
             className: 'navbar-item--icon navbar-item--discussion',
             position: 'left',
           },
@@ -167,7 +167,7 @@ const config = {
             position: 'right',
           },
           {
-            to: 'https://github.com/longportapp/openapi-sdk',
+            to: 'https://github.com/longportapp/openapi',
             position: 'right',
             className: 'navbar-item--icon navbar-item--github',
             value: '<span />',
