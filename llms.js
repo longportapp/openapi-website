@@ -19,35 +19,45 @@ function extractMarkdownInfo(filePath, rootDir) {
     // Extract slug and ensure correct format (starts with / and ends with .md)
     let slug
     if (data.slug) {
-      // If data.slug exists, combine file relative path with slug
-      const dirPath = path.dirname(path.relative(rootDir, filePath))
-      slug = dirPath !== '.' ? `/${dirPath}/${data.slug}` : `/${data.slug}`
+      // If data.slug exists
+      if (data.slug.startsWith('/')) {
+        // If data.slug already starts with /, use it directly
+        slug = data.slug
+      } else {
+        // Otherwise, combine it with the relative file path
+        const dirPath = path.dirname(path.relative(rootDir, filePath))
+        slug = dirPath !== '.' ? `/${dirPath}/${data.slug}` : `/${data.slug}`
+      }
     } else {
-      // Otherwise use file relative path
+      // If data.slug doesn't exist, use the relative file path
       slug = `/${path.relative(rootDir, filePath).replace(path.extname(filePath), '')}`
     }
-    // If slug equals "/", replace with "index"
+
+    // If slug equals "/", replace with "/index"
     if (slug === '/') slug = '/index'
+
     // Ensure slug starts with /en/
     if (!slug.startsWith('/en/')) {
       slug = `/en${slug}`
     }
-    
+
     // Add docs segment to the path
     if (!slug.includes('/docs/')) {
       const parts = slug.split('/')
-      // Find the position of 'en' and add 'docs' after it
       const enIndex = parts.findIndex(part => part === 'en')
       if (enIndex !== -1) {
         parts.splice(enIndex + 1, 0, 'docs')
         slug = parts.join('/')
       }
     }
-    
+
     // Ensure slug ends with .md
     if (!slug.endsWith('.md')) {
       slug = `${slug}.md`
     }
+
+    // Remove duplicate slashes in slug
+    slug = slug.replace(/\/+/g, '/')
 
     // Extract description
     let description = ''
@@ -130,7 +140,7 @@ function generateMarkdownList(structure) {
 
   // Add links for current directory
   for (const link of structure.links) {
-    output += `- [${link.title}](${link.slug})\n`
+    output += `- [${link.title}](https://open.longportapp.com${link.slug})\n`
   }
 
   // Add links for subdirectories
