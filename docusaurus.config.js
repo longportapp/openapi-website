@@ -13,7 +13,7 @@ const config = {
   url: 'https://open.longportapp.com',
   baseUrl: '/',
   organizationName: 'longportapp',
-  projectName: 'openapi-website',
+  projectName: 'longport-openapi',
   baseUrlIssueBanner: false,
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
