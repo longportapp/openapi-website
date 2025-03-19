@@ -90,114 +90,114 @@ openapi-trade.longportapp.com
 
 ## SDK 
 
-- [Getting Started](/en/docs/getting-started.md)
-- [Introduction](/en/docs/index.md)
+- [Getting Started](/en/docs//getting-started.md)
+- [Introduction](/en/docs//.md)
 
 ## Api-reference
 
-- [Error Codes](/en/docs/error-codes.md)
-- [Overview](/en/docs/how-to-access-api.md)
-- [Refresh Token](/en/docs/refresh-token-api.md)
+- [Error Codes](/en/docs/api-reference//error-codes.md)
+- [Overview](/en/docs/api-reference//how-to-access-api.md)
+- [Refresh Token](/en/docs/api-reference//refresh-token-api.md)
 
 ## Socket
 
-- [Get Socket OTP (One time password)](/en/docs/socket-token-api.md)
+- [Get Socket OTP (One time password)](/en/docs/api-reference/socket//socket-token-api.md)
 
 ## Socket
 
-- [Data Commands](/en/docs/socket/biz-command.md)
-- [Control commands](/en/docs/socket/control-command.md)
-- [Access differences between WebSocket and TCP](/en/docs/socket/diff_ws_tcp.md)
-- [Endpoints](/en/docs/socket/hosts.md)
-- [Subscribe Real-Time Market Data](/en/docs/socket/subscribe_quote.md)
-- [Subscribe Real-Time Trading Data](/en/docs/socket/subscribe_trade.md)
+- [Data Commands](/en/docs/api-reference/socket/socket//socket/biz-command.md)
+- [Control commands](/en/docs/api-reference/socket/socket//socket/control-command.md)
+- [Access differences between WebSocket and TCP](/en/docs/api-reference/socket/socket//socket/diff_ws_tcp.md)
+- [Endpoints](/en/docs/api-reference/socket/socket//socket/hosts.md)
+- [Subscribe Real-Time Market Data](/en/docs/api-reference/socket/socket//socket/subscribe_quote.md)
+- [Subscribe Real-Time Trading Data](/en/docs/api-reference/socket/socket//socket/subscribe_trade.md)
 
 ## Qa
 
-- [Quote Releated](/en/docs/broker.md)
-- [General](/en/docs/en/qa/general.md)
-- [Trade](/en/docs/en/qa/trade.md)
+- [Quote Releated](/en/docs/qa/broker.md)
+- [General](/en/docs/qa/general.md)
+- [Trade](/en/docs/qa/trade.md)
 
 ## Quote
 
-- [Permissions](/en/docs/level.md)
-- [Definition](/en/docs/objects.md)
-- [Overview](/en/docs/overview.md)
+- [Permissions](/en/docs/quote/level.md)
+- [Definition](/en/docs/quote/objects.md)
+- [Overview](/en/docs/quote/overview.md)
 
 ## Individual
 
-- [Create watched group](/en/docs/watchlist_create_group.md)
-- [Delete watched group](/en/docs/watchlist_delete_group.md)
-- [Get watched groups](/en/docs/watchlist_groups.md)
-- [Update watched group](/en/docs/watchlist_update_group.md)
+- [Create watched group](/en/docs/quote/individual/watchlist_create_group.md)
+- [Delete watched group](/en/docs/quote/individual/watchlist_delete_group.md)
+- [Get watched groups](/en/docs/quote/individual/watchlist_groups.md)
+- [Update watched group](/en/docs/quote/individual/watchlist_update_group.md)
 
 ## Pull
 
-- [Get Broker IDs](/en/docs/broker-ids.md)
-- [Get Security Brokers](/en/docs/brokers.md)
-- [Get Calculate Indexes Of Securities](/en/docs/calc-index.md)
-- [Get Security Candlesticks](/en/docs/candlestick.md)
-- [Get Security Capital Distribution](/en/docs/capital-distribution.md)
-- [Get Security Capital Flow Intraday](/en/docs/capital-flow-intraday.md)
-- [Get Security Depth](/en/docs/depth.md)
-- [Get Security History Candlesticks](/en/docs/history-candlestick.md)
-- [Get Security Intraday](/en/docs/intraday.md)
-- [Get Warrant Issuer IDs](/en/docs/issuer.md)
-- [Get Real-time Quotes Of Option Securities](/en/docs/option-quote.md)
-- [Get Option Chain Info By Date](/en/docs/optionchain-date-strike.md)
-- [Get Option Chain Expiry Date List](/en/docs/optionchain-date.md)
-- [Get Real-time Quotes Of Securities](/en/docs/quote.md)
-- [Get Basic Information Of Securities](/en/docs/static.md)
-- [Get Market Trading Days](/en/docs/trade-day.md)
-- [Get Trading Session Of The Day](/en/docs/trade-session.md)
-- [Get Security Trades](/en/docs/trade.md)
-- [Get Filtered Warrant](/en/docs/warrant-filter.md)
-- [Get Real-time Quotes Of Warrant Securities](/en/docs/warrant-quote.md)
+- [Get Broker IDs](/en/docs/quote/pull/broker-ids.md)
+- [Get Security Brokers](/en/docs/quote/pull/brokers.md)
+- [Get Calculate Indexes Of Securities](/en/docs/quote/pull/calc-index.md)
+- [Get Security Candlesticks](/en/docs/quote/pull/candlestick.md)
+- [Get Security Capital Distribution](/en/docs/quote/pull/capital-distribution.md)
+- [Get Security Capital Flow Intraday](/en/docs/quote/pull/capital-flow-intraday.md)
+- [Get Security Depth](/en/docs/quote/pull/depth.md)
+- [Get Security History Candlesticks](/en/docs/quote/pull/history-candlestick.md)
+- [Get Security Intraday](/en/docs/quote/pull/intraday.md)
+- [Get Warrant Issuer IDs](/en/docs/quote/pull/issuer.md)
+- [Get Real-time Quotes Of Option Securities](/en/docs/quote/pull/option-quote.md)
+- [Get Option Chain Info By Date](/en/docs/quote/pull/optionchain-date-strike.md)
+- [Get Option Chain Expiry Date List](/en/docs/quote/pull/optionchain-date.md)
+- [Get Real-time Quotes Of Securities](/en/docs/quote/pull/quote.md)
+- [Get Basic Information Of Securities](/en/docs/quote/pull/static.md)
+- [Get Market Trading Days](/en/docs/quote/pull/trade-day.md)
+- [Get Trading Session Of The Day](/en/docs/quote/pull/trade-session.md)
+- [Get Security Trades](/en/docs/quote/pull/trade.md)
+- [Get Filtered Warrant](/en/docs/quote/pull/warrant-filter.md)
+- [Get Real-time Quotes Of Warrant Securities](/en/docs/quote/pull/warrant-quote.md)
 
 ## Push
 
-- [Push Real-time Brokers](/en/docs/broker.md)
-- [Push Real-time Depth](/en/docs/depth.md)
-- [Push Real-time Quote](/en/docs/quote.md)
-- [Push Real-time Trades](/en/docs/trade.md)
+- [Push Real-time Brokers](/en/docs/quote/push/broker.md)
+- [Push Real-time Depth](/en/docs/quote/push/depth.md)
+- [Push Real-time Quote](/en/docs/quote/push/quote.md)
+- [Push Real-time Trades](/en/docs/quote/push/trade.md)
 
 ## Security
 
-- [Retrieve the List of Securities](/en/docs/security_list.md)
+- [Retrieve the List of Securities](/en/docs/quote/security/security_list.md)
 
 ## Subscribe
 
-- [Subscribe Quote](/en/docs/subscribe.md)
-- [Get Subscription Information](/en/docs/subscription.md)
-- [Unsubscribe Quote](/en/docs/unsubscribe.md)
+- [Subscribe Quote](/en/docs/quote/subscribe/subscribe.md)
+- [Get Subscription Information](/en/docs/quote/subscribe/subscription.md)
+- [Unsubscribe Quote](/en/docs/quote/subscribe/unsubscribe.md)
 
 ## Trade
 
-- [Definition](/en/docs/trade-definition.md)
-- [Overview](/en/docs/trade-overview.md)
-- [Trade Push](/en/docs/trade-push.md)
+- [Definition](/en/docs/trade/trade-definition.md)
+- [Overview](/en/docs/trade/trade-overview.md)
+- [Trade Push](/en/docs/trade/trade-push.md)
 
 ## Asset
 
-- [Get Account Balance](/en/docs/account.md)
-- [Get Cash Flow](/en/docs/cashflow.md)
-- [Get Fund Positions](/en/docs/fund.md)
-- [Get margin ratio](/en/docs/margin_ratio.md)
-- [Get Stock Positions](/en/docs/stock.md)
+- [Get Account Balance](/en/docs/trade/asset/account.md)
+- [Get Cash Flow](/en/docs/trade/asset/cashflow.md)
+- [Get Fund Positions](/en/docs/trade/asset/fund.md)
+- [Get margin ratio](/en/docs/trade/asset/margin_ratio.md)
+- [Get Stock Positions](/en/docs/trade/asset/stock.md)
 
 ## Execution
 
-- [Get History Executions](/en/docs/history_executions.md)
-- [Get Today Executions](/en/docs/today_executions.md)
+- [Get History Executions](/en/docs/trade/execution/history_executions.md)
+- [Get Today Executions](/en/docs/trade/execution/today_executions.md)
 
 ## Order
 
-- [Estimate Maximum Purchase Quantity](/en/docs/estimate_available_buy_limit.md)
-- [Get History Deals](/en/docs/history_deals.md)
-- [Get History Order](/en/docs/history_orders.md)
-- [Order Details](/en/docs/order_detail.md)
-- [Replace Order](/en/docs/replace.md)
-- [Submit Order](/en/docs/submit.md)
-- [Get Today Deals](/en/docs/today_deals.md)
-- [Get Today Order](/en/docs/today_orders.md)
-- [Withdraw Order](/en/docs/withdraw.md)
+- [Estimate Maximum Purchase Quantity](/en/docs/trade/order/estimate_available_buy_limit.md)
+- [Get History Deals](/en/docs/trade/order/history_deals.md)
+- [Get History Order](/en/docs/trade/order/history_orders.md)
+- [Order Details](/en/docs/trade/order/order_detail.md)
+- [Replace Order](/en/docs/trade/order/replace.md)
+- [Submit Order](/en/docs/trade/order/submit.md)
+- [Get Today Deals](/en/docs/trade/order/today_deals.md)
+- [Get Today Order](/en/docs/trade/order/today_orders.md)
+- [Withdraw Order](/en/docs/trade/order/withdraw.md)
