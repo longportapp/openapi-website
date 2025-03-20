@@ -1,9 +1,9 @@
-.idea
-node_modules
-.docusaurus
+.idea/
+node_modules/
+.docusaurus/
 *.log
 .DS_Store
-.cache-loader
-dist
+.cache-loader/
+dist/
 *--autogen.md
 autogen-markdown/
