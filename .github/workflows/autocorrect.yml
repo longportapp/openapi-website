@@ -5,7 +5,6 @@ jobs:
     name: Check text autocorrect
     runs-on: ubuntu-latest
     steps:
-      - name: Check out source
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
