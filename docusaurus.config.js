@@ -127,7 +127,7 @@ const config = {
             label: '文档',
             position: 'left',
             /// start with /docs but without /docs/llm
-            activeBaseRegex: '^/docs(?!/llm)',
+            activeBaseRegex: '/docs(?!/llm)',
           },
           {
             label: 'LLM',

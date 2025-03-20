@@ -7,7 +7,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "dev": "bun run dev:docs",
-    "dev:en": "bun run dev:docs --locale en",
+    "dev:zh-CN": "bun run dev:docs --locale zh-CN",
     "dev:zh-HK": "bun run dev:docs --locale zh-HK",
     "dev:docs": "cross-env STAGE=dev docusaurus start --port=8000",
     "build": "bun run clear && bun run build:canary",
