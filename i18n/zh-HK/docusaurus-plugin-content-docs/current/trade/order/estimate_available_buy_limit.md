@@ -35,7 +35,7 @@ headingLevel: 2
 | symbol | string | YES | 股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US` |
 | order_type | string | YES | [訂單類型](../trade-definition#ordertype) |
 | price | string | NO | 預估下單價格，例如：`388.5` |
-| side | string | YES | 買賣方向<br/><br/> **可選值:**<br/> `Buy` - 買入<br/> `Sell` - 賣出 賣出只支持美股賣空查詢 |
+| side | string | YES | 買賣方向<br/><br/> **可選值：**<br/> `Buy` - 買入<br/> `Sell` - 賣出 賣出只支持美股賣空查詢 |
 | currency | string | NO | 結算貨幣 |
 | order_id | string | NO | 訂單 ID，獲取改單預估最大購買數量時必填 |
 

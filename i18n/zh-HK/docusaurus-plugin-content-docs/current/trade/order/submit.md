@@ -41,9 +41,9 @@ headingLevel: 2
 | trailing_amount | string | NO | 跟蹤金額<br/><br/> `TSLPAMT` 訂單必填 |
 | trailing_percent | string | NO | 跟蹤漲跌幅<br/><br/> `TSLPPCT` 訂單必填 |
 | expire_date | string | NO | 長期單過期時間，格式為 `YYYY-MM-DD`, 例如：`2022-12-05`<br/><br/> time_in_force 為 `GTD` 時必填 |
-| side | string | YES | 買賣方向<br/><br/> **可選值:**<br/> `Buy` - 買入<br/> `Sell` - 賣出 |
-| outside_rth | string | NO | 是否允許盤前盤後，美股必填<br/><br/> **可選值:**<br/> `RTH_ONLY` - 不允許盤前盤後<br/> `ANY_TIME` - 允許盤前盤後<br/> `OVERNIGHT` - 夜盤 |
-| time_in_force | string | YES | 訂單有效期類型<br/><br/> **可選值:**<br/> `Day` - 當日有效<br/> `GTC` - 撤單前有效<br/> `GTD` - 到期前有效 |
+| side | string | YES | 買賣方向<br/><br/> **可選值：**<br/> `Buy` - 買入<br/> `Sell` - 賣出 |
+| outside_rth | string | NO | 是否允許盤前盤後，美股必填<br/><br/> **可選值：**<br/> `RTH_ONLY` - 不允許盤前盤後<br/> `ANY_TIME` - 允許盤前盤後<br/> `OVERNIGHT` - 夜盤 |
+| time_in_force | string | YES | 訂單有效期類型<br/><br/> **可選值：**<br/> `Day` - 當日有效<br/> `GTC` - 撤單前有效<br/> `GTD` - 到期前有效 |
 | remark | string | NO | 備註 (最大 64 字符) |
 
 ### Request Example

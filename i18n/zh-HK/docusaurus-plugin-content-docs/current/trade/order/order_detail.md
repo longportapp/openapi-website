@@ -161,31 +161,31 @@ print(resp)
 |price|string|true|下單價格。<br/><br/>當市價條件單未觸發時為空字符串|
 |executed_price|string|true|成交價。<br/><br/>當訂單未成交時為 0|
 |submitted_at|string|true|下單時間|
-|side|string|true|買賣方向<br/><br/> **可選值:**<br/> `Buy` - 買入<br/> `Sell` - 賣出|
+|side|string|true|買賣方向<br/><br/> **可選值：**<br/> `Buy` - 買入<br/> `Sell` - 賣出|
 |symbol|string|true|股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US`|
 |order_type|string|true|[訂單類型](../trade-definition#ordertype)|
 |last_done|string|true|最近成交價格。<br/><br/>當訂單未成交時為空字符串|
 |trigger_price|string|true|`LIT` / `MIT` 訂單觸發價格。<br/><br/>當訂單不是 `LIT` / `MIT` 訂單為空字符串|
 |msg|string|true|拒絕信息或備註，默認為空字符串。|
-|tag|string|true|訂單標記<br/><br/> **可選值:**<br/> `Normal` - 普通訂單<br/> `GTC` - 長期單<br/> `Grey` - 暗盤單|
-|time_in_force|string|true|訂單有效期類型<br/><br/> **可選值:**<br/> `Day` - 當日有效<br/> `GTC` - 撤單前有效<br/> `GTD` - 到期前有效|
+|tag|string|true|訂單標記<br/><br/> **可選值：**<br/> `Normal` - 普通訂單<br/> `GTC` - 長期單<br/> `Grey` - 暗盤單|
+|time_in_force|string|true|訂單有效期類型<br/><br/> **可選值：**<br/> `Day` - 當日有效<br/> `GTC` - 撤單前有效<br/> `GTD` - 到期前有效|
 |expire_date|string|true|長期單過期時間，格式為 `YYYY-MM-DD`, 例如：`2022-12-05。<br/><br/> 不是長期單時，默認為空字符串。|
 |updated_at|string|true|最近更新時間，格式為時間戳 (秒)，默認為 0。|
 |trigger_at|string|true|條件單觸發時間，格式為時間戳 (秒)，默認為 0。|
 |trailing_amount|string|true|`TSLPAMT` 訂單跟蹤金額。<br/><br/>當訂單不是 `TSLPAMT` 訂單時為空字符串。|
 |trailing_percent|string|true|`TSLPPCT` 訂單跟蹤漲跌幅。<br/><br/>當訂單不是 `TSLPPCT` 訂單時為空字符串。|
 |limit_offset|string|true|`TSLPAMT` / `TSLPPCT` 訂單指定價差。<br/><br/>當訂單不是 `TSLPAMT` / `TSLPPCT` 訂單時為空字符串。|
-|trigger_status|string|true|條件單觸發狀態<br/> 當訂單不是條件單或條件單未觸發時, 觸發狀態為 NOT_USED<br/><br/> **可選值:**<br/> `NOT_USED` - 未激活<br/> `DEACTIVE` - 已失效<br/> `ACTIVE` - 已激活<br/> `RELEASED` - 已觸發|
+|trigger_status|string|true|條件單觸發狀態<br/> 當訂單不是條件單或條件單未觸發時，觸發狀態為 NOT_USED<br/><br/> **可選值：**<br/> `NOT_USED` - 未激活<br/> `DEACTIVE` - 已失效<br/> `ACTIVE` - 已激活<br/> `RELEASED` - 已觸發|
 |currency|string|true|結算貨幣|
-|outside_rth|string|true|是否允許盤前盤後<br/> 當訂單不是美股時, 默認為 UnknownOutsideRth<br/><br/> **可選值:**<br/> `RTH_ONLY` - 不允許盤前盤後<br/> `ANY_TIME` - 允許盤前盤後<br/> `OVERNIGHT` - 夜盤|
+|outside_rth|string|true|是否允許盤前盤後<br/> 當訂單不是美股時，默認為 UnknownOutsideRth<br/><br/> **可選值：**<br/> `RTH_ONLY` - 不允許盤前盤後<br/> `ANY_TIME` - 允許盤前盤後<br/> `OVERNIGHT` - 夜盤|
 |remark|string|true|備註|
-|free_status|string|true|免傭狀態，默認為 None<br/><br/> **可選值:**<br/> `None` - 無<br/> `Calculated` - 免傭額待計算<br/> `Pending` - 待免傭<br/> `Ready` - 已免傭|
+|free_status|string|true|免傭狀態，默認為 None<br/><br/> **可選值：**<br/> `None` - 無<br/> `Calculated` - 免傭額待計算<br/> `Pending` - 待免傭<br/> `Ready` - 已免傭|
 |free_amount|string|true|免佣金額，默認為空字符串|
 |free_currency|string|true|免傭貨幣，默認為空字符串|
-|deductions_status|string|true|抵扣狀態/返現狀態，默認為 NONE<br/><br/> **可選值:**<br/> `NONE` - 待結算 <br/> `NO_DATA` - 已結算無數據<br/> `PENDING` - 已結算待發放<br/> `DONE` - 已結算已發放|
+|deductions_status|string|true|抵扣狀態/返現狀態，默認為 NONE<br/><br/> **可選值：**<br/> `NONE` - 待結算 <br/> `NO_DATA` - 已結算無數據<br/> `PENDING` - 已結算待發放<br/> `DONE` - 已結算已發放|
 |deductions_amount|string|true|抵扣金額，默認為空字符串|
 |deductions_currency|string|true|抵扣貨幣，默認為空字符串|
-|platform_deducted_status|string|true|平臺費抵扣狀態/返現狀態，默認為 NONE<br/><br/> **可選值:**<br/> `NONE` - 待結算 <br/> `NO_DATA` - 已結算無數據<br/> `PENDING` - 已結算待發放<br/> `DONE` - 已結算已發放|
+|platform_deducted_status|string|true|平臺費抵扣狀態/返現狀態，默認為 NONE<br/><br/> **可選值：**<br/> `NONE` - 待結算 <br/> `NO_DATA` - 已結算無數據<br/> `PENDING` - 已結算待發放<br/> `DONE` - 已結算已發放|
 |platform_deducted_amount|string|true|平臺費抵扣金額，默認為空字符串|
 |platform_deducted_currency|string|true|平臺費抵扣貨幣，默認為空字符串|
 |history|object[]|true|訂單歷史明細|
@@ -198,7 +198,7 @@ print(resp)
 |∟ total_amount|string|true|全部費用|
 |∟ currency|string|true|結算貨幣|
 |∟ items|object[]|true|訂單費用明細|
-|∟∟ code|string|true|收費類別代碼<br/><br/> **可選值:**<br/> `UNKNOWN`<br/> `BROKER_FEES`<br/> `THIRD_FEES`|
+|∟∟ code|string|true|收費類別代碼<br/><br/> **可選值：**<br/> `UNKNOWN`<br/> `BROKER_FEES`<br/> `THIRD_FEES`|
 |∟∟ name|string|true|收費類別名稱|
 |∟∟ fees|object[]|true|收費明細|
 |∟∟∟ code|string|true|收費代碼|
