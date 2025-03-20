@@ -150,7 +150,8 @@ const config = {
             activeBasePath: '/docs',
             label: '文档',
             position: 'left',
-            activeBaseRegex: '!^/docs/llm',
+            /// start with /docs but without /docs/llm
+            activeBaseRegex: '^/docs(?!/llm)',
           },
           {
             label: 'LLM',
