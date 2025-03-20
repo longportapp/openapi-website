@@ -49,7 +49,7 @@ OpenAPI 文档遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https
 
 #### 在您的 AI 聊天中配置 LongPort MCP
 
-在这一部分，我们将向您展示如何在您的 AI 聊天中配置 LongPort MCP（截图使用了 [Cherry Studio](https://cherry-studio.com/)）。
+在这一部分，我们将向您展示如何在您的 AI 聊天中配置 LongPort MCP（截图使用了 [Cherry Studio](https://cherry-ai.com/)）。
 
 **使用 STDIO 模式：**
 

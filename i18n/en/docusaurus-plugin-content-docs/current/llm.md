@@ -49,7 +49,7 @@ The environment `LONGPORT_APP_KEY`, `LONGPORT_APP_SECRET` and `LONGPORT_ACCESS_T
 
 #### Configuration LongPort MCP in your AI Chat
 
-This part we will show you how to configure LongPort MCP in your AI chat (The screenshot have used [Cherry Studio](https://cherry-studio.com/)).
+This part we will show you how to configure LongPort MCP in your AI chat (The screenshot have used [Cherry Studio](https://cherry-ai.com/)).
 
 **Use STDIO mode:**
 
