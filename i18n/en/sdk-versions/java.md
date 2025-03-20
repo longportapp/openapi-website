@@ -18,5 +18,4 @@ Add the following line to your `pom.xml` file
 
 ### API Documents
 
-- [v1](https://longportapp.github.io/openapi-sdk/v1/java/index.html)
-- [v2](https://longportapp.github.io/openapi-sdk/v2/java/index.html)
+- https://longportapp.github.io/openapi/java/index.html

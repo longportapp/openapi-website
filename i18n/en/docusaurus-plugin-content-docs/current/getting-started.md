@@ -295,7 +295,7 @@ class Main {
         Config config = Config.fromEnv();
 
         // Init config without ENV
-        // https://longportapp.github.io/openapi-sdk/java/com/longport/ConfigBuilder.html
+        // https://longportapp.github.io/openapi/java/com/longport/ConfigBuilder.html
         // Config config = ConfigBuilder("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN").build();
 
         try (TradeContext ctx = TradeContext.create(config).get()) {
@@ -1060,7 +1060,7 @@ We provide the complete code of the above examples in the GitHub repository of L
 
 For detailed SDK API document, please visit:
 
-<https://longportapp.github.io/openapi-sdk/>
+<https://longportapp.github.io/openapi/>
 
 ## Contact & Feedback
 

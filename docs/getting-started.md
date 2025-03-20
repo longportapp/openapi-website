@@ -297,7 +297,7 @@ class Main {
         Config config = Config.fromEnv();
 
         // Init config without ENV
-        // https://longportapp.github.io/openapi-sdk/java/com/longport/ConfigBuilder.html
+        // https://longportapp.github.io/openapi/java/com/longport/ConfigBuilder.html
         // Config config = ConfigBuilder("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN").build();
 
         try (TradeContext ctx = TradeContext.create(config).get()) {
@@ -1042,7 +1042,7 @@ Order {
 }
 ```
 
-上面例子已经完整演示了如何使用 SDK 访问 OpenAPI 的接口，更多其他接口请详细阅读 [LongPort OpenAPI 文档](https://longportapp.github.io/openapi-sdk/)，根据不同的接口使用。
+上面例子已经完整演示了如何使用 SDK 访问 OpenAPI 的接口，更多其他接口请详细阅读 [LongPort OpenAPI 文档](https://longportapp.github.io/openapi/)，根据不同的接口使用。
 
 ## 更多例子
 
@@ -1054,7 +1054,7 @@ Order {
 
 SDK 的详细 API 文档请访问：
 
-<https://longportapp.github.io/openapi-sdk/>
+<https://longportapp.github.io/openapi/>
 
 ## 反馈及沟通
 

@@ -14,5 +14,4 @@ $ pip install longport
 
 ### API Documents
 
-- [v1](https://longportapp.github.io/openapi-sdk/v1/python/index.html)
-- [v2](https://longportapp.github.io/openapi-sdk/v2/python/index.html)
+- https://longportapp.github.io/openapi/python/index.html
