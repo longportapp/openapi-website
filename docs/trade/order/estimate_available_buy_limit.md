@@ -35,7 +35,7 @@ headingLevel: 2
 | symbol | string | YES | 股票代码，使用 `ticker.region` 格式，例如：`AAPL.US` |
 | order_type | string | YES | [订单类型](../trade-definition#ordertype) |
 | price | string | NO | 预估下单价格，例如：`388.5` |
-| side | string | YES | 买卖方向<br/><br/> **可选值:**<br/> `Buy` - 买入<br/> `Sell` - 卖出 卖出只支持美股卖空查询 |
+| side | string | YES | 买卖方向<br/><br/> **可选值：**<br/> `Buy` - 买入<br/> `Sell` - 卖出 卖出只支持美股卖空查询 |
 | currency | string | NO | 结算货币 |
 | order_id | string | NO | 订单 ID，获取改单预估最大购买数量时必填 |
 

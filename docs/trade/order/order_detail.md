@@ -161,31 +161,31 @@ print(resp)
 |price|string|true|下单价格。<br/><br/>当市价条件单未触发时为空字符串|
 |executed_price|string|true|成交价。<br/><br/>当订单未成交时为 0|
 |submitted_at|string|true|下单时间|
-|side|string|true|买卖方向<br/><br/> **可选值:**<br/> `Buy` - 买入<br/> `Sell` - 卖出|
+|side|string|true|买卖方向<br/><br/> **可选值：**<br/> `Buy` - 买入<br/> `Sell` - 卖出|
 |symbol|string|true|股票代码，使用 `ticker.region` 格式，例如：`AAPL.US`|
 |order_type|string|true|[订单类型](../trade-definition#ordertype)|
 |last_done|string|true|最近成交价格。<br/><br/>当订单未成交时为空字符串|
 |trigger_price|string|true|`LIT` / `MIT` 订单触发价格。<br/><br/>当订单不是 `LIT` / `MIT` 订单为空字符串|
 |msg|string|true|拒绝信息或备注，默认为空字符串。|
-|tag|string|true|订单标记<br/><br/> **可选值:**<br/> `Normal` - 普通订单<br/> `GTC` - 长期单<br/> `Grey` - 暗盘单|
-|time_in_force|string|true|订单有效期类型<br/><br/> **可选值:**<br/> `Day` - 当日有效<br/> `GTC` - 撤单前有效<br/> `GTD` - 到期前有效|
+|tag|string|true|订单标记<br/><br/> **可选值：**<br/> `Normal` - 普通订单<br/> `GTC` - 长期单<br/> `Grey` - 暗盘单|
+|time_in_force|string|true|订单有效期类型<br/><br/> **可选值：**<br/> `Day` - 当日有效<br/> `GTC` - 撤单前有效<br/> `GTD` - 到期前有效|
 |expire_date|string|true|长期单过期时间，格式为 `YYYY-MM-DD`, 例如：`2022-12-05。<br/><br/> 不是长期单时，默认为空字符串。|
 |updated_at|string|true|最近更新时间，格式为时间戳 (秒)，默认为 0。|
 |trigger_at|string|true|条件单触发时间，格式为时间戳 (秒)，默认为 0。|
 |trailing_amount|string|true|`TSLPAMT` 订单跟踪金额。<br/><br/>当订单不是 `TSLPAMT` 订单时为空字符串。|
 |trailing_percent|string|true|`TSLPPCT` 订单跟踪涨跌幅。<br/><br/>当订单不是 `TSLPPCT` 订单时为空字符串。|
 |limit_offset|string|true|`TSLPAMT` / `TSLPPCT` 订单指定价差。<br/><br/>当订单不是 `TSLPAMT` / `TSLPPCT` 订单时为空字符串。|
-|trigger_status|string|true|条件单触发状态<br/> 当订单不是条件单或条件单未触发时, 触发状态为 NOT_USED<br/><br/> **可选值:**<br/> `NOT_USED` - 未激活<br/> `DEACTIVE` - 已失效<br/> `ACTIVE` - 已激活<br/> `RELEASED` - 已触发|
+|trigger_status|string|true|条件单触发状态<br/> 当订单不是条件单或条件单未触发时，触发状态为 NOT_USED<br/><br/> **可选值：**<br/> `NOT_USED` - 未激活<br/> `DEACTIVE` - 已失效<br/> `ACTIVE` - 已激活<br/> `RELEASED` - 已触发|
 |currency|string|true|结算货币|
-|outside_rth|string|true|是否允许盘前盘后<br/> 当订单不是美股时, 默认为 UnknownOutsideRth<br/><br/> **可选值:**<br/> `RTH_ONLY` - 不允许盘前盘后<br/> `ANY_TIME` - 允许盘前盘后<br/> `OVERNIGHT` - 夜盘"|
+|outside_rth|string|true|是否允许盘前盘后<br/> 当订单不是美股时，默认为 UnknownOutsideRth<br/><br/> **可选值：**<br/> `RTH_ONLY` - 不允许盘前盘后<br/> `ANY_TIME` - 允许盘前盘后<br/> `OVERNIGHT` - 夜盘"|
 |remark|string|true|备注|
-|free_status|string|true|免佣状态，默认为 None<br/><br/> **可选值:**<br/> `None` - 无<br/> `Calculated` - 免佣额待计算<br/> `Pending` - 待免佣<br/> `Ready` - 已免佣|
+|free_status|string|true|免佣状态，默认为 None<br/><br/> **可选值：**<br/> `None` - 无<br/> `Calculated` - 免佣额待计算<br/> `Pending` - 待免佣<br/> `Ready` - 已免佣|
 |free_amount|string|true|免佣金额，默认为空字符串|
 |free_currency|string|true|免佣货币，默认为空字符串|
-|deductions_status|string|true|抵扣状态/返现状态，默认为 NONE<br/><br/> **可选值:**<br/> `NONE` - 待结算 <br/> `NO_DATA` - 已结算无数据<br/> `PENDING` - 已结算待发放<br/> `DONE` - 已结算已发放|
+|deductions_status|string|true|抵扣状态/返现状态，默认为 NONE<br/><br/> **可选值：**<br/> `NONE` - 待结算 <br/> `NO_DATA` - 已结算无数据<br/> `PENDING` - 已结算待发放<br/> `DONE` - 已结算已发放|
 |deductions_amount|string|true|抵扣金额，默认为空字符串|
 |deductions_currency|string|true|抵扣货币，默认为空字符串|
-|platform_deducted_status|string|true|平台费抵扣状态/返现状态，默认为 NONE<br/><br/> **可选值:**<br/> `NONE` - 待结算 <br/> `NO_DATA` - 已结算无数据<br/> `PENDING` - 已结算待发放<br/> `DONE` - 已结算已发放|
+|platform_deducted_status|string|true|平台费抵扣状态/返现状态，默认为 NONE<br/><br/> **可选值：**<br/> `NONE` - 待结算 <br/> `NO_DATA` - 已结算无数据<br/> `PENDING` - 已结算待发放<br/> `DONE` - 已结算已发放|
 |platform_deducted_amount|string|true|平台费抵扣金额，默认为空字符串|
 |platform_deducted_currency|string|true|平台费抵扣货币，默认为空字符串|
 |history|object[]|true|订单历史明细|
@@ -198,7 +198,7 @@ print(resp)
 |∟ total_amount|string|true|全部费用|
 |∟ currency|string|true|结算货币|
 |∟ items|object[]|true|订单费用明细|
-|∟∟ code|string|true|收费类别代码<br/><br/> **可选值:**<br/> `UNKNOWN`<br/> `BROKER_FEES`<br/> `THIRD_FEES`|
+|∟∟ code|string|true|收费类别代码<br/><br/> **可选值：**<br/> `UNKNOWN`<br/> `BROKER_FEES`<br/> `THIRD_FEES`|
 |∟∟ name|string|true|收费类别名称|
 |∟∟ fees|object[]|true|收费明细|
 |∟∟∟ code|string|true|收费代码|
