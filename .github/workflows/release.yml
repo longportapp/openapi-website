@@ -15,31 +15,28 @@ jobs:
     timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: yarn
 
       - name: Download ossutils zip
         run: |
           wget https://github.com/aliyun/ossutil/releases/download/v1.7.17/ossutil-v1.7.17-linux-amd64.zip
           unzip ossutil-v1.7.17-linux-amd64.zip && cp ./ossutil-v1.7.17-linux-amd64/ossutil ${{github.workspace}}/ && chmod +x ${{github.workspace}}/ossutil
 
-      - name: Test ossutil cli is ok
+      - name: Test ossutil
         run: |
           ${{github.workspace}}/ossutil --version
 
-      - name: install dependency npm
-        run: yarn
+      - uses: oven-sh/setup-bun@v2
 
-      - name: build release env dist file
-        run: yarn build:release
+      - name: Install dependency
+        run: bun install
 
-      - name: upload canary dist to oss
+      - name: Build release
+        run: bun run build:release
+
+      - name: Upload to Aliyun OSS
         run: |
           ${{github.workspace}}/ossutil cp autogen-markdown/ oss://lb-assets/github/release/open.longportapp.com/docs/raw/ -u -r -j 10 -e oss-cn-hangzhou.aliyuncs.com -i ${{ secrets.FE_LB_ASSET_ACCESS_KEY_ID }} -k ${{ secrets.FE_LB_ASSET_ACCESS_KEY_SECRET }} --include "*.md" --meta=Content-Type:text/markdown\;charset=utf-8,Cache-Control:no-cache
           ${{github.workspace}}/ossutil cp ./llms.txt oss://lb-assets/github/release/open.longportapp.com/docs/raw/ -f -e oss-cn-hangzhou.aliyuncs.com -i ${{ secrets.FE_LB_ASSET_ACCESS_KEY_ID }} -k ${{ secrets.FE_LB_ASSET_ACCESS_KEY_SECRET }} --meta=Content-Type:text/plain\;charset=utf-8,Cache-Control:no-cache

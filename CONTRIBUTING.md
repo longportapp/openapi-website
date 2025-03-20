@@ -59,14 +59,16 @@ And please following the [Swagger Specification](https://swagger.io/specificatio
 
 If you want to edit the documentation locally, you can follow the steps below.
 
+We use [Bun](https://bun.sh/) to development and build.
+
 ```shell
-$ yarn
+$ bun install
 
 # Start docusaurus server
-$ yarn dev
+$ bun run dev
 
 # Listening swagger to markdown convert
-$ yarn dev:swagger
+$ bun run dev:swagger
 ```
 
 ### File structure
@@ -84,7 +86,6 @@ $ yarn dev:swagger
 ├── docusaurus.config.js // Documentation website contributions.
 ├── tsconfig.json
 ├── package.json
-└── yarn.lock
 ```
 
 ## Resources
