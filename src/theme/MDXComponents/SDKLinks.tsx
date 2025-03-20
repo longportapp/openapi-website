@@ -32,13 +32,13 @@ export const SDKLinks = ({
       title: 'Python',
       color: '#3572a5',
       label: `longport.openapi.${klass}.${snakeMethod}`,
-      url: `https://longportapp.github.io/openapi-sdk/python/${module}_context/#longport.openapi.${klass}.${snakeMethod}`,
+      url: `https://longportapp.github.io/openapi/python/${module}_context/#longport.openapi.${klass}.${snakeMethod}`,
     },
     {
       title: 'Rust',
       color: '#dea584',
       label: `longport::${module}::${klass}#${snakeMethod}`,
-      url: `https://longportapp.github.io/openapi-sdk/rust/longport/${module}/struct.${klass}.html#method.${snakeMethod}`,
+      url: `https://longportapp.github.io/openapi/rust/longport/${module}/struct.${klass}.html#method.${snakeMethod}`,
     },
     {
       title: 'Go',
@@ -50,7 +50,7 @@ export const SDKLinks = ({
       title: 'Node.js',
       color: '#f1e05a',
       label: `${klass}#${camelMethod}`,
-      url: `https://longportapp.github.io/openapi-sdk/nodejs/classes/${klass}.html#${camelMethod}`,
+      url: `https://longportapp.github.io/openapi/nodejs/classes/${klass}.html#${camelMethod}`,
     },
   ]
 
@@ -59,7 +59,7 @@ export const SDKLinks = ({
       title: 'Java',
       color: '#b07219',
       label: `${klass}.${getPrefixedMethod}`,
-      url: `https://longportapp.github.io/openapi-sdk/java/com/longport/${module}/${klass}.html#${methodJava}`,
+      url: `https://longportapp.github.io/openapi/java/com/longport/${module}/${klass}.html#${methodJava}`,
     })
   }
 

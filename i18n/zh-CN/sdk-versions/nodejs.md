@@ -1,6 +1,6 @@
 ## LongPort OpenAPI SDK for Node.js
 
-[https://github.com/longportapp/openapi-sdk/tree/master/nodejs](https://github.com/longportapp/openapi-sdk/tree/master/nodejs)
+[https://github.com/longportapp/openapi/tree/master/nodejs](https://github.com/longportapp/openapi/tree/master/nodejs)
 
 ### 安装 SDK
 
@@ -14,5 +14,4 @@ $ npm install longport --save
 
 ### API 文档
 
-- [v1](https://longportapp.github.io/openapi-sdk/v1/nodejs/index.html)
-- [v2](https://longportapp.github.io/openapi-sdk/v2/nodejs/index.html)
+- https://longportapp.github.io/openapi/nodejs/index.html

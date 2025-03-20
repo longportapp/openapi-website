@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 ## 前言
 
-[LongPort OpenAPI SDK](https://github.com/longportapp/openapi-sdk) 基于 Rust 底层提供标准实现，目前我们已经发布了 Python、Node.js、Rust、C++/C、Java 等多种编程语言 SDK，其他语言的支持后面会陆续推出。
+[LongPort OpenAPI SDK](https://github.com/longportapp/openapi) 基于 Rust 底层提供标准实现，目前我们已经发布了 Python、Node.js、Rust、C++/C、Java 等多种编程语言 SDK，其他语言的支持后面会陆续推出。
 
 ## API Host
 
@@ -123,11 +123,11 @@ go get github.com/longportapp/openapi-go
 请注意保护好您的 **Access Token** 信息，任何人获得到它，都可以通过 OpenAPI 来交易你的账户！
 :::
 
-| 环境变量                    | 说明                                                       | 值范围          |
-|-----------------------------|----------------------------------------------------------|-----------------|
-| `LONGPORT_APP_KEY`          | 从页面上获取到的 App Key                                   |                 |
-| `LONGPORT_APP_SECRET`       | 从页面上获取到的 App Secret                                |                 |
-| `LONGPORT_ACCESS_TOKEN`     | 从页面上获取到的 Access Token                              |                 |
+| 环境变量                    | 说明                                                         | 值范围          |
+| --------------------------- | ------------------------------------------------------------ | --------------- |
+| `LONGPORT_APP_KEY`          | 从页面上获取到的 App Key                                     |                 |
+| `LONGPORT_APP_SECRET`       | 从页面上获取到的 App Secret                                  |                 |
+| `LONGPORT_ACCESS_TOKEN`     | 从页面上获取到的 Access Token                                |                 |
 | `LONGPORT_REGION`           | API 服务器接入点，请根据你所在地区设置，以获得更好的连接速度 | `hk`, `cn`      |
 | `LONGPORT_ENABLE_OVERNIGHT` | 是否开启夜盘行情，设置 `true` 开启，`false` 关闭             | `true`, `false` |
 
@@ -297,7 +297,7 @@ class Main {
         Config config = Config.fromEnv();
 
         // Init config without ENV
-        // https://longportapp.github.io/openapi-sdk/java/com/longport/ConfigBuilder.html
+        // https://longportapp.github.io/openapi/java/com/longport/ConfigBuilder.html
         // Config config = ConfigBuilder("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN").build();
 
         try (TradeContext ctx = TradeContext.create(config).get()) {
@@ -1042,19 +1042,19 @@ Order {
 }
 ```
 
-上面例子已经完整演示了如何使用 SDK 访问 OpenAPI 的接口，更多其他接口请详细阅读 [LongPort OpenAPI 文档](https://longportapp.github.io/openapi-sdk/)，根据不同的接口使用。
+上面例子已经完整演示了如何使用 SDK 访问 OpenAPI 的接口，更多其他接口请详细阅读 [LongPort OpenAPI 文档](https://longportapp.github.io/openapi/)，根据不同的接口使用。
 
 ## 更多例子
 
 我们在 LongPort OpenAPI Python SDK 的 GitHub 仓库中提供了上面几个例子的完整代码，当然后期我们也会持续往里面补充或更新。
 
-<https://github.com/longportapp/openapi-sdk/tree/master/examples>
+<https://github.com/longportapp/openapi/tree/master/examples>
 
 ## SDK API 文档
 
 SDK 的详细 API 文档请访问：
 
-<https://longportapp.github.io/openapi-sdk/>
+<https://longportapp.github.io/openapi/>
 
 ## 反馈及沟通
 
@@ -1064,7 +1064,7 @@ SDK 的详细 API 文档请访问：
 
 在 GitHub 上，也有很多历史的讨论和问题可以参考，你也可以试着搜索一下，或许也能找到问题的解决方案。
 
-访问地址：<https://github.com/longportapp/openapi-sdk/issues>
+访问地址：<https://github.com/longportapp/openapi/issues>
 
 ### 飞书回馈
 

@@ -131,11 +131,11 @@ go get github.com/longportapp/openapi-go
 請注意保護好您的 **Access Token** 訊息，任何人獲得到它，都可以透過 OpenAPI 來交易你的帳戶！
 :::
 
-| 環境變量                    | 說明                                                       | 值範圍          |
-|-----------------------------|----------------------------------------------------------|-----------------|
-| `LONGPORT_APP_KEY`          | 從頁面上取得到的 App Key                                   |                 |
-| `LONGPORT_APP_SECRET`       | 從頁面取得到的 App Secret                                  |                 |
-| `LONGPORT_ACCESS_TOKEN`     | 從頁面上取得到的 Access Token                              |                 |
+| 環境變量                    | 說明                                                         | 值範圍          |
+| --------------------------- | ------------------------------------------------------------ | --------------- |
+| `LONGPORT_APP_KEY`          | 從頁面上取得到的 App Key                                     |                 |
+| `LONGPORT_APP_SECRET`       | 從頁面取得到的 App Secret                                    |                 |
+| `LONGPORT_ACCESS_TOKEN`     | 從頁面上取得到的 Access Token                                |                 |
 | `LONGPORT_REGION`           | API 伺服器存取點，請根據您所在地區設置，以獲得更好的連線速度 | `hk`, `cn`      |
 | `LONGPORT_ENABLE_OVERNIGHT` | 是否開啟夜盤行情，設定 `true` 開啟，`false` 關閉             | `true`, `false` |
 
@@ -306,7 +306,7 @@ class Main {
         Config config = Config.fromEnv();
 
         // Init config without ENV
-        // https://longportapp.github.io/openapi-sdk/java/com/longport/ConfigBuilder.html
+        // https://longportapp.github.io/openapi/java/com/longport/ConfigBuilder.html
         // Config config = ConfigBuilder("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN").build();
 
         try (TradeContext ctx = TradeContext.create(config).get()) {
@@ -985,13 +985,13 @@ Order {
 
 我們在 LongPort OpenAPI Python SDK 的 GitHub 倉庫中提供了上面幾個例子的完整代碼，當然後期我們也會持續往裡面補充或更新。
 
-<https://github.com/longportapp/openapi-sdk/tree/master/examples>
+<https://github.com/longportapp/openapi/tree/master/examples>
 
 ## SDK API 文檔
 
 SDK 的詳細 API 文檔請訪問：
 
-<https://longportapp.github.io/openapi-sdk/>
+<https://longportapp.github.io/openapi/>
 
 ## 回饋及溝通
 
@@ -1001,7 +1001,7 @@ SDK 的詳細 API 文檔請訪問：
 
 在 GitHub 上，也有很多歷史的討論和問題可以參考，你也可以試著搜尋一下，或許也能找到問題的解決方案。
 
-訪問網址：<https://github.com/longportapp/openapi-sdk/issues>
+訪問網址：<https://github.com/longportapp/openapi/issues>
 
 ### 飛書回饋
 

@@ -1,13 +1,11 @@
 ## LongPort OpenAPI SDK for C/C++
 
-[https://github.com/longportapp/openapi-sdk/tree/master/cpp](https://github.com/longportapp/openapi-sdk/tree/master/cpp)
+[https://github.com/longportapp/openapi/tree/master/cpp](https://github.com/longportapp/openapi/tree/master/cpp)
 
 ### Download
 
-- [1.1.7](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-1.1.7.tar.gz)
 - [2.1.10](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-2.1.10.tar.gz)
 
 ### API Documents
 
-- [v1](https://longportapp.github.io/openapi-sdk/v1/cpp/index.html)
-- [v2](https://longportapp.github.io/openapi-sdk/v2/cpp/index.html)
+- https://longportapp.github.io/openapi/cpp/index.html

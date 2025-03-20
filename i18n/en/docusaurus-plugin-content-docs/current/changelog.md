@@ -12,6 +12,11 @@ sidebar_position: 7
 - Print the opened quote packages when connected to the server.
 - The quantity type in the trading API has changed from `int` to `Decimal`.
 
+## 2024-09-11
+
+- Updated Get Security List API
+  - The `GET /v1/quote/get_security_list` now returns the name in the corresponding language based on the `accept-language` request header, instead of returning all three languages at once.
+
 ## 2024-08-28
 
 - Change the `Depth.price` field in the SDK from `Decimal` type to `Optional[Decimal]` type

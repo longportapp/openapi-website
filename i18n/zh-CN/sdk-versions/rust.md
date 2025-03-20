@@ -1,6 +1,6 @@
 ## LongPort OpenAPI SDK for Rust
 
-[https://github.com/longportapp/openapi-sdk/tree/master/rust](https://github.com/longportapp/openapi-sdk/tree/master/rust)
+[https://github.com/longportapp/openapi/tree/master/rust](https://github.com/longportapp/openapi/tree/master/rust)
 
 ### 安装 SDK
 
@@ -15,5 +15,4 @@ longport = "2.0.0"
 
 ### API 文档
 
-- [v1](https://longportapp.github.io/openapi-sdk/v1/rust/longport/index.html)
-- [v2](https://longportapp.github.io/openapi-sdk/v2/rust/longport/index.html)
+- https://longportapp.github.io/openapi/rust/longport/index.html

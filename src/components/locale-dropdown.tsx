@@ -1,16 +1,19 @@
-import React, { FC, useState, useMemo } from 'react'
-import { useBasenameLocale, useDefaultLocale, getRootDomain } from '@site/src/utils'
+import React, { FC, useMemo } from 'react'
+import { useBasenameLocale, useDefaultLocale } from '@site/src/utils'
 import { loadHighlight } from '@site/src/utils/highlight'
-import Cookies from 'js-cookie'
 import Dropdown from './dropdown'
 import useIsBrowser from '@docusaurus/useIsBrowser'
 
 let prePath = ''
 
 export const LocaleDropdown: FC = () => {
-  // 为了方便复制粘贴，就不用组件了
   const items = useMemo(() => {
     return [
+      {
+        label: 'English',
+        shortLabel: 'EN',
+        value: 'en',
+      },
       {
         label: '简体中文',
         shortLabel: '简',
@@ -21,28 +24,19 @@ export const LocaleDropdown: FC = () => {
         shortLabel: '繁',
         value: 'zh-HK',
       },
-      {
-        label: 'English',
-        shortLabel: 'EN',
-        value: 'en',
-      },
     ]
   }, [])
-  const [locale, setLocale] = useState(useDefaultLocale())
+
+  const locale = useDefaultLocale()
   const pathLocale = useBasenameLocale()
   const onChange = (value: string) => {
-    Cookies.set('locale', value, {
-      domain: getRootDomain(location.hostname),
-      expires: 7,
-    })
-    setLocale(value)
     let pathname = location.pathname
     if (pathLocale) {
       pathname = pathname.replace(`/${pathLocale}`, `/${value}`)
     } else {
       pathname = `/${value}${pathname}`
     }
-    pathname = pathname.replace('/zh-CN', '')
+    pathname = pathname.replace('/en', '')
     const url = new URL(location.href)
     url.pathname = pathname
     location.href = url.toString()
