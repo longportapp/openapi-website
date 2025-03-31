@@ -55,7 +55,7 @@ OpenAPI 文档遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https
 
 确保您已经配置了环境变量并在系统中安装了 `longport-mcp` 命令行工具。
 
-![](https://pub.lbkrs.com/files/202503/QdJeE6WUP9VjFSL7/SCR-20250319-smit.png)
+![](https://pub.lbkrs.com/files/202503/QRuojGfGL1Lay7rs/SCR-20250331-jajy.png)
 
 **使用 SSE 模式：**
 

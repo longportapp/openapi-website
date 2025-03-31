@@ -55,7 +55,7 @@ This part we will show you how to configure LongPort MCP in your AI chat (The sc
 
 Ensure you have already configured your environment variables and install the `longport-mcp` command line tool in your system.
 
-![](https://pub.lbkrs.com/files/202503/QdJeE6WUP9VjFSL7/SCR-20250319-smit.png)
+![](https://pub.lbkrs.com/files/202503/QRuojGfGL1Lay7rs/SCR-20250331-jajy.png)
 
 **Use SSE mode:**
 
