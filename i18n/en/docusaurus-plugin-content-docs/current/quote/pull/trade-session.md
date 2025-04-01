@@ -1,6 +1,6 @@
 ---
 id: quote_trade_session
-title: Get Trading Session Of The Day
+title: Trading Session of The Day
 slug: trade-session
 sidebar_position: 15
 ---

@@ -1,6 +1,6 @@
 ---
 id: quote_history_candlestick
-title: Get Security History Candlesticks
+title: Security History Candlesticks
 slug: history-candlestick
 sidebar_position: 10
 ---

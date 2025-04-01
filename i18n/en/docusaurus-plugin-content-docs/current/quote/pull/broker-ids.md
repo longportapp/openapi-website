@@ -1,6 +1,6 @@
 ---
 id: quote_broker_ids
-title: Get Broker IDs
+title: Broker IDs
 slug: broker-ids
 sidebar_position: 7
 ---

@@ -1,6 +1,6 @@
 ---
 id: quote_intraday
-title: Get Security Intraday
+title: Security Intraday
 slug: intraday
 sidebar_position: 9
 ---

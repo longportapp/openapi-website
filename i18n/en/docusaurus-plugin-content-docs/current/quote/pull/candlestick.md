@@ -1,6 +1,6 @@
 ---
 id: quote_candlestick
-title: Get Security Candlesticks
+title: Security Candlesticks
 slug: candlestick
 sidebar_position: 20
 ---

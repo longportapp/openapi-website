@@ -1,6 +1,6 @@
 ---
 slug: watchlist_update_group
-title: Update watched group 
+title: Update Watchlist Group
 language_tabs: false
 toc_footers: []
 includes: []

@@ -1,6 +1,6 @@
 ---
 slug: watchlist_groups
-title: Get watched groups 
+title: Watchlist Group
 language_tabs: false
 toc_footers: []
 includes: []

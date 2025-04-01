@@ -1,6 +1,6 @@
 ---
 id: quote_static
-title: Get Basic Information Of Securities
+title: Basic Information of Securities
 slug: static
 sidebar_position: 1
 ---

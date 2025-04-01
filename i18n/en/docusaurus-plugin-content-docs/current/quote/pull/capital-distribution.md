@@ -1,6 +1,6 @@
 ---
 id: quote_capital_distribution.md
-title: Get Security Capital Distribution
+title: Security Capital Distribution
 slug: capital-distribution
 sidebar_position: 18
 ---

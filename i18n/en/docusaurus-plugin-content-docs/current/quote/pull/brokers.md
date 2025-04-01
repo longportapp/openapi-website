@@ -1,6 +1,6 @@
 ---
 id: quote_brokers
-title: Get Security Brokers
+title: Security Brokers
 slug: brokers
 sidebar_position: 6
 ---

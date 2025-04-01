@@ -1,6 +1,6 @@
 ---
 id: quote_subscription
-title: Get Subscription Information
+title: Subscription Information
 slug: subscription
 sidebar_position: 3
 ---

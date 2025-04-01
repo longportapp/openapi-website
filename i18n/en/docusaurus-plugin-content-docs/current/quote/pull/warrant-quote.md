@@ -1,6 +1,6 @@
 ---
 id: quote_warrant_quote
-title: Get Real-time Quotes Of Warrant Securities
+title: Real-time Quotes of Warrant
 slug: warrant-quote
 sidebar_position: 4
 ---
