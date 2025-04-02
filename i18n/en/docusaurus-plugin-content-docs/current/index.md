@@ -1,14 +1,11 @@
 ---
 sidebar_position: -999
-slug: /
 title: Introduction
 id: getting_started_introduce
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-## Introduction
 
 LongPort OpenAPI provides programmatic quote trading interfaces for investors with research and development capabilities and assists them to build trading or quote strategy analysis tools based on their own investment strategies. The functions fall into the following categories:
 

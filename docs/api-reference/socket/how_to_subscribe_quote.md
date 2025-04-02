@@ -41,7 +41,6 @@ Server -->> Client: 实时经纪队列推送，cmd: 103
 Server -->> Client: 实时成交明细推送，cmd: 104
 
 end
-
 ```
 
 ## 订阅

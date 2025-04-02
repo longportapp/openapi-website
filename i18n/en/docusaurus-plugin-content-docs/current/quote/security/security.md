@@ -20,8 +20,7 @@ Retrieve the List of Securities
 <table className="http-basic">
 <tbody>
 <tr><td className="http-basic-key">HTTP Method</td><td>GET</td></tr>
-<tr><td className="http-basic-key">HTTP URL</td><td>/v1/quote/get_security_list
-</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>/v1/quote/get_security_list</td></tr>
 </tbody>
 </table>
 

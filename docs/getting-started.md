@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-slug: /getting-started
+slug: getting-started
 title: 快速开始
 id: getting-started
 ---
@@ -412,7 +412,7 @@ go run ./
 
 如没有开通行情权限，可以通过“LongPort”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
 
-<https://longportapp.com/download>
+https://longportapp.com/download
 :::
 
 当你有正确的行情权限，看起来可能会是这样：
@@ -1048,13 +1048,11 @@ Order {
 
 我们在 LongPort OpenAPI Python SDK 的 GitHub 仓库中提供了上面几个例子的完整代码，当然后期我们也会持续往里面补充或更新。
 
-<https://github.com/longportapp/openapi/tree/master/examples>
+https://github.com/longportapp/openapi/tree/master/examples
 
 ## SDK API 文档
 
-SDK 的详细 API 文档请访问：
-
-<https://longportapp.github.io/openapi/>
+SDK 的详细 API 文档请访问：https://longportapp.github.io/openapi/
 
 ## 反馈及沟通
 
@@ -1064,7 +1062,7 @@ SDK 的详细 API 文档请访问：
 
 在 GitHub 上，也有很多历史的讨论和问题可以参考，你也可以试着搜索一下，或许也能找到问题的解决方案。
 
-访问地址：<https://github.com/longportapp/openapi/issues>
+访问地址：https://github.com/longportapp/openapi/issues
 
 ### 飞书回馈
 

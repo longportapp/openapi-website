@@ -5,24 +5,22 @@ language_tabs: false
 toc_footers: []
 includes: []
 search: true
-highlight_theme: ""
+highlight_theme: ''
 headingLevel: 2
-
 ---
 
 Get watched groups
 
 <SDKLinks module="quote" klass="QuoteContext" method="watchlist" />
 
-## 
+##
 
 ## Request
 
 <table className="http-basic">
 <tbody>
 <tr><td className="http-basic-key">HTTP Method</td><td>GET</td></tr>
-<tr><td className="http-basic-key">HTTP URL</td><td>/v1/watchlist/groups 
-</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>/v1/watchlist/groups</td></tr>
 </tbody>
 </table>
 
@@ -70,10 +68,10 @@ print(resp)
 
 ### Response Status
 
-| Status | Description | Schema |
-|---|---|---|
-| 200 | Success | [groups_response](#schemagroups_response) |
-| 500 | Internal error | None |
+| Status | Description    | Schema                                    |
+| ------ | -------------- | ----------------------------------------- |
+| 200    | Success        | [groups_response](#schemagroups_response) |
+| 500    | Internal error | None                                      |
 
 <aside className="success">
 </aside>
@@ -85,15 +83,14 @@ print(resp)
 <a id="schemagroups_response"></a>
 <a id="schemagroups_response"></a>
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-|groups|object[]|false|Groups|
-|∟ id|integer|true|Group ID|
-|∟ name|string|true|Name|
-|∟ securities|object[]|true|Security|
-|∟∟ symbol|string|true|Symbol|
-|∟∟ market|string|true|Market|
-|∟∟ name|string|true|Name|
-|∟∟ watched_price|string|true|Watched price|
-|∟∟ watched_at|integer|true|Watched time|
-
+| Name             | Type     | Required | Description   |
+| ---------------- | -------- | -------- | ------------- |
+| groups           | object[] | false    | Groups        |
+| ∟ id             | integer  | true     | Group ID      |
+| ∟ name           | string   | true     | Name          |
+| ∟ securities     | object[] | true     | Security      |
+| ∟∟ symbol        | string   | true     | Symbol        |
+| ∟∟ market        | string   | true     | Market        |
+| ∟∟ name          | string   | true     | Name          |
+| ∟∟ watched_price | string   | true     | Watched price |
+| ∟∟ watched_at    | integer  | true     | Watched time  |

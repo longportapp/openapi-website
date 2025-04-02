@@ -5,24 +5,22 @@ language_tabs: false
 toc_footers: []
 includes: []
 search: true
-highlight_theme: ""
+highlight_theme: ''
 headingLevel: 2
-
 ---
 
 Create watched group
 
 <SDKLinks module="quote" klass="QuoteContext" method="create_watchlist_group" />
 
-## 
+##
 
 ## Request
 
 <table className="http-basic">
 <tbody>
 <tr><td className="http-basic-key">HTTP Method</td><td>POST</td></tr>
-<tr><td className="http-basic-key">HTTP URL</td><td>/v1/watchlist/groups 
-</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>/v1/watchlist/groups</td></tr>
 </tbody>
 </table>
 
@@ -30,10 +28,10 @@ Create watched group
 
 > Content-Type: application/json; charset=utf-8
 
-| Name | Type | Required | Description |
-|---|---|---|---|
-| name | string | YES | Group name, for example `Information Technology Group`.  |
-| securities | string[] | NO | Security list, for example `["BABA.US", "AAPL.US"]`. Display order of securities in the group, in the same order as this list. If this parameter is not passed, create an empty group.  |
+| Name       | Type     | Required | Description                                                                                                                                                                            |
+| ---------- | -------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name       | string   | YES      | Group name, for example `Information Technology Group`.                                                                                                                                |
+| securities | string[] | NO       | Security list, for example `["BABA.US", "AAPL.US"]`. Display order of securities in the group, in the same order as this list. If this parameter is not passed, create an empty group. |
 
 ### Request Example
 
@@ -65,10 +63,10 @@ print(group_id)
 
 ### Response Status
 
-| Status | Description | Schema |
-|---|---|---|
-| 200 | Success | [create_group_response](#schemacreate_group_response) |
-| 500 | Internal error | None |
+| Status | Description    | Schema                                                |
+| ------ | -------------- | ----------------------------------------------------- |
+| 200    | Success        | [create_group_response](#schemacreate_group_response) |
+| 500    | Internal error | None                                                  |
 
 <aside className="success">
 </aside>
@@ -80,7 +78,6 @@ print(group_id)
 <a id="schemacreate_group_response"></a>
 <a id="schemacreate_group_response"></a>
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-|id|integer|false|Group ID|
-
+| Name | Type    | Required | Description |
+| ---- | ------- | -------- | ----------- |
+| id   | integer | false    | Group ID    |
