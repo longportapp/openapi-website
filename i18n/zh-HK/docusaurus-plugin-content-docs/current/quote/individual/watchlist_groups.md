@@ -1,28 +1,26 @@
 ---
 slug: watchlist_groups
-title: 獲取關注分組 
+title: 獲取關注分組
 language_tabs: false
 toc_footers: []
 includes: []
 search: true
-highlight_theme: ""
+highlight_theme: ''
 headingLevel: 2
-
 ---
 
 獲取關注分組
 
 <SDKLinks module="quote" klass="QuoteContext" method="watchlist" />
 
-## 
+##
 
 ## Request
 
 <table className="http-basic">
 <tbody>
 <tr><td className="http-basic-key">HTTP Method</td><td>GET</td></tr>
-<tr><td className="http-basic-key">HTTP URL</td><td>/v1/watchlist/groups 
-</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>/v1/watchlist/groups </td></tr>
 </tbody>
 </table>
 
@@ -70,10 +68,10 @@ print(resp)
 
 ### Response Status
 
-| Status | Description | Schema |
-|---|---|---|
-| 200 | 返回成功 | [groups_response](#schemagroups_response) |
-| 500 | 內部錯誤 | None |
+| Status | Description | Schema                                    |
+| ------ | ----------- | ----------------------------------------- |
+| 200    | 返回成功    | [groups_response](#schemagroups_response) |
+| 500    | 內部錯誤    | None                                      |
 
 <aside className="success">
 </aside>
@@ -85,15 +83,14 @@ print(resp)
 <a id="schemagroups_response"></a>
 <a id="schemagroups_response"></a>
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-|groups|object[]|false|分組|
-|∟ id|integer|true|分組 ID|
-|∟ name|string|true|名稱|
-|∟ securities|object[]|true|股票|
-|∟∟ symbol|string|true|代碼|
-|∟∟ market|string|true|市場|
-|∟∟ name|string|true|名稱|
-|∟∟ watched_price|string|true|關注時的價格|
-|∟∟ watched_at|integer|true|關注時間|
-
+| Name             | Type     | Required | Description  |
+| ---------------- | -------- | -------- | ------------ |
+| groups           | object[] | false    | 分組         |
+| ∟ id             | integer  | true     | 分組 ID      |
+| ∟ name           | string   | true     | 名稱         |
+| ∟ securities     | object[] | true     | 股票         |
+| ∟∟ symbol        | string   | true     | 代碼         |
+| ∟∟ market        | string   | true     | 市場         |
+| ∟∟ name          | string   | true     | 名稱         |
+| ∟∟ watched_price | string   | true     | 關注時的價格 |
+| ∟∟ watched_at    | integer  | true     | 關注時間     |

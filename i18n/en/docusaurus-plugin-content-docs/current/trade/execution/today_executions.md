@@ -1,28 +1,26 @@
 ---
 slug: today_executions
-title: Get Today Executions 
+title: Get Today Executions
 language_tabs: false
 toc_footers: []
 includes: []
 search: true
-highlight_theme: ""
+highlight_theme: ''
 headingLevel: 2
-
 ---
 
 This API is used to get today executions.
 
 <SDKLinks module="trade" klass="TradeContext" method="today_executions" />
 
-## 
+##
 
 ## Request
 
 <table className="http-basic">
 <tbody>
 <tr><td className="http-basic-key">HTTP Method</td><td>GET</td></tr>
-<tr><td className="http-basic-key">HTTP URL</td><td>/v1/trade/execution/today 
-</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>/v1/trade/execution/today </td></tr>
 </tbody>
 </table>
 
@@ -30,10 +28,10 @@ This API is used to get today executions.
 
 > Content-Type: application/json; charset=utf-8
 
-| Name | Type | Required | Description |
-|---|---|---|---|
-| symbol | string | NO | Stock symbol, use `ticker.region` format, example: `AAPL.US` |
-| order_id | string | NO | Order ID, example: `701276261045858304` |
+| Name     | Type   | Required | Description                                                  |
+| -------- | ------ | -------- | ------------------------------------------------------------ |
+| symbol   | string | NO       | Stock symbol, use `ticker.region` format, example: `AAPL.US` |
+| order_id | string | NO       | Order ID, example: `701276261045858304`                      |
 
 ### Request Example
 
@@ -76,10 +74,10 @@ print(resp)
 
 ### Response Status
 
-| Status | Description | Schema |
-|---|---|---|
-| 200 | Get Today Executions Success | None |
-| 400 | The query failed with an error in the request parameter. | None |
+| Status | Description                                              | Schema |
+| ------ | -------------------------------------------------------- | ------ |
+| 200    | Get Today Executions Success                             | None   |
+| 400    | The query failed with an error in the request parameter. | None   |
 
 ### Response Schema
 
@@ -93,13 +91,12 @@ print(resp)
 <a id="schematoday_executions_rsp"></a>
 <a id="schematoday_executions_rsp"></a>
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-|trades|object[]|false|Execution Detail|
-|∟ order_id|string|true|Order ID|
-|∟ trade_id|string|true|Execution ID|
-|∟ symbol|string|true|Stock symbol, use `ticker.region` format, example: `AAPL.US`|
-|∟ trade_done_at|string|true|Trade done time, formatted as a timestamp (second)|
-|∟ quantity|string|true|Executed quantity|
-|∟ price|string|true|Executed price|
-
+| Name            | Type     | Required | Description                                                  |
+| --------------- | -------- | -------- | ------------------------------------------------------------ |
+| trades          | object[] | false    | Execution Detail                                             |
+| ∟ order_id      | string   | true     | Order ID                                                     |
+| ∟ trade_id      | string   | true     | Execution ID                                                 |
+| ∟ symbol        | string   | true     | Stock symbol, use `ticker.region` format, example: `AAPL.US` |
+| ∟ trade_done_at | string   | true     | Trade done time, formatted as a timestamp (second)           |
+| ∟ quantity      | string   | true     | Executed quantity                                            |
+| ∟ price         | string   | true     | Executed price                                               |

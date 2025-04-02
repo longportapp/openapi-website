@@ -1,28 +1,26 @@
 ---
 slug: estimate_available_buy_limit
-title: Estimate Maximum Purchase Quantity 
+title: Estimate Maximum Purchase Quantity
 language_tabs: false
 toc_footers: []
 includes: []
 search: true
-highlight_theme: ""
+highlight_theme: ''
 headingLevel: 2
-
 ---
 
 This API is used for estimating the maximum purchase quantity for Hong Kong and US stocks, warrants, and options.
 
 <SDKLinks module="trade" klass="TradeContext" method="estimate_max_purchase_quantity" />
 
-## 
+##
 
 ## Request
 
 <table className="http-basic">
 <tbody>
 <tr><td className="http-basic-key">HTTP Method</td><td>GET</td></tr>
-<tr><td className="http-basic-key">HTTP URL</td><td>/v1/trade/estimate/buy_limit 
-</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>/v1/trade/estimate/buy_limit </td></tr>
 </tbody>
 </table>
 
@@ -30,14 +28,14 @@ This API is used for estimating the maximum purchase quantity for Hong Kong and 
 
 > Content-Type: application/json; charset=utf-8
 
-| Name | Type | Required | Description |
-|---|---|---|---|
-| symbol | string | YES | Stock code, using ticker.region format, for example: `AAPL.US` |
-| order_type | string | YES | [Order Type](../trade-definition#ordertype) |
-| price | string | NO | Estimated order price, for example: `388.5` |
-| side | string | YES | Order side<br/><br/> **Enum Value**<br/> `Buy` - Buy<br/> `Sell` - Sell (Short selling is only supported for US stocks) |
-| currency | string | NO | Settlement currency |
-| order_id | string | NO | Order ID, required when estimating the maximum purchase quantity for a modified order |
+| Name       | Type   | Required | Description                                                                                                             |
+| ---------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------- |
+| symbol     | string | YES      | Stock code, using ticker.region format, for example: `AAPL.US`                                                          |
+| order_type | string | YES      | [Order Type](../trade-definition#ordertype)                                                                             |
+| price      | string | NO       | Estimated order price, for example: `388.5`                                                                             |
+| side       | string | YES      | Order side<br/><br/> **Enum Value**<br/> `Buy` - Buy<br/> `Sell` - Sell (Short selling is only supported for US stocks) |
+| currency   | string | NO       | Settlement currency                                                                                                     |
+| order_id   | string | NO       | Order ID, required when estimating the maximum purchase quantity for a modified order                                   |
 
 ### Request Example
 
@@ -76,10 +74,10 @@ print(resp)
 
 ### Response Status
 
-| Status | Description | Schema |
-|---|---|---|
-| 200 | Estimate Maximum Purchase Quantity Success | [estimate_available_buy_limit_rsp](#schemaestimate_available_buy_limit_rsp) |
-| 400 | The query failed with an error in the request parameter. | None |
+| Status | Description                                              | Schema                                                                      |
+| ------ | -------------------------------------------------------- | --------------------------------------------------------------------------- |
+| 200    | Estimate Maximum Purchase Quantity Success               | [estimate_available_buy_limit_rsp](#schemaestimate_available_buy_limit_rsp) |
+| 400    | The query failed with an error in the request parameter. | None                                                                        |
 
 <aside className="success">
 </aside>
@@ -93,8 +91,7 @@ print(resp)
 
 Estimated Maximum Purchase Quantity
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-|cash_max_qty|string|true|Cash available quantity, default value is empty string.|
-|margin_max_qty|string|true|Margin available quantity, default value is empty string.|
-
+| Name           | Type   | Required | Description                                               |
+| -------------- | ------ | -------- | --------------------------------------------------------- |
+| cash_max_qty   | string | true     | Cash available quantity, default value is empty string.   |
+| margin_max_qty | string | true     | Margin available quantity, default value is empty string. |

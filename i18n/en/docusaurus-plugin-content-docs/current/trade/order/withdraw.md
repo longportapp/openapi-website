@@ -1,28 +1,26 @@
 ---
 slug: withdraw
-title: Withdraw Order 
+title: Withdraw Order
 language_tabs: false
 toc_footers: []
 includes: []
 search: true
-highlight_theme: ""
+highlight_theme: ''
 headingLevel: 2
-
 ---
 
 This API is used to withdraw an open order.
 
 <SDKLinks module="trade" klass="TradeContext" method="cancel_order" />
 
-## 
+##
 
 ## Request
 
 <table className="http-basic">
 <tbody>
 <tr><td className="http-basic-key">HTTP Method</td><td>DELETE</td></tr>
-<tr><td className="http-basic-key">HTTP URL</td><td>/v1/trade/order 
-</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>/v1/trade/order </td></tr>
 </tbody>
 </table>
 
@@ -30,9 +28,9 @@ This API is used to withdraw an open order.
 
 > Content-Type: application/json; charset=utf-8
 
-| Name | Type | Required | Description |
-|---|---|---|---|
-| order_id | string | YES | Order ID |
+| Name     | Type   | Required | Description |
+| -------- | ------ | -------- | ----------- |
+| order_id | string | YES      | Order ID    |
 
 ### Request Example
 
@@ -63,11 +61,10 @@ ctx.cancel_order("709043056541253632")
 
 ### Response Status
 
-| Status | Description | Schema |
-|---|---|---|
-| 200 | The submission was successful and the order was commissioned. | None |
-| 400 | The withdrawal was rejected with an incorrect request parameter. | None |
+| Status | Description                                                      | Schema |
+| ------ | ---------------------------------------------------------------- | ------ |
+| 200    | The submission was successful and the order was commissioned.    | None   |
+| 400    | The withdrawal was rejected with an incorrect request parameter. | None   |
 
 <aside className="success">
 </aside>
-

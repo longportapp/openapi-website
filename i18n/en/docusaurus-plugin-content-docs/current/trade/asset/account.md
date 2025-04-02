@@ -1,13 +1,12 @@
 ---
 slug: account
-title: Get Account Balance 
+title: Get Account Balance
 language_tabs: false
 toc_footers: []
 includes: []
 search: true
-highlight_theme: ""
+highlight_theme: ''
 headingLevel: 2
-
 ---
 
 The API is used to obtain the available, desirable, frozen, to-be-settled, and in-transit
@@ -15,15 +14,14 @@ funds (fund purchase and redemption) information for each currency of the user.
 
 <SDKLinks module="trade" klass="TradeContext" method="account_balance" />
 
-## 
+##
 
 ## Request
 
 <table className="http-basic">
 <tbody>
 <tr><td className="http-basic-key">HTTP Method</td><td>GET</td></tr>
-<tr><td className="http-basic-key">HTTP URL</td><td>/v1/asset/account 
-</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>/v1/asset/account </td></tr>
 </tbody>
 </table>
 
@@ -31,9 +29,9 @@ funds (fund purchase and redemption) information for each currency of the user.
 
 > Content-Type: application/json; charset=utf-8
 
-| Name | Type | Required | Description |
-|---|---|---|---|
-| currency | string | NO | Currency (HKD, USD, CNH) |
+| Name     | Type   | Required | Description              |
+| -------- | ------ | -------- | ------------------------ |
+| currency | string | NO       | Currency (HKD, USD, CNH) |
 
 ### Request Example
 
@@ -96,10 +94,10 @@ print(resp)
 
 ### Response Status
 
-| Status | Description | Schema |
-|---|---|---|
-| 200 | Success | [accountcash_rsp](#schemaaccountcash_rsp) |
-| 400 | Internal Error | None |
+| Status | Description    | Schema                                    |
+| ------ | -------------- | ----------------------------------------- |
+| 200    | Success        | [accountcash_rsp](#schemaaccountcash_rsp) |
+| 400    | Internal Error | None                                      |
 
 <aside className="success">
 </aside>
@@ -111,23 +109,22 @@ print(resp)
 <a id="schemaaccountcash_rsp"></a>
 <a id="schemaaccountcash_rsp"></a>
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-|list|object[]|false|Account Balance|
-|∟ total_cash|string|true|Total Cash|
-|∟ max_finance_amount|string|true|Maximum Financing Amount|
-|∟ remaining_finance_amount|string|true|Remaining Financing Amount|
-|∟ risk_level|string|true|Risk control level  <br/> <br/> <b>Option:</b><br/> `0` - safe <br/> `1` - medium risk<br/> `2` - early warning<br/> `3` - danger|
-|∟ margin_call|string|true|Margin Call|
-|∟ net_assets|string|true|net asset|
-|∟ init_margin|string|true|initial margin|
-|∟ maintenance_margin|string|true|maintenance margin|
-|∟ currency|string|true|Currency|
-|∟ buy_power|string|true|Buy Power|
-|∟ cash_infos|object[]|false|Cash Details|
-|∟∟ withdraw_cash|string|true|Withdraw Cash|
-|∟∟ available_cash|string|true|Available Cash|
-|∟∟ frozen_cash|string|true|Frozen Cash|
-|∟∟ settling_cash|string|true|Cash to be Settled|
-|∟∟ currency|string|true|Currency|
-
+| Name                       | Type     | Required | Description                                                                                                                      |
+| -------------------------- | -------- | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| list                       | object[] | false    | Account Balance                                                                                                                  |
+| ∟ total_cash               | string   | true     | Total Cash                                                                                                                       |
+| ∟ max_finance_amount       | string   | true     | Maximum Financing Amount                                                                                                         |
+| ∟ remaining_finance_amount | string   | true     | Remaining Financing Amount                                                                                                       |
+| ∟ risk_level               | string   | true     | Risk control level <br/> <br/> <b>Option:</b><br/> `0` - safe <br/> `1` - medium risk<br/> `2` - early warning<br/> `3` - danger |
+| ∟ margin_call              | string   | true     | Margin Call                                                                                                                      |
+| ∟ net_assets               | string   | true     | net asset                                                                                                                        |
+| ∟ init_margin              | string   | true     | initial margin                                                                                                                   |
+| ∟ maintenance_margin       | string   | true     | maintenance margin                                                                                                               |
+| ∟ currency                 | string   | true     | Currency                                                                                                                         |
+| ∟ buy_power                | string   | true     | Buy Power                                                                                                                        |
+| ∟ cash_infos               | object[] | false    | Cash Details                                                                                                                     |
+| ∟∟ withdraw_cash           | string   | true     | Withdraw Cash                                                                                                                    |
+| ∟∟ available_cash          | string   | true     | Available Cash                                                                                                                   |
+| ∟∟ frozen_cash             | string   | true     | Frozen Cash                                                                                                                      |
+| ∟∟ settling_cash           | string   | true     | Cash to be Settled                                                                                                               |
+| ∟∟ currency                | string   | true     | Currency                                                                                                                         |

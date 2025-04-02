@@ -1,6 +1,6 @@
 // @ts-check
 const { lightTheme } = require('./config/theme')
-const darkCodeTheme = require('prism-react-renderer/themes/vsDark')
+const { themes } = require('prism-react-renderer')
 const i18n = require('./i18n/config')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -160,7 +160,7 @@ const config = {
       },
       prism: {
         theme: lightTheme,
-        darkTheme: darkCodeTheme,
+        darkTheme: themes.vsDark,
         additionalLanguages: ['shell-session', 'http', 'protobuf', 'rust', 'java', 'go'],
       },
       algolia: {

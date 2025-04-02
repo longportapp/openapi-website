@@ -1,13 +1,12 @@
 ---
 slug: fund
-title: Get Fund Positions 
+title: Get Fund Positions
 language_tabs: false
 toc_footers: []
 includes: []
 search: true
-highlight_theme: ""
+highlight_theme: ''
 headingLevel: 2
-
 ---
 
 The API is used to obtain fund position information including account, fund code, holding share, cost net worth,
@@ -15,15 +14,14 @@ current net worth, and currency.
 
 <SDKLinks module="trade" klass="TradeContext" method="fund_positions" />
 
-## 
+##
 
 ## Request
 
 <table className="http-basic">
 <tbody>
 <tr><td className="http-basic-key">HTTP Method</td><td>GET</td></tr>
-<tr><td className="http-basic-key">HTTP URL</td><td>/v1/asset/fund 
-</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>/v1/asset/fund </td></tr>
 </tbody>
 </table>
 
@@ -31,9 +29,9 @@ current net worth, and currency.
 
 > Content-Type: application/json; charset=utf-8
 
-| Name | Type | Required | Description |
-|---|---|---|---|
-| symbol | string[] | NO | Fund code, in `ISIN` format, E.g:`HK0000676327` <a href="https://en.wikipedia.org/wiki/International_Securities_Identification_Number">ISIN explain</a> |
+| Name   | Type     | Required | Description                                                                                                                                             |
+| ------ | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol | string[] | NO       | Fund code, in `ISIN` format, E.g:`HK0000676327` <a href="https://en.wikipedia.org/wiki/International_Securities_Identification_Number">ISIN explain</a> |
 
 ### Request Example
 
@@ -82,10 +80,10 @@ print(resp)
 
 ### Response Status
 
-| Status | Description | Schema |
-|---|---|---|
-| 200 | Success | [fund_rsp](#schemafund_rsp) |
-| 400 | Internal Error | None |
+| Status | Description    | Schema                      |
+| ------ | -------------- | --------------------------- |
+| 200    | Success        | [fund_rsp](#schemafund_rsp) |
+| 400    | Internal Error | None                        |
 
 <aside className="success">
 </aside>
@@ -97,15 +95,14 @@ print(resp)
 <a id="schemafund_rsp"></a>
 <a id="schemafund_rsp"></a>
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-|list|object[]|false|stock holding information|
-|∟ account_channel|string|true|account type|
-|∟ fund_info|object[]|false|Fund Details|
-|∟∟ symbol|string|true|Fund ISIN code|
-|∟∟ current_net_asset_value|string|true|current Equity|
-|∟∟ net_asset_value_day|string|true|current Equity time|
-|∟∟ symbol_name|string|true|Fund name|
-|∟∟ currency|string|true|Currency|
-|∟∟ cost_net_asset_value|string|true|Net Cost|
-
+| Name                       | Type     | Required | Description               |
+| -------------------------- | -------- | -------- | ------------------------- |
+| list                       | object[] | false    | stock holding information |
+| ∟ account_channel          | string   | true     | account type              |
+| ∟ fund_info                | object[] | false    | Fund Details              |
+| ∟∟ symbol                  | string   | true     | Fund ISIN code            |
+| ∟∟ current_net_asset_value | string   | true     | current Equity            |
+| ∟∟ net_asset_value_day     | string   | true     | current Equity time       |
+| ∟∟ symbol_name             | string   | true     | Fund name                 |
+| ∟∟ currency                | string   | true     | Currency                  |
+| ∟∟ cost_net_asset_value    | string   | true     | Net Cost                  |

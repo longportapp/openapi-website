@@ -1,28 +1,26 @@
 ---
 slug: stock
-title: 獲取股票持倉 
+title: 獲取股票持倉
 language_tabs: false
 toc_footers: []
 includes: []
 search: true
-highlight_theme: ""
+highlight_theme: ''
 headingLevel: 2
-
 ---
 
 該接口用於獲取包括賬戶、股票代碼、持倉股數、可用股數、持倉均價（按賬戶設置計算均價方式）、幣種在內的股票持倉信息。
 
 <SDKLinks module="trade" klass="TradeContext" method="stock_positions" />
 
-## 
+##
 
 ## Request
 
 <table className="http-basic">
 <tbody>
 <tr><td className="http-basic-key">HTTP Method</td><td>GET</td></tr>
-<tr><td className="http-basic-key">HTTP URL</td><td>/v1/asset/stock 
-</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>/v1/asset/stock </td></tr>
 </tbody>
 </table>
 
@@ -30,9 +28,9 @@ headingLevel: 2
 
 > Content-Type: application/json; charset=utf-8
 
-| Name | Type | Required | Description |
-|---|---|---|---|
-| symbol | string[] | NO | 股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US` |
+| Name   | Type     | Required | Description                                          |
+| ------ | -------- | -------- | ---------------------------------------------------- |
+| symbol | string[] | NO       | 股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US` |
 
 ### Request Example
 
@@ -146,10 +144,10 @@ print(resp)
 
 ### Response Status
 
-| Status | Description | Schema |
-|---|---|---|
-| 200 | 返回成功 | [stock_rsp](#schemastock_rsp) |
-| 400 | 內部錯誤 | None |
+| Status | Description | Schema                        |
+| ------ | ----------- | ----------------------------- |
+| 200    | 返回成功    | [stock_rsp](#schemastock_rsp) |
+| 400    | 內部錯誤    | None                          |
 
 <aside className="success">
 </aside>
@@ -161,17 +159,16 @@ print(resp)
 <a id="schemastock_rsp"></a>
 <a id="schemastock_rsp"></a>
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-|list|object[]|false|股票持倉信息|
-|∟ account_channel|string|true|賬戶類型|
-|∟ stock_info|object[]|false|股票列表|
-|∟∟ symbol|string|true|股票代碼|
-|∟∟ symbol_name|string|true|股票名稱|
-|∟∟ quantity|string|true|持倉股數|
-|∟∟ available_quantity|string|false|可用股數|
-|∟∟ currency|string|true|幣種|
-|∟∟ market|string|true|市場|
-|∟∟ cost_price|string|true|成本價格 (具體根據客戶端選擇平均買入還是攤薄成本)|
-|∟∟ init_quantity|string|false|開盤前初始持倉|
-
+| Name                  | Type     | Required | Description                                       |
+| --------------------- | -------- | -------- | ------------------------------------------------- |
+| list                  | object[] | false    | 股票持倉信息                                      |
+| ∟ account_channel     | string   | true     | 賬戶類型                                          |
+| ∟ stock_info          | object[] | false    | 股票列表                                          |
+| ∟∟ symbol             | string   | true     | 股票代碼                                          |
+| ∟∟ symbol_name        | string   | true     | 股票名稱                                          |
+| ∟∟ quantity           | string   | true     | 持倉股數                                          |
+| ∟∟ available_quantity | string   | false    | 可用股數                                          |
+| ∟∟ currency           | string   | true     | 幣種                                              |
+| ∟∟ market             | string   | true     | 市場                                              |
+| ∟∟ cost_price         | string   | true     | 成本價格 (具體根據客戶端選擇平均買入還是攤薄成本) |
+| ∟∟ init_quantity      | string   | false    | 開盤前初始持倉                                    |

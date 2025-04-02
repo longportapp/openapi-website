@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-slug: /getting-started
+slug: getting-started
 title: 快速开始
 id: getting-started
 ---

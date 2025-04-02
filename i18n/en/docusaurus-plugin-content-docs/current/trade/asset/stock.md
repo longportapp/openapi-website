@@ -1,13 +1,12 @@
 ---
 slug: stock
-title: Get Stock Positions 
+title: Get Stock Positions
 language_tabs: false
 toc_footers: []
 includes: []
 search: true
-highlight_theme: ""
+highlight_theme: ''
 headingLevel: 2
-
 ---
 
 The API is used to obtain stock position information including account, stock code, number of shares held,
@@ -15,15 +14,14 @@ number of available shares, average position price (calculated according to acco
 
 <SDKLinks module="trade" klass="TradeContext" method="stock_positions" />
 
-## 
+##
 
 ## Request
 
 <table className="http-basic">
 <tbody>
 <tr><td className="http-basic-key">HTTP Method</td><td>GET</td></tr>
-<tr><td className="http-basic-key">HTTP URL</td><td>/v1/asset/stock 
-</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>/v1/asset/stock </td></tr>
 </tbody>
 </table>
 
@@ -31,9 +29,9 @@ number of available shares, average position price (calculated according to acco
 
 > Content-Type: application/json; charset=utf-8
 
-| Name | Type | Required | Description |
-|---|---|---|---|
-| symbol | string[] | NO | Stock code, use `ticker.region` format, E.g:`AAPL.US` |
+| Name   | Type     | Required | Description                                           |
+| ------ | -------- | -------- | ----------------------------------------------------- |
+| symbol | string[] | NO       | Stock code, use `ticker.region` format, E.g:`AAPL.US` |
 
 ### Request Example
 
@@ -147,10 +145,10 @@ print(resp)
 
 ### Response Status
 
-| Status | Description | Schema |
-|---|---|---|
-| 200 | Success | [stock_rsp](#schemastock_rsp) |
-| 400 | Internal Error | None |
+| Status | Description    | Schema                        |
+| ------ | -------------- | ----------------------------- |
+| 200    | Success        | [stock_rsp](#schemastock_rsp) |
+| 400    | Internal Error | None                          |
 
 <aside className="success">
 </aside>
@@ -162,17 +160,16 @@ print(resp)
 <a id="schemastock_rsp"></a>
 <a id="schemastock_rsp"></a>
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-|list|object[]|false|Stock holding information|
-|∟ account_channel|string|true|Account type|
-|∟ stock_info|object[]|false|Stock list|
-|∟∟ symbol|string|true|Stock code|
-|∟∟ symbol_name|string|true|Stock name|
-|∟∟ quantity|string|true|The number of holdings|
-|∟∟ available_quantity|string|false|Available quantity|
-|∟∟ currency|string|true|Currency|
-|∟∟ market|string|true|market|
-|∟∟ cost_price|string|true|Cost Price(According to the client's choice of average purchase or diluted cost)|
-|∟∟ init_quantity|string|false|Initial position before market opening|
-
+| Name                  | Type     | Required | Description                                                                      |
+| --------------------- | -------- | -------- | -------------------------------------------------------------------------------- |
+| list                  | object[] | false    | Stock holding information                                                        |
+| ∟ account_channel     | string   | true     | Account type                                                                     |
+| ∟ stock_info          | object[] | false    | Stock list                                                                       |
+| ∟∟ symbol             | string   | true     | Stock code                                                                       |
+| ∟∟ symbol_name        | string   | true     | Stock name                                                                       |
+| ∟∟ quantity           | string   | true     | The number of holdings                                                           |
+| ∟∟ available_quantity | string   | false    | Available quantity                                                               |
+| ∟∟ currency           | string   | true     | Currency                                                                         |
+| ∟∟ market             | string   | true     | market                                                                           |
+| ∟∟ cost_price         | string   | true     | Cost Price(According to the client's choice of average purchase or diluted cost) |
+| ∟∟ init_quantity      | string   | false    | Initial position before market opening                                           |

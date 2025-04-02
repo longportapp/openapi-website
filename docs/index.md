@@ -8,8 +8,6 @@ id: getting_started_introduce
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## 简介
-
 LongPort OpenAPI 为有研发能力的投资者提供程序化行情交易接口，助力投资者根据自身投资策略搭建交易或行情策略分析工具。覆盖以下类别功能：
 
 - 交易类 - 创建、修改、撤销订单，当日/历史订单及成交记录的查询等
