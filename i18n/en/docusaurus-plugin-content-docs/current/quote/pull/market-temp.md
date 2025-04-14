@@ -1,19 +1,19 @@
 ---
 title: Get Current Market Temperature
-slug: market_temp 
+slug: market_temperature
 sidebar_position: 21
 ---
 
 Get List of Securities
 
-<SDKLinks module="quote" klass="QuoteContext" method="market_temp" />
+<SDKLinks module="quote" klass="QuoteContext" method="market_temperature" />
 
 ## Request
 
 <table className="http-basic">
 <tbody>
 <tr><td className="http-basic-key">HTTP Method</td><td>GET</td></tr>
-<tr><td className="http-basic-key">HTTP URL</td><td>/v1/quote/get_market_temp</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>/v1/quote/get_market_temperature</td></tr>
 </tbody>
 </table>
 
@@ -30,7 +30,7 @@ from longport.openapi import QuoteContext, Config, Market
 
 config = Config.from_env()
 ctx = QuoteContext(config)
-resp = ctx.market_temp(Market.US)
+resp = ctx.market_temperature(Market.US)
 print(resp)
 ```
 
@@ -46,11 +46,11 @@ print(resp)
 {
   "code": 0,
   "data": {
-    "temp": 50,
-    "temp_intro": "Temperature is moderate, maintaining stability",
+    "temperature": 50,
+    "description": "Temperature is moderate, maintaining stability",
     "valuation": 23,
     "sentiment": 78,
-    "updated_at": "2025-04-14 10:10"
+    "updated_at": 1744616612
   }
 }
 ```
@@ -59,7 +59,7 @@ print(resp)
 
 | Status | Description | Schema                                      |
 | ------ | ----------- | ------------------------------------------- |
-| 200    | Success     | [market_temp_response](#get_market_temp_rsp) |
+| 200    | Success     | [market_temperature_response](#get_market_temperature_rsp) |
 | 400    | Parameter Error | None                                        |
 
 <aside className="success">
@@ -67,17 +67,17 @@ print(resp)
 
 ## Schemas
 
-### market_temp_response
+### market_temperature_response
 
-<a id="get_market_temp_rsp"></a>
+<a id="get_market_temperature_rsp"></a>
 
 | Name         | Type     | Required| Description                                                |
 | ------------ | -------- | -------- | ---------------------------------------------------------- |
-| temp         | integer   | true         | Temperature value                                          |
-| temp_intro   | string   | true     | Temperature description                                    |
+| temperature         | integer   | true         | Temperature value                                          |
+| description   | string   | true     | Temperature description                                    |
 | valuation    | integer   | true        | Market valuation                                           |
 | sentiment    | integer   | true        | Market sentiment                                           |
-| updated_at   | string    | true    | Update time                                                |
+| updated_at   | integer    | true    | Update time                                                |
 
 
 ## Error Codes

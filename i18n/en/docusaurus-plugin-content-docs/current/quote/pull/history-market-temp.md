@@ -1,19 +1,19 @@
 ---
 title: Get Historical Market Temperature
-slug: hist_market_temp 
+slug: history_market_temperature 
 sidebar_position: 22
 ---
 
 This interface is used to get historical market temperature.
 
-<SDKLinks module="quote" klass="QuoteContext" method="hist_market_temp" />
+<SDKLinks module="quote" klass="QuoteContext" method="history_market_temperature" />
 
 ## Request
 
 <table className="http-basic">
 <tbody>
 <tr><td className="http-basic-key">HTTP Method</td><td>GET</td></tr>
-<tr><td className="http-basic-key">HTTP URL</td><td>/v1/quote/hist_market_temp</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>/v1/quote/history_market_temperature</td></tr>
 </tbody>
 </table>
 
@@ -32,7 +32,7 @@ from longport.openapi import QuoteContext, Config, Market
 
 config = Config.from_env()
 ctx = QuoteContext(config)
-resp = ctx.hist_market_temp(Market.US, "20240101", "20250101")
+resp = ctx.history_market_temperature(Market.US, "20240101", "20250101")
 print(resp)
 ```
 
@@ -48,7 +48,7 @@ print(resp)
 {
   "code": 0,
   "data": {
-  "temp_list": [
+  "temperatures": [
       {
           "timestamp": 1580486400,
           "value": 36,
@@ -59,7 +59,7 @@ print(resp)
           "type": "month"
       }
     ],
-    "pe_list": [
+    "valuations": [
       {
           "timestamp": 1580486400,
           "value": 36,
@@ -70,7 +70,7 @@ print(resp)
           "type": "month"
       }
     ],
-    "up_list": [
+    "sentiments": [
       {
           "timestamp": 1580486400,
           "value": 36,
@@ -103,15 +103,15 @@ print(resp)
 
 | Name         | Type     | Required| Description                                                |
 | ------------ | -------- | --------| ---------------------------------------------------------- |
-| temp_list    | object[]   | true  | Historical temperature list                                |
+| temperatures    | object[]   | true  | Historical temperature list                                |
 | ∟timestamp  | integer    | true   | Timestamp                                                 |
 | ∟value      | integer    | true   | Value                                                     |
 | ∟type       | string   | true | Data granularity <br />day: daily; week: weekly; month: monthly |
-| pe_list      | object[]   | true  | Historical valuation list                                 |
+| valuations      | object[]   | true  | Historical valuation list                                 |
 | ∟timestamp  | integer    | true   | Timestamp                                                 |
 | ∟value      | integer    | true   | Value                                                     |
 | ∟type       | string   | true | Data granularity <br />day: daily; week: weekly; month: monthly |
-| up_list      | object[]  | true   | Market sentiment list                                     |
+| sentiments      | object[]  | true   | Market sentiment list                                     |
 | ∟timestamp  | integer   | true    | Timestamp                                                 |
 | ∟value      | integer    | true   | Value                                                     |
 | ∟type       | string   | true | Data granularity <br />day: daily; week: weekly; month: monthly |

@@ -1,19 +1,19 @@
 ---
 title: 獲取歷史市場溫度
-slug: hist_market_temp 
+slug: history_market_temperature 
 sidebar_position: 22
 ---
 
 該接口用於獲取歷史市場溫度。
 
-<SDKLinks module="quote" klass="QuoteContext" method="hist_market_temp" />
+<SDKLinks module="quote" klass="QuoteContext" method="history_market_temperature" />
 
 ## Request
 
 <table className="http-basic">
 <tbody>
 <tr><td className="http-basic-key">HTTP Method</td><td>GET</td></tr>
-<tr><td className="http-basic-key">HTTP URL</td><td>/v1/quote/hist_market_temp</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>/v1/quote/history_market_temperature</td></tr>
 </tbody>
 </table>
 
@@ -32,7 +32,7 @@ from longport.openapi import QuoteContext, Config, Market
 
 config = Config.from_env()
 ctx = QuoteContext(config)
-resp = ctx.hist_market_temp(Market.US, "20240101", "20250101")
+resp = ctx.history_market_temperature(Market.US, "20240101", "20250101")
 print(resp)
 ```
 
@@ -48,7 +48,7 @@ print(resp)
 {
   "code": 0,
   "data": {
-  "temp_list": [
+  "temperatures": [
       {
           "timestamp": 1580486400,
           "value": 36,
@@ -59,7 +59,7 @@ print(resp)
           "type": "month"
       }
     ],
-    "pe_list": [
+    "valuations": [
       {
           "timestamp": 1580486400,
           "value": 36,
@@ -70,7 +70,7 @@ print(resp)
           "type": "month"
       }
     ],
-    "up_list": [
+    "sentiments": [
       {
           "timestamp": 1580486400,
           "value": 36,
@@ -103,15 +103,15 @@ print(resp)
 
 | Name         | Type     | Required| Description                                                |
 | ------------ | -------- | --------| ---------------------------------------------------------- |
-| temp_list    | object[]   | true  | 歷史溫度列表                                                 |
+| temperatures    | object[]   | true  | 歷史溫度列表                                                 |
 | ∟timestamp  | integer    | true   | 時間戳                                                      |
 | ∟value      | integer    | true   | 值                                                         |
 | ∟type       | string   | true | 數據顆粒度 <br />day: 日;week: 周;month: 月                   |
-| pe_list      | object[]   | true  | 歷史估值列表                                                 |
+| valuations      | object[]   | true  | 歷史估值列表                                                 |
 | ∟timestamp  | integer    | true   | 時間戳                                                      |
 | ∟value      | integer    | true   | 值                                                         |
 | ∟type       | string   | true | 數據顆粒度 <br />day: 日;week: 周;month: 月                   |
-| up_list      | object[]  | true   | 市場情緒列表                                                 |
+| sentiments      | object[]  | true   | 市場情緒列表                                                 |
 | ∟timestamp  | integer   | true    | 時間戳                                                      |
 | ∟value      | integer    | true    | 值                                                         |
 | ∟type       | string   | true | 數據顆粒度 <br />day: 日;week: 周;month: 月                   |

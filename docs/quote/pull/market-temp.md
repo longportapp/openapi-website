@@ -1,19 +1,19 @@
 ---
 title: 获取当前市场温度
-slug: market_temp 
+slug: market_temperature 
 sidebar_position: 21
 ---
 
 获取标的列表
 
-<SDKLinks module="quote" klass="QuoteContext" method="market_temp" />
+<SDKLinks module="quote" klass="QuoteContext" method="market_temperature" />
 
 ## Request
 
 <table className="http-basic">
 <tbody>
 <tr><td className="http-basic-key">HTTP Method</td><td>GET</td></tr>
-<tr><td className="http-basic-key">HTTP URL</td><td>/v1/quote/get_market_temp</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>/v1/quote/get_market_temperature</td></tr>
 </tbody>
 </table>
 
@@ -30,7 +30,7 @@ from longport.openapi import QuoteContext, Config, Market
 
 config = Config.from_env()
 ctx = QuoteContext(config)
-resp = ctx.market_temp(Market.US)
+resp = ctx.market_temperature(Market.US)
 print(resp)
 ```
 
@@ -46,11 +46,11 @@ print(resp)
 {
   "code": 0,
   "data": {
-    "temp": 50,
-    "temp_intro": "温度适宜, 保持平稳",
+    "temperature": 50,
+    "description": "温度适宜, 保持平稳",
     "valuation": 23,
     "sentiment": 78,
-    "updated_at": "2025-04-14 10:10"
+    "updated_at": 1744616612
   }
 }
 ```
@@ -59,7 +59,7 @@ print(resp)
 
 | Status | Description | Schema                                      |
 | ------ | ----------- | ------------------------------------------- |
-| 200    | 返回成功    | [market_temp_response](#get_market_temp_rsp) |
+| 200    | 返回成功    | [market_temperature_response](#get_market_temperature_rsp) |
 | 400    | 参数错误    | None                                        |
 
 <aside className="success">
@@ -67,17 +67,17 @@ print(resp)
 
 ## Schemas
 
-### market_temp_response
+### market_temperature_response
 
-<a id="get_market_temp_rsp"></a>
+<a id="get_market_temperature_rsp"></a>
 
 | Name         | Type     | Required| Description                                                |
 | ------------ | -------- | -------- | ---------------------------------------------------------- |
-| temp         | integer   | true         | 温度值                                                      |
-| temp_intro   | string   | true     | 温度描述                                                    |
+| temperature         | integer   | true         | 温度值                                                      |
+| description   | string   | true     | 温度描述                                                    |
 | valuation    | integer   | true        | 市场估值                                                    |
 | sentiment    | integer   | true        | 市场情绪                                                    |
-| updated_at   | string    | true    | 更新时间                                                    |
+| updated_at   | integer    | true    | 更新时间                                                    |
 
 
 ## 错误码
