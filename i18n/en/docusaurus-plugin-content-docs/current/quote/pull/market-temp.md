@@ -4,7 +4,7 @@ slug: market_temperature
 sidebar_position: 21
 ---
 
-Get List of Securities
+Get Current Market Temperature
 
 <SDKLinks module="quote" klass="QuoteContext" method="market_temperature" />
 

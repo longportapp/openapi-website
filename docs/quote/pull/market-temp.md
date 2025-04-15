@@ -4,7 +4,7 @@ slug: market_temperature
 sidebar_position: 21
 ---
 
-获取标的列表
+获取当前市场温度
 
 <SDKLinks module="quote" klass="QuoteContext" method="market_temperature" />
 
