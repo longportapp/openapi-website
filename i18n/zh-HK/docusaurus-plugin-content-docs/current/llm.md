@@ -37,7 +37,23 @@ OpenAPI 文檔遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https
 
 ### 安裝
 
-訪問 [https://github.com/longportapp/openapi/releases](https://github.com/longportapp/openapi/releases) 下載最新版本。
+#### macOS 或 Linux
+
+你可以在「終端」下面運行下面的腳本來直接安裝：
+
+『`bash
+curl -sSL https://raw.githubusercontent.com/longportapp/openapi/refs/heads/main/mcp/install | bash
+```
+
+腳本執行完後，`longport-mcp` 將會安裝到 `/usr/local/bin/` 目錄下，執行下面的指令驗證是否正確：
+
+『`bash
+longport-mcp -h
+```
+
+#### Windows
+
+請造訪 [https://github.com/longportapp/openapi/releases](https://github.com/longportapp/openapi/releases) 下載「longport-mcp-x86_64-pc-windows-msvc.zip」並解壓縮取得 `longport-mcp.exe`。
 
 ### 使用
 

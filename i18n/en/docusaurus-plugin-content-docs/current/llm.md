@@ -37,7 +37,17 @@ And is also open source in our GitHub organization.
 
 ### Installation
 
-Visit [https://github.com/longportapp/openapi/releases](https://github.com/longportapp/openapi/releases) to download the latest release.
+#### macOS or Linux
+
+Run script to install:
+
+```bash
+curl -sSL https://raw.githubusercontent.com/longportapp/openapi/refs/heads/main/mcp/install | bash
+```
+
+#### Windows
+
+Download the latest binary from the [Releases](https://github.com/longportapp/openapi/releases/tag/longport-mcp-0.1.0) page.
 
 ### Usage
 
