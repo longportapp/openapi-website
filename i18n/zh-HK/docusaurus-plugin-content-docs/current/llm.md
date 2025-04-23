@@ -110,7 +110,7 @@ longport-mcp -h
 }
 ```
 
-效果演示:
+效果演示：
 
 <img src="https://assets.lbctrl.com/uploads/415db9a3-a5e7-4610-87d7-75cf7146c706/scr-20250423-menf.png" />
 
