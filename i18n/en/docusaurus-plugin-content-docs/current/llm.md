@@ -29,7 +29,7 @@ For example:
 
 ### Demo
 
-<video src="https://assets.lbctrl.com/uploads/ba6e849f-543d-4cb2-a6de-b0405124acb5/92fcb37035f4cc6fea390f63d18da7b5.mp4" width="100%" autoplay loop controls  />
+<video src="https://assets.lbkrs.com/uploads/030b2d42-c693-4290-aff1-9cfa6d819644/92fcb37035f4cc6fea390f63d18da7b5.mp4" width="100%" autoplay loop controls  />
 
 ### Using in Cursor
 
@@ -41,11 +41,11 @@ https://open.longportapp.com/llms.txt
 
 Once added successfully, the Cursor Settings will look like this:
 
-<img src="https://assets.lbctrl.com/uploads/5d5d037f-d8fb-42ed-aa5e-6c59bd65d066/scr-20250423-qrgl.png" />
+<img src="https://assets.lbkrs.com/uploads/5d5d037f-d8fb-42ed-aa5e-6c59bd65d066/scr-20250423-qrgl.png" />
 
 Next, in an AI conversation, you can select the Docs you just added under the `docs` menu of **@Add Context**. This allows the AI to use these documents as context in subsequent conversations.
 
-<img src="https://assets.lbctrl.com/uploads/4c3c37d5-ead7-4854-8c8d-e8e77cdcd967/scr-20250423-qoxl.png" />
+<img src="https://assets.lbkrs.com/uploads/4c3c37d5-ead7-4854-8c8d-e8e77cdcd967/scr-20250423-qoxl.png" />
 
 ## MCP
 
@@ -112,7 +112,7 @@ In the opened `mcp.json` file, add the following content, replacing `your-app-ke
 
 Demo:
 
-<img src="https://assets.lbctrl.com/uploads/415db9a3-a5e7-4610-87d7-75cf7146c706/scr-20250423-menf.png" />
+<img src="https://assets.lbkrs.com/uploads/415db9a3-a5e7-4610-87d7-75cf7146c706/scr-20250423-menf.png" />
 
 ### Cherry Studio Configuration
 

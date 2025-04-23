@@ -159,7 +159,7 @@ Windows 要稍微复杂一些，有下面两种方式可以设置环境变量：
 
    - 在弹出的窗口中点击“环境变量”。
 
-     <img src="https://assets.lbctrl.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
+     <img src="https://assets.lbkrs.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
 
    - 在弹出的窗口中点击“新建”，然后输入环境变量名称，比如 `LONGPORT_APP_KEY`，`Value` 分别填写从页面上获取到的 App Key，App Secret，Access Token，Region。
 
@@ -1068,4 +1068,4 @@ SDK 的详细 API 文档请访问：https://longportapp.github.io/openapi/
 
 如果你有使用[飞书](https://www.feishu.cn/)，可以扫打开在飞书话题群中提出你的问题：
 
-<img src="https://assets.lbctrl.com/uploads/412f8cd8-2268-45ff-a367-98f280d0ee09/openapi-feishu-qrcode.png" style={{ width: "200px" }} />
+<img src="https://assets.lbkrs.com/uploads/412f8cd8-2268-45ff-a367-98f280d0ee09/openapi-feishu-qrcode.png" style={{ width: "200px" }} />
