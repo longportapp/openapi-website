@@ -16,16 +16,36 @@ id: llm
 
 ## LLMs 文本
 
-OpenAPI 文檔遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https://open.longportapp.com/llms.txt) 以及每個文檔的 Markdown 文件。
+OpenAPI 文件遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https://open.longportapp.com/llms.txt) 以及每個文件的 Markdown 文件，基於這個 LLMs 文本，你可以為 AI 提供 LongPort OpenAPI 完整的文件字典作為 AI 輔助生成開發的參考信息，這樣 AI 能生成出來的代碼可以更準確。
 
 - [https://open.longportapp.com/llms.txt](https://open.longportapp.com/llms.txt) - 大約 2104 個 token。
 
-我們的每個文檔也都提供 Markdown 格式，當您訪問它們時，只需在 URL 後添加 `.md` 後綴。
+我們的每個文件也都提供 Markdown 格式，當您訪問它們時，只需在 URL 後添加 `.md` 後綴。
 
 例如：
 
 - https://open.longportapp.com/docs/getting-started.md
 - https://open.longportapp.com/docs/quote/pull/static.md
+
+### 演示
+
+<video src="https://assets.lbctrl.com/uploads/ba6e849f-543d-4cb2-a6de-b0405124acb5/92fcb37035f4cc6fea390f63d18da7b5.mp4" width="100%" autoplay loop controls  />
+
+### Cursor 內使用
+
+打開 Cursor，打開命令面板（`Command + Shift + P`）搜索並選擇 **Add New Custom Docs**，並在出來的對話框中輸入 LongPort OpenAPI 的 LLMs Text 地址：
+
+```
+https://open.longportapp.com/llms.txt
+```
+
+添加成功後，Cursor Settings 裡面會是這樣：
+
+<img src="https://assets.lbctrl.com/uploads/5d5d037f-d8fb-42ed-aa5e-6c59bd65d066/scr-20250423-qrgl.png" />
+
+接下來你可以在 AI 的會話中，**@Add Context** 的 `docs` 菜單下選擇剛才添加的 Docs，這樣接下來與 AI 的會話中，AI 將會使用這些文件作為上下文。
+
+<img src="https://assets.lbctrl.com/uploads/4c3c37d5-ead7-4854-8c8d-e8e77cdcd967/scr-20250423-qoxl.png" />
 
 ## MCP
 
@@ -37,33 +57,64 @@ OpenAPI 文檔遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https
 
 ### 安裝
 
+開始之前閱讀 [快速開始](/docs/getting-started) 並獲得您的 `LONGPORT_APP_KEY`、`LONGPORT_APP_SECRET` 和 `LONGPORT_ACCESS_TOKEN`。
+
 #### macOS 或 Linux
 
-你可以在「終端」下面運行下面的腳本來直接安裝：
+你可以在“終端”下面運行下面的腳本來直接安裝：
 
-『`bash
+```bash
 curl -sSL https://raw.githubusercontent.com/longportapp/openapi/refs/heads/main/mcp/install | bash
 ```
 
-腳本執行完後，`longport-mcp` 將會安裝到 `/usr/local/bin/` 目錄下，執行下面的指令驗證是否正確：
+腳本執行完後，`longport-mcp` 將會安裝到 `/usr/local/bin/` 目錄下，運行下面的命令驗證是否正確：
 
-『`bash
+```bash
 longport-mcp -h
 ```
 
 #### Windows
 
-請造訪 [https://github.com/longportapp/openapi/releases](https://github.com/longportapp/openapi/releases) 下載「longport-mcp-x86_64-pc-windows-msvc.zip」並解壓縮取得 `longport-mcp.exe`。
+請訪問 [https://github.com/longportapp/openapi/releases](https://github.com/longportapp/openapi/releases) 下載 `longport-mcp-x86_64-pc-windows-msvc.zip` 並解壓獲得 `longport-mcp.exe`。
 
-### 使用
+### 示例提示
 
-成功安裝後，您將擁有一個 `longport-mcp` 命令行工具。
+完成伺服器設置並連接後，您可以與 AI 進行以下對話：
 
-> 注意：您必須按照 [快速開始](/docs/getting-started) 配置您的環境。
+- AAPL 和 TSLA 股票的當前價格是多少？
+- 特斯拉在過去一個月的表現如何？
+- 查一下港股、美股主要指數的最新行情數據。
+- 查一下 TSLA 和 AAPL 在過去一年的股票價格歷史。
+- 比較 TSLA、AAPL 和 NVDA 在過去 3 個月的表現。
+- 為我持有的股票生成投資組合表現圖表，並返回數據表和餅圖（直接返回結果，不要生成代碼）。
+- 檢查我持有股票的最新價格，如果下跌/上漲超過 3%，以市場價格賣出（如果下跌）或買入（如果上漲）三分之一。
 
-在啟動 MCP 服務器之前，必須設置環境變量 `LONGPORT_APP_KEY`、`LONGPORT_APP_SECRET` 和 `LONGPORT_ACCESS_TOKEN`。
+### Cursor 內使用
 
-#### 在您的 AI 聊天中配置 LongPort MCP
+打開命令面板（`Command + Shift + P`），選擇 **Cursor Settings** 進入 Cursor Settings 界面，並選擇 **MCP Servers** 點擊 **Add new global MCP server** 按鈕。
+
+在打開的 `mcp.json` 文件中增加下面的內容，請替換 `your-app-key`、`your-app-secret` 和 `your-access-token` 為您的實際值：
+
+```json
+{
+  "mcpServers": {
+    "longport-mcp": {
+      "command": "/usr/local/bin/longport-mcp",
+      "env": {
+        "LONGPORT_APP_KEY": "your-app-key",
+        "LONGPORT_APP_SECRET": "your-app-secret",
+        "LONGPORT_ACCESS_TOKEN": "your-access-token"
+      }
+    }
+  }
+}
+```
+
+效果演示：
+
+<img src="https://assets.lbctrl.com/uploads/415db9a3-a5e7-4610-87d7-75cf7146c706/scr-20250423-menf.png" />
+
+### Cherry Studio 配置
 
 在這一部分，我們將向您展示如何在您的 AI 聊天中配置 LongPort MCP（截圖使用了 [Cherry Studio](https://cherry-ai.com/)）。
 
