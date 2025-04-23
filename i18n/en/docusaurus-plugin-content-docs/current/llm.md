@@ -77,6 +77,18 @@ longport-mcp -h
 
 Visit [https://github.com/longportapp/openapi/releases](https://github.com/longportapp/openapi/releases) to download `longport-mcp-x86_64-pc-windows-msvc.zip` and extract `longport-mcp.exe`.
 
+### Example Prompts
+
+Once you done server setup, and connected, you can talk with AI:
+
+- What's the current price of AAPL and TSLA stock?
+- How has Tesla performed over the past month?
+- Show me the current values of major market indices.
+- What's the stock price history for TSLA, AAPL over the last year?
+- Compare the performance of TSLA, AAPL and NVDA over the past 3 months.
+- Generate a portfolio performance chart for my holding stocks, and return me with data table and pie chart (Just return result no code).
+- Check the price of the stocks I hold today, and if they fall/rise by more than 3%, sell(If fall, buy if rise) 1/3 at the market price.
+
 ### Using in Cursor
 
 Open the command palette (`Command + Shift + P`), select **Cursor Settings** to enter the Cursor Settings interface, and select **MCP Servers**. Click the **Add new global MCP server** button.

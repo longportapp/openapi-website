@@ -77,6 +77,18 @@ longport-mcp -h
 
 请访问 [https://github.com/longportapp/openapi/releases](https://github.com/longportapp/openapi/releases) 下载 `longport-mcp-x86_64-pc-windows-msvc.zip` 并解压获得 `longport-mcp.exe`。
 
+### 示例提示
+
+完成服务器设置并连接后，您可以与 AI 进行以下对话：
+
+- AAPL 和 TSLA 股票的当前价格是多少？
+- 特斯拉在过去一个月的表现如何？
+- 查一下港股、美股主要指数的最新行情数据。
+- 查一下 TSLA 和 AAPL 在过去一年的股票价格历史。
+- 比较 TSLA、AAPL 和 NVDA 在过去 3 个月的表现。
+- 为我持有的股票生成投资组合表现图表，并返回数据表和饼图（直接返回结果，不要生成代码）。
+- 检查我持有股票的最新价格，如果下跌/上涨超过 3%，以市场价格卖出（如果下跌）或买入（如果上涨）三分之一。
+
 ### Cursor 内使用
 
 打开命令面板（`Command + Shift + P`），选择 **Cursor Settings** 进入 Cursor Settings 界面，并选择 **MCP Servers** 点击 **Add new global MCP server** 按钮。
