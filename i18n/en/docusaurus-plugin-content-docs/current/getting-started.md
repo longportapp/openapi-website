@@ -156,7 +156,7 @@ Windows is a little more complicated, we provide two methods to set the environm
 
    - Click "Environment Variables" in the pop-up window.
 
-     <img src="https://assets.lbctrl.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
+     <img src="https://assets.lbkrs.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
 
    - Click "New" in the pop-up window, then enter the environment variable name, such as `LONGPORT_APP_KEY`, `Value` respectively fill in the App Key, App Secret, Access Token, Region obtained from the page.
 

@@ -29,7 +29,7 @@ OpenAPI 文件遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https
 
 ### 演示
 
-<video src="https://assets.lbctrl.com/uploads/ba6e849f-543d-4cb2-a6de-b0405124acb5/92fcb37035f4cc6fea390f63d18da7b5.mp4" width="100%" autoplay loop controls  />
+<video src="https://assets.lbkrs.com/uploads/030b2d42-c693-4290-aff1-9cfa6d819644/92fcb37035f4cc6fea390f63d18da7b5.mp4" width="100%" autoplay loop controls  />
 
 ### Cursor 內使用
 
@@ -41,11 +41,11 @@ https://open.longportapp.com/llms.txt
 
 添加成功後，Cursor Settings 裡面會是這樣：
 
-<img src="https://assets.lbctrl.com/uploads/5d5d037f-d8fb-42ed-aa5e-6c59bd65d066/scr-20250423-qrgl.png" />
+<img src="https://assets.lbkrs.com/uploads/5d5d037f-d8fb-42ed-aa5e-6c59bd65d066/scr-20250423-qrgl.png" />
 
 接下來你可以在 AI 的會話中，**@Add Context** 的 `docs` 菜單下選擇剛才添加的 Docs，這樣接下來與 AI 的會話中，AI 將會使用這些文件作為上下文。
 
-<img src="https://assets.lbctrl.com/uploads/4c3c37d5-ead7-4854-8c8d-e8e77cdcd967/scr-20250423-qoxl.png" />
+<img src="https://assets.lbkrs.com/uploads/4c3c37d5-ead7-4854-8c8d-e8e77cdcd967/scr-20250423-qoxl.png" />
 
 ## MCP
 
@@ -112,7 +112,7 @@ longport-mcp -h
 
 效果演示：
 
-<img src="https://assets.lbctrl.com/uploads/415db9a3-a5e7-4610-87d7-75cf7146c706/scr-20250423-menf.png" />
+<img src="https://assets.lbkrs.com/uploads/415db9a3-a5e7-4610-87d7-75cf7146c706/scr-20250423-menf.png" />
 
 ### Cherry Studio 配置
 
