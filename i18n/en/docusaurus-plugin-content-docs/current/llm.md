@@ -8,73 +8,118 @@ id: llm
 
 # LLM Components
 
-We provide some components for LLM (Large language models), you can easily access and analyze financial data, real-time market data, even tell AI to submit orders.
+We provide several components for LLMs (Large Language Models) that allow you to easily access and analyze financial data, real-time market data, and even enable AI to place orders.
 
 <video src="https://pub.lbkrs.com/files/202503/SGozJNWBfYpta73i/longport-mcp.mp4" width="100%" autoplay loop controls  />
 
-Yes, you can do it via LongPort OpenAPI with our LLM components, start today!
+Yes, you can use our LLM components through the LongPort OpenAPI. Start today!
 
 ## LLMs Text
 
-The OpenAPI Docs follow [LLMs Text](https://llmstxt.org/) to provide [llms.txt](https://open.longportapp.com/llms.txt) and Markdown files for each documents.
+The OpenAPI documentation follows the [LLMs Text](https://llmstxt.org/) standard, providing [llms.txt](https://open.longportapp.com/llms.txt) and Markdown files for each document. Based on this LLMs Text, you can provide AI with a complete dictionary of LongPort OpenAPI documentation as a reference for AI-assisted development, enabling AI to generate more accurate code.
 
-- [https://open.longportapp.com/llms.txt](https://open.longportapp.com/llms.txt) - About 2104 tokens.
+- [https://open.longportapp.com/llms.txt](https://open.longportapp.com/llms.txt) - Approximately 2104 tokens.
 
-Our each document is also available in Markdown format, when you visit them, just add `.md` suffix to the URL.
+Each of our documents is also available in Markdown format. When accessing them, simply add the `.md` suffix to the URL.
 
 For example:
 
 - https://open.longportapp.com/docs/getting-started.md
 - https://open.longportapp.com/docs/quote/pull/static.md
 
+### Demo
+
+<video src="https://assets.lbctrl.com/uploads/ba6e849f-543d-4cb2-a6de-b0405124acb5/92fcb37035f4cc6fea390f63d18da7b5.mp4" width="100%" autoplay loop controls  />
+
+### Using in Cursor
+
+Open Cursor, open the command palette (`Command + Shift + P`), search for and select **Add New Custom Docs** and enter the LongPort OpenAPI LLMs Text address in the dialog box:
+
+```
+https://open.longportapp.com/llms.txt
+```
+
+Once added successfully, the Cursor Settings will look like this:
+
+<img src="https://assets.lbctrl.com/uploads/5d5d037f-d8fb-42ed-aa5e-6c59bd65d066/scr-20250423-qrgl.png" />
+
+Next, in an AI conversation, you can select the Docs you just added under the `docs` menu of **@Add Context**. This allows the AI to use these documents as context in subsequent conversations.
+
+<img src="https://assets.lbctrl.com/uploads/4c3c37d5-ead7-4854-8c8d-e8e77cdcd967/scr-20250423-qoxl.png" />
+
 ## MCP
 
-We in building the [MCP](https://modelcontextprotocol.io/) implementation for LongPort OpenAPI (Based on our SDK), you can use it in every AI platform that supported [MCP](https://modelcontextprotocol.io/).
+We are building an [MCP](https://modelcontextprotocol.io/) implementation for LongPort OpenAPI (based on our SDK), which you can use on any platform that supports [MCP](https://modelcontextprotocol.io/).
 
-And is also open source in our GitHub organization.
+It is also open-sourced in our GitHub organization.
 
 [https://github.com/longportapp/openapi](https://github.com/longportapp/openapi/tree/main/mcp)
 
 ### Installation
 
+Before starting, read the [Getting Started](/docs/getting-started) guide and obtain your `LONGPORT_APP_KEY`, `LONGPORT_APP_SECRET`, and `LONGPORT_ACCESS_TOKEN`.
+
 #### macOS or Linux
 
-Run script to install:
+You can run the following script in the terminal to install directly:
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/longportapp/openapi/refs/heads/main/mcp/install | bash
 ```
 
+After the script finishes, `longport-mcp` will be installed in the `/usr/local/bin/` directory. Run the following command to verify the installation:
+
+```bash
+longport-mcp -h
+```
+
 #### Windows
 
-Download the latest binary from the [Releases](https://github.com/longportapp/openapi/releases/tag/longport-mcp-0.1.0) page.
+Visit [https://github.com/longportapp/openapi/releases](https://github.com/longportapp/openapi/releases) to download `longport-mcp-x86_64-pc-windows-msvc.zip` and extract `longport-mcp.exe`.
 
-### Usage
+### Using in Cursor
 
-When you installed successfully, you will have a `longport-mcp` command line tool.
+Open the command palette (`Command + Shift + P`), select **Cursor Settings** to enter the Cursor Settings interface, and select **MCP Servers**. Click the **Add new global MCP server** button.
 
-> NOTE: You must follow [Getting Started](/docs/getting-started) to configure your environment.
+In the opened `mcp.json` file, add the following content, replacing `your-app-key`, `your-app-secret`, and `your-access-token` with your actual values:
 
-The environment `LONGPORT_APP_KEY`, `LONGPORT_APP_SECRET` and `LONGPORT_ACCESS_TOKEN` must be set before you start the MCP server.
+```json
+{
+  "mcpServers": {
+    "longport-mcp": {
+      "command": "/usr/local/bin/longport-mcp",
+      "env": {
+        "LONGPORT_APP_KEY": "your-app-key",
+        "LONGPORT_APP_SECRET": "your-app-secret",
+        "LONGPORT_ACCESS_TOKEN": "your-access-token"
+      }
+    }
+  }
+}
+```
 
-#### Configuration LongPort MCP in your AI Chat
+Demo:
 
-This part we will show you how to configure LongPort MCP in your AI chat (The screenshot have used [Cherry Studio](https://cherry-ai.com/)).
+<img src="https://assets.lbctrl.com/uploads/415db9a3-a5e7-4610-87d7-75cf7146c706/scr-20250423-menf.png" />
 
-**Use STDIO mode:**
+### Cherry Studio Configuration
 
-Ensure you have already configured your environment variables and install the `longport-mcp` command line tool in your system.
+In this section, we will show you how to configure LongPort MCP in your AI chat (screenshots use [Cherry Studio](https://cherry-ai.com/)).
+
+**Using STDIO Mode:**
+
+Ensure you have configured the environment variables and installed the `longport-mcp` command-line tool on your system.
 
 ![](https://pub.lbkrs.com/files/202503/QRuojGfGL1Lay7rs/SCR-20250331-jajy.png)
 
-**Use SSE mode:**
+**Using SSE Mode:**
 
-You must to start SSE server first, you can use the following command:
+You must first start the SSE server. You can use the following command:
 
 ```bash
 longport-mcp --sse
 ```
 
-And then configure your AI chat to use `http://localhost:8000`.
+Then configure your AI chat to use `http://localhost:8000`.
 
 ![](https://pub.lbkrs.com/files/202503/PhUVovCsMqD2w2rL/SCR-20250319-snro.png)

@@ -16,7 +16,7 @@ id: llm
 
 ## LLMs 文本
 
-OpenAPI 文档遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https://open.longportapp.com/llms.txt) 以及每个文档的 Markdown 文件。
+OpenAPI 文档遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https://open.longportapp.com/llms.txt) 以及每个文档的 Markdown 文件，基于这个 LLMs 文本，你可以为 AI 提供 LongPort OpenAPI 完整的文档字典作为 AI 辅助生成开发的参考信息，这样 AI 能生成出来的代码可以更准确。
 
 - [https://open.longportapp.com/llms.txt](https://open.longportapp.com/llms.txt) - 大约 2104 个 token。
 
@@ -27,6 +27,26 @@ OpenAPI 文档遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https
 - https://open.longportapp.com/docs/getting-started.md
 - https://open.longportapp.com/docs/quote/pull/static.md
 
+### 演示
+
+<video src="https://assets.lbctrl.com/uploads/ba6e849f-543d-4cb2-a6de-b0405124acb5/92fcb37035f4cc6fea390f63d18da7b5.mp4" width="100%" autoplay loop controls  />
+
+### Cursor 内使用
+
+打开 Cursor，打开命令面板（`Command + Shift + P`）搜索并选择 **Add New Custom Docs**，并在出来的对话框中输入 LongPort OpenAPI 的 LLMs Text 地址：
+
+```
+https://open.longportapp.com/llms.txt
+```
+
+添加成功后，Cursor Settings 里面会是这样：
+
+<img src="https://assets.lbctrl.com/uploads/5d5d037f-d8fb-42ed-aa5e-6c59bd65d066/scr-20250423-qrgl.png" />
+
+接下来你可以在 AI 的会话中，**@Add Context** 的 `docs` 菜单下选择刚才添加的 Docs，这样接下来与 AI 的会话中，AI 将会使用这些文档作为上下文。
+
+<img src="https://assets.lbctrl.com/uploads/4c3c37d5-ead7-4854-8c8d-e8e77cdcd967/scr-20250423-qoxl.png" />
+
 ## MCP
 
 我们正在为 LongPort OpenAPI 构建 [MCP](https://modelcontextprotocol.io/) 实现（基于我们的 SDK），您可以在支持 [MCP](https://modelcontextprotocol.io/) 的每个平台上使用它。
@@ -36,6 +56,8 @@ OpenAPI 文档遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https
 [https://github.com/longportapp/openapi](https://github.com/longportapp/openapi/tree/main/mcp)
 
 ### 安装
+
+开始之前阅读 [快速开始](/docs/getting-started) 并获得您的 `LONGPORT_APP_KEY`、`LONGPORT_APP_SECRET` 和 `LONGPORT_ACCESS_TOKEN`。
 
 #### macOS 或 Linux
 
@@ -53,17 +75,34 @@ longport-mcp -h
 
 #### Windows
 
-请访问 [https://github.com/longportapp/openapi/releases](https://github.com/longportapp/openapi/releases) 下载“longport-mcp-x86_64-pc-windows-msvc.zip”并解压获得 `longport-mcp.exe`。
+请访问 [https://github.com/longportapp/openapi/releases](https://github.com/longportapp/openapi/releases) 下载 `longport-mcp-x86_64-pc-windows-msvc.zip` 并解压获得 `longport-mcp.exe`。
 
-### 使用
+### Cursor 内使用
 
-成功安装后，您将拥有一个 `longport-mcp` 命令行工具。
+打开命令面板（`Command + Shift + P`），选择 **Cursor Settings** 进入 Cursor Settings 界面，并选择 **MCP Servers** 点击 **Add new global MCP server** 按钮。
 
-> 注意：您必须按照 [快速开始](/docs/getting-started) 配置您的环境。
+在打开的 `mcp.json` 文件中增加下面的内容，请替换 `your-app-key`、`your-app-secret` 和 `your-access-token` 为您的实际值：
 
-在启动 MCP 服务器之前，必须设置环境变量 `LONGPORT_APP_KEY`、`LONGPORT_APP_SECRET` 和 `LONGPORT_ACCESS_TOKEN`。
+```json
+{
+  "mcpServers": {
+    "longport-mcp": {
+      "command": "/usr/local/bin/longport-mcp",
+      "env": {
+        "LONGPORT_APP_KEY": "your-app-key",
+        "LONGPORT_APP_SECRET": "your-app-secret",
+        "LONGPORT_ACCESS_TOKEN": "your-access-token"
+      }
+    }
+  }
+}
+```
 
-#### 在您的 AI 聊天中配置 LongPort MCP
+效果演示:
+
+<img src="https://assets.lbctrl.com/uploads/415db9a3-a5e7-4610-87d7-75cf7146c706/scr-20250423-menf.png" />
+
+### Cherry Studio 配置
 
 在这一部分，我们将向您展示如何在您的 AI 聊天中配置 LongPort MCP（截图使用了 [Cherry Studio](https://cherry-ai.com/)）。
 
