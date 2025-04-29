@@ -1,6 +1,6 @@
 ---
-title: 获取当前市场温度
-slug: market_temperature 
+title: 当前市场温度
+slug: market_temperature
 sidebar_position: 21
 ---
 
@@ -19,9 +19,9 @@ sidebar_position: 21
 
 ### Parameters
 
-| Name     | Type   | Required | Description                      |
-| -------- | ------ | -------- | -------------------------------- |
-| market   | string | YES      | 市场，目前支持 US、HK、SG、CN        |
+| Name   | Type   | Required | Description                   |
+| ------ | ------ | -------- | ----------------------------- |
+| market | string | YES      | 市场，目前支持 US、HK、SG、CN |
 
 ### Request Example
 
@@ -57,10 +57,10 @@ print(resp)
 
 #### Response Status
 
-| Status | Description | Schema                                      |
-| ------ | ----------- | ------------------------------------------- |
+| Status | Description | Schema                                                     |
+| ------ | ----------- | ---------------------------------------------------------- |
 | 200    | 返回成功    | [market_temperature_response](#get_market_temperature_rsp) |
-| 400    | 参数错误    | None                                        |
+| 400    | 参数错误    | None                                                       |
 
 <aside className="success">
 </aside>
@@ -71,17 +71,16 @@ print(resp)
 
 <a id="get_market_temperature_rsp"></a>
 
-| Name         | Type     | Required| Description                                                |
-| ------------ | -------- | -------- | ---------------------------------------------------------- |
-| temperature         | integer   | true         | 温度值                                                      |
-| description   | string   | true     | 温度描述                                                    |
-| valuation    | integer   | true        | 市场估值                                                    |
-| sentiment    | integer   | true        | 市场情绪                                                    |
-| updated_at   | integer    | true    | 更新时间                                                    |
-
+| Name        | Type    | Required | Description |
+| ----------- | ------- | -------- | ----------- |
+| temperature | integer | true     | 温度值      |
+| description | string  | true     | 温度描述    |
+| valuation   | integer | true     | 市场估值    |
+| sentiment   | integer | true     | 市场情绪    |
+| updated_at  | integer | true     | 更新时间    |
 
 ## 错误码
 
 | 业务错误码 | 描述           | 排查建议                 |
 | ---------- | -------------- | ------------------------ |
-| 2601500     | 服务端内部错误 | 请重试或联系技术人员处理 |
+| 2601500    | 服务端内部错误 | 请重试或联系技术人员处理 |

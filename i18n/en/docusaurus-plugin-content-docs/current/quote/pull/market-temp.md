@@ -1,5 +1,5 @@
 ---
-title: Get Current Market Temperature
+title: Current Market Temperature
 slug: market_temperature
 sidebar_position: 21
 ---
@@ -19,9 +19,9 @@ Get Current Market Temperature
 
 ### Parameters
 
-| Name     | Type   | Required | Description                      |
-| -------- | ------ | -------- | -------------------------------- |
-| market   | string | YES      | Market, currently supports US, HK, SG, CN |
+| Name   | Type   | Required | Description                               |
+| ------ | ------ | -------- | ----------------------------------------- |
+| market | string | YES      | Market, currently supports US, HK, SG, CN |
 
 ### Request Example
 
@@ -57,10 +57,10 @@ print(resp)
 
 #### Response Status
 
-| Status | Description | Schema                                      |
-| ------ | ----------- | ------------------------------------------- |
-| 200    | Success     | [market_temperature_response](#get_market_temperature_rsp) |
-| 400    | Parameter Error | None                                        |
+| Status | Description     | Schema                                                     |
+| ------ | --------------- | ---------------------------------------------------------- |
+| 200    | Success         | [market_temperature_response](#get_market_temperature_rsp) |
+| 400    | Parameter Error | None                                                       |
 
 <aside className="success">
 </aside>
@@ -71,17 +71,16 @@ print(resp)
 
 <a id="get_market_temperature_rsp"></a>
 
-| Name         | Type     | Required| Description                                                |
-| ------------ | -------- | -------- | ---------------------------------------------------------- |
-| temperature         | integer   | true         | Temperature value                                          |
-| description   | string   | true     | Temperature description                                    |
-| valuation    | integer   | true        | Market valuation                                           |
-| sentiment    | integer   | true        | Market sentiment                                           |
-| updated_at   | integer    | true    | Update time                                                |
-
+| Name        | Type    | Required | Description             |
+| ----------- | ------- | -------- | ----------------------- |
+| temperature | integer | true     | Temperature value       |
+| description | string  | true     | Temperature description |
+| valuation   | integer | true     | Market valuation        |
+| sentiment   | integer | true     | Market sentiment        |
+| updated_at  | integer | true     | Update time             |
 
 ## Error Codes
 
-| Business Error Code | Description           | Troubleshooting                 |
-| ---------- | -------------- | ------------------------ |
-| 2601500     | Server Internal Error | Please retry or contact technical support |
+| Business Error Code | Description           | Troubleshooting                           |
+| ------------------- | --------------------- | ----------------------------------------- |
+| 2601500             | Server Internal Error | Please retry or contact technical support |

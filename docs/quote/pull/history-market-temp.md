@@ -1,6 +1,6 @@
 ---
-title: 获取历史市场温度
-slug: history_market_temperature 
+title: 历史市场温度
+slug: history_market_temperature
 sidebar_position: 22
 ---
 
@@ -19,11 +19,11 @@ sidebar_position: 22
 
 ### Parameters
 
-| Name     | Type   | Required | Description                      |
-| -------- | ------ | -------- | -------------------------------- |
-| market   | string | YES      | 市场，目前支持 US、HK、SG、CN        |
-| start_date |string|YES|开始日期，最小到 2016 年，比如：20240101|
-| end_date |string|YES|结束日期，比如：20250101|
+| Name       | Type   | Required | Description                              |
+| ---------- | ------ | -------- | ---------------------------------------- |
+| market     | string | YES      | 市场，目前支持 US、HK、SG、CN            |
+| start_date | string | YES      | 开始日期，最小到 2016 年，比如：20240101 |
+| end_date   | string | YES      | 结束日期，比如：20250101                 |
 
 ### Request Example
 
@@ -48,49 +48,52 @@ print(resp)
 {
   "code": 0,
   "data": {
-  "temperatures": [
+    "temperatures": [
       {
-          "timestamp": 1580486400,
-          "value": 36,
-          "type": "month"
-      }, {
-          "timestamp": 1582992000,
-          "value": 46,
-          "type": "month"
+        "timestamp": 1580486400,
+        "value": 36,
+        "type": "month"
+      },
+      {
+        "timestamp": 1582992000,
+        "value": 46,
+        "type": "month"
       }
     ],
     "valuations": [
       {
-          "timestamp": 1580486400,
-          "value": 36,
-          "type": "month"
-      }, {
-          "timestamp": 1582992000,
-          "value": 46,
-          "type": "month"
+        "timestamp": 1580486400,
+        "value": 36,
+        "type": "month"
+      },
+      {
+        "timestamp": 1582992000,
+        "value": 46,
+        "type": "month"
       }
     ],
     "sentiments": [
       {
-          "timestamp": 1580486400,
-          "value": 36,
-          "type": "month"
-      }, {
-          "timestamp": 1582992000,
-          "value": 46,
-          "type": "month"
+        "timestamp": 1580486400,
+        "value": 36,
+        "type": "month"
+      },
+      {
+        "timestamp": 1582992000,
+        "value": 46,
+        "type": "month"
       }
-    ],     
+    ]
   }
 }
 ```
 
 #### Response Status
 
-| Status | Description | Schema                                      |
-| ------ | ----------- | ------------------------------------------- |
+| Status | Description | Schema                                             |
+| ------ | ----------- | -------------------------------------------------- |
 | 200    | 返回成功    | [hist_market_temp_response](#hist_market_temp_rsp) |
-| 400    | 参数错误    | None                                        |
+| 400    | 参数错误    | None                                               |
 
 <aside className="success">
 </aside>
@@ -101,25 +104,23 @@ print(resp)
 
 <a id="hist_market_temp_rsp"></a>
 
-| Name         | Type     | Required| Description                                                |
-| ------------ | -------- | --------| ---------------------------------------------------------- |
-| temperatures    | object[]   | true  | 历史温度列表                                                 |
-| ∟timestamp  | integer    | true   | 时间戳                                                      |
-| ∟value      | integer    | true   | 值                                                         |
-| ∟type       | string   | true | 数据颗粒度 <br />day: 日;week: 周;month: 月                   |
-| valuations      | object[]   | true  | 历史估值列表                                                 |
-| ∟timestamp  | integer    | true   | 时间戳                                                      |
-| ∟value      | integer    | true   | 值                                                         |
-| ∟type       | string   | true | 数据颗粒度 <br />day: 日;week: 周;month: 月                   |
-| sentiments      | object[]  | true   | 市场情绪列表                                                 |
-| ∟timestamp  | integer   | true    | 时间戳                                                      |
-| ∟value      | integer   | true    | 值                                                         |
-| ∟type       | string   | true | 数据颗粒度 <br />day: 日;week: 周;month: 月                   |
-
-
+| Name         | Type     | Required | Description                                 |
+| ------------ | -------- | -------- | ------------------------------------------- |
+| temperatures | object[] | true     | 历史温度列表                                |
+| ∟timestamp   | integer  | true     | 时间戳                                      |
+| ∟value       | integer  | true     | 值                                          |
+| ∟type        | string   | true     | 数据颗粒度 <br />day: 日;week: 周;month: 月 |
+| valuations   | object[] | true     | 历史估值列表                                |
+| ∟timestamp   | integer  | true     | 时间戳                                      |
+| ∟value       | integer  | true     | 值                                          |
+| ∟type        | string   | true     | 数据颗粒度 <br />day: 日;week: 周;month: 月 |
+| sentiments   | object[] | true     | 市场情绪列表                                |
+| ∟timestamp   | integer  | true     | 时间戳                                      |
+| ∟value       | integer  | true     | 值                                          |
+| ∟type        | string   | true     | 数据颗粒度 <br />day: 日;week: 周;month: 月 |
 
 ## 错误码
 
 | 业务错误码 | 描述           | 排查建议                 |
 | ---------- | -------------- | ------------------------ |
-| 2601500     | 服务端内部错误 | 请重试或联系技术人员处理 |
+| 2601500    | 服务端内部错误 | 请重试或联系技术人员处理 |
