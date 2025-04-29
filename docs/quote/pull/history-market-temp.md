@@ -22,7 +22,7 @@ sidebar_position: 22
 | Name     | Type   | Required | Description                      |
 | -------- | ------ | -------- | -------------------------------- |
 | market   | string | YES      | 市场，目前支持 US、HK、SG、CN        |
-| start_date |string|YES|开始日期，最小到 2016年，比如：20240101|
+| start_date |string|YES|开始日期，最小到 2016 年，比如：20240101|
 | end_date |string|YES|结束日期，比如：20250101|
 
 ### Request Example

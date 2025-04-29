@@ -47,7 +47,7 @@ print(resp)
   "code": 0,
   "data": {
     "temperature": 50,
-    "description": "溫度適宜, 保持平穩",
+    "description": "溫度適宜，保持平穩",
     "valuation": 23,
     "sentiment": 78,
     "updated_at": 1744616612
