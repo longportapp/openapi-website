@@ -90,19 +90,19 @@ print(resp)
 
 #### Response Status
 
-| Status | Description     | Schema                                             |
-| ------ | --------------- | -------------------------------------------------- |
-| 200    | Success         | [hist_market_temp_response](#hist_market_temp_rsp) |
-| 400    | Parameter Error | None                                               |
+| Status | Description     | Schema                                                                   |
+| ------ | --------------- | ------------------------------------------------------------------------ |
+| 200    | Success         | [HistoryMarketTemperatureResponse](#history_market_temperature_response) |
+| 400    | Parameter Error | None                                                                     |
 
 <aside className="success">
 </aside>
 
 ## Schemas
 
-### hist_market_temp_response
+### HistoryMarketTemperatureResponse
 
-<a id="hist_market_temp_rsp"></a>
+<a id="history_market_temperature_response"></a>
 
 | Name         | Type     | Required | Description                                                     |
 | ------------ | -------- | -------- | --------------------------------------------------------------- |

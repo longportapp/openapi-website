@@ -57,19 +57,19 @@ print(resp)
 
 #### Response Status
 
-| Status | Description | Schema                                                     |
-| ------ | ----------- | ---------------------------------------------------------- |
-| 200    | 返回成功    | [market_temperature_response](#get_market_temperature_rsp) |
-| 400    | 参数错误    | None                                                       |
+| Status | Description | Schema                                                    |
+| ------ | ----------- | --------------------------------------------------------- |
+| 200    | 返回成功    | [MarketTemperatureResponse](#market_temperature_response) |
+| 400    | 参数错误    | None                                                      |
 
 <aside className="success">
 </aside>
 
 ## Schemas
 
-### market_temperature_response
+### MarketTemperatureResponse
 
-<a id="get_market_temperature_rsp"></a>
+<a id="market_temperature_response"></a>
 
 | Name        | Type    | Required | Description |
 | ----------- | ------- | -------- | ----------- |
