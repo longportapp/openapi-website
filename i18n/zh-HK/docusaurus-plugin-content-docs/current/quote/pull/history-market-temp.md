@@ -48,39 +48,19 @@ print(resp)
 {
   "code": 0,
   "data": {
-    "temperatures": [
+    "list": [
       {
         "timestamp": 1580486400,
-        "value": 36,
+        "temperature": 36,
+        "valuation": 12,
+        "sentiment": 46,
         "type": "month"
       },
       {
         "timestamp": 1582992000,
-        "value": 46,
-        "type": "month"
-      }
-    ],
-    "valuations": [
-      {
-        "timestamp": 1580486400,
-        "value": 36,
-        "type": "month"
-      },
-      {
-        "timestamp": 1582992000,
-        "value": 46,
-        "type": "month"
-      }
-    ],
-    "sentiments": [
-      {
-        "timestamp": 1580486400,
-        "value": 36,
-        "type": "month"
-      },
-      {
-        "timestamp": 1582992000,
-        "value": 46,
+        "temperature": 36,
+        "valuation": 12,
+        "sentiment": 46,
         "type": "month"
       }
     ]
@@ -106,17 +86,11 @@ print(resp)
 
 | Name         | Type     | Required | Description                                 |
 | ------------ | -------- | -------- | ------------------------------------------- |
-| temperatures | object[] | true     | 歷史溫度列表                                |
+| list | object[] | true     | 列表                                |
 | ∟timestamp   | integer  | true     | 時間戳                                      |
-| ∟value       | integer  | true     | 值                                          |
-| ∟type        | string   | true     | 數據顆粒度 <br />day: 日;week: 周;month: 月 |
-| valuations   | object[] | true     | 歷史估值列表                                |
-| ∟timestamp   | integer  | true     | 時間戳                                      |
-| ∟value       | integer  | true     | 值                                          |
-| ∟type        | string   | true     | 數據顆粒度 <br />day: 日;week: 周;month: 月 |
-| sentiments   | object[] | true     | 市場情緒列表                                |
-| ∟timestamp   | integer  | true     | 時間戳                                      |
-| ∟value       | integer  | true     | 值                                          |
+| ∟temperature    | integer  | true     | 溫度值                                          |
+| ∟valuation      | integer  | true     | 估值值                                          |
+| ∟sentiment      | integer  | true     | 情緒值                                          |
 | ∟type        | string   | true     | 數據顆粒度 <br />day: 日;week: 周;month: 月 |
 
 ## 錯誤碼

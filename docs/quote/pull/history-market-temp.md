@@ -48,39 +48,19 @@ print(resp)
 {
   "code": 0,
   "data": {
-    "temperatures": [
+    "list": [
       {
         "timestamp": 1580486400,
-        "value": 36,
+        "temperature": 36,
+        "valuation": 12,
+        "sentiment": 46,
         "type": "month"
       },
       {
         "timestamp": 1582992000,
-        "value": 46,
-        "type": "month"
-      }
-    ],
-    "valuations": [
-      {
-        "timestamp": 1580486400,
-        "value": 36,
-        "type": "month"
-      },
-      {
-        "timestamp": 1582992000,
-        "value": 46,
-        "type": "month"
-      }
-    ],
-    "sentiments": [
-      {
-        "timestamp": 1580486400,
-        "value": 36,
-        "type": "month"
-      },
-      {
-        "timestamp": 1582992000,
-        "value": 46,
+        "temperature": 46,
+        "valuation": 12,
+        "sentiment": 46,
         "type": "month"
       }
     ]
@@ -106,19 +86,12 @@ print(resp)
 
 | Name         | Type     | Required | Description                                 |
 | ------------ | -------- | -------- | ------------------------------------------- |
-| temperatures | object[] | true     | 历史温度列表                                |
-| ∟timestamp   | integer  | true     | 时间戳                                      |
-| ∟value       | integer  | true     | 值                                          |
+| list | object[] | true     | 历史温度列表                                |
+| ∟timestamp      | integer  | true     | 时间戳                                      |
+| ∟temperature    | integer  | true     | 温度值                                          |
+| ∟valuation      | integer  | true     | 估值值                                          |
+| ∟sentiment      | integer  | true     | 情绪值                                          |
 | ∟type        | string   | true     | 数据颗粒度 <br />day: 日;week: 周;month: 月 |
-| valuations   | object[] | true     | 历史估值列表                                |
-| ∟timestamp   | integer  | true     | 时间戳                                      |
-| ∟value       | integer  | true     | 值                                          |
-| ∟type        | string   | true     | 数据颗粒度 <br />day: 日;week: 周;month: 月 |
-| sentiments   | object[] | true     | 市场情绪列表                                |
-| ∟timestamp   | integer  | true     | 时间戳                                      |
-| ∟value       | integer  | true     | 值                                          |
-| ∟type        | string   | true     | 数据颗粒度 <br />day: 日;week: 周;month: 月 |
-
 ## 错误码
 
 | 业务错误码 | 描述           | 排查建议                 |
