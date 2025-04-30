@@ -48,20 +48,19 @@ print(resp)
 {
   "code": 0,
   "data": {
+    "type": "month",
     "list": [
       {
         "timestamp": 1580486400,
         "temperature": 36,
         "valuation": 12,
-        "sentiment": 46,
-        "type": "month"
+        "sentiment": 46
       },
       {
         "timestamp": 1582992000,
         "temperature": 46,
         "valuation": 12,
-        "sentiment": 46,
-        "type": "month"
+        "sentiment": 46
       }
     ]
   }
@@ -91,7 +90,7 @@ print(resp)
 | ∟temperature    | integer  | true     | 温度值                                          |
 | ∟valuation      | integer  | true     | 估值值                                          |
 | ∟sentiment      | integer  | true     | 情绪值                                          |
-| ∟type        | string   | true     | 数据颗粒度 <br />day: 日;week: 周;month: 月 |
+| type        | string   | true     | 数据颗粒度 <br />day: 日;week: 周;month: 月 |
 ## 错误码
 
 | 业务错误码 | 描述           | 排查建议                 |

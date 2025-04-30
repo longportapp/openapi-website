@@ -48,20 +48,19 @@ print(resp)
 {
   "code": 0,
   "data": {
+    "type": "month"
     "list": [
       {
         "timestamp": 1580486400,
         "temperature": 36,
         "valuation": 12,
-        "sentiment": 46,
-        "type": "month"
+        "sentiment": 46
       },
       {
         "timestamp": 1582992000,
         "temperature": 36,
         "valuation": 12,
-        "sentiment": 46,
-        "type": "month"
+        "sentiment": 46
       }
     ]
   }
@@ -91,7 +90,7 @@ print(resp)
 | ∟temperature    | integer  | true     | Temperature                                          |
 | ∟valuation      | integer  | true     | Valuation                                          |
 | ∟sentiment      | integer  | true     | Sentiment                                          |
-| ∟type        | string   | true     | Data granularity <br />day: daily; week: weekly; month: monthly |
+| type        | string   | true     | Data granularity <br />day: daily; week: weekly; month: monthly |
 
 ## Error Codes
 
