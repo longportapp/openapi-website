@@ -13,7 +13,7 @@ Get Current Market Temperature
 <table className="http-basic">
 <tbody>
 <tr><td className="http-basic-key">HTTP Method</td><td>GET</td></tr>
-<tr><td className="http-basic-key">HTTP URL</td><td>/v1/quote/get_market_temperature</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>/v1/quote/market_temperature</td></tr>
 </tbody>
 </table>
 
