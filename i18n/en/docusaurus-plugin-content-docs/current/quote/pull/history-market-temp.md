@@ -20,7 +20,7 @@ This interface is used to get historical market temperature.
 ### Parameters
 
 | Name       | Type   | Required | Description                                 |
-| ---------- | ------ | -------- | ------------------------------------------- |
+|------------|--------|----------|---------------------------------------------|
 | market     | string | YES      | Market, currently supports US, HK, SG, CN   |
 | start_date | string | YES      | Start date, minimum to 2016, e.g.: 20240101 |
 | end_date   | string | YES      | End date, e.g.: 20250101                    |
@@ -28,11 +28,12 @@ This interface is used to get historical market temperature.
 ### Request Example
 
 ```python
+import datetime
 from longport.openapi import QuoteContext, Config, Market
 
 config = Config.from_env()
 ctx = QuoteContext(config)
-resp = ctx.history_market_temperature(Market.US, "20240101", "20250101")
+resp = ctx.history_market_temperature(Market.US, datetime.date(2024, 1, 1), datetime.date(2025, 1, 1))
 print(resp)
 ```
 
@@ -70,7 +71,7 @@ print(resp)
 #### Response Status
 
 | Status | Description     | Schema                                                                   |
-| ------ | --------------- | ------------------------------------------------------------------------ |
+|--------|-----------------|--------------------------------------------------------------------------|
 | 200    | Success         | [HistoryMarketTemperatureResponse](#history_market_temperature_response) |
 | 400    | Parameter Error | None                                                                     |
 
@@ -84,16 +85,16 @@ print(resp)
 <a id="history_market_temperature_response"></a>
 
 | Name         | Type     | Required | Description                                                     |
-| ------------ | -------- | -------- | --------------------------------------------------------------- |
-| list         | object[] | true     | List                                     |
+|--------------|----------|----------|-----------------------------------------------------------------|
+| list         | object[] | true     | List                                                            |
 | ∟timestamp   | integer  | true     | Timestamp                                                       |
-| ∟temperature    | integer  | true     | Temperature                                          |
-| ∟valuation      | integer  | true     | Valuation                                          |
-| ∟sentiment      | integer  | true     | Sentiment                                          |
-| type        | string   | true     | Data granularity <br />day: daily; week: weekly; month: monthly |
+| ∟temperature | integer  | true     | Temperature                                                     |
+| ∟valuation   | integer  | true     | Valuation                                                       |
+| ∟sentiment   | integer  | true     | Sentiment                                                       |
+| type         | string   | true     | Data granularity <br />day: daily; week: weekly; month: monthly |
 
 ## Error Codes
 
 | Business Error Code | Description           | Troubleshooting Suggestions               |
-| ------------------- | --------------------- | ----------------------------------------- |
+|---------------------|-----------------------|-------------------------------------------|
 | 2601500             | Server Internal Error | Please retry or contact technical support |
