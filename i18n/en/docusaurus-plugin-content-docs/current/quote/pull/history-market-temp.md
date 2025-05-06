@@ -48,40 +48,19 @@ print(resp)
 {
   "code": 0,
   "data": {
-    "temperatures": [
+    "type": "month"
+    "list": [
       {
         "timestamp": 1580486400,
-        "value": 36,
-        "type": "month"
+        "temperature": 36,
+        "valuation": 12,
+        "sentiment": 46
       },
       {
         "timestamp": 1582992000,
-        "value": 46,
-        "type": "month"
-      }
-    ],
-    "valuations": [
-      {
-        "timestamp": 1580486400,
-        "value": 36,
-        "type": "month"
-      },
-      {
-        "timestamp": 1582992000,
-        "value": 46,
-        "type": "month"
-      }
-    ],
-    "sentiments": [
-      {
-        "timestamp": 1580486400,
-        "value": 36,
-        "type": "month"
-      },
-      {
-        "timestamp": 1582992000,
-        "value": 46,
-        "type": "month"
+        "temperature": 36,
+        "valuation": 12,
+        "sentiment": 46
       }
     ]
   }
@@ -106,18 +85,12 @@ print(resp)
 
 | Name         | Type     | Required | Description                                                     |
 | ------------ | -------- | -------- | --------------------------------------------------------------- |
-| temperatures | object[] | true     | Historical temperature list                                     |
+| list         | object[] | true     | List                                     |
 | ∟timestamp   | integer  | true     | Timestamp                                                       |
-| ∟value       | integer  | true     | Value                                                           |
-| ∟type        | string   | true     | Data granularity <br />day: daily; week: weekly; month: monthly |
-| valuations   | object[] | true     | Historical valuation list                                       |
-| ∟timestamp   | integer  | true     | Timestamp                                                       |
-| ∟value       | integer  | true     | Value                                                           |
-| ∟type        | string   | true     | Data granularity <br />day: daily; week: weekly; month: monthly |
-| sentiments   | object[] | true     | Market sentiment list                                           |
-| ∟timestamp   | integer  | true     | Timestamp                                                       |
-| ∟value       | integer  | true     | Value                                                           |
-| ∟type        | string   | true     | Data granularity <br />day: daily; week: weekly; month: monthly |
+| ∟temperature    | integer  | true     | Temperature                                          |
+| ∟valuation      | integer  | true     | Valuation                                          |
+| ∟sentiment      | integer  | true     | Sentiment                                          |
+| type        | string   | true     | Data granularity <br />day: daily; week: weekly; month: monthly |
 
 ## Error Codes
 
