@@ -50,7 +50,7 @@ message SecurityCandlestickRequest {
 # https://open.longportapp.com/docs/quote/pull/candlestick
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
-from longport.openapi import QuoteContext, Config, Period, AdjustType
+from longport.openapi import QuoteContext, Config, Period, AdjustType, TradeSessions
 
 config = Config.from_env()
 ctx = QuoteContext(config)
