@@ -23,12 +23,13 @@ sidebar_position: 20
 
 ### Parameters
 
-| Name        | Type   | Required | Description                                                                  |
-| ----------- | ------ | -------- | ---------------------------------------------------------------------------- |
-| symbol      | string | 是       | 标的代码，使用 `ticker.region` 格式，例如：`700.HK`                          |
-| period      | int32  | 是       | k 线周期，例如：`1000`，详见 [Period](../objects#period---k-线周期)          |
-| count       | int32  | 是       | 数据数量，例如：`100`<br /><br />**校验规则：** <br />请求数量最大为 `1000`  |
-| adjust_type | int32  | 是       | 复权类型，例如：`0`，详见 [AdjustType](../objects#adjusttype---k-线复权类型) |
+| Name          | Type   | Required | Description                                                                  |
+| ------------- | ------ | -------- | ---------------------------------------------------------------------------- |
+| symbol        | string | 是       | 标的代码，使用 `ticker.region` 格式，例如：`700.HK`                          |
+| period        | int32  | 是       | k 线周期，例如：`1000`，详见 [Period](../objects#period---k-线周期)          |
+| count         | int32  | 是       | 数据数量，例如：`100`<br /><br />**校验规则：** <br />请求数量最大为 `1000`  |
+| adjust_type   | int32  | 是       | 复权类型，例如：`0`，详见 [AdjustType](../objects#adjusttype---k-线复权类型) |
+| trade_session | int32  | 是       | 交易时段 <br /><br />**可选值：**<br />`0` - 仅盘中 <br />`100` - 全部时段   |
 
 ### Protobuf
 
@@ -61,17 +62,18 @@ print(resp)
 
 ### Response Properties
 
-| Name         | Type     | Description               |
-| ------------ | -------- | ------------------------- |
-| symbol       | string   | 标的代码，例如：`AAPL.US` |
-| candlesticks | object[] | K 线数据                  |
-| ∟ close      | string   | 当前周期收盘价            |
-| ∟ open       | string   | 当前周期开盘价            |
-| ∟ low        | string   | 当前周期最低价            |
-| ∟ high       | string   | 当前周期最高价            |
-| ∟ volume     | int64    | 当前周期成交量            |
-| ∟ turnover   | string   | 当前周期成交额            |
-| ∟ timestamp  | int64    | 当前周期的时间戳          |
+| Name            | Type     | Description                                                       |
+| --------------- | -------- | ----------------------------------------------------------------- |
+| symbol          | string   | 标的代码，例如：`AAPL.US`                                         |
+| candlesticks    | object[] | K 线数据                                                          |
+| ∟ close         | string   | 当前周期收盘价                                                    |
+| ∟ open          | string   | 当前周期开盘价                                                    |
+| ∟ low           | string   | 当前周期最低价                                                    |
+| ∟ high          | string   | 当前周期最高价                                                    |
+| ∟ volume        | int64    | 当前周期成交量                                                    |
+| ∟ turnover      | string   | 当前周期成交额                                                    |
+| ∟ timestamp     | int64    | 当前周期的时间戳                                                  |
+| ∟ trade_session | int64    | 交易时段，详见 [TradeSession](../objects#tradesession---交易时段) |
 
 ### Protobuf
 

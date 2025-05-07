@@ -23,12 +23,13 @@ Note: This interface can only retrieve the last 1000 candlesticks. To obtain lon
 
 ### Parameters
 
-| Name        | Type   | Required | Description                                                                                              |
-| ----------- | ------ | -------- | -------------------------------------------------------------------------------------------------------- |
-| symbol      | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK`                                           |
-| period      | int32  | Yes      | Candlestick period, for example: `1000`, see [Period](../objects#period---candlestick-period)            |
-| count       | int32  | Yes      | Count of cancdlestick, for example: `100`<br /><br />**Check rules:** <br />maximum count is `1000`      |
-| adjust_type | int32  | Yes      | Adjustment type, for example: `0`, see [AdjustType](../objects#adjusttype---candlestick-adjustment-type) |
+| Name          | Type   | Required | Description                                                                                              |
+| ------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------- |
+| symbol        | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK`                                           |
+| period        | int32  | Yes      | Candlestick period, for example: `1000`, see [Period](../objects#period---candlestick-period)            |
+| count         | int32  | Yes      | Count of cancdlestick, for example: `100`<br /><br />**Check rules:** <br />maximum count is `1000`      |
+| adjust_type   | int32  | Yes      | Adjustment type, for example: `0`, see [AdjustType](../objects#adjusttype---candlestick-adjustment-type) |
+| trade_session | int32  | Yes      | Trade session <br /><br />**Optional value:**<br />`0` - Trading <br />`100` - All-Session               |
 
 ### Protobuf
 
@@ -61,17 +62,18 @@ print(resp)
 
 ### Response Properties
 
-| Name         | Type     | Description                           |
-| ------------ | -------- | ------------------------------------- |
-| symbol       | string   | Security code, for example: `AAPL.US` |
-| candlesticks | object[] | Candlestick data                      |
-| ∟ close      | string   | Close price                           |
-| ∟ open       | string   | Open price                            |
-| ∟ low        | string   | Low price                             |
-| ∟ high       | string   | High price                            |
-| ∟ volume     | int64    | Volume                                |
-| ∟ turnover   | string   | Turnover                              |
-| ∟ timestamp  | int64    | Timestamp                             |
+| Name            | Type     | Description                                                                  |
+| --------------- | -------- | ---------------------------------------------------------------------------- |
+| symbol          | string   | Security code, for example: `AAPL.US`                                        |
+| candlesticks    | object[] | Candlestick data                                                             |
+| ∟ close         | string   | Close price                                                                  |
+| ∟ open          | string   | Open price                                                                   |
+| ∟ low           | string   | Low price                                                                    |
+| ∟ high          | string   | High price                                                                   |
+| ∟ volume        | int64    | Volume                                                                       |
+| ∟ turnover      | string   | Turnover                                                                     |
+| ∟ timestamp     | int64    | Timestamp                                                                    |
+| ∟ trade_session | int32    | Trade session, see [TradeSession](../objects#tradesession---trading-session) |
 
 ### Protobuf
 
