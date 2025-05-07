@@ -23,13 +23,12 @@ sidebar_position: 20
 
 ### Parameters
 
-| Name          | Type   | Required | Description                                                                  |
-| ------------- | ------ | -------- | ---------------------------------------------------------------------------- |
-| symbol        | string | 是       | 標的代碼，使用 `ticker.region` 格式，例如：`700.HK`                          |
-| period        | int32  | 是       | k 線週期，例如：`1000`，详见 [Period](../objects#period---k-線週期)          |
-| count         | int32  | 是       | 數據數量，例如：`100`<br /><br />**校验规则：** <br />請求數量最大為 `1000`  |
-| adjust_type   | int32  | 是       | 復權類型，例如：`0`，详见 [AdjustType](../objects#adjusttype---k-線復權類型) |
-| trade_session | int32  | 是       | 交易時段 <br /><br />**可選值：**<br />`0` - 僅盤中 <br />`100` - 全部時段   |
+| Name        | Type   | Required | Description                                                                  |
+| ----------- | ------ | -------- | ---------------------------------------------------------------------------- |
+| symbol      | string | 是       | 標的代碼，使用 `ticker.region` 格式，例如：`700.HK`                          |
+| period      | int32  | 是       | k 線週期，例如：`1000`，详见 [Period](../objects#period---k-線週期)          |
+| count       | int32  | 是       | 數據數量，例如：`100`<br /><br />**校验规则：** <br />請求數量最大為 `1000`  |
+| adjust_type | int32  | 是       | 復權類型，例如：`0`，详见 [AdjustType](../objects#adjusttype---k-線復權類型) |
 
 ### Protobuf
 
@@ -62,18 +61,17 @@ print(resp)
 
 ### Response Properties
 
-| Name            | Type     | Description                                                       |
-| --------------- | -------- | ----------------------------------------------------------------- |
-| symbol          | string   | 標的代碼，例如：`AAPL.US`                                         |
-| candlesticks    | object[] | K 線數據                                                          |
-| ∟ close         | string   | 當前週期收盤價                                                    |
-| ∟ open          | string   | 當前週期開盤價                                                    |
-| ∟ low           | string   | 當前週期最低價                                                    |
-| ∟ high          | string   | 當前週期最高價                                                    |
-| ∟ volume        | int64    | 當前週期成交量                                                    |
-| ∟ turnover      | string   | 當前週期成交額                                                    |
-| ∟ timestamp     | int64    | 當前週期的時間戳                                                  |
-| ∟ trade_session | int32    | 交易時段，詳見 [TradeSession](../objects#tradesession---交易時段) |
+| Name         | Type     | Description               |
+| ------------ | -------- | ------------------------- |
+| symbol       | string   | 標的代碼，例如：`AAPL.US` |
+| candlesticks | object[] | K 線數據                  |
+| ∟ close      | string   | 當前週期收盤價            |
+| ∟ open       | string   | 當前週期開盤價            |
+| ∟ low        | string   | 當前週期最低價            |
+| ∟ high       | string   | 當前週期最高價            |
+| ∟ volume     | int64    | 當前週期成交量            |
+| ∟ turnover   | string   | 當前週期成交額            |
+| ∟ timestamp  | int64    | 當前週期的時間戳          |
 
 ### Protobuf
 
