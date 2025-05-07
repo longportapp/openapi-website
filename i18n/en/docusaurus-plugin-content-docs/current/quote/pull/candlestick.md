@@ -29,7 +29,7 @@ Note: This interface can only retrieve the last 1000 candlesticks. To obtain lon
 | period        | int32  | Yes      | Candlestick period, for example: `1000`, see [Period](../objects#period---candlestick-period)            |
 | count         | int32  | Yes      | Count of cancdlestick, for example: `100`<br /><br />**Check rules:** <br />maximum count is `1000`      |
 | adjust_type   | int32  | Yes      | Adjustment type, for example: `0`, see [AdjustType](../objects#adjusttype---candlestick-adjustment-type) |
-| trade_session | int32  | Yes      | Trade session <br /><br />**Optional value:**<br />`0` - Trading <br />`100` - All-Session               |
+| trade_session | int32  | Yes      | Trade session <br /><br />**Optional value:**<br />`0` - Intraday trading <br />`100` - All-Session      |
 
 ### Protobuf
 
