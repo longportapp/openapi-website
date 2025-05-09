@@ -183,7 +183,7 @@ function generateLLMSFullTxt() {
       return
     }
 
-    let fullContent = ''
+    let fullContent = '# LongPort OpenAPI Documentation'
 
     // Function to recursively process all markdown files
     function processDirectory(dir, indent = '') {
