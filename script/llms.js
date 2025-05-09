@@ -2,6 +2,8 @@ const fs = require('fs')
 const path = require('path')
 const matter = require('gray-matter')
 const { capitalize } = require('lodash')
+// List of file paths to ignore
+const ignoredFiles = ['changelog.md']
 
 /**
  * Extract title, slug and description from Markdown file
@@ -44,7 +46,7 @@ function extractMarkdownInfo(filePath, rootDir) {
     // Add docs segment to the path
     if (!slug.includes('/docs/')) {
       const parts = slug.split('/')
-      const enIndex = parts.findIndex(part => part === 'en')
+      const enIndex = parts.findIndex((part) => part === 'en')
       if (enIndex !== -1) {
         parts.splice(enIndex + 1, 0, 'docs')
         slug = parts.join('/')
@@ -85,6 +87,10 @@ function extractMarkdownInfo(filePath, rootDir) {
   }
 }
 
+function shouldIgnoreFile(filePath) {
+  return ignoredFiles.some((ignoredFile) => filePath.endsWith(ignoredFile))
+}
+
 /**
  * Recursively traverse directory and generate Markdown link list
  * @param {string} dir - Directory to traverse
@@ -99,18 +105,12 @@ function traverseDirectory(dir, rootDir) {
 
   const files = fs.readdirSync(dir)
 
-  // List of file paths to ignore
-  const ignoredFiles = ['changelog.md']
-
   for (const file of files) {
     const fullPath = path.join(dir, file)
     const relativePath = path.relative(rootDir, fullPath)
     const stat = fs.statSync(fullPath)
 
-    // Check if file is in ignore list
-    const shouldIgnore = ignoredFiles.some((ignoredFile) => relativePath.endsWith(ignoredFile))
-
-    if (shouldIgnore) {
+    if (shouldIgnoreFile(relativePath)) {
       // Skip ignored files
       continue
     }
@@ -156,59 +156,6 @@ function generateMarkdownList(structure) {
   return output
 }
 
-/**
- * Convert HTML table element to Markdown table format
- * @param {HTMLTableElement} tableElement - HTML table element
- * @returns {string} Markdown table format string
- */
-function convertTableToMarkdown(tableElement) {
-  if (!tableElement || tableElement.tagName !== 'TABLE') {
-    return 'Invalid table element'
-  }
-
-  const rows = tableElement.rows
-  let markdown = ''
-  let headerProcessed = false
-
-  // Process each row in the table
-  for (let i = 0; i < rows.length; i++) {
-    const row = rows[i]
-    const cells = row.cells
-    let rowContent = '|'
-
-    // Process each cell in the row
-    for (let j = 0; j < cells.length; j++) {
-      const cell = cells[j]
-      let cellContent = ` ${cell.textContent.trim()} |`
-
-      // Handle rowspan attribute
-      if (cell.hasAttribute('rowspan')) {
-        // In Markdown, rowspan cannot be directly handled, need to repeat content in subsequent rows
-        const rowspan = parseInt(cell.getAttribute('rowspan'))
-        if (rowspan > 1) {
-          cellContent = ` ${cell.textContent.trim()} |`
-        }
-      }
-
-      rowContent += cellContent
-    }
-
-    markdown += rowContent + '\n'
-
-    // Add separator row after header
-    if (!headerProcessed && i === 0) {
-      let separatorRow = '|'
-      for (let j = 0; j < cells.length; j++) {
-        separatorRow += ' --- |'
-      }
-      markdown += separatorRow + '\n'
-      headerProcessed = true
-    }
-  }
-
-  return markdown
-}
-
 function extractIntroContent(filePath) {
   const fileContent = fs.readFileSync(filePath, 'utf8')
   const { content } = matter(fileContent)
@@ -224,10 +171,75 @@ function extractIntroContent(filePath) {
 }
 
 /**
- * Main function
+ * Generate full content file with all markdown files
  */
-function main() {
+function generateLLMSFullTxt() {
   const rootDir = path.join(process.cwd(), 'autogen-markdown')
+  const enDir = path.join(rootDir, 'en')
+
+  try {
+    if (!fs.existsSync(enDir)) {
+      console.error(`Directory does not exist: ${enDir}`)
+      return
+    }
+
+    let fullContent = ''
+
+    // Function to recursively process all markdown files
+    function processDirectory(dir, indent = '') {
+      const files = fs.readdirSync(dir)
+
+      // Process files first, then directories for better organization
+      // First pass: process markdown files
+      for (const file of files) {
+        const fullPath = path.join(dir, file)
+        const stat = fs.statSync(fullPath)
+
+        if (shouldIgnoreFile(fullPath)) {
+          // Skip ignored files
+          continue
+        }
+
+        if (stat.isFile() && path.extname(file) === '.md') {
+          const fileContent = fs.readFileSync(fullPath, 'utf8')
+          const { data, content } = matter(fileContent)
+
+          // Add file title as heading
+          const fileName = path.basename(file, '.md')
+          const title = data.title || capitalize(fileName)
+
+          fullContent += `\n\n${indent}# ${title}\n\n`
+          fullContent += content.trim()
+        }
+      }
+
+      // Second pass: process directories
+      for (const file of files) {
+        const fullPath = path.join(dir, file)
+        const stat = fs.statSync(fullPath)
+
+        if (stat.isDirectory()) {
+          const dirName = capitalize(path.basename(fullPath))
+          fullContent += `\n\n${indent}## ${dirName}\n`
+          processDirectory(fullPath, indent + '#')
+        }
+      }
+    }
+
+    // Start processing from the en directory
+    processDirectory(enDir)
+
+    // Write to llms-full.txt
+    fs.writeFileSync('llms-full.txt', fullContent)
+    console.log('--> Generated llms-full.txt with all markdown content')
+  } catch (error) {
+    console.error('Error generating full content file:', error)
+  }
+}
+
+function generateLLMSTxt() {
+  const rootDir = path.join(process.cwd(), 'autogen-markdown')
+  // Only support en locale
   const enDir = path.join(rootDir, 'en')
 
   try {
@@ -247,10 +259,18 @@ function main() {
 
     // write to llms.txt
     fs.writeFileSync('llms.txt', content)
+    console.log('--> Generated llms.txt with fast markdown content')
   } catch (error) {
     console.error('Error processing directory:', error)
   }
 }
 
-// Execute main function
+/**
+ * Main function
+ */
+function main() {
+  generateLLMSTxt()
+  generateLLMSFullTxt()
+}
+
 main()

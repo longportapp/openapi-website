@@ -1,5 +1,7 @@
 # LongPort OpenAPI Documentation
 
+## Introduction
+
 LongPort OpenAPI provides programmatic quote trading interfaces for investors with research and development capabilities and assists them to build trading or quote strategy analysis tools based on their own investment strategies. The functions fall into the following categories:
 
 - **Trading** - Create, amend, cancel orders, query today's/past orders and transaction details, etc.
@@ -125,33 +127,33 @@ openapi-trade.longportapp.com
 
 ## Individual
 
-- [Create Watchlist Group](https://open.longportapp.com/en/docs/quote/individual/watchlist_create_group.md)
-- [Delete Watchlist Group](https://open.longportapp.com/en/docs/quote/individual/watchlist_delete_group.md)
-- [Watchlist Group](https://open.longportapp.com/en/docs/quote/individual/watchlist_groups.md)
-- [Update Watchlist Group](https://open.longportapp.com/en/docs/quote/individual/watchlist_update_group.md)
+- [Create watched group](https://open.longportapp.com/en/docs/quote/individual/watchlist_create_group.md)
+- [Delete watched group](https://open.longportapp.com/en/docs/quote/individual/watchlist_delete_group.md)
+- [Get watched groups](https://open.longportapp.com/en/docs/quote/individual/watchlist_groups.md)
+- [Update watched group](https://open.longportapp.com/en/docs/quote/individual/watchlist_update_group.md)
 
 ## Pull
 
-- [Broker IDs](https://open.longportapp.com/en/docs/quote/pull/broker-ids.md)
-- [Security Brokers](https://open.longportapp.com/en/docs/quote/pull/brokers.md)
-- [Calculate Indexes Of Securities](https://open.longportapp.com/en/docs/quote/pull/calc-index.md)
-- [Security Candlesticks](https://open.longportapp.com/en/docs/quote/pull/candlestick.md)
-- [Security Capital Distribution](https://open.longportapp.com/en/docs/quote/pull/capital-distribution.md)
-- [Security Capital Flow Intraday](https://open.longportapp.com/en/docs/quote/pull/capital-flow-intraday.md)
-- [Security Depth](https://open.longportapp.com/en/docs/quote/pull/depth.md)
-- [Security History Candlesticks](https://open.longportapp.com/en/docs/quote/pull/history-candlestick.md)
-- [Security Intraday](https://open.longportapp.com/en/docs/quote/pull/intraday.md)
-- [Warrant Issuer IDs](https://open.longportapp.com/en/docs/quote/pull/issuer.md)
-- [Real-time Quotes of Option](https://open.longportapp.com/en/docs/quote/pull/option-quote.md)
-- [Option Chain By Date](https://open.longportapp.com/en/docs/quote/pull/optionchain-date-strike.md)
-- [Option Chain Expiry Date List](https://open.longportapp.com/en/docs/quote/pull/optionchain-date.md)
-- [Real-time Quotes Of Securities](https://open.longportapp.com/en/docs/quote/pull/quote.md)
-- [Basic Information of Securities](https://open.longportapp.com/en/docs/quote/pull/static.md)
-- [Market Trading Days](https://open.longportapp.com/en/docs/quote/pull/trade-day.md)
-- [Trading Session of The Day](https://open.longportapp.com/en/docs/quote/pull/trade-session.md)
-- [Security Trades](https://open.longportapp.com/en/docs/quote/pull/trade.md)
-- [Warrant Filter](https://open.longportapp.com/en/docs/quote/pull/warrant-filter.md)
-- [Real-time Quotes of Warrant](https://open.longportapp.com/en/docs/quote/pull/warrant-quote.md)
+- [Get Broker IDs](https://open.longportapp.com/en/docs/quote/pull/broker-ids.md)
+- [Get Security Brokers](https://open.longportapp.com/en/docs/quote/pull/brokers.md)
+- [Get Calculate Indexes Of Securities](https://open.longportapp.com/en/docs/quote/pull/calc-index.md)
+- [Get Security Candlesticks](https://open.longportapp.com/en/docs/quote/pull/candlestick.md)
+- [Get Security Capital Distribution](https://open.longportapp.com/en/docs/quote/pull/capital-distribution.md)
+- [Get Security Capital Flow Intraday](https://open.longportapp.com/en/docs/quote/pull/capital-flow-intraday.md)
+- [Get Security Depth](https://open.longportapp.com/en/docs/quote/pull/depth.md)
+- [Get Security History Candlesticks](https://open.longportapp.com/en/docs/quote/pull/history-candlestick.md)
+- [Get Security Intraday](https://open.longportapp.com/en/docs/quote/pull/intraday.md)
+- [Get Warrant Issuer IDs](https://open.longportapp.com/en/docs/quote/pull/issuer.md)
+- [Get Real-time Quotes Of Option Securities](https://open.longportapp.com/en/docs/quote/pull/option-quote.md)
+- [Get Option Chain Info By Date](https://open.longportapp.com/en/docs/quote/pull/optionchain-date-strike.md)
+- [Get Option Chain Expiry Date List](https://open.longportapp.com/en/docs/quote/pull/optionchain-date.md)
+- [Get Real-time Quotes Of Securities](https://open.longportapp.com/en/docs/quote/pull/quote.md)
+- [Get Basic Information Of Securities](https://open.longportapp.com/en/docs/quote/pull/static.md)
+- [Get Market Trading Days](https://open.longportapp.com/en/docs/quote/pull/trade-day.md)
+- [Get Trading Session Of The Day](https://open.longportapp.com/en/docs/quote/pull/trade-session.md)
+- [Get Security Trades](https://open.longportapp.com/en/docs/quote/pull/trade.md)
+- [Get Filtered Warrant](https://open.longportapp.com/en/docs/quote/pull/warrant-filter.md)
+- [Get Real-time Quotes Of Warrant Securities](https://open.longportapp.com/en/docs/quote/pull/warrant-quote.md)
 
 ## Push
 
@@ -167,7 +169,7 @@ openapi-trade.longportapp.com
 ## Subscribe
 
 - [Subscribe Quote](https://open.longportapp.com/en/docs/quote/subscribe/subscribe.md)
-- [Subscription Information](https://open.longportapp.com/en/docs/quote/subscribe/subscription.md)
+- [Get Subscription Information](https://open.longportapp.com/en/docs/quote/subscribe/subscription.md)
 - [Unsubscribe Quote](https://open.longportapp.com/en/docs/quote/subscribe/unsubscribe.md)
 
 ## Trade
@@ -192,9 +194,11 @@ openapi-trade.longportapp.com
 ## Order
 
 - [Estimate Maximum Purchase Quantity](https://open.longportapp.com/en/docs/trade/order/estimate_available_buy_limit.md)
+- [Get History Deals](https://open.longportapp.com/en/docs/trade/order/history_deals.md)
 - [Get History Order](https://open.longportapp.com/en/docs/trade/order/history_orders.md)
 - [Order Details](https://open.longportapp.com/en/docs/trade/order/order_detail.md)
 - [Replace Order](https://open.longportapp.com/en/docs/trade/order/replace.md)
 - [Submit Order](https://open.longportapp.com/en/docs/trade/order/submit.md)
+- [Get Today Deals](https://open.longportapp.com/en/docs/trade/order/today_deals.md)
 - [Get Today Order](https://open.longportapp.com/en/docs/trade/order/today_orders.md)
 - [Withdraw Order](https://open.longportapp.com/en/docs/trade/order/withdraw.md)
