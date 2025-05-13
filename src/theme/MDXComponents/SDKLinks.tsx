@@ -32,7 +32,7 @@ export const SDKLinks = ({
       title: 'Python',
       color: '#3572a5',
       label: `longport.openapi.${klass}.${snakeMethod}`,
-      url: `https://longportapp.github.io/openapi/python/${module}_context/#longport.openapi.${klass}.${snakeMethod}`,
+      url: `https://longportapp.github.io/openapi/python/reference_all/#longport.openapi.${klass}.${snakeMethod}`,
     },
     {
       title: 'Rust',
