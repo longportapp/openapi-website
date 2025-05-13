@@ -70,7 +70,7 @@ yarn install longport
 
 ```toml
 [dependencies]
-longport = "1.0.0"
+longport = "3.0.0"
 tokio = { version = "1", features = "rt-multi-thread" }
 ```
 

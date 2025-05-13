@@ -72,7 +72,7 @@ yarn install longport
 
 ```toml
 [dependencies]
-longport = "1.0.0"
+longport = "3.0.0"
 tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
@@ -121,7 +121,7 @@ Please pay attention to protect your **Access Token** information, anyone who ge
 :::
 
 | 环境变量                    | 说明                                                               | 值范围          |
-| --------------------------- | ------------------------------------------------------------------ | --------------- |
+|-----------------------------|--------------------------------------------------------------------|-----------------|
 | `LONGPORT_APP_KEY`          | App Key get from developer center                                  |                 |
 | `LONGPORT_APP_SECRET`       | App Secret get from developer center                               |                 |
 | `LONGPORT_ACCESS_TOKEN`     | Access Token get from developer center                             |                 |

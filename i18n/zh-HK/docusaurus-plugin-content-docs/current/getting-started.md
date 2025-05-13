@@ -73,7 +73,7 @@ yarn install longport
 
 ```toml
 [dependencies]
-longport = "1.0.0"
+longport = "3.0.0"
 tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
@@ -131,11 +131,11 @@ go get github.com/longportapp/openapi-go
 請注意保護好您的 **Access Token** 訊息，任何人獲得到它，都可以透過 OpenAPI 來交易你的帳戶！
 :::
 
-| 環境變量                    | 說明                                                         | 值範圍          |
-| --------------------------- | ------------------------------------------------------------ | --------------- |
-| `LONGPORT_APP_KEY`          | 從頁面上取得到的 App Key                                     |                 |
-| `LONGPORT_APP_SECRET`       | 從頁面取得到的 App Secret                                    |                 |
-| `LONGPORT_ACCESS_TOKEN`     | 從頁面上取得到的 Access Token                                |                 |
+| 環境變量                    | 說明                                                       | 值範圍          |
+|-----------------------------|----------------------------------------------------------|-----------------|
+| `LONGPORT_APP_KEY`          | 從頁面上取得到的 App Key                                   |                 |
+| `LONGPORT_APP_SECRET`       | 從頁面取得到的 App Secret                                  |                 |
+| `LONGPORT_ACCESS_TOKEN`     | 從頁面上取得到的 Access Token                              |                 |
 | `LONGPORT_REGION`           | API 伺服器存取點，請根據您所在地區設置，以獲得更好的連線速度 | `hk`, `cn`      |
 | `LONGPORT_ENABLE_OVERNIGHT` | 是否開啟夜盤行情，設定 `true` 開啟，`false` 關閉             | `true`, `false` |
 
