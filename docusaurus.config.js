@@ -103,13 +103,13 @@ const config = {
         title: '',
         logo: {
           alt: 'LongPort',
-          href: openapiDomain,
+          href: '/',
           target: '_self',
           src: 'https://pub.pbkrs.com/files/202211/BoUn1BSQuAHDX4GY/logo-with-title.svg',
         },
         items: [
           {
-            to: openapiDomain,
+            to: '/',
             position: 'left',
             target: '_self',
             label: '开发者认证',
