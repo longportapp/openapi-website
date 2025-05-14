@@ -1,0 +1,637 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Longbridge API",
+    "description": "The Longbridge API is an example OpenAPI specification to test OpenAPI tools and libraries. Get all the data for [all artists](#getAllArtists).\n\n>Inspired by [Scalar Galaxy](https://galaxy.scalar.com/)\n\n## Resources\n\n* https://github.com/enzonotario/vitepress-openapi\n* https://github.com/OAI/OpenAPI-Specification\n\n## Markdown Support\n\nAll descriptions *can* contain ~~tons of text~~ **Markdown**. [If GitHub supports the syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax), chances are we’re supporting it, too. You can even create [internal links to reference endpoints](#createArtist).\n\n<details>\n  <summary>Examples</summary>\n\n  **Blockquotes**\n\n  > I love Argentine Rock. <3\n\n  **Tables**\n\n  | Feature          | Availability |\n  | ---------------- | ------------ |\n  | Markdown Support | ✓            |\n\n  **Accordion**\n\n  ```html\n  <details>\n    <summary>Using Details Tags</summary>\n    <p>HTML Example</p>\n  </details>\n  ```\n\n  **Images**\n\n  Yes, there’s support for images, too!\n\n  ![Placeholder image](https://images.placeholders.dev/?width=1280&height=720)\n\n</details>\n",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Longbridge",
+      "url": "https://open.longportapp.com",
+      "email": "hi@longportapp.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://open.longportapp.com",
+      "description": "Longbridge API"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    },
+    {
+      "apiKeyHeader": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "Some endpoints are public, but some require authentication. We provide all the required endpoints to create an account and authorize yourself."
+    },
+    {
+      "name": "Artists",
+      "description": "Everything about Argentine Rock artists"
+    }
+  ],
+  "paths": {
+    "/api/v1/artists": {
+      "get": {
+        "tags": ["Artists"],
+        "summary": "Get all artists",
+        "description": "Get a list of all legendary Argentine Rock artists and explore their contributions to the music scene.",
+        "operationId": "getAllArtists",
+        "security": [{}],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Artist"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/PaginatedResource"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Artists"],
+        "summary": "Add a new artist",
+        "description": "Add a new legendary Argentine Rock artist. Make sure they truly deserve the title!",
+        "operationId": "createArtist",
+        "requestBody": {
+          "description": "Artist data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Artist"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Artist"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/artists/{artistId}": {
+      "get": {
+        "tags": ["Artists"],
+        "summary": "Get an artist",
+        "description": "Learn more about a specific Argentine Rock artist and their legacy.",
+        "operationId": "getArtist",
+        "security": [{}],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/artistId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Artist Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Artist"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Artist Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Artists"],
+        "summary": "Update an artist",
+        "description": "Update the information of a legendary Argentine Rock artist. Make sure to provide accurate data.",
+        "operationId": "updateArtist",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/artistId"
+          }
+        ],
+        "requestBody": {
+          "description": "Artist data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Artist"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Artist"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Artists"],
+        "summary": "Delete an artist",
+        "operationId": "deleteArtist",
+        "description": "This endpoint was used to delete artists. Unfortunately, that caused a lot of controversy. So, this endpoint is now deprecated and should not be used anymore.",
+        "deprecated": true,
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/artistId"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/artists/{artistId}/albums": {
+      "get": {
+        "tags": ["Artists"],
+        "summary": "Get all albums",
+        "description": "Get a list of all albums from a legendary Argentine Rock artist.",
+        "operationId": "getAllAlbums",
+        "security": [{}],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/artistId"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Album"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/PaginatedResource"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Artists"],
+        "summary": "Add a new album",
+        "description": "Add a new album to a legendary Argentine Rock artist. Make sure it’s a masterpiece!",
+        "operationId": "createAlbum",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/artistId"
+          }
+        ],
+        "requestBody": {
+          "description": "Album data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Album"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Album"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/signup": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Create a user",
+        "description": "Create a user account to access exclusive content about Argentine Rock legends.",
+        "operationId": "createUser",
+        "security": [{}],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUser"
+              },
+              "examples": {
+                "Carlos": {
+                  "value": {
+                    "name": "Carlos",
+                    "email": "carlos@rock-legends.com",
+                    "password": "i-love-rock"
+                  }
+                },
+                "Maria": {
+                  "value": {
+                    "name": "Maria",
+                    "email": "maria@rock-legends.com",
+                    "password": "rock-n-roll"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "apiKeyHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      }
+    },
+    "parameters": {
+      "artistId": {
+        "name": "artistId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int64",
+          "examples": [1]
+        }
+      },
+      "limit": {
+        "name": "limit",
+        "in": "query",
+        "description": "The number of items to return",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int64",
+          "default": 10
+        }
+      },
+      "offset": {
+        "name": "offset",
+        "in": "query",
+        "description": "The number of items to skip before starting to collect the result set",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int64",
+          "default": 0
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "NotFound",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "NewUser": {
+        "type": "object",
+        "required": ["name", "email", "password"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "examples": ["Carlos", "Maria"]
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "examples": ["carlos@rock-legends.com", "maria@rock-legends.com"]
+          },
+          "password": {
+            "type": "string",
+            "minLength": 8,
+            "examples": ["i-love-rock", "rock-n-roll"]
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "required": ["id", "name", "email"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "examples": [1]
+          },
+          "name": {
+            "type": "string",
+            "examples": ["Carlos"]
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "examples": ["carlos@rock-legends.com"]
+          }
+        }
+      },
+      "Artist": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "examples": [1],
+            "x-variable": "artistId"
+          },
+          "name": {
+            "type": "string",
+            "examples": ["Charly García"]
+          },
+          "description": {
+            "type": ["string", "null"],
+            "examples": ["One of the most influential rock musicians in Argentine history."]
+          },
+          "image": {
+            "type": "string",
+            "nullable": true,
+            "examples": ["https://cdn.rock-legends.com/photos/charly.jpg"]
+          },
+          "band": {
+            "type": "string",
+            "examples": ["Sui Generis"]
+          }
+        }
+      },
+      "Album": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "examples": [1]
+          },
+          "name": {
+            "type": "string",
+            "examples": ["La Máquina de Hacer Pájaros"]
+          },
+          "year": {
+            "type": "integer",
+            "format": "int64",
+            "examples": [1976]
+          },
+          "image": {
+            "type": "string",
+            "nullable": true,
+            "examples": ["https://cdn.rock-legends.com/photos/la-maquina.jpg"]
+          }
+        }
+      },
+      "PaginatedResource": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "type": "integer",
+                "format": "int64",
+                "examples": [10]
+              },
+              "offset": {
+                "type": "integer",
+                "format": "int64",
+                "examples": [0]
+              },
+              "total": {
+                "type": "integer",
+                "format": "int64",
+                "examples": [100]
+              },
+              "next": {
+                "type": ["string", "null"],
+                "examples": ["/artists?limit=10&offset=10"]
+              }
+            }
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "description": "RFC 7807 (https://datatracker.ietf.org/doc/html/rfc7807)",
+        "properties": {
+          "type": {
+            "type": "string",
+            "examples": ["https://example.com/errors/generic-error"]
+          },
+          "title": {
+            "type": "string",
+            "examples": ["Something went wrong here."]
+          },
+          "status": {
+            "type": "integer",
+            "format": "int64",
+            "examples": [403]
+          },
+          "detail": {
+            "type": "string",
+            "examples": ["Unfortunately, we can’t provide further information."]
+          }
+        }
+      }
+    }
+  }
+}
