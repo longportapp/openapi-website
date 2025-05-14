@@ -10,7 +10,8 @@ const IndexPageShouldRedirect = () => {
     },
     i18n: { defaultLocale, currentLocale },
   } = useDocusaurusContext()
-  let path = domainWithLocalPath(window.location.origin, '')
+  const isServer = typeof window === 'undefined'
+  let path = domainWithLocalPath(isServer ? '' : window.location.origin, '')
 
   // local dev should redirect to /docs
   if (isDev) {
