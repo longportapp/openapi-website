@@ -19,11 +19,7 @@ const IndexPageShouldRedirect = () => {
   }
 
   useEffect(() => {
-    window.location.href = isDev
-      ? defaultLocale === currentLocale
-        ? '/docs'
-        : `/${currentLocale}/docs`
-      : domainWithLocalPath(window.location.origin, '')
+    window.location.href = path
   }, [])
   return null
 }
