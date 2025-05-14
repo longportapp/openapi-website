@@ -10,7 +10,7 @@ const IndexPageShouldRedirect = () => {
     },
     i18n: { defaultLocale, currentLocale },
   } = useDocusaurusContext()
-  let path = domainWithLocalPath('https://open.longportapp.com', '')
+  let path = domainWithLocalPath(window.location.origin, '')
 
   // local dev should redirect to /docs
   if (isDev) {
