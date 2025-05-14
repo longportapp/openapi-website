@@ -4,7 +4,7 @@
 
 ### 下载地址
 
-- [3.0.2](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-3.0.2.tar.gz)
+- [3.0.3](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-3.0.3.tar.gz)
 
 ### API 文档
 
