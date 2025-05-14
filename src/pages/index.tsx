@@ -10,15 +10,13 @@ const IndexPageShouldRedirect = () => {
     },
     i18n: { defaultLocale, currentLocale },
   } = useDocusaurusContext()
-  let path = domainWithLocalPath(window.location.origin, '')
-
-  // local dev should redirect to /docs
-  if (isDev) {
-    path = defaultLocale === currentLocale ? '/docs' : `/${currentLocale}/docs`
-  }
-
+  
   useEffect(() => {
-    window.location.href = path
+    window.location.href = isDev
+      ? defaultLocale === currentLocale
+        ? '/docs'
+        : `/${currentLocale}/docs`
+      : domainWithLocalPath(window.location.origin, '')
   }, [])
   return null
 }
