@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-slug: /getting-started
+slug: getting-started
 title: 快速开始
 id: getting-started
 ---
@@ -73,7 +73,7 @@ yarn add longport
 
 ```toml
 [dependencies]
-longport = "1.0.0"
+longport = "3.0.3"
 tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
@@ -123,11 +123,11 @@ go get github.com/longportapp/openapi-go
 请注意保护好您的 **Access Token** 信息，任何人获得到它，都可以通过 OpenAPI 来交易你的账户！
 :::
 
-| 环境变量                    | 说明                                                         | 值范围          |
-| --------------------------- | ------------------------------------------------------------ | --------------- |
-| `LONGPORT_APP_KEY`          | 从页面上获取到的 App Key                                     |                 |
-| `LONGPORT_APP_SECRET`       | 从页面上获取到的 App Secret                                  |                 |
-| `LONGPORT_ACCESS_TOKEN`     | 从页面上获取到的 Access Token                                |                 |
+| 环境变量                    | 说明                                                       | 值范围          |
+|-----------------------------|----------------------------------------------------------|-----------------|
+| `LONGPORT_APP_KEY`          | 从页面上获取到的 App Key                                   |                 |
+| `LONGPORT_APP_SECRET`       | 从页面上获取到的 App Secret                                |                 |
+| `LONGPORT_ACCESS_TOKEN`     | 从页面上获取到的 Access Token                              |                 |
 | `LONGPORT_REGION`           | API 服务器接入点，请根据你所在地区设置，以获得更好的连接速度 | `hk`, `cn`      |
 | `LONGPORT_ENABLE_OVERNIGHT` | 是否开启夜盘行情，设置 `true` 开启，`false` 关闭             | `true`, `false` |
 
@@ -159,7 +159,7 @@ Windows 要稍微复杂一些，有下面两种方式可以设置环境变量：
 
    - 在弹出的窗口中点击“环境变量”。
 
-     <img src="https://assets.lbctrl.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
+     <img src="https://assets.lbkrs.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
 
    - 在弹出的窗口中点击“新建”，然后输入环境变量名称，比如 `LONGPORT_APP_KEY`，`Value` 分别填写从页面上获取到的 App Key，App Secret，Access Token，Region。
 
@@ -412,7 +412,7 @@ go run ./
 
 如没有开通行情权限，可以通过“LongPort”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
 
-<https://longportapp.com/download>
+https://longportapp.com/download
 :::
 
 当你有正确的行情权限，看起来可能会是这样：
@@ -1048,13 +1048,11 @@ Order {
 
 我们在 LongPort OpenAPI Python SDK 的 GitHub 仓库中提供了上面几个例子的完整代码，当然后期我们也会持续往里面补充或更新。
 
-<https://github.com/longportapp/openapi/tree/master/examples>
+https://github.com/longportapp/openapi/tree/master/examples
 
 ## SDK API 文档
 
-SDK 的详细 API 文档请访问：
-
-<https://longportapp.github.io/openapi/>
+SDK 的详细 API 文档请访问：https://longportapp.github.io/openapi/
 
 ## 反馈及沟通
 
@@ -1064,10 +1062,10 @@ SDK 的详细 API 文档请访问：
 
 在 GitHub 上，也有很多历史的讨论和问题可以参考，你也可以试着搜索一下，或许也能找到问题的解决方案。
 
-访问地址：<https://github.com/longportapp/openapi/issues>
+访问地址：https://github.com/longportapp/openapi/issues
 
 ### 飞书回馈
 
 如果你有使用[飞书](https://www.feishu.cn/)，可以扫打开在飞书话题群中提出你的问题：
 
-<img src="https://assets.lbctrl.com/uploads/412f8cd8-2268-45ff-a367-98f280d0ee09/openapi-feishu-qrcode.png" style={{ width: "200px" }} />
+<img src="https://assets.lbkrs.com/uploads/412f8cd8-2268-45ff-a367-98f280d0ee09/openapi-feishu-qrcode.png" style={{ width: "200px" }} />

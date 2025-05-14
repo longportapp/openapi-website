@@ -1,6 +1,6 @@
 ---
 id: quote_trade_day
-title: Get Market Trading Days
+title: Market Trading Days
 slug: trade-day
 sidebar_position: 16
 ---

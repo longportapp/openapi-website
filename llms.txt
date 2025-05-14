@@ -92,6 +92,7 @@ openapi-trade.longportapp.com
 
 - [Getting Started](https://open.longportapp.com/en/docs/getting-started.md)
 - [Introduction](https://open.longportapp.com/en/docs/index.md)
+- [llm](https://open.longportapp.com/en/docs/llm.md)
 
 ## Api-reference
 

@@ -1,9 +1,9 @@
-.idea
-node_modules
-.docusaurus
-yarn-error.log
+.idea/
+node_modules/
+.docusaurus/
+*.log
 .DS_Store
-.cache-loader
-dist
+.cache-loader/
+dist/
 *--autogen.md
 autogen-markdown/

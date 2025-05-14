@@ -1,6 +1,6 @@
 ---
 id: quote_history_candlestick
-title: Get Security History Candlesticks
+title: Security History Candlesticks
 slug: history-candlestick
 sidebar_position: 10
 ---
@@ -33,6 +33,7 @@ This API is used to obtain the history candlestick data of security.
 | ∟ date         | string | No       | Query date, in `YYYYMMDD` format, for example: 20231016. Default value: latest trading day of the underlying market.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | ∟ minute       | string | No       | Query time, in `HHMM` format, for example: 09:35, only valid when querying minute-level data                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ∟ count        | int32  | No       | Count of cancdlestick, valid range:`[1,1000]`. Default value: `10`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| trade_session  | int32  | No       | Trading session, 0: intraday, 100: All (pre, intraday, post, overnight)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
 ### Protobuf
 
@@ -90,17 +91,18 @@ print(resp)
 
 ### Response Properties
 
-| Name         | Type     | Description                           |
-|--------------|----------|---------------------------------------|
-| symbol       | string   | Security code, for example: `AAPL.US` |
-| candlesticks | object[] | Candlestick data                      |
-| ∟ close      | string   | Close price                           |
-| ∟ open       | string   | Open price                            |
-| ∟ low        | string   | Low price                             |
-| ∟ high       | string   | High price                            |
-| ∟ volume     | int64    | Volume                                |
-| ∟ turnover   | string   | Turnover                              |
-| ∟ timestamp  | int64    | Timestamp                             |
+| Name            | Type     | Description                                                                  |
+|-----------------|----------|------------------------------------------------------------------------------|
+| symbol          | string   | Security code, for example: `AAPL.US`                                        |
+| candlesticks    | object[] | Candlestick data                                                             |
+| ∟ close         | string   | Close price                                                                  |
+| ∟ open          | string   | Open price                                                                   |
+| ∟ low           | string   | Low price                                                                    |
+| ∟ high          | string   | High price                                                                   |
+| ∟ volume        | int64    | Volume                                                                       |
+| ∟ turnover      | string   | Turnover                                                                     |
+| ∟ timestamp     | int64    | Timestamp                                                                    |
+| ∟ trade_session | int32    | Trade session, see [TradeSession](../objects#tradesession---trading-session) |
 
 ### Protobuf
 

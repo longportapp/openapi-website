@@ -1,6 +1,6 @@
 ---
 id: quote_calc_index.md
-title: Get Calculate Indexes Of Securities
+title: Calculate Indexes Of Securities
 slug: calc-index
 sidebar_position: 19
 ---

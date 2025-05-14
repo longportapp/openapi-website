@@ -1,6 +1,6 @@
 // @ts-check
 const { lightTheme } = require('./config/theme')
-const darkCodeTheme = require('prism-react-renderer/themes/vsDark')
+const { themes } = require('prism-react-renderer')
 const i18n = require('./i18n/config')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -68,30 +68,6 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // todo I18n lang should redirect other dir
-          editUrl: ({ locale, docPath }) => {
-            const isAutoGenDoc = docPath.includes('--autogen.md')
-
-            let nextVersionDocsDirPath = 'docs'
-            if (isAutoGenDoc) {
-              docPath = docPath.replace('--autogen.md', '.yml')
-              nextVersionDocsDirPath = 'swagger-docs'
-            }
-
-            if (locale !== 'zh-CN') {
-              let targetPath = `i18n/${locale}/docusaurus-plugin-content-docs/current/${docPath}`
-              if (isAutoGenDoc) {
-                targetPath = `${nextVersionDocsDirPath}/${locale}/${docPath}`
-              }
-              return `https://github.com/longportapp/openapi-website/edit/main/${targetPath}`
-            } else {
-              if (docPath.includes('--autogen.md')) {
-                docPath = docPath.replace('--autogen.md', '.yml')
-                nextVersionDocsDirPath = 'swagger-docs'
-              }
-              return `https://github.com/longportapp/openapi-website/edit/main/${nextVersionDocsDirPath}/${docPath}`
-            }
-          },
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
           sidebarCollapsed: false,
@@ -127,13 +103,13 @@ const config = {
         title: '',
         logo: {
           alt: 'LongPort',
-          href: openapiDomain,
+          href: '/',
           target: '_self',
           src: 'https://pub.pbkrs.com/files/202211/BoUn1BSQuAHDX4GY/logo-with-title.svg',
         },
         items: [
           {
-            to: openapiDomain,
+            to: '/',
             position: 'left',
             target: '_self',
             label: '开发者认证',
@@ -150,7 +126,8 @@ const config = {
             activeBasePath: '/docs',
             label: '文档',
             position: 'left',
-            activeBaseRegex: '!^/docs/llm',
+            /// start with /docs but without /docs/llm
+            activeBaseRegex: '/docs(?!/llm)',
           },
           {
             label: 'LLM',
@@ -183,7 +160,7 @@ const config = {
       },
       prism: {
         theme: lightTheme,
-        darkTheme: darkCodeTheme,
+        darkTheme: themes.vsDark,
         additionalLanguages: ['shell-session', 'http', 'protobuf', 'rust', 'java', 'go'],
       },
       algolia: {
@@ -199,10 +176,10 @@ const config = {
         // Optional: see doc section below
         contextualSearch: true,
         // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
-        // replaceSearchResultPathname: {
-        //   from: '/docs/', // or as RegExp: /\/docs\//
-        //   to: '/',
-        // },
+        replaceSearchResultPathname: {
+          from: '/en/docs/', // or as RegExp: /\/docs\//
+          to: '/docs/',
+        },
 
         // Optional: Algolia search parameters
         searchParameters: {},

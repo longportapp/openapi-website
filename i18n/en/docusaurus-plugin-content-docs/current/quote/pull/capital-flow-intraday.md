@@ -1,6 +1,6 @@
 ---
 id: quote_capital_flow_intraday
-title: Get Security Capital Flow Intraday
+title: Security Capital Flow Intraday
 slug: capital-flow-intraday
 sidebar_position: 17
 ---

@@ -1,6 +1,6 @@
 ---
 id: quote_depth
-title: Get Security Depth
+title: Security Depth
 slug: depth
 sidebar_position: 5
 ---

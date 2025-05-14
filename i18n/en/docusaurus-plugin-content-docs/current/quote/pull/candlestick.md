@@ -1,6 +1,6 @@
 ---
 id: quote_candlestick
-title: Get Security Candlesticks
+title: Security Candlesticks
 slug: candlestick
 sidebar_position: 20
 ---
@@ -23,12 +23,13 @@ Note: This interface can only retrieve the last 1000 candlesticks. To obtain lon
 
 ### Parameters
 
-| Name        | Type   | Required | Description                                                                                              |
-| ----------- | ------ | -------- | -------------------------------------------------------------------------------------------------------- |
-| symbol      | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK`                                           |
-| period      | int32  | Yes      | Candlestick period, for example: `1000`, see [Period](../objects#period---candlestick-period)            |
-| count       | int32  | Yes      | Count of cancdlestick, for example: `100`<br /><br />**Check rules:** <br />maximum count is `1000`      |
-| adjust_type | int32  | Yes      | Adjustment type, for example: `0`, see [AdjustType](../objects#adjusttype---candlestick-adjustment-type) |
+| Name          | Type   | Required | Description                                                                                              |
+|---------------|--------|----------|----------------------------------------------------------------------------------------------------------|
+| symbol        | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK`                                           |
+| period        | int32  | Yes      | Candlestick period, for example: `1000`, see [Period](../objects#period---candlestick-period)            |
+| count         | int32  | Yes      | Count of cancdlestick, for example: `100`<br /><br />**Check rules:** <br />maximum count is `1000`      |
+| adjust_type   | int32  | Yes      | Adjustment type, for example: `0`, see [AdjustType](../objects#adjusttype---candlestick-adjustment-type) |
+| trade_session | int32  | No       | Trading session, 0: intraday, 100: All (pre, intraday, post, overnight)                                  |
 
 ### Protobuf
 
@@ -38,6 +39,7 @@ message SecurityCandlestickRequest {
   Period period = 2;
   int32 count = 3;
   AdjustType adjust_type = 4;
+  int32 trade_session = 5;
 }
 ```
 
@@ -48,30 +50,35 @@ message SecurityCandlestickRequest {
 # https://open.longportapp.com/docs/quote/pull/candlestick
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
-from longport.openapi import QuoteContext, Config, Period, AdjustType
+from longport.openapi import QuoteContext, Config, Period, AdjustType, TradeSessions
 
 config = Config.from_env()
 ctx = QuoteContext(config)
 
+# Get intraday candlestick data for 700.HK
 resp = ctx.candlesticks("700.HK", Period.Day, 10, AdjustType.NoAdjust)
 print(resp)
+
+# Get all candlestick data for 700.HK
+resp = ctx.candlesticks("700.HK", Period.Day, 10, AdjustType.NoAdjust, trade_session=TradeSessions.All)
 ```
 
 ## Response
 
 ### Response Properties
 
-| Name         | Type     | Description                           |
-| ------------ | -------- | ------------------------------------- |
-| symbol       | string   | Security code, for example: `AAPL.US` |
-| candlesticks | object[] | Candlestick data                      |
-| ∟ close      | string   | Close price                           |
-| ∟ open       | string   | Open price                            |
-| ∟ low        | string   | Low price                             |
-| ∟ high       | string   | High price                            |
-| ∟ volume     | int64    | Volume                                |
-| ∟ turnover   | string   | Turnover                              |
-| ∟ timestamp  | int64    | Timestamp                             |
+| Name            | Type     | Description                                                                  |
+|-----------------|----------|------------------------------------------------------------------------------|
+| symbol          | string   | Security code, for example: `AAPL.US`                                        |
+| candlesticks    | object[] | Candlestick data                                                             |
+| ∟ close         | string   | Close price                                                                  |
+| ∟ open          | string   | Open price                                                                   |
+| ∟ low           | string   | Low price                                                                    |
+| ∟ high          | string   | High price                                                                   |
+| ∟ volume        | int64    | Volume                                                                       |
+| ∟ turnover      | string   | Turnover                                                                     |
+| ∟ timestamp     | int64    | Timestamp                                                                    |
+| ∟ trade_session | int32    | Trade session, see [TradeSession](../objects#tradesession---trading-session) |
 
 ### Protobuf
 
@@ -150,7 +157,7 @@ message Candlestick {
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description                    | Troubleshooting Suggestions                                                    |
-| ------------------- | ------------------- | ------------------------------ | ------------------------------------------------------------------------------ |
+|---------------------|---------------------|--------------------------------|--------------------------------------------------------------------------------|
 | 3                   | 301600              | Invalid request                | Invalid request parameters or unpacking request failed                         |
 | 3                   | 301606              | Request rate limit             | Reduce the frequency of requests                                               |
 | 7                   | 301602              | Server error                   | Please try again or contact a technician to resolve the issue                  |

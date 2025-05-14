@@ -1,6 +1,6 @@
 ---
 id: quote_warrant_filter
-title: Get Filtered Warrant
+title: Warrant Filter
 slug: warrant-filter
 sidebar_position: 14
 ---

@@ -1,8 +1,7 @@
 ---
 sidebar_position: 1
-slug: /getting-started
+slug: getting-started
 title: Getting Started
-id: getting-started
 ---
 
 import Tabs from '@theme/Tabs';
@@ -73,7 +72,7 @@ yarn install longport
 
 ```toml
 [dependencies]
-longport = "1.0.0"
+longport = "3.0.3"
 tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
@@ -122,7 +121,7 @@ Please pay attention to protect your **Access Token** information, anyone who ge
 :::
 
 | 环境变量                    | 说明                                                               | 值范围          |
-| --------------------------- | ------------------------------------------------------------------ | --------------- |
+|-----------------------------|--------------------------------------------------------------------|-----------------|
 | `LONGPORT_APP_KEY`          | App Key get from developer center                                  |                 |
 | `LONGPORT_APP_SECRET`       | App Secret get from developer center                               |                 |
 | `LONGPORT_ACCESS_TOKEN`     | Access Token get from developer center                             |                 |
@@ -157,7 +156,7 @@ Windows is a little more complicated, we provide two methods to set the environm
 
    - Click "Environment Variables" in the pop-up window.
 
-     <img src="https://assets.lbctrl.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
+     <img src="https://assets.lbkrs.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
 
    - Click "New" in the pop-up window, then enter the environment variable name, such as `LONGPORT_APP_KEY`, `Value` respectively fill in the App Key, App Secret, Access Token, Region obtained from the page.
 
@@ -408,10 +407,9 @@ To subscribe to market data, please check the [Developer Center](https://open.lo
 Before running, visit the [Developer Center](https://open.longportapp.com/account) and ensure that the account has the correct quote level.
 
 :::info
-
 If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
 
-<https://longportapp.com/download>
+https://longportapp.com/download
 :::
 
 When you have the correct Quote authority, it might look like this:
@@ -1054,13 +1052,13 @@ The above example has fully demonstrated how to use the SDK to access the OpenAP
 
 We provide the complete code of the above examples in the GitHub repository of LongPort OpenAPI Python SDK, and we will continue to add or update it later.
 
-<https://github.com/longportapp/openapi/tree/master/examples>
+https://github.com/longportapp/openapi/tree/master/examples
 
 ## SDK API Document
 
 For detailed SDK API document, please visit:
 
-<https://longportapp.github.io/openapi/>
+https://longportapp.github.io/openapi/
 
 ## Contact & Feedback
 

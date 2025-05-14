@@ -1,6 +1,6 @@
 ---
 id: quote_trade
-title: Get Security Trades
+title: Security Trades
 slug: trade
 sidebar_position: 8
 ---

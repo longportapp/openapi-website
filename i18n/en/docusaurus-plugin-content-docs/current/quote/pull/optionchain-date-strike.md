@@ -1,6 +1,6 @@
 ---
 id: quote_optionchain_date_strike
-title: Get Option Chain Info By Date
+title: Option Chain By Date
 slug: optionchain-date-strike
 sidebar_position: 12
 ---

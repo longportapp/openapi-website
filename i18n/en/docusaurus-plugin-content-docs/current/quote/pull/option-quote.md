@@ -1,6 +1,6 @@
 ---
 id: quote_option_quote
-title: Get Real-time Quotes Of Option Securities
+title: Real-time Quotes of Option
 slug: option-quote
 sidebar_position: 3
 ---

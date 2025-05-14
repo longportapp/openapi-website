@@ -1,6 +1,6 @@
 ---
 id: quote_quote
-title: Get Real-time Quotes Of Securities
+title: Real-time Quotes Of Securities
 slug: quote
 sidebar_position: 2
 ---

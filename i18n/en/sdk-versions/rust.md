@@ -8,7 +8,7 @@ Add the following line to your `Cargo.toml` file
 
 ```toml
 [dependencies]
-longport = "1.0.0"
+longport = "3.0.3"
 ```
 
 [https://crates.io/crates/longport](https://crates.io/crates/longport)

@@ -1,6 +1,6 @@
 ---
 id: quote_issuer
-title: Get Warrant Issuer IDs
+title: Warrant Issuer IDs
 slug: issuer
 sidebar_position: 13
 ---

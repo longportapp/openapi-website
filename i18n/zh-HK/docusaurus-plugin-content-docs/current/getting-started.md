@@ -73,7 +73,7 @@ yarn install longport
 
 ```toml
 [dependencies]
-longport = "1.0.0"
+longport = "3.0.3"
 tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
@@ -131,11 +131,11 @@ go get github.com/longportapp/openapi-go
 請注意保護好您的 **Access Token** 訊息，任何人獲得到它，都可以透過 OpenAPI 來交易你的帳戶！
 :::
 
-| 環境變量                    | 說明                                                         | 值範圍          |
-| --------------------------- | ------------------------------------------------------------ | --------------- |
-| `LONGPORT_APP_KEY`          | 從頁面上取得到的 App Key                                     |                 |
-| `LONGPORT_APP_SECRET`       | 從頁面取得到的 App Secret                                    |                 |
-| `LONGPORT_ACCESS_TOKEN`     | 從頁面上取得到的 Access Token                                |                 |
+| 環境變量                    | 說明                                                       | 值範圍          |
+|-----------------------------|----------------------------------------------------------|-----------------|
+| `LONGPORT_APP_KEY`          | 從頁面上取得到的 App Key                                   |                 |
+| `LONGPORT_APP_SECRET`       | 從頁面取得到的 App Secret                                  |                 |
+| `LONGPORT_ACCESS_TOKEN`     | 從頁面上取得到的 Access Token                              |                 |
 | `LONGPORT_REGION`           | API 伺服器存取點，請根據您所在地區設置，以獲得更好的連線速度 | `hk`, `cn`      |
 | `LONGPORT_ENABLE_OVERNIGHT` | 是否開啟夜盤行情，設定 `true` 開啟，`false` 關閉             | `true`, `false` |
 
@@ -168,7 +168,7 @@ Windows 要稍微複雜一些，有以下兩種方式可以設定環境變量：
 
    - 在彈出的視窗中點選「環境變量」。
 
-     <img src="https://assets.lbctrl.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
+     <img src="https://assets.lbkrs.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
 
    - 在彈出的視窗中點擊“新建”，然後輸入環境變量名稱，例如 `LONGPORT_APP_KEY`，`Value` 分別填寫從頁面上取得到的 App Key，App Secret，Access Token，Region。
 
@@ -422,7 +422,7 @@ go run ./
 
 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 
-<https://longportapp.com/download>
+https://longportapp.com/download
 :::
 
 當你有正確的行情權限，看起來可能會是這樣：
@@ -985,13 +985,13 @@ Order {
 
 我們在 LongPort OpenAPI Python SDK 的 GitHub 倉庫中提供了上面幾個例子的完整代碼，當然後期我們也會持續往裡面補充或更新。
 
-<https://github.com/longportapp/openapi/tree/master/examples>
+https://github.com/longportapp/openapi/tree/master/examples
 
 ## SDK API 文檔
 
 SDK 的詳細 API 文檔請訪問：
 
-<https://longportapp.github.io/openapi/>
+https://longportapp.github.io/openapi/
 
 ## 回饋及溝通
 
@@ -1001,10 +1001,10 @@ SDK 的詳細 API 文檔請訪問：
 
 在 GitHub 上，也有很多歷史的討論和問題可以參考，你也可以試著搜尋一下，或許也能找到問題的解決方案。
 
-訪問網址：<https://github.com/longportapp/openapi/issues>
+訪問網址：https://github.com/longportapp/openapi/issues
 
 ### 飛書回饋
 
 如果你有使用[飛書](https://www.feishu.cn/)，可以掃打開在飛書話題群中提出你的問題：
 
-<img src="https://assets.lbctrl.com/uploads/412f8cd8-2268-45ff-a367-98f280d0ee09/openapi-feishu-qrcode.png" style={{ width: "200px" }} />
+<img src="https://assets.lbkrs.com/uploads/412f8cd8-2268-45ff-a367-98f280d0ee09/openapi-feishu-qrcode.png" style={{ width: "200px" }} />

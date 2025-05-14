@@ -1,6 +1,6 @@
 ---
 id: quote_optionchain_date
-title: Get Option Chain Expiry Date List
+title: Option Chain Expiry Date List
 slug: optionchain-date
 sidebar_position: 11
 ---
