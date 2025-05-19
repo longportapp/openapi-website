@@ -1,9 +1,12 @@
 ---
 sidebar: false
-title: 支持多种主流编程语言，并提供 SDK
-description: SDK page banner description
+title: SDK
+description: 支持多种主流编程语言，并提供 SDK
 id: sdk
+layout: page
 ---
+
+<SDK />
 
 ::: tabs key:language
 == Python

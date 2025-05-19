@@ -60,6 +60,10 @@ export default defineAdditionalConfig({
 function nav(): DefaultTheme.NavItem[] {
   return [
     {
+      text: 'SDK',
+      link: `/${lang}/sdk`,
+    },
+    {
       text: '指南',
       link: `/${lang}/guide/introduction`,
       activeMatch: '/guide/',

@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 import { groupIconMdPlugin, groupIconVitePlugin, localIconLoader } from 'vitepress-plugin-group-icons'
 import llmstxt from 'vitepress-plugin-llms'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
+import Unocss from 'unocss/vite'
 
 export default defineConfig({
   title: 'Longbridge',
@@ -95,6 +96,9 @@ export default defineConfig({
       llmstxt({
         workDir: 'en',
         ignoreFiles: ['index.md'],
+      }),
+      Unocss({
+        configFile: '../unocss.config.ts',
       }),
     ],
   },

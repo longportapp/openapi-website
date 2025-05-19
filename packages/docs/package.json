@@ -11,9 +11,12 @@
   },
   "devDependencies": {
     "@lunariajs/core": "^0.1.1",
+    "@unocss/extractor-mdc": "^66.1.2",
+    "@unocss/transformer-variant-group": "^66.1.2",
     "markdown-it-mathjax3": "^4.3.2",
     "open-cli": "^8.0.0",
     "postcss-rtlcss": "^5.7.0",
+    "unocss": "^66.1.2",
     "vitepress": "2.0.0-alpha.5",
     "vitepress-plugin-group-icons": "^1.5.2",
     "vitepress-plugin-llms": "^1.1.0",

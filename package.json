@@ -1,21 +1,21 @@
 {
   "name": "openapi-website",
-  "private": true,
   "version": "0.0.1",
-  "description": "this is a website of longbridge-openapi",
   "author": "longbridge",
-  "type": "module",
-  "workspaces": [
-    "packages/*"
-  ],
+  "module": "index.ts",
+  "description": "this is a website of longbridge-openapi",
+  "license": "MIT",
+  "private": true,
   "scripts": {
     "docs:dev": "bun run --filter './packages/docs' dev",
     "docs:build": "bun run --filter './packages/docs' build",
     "docs:preview": "bun run --filter './packages/docs' preview",
     "lint": "prettier -c --parser typescript \"packages/*/{src,__tests__,e2e}/**/*.[jt]s?(x)\" \"packages/docs/**/*.[jt]s\""
   },
-  "license": "MIT",
-  "module": "index.ts",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
     "@types/bun": "latest",
     "prettier": "^3.5.3"

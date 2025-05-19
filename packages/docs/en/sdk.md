@@ -1,12 +1,13 @@
 ---
 sidebar: false
-title: Supports multiple programming languages and provides SDK
-description: SDK page banner description
+title: SDK
+description: Supports multiple programming languages and provides SDK
 id: sdk
 layout: page
 ---
 
 <SDK />
+
 ::: tabs key:language
 == Python
 
