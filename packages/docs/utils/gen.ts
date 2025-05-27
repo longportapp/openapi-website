@@ -64,6 +64,7 @@ function generateSidebarItems(dirPath: string, relativePath: string, config?: Co
         items.push({
           text: dirTitle,
           items: subItems,
+          collapsed: false,
         } as DefaultTheme.SidebarItem)
       }
     }
