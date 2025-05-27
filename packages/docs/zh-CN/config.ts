@@ -1,4 +1,6 @@
 import { defineAdditionalConfig, type DefaultTheme } from 'vitepress'
+import { genMarkdowDocs } from '../utils/gen'
+
 // import { useSidebar } from 'vitepress-openapi'
 // import spec from '../public/openapi.json'
 
@@ -8,6 +10,8 @@ const lang = 'zh-CN'
 //   // Optionally, you can specify a link prefix for all generated sidebar items.
 //   linkPrefix: '/sock/',
 // })
+
+const docsSidebar = genMarkdowDocs('zh-CN', 'docs')
 export default defineAdditionalConfig({
   lang: 'zh-CN',
   description: '长桥 API 文档',
@@ -18,8 +22,13 @@ export default defineAdditionalConfig({
     search: { options: searchOptions() },
 
     sidebar: {
-      [`/${lang}/guide/`]: { base: `/${lang}/guide/`, items: sidebarGuide() },
-      [`/${lang}/api-reference/`]: { base: `/${lang}/api-reference/`, items: sidebarReference() },
+      [`/${lang}/sdk/`]: [
+        {
+          text: 'SDK',
+          link: 'sdk',
+        },
+      ],
+      [`/${lang}/docs/`]: { base: `/${lang}/docs/`, items: docsSidebar() },
     },
 
     footer: {
@@ -64,14 +73,8 @@ function nav(): DefaultTheme.NavItem[] {
       link: `/${lang}/sdk`,
     },
     {
-      text: '指南',
-      link: `/${lang}/guide/introduction`,
-      activeMatch: '/guide/',
-    },
-    {
-      text: 'API 参考',
-      link: `/${lang}/api-reference/error-codes`,
-      activeMatch: '/api-reference/',
+      text: '文档',
+      link: `/${lang}/docs/`,
     },
     {
       text: 'LLM',
@@ -82,22 +85,6 @@ function nav(): DefaultTheme.NavItem[] {
       link: 'https://github.com/longportapp/openapi/issues',
       target: '_blank',
     },
-  ]
-}
-
-function sidebarGuide(): DefaultTheme.SidebarItem[] {
-  return [
-    {
-      text: '首先',
-      collapsed: false,
-      items: [
-        { text: '什么是长桥 API？', link: 'introduction' },
-        { text: '长桥 API 文档', link: 'getting-started' },
-      ],
-    },
-    { text: 'LLM', base: '/llm/', link: 'learn' },
-    // 这样可以链接到其他的页面或链接
-    // { text: '配置和 API 参考', base: '/zh-CN/reference/', link: 'site-config' },
   ]
 }
 

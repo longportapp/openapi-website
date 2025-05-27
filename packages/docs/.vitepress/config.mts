@@ -3,6 +3,7 @@ import { groupIconMdPlugin, groupIconVitePlugin, localIconLoader } from 'vitepre
 import llmstxt from 'vitepress-plugin-llms'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 import Unocss from 'unocss/vite'
+import { tipContainerPlugin } from './md-plugins/tip-container'
 
 export default defineConfig({
   title: 'Longbridge',
@@ -56,6 +57,7 @@ export default defineConfig({
       }
       md.use(groupIconMdPlugin)
       md.use(tabsMarkdownPlugin)
+      md.use(tipContainerPlugin)
     },
   },
 

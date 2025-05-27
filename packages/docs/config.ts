@@ -1,4 +1,5 @@
 import { defineAdditionalConfig, type DefaultTheme } from 'vitepress'
+import { genMarkdowDocs } from './utils/gen'
 
 // import { useSidebar } from 'vitepress-openapi'
 // import spec from './public/openapi.json'
@@ -9,12 +10,14 @@ import { defineAdditionalConfig, type DefaultTheme } from 'vitepress'
 //   linkPrefix: '/socks/',
 // })
 
+// Generate nav items by reading markdown files
+const docsSidebar = genMarkdowDocs('en', 'docs')
 export default defineAdditionalConfig({
   lang: 'en-US',
   description: 'Longbridge API Documentation',
 
   themeConfig: {
-    nav: nav(),
+    nav: generateNav(),
 
     search: { options: searchOptions() },
 
@@ -25,8 +28,7 @@ export default defineAdditionalConfig({
           link: 'sdk',
         },
       ],
-      '/guide/': { base: '/guide/', items: sidebarGuide() },
-      '/api-reference/': { base: '/api-reference/', items: sidebarReference() },
+      '/docs/': { base: '/docs/', items: docsSidebar() },
     },
 
     footer: {
@@ -65,25 +67,20 @@ export default defineAdditionalConfig({
   },
 })
 
-function nav(): DefaultTheme.NavItem[] {
+function generateNav(): DefaultTheme.NavItem[] {
   return [
     {
       text: 'SDK',
       link: '/sdk',
     },
     {
-      text: 'Guide',
-      link: '/guide/introduction',
-      activeMatch: '/guide/',
-    },
-    {
-      text: 'API Reference',
-      link: '/api-reference/error-codes',
-      activeMatch: '/api-reference/',
+      text: 'Docs',
+      link: '/docs',
+      activeMatch: '/docs/',
     },
     {
       text: 'LLM',
-      link: '/llm/learn',
+      link: '/docs/llm',
     },
     {
       text: 'Discord',
@@ -103,30 +100,9 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: 'Longbridge API Documentation', link: 'getting-started' },
       ],
     },
-    { text: 'LLM', base: '/llm/', link: 'learn' },
+    { text: 'LLM', base: '/docs/', link: 'llm' },
     // 这样可以链接到其他的页面或链接
     // { text: '配置和 API 参考', base: '/zh/reference/', link: 'site-config' },
-  ]
-}
-
-function sidebarReference(): DefaultTheme.SidebarItem[] {
-  return [
-    {
-      text: 'API Appendix',
-      items: [
-        { text: 'General Error Codes', link: 'error-codes' },
-        { text: 'Get Token', link: 'how-to-access-api' },
-        { text: 'Refresh Token', link: 'refresh-token-api' },
-        {
-          text: 'Long Connection',
-          base: '/api-reference/socket/',
-          items: [
-            { text: 'Local Host', link: 'hosts' },
-            { text: 'Subscribe Quote Push', link: 'how_to_subscribe_quote' },
-          ],
-        },
-      ],
-    },
   ]
 }
 
