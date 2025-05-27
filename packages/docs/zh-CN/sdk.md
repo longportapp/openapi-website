@@ -8,10 +8,10 @@ layout: page
 
 <SDK />
 
-::: tabs key:language
+:::tabs key:language
 == Python
 
-## LongPort OpenAPI SDK for Python
+## LongPort OpenAPI SDK for Python{.bg-red}
 
 [https://github.com/longportapp/openapi/tree/master/python](https://github.com/longportapp/openapi/tree/master/python)
 
