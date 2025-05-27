@@ -1,7 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { groupIconMdPlugin, groupIconVitePlugin, localIconLoader } from 'vitepress-plugin-group-icons'
 import llmstxt from 'vitepress-plugin-llms'
-import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 import Unocss from 'unocss/vite'
 import { tipContainerPlugin } from './md-plugins/tip-container'
 
@@ -56,7 +55,6 @@ export default defineConfig({
         )
       }
       md.use(groupIconMdPlugin)
-      md.use(tabsMarkdownPlugin)
       md.use(tipContainerPlugin)
     },
   },

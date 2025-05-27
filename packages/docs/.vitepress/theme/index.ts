@@ -5,7 +5,6 @@ import './style/index.css'
 import 'virtual:group-icons.css' //代码组样式
 import { theme, useOpenapi } from 'vitepress-openapi/client'
 import 'vitepress-openapi/dist/style.css'
-import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 import spec from '../../public/openapi.json'
 import 'virtual:uno.css'
 import TipContainer from './components/TipContainer.vue'
@@ -23,7 +22,6 @@ export default {
       config: {},
     })
     theme.enhanceApp({ app, openapi } as any)
-    enhanceAppWithTabs(app)
     app.component('SDK', Sdk)
     app.component('SDKLinks', SDKLinks)
     app.component('TipContainer', TipContainer)

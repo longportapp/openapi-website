@@ -13,6 +13,7 @@
     "@lunariajs/core": "^0.1.1",
     "@unocss/extractor-mdc": "^66.1.2",
     "@unocss/transformer-variant-group": "^66.1.2",
+    "markdown-it": "^14.1.0",
     "markdown-it-mathjax3": "^4.3.2",
     "open-cli": "^8.0.0",
     "postcss-rtlcss": "^5.7.0",
@@ -20,9 +21,7 @@
     "vitepress": "2.0.0-alpha.5",
     "vitepress-plugin-group-icons": "^1.5.2",
     "vitepress-plugin-llms": "^1.1.0",
-    "vitepress-plugin-tabs": "^0.7.1",
-    "vue": "^3.5.13",
-    "markdown-it": "^14.1.0"
+    "vue": "^3.5.13"
   },
   "dependencies": {
     "vitepress-openapi": "^0.0.3-alpha.79"

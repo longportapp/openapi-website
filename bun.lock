@@ -28,7 +28,6 @@
         "vitepress": "2.0.0-alpha.5",
         "vitepress-plugin-group-icons": "^1.5.2",
         "vitepress-plugin-llms": "^1.1.0",
-        "vitepress-plugin-tabs": "^0.7.1",
         "vue": "^3.5.13",
       },
     },
@@ -905,8 +904,6 @@
     "vitepress-plugin-group-icons": ["vitepress-plugin-group-icons@1.5.2", "https://registry.npmmirror.com/vitepress-plugin-group-icons/-/vitepress-plugin-group-icons-1.5.2.tgz", { "dependencies": { "@iconify-json/logos": "^1.2.4", "@iconify-json/vscode-icons": "^1.2.18", "@iconify/utils": "^2.3.0" } }, "sha512-zen07KxZ83y3eecou4EraaEgwIriwHaB5Q0cHAmS4yO1UZEQvbljTylHPqiJ7LNkV39U8VehfcyquAJXg/26LA=="],
 
     "vitepress-plugin-llms": ["vitepress-plugin-llms@1.1.1", "https://registry.npmmirror.com/vitepress-plugin-llms/-/vitepress-plugin-llms-1.1.1.tgz", { "dependencies": { "byte-size": "^9.0.1", "gray-matter": "^4.0.3", "markdown-title": "^1.0.2", "millify": "^6.1.0", "minimatch": "^10.0.1", "picocolors": "^1.1.1", "remark": "^15.0.1", "remark-frontmatter": "^5.0.0", "tokenx": "^0.4.1", "unist-util-remove": "^4.0.0" } }, "sha512-QuMXQVlGvXOnF2G3Rr/32Jebl9tdy/Gg9p4Rx52YMo+e7tasWW/m6LHwW2kqJQR39bOe/SDO0fEtRXOCCuSbbQ=="],
-
-    "vitepress-plugin-tabs": ["vitepress-plugin-tabs@0.7.1", "https://registry.npmmirror.com/vitepress-plugin-tabs/-/vitepress-plugin-tabs-0.7.1.tgz", { "peerDependencies": { "vitepress": "^1.0.0", "vue": "^3.5.0" } }, "sha512-jxJvsicxnMSIYX9b8mAFLD2nwyKUcMO10dEt4nDSbinZhM8cGvAmMFOHPdf6TBX6gYZRl+/++/iYHtoM14fERQ=="],
 
     "vue": ["vue@3.5.13", "https://registry.npmmirror.com/vue/-/vue-3.5.13.tgz", { "dependencies": { "@vue/compiler-dom": "3.5.13", "@vue/compiler-sfc": "3.5.13", "@vue/runtime-dom": "3.5.13", "@vue/server-renderer": "3.5.13", "@vue/shared": "3.5.13" }, "peerDependencies": { "typescript": "*" }, "optionalPeers": ["typescript"] }, "sha512-wmeiSMxkZCSc+PM2w2VRsOYAZC8GdipNFRTsLSfodVqI9mbejKeXEGr8SckuLnrQPGe3oJN5c3K0vpoU9q/wCQ=="],
 
