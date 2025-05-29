@@ -4,7 +4,7 @@
 
 ### Download
 
-- [3.0.3](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-3.0.3.tar.gz)
+- [3.0.5](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-3.0.5.tar.gz)
 
 ### API Documents
 

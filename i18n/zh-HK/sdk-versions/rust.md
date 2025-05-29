@@ -8,7 +8,7 @@
 
 ```toml
 [dependencies]
-longport = "3.0.3"
+longport = "3.0.5"
 ```
 
 [https://crates.io/crates/longport](https://crates.io/crates/longport)
