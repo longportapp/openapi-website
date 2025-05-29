@@ -10,7 +10,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   src: '',
   size: 'md',
-  alt: 'User Avatar'
+  alt: 'User Avatar',
 })
 
 const sizeClasses = computed(() => {
@@ -30,15 +30,10 @@ const avatarSrc = computed(() => {
 </script>
 
 <template>
-  <div
-    class="inline-flex items-center justify-center flex-shrink-0"
-    :class="sizeClasses"
-  >
+  <div class="inline-flex items-center justify-center flex-shrink-0" :class="sizeClasses">
     <img
       :src="avatarSrc"
       :alt="props.alt"
-      class="w-full h-full rounded-full object-cover bg-gray-100 dark:bg-gray-800"
-    />
+      class="w-full h-full rounded-full object-cover bg-gray-100 dark:bg-gray-800" />
   </div>
 </template>
-

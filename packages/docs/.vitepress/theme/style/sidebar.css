@@ -1,12 +1,12 @@
 .VPSidebar {
-  --at-apply: outline-none
+  --at-apply: outline-none;
 }
 .VPSidebarItem .VPLink {
-  --at-apply: rounded-xl px-2 py-1 hover:bg-gray-600/5 dark:hover:bg-gray-200/5
+  --at-apply: rounded-xl px-2 py-1 hover: bg-gray-600/5 dark: hover: bg-gray-200/5;
 }
 
 .VPSidebarItem.is-active {
-  --at-apply: bg-gray-600/5 dark:bg-gray-200/5
+  --at-apply: bg-gray-600/5 dark: bg-gray-200/5;
 }
 
 :root {

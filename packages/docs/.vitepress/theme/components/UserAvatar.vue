@@ -6,7 +6,7 @@ import Dropdown from './UserAvatarDropdown.vue'
 const open = ref(false)
 const el = ref<HTMLElement>()
 
-const list = computed<{ title: string, href: string, icon: string }[]>(() => [
+const list = computed<{ title: string; href: string; icon: string }[]>(() => [
   {
     title: '反馈',
     href: 'https://open.longportapp.com/feedback',
@@ -22,26 +22,18 @@ const list = computed<{ title: string, href: string, icon: string }[]>(() => [
 
 <template>
   <ClientOnly>
-    <div
-      ref="el"
-      class="VPFlyout"
-      @mouseenter="open = true"
-      @focusin="open = true"
-      @focusout="open = false"
-    >
+    <div ref="el" class="VPFlyout" @mouseenter="open = true" @focusin="open = true" @focusout="open = false">
       <button
         type="button"
         class="button flex items-center py-3 w-8 h-8 focus:outline-none focus:ring-2 focus:ring-offset-0"
         aria-haspopup="true"
         :aria-expanded="open"
-        @click="open = !open"
-      >
-        <UserAvatarIcon
-          size="sm"
-        />
+        @click="open = !open">
+        <UserAvatarIcon size="sm" />
       </button>
 
-      <div class="menu absolute top-[calc(var(--vp-nav-height)/2)] right-0 opacity-0 invisible transition-opacity duration-200">
+      <div
+        class="menu absolute top-[calc(var(--vp-nav-height)/2)] right-0 opacity-0 invisible transition-opacity duration-200">
         <Dropdown :list="list" v-model:open="open" />
       </div>
     </div>
@@ -49,7 +41,6 @@ const list = computed<{ title: string, href: string, icon: string }[]>(() => [
 </template>
 
 <style scoped>
-
 .VPFlyout {
   display: flex;
   align-items: center;

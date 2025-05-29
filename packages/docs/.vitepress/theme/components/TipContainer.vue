@@ -1,12 +1,6 @@
 <template>
-  <div 
-    class="rounded-lg p-4 my-4 border-l-4 transition-colors duration-200"
-    :class="containerClasses"
-  >
-    <div 
-      v-if="title" 
-      class="flex items-center mb-2 font-semibold"
-    >
+  <div class="rounded-lg p-4 my-4 border-l-4 transition-colors duration-200" :class="containerClasses">
+    <div v-if="title" class="flex items-center mb-2 font-semibold">
       <span class="mr-2 text-base">{{ getIcon(type) }}</span>
       <span class="text-sm uppercase tracking-wider">{{ title }}</span>
     </div>
@@ -65,4 +59,4 @@ function getIcon(type: string): string {
 .prose :deep(li) {
   @apply my-1;
 }
-</style> 
+</style>

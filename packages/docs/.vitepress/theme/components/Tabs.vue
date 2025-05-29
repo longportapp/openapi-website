@@ -8,10 +8,9 @@
           'px-4 py-2 border-none bg-transparent cursor-pointer text-sm font-medium whitespace-nowrap border-b-2 border-transparent transition-all duration-200',
           tab.value === activeTab
             ? 'text-blue-600 dark:text-blue-400 border-b-blue-600 dark:border-b-blue-400'
-            : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
+            : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100',
         ]"
-        @click="setActiveTab(tab.value)"
-      >
+        @click="setActiveTab(tab.value)">
         {{ tab.label }}
       </button>
     </div>
@@ -59,13 +58,13 @@ if (typeof window !== 'undefined') {
 
 // 注册 tab
 const registerTab = (tab: Tab) => {
-  const existingIndex = tabs.value.findIndex(t => t.value === tab.value)
+  const existingIndex = tabs.value.findIndex((t) => t.value === tab.value)
   if (existingIndex >= 0) {
     tabs.value[existingIndex] = tab
   } else {
     tabs.value.push(tab)
   }
-  
+
   // 设置默认激活 tab
   if (tab.default || tabs.value.length === 1) {
     setActiveTab(tab.value)
@@ -75,18 +74,18 @@ const registerTab = (tab: Tab) => {
 // 设置激活 tab
 const setActiveTab = (value: string) => {
   activeTab.value = value
-  
+
   // 如果有 groupId，同步到全局状态
   if (props.groupId && typeof window !== 'undefined') {
     window.__VitePressTabsState[props.groupId] = value
-    
+
     // 通知其他同组的 tabs
     if (window.__VitePressTabsListeners[props.groupId]) {
-      window.__VitePressTabsListeners[props.groupId].forEach(listener => {
+      window.__VitePressTabsListeners[props.groupId].forEach((listener) => {
         listener(value)
       })
     }
-    
+
     // 持久化到 localStorage
     try {
       localStorage.setItem(`vitepress-tabs-${props.groupId}`, value)
@@ -100,34 +99,36 @@ const setActiveTab = (value: string) => {
 onMounted(() => {
   if (props.groupId && typeof window !== 'undefined') {
     const groupId = props.groupId
-    
+
     // 注册监听器
     if (!window.__VitePressTabsListeners[groupId]) {
       window.__VitePressTabsListeners[groupId] = new Set()
     }
-    
+
     const listener = (value: string) => {
-      if (tabs.value.some(tab => tab.value === value)) {
+      if (tabs.value.some((tab) => tab.value === value)) {
         activeTab.value = value
       }
     }
-    
+
     window.__VitePressTabsListeners[groupId].add(listener)
-    
+
     // 从 localStorage 恢复状态
     try {
       const saved = localStorage.getItem(`vitepress-tabs-${groupId}`)
-      if (saved && tabs.value.some(tab => tab.value === saved)) {
+      if (saved && tabs.value.some((tab) => tab.value === saved)) {
         activeTab.value = saved
         window.__VitePressTabsState[groupId] = saved
       }
     } catch (e) {
       console.warn('Failed to read tab state from localStorage:', e)
     }
-    
+
     // 如果全局状态已经有值，使用它
-    if (window.__VitePressTabsState[groupId] && 
-        tabs.value.some(tab => tab.value === window.__VitePressTabsState[groupId])) {
+    if (
+      window.__VitePressTabsState[groupId] &&
+      tabs.value.some((tab) => tab.value === window.__VitePressTabsState[groupId])
+    ) {
       activeTab.value = window.__VitePressTabsState[groupId]
     }
   }

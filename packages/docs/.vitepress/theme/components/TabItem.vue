@@ -49,4 +49,4 @@ onMounted(() => {
     transform: translateY(0);
   }
 }
-</style> 
+</style>

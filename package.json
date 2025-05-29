@@ -10,7 +10,8 @@
     "docs:dev": "bun run --filter './packages/docs' dev",
     "docs:build": "bun run --filter './packages/docs' build",
     "docs:preview": "bun run --filter './packages/docs' preview",
-    "lint": "prettier -c --parser typescript \"packages/*/{src,__tests__,e2e}/**/*.[jt]s?(x)\" \"packages/docs/**/*.[jt]s\""
+    "lint:docs": "prettier -c --parser typescript \"packages/docs/**/*.{js,ts,vue}\"",
+    "format:docs": "prettier --write \"packages/docs/**/*.{js,ts,vue}\""
   },
   "type": "module",
   "workspaces": [

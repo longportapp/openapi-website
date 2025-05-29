@@ -7,8 +7,7 @@ import UserAvatar from '../components/UserAvatar.vue'
 const { isDark } = useData()
 
 const enableTransitions = () =>
-  'startViewTransition' in document &&
-  window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+  'startViewTransition' in document && window.matchMedia('(prefers-reduced-motion: no-preference)').matches
 
 provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
   if (!enableTransitions()) {
@@ -18,10 +17,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
 
   const clipPath = [
     `circle(0px at ${x}px ${y}px)`,
-    `circle(${Math.hypot(
-      Math.max(x, innerWidth - x),
-      Math.max(y, innerHeight - y)
-    )}px at ${x}px ${y}px)`
+    `circle(${Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y))}px at ${x}px ${y}px)`,
   ]
 
   await document.startViewTransition(async () => {
@@ -34,7 +30,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
     {
       duration: 300,
       easing: 'ease-in',
-      pseudoElement: `::view-transition-${isDark.value ? 'old' : 'new'}(root)`
+      pseudoElement: `::view-transition-${isDark.value ? 'old' : 'new'}(root)`,
     }
   )
 })
@@ -42,11 +38,9 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
 
 <template>
   <DefaultTheme.Layout>
-
     <template #nav-bar-content-after>
       <UserAvatar />
     </template>
-
   </DefaultTheme.Layout>
 </template>
 
