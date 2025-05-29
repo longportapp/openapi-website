@@ -16,7 +16,7 @@ type Config = {
  */
 export function genMarkdowDocs(lang: string, basePath: string, config?: Config) {
   return function (): DefaultTheme.SidebarItem[] {
-    const rootDir = path.resolve(__dirname, '../', lang, basePath)
+    const rootDir = path.resolve(__dirname, '../../../', lang, basePath)
     return generateSidebarItems(rootDir, '', config)
   }
 }
@@ -28,7 +28,12 @@ export function genMarkdowDocs(lang: string, basePath: string, config?: Config) 
  * @param lang Language code (e.g., 'en', 'zh-CN')
  * @returns Array of navigation items
  */
-function generateSidebarItems(dirPath: string, relativePath: string, config?: Config): DefaultTheme.SidebarItem[] {
+function generateSidebarItems(
+  dirPath: string,
+  relativePath: string,
+  config?: Config,
+  level = 0
+): DefaultTheme.SidebarItem[] {
   const items: DefaultTheme.SidebarItem[] = []
 
   try {
@@ -57,14 +62,14 @@ function generateSidebarItems(dirPath: string, relativePath: string, config?: Co
     for (const dir of directories) {
       const subDirPath = path.join(dirPath, dir)
       const subRelativePath = path.join(relativePath, dir)
-      const subItems = generateSidebarItems(subDirPath, subRelativePath, config)
+      const subItems = generateSidebarItems(subDirPath, subRelativePath, config, level + 1)
 
       if (subItems.length > 0) {
         const dirTitle = formatDirName(dir)
         items.push({
           text: dirTitle,
           items: subItems,
-          collapsed: false,
+          collapsed: level > 0,
         } as DefaultTheme.SidebarItem)
       }
     }

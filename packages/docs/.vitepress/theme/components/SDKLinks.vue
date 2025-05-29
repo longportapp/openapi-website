@@ -5,31 +5,24 @@
     <h4 v-else-if="title && level === 4">{{ title }}</h4>
     <h5 v-else-if="title && level === 5">{{ title }}</h5>
     
-    <table class="table" style="display: table">
+    <table class="table block">
       <tbody>
         <tr v-for="link in links" :key="link.title">
-          <td class="bg-gray-50 w-[100px]">
-            <div class="flex items-center gap-x-2 text-sm">
+          <td class="w-25 bg-[var(--vp-c-bg-soft)] border border-[var(--vp-c-divider)]">
+            <div class="flex items-center gap-2 text-sm text-[var(--vp-c-text-1)]">
               <div
-                :style="{
-                  display: 'inline-block',
-                  width: '8px',
-                  height: '8px',
-                  backgroundColor: link.color,
-                  borderRadius: '1px',
-                }"
+                class="inline-block w-2 h-2 rounded-sm"
+                :style="{ backgroundColor: link.color }"
               ></div>
               <div>{{ link.title }}</div>
             </div>
           </td>
-          <td
-            :style="{
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-            }"
-          >
-            <a :href="link.url" target="_blank">
+          <td class="whitespace-nowrap overflow-hidden text-ellipsis bg-[var(--vp-c-bg)] border border-[var(--vp-c-divider)]">
+            <a 
+              :href="link.url" 
+              target="_blank" 
+              class="text-[var(--vp-c-brand-1)] no-underline"
+            >
               {{ link.label }}
             </a>
           </td>

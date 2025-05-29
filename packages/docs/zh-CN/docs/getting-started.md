@@ -70,7 +70,7 @@ yarn add longport
 
 ```toml
 [dependencies]
-longport = "1.0.0"
+longport = "3.0.3"
 tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
@@ -226,7 +226,7 @@ python account_asset.py
 
 创建 `account_asset.js` 贴入下面的代码：
 
-```js
+```javascript
 const { Config, TradeContext } = require('longport')
 
 let config = Config.fromEnv()
@@ -887,7 +887,7 @@ python today_orders.py
 
 创建 `today_orders.js` 贴入下面的代码：
 
-```js
+```javascript
 const { Config, TradeContext } = require('longport')
 
 let config = Config.fromEnv()

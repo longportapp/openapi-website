@@ -1,12 +1,12 @@
 @import './marker.css';
 @import './button.css';
 @import './custom-block.css';
-@import './algolia.css';
 @import './blockquote.css';
 @import './vp-code-group.css';
 @import './vp-code-title.css';
 @import './font.css';
 @import './sidebar.css';
+
 :root {
   --vp-c-default-1: var(--vp-c-gray-1);
   --vp-c-default-2: var(--vp-c-gray-2);

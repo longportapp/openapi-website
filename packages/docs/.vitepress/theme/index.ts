@@ -1,31 +1,27 @@
 // https://vitepress.dev/guide/custom-theme
 import type { Theme } from 'vitepress'
-import DefaultTheme from 'vitepress/theme-without-fonts'
 import './style/index.css'
 import 'virtual:group-icons.css' //代码组样式
 import { theme, useOpenapi } from 'vitepress-openapi/client'
 import 'vitepress-openapi/dist/style.css'
 import spec from '../../public/openapi.json'
 import 'virtual:uno.css'
-import TipContainer from './components/TipContainer.vue'
 
-import Sdk from './components/sdk.vue'
-import SDKLinks from './components/sdkLink.vue'
-import Tabs from './components/Tabs.vue'
-import TabItem from './components/TabItem.vue'
+/** Layouts */
+import Layout from './layouts/Layout.vue'
+/** auto import components */
+import * as components from './components'
 
 export default {
-  extends: DefaultTheme,
+  Layout,
   async enhanceApp({ app }) {
     const openapi = useOpenapi({
       spec,
       config: {},
     })
     theme.enhanceApp({ app, openapi } as any)
-    app.component('SDK', Sdk)
-    app.component('SDKLinks', SDKLinks)
-    app.component('TipContainer', TipContainer)
-    app.component('Tabs', Tabs)
-    app.component('TabItem', TabItem)
+    for (const component of Object.keys(components)) {
+      app.component(component, (components as any)[component])
+    }
   },
 } satisfies Theme

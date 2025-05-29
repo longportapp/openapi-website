@@ -33,6 +33,7 @@ sidebar_position: 10
 | ∟ date         | string | 否       | 查询日期，格式为 `YYYYMMDD`，例如：20231016，为空时使用标的所在市场的最新交易日                                                                                                                                                                                                                                                                                                                                                                                             |
 | ∟ minute       | string | 否       | 查询时间，格式为 `HHMM`，例如：09:35，仅在查询分钟级别 K 线时有效                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ∟ count        | int32  | 否       | 查询数量，填写范围 `[1,1000]`，为空时默认查询 `10` 条                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| trade_session  | int32  | 否       | 交易時段，0: 盤中，100: 所有延長時段（盤前，盤中, 盤後，夜盤）                                                                                                                                                                                                                                                                                                                                                                                                                |
 
 ### Protobuf
 
@@ -90,17 +91,18 @@ print(resp)
 
 ### Response Properties
 
-| Name         | Type     | Description             |
-|--------------|----------|-------------------------|
-| symbol       | string   | 标的代码，例如：`AAPL.US` |
-| candlesticks | object[] | K 线数据                |
-| ∟ close      | string   | 当前周期收盘价          |
-| ∟ open       | string   | 当前周期开盘价          |
-| ∟ low        | string   | 当前周期最低价          |
-| ∟ high       | string   | 当前周期最高价          |
-| ∟ volume     | int64    | 当前周期成交量          |
-| ∟ turnover   | string   | 当前周期成交额          |
-| ∟ timestamp  | int64    | 当前周期的时间戳        |
+| Name            | Type     | Description                                                      |
+|-----------------|----------|------------------------------------------------------------------|
+| symbol          | string   | 标的代码，例如：`AAPL.US`                                          |
+| candlesticks    | object[] | K 线数据                                                         |
+| ∟ close         | string   | 当前周期收盘价                                                   |
+| ∟ open          | string   | 当前周期开盘价                                                   |
+| ∟ low           | string   | 当前周期最低价                                                   |
+| ∟ high          | string   | 当前周期最高价                                                   |
+| ∟ volume        | int64    | 当前周期成交量                                                   |
+| ∟ turnover      | string   | 当前周期成交额                                                   |
+| ∟ timestamp     | int64    | 当前周期的时间戳                                                 |
+| ∟ trade_session | int32    | 交易時段，详见 [TradeSession](../objects#tradesession---交易时段) |
 
 ### Protobuf
 

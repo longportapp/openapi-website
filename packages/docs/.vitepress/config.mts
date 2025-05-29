@@ -1,12 +1,15 @@
 import { defineConfig } from 'vitepress'
-import { groupIconMdPlugin, groupIconVitePlugin, localIconLoader } from 'vitepress-plugin-group-icons'
+import { groupIconVitePlugin, localIconLoader } from 'vitepress-plugin-group-icons'
 import llmstxt from 'vitepress-plugin-llms'
 import Unocss from 'unocss/vite'
-import { tipContainerPlugin } from './md-plugins/tip-container'
+import { markdownConfig } from './config/markdown'
+import { dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { localesConfig } from './config/locales'
 
 export default defineConfig({
   title: 'Longbridge',
-
+  appearance: 'dark',
   lastUpdated: true,
   cleanUrls: true,
   metaChunk: true,
@@ -15,49 +18,7 @@ export default defineConfig({
   rewrites: {
     'en/:rest*': ':rest*',
   },
-  markdown: {
-    math: true,
-    codeTransformers: [
-      // We use `[!!code` in demo to prevent transformation, here we revert it back.
-      {
-        postprocess(code) {
-          return code.replace(/\[\!\!code/g, '[!code')
-        },
-      },
-    ],
-    config(md) {
-      const fence = md.renderer.rules.fence!
-      md.renderer.rules.fence = function (tokens, idx, options, env, self) {
-        const { localeIndex = 'root' } = env
-        const codeCopyButtonTitle = (() => {
-          switch (localeIndex) {
-            case 'es':
-              return 'Copiar código'
-            case 'fa':
-              return 'کپی کد'
-            case 'ko':
-              return '코드 복사'
-            case 'pt':
-              return 'Copiar código'
-            case 'ru':
-              return 'Скопировать код'
-            case 'zh-CN':
-              return '复制代码'
-            case 'zh-HK':
-              return '複製代碼'
-            default:
-              return 'Copy code'
-          }
-        })()
-        return fence(tokens, idx, options, env, self).replace(
-          '<button title="Copy Code" class="copy"></button>',
-          `<button title="${codeCopyButtonTitle}" class="copy"></button>`
-        )
-      }
-      md.use(groupIconMdPlugin)
-      md.use(tipContainerPlugin)
-    },
-  },
+  markdown: markdownConfig,
 
   sitemap: {
     hostname: 'https://open.longportapp.com',
@@ -78,25 +39,36 @@ export default defineConfig({
 
   themeConfig: {
     logo: { src: '/logo.svg', width: 48, height: 48 },
+    search: {
+      provider: 'local',
+    },
   },
 
-  locales: {
-    root: { label: 'English' },
-    'zh-CN': { label: '简体中文' },
-    'zh-HK': { label: '繁體中文' },
-  },
+  locales: localesConfig,
 
   vite: {
+    resolve: {
+      alias: [
+        {
+          find: '@',
+          replacement: dirname(fileURLToPath(new URL('./theme', import.meta.url))),
+        },
+        {
+          find: '~',
+          replacement: dirname(fileURLToPath(new URL('../', import.meta.url))),
+        },
+      ],
+    },
     plugins: [
       groupIconVitePlugin({
         customIcon: {
           vitepress: localIconLoader(import.meta.url, '../public/logo.svg'),
         },
       }),
-      llmstxt({
-        workDir: 'en',
-        ignoreFiles: ['index.md'],
-      }),
+      // llmstxt({
+      //   workDir: 'en',
+      //   ignoreFiles: ['index.md'],
+      // }),
       Unocss({
         configFile: '../unocss.config.ts',
       }),

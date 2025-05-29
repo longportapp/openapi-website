@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": ["**/*.ts", "**/*.vue", "**/*.md","**/*.json"],
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "paths": {
+      "@/*": [".vitepress/*"],
+      "~/*": ["./*"]
+    },
+    "baseUrl": ".",
+    "composite": true
+  }
+}
