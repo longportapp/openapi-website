@@ -14,7 +14,7 @@
 import { computed } from 'vue'
 
 interface Props {
-  type?: 'tip' | 'warning' | 'danger' | 'info'
+  type?: 'tip' | 'warning' | 'danger' | 'info' | 'caution' | 'success'
   title?: string
 }
 
@@ -29,6 +29,8 @@ const containerClasses = computed(() => {
     warning: 'bg-amber-50 dark:bg-amber-950/20 border-l-amber-500 text-amber-900 dark:text-amber-100',
     danger: 'bg-red-50 dark:bg-red-950/20 border-l-red-500 text-red-900 dark:text-red-100',
     info: 'bg-emerald-50 dark:bg-emerald-950/20 border-l-emerald-500 text-emerald-900 dark:text-emerald-100',
+    caution: 'bg-orange-50 dark:bg-orange-950/20 border-l-orange-500 text-orange-900 dark:text-orange-100',
+    success: 'bg-green-50 dark:bg-green-950/20 border-l-green-500 text-green-900 dark:text-green-100',
   }
   return typeClasses[props.type]
 })
@@ -39,6 +41,8 @@ function getIcon(type: string): string {
     warning: '⚠️',
     danger: '❌',
     info: 'ℹ️',
+    caution: '⚠️',
+    success: '✅',
   }
   return icons[type as keyof typeof icons] || '💡'
 }

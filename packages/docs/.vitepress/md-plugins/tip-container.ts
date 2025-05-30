@@ -1,24 +1,20 @@
-import type MarkdownIt from 'markdown-it'
-
+import type MarkdownItAsync from 'markdown-it'
+import container from 'markdown-it-container'
 interface ContainerOptions {
   marker?: string
   validate?: (params: string) => boolean
   render?: (tokens: any[], idx: number, options: any, env: any, renderer: any) => string
 }
 
-export function tipContainerPlugin(md: MarkdownIt) {
-  const containers = ['tip', 'warning', 'danger', 'info']
-
+export function tipContainerPlugin(md: MarkdownItAsync) {
+  const containers = ['tip', 'warning', 'danger', 'info', 'caution', 'success']
   containers.forEach((name) => {
-    md.use(createContainer, name, {
+    md.use(container, name, {
       render: (tokens: any[], idx: number) => {
         const token = tokens[idx]
         const info = token.info.trim().slice(name.length).trim()
-
         if (token.nesting === 1) {
-          // Opening tag
           const title = info || name.charAt(0).toUpperCase() + name.slice(1)
-          // Escape HTML attributes to prevent special characters from causing errors
           const escapedTitle = title
             .replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')
@@ -35,7 +31,7 @@ export function tipContainerPlugin(md: MarkdownIt) {
   })
 }
 
-function createContainer(md: MarkdownIt, name: string, options: ContainerOptions) {
+export function createContainer(md: MarkdownItAsync, name: string, options: ContainerOptions) {
   const min_markers = 3
   const marker_str = options.marker || ':'
   const marker_char = marker_str.charCodeAt(0)
@@ -83,6 +79,7 @@ function createContainer(md: MarkdownIt, name: string, options: ContainerOptions
     markup = state.src.slice(start, pos)
     params = state.src.slice(pos, state.eMarks[startLine])
 
+    console.log('[params]: ', params)
     if (!validate(params)) {
       return false
     }

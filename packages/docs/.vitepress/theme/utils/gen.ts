@@ -8,50 +8,98 @@ type Config = {
     collapsed?: boolean
   }
 }
+
+interface CategoryConfig {
+  position?: number
+  label?: string
+  collapsible?: boolean
+  collapsed?: boolean
+  link?: string | null | { title: string; slug: string }
+  childFileSort?: {
+    sortByType: 'ext' | 'dir'
+    ext?: string
+    sortByName?: string[]
+  }[]
+}
+
+type MSidebar = DefaultTheme.SidebarItem & { position?: number }
 /**
  * Generate navigation items by reading markdown files from a directory
  * @param lang Language code (e.g., 'en', 'zh-CN')
  * @param basePath Base path to read files from (e.g., 'docs')
  * @returns Function that returns an array of navigation items
  */
-export function genMarkdowDocs(lang: string, basePath: string, config?: Config) {
+export function genMarkdowDocs(lang: string, basePath: string) {
   return function (): DefaultTheme.SidebarItem[] {
     const rootDir = path.resolve(__dirname, '../../../', lang, basePath)
-    return generateSidebarItems(rootDir, '', config)
+    return generateSidebarItems(rootDir, '')
   }
+}
+/**
+ * Read _category_.json configuration file from a directory
+ * @param dirPath Directory path
+ * @returns CategoryConfig object or null if not found
+ */
+function readCategoryConfig(dirPath: string): CategoryConfig | null {
+  const categoryPath = path.join(dirPath, '_category_.json')
+  try {
+    if (fs.existsSync(categoryPath)) {
+      const content = fs.readFileSync(categoryPath, 'utf8')
+      return JSON.parse(content) as CategoryConfig
+    }
+  } catch (error) {
+    console.warn(`Error reading category config at ${categoryPath}:`, error)
+  }
+  return null
+}
+
+/**
+ * Sort items based on position property
+ * @param items Array of items with position property
+ * @returns Sorted array
+ */
+function sortByPosition<T extends { position?: number }>(items: T[]): T[] {
+  return items.sort((a, b) => {
+    const posA = a.position ?? Infinity
+    const posB = b.position ?? Infinity
+    return posA - posB
+  })
 }
 
 /**
  * Recursively generate navigation items from a directory
  * @param dirPath Directory path to read
  * @param relativePath Relative path for links
- * @param lang Language code (e.g., 'en', 'zh-CN')
  * @returns Array of navigation items
  */
-function generateSidebarItems(
-  dirPath: string,
-  relativePath: string,
-  config?: Config,
-  level = 0
-): DefaultTheme.SidebarItem[] {
+function generateSidebarItems(dirPath: string, relativePath: string): DefaultTheme.SidebarItem[] {
   const items: DefaultTheme.SidebarItem[] = []
 
   try {
     const files = fs.readdirSync(dirPath)
 
-    const mdFiles = files.filter((file) => file.endsWith('.md'))
+    // Process markdown files
+    const mdFiles = files.filter((file) => file.endsWith('.md') && file !== '_category_.json')
+    const fileItems: MSidebar[] = []
+
     for (const file of mdFiles) {
       const filePath = path.join(dirPath, file)
       const fileContent = fs.readFileSync(filePath, 'utf8')
       const { data } = matter(fileContent)
       const title = data['title'] || getDefaultTitle(file)
       const link = data['link'] || path.join(relativePath, file.replace('.md', ''))
-      const params = {
+      const position = data['position'] || undefined
+
+      fileItems.push({
         text: title,
         link,
-      }
-      items.push(params)
+        position,
+      })
     }
+
+    // Sort files by position if specified
+    const sortedFileItems = sortByPosition(fileItems)
+    items.push(...sortedFileItems)
 
     // Process directories
     const directories = files.filter((file) => {
@@ -59,20 +107,33 @@ function generateSidebarItems(
       return stats.isDirectory()
     })
 
+    const dirItems: MSidebar[] = []
+
     for (const dir of directories) {
       const subDirPath = path.join(dirPath, dir)
       const subRelativePath = path.join(relativePath, dir)
-      const subItems = generateSidebarItems(subDirPath, subRelativePath, config, level + 1)
+      const subCategoryConfig = readCategoryConfig(subDirPath)
+      const subItems = generateSidebarItems(subDirPath, subRelativePath)
 
       if (subItems.length > 0) {
-        const dirTitle = formatDirName(dir)
-        items.push({
+        const dirTitle = subCategoryConfig?.label || formatDirName(dir)
+        const collapsed = subCategoryConfig?.collapsed || false
+        const position = subCategoryConfig?.position
+
+        const sidebarItem: MSidebar = {
           text: dirTitle,
           items: subItems,
-          collapsed: level > 0,
-        } as DefaultTheme.SidebarItem)
+          collapsed,
+          position,
+        }
+
+        dirItems.push(sidebarItem)
       }
     }
+
+    // Sort directories by position
+    const sortedDirItems = sortByPosition(dirItems)
+    items.push(...sortedDirItems)
 
     return items
   } catch (error) {
