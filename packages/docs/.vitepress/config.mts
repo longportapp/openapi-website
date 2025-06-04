@@ -15,8 +15,25 @@ export default defineConfig({
   metaChunk: true,
   ignoreDeadLinks: true,
   base: '/',
-  rewrites: {
-    'en/:rest*': ':rest*',
+  rewrites: (path) => {
+    /** hack path route */
+    let np = path
+    if (np.includes('en')) {
+      np = np.replace('en/', '')
+    }
+    // 保持原有 SEO 路径
+    if (np.includes('/api-reference')) {
+      np = np.replace('/api-reference', '')
+    }
+    // 保持原有 /socket/socket-otp-api.md SEO 路径
+    if (np.includes('/socket/socket-otp-api.md')) {
+      np = np.replace('/socket', '')
+    }
+    // 重写 /:reset.md 文件为 :reset/index.md
+    if (np.endsWith('.md') && !np.includes('index.md')) {
+      np = np.replace(/\.md$/, '/index.md')
+    }
+    return np
   },
   markdown: markdownConfig,
 

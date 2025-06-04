@@ -29,10 +29,14 @@ type MSidebar = DefaultTheme.SidebarItem & { position?: number }
  * @param basePath Base path to read files from (e.g., 'docs')
  * @returns Function that returns an array of navigation items
  */
-export function genMarkdowDocs(lang: string, basePath: string) {
+export function genMarkdowDocs(lang: string, basePath: string, debug = false) {
   return function (): DefaultTheme.SidebarItem[] {
     const rootDir = path.resolve(__dirname, '../../../', lang, basePath)
-    return generateSidebarItems(rootDir, '')
+    const fc = generateSidebarItems(rootDir, '')
+    if (debug) {
+      fs.writeFileSync(path.resolve(__dirname, `./${lang}_sidebar.json`), JSON.stringify(fc, null, 2))
+    }
+    return fc
   }
 }
 /**
@@ -87,7 +91,7 @@ function generateSidebarItems(dirPath: string, relativePath: string): DefaultThe
       const fileContent = fs.readFileSync(filePath, 'utf8')
       const { data } = matter(fileContent)
       const title = data['title'] || getDefaultTitle(file)
-      const link = data['link'] || path.join(relativePath, file.replace('.md', ''))
+      const link = data['link'] || data['slug'] || path.join(relativePath, file.replace('.md', ''))
       const position = data['position'] || undefined
 
       fileItems.push({
