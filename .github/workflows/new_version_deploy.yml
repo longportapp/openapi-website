@@ -38,5 +38,5 @@ jobs:
 
       - name: Upload to Aliyun OSS
         run: |
-          ${{github.workspace}}/ossutil cp ./packages/docs/.vitepress/dist oss://lb-assets/github/release/open.longportapp.com/new-docs/raw/ -u -r -j 10 -e oss-cn-hangzhou.aliyuncs.com -i ${{ secrets.FE_LB_ASSET_ACCESS_KEY_ID }} -k ${{ secrets.FE_LB_ASSET_ACCESS_KEY_SECRET }} --exclude "*.html" --meta=Cache-Control:max-age=31536000
-          ${{github.workspace}}/ossutil cp ./packages/docs/.vitepress/dist oss://lb-assets/github/release/open.longportapp.com/new-docs/raw/ -u -r -j 10 -e oss-cn-hangzhou.aliyuncs.com -i ${{ secrets.FE_LB_ASSET_ACCESS_KEY_ID }} -k ${{ secrets.FE_LB_ASSET_ACCESS_KEY_SECRET }} --include "*.html" --meta=Content-Type:text/html\;charset=utf-8,Cache-Control:no-cache
+          ${{github.workspace}}/ossutil cp ./packages/docs/.vitepress/dist oss://lb-assets/github/canary/open.longportapp.com/new-docs/raw/ -u -r -j 10 -e oss-cn-hangzhou.aliyuncs.com -i ${{ secrets.FE_LB_ASSET_ACCESS_KEY_ID }} -k ${{ secrets.FE_LB_ASSET_ACCESS_KEY_SECRET }} --exclude "*.html" --meta=Cache-Control:max-age=31536000
+          ${{github.workspace}}/ossutil cp ./packages/docs/.vitepress/dist oss://lb-assets/github/canary/open.longportapp.com/new-docs/raw/ -u -r -j 10 -e oss-cn-hangzhou.aliyuncs.com -i ${{ secrets.FE_LB_ASSET_ACCESS_KEY_ID }} -k ${{ secrets.FE_LB_ASSET_ACCESS_KEY_SECRET }} --include "*.html" --meta=Content-Type:text/html\;charset=utf-8,Cache-Control:no-cache
