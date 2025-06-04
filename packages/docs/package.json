@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vitepress dev",
-    "build": "vitepress build",
+    "build": "vitepress build --base /longbridge-docs/",
     "preview": "vitepress preview",
     "lunaria:build": "lunaria build",
     "lunaria:open": "open-cli .vitepress/dist/_translations/index.html"
