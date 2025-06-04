@@ -47,6 +47,9 @@ export default defineConfig({
   locales: localesConfig,
 
   vite: {
+    build: {
+      chunkSizeWarningLimit: 1000,
+    },
     resolve: {
       alias: [
         {
