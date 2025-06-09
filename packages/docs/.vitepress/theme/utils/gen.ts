@@ -91,7 +91,10 @@ function generateSidebarItems(dirPath: string, relativePath: string): DefaultThe
       const fileContent = fs.readFileSync(filePath, 'utf8')
       const { data } = matter(fileContent)
       const title = data['title'] || getDefaultTitle(file)
-      const link = data['link'] || data['slug'] || path.join(relativePath, file.replace('.md', ''))
+      const originLink = data['link'] || data['slug']
+
+      const link =
+        originLink && path.isAbsolute(originLink) ? originLink : path.join(relativePath, file.replace('.md', ''))
       const position = data['position'] || undefined
 
       fileItems.push({

@@ -1,6 +1,5 @@
 import { defineConfig } from 'vitepress'
 import { groupIconVitePlugin, localIconLoader } from 'vitepress-plugin-group-icons'
-import llmstxt from 'vitepress-plugin-llms'
 import Unocss from 'unocss/vite'
 import { markdownConfig } from './config/markdown'
 import { dirname } from 'node:path'
@@ -86,10 +85,6 @@ export default defineConfig({
           vitepress: localIconLoader(import.meta.url, '../public/logo.svg'),
         },
       }),
-      // llmstxt({
-      //   workDir: 'en',
-      //   ignoreFiles: ['index.md'],
-      // }),
       Unocss({
         configFile: '../unocss.config.ts',
       }),
