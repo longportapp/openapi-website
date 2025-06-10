@@ -23,7 +23,6 @@ export function tipContainerPlugin(md: MarkdownItAsync) {
             .replace(/'/g, '&#39;')
           return `<TipContainer type="${name}" title="${escapedTitle}">\n`
         } else {
-          // Closing tag
           return '</TipContainer>\n'
         }
       },

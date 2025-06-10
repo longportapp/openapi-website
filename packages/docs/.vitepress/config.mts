@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
-import { groupIconVitePlugin, localIconLoader } from 'vitepress-plugin-group-icons'
+import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
+import llmstxt from 'vitepress-plugin-llms'
 import Unocss from 'unocss/vite'
 import { markdownConfig } from './config/markdown'
 import { dirname } from 'node:path'
@@ -46,7 +47,7 @@ export default defineConfig({
 
   /* prettier-ignore */
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: 'https://assets.lbctrl.com/uploads/76e9147c-76a5-4242-b90f-e3841cf50c46/longbridge-openapi.svg' }],
     ['meta', { name: 'theme-color', content: '#5f67ee' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:site_name', content: 'Longbridge Open API' }],
@@ -55,7 +56,11 @@ export default defineConfig({
   ],
 
   themeConfig: {
-    logo: { src: '/logo.svg', width: 48, height: 48 },
+    logo: {
+      src: 'https://assets.lbctrl.com/uploads/76e9147c-76a5-4242-b90f-e3841cf50c46/longbridge-openapi.svg',
+      width: 48,
+      height: 48,
+    },
     search: {
       provider: 'local',
     },
@@ -80,10 +85,10 @@ export default defineConfig({
       ],
     },
     plugins: [
-      groupIconVitePlugin({
-        customIcon: {
-          vitepress: localIconLoader(import.meta.url, '../public/logo.svg'),
-        },
+      groupIconVitePlugin(),
+      llmstxt({
+        workDir: 'en',
+        ignoreFiles: ['index.md', 'README.md', 'sock/operations/*'],
       }),
       Unocss({
         configFile: '../unocss.config.ts',
