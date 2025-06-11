@@ -69,6 +69,15 @@ export default defineConfig({
   locales: localesConfig,
 
   vite: {
+    server: {
+      proxy: {
+        '/api': {
+          target: 'https://openapi.longportapp.com',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+      },
+    },
     build: {
       chunkSizeWarningLimit: 1000,
     },

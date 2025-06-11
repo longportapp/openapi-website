@@ -35,5 +35,6 @@
     "editor.quickSuggestions": {
       "strings": true
     }
-  }
+  },
+  "vue.server.includeLanguages": ["vue", "markdown"]
 }

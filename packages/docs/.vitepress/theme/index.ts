@@ -21,7 +21,7 @@ export default {
     })
     theme.enhanceApp({ app, openapi } as any)
     for (const component of Object.keys(components)) {
-      app.component(component, (components as any)[component])
+      app.component(component, components[component])
     }
   },
 } satisfies Theme
