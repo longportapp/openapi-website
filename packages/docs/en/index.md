@@ -6,22 +6,22 @@ hero:
   image:
     src: https://pub.lbkrs.com/files/202503/2CChxYnHQXeW9eRu/code.svg
     alt: Longbridge
-  name: "Longbridge-docs-center"
-  text: "A document center for longbridge OpenAPI"
-  tagline: Stable · safe · Fast
+  name: 'Longbridge-docs-center'
+  text: 'A document center for Longbridge OpenAPI'
+  tagline: Stable · Safe · Fast
   actions:
     - theme: brand
       text: Getting Started
-      link: /en/guide/introduction
+      link: docs/
     - theme: alt
       text: API Reference
-      link: en//api-reference/error-codes
+      link: docs/how-to-access-api/
 
 features:
   - icon: <img src="https://pub.lbkrs.com/files/202503/7C3YBFzrQsnQ9rma/icon-code.svg" width="48" height="48"/>
     title: Extremely Stable
     details: No core utilities, all functionalities are provided via presets.
-    link: /en/guide/introduction
+    link: docs/
     linkText: Getting Started
 
   - icon: <img src="https://pub.lbkrs.com/files/202503/cHW5RsNJNYv6Z7RM/icon-cloud.svg" width="48" height="48" />
@@ -32,4 +32,3 @@ features:
     title: Ultra Latency
     details: Lightning-fast transactions with as low as 10ms delay, powered by cloud-native distributed in-memory databases and stateless architecture
 ---
-

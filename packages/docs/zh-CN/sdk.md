@@ -3,15 +3,16 @@ sidebar: false
 title: SDK
 description: 支持多种主流编程语言，并提供 SDK
 id: sdk
-layout: page
+layout: home
 ---
 
 <SDK />
 
-:::tabs key:language
-== Python
+<div class="border-t-hidden flex flex-col md:flex-row max-w-4xl w-full justify-between md:text-left mx-auto px-6 md:px-0 py-10">
+<Tabs groupId="programming-language">
+<TabItem value="python" label="Python">
 
-## LongPort OpenAPI SDK for Python{.bg-red}
+## LongPort OpenAPI SDK for Python
 
 [https://github.com/longportapp/openapi/tree/master/python](https://github.com/longportapp/openapi/tree/master/python)
 
@@ -33,7 +34,10 @@ $ pip install longport -i https://mirrors.aliyun.com/pypi/simple
 
 - https://longportapp.github.io/openapi/python/index.html
 
-== JavaScript## LongPort OpenAPI SDK for Node.js
+</TabItem>
+<TabItem value="javascript" label="JavaScript">
+
+## LongPort OpenAPI SDK for Node.js
 
 [https://github.com/longportapp/openapi/tree/master/nodejs](https://github.com/longportapp/openapi/tree/master/nodejs)
 
@@ -51,7 +55,10 @@ $ npm install longport --save
 
 - https://longportapp.github.io/openapi/nodejs/index.html
 
-== Rust## LongPort OpenAPI SDK for Rust
+</TabItem>
+<TabItem value="rust" label="Rust">
+
+## LongPort OpenAPI SDK for Rust
 
 [https://github.com/longportapp/openapi/tree/master/rust](https://github.com/longportapp/openapi/tree/master/rust)
 
@@ -70,7 +77,8 @@ longport = "2.0.0"
 
 - https://longportapp.github.io/openapi/rust/longport/index.html
 
-== Java
+</TabItem>
+<TabItem value="java" label="Java">
 
 ## LongPort OpenAPI SDK for Java
 
@@ -94,7 +102,8 @@ longport = "2.0.0"
 
 - https://longportapp.github.io/openapi/java/index.html
 
-== Go
+</TabItem>
+<TabItem value="go" label="Go">
 
 ## LongPort OpenAPI SDK for Go
 
@@ -110,7 +119,8 @@ $ go get github.com/longportapp/openapi-go
 
 [https://pkg.go.dev/github.com/longportapp/openapi-go](https://pkg.go.dev/github.com/longportapp/openapi-go)
 
-== C++
+</TabItem>
+<TabItem value="c++" label="C++">
 
 ## LongPort OpenAPI SDK for C/C++
 
@@ -122,4 +132,14 @@ $ go get github.com/longportapp/openapi-go
 
 ### API 文档
 
-- https://longportapp.github.io/openapi/cpp/index.html
+<a href="https://longportapp.github.io/openapi/cpp/index.html">https://longportapp.github.io/openapi/cpp/index.html</a>
+</TabItem>
+</Tabs>
+
+</div>
+
+<style scoped>
+h2 {
+  border: 0;
+}
+</style>

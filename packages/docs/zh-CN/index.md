@@ -6,22 +6,22 @@ hero:
   image:
     src: https://pub.lbkrs.com/files/202503/2CChxYnHQXeW9eRu/code.svg
     alt: Longbridge
-  name: "长桥开发者平台"
-  text: "Open API 文档中心"
+  name: '长桥开发者平台'
+  text: 'Open API 文档中心'
   tagline: 稳定 · 安全 · 快速
   actions:
     - theme: brand
       text: 开始使用
-      link: /zh-CN/guide/introduction
+      link: /zh-CN/docs/
     - theme: alt
       text: API 参考
-      link: /zh-CN//api-reference/error-codes
+      link: /zh-CN/docs/how-to-access-api/
 
 features:
   - icon: <img src="https://pub.lbkrs.com/files/202503/7C3YBFzrQsnQ9rma/icon-code.svg" width="48" height="48"/>
     title: 极致稳定
     details: 无核心工具依赖，所有功能通过预设提供。
-    link: /zh-CN/guide/introduction
+    link: /zh-CN/docs/
     linkText: 开始使用
   - icon: <img src="https://pub.lbkrs.com/files/202503/cHW5RsNJNYv6Z7RM/icon-cloud.svg" width="48" height="48" />
     title: 弹性扩展

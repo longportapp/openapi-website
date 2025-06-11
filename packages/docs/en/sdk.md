@@ -3,13 +3,14 @@ sidebar: false
 title: SDK
 description: Supports multiple programming languages and provides SDK
 id: sdk
-layout: page
+layout: home
 ---
 
 <SDK />
 
-::: tabs key:language
-== Python
+<div class="border-t-hidden flex flex-col md:flex-row max-w-4xl w-full justify-between md:text-left mx-auto px-6 md:px-0 py-10">
+<Tabs groupId="programming-language">
+<TabItem value="python" label="Python" default>
 
 ## LongPort OpenAPI SDK for Python
 
@@ -29,7 +30,8 @@ $ pip install longport
 
 - https://longportapp.github.io/openapi/python/index.html
 
-== JavaScript
+</TabItem>
+<TabItem value="javascript" label="JavaScript">
 
 ## LongPort OpenAPI SDK for Node.js
 
@@ -49,7 +51,8 @@ $ npm install longport --save
 
 - https://longportapp.github.io/openapi/nodejs/index.html
 
-== Rust
+</TabItem>
+<TabItem value="rust" label="Rust">
 
 ## LongPort OpenAPI SDK for Rust
 
@@ -70,7 +73,8 @@ longport = "1.0.0"
 
 - https://longportapp.github.io/openapi/rust/longport/index.html
 
-== Java
+</TabItem>
+<TabItem value="java" label="Java">
 
 ## LongPort OpenAPI SDK for Java
 
@@ -94,7 +98,8 @@ Add the following line to your `pom.xml` file
 
 - https://longportapp.github.io/openapi/java/index.html
 
-== Go
+</TabItem>
+<TabItem value="go" label="Go">
 
 ## LongPort OpenAPI SDK for Go
 
@@ -110,7 +115,8 @@ $ go get github.com/longportapp/openapi-go
 
 [https://pkg.go.dev/github.com/longportapp/openapi-go](https://pkg.go.dev/github.com/longportapp/openapi-go)
 
-== C++
+</TabItem>
+<TabItem value="c++" label="C++">
 
 ## LongPort OpenAPI SDK for C/C++
 
@@ -123,3 +129,14 @@ $ go get github.com/longportapp/openapi-go
 ### API Documents
 
 - https://longportapp.github.io/openapi/cpp/index.html
+
+</TabItem>
+</Tabs>
+
+</div>
+
+<style scoped>
+h2 {
+  border: 0;
+}
+</style>
