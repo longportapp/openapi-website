@@ -154,9 +154,11 @@ export function createContainer(md: MarkdownItAsync, name: string, options: Cont
     return true
   }
 
-  md.block.ruler.before('fence', 'container_' + name, ruleBlock, {
+  md?.block?.ruler.before('fence', 'container_' + name, ruleBlock, {
     alt: ['paragraph', 'reference', 'blockquote', 'list'],
   })
-  md.renderer.rules['container_' + name + '_open'] = render
-  md.renderer.rules['container_' + name + '_close'] = render
+  if (md?.renderer) {
+    md.renderer.rules['container_' + name + '_open'] = render
+    md.renderer.rules['container_' + name + '_close'] = render
+  }
 }

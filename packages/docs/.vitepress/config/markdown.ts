@@ -1,6 +1,7 @@
-import { MarkdownOptions } from 'vitepress'
+import { type MarkdownOptions } from 'vitepress'
 import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
 import { tipContainerPlugin } from '../md-plugins/tip-container'
+import { GenTryItPlugin } from '../md-plugins/gen-try-it.ts'
 
 export const markdownConfig: MarkdownOptions = {
   image: {
@@ -46,5 +47,6 @@ export const markdownConfig: MarkdownOptions = {
     }
     md.use(groupIconMdPlugin)
     md.use(tipContainerPlugin)
+    md.use(GenTryItPlugin)
   },
 }
