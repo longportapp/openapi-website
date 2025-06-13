@@ -1,6 +1,6 @@
 export interface ParameterRow {
   name: string
-  type: string
+  type: 'string' | 'number' | 'boolean' | 'array' | 'object' | 'string[]'
   required: string
   description: string
 }

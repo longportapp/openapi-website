@@ -6,6 +6,7 @@ import { markdownConfig } from './config/markdown'
 import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { localesConfig } from './config/locales'
+import path from 'path'
 
 export default defineConfig({
   title: 'Longbridge',
@@ -15,6 +16,7 @@ export default defineConfig({
   metaChunk: true,
   ignoreDeadLinks: true,
   base: '/',
+
   srcExclude: ['README.md'],
   rewrites: (path) => {
     /** hack path route */
@@ -77,6 +79,10 @@ export default defineConfig({
           rewrite: (path) => path.replace(/^\/api/, ''),
         },
       },
+    },
+    optimizeDeps: {
+      // Exclude vuetify since it has an issue with vite dev - TypeError: makeVExpansionPanelTextProps is not a function - the makeVExpansionPanelTextProps is used before it is defined
+      exclude: ['vuetify'],
     },
     build: {
       chunkSizeWarningLimit: 1000,
