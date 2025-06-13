@@ -23,12 +23,10 @@ declare type Ref<T> = { value: T }
 // ==================== 配置示例 ====================
 
 const wsConfig: WebSocketConfig = {
-  appKey: '5e2640865ebc03230f6d788077f277a6',
-  accessToken:
-    'm_eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsb25nYnJpZGdlIiwic3ViIjoiYWNjZXNzX3Rva2VuIiwiZXhwIjoxNzU3MjI5MzQ3LCJpYXQiOjE3NDk0NTMzNDgsImFrIjoiNWUyNjQwODY1ZWJjMDMyMzBmNmQ3ODgwNzdmMjc3YTYiLCJhYWlkIjoyMDYyNTkyMCwiYWMiOiJsYl9wYXBlcnRyYWRpbmciLCJtaWQiOjExNzc0NDc4LCJzaWQiOiJxN2hCMGw4ZHVTYU41bnpra3c5M2FRPT0iLCJibCI6MSwidWwiOjAsImlrIjoibGJfcGFwZXJ0cmFkaW5nXzIwNjI1OTIwIn0.MzYXr-10k3OqHr1eX62vvUOh4MKIC3acd4a81PtRws-bfFrxSpgaWyaymRsIaZhPkm3IFxAQOaY5l2VIWUyl1B_jbKWxWS19IkpWEUhVD5qkk5s9XPoJPp_GXz52CCmLVOOe29OmnU7Xf2Gu-BL84KcW4FKxx664jLY__F0d8FrBuZMSs7QpwL2cSA8LM04K4IF57LCgiDrctfG0omvYf0Zucb6H-x3PQbfuCVzfnhK9LOoIz9wija4tuz5qFl2xFb4muLGQ5Tl_RNu1nF4PgfnTCWtdanaFsgrtDJTto_lbC1tDNiZSHw_f3xCxCPXjsKNIu8INgFz3yXF-rfF3cfjJ_Sl0_OWOrktiuAczOVA-KVVJPFaFrWbMkGaUyQADuCTSq-RomU-V8n2l5_gZo27zeUYPGR3x3VwGLg6ihpONlE5l-zmzDVTM4uj5rdA5jh7s_e9Seyn52JkylP3LTAajv1tkAhOaNRRPWT_DSosbh5bFn6jHcSx-Le1MVc-XwDBs-YTjBA_a6SIXOuxNT1Mzdt-4qVpFKKxx_uyMCqT66PmI6iXmtQ_8kqxEP9-4ly7XVF6NoAcrt9fw-WRFQp1orDuXoTMD3XnvKBTz7tWB9ZMyE8LHiZIye1mPVTty20ZK3Orn2JbL4Gm_H-e-nIiGyAun0BDd8OAweHDejK0',
-  appSecret: '4f051005937131da7726901c68487ff46cf5ec836ae5ed4b5a4d51673f2c9439',
+  appKey: '',
+  accessToken: '',
+  appSecret: '',
   // 可选配置
-  apiBaseUrl: 'https://openapi.longportapp.com', // 默认值
   wsUrl: 'wss://openapi-quote.longportapp.com', // 默认值
   timeout: 30000, // 30 秒超时
   autoReconnect: true, // 自动重连
