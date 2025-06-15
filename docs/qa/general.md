@@ -34,3 +34,7 @@ A: 若客户持有多个证券账户，例如日内融或其他子账户，交�
 ## Q7: 通过 LongPort OpenAPI 进行交易操作有额外收费吗
 
 A: 通过 OpenAPI 接入进行行情查询、交易等，我们不会收取额外的费用。交易手续费、平台费、行情权限等账户相关的费用，请以 App 以及官网提供的信息为准。
+
+## Q8: 如何关闭 SDK 连接到服务器后的控制台下的权限表输出
+
+A: 您可以设置环境变量 `LONGPORT_PRINT_QUOTE_PACKAGES` 为 `false`，或者在代码中创建 `Config` 对象时设置 `enable_print_quote_packages` 为 `false`，来关闭控制台下的权限表输出。

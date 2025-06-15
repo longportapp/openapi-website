@@ -34,3 +34,7 @@ A: 若客戶持有多個證券帳戶，例如日內融或其他子帳戶，交�
 ## Q7: 透過 LongPort OpenAPI 進行交易操作有額外收費嗎
 
 A: 透過 OpenAPI 存取進行行情查詢、交易等，我們不會收取額外的費用。交易手續費、平台費、行情權限等帳戶相關的費用，請以 App 以及官網提供的資訊為準。
+
+## Q8: 如何關閉 SDK 連接到伺服器後的控制台下的權限表輸出
+
+A: 您可以設置環境變數 `LONGPORT_PRINT_QUOTE_PACKAGES` 為 `false`，或者在代碼中創建 `Config` 對象時設置 `enable_print_quote_packages` 為 `false`，來關閉控制台下的權限表輸出。
