@@ -1,6 +1,6 @@
 <template>
   <div v-if="visible" :id="id" class="control-wrapper">
-    <div class="flex gap-6">
+    <div class="flex gap-2 md:gap-6 flex-col md:flex-row">
       <!-- 左侧：字段信息区域 -->
       <div class="field-info flex-1 min-w-0">
         <!-- 字段标题行 -->
@@ -35,7 +35,7 @@
       </div>
 
       <!-- 右侧：输入控件区域 -->
-      <div class="control-input-wrapper flex-shrink-0 w-80">
+      <div class="control-input-wrapper flex-shrink-0 flex-1 max-w-80">
         <slot></slot>
       </div>
     </div>

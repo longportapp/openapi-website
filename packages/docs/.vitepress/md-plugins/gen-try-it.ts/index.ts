@@ -228,7 +228,7 @@ export const GenTryItPlugin = (md: MarkdownIt) => {
       // 将 HTTP 信息存储到环境变量中，供后续使用
       state.env.httpInfo = httpResult
     }
-    if (httpResult && parametersResult) {
+    if (httpResult) {
       addTryItComponent(state, httpResult, parametersResult)
     }
   })
