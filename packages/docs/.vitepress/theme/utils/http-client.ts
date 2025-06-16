@@ -19,12 +19,16 @@ export interface ApiConfig {
 }
 
 export interface ApiResponse<T = any> {
-  /** 业务状态码，0 表示成功 */
-  code: number
-  /** 响应消息 */
-  msg: string
-  /** 响应数据 */
-  data?: T
+  status: number
+  statusText: string
+  response: {
+    /** 业务状态码，0 表示成功 */
+    code: number
+    /** 响应消息 */
+    msg: string
+    /** 响应数据 */
+    data?: T
+  }
 }
 
 export interface RequestOptions {
@@ -136,7 +140,7 @@ export class LongbridgeApiClient {
   /**
    * 发送 HTTP 请求
    */
-  async request<T = any>(uri: string, options: RequestOptions = {}): Promise<ApiResponse<T>> {
+  async request<T = any>(uri: string, options: RequestOptions = {}): Promise<ApiResponse> {
     const { method = 'GET', params = {}, body, headers: customHeaders = {}, timeout = this.config.timeout } = options
 
     // 构建查询参数
@@ -174,21 +178,22 @@ export class LongbridgeApiClient {
 
       clearTimeout(timeoutId)
 
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+      console.log('response', response)
+      const result = await response.json()
+      return {
+        status: response.status,
+        statusText: response.statusText,
+        response: result,
       }
-
-      const result: ApiResponse<T> = await response.json()
-      return result
     } catch (error) {
       clearTimeout(timeoutId)
       if (error instanceof Error) {
         if (error.name === 'AbortError') {
-          throw new Error(`请求超时：${timeout}ms`)
+          throw new Error(`timeout ${timeout}ms`)
         }
         throw error
       }
-      throw new Error('未知错误')
+      throw new Error('unknown')
     }
   }
 

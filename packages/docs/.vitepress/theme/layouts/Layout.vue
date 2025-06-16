@@ -3,8 +3,11 @@ import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { nextTick, provide } from 'vue'
 import UserAvatar from '../components/UserAvatar.vue'
+import { createHighlighter } from 'shiki/bundle/web'
 
 const { isDark } = useData()
+
+provide('highlighter', createHighlighter({ themes: ['vitesse-dark', 'vitesse-light'], langs: ['json'] }))
 
 const enableTransitions = () =>
   'startViewTransition' in document && window.matchMedia('(prefers-reduced-motion: no-preference)').matches

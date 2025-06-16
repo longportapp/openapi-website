@@ -1,8 +1,8 @@
 <template>
   <div
     v-if="props.parameters.length > 0"
-    class="parameters-form border border-gray-200 dark:border-gray-600 rounded-lg p-4">
-    <h2 class="pb-4 text-lg font-semibold text-gray-900 dark:text-gray-100">Params</h2>
+    class="parameters-form border border-gray-200 dark:border-white/10 rounded-xl p-4 dark:border-white/10">
+    <h2 class="pb-4 text-lg font-semibold text-gray-900 dark:text-gray-100">Parameters</h2>
     <json-forms :data="data" :schema="schema" :uischema="uischema" :renderers="renderers" @change="onChange" />
   </div>
   <div v-else class="text-gray-500 dark:text-gray-400 text-sm">No parameters required for this API</div>
@@ -103,11 +103,7 @@ const onChange = (event: any) => {
 <style lang="scss">
 .parameters-form {
   input {
-    @apply w-full border border-gray-200 dark:border-gray-600 rounded-lg border-solid text-sm py-1.5 px-2.5 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 focus:border-gray-300 dark:focus:border-gray-500 focus:ring-gray-300 dark:focus:ring-gray-500 transition-all duration-200;
-  }
-
-  button {
-    @apply border border-gray-200 dark:border-gray-600 rounded-lg border-solid text-sm py-1 px-2 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:border-gray-300 dark:focus:border-gray-500 focus:ring-gray-300 dark:focus:ring-gray-500 transition-all duration-200;
+    @apply w-full border border-gray-200/70 dark:border-white/10 rounded-lg border-solid text-sm py-1.5 px-2.5 text-gray-900 dark:text-gray-100  focus:border-gray-300 dark:focus:border-gray-500 focus:ring-gray-300 dark:focus:ring-gray-500 transition-all duration-200;
   }
 
   .horizontal-layout {
@@ -126,7 +122,7 @@ const onChange = (event: any) => {
   }
 
   .vertical-layout-item {
-    @apply border-t border-gray-200 dark:border-gray-600 border-solid py-4;
+    @apply border-t border-gray-200 dark:border-white/10 border-solid py-4;
   }
 
   .error {
@@ -157,6 +153,9 @@ const onChange = (event: any) => {
     display: flex;
     flex-direction: column;
   }
+  .array-list-item {
+    @apply flex items-start;
+  }
 
   .array-list-item-toolbar {
     cursor: pointer;
@@ -172,19 +171,6 @@ const onChange = (event: any) => {
   }
   .array-list-item-toolbar > button:disabled {
     cursor: initial;
-  }
-
-  .array-list-item-label {
-    background-color: rgb(238, 238, 238);
-    @apply dark:bg-gray-600;
-    flex: 1;
-    padding-left: 0.5em;
-    height: 1.5em;
-    line-height: 1.5em;
-  }
-  .array-list-item-label:hover {
-    background-color: rgb(221, 221, 221);
-    @apply dark:bg-gray-500;
   }
 
   .array-list-item-content {

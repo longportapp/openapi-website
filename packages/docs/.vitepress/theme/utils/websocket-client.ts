@@ -278,11 +278,11 @@ export class LongbridgeWebSocketClient {
       console.log('获取 WebSocket 连接 Token...')
       const otpResponse = await this.apiClient.get('/v1/socket/token')
 
-      if (otpResponse.code !== 0 || !otpResponse.data?.otp) {
-        throw new Error(`获取 OTP 失败：${otpResponse.msg}`)
+      if (otpResponse.response.code !== 0 || !otpResponse.response.data?.otp) {
+        throw new Error(`获取 OTP 失败：${otpResponse.response.msg}`)
       }
 
-      const otp = otpResponse.data.otp
+      const otp = otpResponse.response.data.otp
       console.log('获取 OTP 成功')
 
       // 2. 建立 WebSocket 连接

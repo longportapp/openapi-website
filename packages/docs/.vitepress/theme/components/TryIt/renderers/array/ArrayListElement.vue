@@ -1,23 +1,32 @@
 <template>
   <div :class="styles.arrayList.item">
-    <div :class="toolbarClasses" @click="expandClicked">
-      <div :class="styles.arrayList.itemLabel">{{ label }}</div>
-      <button :disabled="!moveUpEnabled" :class="styles.arrayList.itemMoveUp" type="button" @click="moveUpClicked">
-        ↑
-      </button>
-      <button
-        :disabled="!moveDownEnabled"
-        :class="styles.arrayList.itemMoveDown"
-        type="button"
-        @click="moveDownClicked">
-        ↓
-      </button>
-      <button :disabled="!deleteEnabled" :class="styles.arrayList.itemDelete" type="button" @click="deleteClicked">
-        🗙
-      </button>
+    <div
+      :class="[
+        styles.arrayList.itemLabel,
+        'mt-4.5 rounded-full h-5 w-5 flex items-center justify-center bg-gray-100 dark:bg-white/10 text-xs font-sans font-medium text-gray-900 dark:text-gray-300',
+      ]">
+      {{ label }}
     </div>
-    <div :class="contentClasses">
-      <slot></slot>
+    <div class="w-full">
+      <div @click="expandClicked" v-if="!isPrimitiveType">{{ type }}</div>
+      <div :class="contentClasses">
+        <slot></slot>
+      </div>
+    </div>
+    <div :class="toolbarClasses">
+      <template v-if="supportMove">
+        <button :disabled="!moveUpEnabled" :class="styles.arrayList.itemMoveUp" type="button" @click="moveUpClicked">
+          ↑
+        </button>
+        <button
+          :disabled="!moveDownEnabled"
+          :class="styles.arrayList.itemMoveDown"
+          type="button"
+          @click="moveDownClicked">
+          ↓
+        </button>
+      </template>
+      <DeleteButton :enabled="deleteEnabled" :style-class="styles.arrayList.itemDelete" :on-delete="deleteClicked" />
     </div>
   </div>
 </template>
@@ -25,10 +34,18 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { classes, Styles } from '../styles'
+import DeleteButton from './DeleteButton.vue'
 
 const listItem = defineComponent({
   name: 'ArrayListElement',
+  components: {
+    DeleteButton,
+  },
   props: {
+    type: {
+      required: true,
+      type: String,
+    },
     initiallyExpanded: {
       required: false,
       type: Boolean,
@@ -73,6 +90,11 @@ const listItem = defineComponent({
       required: true,
       type: Object as PropType<Styles>,
     },
+    supportMove: {
+      required: false,
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -85,6 +107,9 @@ const listItem = defineComponent({
     },
     toolbarClasses(): string {
       return classes`${this.styles.arrayList.itemToolbar} ${this.expanded && this.styles.arrayList.itemExpanded}`
+    },
+    isPrimitiveType(): boolean {
+      return ['string', 'number', 'boolean'].includes(this.type)
     },
   },
   methods: {
@@ -99,8 +124,7 @@ const listItem = defineComponent({
       event.stopPropagation()
       this.moveDown?.()
     },
-    deleteClicked(event: Event): void {
-      event.stopPropagation()
+    deleteClicked(): void {
       this.delete?.()
     },
   },

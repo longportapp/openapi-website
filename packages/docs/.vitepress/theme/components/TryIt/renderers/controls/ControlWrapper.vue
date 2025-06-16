@@ -9,15 +9,12 @@
             <label :for="id + '-input'" class="field-label text-sm font-medium text-gray-900 dark:text-gray-100">
               {{ label }}
             </label>
-            <span
-              v-if="type"
-              class="field-type text-xs text-gray-500 dark:text-gray-400 font-mono bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">
+            <span v-if="type" class="field-type text-xs text-gray-500 dark:text-gray-400 font-mono px-1.5 py-0.5">
               {{ type }}
             </span>
             <span
               v-if="showAsterisk"
-              class="required-badge inline-flex items-center px-2 py-1 text-xs font-semibold bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-400 border border-red-300 dark:border-red-700 rounded-full">
-              <span class="w-1.5 h-1.5 bg-red-500 dark:bg-red-400 rounded-full mr-1.5"></span>
+              class="required-badge inline-flex items-center px-2 py-1 text-xs font-semibold px-2 py-0.5 rounded-md bg-red-100/50 dark:bg-red-400/10 text-red-600 dark:text-red-300 font-medium whitespace-nowrap">
               required
             </span>
             <span v-else class="optional-badge text-xs text-gray-400 dark:text-gray-500 font-medium"> optional </span>
@@ -27,8 +24,8 @@
         <!-- 描述信息 -->
         <div
           v-if="showDescription && description"
-          class="field-description text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-2">
-          {{ description }}
+          class="field-description text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-2 vp-doc">
+          <div v-html="description"></div>
         </div>
 
         <!-- 错误信息 -->

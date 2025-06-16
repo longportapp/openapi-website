@@ -2,7 +2,7 @@ export interface ParameterRow {
   name: string
   type: 'string' | 'number' | 'boolean' | 'array' | 'object' | 'string[]'
   required: string
-  description: string
+  description?: string
 }
 
 export interface ParametersTable {

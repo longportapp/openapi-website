@@ -101,5 +101,6 @@ export const useVanillaArrayControl = <I extends { control: any }>(input: I) => 
     appliedOptions,
     childUiSchema,
     childLabelForIndex,
+    type: input.control.value.schema.type,
   }
 }

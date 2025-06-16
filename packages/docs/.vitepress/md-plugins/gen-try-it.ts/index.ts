@@ -1,8 +1,6 @@
 import MarkdownIt from 'markdown-it'
 import * as cheerio from 'cheerio'
 import type { ParametersTable, ParameterRow, HttpInfo } from '../../types'
-import fs from 'fs/promises'
-import path from 'path'
 
 interface MarkdownItCoreState {
   tokens: any[]
@@ -46,9 +44,9 @@ function parseParametersTable(html: string): ParametersTable | null {
     if (cells.length >= 4) {
       const parameter: ParameterRow = {
         name: $(cells[0]).text().trim(),
-        type: $(cells[1]).text().trim(),
+        type: $(cells[1]).text().trim() as ParameterRow['type'],
         required: $(cells[2]).text().trim(),
-        description: $(cells[3]).text().trim(),
+        description: $(cells[3]).html()?.trim(),
       }
 
       if (parameter.name && parameter.type && parameter.required && parameter.description) {
@@ -230,6 +228,8 @@ export const GenTryItPlugin = (md: MarkdownIt) => {
       // 将 HTTP 信息存储到环境变量中，供后续使用
       state.env.httpInfo = httpResult
     }
-    addTryItComponent(state, httpResult, parametersResult)
+    if (httpResult && parametersResult) {
+      addTryItComponent(state, httpResult, parametersResult)
+    }
   })
 }
