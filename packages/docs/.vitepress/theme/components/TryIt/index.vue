@@ -1,5 +1,5 @@
 <template>
-  <PlayButton :color="getMethodColor(props.method)" @click="setIsOpen(true)"> Try it </PlayButton>
+  <PlayButton :color="getMethodColor(props.method)" @click="setIsOpen(true)">{{$t('vitepress_theme_components_tryit_index_2')}}</PlayButton>
   <Dialog :open="isOpen" @close="setIsOpen">
     <!-- The backdrop, rendered as a fixed sibling to the panel container -->
     <div class="fixed z-30 inset-0" aria-hidden="true" />
@@ -30,7 +30,7 @@
                 :color="getMethodColor(props.method)"
                 :loading="isLoading"
                 @click="handleSend">
-                Send
+                {{ $t('tryIt.send') }}
               </PlayButton>
             </div>
             <p class="text-sm text-gray-500 dark:text-gray-400 mt-2" v-if="props.description">
