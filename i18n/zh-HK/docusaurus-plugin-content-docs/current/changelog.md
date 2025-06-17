@@ -5,6 +5,12 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2025-06-17
+
+- 更新獲取賬戶資金接口
+  - `GET /v1/asset/account` 增加 (frozen_transaction_fees) 返回字段
+
+
 ## 2024-10-09
 
 ### SDK 2.0.0
