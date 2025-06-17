@@ -1,4 +1,8 @@
 {
   "tryIt.send": "Send",
-  "vitepress_theme_components_tryit_index_2": "Try it"
+  "vitepress_theme_components_tryit_index_2": "Try it",
+  "theme_components_tryit_renderers_controls_stringcontrolrenderer_3": "Please enter",
+  "parameters.title": "Parameters",
+  "parameters.noParameters": "No parameters required for this API",
+  "authorization.title": "Authorization"
 }

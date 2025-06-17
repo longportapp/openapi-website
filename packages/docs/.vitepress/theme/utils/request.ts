@@ -2,7 +2,7 @@ import { createApiClient, type ApiConfig } from './http-client'
 
 // ==================== 配置示例 ====================
 
-const getLocalStorage = (key: string) => {
+export const getLocalStorage = (key: string) => {
   if (typeof window === 'undefined') {
     return ''
   }

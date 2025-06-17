@@ -6,7 +6,10 @@
       :value="control.data"
       :disabled="!control.enabled"
       :autofocus="appliedOptions.focus"
-      :placeholder="appliedOptions.placeholder"
+      :type="appliedOptions.type || 'text'"
+      :placeholder="
+        appliedOptions.placeholder || $t('theme_components_tryit_renderers_controls_stringcontrolrenderer_3')
+      "
       @change="onChange"
       @focus="isFocused = true"
       @blur="isFocused = false" />
@@ -14,6 +17,7 @@
 </template>
 
 <script lang="ts">
+import 'vue-i18n'
 import { ControlElement, JsonFormsRendererRegistryEntry, rankWith, isStringControl } from '@jsonforms/core'
 import { defineComponent } from 'vue'
 import { rendererProps, useJsonFormsControl, RendererProps } from '@jsonforms/vue'

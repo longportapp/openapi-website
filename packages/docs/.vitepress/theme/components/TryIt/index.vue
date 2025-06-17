@@ -1,5 +1,7 @@
 <template>
-  <PlayButton :color="getMethodColor(props.method)" @click="setIsOpen(true)">{{$t('vitepress_theme_components_tryit_index_2')}}</PlayButton>
+  <PlayButton :color="getMethodColor(props.method)" @click="setIsOpen(true)">{{
+    $t('vitepress_theme_components_tryit_index_2')
+  }}</PlayButton>
   <Dialog :open="isOpen" @close="setIsOpen">
     <!-- The backdrop, rendered as a fixed sibling to the panel container -->
     <div class="fixed z-30 inset-0" aria-hidden="true" />
@@ -10,7 +12,7 @@
       <div class="flex min-h-full items-center justify-center p-4">
         <!-- The actual dialog panel -->
         <DialogPanel
-          class="w-full lg:w-auto max-w-[calc(100vw-32px)] md:max-w-[calc(100vw-64px)] px-6 pb-6 bg-white dark:bg-[rgb(10,12,16)] rounded-2xl shadow-xl border border-gray-200/70 dark:border-white/10">
+          class="w-full lg:w-[calc(100vw-64px)] max-w-[calc(100vw-32px)] px-6 pb-6 bg-white dark:bg-[rgb(10,12,16)] rounded-2xl shadow-xl border border-gray-200/70 dark:border-white/10">
           <!-- Header -->
           <div class="py-6">
             <div class="flex items-center justify-between max-w-full">
@@ -38,11 +40,15 @@
             </p>
           </div>
           <div class="flex gap-4 items-start flex-col lg:flex-row">
-            <div class="flex-1 w-full lg:w-auto">
+            <div class="flex-1 w-full lg:w-auto min-w-0 space-y-4">
+              <AuthorizationForm @auth-change="onAuthChange" />
               <ParametersForm :parameters="props.parameters" @form-change="onFormChange" />
             </div>
-            <div v-if="result" class="flex-1 w-full">
-              <Code :result="result" />
+            <div v-if="result || isLoading" class="flex-1 w-full min-w-0">
+              <!-- Loading State -->
+              <LoadingSpinner v-if="isLoading" />
+              <!-- Result Display -->
+              <Code v-if="result" :result="result" />
             </div>
           </div>
         </DialogPanel>
@@ -51,12 +57,15 @@
   </Dialog>
 </template>
 <script setup lang="ts">
+import 'vue-i18n'
 import type { ParameterRow } from '../../../types'
 import { ref } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, DialogDescription } from '@headlessui/vue'
 import ParametersForm from './ParametersForm.vue'
+import AuthorizationForm from './AuthorizationForm.vue'
 import PlayButton from './PlayButton.vue'
 import Code from './Code.vue'
+import LoadingSpinner from './LoadingSpinner.vue'
 import { type ApiResponse } from '../../utils/http-client'
 
 interface Props {
@@ -78,17 +87,33 @@ console.log(JSON.stringify(props.parameters, null, 2))
 import { request } from '../../utils/request'
 
 const formData = ref<Record<string, any>>({})
+const authData = ref<Record<string, any>>({})
 const isLoading = ref(false)
 
 const onFormChange = (data: Record<string, any>) => {
   formData.value = data
 }
 
+const onAuthChange = (data: Record<string, any>) => {
+  authData.value = data
+  // 更新本地存储
+  if (typeof window !== 'undefined') {
+    Object.keys(data).forEach((key) => {
+      if (data[key]) {
+        window.localStorage.setItem(key, data[key])
+      }
+    })
+  }
+}
+
 const result = ref<ApiResponse | undefined>()
 const handleSend = async () => {
   if (isLoading.value) return
 
+  // 清除之前的结果，显示加载状态
+  result.value = undefined
   isLoading.value = true
+
   try {
     const method = props.method.toLowerCase()
     const url = props.url
