@@ -39,7 +39,6 @@ const formFields = computed(() => {
 
 // 表单变化处理
 const onChange = (data: Record<string, any>) => {
-  console.log('Form data changed:', data)
   // 发出事件给父组件
   emit('form-change', data)
 }

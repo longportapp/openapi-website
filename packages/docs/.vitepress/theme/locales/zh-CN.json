@@ -4,5 +4,6 @@
   "theme_components_tryit_renderers_controls_stringcontrolrenderer_3": "请输入",
   "parameters.title": "参数",
   "parameters.noParameters": "此 API 不需要参数",
-  "authorization.title": "授权信息"
+  "authorization.title": "授权信息",
+  "authorization.createButton": "立即创建"
 }

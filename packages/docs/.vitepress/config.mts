@@ -6,6 +6,7 @@ import { markdownConfig } from './config/markdown'
 import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { localesConfig } from './config/locales'
+import fs from 'node:fs'
 import path from 'path'
 
 export default defineConfig({
@@ -71,7 +72,11 @@ export default defineConfig({
   locales: localesConfig,
 
   vite: {
+    ssr: {
+      noExternal: ['vue-i18n'],
+    },
     server: {
+      port: 8000,
       proxy: {
         '/api': {
           target: 'https://openapi.longportapp.com',

@@ -78,7 +78,6 @@ export function createContainer(md: MarkdownItAsync, name: string, options: Cont
     markup = state.src.slice(start, pos)
     params = state.src.slice(pos, state.eMarks[startLine])
 
-    console.log('[params]: ', params)
     if (!validate(params)) {
       return false
     }

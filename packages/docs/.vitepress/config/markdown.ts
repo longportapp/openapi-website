@@ -16,6 +16,7 @@ export const markdownConfig: MarkdownOptions = {
       },
     },
   ],
+
   config(md) {
     const fence = md.renderer.rules.fence!
     md.renderer.rules.fence = function (tokens, idx, options, env, self) {

@@ -82,7 +82,7 @@
     <div class="rounded-[14px] dark:bg-[#121212] bg-white">
       <div class="h-full">
         <div
-          class="px-3 py-3.5 min-h-[200px] max-h-[50vh] whitespace-pre border-gray-200 dark:border-gray-700 dark:text-gray-300 font-mono text-xs leading-5">
+          class="px-3 py-3.5 min-h-[200px] max-h-[50vh] whitespace-pre border-gray-200 dark:border-gray-700 dark:text-gray-300 font-mono text-xs leading-5 overflow-auto">
           <div v-html="highlightHtml" class="h-full overflow-auto"></div>
         </div>
       </div>
@@ -110,7 +110,6 @@ const highlighterPromise = inject<ReturnType<typeof createHighlighter>>('highlig
 
 const highlightJson = async () => {
   const highlighter = await highlighterPromise
-  console.log(props.result?.response)
   if (props.result?.response) {
     const code = JSON.stringify(props.result.response, null, 2)
     highlightHtml.value =

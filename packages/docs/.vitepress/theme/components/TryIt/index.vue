@@ -82,8 +82,6 @@ const props = withDefaults(defineProps<Props>(), {
   parameters: () => [],
 })
 
-console.log(JSON.stringify(props.parameters, null, 2))
-
 import { request } from '../../utils/request'
 
 const formData = ref<Record<string, any>>({})

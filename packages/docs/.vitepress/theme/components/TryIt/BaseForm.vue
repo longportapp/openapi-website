@@ -9,6 +9,9 @@
       ]"
       @click="toggleCollapsed">
       <h2 class="font-semibold text-gray-900 dark:text-gray-100 m-0">{{ title }}</h2>
+      <div class="flex items-center gap-2" @click.stop>
+        <slot name="title-actions"></slot>
+      </div>
     </div>
     <div class="form-content" :class="{ collapsed: collapsed }">
       <div class="px-4 pb-4">

@@ -4,5 +4,6 @@
   "theme_components_tryit_renderers_controls_stringcontrolrenderer_3": "Please enter",
   "parameters.title": "Parameters",
   "parameters.noParameters": "No parameters required for this API",
-  "authorization.title": "Authorization"
+  "authorization.title": "Authorization",
+  "authorization.createButton": "Create Now"
 }
