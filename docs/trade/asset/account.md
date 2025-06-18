@@ -84,6 +84,12 @@ print(resp)
             "settling_cash": "-276806.51",
             "currency": "USD"
           }
+        ],
+        "frozen_transaction_fees": [
+          {
+            "currency": "USD",
+            "frozen_transaction_fee": "6.51"
+          }
         ]
       }
     ]
@@ -108,23 +114,26 @@ print(resp)
 <a id="schemaaccountcash_rsp"></a>
 <a id="schemaaccountcash_rsp"></a>
 
-| Name                       | Type     | Required | Description                                                                                            |
-| -------------------------- | -------- | -------- | ------------------------------------------------------------------------------------------------------ |
-| list                       | object[] | false    | 账户资金信息                                                                                           |
-| ∟ total_cash               | string   | true     | 现金总额                                                                                               |
-| ∟ max_finance_amount       | string   | true     | 最大融资金额                                                                                           |
-| ∟ remaining_finance_amount | string   | true     | 剩余融资金额                                                                                           |
+| Name                       | Type     | Required | Description                                                                            |
+|----------------------------| -------- | -------- |----------------------------------------------------------------------------------------|
+| list                       | object[] | false    | 账户资金信息                                                                                 |
+| ∟ total_cash               | string   | true     | 现金总额                                                                                   |
+| ∟ max_finance_amount       | string   | true     | 最大融资金额                                                                                 |
+| ∟ remaining_finance_amount | string   | true     | 剩余融资金额                                                                                 |
 | ∟ risk_level               | string   | true     | 风控等级 <br/> <br/> <b>可选值:</b><br/> `0` - 安全 <br/> `1` - 中风险<br/> `2` - 预警<br/> `3` - 危险 |
-| ∟ margin_call              | string   | true     | 追缴保证金                                                                                             |
-| ∟ net_assets               | string   | true     | 净资产                                                                                                 |
-| ∟ init_margin              | string   | true     | 初始保证金                                                                                             |
-| ∟ maintenance_margin       | string   | true     | 维持保证金                                                                                             |
-| ∟ currency                 | string   | true     | 币种                                                                                                   |
-| ∟ market                   | string   | false    | 市场                                                                                                   |
-| ∟ buy_power                | string   | true     | 购买力                                                                                                 |
-| ∟ cash_infos               | object[] | false    | 现金详情                                                                                               |
-| ∟∟ withdraw_cash           | string   | true     | 可提现金                                                                                               |
-| ∟∟ available_cash          | string   | true     | 可用现金                                                                                               |
-| ∟∟ frozen_cash             | string   | true     | 冻结现金                                                                                               |
-| ∟∟ settling_cash           | string   | true     | 待结算现金                                                                                             |
-| ∟∟ currency                | string   | true     | 币种                                                                                                   |
+| ∟ margin_call              | string   | true     | 追缴保证金                                                                                  |
+| ∟ net_assets               | string   | true     | 净资产                                                                                    |
+| ∟ init_margin              | string   | true     | 初始保证金                                                                                  |
+| ∟ maintenance_margin       | string   | true     | 维持保证金                                                                                  |
+| ∟ currency                 | string   | true     | 币种                                                                                     |
+| ∟ market                   | string   | false    | 市场                                                                                     |
+| ∟ buy_power                | string   | true     | 购买力                                                                                    |
+| ∟ cash_infos               | object[] | false    | 现金详情                                                                                   |
+| ∟∟ withdraw_cash           | string   | true     | 可提现金                                                                                   |
+| ∟∟ available_cash          | string   | true     | 可用现金                                                                                   |
+| ∟∟ frozen_cash             | string   | true     | 冻结现金                                                                                   |
+| ∟∟ settling_cash           | string   | true     | 待结算现金                                                                                  |
+| ∟∟ currency                | string   | true     | 币种                                                                                     
+| ∟ frozen_transaction_fees  | object[] | false    | 冻结费用                                                                                   |
+| ∟∟ currency                | string   | false    | 币种                                                                                     |
+| ∟∟ frozen_transaction_fee  | string   | false    | 费用金额                                                                                   |
