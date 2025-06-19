@@ -9,7 +9,7 @@ highlight_theme: ''
 headingLevel: 2
 ---
 
-This API is used to get history executions, including the sell and buy records.
+This API is used to get history executions, including the sell and buy records, and does not support querying today's execution details.
 
 <SDKLinks module="trade" klass="TradeContext" method="history_executions" />
 
