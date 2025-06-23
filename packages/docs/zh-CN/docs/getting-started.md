@@ -70,7 +70,7 @@ yarn add longport
 
 ```toml
 [dependencies]
-longport = "3.0.3"
+longport = "3.0.5"
 tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
@@ -120,11 +120,11 @@ go get github.com/longportapp/openapi-go
 请注意保护好您的 **Access Token** 信息，任何人获得到它，都可以通过 OpenAPI 来交易你的账户！
 :::
 
-| 环境变量                    | 说明                                                         | 值范围          |
-| --------------------------- | ------------------------------------------------------------ | --------------- |
-| `LONGPORT_APP_KEY`          | 从页面上获取到的 App Key                                     |                 |
-| `LONGPORT_APP_SECRET`       | 从页面上获取到的 App Secret                                  |                 |
-| `LONGPORT_ACCESS_TOKEN`     | 从页面上获取到的 Access Token                                |                 |
+| 环境变量                    | 说明                                                       | 值范围          |
+|-----------------------------|----------------------------------------------------------|-----------------|
+| `LONGPORT_APP_KEY`          | 从页面上获取到的 App Key                                   |                 |
+| `LONGPORT_APP_SECRET`       | 从页面上获取到的 App Secret                                |                 |
+| `LONGPORT_ACCESS_TOKEN`     | 从页面上获取到的 Access Token                              |                 |
 | `LONGPORT_REGION`           | API 服务器接入点，请根据你所在地区设置，以获得更好的连接速度 | `hk`, `cn`      |
 | `LONGPORT_ENABLE_OVERNIGHT` | 是否开启夜盘行情，设置 `true` 开启，`false` 关闭             | `true`, `false` |
 
@@ -226,7 +226,7 @@ python account_asset.py
 
 创建 `account_asset.js` 贴入下面的代码：
 
-```javascript
+```js
 const { Config, TradeContext } = require('longport')
 
 let config = Config.fromEnv()
@@ -887,7 +887,7 @@ python today_orders.py
 
 创建 `today_orders.js` 贴入下面的代码：
 
-```javascript
+```js
 const { Config, TradeContext } = require('longport')
 
 let config = Config.fromEnv()
@@ -1065,4 +1065,4 @@ SDK 的详细 API 文档请访问：https://longportapp.github.io/openapi/
 
 如果你有使用[飞书](https://www.feishu.cn/)，可以扫打开在飞书话题群中提出你的问题：
 
-<img src="https://assets.lbkrs.com/uploads/412f8cd8-2268-45ff-a367-98f280d0ee09/openapi-feishu-qrcode.png" style= width: "200px" />
+<img src="https://assets.lbkrs.com/uploads/412f8cd8-2268-45ff-a367-98f280d0ee09/openapi-feishu-qrcode.png" style="width: 200px"  />

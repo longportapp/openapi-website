@@ -4,6 +4,10 @@ title: Changelog
 slug: changelog
 sidebar_position: 7
 ---
+## 2025-06-17
+
+- Update the interface for Get Account Balance
+  - `GET /v1/asset/account` Add response field (frozen_transaction_fees)
 
 ## 2024-10-09
 

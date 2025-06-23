@@ -90,10 +90,7 @@ async function generateSignature(
   const signStr = `HMAC-SHA256|${canonicalHashHex}`
 
   // 确保密钥是有效的字符串格式
-  const normalizedSecret = secret.trim()
-  if (!normalizedSecret) {
-    throw new Error('App Secret 不能为空')
-  }
+  const normalizedSecret = secret?.trim() || 'unknown'
 
   const secretKey = await crypto.subtle.importKey(
     'raw',

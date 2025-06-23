@@ -20,7 +20,7 @@ This API is used to obtain the history candlestick data of security.
 ### Parameters
 
 | Name           | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| -------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|----------------|--------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | symbol         | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | period         | int32  | Yes      | Candlestick period, for example: `1000`, see [Period](../objects#period---candlestick-period)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | adjust_type    | int32  | Yes      | Adjustment type, for example: `0`, see [AdjustType](../objects#adjusttype---candlestick-adjustment-type)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -33,6 +33,7 @@ This API is used to obtain the history candlestick data of security.
 | ∟ date         | string | No       | Query date, in `YYYYMMDD` format, for example: 20231016. Default value: latest trading day of the underlying market.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | ∟ minute       | string | No       | Query time, in `HHMM` format, for example: 09:35, only valid when querying minute-level data                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ∟ count        | int32  | No       | Count of cancdlestick, valid range:`[1,1000]`. Default value: `10`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| trade_session  | int32  | No       | Trading session, 0: intraday, 100: All (pre, intraday, post, overnight)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
 ### Protobuf
 
@@ -90,17 +91,18 @@ print(resp)
 
 ### Response Properties
 
-| Name         | Type     | Description                           |
-| ------------ | -------- | ------------------------------------- |
-| symbol       | string   | Security code, for example: `AAPL.US` |
-| candlesticks | object[] | Candlestick data                      |
-| ∟ close      | string   | Close price                           |
-| ∟ open       | string   | Open price                            |
-| ∟ low        | string   | Low price                             |
-| ∟ high       | string   | High price                            |
-| ∟ volume     | int64    | Volume                                |
-| ∟ turnover   | string   | Turnover                              |
-| ∟ timestamp  | int64    | Timestamp                             |
+| Name            | Type     | Description                                                                  |
+|-----------------|----------|------------------------------------------------------------------------------|
+| symbol          | string   | Security code, for example: `AAPL.US`                                        |
+| candlesticks    | object[] | Candlestick data                                                             |
+| ∟ close         | string   | Close price                                                                  |
+| ∟ open          | string   | Open price                                                                   |
+| ∟ low           | string   | Low price                                                                    |
+| ∟ high          | string   | High price                                                                   |
+| ∟ volume        | int64    | Volume                                                                       |
+| ∟ turnover      | string   | Turnover                                                                     |
+| ∟ timestamp     | int64    | Timestamp                                                                    |
+| ∟ trade_session | int32    | Trade session, see [TradeSession](../objects#tradesession---trading-session) |
 
 ### Protobuf
 
@@ -219,7 +221,7 @@ According to the user’s assets and transactions, the number of targets that di
 ## Description of historical candlesticks range
 
 | Market             | Daily/Weekly/Monthly/Year period candlesticks | Minute candlesticks   | Description                                                                                                       |
-| ------------------ | --------------------------------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------- |
+|--------------------|-----------------------------------------------|-----------------------|-------------------------------------------------------------------------------------------------------------------|
 | Hong Kong stocks   | 2004-6-1 to present                           | 2022-09-28 to present |                                                                                                                   |
 | U.S. stocks        | 2010-6-1 to present                           | 2023-12-4 to present  |                                                                                                                   |
 | U.S. stock options | -                                             | -                     | U.S. stock options historical data is currently not supported, and data for longer periods will be released later |
@@ -236,7 +238,7 @@ According to the user’s assets and transactions, the number of targets that di
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description                | Troubleshooting Suggestions                                                               |
-| ------------------- | ------------------- | -------------------------- | ----------------------------------------------------------------------------------------- |
+|---------------------|---------------------|----------------------------|-------------------------------------------------------------------------------------------|
 | 3                   | 301600              | Invalid request            | Invalid request parameters or unpacking request failed                                    |
 | 3                   | 301606              | Request rate limit         | Reduce the frequency of requests                                                          |
 | 7                   | 301602              | Server error               | Please try again or contact a technician to resolve the issue                             |

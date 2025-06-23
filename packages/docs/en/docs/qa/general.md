@@ -34,3 +34,7 @@ A: If a customer holds multiple securities accounts, such as intraday financing 
 ## Q7: Are there additional charges for trading operations through LongPort OpenAPI?
 
 A: We do not charge additional fees for accessing market queries, trading, etc., via OpenAPI. For account-related fees such as trading commissions, platform fees, and market permissions, please refer to the information provided by the app and the official website.
+
+## Q8: How to disable the permission table output in the console after the SDK connects to the server?
+
+A: You can set the environment variable `LONGPORT_PRINT_QUOTE_PACKAGES` to `false`, or set `enable_print_quote_packages` to `false` when creating the `Config` object in the code to disable the permission table output in the console.

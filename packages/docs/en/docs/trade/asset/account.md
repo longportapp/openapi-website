@@ -85,6 +85,12 @@ print(resp)
             "settling_cash": "-276806.51",
             "currency": "USD"
           }
+        ],
+        "frozen_transaction_fees": [
+          {
+            "currency": "USD",
+            "frozen_transaction_fee": "6.51"
+          }
         ]
       }
     ]
@@ -110,7 +116,7 @@ print(resp)
 <a id="schemaaccountcash_rsp"></a>
 
 | Name                       | Type     | Required | Description                                                                                                                      |
-| -------------------------- | -------- | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| -------------------------- | -------- | -------- |----------------------------------------------------------------------------------------------------------------------------------|
 | list                       | object[] | false    | Account Balance                                                                                                                  |
 | ∟ total_cash               | string   | true     | Total Cash                                                                                                                       |
 | ∟ max_finance_amount       | string   | true     | Maximum Financing Amount                                                                                                         |
@@ -128,3 +134,6 @@ print(resp)
 | ∟∟ frozen_cash             | string   | true     | Frozen Cash                                                                                                                      |
 | ∟∟ settling_cash           | string   | true     | Cash to be Settled                                                                                                               |
 | ∟∟ currency                | string   | true     | Currency                                                                                                                         |
+| ∟ frozen_transaction_fees  | object[] | false    | frozen fees                                                                                                                      |
+| ∟∟ currency                | string   | false    | currency                                                                                                                         |
+| ∟∟ frozen_transaction_fee  | string   | false    | frozen amount                                                                                                                    |
