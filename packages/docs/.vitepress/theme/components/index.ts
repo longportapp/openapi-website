@@ -1,6 +1,3 @@
-export { default as UserAvatar } from './UserAvatar.vue'
-export { default as UserAvatarDropdown } from './UserAvatarDropdown.vue'
-export { default as UserAvatarIcon } from './UserAvatarIcon.vue'
 export { default as Tabs } from './Tabs.vue'
 export { default as TabItem } from './TabItem.vue'
 export { default as TipContainer } from './TipContainer.vue'

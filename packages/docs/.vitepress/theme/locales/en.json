@@ -5,5 +5,8 @@
   "parameters.title": "Parameters",
   "parameters.noParameters": "No parameters required for this API",
   "authorization.title": "Authorization",
-  "authorization.createButton": "Create Now"
+  "authorization.createButton": "Create Now",
+  "HD2WD-CgkkcJJW12yOmDM": "Profile",
+  "JJTHzcLZRxvS2W-2IwWMn": "Logout",
+  "login_now": "Apply Now"
 }

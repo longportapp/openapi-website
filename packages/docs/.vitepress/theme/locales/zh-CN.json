@@ -5,5 +5,8 @@
   "parameters.title": "参数",
   "parameters.noParameters": "此 API 不需要参数",
   "authorization.title": "授权信息",
-  "authorization.createButton": "立即创建"
+  "authorization.createButton": "立即创建",
+  "HD2WD-CgkkcJJW12yOmDM": "个人资料",
+  "JJTHzcLZRxvS2W-2IwWMn": "退出登录",
+  "login_now": "立即申请"
 }

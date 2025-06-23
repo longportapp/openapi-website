@@ -1,11 +1,19 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import { nextTick, provide } from 'vue'
-import UserAvatar from '../components/UserAvatar.vue'
+import { nextTick, provide, watchEffect } from 'vue'
+import UserAvatar from '../components/UserAvatar/index.vue'
 import { createHighlighter } from 'shiki/bundle/web'
 
-const { isDark } = useData()
+const { isDark, lang } = useData()
+const i18n = useI18n()
+
+watchEffect(() => {
+  if (lang.value !== i18n.locale.value) {
+    i18n.locale.value = lang.value
+  }
+})
 
 provide('highlighter', createHighlighter({ themes: ['vitesse-dark', 'vitesse-light'], langs: ['json'] }))
 

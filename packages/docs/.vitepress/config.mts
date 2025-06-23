@@ -6,8 +6,6 @@ import { markdownConfig } from './config/markdown'
 import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { localesConfig } from './config/locales'
-import fs from 'node:fs'
-import path from 'path'
 
 export default defineConfig({
   title: 'Longbridge',

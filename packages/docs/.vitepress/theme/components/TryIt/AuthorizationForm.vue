@@ -18,6 +18,7 @@
 </template>
 
 <script setup lang="ts">
+import { localePath } from '../../utils/i18n'
 import BaseForm from './BaseForm.vue'
 import { computed } from 'vue'
 
@@ -91,8 +92,6 @@ const onAuthChange = (data: Record<string, any>) => {
 
 // 处理立即创建按钮点击
 const handleCreateClick = () => {
-  // 这里可以添加创建授权信息的逻辑
-  // 比如跳转到创建页面或显示创建弹窗
-  window.open('https://open.longbridgeapp.com/', '_blank')
+  window.open(localePath('/auth'))
 }
 </script>

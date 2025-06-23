@@ -8,6 +8,10 @@ import en from './locales/en.json'
 import zhCN from './locales/zh-CN.json'
 import zhHK from './locales/zh-HK.json'
 import { getCurrentLanguage } from './utils/i18n'
+/** Layouts */
+import Layout from './layouts/Layout.vue'
+/** auto import components */
+import * as components from './components'
 
 const i18n = createI18n<[typeof en, typeof zhCN, typeof zhHK], 'en' | 'zh-CN' | 'zh-HK'>({
   locale: getCurrentLanguage(),
@@ -18,11 +22,6 @@ const i18n = createI18n<[typeof en, typeof zhCN, typeof zhHK], 'en' | 'zh-CN' | 
     'zh-HK': zhHK,
   },
 })
-
-/** Layouts */
-import Layout from './layouts/Layout.vue'
-/** auto import components */
-import * as components from './components'
 
 export default {
   Layout,
