@@ -30,19 +30,19 @@ const dropdownRef = ref<HTMLElement>()
 
 const alignmentClasses = computed(() => {
   let classes = 'dropdown-menu'
-  
+
   if (props.side === 'top') {
     classes += ' dropdown-menu-top'
   } else {
     classes += ' dropdown-menu-bottom'
   }
-  
+
   if (props.align === 'start') {
     classes += ' dropdown-menu-start'
   } else {
     classes += ' dropdown-menu-end'
   }
-  
+
   return classes
 })
 
@@ -50,7 +50,7 @@ const handleItemClick = (item: DropdownItem) => {
   if (item.onClick) {
     item.onClick()
   } else if (item.href) {
-    window.open(item.href, '_blank')
+    window.location.href = item.href
   }
   emit('update:open', false)
 }
@@ -79,9 +79,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div 
-    ref="dropdownRef" 
-    class="dropdown-container">
+  <div ref="dropdownRef" class="dropdown-container">
     <Transition
       enter-active-class="dropdown-enter-active"
       enter-from-class="dropdown-enter-from"
@@ -92,12 +90,7 @@ onUnmounted(() => {
       <div v-show="props.open" :class="alignmentClasses" role="menu" aria-orientation="vertical">
         <template v-for="(item, index) in props.list" :key="index">
           <hr v-if="item.separator" class="dropdown-separator" />
-          <button
-            v-else
-            type="button"
-            class="dropdown-item"
-            role="menuitem"
-            @click="handleItemClick(item)">
+          <button v-else type="button" class="dropdown-item" role="menuitem" @click="handleItemClick(item)">
             <div v-if="item.icon" :class="item.icon" class="dropdown-item-icon" />
             <span class="dropdown-item-text">{{ item.title }}</span>
           </button>
