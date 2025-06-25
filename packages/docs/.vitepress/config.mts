@@ -80,12 +80,20 @@ export default defineConfig({
 
   /* prettier-ignore */
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: 'https://assets.lbctrl.com/uploads/76e9147c-76a5-4242-b90f-e3841cf50c46/longbridge-openapi.svg' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: 'https://pub.pbkrs.com/files/202211/TNosrY77nCxm6rtU/logo-without-title.svg' }],
     ['meta', { name: 'theme-color', content: '#5f67ee' }],
-    ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:site_name', content: 'LongPort Open API' }],
-    ['meta', { property: 'og:image', content: 'https://pub.pbkrs.com/files/202211/sJswdGqSX1xDqrES/lonport-seo-img.png' }],
-    ['meta', { property: 'og:url', content: 'https://open.longportapp.com/' }],
+    ['meta', { name: 'twitter:card', content: 'summary' }],
+    ['meta', { name: 'twitter:site', content: 'https://open.longportapp.com' }],
+    ['meta', { name: 'robots', content: 'index,follow' }],
+    ['meta', { name: 'googlebot', content: 'index,follow' }],
+    ['script', { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-JNRX7GS04Y' }],
+    ['script', {}, `window.dataLayer = window.dataLayer||[];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-JNRX7GS04Y');`],
+    ['script', { defer: '', src: 'https://assets.lbkrs.com/pkg/sensorsdata/1.21.13.min.js' }],
   ],
 
   themeConfig: {

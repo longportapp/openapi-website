@@ -1,14 +1,14 @@
 <template>
   <div class="my-4">
-    <div class="flex border-b border-gray-200 dark:border-gray-700 mb-4 overflow-x-auto">
+    <div class="flex border-b border-gray-200 dark:border-gray-700 mb-4 overflow-x-auto gap-4">
       <button
         v-for="tab in tabs"
         :key="tab.value"
         :class="[
-          'px-4 py-2 border-none bg-transparent cursor-pointer text-sm font-medium whitespace-nowrap border-b-2 border-transparent transition-all duration-200',
+          'py-2 bg-transparent cursor-pointer text-base font-medium whitespace-nowrap border-b-2  transition-color duration-200 border border-solid  border-transparent dark:border-gray-700',
           tab.value === activeTab
             ? 'text-blue-600 dark:text-blue-400 border-b-blue-600 dark:border-b-blue-400'
-            : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100',
+            : 'text-gray-400 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100',
         ]"
         @click="setActiveTab(tab.value)">
         {{ tab.label }}
