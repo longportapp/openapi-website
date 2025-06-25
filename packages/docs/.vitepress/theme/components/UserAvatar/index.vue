@@ -2,6 +2,7 @@
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import UserAvatarIcon from './UserAvatarIcon.vue'
 import Dropdown from './UserAvatarDropdown.vue'
+import LoginButton from './LoginButton.vue'
 import { localePath } from '../../utils/i18n'
 import { useI18n } from 'vue-i18n'
 
@@ -93,14 +94,7 @@ onUnmounted(() => {
     </div>
 
     <!-- 未登录状态：显示登录按钮 -->
-    <div v-else class="VPFlyout">
-      <a
-        target="_self"
-        :href="localePath('/auth')"
-        class="login-button px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200">
-        {{ t('login_now') }}
-      </a>
-    </div>
+    <LoginButton v-else />
   </ClientOnly>
 </template>
 
@@ -154,17 +148,5 @@ onUnmounted(() => {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
-}
-
-.login-button {
-  background-color: var(--vp-c-brand-1);
-  color: var(--vp-c-white);
-  border: 1px solid transparent;
-  text-decoration: none;
-}
-
-.login-button:hover {
-  background-color: var(--vp-c-brand-2);
-  color: var(--vp-c-white);
 }
 </style>
