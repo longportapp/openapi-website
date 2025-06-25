@@ -8,8 +8,9 @@
     "stripKeyPrefix": "src_pages"
   },
   "scripts": {
-    "dev": "vitepress dev",
-    "build": "vitepress build",
+    "dev": "VITE_API_BASE_URL=https://openapi.longbridge.xyz vitepress dev",
+    "build:canary": "VITE_API_BASE_URL=https://openapi.longbridge.xyz vitepress build",
+    "build:prod": "VITE_API_BASE_URL=https://openapi.longportapp.com vitepress build",
     "preview": "vitepress preview",
     "lunaria:build": "lunaria build",
     "lunaria:open": "open-cli .vitepress/dist/_translations/index.html"

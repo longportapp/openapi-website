@@ -14,7 +14,7 @@ const apiConfig: ApiConfig = {
   accessToken: getLocalStorage('accessToken')!,
   appSecret: getLocalStorage('appSecret')!,
   // 可选配置
-  baseUrl: import.meta.env.DEV ? '/api' : 'https://openapi.longportapp.com', // 默认值
+  baseUrl: import.meta.env.DEV ? '/api' : import.meta.env.VITE_API_BASE_URL || 'https://openapi.longportapp.com', // 支持环境变量配置
   timeout: 30000, // 30 秒超时，默认值
 }
 

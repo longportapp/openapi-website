@@ -12,9 +12,6 @@ hero:
     - theme: brand
       text: Getting Started
       link: docs/
-    - theme: alt
-      text: API Reference
-      link: docs/how-to-access-api/
 
 features:
   - icon: <img src="https://pub.lbkrs.com/files/202503/7C3YBFzrQsnQ9rma/icon-code.svg" width="48" height="48"/>

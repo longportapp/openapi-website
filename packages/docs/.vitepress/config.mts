@@ -110,7 +110,7 @@ export default defineConfig({
       port: 8000,
       proxy: {
         '/api': {
-          target: 'https://openapi.longportapp.com',
+          target: process.env.VITE_API_BASE_URL || 'https://openapi.longportapp.com',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
         },

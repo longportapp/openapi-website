@@ -3,7 +3,7 @@
     <a
       target="_self"
       :href="redirectPath"
-      class="login-button px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200">
+      class="login-button px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200">
       {{ t('login_now') }}
     </a>
   </div>
@@ -50,19 +50,19 @@ const redirectPath = computed(() => {
 }
 
 .VPFlyout:hover {
-  color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-2);
   transition: color 0.25s;
 }
 
 .login-button {
-  background-color: var(--vp-c-brand-1);
+  background-color: var(--vp-c-brand-2);
   color: var(--vp-c-white);
   border: 1px solid transparent;
   text-decoration: none;
 }
 
 .login-button:hover {
-  background-color: var(--vp-c-brand-2);
+  background-color: var(--vp-c-brand-1);
   color: var(--vp-c-white);
 }
 </style>

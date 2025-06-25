@@ -84,7 +84,7 @@ onUnmounted(() => {
         aria-haspopup="true"
         :aria-expanded="open"
         @click="handleClick">
-        <UserAvatarIcon :src="session.member.avatar" size="sm" />
+        <UserAvatarIcon :src="session.avatar || session?.member?.avatar" size="sm" />
       </button>
 
       <div
