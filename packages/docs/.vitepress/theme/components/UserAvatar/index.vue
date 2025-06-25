@@ -76,21 +76,18 @@ onUnmounted(() => {
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
       @focusin="open = true"
-      @focusout="open = false"
-    >
+      @focusout="open = false">
       <button
         type="button"
         class="flex items-center w-8 h-8 py-3 button focus:outline-none focus:ring-2 focus:ring-offset-0"
         aria-haspopup="true"
         :aria-expanded="open"
-        @click="handleClick"
-      >
+        @click="handleClick">
         <UserAvatarIcon :src="session.member.avatar" size="sm" />
       </button>
 
       <div
-        class="menu absolute top-[calc(var(--vp-nav-height)/2)] right-0 opacity-0 invisible transition-opacity duration-200"
-      >
+        class="menu absolute top-[calc(var(--vp-nav-height)/2)] right-0 opacity-0 invisible transition-opacity duration-200">
         <Dropdown ref="dropdownRef" :list="list" v-model:open="open" />
       </div>
     </div>
@@ -98,9 +95,9 @@ onUnmounted(() => {
     <!-- 未登录状态：显示登录按钮 -->
     <div v-else class="VPFlyout">
       <a
+        target="_self"
         :href="localePath('/auth')"
-        class="login-button px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200"
-      >
+        class="login-button px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200">
         {{ t('login_now') }}
       </a>
     </div>
