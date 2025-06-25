@@ -3,8 +3,8 @@ import { nav } from './nav'
 import { search } from './search'
 import { sidebar } from './sidebar'
 export const zhHKConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
-  title: '長橋 API 文檔',
-  description: '長橋 API 文檔',
+  title: 'LongPort API 文檔',
+  description: 'LongPort API 文檔',
 
   themeConfig: {
     nav: nav('zh-HK'),
@@ -13,12 +13,6 @@ export const zhHKConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
       provider: 'local',
       options: search,
     },
-
-    footer: {
-      message: '基於 MIT 許可發佈',
-      copyright: `版權所有 © 2025 長橋`,
-    },
-
     docFooter: {
       prev: '上一頁',
       next: '下一頁',

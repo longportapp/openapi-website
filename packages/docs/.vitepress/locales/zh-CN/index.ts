@@ -3,8 +3,8 @@ import { nav } from './nav'
 import { search } from './search'
 import { sidebar } from './sidebar'
 export const zhCNConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
-  title: '长桥 API 文档',
-  description: '长桥 API 文档',
+  title: 'LongPort API 文档',
+  description: 'LongPort API 文档',
 
   themeConfig: {
     nav: nav('zh-CN'),
@@ -13,12 +13,6 @@ export const zhCNConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
       provider: 'local',
       options: search,
     },
-
-    footer: {
-      message: '基于 MIT 许可发布',
-      copyright: `版权所有 © 2025 长桥`,
-    },
-
     docFooter: {
       prev: '上一页',
       next: '下一页',

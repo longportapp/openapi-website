@@ -5,9 +5,8 @@ layout: home
 hero:
   image:
     src: https://pub.lbkrs.com/files/202503/2CChxYnHQXeW9eRu/code.svg
-    alt: Longbridge
-  name: 'Longbridge-docs-center'
-  text: 'A document center for Longbridge OpenAPI'
+    alt: LongPort
+  text: 'LongPort OpenAPI'
   tagline: Stable · Safe · Fast
   actions:
     - theme: brand

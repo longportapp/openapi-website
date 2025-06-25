@@ -6,8 +6,7 @@ hero:
   image:
     src: https://pub.lbkrs.com/files/202503/2CChxYnHQXeW9eRu/code.svg
     alt: Longbridge
-  name: '长桥开发者平台'
-  text: 'Open API 文档中心'
+  text: 'LongPort OpenAPI'
   tagline: 稳定 · 安全 · 快速
   actions:
     - theme: brand

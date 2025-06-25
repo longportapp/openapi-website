@@ -3,8 +3,8 @@ import { nav } from './nav'
 import { search } from './search'
 import { sidebar } from './sidebar'
 export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
-  title: 'Longbridge Open API',
-  description: 'Longbridge Open API',
+  title: 'LongPort Open API',
+  description: 'LongPort Open API',
   themeConfig: {
     nav: nav(),
     sidebar: sidebar,
@@ -12,12 +12,6 @@ export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
       provider: 'local',
       options: search,
     },
-
-    footer: {
-      message: 'Published under MIT License',
-      copyright: `Copyright © 2025 Longbridge`,
-    },
-
     docFooter: {
       prev: 'Previous Page',
       next: 'Next Page',

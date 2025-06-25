@@ -1,6 +1,6 @@
-# Cursor Rules for Longbridge OpenAPI Documentation Project
+# Cursor Rules for Longport OpenAPI Documentation Project
 
-You are assisting with the development of the Longbridge OpenAPI documentation website, which uses the following tech stack:
+You are assisting with the development of the Longport OpenAPI documentation website, which uses the following tech stack:
 
 ## Tech Stack
 - VitePress 2.0.0-alpha.5 (Vue-based static site generator)
