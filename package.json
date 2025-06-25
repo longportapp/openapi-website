@@ -9,6 +9,8 @@
   "scripts": {
     "docs:dev": "bun run --filter './packages/docs' dev",
     "docs:build": "bun run --filter './packages/docs' build",
+    "docs:build:canary": "bun run --filter './packages/docs' build:canary",
+    "docs:build:prod": "bun run --filter './packages/docs' build:prod",
     "docs:preview": "bun run --filter './packages/docs' preview",
     "lint:docs": "prettier -c --parser typescript \"packages/docs/**/*.{js,ts,vue}\"",
     "format:docs": "prettier --write \"packages/docs/**/*.{js,ts,vue}\""
@@ -23,6 +25,5 @@
   },
   "peerDependencies": {
     "typescript": "^5"
-  },
-  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
+  }
 }

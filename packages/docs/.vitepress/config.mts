@@ -53,7 +53,6 @@ export default defineConfig({
         const locale = localeMatch[1]
         const cleanSlug = slug.startsWith('/') ? slug.substring(1) : slug
         np = `${locale}/docs/${cleanSlug}.md`
-        console.log(`${path} -> ${np}`)
       } else {
         // 如果没有匹配到语言，使用默认处理
         np = slug + '.md'

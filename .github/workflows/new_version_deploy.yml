@@ -34,7 +34,7 @@ jobs:
         run: bun install
 
       - name: Build release
-        run: bun run docs:build
+        run: bun run docs:build:canary
 
       - name: Upload to Aliyun OSS
         run: |

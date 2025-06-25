@@ -141,5 +141,7 @@ $ go get github.com/longportapp/openapi-go
 <style scoped>
 h2 {
   border: 0;
+  margin-top: 0;
+  padding-top:0;
 }
 </style>
