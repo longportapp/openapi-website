@@ -21,9 +21,4 @@ const labelRenderer = defineComponent({
 })
 
 export default labelRenderer
-
-export const entry: JsonFormsRendererRegistryEntry = {
-  renderer: labelRenderer,
-  tester: rankWith(1, uiTypeIs('Label')),
-}
 </script>

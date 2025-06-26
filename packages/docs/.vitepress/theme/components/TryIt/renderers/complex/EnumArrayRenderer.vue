@@ -65,22 +65,4 @@ const hasOneOfItems = (schema: JsonSchema): boolean =>
   })
 
 const hasEnumItems = (schema: JsonSchema): boolean => schema.type === 'string' && schema.enum !== undefined
-
-export const entry: JsonFormsRendererRegistryEntry = {
-  renderer: controlRenderer,
-  tester: rankWith(
-    5,
-    and(
-      uiTypeIs('Control'),
-      and(
-        schemaMatches(
-          (schema) => hasType(schema, 'array') && !Array.isArray(schema.items) && schema.uniqueItems === true
-        ),
-        schemaSubPathMatches('items', (schema) => {
-          return hasOneOfItems(schema) || hasEnumItems(schema)
-        })
-      )
-    )
-  ),
-}
 </script>

@@ -1,15 +1,11 @@
 <template>
   <div :class="styles.categorization.root">
     <div :class="styles.categorization.category">
-      <template
-        v-for="(category, index) in categories"
-        :key="`category-${index}`"
-      >
+      <template v-for="(category, index) in categories" :key="`category-${index}`">
         <div v-if="category.value.visible" @click="selected = index">
           <button
             :class="[selected === index ? styles.categorization.selected : '']"
-            :disabled="!category.value.enabled"
-          >
+            :disabled="!category.value.enabled">
             <label>{{ category.value.label }}</label>
           </button>
         </div>
@@ -24,28 +20,17 @@
         :path="layout.path"
         :enabled="layout.enabled"
         :renderers="layout.renderers"
-        :cells="layout.cells"
-      />
+        :cells="layout.cells" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import type { JsonFormsRendererRegistryEntry, Layout } from '@jsonforms/core';
-import {
-  and,
-  categorizationHasCategory,
-  isCategorization,
-  rankWith,
-} from '@jsonforms/core';
-import {
-  DispatchRenderer,
-  rendererProps,
-  useJsonFormsCategorization,
-  type RendererProps,
-} from '@jsonforms/vue';
-import { useVanillaLayout } from '../util';
+import { defineComponent } from 'vue'
+import type { JsonFormsRendererRegistryEntry, Layout } from '@jsonforms/core'
+import { and, categorizationHasCategory, isCategorization, rankWith } from '@jsonforms/core'
+import { DispatchRenderer, rendererProps, useJsonFormsCategorization, type RendererProps } from '@jsonforms/vue'
+import { useVanillaLayout } from '../util'
 
 const layoutRenderer = defineComponent({
   name: 'CategorizationRenderer',
@@ -56,18 +41,14 @@ const layoutRenderer = defineComponent({
     ...rendererProps<Layout>(),
   },
   setup(props: RendererProps<Layout>) {
-    return useVanillaLayout(useJsonFormsCategorization(props));
+    return useVanillaLayout(useJsonFormsCategorization(props))
   },
   data() {
     return {
       selected: 0,
-    };
+    }
   },
-});
+})
 
-export default layoutRenderer;
-export const entry: JsonFormsRendererRegistryEntry = {
-  renderer: layoutRenderer,
-  tester: rankWith(2, and(isCategorization, categorizationHasCategory)),
-};
+export default layoutRenderer
 </script>

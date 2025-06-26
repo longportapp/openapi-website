@@ -47,9 +47,4 @@ const controlRenderer = defineComponent({
 })
 
 export default controlRenderer
-
-export const entry: JsonFormsRendererRegistryEntry = {
-  renderer: controlRenderer,
-  tester: rankWith(1, isNumberControl),
-}
 </script>

@@ -1,27 +1,18 @@
 <template>
   <div :class="styles.categorization.root">
     <div :class="styles.categorization.stepper">
-      <template
-        v-for="(category, index) in visibleCategories"
-        :key="`tab-${index}`"
-      >
+      <template v-for="(category, index) in visibleCategories" :key="`tab-${index}`">
         <div v-if="category.value.visible" @click="selected = index">
           <button
             :class="[selected === index ? styles.categorization.selected : '']"
-            :disabled="!category.value.enabled"
-          >
-            <span :class="styles.categorization.stepperBadge">{{
-              index + 1
-            }}</span>
+            :disabled="!category.value.enabled">
+            <span :class="styles.categorization.stepperBadge">{{ index + 1 }}</span>
 
             <label>{{ category.value.label }}</label>
           </button>
         </div>
 
-        <hr
-          v-if="index !== visibleCategories.length - 1"
-          :class="styles.categorization.stepperLine"
-        />
+        <hr v-if="index !== visibleCategories.length - 1" :class="styles.categorization.stepperLine" />
       </template>
     </div>
 
@@ -33,19 +24,11 @@
         :path="layout.path"
         :enabled="layout.enabled"
         :renderers="layout.renderers"
-        :cells="layout.cells"
-      />
+        :cells="layout.cells" />
     </div>
 
-    <footer
-      v-if="appliedOptions?.showNavButtons"
-      :class="styles.categorization.stepperFooter"
-    >
-      <div
-        v-if="selected > 0"
-        :class="styles.categorization.stepperButtonBack"
-        @click="selected = selected - 1"
-      >
+    <footer v-if="appliedOptions?.showNavButtons" :class="styles.categorization.stepperFooter">
+      <div v-if="selected > 0" :class="styles.categorization.stepperButtonBack" @click="selected = selected - 1">
         <button :disabled="!visibleCategories[selected - 1].value.enabled">
           {{ 'back' }}
         </button>
@@ -54,8 +37,7 @@
       <div
         v-if="selected + 1 < visibleCategories.length"
         :class="styles.categorization.stepperButtonNext"
-        @click="selected = selected + 1"
-      >
+        @click="selected = selected + 1">
         <button :disabled="!visibleCategories[selected + 1].value.enabled">
           {{ 'next' }}
         </button>
@@ -65,22 +47,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import type { JsonFormsRendererRegistryEntry, Layout } from '@jsonforms/core';
-import {
-  and,
-  categorizationHasCategory,
-  isCategorization,
-  optionIs,
-  rankWith,
-} from '@jsonforms/core';
-import {
-  DispatchRenderer,
-  rendererProps,
-  useJsonFormsCategorization,
-  type RendererProps,
-} from '@jsonforms/vue';
-import { useVanillaLayout } from '../util';
+import { defineComponent } from 'vue'
+import type { JsonFormsRendererRegistryEntry, Layout } from '@jsonforms/core'
+import { and, categorizationHasCategory, isCategorization, optionIs, rankWith } from '@jsonforms/core'
+import { DispatchRenderer, rendererProps, useJsonFormsCategorization, type RendererProps } from '@jsonforms/vue'
+import { useVanillaLayout } from '../util'
 
 const layoutRenderer = defineComponent({
   name: 'CategorizationStepperRenderer',
@@ -91,30 +62,19 @@ const layoutRenderer = defineComponent({
     ...rendererProps<Layout>(),
   },
   setup(props: RendererProps<Layout>) {
-    return useVanillaLayout(useJsonFormsCategorization(props));
+    return useVanillaLayout(useJsonFormsCategorization(props))
   },
   data() {
     return {
       selected: 0,
-    };
+    }
   },
   computed: {
     visibleCategories() {
-      return this.categories.filter((category) => category.value.visible);
+      return this.categories.filter((category) => category.value.visible)
     },
   },
-});
+})
 
-export default layoutRenderer;
-export const entry: JsonFormsRendererRegistryEntry = {
-  renderer: layoutRenderer,
-  tester: rankWith(
-    3,
-    and(
-      isCategorization,
-      categorizationHasCategory,
-      optionIs('variant', 'stepper')
-    )
-  ),
-};
+export default layoutRenderer
 </script>
