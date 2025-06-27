@@ -12,7 +12,7 @@
       <div class="flex min-h-full items-center justify-center p-4">
         <!-- The actual dialog panel -->
         <DialogPanel
-          class="w-full lg:w-[calc(100vw-64px)] max-w-[calc(100vw-32px)] px-6 pb-6 bg-white dark:bg-[rgb(10,12,16)] rounded-2xl shadow-xl border border-gray-200/70 dark:border-white/10">
+          class="w-full max-w-[1200px] px-6 pb-6 bg-white dark:bg-[rgb(10,12,16)] rounded-2xl shadow-xl border border-gray-200/70 dark:border-white/10">
           <!-- Header -->
           <div class="py-6">
             <div class="flex items-center justify-between max-w-full">

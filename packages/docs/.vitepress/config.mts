@@ -32,7 +32,7 @@ function getFileSlug(filePath: string): string | null {
 
 export default defineConfig({
   title: 'LongPort Open API',
-  appearance: 'dark',
+  appearance: 'force-auto',
   lastUpdated: true,
   cleanUrls: true,
   metaChunk: true,
@@ -63,10 +63,6 @@ export default defineConfig({
       np = np.replace('en/', '')
     }
 
-    // 重写 /:reset.md 文件为 :reset/index.md
-    if (np.endsWith('.md') && !np.includes('index.md')) {
-      np = np.replace(/\.md$/, '/index.md')
-    }
     return np
   },
   markdown: markdownConfig,

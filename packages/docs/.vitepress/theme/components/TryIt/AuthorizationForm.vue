@@ -3,7 +3,6 @@
     :title="$t('authorization.title')"
     :fields="authFields"
     :initial-data="initialAuthData"
-    :default-collapsed="true"
     :uischema-options="uischemaOptions"
     @form-change="onAuthChange">
     <template #title-actions>
@@ -92,6 +91,6 @@ const onAuthChange = (data: Record<string, any>) => {
 
 // 处理立即创建按钮点击
 const handleCreateClick = () => {
-  window.open(localePath('/auth'))
+  window.location.href = localePath('/auth')
 }
 </script>
