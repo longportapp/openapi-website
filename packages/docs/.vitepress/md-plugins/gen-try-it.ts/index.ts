@@ -18,10 +18,17 @@ interface MarkdownItCoreState {
 function parseParametersTable(html: string): ParametersTable | null {
   const $ = cheerio.load(html)
 
-  // 查找 "Parameters" 标题（使用包含匹配，因为可能有锚点链接）
+  // 查找 "Parameters" 标题（支持多语言：英文、简体中文、繁体中文）
   const parametersHeading = $('h3').filter((_, el) => {
     const text = $(el).text().trim()
-    return text.includes('Parameters') || text === 'Parameters'
+    return (
+      text.includes('Parameters') ||
+      text === 'Parameters' ||
+      text.includes('请求参数') ||
+      text === '请求参数' ||
+      text.includes('請求參數') ||
+      text === '請求參數'
+    )
   })
 
   if (parametersHeading.length === 0) {
@@ -69,10 +76,17 @@ function parseParametersTable(html: string): ParametersTable | null {
 function parseRequestTable(html: string): HttpInfo | null {
   const $ = cheerio.load(html)
 
-  // 查找 "Request" 标题（使用包含匹配，因为可能有锚点链接）
+  // 查找 "Request" 标题（支持多语言：英文、简体中文、繁体中文）
   const requestHeading = $('h2').filter((_, el) => {
     const text = $(el).text().trim()
-    return text.includes('Request') || text === 'Request'
+    return (
+      text.includes('Request') ||
+      text === 'Request' ||
+      text.includes('请求') ||
+      text === '请求' ||
+      text.includes('請求') ||
+      text === '請求'
+    )
   })
 
   if (requestHeading.length === 0) {
