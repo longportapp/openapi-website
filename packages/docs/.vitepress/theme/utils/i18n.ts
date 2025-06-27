@@ -11,6 +11,10 @@ export const localePath = (path: string) => {
     return path
   }
 
+  if (!path.startsWith('/') && !path.startsWith('./') && !path.startsWith('../')) {
+    return path
+  }
+
   const locale = getBasenameLocale()
   return locale ? `/${locale}${path}` : path
 }
