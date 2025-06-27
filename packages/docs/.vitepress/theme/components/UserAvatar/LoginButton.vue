@@ -11,23 +11,13 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { localePath } from '../../utils/i18n'
 import { useI18n } from 'vue-i18n'
-import { withQuery } from 'ufo'
+import { createLoginRedirectPath } from '../../utils/navigate'
 
 const { t } = useI18n()
 
 const redirectPath = computed(() => {
-  // 记住当前访问的页面路径，登录成功后跳转到对应的路径上
-  const ssoRedirectTo = `redirect_to=${window.location.pathname}`
-
-  // 跳转到 /sso 页面用于承接登录成功后带过来的 token
-  const redirect_to = `${localePath(`${window.location.origin}/sso`)}?${ssoRedirectTo}`
-
-  return withQuery(localePath(`/login`), {
-    redirect_to,
-    logout: '1',
-  })
+  return createLoginRedirectPath()
 })
 </script>
 

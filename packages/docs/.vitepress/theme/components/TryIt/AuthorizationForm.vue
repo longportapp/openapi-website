@@ -17,9 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import { localePath } from '../../utils/i18n'
 import BaseForm from './BaseForm.vue'
 import { computed, onMounted } from 'vue'
+import { createLoginRedirectPath } from '../../utils/navigate'
 
 // 定义事件
 const emit = defineEmits<{
@@ -99,6 +99,10 @@ onMounted(() => {
 
 // 处理立即创建按钮点击
 const handleCreateClick = () => {
-  window.location.href = localePath('/auth')
+  const path = createLoginRedirectPath({
+    type: 'should_has_mock_token',
+  })
+  console.log('path', path)
+  // window.location.href = path
 }
 </script>
