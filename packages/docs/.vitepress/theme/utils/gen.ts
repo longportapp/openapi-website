@@ -90,7 +90,7 @@ function generateSidebarItems(dirPath: string, relativePath: string): DefaultThe
       const filePath = path.join(dirPath, file)
       const fileContent = fs.readFileSync(filePath, 'utf8')
       const { data } = matter(fileContent)
-      const title = data['title'] || getDefaultTitle(file)
+      const title = data['sidebar_label'] || data['title'] || getDefaultTitle(file)
       const originLink = data['link'] || data['slug']
 
       const link =

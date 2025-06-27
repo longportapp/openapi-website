@@ -32,7 +32,7 @@ function getFileSlug(filePath: string): string | null {
 
 export default defineConfig({
   title: 'LongPort Open API',
-  appearance: 'force-auto',
+  appearance: true,
   lastUpdated: true,
   cleanUrls: true,
   metaChunk: true,
