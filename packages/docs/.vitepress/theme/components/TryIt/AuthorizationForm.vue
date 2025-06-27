@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import { localePath } from '../../utils/i18n'
 import BaseForm from './BaseForm.vue'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 
 // 定义事件
 const emit = defineEmits<{
@@ -88,6 +88,14 @@ const initialAuthData = computed(() => {
 const onAuthChange = (data: Record<string, any>) => {
   emit('auth-change', data)
 }
+
+// 组件初始化时触发认证数据变化事件
+onMounted(() => {
+  if (initialAuthData.value) {
+    // 如果有初始认证数据，立即触发 auth-change 事件
+    emit('auth-change', initialAuthData.value)
+  }
+})
 
 // 处理立即创建按钮点击
 const handleCreateClick = () => {

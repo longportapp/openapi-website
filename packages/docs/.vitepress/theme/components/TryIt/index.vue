@@ -67,6 +67,7 @@ import PlayButton from './PlayButton.vue'
 import Code from './Code.vue'
 import LoadingSpinner from './LoadingSpinner.vue'
 import { type ApiResponse } from '../../utils/http-client'
+import { createQuickRequest } from '../../utils/request'
 
 interface Props {
   method?: string
@@ -82,8 +83,6 @@ const props = withDefaults(defineProps<Props>(), {
   parameters: () => [],
 })
 
-import { request } from '../../utils/request'
-
 const formData = ref<Record<string, any>>({})
 const authData = ref<Record<string, any>>({})
 const isLoading = ref(false)
@@ -94,14 +93,6 @@ const onFormChange = (data: Record<string, any>) => {
 
 const onAuthChange = (data: Record<string, any>) => {
   authData.value = data
-  // 更新本地存储
-  if (typeof window !== 'undefined') {
-    Object.keys(data).forEach((key) => {
-      if (data[key]) {
-        window.localStorage.setItem(key, data[key])
-      }
-    })
-  }
 }
 
 const result = ref<ApiResponse | undefined>()
@@ -116,10 +107,41 @@ const handleSend = async () => {
     const method = props.method.toLowerCase()
     const url = props.url
 
-    const localResult = await request[method](url, formData.value)
+    // 根据认证参数动态创建 request 实例
+    const request = createQuickRequest(authData.value.appKey, authData.value.accessToken, authData.value.appSecret)
+
+    // 根据不同的 HTTP 方法调用对应的 API
+    let localResult: ApiResponse
+    switch (method) {
+      case 'get':
+        localResult = await request.get(url, formData.value)
+        break
+      case 'post':
+        localResult = await request.post(url, formData.value)
+        break
+      case 'put':
+        localResult = await request.put(url, formData.value)
+        break
+      case 'delete':
+        localResult = await request.delete(url, formData.value)
+        break
+      default:
+        throw new Error(`不支持的 HTTP 方法：${method}`)
+    }
+
     result.value = localResult
   } catch (error) {
     console.error('API request failed:', error)
+    // 设置错误结果
+    result.value = {
+      status: 500,
+      statusText: 'Internal Server Error',
+      response: {
+        code: -1,
+        msg: error instanceof Error ? error.message : '请求失败',
+        data: null,
+      },
+    }
   } finally {
     isLoading.value = false
   }
