@@ -102,7 +102,6 @@ const handleCreateClick = () => {
   const path = createLoginRedirectPath({
     type: 'should_has_mock_token',
   })
-  console.log('path', path)
-  // window.location.href = path
+  window.location.href = path
 }
 </script>
