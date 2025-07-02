@@ -27,6 +27,10 @@ export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   description:
     'Access LongPort OpenAPI for diversified and flexible support tailored to your programmatic trading needs. Enhance your trading strategies with ease.',
   themeConfig: {
+    logoLink: {
+      link: '/',
+      target: '_self',
+    },
     nav: nav(),
     sidebar: sidebar,
     search: {

@@ -90,6 +90,7 @@ export default defineConfig({
     gtag('js', new Date());
     gtag('config', 'G-JNRX7GS04Y');`],
     ['script', { defer: '', src: 'https://assets.lbkrs.com/pkg/sensorsdata/1.21.13.min.js' }],
+    ['script', { async: '', src: 'https://at.alicdn.com/t/c/font_2621450_y740y72ffjq.js' }],
   ],
 
   themeConfig: {

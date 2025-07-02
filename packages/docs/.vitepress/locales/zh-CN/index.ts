@@ -25,6 +25,10 @@ export const zhCNConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   title: 'LongPort API 文档',
   description: 'LongPort OpenAPI 为您提供灵活多样的接入服务，满足您的量化交易需求，快速构建您的交易策略。',
   themeConfig: {
+    logoLink: {
+      link: '/zh-CN',
+      target: '_self',
+    },
     nav: nav('zh-CN'),
     sidebar: sidebar,
     search: {

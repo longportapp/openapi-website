@@ -6,6 +6,8 @@
 @import './vp-code-title.css';
 @import './font.css';
 @import './sidebar.css';
+@import './custom.scss';
+@import './css-var.scss';
 
 :root {
   --vp-c-default-1: var(--vp-c-gray-1);

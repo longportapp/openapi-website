@@ -1,6 +1,7 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
+pageClass: longport-home-page
 
 hero:
   image:
@@ -10,8 +11,9 @@ hero:
   tagline: 稳定 · 安全 · 快速
   actions:
     - theme: brand
-      text: 开始使用
-      link: /zh-CN/docs/
+      text: 立即申请
+      link: /zh-CN/auth/
+      target: _self
 
 features:
   - icon: <img src="https://pub.lbkrs.com/files/202503/7C3YBFzrQsnQ9rma/icon-code.svg" width="48" height="48"/>
@@ -26,3 +28,4 @@ features:
     title: 超低延迟
     details: 延迟低至 10 毫秒的极速交易，适应云原生的分布式内存数据库和分布式无状态系统框架
 ---
+<HomePage/>

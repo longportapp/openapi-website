@@ -26,6 +26,10 @@ export const zhHKConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   description: 'LongPort OpenAPI 為您提供靈活多樣的接入服務，滿足您的量化交易需求，快速構建您的交易策略。',
 
   themeConfig: {
+    logoLink: {
+      link: '/zh-HK',
+      target: '_self',
+    },
     nav: nav('zh-HK'),
     sidebar: sidebar,
     search: {
