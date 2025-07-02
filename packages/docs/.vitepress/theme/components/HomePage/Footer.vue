@@ -20,11 +20,15 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { isServer } from '../../utils/i18n'
 
 const { t, locale } = useI18n()
 
 // 备案文案
 const beianText = computed(() => {
+  if (isServer()) {
+    return ''
+  }
   const hostIsCN = window.location.host.endsWith('.cn')
   return hostIsCN && locale.value === 'zh-CN' ? `© ${new Date().getFullYear()} 粤 ICP 备 2025433117 号` : ''
 })
