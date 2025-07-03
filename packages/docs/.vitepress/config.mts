@@ -76,7 +76,7 @@ export default defineConfig({
 
   /* prettier-ignore */
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: 'https://pub.pbkrs.com/files/202211/TNosrY77nCxm6rtU/logo-without-title.svg' }],
+    ['link', { rel: 'shortcut icon', type: 'image/x-icon', href: 'https://assets.lbkrs.com/uploads/770073a2-c505-4d41-99f4-93cb75abe257/longport_favicon.png' }],
     ['meta', { name: 'theme-color', content: '#5f67ee' }],
     ['meta', { name: 'twitter:card', content: 'summary' }],
     ['meta', { name: 'twitter:site', content: 'https://open.longportapp.com' }],
