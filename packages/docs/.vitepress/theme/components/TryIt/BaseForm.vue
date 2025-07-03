@@ -1,14 +1,10 @@
 <template>
-  <div
-    v-if="hasData"
-    class="base-form border border-solid border-gray-200 dark:border-white/10 rounded-xl overflow-hidden">
+  <div v-if="hasData" class="base-form rounded-xl overflow-hidden" style="border: 1px solid var(--vp-c-border)">
     <div
       v-if="title"
-      :class="[
-        'flex items-center justify-between cursor-pointer select-none border-b border-gray-200 dark:border-white/10 p-4 hover:bg-gray-100 dark:hover:bg-white/5',
-      ]"
+      class="flex items-center justify-between cursor-pointer select-none p-4 form-header"
       @click="toggleCollapsed">
-      <h2 class="font-semibold text-gray-900 dark:text-gray-100 m-0">{{ title }}</h2>
+      <h2 class="font-semibold m-0" style="color: var(--vp-c-text-1)">{{ title }}</h2>
       <div class="flex items-center gap-2" @click.stop>
         <slot name="title-actions"></slot>
       </div>
@@ -19,7 +15,7 @@
       </div>
     </div>
   </div>
-  <div v-else-if="emptyMessage" class="text-gray-500 dark:text-gray-400 text-sm">{{ emptyMessage }}</div>
+  <div v-else-if="emptyMessage" class="text-sm empty-message">{{ emptyMessage }}</div>
 </template>
 
 <script setup lang="ts">
@@ -157,6 +153,16 @@ const onChange = (event: any) => {
 
 <style lang="scss">
 .base-form {
+  .form-header {
+    border-bottom: 1px solid var(--vp-c-divider);
+    background-color: var(--vp-c-bg-soft);
+    transition: background-color 0.2s ease;
+  }
+
+  .form-header:hover {
+    background-color: var(--vp-c-bg-alt);
+  }
+
   .form-content {
     interpolate-size: allow-keywords;
     transition: height 0.3s ease-in-out;
@@ -168,8 +174,25 @@ const onChange = (event: any) => {
     height: 0;
   }
 
+  .empty-message {
+    color: var(--vp-c-text-2);
+  }
+
   input {
-    @apply w-full border border-gray-200/70 dark:border-white/10 rounded-lg border-solid text-sm py-1.5 px-2.5 text-gray-900 dark:text-gray-100  focus:border-gray-300 dark:focus:border-gray-500 focus:ring-gray-300 dark:focus:ring-gray-500 transition-all duration-200;
+    width: 100%;
+    border: 1px solid var(--vp-c-border);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    padding: 0.375rem 0.625rem;
+    color: var(--vp-c-text-1);
+    background-color: var(--vp-c-bg);
+    transition: all 0.2s ease;
+  }
+
+  input:focus {
+    border-color: var(--vp-c-brand-1);
+    outline: none;
+    box-shadow: 0 0 0 3px var(--vp-c-brand-soft);
   }
 
   fieldset {
@@ -191,12 +214,19 @@ const onChange = (event: any) => {
     flex: 1;
   }
 
-  .vertical-layout-item {
-    @apply border-gray-200 dark:border-white/10 border-solid py-4 border-x-0 border-b-0;
+  .vertical-layout > .vertical-layout-item {
+    padding: 1rem 0;
+    &:not(:first-child) {
+      border-color: var(--vp-c-border);
+      border-style: solid;
+      border-left: 0;
+      border-right: 0;
+      border-bottom: 0;
+    }
   }
 
   .error {
-    @apply text-red-500 dark:text-red-400;
+    color: var(--vp-c-danger-1);
   }
 
   .control {
@@ -224,7 +254,8 @@ const onChange = (event: any) => {
     flex-direction: column;
   }
   .array-list-item {
-    @apply flex items-start;
+    display: flex;
+    align-items: start;
   }
 
   .array-list-item-toolbar {
@@ -244,11 +275,11 @@ const onChange = (event: any) => {
   }
 
   .array-list-item-label {
-    @apply mt-3;
+    margin-top: 0.75rem;
   }
 
   .array-list-item-delete {
-    @apply mt-3.5;
+    margin-top: 0.875rem;
   }
 
   .array-list-item-content {
@@ -256,9 +287,11 @@ const onChange = (event: any) => {
     padding: 0 1em;
 
     > .vertical-layout > .vertical-layout-item {
-      @apply py-2 border-t-0;
+      padding: 0.5rem 0;
+      border-top: 0;
       & > .control-wrapper {
-        @apply items-center;
+        align-items: center;
+        flex-direction: row;
       }
     }
   }

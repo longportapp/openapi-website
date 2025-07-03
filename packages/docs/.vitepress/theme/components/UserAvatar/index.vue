@@ -87,8 +87,7 @@ onUnmounted(() => {
         <UserAvatarIcon :src="session.avatar || session?.member?.avatar" size="sm" />
       </button>
 
-      <div
-        class="menu absolute top-[calc(var(--vp-nav-height)/2)] right-0 opacity-0 invisible transition-opacity duration-200">
+      <div class="menu absolute top-full right-0 opacity-0 invisible transition-opacity duration-200">
         <Dropdown ref="dropdownRef" :list="list" v-model:open="open" />
       </div>
     </div>

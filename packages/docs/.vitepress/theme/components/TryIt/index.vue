@@ -7,23 +7,27 @@
     <div class="fixed z-30 inset-0" aria-hidden="true" />
 
     <!-- Full-screen scrollable container -->
-    <div class="fixed z-50 inset-0 w-screen overflow-y-auto backdrop-blur-sm bg-black/20">
+    <div
+      class="fixed z-50 inset-0 w-screen overflow-y-auto"
+      style="backdrop-filter: blur(4px); background-color: var(--vp-backdrop-bg-color)">
       <!-- Container to center the panel -->
       <div class="flex min-h-full items-center justify-center p-4">
         <!-- The actual dialog panel -->
         <DialogPanel
-          class="w-full max-w-[1200px] px-6 pb-6 bg-white dark:bg-[rgb(10,12,16)] rounded-2xl shadow-xl border border-gray-200/70 dark:border-white/10">
+          class="w-full max-w-[1200px] px-6 pb-6 rounded-2xl shadow-xl"
+          style="background-color: var(--vp-c-bg-elv); border: 1px solid var(--vp-c-border)">
           <!-- Header -->
           <div class="py-6">
             <div class="flex items-center justify-between max-w-full">
               <DialogTitle
-                class="text-lg font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2 flex-1 min-w-0">
+                class="text-lg font-semibold flex items-center gap-2 flex-1 min-w-0"
+                style="color: var(--vp-c-text-1)">
                 <span
                   class="text-base items-center justify-center px-3 py-1 font-medium rounded-xl shadow-none flex-shrink-0"
                   :class="getMethodTextColor(props.method)">
                   {{ props.method }}
                 </span>
-                <span class="text-gray-700 dark:text-gray-300 overflow-x-auto whitespace-nowrap min-w-0 flex-1">{{
+                <span class="overflow-x-auto whitespace-nowrap min-w-0 flex-1" style="color: var(--vp-c-text-2)">{{
                   props.url
                 }}</span>
               </DialogTitle>
@@ -35,7 +39,7 @@
                 {{ $t('tryIt.send') }}
               </PlayButton>
             </div>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-2" v-if="props.description">
+            <p class="text-sm mt-2" style="color: var(--vp-c-text-2)" v-if="props.description">
               {{ props.description }}
             </p>
           </div>
@@ -150,34 +154,34 @@ const handleSend = async () => {
 const getMethodColor = (method: string) => {
   switch (method?.toLowerCase()) {
     case 'get':
-      return 'bg-green-500'
+      return 'success'
     case 'post':
-      return 'bg-blue-500'
+      return 'brand'
     case 'put':
-      return 'bg-orange-500'
+      return 'warning'
     case 'delete':
-      return 'bg-red-500'
+      return 'danger'
     case 'patch':
-      return 'bg-purple-500'
+      return 'important'
     default:
-      return 'bg-gray-500'
+      return 'default'
   }
 }
 
 const getMethodTextColor = (method: string) => {
   switch (method?.toLowerCase()) {
     case 'get':
-      return 'text-green-500 bg-green-400/10'
+      return 'method-get'
     case 'post':
-      return 'text-blue-500 bg-blue-400/10'
+      return 'method-post'
     case 'put':
-      return 'text-orange-500 bg-orange-400/10'
+      return 'method-put'
     case 'delete':
-      return 'text-red-500 bg-red-400/10'
+      return 'method-delete'
     case 'patch':
-      return 'text-purple-500 bg-purple-400/10'
+      return 'method-patch'
     default:
-      return 'text-gray-500 bg-gray-400/10'
+      return 'method-default'
   }
 }
 
@@ -187,3 +191,35 @@ function setIsOpen(value) {
   isOpen.value = value
 }
 </script>
+
+<style scoped>
+.method-get {
+  color: var(--vp-c-success-1);
+  background-color: var(--vp-c-success-soft);
+}
+
+.method-post {
+  color: var(--vp-c-brand-1);
+  background-color: var(--vp-c-brand-soft);
+}
+
+.method-put {
+  color: var(--vp-c-warning-1);
+  background-color: var(--vp-c-warning-soft);
+}
+
+.method-delete {
+  color: var(--vp-c-danger-1);
+  background-color: var(--vp-c-danger-soft);
+}
+
+.method-patch {
+  color: var(--vp-c-important-1);
+  background-color: var(--vp-c-important-soft);
+}
+
+.method-default {
+  color: var(--vp-c-text-2);
+  background-color: var(--vp-c-default-soft);
+}
+</style>

@@ -2,7 +2,7 @@
   <button
     :class="[
       'ml-2 inline-flex items-center justify-center px-3 py-1 text-white font-medium rounded-lg cursor-pointer disabled:opacity-70 hover:opacity-80 gap-1 shadow-none transition-all duration-200',
-      color,
+      getColorClass,
       customClass,
       { 'cursor-not-allowed': loading },
     ]"
@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, withDefaults, defineEmits } from 'vue'
+import { defineProps, withDefaults, defineEmits, computed } from 'vue'
 
 const props = withDefaults(
   defineProps<{
@@ -45,12 +45,93 @@ const props = withDefaults(
     loading?: boolean
   }>(),
   {
-    color: 'bg-blue-500',
+    color: 'brand',
     customClass: '',
     disabled: false,
     loading: false,
   }
 )
 
+const getColorClass = computed(() => {
+  switch (props.color) {
+    case 'success':
+      return 'btn-success'
+    case 'brand':
+      return 'btn-brand'
+    case 'warning':
+      return 'btn-warning'
+    case 'danger':
+      return 'btn-danger'
+    case 'important':
+      return 'btn-important'
+    case 'default':
+      return 'btn-default'
+    default:
+      return 'btn-brand'
+  }
+})
+
 defineEmits(['click'])
 </script>
+
+<style scoped>
+.btn-success {
+  background-color: var(--vp-c-success-3);
+  border-color: var(--vp-c-success-3);
+}
+
+.btn-success:hover {
+  background-color: var(--vp-c-success-2);
+  border-color: var(--vp-c-success-2);
+}
+
+.btn-brand {
+  background-color: var(--vp-c-brand-3);
+  border-color: var(--vp-c-brand-3);
+}
+
+.btn-brand:hover {
+  background-color: var(--vp-c-brand-2);
+  border-color: var(--vp-c-brand-2);
+}
+
+.btn-warning {
+  background-color: var(--vp-c-warning-3);
+  border-color: var(--vp-c-warning-3);
+}
+
+.btn-warning:hover {
+  background-color: var(--vp-c-warning-2);
+  border-color: var(--vp-c-warning-2);
+}
+
+.btn-danger {
+  background-color: var(--vp-c-danger-3);
+  border-color: var(--vp-c-danger-3);
+}
+
+.btn-danger:hover {
+  background-color: var(--vp-c-danger-2);
+  border-color: var(--vp-c-danger-2);
+}
+
+.btn-important {
+  background-color: var(--vp-c-important-3);
+  border-color: var(--vp-c-important-3);
+}
+
+.btn-important:hover {
+  background-color: var(--vp-c-important-2);
+  border-color: var(--vp-c-important-2);
+}
+
+.btn-default {
+  background-color: var(--vp-c-default-3);
+  border-color: var(--vp-c-default-3);
+}
+
+.btn-default:hover {
+  background-color: var(--vp-c-default-2);
+  border-color: var(--vp-c-default-2);
+}
+</style>

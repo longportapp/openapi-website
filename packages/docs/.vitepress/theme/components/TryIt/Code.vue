@@ -1,7 +1,8 @@
 <template>
   <div
     v-if="props.result"
-    class="w-full rounded-xl border p-0.5 bg-gray-50 dark:bg-white/5 border-solid border-gray-200 dark:border-white/10">
+    class="w-full rounded-xl p-0.5"
+    style="background-color: var(--vp-c-bg-soft); border: 1px solid var(--vp-c-border)">
     <!-- Header Bar -->
     <div class="flex w-full px-2 py-1 space-x-3 items-center rounded-t-2xl">
       <div class="flex flex-1 space-x-4 items-center">
@@ -9,7 +10,7 @@
           <!-- Status Icon -->
           <div class="w-3.5 h-3.5 rounded-full" :class="getStatusIconClass()"></div>
           <!-- Status Text -->
-          <div class="text-xs text-gray-800 dark:text-gray-200 font-medium">
+          <div class="text-xs font-medium" style="color: var(--vp-c-text-1)">
             {{ getStatusText() }}
           </div>
         </div>
@@ -20,10 +21,10 @@
         <!-- Download Button -->
         <button
           @click="downloadResponse"
-          class="group h-7 w-7 flex items-center justify-center cursor-pointer relative hover:bg-gray-100 dark:hover:bg-white/5 rounded-md transition-all duration-200 hover:scale-110"
+          class="group h-7 w-7 flex items-center justify-center cursor-pointer relative rounded-md transition-all duration-200 hover:scale-110 hover-bg"
           title="download">
           <svg
-            class="w-4 h-4 bg-gray-400 group-hover:bg-gray-500 dark:bg-white/40 dark:group-hover:bg-white/60 transition-all duration-200"
+            class="w-4 h-4 transition-all duration-200 bg-[var(--vp-c-text-2)]"
             style="
               mask-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTMgMTNIMTMiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik04IDNWMTFNOCAxMUwxMSA4TTggMTFMNSA4IiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K');
               mask-repeat: no-repeat;
@@ -35,7 +36,7 @@
         <div class="relative">
           <button
             @click="copyResponse"
-            class="h-7 w-7 flex items-center justify-center rounded-md backdrop-blur group/copy-button hover:bg-gray-100 dark:hover:bg-white/5 transition-all duration-200 hover:scale-110"
+            class="h-7 w-7 flex items-center justify-center rounded-md backdrop-blur group/copy-button transition-all duration-200 hover:scale-110 hover-bg"
             :title="copySuccess ? '已复制' : '复制代码'">
             <svg
               v-if="!copySuccess"
@@ -44,7 +45,7 @@
               viewBox="0 0 18 18"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              class="w-4 h-4 text-gray-400 group-hover/copy-button:text-gray-500 dark:text-white/40 dark:group-hover/copy-button:text-white/60">
+              class="w-4 h-4 transition-all duration-200 svg-icon">
               <path
                 d="M14.25 5.25H7.25C6.14543 5.25 5.25 6.14543 5.25 7.25V14.25C5.25 15.3546 6.14543 16.25 7.25 16.25H14.25C15.3546 16.25 16.25 15.3546 16.25 14.25V7.25C16.25 6.14543 15.3546 5.25 14.25 5.25Z"
                 stroke="currentColor"
@@ -65,7 +66,8 @@
               viewBox="0 0 18 18"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              class="w-4 h-4 text-green-500">
+              class="w-4 h-4"
+              style="color: var(--vp-c-success-1)">
               <path
                 d="M15 4.5L7.5 12L3 7.5"
                 stroke="currentColor"
@@ -79,10 +81,11 @@
     </div>
 
     <!-- Code Content -->
-    <div class="rounded-[14px] dark:bg-[#121212] bg-white">
+    <div class="rounded-[14px]" style="background-color: var(--vp-c-bg)">
       <div class="h-full">
         <div
-          class="px-3 py-3.5 min-h-[200px] max-h-[50vh] whitespace-pre border-gray-200 dark:border-gray-700 dark:text-gray-300 font-mono text-xs leading-5 overflow-auto">
+          class="px-3 py-3.5 min-h-[200px] max-h-[50vh] whitespace-pre font-mono text-xs leading-5 overflow-auto"
+          style="color: var(--vp-c-text-2); border-color: var(--vp-c-border)">
           <div v-html="highlightHtml" class="h-full overflow-auto"></div>
         </div>
       </div>
@@ -123,17 +126,17 @@ const highlightJson = async () => {
 }
 
 const getStatusIconClass = () => {
-  if (!props.result) return 'bg-gray-400'
+  if (!props.result) return 'status-default'
 
   const status = props.result.status
   if (status >= 200 && status < 300) {
-    return 'bg-green-500'
+    return 'status-success'
   } else if (status >= 400 && status < 500) {
-    return 'bg-red-500'
+    return 'status-danger'
   } else if (status >= 500) {
-    return 'bg-red-600'
+    return 'status-danger'
   } else {
-    return 'bg-yellow-500'
+    return 'status-warning'
   }
 }
 
@@ -183,5 +186,27 @@ watch(() => props.result, highlightJson, { deep: true })
 </script>
 
 <style scoped>
-/* 保留基本样式，移除所有动画 */
+.hover-bg:hover {
+  background-color: var(--vp-c-bg-soft);
+}
+
+.group:hover .svg-icon {
+  background-color: var(--vp-c-text-1);
+}
+
+.status-success {
+  background-color: var(--vp-c-success-1);
+}
+
+.status-danger {
+  background-color: var(--vp-c-danger-1);
+}
+
+.status-warning {
+  background-color: var(--vp-c-warning-1);
+}
+
+.status-default {
+  background-color: var(--vp-c-default-1);
+}
 </style>

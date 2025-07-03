@@ -8,7 +8,7 @@
     <template #title-actions>
       <button
         v-if="!initialAuthData"
-        class="px-3 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 rounded-lg transition-colors duration-200"
+        class="px-3 py-1.5 text-sm font-medium text-white rounded-lg transition-colors duration-200 auth-button"
         @click="handleCreateClick">
         {{ $t('authorization.createButton') }}
       </button>
@@ -105,3 +105,15 @@ const handleCreateClick = () => {
   window.location.href = path
 }
 </script>
+
+<style scoped>
+.auth-button {
+  background-color: var(--vp-c-brand-3);
+  border-color: var(--vp-c-brand-3);
+}
+
+.auth-button:hover {
+  background-color: var(--vp-c-brand-2);
+  border-color: var(--vp-c-brand-2);
+}
+</style>

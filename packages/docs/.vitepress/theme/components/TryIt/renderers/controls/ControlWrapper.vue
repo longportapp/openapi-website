@@ -5,25 +5,25 @@
       <!-- 字段标题行 -->
       <div class="field-header mb-2">
         <div class="flex items-center gap-2 mb-1">
-          <label :for="id + '-input'" class="field-label text-sm font-medium text-gray-900 dark:text-gray-100">
+          <label :for="id + '-input'" class="field-label text-sm font-medium" style="color: var(--vp-c-text-1)">
             {{ label }}
           </label>
-          <span v-if="type" class="field-type text-xs text-gray-500 dark:text-gray-400 font-mono px-1.5 py-0.5">
+          <span v-if="type" class="field-type text-xs font-mono px-1.5 py-0.5" style="color: var(--vp-c-text-2)">
             {{ type }}
           </span>
           <span
             v-if="showAsterisk"
-            class="required-badge inline-flex items-center px-2 py-1 text-xs font-semibold px-2 py-0.5 rounded-md bg-red-100/50 dark:bg-red-400/10 text-red-600 dark:text-red-300 font-medium whitespace-nowrap">
+            class="required-badge inline-flex items-center px-2 py-1 text-xs font-semibold px-2 py-0.5 rounded-md font-medium whitespace-nowrap required-style">
             required
           </span>
-          <span v-else class="optional-badge text-xs text-gray-400 dark:text-gray-500 font-medium"> optional </span>
+          <span v-else class="optional-badge text-xs font-medium optional-style"> optional </span>
         </div>
       </div>
 
       <!-- 描述信息 -->
       <div
         v-if="showDescription && description"
-        class="field-description text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-2 vp-doc">
+        class="field-description text-sm leading-relaxed mb-2 vp-doc description-style">
         <div v-html="description"></div>
       </div>
 
@@ -113,3 +113,18 @@ export default defineComponent({
   },
 })
 </script>
+
+<style scoped>
+.required-style {
+  color: var(--vp-c-danger-1);
+  background-color: var(--vp-c-danger-soft);
+}
+
+.optional-style {
+  color: var(--vp-c-text-3);
+}
+
+.description-style {
+  color: var(--vp-c-text-2);
+}
+</style>

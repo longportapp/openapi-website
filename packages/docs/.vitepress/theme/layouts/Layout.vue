@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { useData } from 'vitepress'
+import { useData, useRoute } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { nextTick, provide, watchEffect } from 'vue'
 import UserAvatar from '../components/UserAvatar/index.vue'
@@ -8,6 +8,8 @@ import { createHighlighter } from 'shiki/bundle/web'
 
 const { isDark, lang } = useData()
 const i18n = useI18n()
+
+const router = useRoute()
 
 watchEffect(() => {
   if (lang.value !== i18n.locale.value) {
@@ -51,6 +53,9 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
   <DefaultTheme.Layout>
     <template #nav-bar-content-after>
       <UserAvatar />
+    </template>
+    <template #doc-footer-before>
+      <a :href="router.path + '.md'" target="_blank" class="text-sm text-[--vp-c-brand-1] italic">LLMs Text</a>
     </template>
   </DefaultTheme.Layout>
 </template>

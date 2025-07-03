@@ -1,13 +1,14 @@
 <template>
   <div
-    class="w-full flex justify-center items-center min-h-[250px] rounded-xl border p-4 bg-gray-50 dark:bg-white/5 border-solid border-gray-200 dark:border-white/10">
+    class="w-full flex justify-center items-center min-h-[250px] rounded-xl p-4"
+    style="background-color: var(--vp-c-bg-soft); border: 1px solid var(--vp-c-border)">
     <div class="flex items-center justify-center py-12">
       <div class="flex flex-col items-center space-y-4">
         <!-- Bouncing dots -->
         <div class="flex space-x-2">
-          <div class="w-2 h-2 bg-blue-500 rounded-full loading-dot"></div>
-          <div class="w-2 h-2 bg-blue-500 rounded-full loading-dot"></div>
-          <div class="w-2 h-2 bg-blue-500 rounded-full loading-dot"></div>
+          <div class="w-2 h-2 rounded-full loading-dot" style="background-color: var(--vp-c-brand-1)"></div>
+          <div class="w-2 h-2 rounded-full loading-dot" style="background-color: var(--vp-c-brand-1)"></div>
+          <div class="w-2 h-2 rounded-full loading-dot" style="background-color: var(--vp-c-brand-1)"></div>
         </div>
       </div>
     </div>
