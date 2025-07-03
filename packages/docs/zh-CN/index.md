@@ -17,8 +17,8 @@ hero:
 
 features:
   - icon: <img src="https://pub.lbkrs.com/files/202503/7C3YBFzrQsnQ9rma/icon-code.svg" width="48" height="48"/>
-    title: 极致稳定
-    details: 无核心工具依赖，所有功能通过预设提供。
+    title: 多样接入
+    details: 支持 HTTP WebSocket 私有二进制长连接协议及多语言 SDK，灵活接入
     link: /zh-CN/docs/
     linkText: 开始使用
   - icon: <img src="https://pub.lbkrs.com/files/202503/cHW5RsNJNYv6Z7RM/icon-cloud.svg" width="48" height="48" />

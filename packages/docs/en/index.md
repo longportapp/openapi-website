@@ -16,8 +16,8 @@ hero:
 
 features:
   - icon: <img src="https://pub.lbkrs.com/files/202503/7C3YBFzrQsnQ9rma/icon-code.svg" width="48" height="48"/>
-    title: Extremely Stable
-    details: No core utilities, all functionalities are provided via presets.
+    title: Multiple Access Methods
+    details: Support HTTP/WebSocket/Longbridge binary protocol and multi-language SDK, allowing flexible access
     link: docs/
     linkText: Getting Started
 
