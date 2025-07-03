@@ -142,7 +142,14 @@ const getStatusIconClass = () => {
 
 const getStatusText = () => {
   if (!props.result) return ''
-  return `${props.result.status} - ${props.result.statusText}`
+  const textList: string[] = []
+  if (props.result.status) {
+    textList.push(`${props.result.status}`)
+  }
+  if (props.result.statusText) {
+    textList.push(`${props.result.statusText}`)
+  }
+  return textList.join(' - ')
 }
 
 const copyResponse = async () => {
