@@ -1,7 +1,7 @@
 ---
 sidebar: false
 title: SDK
-description: 支援多種主流程式語言，並提供 SDK
+description: 支持多種主流編程語言，並提供 SDK
 id: sdk
 layout: home
 ---
