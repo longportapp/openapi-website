@@ -46,13 +46,23 @@ export default defineConfig({
 
     //首先尝试读取文件的 slug 字段
     const slug = getFileSlug(path)
-    if (slug && Path.isAbsolute(slug) && slug !== '/') {
+
+    if (slug && slug !== '/') {
       // 如果存在 slug，重写为 /{locale}/docs/{slug}.md 的形式
       const localeMatch = path.match(/^(en|zh-CN|zh-HK)\//)
       if (localeMatch) {
         const locale = localeMatch[1]
-        const cleanSlug = slug.startsWith('/') ? slug.substring(1) : slug
-        np = `${locale}/docs/${cleanSlug}.md`
+        /**
+         * 如果是 slug / 开头，则是绝对路径，需要直接替换为 /{locale}/docs/{slug}.md 的形式
+         * 如果 slug 不是 / 开头，则是相对路径，则是相对原目录，替换文件名，类似 alias 的用法
+         */
+        if (slug.startsWith('/')) {
+          const cleanSlug = slug.startsWith('/') ? slug.substring(1) : slug
+          np = `${locale}/docs/${cleanSlug}.md`
+        } else {
+          const dirname = Path.dirname(path)
+          np = `${dirname}/${slug}.md`
+        }
       } else {
         // 如果没有匹配到语言，使用默认处理
         np = slug + '.md'
@@ -62,6 +72,8 @@ export default defineConfig({
     if (np.includes('en')) {
       np = np.replace('en/', '')
     }
+
+    console.log(`rewrite ${path} -> ${np}`)
 
     return np
   },

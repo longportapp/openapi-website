@@ -3,12 +3,6 @@ import path from 'path'
 import matter from 'gray-matter'
 import { type DefaultTheme } from 'vitepress'
 
-type Config = {
-  [key: string]: {
-    collapsed?: boolean
-  }
-}
-
 interface CategoryConfig {
   position?: number
   label?: string
@@ -91,10 +85,12 @@ function generateSidebarItems(dirPath: string, relativePath: string): DefaultThe
       const fileContent = fs.readFileSync(filePath, 'utf8')
       const { data } = matter(fileContent)
       const title = data['sidebar_label'] || data['title'] || getDefaultTitle(file)
-      const originLink = data['link'] || data['slug']
-
-      const link =
-        originLink && path.isAbsolute(originLink) ? originLink : path.join(relativePath, file.replace('.md', ''))
+      const slug = data['slug']
+      const link = slug
+        ? path.isAbsolute(slug)
+          ? slug
+          : path.join(relativePath, slug)
+        : path.join(relativePath, file.replace('.md', ''))
       const position = data['position'] || undefined
 
       fileItems.push({
