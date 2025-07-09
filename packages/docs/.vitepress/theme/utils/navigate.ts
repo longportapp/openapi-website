@@ -8,7 +8,7 @@ import { localePath } from './i18n'
  */
 export function createLoginRedirectPath(ssoParams?: Record<string, string | number | boolean>): string {
   const redirect_to = withQuery(localePath(`${window.location.origin}/sso`), {
-    redirect_to: window.location.pathname,
+    redirect_to: window.location.href,
     ...ssoParams,
   })
 
