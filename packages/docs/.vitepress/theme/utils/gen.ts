@@ -26,7 +26,7 @@ type MSidebar = DefaultTheme.SidebarItem & { position?: number }
 export function genMarkdowDocs(lang: string, basePath: string, debug = false) {
   return function (): DefaultTheme.SidebarItem[] {
     const rootDir = path.resolve(__dirname, '../../../', lang, basePath)
-    const fc = generateSidebarItems(rootDir, '')
+    const fc = generateSidebarItems(rootDir, `/${basePath}`, `/${basePath}`)
     if (debug) {
       fs.writeFileSync(path.resolve(__dirname, `./${lang}_sidebar.json`), JSON.stringify(fc, null, 2))
     }
@@ -70,7 +70,7 @@ function sortByPosition<T extends { position?: number }>(items: T[]): T[] {
  * @param relativePath Relative path for links
  * @returns Array of navigation items
  */
-function generateSidebarItems(dirPath: string, relativePath: string): DefaultTheme.SidebarItem[] {
+function generateSidebarItems(dirPath: string, relativePath: string, rootPath: string): DefaultTheme.SidebarItem[] {
   const items: DefaultTheme.SidebarItem[] = []
 
   try {
@@ -86,11 +86,14 @@ function generateSidebarItems(dirPath: string, relativePath: string): DefaultThe
       const { data } = matter(fileContent)
       const title = data['sidebar_label'] || data['title'] || getDefaultTitle(file)
       const slug = data['slug']
+
+      const normalizeLink =
+        file === 'index.md' ? `${relativePath}.md` : path.join(relativePath, file.replace('.md', ''))
       const link = slug
         ? path.isAbsolute(slug)
-          ? slug
+          ? path.join(rootPath, slug)
           : path.join(relativePath, slug)
-        : path.join(relativePath, file.replace('.md', ''))
+        : normalizeLink
       const position = data['sidebar_position'] || undefined
 
       fileItems.push({
@@ -114,7 +117,7 @@ function generateSidebarItems(dirPath: string, relativePath: string): DefaultThe
       const subDirPath = path.join(dirPath, dir)
       const subRelativePath = path.join(relativePath, dir)
       const subCategoryConfig = readCategoryConfig(subDirPath)
-      const subItems = generateSidebarItems(subDirPath, subRelativePath)
+      const subItems = generateSidebarItems(subDirPath, subRelativePath, rootPath)
 
       if (subItems.length > 0) {
         const dirTitle = subCategoryConfig?.label || formatDirName(dir)

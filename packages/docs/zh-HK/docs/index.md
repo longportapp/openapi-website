@@ -1,6 +1,5 @@
 ---
 sidebar_position: -999
-slug: /
 title: OpenAPI 介紹
 id: getting_started_introduce
 ---

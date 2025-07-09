@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useData, useRoute } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
@@ -58,6 +59,17 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
     }
   )
 })
+
+const llmMarkdownLink = computed(() => {
+  const path = router.path
+  // 用正则 匹配 /zh-CN 后面的路径，例如 /zh-CN/docs/llm/index.md，返回 /docs/llm/index.md
+  const match = path.match(/^\/?(?:zh-CN|zh-HK)?(.*)$/)
+  console.log('match', match)
+  if (match) {
+    return match[1] + '.md'
+  }
+  return null
+})
 </script>
 
 <template>
@@ -66,7 +78,9 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
       <UserAvatar />
     </template>
     <template #doc-footer-before>
-      <a :href="router.path + '.md'" target="_blank" class="text-sm text-[--vp-c-brand-1] italic">LLMs Text</a>
+      <a v-if="llmMarkdownLink" :href="llmMarkdownLink" target="_blank" class="text-sm text-[--vp-c-brand-1] italic"
+        >LLMs Text</a
+      >
     </template>
   </DefaultTheme.Layout>
 </template>
@@ -100,7 +114,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
   @apply pb-2.5;
 }
 
-.VPSidebar .level-1.is-link .VPLink {
+.VPSidebar .level-1.is-link {
   @apply -ml-2;
 }
 </style>

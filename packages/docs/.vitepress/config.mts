@@ -44,10 +44,14 @@ export default defineConfig({
     /** hack path route */
     let np = path
 
+    if (/^(en|zh-CN|zh-HK)\/docs\/index\.md/.test(path)) {
+      np = path.replace('docs/index.md', 'docs.md')
+    }
+
     //首先尝试读取文件的 slug 字段
     const slug = getFileSlug(path)
 
-    if (slug && slug !== '/') {
+    if (slug) {
       // 如果存在 slug，重写为 /{locale}/docs/{slug}.md 的形式
       const localeMatch = path.match(/^(en|zh-CN|zh-HK)\//)
       if (localeMatch) {
@@ -56,6 +60,7 @@ export default defineConfig({
          * 如果是 slug / 开头，则是绝对路径，需要直接替换为 /{locale}/docs/{slug}.md 的形式
          * 如果 slug 不是 / 开头，则是相对路径，则是相对原目录，替换文件名，类似 alias 的用法
          */
+
         if (slug.startsWith('/')) {
           const cleanSlug = slug.startsWith('/') ? slug.substring(1) : slug
           np = `${locale}/docs/${cleanSlug}.md`
@@ -72,6 +77,8 @@ export default defineConfig({
     if (np.includes('en')) {
       np = np.replace('en/', '')
     }
+
+    // console.log(`rewrite ${path} to ${np}`)
     return np
   },
   markdown: markdownConfig,
