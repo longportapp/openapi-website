@@ -91,7 +91,7 @@ function generateSidebarItems(dirPath: string, relativePath: string): DefaultThe
           ? slug
           : path.join(relativePath, slug)
         : path.join(relativePath, file.replace('.md', ''))
-      const position = data['position'] || undefined
+      const position = data['sidebar_position'] || undefined
 
       fileItems.push({
         text: title,
@@ -100,9 +100,7 @@ function generateSidebarItems(dirPath: string, relativePath: string): DefaultThe
       })
     }
 
-    // Sort files by position if specified
-    const sortedFileItems = sortByPosition(fileItems)
-    items.push(...sortedFileItems)
+    items.push(...fileItems)
 
     // Process directories
     const directories = files.filter((file) => {
@@ -134,11 +132,8 @@ function generateSidebarItems(dirPath: string, relativePath: string): DefaultThe
       }
     }
 
-    // Sort directories by position
-    const sortedDirItems = sortByPosition(dirItems)
-    items.push(...sortedDirItems)
-
-    return items
+    items.push(...dirItems)
+    return sortByPosition(items as MSidebar[])
   } catch (error) {
     console.error(`Error reading directory ${dirPath}:`, error)
     return []

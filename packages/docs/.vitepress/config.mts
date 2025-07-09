@@ -72,9 +72,6 @@ export default defineConfig({
     if (np.includes('en')) {
       np = np.replace('en/', '')
     }
-
-    console.log(`rewrite ${path} -> ${np}`)
-
     return np
   },
   markdown: markdownConfig,

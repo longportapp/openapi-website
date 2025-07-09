@@ -13,6 +13,7 @@ export interface ParametersTable {
 export interface HttpInfo {
   method: string
   url: string
+  description?: string
 }
 
 export interface OpenApiInfo extends HttpInfo {

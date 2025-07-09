@@ -2,14 +2,25 @@
 import { useI18n } from 'vue-i18n'
 import { useData, useRoute } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import { nextTick, provide, watchEffect } from 'vue'
+import { nextTick, provide, ref, watchEffect, onMounted } from 'vue'
 import UserAvatar from '../components/UserAvatar/index.vue'
 import { createHighlighter } from 'shiki/bundle/web'
 
 const { isDark, lang } = useData()
 const i18n = useI18n()
-
 const router = useRoute()
+
+const showTryIt = ref(false)
+
+onMounted(() => {
+  const params = new URLSearchParams(router.query)
+  console.log(params.get('mode'))
+  if (params.get('mode') === 'try-it') {
+    showTryIt.value = true
+  }
+
+  console.log(showTryIt.value)
+})
 
 watchEffect(() => {
   if (lang.value !== i18n.locale.value) {
@@ -83,5 +94,13 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
 
 .VPSwitchAppearance .check {
   transform: none !important;
+}
+
+.VPSidebar .VPSidebarItem.level-0 {
+  @apply pb-2.5;
+}
+
+.VPSidebar .level-1.is-link .VPLink {
+  @apply -ml-2;
 }
 </style>

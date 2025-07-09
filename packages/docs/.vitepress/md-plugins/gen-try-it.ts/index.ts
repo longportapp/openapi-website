@@ -137,11 +137,7 @@ function parseRequestTable(html: string): HttpInfo | null {
  * @param httpInfo - HTTP 信息
  * @param parametersTable - 参数表格
  */
-function addTryItComponent(
-  state: MarkdownItCoreState,
-  httpInfo: HttpInfo | null,
-  parametersTable: ParametersTable | null
-) {
+function addTryItComponent(state: MarkdownItCoreState) {
   // 查找第一个段落
   let firstParagraphIndex = -1
   for (let i = 0; i < state.tokens.length; i++) {
@@ -163,31 +159,8 @@ function addTryItComponent(
 
   const inlineToken = state.tokens[inlineTokenIndex]
 
-  // 构造 TryIt 组件的 props
-  const props: Record<string, any> = {}
-
-  if (httpInfo) {
-    props.method = httpInfo.method
-    props.url = httpInfo.url
-  }
-
-  if (parametersTable && parametersTable.parameters) {
-    props.parameters = parametersTable.parameters
-  }
-
-  // 将 props 序列化为 HTML 属性
-  const propsStr = Object.entries(props)
-    .map(([key, value]) => {
-      if (typeof value === 'string') {
-        return `${key}="${value}"`
-      } else {
-        return `:${key}='${JSON.stringify(value)}'`
-      }
-    })
-    .join(' ')
-
   // 创建 TryIt 组件的 HTML 内容
-  const tryItHtml = propsStr ? `<TryIt ${propsStr}/>` : '<TryIt/>'
+  const tryItHtml = '<TryIt/>'
 
   // 创建新的 html_inline token
   const htmlInlineToken = {
@@ -243,7 +216,22 @@ export const GenTryItPlugin = (md: MarkdownIt) => {
       state.env.httpInfo = httpResult
     }
     if (httpResult) {
-      addTryItComponent(state, httpResult, parametersResult)
+      if (!state.env.frontmatter) {
+        state.env.frontmatter = {}
+      }
+
+      state.env.frontmatter.httpInfo = httpResult
+      state.env.frontmatter.parametersTable = parametersResult || {}
+
+      addTryItComponent(state)
+    }
+
+    // 将解析结果写入 frontmatter 中供其他组件访问
+    if (httpResult || parametersResult) {
+      // 确保 frontmatter 存在
+      if (!state.env.frontmatter) {
+        state.env.frontmatter = {}
+      }
     }
   })
 }

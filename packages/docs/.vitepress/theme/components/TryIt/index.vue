@@ -1,5 +1,5 @@
 <template>
-  <PlayButton :color="getMethodColor(props.method)" @click="setIsOpen(true)">{{
+  <PlayButton :color="getMethodColor(httpInfo.method)" @click="setIsOpen(true)">{{
     $t('vitepress_theme_components_tryit_index_2')
   }}</PlayButton>
   <Dialog :open="isOpen" @close="setIsOpen">
@@ -24,29 +24,29 @@
                 style="color: var(--vp-c-text-1)">
                 <span
                   class="text-base items-center justify-center px-3 py-1 font-medium rounded-xl shadow-none flex-shrink-0"
-                  :class="getMethodTextColor(props.method)">
-                  {{ props.method }}
+                  :class="getMethodTextColor(httpInfo.method)">
+                  {{ httpInfo.method }}
                 </span>
                 <span class="overflow-x-auto whitespace-nowrap min-w-0 flex-1" style="color: var(--vp-c-text-2)">{{
-                  props.url
+                  httpInfo.url
                 }}</span>
               </DialogTitle>
               <PlayButton
                 class="flex-shrink-0 ml-2"
-                :color="getMethodColor(props.method)"
+                :color="getMethodColor(httpInfo.method)"
                 :loading="isLoading"
                 @click="handleSend">
                 {{ $t('tryIt.send') }}
               </PlayButton>
             </div>
-            <p class="text-sm mt-2" style="color: var(--vp-c-text-2)" v-if="props.description">
-              {{ props.description }}
+            <p class="text-sm mt-2" style="color: var(--vp-c-text-2)" v-if="httpInfo.description">
+              {{ httpInfo.description }}
             </p>
           </div>
           <div class="flex gap-4 items-start flex-col lg:flex-row">
             <div class="flex-1 w-full lg:w-auto min-w-0 space-y-4">
               <AuthorizationForm @auth-change="onAuthChange" />
-              <ParametersForm :parameters="props.parameters" @form-change="onFormChange" />
+              <ParametersForm :parameters="parametersTable.parameters" @form-change="onFormChange" />
             </div>
             <div v-if="result || isLoading" class="flex-1 w-full min-w-0">
               <!-- Loading State -->
@@ -62,9 +62,8 @@
 </template>
 <script setup lang="ts">
 import 'vue-i18n'
-import type { ParameterRow } from '../../../types'
-import { ref } from 'vue'
-import { Dialog, DialogPanel, DialogTitle, DialogDescription } from '@headlessui/vue'
+import { ref, computed } from 'vue'
+import { Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
 import ParametersForm from './ParametersForm.vue'
 import AuthorizationForm from './AuthorizationForm.vue'
 import PlayButton from './PlayButton.vue'
@@ -72,20 +71,13 @@ import Code from './Code.vue'
 import LoadingSpinner from './LoadingSpinner.vue'
 import { type ApiResponse } from '../../utils/http-client'
 import { createQuickRequest } from '../../utils/request'
+import { useData } from 'vitepress'
+import type { HttpInfo, ParametersTable } from '../../../types'
 
-interface Props {
-  method?: string
-  url?: string
-  description?: string
-  parameters?: ParameterRow[]
-}
+const { frontmatter } = useData()
 
-const props = withDefaults(defineProps<Props>(), {
-  method: 'GET',
-  url: '',
-  description: '',
-  parameters: () => [],
-})
+const httpInfo = computed<HttpInfo>(() => frontmatter.value.httpInfo)
+const parametersTable = computed<ParametersTable>(() => frontmatter.value.parametersTable)
 
 const formData = ref<Record<string, any>>({})
 const authData = ref<Record<string, any>>({})
@@ -108,8 +100,8 @@ const handleSend = async () => {
   isLoading.value = true
 
   try {
-    const method = props.method.toLowerCase()
-    const url = props.url
+    const method = httpInfo.value.method.toLowerCase()
+    const url = httpInfo.value.url
 
     // 根据认证参数动态创建 request 实例
     const request = createQuickRequest(authData.value.appKey, authData.value.accessToken, authData.value.appSecret)
