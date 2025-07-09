@@ -77,7 +77,9 @@ provide('hero-image-slot-exists', heroImageSlotExists)
       <template #aside-ads-before><slot name="aside-ads-before" /></template>
       <template #aside-ads-after><slot name="aside-ads-after" /></template>
     </VPContent>
-    <TryItContent v-else />
+    <ClientOnly v-else>
+      <TryItContent />
+    </ClientOnly>
 
     <VPFooter />
     <slot name="layout-bottom" />
