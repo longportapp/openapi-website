@@ -18,6 +18,14 @@ import extractorMdc from '@unocss/extractor-mdc'
 
 export default defineConfig({
   presets: [presetWind3()],
+  theme: {
+    breakpoints: {
+      md: '768px',
+      lg: '960px',
+      xl: '1280px',
+      '2xl': '1536px',
+    },
+  },
   extractors: [extractorMdc()],
   transformers: [transformerDirectives()],
 })

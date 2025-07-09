@@ -7,11 +7,11 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "docs:dev": "bun run --filter './packages/docs' dev",
-    "docs:build": "bun run --filter './packages/docs' build",
-    "docs:build:canary": "bun run --filter './packages/docs' build:canary",
-    "docs:build:prod": "bun run --filter './packages/docs' build:prod",
-    "docs:preview": "bun run --filter './packages/docs' preview",
+    "docs:dev": "bun run --bun --filter './packages/docs' dev",
+    "docs:build": "bun run --bun --filter './packages/docs' build",
+    "docs:build:canary": "bun run --bun --filter './packages/docs' build:canary",
+    "docs:build:prod": "bun run --bun --filter './packages/docs' build:prod",
+    "docs:preview": "bun run --bun --filter './packages/docs' preview",
     "lint:docs": "prettier -c --parser typescript \"packages/docs/**/*.{js,ts,vue}\"",
     "format:docs": "prettier --write \"packages/docs/**/*.{js,ts,vue}\""
   },

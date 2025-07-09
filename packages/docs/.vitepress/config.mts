@@ -156,11 +156,14 @@ export default defineConfig({
       ],
     },
     plugins: [
+      // @ts-ignore vite 升级后，类型有问题
       groupIconVitePlugin(),
+      // @ts-ignore vite 升级后，类型有问题
       llmstxt({
         workDir: 'en',
         ignoreFiles: ['index.md', 'README.md', 'sock/operations/*'],
       }),
+      // @ts-ignore vite 升级后，类型有问题
       Unocss({
         configFile: '../unocss.config.ts',
       }),

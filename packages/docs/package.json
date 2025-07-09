@@ -27,7 +27,7 @@
     "postcss-rtlcss": "^5.7.0",
     "sass-embedded": "^1.89.2",
     "unocss": "^66.1.2",
-    "vitepress": "2.0.0-alpha.5",
+    "vitepress": "2.0.0-alpha.8",
     "vitepress-plugin-group-icons": "^1.5.2",
     "vitepress-plugin-llms": "^1.6.0",
     "vue": "^3.5.13"

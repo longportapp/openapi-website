@@ -10,7 +10,7 @@
         </p>
       </div>
       <div>
-        <img class="w-100" src="https://pub.lbkrs.com/files/202503/vEnnmgUM6bo362ya/sdk.svg" alt="" />
+        <img class="h-[244px]" src="https://pub.lbkrs.com/files/202503/vEnnmgUM6bo362ya/sdk.svg" alt="" />
       </div>
     </div>
   </div>

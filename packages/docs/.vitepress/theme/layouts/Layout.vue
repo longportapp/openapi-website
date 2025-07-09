@@ -1,79 +1,18 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { useData, useRoute } from 'vitepress'
-import DefaultTheme from 'vitepress/theme'
-import { nextTick, provide, ref, watchEffect, onMounted } from 'vue'
 import UserAvatar from '../components/UserAvatar/index.vue'
-import { createHighlighter } from 'shiki/bundle/web'
+import Layout from './LayoutInner.vue'
+import { useThemeToggle, useI18nSync, useHighlighter, useLLMMarkdownLink } from '../composables'
 
-const { isDark, lang } = useData()
-const i18n = useI18n()
-const router = useRoute()
+// 使用抽离的 hooks
+useThemeToggle()
+useI18nSync()
+useHighlighter()
 
-const showTryIt = ref(false)
-
-onMounted(() => {
-  const params = new URLSearchParams(router.query)
-  console.log(params.get('mode'))
-  if (params.get('mode') === 'try-it') {
-    showTryIt.value = true
-  }
-
-  console.log(showTryIt.value)
-})
-
-watchEffect(() => {
-  if (lang.value !== i18n.locale.value) {
-    i18n.locale.value = lang.value
-  }
-})
-
-provide('highlighter', createHighlighter({ themes: ['vitesse-dark', 'vitesse-light'], langs: ['json'] }))
-
-const enableTransitions = () =>
-  'startViewTransition' in document && window.matchMedia('(prefers-reduced-motion: no-preference)').matches
-
-provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
-  if (!enableTransitions()) {
-    isDark.value = !isDark.value
-    return
-  }
-
-  const clipPath = [
-    `circle(0px at ${x}px ${y}px)`,
-    `circle(${Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y))}px at ${x}px ${y}px)`,
-  ]
-
-  await document.startViewTransition(async () => {
-    isDark.value = !isDark.value
-    await nextTick()
-  }).ready
-
-  document.documentElement.animate(
-    { clipPath: isDark.value ? clipPath.reverse() : clipPath },
-    {
-      duration: 300,
-      easing: 'ease-in',
-      pseudoElement: `::view-transition-${isDark.value ? 'old' : 'new'}(root)`,
-    }
-  )
-})
-
-const llmMarkdownLink = computed(() => {
-  const path = router.path
-  // 用正则 匹配 /zh-CN 后面的路径，例如 /zh-CN/docs/llm/index.md，返回 /docs/llm/index.md
-  const match = path.match(/^\/?(?:zh-CN|zh-HK)?(.*)$/)
-  console.log('match', match)
-  if (match) {
-    return match[1] + '.md'
-  }
-  return null
-})
+const { llmMarkdownLink } = useLLMMarkdownLink()
 </script>
 
 <template>
-  <DefaultTheme.Layout>
+  <Layout>
     <template #nav-bar-content-after>
       <UserAvatar />
     </template>
@@ -82,7 +21,7 @@ const llmMarkdownLink = computed(() => {
         >LLMs Text</a
       >
     </template>
-  </DefaultTheme.Layout>
+  </Layout>
 </template>
 
 <style>
