@@ -1,6 +1,6 @@
 <template>
-  <div class="lg:pl-[var(--vp-sidebar-width)] lg:pt-[var(--vp-nav-height)]">
-    <div class="px-6 pb-6 rounded-2xl lg:mx-12 lg:mt-4">
+  <div>
+    <div class="pb-6 rounded-2xl mx-8 lg:mt-4">
       <!-- Header -->
       <div class="py-6">
         <div class="flex items-center justify-between">

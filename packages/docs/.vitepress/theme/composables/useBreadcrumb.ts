@@ -1,6 +1,8 @@
 import { computed } from 'vue'
 import { useRoute } from 'vitepress'
 import { useLayout } from 'vitepress/theme'
+import { useI18n } from 'vue-i18n'
+import { localePath } from '../utils/i18n'
 import type { DefaultTheme } from 'vitepress'
 
 export interface BreadcrumbItem {
@@ -11,6 +13,15 @@ export interface BreadcrumbItem {
 export function useBreadcrumb() {
   const route = useRoute()
   const { sidebar } = useLayout()
+  const { t } = useI18n()
+
+  // 获取主页链接
+  const getHomeItem = (): BreadcrumbItem => {
+    return {
+      text: t('breadcrumb.home'),
+      link: localePath('/'),
+    }
+  }
 
   // 递归查找匹配的面包屑路径
   const findBreadcrumbPath = (
@@ -59,11 +70,22 @@ export function useBreadcrumb() {
 
   // 计算面包屑导航
   const breadcrumbItems = computed(() => {
-    if (!sidebar.value || !route.path) {
-      return []
+    // 首先获取主页项
+    const homeItem = getHomeItem()
+
+    // 如果当前就是主页，只显示主页
+    const currentPath = route.path
+    const normalizedCurrentPath = normalizePath(currentPath)
+    const normalizedHomePath = normalizePath(homeItem.link || '/')
+
+    if (normalizedCurrentPath === normalizedHomePath || currentPath === homeItem.link) {
+      return [homeItem]
     }
 
-    const currentPath = route.path
+    if (!sidebar.value || !route.path) {
+      return [homeItem]
+    }
+
     let sidebarItems: DefaultTheme.SidebarItem[] = []
 
     // 处理不同的 sidebar 格式
@@ -87,11 +109,17 @@ export function useBreadcrumb() {
     }
 
     if (sidebarItems.length === 0) {
-      return []
+      return [homeItem]
     }
 
     const breadcrumbPath = findBreadcrumbPath(sidebarItems, currentPath)
-    return breadcrumbPath || []
+
+    // 始终在面包屑路径前添加主页链接
+    if (breadcrumbPath && breadcrumbPath.length > 0) {
+      return [homeItem, ...breadcrumbPath]
+    }
+
+    return [homeItem]
   })
 
   return {

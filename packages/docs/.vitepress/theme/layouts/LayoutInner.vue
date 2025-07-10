@@ -13,6 +13,7 @@ import { registerWatchers } from 'vitepress/dist/client/theme-default/composable
 import { useSidebarControl } from 'vitepress/dist/client/theme-default/composables/sidebar.js'
 import { useTryItMode } from '../composables'
 import TryItContent from '../components/TryIt/Content.vue'
+import Content from './Content.vue'
 import 'vitepress/theme'
 
 const { isOpen: isSidebarOpen, open: openSidebar, close: closeSidebar } = useSidebarControl()
@@ -78,9 +79,11 @@ provide('hero-image-slot-exists', heroImageSlotExists)
       <template #aside-ads-before><slot name="aside-ads-before" /></template>
       <template #aside-ads-after><slot name="aside-ads-after" /></template>
     </VPContent>
-    <ClientOnly v-else>
-      <TryItContent />
-    </ClientOnly>
+    <Content v-else>
+      <ClientOnly>
+        <TryItContent />
+      </ClientOnly>
+    </Content>
 
     <VPFooter />
     <slot name="layout-bottom" />
