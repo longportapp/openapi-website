@@ -14,8 +14,6 @@ funds (fund purchase and redemption) information for each currency of the user.
 
 <SDKLinks module="trade" klass="TradeContext" method="account_balance" />
 
-##
-
 ## Request
 
 <table className="http-basic">

@@ -13,8 +13,6 @@ This API is used to replace order, modify quantity or price.
 
 <SDKLinks module="trade" klass="TradeContext" method="replace_order" />
 
-##
-
 ## Request
 
 <table className="http-basic">

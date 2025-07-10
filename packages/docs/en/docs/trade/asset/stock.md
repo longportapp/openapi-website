@@ -14,8 +14,6 @@ number of available shares, average position price (calculated according to acco
 
 <SDKLinks module="trade" klass="TradeContext" method="stock_positions" />
 
-##
-
 ## Request
 
 <table className="http-basic">

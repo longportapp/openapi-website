@@ -13,8 +13,6 @@ This API is used to get today executions.
 
 <SDKLinks module="trade" klass="TradeContext" method="today_executions" />
 
-##
-
 ## Request
 
 <table className="http-basic">

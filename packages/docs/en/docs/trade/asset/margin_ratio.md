@@ -14,8 +14,6 @@ margin ratio of stocks.
 
 <SDKLinks module="trade" klass="TradeContext" method="margin_ratio" />
 
-##
-
 ## Request
 
 <table className="http-basic">

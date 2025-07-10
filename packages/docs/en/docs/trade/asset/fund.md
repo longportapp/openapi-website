@@ -14,8 +14,6 @@ current net worth, and currency.
 
 <SDKLinks module="trade" klass="TradeContext" method="fund_positions" />
 
-##
-
 ## Request
 
 <table className="http-basic">

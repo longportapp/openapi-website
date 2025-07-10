@@ -13,8 +13,6 @@ headingLevel: 2
 
 <SDKLinks module="trade" klass="TradeContext" method="cancel_order" />
 
-##
-
 ## Request
 
 <table className="http-basic">

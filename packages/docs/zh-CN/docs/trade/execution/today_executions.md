@@ -13,8 +13,6 @@ headingLevel: 2
 
 <SDKLinks module="trade" klass="TradeContext" method="today_executions" />
 
-##
-
 ## Request
 
 <table className="http-basic">

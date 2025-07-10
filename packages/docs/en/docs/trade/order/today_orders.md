@@ -13,8 +13,6 @@ This API is used to get today order or get order by order id.
 
 <SDKLinks module="trade" klass="TradeContext" method="today_orders" />
 
-##
-
 ## Request
 
 <table className="http-basic">

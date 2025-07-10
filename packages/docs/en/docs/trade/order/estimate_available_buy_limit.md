@@ -13,8 +13,6 @@ This API is used for estimating the maximum purchase quantity for Hong Kong and 
 
 <SDKLinks module="trade" klass="TradeContext" method="estimate_max_purchase_quantity" />
 
-##
-
 ## Request
 
 <table className="http-basic">

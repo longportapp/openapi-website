@@ -13,8 +13,6 @@ This API is used to withdraw an open order.
 
 <SDKLinks module="trade" klass="TradeContext" method="cancel_order" />
 
-##
-
 ## Request
 
 <table className="http-basic">

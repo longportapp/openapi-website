@@ -13,7 +13,6 @@ headingLevel: 2
 
 <SDKLinks module="quote" klass="QuoteContext" method="update_watchlist_group" />
 
-##
 
 ## Request
 

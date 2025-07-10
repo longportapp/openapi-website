@@ -13,8 +13,6 @@ This API is used to submit order for HK and US stocks, warrant and option.
 
 <SDKLinks module="trade" klass="TradeContext" method="submit_order" />
 
-##
-
 ## Request
 
 <table className="http-basic">

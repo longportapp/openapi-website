@@ -13,8 +13,6 @@ headingLevel: 2
 
 <SDKLinks module="trade" klass="TradeContext" method="fund_positions" />
 
-##
-
 ## Request
 
 <table className="http-basic">

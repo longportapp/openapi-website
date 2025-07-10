@@ -13,8 +13,6 @@ Update watched group
 
 <SDKLinks module="quote" klass="QuoteContext" method="update_watchlist_group" />
 
-##
-
 ## Request
 
 <table className="http-basic">

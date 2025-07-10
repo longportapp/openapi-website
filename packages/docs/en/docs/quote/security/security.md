@@ -13,8 +13,6 @@ Retrieve the List of Securities
 
 <SDKLinks module="quote" klass="QuoteContext" method="security_list" />
 
-##
-
 ### Request
 
 <table className="http-basic">

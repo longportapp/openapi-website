@@ -13,8 +13,6 @@ This API is used to get history executions, including the sell and buy records, 
 
 <SDKLinks module="trade" klass="TradeContext" method="history_executions" />
 
-##
-
 ## Request
 
 <table className="http-basic">

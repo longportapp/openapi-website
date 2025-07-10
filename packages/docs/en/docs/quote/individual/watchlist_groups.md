@@ -13,8 +13,6 @@ Get watched groups
 
 <SDKLinks module="quote" klass="QuoteContext" method="watchlist" />
 
-##
-
 ## Request
 
 <table className="http-basic">

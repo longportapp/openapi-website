@@ -13,8 +13,6 @@ This API is used to get history order.
 
 <SDKLinks module="trade" klass="TradeContext" method="history_orders" />
 
-##
-
 ## Request
 
 <table className="http-basic">

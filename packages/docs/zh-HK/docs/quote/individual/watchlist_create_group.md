@@ -13,8 +13,6 @@ headingLevel: 2
 
 <SDKLinks module="quote" klass="QuoteContext" method="create_watchlist_group" />
 
-##
-
 ## Request
 
 <table className="http-basic">

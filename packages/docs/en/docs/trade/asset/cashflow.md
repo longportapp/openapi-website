@@ -14,8 +14,6 @@ associated stock code and capital flow description information.
 
 <SDKLinks module="trade" klass="TradeContext" method="cash_flow" />
 
-##
-
 ## Request
 
 <table className="http-basic">

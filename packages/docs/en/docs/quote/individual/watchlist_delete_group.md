@@ -13,8 +13,6 @@ Delete watched group
 
 <SDKLinks module="quote" klass="QuoteContext" method="delete_watchlist_group" />
 
-##
-
 ## Request
 
 <table className="http-basic">

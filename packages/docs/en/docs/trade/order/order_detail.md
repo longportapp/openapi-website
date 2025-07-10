@@ -13,8 +13,6 @@ This API is used for order detail query
 
 <SDKLinks module="trade" klass="TradeContext" method="order_detail" />
 
-##
-
 ## Request
 
 <table className="http-basic">
