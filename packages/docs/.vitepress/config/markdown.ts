@@ -2,6 +2,7 @@ import { type MarkdownOptions } from 'vitepress'
 import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
 import { tipContainerPlugin } from '../md-plugins/tip-container'
 import { GenTryItPlugin } from '../md-plugins/gen-try-it.ts'
+import { NormalizeMdPlugin } from '../md-plugins/normalize-md'
 
 export const markdownConfig: MarkdownOptions = {
   image: {
@@ -46,6 +47,7 @@ export const markdownConfig: MarkdownOptions = {
         `<button title="${codeCopyButtonTitle}" class="copy"></button>`
       )
     }
+    md.use(NormalizeMdPlugin)
     md.use(groupIconMdPlugin)
     md.use(tipContainerPlugin)
     md.use(GenTryItPlugin)
