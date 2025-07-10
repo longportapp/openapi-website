@@ -79,11 +79,11 @@ provide('hero-image-slot-exists', heroImageSlotExists)
       <template #aside-ads-before><slot name="aside-ads-before" /></template>
       <template #aside-ads-after><slot name="aside-ads-after" /></template>
     </VPContent>
-    <Content v-else>
-      <ClientOnly>
+    <ClientOnly v-else>
+      <Content>
         <TryItContent />
-      </ClientOnly>
-    </Content>
+      </Content>
+    </ClientOnly>
 
     <VPFooter />
     <slot name="layout-bottom" />
