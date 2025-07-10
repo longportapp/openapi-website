@@ -10,6 +10,7 @@ import { readFileSync, existsSync } from 'node:fs'
 import { resolve, join } from 'node:path'
 import matter from 'gray-matter'
 import Path from 'node:path'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 
 // 获取文件的 slug
 function getFileSlug(filePath: string): string | null {
@@ -30,68 +31,69 @@ function getFileSlug(filePath: string): string | null {
   }
 }
 
-export default defineConfig({
-  title: 'LongPort Open API',
-  appearance: true,
-  lastUpdated: true,
-  cleanUrls: true,
-  metaChunk: true,
-  ignoreDeadLinks: true,
-  base: '/',
+export default defineConfig(
+  withMermaid({
+    title: 'LongPort Open API',
+    appearance: true,
+    lastUpdated: true,
+    cleanUrls: true,
+    metaChunk: true,
+    ignoreDeadLinks: true,
+    base: '/',
 
-  srcExclude: ['README.md'],
-  rewrites: (path) => {
-    /** hack path route */
-    let np = path
+    srcExclude: ['README.md'],
+    rewrites: (path) => {
+      /** hack path route */
+      let np = path
 
-    if (/^(en|zh-CN|zh-HK)\/docs\/index\.md/.test(path)) {
-      np = path.replace('docs/index.md', 'docs.md')
-    }
-
-    //首先尝试读取文件的 slug 字段
-    const slug = getFileSlug(path)
-
-    if (slug) {
-      // 如果存在 slug，重写为 /{locale}/docs/{slug}.md 的形式
-      const localeMatch = path.match(/^(en|zh-CN|zh-HK)\//)
-      if (localeMatch) {
-        const locale = localeMatch[1]
-        /**
-         * 如果是 slug / 开头，则是绝对路径，需要直接替换为 /{locale}/docs/{slug}.md 的形式
-         * 如果 slug 不是 / 开头，则是相对路径，则是相对原目录，替换文件名，类似 alias 的用法
-         */
-
-        if (slug.startsWith('/')) {
-          const cleanSlug = slug.startsWith('/') ? slug.substring(1) : slug
-          np = `${locale}/docs/${cleanSlug}.md`
-        } else {
-          const dirname = Path.dirname(path)
-          np = `${dirname}/${slug}.md`
-        }
-      } else {
-        // 如果没有匹配到语言，使用默认处理
-        np = slug + '.md'
+      if (/^(en|zh-CN|zh-HK)\/docs\/index\.md/.test(path)) {
+        np = path.replace('docs/index.md', 'docs.md')
       }
-    }
 
-    if (np.includes('en')) {
-      np = np.replace('en/', '')
-    }
+      //首先尝试读取文件的 slug 字段
+      const slug = getFileSlug(path)
 
-    // console.log(`rewrite ${path} to ${np}`)
-    return np
-  },
-  markdown: markdownConfig,
+      if (slug) {
+        // 如果存在 slug，重写为 /{locale}/docs/{slug}.md 的形式
+        const localeMatch = path.match(/^(en|zh-CN|zh-HK)\//)
+        if (localeMatch) {
+          const locale = localeMatch[1]
+          /**
+           * 如果是 slug / 开头，则是绝对路径，需要直接替换为 /{locale}/docs/{slug}.md 的形式
+           * 如果 slug 不是 / 开头，则是相对路径，则是相对原目录，替换文件名，类似 alias 的用法
+           */
 
-  sitemap: {
-    hostname: 'https://open.longportapp.com',
-    transformItems(items) {
-      return items.filter((item) => !item.url.includes('migration'))
+          if (slug.startsWith('/')) {
+            const cleanSlug = slug.startsWith('/') ? slug.substring(1) : slug
+            np = `${locale}/docs/${cleanSlug}.md`
+          } else {
+            const dirname = Path.dirname(path)
+            np = `${dirname}/${slug}.md`
+          }
+        } else {
+          // 如果没有匹配到语言，使用默认处理
+          np = slug + '.md'
+        }
+      }
+
+      if (np.includes('en')) {
+        np = np.replace('en/', '')
+      }
+
+      // console.log(`rewrite ${path} to ${np}`)
+      return np
     },
-  },
+    markdown: markdownConfig,
 
-  /* prettier-ignore */
-  head: [
+    sitemap: {
+      hostname: 'https://open.longportapp.com',
+      transformItems(items) {
+        return items.filter((item) => !item.url.includes('migration'))
+      },
+    },
+
+    /* prettier-ignore */
+    head: [
     ['link', { rel: 'shortcut icon', type: 'image/x-icon', href: 'https://assets.lbkrs.com/uploads/770073a2-c505-4d41-99f4-93cb75abe257/longport_favicon.png' }],
     ['meta', { name: 'theme-color', content: '#5f67ee' }],
     ['meta', { name: 'twitter:card', content: 'summary' }],
@@ -109,64 +111,65 @@ export default defineConfig({
     ['script', { async: '', src: 'https://at.alicdn.com/t/c/font_2621450_y740y72ffjq.js' }],
   ],
 
-  themeConfig: {
-    logo: {
-      src: 'https://pub.pbkrs.com/files/202211/TNosrY77nCxm6rtU/logo-without-title.svg',
-      width: 48,
-      height: 48,
-    },
-    search: {
-      provider: 'local',
-    },
-  },
-
-  locales: localesConfig,
-
-  vite: {
-    ssr: {
-      noExternal: ['vue-i18n'],
-    },
-    server: {
-      port: 8000,
-      proxy: {
-        '/api': {
-          target: process.env.VITE_API_BASE_URL || 'https://openapi.longportapp.com',
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ''),
-        },
+    themeConfig: {
+      logo: {
+        src: 'https://pub.pbkrs.com/files/202211/TNosrY77nCxm6rtU/logo-without-title.svg',
+        width: 48,
+        height: 48,
+      },
+      search: {
+        provider: 'local',
       },
     },
-    optimizeDeps: {
-      // Exclude vuetify since it has an issue with vite dev - TypeError: makeVExpansionPanelTextProps is not a function - the makeVExpansionPanelTextProps is used before it is defined
-      exclude: ['vuetify'],
-    },
-    build: {
-      chunkSizeWarningLimit: 1000,
-    },
-    resolve: {
-      alias: [
-        {
-          find: '@',
-          replacement: dirname(fileURLToPath(new URL('./theme', import.meta.url))),
+
+    locales: localesConfig,
+
+    vite: {
+      ssr: {
+        noExternal: ['vue-i18n'],
+      },
+      server: {
+        port: 8000,
+        proxy: {
+          '/api': {
+            target: process.env.VITE_API_BASE_URL || 'https://openapi.longportapp.com',
+            changeOrigin: true,
+            rewrite: (path) => path.replace(/^\/api/, ''),
+          },
         },
-        {
-          find: '~',
-          replacement: dirname(fileURLToPath(new URL('../', import.meta.url))),
-        },
+      },
+      optimizeDeps: {
+        // Exclude vuetify since it has an issue with vite dev - TypeError: makeVExpansionPanelTextProps is not a function - the makeVExpansionPanelTextProps is used before it is defined
+        exclude: ['vuetify'],
+      },
+      build: {
+        chunkSizeWarningLimit: 1000,
+      },
+      resolve: {
+        alias: [
+          {
+            find: '@',
+            replacement: dirname(fileURLToPath(new URL('./theme', import.meta.url))),
+          },
+          {
+            find: '~',
+            replacement: dirname(fileURLToPath(new URL('../', import.meta.url))),
+          },
+        ],
+      },
+      plugins: [
+        // @ts-ignore vite 升级后，类型有问题
+        groupIconVitePlugin(),
+        // @ts-ignore vite 升级后，类型有问题
+        llmstxt({
+          workDir: 'en',
+          ignoreFiles: ['index.md', 'README.md', 'sock/operations/*'],
+        }),
+        // @ts-ignore vite 升级后，类型有问题
+        Unocss({
+          configFile: '../unocss.config.ts',
+        }),
       ],
     },
-    plugins: [
-      // @ts-ignore vite 升级后，类型有问题
-      groupIconVitePlugin(),
-      // @ts-ignore vite 升级后，类型有问题
-      llmstxt({
-        workDir: 'en',
-        ignoreFiles: ['index.md', 'README.md', 'sock/operations/*'],
-      }),
-      // @ts-ignore vite 升级后，类型有问题
-      Unocss({
-        configFile: '../unocss.config.ts',
-      }),
-    ],
-  },
-})
+  })
+)

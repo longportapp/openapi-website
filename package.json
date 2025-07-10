@@ -21,7 +21,9 @@
   ],
   "devDependencies": {
     "@types/bun": "latest",
-    "prettier": "^3.5.3"
+    "mermaid": "^11.8.1",
+    "prettier": "^3.5.3",
+    "vitepress-plugin-mermaid": "^2.0.17"
   },
   "peerDependencies": {
     "typescript": "^5"
