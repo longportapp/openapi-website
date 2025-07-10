@@ -19,7 +19,7 @@ const { isOpen: isSidebarOpen, open: openSidebar, close: closeSidebar } = useSid
 
 registerWatchers({ closeSidebar })
 
-const { frontmatter } = useData<{ aa: string }>()
+const { frontmatter, site, page } = useData<{ aa: string }>()
 
 const slots = useSlots()
 const heroImageSlotExists = computed(() => !!slots['home-hero-image'])
@@ -30,6 +30,7 @@ provide('hero-image-slot-exists', heroImageSlotExists)
 </script>
 
 <template>
+  <!-- @vue-ignore -->
   <div v-if="frontmatter.layout !== false" class="Layout" :class="frontmatter.pageClass">
     <slot name="layout-top" />
     <VPSkipLink />

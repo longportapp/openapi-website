@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import UserAvatar from '../components/UserAvatar/index.vue'
+import Breadcrumb from '../components/Breadcrumb/index.vue'
 import Layout from './LayoutInner.vue'
 import { useThemeToggle, useI18nSync, useHighlighter, useLLMMarkdownLink } from '../composables'
 
@@ -16,6 +17,12 @@ const { llmMarkdownLink } = useLLMMarkdownLink()
     <template #nav-bar-content-after>
       <UserAvatar />
     </template>
+    <template #doc-top>
+      <div class="-mt-4">
+        <Breadcrumb />
+      </div>
+    </template>
+
     <template #doc-footer-before>
       <a v-if="llmMarkdownLink" :href="llmMarkdownLink" target="_blank" class="text-sm text-[--vp-c-brand-1] italic"
         >LLMs Text</a
