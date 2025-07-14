@@ -66,12 +66,15 @@ $ bun run dev
 .
 ├── README.md
 ├── docs // All documentation in here
-├── i18n // I18n translation files, when you change any files in `docs`, you need to update the translation files.
+│   ├── .vitepress // vitepress config
+│   ├── en
+│   ├── zh-CN
+│   └── zh-HK
+
 ├── src // Documentation website source code.
-├── sidebars.js // For describe the documentation sidebar.
 ├── docusaurus.config.js // Documentation website contributions.
 ├── tsconfig.json
-├── package.json
+└── package.json
 ```
 
 ## Resources
