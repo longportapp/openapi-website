@@ -27,4 +27,4 @@ jobs:
 
       - name: Build for canary
         run: |
-          bun run canary
+          bun run build:canary
