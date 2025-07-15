@@ -1,4 +1,5 @@
 import { createApiClient, type ApiConfig } from './http-client'
+import endsWith from 'lodash/endsWith'
 
 export interface DynamicAuthConfig {
   appKey: string
@@ -31,13 +32,17 @@ export function createDynamicRequest(
   authConfig: DynamicAuthConfig,
   options?: Partial<Pick<ApiConfig, 'baseUrl' | 'timeout'>>
 ) {
+  const API_BASE_URL = endsWith(location.hostname, '.xyz')
+    ? 'https://openapi.longbridge.xyz'
+    : endsWith(location.hostname, '.cn')
+      ? 'https://openapi.longportapp.cn'
+      : 'https://openapi.longportapp.com'
+
   const config: ApiConfig = {
     appKey: authConfig.appKey,
     accessToken: authConfig.accessToken,
     appSecret: authConfig.appSecret,
-    baseUrl:
-      options?.baseUrl ||
-      (import.meta.env.DEV ? '/api' : import.meta.env.VITE_API_BASE_URL || 'https://openapi.longportapp.com'),
+    baseUrl: options?.baseUrl || (import.meta.env.DEV ? '/api' : API_BASE_URL),
     timeout: options?.timeout || 30000,
   }
 
