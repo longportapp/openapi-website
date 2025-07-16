@@ -92,7 +92,7 @@ message Trade {
 # https://open.longportapp.com/account
 #
 # - HK Market - BMP basic quotation is unable to subscribe with WebSocket as it has no real-time quote push.
-# - US Market - LV1 Nasdaq Basic (Only Open API).
+# - US Market - LV1 Nasdaq Basic (Only OpenAPI).
 #
 # Before running, please visit the "Developers" to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.

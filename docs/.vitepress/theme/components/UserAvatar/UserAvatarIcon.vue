@@ -25,7 +25,7 @@ const sizeClasses = computed(() => {
 })
 
 const avatarSrc = computed(() => {
-  return props.src || 'https://api.dicebear.com/7.x/lorelei/svg?seed=default'
+  return props.src
 })
 </script>
 

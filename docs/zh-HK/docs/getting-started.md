@@ -411,7 +411,7 @@ go run ./
 訂閱行情數據請檢查 [開發者中心](https://open.longportapp.com/account) - “行情權限”是否正確
 
 - 港股 - BMP 基礎報價，無實時行情推送，無法用 WebSocket 訂閱
-- 美股 - LV1 納斯達克最優報價 (只限 Open API）
+- 美股 - LV1 納斯達克最優報價 (只限 OpenAPI）
 
 運行前訪問 [開發者中心](https://open.longportapp.com/account)，檢查確保賬戶有正確的行情權限。
 

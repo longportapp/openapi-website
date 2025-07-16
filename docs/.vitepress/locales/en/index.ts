@@ -23,7 +23,7 @@ export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
     ['meta', { property: 'og:site_name', content: 'OpenAPI | LongPort' }],
     ['link', { rel: 'canonical', href: 'https://open.longportapp.com/' }],
   ],
-  title: 'LongPort Open API',
+  title: 'LongPort OpenAPI',
   description:
     'Access LongPort OpenAPI for diversified and flexible support tailored to your programmatic trading needs. Enhance your trading strategies with ease.',
   themeConfig: {

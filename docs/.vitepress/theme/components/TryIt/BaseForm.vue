@@ -5,7 +5,7 @@
       class="flex items-center justify-between cursor-pointer select-none p-4 form-header"
       @click="toggleCollapsed">
       <h2 class="font-semibold m-0" style="color: var(--vp-c-text-1)">{{ title }}</h2>
-      <div class="flex items-center gap-2" @click.stop>
+      <div class="flex items-center gap-2">
         <slot name="title-actions"></slot>
       </div>
     </div>

@@ -7,8 +7,8 @@
         :class="[
           'py-2 bg-transparent cursor-pointer text-base font-medium whitespace-nowrap border-b-2  transition-color duration-200 border border-solid  border-transparent',
           tab.value === activeTab
-            ? 'text-blue-600 dark:text-blue-400 border-b-blue-600 dark:border-b-blue-400'
-            : 'text-gray-400 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100',
+            ? 'text-[--vp-c-brand-1] border-b-[--vp-c-brand-1]'
+            : 'text-gray-400 dark:text-gray-400 hover:text-[--vp-c-brand-1]',
         ]"
         @click="setActiveTab(tab.value)">
         {{ tab.label }}
