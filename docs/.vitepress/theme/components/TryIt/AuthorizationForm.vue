@@ -6,12 +6,9 @@
     :uischema-options="uischemaOptions"
     @form-change="onAuthChange">
     <template #title-actions>
-      <button
-        v-if="!initialAuthData"
-        class="px-3 py-1.5 text-sm font-medium text-white rounded-lg transition-colors duration-200 auth-button"
-        @click="handleCreateClick">
-        {{ $t('authorization.createButton') }}
-      </button>
+      <div class="text-xs text-gray-500" v-if="initialAuthData">
+        {{ $t('authorization.autoFill') }}
+      </div>
     </template>
   </BaseForm>
 </template>

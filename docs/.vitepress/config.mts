@@ -10,7 +10,7 @@ import { rewriteMarkdownPath } from './utils'
 
 export default defineConfig(
   withMermaid({
-    title: 'LongPort Open API',
+    title: 'LongPort OpenAPI',
     appearance: true,
     lastUpdated: true,
     cleanUrls: true,

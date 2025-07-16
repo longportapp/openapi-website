@@ -399,7 +399,7 @@ After running, the output is as follows:
 To subscribe to market data, please check the [Developer Center](https://open.longportapp.com/account) - "Quote authority" is correct
 
 - HK Market - BMP basic quotation is unable to subscribe with WebSocket as it has no real-time quote push.
-- US Market - LV1 Nasdaq Basic (Only Open API).
+- US Market - LV1 Nasdaq Basic (Only OpenAPI).
 
 Before running, visit the [Developer Center](https://open.longportapp.com/account) and ensure that the account has the correct quote level.
 

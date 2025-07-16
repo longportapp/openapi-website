@@ -2,10 +2,9 @@
 import UserAvatar from '../components/UserAvatar/index.vue'
 import Breadcrumb from '../components/Breadcrumb/index.vue'
 import Layout from './LayoutInner.vue'
-import { useThemeToggle, useI18nSync, useHighlighter, useLLMMarkdownLink } from '../composables'
+import { useI18nSync, useHighlighter, useLLMMarkdownLink } from '../composables'
 
 // 使用抽离的 hooks
-useThemeToggle()
 useI18nSync()
 useHighlighter()
 
