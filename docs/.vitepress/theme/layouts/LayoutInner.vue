@@ -20,7 +20,7 @@ const { isOpen: isSidebarOpen, open: openSidebar, close: closeSidebar } = useSid
 
 registerWatchers({ closeSidebar })
 
-const { frontmatter, site, page } = useData<{ aa: string }>()
+const { frontmatter } = useData()
 
 const slots = useSlots()
 const heroImageSlotExists = computed(() => !!slots['home-hero-image'])

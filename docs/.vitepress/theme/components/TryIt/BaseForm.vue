@@ -127,6 +127,7 @@ const uischema = computed(() => {
   const fieldNames = props.schema ? Object.keys(props.schema.properties || {}) : props.fields.map((field) => field.name)
 
   const elements = fieldNames.map((name) => ({
+    label: name,
     type: 'Control',
     scope: `#/properties/${name}`,
     options: {

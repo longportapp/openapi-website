@@ -32,15 +32,15 @@ const authFields = computed(() => [
     required: true,
   },
   {
-    name: 'accessToken',
-    type: 'string',
-    description: 'Access Token',
-    required: true,
-  },
-  {
     name: 'appSecret',
     type: 'string',
     description: 'Application Secret',
+    required: true,
+  },
+  {
+    name: 'accessToken',
+    type: 'string',
+    description: 'Access Token',
     required: true,
   },
 ])
