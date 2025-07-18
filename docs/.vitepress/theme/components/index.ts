@@ -1,0 +1,7 @@
+export { default as Tabs } from './Tabs.vue'
+export { default as TabItem } from './TabItem.vue'
+export { default as TipContainer } from './TipContainer.vue'
+export { default as SDKLinks } from './SDKLinks.vue'
+export { default as SDK } from './SDK.vue'
+export { default as TryIt } from './TryIt/index.vue'
+export { default as HomePage } from './HomePage/index.vue'

@@ -13,7 +13,7 @@ Please following the [CONTRIBUTING.md](./CONTRIBUTING.md) document.
 ### 文档需要遵守以下规范：
 
 - 遵循中英文书写规范，中英文加空格间隔，正确使用标点符号，正确用词，精确专业术语用词、大小写。
-- Longbridge 员工请阅读内部：[文案书写指导](https://longbridge.feishu.cn/wiki/wikcnqOEWHe43bdSLMP0S42vvvg) 与 [Open API 接口规范](https://longbridge.feishu.cn/wiki/wikcnb0RtZ8OEuAodGBXaOL6Nxh)。
+- Longbridge 员工请阅读内部：[文案书写指导](https://longbridge.feishu.cn/wiki/wikcnqOEWHe43bdSLMP0S42vvvg) 与 [OpenAPI 接口规范](https://longbridge.feishu.cn/wiki/wikcnb0RtZ8OEuAodGBXaOL6Nxh)。
 - Markdown 文档需要提供规范的 Meta 信息。
 
 ### Markdown Meta 信息格式
