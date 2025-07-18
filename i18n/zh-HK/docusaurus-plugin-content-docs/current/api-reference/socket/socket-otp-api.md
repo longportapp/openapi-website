@@ -13,10 +13,10 @@ sidebar_position: 2
 
 ## 請求
 
-| 基本信息    |                |
-| ----------- | -------------- |
+| 基本信息    |                  |
+| ----------- | ---------------- |
 | HTTP URL    | /v1/socket/token |
-| HTTP Method | GET            |
+| HTTP Method | GET              |
 
 ### 請求頭
 
@@ -31,12 +31,14 @@ sidebar_position: 2
 
 ### 響應體
 
-| 名稱 | 類型   | 描述                  |
-| ---- | ------ | --------------------- |
-| code | int    | 錯誤碼，非 0 表示失敗 |
-| msg  | string | 錯誤描述              |
-| data | object |                       |
-| ∟otp | string | 獲取到的 token        |
+| 名稱    | 類型   | 描述                  |
+| ------- | ------ | --------------------- |
+| code    | int    | 錯誤碼，非 0 表示失敗 |
+| msg     | string | 錯誤描述              |
+| data    | object |                       |
+| ∟otp    | string | 獲取到的 token        |
+| ∟limit  | int    | 連接限制總數          |
+| ∟online | int    | 當前在線連接數        |
 
 ### 響應體示例
 
@@ -45,8 +47,9 @@ sidebar_position: 2
   "code": 0,
   "message": "",
   "data": {
-    "otp": "xxxxxxxx"
-    }
+    "otp": "xxxxxxxx",
+    "online": 1,
+    "limit": 10
   }
 }
 ```

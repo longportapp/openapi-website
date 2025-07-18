@@ -31,12 +31,14 @@ Our socket `Token` is one time password, you can use the `Token` to connect to q
 
 ### Response Body
 
-| Field | Type   | Description                       |
-| ----- | ------ | --------------------------------- |
-| code  | int    | error code, failed if not equal 0 |
-| msg   | string | error description                 |
-| data  | object |                                   |
-| ∟otp  | string | token                             |
+| Field   | Type   | Description                       |
+| ------- | ------ | --------------------------------- |
+| code    | int    | error code, failed if not equal 0 |
+| msg     | string | error description                 |
+| data    | object |                                   |
+| ∟otp    | string | token                             |
+| ∟limit  | int    | Total connection limit            |
+| ∟online | int    | Current online connection count   |
 
 ### Response Example
 
@@ -45,8 +47,9 @@ Our socket `Token` is one time password, you can use the `Token` to connect to q
   "code": 0,
   "message": "",
   "data": {
-    "otp": "xxxxxxxx"
-    }
+    "otp": "xxxxxxxx",
+    "online": 1,
+    "limit": 10
   }
 }
 ```
