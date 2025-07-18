@@ -13,10 +13,10 @@ sidebar_position: 2
 
 ## 请求
 
-| 基本信息    |                |
-| ----------- | -------------- |
+| 基本信息    |                  |
+| ----------- | ---------------- |
 | HTTP URL    | /v1/socket/token |
-| HTTP Method | GET            |
+| HTTP Method | GET              |
 
 ### 请求头
 
@@ -31,12 +31,14 @@ sidebar_position: 2
 
 ### 响应体
 
-| 名称 | 类型   | 描述                  |
-| ---- | ------ | --------------------- |
-| code | int    | 错误码，非 0 表示失败 |
-| msg  | string | 错误描述              |
-| data | object |                       |
-| ∟otp | string | 获取到的 token        |
+| 名称    | 类型   | 描述                  |
+| ------- | ------ | --------------------- |
+| code    | int    | 错误码，非 0 表示失败 |
+| msg     | string | 错误描述              |
+| data    | object |                       |
+| ∟otp    | string | 获取到的 token        |
+| ∟limit  | int    | 连接限制总数          |
+| ∟online | int    | 当前在线连接数        |
 
 ### 响应体示例
 
@@ -45,8 +47,9 @@ sidebar_position: 2
   "code": 0,
   "message": "",
   "data": {
-    "otp": "xxxxxxxx"
-    }
+    "otp": "xxxxxxxx",
+    "limit": 10,
+    "online": 3
   }
 }
 ```
