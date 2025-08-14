@@ -118,20 +118,20 @@ Demo:
 
 In this section, we will show you how to configure LongPort MCP in your AI chat (screenshots use [Cherry Studio](https://cherry-ai.com/)).
 
+> NOTE: Please make sure your update the Cherry Studio to newest version.
+
 **Using STDIO Mode:**
 
 Ensure you have configured the environment variables and installed the `longport-mcp` command-line tool on your system.
 
 ![](https://pub.lbkrs.com/files/202503/QRuojGfGL1Lay7rs/SCR-20250331-jajy.png)
 
-**Using SSE Mode:**
+For Windows, you can configure like this:
 
-You must first start the SSE server. You can use the following command:
+![](https://assets.lbctrl.com/uploads/4ff72c40-b651-438d-a98d-71dd76d78014/scr-20250814-nfrg.png)
 
-```bash
-longport-mcp --sse
+If your in China, you may need to add `LONGPORT_REGION=cn` into your environment config.
+
 ```
-
-Then configure your AI chat to use `http://localhost:8000`.
-
-![](https://pub.lbkrs.com/files/202503/PhUVovCsMqD2w2rL/SCR-20250319-snro.png)
+LONGPORT_REGION=cn
+```

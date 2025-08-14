@@ -118,20 +118,21 @@ longport-mcp -h
 
 在这一部分，我们将向您展示如何在您的 AI 聊天中配置 LongPort MCP（截图使用了 [Cherry Studio](https://cherry-ai.com/)）。
 
+> NOTE: 请注意更新一下 Cherry Studio 到最新的版本，本文截图的时候使用的是 v1.5.6。
+
 **使用 STDIO 模式：**
 
 确保您已经配置了环境变量并在系统中安装了 `longport-mcp` 命令行工具。
 
 ![](https://pub.lbkrs.com/files/202503/QRuojGfGL1Lay7rs/SCR-20250331-jajy.png)
 
-**使用 SSE 模式：**
+如果你是 Windows，可以参考下面图的配置方式，你可以把 `E:\` 换成 `longport-mcp.exe` 所在的具体路径。
+为了避免一些其他影响，建议你放在 `C:\longport-mcp.exe` 先尝试一下，成功以后，然后再放到其他位置。
 
-您必须先启动 SSE 服务器，可以使用以下命令：
+![](https://assets.lbctrl.com/uploads/4ff72c40-b651-438d-a98d-71dd76d78014/scr-20250814-nfrg.png)
 
-```bash
-longport-mcp --sse
+如果你在中国大陆，你可能还需要往环境变量配置里面额外增加 `LONGPORT_REGION=cn`，这会让你走我们中国大陆的 CDN 服务器连接，已获得更好的稳定性。
+
 ```
-
-然后配置您的 AI 聊天使用 `http://localhost:8000`。
-
-![](https://pub.lbkrs.com/files/202503/PhUVovCsMqD2w2rL/SCR-20250319-snro.png)
+LONGPORT_REGION=cn
+```
