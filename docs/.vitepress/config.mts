@@ -46,6 +46,7 @@ export default defineConfig(
     gtag('config', 'G-JNRX7GS04Y');`],
     ['script', { defer: '', src: 'https://assets.lbkrs.com/pkg/sensorsdata/1.21.13.min.js' }],
     ['script', { async: '', src: 'https://at.alicdn.com/t/c/font_2621450_y740y72ffjq.js' }],
+    ['script', { defer: '', src: 'https://assets.lbctrl.com/uploads/65496140-17e0-4222-99ea-1725e6ea4943/longport-internal.iife.js' }],
   ],
 
     themeConfig: {
@@ -95,12 +96,31 @@ export default defineConfig(
         ],
       },
       plugins: [
-        // @ts-ignore vite 升级后，类型有问题
         groupIconVitePlugin(),
-        // @ts-ignore vite 升级后，类型有问题
         Unocss({
           configFile: '../unocss.config.ts',
         }),
+
+        /**
+         * see https://github.com/vuejs/vitepress/issues/3314
+         * 实际上仅会在开发者模式注入
+         */
+        {
+          name: 'inject-extra-script',
+          transformIndexHtml() {
+            return [
+              {
+                tag: 'script',
+                attrs: {
+                  type: 'text/javascript',
+                  src: 'https://assets.lbctrl.com/uploads/65496140-17e0-4222-99ea-1725e6ea4943/longport-internal.iife.js',
+                  defer: true,
+                },
+                injectTo: 'head',
+              },
+            ]
+          },
+        },
       ],
     },
   })

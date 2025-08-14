@@ -87,7 +87,7 @@ onUnmounted(() => {
       leave-active-class="dropdown-leave-active"
       leave-from-class="dropdown-leave-from"
       leave-to-class="dropdown-leave-to">
-      <div :class="alignmentClasses" role="menu" aria-orientation="vertical">
+      <div v-show="props.open" :class="alignmentClasses" role="menu" aria-orientation="vertical">
         <template v-for="(item, index) in props.list" :key="index">
           <hr v-if="item.separator" class="dropdown-separator" />
           <button v-else type="button" class="dropdown-item" role="menuitem" @click="handleItemClick(item)">
@@ -103,11 +103,11 @@ onUnmounted(() => {
 <style scoped>
 .dropdown-container {
   position: relative;
-  display: block;
-  padding-top: 8px;
+  display: inline-block;
 }
 
 .dropdown-menu {
+  position: absolute;
   z-index: 50;
   border-radius: 12px;
   padding: 12px;
@@ -127,6 +127,7 @@ onUnmounted(() => {
 
 .dropdown-menu-bottom {
   top: 100%;
+  margin-top: 8px;
 }
 
 .dropdown-menu-start {
