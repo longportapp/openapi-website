@@ -5,29 +5,26 @@ on:
     branches:
       - "!main"
       - "!canary"
-      
-concurrency: 
+
+concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-  
+
 jobs:
   build:
     name: Build Test
     timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: yarn
+      - uses: oven-sh/setup-bun@v2
 
-      - name: install dependency npm
-        run: yarn
+      - name: Install dependencies
+        run: bun install
 
-      - name: build canary env dist file
+      - name: Build for canary
         run: |
-          yarn build:canary
+          bun run build:canary

@@ -1,9 +1,37 @@
-.idea
+# dependencies (bun install)
 node_modules
-.docusaurus
-yarn-error.log
-.DS_Store
-.cache-loader
+
+# output
+out
 dist
-*--autogen.md
-autogen-markdown/
+*.tgz
+
+# code coverage
+coverage
+*.lcov
+
+# logs
+logs
+_.log
+report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
+
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# caches
+.eslintcache
+.cache
+*.tsbuildinfo
+**/.vitepress/cache
+
+# IntelliJ based IDEs
+.idea
+
+# Finder (MacOS) folder config
+.DS_Store
+
+old_docs

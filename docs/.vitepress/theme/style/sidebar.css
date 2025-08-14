@@ -1,0 +1,23 @@
+.VPSidebar {
+  --at-apply: outline-none
+}
+
+.VPSidebarItem:hover {
+  color: var(--vp-c-brand-1);
+}
+
+.VPSidebarItem .VPLink {
+  --at-apply: rounded-xl px-2 py-1;
+}
+
+.VPSidebarItem.is-link .VPLink > p {
+  --at-apply: py-0;
+}
+
+.VPSidebarItem.is-active {
+  --at-apply: bg-gray-600/5 dark:bg-gray-200/5
+}
+
+:root {
+  --vp-sidebar-width: 300px
+}
