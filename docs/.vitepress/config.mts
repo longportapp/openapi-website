@@ -101,6 +101,22 @@ export default defineConfig(
         Unocss({
           configFile: '../unocss.config.ts',
         }),
+        {
+          name: 'inject-extra-script',
+          transformIndexHtml() {
+            return [
+              {
+                tag: 'script',
+                attrs: {
+                  type: 'text/javascript',
+                  src: 'https://assets.lbctrl.com/uploads/65496140-17e0-4222-99ea-1725e6ea4943/longport-internal.iife.js',
+                  defer: true,
+                },
+                injectTo: 'body',
+              },
+            ]
+          },
+        },
       ],
     },
   })
