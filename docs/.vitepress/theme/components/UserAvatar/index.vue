@@ -5,7 +5,6 @@ import Dropdown from './UserAvatarDropdown.vue'
 import LoginButton from './LoginButton.vue'
 import { localePath } from '../../utils/i18n'
 import { useI18n } from 'vue-i18n'
-import { useAvatar } from './uesAvatar'
 
 const { t } = useI18n()
 
@@ -13,13 +12,12 @@ const open = ref(false)
 const el = ref<HTMLElement>()
 const dropdownRef = ref<InstanceType<typeof Dropdown>>()
 const closeTimer = ref<NodeJS.Timeout | null>(null)
-const isLogin = ref(false)
 
-onMounted(() => {
-  isLogin.value = window.longportInternal.isLogin()
+const session = computed(() => {
+  const sessionStr = localStorage.getItem('session')
+  return sessionStr ? JSON.parse(sessionStr) : null
 })
 
-const { avatar } = useAvatar()
 const list = computed<{ title: string; href: string }[]>(() => [
   {
     title: t('HD2WD-CgkkcJJW12yOmDM'),
@@ -73,7 +71,7 @@ onUnmounted(() => {
   <ClientOnly>
     <!-- 已登录状态：显示头像和下拉菜单 -->
     <div
-      v-if="isLogin"
+      v-if="session"
       ref="el"
       class="VPFlyout"
       @mouseenter="handleMouseEnter"
@@ -86,11 +84,10 @@ onUnmounted(() => {
         aria-haspopup="true"
         :aria-expanded="open"
         @click="handleClick">
-        <UserAvatarIcon :src="avatar" size="sm" />
+        <UserAvatarIcon :src="session.avatar || session?.member?.avatar" size="sm" />
       </button>
 
-      <div
-        class="menu absolute top-[calc(var(--vp-nav-height)/2)] right-0 opacity-0 invisible transition-opacity duration-200">
+      <div class="menu absolute top-full right-0 opacity-0 invisible transition-opacity duration-200">
         <Dropdown ref="dropdownRef" :list="list" v-model:open="open" />
       </div>
     </div>

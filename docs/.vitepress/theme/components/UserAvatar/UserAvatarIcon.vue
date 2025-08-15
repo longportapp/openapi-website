@@ -32,10 +32,8 @@ const avatarSrc = computed(() => {
 <template>
   <div class="inline-flex items-center justify-center flex-shrink-0" :class="sizeClasses">
     <img
-      v-if="avatarSrc"
       :src="avatarSrc"
       :alt="props.alt"
       class="w-full h-full rounded-full object-cover bg-gray-100 dark:bg-gray-800" />
-    <div v-else class="w-full h-full rounded-full bg-[#EAEBEC] dark:bg-[#262626]"></div>
   </div>
 </template>
