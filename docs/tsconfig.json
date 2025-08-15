@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["**/*.ts", "**/*.vue", "**/*.md", "**/*.json", "docs/**/*.md", "docs/.vitepress/sdk.d.ts"],
+  "include": ["**/*.ts", "**/*.vue", "**/*.md", "**/*.json", "docs/**/*.md"],
   "compilerOptions": {
     "moduleResolution": "bundler",
     "paths": {
