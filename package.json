@@ -8,6 +8,7 @@
   "private": true,
   "scripts": {
     "dev": "VITE_API_BASE_URL=https://openapi.longbridge.xyz vitepress dev docs",
+    "dev:prod": "VITE_API_BASE_URL=https://openapi.longportapp.com vitepress dev docs",
     "build:canary": "VITE_API_BASE_URL=https://openapi.longbridge.xyz vitepress build docs && bun run build:llms",
     "build:release": "VITE_API_BASE_URL=https://openapi.longportapp.com vitepress build docs && bun run build:llms",
     "build:llms": "bun run script/normalize_md.ts && bun run script/generate-llms.ts",

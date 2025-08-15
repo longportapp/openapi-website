@@ -4,8 +4,10 @@ export const useAvatar = () => {
   const avatar = ref('')
 
   const getUserInfo = async () => {
-    const res = await window.longportInternal.getUserInfo()
-    avatar.value = res.data.member.avatar
+    if (window.longportInternal && window.longportInternal.isLogin()) {
+      const res = await window.longportInternal.getUserInfo()
+      avatar.value = res.data.member.avatar
+    }
   }
 
   onMounted(() => {
