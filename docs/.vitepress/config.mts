@@ -8,6 +8,13 @@ import { localesConfig } from './config/locales'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 import { rewriteMarkdownPath } from './utils'
 
+const PROXY_API_MAP = {
+  canary: 'https://m.longbridge.xyz',
+  prod: 'https://m.lbkrs.com',
+}
+
+const proxyApi = PROXY_API_MAP[process.env.PROXY || 'prod']
+
 export default defineConfig(
   withMermaid({
     title: 'LongPort OpenAPI',
@@ -46,7 +53,8 @@ export default defineConfig(
     gtag('config', 'G-JNRX7GS04Y');`],
     ['script', { defer: '', src: 'https://assets.lbkrs.com/pkg/sensorsdata/1.21.13.min.js' }],
     ['script', { async: '', src: 'https://at.alicdn.com/t/c/font_2621450_y740y72ffjq.js' }],
-    ['script', { defer: '', src: 'https://assets.lbctrl.com/uploads/65496140-17e0-4222-99ea-1725e6ea4943/longport-internal.iife.js' }],
+    ['script', {}, `window.__API_PROXY_URL__ = ${JSON.stringify(proxyApi)}`],
+    ['script', { defer: '', src: 'https://assets.lbctrl.com/uploads/b63bb77e-74b5-43d3-8bf4-d610be91c838/longport-internal.iife.js' }],
   ],
     themeConfig: {
       editLink: {
@@ -117,7 +125,15 @@ export default defineConfig(
                 tag: 'script',
                 attrs: {
                   type: 'text/javascript',
-                  src: 'https://assets.lbctrl.com/uploads/65496140-17e0-4222-99ea-1725e6ea4943/longport-internal.iife.js',
+                },
+                children: `window.__API_PROXY_URL__ = ${JSON.stringify(proxyApi)}`,
+                injectTo: 'head',
+              },
+              {
+                tag: 'script',
+                attrs: {
+                  type: 'text/javascript',
+                  src: 'https://assets.lbctrl.com/uploads/b63bb77e-74b5-43d3-8bf4-d610be91c838/longport-internal.iife.js',
                   defer: true,
                 },
                 injectTo: 'head',
