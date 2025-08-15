@@ -48,8 +48,12 @@ export default defineConfig(
     ['script', { async: '', src: 'https://at.alicdn.com/t/c/font_2621450_y740y72ffjq.js' }],
     ['script', { defer: '', src: 'https://assets.lbctrl.com/uploads/65496140-17e0-4222-99ea-1725e6ea4943/longport-internal.iife.js' }],
   ],
-
     themeConfig: {
+      editLink: {
+        pattern: ({ filePath }) => {
+          return `https://github.com/longportapp/openapi-website/edit/main/docs/${filePath}`
+        },
+      },
       logo: {
         src: 'https://pub.pbkrs.com/files/202211/TNosrY77nCxm6rtU/logo-without-title.svg',
         width: 48,
