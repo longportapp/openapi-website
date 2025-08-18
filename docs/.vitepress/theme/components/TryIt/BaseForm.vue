@@ -132,7 +132,7 @@ const uischema = computed(() => {
     scope: `#/properties/${name}`,
     options: {
       ...props.defaultUischemaOptions,
-      ...(props.uischemaOptions[name] || {}),
+      ...props.uischemaOptions[name],
     },
   }))
 

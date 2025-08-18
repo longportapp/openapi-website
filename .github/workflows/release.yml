@@ -35,6 +35,8 @@ jobs:
 
       - name: Build release
         run: bun run build:release
+        env:
+          VITE_PORTAL_GATEWAY_BASE_URL: 'https://m.lbkrs.com'
 
       - name: Upload to Aliyun OSS
         run: |

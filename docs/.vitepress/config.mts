@@ -9,17 +9,10 @@ import { withMermaid } from 'vitepress-plugin-mermaid'
 import { rewriteMarkdownPath } from './utils'
 import * as cheerio from 'cheerio'
 
-const PROXY_API_MAP = {
-  canary: 'https://m.longbridge.xyz',
-  prod: 'https://m.lbkrs.com',
-}
-
-const proxyApi = PROXY_API_MAP[process.env.PROXY || 'prod']
-
 const insertScript = (html: string) => {
   const $ = cheerio.load(html)
   $('head').prepend(
-    `<script>window.__API_PROXY_URL__ = ${JSON.stringify(proxyApi)}</script>`,
+    `<script>window.__API_PROXY_URL__ = ${JSON.stringify(process.env.VITE_PORTAL_GATEWAY_BASE_URL)}</script>`,
     `<script defer˝ src="https://assets.lbctrl.com/uploads/b63bb77e-74b5-43d3-8bf4-d610be91c838/longport-internal.iife.js"></script>`
   )
   return $.html()
