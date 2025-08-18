@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "VITE_API_BASE_URL=https://openapi.longbridge.xyz PROXY=canary vitepress dev docs",
     "dev:prod": "VITE_API_BASE_URL=https://openapi.longportapp.com PROXY=prod vitepress dev docs",
-    "build:canary": "VITE_API_BASE_URL=https://openapi.longbridge.xyz PROXY=canary vitepress build docs && bun run build:llms",
+    "build:canary": "VITE_API_BASE_URL=https://openapi.longbridge.xyz PROXY=prod vitepress build docs && bun run build:llms",
     "build:release": "VITE_API_BASE_URL=https://openapi.longportapp.com PROXY=prod vitepress build docs && bun run build:llms",
     "build:llms": "bun run script/normalize_md.ts && bun run script/generate-llms.ts",
     "preview": "vitepress preview docs",
