@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url'
 import { localesConfig } from './config/locales'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 import { rewriteMarkdownPath } from './utils'
+import * as cheerio from 'cheerio'
 
 const PROXY_API_MAP = {
   canary: 'https://m.longbridge.xyz',
@@ -14,6 +15,15 @@ const PROXY_API_MAP = {
 }
 
 const proxyApi = PROXY_API_MAP[process.env.PROXY || 'prod']
+
+const insertScript = (html: string) => {
+  const $ = cheerio.load(html)
+  $('head').prepend(
+    `<script>window.__API_PROXY_URL__ = ${JSON.stringify(proxyApi)}</script>`,
+    `<script defer˝ src="https://assets.lbctrl.com/uploads/b63bb77e-74b5-43d3-8bf4-d610be91c838/longport-internal.iife.js"></script>`
+  )
+  return $.html()
+}
 
 export default defineConfig(
   withMermaid({
@@ -28,6 +38,9 @@ export default defineConfig(
     srcExclude: ['README.md'],
     rewrites: rewriteMarkdownPath,
     markdown: markdownConfig,
+    transformHtml(code) {
+      return insertScript(code)
+    },
 
     sitemap: {
       hostname: 'https://open.longportapp.com',
@@ -53,8 +66,6 @@ export default defineConfig(
     gtag('config', 'G-JNRX7GS04Y');`],
     ['script', { defer: '', src: 'https://assets.lbkrs.com/pkg/sensorsdata/1.21.13.min.js' }],
     ['script', { async: '', src: 'https://at.alicdn.com/t/c/font_2621450_y740y72ffjq.js' }],
-    ['script', {}, `window.__API_PROXY_URL__ = ${JSON.stringify(proxyApi)}`],
-    ['script', { defer: '', src: 'https://assets.lbctrl.com/uploads/b63bb77e-74b5-43d3-8bf4-d610be91c838/longport-internal.iife.js' }],
   ],
     themeConfig: {
       editLink: {
@@ -113,32 +124,14 @@ export default defineConfig(
           configFile: '../unocss.config.ts',
         }),
 
-        /**
+        /**s
          * see https://github.com/vuejs/vitepress/issues/3314
          * 实际上仅会在开发者模式注入
          */
         {
           name: 'inject-extra-script',
-          transformIndexHtml() {
-            return [
-              {
-                tag: 'script',
-                attrs: {
-                  type: 'text/javascript',
-                },
-                children: `window.__API_PROXY_URL__ = ${JSON.stringify(proxyApi)}`,
-                injectTo: 'head',
-              },
-              {
-                tag: 'script',
-                attrs: {
-                  type: 'text/javascript',
-                  src: 'https://assets.lbctrl.com/uploads/b63bb77e-74b5-43d3-8bf4-d610be91c838/longport-internal.iife.js',
-                  defer: true,
-                },
-                injectTo: 'head',
-              },
-            ]
+          transformIndexHtml(code) {
+            return insertScript(code)
           },
         },
       ],
