@@ -7,6 +7,16 @@ import { fileURLToPath } from 'node:url'
 import { localesConfig } from './config/locales'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 import { rewriteMarkdownPath } from './utils'
+import * as cheerio from 'cheerio'
+
+const insertScript = (html: string) => {
+  const $ = cheerio.load(html)
+  $('head').prepend(
+    `<script>window.__API_PROXY_URL__ = ${JSON.stringify(process.env.VITE_PORTAL_GATEWAY_BASE_URL)}</script>`,
+    `<script defer˝ src="https://assets.lbctrl.com/uploads/b63bb77e-74b5-43d3-8bf4-d610be91c838/longport-internal.iife.js"></script>`
+  )
+  return $.html()
+}
 
 export default defineConfig(
   withMermaid({
@@ -21,6 +31,9 @@ export default defineConfig(
     srcExclude: ['README.md'],
     rewrites: rewriteMarkdownPath,
     markdown: markdownConfig,
+    transformHtml(code) {
+      return insertScript(code)
+    },
 
     sitemap: {
       hostname: 'https://open.longportapp.com',
@@ -47,8 +60,12 @@ export default defineConfig(
     ['script', { defer: '', src: 'https://assets.lbkrs.com/pkg/sensorsdata/1.21.13.min.js' }],
     ['script', { async: '', src: 'https://at.alicdn.com/t/c/font_2621450_y740y72ffjq.js' }],
   ],
-
     themeConfig: {
+      editLink: {
+        pattern: ({ filePath }) => {
+          return `https://github.com/longportapp/openapi-website/edit/main/docs/${filePath}`
+        },
+      },
       logo: {
         src: 'https://pub.pbkrs.com/files/202211/TNosrY77nCxm6rtU/logo-without-title.svg',
         width: 48,
@@ -95,12 +112,21 @@ export default defineConfig(
         ],
       },
       plugins: [
-        // @ts-ignore vite 升级后，类型有问题
         groupIconVitePlugin(),
-        // @ts-ignore vite 升级后，类型有问题
         Unocss({
           configFile: '../unocss.config.ts',
         }),
+
+        /**s
+         * see https://github.com/vuejs/vitepress/issues/3314
+         * 实际上仅会在开发者模式注入
+         */
+        {
+          name: 'inject-extra-script',
+          transformIndexHtml(code) {
+            return insertScript(code)
+          },
+        },
       ],
     },
   })

@@ -66,9 +66,7 @@ import { createQuickRequest } from '../../utils/request'
 import { useData, useRouter } from 'vitepress'
 import type { HttpInfo, ParametersTable } from '../../../types'
 
-const { frontmatter, ...others } = useData()
-
-console.log('others', others, others.site.value)
+const { frontmatter } = useData()
 
 const httpInfo = computed<HttpInfo>(() => frontmatter.value.httpInfo || {})
 const parametersTable = computed<ParametersTable>(() => frontmatter.value.parametersTable || {})
