@@ -128,7 +128,7 @@ $ go get github.com/longportapp/openapi-go
 
 ### 下載地址
 
-- [3.0.12](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-3.0.12.tar.gz)
+- [3.0.13](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-3.0.13.tar.gz)
 
 ### API 文檔
 
