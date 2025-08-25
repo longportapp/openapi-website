@@ -1,6 +1,6 @@
 ---
 slug: margin_ratio
-title: Get margin ratio
+title: Get Margin Ratio
 language_tabs: false
 toc_footers: []
 includes: []
