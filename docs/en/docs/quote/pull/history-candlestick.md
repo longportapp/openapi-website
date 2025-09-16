@@ -20,7 +20,7 @@ This API is used to obtain the history candlestick data of security.
 ### Parameters
 
 | Name           | Type   | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-|----------------|--------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | symbol         | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | period         | int32  | Yes      | Candlestick period, for example: `1000`, see [Period](../objects#period---candlestick-period)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | adjust_type    | int32  | Yes      | Adjustment type, for example: `0`, see [AdjustType](../objects#adjusttype---candlestick-adjustment-type)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -65,9 +65,9 @@ message SecurityHistoryCandlestickRequest {
 
 ```python
 # Get Security History Candlesticks
-# https://open.longportapp.com/docs/quote/pull/candlestick
+# https://open.longbridge.com/docs/quote/pull/candlestick
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
+# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile app.
 from datetime import datetime, date
 from longport.openapi import QuoteContext, Config, Period, AdjustType
 
@@ -92,7 +92,7 @@ print(resp)
 ### Response Properties
 
 | Name            | Type     | Description                                                                  |
-|-----------------|----------|------------------------------------------------------------------------------|
+| --------------- | -------- | ---------------------------------------------------------------------------- |
 | symbol          | string   | Security code, for example: `AAPL.US`                                        |
 | candlesticks    | object[] | Candlestick data                                                             |
 | ∟ close         | string   | Close price                                                                  |
@@ -221,7 +221,7 @@ According to the user’s assets and transactions, the number of targets that di
 ## Description of historical candlesticks range
 
 | Market             | Daily/Weekly/Monthly/Year period candlesticks | Minute candlesticks   | Description                                                                                                       |
-|--------------------|-----------------------------------------------|-----------------------|-------------------------------------------------------------------------------------------------------------------|
+| ------------------ | --------------------------------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | Hong Kong stocks   | 2004-6-1 to present                           | 2022-09-28 to present |                                                                                                                   |
 | U.S. stocks        | 2010-6-1 to present                           | 2023-12-4 to present  |                                                                                                                   |
 | U.S. stock options | -                                             | -                     | U.S. stock options historical data is currently not supported, and data for longer periods will be released later |
@@ -238,7 +238,7 @@ According to the user’s assets and transactions, the number of targets that di
 ## Error Code
 
 | Protocol Error Code | Business Error Code | Description                | Troubleshooting Suggestions                                                               |
-|---------------------|---------------------|----------------------------|-------------------------------------------------------------------------------------------|
+| ------------------- | ------------------- | -------------------------- | ----------------------------------------------------------------------------------------- |
 | 3                   | 301600              | Invalid request            | Invalid request parameters or unpacking request failed                                    |
 | 3                   | 301606              | Request rate limit         | Reduce the frequency of requests                                                          |
 | 7                   | 301602              | Server error               | Please try again or contact a technician to resolve the issue                             |
