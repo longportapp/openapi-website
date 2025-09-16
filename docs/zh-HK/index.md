@@ -7,8 +7,8 @@ titleTemplate: 靈活支持程序化交易
 hero:
   image:
     src: https://pub.lbkrs.com/files/202503/2CChxYnHQXeW9eRu/code.svg
-    alt: LongPort
-  text: 'LongPort OpenAPI'
+    alt: Longbridge
+  text: 'Longbridge OpenAPI'
   tagline: 穩定 · 安全 · 快速
   actions:
     - theme: brand

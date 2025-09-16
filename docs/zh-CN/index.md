@@ -7,7 +7,7 @@ hero:
   image:
     src: https://pub.lbkrs.com/files/202503/2CChxYnHQXeW9eRu/code.svg
     alt: Longbridge
-  text: 'LongPort OpenAPI'
+  text: 'Longbridge OpenAPI'
   tagline: 稳定 · 安全 · 快速
   actions:
     - theme: brand
@@ -28,4 +28,5 @@ features:
     title: 超低延迟
     details: 延迟低至 10 毫秒的极速交易，适应云原生的分布式内存数据库和分布式无状态系统框架
 ---
+
 <HomePage/>
