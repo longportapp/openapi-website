@@ -1,6 +1,6 @@
-LongPort OpenAPI Documentation
+Longbridge OpenAPI Documentation
 
-https://open.longportapp.com
+https://open.longbridge.com
 
 ## CONTRIBUTING
 

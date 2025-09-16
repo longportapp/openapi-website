@@ -8,7 +8,7 @@ sidebar_position: 1
 :::success NOTE
 我们的 OpenAPI SDK 已经完整实现了订阅行情的功能，你可以直接使用 SDK。
 
-https://open.longportapp.com/sdk
+https://open.longbridge.com/sdk
 
 本章节文档提供给大家参考 API 细节。
 :::

@@ -5,12 +5,12 @@ slug: /how-to-access-api
 sidebar_position: 1
 ---
 
-This section mainly introduces the basic information of LongPort OpenAPI, including how to access the API, how to use the API, how to obtain the API interface document, etc., the content is relatively primitive.
+This section mainly introduces the basic information of Longbridge OpenAPI, including how to access the API, how to use the API, how to obtain the API interface document, etc., the content is relatively primitive.
 
 :::success Tip
 It is recommended to directly use the SDK to access the API, the SDK has encapsulated the API call method, which is more convenient to use.
 
-https://open.longportapp.com/sdk
+https://open.longbridge.com/sdk
 :::
 
 ## Notes
@@ -72,7 +72,7 @@ Refer to [Introduction to OpenAPI](../docs#how-to-enable) to enable the correspo
 
 ### 2. Get App Key and Access Token information
 
-Get **Access Token**, **App Key** and **App Secret** on the [Developer Website](https://open.longportapp.com/account).
+Get **Access Token**, **App Key** and **App Secret** on the [Developer Website](https://open.longbridge.com/account).
 
 **Access Token** will expires in three months. Token can be reset in Developer Website after expiration. Also token can be refresh through invoking [Refresh Token](./refresh-token-api) API before token expired.
 

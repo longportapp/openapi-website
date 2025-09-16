@@ -6,7 +6,7 @@ title: Getting Started
 
 ## Foreword
 
-LongPort OpenAPI SDK is implemented based on Rust we have released SDK for Python, Node.js, Rust, C++/C and Java ..., and support for other languages will be launched in the future.
+Longbridge OpenAPI SDK is implemented based on Rust we have released SDK for Python, Node.js, Rust, C++/C and Java ..., and support for other languages will be launched in the future.
 
 ## API Host
 
@@ -103,11 +103,11 @@ Let's take obtaining assets as an example to demonstrate how to use the SDK.
 ## Configuration
 
 1. Download App and open an account.
-2. Get App Key, App Secret, Access Token and other information from [LongPort OpenAPI](https://open.longportapp.com) official website
+2. Get App Key, App Secret, Access Token and other information from [Longbridge OpenAPI](https://open.longbridge.com) official website
 
    **_Get App Key, App Secret, Access Token and other information_**
 
-   Login the [LongPort OpenAPI](https://open.longportapp.com) website, and enter the "User Center".
+   Login the [Longbridge OpenAPI](https://open.longbridge.com) website, and enter the "User Center".
 
    The "application credential" credential information will be given on the page. After we get it, we will set the environment variable, which is convenient for later development and use.
 
@@ -118,7 +118,7 @@ Please pay attention to protect your **Access Token** information, anyone who ge
 :::
 
 | 环境变量                    | 说明                                                               | 值范围          |
-|-----------------------------|--------------------------------------------------------------------|-----------------|
+| --------------------------- | ------------------------------------------------------------------ | --------------- |
 | `LONGPORT_APP_KEY`          | App Key get from developer center                                  |                 |
 | `LONGPORT_APP_SECRET`       | App Secret get from developer center                               |                 |
 | `LONGPORT_ACCESS_TOKEN`     | Access Token get from developer center                             |                 |
@@ -131,7 +131,7 @@ We recommend that you set the environment variables. For the convenience of demo
 
 The ENV variables are **not necessary** conditions, if it is inconvenient to set the ENV variables or encounter problems that are difficult to solve, you can not set the ENV variables, but directly use the parameters in the code to initialize.
 
-The `Config` in LongPort OpenAPI SDK can be directly passed in parameters such as `app_key`, `app_secret`, `access_token` to initialize, pay attention to the comments in the example code below `Init config without ENV`.
+The `Config` in Longbridge OpenAPI SDK can be directly passed in parameters such as `app_key`, `app_secret`, `access_token` to initialize, pay attention to the comments in the example code below `Init config without ENV`.
 
 :::
 
@@ -150,7 +150,6 @@ export LONGPORT_ACCESS_TOKEN="Access Token get from user center"
 Windows is a little more complicated, we provide two methods to set the environment variables.
 
 1. **Through the GUI**: Right click on "My Computer" on the desktop, select "Properties", click "Advanced system settings" in the pop-up window.
-
    - Click "Environment Variables" in the pop-up window.
 
      <img src="https://assets.lbkrs.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
@@ -396,17 +395,17 @@ After running, the output is as follows:
 
 ### Subscribe Quote
 
-To subscribe to market data, please check the [Developer Center](https://open.longportapp.com/account) - "Quote authority" is correct
+To subscribe to market data, please check the [Developer Center](https://open.longbridge.com/account) - "Quote authority" is correct
 
 - HK Market - BMP basic quotation is unable to subscribe with WebSocket as it has no real-time quote push.
 - US Market - LV1 Nasdaq Basic (Only OpenAPI).
 
-Before running, visit the [Developer Center](https://open.longportapp.com/account) and ensure that the account has the correct quote level.
+Before running, visit the [Developer Center](https://open.longbridge.com/account) and ensure that the account has the correct quote level.
 
 :::info
-If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
+If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile app.
 
-https://longportapp.com/download
+https://longbridge.com/download
 :::
 
 When you have the correct Quote authority, it might look like this:
@@ -640,7 +639,7 @@ NFLX.US PushQuote {
 
 ### Submit Order
 
-Next, we will do a [submit order](https://open.longportapp.com/docs/trade/order/submit) action, we assume that to buy `700.HK` at 50 HKD and quantity is `100`.
+Next, we will do a [submit order](https://open.longbridge.com/docs/trade/order/submit) action, we assume that to buy `700.HK` at 50 HKD and quantity is `100`.
 
 > NOTE: In order to prevent a successful test buy, the demo here gives a lower price and avoids the transaction. OpenAPI operations are equivalent to online transactions, please operate with caution, and pay attention to parameter details during development and debugging.
 
@@ -1043,11 +1042,11 @@ Order {
 }
 ```
 
-The above example has fully demonstrated how to use the SDK to access the OpenAPI interface. For more interfaces, please read the [LongPort OpenAPI Documentation](https://open.longportapp.com/docs) in detail and use them according to different interfaces.
+The above example has fully demonstrated how to use the SDK to access the OpenAPI interface. For more interfaces, please read the [Longbridge OpenAPI Documentation](https://open.longbridge.com/docs) in detail and use them according to different interfaces.
 
 ## More Examples
 
-We provide the complete code of the above examples in the GitHub repository of LongPort OpenAPI Python SDK, and we will continue to add or update it later.
+We provide the complete code of the above examples in the GitHub repository of Longbridge OpenAPI Python SDK, and we will continue to add or update it later.
 
 https://github.com/longportapp/openapi/tree/master/examples
 

@@ -12,7 +12,7 @@ layout: home
 <Tabs groupId="programming-language">
 <TabItem value="python" label="Python" default>
 
-## LongPort OpenAPI SDK for Python
+## Longbridge OpenAPI SDK for Python
 
 [https://github.com/longportapp/openapi/tree/master/python](https://github.com/longportapp/openapi/tree/master/python)
 
@@ -33,7 +33,7 @@ $ pip install longport
 </TabItem>
 <TabItem value="javascript" label="JavaScript">
 
-## LongPort OpenAPI SDK for Node.js
+## Longbridge OpenAPI SDK for Node.js
 
 [https://github.com/longportapp/openapi/tree/master/nodejs](https://github.com/longportapp/openapi/tree/master/nodejs)
 
@@ -54,7 +54,7 @@ $ npm install longport --save
 </TabItem>
 <TabItem value="rust" label="Rust">
 
-## LongPort OpenAPI SDK for Rust
+## Longbridge OpenAPI SDK for Rust
 
 [https://github.com/longportapp/openapi/tree/master/rust](https://github.com/longportapp/openapi/tree/master/rust)
 
@@ -76,7 +76,7 @@ longport = "3.0.17"
 </TabItem>
 <TabItem value="java" label="Java">
 
-## LongPort OpenAPI SDK for Java
+## Longbridge OpenAPI SDK for Java
 
 [https://github.com/longportapp/openapi/tree/master/java](https://github.com/longportapp/openapi/tree/master/java)
 
@@ -101,7 +101,7 @@ Add the following line to your `pom.xml` file
 </TabItem>
 <TabItem value="go" label="Go">
 
-## LongPort OpenAPI SDK for Go
+## Longbridge OpenAPI SDK for Go
 
 [https://github.com/longportapp/openapi-go](https://github.com/longportapp/openapi-go)
 
@@ -118,7 +118,7 @@ $ go get github.com/longportapp/openapi-go
 </TabItem>
 <TabItem value="c++" label="C++">
 
-## LongPort OpenAPI SDK for C/C++
+## Longbridge OpenAPI SDK for C/C++
 
 [https://github.com/longportapp/openapi/tree/master/cpp](https://github.com/longportapp/openapi/tree/master/cpp)
 

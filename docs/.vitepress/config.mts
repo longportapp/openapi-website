@@ -20,7 +20,7 @@ const insertScript = (html: string) => {
 
 export default defineConfig(
   withMermaid({
-    title: 'LongPort OpenAPI',
+    title: 'Longbridge OpenAPI',
     appearance: true,
     lastUpdated: true,
     cleanUrls: true,
@@ -36,7 +36,7 @@ export default defineConfig(
     },
 
     sitemap: {
-      hostname: 'https://open.longportapp.com',
+      hostname: 'https://open.longbridge.com',
       transformItems(items) {
         return items.filter((item) => !item.url.includes('migration'))
       },
@@ -44,19 +44,19 @@ export default defineConfig(
 
     /* prettier-ignore */
     head: [
-    ['link', { rel: 'shortcut icon', type: 'image/x-icon', href: 'https://assets.lbkrs.com/uploads/770073a2-c505-4d41-99f4-93cb75abe257/longport_favicon.png' }],
+    ['link', { rel: 'shortcut icon', type: 'image/x-icon', href: 'https://pub.lbkrs.com/files/202107/35tULHe3n4Pp4EtA/logo.png' }],
     ['meta', { name: 'theme-color', content: '#5f67ee' }],
     ['meta', { name: 'twitter:card', content: 'summary' }],
-    ['meta', { name: 'twitter:site', content: 'https://open.longportapp.com' }],
+    ['meta', { name: 'twitter:site', content: 'https://open.longbridge.com' }],
     ['meta', { name: 'robots', content: 'index,follow' }],
     ['meta', { name: 'googlebot', content: 'index,follow' }],
-    ['script', { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-JNRX7GS04Y' }],
+    ['script', { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-P81Y8BDYYS' }],
     ['script', {}, `window.dataLayer = window.dataLayer||[];
     function gtag() {
       dataLayer.push(arguments);
     }
     gtag('js', new Date());
-    gtag('config', 'G-JNRX7GS04Y');`],
+    gtag('config', 'G-P81Y8BDYYS');`],
     ['script', { defer: '', src: 'https://assets.lbkrs.com/pkg/sensorsdata/1.21.13.min.js' }],
     ['script', { async: '', src: 'https://at.alicdn.com/t/c/font_2621450_y740y72ffjq.js' }],
   ],
@@ -67,7 +67,7 @@ export default defineConfig(
         },
       },
       logo: {
-        src: 'https://pub.pbkrs.com/files/202211/TNosrY77nCxm6rtU/logo-without-title.svg',
+        src: 'https://assets.lbkrs.com/uploads/f029efba-486b-4c32-8b05-1a87b0fb61f8/logo-without-title-lb.svg',
         width: 48,
         height: 48,
       },

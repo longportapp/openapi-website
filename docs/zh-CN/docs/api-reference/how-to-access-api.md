@@ -5,12 +5,12 @@ slug: /how-to-access-api
 sidebar_position: 1
 ---
 
-本部分内容主要介绍 LongPort OpenAPI 的基础信息，包括如何访问 API、如何使用 API、如何获取 API 接口文档等，内容比较原始。
+本部分内容主要介绍 Longbridge OpenAPI 的基础信息，包括如何访问 API、如何使用 API、如何获取 API 接口文档等，内容比较原始。
 
 :::success 提示
 建议可以直接采用 SDK 的方式访问 API，SDK 已经封装了 API 的调用方式，使用起来更加方便。
 
-https://open.longportapp.com/sdk
+https://open.longbridge.com/sdk
 :::
 
 ## API 须知
@@ -71,7 +71,7 @@ GET 请求时默认所有参数为查询参数，非 GET 请求时默认所有�
 
 ### 2. 获取 App Key 信息及 Access Token
 
-在 [开发者后台](https://open.longportapp.com/account) 中获取 **Access Token**， **App Key** 以及 **App Secret**。
+在 [开发者后台](https://open.longbridge.com/account) 中获取 **Access Token**， **App Key** 以及 **App Secret**。
 
 **Access Token** 的有效期是三个月，失效后可以在开发者后台重置。在失效之前，可以通过调用 [刷新 Access Token](./refresh-token-api) API 进行刷新。
 

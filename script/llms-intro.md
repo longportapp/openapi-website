@@ -1,6 +1,6 @@
-# LongPort OpenAPI Documentation
+# Longbridge OpenAPI Documentation
 
-LongPort OpenAPI provides programmatic quote trading interfaces for investors with research and development capabilities and assists them to build trading or quote strategy analysis tools based on their own investment strategies. The functions fall into the following categories:
+Longbridge OpenAPI provides programmatic quote trading interfaces for investors with research and development capabilities and assists them to build trading or quote strategy analysis tools based on their own investment strategies. The functions fall into the following categories:
 
 - **Trading** - Create, amend, cancel orders, query today's/past orders and transaction details, etc.
 - **Quotes** - Real-time quotes, acquisition of historical quotes, etc.
@@ -9,13 +9,13 @@ LongPort OpenAPI provides programmatic quote trading interfaces for investors wi
 
 ## Interface Type
 
-LongPort provides diversified access methods such as HTTP / WebSockets interfaces for accessing the underlying services and SDK (Python / C++, etc.) encapsulated in the upper layer, allowing flexible choices.
+Longbridge provides diversified access methods such as HTTP / WebSockets interfaces for accessing the underlying services and SDK (Python / C++, etc.) encapsulated in the upper layer, allowing flexible choices.
 
 ## How to Enable OpenAPI
 
-1. Log in to the [LongPort App](https://longportapp.com/download) to complete the account opening process;
+1. Log in to the [Longbridge App](https://longbridge.com/download) to complete the account opening process;
 
-2. Log in to the [longportapp.com](https://longportapp.com) and enter the developer platform, complete the developer verification (OpenAPI permission application), and obtain a token.
+2. Log in to the [longbridge.com](https://longbridge.com) and enter the developer platform, complete the developer verification (OpenAPI permission application), and obtain a token.
 
 ## Quote Coverage
 
@@ -70,7 +70,7 @@ Supported trading functions include:
 
 :::success
 
-The [OpenAPI SDK](https://open.longportapp.com/sdk) has done effective frequency control internally:
+The [OpenAPI SDK](https://open.longbridge.com/sdk) has done effective frequency control internally:
 
 - Quote: The methods under `QuoteContext` will be actively controlled by the SDK according to the server's rate limit. When the request is too fast, the SDK will automatically delay the request. Therefore, you do not need to implement the frequency control details separately.
 - Trade: The methods under `TradeContext` are not limited by the SDK. Due to the special nature of the trading order placement scenario, this is left to the user to handle.
@@ -79,9 +79,9 @@ The [OpenAPI SDK](https://open.longportapp.com/sdk) has done effective frequency
 
 ## Pricing {#pricing}
 
-LongPort does not charge any additional fees for activating or using interface services. You only need to open a LongPort Integrated A/C and get OpenAPI service permissions to use it for free. For actual transaction fees, please contact the brokerage firm where you have opened your securities account.
+Longbridge does not charge any additional fees for activating or using interface services. You only need to open a Longbridge Integrated A/C and get OpenAPI service permissions to use it for free. For actual transaction fees, please contact the brokerage firm where you have opened your securities account.
 
 ## Other
 
-The OpenAPI services are provided by LongPort and the applicable affiliates (subject to the agreement).
+The OpenAPI services are provided by Longbridge and the applicable affiliates (subject to the agreement).
 openapi-trade.longportapp.com

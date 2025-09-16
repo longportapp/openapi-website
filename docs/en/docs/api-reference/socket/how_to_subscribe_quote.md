@@ -8,7 +8,7 @@ sidebar_position: 1
 :::success NOTE
 Our OpenAPI SDK has fully implemented the function of subscribing to quotes, and you can use the SDK directly.
 
-https://open.longportapp.com/sdk
+https://open.longbridge.com/sdk
 
 The documentation in this chapter provides API details for your reference.
 :::

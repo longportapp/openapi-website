@@ -39,7 +39,7 @@ headingLevel: 2
 
 ```python
 # 獲取資金流水
-# https://open.longportapp.com/docs/trade/asset/cashflow
+# https://open.longbridge.com/docs/trade/asset/cashflow
 from datetime import datetime
 from longport.openapi import TradeContext, Config
 

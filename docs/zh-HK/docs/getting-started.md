@@ -7,7 +7,7 @@ id: getting-started
 
 ## 前言
 
-LongPort OpenAPI SDK 基於 Rust 底層提供標準實現，目前我們已經發布了 Python, Node.js, Rust, C++/C, Java 等多種編程語言 SDK，其他語言的支持後面會陸續推出。
+Longbridge OpenAPI SDK 基於 Rust 底層提供標準實現，目前我們已經發布了 Python, Node.js, Rust, C++/C, Java 等多種編程語言 SDK，其他語言的支持後面會陸續推出。
 
 ## API Host
 
@@ -102,23 +102,23 @@ go get github.com/longportapp/openapi-go
 
 ## 配置
 
-1. 下載 [LongPort](https://longportapp.com/download) 並完成開戶。
-2. 從 [LongPort OpenAPI](https://open.longportapp.com) 官網獲取 `App Key`, `App Secret`, `Access Token` 等信息。
+1. 下載 [Longbridge](https://longbridge.com/download) 並完成開戶。
+2. 從 [Longbridge OpenAPI](https://open.longbridge.com) 官網獲取 `App Key`, `App Secret`, `Access Token` 等信息。
 
    **_獲取 App Key, App Secret, Access Token 等信息_**
 
-   訪問 [LongPort OpenAPI](https://open.longportapp.com) 網站，登錄後，進入“個人中心”。
+   訪問 [Longbridge OpenAPI](https://open.longbridge.com) 網站，登錄後，進入“個人中心”。
 
    在頁面上會給出“應用憑證”憑證信息，我們拿到以後設置環境變量，便於後面開發使用方便。
 
 ### 開通開發中帳戶
 
-1. 下載 [LongPort](https://longportapp.com/download)，並完成開戶
-2. 從 [LongPort OpenAPI](https://open.longportapp.com) 官網取得 `App Key`, `App Secret`, `Access Token` 等資訊。
+1. 下載 [Longbridge](https://longbridge.com/download)，並完成開戶
+2. 從 [Longbridge OpenAPI](https://open.longbridge.com) 官網取得 `App Key`, `App Secret`, `Access Token` 等資訊。
 
    **_取得 App Key, App Secret, Access Token 等資訊_**
 
-   造訪 [LongPort OpenAPI](https://open.longportapp.com) 網站，登入後，進入「個人中心」。
+   造訪 [Longbridge OpenAPI](https://open.longbridge.com) 網站，登入後，進入「個人中心」。
 
    在頁面上會給出「應用憑證」憑證訊息，我們拿到以後設定環境變量，方便後面開發使用方便。
 
@@ -128,11 +128,11 @@ go get github.com/longportapp/openapi-go
 請注意保護好您的 **Access Token** 訊息，任何人獲得到它，都可以透過 OpenAPI 來交易你的帳戶！
 :::
 
-| 環境變量                    | 說明                                                       | 值範圍          |
-|-----------------------------|------------------------------------------------------------|-----------------|
-| `LONGPORT_APP_KEY`          | 從頁面上取得到的 App Key                                   |                 |
-| `LONGPORT_APP_SECRET`       | 從頁面取得到的 App Secret                                  |                 |
-| `LONGPORT_ACCESS_TOKEN`     | 從頁面上取得到的 Access Token                              |                 |
+| 環境變量                    | 說明                                                         | 值範圍          |
+| --------------------------- | ------------------------------------------------------------ | --------------- |
+| `LONGPORT_APP_KEY`          | 從頁面上取得到的 App Key                                     |                 |
+| `LONGPORT_APP_SECRET`       | 從頁面取得到的 App Secret                                    |                 |
+| `LONGPORT_ACCESS_TOKEN`     | 從頁面上取得到的 Access Token                                |                 |
 | `LONGPORT_REGION`           | API 伺服器存取點，請根據您所在地區設置，以獲得更好的連線速度 | `hk`, `cn`      |
 | `LONGPORT_ENABLE_OVERNIGHT` | 是否開啟夜盤行情，設定 `true` 開啟，`false` 關閉             | `true`, `false` |
 
@@ -142,7 +142,7 @@ go get github.com/longportapp/openapi-go
 
 環境變量**非必要**條件，如設定不方便或遇到問題難以解決，可不用環境變量，而是直接在程式碼裡用參數來初始化。
 
-LongPort OpenAPI SDK 的 `Config` 都可以直接傳入 `app_key`, `app_secret`, `access_token` 等參數來初始化，注意看後面的例子註釋內 `Init config without ENV` 的部分。
+Longbridge OpenAPI SDK 的 `Config` 都可以直接傳入 `app_key`, `app_secret`, `access_token` 等參數來初始化，注意看後面的例子註釋內 `Init config without ENV` 的部分。
 
 :::
 
@@ -162,7 +162,6 @@ export LONGPORT_ACCESS_TOKEN="從頁面取得到的 Access Token"
 Windows 要稍微複雜一些，有以下兩種方式可以設定環境變量：
 
 1. **透過圖形介面設定**：在桌面上找到“我的電腦”，右鍵點擊，選擇“屬性”，在彈出的視窗中點擊“高級系統設定”。
-
    - 在彈出的視窗中點選「環境變量」。
 
      <img src="https://assets.lbkrs.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
@@ -408,16 +407,16 @@ go run ./
 
 ### 訂閱實時行情
 
-訂閱行情數據請檢查 [開發者中心](https://open.longportapp.com/account) - “行情權限”是否正確
+訂閱行情數據請檢查 [開發者中心](https://open.longbridge.com/account) - “行情權限”是否正確
 
 - 港股 - BMP 基礎報價，無實時行情推送，無法用 WebSocket 訂閱
 - 美股 - LV1 納斯達克最優報價 (只限 OpenAPI）
 
-運行前訪問 [開發者中心](https://open.longportapp.com/account)，檢查確保賬戶有正確的行情權限。
+運行前訪問 [開發者中心](https://open.longbridge.com/account)，檢查確保賬戶有正確的行情權限。
 
 :::info
 
-如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
+如沒有開通行情權限，可以通過“Longbridge”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 
 https://longportapp.com/download
 :::
@@ -585,7 +584,7 @@ NFLX.US PushQuote {
 
 ### 委託下單
 
-下面我們做一次 [委託下單](https://open.longportapp.com/docs/trade/order/submit) 動作，我們假設要以 50 HKD 買入 `700.HK` 的數量為 `100`。
+下面我們做一次 [委託下單](https://open.longbridge.com/docs/trade/order/submit) 動作，我們假設要以 50 HKD 買入 `700.HK` 的數量為 `100`。
 
 > NOTE: 為了防止測試買入成功，這裡演示給了一個較低的價格，避免成交。OpenAPI 操作均等同與線上交易，請謹慎操作，開發調試注意參數細節。
 
@@ -976,11 +975,11 @@ Order {
 }
 ```
 
-上面例子已經完整演示瞭如何使用 SDK 訪問 OpenAPI 的接口，更多其他接口請詳細閱讀 [LongPort OpenAPI 文檔](https://open.longportapp.com/docs)，根據不同的接口使用。
+上面例子已經完整演示瞭如何使用 SDK 訪問 OpenAPI 的接口，更多其他接口請詳細閱讀 [Longbridge OpenAPI 文檔](https://open.longbridge.com/docs)，根據不同的接口使用。
 
 ## 更多例子
 
-我們在 LongPort OpenAPI Python SDK 的 GitHub 倉庫中提供了上面幾個例子的完整代碼，當然後期我們也會持續往裡面補充或更新。
+我們在 Longbridge OpenAPI Python SDK 的 GitHub 倉庫中提供了上面幾個例子的完整代碼，當然後期我們也會持續往裡面補充或更新。
 
 https://github.com/longportapp/openapi/tree/master/examples
 

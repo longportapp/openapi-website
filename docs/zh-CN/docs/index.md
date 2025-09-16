@@ -4,7 +4,7 @@ title: OpenAPI 介绍
 id: getting_started_introduce
 ---
 
-LongPort OpenAPI 为有研发能力的投资者提供程序化行情交易接口，助力投资者根据自身投资策略搭建交易或行情策略分析工具。覆盖以下类别功能：
+Longbridge OpenAPI 为有研发能力的投资者提供程序化行情交易接口，助力投资者根据自身投资策略搭建交易或行情策略分析工具。覆盖以下类别功能：
 
 - 交易类 - 创建、修改、撤销订单，当日/历史订单及成交记录的查询等
 - 行情类 - 实时行情报价、历史行情数的获取等
@@ -13,11 +13,11 @@ LongPort OpenAPI 为有研发能力的投资者提供程序化行情交易接口
 
 ## 接口类型
 
-LongPort 提供接入底层服务的 HTTP / WebSockets 接口以及封装在上层的 SDK（Python / C++ ...）等多种接入方式，灵活选择。
+Longbridge 提供接入底层服务的 HTTP / WebSockets 接口以及封装在上层的 SDK（Python / C++ ...）等多种接入方式，灵活选择。
 
 ## 如何开通
 
-1. 登录 [LongPort App](https://longportapp.com/download) 完成开户；
+1. 登录 [Longbridge App](https://longportapp.com/download) 完成开户；
 2. 登录 [longportapp.com](https://longportapp.com) 进入开发者平台，完成开发者认证即 OpenAPI 权限申请，获取令牌。
 
 ## 行情覆盖
@@ -73,7 +73,7 @@ LongPort 提供接入底层服务的 HTTP / WebSockets 接口以及封装在上�
 
 :::success
 
-我们 [OpenAPI SDK](https://open.longportapp.com/sdk) 内部已经做了有效的频率控制：
+我们 [OpenAPI SDK](https://open.longbridge.com/sdk) 内部已经做了有效的频率控制：
 
 - 行情类：`QuoteContext` 下的接口，SDK 内部会按照服务端的频率限制来主动控制，当请求过快的时候，SDK 会自动延迟请求。因此你可以不需要额外实现频率控制细节。
 - 交易类：`TradeContext` 下的接口，SDK 没有做限制，由于交易下单场景特殊性，将这个交由用户自行处理。
@@ -82,8 +82,8 @@ LongPort 提供接入底层服务的 HTTP / WebSockets 接口以及封装在上�
 
 ## 使用费用 {#pricing}
 
-LongPort 不针对接口服务额外收取开通或使用费用，只需开通 LongPort 账户及 OpenAPI 服务权限后即可免费使用。实际交易费率请咨询您开通证券账户的券商。
+Longbridge 不针对接口服务额外收取开通或使用费用，只需开通 Longbridge 账户及 OpenAPI 服务权限后即可免费使用。实际交易费率请咨询您开通证券账户的券商。
 
 ## 其他
 
-OpenAPI 服务由 LongPort 及其适用的关联公司提供（具体以协议为准）。
+OpenAPI 服务由 Longbridge 及其适用的关联公司提供（具体以协议为准）。

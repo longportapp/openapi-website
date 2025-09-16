@@ -74,7 +74,7 @@ A：標的代碼使用 `ticker.region` 格式，`ticker` 表示標的代碼。�
     </tr>
 </table>
 
-可以使用 LongPort App 查看標的的 symbol
+可以使用 Longbridge App 查看標的的 symbol
 <img src="https://pub.pbkrs.com/files/202206/7CSoiaDR4wGZPNCT/20220629-180013.jpeg" className="max-w-2xl" />
 
 ## Q4：OpenAPI 的行情权限是怎么样？如何购买行情卡？
@@ -82,9 +82,9 @@ A：標的代碼使用 `ticker.region` 格式，`ticker` 表示標的代碼。�
 A：
 
 - 行情權限
-  應交易所規則，OpenAPI 的權限是獨立的，和客戶端（App、PC、Web）權限不共享。比如，你在客戶端上擁有的港股 Level 2 權限並不能同樣代入 OpenAPI 端使用。LongPort 也給 OpenAPI 用戶贈送了基礎的行情權益，如你需要更高級別的行情，可以通過券商行情商店，或聯繫券商購買行情卡激活高級別行情權限。
+  應交易所規則，OpenAPI 的權限是獨立的，和客戶端（App、PC、Web）權限不共享。比如，你在客戶端上擁有的港股 Level 2 權限並不能同樣代入 OpenAPI 端使用。Longbridge 也給 OpenAPI 用戶贈送了基礎的行情權益，如你需要更高級別的行情，可以通過券商行情商店，或聯繫券商購買行情卡激活高級別行情權限。
 - 如何購買行情卡  
-  LongPort 用戶可以通過 LongPort App 中的「行情商店」自行選擇想要購買的行情卡。
+  Longbridge 用戶可以通過 Longbridge App 中的「行情商店」自行選擇想要購買的行情卡。
 
 ## Q5：各個市場的清盤時間
 

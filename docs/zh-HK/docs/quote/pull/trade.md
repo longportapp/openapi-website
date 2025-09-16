@@ -37,9 +37,9 @@ message SecurityTradeRequest {
 
 ```python
 # 獲取標的成交明細
-# https://open.longportapp.com/docs/quote/pull/trade
+# https://open.longbridge.com/docs/quote/pull/trade
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
+# 如沒有開通行情權限，可以通過“Longbridge”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from longport.openapi import QuoteContext, Config
 
 config = Config.from_env()
