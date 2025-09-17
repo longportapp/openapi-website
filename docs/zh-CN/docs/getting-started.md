@@ -1060,9 +1060,3 @@ SDK 的详细 API 文档请访问：https://longportapp.github.io/openapi/
 在 GitHub 上，也有很多历史的讨论和问题可以参考，你也可以试着搜索一下，或许也能找到问题的解决方案。
 
 访问地址：https://github.com/longportapp/openapi/issues
-
-### 飞书回馈
-
-如果你有使用[飞书](https://www.feishu.cn/)，可以扫打开在飞书话题群中提出你的问题：
-
-<img src="https://assets.lbkrs.com/uploads/412f8cd8-2268-45ff-a367-98f280d0ee09/openapi-feishu-qrcode.png" style="width: 200px"  />
