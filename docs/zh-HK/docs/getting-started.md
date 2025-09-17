@@ -999,9 +999,3 @@ https://longportapp.github.io/openapi/
 在 GitHub 上，也有很多歷史的討論和問題可以參考，你也可以試著搜尋一下，或許也能找到問題的解決方案。
 
 訪問網址：https://github.com/longportapp/openapi/issues
-
-### 飛書回饋
-
-如果你有使用[飛書](https://www.feishu.cn/)，可以掃打開在飛書話題群中提出你的問題：
-
-<img src="https://assets.lbkrs.com/uploads/412f8cd8-2268-45ff-a367-98f280d0ee09/openapi-feishu-qrcode.png"  style="width: 200px" />
