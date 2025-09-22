@@ -64,7 +64,7 @@ Add the following line to your `Cargo.toml` file
 
 ```toml
 [dependencies]
-longport = "3.0.13"
+longport = "3.0.14"
 ```
 
 [https://crates.io/crates/longport](https://crates.io/crates/longport)
@@ -124,7 +124,7 @@ $ go get github.com/longportapp/openapi-go
 
 ### Download
 
-- [3.0.13](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-3.0.13.tar.gz)
+- [3.0.14](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-3.0.14.tar.gz)
 
 ### API Documents
 

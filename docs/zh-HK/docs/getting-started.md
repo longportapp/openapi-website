@@ -70,7 +70,7 @@ yarn install longport
 
 ```toml
 [dependencies]
-longport = "3.0.13"
+longport = "3.0.14"
 tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
@@ -129,7 +129,7 @@ go get github.com/longportapp/openapi-go
 :::
 
 | 環境變量                    | 說明                                                       | 值範圍          |
-|-----------------------------|----------------------------------------------------------|-----------------|
+|-----------------------------|------------------------------------------------------------|-----------------|
 | `LONGPORT_APP_KEY`          | 從頁面上取得到的 App Key                                   |                 |
 | `LONGPORT_APP_SECRET`       | 從頁面取得到的 App Secret                                  |                 |
 | `LONGPORT_ACCESS_TOKEN`     | 從頁面上取得到的 Access Token                              |                 |
