@@ -408,7 +408,7 @@ go run ./
 
 如没有开通行情权限，可以通过“Longbridge”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
 
-https://longportapp.com/download
+https://longbridge.com/download
 :::
 
 当你有正确的行情权限，看起来可能会是这样：
