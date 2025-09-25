@@ -17,8 +17,8 @@ Longbridge 提供接入底层服务的 HTTP / WebSockets 接口以及封装在�
 
 ## 如何开通
 
-1. 登录 [Longbridge App](https://longportapp.com/download) 完成开户；
-2. 登录 [longportapp.com](https://longportapp.com) 进入开发者平台，完成开发者认证即 OpenAPI 权限申请，获取令牌。
+1. 登录 [Longbridge App](https://longbridge.com/download) 完成开户；
+2. 登录 [longbridge.com](https://longbridge.com) 进入开发者平台，完成开发者认证即 OpenAPI 权限申请，获取令牌。
 
 ## 行情覆盖
 

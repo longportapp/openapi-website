@@ -17,11 +17,13 @@ export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
     ],
     [
       'meta',
-      { property: 'og:image', content: 'https://pub.pbkrs.com/files/202211/sJswdGqSX1xDqrES/lonport-seo-img.png' },
+      {
+        property: 'og:image',
+        content: 'https://assets.lbkrs.com/uploads/48641e8e-a157-4b0f-a58e-bd3998d10d54/group427321346.webp',
+      },
     ],
     ['meta', { property: 'og:locale', content: 'en' }],
     ['meta', { property: 'og:site_name', content: 'OpenAPI | Longbridge' }],
-    ['link', { rel: 'canonical', href: 'https://open.longbridge.com/' }],
   ],
   title: 'Longbridge OpenAPI',
   description:

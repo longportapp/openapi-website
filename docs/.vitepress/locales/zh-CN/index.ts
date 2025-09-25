@@ -16,11 +16,13 @@ export const zhCNConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
     ],
     [
       'meta',
-      { property: 'og:image', content: 'https://pub.pbkrs.com/files/202211/sJswdGqSX1xDqrES/lonport-seo-img.png' },
+      {
+        property: 'og:image',
+        content: 'https://assets.lbkrs.com/uploads/48641e8e-a157-4b0f-a58e-bd3998d10d54/group427321346.webp',
+      },
     ],
     ['meta', { property: 'og:locale', content: 'zh-CN' }],
     ['meta', { property: 'og:site_name', content: 'OpenAPI | Longbridge 开放平台' }],
-    ['link', { rel: 'canonical', href: 'https://open.longbridge.com/zh-CN/' }],
   ],
   title: 'Longbridge API 文档',
   description: 'Longbridge OpenAPI 为您提供灵活多样的接入服务，满足您的量化交易需求，快速构建您的交易策略。',
