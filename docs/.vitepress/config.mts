@@ -34,6 +34,20 @@ export default defineConfig(
     transformHtml(code) {
       return insertScript(code)
     },
+    transformHead(context) {
+      const { page } = context
+      let localePathname = page.replace(/\.md$/, '')
+      if (localePathname.includes('index')) {
+        localePathname = localePathname.replace('index', '')
+      }
+      const pathname = localePathname.replace('zh-CN/', '').replace('zh-HK/', '')
+      return [
+        ['link', { rel: 'canonical', href: `https://open.longbridge.com/${localePathname}` }],
+        ['link', { rel: 'alternate', hreflang: 'en', href: `https://open.longbridge.com/${pathname}` }],
+        ['link', { rel: 'alternate', hreflang: 'zh-Hans', href: `https://open.longbridge.com/zh-CN/${pathname}` }],
+        ['link', { rel: 'alternate', hreflang: 'zh-Hant', href: `https://open.longbridge.com/zh-HK/${pathname}` }],
+      ]
+    },
 
     sitemap: {
       hostname: 'https://open.longbridge.com',
