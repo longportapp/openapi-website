@@ -2,6 +2,7 @@ import type { DefaultTheme, LocaleSpecificConfig } from 'vitepress'
 import { nav } from './nav'
 import { search } from './search'
 import { sidebar } from './sidebar'
+import { logoLink } from '../../theme/utils/link'
 export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   head: [
     ['meta', { property: 'og:url', content: 'https://open.longbridge.com' }],
@@ -29,10 +30,7 @@ export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   description:
     'Access Longbridge OpenAPI for diversified and flexible support tailored to your programmatic trading needs. Enhance your trading strategies with ease.',
   themeConfig: {
-    logoLink: {
-      link: '/',
-      target: '_self',
-    },
+    logoLink: logoLink(),
     nav: nav(),
     sidebar: sidebar,
     search: {
