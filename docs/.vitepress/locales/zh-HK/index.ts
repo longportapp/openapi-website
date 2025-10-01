@@ -2,6 +2,7 @@ import type { DefaultTheme, LocaleSpecificConfig } from 'vitepress'
 import { nav } from './nav'
 import { search } from './search'
 import { sidebar } from './sidebar'
+import { logoLink } from '../../theme/utils/link'
 export const zhHKConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   head: [
     ['meta', { property: 'og:url', content: 'https://open.longbridge.com' }],
@@ -28,10 +29,7 @@ export const zhHKConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   description: 'Longbridge OpenAPI 為您提供靈活多樣的接入服務，滿足您的量化交易需求，快速構建您的交易策略。',
 
   themeConfig: {
-    logoLink: {
-      link: '/zh-HK',
-      target: '_self',
-    },
+    logoLink: logoLink(),
     nav: nav('zh-HK'),
     sidebar: sidebar,
     search: {
