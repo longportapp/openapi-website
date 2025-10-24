@@ -104,7 +104,7 @@ def on_trades(symbol: str, event: PushTrades):
 
 config = Config.from_env()
 ctx = QuoteContext(config)
-ctx.set_on_trades(on_trade)
+ctx.set_on_trades(on_trades)
 
 ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Trade])
 sleep(30)
