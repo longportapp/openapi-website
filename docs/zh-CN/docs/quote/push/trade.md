@@ -19,15 +19,15 @@ sidebar_position: 4
 
 ### Properties
 
-| Name            | Type     | Description                                                                        |
-| --------------- | -------- | ---------------------------------------------------------------------------------- |
-| symbol          | string   | 标的代码，例如：`AAPL.US`                                                          |
-| sequence        | int64    | 序列号                                                                             |
-| trades          | object[] | 逐笔明细数据                                                                       |
-| ∟ price         | string   | 价格                                                                               |
-| ∟ volume        | int64    | 成交量                                                                             |
-| ∟ timestamp     | int64    | 成交时间                                                                           |
-| ∟ trade_type    | string   | [交易类型说明](#交易类型)                                                          |
+| Name            | Type     | Description                                                                       |
+|-----------------|----------|-----------------------------------------------------------------------------------|
+| symbol          | string   | 标的代码，例如：`AAPL.US`                                                           |
+| sequence        | int64    | 序列号                                                                            |
+| trades          | object[] | 逐笔明细数据                                                                      |
+| ∟ price         | string   | 价格                                                                              |
+| ∟ volume        | int64    | 成交量                                                                            |
+| ∟ timestamp     | int64    | 成交时间                                                                          |
+| ∟ trade_type    | string   | [交易类型说明](#交易类型)                                                         |
 | ∟ direction     | int32    | 交易方向 <br /><br />**可选值：**<br />`0` - neutral<br />`1` - down<br />`2` - up |
 | ∟ trade_session | int32    | 交易时段，详见 [TradeSession](../objects#tradesession---交易时段)                  |
 
@@ -104,7 +104,7 @@ def on_trades(symbol: str, event: PushTrades):
 
 config = Config.from_env()
 ctx = QuoteContext(config)
-ctx.set_on_trades(on_trade)
+ctx.set_on_trades(on_trades)
 
 ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Trade])
 sleep(30)

@@ -20,7 +20,7 @@ Real-time trades data push of the subscribed security.
 ### Properties
 
 | Name            | Type     | Description                                                                                      |
-| --------------- | -------- | ------------------------------------------------------------------------------------------------ |
+|-----------------|----------|--------------------------------------------------------------------------------------------------|
 | symbol          | string   | Security code, for example: `AAPL.US`                                                            |
 | sequence        | int64    | Sequence number                                                                                  |
 | trades          | object[] | Trades data                                                                                      |
@@ -104,7 +104,7 @@ def on_trades(symbol: str, event: PushTrades):
 
 config = Config.from_env()
 ctx = QuoteContext(config)
-ctx.set_on_trades(on_trade)
+ctx.set_on_trades(on_trades)
 
 ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Trade])
 sleep(30)
