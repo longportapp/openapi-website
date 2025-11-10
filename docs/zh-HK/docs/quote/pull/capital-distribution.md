@@ -33,9 +33,9 @@ message SecurityRequest {
 
 ```python
 # Get Security Capital Distribution
-# https://open.longportapp.com/docs/quote/pull/capital-distribution
+# https://open.longbridge.com/docs/quote/pull/capital-distribution
 # 運行前請訪問“開發者中心”確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
+# 如沒有開通行情權限，可以通過“Longbridge”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 ```
 
 ## Response

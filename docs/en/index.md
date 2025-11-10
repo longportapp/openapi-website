@@ -6,8 +6,8 @@ pageClass: longport-home-page
 hero:
   image:
     src: https://pub.lbkrs.com/files/202503/2CChxYnHQXeW9eRu/code.svg
-    alt: LongPort
-  text: 'LongPort OpenAPI'
+    alt: Longbridge
+  text: 'Longbridge OpenAPI'
   tagline: Stable · Safe · Fast
   actions:
     - theme: brand
@@ -30,4 +30,5 @@ features:
     title: Ultra Latency
     details: Lightning-fast transactions with as low as 10ms delay, powered by cloud-native distributed in-memory databases and stateless architecture
 ---
+
 <HomePage/>

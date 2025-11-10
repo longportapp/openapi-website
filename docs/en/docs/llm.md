@@ -12,20 +12,20 @@ We provide several components for LLMs (Large Language Models) that allow you to
 
 <video src="https://pub.lbkrs.com/files/202503/SGozJNWBfYpta73i/longport-mcp.mp4" width="100%" autoplay loop controls  />
 
-Yes, you can use our LLM components through the LongPort OpenAPI. Start today!
+Yes, you can use our LLM components through the Longbridge OpenAPI. Start today!
 
 ## LLMs Text
 
-The OpenAPI documentation follows the [LLMs Text](https://llmstxt.org/) standard, providing [llms.txt](https://open.longportapp.com/llms.txt) and Markdown files for each document. Based on this LLMs Text, you can provide AI with a complete dictionary of LongPort OpenAPI documentation as a reference for AI-assisted development, enabling AI to generate more accurate code.
+The OpenAPI documentation follows the [LLMs Text](https://llmstxt.org/) standard, providing [llms.txt](https://open.longbridge.com/llms.txt) and Markdown files for each document. Based on this LLMs Text, you can provide AI with a complete dictionary of Longbridge OpenAPI documentation as a reference for AI-assisted development, enabling AI to generate more accurate code.
 
-- [https://open.longportapp.com/llms.txt](https://open.longportapp.com/llms.txt) - Approximately 2104 tokens.
+- [https://open.longbridge.com/llms.txt](https://open.longbridge.com/llms.txt) - Approximately 2104 tokens.
 
 Each of our documents is also available in Markdown format. When accessing them, simply add the `.md` suffix to the URL.
 
 For example:
 
-- https://open.longportapp.com/docs/getting-started.md
-- https://open.longportapp.com/docs/quote/pull/static.md
+- https://open.longbridge.com/docs/getting-started.md
+- https://open.longbridge.com/docs/quote/pull/static.md
 
 ### Demo
 
@@ -33,10 +33,10 @@ For example:
 
 ### Using in Cursor
 
-Open Cursor, open the command palette (`Command + Shift + P`), search for and select **Add New Custom Docs** and enter the LongPort OpenAPI LLMs Text address in the dialog box:
+Open Cursor, open the command palette (`Command + Shift + P`), search for and select **Add New Custom Docs** and enter the Longbridge OpenAPI LLMs Text address in the dialog box:
 
 ```
-https://open.longportapp.com/llms.txt
+https://open.longbridge.com/llms.txt
 ```
 
 Once added successfully, the Cursor Settings will look like this:
@@ -49,7 +49,7 @@ Next, in an AI conversation, you can select the Docs you just added under the `d
 
 ## MCP
 
-We are building an [MCP](https://modelcontextprotocol.io/) implementation for LongPort OpenAPI (based on our SDK), which you can use on any platform that supports [MCP](https://modelcontextprotocol.io/).
+We are building an [MCP](https://modelcontextprotocol.io/) implementation for Longbridge OpenAPI (based on our SDK), which you can use on any platform that supports [MCP](https://modelcontextprotocol.io/).
 
 It is also open-sourced in our GitHub organization.
 
@@ -116,7 +116,7 @@ Demo:
 
 ### Cherry Studio Configuration
 
-In this section, we will show you how to configure LongPort MCP in your AI chat (screenshots use [Cherry Studio](https://cherry-ai.com/)).
+In this section, we will show you how to configure Longbridge MCP in your AI chat (screenshots use [Cherry Studio](https://cherry-ai.com/)).
 
 > NOTE: Please make sure your update the Cherry Studio to newest version.
 

@@ -1,6 +1,6 @@
 # Editing documentation
 
-Thank you for your interest in the LongPort OpenAPI documentation! We appreciate your feedback, edits, and additions to our content. This page covers the basic steps for editing our documentation.
+Thank you for your interest in the Longbridge OpenAPI documentation! We appreciate your feedback, edits, and additions to our content. This page covers the basic steps for editing our documentation.
 
 ## Editing documents in GitHub
 
@@ -8,7 +8,7 @@ We've tried to make editing an existing, public file as simple as possible.
 
 ### To edit a documentation
 
-1. Browse to the [LongPort OpenAPI Docs](https://open.longportapp.com/docs) article that you want to update.
+1. Browse to the [Longbridge OpenAPI Docs](https://open.longbridge.com/docs) article that you want to update.
 
 1. Then click the **Edit this page** or **Edit page** link.
 
