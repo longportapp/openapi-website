@@ -23,13 +23,13 @@ sidebar_position: 20
 
 ### Parameters
 
-| Name          | Type   | Required | Description                                                               |
-|---------------|--------|----------|---------------------------------------------------------------------------|
+| Name          | Type   | Required | Description                                                                  |
+| ------------- | ------ | -------- | ---------------------------------------------------------------------------- |
 | symbol        | string | 是       | 标的代码，使用 `ticker.region` 格式，例如：`700.HK`                          |
 | period        | int32  | 是       | k 线周期，例如：`1000`，详见 [Period](../objects#period---k-线周期)          |
 | count         | int32  | 是       | 数据数量，例如：`100`<br /><br />**校验规则：** <br />请求数量最大为 `1000`  |
 | adjust_type   | int32  | 是       | 复权类型，例如：`0`，详见 [AdjustType](../objects#adjusttype---k-线复权类型) |
-| trade_session | int32  | 否       | 交易时段，0: 盘中，100: 所有（盘前，盘中，盘后，夜盘）                           |
+| trade_session | int32  | 否       | 交易时段，0: 盘中，100: 所有（盘前，盘中，盘后，夜盘）                       |
 
 ### Protobuf
 
@@ -47,9 +47,9 @@ message SecurityCandlestickRequest {
 
 ```python
 # 获取标的 k 线
-# https://open.longportapp.com/docs/quote/pull/candlestick
+# https://open.longbridge.com/docs/quote/pull/candlestick
 # 运行前请访问“开发者中心”确保账户有正确的行情权限。
-# 如没有开通行情权限，可以通过“LongPort”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
+# 如没有开通行情权限，可以通过“Longbridge”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
 from longport.openapi import QuoteContext, Config, Period, AdjustType, TradeSessions
 
 config = Config.from_env()
@@ -67,17 +67,17 @@ resp = ctx.candlesticks("700.HK", Period.Day, 10, AdjustType.NoAdjust, trade_ses
 
 ### Response Properties
 
-| Name            | Type     | Description                                                      |
-|-----------------|----------|------------------------------------------------------------------|
-| symbol          | string   | 标的代码，例如：`AAPL.US`                                          |
-| candlesticks    | object[] | K 线数据                                                         |
-| ∟ close         | string   | 当前周期收盘价                                                   |
-| ∟ open          | string   | 当前周期开盘价                                                   |
-| ∟ low           | string   | 当前周期最低价                                                   |
-| ∟ high          | string   | 当前周期最高价                                                   |
-| ∟ volume        | int64    | 当前周期成交量                                                   |
-| ∟ turnover      | string   | 当前周期成交额                                                   |
-| ∟ timestamp     | int64    | 当前周期的时间戳                                                 |
+| Name            | Type     | Description                                                       |
+| --------------- | -------- | ----------------------------------------------------------------- |
+| symbol          | string   | 标的代码，例如：`AAPL.US`                                         |
+| candlesticks    | object[] | K 线数据                                                          |
+| ∟ close         | string   | 当前周期收盘价                                                    |
+| ∟ open          | string   | 当前周期开盘价                                                    |
+| ∟ low           | string   | 当前周期最低价                                                    |
+| ∟ high          | string   | 当前周期最高价                                                    |
+| ∟ volume        | int64    | 当前周期成交量                                                    |
+| ∟ turnover      | string   | 当前周期成交额                                                    |
+| ∟ timestamp     | int64    | 当前周期的时间戳                                                  |
 | ∟ trade_session | int32    | 交易時段，详见 [TradeSession](../objects#tradesession---交易时段) |
 
 ### Protobuf
@@ -156,12 +156,12 @@ message Candlestick {
 
 ## 错误码
 
-| 协议错误码 | 业务错误码 | 描述           | 排查建议                                                               |
-|------------|------------|--------------|--------------------------------------------------------------------|
-| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败                                                 |
-| 3          | 301606     | 限流           | 降低请求频次                                                           |
-| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理                                               |
+| 协议错误码 | 业务错误码 | 描述           | 排查建议                                                                 |
+| ---------- | ---------- | -------------- | ------------------------------------------------------------------------ |
+| 3          | 301600     | 无效的请求     | 请求参数有误或解包失败                                                   |
+| 3          | 301606     | 限流           | 降低请求频次                                                             |
+| 7          | 301602     | 服务端内部错误 | 请重试或联系技术人员处理                                                 |
 | 7          | 301600     | 请求数据非法   | 检查请求的 `symbol`，`count`，`adjust_type`, `period` 数据是否在正确范围 |
-| 7          | 301603     | 标的无行情     | 标的没有请求的行情数据                                                 |
-| 7          | 301604     | 无权限         | 没有获取标的行情的权限                                                 |
-| 7          | 301607     | 接口限制       | 请求的数据数量超限，减少数据数量                                        |
+| 7          | 301603     | 标的无行情     | 标的没有请求的行情数据                                                   |
+| 7          | 301604     | 无权限         | 没有获取标的行情的权限                                                   |
+| 7          | 301607     | 接口限制       | 请求的数据数量超限，减少数据数量                                         |

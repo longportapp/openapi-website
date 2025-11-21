@@ -19,9 +19,9 @@ This API is used to obtain participant IDs data (which can be synchronized once 
 
 ```python
 # Get Broker IDs
-# https://open.longportapp.com/docs/quote/pull/broker-ids
+# https://open.longbridge.com/docs/quote/pull/broker-ids
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
+# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile app.
 from longport.openapi import QuoteContext, Config
 
 config = Config.from_env()

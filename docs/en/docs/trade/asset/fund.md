@@ -35,7 +35,7 @@ current net worth, and currency.
 
 ```python
 # Get Fund Position
-# https://open.longportapp.com/docs/trade/asset/fund
+# https://open.longbridge.com/docs/trade/asset/fund
 from longport.openapi import TradeContext, Config
 
 config = Config.from_env()

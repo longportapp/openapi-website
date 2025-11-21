@@ -7,7 +7,7 @@ id: getting-started
 
 ## 前言
 
-[LongPort OpenAPI SDK](https://github.com/longportapp/openapi) 基于 Rust 底层提供标准实现，目前我们已经发布了 Python、Node.js、Rust、C++/C、Java 等多种编程语言 SDK，其他语言的支持后面会陆续推出。
+[Longbridge OpenAPI SDK](https://github.com/longportapp/openapi) 基于 Rust 底层提供标准实现，目前我们已经发布了 Python、Node.js、Rust、C++/C、Java 等多种编程语言 SDK，其他语言的支持后面会陆续推出。
 
 ## API Host
 
@@ -70,7 +70,7 @@ yarn add longport
 
 ```toml
 [dependencies]
-longport = "3.0.5"
+longport = "3.0.17"
 tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
@@ -105,12 +105,12 @@ go get github.com/longportapp/openapi-go
 
 ### 开通开发中账户
 
-1. 下载 [LongPort](https://longportapp.com/download)，并完成开户
-2. 从 [LongPort OpenAPI](https://open.longportapp.com) 官网获取 `App Key`, `App Secret`, `Access Token` 等信息。
+1. 下载 [Longbridge](https://longbridge.com/download)，并完成开户
+2. 从 [Longbridge OpenAPI](https://open.longbridge.com) 官网获取 `App Key`, `App Secret`, `Access Token` 等信息。
 
    **_获取 App Key, App Secret, Access Token 等信息_**
 
-   访问 [LongPort OpenAPI](https://open.longportapp.com) 网站，登录后，进入“个人中心”。
+   访问 [Longbridge OpenAPI](https://open.longbridge.com) 网站，登录后，进入“个人中心”。
 
    在页面上会给出“应用凭证”凭证信息，我们拿到以后设置环境变量，便于后面开发使用方便。
 
@@ -120,11 +120,11 @@ go get github.com/longportapp/openapi-go
 请注意保护好您的 **Access Token** 信息，任何人获得到它，都可以通过 OpenAPI 来交易你的账户！
 :::
 
-| 环境变量                    | 说明                                                       | 值范围          |
-|-----------------------------|----------------------------------------------------------|-----------------|
-| `LONGPORT_APP_KEY`          | 从页面上获取到的 App Key                                   |                 |
-| `LONGPORT_APP_SECRET`       | 从页面上获取到的 App Secret                                |                 |
-| `LONGPORT_ACCESS_TOKEN`     | 从页面上获取到的 Access Token                              |                 |
+| 环境变量                    | 说明                                                         | 值范围          |
+| --------------------------- | ------------------------------------------------------------ | --------------- |
+| `LONGPORT_APP_KEY`          | 从页面上获取到的 App Key                                     |                 |
+| `LONGPORT_APP_SECRET`       | 从页面上获取到的 App Secret                                  |                 |
+| `LONGPORT_ACCESS_TOKEN`     | 从页面上获取到的 Access Token                                |                 |
 | `LONGPORT_REGION`           | API 服务器接入点，请根据你所在地区设置，以获得更好的连接速度 | `hk`, `cn`      |
 | `LONGPORT_ENABLE_OVERNIGHT` | 是否开启夜盘行情，设置 `true` 开启，`false` 关闭             | `true`, `false` |
 
@@ -134,7 +134,7 @@ go get github.com/longportapp/openapi-go
 
 环境变量**非必要**条件，如设置不方便或遇到问题难以解决，可不用环境变量，而是直接在代码里用参数来初始化。
 
-LongPort OpenAPI SDK 的 `Config` 均可以直接传入 `app_key`, `app_secret`, `access_token` 等参数来初始化，注意看后面的例子注释内 `Init config without ENV` 的部分。
+Longbridge OpenAPI SDK 的 `Config` 均可以直接传入 `app_key`, `app_secret`, `access_token` 等参数来初始化，注意看后面的例子注释内 `Init config without ENV` 的部分。
 
 :::
 
@@ -153,7 +153,6 @@ export LONGPORT_ACCESS_TOKEN="从页面上获取到的 Access Token"
 Windows 要稍微复杂一些，有下面两种方式可以设置环境变量：
 
 1. **通过图形界面设置**：在桌面上找到“我的电脑”，右键点击，选择“属性”，在弹出的窗口中点击“高级系统设置”。
-
    - 在弹出的窗口中点击“环境变量”。
 
      <img src="https://assets.lbkrs.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
@@ -398,18 +397,18 @@ go run ./
 
 ### 订阅实时行情
 
-订阅行情数据请检查 [开发者中心](https://open.longportapp.com/account) - “行情权限”是否正确
+订阅行情数据请检查 [开发者中心](https://open.longbridge.com/account) - “行情权限”是否正确
 
 - 港股 - BMP 基础报价，无实时行情推送，无法用 WebSocket 订阅
 - 美股 - LV1 纳斯达克最优报价 (只限 OpenAPI）
 
-运行前访问 [开发者中心](https://open.longportapp.com/account)，检查确保账户有正确的行情权限。
+运行前访问 [开发者中心](https://open.longbridge.com/account)，检查确保账户有正确的行情权限。
 
 :::info
 
-如没有开通行情权限，可以通过“LongPort”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
+如没有开通行情权限，可以通过“Longbridge”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
 
-https://longportapp.com/download
+https://longbridge.com/download
 :::
 
 当你有正确的行情权限，看起来可能会是这样：
@@ -643,7 +642,7 @@ NFLX.US PushQuote {
 
 ### 委托下单
 
-下面我们做一次 [委托下单](https://open.longportapp.com/docs/trade/order/submit) 动作，我们假设要以 50 HKD 买入 `700.HK` 的数量为 `100`。
+下面我们做一次 [委托下单](https://open.longbridge.com/docs/trade/order/submit) 动作，我们假设要以 50 HKD 买入 `700.HK` 的数量为 `100`。
 
 > NOTE: 为了防止测试买入成功，这里演示给了一个较低的价格，避免成交。OpenAPI 操作均等同与线上交易，请谨慎操作，开发调试注意参数细节。
 
@@ -1039,11 +1038,11 @@ Order {
 }
 ```
 
-上面例子已经完整演示了如何使用 SDK 访问 OpenAPI 的接口，更多其他接口请详细阅读 [LongPort OpenAPI 文档](https://longportapp.github.io/openapi/)，根据不同的接口使用。
+上面例子已经完整演示了如何使用 SDK 访问 OpenAPI 的接口，更多其他接口请详细阅读 [Longbridge OpenAPI 文档](https://longportapp.github.io/openapi/)，根据不同的接口使用。
 
 ## 更多例子
 
-我们在 LongPort OpenAPI Python SDK 的 GitHub 仓库中提供了上面几个例子的完整代码，当然后期我们也会持续往里面补充或更新。
+我们在 Longbridge OpenAPI Python SDK 的 GitHub 仓库中提供了上面几个例子的完整代码，当然后期我们也会持续往里面补充或更新。
 
 https://github.com/longportapp/openapi/tree/master/examples
 
@@ -1060,9 +1059,3 @@ SDK 的详细 API 文档请访问：https://longportapp.github.io/openapi/
 在 GitHub 上，也有很多历史的讨论和问题可以参考，你也可以试着搜索一下，或许也能找到问题的解决方案。
 
 访问地址：https://github.com/longportapp/openapi/issues
-
-### 飞书回馈
-
-如果你有使用[飞书](https://www.feishu.cn/)，可以扫打开在飞书话题群中提出你的问题：
-
-<img src="https://assets.lbkrs.com/uploads/412f8cd8-2268-45ff-a367-98f280d0ee09/openapi-feishu-qrcode.png" style="width: 200px"  />

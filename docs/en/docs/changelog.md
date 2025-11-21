@@ -4,6 +4,7 @@ title: Changelog
 slug: changelog
 sidebar_position: 7
 ---
+
 ## 2025-06-17
 
 - Update the interface for Get Account Balance
@@ -25,7 +26,6 @@ sidebar_position: 7
 
 - Change the `Depth.price` field in the SDK from `Decimal` type to `Optional[Decimal]` type
 
-
 ## 2024-05-17
 
 - Expand `outside_rth` field to support overnight trading in order placement and query APIs
@@ -41,11 +41,11 @@ sidebar_position: 7
 
 ## 2024-04-15
 
-- Add `last_share`, `last_price` field to [Trade push](https://open.longportapp.com/en/docs/trade/trade-definition#websocket-notification).
+- Add `last_share`, `last_price` field to [Trade push](https://open.longbridge.com/en/docs/trade/trade-definition#websocket-notification).
 
 ## 2024-04-13
 
-- Add `remark` field to [Trade push](https://open.longportapp.com/en/docs/trade/trade-definition#websocket-notification).
+- Add `remark` field to [Trade push](https://open.longbridge.com/en/docs/trade/trade-definition#websocket-notification).
 
 ## 2023-11-03
 

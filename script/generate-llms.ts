@@ -128,7 +128,7 @@ function generateMarkdownList(structure: DirectoryStructure): string {
 
   // Add links for current directory
   for (const link of structure.links) {
-    output += `- [${link.title}](https://open.longportapp.com${link.slug})\n`
+    output += `- [${link.title}](https://open.longbridge.com${link.slug})\n`
   }
 
   // Add links for subdirectories
@@ -156,7 +156,7 @@ function generateLLMSFullTxt(): void {
       return
     }
 
-    let fullContent = '# LongPort OpenAPI Documentation'
+    let fullContent = '# Longbridge OpenAPI Documentation'
 
     // Function to recursively process all markdown files
     function processDirectory(dir: string, indent = ''): void {

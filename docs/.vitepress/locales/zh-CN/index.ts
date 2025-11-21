@@ -2,33 +2,33 @@ import type { DefaultTheme, LocaleSpecificConfig } from 'vitepress'
 import { nav } from './nav'
 import { search } from './search'
 import { sidebar } from './sidebar'
+import { logoLink } from '../../theme/utils/link'
 export const zhCNConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   head: [
-    ['meta', { property: 'og:url', content: 'https://open.longportapp.com' }],
+    ['meta', { property: 'og:url', content: 'https://open.longbridge.com' }],
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:title', content: 'LongPort OpenAPI：灵活支持程序化交易' }],
+    ['meta', { property: 'og:title', content: 'Longbridge OpenAPI：灵活支持程序化交易' }],
     [
       'meta',
       {
         property: 'og:description',
-        content: 'LongPort OpenAPI 为您提供灵活多样的接入服务，满足您的量化交易需求，快速构建您的交易策略。',
+        content: 'Longbridge OpenAPI 为您提供灵活多样的接入服务，满足您的量化交易需求，快速构建您的交易策略。',
       },
     ],
     [
       'meta',
-      { property: 'og:image', content: 'https://pub.pbkrs.com/files/202211/sJswdGqSX1xDqrES/lonport-seo-img.png' },
+      {
+        property: 'og:image',
+        content: 'https://assets.lbkrs.com/uploads/48641e8e-a157-4b0f-a58e-bd3998d10d54/group427321346.webp',
+      },
     ],
     ['meta', { property: 'og:locale', content: 'zh-CN' }],
-    ['meta', { property: 'og:site_name', content: 'OpenAPI | LongPort 开放平台' }],
-    ['link', { rel: 'canonical', href: 'https://open.longportapp.com/zh-CN/' }],
+    ['meta', { property: 'og:site_name', content: 'OpenAPI | Longbridge 开放平台' }],
   ],
-  title: 'LongPort API 文档',
-  description: 'LongPort OpenAPI 为您提供灵活多样的接入服务，满足您的量化交易需求，快速构建您的交易策略。',
+  title: 'Longbridge API 文档',
+  description: 'Longbridge OpenAPI 为您提供灵活多样的接入服务，满足您的量化交易需求，快速构建您的交易策略。',
   themeConfig: {
-    logoLink: {
-      link: '/zh-CN',
-      target: '_self',
-    },
+    logoLink: logoLink(),
     nav: nav('zh-CN'),
     sidebar: sidebar,
     search: {

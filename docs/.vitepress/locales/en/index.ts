@@ -2,35 +2,35 @@ import type { DefaultTheme, LocaleSpecificConfig } from 'vitepress'
 import { nav } from './nav'
 import { search } from './search'
 import { sidebar } from './sidebar'
+import { logoLink } from '../../theme/utils/link'
 export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   head: [
-    ['meta', { property: 'og:url', content: 'https://open.longportapp.com' }],
+    ['meta', { property: 'og:url', content: 'https://open.longbridge.com' }],
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:title', content: 'LongPort OpenAPI: Flexible Support for Programmatic Trading' }],
+    ['meta', { property: 'og:title', content: 'Longbridge OpenAPI: Flexible Support for Programmatic Trading' }],
     [
       'meta',
       {
         property: 'og:description',
         content:
-          'Access LongPort OpenAPI for diversified and flexible support tailored to your programmatic trading needs. Enhance your trading strategies with ease.',
+          'Access Longbridge OpenAPI for diversified and flexible support tailored to your programmatic trading needs. Enhance your trading strategies with ease.',
       },
     ],
     [
       'meta',
-      { property: 'og:image', content: 'https://pub.pbkrs.com/files/202211/sJswdGqSX1xDqrES/lonport-seo-img.png' },
+      {
+        property: 'og:image',
+        content: 'https://assets.lbkrs.com/uploads/48641e8e-a157-4b0f-a58e-bd3998d10d54/group427321346.webp',
+      },
     ],
     ['meta', { property: 'og:locale', content: 'en' }],
-    ['meta', { property: 'og:site_name', content: 'OpenAPI | LongPort' }],
-    ['link', { rel: 'canonical', href: 'https://open.longportapp.com/' }],
+    ['meta', { property: 'og:site_name', content: 'OpenAPI | Longbridge' }],
   ],
-  title: 'LongPort OpenAPI',
+  title: 'Longbridge OpenAPI',
   description:
-    'Access LongPort OpenAPI for diversified and flexible support tailored to your programmatic trading needs. Enhance your trading strategies with ease.',
+    'Access Longbridge OpenAPI for diversified and flexible support tailored to your programmatic trading needs. Enhance your trading strategies with ease.',
   themeConfig: {
-    logoLink: {
-      link: '/',
-      target: '_self',
-    },
+    logoLink: logoLink(),
     nav: nav(),
     sidebar: sidebar,
     search: {

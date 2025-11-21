@@ -38,9 +38,9 @@ This API is used to submit order for HK and US stocks, warrant and option.
 | trailing_percent   | string | NO       | Trailing percent<br/><br/> `TSLPPCT` Order Required                                                                                                                            |
 | expire_date        | string | NO       | Long term order expire date, format `YYYY-MM-DD`, example: `2022-12-05`<br/><br/> Required when `time_in_force` is `GTD`                                                       |
 | side               | string | YES      | Order Side<br/><br/> **Enum Value:**<br/> `Buy`<br/> `Sell`                                                                                                                    |
-| outside_rth        | string | NO       | Enable or disable outside regular trading hours<br/><br/> **Enum Value:**<br/> `RTH_ONLY` - regular trading hour only<br/> `ANY_TIME` - any time<br/> `OVERNIGHT` - Overnight" |
+| outside_rth        | string | NO       | Enable or disable outside regular trading hours<br/><br/> **Enum Value:**<br/> `RTH_ONLY` - regular trading hour only<br/> `ANY_TIME` - any time<br/> `OVERNIGHT` - Overnight  |
 | time_in_force      | string | YES      | Time in force Type<br/><br/> **Enum Value:**<br/> `Day` - Day Order<br/> `GTC` - Good Til Canceled Order<br/> `GTD` - Good Til Date Order                                      |
-| remark             | string | NO       | remark (Maximum 64 characters)                                                                                                                                                 |
+| remark             | string | NO       | remark (Maximum 255 characters)                                                                                                                                                 |
 
 ### Request Example
 

@@ -5,7 +5,6 @@ slug: changelog
 sidebar_position: 7
 ---
 
-
 ## 2025-06-17
 
 - 更新获取账户资金接口
@@ -42,11 +41,11 @@ sidebar_position: 7
 
 ## 2024-04-15
 
-- [交易推送](https://open.longportapp.com/docs/trade/trade-definition#websocket-%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5)添加 `last_share`, `last_price`。
+- [交易推送](https://open.longbridge.com/docs/trade/trade-definition#websocket-%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5)添加 `last_share`, `last_price`。
 
 ## 2024-04-13
 
-- [交易推送](https://open.longportapp.com/docs/trade/trade-definition#websocket-%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5)添加 `remark` 备注字段。
+- [交易推送](https://open.longbridge.com/docs/trade/trade-definition#websocket-%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5)添加 `remark` 备注字段。
 
 ## 2023-11-03
 

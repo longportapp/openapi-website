@@ -3,13 +3,13 @@ title: General
 sidebar_position: 0
 ---
 
-## Q1: Do I need to open a live account to call LongPort OpenAPI?
+## Q1: Do I need to open a live account to call Longbridge OpenAPI?
 
 A: We provide a paper account, you can use it to complete the debugging of the OpenAPI quote and trading interfaces.
 
 ## Q2: How to open a paper account for debugging?
 
-A: Please visit [Development Center](https://open.longportapp.com/account/) to enable the paper account and obtain the corresponding App Key & Secret and Access Token.
+A: Please visit [Development Center](https://open.longbridge.com/account/) to enable the paper account and obtain the corresponding App Key & Secret and Access Token.
 
 ## Q3: Are the trading permissions for simulation debugging the same as for real accounts?
 
@@ -31,7 +31,7 @@ A: Please visit [Rate Limit](docs/#rate-limit) for specific descriptions.
 
 A: If a customer holds multiple securities accounts, such as intraday financing or other sub-accounts, the trading interface call frequency limits are calculated and controlled based on different securities accounts, while quote interface calls are not affected by multiple accounts and are uniformly limited.
 
-## Q7: Are there additional charges for trading operations through LongPort OpenAPI?
+## Q7: Are there additional charges for trading operations through Longbridge OpenAPI?
 
 A: We do not charge additional fees for accessing market queries, trading, etc., via OpenAPI. For account-related fees such as trading commissions, platform fees, and market permissions, please refer to the information provided by the app and the official website.
 

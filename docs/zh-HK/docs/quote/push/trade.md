@@ -19,15 +19,15 @@ sidebar_position: 4
 
 ### Properties
 
-| Name            | Type     | Description                                                                        |
-| --------------- | -------- | ---------------------------------------------------------------------------------- |
-| symbol          | string   | 標的代碼，例如：`AAPL.US`                                                          |
-| sequence        | int64    | 序列號                                                                             |
-| trades          | object[] | 逐筆明細數據                                                                       |
-| ∟ price         | string   | 價格                                                                               |
-| ∟ volume        | int64    | 成交量                                                                             |
-| ∟ timestamp     | int64    | 成交時間                                                                           |
-| ∟ trade_type    | string   | [交易類型說明](#交易類型)                                                          |
+| Name            | Type     | Description                                                                       |
+|-----------------|----------|-----------------------------------------------------------------------------------|
+| symbol          | string   | 標的代碼，例如：`AAPL.US`                                                           |
+| sequence        | int64    | 序列號                                                                            |
+| trades          | object[] | 逐筆明細數據                                                                      |
+| ∟ price         | string   | 價格                                                                              |
+| ∟ volume        | int64    | 成交量                                                                            |
+| ∟ timestamp     | int64    | 成交時間                                                                          |
+| ∟ trade_type    | string   | [交易類型說明](#交易類型)                                                         |
 | ∟ direction     | int32    | 交易方向 <br /><br />**可选值：**<br />`0` - neutral<br />`1` - down<br />`2` - up |
 | ∟ trade_session | int32    | 交易時段，詳見 [TradeSession](../objects#tradesession---交易時段)                  |
 
@@ -87,15 +87,15 @@ message Trade {
 
 ```python
 # 實時成交明細推送
-# https://open.longportapp.com/docs/quote/push/push-trade
+# https://open.longbridge.com/docs/quote/push/push-trade
 # 訂閱行情數據請檢查“開發者中心“ - “行情權限”是否正確
-# https://open.longportapp.com/account
+# https://open.longbridge.com/account
 #
 # - 港股 - BMP 基礎報價，無實時行情推送，無法用 WebSocket 訂閱
 # - 美股 - LV1 納斯達克最優報價 (只限 OpenAPI）
 #
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
+# 如沒有開通行情權限，可以通過“Longbridge”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from time import sleep
 from longport.openapi import QuoteContext, Config, SubType, PushTrades
 
@@ -104,7 +104,7 @@ def on_trades(symbol: str, event: PushTrades):
 
 config = Config.from_env()
 ctx = QuoteContext(config)
-ctx.set_on_trades(on_trade)
+ctx.set_on_trades(on_trades)
 
 ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Trade])
 sleep(30)

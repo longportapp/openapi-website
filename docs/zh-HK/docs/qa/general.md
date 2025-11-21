@@ -3,13 +3,13 @@ title: 通用問題
 sidebar_position: 0
 ---
 
-## Q1: 一定要開通真實帳號才能呼叫 LongPort OpenAPI 嗎？
+## Q1: 一定要開通真實帳號才能呼叫 Longbridge OpenAPI 嗎？
 
 A: 我們已提供了模擬帳戶，你可以用模擬帳戶來完成 OpenAPI 的行情和交易介面偵錯。
 
 ## Q2: 如何開通模擬帳戶調試？
 
-A: 請造訪 [開發者中心](https://open.longportapp.com/account/) 開啟**模擬帳號**並取得模擬帳號對應的 App Key & Secret 以及 Access Token 等資訊。
+A: 請造訪 [開發者中心](https://open.longbridge.com/account/) 開啟**模擬帳號**並取得模擬帳號對應的 App Key & Secret 以及 Access Token 等資訊。
 
 ## Q3: 模擬偵錯的行情交易權限與真實帳戶相同嗎？
 
@@ -31,7 +31,7 @@ A: 請造訪 [頻率限制](/docs/#rate-limit) 查看具體描述。
 
 A: 若客戶持有多個證券帳戶，例如日內融或其他子帳戶，交易介面呼叫頻次及數量限制依不同的證券帳戶統計及控制，行情介面則不受多帳戶影響，統一限制。
 
-## Q7: 透過 LongPort OpenAPI 進行交易操作有額外收費嗎
+## Q7: 透過 Longbridge OpenAPI 進行交易操作有額外收費嗎
 
 A: 透過 OpenAPI 存取進行行情查詢、交易等，我們不會收取額外的費用。交易手續費、平台費、行情權限等帳戶相關的費用，請以 App 以及官網提供的資訊為準。
 

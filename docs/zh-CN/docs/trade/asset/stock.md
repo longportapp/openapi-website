@@ -34,7 +34,7 @@ headingLevel: 2
 
 ```python
 # 获取股票持仓
-# https://open.longportapp.com/docs/trade/asset/stock
+# https://open.longbridge.com/docs/trade/asset/stock
 from longport.openapi import TradeContext, Config
 
 config = Config.from_env()

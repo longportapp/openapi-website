@@ -34,7 +34,7 @@ headingLevel: 2
 
 ```python
 # 獲取賬戶資金
-# https://open.longportapp.com/docs/trade/asset/account
+# https://open.longbridge.com/docs/trade/asset/account
 from longport.openapi import TradeContext, Config
 
 config = Config.from_env()
@@ -131,6 +131,6 @@ print(resp)
 | ∟∟ frozen_cash             | string   | true     | 凍結現金                                                                                               |
 | ∟∟ settling_cash           | string   | true     | 待結算現金                                                                                             |
 | ∟∟ currency                | string   | true     | 幣種                                                                                                   |
-| ∟ frozen_transaction_fees  | object[] | false    | 凍結費用                                                                                   |
-| ∟∟ currency                | string   | false    | 幣種                                                                                     |
-| ∟∟ frozen_transaction_fee  | string   | false    | 費用金额                                                                                   |
+| ∟ frozen_transaction_fees  | object[] | false    | 凍結費用                                                                                               |
+| ∟∟ currency                | string   | false    | 幣種                                                                                                   |
+| ∟∟ frozen_transaction_fee  | string   | false    | 費用金额                                                                                               |

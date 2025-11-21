@@ -23,13 +23,13 @@ sidebar_position: 20
 
 ### Parameters
 
-| Name          | Type   | Required | Description                                                               |
-|---------------|--------|----------|---------------------------------------------------------------------------|
+| Name          | Type   | Required | Description                                                                  |
+| ------------- | ------ | -------- | ---------------------------------------------------------------------------- |
 | symbol        | string | 是       | 標的代碼，使用 `ticker.region` 格式，例如：`700.HK`                          |
 | period        | int32  | 是       | k 線週期，例如：`1000`，详见 [Period](../objects#period---k-線週期)          |
 | count         | int32  | 是       | 數據數量，例如：`100`<br /><br />**校验规则：** <br />請求數量最大為 `1000`  |
 | adjust_type   | int32  | 是       | 復權類型，例如：`0`，详见 [AdjustType](../objects#adjusttype---k-線復權類型) |
-| trade_session | int32  | 否       | 交易時段，0: 盤中，100: 所有延長時段（盤前，盤中，盤後，夜盤）                  |
+| trade_session | int32  | 否       | 交易時段，0: 盤中，100: 所有延長時段（盤前，盤中，盤後，夜盤）               |
 
 ### Protobuf
 
@@ -47,9 +47,9 @@ message SecurityCandlestickRequest {
 
 ```python
 # 獲取標的 K 線
-# https://open.longportapp.com/docs/quote/pull/candlestick
+# https://open.longbridge.com/docs/quote/pull/candlestick
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過“LongPort”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
+# 如沒有開通行情權限，可以通過“Longbridge”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from longport.openapi import QuoteContext, Config, Period, AdjustType, TradeSessions
 
 config = Config.from_env()
@@ -67,17 +67,17 @@ resp = ctx.candlesticks("700.HK", Period.Day, 10, AdjustType.NoAdjust, trade_ses
 
 ### Response Properties
 
-| Name            | Type     | Description                                                      |
-|-----------------|----------|------------------------------------------------------------------|
-| symbol          | string   | 標的代碼，例如：`AAPL.US`                                          |
-| candlesticks    | object[] | K 線數據                                                         |
-| ∟ close         | string   | 當前週期收盤價                                                   |
-| ∟ open          | string   | 當前週期開盤價                                                   |
-| ∟ low           | string   | 當前週期最低價                                                   |
-| ∟ high          | string   | 當前週期最高價                                                   |
-| ∟ volume        | int64    | 當前週期成交量                                                   |
-| ∟ turnover      | string   | 當前週期成交額                                                   |
-| ∟ timestamp     | int64    | 當前週期的時間戳                                                 |
+| Name            | Type     | Description                                                       |
+| --------------- | -------- | ----------------------------------------------------------------- |
+| symbol          | string   | 標的代碼，例如：`AAPL.US`                                         |
+| candlesticks    | object[] | K 線數據                                                          |
+| ∟ close         | string   | 當前週期收盤價                                                    |
+| ∟ open          | string   | 當前週期開盤價                                                    |
+| ∟ low           | string   | 當前週期最低價                                                    |
+| ∟ high          | string   | 當前週期最高價                                                    |
+| ∟ volume        | int64    | 當前週期成交量                                                    |
+| ∟ turnover      | string   | 當前週期成交額                                                    |
+| ∟ timestamp     | int64    | 當前週期的時間戳                                                  |
 | ∟ trade_session | int32    | 交易時段，詳見 [TradeSession](../objects#tradesession---交易時段) |
 
 ### Protobuf
@@ -156,12 +156,12 @@ message Candlestick {
 
 ## 錯誤碼
 
-| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                                                               |
-|------------|------------|--------------|--------------------------------------------------------------------|
-| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗                                                 |
-| 3          | 301606     | 限流           | 降低請求頻次                                                           |
-| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理                                               |
+| 協議錯誤碼 | 業務錯誤碼 | 描述           | 排查建議                                                                 |
+| ---------- | ---------- | -------------- | ------------------------------------------------------------------------ |
+| 3          | 301600     | 無效的請求     | 請求參數有誤或解包失敗                                                   |
+| 3          | 301606     | 限流           | 降低請求頻次                                                             |
+| 7          | 301602     | 服務端內部錯誤 | 請重試或聯繫技術人員處理                                                 |
 | 7          | 301600     | 請求數據非法   | 檢查請求的 `symbol`，`count`，`adjust_type`, `period` 數據是否在正確範圍 |
-| 7          | 301603     | 標的無行情     | 標的沒有請求的行情數據                                                 |
-| 7          | 301604     | 無權限         | 沒有獲取標的行情的權限                                                 |
-| 7          | 301607     | 接口限制       | 請求的數據數量超限，減少數據數量                                        |
+| 7          | 301603     | 標的無行情     | 標的沒有請求的行情數據                                                   |
+| 7          | 301604     | 無權限         | 沒有獲取標的行情的權限                                                   |
+| 7          | 301607     | 接口限制       | 請求的數據數量超限，減少數據數量                                         |

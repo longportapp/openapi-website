@@ -12,20 +12,20 @@ id: llm
 
 <video src="https://pub.lbkrs.com/files/202503/SGozJNWBfYpta73i/longport-mcp.mp4" width="100%" autoplay loop controls  />
 
-是的，您可以通過 LongPort OpenAPI 使用我們的 LLM 組件，今天就開始吧！
+是的，您可以通過 Longbridge OpenAPI 使用我們的 LLM 組件，今天就開始吧！
 
 ## LLMs 文本
 
-OpenAPI 文件遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https://open.longportapp.com/llms.txt) 以及每個文件的 Markdown 文件，基於這個 LLMs 文本，你可以為 AI 提供 LongPort OpenAPI 完整的文件字典作為 AI 輔助生成開發的參考信息，這樣 AI 能生成出來的代碼可以更準確。
+OpenAPI 文件遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https://open.longbridge.com/llms.txt) 以及每個文件的 Markdown 文件，基於這個 LLMs 文本，你可以為 AI 提供 Longbridge OpenAPI 完整的文件字典作為 AI 輔助生成開發的參考信息，這樣 AI 能生成出來的代碼可以更準確。
 
-- [https://open.longportapp.com/llms.txt](https://open.longportapp.com/llms.txt) - 大約 2104 個 token。
+- [https://open.longbridge.com/llms.txt](https://open.longbridge.com/llms.txt) - 大約 2104 個 token。
 
 我們的每個文件也都提供 Markdown 格式，當您訪問它們時，只需在 URL 後添加 `.md` 後綴。
 
 例如：
 
-- https://open.longportapp.com/docs/getting-started.md
-- https://open.longportapp.com/docs/quote/pull/static.md
+- https://open.longbridge.com/docs/getting-started.md
+- https://open.longbridge.com/docs/quote/pull/static.md
 
 ### 演示
 
@@ -33,10 +33,10 @@ OpenAPI 文件遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https
 
 ### Cursor 內使用
 
-打開 Cursor，打開命令面板（`Command + Shift + P`）搜索並選擇 **Add New Custom Docs**，並在出來的對話框中輸入 LongPort OpenAPI 的 LLMs Text 地址：
+打開 Cursor，打開命令面板（`Command + Shift + P`）搜索並選擇 **Add New Custom Docs**，並在出來的對話框中輸入 Longbridge OpenAPI 的 LLMs Text 地址：
 
 ```
-https://open.longportapp.com/llms.txt
+https://open.longbridge.com/llms.txt
 ```
 
 添加成功後，Cursor Settings 裡面會是這樣：
@@ -49,7 +49,7 @@ https://open.longportapp.com/llms.txt
 
 ## MCP
 
-我們正在為 LongPort OpenAPI 構建 [MCP](https://modelcontextprotocol.io/) 實現（基於我們的 SDK），您可以在支持 [MCP](https://modelcontextprotocol.io/) 的每個平台上使用它。
+我們正在為 Longbridge OpenAPI 構建 [MCP](https://modelcontextprotocol.io/) 實現（基於我們的 SDK），您可以在支持 [MCP](https://modelcontextprotocol.io/) 的每個平台上使用它。
 
 並且在我們的 GitHub 組織中也是開源的。
 
@@ -116,7 +116,7 @@ longport-mcp -h
 
 ### Cherry Studio 配置
 
-在這一部分，我們將向您展示如何在您的 AI 聊天中配置 LongPort MCP（截圖使用了 [Cherry Studio](https://cherry-ai.com/)）。
+在這一部分，我們將向您展示如何在您的 AI 聊天中配置 Longbridge MCP（截圖使用了 [Cherry Studio](https://cherry-ai.com/)）。
 
 > NOTE: 請注意更新 Cherry Studio 到最新的版本，本文截圖的時候使用的是 v1.5.6。
 

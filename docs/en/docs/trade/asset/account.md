@@ -35,7 +35,7 @@ funds (fund purchase and redemption) information for each currency of the user.
 
 ```python
 # Get Account Balance
-# https://open.longportapp.com/docs/trade/asset/account
+# https://open.longbridge.com/docs/trade/asset/account
 from longport.openapi import TradeContext, Config
 
 config = Config.from_env()
@@ -114,7 +114,7 @@ print(resp)
 <a id="schemaaccountcash_rsp"></a>
 
 | Name                       | Type     | Required | Description                                                                                                                      |
-| -------------------------- | -------- | -------- |----------------------------------------------------------------------------------------------------------------------------------|
+| -------------------------- | -------- | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | list                       | object[] | false    | Account Balance                                                                                                                  |
 | ∟ total_cash               | string   | true     | Total Cash                                                                                                                       |
 | ∟ max_finance_amount       | string   | true     | Maximum Financing Amount                                                                                                         |

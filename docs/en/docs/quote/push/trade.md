@@ -20,7 +20,7 @@ Real-time trades data push of the subscribed security.
 ### Properties
 
 | Name            | Type     | Description                                                                                      |
-| --------------- | -------- | ------------------------------------------------------------------------------------------------ |
+|-----------------|----------|--------------------------------------------------------------------------------------------------|
 | symbol          | string   | Security code, for example: `AAPL.US`                                                            |
 | sequence        | int64    | Sequence number                                                                                  |
 | trades          | object[] | Trades data                                                                                      |
@@ -87,15 +87,15 @@ message Trade {
 
 ```python
 # Push Real-time Trades
-# https://open.longportapp.com/docs/quote/push/push-trade
+# https://open.longbridge.com/docs/quote/push/push-trade
 # To subscribe quotes data, please check whether "Developers" - "Quote authority" is correct.
-# https://open.longportapp.com/account
+# https://open.longbridge.com/account
 #
 # - HK Market - BMP basic quotation is unable to subscribe with WebSocket as it has no real-time quote push.
 # - US Market - LV1 Nasdaq Basic (Only OpenAPI).
 #
 # Before running, please visit the "Developers" to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "LongPort" mobile app.
+# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile app.
 from time import sleep
 from longport.openapi import QuoteContext, Config, SubType, PushTrades
 
@@ -104,7 +104,7 @@ def on_trades(symbol: str, event: PushTrades):
 
 config = Config.from_env()
 ctx = QuoteContext(config)
-ctx.set_on_trades(on_trade)
+ctx.set_on_trades(on_trades)
 
 ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Trade])
 sleep(30)
