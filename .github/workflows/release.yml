@@ -2,8 +2,7 @@ name: Deploy Release
 on:
   push:
     branches:
-      - main
-      - release
+      - longport
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
