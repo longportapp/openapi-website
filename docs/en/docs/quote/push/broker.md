@@ -20,7 +20,7 @@ Real-time brokers data push of the subscribed security.
 ### Properties
 
 | Name         | Type     | Description                           |
-| ------------ | -------- | ------------------------------------- |
+|--------------|----------|---------------------------------------|
 | symbol       | string   | Security code, for example: `AAPL.US` |
 | sequence     | int64    | Sequence number                       |
 | ask_brokers  | object[] | Ask brokers                           |
@@ -69,7 +69,7 @@ config = Config.from_env()
 ctx = QuoteContext(config)
 ctx.set_on_brokers(on_brokers)
 
-ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Brokers], is_first_push=True)
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Brokers])
 sleep(30)
 ```
 

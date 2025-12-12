@@ -20,8 +20,8 @@ sidebar_position: 3
 ### Properties
 
 | Name         | Type     | Description                       |
-| ------------ | -------- | --------------------------------- |
-| symbol       | string   | 标的代码，例如：`AAPL.US`         |
+|--------------|----------|-----------------------------------|
+| symbol       | string   | 标的代码，例如：`AAPL.US`           |
 | sequence     | int64    | 序列号                            |
 | ask_brokers  | object[] | 卖盘经纪队列                      |
 | ∟ position   | int32    | 档位                              |
@@ -69,7 +69,7 @@ config = Config.from_env()
 ctx = QuoteContext(config)
 ctx.set_on_brokers(on_brokers)
 
-ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Brokers], is_first_push=True)
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Brokers])
 sleep(30)
 ```
 

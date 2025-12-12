@@ -19,21 +19,21 @@ sidebar_position: 1
 
 ### Properties
 
-| Name             | Type   | Description                                                                           |
-| ---------------- | ------ | ------------------------------------------------------------------------------------- |
-| symbol           | string | 標的代碼，例如：`AAPL.US`                                                             |
-| sequence         | int64  | 序列號                                                                                |
-| last_done        | string | 最新價                                                                                |
-| open             | string | 開盤價                                                                                |
-| high             | string | 最高價                                                                                |
-| low              | string | 最低價                                                                                |
-| timestamp        | int64  | 最新成交的時間戳                                                                      |
-| volume           | int64  | 成交量                                                                                |
-| turnover         | string | 成交額                                                                                |
+| Name             | Type   | Description                                                                          |
+|------------------|--------|--------------------------------------------------------------------------------------|
+| symbol           | string | 標的代碼，例如：`AAPL.US`                                                              |
+| sequence         | int64  | 序列號                                                                               |
+| last_done        | string | 最新價                                                                               |
+| open             | string | 開盤價                                                                               |
+| high             | string | 最高價                                                                               |
+| low              | string | 最低價                                                                               |
+| timestamp        | int64  | 最新成交的時間戳                                                                     |
+| volume           | int64  | 成交量                                                                               |
+| turnover         | string | 成交額                                                                               |
 | trade_status     | int32  | 交易狀態，詳見 [TradeStatus](../objects#tradestatus---交易狀態)                       |
 | trade_session    | int32  | 交易時段，詳見 [TradeSession](../objects#tradesession---交易時段)                     |
-| current_volume   | int32  | 兩次推送之間增加的成交量                                                              |
-| current_turnover | string | 兩次推送之間增加的成交額                                                              |
+| current_volume   | int32  | 兩次推送之間增加的成交量                                                             |
+| current_turnover | string | 兩次推送之間增加的成交額                                                             |
 | tag              | int32  | 價格數據標籤 <br /><br />**可选值：**<br />`0` - 實時行情<br />`1` - 收盤後的修正數據 |
 
 ### Protobuf
@@ -77,7 +77,7 @@ config = Config.from_env()
 ctx = QuoteContext(config)
 ctx.set_on_quote(on_quote)
 
-ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote], is_first_push=True)
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote])
 sleep(30)
 ```
 
