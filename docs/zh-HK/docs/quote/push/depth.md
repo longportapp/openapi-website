@@ -19,20 +19,20 @@ sidebar_position: 2
 
 ### Properties
 
-| Name        | Type     | Description               |
-| ----------- | -------- | ------------------------- |
+| Name        | Type     | Description             |
+|-------------|----------|-------------------------|
 | symbol      | string   | 標的代碼，例如：`AAPL.US` |
-| sequence    | int64    | 序列號                    |
-| ask         | object[] | 賣盤                      |
-| ∟ position  | int32    | 檔位                      |
-| ∟ price     | string   | 價格                      |
-| ∟ volume    | int64    | 掛單量                    |
-| ∟ order_num | int64    | 訂單數量                  |
-| bid         | object[] | 買盤                      |
-| ∟ position  | int32    | 檔位                      |
-| ∟ price     | string   | 價格                      |
-| ∟ volume    | int64    | 掛單量                    |
-| ∟ order_num | int64    | 訂單數量                  |
+| sequence    | int64    | 序列號                  |
+| ask         | object[] | 賣盤                    |
+| ∟ position  | int32    | 檔位                    |
+| ∟ price     | string   | 價格                    |
+| ∟ volume    | int64    | 掛單量                  |
+| ∟ order_num | int64    | 訂單數量                |
+| bid         | object[] | 買盤                    |
+| ∟ position  | int32    | 檔位                    |
+| ∟ price     | string   | 價格                    |
+| ∟ volume    | int64    | 掛單量                  |
+| ∟ order_num | int64    | 訂單數量                |
 
 ### Protobuf
 
@@ -75,7 +75,7 @@ config = Config.from_env()
 ctx = QuoteContext(config)
 ctx.set_on_depth(on_depth)
 
-ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Depth], is_first_push=True)
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Depth])
 sleep(30)
 ```
 

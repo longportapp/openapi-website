@@ -20,7 +20,7 @@ Real-time depth data push of the subscribed security.
 ### Properties
 
 | Name        | Type     | Description                           |
-| ----------- | -------- | ------------------------------------- |
+|-------------|----------|---------------------------------------|
 | symbol      | string   | Security code, for example: `AAPL.US` |
 | sequence    | int64    | Sequence number                       |
 | ask         | object[] | Ask depth                             |
@@ -75,7 +75,7 @@ config = Config.from_env()
 ctx = QuoteContext(config)
 ctx.set_on_depth(on_depth)
 
-ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Depth], is_first_push=True)
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Depth])
 sleep(30)
 ```
 
