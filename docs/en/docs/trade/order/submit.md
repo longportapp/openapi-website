@@ -33,7 +33,7 @@ This API is used to submit order for HK and US stocks, warrant and option.
 | submitted_price    | string | NO       | Submitted price, example: `388.5`<br/><br/> `LO` / `ELO` / `ALO` / `ODD` / `LIT` Order Required                                                                                |
 | submitted_quantity | string | YES      | Submitted quantity, example: `100`                                                                                                                                             |
 | trigger_price      | string | NO       | Trigger price, example: `388.5`<br/><br/> `LIT` / `MIT` Order Required                                                                                                         |
-| limit_offset       | string | NO       | Limit offset amount<br/><br/> `TSLPAMT` / `TSLPPCT` Order Required                                                                                                             |
+| limit_offset       | string | NO       | Limit offset amount<br/><br/> `TSLPAMT` / `TSLPPCT` Order Required when`limit_depth_level` is set to 0                                                                                              |
 | trailing_amount    | string | NO       | Trailing amount<br/><br/> `TSLPAMT` Order Required                                                                                                                             |
 | trailing_percent   | string | NO       | Trailing percent<br/><br/> `TSLPPCT` Order Required                                                                                                                            |
 | expire_date        | string | NO       | Long term order expire date, format `YYYY-MM-DD`, example: `2022-12-05`<br/><br/> Required when `time_in_force` is `GTD`                                                       |
@@ -41,6 +41,9 @@ This API is used to submit order for HK and US stocks, warrant and option.
 | outside_rth        | string | NO       | Enable or disable outside regular trading hours<br/><br/> **Enum Value:**<br/> `RTH_ONLY` - regular trading hour only<br/> `ANY_TIME` - any time<br/> `OVERNIGHT` - Overnight  |
 | time_in_force      | string | YES      | Time in force Type<br/><br/> **Enum Value:**<br/> `Day` - Day Order<br/> `GTC` - Good Til Canceled Order<br/> `GTD` - Good Til Date Order                                      |
 | remark             | string | NO       | remark (Maximum 255 characters)                                                                                                                                                 |
+| limit_depth_level  | int32  | NO       | Specifies the bid/ask depth level. Value range is -5 ~ 0 ~ 5. <br/>Negative numbers indicate bid levels (e.g., -1 means best bid level 1),<br/>positive numbers indicate ask levels (e.g., 1 means best ask level 1).<br/>When set to 0, the `limit_offset` parameter takes effect.<br/>Valid for `TSLPAMT` / `TSLPPCT` orders. |
+| monitor_price      | string |  NO      | Monitoring price. <br/>Monitoring starts only after reaching this price, updating the reference price.<br/>Valid for `TSLPAMT` / `TSLPPCT` orders. |
+| trigger_count      | int32  |  NO      | Number of triggers. Value range is 0 ~ 3.<br/>Specifies that within 1 minute, the order will only be placed after being triggered multiple times.<br/>Valid for `LIT` / `MIT` / `TSLPAMT` / `TSLPPCT` orders. |
 
 ### Request Example
 

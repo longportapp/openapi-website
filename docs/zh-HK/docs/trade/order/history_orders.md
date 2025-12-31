@@ -95,7 +95,10 @@ print(resp)
         "trigger_price": "",
         "trigger_status": "NOT_USED",
         "updated_at": "1651644898",
-        "remark": ""
+        "remark": "",
+        "limit_depth_level": 0,
+        "monitor_price": "",
+        "trigger_count": 1
       }
     ]
   }
@@ -149,3 +152,6 @@ print(resp)
 | ∟ currency          | string   | true     | 結算貨幣                                                                                                                                                                            |
 | ∟ outside_rth       | string   | true     | 是否允許盤前盤後<br/> 當訂單不是美股時，默認為 UnknownOutsideRth<br/><br/> **可選值：**<br/> `RTH_ONLY` - 不允許盤前盤後<br/> `ANY_TIME` - 允許盤前盤後<br/> `OVERNIGHT` - 夜盤     |
 | ∟ remark            | string   | true     | 備註                                                                                                                                                                                |
+| ∟ limit_depth_level | int32    | true     | 指定買賣檔位   |
+| ∟ monitor_price     | string   | true     | 監控價格       |
+| ∟ trigger_count     | int32    | true     | 觸發次數       |

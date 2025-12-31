@@ -95,7 +95,10 @@ print(resp)
         "trigger_price": "",
         "trigger_status": "NOT_USED",
         "updated_at": "1651644898",
-        "remark": ""
+        "remark": "",
+        "limit_depth_level": 0,
+        "monitor_price": "",
+        "trigger_count": 1
       }
     ]
   }
@@ -149,3 +152,6 @@ print(resp)
 | ∟ currency          | string   | true     | Currency                                                                                                                                                                                                                                            |
 | ∟ outside_rth       | string   | true     | Enable or disable outside regular trading hours<br/> Default is `UnknownOutsideRth` when the order is not a US stock<br/><br/> **Enum Value:**<br/> `RTH_ONLY` - Regular trading hour only<br/> `ANY_TIME` - Any time<br/> `OVERNIGHT` - Overnight" |
 | ∟ remark            | string   | true     | Remark                                                                                                                                                                                                                                              |
+| ∟ limit_depth_level | int32    | true     | Specifies the bid/ask depth level   |
+| ∟ monitor_price     | string   | true     | Monitoring price                    |
+| ∟ trigger_count     | int32    | true     | Number of triggers                  |

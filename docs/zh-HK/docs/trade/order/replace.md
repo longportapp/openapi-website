@@ -32,10 +32,13 @@ headingLevel: 2
 | quantity         | string | YES      | 改單數量，例如：`200`                                                           |
 | price            | string | NO       | 改單價格，例如：`388.5`<br/><br/> `LO` / `ELO` / `ALO` / `ODD` / `LIT` 訂單必填 |
 | trigger_price    | string | NO       | 觸發價格，例如：`388.5`<br/><br/> `LIT` / `MIT` 訂單必填                        |
-| limit_offset     | string | NO       | 指定價差<br/><br/> `TSLPAMT` / `TSLPPCT` 訂單必填                               |
+| limit_offset     | string | NO       | 指定價差<br/><br/> `TSLPAMT` / `TSLPPCT` 訂單在 `limit_depth_level` 為 0 時必填 |
 | trailing_amount  | string | NO       | 跟蹤金額<br/><br/> `TSLPAMT` 訂單必填                                           |
 | trailing_percent | string | NO       | 跟蹤漲跌幅<br/><br/> `TSLPPCT` 訂單必填                                         |
 | remark           | string | NO       | 備註 (最大 64 字符)                                                             |
+| limit_depth_level | int32  | NO      | 指定買賣檔位，`TSLPAMT` / `TSLPPCT` 訂單必填                                     |
+| monitor_price     | string | NO      | 監控價格，`TSLPAMT` / `TSLPPCT` 訂單必填                                        |
+| trigger_count     | int32  | NO      | 觸發次數，`LIT` / `MIT` / `TSLPAMT` / `TSLPPCT` 訂單必填                         |
 
 ### Request Example
 

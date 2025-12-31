@@ -32,10 +32,13 @@ This API is used to replace order, modify quantity or price.
 | quantity         | string | YES      | Replaced quantity, example: `100`                                                              |
 | price            | string | NO       | Replaced price, example: `388.5`<br/><br/> `LO` / `ELO` / `ALO` / `ODD` / `LIT` Order Required |
 | trigger_price    | string | NO       | Trigger price, example: `388.5`<br/><br/> `LIT` / `MIT` Order Required                         |
-| limit_offset     | string | NO       | Limit offset amount<br/><br/> `TSLPAMT` / `TSLPPCT` Order Required                             |
+| limit_offset     | string | NO       | Limit offset amount<br/><br/> `TSLPAMT` / `TSLPPCT` Order Required when`limit_depth_level` is set to 0 |
 | trailing_amount  | string | NO       | Trailing amount<br/><br/> `TSLPAMT` Order Required                                             |
 | trailing_percent | string | NO       | Trailing percent<br/><br/> `TSLPPCT` Order Required                                            |
 | remark           | string | NO       | Remark (Maximum 64 characters)                                                                 |
+| limit_depth_level | int32  | NO      | Specifies the bid/ask depth level. `TSLPAMT` / `TSLPPCT` Order Required                        |
+| monitor_price     | string | NO      | Monitoring price. `TSLPAMT` / `TSLPPCT` Order Required                                         |
+| trigger_count     | int32  | NO      | Number of triggers. `LIT` / `MIT` / `TSLPAMT` / `TSLPPCT` Order Required                       |
 
 ### Request Example
 

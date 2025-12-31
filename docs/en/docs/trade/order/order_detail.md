@@ -79,6 +79,9 @@ print(resp)
     "trailing_amount": "",
     "trailing_percent": "",
     "limit_offset": "",
+    "limit_depth_level": 0,
+    "monitor_price": "",
+    "trigger_count": 1,
     "trigger_status": "NOT_USED",
     "outside_rth": "ANY_TIME",
     "currency": "USD",
@@ -201,3 +204,6 @@ Order Information
 | ∟∟∟ name                   | string   | true     | Charge name                                                                                                                                                                                                                                                    |
 | ∟∟∟ amount                 | string   | true     | Charge amount                                                                                                                                                                                                                                                  |
 | ∟∟∟ currency               | string   | true     | Charge currency                                                                                                                                                                                                                                                |
+| ∟∟∟ limit_depth_level      | int32    | true     | Specifies the bid/ask depth level   |
+| ∟∟∟ monitor_price          | string   | true     | Monitoring price                    |
+| ∟∟∟ trigger_count          | int32    | true     | Number of triggers                  |
