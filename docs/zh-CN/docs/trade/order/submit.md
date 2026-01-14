@@ -29,7 +29,7 @@ headingLevel: 3
 | submitted_price    | string | NO       | 下单价格，例如：`388.5`<br/><br/> `LO` / `ELO` / `ALO` / `ODD` / `LIT` 订单必填                                                           |
 | submitted_quantity | string | YES      | 下单数量，例如：`100`                                                                                                                     |
 | trigger_price      | string | NO       | 触发价格，例如：`388.5`<br/><br/> `LIT` / `MIT` 订单必填                                                                                  |
-| limit_offset       | string | NO       | 指定价差，例如 "1.2" 表示价差 1.2 USD (如果是美股)<br/><br/> `TSLPAMT` / `TSLPPCT` 订单必填                                               |
+| limit_offset       | string | NO       | 指定价差，例如 "1.2" 表示价差 1.2 USD (如果是美股)<br/><br/> `TSLPAMT` / `TSLPPCT` 订单在 `limit_depth_level` 为 0 时必填 |
 | trailing_amount    | string | NO       | 跟踪金额<br/><br/> `TSLPAMT` 订单必填                                                                                                     |
 | trailing_percent   | string | NO       | 跟踪涨跌幅，单位为百分比，例如 "2.5" 表示 "2.5%"<br/><br/> `TSLPPCT` 订单必填                                                             |
 | expire_date        | string | NO       | 长期单过期时间，格式为 `YYYY-MM-DD`, 例如：`2022-12-05`<br/><br/> time_in_force 为 `GTD` 时必填                                           |
@@ -37,6 +37,9 @@ headingLevel: 3
 | outside_rth        | string | NO       | 是否允许盘前盘后，美股必填<br/><br/> **可选值：**<br/> `RTH_ONLY` - 不允许盘前盘后<br/> `ANY_TIME` - 允许盘前盘后<br/> `OVERNIGHT` - 夜盘 |
 | time_in_force      | string | YES      | 订单有效期类型<br/><br/> **可选值：**<br/> `Day` - 当日有效<br/> `GTC` - 撤单前有效<br/> `GTD` - 到期前有效                               |
 | remark             | string | NO       | 备注 (最大 64 字符)                                                                                                                       |
+| limit_depth_level  | int32  | NO       | 指定买卖档位，取值范围为 -5 ～ 0 ～ 5，负数代表买盘档位（如 -1 表示买一），<br/>正数代表卖盘档位（如 1 表示卖一），为 0 时 limit_offset 参数生效<br/>`TSLPAMT` / `TSLPPCT` 订单有效 |
+| monitor_price      | string |  NO      | 监控价格，需要达到该价格才会开始监控，更新参考价<br/>`TSLPAMT` / `TSLPPCT` 订单有效 |
+| trigger_count      | int32  |  NO      | 触发次数，取值范围 0 ~ 3, 表示在 1 分钟内触发多次才会触发订单<br/>`LIT` / `MIT` / `TSLPAMT` / `TSLPPCT` 订单有效 |
 
 ## Examples
 

@@ -32,10 +32,14 @@ headingLevel: 2
 | quantity         | string | YES      | 改单数量，例如：`200`                                                           |
 | price            | string | NO       | 改单价格，例如：`388.5`<br/><br/> `LO` / `ELO` / `ALO` / `ODD` / `LIT` 订单必填 |
 | trigger_price    | string | NO       | 触发价格，例如：`388.5`<br/><br/> `LIT` / `MIT` 订单必填                        |
-| limit_offset     | string | NO       | 指定价差<br/><br/> `TSLPAMT` / `TSLPPCT` 订单必填                               |
+| limit_offset     | string | NO       | 指定价差<br/><br/> `TSLPAMT` / `TSLPPCT` 订单在 `limit_depth_level` 为 0 时必填  |
 | trailing_amount  | string | NO       | 跟踪金额<br/><br/> `TSLPAMT` 订单必填                                           |
 | trailing_percent | string | NO       | 跟踪涨跌幅<br/><br/> `TSLPPCT` 订单必填                                         |
 | remark           | string | NO       | 备注 (最大 64 字符)                                                             |
+| limit_depth_level | int32 | NO       | 指定买卖档位，`TSLPAMT` / `TSLPPCT` 订单必填                                      |
+| monitor_price     | string| NO       | 监控价格，`TSLPAMT` / `TSLPPCT` 订单必填                                         |
+| trigger_count     | int32 | NO       | 触发次数，`LIT` / `MIT` / `TSLPAMT` / `TSLPPCT` 订单必填                         |
+
 
 ### Request Example
 

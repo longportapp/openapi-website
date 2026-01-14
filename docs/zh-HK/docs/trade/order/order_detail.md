@@ -79,6 +79,9 @@ print(resp)
     "trailing_amount": "",
     "trailing_percent": "",
     "limit_offset": "",
+    "limit_depth_level": 0,
+    "monitor_price": "",
+    "trigger_count": 1,
     "trigger_status": "NOT_USED",
     "outside_rth": "ANY_TIME",
     "currency": "USD",
@@ -201,3 +204,6 @@ print(resp)
 | ∟∟∟ name                   | string   | true     | 收費名稱                                                                                                                                                                                           |
 | ∟∟∟ amount                 | string   | true     | 單項收費金額                                                                                                                                                                                       |
 | ∟∟∟ currency               | string   | true     | 收費貨幣                                                                                                                                                                                           |
+| ∟∟∟ limit_depth_level      | int32    | true     | 指定買賣檔位    |
+| ∟∟∟ monitor_price          | string   | true     | 監控價格       |
+| ∟∟∟ trigger_count          | int32    | true     | 觸發次數       |
