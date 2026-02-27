@@ -12,6 +12,7 @@
     "build:canary": "VITE_API_BASE_URL=https://openapi.longbridge.xyz vitepress build docs && bun run build:llms",
     "build:release": "VITE_API_BASE_URL=https://openapi.longportapp.com vitepress build docs && bun run build:llms",
     "build:llms": "bun run script/normalize_md.ts && bun run script/generate-llms.ts",
+    "validate:apis": "node script/validate-http-apis.mjs --spec script/api-validation-cases.example.json",
     "preview": "vitepress preview docs",
     "lint:docs": "prettier -c --parser typescript \"packages/**/*.{js,ts,vue}\"",
     "format:docs": "prettier --write \"packages/**/*.{js,ts,vue}\""
