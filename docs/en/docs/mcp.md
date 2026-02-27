@@ -10,6 +10,9 @@ id: mcp
 
 Longbridge provides an online MCP service so AI tools can securely access market and account capabilities through the Model Context Protocol.
 
+- MCP endpoint: `https://openapi.longbridge.com/mcp`
+- OAuth discovery: `https://openapi.longbridge.com/.well-known/oauth-authorization-server`
+
 > This page describes the **hosted Longbridge MCP service** and its **OAuth authentication flow**.
 
 ## What the Longbridge MCP service can do
