@@ -10,8 +10,8 @@ id: mcp
 
 Longbridge provides an online MCP service so AI tools can securely access market and account capabilities through the Model Context Protocol.
 
-- MCP endpoint: `https://openapi.longbridge.com/mcp`
-- OAuth discovery: `https://openapi.longbridge.com/.well-known/oauth-authorization-server`
+- MCP endpoint: `https://openapi.longbridgeapp.com/mcp`
+- OAuth discovery: `https://openapi.longbridgeapp.com/.well-known/oauth-authorization-server`
 
 > This page describes the **hosted Longbridge MCP service** and its **OAuth authentication flow**.
 
@@ -50,6 +50,12 @@ After approval, the client receives OAuth credentials and the MCP session become
 
 - Access may expire and be refreshed according to OAuth policy.
 - You can revoke access from your Longbridge security/authorization settings at any time.
+
+## Client compatibility note
+
+Some clients that do not fully implement the MCP OAuth 2.1 flow may fail to connect to Longbridge MCP.
+
+For example, older versions of certain clients (such as early Cherry Studio releases) may not complete OAuth correctly. Please upgrade to the latest version of your client.
 
 ## Security notes
 
