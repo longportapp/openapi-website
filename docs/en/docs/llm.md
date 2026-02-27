@@ -27,6 +27,22 @@ For example:
 - https://open.longbridge.com/docs/getting-started.md
 - https://open.longbridge.com/docs/quote/pull/static.md
 
+## Longbridge.com Markdown Access (AI-friendly)
+
+In addition to OpenAPI docs, pages on [https://longbridge.com](https://longbridge.com) are also AI-friendly for markdown retrieval.
+
+You can get markdown content in either way:
+
+1. Add `.md` suffix to page URL
+2. Send request header: `Accept: text/markdown`
+
+Examples:
+
+- `https://longbridge.com/en/pricing.md`
+- `curl -H "Accept: text/markdown" https://longbridge.com/quote/TSLA.US`
+
+This is useful for LLM crawlers, RAG indexing, and tool-based content ingestion while keeping page structure clean.
+
 ### Demo
 
 <video src="https://assets.lbkrs.com/uploads/030b2d42-c693-4290-aff1-9cfa6d819644/92fcb37035f4cc6fea390f63d18da7b5.mp4" width="100%" autoplay loop controls  />
