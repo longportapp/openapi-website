@@ -57,6 +57,48 @@ After approval, the client receives OAuth credentials and the MCP session become
 - Use least-privilege scopes whenever possible.
 - For trading-related prompts, always require human confirmation before order placement.
 
+## Client setup
+
+### ChatGPT
+
+In ChatGPT, open **Settings → Connectors / MCP** (or the MCP entry in your workspace settings), add a new MCP server, and use:
+
+- Server URL: `https://openapi.longbridge.com/mcp`
+
+Then complete the OAuth sign-in flow and grant scopes.
+
+### Claude Code
+
+In Claude Code MCP settings, add a remote MCP server with:
+
+- Server URL: `https://openapi.longbridge.com/mcp`
+
+Finish OAuth in browser, then return to Claude Code to start using tools.
+
+### Cursor
+
+Open **Cursor Settings → MCP Servers**, add a remote MCP server endpoint:
+
+- Server URL: `https://openapi.longbridge.com/mcp`
+
+Complete OAuth authorization and verify tools are listed.
+
+### Zed
+
+In Zed MCP/server integrations, add Longbridge as a remote MCP endpoint:
+
+- Server URL: `https://openapi.longbridge.com/mcp`
+
+Authorize via OAuth and return to Zed for usage.
+
+### OpenClaw
+
+In OpenClaw MCP/tool integration settings, add Longbridge remote MCP endpoint:
+
+- Server URL: `https://openapi.longbridge.com/mcp`
+
+Complete OAuth and confirm the MCP tools are available in your session.
+
 ## Recommended usage pattern
 
 1. Start with read-only tasks (quote/account/position).

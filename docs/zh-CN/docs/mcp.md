@@ -57,6 +57,48 @@ Longbridge MCP 使用 OAuth，用户无需向客户端暴露原始 API 密钥。
 - 遵循最小权限原则，仅授予必要 scope。
 - 涉及交易操作时，建议始终加入人工确认。
 
+## 客户端接入方式
+
+### ChatGPT
+
+在 ChatGPT 的 **Settings → Connectors / MCP**（或工作区 MCP 配置入口）中新增 MCP 服务，填写：
+
+- 服务地址：`https://openapi.longbridge.com/mcp`
+
+然后按页面指引完成 OAuth 授权。
+
+### Claude Code
+
+在 Claude Code 的 MCP 配置中新增远程 MCP 服务：
+
+- 服务地址：`https://openapi.longbridge.com/mcp`
+
+浏览器完成 OAuth 后，回到 Claude Code 即可调用工具。
+
+### Cursor
+
+打开 **Cursor Settings → MCP Servers**，新增远程 MCP 服务：
+
+- 服务地址：`https://openapi.longbridge.com/mcp`
+
+完成 OAuth 后，确认工具列表已出现。
+
+### Zed
+
+在 Zed 的 MCP/Server Integration 配置中添加 Longbridge 远程 MCP：
+
+- 服务地址：`https://openapi.longbridge.com/mcp`
+
+完成 OAuth 授权后即可使用。
+
+### OpenClaw
+
+在 OpenClaw 的 MCP/工具集成配置中添加 Longbridge 远程 MCP：
+
+- 服务地址：`https://openapi.longbridge.com/mcp`
+
+完成 OAuth 后，在会话中确认工具可用。
+
 ## 推荐使用方式
 
 1. 先从只读能力开始（行情/账户/持仓）。
