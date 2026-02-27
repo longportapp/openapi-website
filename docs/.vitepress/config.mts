@@ -41,11 +41,21 @@ export default defineConfig(
         localePathname = localePathname.replace('index', '')
       }
       const pathname = localePathname.replace('zh-CN/', '').replace('zh-HK/', '')
+
+      // AI/agent-friendly markdown discovery link
+      // e.g. en/docs/getting-started.md -> /docs/getting-started.md
+      //      zh-CN/docs/index.md      -> /zh-CN/docs.md
+      let markdownPath = page.startsWith('en/') ? page.slice(3) : page
+      if (markdownPath.endsWith('/index.md')) {
+        markdownPath = markdownPath.replace('/index.md', '.md')
+      }
+
       return [
         ['link', { rel: 'canonical', href: `https://open.longbridge.com/${localePathname}` }],
         ['link', { rel: 'alternate', hreflang: 'en', href: `https://open.longbridge.com/${pathname}` }],
         ['link', { rel: 'alternate', hreflang: 'zh-Hans', href: `https://open.longbridge.com/zh-CN/${pathname}` }],
         ['link', { rel: 'alternate', hreflang: 'zh-Hant', href: `https://open.longbridge.com/zh-HK/${pathname}` }],
+        ['link', { rel: 'alternate', type: 'text/markdown', href: `https://open.longbridge.com/${markdownPath}` }],
       ]
     },
 
