@@ -1,286 +1,172 @@
 ---
-sidebar_position: 5
+sidebar_position: 7
 slug: /mcp
-sidebar_label: MCP 伺服器
+sidebar_label: MCP
+sidebarCollapsed: true
 id: mcp
 ---
 
-# Longbridge MCP 伺服器
+# MCP
 
-我們為 Longbridge OpenAPI 提供了全面的 [MCP](https://modelcontextprotocol.io/) 實現，讓您可以從任何支援 MCP 的 AI 助手中輕鬆訪問金融數據、實時市場數據，甚至讓 AI 直接下單。
+Longport MCP 是基於 Longbridge OpenAPI SDK 實作的 MCP 服務。
 
-<video src="https://pub.lbkrs.com/files/202503/SGozJNWBfYpta73i/longport-mcp.mp4" width="100%" autoplay loop controls  />
+它可讓 Cursor、Cherry Studio、Claude Desktop 等支援 MCP 的 AI 客戶端，透過標準協議存取 Longbridge 的行情與交易能力。
 
-## 什麼是 MCP？
+- 開源地址：[longportapp/openapi/tree/main/mcp](https://github.com/longportapp/openapi/tree/main/mcp)
+- 協議標準：[Model Context Protocol](https://modelcontextprotocol.io/)
 
-Model Context Protocol（模型上下文協議）是一個開放協議，它標準化了應用程式如何為大型語言模型（LLM）提供上下文。透過 MCP，AI 助手可以安全地連接到各種數據源和工具，使它們能夠訪問實時信息並代表您執行操作。
+## 前置條件
 
-> **重要提示：** 之前的 `longport-mcp` CLI 工具已經廢棄，不再建議使用。請使用我們的線上 MCP 伺服器，它提供更好的性能、自動更新和 OAuth 2 安全認證。本文件介紹的是推薦的線上 MCP 伺服器方式。
+開始前請確認：
 
-## Longbridge MCP 伺服器
+- 你已完成 Longbridge 開戶並啟用 OpenAPI 授權。
+- 你已取得以下憑證：
+  - `LONGPORT_APP_KEY`
+  - `LONGPORT_APP_SECRET`
+  - `LONGPORT_ACCESS_TOKEN`
+- （可選）如在中國大陸使用，建議設定：
+  - `LONGPORT_REGION=cn`
 
-我們的 MCP 伺服器為 AI 助手提供直接訪問：
+> 安全提示：`LONGPORT_ACCESS_TOKEN` 等同 API 存取權限，請勿外洩。
 
-- **實時市場數據**：股票價格、報價和市場指數
-- **歷史數據**：歷史股票價格和表現指標
-- **投資組合資訊**：您當前的持倉和頭寸
-- **交易功能**：下單、查看帳戶狀態
-- **市場分析**：技術指標和市場洞察
+## 安裝
 
-### 伺服器端點
+### macOS / Linux
 
-**全球：**
+執行：
 
-```
-https://openapi.longportapp.com/mcp
-```
-
-**中國大陸（加速）：**
-
-```
-https://openapi.longportapp.cn/mcp
+```bash
+curl -sSL https://raw.githubusercontent.com/longportapp/openapi/refs/heads/main/mcp/install | bash
 ```
 
-> 如果您位於中國大陸，我們建議使用 `.cn` 端點以獲得更好的性能和更快的響應時間。
+安裝後驗證：
 
-## 配置
+```bash
+longport-mcp -h
+```
 
-### 在 Claude Desktop 中使用
+### Windows
 
-在您的 Claude Desktop MCP 設定中添加以下配置：
+從以下地址下載 `longport-mcp-x86_64-pc-windows-msvc.zip`：
+
+- [https://github.com/longportapp/openapi/releases](https://github.com/longportapp/openapi/releases)
+
+解壓取得 `longport-mcp.exe`，建議放在固定路徑（例如 `C:\\longport-mcp.exe`）。
+
+## 3 分鐘快速開始
+
+1. 安裝 `longport-mcp`。
+2. 在你的 AI 客戶端中設定 MCP。
+3. 啟動後先用行情/帳戶類提問驗證連線。
+
+`mcp.json` 範例：
 
 ```json
 {
   "mcpServers": {
-    "longbridge": {
-      "type": "http",
-      "url": "https://openapi.longportapp.com/mcp"
-    }
-  }
-}
-```
-
-首次連接時，Claude Desktop 將引導您完成 OAuth 2 授權流程以授予對您 Longbridge 帳戶的訪問權限。
-
-### 在 Cursor 中使用
-
-打開命令面板（`Command + Shift + P`），選擇 **Cursor Settings**，導航到 **MCP Servers**，然後點擊 **Add new global MCP server**。
-
-在 `mcp.json` 文件中添加：
-
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "url": "https://openapi.longportapp.com/mcp"
-    }
-  }
-}
-```
-
-在提示時按照瀏覽器中的 OAuth 2 授權流程操作。
-
-### 在 Claude Code（CLI）中使用
-
-[Claude Code](https://github.com/anthropics/claude-code) 是 Anthropic 的官方命令行介面。
-
-將伺服器添加到您的 `~/.claude/settings.json`：
-
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "type": "http",
-      "url": "https://openapi.longportapp.com/mcp"
-    }
-  }
-}
-```
-
-當您啟動 Claude Code 並與 Longbridge 伺服器互動時，它會自動處理 OAuth 2 授權流程。
-
-### 在 Windsurf 中使用
-
-[Windsurf](https://codeium.com/windsurf) 是 Codeium 的 AI 驅動程式碼編輯器。
-
-1. 打開 Windsurf 設定
-2. 導航到 **Extensions** → **MCP Servers**
-3. 點擊 **Add Server**
-4. 配置伺服器：
-
-```json
-{
-  "name": "longbridge",
-  "url": "https://openapi.longportapp.com/mcp",
-  "type": "http"
-}
-```
-
-### 在 Cline（VS Code 擴展）中使用
-
-[Cline](https://github.com/cline/cline) 是一個流行的支援 MCP 的 VS Code 擴展。
-
-1. 從 VS Code 市場安裝 Cline 擴展
-2. 打開 VS Code 設定（`Cmd/Ctrl + ,`）
-3. 搜索 "Cline MCP"
-4. 添加 Longbridge MCP 伺服器：
-
-```json
-{
-  "cline.mcpServers": {
-    "longbridge": {
-      "url": "https://openapi.longportapp.com/mcp",
-      "type": "http"
-    }
-  }
-}
-```
-
-### 在 Continue.dev 中使用
-
-[Continue](https://continue.dev/) 是一個開源 AI 程式碼助手。
-
-添加到您的 `~/.continue/config.json`：
-
-```json
-{
-  "mcpServers": [
-    {
-      "name": "longbridge",
-      "url": "https://openapi.longportapp.com/mcp",
-      "type": "http"
-    }
-  ]
-}
-```
-
-### 在 Zed 中使用
-
-[Zed](https://zed.dev/) 是一個原生支援 MCP 的高性能程式碼編輯器。
-
-1. 打開 Zed 設定（`Cmd + ,`）
-2. 導航到 **AI** 部分
-3. 添加 MCP 伺服器配置：
-
-```json
-{
-  "assistant": {
-    "mcp_servers": {
-      "longbridge": {
-        "url": "https://openapi.longportapp.com/mcp",
-        "type": "http"
+    "longport-mcp": {
+      "command": "/usr/local/bin/longport-mcp",
+      "env": {
+        "LONGPORT_APP_KEY": "your-app-key",
+        "LONGPORT_APP_SECRET": "your-app-secret",
+        "LONGPORT_ACCESS_TOKEN": "your-access-token"
       }
     }
   }
 }
 ```
 
-### 在 ChatGPT Desktop 中使用
+Windows 範例：
 
-如果您使用支援 MCP 的 ChatGPT Desktop：
-
-1. 打開 ChatGPT 設定
-2. 導航到 **Integrations** → **MCP Servers**
-3. 點擊 **Add Server** 並輸入：
-   - 名稱：`Longbridge`
-   - URL：`https://openapi.longportapp.com/mcp`
-   - 類型：`HTTP with OAuth 2`
-
-### 地區配置
-
-**中國大陸用戶：**
-
-如果您在中國大陸，請將伺服器 URL 替換為加速端點以獲得更好的性能：
-
-```
-https://openapi.longportapp.cn/mcp
+```json
+{
+  "mcpServers": {
+    "longport-mcp": {
+      "command": "C:\\longport-mcp.exe",
+      "env": {
+        "LONGPORT_APP_KEY": "your-app-key",
+        "LONGPORT_APP_SECRET": "your-app-secret",
+        "LONGPORT_ACCESS_TOKEN": "your-access-token"
+      }
+    }
+  }
+}
 ```
 
-只需在配置文件中將 `url` 欄位更新為使用 `.cn` 域名即可。
+如在中國大陸，可增加：
 
-## 示例提示
+```json
+{
+  "LONGPORT_REGION": "cn"
+}
+```
 
-配置完成後，您可以使用自然語言與 AI 互動：
+## 能力分類
 
-**市場數據查詢：**
+依帳戶權限不同，MCP 可提供以下能力：
 
-- "AAPL 和 TSLA 股票的當前價格是多少？"
-- "顯示主要市場指數的當前值"
-- "特斯拉在過去一個月的表現如何？"
+- **Quote（行情）**：快照、即時行情、K 線、歷史資料
+- **Market（市場）**：主要指數與市場概覽
+- **Account（帳戶）**：資金與帳戶摘要
+- **Position（持倉）**：持倉與組合檢視
+- **Trade（交易）**：下單、查單、撤單（需權限）
 
-**歷史分析：**
+> 實際可用工具會因地區與帳戶權限而異。
 
-- "TSLA 和 AAPL 在過去一年的股票價格歷史是什麼？"
-- "比較 TSLA、AAPL 和 NVDA 在過去 3 個月的表現"
+## 範例提問
 
-**投資組合管理：**
+連接 MCP 後可這樣詢問：
 
-- "為我持有的股票生成投資組合表現圖表"
-- "顯示我當前的頭寸及其盈虧"
-- "我的投資組合配置是怎樣的？"
+- 「AAPL 和 TSLA 現價是多少？」
+- 「TSLA 最近一個月表現如何？」
+- 「給我目前帳戶摘要和持倉情況。」
+- 「比較 TSLA、AAPL、NVDA 過去 3 個月表現。」
+- 「生成我的組合表現表格與圓餅圖（只回傳結果，不要程式碼）。」
 
-**交易操作：**
+## Cursor 設定
 
-- "檢查我今天持有的股票價格，如果下跌超過 3%，以市場價賣出 1/3"
-- "下一個限價單，以 150 美元買入 100 股 AAPL"
+1. 打開命令面板（`Command + Shift + P`）
+2. 進入 **Cursor Settings**
+3. 選擇 **MCP Servers**
+4. 點擊 **Add new global MCP server**
+5. 在 `mcp.json` 填入你的憑證
 
-## 可用工具
+## Cherry Studio 設定
 
-Longbridge MCP 伺服器提供以下功能：
+建議使用 **STDIO 模式**，並確保系統可找到 `longport-mcp` 命令（或使用絕對路徑）。
 
-### 報價工具
+中國大陸使用者建議增加：
 
-- 獲取股票實時報價
-- 獲取歷史價格數據
-- 訪問市場指數和板塊表現
-- 查詢交易量和市場深度
+```bash
+LONGPORT_REGION=cn
+```
 
-### 帳戶工具
+## 安全與風控建議
 
-- 查看帳戶餘額和購買力
-- 檢查當前頭寸和持倉
-- 查看訂單歷史
-- 監控投資組合表現
+- AI 生成的交易指令必須人工覆核。
+- 建議先從只讀能力開始（行情/帳戶/持倉）。
+- 如啟用交易指令，建議加入硬性限制，例如：
+  - 單筆金額上限
+  - 僅允許指定標的
+  - 下單前強制確認
+- 初次使用建議先小額驗證。
 
-### 交易工具
+## 常見問題排查
 
-- 下市價單和限價單
-- 修改或取消待處理訂單
-- 設置條件訂單
-- 執行多腿策略
+### Authentication failed / invalid token
 
-### 分析工具
+- 檢查 3 個憑證是否正確。
+- 確認 token 未過期、未被撤銷。
 
-- 計算技術指標
-- 生成表現報告
-- 比較多個證券
-- 創建自定義視覺化
+### MCP 已啟動但看不到工具
 
-## 安全性
+- 確認客戶端讀取的是正確的 `mcp.json`。
+- 修改設定後重啟 AI 客戶端。
 
-Longbridge MCP 伺服器使用 OAuth 2 進行安全認證：
+### Windows 找不到可執行檔
 
-- **無憑證儲存**：您的憑證永遠不會儲存在配置文件中
-- **安全令牌交換**：OAuth 2 令牌由您的 MCP 客戶端安全管理
-- **HTTPS 加密**：所有通訊都透過 HTTPS 加密
-- **令牌刷新**：訪問令牌在需要時自動刷新
+- 請使用絕對路徑，例如 `C:\\longport-mcp.exe`。
 
-您將在初始設定期間透過瀏覽器授權訪問。授權後，MCP 客戶端會安全地管理您的會話令牌。
+### 中國大陸網路不穩定
 
-## 速率限制
-
-MCP 伺服器受到與標準 Longbridge OpenAPI 相同的速率限制。有關詳細資訊，請參閱我們的[速率限制](/docs/rate-limits)文件。
-
-## 支援
-
-如果您遇到任何問題或有疑問：
-
-- 查看我們的[文件](/docs/getting-started)
-- 訪問我們的 [GitHub 倉庫](https://github.com/longportapp/openapi)
-- 聯繫我們的支援團隊
-
-## 下一步
-
-- 探索我們的 [API 文件](/docs/quote/pull/static)以了解可用數據
-- 了解[交易 API](/docs/trade/order/submit) 功能
-- 加入我們的開發者社群獲取提示和最佳實踐
+- 增加 `LONGPORT_REGION=cn`。

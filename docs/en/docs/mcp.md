@@ -1,286 +1,172 @@
 ---
-sidebar_position: 5
+sidebar_position: 7
 slug: /mcp
-sidebar_label: MCP Server
+sidebar_label: MCP
+sidebarCollapsed: true
 id: mcp
 ---
 
-# Longbridge MCP Server
+# MCP
 
-We provide a comprehensive [MCP](https://modelcontextprotocol.io/) implementation for Longbridge OpenAPI, allowing you to easily access financial data, real-time market data, and even enable AI to place orders directly from any AI assistant that supports MCP.
+Longport MCP is an MCP server based on Longbridge OpenAPI SDK.
 
-<video src="https://pub.lbkrs.com/files/202503/SGozJNWBfYpta73i/longport-mcp.mp4" width="100%" autoplay loop controls  />
+It allows AI clients (such as Cursor, Cherry Studio, Claude Desktop, etc.) to access Longbridge market data and trading capabilities through a standardized protocol.
 
-## What is MCP?
+- Source code: [longportapp/openapi/tree/main/mcp](https://github.com/longportapp/openapi/tree/main/mcp)
+- Protocol: [Model Context Protocol](https://modelcontextprotocol.io/)
 
-The Model Context Protocol (MCP) is an open protocol that standardizes how applications provide context to Large Language Models (LLMs). With MCP, AI assistants can securely connect to various data sources and tools, enabling them to access real-time information and perform actions on your behalf.
+## Prerequisites
 
-> **Important Notice:** The previous `longport-mcp` CLI tool has been deprecated and is no longer recommended. Please use our online MCP Server instead, which provides better performance, automatic updates, and OAuth 2 security. This documentation covers the recommended online MCP Server approach.
+Before using MCP, please make sure:
 
-## Longbridge MCP Server
+- You have completed Longbridge account opening and OpenAPI authorization.
+- You have obtained these credentials:
+  - `LONGPORT_APP_KEY`
+  - `LONGPORT_APP_SECRET`
+  - `LONGPORT_ACCESS_TOKEN`
+- (Optional) If you are in mainland China, set:
+  - `LONGPORT_REGION=cn`
 
-Our MCP server provides AI assistants with direct access to:
+> Security note: `LONGPORT_ACCESS_TOKEN` grants API access. Never share it publicly.
 
-- **Real-time Market Data**: Stock prices, quotes, and market indices
-- **Historical Data**: Historical stock prices and performance metrics
-- **Portfolio Information**: Your current holdings and positions
-- **Trading Capabilities**: Place orders, check account status
-- **Market Analysis**: Technical indicators and market insights
+## Installation
 
-### Server Endpoint
+### macOS or Linux
 
-**Global:**
+Run the following command:
 
-```
-https://openapi.longportapp.com/mcp
-```
-
-**China Mainland (Faster):**
-
-```
-https://openapi.longportapp.cn/mcp
+```bash
+curl -sSL https://raw.githubusercontent.com/longportapp/openapi/refs/heads/main/mcp/install | bash
 ```
 
-> If you're located in China mainland, we recommend using the `.cn` endpoint for better performance and faster response times.
+After installation, verify:
 
-## Configuration
+```bash
+longport-mcp -h
+```
 
-### Using in Claude Desktop
+### Windows
 
-Add the following configuration to your Claude Desktop MCP settings:
+Download `longport-mcp-x86_64-pc-windows-msvc.zip` from:
+
+- [https://github.com/longportapp/openapi/releases](https://github.com/longportapp/openapi/releases)
+
+Extract `longport-mcp.exe` and place it in a fixed location (for example `C:\\longport-mcp.exe`).
+
+## Quick Start (3 minutes)
+
+1. Install `longport-mcp`.
+2. Configure your MCP client.
+3. Start your AI client and test with quote/account prompts.
+
+Example `mcp.json`:
 
 ```json
 {
   "mcpServers": {
-    "longbridge": {
-      "type": "http",
-      "url": "https://openapi.longportapp.com/mcp"
-    }
-  }
-}
-```
-
-When you first connect, Claude Desktop will guide you through the OAuth 2 authorization flow to grant access to your Longbridge account.
-
-### Using in Cursor
-
-Open the command palette (`Command + Shift + P`), select **Cursor Settings**, navigate to **MCP Servers**, and click **Add new global MCP server**.
-
-In the `mcp.json` file, add:
-
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "url": "https://openapi.longportapp.com/mcp"
-    }
-  }
-}
-```
-
-Follow the OAuth 2 authorization flow in your browser when prompted.
-
-### Using in Claude Code (CLI)
-
-[Claude Code](https://github.com/anthropics/claude-code) is Anthropic's official command-line interface for Claude.
-
-Add the server to your `~/.claude/settings.json`:
-
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "type": "http",
-      "url": "https://openapi.longportapp.com/mcp"
-    }
-  }
-}
-```
-
-When you start Claude Code and interact with the Longbridge server, it will automatically handle the OAuth 2 authorization flow.
-
-### Using in Windsurf
-
-[Windsurf](https://codeium.com/windsurf) is an AI-powered code editor by Codeium.
-
-1. Open Windsurf Settings
-2. Navigate to **Extensions** → **MCP Servers**
-3. Click **Add Server**
-4. Configure the server:
-
-```json
-{
-  "name": "longbridge",
-  "url": "https://openapi.longportapp.com/mcp",
-  "type": "http"
-}
-```
-
-### Using in Cline (VS Code Extension)
-
-[Cline](https://github.com/cline/cline) is a popular VS Code extension that supports MCP.
-
-1. Install the Cline extension from VS Code Marketplace
-2. Open VS Code Settings (`Cmd/Ctrl + ,`)
-3. Search for "Cline MCP"
-4. Add the Longbridge MCP server:
-
-```json
-{
-  "cline.mcpServers": {
-    "longbridge": {
-      "url": "https://openapi.longportapp.com/mcp",
-      "type": "http"
-    }
-  }
-}
-```
-
-### Using in Continue.dev
-
-[Continue](https://continue.dev/) is an open-source AI code assistant.
-
-Add to your `~/.continue/config.json`:
-
-```json
-{
-  "mcpServers": [
-    {
-      "name": "longbridge",
-      "url": "https://openapi.longportapp.com/mcp",
-      "type": "http"
-    }
-  ]
-}
-```
-
-### Using in Zed
-
-[Zed](https://zed.dev/) is a high-performance code editor with native MCP support.
-
-1. Open Zed Settings (`Cmd + ,`)
-2. Navigate to the **AI** section
-3. Add MCP server configuration:
-
-```json
-{
-  "assistant": {
-    "mcp_servers": {
-      "longbridge": {
-        "url": "https://openapi.longportapp.com/mcp",
-        "type": "http"
+    "longport-mcp": {
+      "command": "/usr/local/bin/longport-mcp",
+      "env": {
+        "LONGPORT_APP_KEY": "your-app-key",
+        "LONGPORT_APP_SECRET": "your-app-secret",
+        "LONGPORT_ACCESS_TOKEN": "your-access-token"
       }
     }
   }
 }
 ```
 
-### Using in ChatGPT Desktop
+For Windows:
 
-If you're using ChatGPT Desktop with MCP support:
-
-1. Open ChatGPT Settings
-2. Navigate to **Integrations** → **MCP Servers**
-3. Click **Add Server** and enter:
-   - Name: `Longbridge`
-   - URL: `https://openapi.longportapp.com/mcp`
-   - Type: `HTTP with OAuth 2`
-
-### Regional Configuration
-
-**For China Mainland Users:**
-
-If you're in China mainland, replace the server URL with the accelerated endpoint for better performance:
-
-```
-https://openapi.longportapp.cn/mcp
+```json
+{
+  "mcpServers": {
+    "longport-mcp": {
+      "command": "C:\\longport-mcp.exe",
+      "env": {
+        "LONGPORT_APP_KEY": "your-app-key",
+        "LONGPORT_APP_SECRET": "your-app-secret",
+        "LONGPORT_ACCESS_TOKEN": "your-access-token"
+      }
+    }
+  }
+}
 ```
 
-Simply update the `url` field in your configuration file to use the `.cn` domain.
+If needed (mainland China):
+
+```json
+{
+  "LONGPORT_REGION": "cn"
+}
+```
+
+## Capability Categories
+
+Depending on your account and permissions, MCP tools can cover:
+
+- **Quote**: snapshot, real-time quote, candlesticks, history
+- **Market**: major indexes and market overview
+- **Account**: balances and account summary
+- **Position**: holdings and portfolio views
+- **Trade**: submit/query/cancel orders (if enabled)
+
+> Actual available tools may vary by region and account permission.
 
 ## Example Prompts
 
-Once configured, you can interact with AI using natural language:
+After MCP is connected, try:
 
-**Market Data Queries:**
+- "What's the current price of AAPL and TSLA?"
+- "How did TSLA perform in the last month?"
+- "Show my current account summary and holdings."
+- "Compare TSLA, AAPL, and NVDA in the past 3 months."
+- "Generate a portfolio summary table and pie chart (return result only, no code)."
 
-- "What's the current price of AAPL and TSLA stock?"
-- "Show me the current values of major market indices"
-- "How has Tesla performed over the past month?"
+## Cursor Configuration
 
-**Historical Analysis:**
+1. Open command palette (`Command + Shift + P`).
+2. Enter **Cursor Settings**.
+3. Open **MCP Servers**.
+4. Click **Add new global MCP server**.
+5. Edit `mcp.json` with your credentials.
 
-- "What's the stock price history for TSLA and AAPL over the last year?"
-- "Compare the performance of TSLA, AAPL, and NVDA over the past 3 months"
+## Cherry Studio Configuration
 
-**Portfolio Management:**
+Use **STDIO mode** and ensure `longport-mcp` is available on your system path (or use absolute executable path).
 
-- "Generate a portfolio performance chart for my holding stocks"
-- "Show me my current positions and their P&L"
-- "What's my portfolio allocation?"
+If you are in mainland China, add:
 
-**Trading Actions:**
+```bash
+LONGPORT_REGION=cn
+```
 
-- "Check the price of the stocks I hold today, and if they fall by more than 3%, sell 1/3 at market price"
-- "Place a limit order to buy 100 shares of AAPL at $150"
+## Safety & Risk Control
 
-## Available Tools
+- Always review AI-generated trading instructions before execution.
+- Start with read-only tasks first (quote/account/position).
+- If you enable trading prompts, add constraints, for example:
+  - max order amount
+  - allowed symbols only
+  - confirmation required before order placement
+- For first-time usage, prefer small-size orders.
 
-The Longbridge MCP server provides the following capabilities:
+## Troubleshooting
 
-### Quote Tools
+### Authentication failed / invalid token
 
-- Get real-time quotes for stocks
-- Fetch historical price data
-- Access market indices and sector performance
-- Query trading volume and market depth
+- Re-check all 3 credentials.
+- Ensure token is not expired or revoked.
 
-### Account Tools
+### MCP server starts but no tools shown
 
-- View account balance and buying power
-- Check current positions and holdings
-- Review order history
-- Monitor portfolio performance
+- Confirm your client loaded the correct `mcp.json`.
+- Restart the AI client after config changes.
 
-### Trading Tools
+### Windows cannot find executable
 
-- Place market and limit orders
-- Modify or cancel pending orders
-- Set up conditional orders
-- Execute multi-leg strategies
+- Use absolute path, such as `C:\\longport-mcp.exe`.
 
-### Analysis Tools
+### Connection unstable in mainland China
 
-- Calculate technical indicators
-- Generate performance reports
-- Compare multiple securities
-- Create custom visualizations
-
-## Security
-
-The Longbridge MCP server uses OAuth 2 for secure authentication:
-
-- **No credential storage**: Your credentials are never stored in configuration files
-- **Secure token exchange**: OAuth 2 tokens are securely managed by your MCP client
-- **HTTPS encryption**: All communications are encrypted via HTTPS
-- **Token refresh**: Access tokens are automatically refreshed when needed
-
-You'll be prompted to authorize access through your browser during the initial setup. After authorization, the MCP client securely manages your session tokens.
-
-## Rate Limits
-
-The MCP server is subject to the same rate limits as the standard Longbridge OpenAPI. See our [Rate Limits](/docs/rate-limits) documentation for details.
-
-## Support
-
-If you encounter any issues or have questions:
-
-- Check our [Documentation](/docs/getting-started)
-- Visit our [GitHub Repository](https://github.com/longportapp/openapi)
-- Contact our support team
-
-## Next Steps
-
-- Explore our [API Documentation](/docs/quote/pull/static) for available data
-- Learn about [Trading API](/docs/trade/order/submit) capabilities
-- Join our developer community for tips and best practices
+- Add `LONGPORT_REGION=cn`.
