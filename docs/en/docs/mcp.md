@@ -10,8 +10,8 @@ id: mcp
 
 Longbridge provides an online MCP service so AI tools can securely access market and account capabilities through the Model Context Protocol.
 
-- MCP endpoint: `https://openapi.longbridge.com/mcp`
-- OAuth discovery: `https://openapi.longbridge.com/.well-known/oauth-authorization-server`
+- MCP endpoint: `https://openapi.longbridgeapp.com/mcp`
+- OAuth discovery: `https://openapi.longbridgeapp.com/.well-known/oauth-authorization-server`
 
 > This page describes the **hosted Longbridge MCP service** and its **OAuth authentication flow**.
 
@@ -69,7 +69,7 @@ For example, older versions of certain clients (such as early Cherry Studio rele
 
 In ChatGPT, open **Settings → Connectors / MCP** (or the MCP entry in your workspace settings), add a new MCP server, and use:
 
-- Server URL: `https://openapi.longbridge.com/mcp`
+- Server URL: `https://openapi.longbridgeapp.com/mcp`
 
 Then complete the OAuth sign-in flow and grant scopes.
 
@@ -77,7 +77,7 @@ Then complete the OAuth sign-in flow and grant scopes.
 
 In Claude Code MCP settings, add a remote MCP server with:
 
-- Server URL: `https://openapi.longbridge.com/mcp`
+- Server URL: `https://openapi.longbridgeapp.com/mcp`
 
 Finish OAuth in browser, then return to Claude Code to start using tools.
 
@@ -85,7 +85,7 @@ Finish OAuth in browser, then return to Claude Code to start using tools.
 
 Open **Cursor Settings → MCP Servers**, add a remote MCP server endpoint:
 
-- Server URL: `https://openapi.longbridge.com/mcp`
+- Server URL: `https://openapi.longbridgeapp.com/mcp`
 
 Complete OAuth authorization and verify tools are listed.
 
@@ -93,7 +93,7 @@ Complete OAuth authorization and verify tools are listed.
 
 In Zed MCP/server integrations, add Longbridge as a remote MCP endpoint:
 
-- Server URL: `https://openapi.longbridge.com/mcp`
+- Server URL: `https://openapi.longbridgeapp.com/mcp`
 
 Authorize via OAuth and return to Zed for usage.
 
@@ -101,7 +101,7 @@ Authorize via OAuth and return to Zed for usage.
 
 In OpenClaw MCP/tool integration settings, add Longbridge remote MCP endpoint:
 
-- Server URL: `https://openapi.longbridge.com/mcp`
+- Server URL: `https://openapi.longbridgeapp.com/mcp`
 
 Complete OAuth and confirm the MCP tools are available in your session.
 
