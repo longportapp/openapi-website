@@ -7,13 +7,15 @@ Validate documented HTTP APIs against real service behavior (`openapi.longbridge
 ## Run
 
 ```bash
+npm run generate:api-cases
 npm run validate:apis
 ```
 
 Equivalent:
 
 ```bash
-node script/validate-http-apis.mjs --spec script/api-validation-cases.example.json
+node script/generate-cases-from-openapi.mjs --openapi openapi/openapi.baseline.json --out script/api-validation-cases.generated.json
+node script/validate-http-apis.mjs --spec script/api-validation-cases.generated.json
 ```
 
 ## Auth Modes

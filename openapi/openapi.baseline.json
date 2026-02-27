@@ -1,0 +1,97 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Longbridge OpenAPI Validation Baseline",
+    "version": "0.1.0",
+    "description": "Baseline OpenAPI contract used for doc-validation automation. Extend this incrementally with every documented endpoint."
+  },
+  "servers": [
+    {
+      "url": "https://openapi.longbridge.xyz"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "OAuth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://openapi.longbridge.xyz/oauth2/authorize",
+            "tokenUrl": "https://openapi.longbridge.xyz/oauth2/token",
+            "scopes": {
+              "18": "Quote",
+              "19": "Trade",
+              "20": "Account",
+              "21": "Position",
+              "22": "Other"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "BaseResponse": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "integer" },
+          "message": { "type": "string" },
+          "data": {}
+        },
+        "required": ["code", "message"]
+      }
+    }
+  },
+  "paths": {
+    "/v1/test": {
+      "get": {
+        "summary": "Service health check",
+        "operationId": "healthCheck",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BaseResponse" }
+              }
+            }
+          }
+        },
+        "x-validation": {
+          "expectedStatus": 200,
+          "expectJsonCode": 0
+        }
+      }
+    },
+    "/.well-known/oauth-authorization-server": {
+      "get": {
+        "summary": "OAuth 2 authorization server discovery",
+        "operationId": "oauthDiscovery",
+        "responses": {
+          "200": {
+            "description": "OAuth discovery document"
+          }
+        },
+        "x-validation": {
+          "expectedStatus": 200,
+          "expectBodyContains": ["token_endpoint", "authorization_endpoint"]
+        }
+      }
+    },
+    "/v1/asset/account": {
+      "get": {
+        "summary": "Account balance",
+        "operationId": "assetAccount",
+        "security": [{ "OAuth2": [] }],
+        "responses": {
+          "200": { "description": "Authorized response" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "x-validation": {
+          "expectedStatus": [401, 403],
+          "requiresAuth": false
+        }
+      }
+    }
+  }
+}
