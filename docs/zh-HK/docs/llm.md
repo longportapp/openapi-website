@@ -39,7 +39,7 @@ OpenAPI 文件遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https
 範例：
 
 - `https://longbridge.com/en/pricing.md`
-- `curl -H "Accept: text/markdown" https://longbridge.com/en/pricing`
+- `curl -H "Accept: text/markdown" https://longbridge.com/quote/TSLA.US`
 
 這個能力適合 LLM 抓取、RAG 建索引，以及工具化讀取頁面內容，同時保持頁面結構清晰。
 

@@ -39,7 +39,7 @@ You can get markdown content in either way:
 Examples:
 
 - `https://longbridge.com/en/pricing.md`
-- `curl -H "Accept: text/markdown" https://longbridge.com/en/pricing`
+- `curl -H "Accept: text/markdown" https://longbridge.com/quote/TSLA.US`
 
 This is useful for LLM crawlers, RAG indexing, and tool-based content ingestion while keeping page structure clean.
 
