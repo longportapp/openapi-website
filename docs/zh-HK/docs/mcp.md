@@ -10,8 +10,8 @@ id: mcp
 
 Longbridge 提供線上 MCP 服務，讓 AI 工具可透過 Model Context Protocol 安全存取行情與帳戶能力。
 
-- MCP 服務地址：`https://openapi.longbridgeapp.com/mcp`
-- OAuth 發現地址：`https://openapi.longbridgeapp.com/.well-known/oauth-authorization-server`
+- MCP 服務地址：`https://openapi.longbridge.com/mcp`
+- OAuth 發現地址：`https://openapi.longbridge.com/.well-known/oauth-authorization-server`
 
 > 本頁僅說明 **Longbridge MCP 線上服務** 與其 **OAuth 驗證流程**。
 
