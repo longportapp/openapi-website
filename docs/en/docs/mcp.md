@@ -8,165 +8,72 @@ id: mcp
 
 # MCP
 
-Longport MCP is an MCP server based on Longbridge OpenAPI SDK.
+Longbridge provides an online MCP service so AI tools can securely access market and account capabilities through the Model Context Protocol.
 
-It allows AI clients (such as Cursor, Cherry Studio, Claude Desktop, etc.) to access Longbridge market data and trading capabilities through a standardized protocol.
+> This page describes the **hosted Longbridge MCP service** and its **OAuth authentication flow**.
 
-- Source code: [longportapp/openapi/tree/main/mcp](https://github.com/longportapp/openapi/tree/main/mcp)
-- Protocol: [Model Context Protocol](https://modelcontextprotocol.io/)
+## What the Longbridge MCP service can do
 
-## Prerequisites
+After authorization, MCP clients can use Longbridge capabilities such as:
 
-Before using MCP, please make sure:
+- Market quotes and snapshots
+- Candlesticks and historical data queries
+- Account overview and position queries
+- Trading actions (subject to account permissions and product rules)
 
-- You have completed Longbridge account opening and OpenAPI authorization.
-- You have obtained these credentials:
-  - `LONGPORT_APP_KEY`
-  - `LONGPORT_APP_SECRET`
-  - `LONGPORT_ACCESS_TOKEN`
-- (Optional) If you are in mainland China, set:
-  - `LONGPORT_REGION=cn`
+Actual tool availability may vary by region, account level, and permission scope.
 
-> Security note: `LONGPORT_ACCESS_TOKEN` grants API access. Never share it publicly.
+## OAuth authentication flow
 
-## Installation
+Longbridge MCP uses OAuth so users can authorize clients without sharing raw API secrets.
 
-### macOS or Linux
+### 1) Start MCP connection from your client
 
-Run the following command:
+In your MCP-capable client (for example Cursor, Claude Desktop, or Cherry Studio), choose to connect to the Longbridge MCP server.
 
-```bash
-curl -sSL https://raw.githubusercontent.com/longportapp/openapi/refs/heads/main/mcp/install | bash
-```
+### 2) Redirect to Longbridge authorization page
 
-After installation, verify:
+The client opens a browser page for Longbridge sign-in and consent.
 
-```bash
-longport-mcp -h
-```
+### 3) Sign in and grant permissions
 
-### Windows
+Review requested scopes and approve access.
 
-Download `longport-mcp-x86_64-pc-windows-msvc.zip` from:
+### 4) Receive authorization and establish session
 
-- [https://github.com/longportapp/openapi/releases](https://github.com/longportapp/openapi/releases)
+After approval, the client receives OAuth credentials and the MCP session becomes available.
 
-Extract `longport-mcp.exe` and place it in a fixed location (for example `C:\\longport-mcp.exe`).
+### 5) Refresh and revoke
 
-## Quick Start (3 minutes)
+- Access may expire and be refreshed according to OAuth policy.
+- You can revoke access from your Longbridge security/authorization settings at any time.
 
-1. Install `longport-mcp`.
-2. Configure your MCP client.
-3. Start your AI client and test with quote/account prompts.
+## Security notes
 
-Example `mcp.json`:
+- OAuth credentials are sensitive and should be stored securely by your client.
+- Use least-privilege scopes whenever possible.
+- For trading-related prompts, always require human confirmation before order placement.
 
-```json
-{
-  "mcpServers": {
-    "longport-mcp": {
-      "command": "/usr/local/bin/longport-mcp",
-      "env": {
-        "LONGPORT_APP_KEY": "your-app-key",
-        "LONGPORT_APP_SECRET": "your-app-secret",
-        "LONGPORT_ACCESS_TOKEN": "your-access-token"
-      }
-    }
-  }
-}
-```
+## Recommended usage pattern
 
-For Windows:
-
-```json
-{
-  "mcpServers": {
-    "longport-mcp": {
-      "command": "C:\\longport-mcp.exe",
-      "env": {
-        "LONGPORT_APP_KEY": "your-app-key",
-        "LONGPORT_APP_SECRET": "your-app-secret",
-        "LONGPORT_ACCESS_TOKEN": "your-access-token"
-      }
-    }
-  }
-}
-```
-
-If needed (mainland China):
-
-```json
-{
-  "LONGPORT_REGION": "cn"
-}
-```
-
-## Capability Categories
-
-Depending on your account and permissions, MCP tools can cover:
-
-- **Quote**: snapshot, real-time quote, candlesticks, history
-- **Market**: major indexes and market overview
-- **Account**: balances and account summary
-- **Position**: holdings and portfolio views
-- **Trade**: submit/query/cancel orders (if enabled)
-
-> Actual available tools may vary by region and account permission.
-
-## Example Prompts
-
-After MCP is connected, try:
-
-- "What's the current price of AAPL and TSLA?"
-- "How did TSLA perform in the last month?"
-- "Show my current account summary and holdings."
-- "Compare TSLA, AAPL, and NVDA in the past 3 months."
-- "Generate a portfolio summary table and pie chart (return result only, no code)."
-
-## Cursor Configuration
-
-1. Open command palette (`Command + Shift + P`).
-2. Enter **Cursor Settings**.
-3. Open **MCP Servers**.
-4. Click **Add new global MCP server**.
-5. Edit `mcp.json` with your credentials.
-
-## Cherry Studio Configuration
-
-Use **STDIO mode** and ensure `longport-mcp` is available on your system path (or use absolute executable path).
-
-If you are in mainland China, add:
-
-```bash
-LONGPORT_REGION=cn
-```
-
-## Safety & Risk Control
-
-- Always review AI-generated trading instructions before execution.
-- Start with read-only tasks first (quote/account/position).
-- If you enable trading prompts, add constraints, for example:
-  - max order amount
-  - allowed symbols only
-  - confirmation required before order placement
-- For first-time usage, prefer small-size orders.
+1. Start with read-only tasks (quote/account/position).
+2. Add trading actions only after confirming permission scopes and risk controls.
+3. Set guardrails in prompts (max amount, symbol allowlist, confirmation required).
 
 ## Troubleshooting
 
-### Authentication failed / invalid token
+### OAuth sign-in failed
 
-- Re-check all 3 credentials.
-- Ensure token is not expired or revoked.
+- Confirm your Longbridge account is in good standing.
+- Retry authorization from the MCP client.
+- Check whether the requested scopes are supported for your account.
 
-### MCP server starts but no tools shown
+### Connected but some tools are missing
 
-- Confirm your client loaded the correct `mcp.json`.
-- Restart the AI client after config changes.
+- Your account/region may not have those permissions.
+- Re-authorize if scope has changed.
 
-### Windows cannot find executable
+### Permission denied on trading actions
 
-- Use absolute path, such as `C:\\longport-mcp.exe`.
-
-### Connection unstable in mainland China
-
-- Add `LONGPORT_REGION=cn`.
+- Verify trading permissions and market eligibility on your account.
+- Ensure the MCP session has the required OAuth scopes.
