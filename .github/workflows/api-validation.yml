@@ -46,8 +46,17 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Split Try-It APIs from docs
+        run: bun run split:tryit-apis
+
       - name: Generate API validation cases from OpenAPI
         run: bun run generate:api-cases
 
       - name: Run API validation
         run: bun run validate:apis
+
+      - name: Upload Try-It API split artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: tryit-api-split
+          path: openapi/tryit/*.json
