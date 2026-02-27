@@ -27,6 +27,22 @@ OpenAPI 文档遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https
 - https://open.longbridge.com/docs/getting-started.md
 - https://open.longbridge.com/docs/quote/pull/static.md
 
+## longbridge.com 页面 Markdown 获取（AI 友好）
+
+除了 OpenAPI 文档， [https://longbridge.com](https://longbridge.com) 的页面也支持面向 AI 的 Markdown 获取。
+
+你可以通过两种方式获取页面 Markdown：
+
+1. 在页面 URL 后追加 `.md`
+2. 请求时带上 Header：`Accept: text/markdown`
+
+示例：
+
+- `https://longbridge.com/en/pricing.md`
+- `curl -H "Accept: text/markdown" https://longbridge.com/en/pricing`
+
+这个能力适合 LLM 抓取、RAG 建索引、以及工具化读取页面内容，并且能保持页面结构清晰。
+
 ### 演示
 
 <video src="https://assets.lbkrs.com/uploads/030b2d42-c693-4290-aff1-9cfa6d819644/92fcb37035f4cc6fea390f63d18da7b5.mp4" width="100%" autoplay loop controls  />
