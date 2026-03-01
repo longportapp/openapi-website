@@ -19,7 +19,6 @@ OAuth 2.0 授權服務已可用。對於新接入，建議優先使用 OAuth 2.0
 
 - 生產環境 Discovery：`https://openapi.longportapp.com/.well-known/oauth-authorization-server`
 - 中國內地 Discovery：`https://openapi.longportapp.cn/.well-known/oauth-authorization-server`
-- 測試環境 Discovery（僅用於驗證）：`https://openapi.longbridge.xyz/.well-known/oauth-authorization-server`
 
 目前支持的授權類型（以 Discovery 為準）：
 

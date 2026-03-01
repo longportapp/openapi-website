@@ -11,7 +11,7 @@
     },
     {
       "name": "oauth discovery(test)",
-      "url": "https://openapi.longbridge.xyz/.well-known/oauth-authorization-server",
+      "url": "https://openapi.longportapp.com/.well-known/oauth-authorization-server",
       "status": 200,
       "code": null,
       "message": null
@@ -25,7 +25,7 @@
     },
     {
       "name": "health test(test)",
-      "url": "https://openapi.longbridge.xyz/v1/test",
+      "url": "https://openapi.longportapp.com/v1/test",
       "status": 200,
       "code": 0,
       "message": "success"

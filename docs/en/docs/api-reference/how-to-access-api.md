@@ -19,7 +19,6 @@ OAuth 2.0 authorization server is now available. For new integrations, use OAuth
 
 - Production discovery: `https://openapi.longportapp.com/.well-known/oauth-authorization-server`
 - China discovery: `https://openapi.longportapp.cn/.well-known/oauth-authorization-server`
-- Test discovery (validation only): `https://openapi.longbridge.xyz/.well-known/oauth-authorization-server`
 
 Supported grant types (from discovery):
 
