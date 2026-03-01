@@ -19,8 +19,8 @@ Use OAuth 2.0 for new integrations. It is simpler than the legacy `X-Api-Key` si
 
 ### Quick path (recommended)
 
-1. Create OAuth client in developer portal (you can obtain `client_id` yourself).
-2. Configure your `redirect_uri`.
+1. Register an OAuth client via `POST /oauth2/register` to obtain `client_id` (and `client_secret` if issued).
+2. Configure and use the same `redirect_uri` in registration and authorization steps.
 3. Open authorization URL, get `code`.
 4. Exchange `code` for `access_token`.
 5. Call API with `Authorization: Bearer <access_token>`.
@@ -35,6 +35,24 @@ Supported grant types (from discovery):
 
 - `authorization_code`
 - `refresh_token`
+
+
+
+### Register OAuth client (required)
+
+If your environment does not provide a UI for OAuth client creation, register dynamically via endpoint:
+
+```bash
+curl -X POST https://openapi.longportapp.com/oauth2/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "client_name": "my-openapi-app",
+    "redirect_uris": ["https://your-app.com/callback"],
+    "grant_types": ["authorization_code", "refresh_token"],
+    "response_types": ["code"],
+    "token_endpoint_auth_method": "client_secret_post"
+  }'
+```
 
 ### 1) Build authorization URL
 

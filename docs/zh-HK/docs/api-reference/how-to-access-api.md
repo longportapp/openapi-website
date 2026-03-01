@@ -19,8 +19,8 @@ https://open.longbridge.com/sdk
 
 ### 推薦接入路徑
 
-1. 於開發者平台建立 OAuth client（`client_id` 可自行取得）。
-2. 設定 `redirect_uri`。
+1. 透過 `POST /oauth2/register` 註冊 OAuth client，取得 `client_id`（若回傳則包含 `client_secret`）。
+2. 在註冊與授權步驟中使用同一個 `redirect_uri`。
 3. 打開授權連結取得 `code`。
 4. 以 `code` 換取 `access_token`。
 5. 使用 `Authorization: Bearer <access_token>` 呼叫 API。
@@ -35,6 +35,24 @@ https://open.longbridge.com/sdk
 
 - `authorization_code`
 - `refresh_token`
+
+
+
+### 註冊 OAuth client（必需）
+
+若目前環境沒有提供「建立 OAuth client」頁面，可直接透過接口動態註冊：
+
+```bash
+curl -X POST https://openapi.longportapp.com/oauth2/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "client_name": "my-openapi-app",
+    "redirect_uris": ["https://your-app.com/callback"],
+    "grant_types": ["authorization_code", "refresh_token"],
+    "response_types": ["code"],
+    "token_endpoint_auth_method": "client_secret_post"
+  }'
+```
 
 ### 1）組裝授權連結
 
