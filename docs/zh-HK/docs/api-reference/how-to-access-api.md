@@ -93,7 +93,7 @@ curl -X POST https://openapi.longportapp.com/oauth2/token \
 ### 4）用 Bearer token 呼叫 API（TSLA.US 示例）
 
 ```bash
-curl -X GET "https://openapi.longportapp.cn/v1/quote/get_security_list?market=US&category=Overnight" \
+curl -X GET "https://openapi.longportapp.com/v1/quote/get_security_list?market=US&category=Overnight" \
   -H "Authorization: Bearer ACCESS_TOKEN"
 ```
 
