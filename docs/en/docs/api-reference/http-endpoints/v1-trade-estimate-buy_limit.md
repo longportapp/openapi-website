@@ -1,5 +1,5 @@
 ---
-title: /v1/trade/estimate/buy_limit
+title: `GET` Trade Estimate Buy Limit
 id: v1-trade-estimate-buy_limit
 slug: /api/v1/trade/estimate/buy_limit
 sidebar_position: 10

@@ -1,5 +1,5 @@
 ---
-title: /v1/trade/order/today
+title: `GET` Trade Order Today
 id: v1-trade-order-today
 slug: /api/v1/trade/order/today
 sidebar_position: 8

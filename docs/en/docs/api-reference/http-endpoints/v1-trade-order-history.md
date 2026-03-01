@@ -1,5 +1,5 @@
 ---
-title: /v1/trade/order/history
+title: `GET` Trade Order History
 id: v1-trade-order-history
 slug: /api/v1/trade/order/history
 sidebar_position: 7

@@ -1,5 +1,5 @@
 ---
-title: /v1/quote/history_market_temperature
+title: `GET` Quote History Market Temperature
 id: v1-quote-history_market_temperature
 slug: /api/v1/quote/history_market_temperature
 sidebar_position: 4

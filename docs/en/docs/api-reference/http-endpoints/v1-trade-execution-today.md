@@ -1,5 +1,5 @@
 ---
-title: /v1/trade/execution/today
+title: `GET` Trade Execution Today
 id: v1-trade-execution-today
 slug: /api/v1/trade/execution/today
 sidebar_position: 6

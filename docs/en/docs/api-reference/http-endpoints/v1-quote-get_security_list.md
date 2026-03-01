@@ -1,5 +1,5 @@
 ---
-title: /v1/quote/get_security_list
+title: `GET` Quote Get Security List
 id: v1-quote-get_security_list
 slug: /api/v1/quote/get_security_list
 sidebar_position: 2

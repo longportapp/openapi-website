@@ -1,5 +1,5 @@
 ---
-title: /v1/risk/margin-ratio
+title: `GET` Risk Margin Ratio
 id: v1-risk-margin-ratio
 slug: /api/v1/risk/margin-ratio
 sidebar_position: 15

@@ -1,5 +1,5 @@
 ---
-title: /v1/trade/execution/history
+title: `GET` Trade Execution History
 id: v1-trade-execution-history
 slug: /api/v1/trade/execution/history
 sidebar_position: 5

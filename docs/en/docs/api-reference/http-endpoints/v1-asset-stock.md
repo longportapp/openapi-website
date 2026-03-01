@@ -1,5 +1,5 @@
 ---
-title: /v1/asset/stock
+title: `GET` Asset Stock
 id: v1-asset-stock
 slug: /api/v1/asset/stock
 sidebar_position: 14

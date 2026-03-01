@@ -1,5 +1,5 @@
 ---
-title: /v1/asset/cashflow
+title: `GET` Asset Cashflow
 id: v1-asset-cashflow
 slug: /api/v1/asset/cashflow
 sidebar_position: 12

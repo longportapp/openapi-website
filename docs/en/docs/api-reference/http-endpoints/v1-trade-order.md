@@ -1,5 +1,5 @@
 ---
-title: /v1/trade/order
+title: `GET/POST/PUT/DELETE` Trade Order
 id: v1-trade-order
 slug: /api/v1/trade/order
 sidebar_position: 9

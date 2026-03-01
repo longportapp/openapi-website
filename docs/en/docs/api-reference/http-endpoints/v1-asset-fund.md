@@ -1,5 +1,5 @@
 ---
-title: /v1/asset/fund
+title: `GET` Asset Fund
 id: v1-asset-fund
 slug: /api/v1/asset/fund
 sidebar_position: 13

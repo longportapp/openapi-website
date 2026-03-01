@@ -1,5 +1,5 @@
 ---
-title: /v1/watchlist/groups
+title: `GET/POST/PUT/DELETE` Watchlist Groups
 id: v1-watchlist-groups
 slug: /api/v1/watchlist/groups
 sidebar_position: 1

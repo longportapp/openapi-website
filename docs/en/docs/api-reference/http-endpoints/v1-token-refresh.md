@@ -1,5 +1,5 @@
 ---
-title: /v1/token/refresh
+title: `GET` Token Refresh
 id: v1-token-refresh
 slug: /api/v1/token/refresh
 sidebar_position: 16
