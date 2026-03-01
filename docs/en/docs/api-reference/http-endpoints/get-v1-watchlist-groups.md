@@ -1,7 +1,7 @@
 ---
 title: GET /v1/watchlist/groups
 id: get-v1-watchlist-groups
-slug: /http-endpoints/get-v1-watchlist-groups
+slug: /api/get-v1-watchlist-groups
 sidebar_position: 1
 ---
 

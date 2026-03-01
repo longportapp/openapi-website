@@ -1,7 +1,7 @@
 ---
 title: GET /v1/asset/fund
 id: get-v1-asset-fund
-slug: /http-endpoints/get-v1-asset-fund
+slug: /api/get-v1-asset-fund
 sidebar_position: 19
 ---
 

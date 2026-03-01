@@ -1,7 +1,7 @@
 ---
 title: GET /v1/asset/cashflow
 id: get-v1-asset-cashflow
-slug: /http-endpoints/get-v1-asset-cashflow
+slug: /api/get-v1-asset-cashflow
 sidebar_position: 18
 ---
 

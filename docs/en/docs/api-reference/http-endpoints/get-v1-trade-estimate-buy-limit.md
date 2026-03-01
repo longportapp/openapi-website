@@ -1,7 +1,7 @@
 ---
 title: GET /v1/trade/estimate/buy_limit
 id: get-v1-trade-estimate-buy-limit
-slug: /http-endpoints/get-v1-trade-estimate-buy-limit
+slug: /api/get-v1-trade-estimate-buy-limit
 sidebar_position: 16
 ---
 

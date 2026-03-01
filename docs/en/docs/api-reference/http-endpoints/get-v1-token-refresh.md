@@ -1,7 +1,7 @@
 ---
 title: GET /v1/token/refresh
 id: get-v1-token-refresh
-slug: /http-endpoints/get-v1-token-refresh
+slug: /api/get-v1-token-refresh
 sidebar_position: 22
 ---
 

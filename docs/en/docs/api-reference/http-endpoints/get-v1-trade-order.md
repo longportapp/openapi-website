@@ -1,7 +1,7 @@
 ---
 title: GET /v1/trade/order
 id: get-v1-trade-order
-slug: /http-endpoints/get-v1-trade-order
+slug: /api/get-v1-trade-order
 sidebar_position: 12
 ---
 

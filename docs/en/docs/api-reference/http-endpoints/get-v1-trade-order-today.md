@@ -1,7 +1,7 @@
 ---
 title: GET /v1/trade/order/today
 id: get-v1-trade-order-today
-slug: /http-endpoints/get-v1-trade-order-today
+slug: /api/get-v1-trade-order-today
 sidebar_position: 11
 ---
 

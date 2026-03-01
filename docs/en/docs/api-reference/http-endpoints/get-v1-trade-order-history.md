@@ -1,7 +1,7 @@
 ---
 title: GET /v1/trade/order/history
 id: get-v1-trade-order-history
-slug: /http-endpoints/get-v1-trade-order-history
+slug: /api/get-v1-trade-order-history
 sidebar_position: 10
 ---
 

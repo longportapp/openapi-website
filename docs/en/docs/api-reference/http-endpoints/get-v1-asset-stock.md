@@ -1,7 +1,7 @@
 ---
 title: GET /v1/asset/stock
 id: get-v1-asset-stock
-slug: /http-endpoints/get-v1-asset-stock
+slug: /api/get-v1-asset-stock
 sidebar_position: 20
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: HTTP API Endpoints (from SDK)
 id: http-endpoints
-slug: /http-endpoints
+slug: /api
 sidebar_position: 3
 ---
 

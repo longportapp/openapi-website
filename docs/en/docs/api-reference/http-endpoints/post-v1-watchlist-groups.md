@@ -1,7 +1,7 @@
 ---
 title: POST /v1/watchlist/groups
 id: post-v1-watchlist-groups
-slug: /http-endpoints/post-v1-watchlist-groups
+slug: /api/post-v1-watchlist-groups
 sidebar_position: 2
 ---
 

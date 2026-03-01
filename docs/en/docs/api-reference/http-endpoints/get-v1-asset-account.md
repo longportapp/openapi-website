@@ -1,7 +1,7 @@
 ---
 title: GET /v1/asset/account
 id: get-v1-asset-account
-slug: /http-endpoints/get-v1-asset-account
+slug: /api/get-v1-asset-account
 sidebar_position: 17
 ---
 

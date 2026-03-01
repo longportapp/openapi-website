@@ -1,7 +1,7 @@
 ---
 title: GET /v1/trade/execution/history
 id: get-v1-trade-execution-history
-slug: /http-endpoints/get-v1-trade-execution-history
+slug: /api/get-v1-trade-execution-history
 sidebar_position: 8
 ---
 

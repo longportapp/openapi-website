@@ -1,7 +1,7 @@
 ---
 title: GET /v1/risk/margin-ratio
 id: get-v1-risk-margin-ratio
-slug: /http-endpoints/get-v1-risk-margin-ratio
+slug: /api/get-v1-risk-margin-ratio
 sidebar_position: 21
 ---
 

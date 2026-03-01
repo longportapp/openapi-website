@@ -1,7 +1,7 @@
 ---
 title: GET /v1/quote/market_temperature
 id: get-v1-quote-market-temperature
-slug: /http-endpoints/get-v1-quote-market-temperature
+slug: /api/get-v1-quote-market-temperature
 sidebar_position: 6
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: DELETE /v1/trade/order
 id: delete-v1-trade-order
-slug: /http-endpoints/delete-v1-trade-order
+slug: /api/delete-v1-trade-order
 sidebar_position: 15
 ---
 

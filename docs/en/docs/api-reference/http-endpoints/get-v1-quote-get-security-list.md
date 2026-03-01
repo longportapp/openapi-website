@@ -1,7 +1,7 @@
 ---
 title: GET /v1/quote/get_security_list
 id: get-v1-quote-get-security-list
-slug: /http-endpoints/get-v1-quote-get-security-list
+slug: /api/get-v1-quote-get-security-list
 sidebar_position: 5
 ---
 

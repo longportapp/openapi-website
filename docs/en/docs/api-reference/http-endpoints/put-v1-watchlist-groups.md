@@ -1,7 +1,7 @@
 ---
 title: PUT /v1/watchlist/groups
 id: put-v1-watchlist-groups
-slug: /http-endpoints/put-v1-watchlist-groups
+slug: /api/put-v1-watchlist-groups
 sidebar_position: 4
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: PUT /v1/trade/order
 id: put-v1-trade-order
-slug: /http-endpoints/put-v1-trade-order
+slug: /api/put-v1-trade-order
 sidebar_position: 14
 ---
 

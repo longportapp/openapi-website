@@ -1,7 +1,7 @@
 ---
 title: POST /v1/trade/order
 id: post-v1-trade-order
-slug: /http-endpoints/post-v1-trade-order
+slug: /api/post-v1-trade-order
 sidebar_position: 13
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: DELETE /v1/watchlist/groups
 id: delete-v1-watchlist-groups
-slug: /http-endpoints/delete-v1-watchlist-groups
+slug: /api/delete-v1-watchlist-groups
 sidebar_position: 3
 ---
 
