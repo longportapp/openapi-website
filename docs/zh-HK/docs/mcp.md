@@ -64,6 +64,8 @@ Longbridge MCP 採用 OAuth，使用者無需向客戶端提供原始 API 密鑰
 - 涉及交易操作時，建議一律加入人工確認。
 
 ## 客戶端接入方式
+> 說明：各客戶端 MCP 配置格式可能隨版本變化，請以客戶端官方文件/介面為準，本文僅提供接入要點與服務地址。
+
 
 ### ChatGPT
 
@@ -71,18 +73,6 @@ Longbridge MCP 採用 OAuth，使用者無需向客戶端提供原始 API 密鑰
 
 - 服務地址：`https://openapi.longportapp.com/mcp`
 
-參考設定（示意）：
-
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "type": "remote",
-      "url": "https://openapi.longportapp.com/mcp"
-    }
-  }
-}
-```
 
 其後依指示完成 OAuth 授權。
 
@@ -92,17 +82,6 @@ Longbridge MCP 採用 OAuth，使用者無需向客戶端提供原始 API 密鑰
 
 - 服務地址：`https://openapi.longportapp.com/mcp`
 
-參考設定：
-
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "url": "https://openapi.longportapp.com/mcp"
-    }
-  }
-}
-```
 
 於瀏覽器完成 OAuth 後，回到 Claude Code 即可使用工具。
 
@@ -112,17 +91,6 @@ Longbridge MCP 採用 OAuth，使用者無需向客戶端提供原始 API 密鑰
 
 - 服務地址：`https://openapi.longportapp.com/mcp`
 
-參考設定：
-
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "url": "https://openapi.longportapp.com/mcp"
-    }
-  }
-}
-```
 
 完成 OAuth 後，確認工具列表已出現。
 
@@ -132,18 +100,6 @@ Longbridge MCP 採用 OAuth，使用者無需向客戶端提供原始 API 密鑰
 
 - 服務地址：`https://openapi.longportapp.com/mcp`
 
-參考設定（示意）：
-
-```json
-{
-  "context_servers": [
-    {
-      "name": "longbridge",
-      "url": "https://openapi.longportapp.com/mcp"
-    }
-  ]
-}
-```
 
 完成 OAuth 授權後即可使用。
 
@@ -153,17 +109,6 @@ Longbridge MCP 採用 OAuth，使用者無需向客戶端提供原始 API 密鑰
 
 - 服務地址：`https://openapi.longportapp.com/mcp`
 
-參考設定：
-
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "url": "https://openapi.longportapp.com/mcp"
-    }
-  }
-}
-```
 
 完成 OAuth 後，於會話中確認工具可用。
 

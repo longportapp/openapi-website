@@ -64,6 +64,8 @@ For example, older versions of certain clients (such as early Cherry Studio rele
 - For trading-related prompts, always require human confirmation before order placement.
 
 ## Client setup
+> Note: Client MCP configuration format may change by version. Prefer the client official MCP docs/UI as source of truth, and use the Longbridge MCP server URL below.
+
 
 ### ChatGPT
 
@@ -71,18 +73,6 @@ In ChatGPT, open **Settings → Connectors / MCP** (or the MCP entry in your wor
 
 - Server URL: `https://openapi.longportapp.com/mcp`
 
-Reference config (conceptual):
-
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "type": "remote",
-      "url": "https://openapi.longportapp.com/mcp"
-    }
-  }
-}
-```
 
 Then complete the OAuth sign-in flow and grant scopes.
 
@@ -92,17 +82,6 @@ In Claude Code MCP settings, add a remote MCP server with:
 
 - Server URL: `https://openapi.longportapp.com/mcp`
 
-Reference config:
-
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "url": "https://openapi.longportapp.com/mcp"
-    }
-  }
-}
-```
 
 Finish OAuth in browser, then return to Claude Code to start using tools.
 
@@ -112,17 +91,6 @@ Open **Cursor Settings → MCP Servers**, add a remote MCP server endpoint:
 
 - Server URL: `https://openapi.longportapp.com/mcp`
 
-Reference config:
-
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "url": "https://openapi.longportapp.com/mcp"
-    }
-  }
-}
-```
 
 Complete OAuth authorization and verify tools are listed.
 
@@ -132,18 +100,6 @@ In Zed MCP/server integrations, add Longbridge as a remote MCP endpoint:
 
 - Server URL: `https://openapi.longportapp.com/mcp`
 
-Reference config:
-
-```json
-{
-  "context_servers": [
-    {
-      "name": "longbridge",
-      "url": "https://openapi.longportapp.com/mcp"
-    }
-  ]
-}
-```
 
 Authorize via OAuth and return to Zed for usage.
 
@@ -153,17 +109,6 @@ In OpenClaw MCP/tool integration settings, add Longbridge remote MCP endpoint:
 
 - Server URL: `https://openapi.longportapp.com/mcp`
 
-Reference config:
-
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "url": "https://openapi.longportapp.com/mcp"
-    }
-  }
-}
-```
 
 Complete OAuth and confirm the MCP tools are available in your session.
 
