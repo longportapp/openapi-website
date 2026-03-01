@@ -1,14 +1,14 @@
 ---
-title: GET /v1/asset/account
+title: /v1/asset/account
 id: v1-asset-account
 slug: /api/v1/asset/account
-sidebar_position: 17
+sidebar_position: 11
 ---
 
 ## Request
 
-- **HTTP Method:** `GET`
 - **HTTP URL:** `/v1/asset/account`
+- **HTTP Method(s):** `GET`
 
 ## Base URL
 
@@ -25,5 +25,3 @@ https://openapi.longportapp.com/v1/asset/account
 
 - `rust/src/trade/context.rs`
 - Repository: <https://github.com/longportapp/openapi/tree/main/rust/src>
-
-> This page is generated from SDK source mapping and is intended as HTTP path reference.

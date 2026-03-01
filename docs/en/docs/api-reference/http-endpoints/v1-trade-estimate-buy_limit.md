@@ -1,14 +1,14 @@
 ---
-title: GET /v1/trade/estimate/buy_limit
-id: get-v1-trade-estimate-buy-limit
-slug: /api/get-v1-trade-estimate-buy-limit
-sidebar_position: 16
+title: /v1/trade/estimate/buy_limit
+id: v1-trade-estimate-buy_limit
+slug: /api/v1/trade/estimate/buy_limit
+sidebar_position: 10
 ---
 
 ## Request
 
-- **HTTP Method:** `GET`
 - **HTTP URL:** `/v1/trade/estimate/buy_limit`
+- **HTTP Method(s):** `GET`
 
 ## Base URL
 
@@ -25,5 +25,3 @@ https://openapi.longportapp.com/v1/trade/estimate/buy_limit
 
 - `rust/src/trade/context.rs`
 - Repository: <https://github.com/longportapp/openapi/tree/main/rust/src>
-
-> This page is generated from SDK source mapping and is intended as HTTP path reference.

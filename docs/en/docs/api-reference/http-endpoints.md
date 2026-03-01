@@ -5,32 +5,26 @@ slug: /api
 sidebar_position: 3
 ---
 
-This section provides one page per endpoint mapped from Rust SDK source.
+This section provides one page per API path (slug path-style, no HTTP verb prefix).
 
 ## Endpoint Pages
 
-- [GET /v1/watchlist/groups](./http-endpoints/get-v1-watchlist-groups)
-- [POST /v1/watchlist/groups](./http-endpoints/post-v1-watchlist-groups)
-- [DELETE /v1/watchlist/groups](./http-endpoints/delete-v1-watchlist-groups)
-- [PUT /v1/watchlist/groups](./http-endpoints/put-v1-watchlist-groups)
-- [GET /v1/quote/get_security_list](./http-endpoints/get-v1-quote-get-security-list)
-- [GET /v1/quote/market_temperature](./http-endpoints/get-v1-quote-market-temperature)
-- [GET /v1/quote/history_market_temperature](./http-endpoints/get-v1-quote-history-market-temperature)
-- [GET /v1/trade/execution/history](./http-endpoints/get-v1-trade-execution-history)
-- [GET /v1/trade/execution/today](./http-endpoints/get-v1-trade-execution-today)
-- [GET /v1/trade/order/history](./http-endpoints/get-v1-trade-order-history)
-- [GET /v1/trade/order/today](./http-endpoints/get-v1-trade-order-today)
-- [GET /v1/trade/order](./http-endpoints/get-v1-trade-order)
-- [POST /v1/trade/order](./http-endpoints/post-v1-trade-order)
-- [PUT /v1/trade/order](./http-endpoints/put-v1-trade-order)
-- [DELETE /v1/trade/order](./http-endpoints/delete-v1-trade-order)
-- [GET /v1/trade/estimate/buy_limit](./http-endpoints/get-v1-trade-estimate-buy-limit)
-- [GET /v1/asset/account](./http-endpoints/v1-asset-account)
-- [GET /v1/asset/cashflow](./http-endpoints/get-v1-asset-cashflow)
-- [GET /v1/asset/fund](./http-endpoints/get-v1-asset-fund)
-- [GET /v1/asset/stock](./http-endpoints/get-v1-asset-stock)
-- [GET /v1/risk/margin-ratio](./http-endpoints/get-v1-risk-margin-ratio)
-- [GET /v1/token/refresh (legacy)](./http-endpoints/get-v1-token-refresh)
+- [`/v1/watchlist/groups`](./http-endpoints/v1-watchlist-groups)
+- [`/v1/quote/get_security_list`](./http-endpoints/v1-quote-get_security_list)
+- [`/v1/quote/market_temperature`](./http-endpoints/v1-quote-market_temperature)
+- [`/v1/quote/history_market_temperature`](./http-endpoints/v1-quote-history_market_temperature)
+- [`/v1/trade/execution/history`](./http-endpoints/v1-trade-execution-history)
+- [`/v1/trade/execution/today`](./http-endpoints/v1-trade-execution-today)
+- [`/v1/trade/order/history`](./http-endpoints/v1-trade-order-history)
+- [`/v1/trade/order/today`](./http-endpoints/v1-trade-order-today)
+- [`/v1/trade/order`](./http-endpoints/v1-trade-order)
+- [`/v1/trade/estimate/buy_limit`](./http-endpoints/v1-trade-estimate-buy_limit)
+- [`/v1/asset/account`](./http-endpoints/v1-asset-account)
+- [`/v1/asset/cashflow`](./http-endpoints/v1-asset-cashflow)
+- [`/v1/asset/fund`](./http-endpoints/v1-asset-fund)
+- [`/v1/asset/stock`](./http-endpoints/v1-asset-stock)
+- [`/v1/risk/margin-ratio`](./http-endpoints/v1-risk-margin-ratio)
+- [`/v1/token/refresh`](./http-endpoints/v1-token-refresh)
 
 ## Source
 

@@ -1,14 +1,14 @@
 ---
-title: DELETE /v1/trade/order
-id: delete-v1-trade-order
-slug: /api/delete-v1-trade-order
-sidebar_position: 15
+title: /v1/trade/order
+id: v1-trade-order
+slug: /api/v1/trade/order
+sidebar_position: 9
 ---
 
 ## Request
 
-- **HTTP Method:** `DELETE`
 - **HTTP URL:** `/v1/trade/order`
+- **HTTP Method(s):** `GET, POST, PUT, DELETE`
 
 ## Base URL
 
@@ -25,5 +25,3 @@ https://openapi.longportapp.com/v1/trade/order
 
 - `rust/src/trade/context.rs`
 - Repository: <https://github.com/longportapp/openapi/tree/main/rust/src>
-
-> This page is generated from SDK source mapping and is intended as HTTP path reference.

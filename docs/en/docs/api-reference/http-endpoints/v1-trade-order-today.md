@@ -1,14 +1,14 @@
 ---
-title: GET /v1/trade/order/today
-id: get-v1-trade-order-today
-slug: /api/get-v1-trade-order-today
-sidebar_position: 11
+title: /v1/trade/order/today
+id: v1-trade-order-today
+slug: /api/v1/trade/order/today
+sidebar_position: 8
 ---
 
 ## Request
 
-- **HTTP Method:** `GET`
 - **HTTP URL:** `/v1/trade/order/today`
+- **HTTP Method(s):** `GET`
 
 ## Base URL
 
@@ -25,5 +25,3 @@ https://openapi.longportapp.com/v1/trade/order/today
 
 - `rust/src/trade/context.rs`
 - Repository: <https://github.com/longportapp/openapi/tree/main/rust/src>
-
-> This page is generated from SDK source mapping and is intended as HTTP path reference.

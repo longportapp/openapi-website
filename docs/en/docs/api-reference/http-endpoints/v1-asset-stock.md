@@ -1,14 +1,14 @@
 ---
-title: PUT /v1/trade/order
-id: put-v1-trade-order
-slug: /api/put-v1-trade-order
+title: /v1/asset/stock
+id: v1-asset-stock
+slug: /api/v1/asset/stock
 sidebar_position: 14
 ---
 
 ## Request
 
-- **HTTP Method:** `PUT`
-- **HTTP URL:** `/v1/trade/order`
+- **HTTP URL:** `/v1/asset/stock`
+- **HTTP Method(s):** `GET`
 
 ## Base URL
 
@@ -18,12 +18,10 @@ sidebar_position: 14
 ## Full URL Example
 
 ```text
-https://openapi.longportapp.com/v1/trade/order
+https://openapi.longportapp.com/v1/asset/stock
 ```
 
 ## Source (SDK mapping)
 
 - `rust/src/trade/context.rs`
 - Repository: <https://github.com/longportapp/openapi/tree/main/rust/src>
-
-> This page is generated from SDK source mapping and is intended as HTTP path reference.

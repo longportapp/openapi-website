@@ -1,14 +1,14 @@
 ---
-title: GET /v1/asset/cashflow
-id: get-v1-asset-cashflow
-slug: /api/get-v1-asset-cashflow
-sidebar_position: 18
+title: /v1/asset/cashflow
+id: v1-asset-cashflow
+slug: /api/v1/asset/cashflow
+sidebar_position: 12
 ---
 
 ## Request
 
-- **HTTP Method:** `GET`
 - **HTTP URL:** `/v1/asset/cashflow`
+- **HTTP Method(s):** `GET`
 
 ## Base URL
 
@@ -25,5 +25,3 @@ https://openapi.longportapp.com/v1/asset/cashflow
 
 - `rust/src/trade/context.rs`
 - Repository: <https://github.com/longportapp/openapi/tree/main/rust/src>
-
-> This page is generated from SDK source mapping and is intended as HTTP path reference.

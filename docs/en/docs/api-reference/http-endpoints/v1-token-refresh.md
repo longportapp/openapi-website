@@ -1,14 +1,14 @@
 ---
-title: GET /v1/token/refresh
-id: get-v1-token-refresh
-slug: /api/get-v1-token-refresh
-sidebar_position: 22
+title: /v1/token/refresh
+id: v1-token-refresh
+slug: /api/v1/token/refresh
+sidebar_position: 16
 ---
 
 ## Request
 
-- **HTTP Method:** `GET`
 - **HTTP URL:** `/v1/token/refresh`
+- **HTTP Method(s):** `GET`
 
 ## Base URL
 
@@ -25,5 +25,3 @@ https://openapi.longportapp.com/v1/token/refresh
 
 - `rust/src/config.rs`
 - Repository: <https://github.com/longportapp/openapi/tree/main/rust/src>
-
-> This page is generated from SDK source mapping and is intended as HTTP path reference.
