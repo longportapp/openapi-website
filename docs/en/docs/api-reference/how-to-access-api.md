@@ -19,11 +19,11 @@ Use OAuth 2.0 for new integrations. It is simpler than the legacy `X-Api-Key` si
 
 ### Quick path (recommended)
 
-1. Register an OAuth client via `POST /oauth2/register` to obtain `client_id` (and `client_secret` if issued).
-2. Configure and use the same `redirect_uri` in registration and authorization steps.
-3. Open authorization URL, get `code`.
+1. Register OAuth client via `POST /oauth2/register` and obtain `client_id`.
+2. Use the same `redirect_uri` in registration and authorization.
+3. Open authorization URL and obtain `code`.
 4. Exchange `code` for `access_token`.
-5. Call API with `Authorization: Bearer <access_token>`.
+5. Call APIs with `Authorization: Bearer <access_token>`.
 6. Refresh with `grant_type=refresh_token` when needed.
 
 ### Discovery endpoints
@@ -36,11 +36,7 @@ Supported grant types (from discovery):
 - `authorization_code`
 - `refresh_token`
 
-
-
-### Register OAuth client (required)
-
-If your environment does not provide a UI for OAuth client creation, register dynamically via endpoint:
+### 0) Register OAuth client
 
 ```bash
 curl -X POST https://openapi.longportapp.com/oauth2/register \
@@ -49,10 +45,11 @@ curl -X POST https://openapi.longportapp.com/oauth2/register \
     "client_name": "my-openapi-app",
     "redirect_uris": ["https://your-app.com/callback"],
     "grant_types": ["authorization_code", "refresh_token"],
-    "response_types": ["code"],
-    "token_endpoint_auth_method": "client_secret_post"
+    "response_types": ["code"]
   }'
 ```
+
+> Registration may return only `client_id` (public client, no `client_secret`). In this case, use PKCE and omit `client_secret` in token requests.
 
 ### 1) Build authorization URL
 
@@ -76,19 +73,34 @@ YOUR_REDIRECT_URI?code=AUTH_CODE&state=YOUR_RANDOM_STATE
 ### 2) Exchange code for token
 
 ```bash
-curl -X POST https://openapi.longportapp.com/oauth2/token   -H "Content-Type: application/x-www-form-urlencoded"   -d "grant_type=authorization_code"   -d "client_id=YOUR_CLIENT_ID"   -d "client_secret=YOUR_CLIENT_SECRET"   -d "redirect_uri=YOUR_REDIRECT_URI"   -d "code=AUTH_CODE"   -d "code_verifier=YOUR_CODE_VERIFIER"
+curl -X POST https://openapi.longportapp.com/oauth2/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=authorization_code" \
+  -d "client_id=YOUR_CLIENT_ID" \
+  -d "redirect_uri=YOUR_REDIRECT_URI" \
+  -d "code=AUTH_CODE" \
+  -d "code_verifier=YOUR_CODE_VERIFIER"
+# add this only when your client has secret:
+# -d "client_secret=YOUR_CLIENT_SECRET"
 ```
 
 ### 3) Call API with Bearer token
 
 ```bash
-curl -X GET "https://openapi.longportapp.com/v1/asset/account"   -H "Authorization: Bearer ACCESS_TOKEN"
+curl -X GET "https://openapi.longportapp.com/v1/asset/account" \
+  -H "Authorization: Bearer ACCESS_TOKEN"
 ```
 
 ### 4) Refresh token
 
 ```bash
-curl -X POST https://openapi.longportapp.com/oauth2/token   -H "Content-Type: application/x-www-form-urlencoded"   -d "grant_type=refresh_token"   -d "client_id=YOUR_CLIENT_ID"   -d "client_secret=YOUR_CLIENT_SECRET"   -d "refresh_token=REFRESH_TOKEN"
+curl -X POST https://openapi.longportapp.com/oauth2/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=refresh_token" \
+  -d "client_id=YOUR_CLIENT_ID" \
+  -d "refresh_token=REFRESH_TOKEN"
+# add this only when your client has secret:
+# -d "client_secret=YOUR_CLIENT_SECRET"
 ```
 
 ### TypeScript / Python examples

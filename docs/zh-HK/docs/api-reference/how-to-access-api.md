@@ -19,8 +19,8 @@ https://open.longbridge.com/sdk
 
 ### 推薦接入路徑
 
-1. 透過 `POST /oauth2/register` 註冊 OAuth client，取得 `client_id`（若回傳則包含 `client_secret`）。
-2. 在註冊與授權步驟中使用同一個 `redirect_uri`。
+1. 透過 `POST /oauth2/register` 註冊 OAuth client，取得 `client_id`。
+2. 註冊與授權步驟使用同一個 `redirect_uri`。
 3. 打開授權連結取得 `code`。
 4. 以 `code` 換取 `access_token`。
 5. 使用 `Authorization: Bearer <access_token>` 呼叫 API。
@@ -36,11 +36,7 @@ https://open.longbridge.com/sdk
 - `authorization_code`
 - `refresh_token`
 
-
-
-### 註冊 OAuth client（必需）
-
-若目前環境沒有提供「建立 OAuth client」頁面，可直接透過接口動態註冊：
+### 0）註冊 OAuth client
 
 ```bash
 curl -X POST https://openapi.longportapp.com/oauth2/register \
@@ -49,10 +45,11 @@ curl -X POST https://openapi.longportapp.com/oauth2/register \
     "client_name": "my-openapi-app",
     "redirect_uris": ["https://your-app.com/callback"],
     "grant_types": ["authorization_code", "refresh_token"],
-    "response_types": ["code"],
-    "token_endpoint_auth_method": "client_secret_post"
+    "response_types": ["code"]
   }'
 ```
+
+> 註冊回傳可能僅有 `client_id`（public client，不含 `client_secret`）。此情況請使用 PKCE，並在 token 請求中不傳 `client_secret`。
 
 ### 1）組裝授權連結
 
@@ -76,19 +73,34 @@ YOUR_REDIRECT_URI?code=AUTH_CODE&state=YOUR_RANDOM_STATE
 ### 2）用 code 換 token
 
 ```bash
-curl -X POST https://openapi.longportapp.com/oauth2/token   -H "Content-Type: application/x-www-form-urlencoded"   -d "grant_type=authorization_code"   -d "client_id=YOUR_CLIENT_ID"   -d "client_secret=YOUR_CLIENT_SECRET"   -d "redirect_uri=YOUR_REDIRECT_URI"   -d "code=AUTH_CODE"   -d "code_verifier=YOUR_CODE_VERIFIER"
+curl -X POST https://openapi.longportapp.com/oauth2/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=authorization_code" \
+  -d "client_id=YOUR_CLIENT_ID" \
+  -d "redirect_uri=YOUR_REDIRECT_URI" \
+  -d "code=AUTH_CODE" \
+  -d "code_verifier=YOUR_CODE_VERIFIER"
+# 僅當你的 client 有 secret 時再加：
+# -d "client_secret=YOUR_CLIENT_SECRET"
 ```
 
 ### 3）用 Bearer token 呼叫 API
 
 ```bash
-curl -X GET "https://openapi.longportapp.com/v1/asset/account"   -H "Authorization: Bearer ACCESS_TOKEN"
+curl -X GET "https://openapi.longportapp.com/v1/asset/account" \
+  -H "Authorization: Bearer ACCESS_TOKEN"
 ```
 
 ### 4）刷新 token
 
 ```bash
-curl -X POST https://openapi.longportapp.com/oauth2/token   -H "Content-Type: application/x-www-form-urlencoded"   -d "grant_type=refresh_token"   -d "client_id=YOUR_CLIENT_ID"   -d "client_secret=YOUR_CLIENT_SECRET"   -d "refresh_token=REFRESH_TOKEN"
+curl -X POST https://openapi.longportapp.com/oauth2/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=refresh_token" \
+  -d "client_id=YOUR_CLIENT_ID" \
+  -d "refresh_token=REFRESH_TOKEN"
+# 僅當你的 client 有 secret 時再加：
+# -d "client_secret=YOUR_CLIENT_SECRET"
 ```
 
 ### TypeScript / Python 範例
