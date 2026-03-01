@@ -1,5 +1,5 @@
 ---
-slug: security_news
+slug: news
 title: News
 language_tabs: false
 toc_footers: []

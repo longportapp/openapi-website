@@ -1,5 +1,5 @@
 ---
-slug: security_news
+slug: news
 title: 股票資訊
 language_tabs: false
 toc_footers: []
