@@ -71,6 +71,19 @@ Longbridge MCP 使用 OAuth，用户无需向客户端暴露原始 API 密钥。
 
 - 服务地址：`https://openapi.longportapp.com/mcp`
 
+参考配置（示意）：
+
+```json
+{
+  "mcpServers": {
+    "longbridge": {
+      "type": "remote",
+      "url": "https://openapi.longportapp.com/mcp"
+    }
+  }
+}
+```
+
 然后按页面指引完成 OAuth 授权。
 
 ### Claude Code
@@ -78,6 +91,18 @@ Longbridge MCP 使用 OAuth，用户无需向客户端暴露原始 API 密钥。
 在 Claude Code 的 MCP 配置中新增远程 MCP 服务：
 
 - 服务地址：`https://openapi.longportapp.com/mcp`
+
+参考配置：
+
+```json
+{
+  "mcpServers": {
+    "longbridge": {
+      "url": "https://openapi.longportapp.com/mcp"
+    }
+  }
+}
+```
 
 浏览器完成 OAuth 后，回到 Claude Code 即可调用工具。
 
@@ -87,6 +112,18 @@ Longbridge MCP 使用 OAuth，用户无需向客户端暴露原始 API 密钥。
 
 - 服务地址：`https://openapi.longportapp.com/mcp`
 
+参考配置：
+
+```json
+{
+  "mcpServers": {
+    "longbridge": {
+      "url": "https://openapi.longportapp.com/mcp"
+    }
+  }
+}
+```
+
 完成 OAuth 后，确认工具列表已出现。
 
 ### Zed
@@ -95,6 +132,19 @@ Longbridge MCP 使用 OAuth，用户无需向客户端暴露原始 API 密钥。
 
 - 服务地址：`https://openapi.longportapp.com/mcp`
 
+参考配置（示意）：
+
+```json
+{
+  "context_servers": [
+    {
+      "name": "longbridge",
+      "url": "https://openapi.longportapp.com/mcp"
+    }
+  ]
+}
+```
+
 完成 OAuth 授权后即可使用。
 
 ### OpenClaw
@@ -102,6 +152,18 @@ Longbridge MCP 使用 OAuth，用户无需向客户端暴露原始 API 密钥。
 在 OpenClaw 的 MCP/工具集成配置中添加 Longbridge 远程 MCP：
 
 - 服务地址：`https://openapi.longportapp.com/mcp`
+
+参考配置：
+
+```json
+{
+  "mcpServers": {
+    "longbridge": {
+      "url": "https://openapi.longportapp.com/mcp"
+    }
+  }
+}
+```
 
 完成 OAuth 后，在会话中确认工具可用。
 
