@@ -31,6 +31,115 @@ OAuth 2.0 授權服務已可用。對於新接入，建議優先使用 OAuth 2.0
 Authorization: Bearer <access_token>
 ```
 
+### OAuth 2.0 完整接入範例
+
+以下範例涵蓋從 `authorization_code` 到 API 呼叫與 `refresh_token` 刷新的完整流程。
+
+#### 第一步：組裝授權網址
+
+```text
+https://openapi.longportapp.com/oauth2/authorize
+  ?response_type=code
+  &client_id=YOUR_CLIENT_ID
+  &redirect_uri=YOUR_REDIRECT_URI
+  &scope=3
+  &state=YOUR_RANDOM_STATE
+  &code_challenge=YOUR_CODE_CHALLENGE
+  &code_challenge_method=S256
+```
+
+用戶授權後，回調網址會收到：
+
+```text
+YOUR_REDIRECT_URI?code=AUTH_CODE&state=YOUR_RANDOM_STATE
+```
+
+#### 第二步：用 authorization_code 換 token（cURL）
+
+```bash
+curl -X POST https://openapi.longportapp.com/oauth2/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=authorization_code" \
+  -d "client_id=YOUR_CLIENT_ID" \
+  -d "client_secret=YOUR_CLIENT_SECRET" \
+  -d "redirect_uri=YOUR_REDIRECT_URI" \
+  -d "code=AUTH_CODE" \
+  -d "code_verifier=YOUR_CODE_VERIFIER"
+```
+
+#### 第三步：用 Bearer Token 呼叫 API（cURL）
+
+```bash
+curl -X GET "https://openapi.longportapp.com/v1/asset/account" \
+  -H "Authorization: Bearer ACCESS_TOKEN"
+```
+
+#### 第四步：刷新 token（cURL）
+
+```bash
+curl -X POST https://openapi.longportapp.com/oauth2/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=refresh_token" \
+  -d "client_id=YOUR_CLIENT_ID" \
+  -d "client_secret=YOUR_CLIENT_SECRET" \
+  -d "refresh_token=REFRESH_TOKEN"
+```
+
+### Node.js（TypeScript）範例
+
+```ts
+const tokenResp = await fetch('https://openapi.longportapp.com/oauth2/token', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  body: new URLSearchParams({
+    grant_type: 'authorization_code',
+    client_id: process.env.CLIENT_ID!,
+    client_secret: process.env.CLIENT_SECRET!,
+    redirect_uri: process.env.REDIRECT_URI!,
+    code: process.env.AUTH_CODE!,
+    code_verifier: process.env.CODE_VERIFIER || '',
+  }),
+})
+
+const tokenJson = await tokenResp.json()
+const accessToken = tokenJson.access_token
+
+const apiResp = await fetch('https://openapi.longportapp.com/v1/asset/account', {
+  headers: { Authorization: `Bearer ${accessToken}` },
+})
+
+console.log(await apiResp.json())
+```
+
+### Python 範例
+
+```python
+import os
+import requests
+
+token_resp = requests.post(
+    'https://openapi.longportapp.com/oauth2/token',
+    data={
+        'grant_type': 'authorization_code',
+        'client_id': os.environ['CLIENT_ID'],
+        'client_secret': os.environ['CLIENT_SECRET'],
+        'redirect_uri': os.environ['REDIRECT_URI'],
+        'code': os.environ['AUTH_CODE'],
+        'code_verifier': os.environ.get('CODE_VERIFIER', ''),
+    },
+    timeout=15,
+)
+token_resp.raise_for_status()
+access_token = token_resp.json()['access_token']
+
+api_resp = requests.get(
+    'https://openapi.longportapp.com/v1/asset/account',
+    headers={'Authorization': f'Bearer {access_token}'},
+    timeout=15,
+)
+print(api_resp.status_code, api_resp.json())
+```
+
 :::tip
 本文後續的簽名方式內容保留用於相容與遷移參考。新接入建議採用 OAuth 2.0。
 :::

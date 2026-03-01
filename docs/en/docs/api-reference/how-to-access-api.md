@@ -31,6 +31,115 @@ After obtaining an access token, call APIs with:
 Authorization: Bearer <access_token>
 ```
 
+### OAuth 2.0 end-to-end example
+
+The following example shows the full flow from `authorization_code` to API calls and token refresh.
+
+#### Step 1: Open authorization URL
+
+```text
+https://openapi.longportapp.com/oauth2/authorize
+  ?response_type=code
+  &client_id=YOUR_CLIENT_ID
+  &redirect_uri=YOUR_REDIRECT_URI
+  &scope=3
+  &state=YOUR_RANDOM_STATE
+  &code_challenge=YOUR_CODE_CHALLENGE
+  &code_challenge_method=S256
+```
+
+After user consent, your callback URL receives:
+
+```text
+YOUR_REDIRECT_URI?code=AUTH_CODE&state=YOUR_RANDOM_STATE
+```
+
+#### Step 2: Exchange authorization code for access token (cURL)
+
+```bash
+curl -X POST https://openapi.longportapp.com/oauth2/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=authorization_code" \
+  -d "client_id=YOUR_CLIENT_ID" \
+  -d "client_secret=YOUR_CLIENT_SECRET" \
+  -d "redirect_uri=YOUR_REDIRECT_URI" \
+  -d "code=AUTH_CODE" \
+  -d "code_verifier=YOUR_CODE_VERIFIER"
+```
+
+#### Step 3: Call API with Bearer token (cURL)
+
+```bash
+curl -X GET "https://openapi.longportapp.com/v1/asset/account" \
+  -H "Authorization: Bearer ACCESS_TOKEN"
+```
+
+#### Step 4: Refresh token (cURL)
+
+```bash
+curl -X POST https://openapi.longportapp.com/oauth2/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=refresh_token" \
+  -d "client_id=YOUR_CLIENT_ID" \
+  -d "client_secret=YOUR_CLIENT_SECRET" \
+  -d "refresh_token=REFRESH_TOKEN"
+```
+
+### Node.js (TypeScript) example
+
+```ts
+const tokenResp = await fetch('https://openapi.longportapp.com/oauth2/token', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  body: new URLSearchParams({
+    grant_type: 'authorization_code',
+    client_id: process.env.CLIENT_ID!,
+    client_secret: process.env.CLIENT_SECRET!,
+    redirect_uri: process.env.REDIRECT_URI!,
+    code: process.env.AUTH_CODE!,
+    code_verifier: process.env.CODE_VERIFIER || '',
+  }),
+})
+
+const tokenJson = await tokenResp.json()
+const accessToken = tokenJson.access_token
+
+const apiResp = await fetch('https://openapi.longportapp.com/v1/asset/account', {
+  headers: { Authorization: `Bearer ${accessToken}` },
+})
+
+console.log(await apiResp.json())
+```
+
+### Python example
+
+```python
+import os
+import requests
+
+token_resp = requests.post(
+    'https://openapi.longportapp.com/oauth2/token',
+    data={
+        'grant_type': 'authorization_code',
+        'client_id': os.environ['CLIENT_ID'],
+        'client_secret': os.environ['CLIENT_SECRET'],
+        'redirect_uri': os.environ['REDIRECT_URI'],
+        'code': os.environ['AUTH_CODE'],
+        'code_verifier': os.environ.get('CODE_VERIFIER', ''),
+    },
+    timeout=15,
+)
+token_resp.raise_for_status()
+access_token = token_resp.json()['access_token']
+
+api_resp = requests.get(
+    'https://openapi.longportapp.com/v1/asset/account',
+    headers={'Authorization': f'Bearer {access_token}'},
+    timeout=15,
+)
+print(api_resp.status_code, api_resp.json())
+```
+
 :::tip
 Legacy signature-based auth in the sections below is kept for compatibility reference. Prefer OAuth 2.0 for new clients.
 :::
