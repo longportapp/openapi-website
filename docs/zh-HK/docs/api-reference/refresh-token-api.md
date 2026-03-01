@@ -7,6 +7,12 @@ sidebar_position: 2
 
 # 刷新 Access Token
 
+對於 OAuth 2.0 客戶端，建議透過 OAuth token endpoint 使用 `grant_type=refresh_token` 進行刷新：
+
+- `https://openapi.longportapp.com/oauth2/token`
+
+本文檔記錄的是兼容保留的舊刷新接口（`/v1/token/refresh`）。
+
 在老的 `access_token` 過期之前，通過調用此接口獲取新的 `access_token`。調用成功後老的 `access_token` 就會作廢。
 
 > 最後更新於 2022-04-21

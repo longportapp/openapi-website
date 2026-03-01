@@ -13,6 +13,158 @@ It is recommended to directly use the SDK to access the API, the SDK has encapsu
 https://open.longbridge.com/sdk
 :::
 
+## OAuth 2.0 (Current Recommendation)
+
+OAuth 2.0 authorization server is now available. For new integrations, use OAuth 2.0 first.
+
+- Production discovery: `https://openapi.longportapp.com/.well-known/oauth-authorization-server`
+- China discovery: `https://openapi.longportapp.cn/.well-known/oauth-authorization-server`
+
+Supported grant types (from discovery):
+
+- `authorization_code`
+- `refresh_token`
+
+After obtaining an access token, call APIs with:
+
+```http
+Authorization: Bearer <access_token>
+```
+
+### OAuth 2.0 end-to-end example
+
+The following example shows the full flow from `authorization_code` to API calls and token refresh.
+
+#### Step 1: Open authorization URL
+
+```text
+https://openapi.longportapp.com/oauth2/authorize
+  ?response_type=code
+  &client_id=YOUR_CLIENT_ID
+  &redirect_uri=YOUR_REDIRECT_URI
+  &scope=3
+  &state=YOUR_RANDOM_STATE
+  &code_challenge=YOUR_CODE_CHALLENGE
+  &code_challenge_method=S256
+```
+
+After user consent, your callback URL receives:
+
+```text
+YOUR_REDIRECT_URI?code=AUTH_CODE&state=YOUR_RANDOM_STATE
+```
+
+#### Step 2: Exchange authorization code for access token (cURL)
+
+```bash
+curl -X POST https://openapi.longportapp.com/oauth2/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=authorization_code" \
+  -d "client_id=YOUR_CLIENT_ID" \
+  -d "client_secret=YOUR_CLIENT_SECRET" \
+  -d "redirect_uri=YOUR_REDIRECT_URI" \
+  -d "code=AUTH_CODE" \
+  -d "code_verifier=YOUR_CODE_VERIFIER"
+```
+
+#### Step 3: Call API with Bearer token (cURL)
+
+```bash
+curl -X GET "https://openapi.longportapp.com/v1/asset/account" \
+  -H "Authorization: Bearer ACCESS_TOKEN"
+```
+
+#### Step 4: Refresh token (cURL)
+
+```bash
+curl -X POST https://openapi.longportapp.com/oauth2/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=refresh_token" \
+  -d "client_id=YOUR_CLIENT_ID" \
+  -d "client_secret=YOUR_CLIENT_SECRET" \
+  -d "refresh_token=REFRESH_TOKEN"
+```
+
+### Node.js (TypeScript) example
+
+```ts
+import { AuthorizationCode } from 'simple-oauth2'
+
+const client = new AuthorizationCode({
+  client: {
+    id: process.env.CLIENT_ID!,
+    secret: process.env.CLIENT_SECRET!,
+  },
+  auth: {
+    tokenHost: 'https://openapi.longportapp.com',
+    tokenPath: '/oauth2/token',
+    authorizePath: '/oauth2/authorize',
+  },
+})
+
+// Exchange authorization code -> token
+const tokenParams = {
+  code: process.env.AUTH_CODE!,
+  redirect_uri: process.env.REDIRECT_URI!,
+  code_verifier: process.env.CODE_VERIFIER || '',
+}
+
+const accessToken = await client.getToken(tokenParams)
+
+// Call API with Bearer token
+const apiResp = await fetch('https://openapi.longportapp.com/v1/asset/account', {
+  headers: { Authorization: `Bearer ${accessToken.token.access_token}` },
+})
+
+console.log(await apiResp.json())
+
+// Refresh when needed
+if (accessToken.expired()) {
+  const refreshed = await accessToken.refresh()
+  console.log('refreshed access token:', refreshed.token.access_token)
+}
+```
+
+### Python example
+
+```python
+import os
+from requests_oauthlib import OAuth2Session
+
+client_id = os.environ['CLIENT_ID']
+client_secret = os.environ['CLIENT_SECRET']
+redirect_uri = os.environ['REDIRECT_URI']
+auth_code = os.environ['AUTH_CODE']
+
+oauth = OAuth2Session(client_id=client_id, redirect_uri=redirect_uri)
+
+# Exchange authorization code -> token
+token = oauth.fetch_token(
+    token_url='https://openapi.longportapp.com/oauth2/token',
+    code=auth_code,
+    client_secret=client_secret,
+    include_client_id=True,
+    code_verifier=os.environ.get('CODE_VERIFIER', ''),
+)
+
+# Call API with Bearer token (auto injects Authorization header)
+resp = oauth.get('https://openapi.longportapp.com/v1/asset/account', timeout=15)
+print(resp.status_code, resp.json())
+
+# Refresh token
+new_token = oauth.refresh_token(
+    token_url='https://openapi.longportapp.com/oauth2/token',
+    refresh_token=token.get('refresh_token'),
+    client_id=client_id,
+    client_secret=client_secret,
+)
+print('refreshed access token:', new_token.get('access_token'))
+```
+
+:::tip
+Legacy signature-based auth in the sections below is kept for compatibility reference. Prefer OAuth 2.0 for new clients.
+:::
+
 ## Notes
 
 | Precautions                                                                                          | Reference Documents                                                             |

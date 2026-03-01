@@ -7,6 +7,12 @@ sidebar_position: 2
 
 # Refresh Access Token
 
+For OAuth 2.0 clients, token refresh is recommended via the OAuth token endpoint with `grant_type=refresh_token`:
+
+- `https://openapi.longportapp.com/oauth2/token`
+
+This page documents the legacy refresh API (`/v1/token/refresh`) kept for compatibility.
+
 Call this to get a new `access_token` before the old `access_token` expires. The old `access_token` will be invalidated after a successful call.
 
 > Lasted 2022-04-21
