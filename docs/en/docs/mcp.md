@@ -69,19 +69,33 @@ For example, older versions of certain clients (such as early Cherry Studio rele
 
 ### ChatGPT
 
-In ChatGPT, open **Settings → Connectors / MCP** (or the MCP entry in your workspace settings), add a new MCP server, and use:
+In ChatGPT, open **Settings → Connectors / MCP** (or the MCP entry in your workspace settings), then add a remote MCP server:
 
-- Server URL: `https://openapi.longportapp.com/mcp`
+```json
+{
+  "mcpServers": {
+    "longbridge": {
+      "url": "https://openapi.longportapp.cn/mcp"
+    }
+  }
+}
+```
 
-
-Then complete the OAuth sign-in flow and grant scopes.
+Then complete OAuth sign-in and grant scopes.
 
 ### Claude Code
 
-In Claude Code MCP settings, add a remote MCP server with:
+In Claude Code MCP settings, add a remote MCP server:
 
-- Server URL: `https://openapi.longportapp.com/mcp`
-
+```json
+{
+  "mcpServers": {
+    "longbridge": {
+      "url": "https://openapi.longportapp.cn/mcp"
+    }
+  }
+}
+```
 
 Finish OAuth in browser, then return to Claude Code to start using tools.
 
@@ -89,8 +103,15 @@ Finish OAuth in browser, then return to Claude Code to start using tools.
 
 Open **Cursor Settings → MCP Servers**, add a remote MCP server endpoint:
 
-- Server URL: `https://openapi.longportapp.com/mcp`
-
+```json
+{
+  "mcpServers": {
+    "longbridge": {
+      "url": "https://openapi.longportapp.cn/mcp"
+    }
+  }
+}
+```
 
 Complete OAuth authorization and verify tools are listed.
 
@@ -114,8 +135,15 @@ Then authorize via OAuth and return to Zed for usage.
 
 In OpenClaw MCP/tool integration settings, add Longbridge remote MCP endpoint:
 
-- Server URL: `https://openapi.longportapp.com/mcp`
-
+```json
+{
+  "mcpServers": {
+    "longbridge": {
+      "url": "https://openapi.longportapp.cn/mcp"
+    }
+  }
+}
+```
 
 Complete OAuth and confirm the MCP tools are available in your session.
 
