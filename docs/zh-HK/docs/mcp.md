@@ -10,8 +10,8 @@ id: mcp
 
 Longbridge 提供線上 MCP 服務，讓 AI 工具可透過 Model Context Protocol 安全存取行情與帳戶能力。
 
-- MCP 服務地址：`https://openapi.longbridgeapp.com/mcp`
-- OAuth 發現地址：`https://openapi.longbridgeapp.com/.well-known/oauth-authorization-server`
+- MCP 服務地址：`https://openapi.longportapp.com/mcp`
+- OAuth 發現地址：`https://openapi.longportapp.com/.well-known/oauth-authorization-server`
 
 > 本頁僅說明 **Longbridge MCP 線上服務** 與其 **OAuth 驗證流程**。
 
@@ -69,7 +69,7 @@ Longbridge MCP 採用 OAuth，使用者無需向客戶端提供原始 API 密鑰
 
 在 ChatGPT 的 **Settings → Connectors / MCP**（或工作區 MCP 設定入口）新增 MCP 服務，填入：
 
-- 服務地址：`https://openapi.longbridgeapp.com/mcp`
+- 服務地址：`https://openapi.longportapp.com/mcp`
 
 其後依指示完成 OAuth 授權。
 
@@ -77,7 +77,7 @@ Longbridge MCP 採用 OAuth，使用者無需向客戶端提供原始 API 密鑰
 
 在 Claude Code 的 MCP 設定中新增遠端 MCP 服務：
 
-- 服務地址：`https://openapi.longbridgeapp.com/mcp`
+- 服務地址：`https://openapi.longportapp.com/mcp`
 
 於瀏覽器完成 OAuth 後，回到 Claude Code 即可使用工具。
 
@@ -85,7 +85,7 @@ Longbridge MCP 採用 OAuth，使用者無需向客戶端提供原始 API 密鑰
 
 打開 **Cursor Settings → MCP Servers**，新增遠端 MCP 服務：
 
-- 服務地址：`https://openapi.longbridgeapp.com/mcp`
+- 服務地址：`https://openapi.longportapp.com/mcp`
 
 完成 OAuth 後，確認工具列表已出現。
 
@@ -93,7 +93,7 @@ Longbridge MCP 採用 OAuth，使用者無需向客戶端提供原始 API 密鑰
 
 在 Zed 的 MCP/Server Integration 設定中加入 Longbridge 遠端 MCP：
 
-- 服務地址：`https://openapi.longbridgeapp.com/mcp`
+- 服務地址：`https://openapi.longportapp.com/mcp`
 
 完成 OAuth 授權後即可使用。
 
@@ -101,7 +101,7 @@ Longbridge MCP 採用 OAuth，使用者無需向客戶端提供原始 API 密鑰
 
 在 OpenClaw 的 MCP/工具整合設定中加入 Longbridge 遠端 MCP：
 
-- 服務地址：`https://openapi.longbridgeapp.com/mcp`
+- 服務地址：`https://openapi.longportapp.com/mcp`
 
 完成 OAuth 後，於會話中確認工具可用。
 
