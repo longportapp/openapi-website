@@ -88,11 +88,30 @@ curl -X POST https://openapi.longportapp.com/oauth2/token \
 # -d "client_secret=YOUR_CLIENT_SECRET"
 ```
 
-### 4）用 Bearer token 调 API
+### 4）用 Bearer token 调 API（TSLA.US 实例）
 
 ```bash
-curl -X GET "https://openapi.longportapp.com/v1/quote/market_temperature?market=US" \
+curl -X GET "https://openapi.longportapp.cn/v1/quote/get_security_list?market=US&category=Overnight" \
   -H "Authorization: Bearer ACCESS_TOKEN"
+```
+
+实际返回（节选，保留 `TSLA.US` 项）：
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "list": [
+      {
+        "symbol": "TSLA.US",
+        "name_cn": "特斯拉",
+        "name_hk": "",
+        "name_en": ""
+      }
+    ]
+  }
+}
 ```
 
 ### 5）刷新 token
