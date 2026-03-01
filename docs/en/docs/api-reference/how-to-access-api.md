@@ -13,6 +13,29 @@ It is recommended to directly use the SDK to access the API, the SDK has encapsu
 https://open.longbridge.com/sdk
 :::
 
+## OAuth 2.0 (Current Recommendation)
+
+OAuth 2.0 authorization server is now available. For new integrations, use OAuth 2.0 first.
+
+- Production discovery: `https://openapi.longportapp.com/.well-known/oauth-authorization-server`
+- China discovery: `https://openapi.longportapp.cn/.well-known/oauth-authorization-server`
+- Test discovery (validation only): `https://openapi.longbridge.xyz/.well-known/oauth-authorization-server`
+
+Supported grant types (from discovery):
+
+- `authorization_code`
+- `refresh_token`
+
+After obtaining an access token, call APIs with:
+
+```http
+Authorization: Bearer <access_token>
+```
+
+:::tip
+Legacy signature-based auth in the sections below is kept for compatibility reference. Prefer OAuth 2.0 for new clients.
+:::
+
 ## Notes
 
 | Precautions                                                                                          | Reference Documents                                                             |

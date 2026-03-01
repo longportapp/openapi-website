@@ -13,6 +13,29 @@ sidebar_position: 1
 https://open.longbridge.com/sdk
 :::
 
+## OAuth 2.0（当前推荐）
+
+OAuth 2.0 授权服务已可用。对于新接入，建议优先使用 OAuth 2.0。
+
+- 生产环境 Discovery：`https://openapi.longportapp.com/.well-known/oauth-authorization-server`
+- 中国内地 Discovery：`https://openapi.longportapp.cn/.well-known/oauth-authorization-server`
+- 测试环境 Discovery（仅用于验证）：`https://openapi.longbridge.xyz/.well-known/oauth-authorization-server`
+
+当前支持的授权类型（以 Discovery 为准）：
+
+- `authorization_code`
+- `refresh_token`
+
+获取 Access Token 后，使用以下请求头访问 API：
+
+```http
+Authorization: Bearer <access_token>
+```
+
+:::tip
+本文后续的签名方式内容保留用于兼容与迁移参考。新接入建议采用 OAuth 2.0。
+:::
+
 ## API 须知
 
 | 注意事项                                     | 参考文档                                          |
