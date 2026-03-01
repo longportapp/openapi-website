@@ -96,12 +96,19 @@ Longbridge MCP 使用 OAuth，用户无需向客户端暴露原始 API 密钥。
 
 ### Zed
 
-在 Zed 的 MCP/Server Integration 配置中添加 Longbridge 远程 MCP：
+打开 `settings.json`，增加：
 
-- 服务地址：`https://openapi.longportapp.com/mcp`
+```json
+{
+  "context_servers": {
+    "longbridge": {
+      "url": "https://openapi.longportapp.cn/mcp"
+    }
+  }
+}
+```
 
-
-完成 OAuth 授权后即可使用。
+然后完成 OAuth 授权即可使用。
 
 ### OpenClaw
 

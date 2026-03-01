@@ -96,12 +96,19 @@ Complete OAuth authorization and verify tools are listed.
 
 ### Zed
 
-In Zed MCP/server integrations, add Longbridge as a remote MCP endpoint:
+Open `settings.json`, add:
 
-- Server URL: `https://openapi.longportapp.com/mcp`
+```json
+{
+  "context_servers": {
+    "longbridge": {
+      "url": "https://openapi.longportapp.cn/mcp"
+    }
+  }
+}
+```
 
-
-Authorize via OAuth and return to Zed for usage.
+Then authorize via OAuth and return to Zed for usage.
 
 ### OpenClaw
 
