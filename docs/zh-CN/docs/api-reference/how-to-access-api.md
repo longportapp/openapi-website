@@ -15,27 +15,43 @@ https://open.longbridge.com/sdk
 
 ## OAuth 2.0（当前推荐）
 
-OAuth 2.0 授权服务已可用。对于新接入，建议优先使用 OAuth 2.0。
+新接入建议使用 OAuth 2.0。相比后面的 `X-Api-Key` 签名方式，OAuth 2.0 更简单、接入成本更低。
 
-- 生产环境 Discovery：`https://openapi.longportapp.com/.well-known/oauth-authorization-server`
-- 中国内地 Discovery：`https://openapi.longportapp.cn/.well-known/oauth-authorization-server`
+### 推荐接入路径
 
-当前支持的授权类型（以 Discovery 为准）：
+1. 通过 `POST /oauth2/register` 注册 OAuth 客户端，获取 `client_id`。
+2. 注册与授权步骤使用同一个 `redirect_uri`。
+3. 打开授权链接，拿到 `code`。
+4. 用 `code` 换取 `access_token`。
+5. 用 `Authorization: Bearer <access_token>` 调用 API。
+6. 通过 `grant_type=refresh_token` 刷新 token。
+
+### Discovery 地址
+
+- 生产环境：`https://openapi.longportapp.com/.well-known/oauth-authorization-server`
+- 中国内地：`https://openapi.longportapp.cn/.well-known/oauth-authorization-server`
+
+支持授权类型（以 Discovery 返回为准）：
 
 - `authorization_code`
 - `refresh_token`
 
-获取 Access Token 后，使用以下请求头访问 API：
+### 0）注册 OAuth 客户端
 
-```http
-Authorization: Bearer <access_token>
+```bash
+curl -X POST https://openapi.longportapp.com/oauth2/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "client_name": "my-openapi-app",
+    "redirect_uris": ["https://your-app.com/callback"],
+    "grant_types": ["authorization_code", "refresh_token"],
+    "response_types": ["code"]
+  }'
 ```
 
-### OAuth 2.0 完整接入示例
+> 注册返回可能仅有 `client_id`（public client，不含 `client_secret`）。这种情况请使用 PKCE，并在 token 请求中不传 `client_secret`。
 
-下面示例覆盖从 `authorization_code` 到接口调用与 `refresh_token` 刷新的完整流程。
-
-#### 第一步：拼装授权地址
+### 1）构造授权链接
 
 ```text
 https://openapi.longportapp.com/oauth2/authorize
@@ -48,122 +64,53 @@ https://openapi.longportapp.com/oauth2/authorize
   &code_challenge_method=S256
 ```
 
-用户授权后，回调地址会收到：
+授权完成后回调：
 
 ```text
 YOUR_REDIRECT_URI?code=AUTH_CODE&state=YOUR_RANDOM_STATE
 ```
 
-#### 第二步：用 authorization_code 换 token（cURL）
+### 2）用 code 换 token
 
 ```bash
 curl -X POST https://openapi.longportapp.com/oauth2/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -d "grant_type=authorization_code" \
   -d "client_id=YOUR_CLIENT_ID" \
-  -d "client_secret=YOUR_CLIENT_SECRET" \
   -d "redirect_uri=YOUR_REDIRECT_URI" \
   -d "code=AUTH_CODE" \
   -d "code_verifier=YOUR_CODE_VERIFIER"
+# 仅当你的客户端有 secret 时再加：
+# -d "client_secret=YOUR_CLIENT_SECRET"
 ```
 
-#### 第三步：用 Bearer Token 调用 API（cURL）
+### 3）用 Bearer token 调 API
 
 ```bash
 curl -X GET "https://openapi.longportapp.com/v1/asset/account" \
   -H "Authorization: Bearer ACCESS_TOKEN"
 ```
 
-#### 第四步：刷新 token（cURL）
+### 4）刷新 token
 
 ```bash
 curl -X POST https://openapi.longportapp.com/oauth2/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -d "grant_type=refresh_token" \
   -d "client_id=YOUR_CLIENT_ID" \
-  -d "client_secret=YOUR_CLIENT_SECRET" \
   -d "refresh_token=REFRESH_TOKEN"
+# 仅当你的客户端有 secret 时再加：
+# -d "client_secret=YOUR_CLIENT_SECRET"
 ```
 
-### Node.js（TypeScript）示例
+### TypeScript / Python 示例
 
-```ts
-import { AuthorizationCode } from 'simple-oauth2'
-
-const client = new AuthorizationCode({
-  client: {
-    id: process.env.CLIENT_ID!,
-    secret: process.env.CLIENT_SECRET!,
-  },
-  auth: {
-    tokenHost: 'https://openapi.longportapp.com',
-    tokenPath: '/oauth2/token',
-    authorizePath: '/oauth2/authorize',
-  },
-})
-
-// Exchange authorization code -> token
-const tokenParams = {
-  code: process.env.AUTH_CODE!,
-  redirect_uri: process.env.REDIRECT_URI!,
-  code_verifier: process.env.CODE_VERIFIER || '',
-}
-
-const accessToken = await client.getToken(tokenParams)
-
-// Call API with Bearer token
-const apiResp = await fetch('https://openapi.longportapp.com/v1/asset/account', {
-  headers: { Authorization: `Bearer ${accessToken.token.access_token}` },
-})
-
-console.log(await apiResp.json())
-
-// Refresh when needed
-if (accessToken.expired()) {
-  const refreshed = await accessToken.refresh()
-  console.log('refreshed access token:', refreshed.token.access_token)
-}
-```
-
-### Python 示例
-
-```python
-import os
-from requests_oauthlib import OAuth2Session
-
-client_id = os.environ['CLIENT_ID']
-client_secret = os.environ['CLIENT_SECRET']
-redirect_uri = os.environ['REDIRECT_URI']
-auth_code = os.environ['AUTH_CODE']
-
-oauth = OAuth2Session(client_id=client_id, redirect_uri=redirect_uri)
-
-# Exchange authorization code -> token
-token = oauth.fetch_token(
-    token_url='https://openapi.longportapp.com/oauth2/token',
-    code=auth_code,
-    client_secret=client_secret,
-    include_client_id=True,
-    code_verifier=os.environ.get('CODE_VERIFIER', ''),
-)
-
-# Call API with Bearer token (auto injects Authorization header)
-resp = oauth.get('https://openapi.longportapp.com/v1/asset/account', timeout=15)
-print(resp.status_code, resp.json())
-
-# Refresh token
-new_token = oauth.refresh_token(
-    token_url='https://openapi.longportapp.com/oauth2/token',
-    refresh_token=token.get('refresh_token'),
-    client_id=client_id,
-    client_secret=client_secret,
-)
-print('refreshed access token:', new_token.get('access_token'))
-```
+生产项目建议使用成熟 OAuth2 客户端库（`simple-oauth2`、`requests-oauthlib`）处理换 token / 刷新，再用 Bearer token 调用 API。
 
 :::tip
-本文后续的签名方式内容保留用于兼容与迁移参考。新接入建议采用 OAuth 2.0。
+后文 `X-Api-Key` + `X-Api-Signature` 是历史兼容说明。新接入请优先使用 OAuth 2.0。
 :::
+
 
 ## API 须知
 

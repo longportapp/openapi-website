@@ -15,27 +15,43 @@ https://open.longbridge.com/sdk
 
 ## OAuth 2.0 (Current Recommendation)
 
-OAuth 2.0 authorization server is now available. For new integrations, use OAuth 2.0 first.
+Use OAuth 2.0 for new integrations. It is simpler than the legacy `X-Api-Key` signature flow.
 
-- Production discovery: `https://openapi.longportapp.com/.well-known/oauth-authorization-server`
-- China discovery: `https://openapi.longportapp.cn/.well-known/oauth-authorization-server`
+### Quick path (recommended)
+
+1. Register OAuth client via `POST /oauth2/register` and obtain `client_id`.
+2. Use the same `redirect_uri` in registration and authorization.
+3. Open authorization URL and obtain `code`.
+4. Exchange `code` for `access_token`.
+5. Call APIs with `Authorization: Bearer <access_token>`.
+6. Refresh with `grant_type=refresh_token` when needed.
+
+### Discovery endpoints
+
+- Production: `https://openapi.longportapp.com/.well-known/oauth-authorization-server`
+- China: `https://openapi.longportapp.cn/.well-known/oauth-authorization-server`
 
 Supported grant types (from discovery):
 
 - `authorization_code`
 - `refresh_token`
 
-After obtaining an access token, call APIs with:
+### 0) Register OAuth client
 
-```http
-Authorization: Bearer <access_token>
+```bash
+curl -X POST https://openapi.longportapp.com/oauth2/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "client_name": "my-openapi-app",
+    "redirect_uris": ["https://your-app.com/callback"],
+    "grant_types": ["authorization_code", "refresh_token"],
+    "response_types": ["code"]
+  }'
 ```
 
-### OAuth 2.0 end-to-end example
+> Registration may return only `client_id` (public client, no `client_secret`). In this case, use PKCE and omit `client_secret` in token requests.
 
-The following example shows the full flow from `authorization_code` to API calls and token refresh.
-
-#### Step 1: Open authorization URL
+### 1) Build authorization URL
 
 ```text
 https://openapi.longportapp.com/oauth2/authorize
@@ -48,122 +64,53 @@ https://openapi.longportapp.com/oauth2/authorize
   &code_challenge_method=S256
 ```
 
-After user consent, your callback URL receives:
+After consent, callback receives:
 
 ```text
 YOUR_REDIRECT_URI?code=AUTH_CODE&state=YOUR_RANDOM_STATE
 ```
 
-#### Step 2: Exchange authorization code for access token (cURL)
+### 2) Exchange code for token
 
 ```bash
 curl -X POST https://openapi.longportapp.com/oauth2/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -d "grant_type=authorization_code" \
   -d "client_id=YOUR_CLIENT_ID" \
-  -d "client_secret=YOUR_CLIENT_SECRET" \
   -d "redirect_uri=YOUR_REDIRECT_URI" \
   -d "code=AUTH_CODE" \
   -d "code_verifier=YOUR_CODE_VERIFIER"
+# add this only when your client has secret:
+# -d "client_secret=YOUR_CLIENT_SECRET"
 ```
 
-#### Step 3: Call API with Bearer token (cURL)
+### 3) Call API with Bearer token
 
 ```bash
 curl -X GET "https://openapi.longportapp.com/v1/asset/account" \
   -H "Authorization: Bearer ACCESS_TOKEN"
 ```
 
-#### Step 4: Refresh token (cURL)
+### 4) Refresh token
 
 ```bash
 curl -X POST https://openapi.longportapp.com/oauth2/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -d "grant_type=refresh_token" \
   -d "client_id=YOUR_CLIENT_ID" \
-  -d "client_secret=YOUR_CLIENT_SECRET" \
   -d "refresh_token=REFRESH_TOKEN"
+# add this only when your client has secret:
+# -d "client_secret=YOUR_CLIENT_SECRET"
 ```
 
-### Node.js (TypeScript) example
+### TypeScript / Python examples
 
-```ts
-import { AuthorizationCode } from 'simple-oauth2'
-
-const client = new AuthorizationCode({
-  client: {
-    id: process.env.CLIENT_ID!,
-    secret: process.env.CLIENT_SECRET!,
-  },
-  auth: {
-    tokenHost: 'https://openapi.longportapp.com',
-    tokenPath: '/oauth2/token',
-    authorizePath: '/oauth2/authorize',
-  },
-})
-
-// Exchange authorization code -> token
-const tokenParams = {
-  code: process.env.AUTH_CODE!,
-  redirect_uri: process.env.REDIRECT_URI!,
-  code_verifier: process.env.CODE_VERIFIER || '',
-}
-
-const accessToken = await client.getToken(tokenParams)
-
-// Call API with Bearer token
-const apiResp = await fetch('https://openapi.longportapp.com/v1/asset/account', {
-  headers: { Authorization: `Bearer ${accessToken.token.access_token}` },
-})
-
-console.log(await apiResp.json())
-
-// Refresh when needed
-if (accessToken.expired()) {
-  const refreshed = await accessToken.refresh()
-  console.log('refreshed access token:', refreshed.token.access_token)
-}
-```
-
-### Python example
-
-```python
-import os
-from requests_oauthlib import OAuth2Session
-
-client_id = os.environ['CLIENT_ID']
-client_secret = os.environ['CLIENT_SECRET']
-redirect_uri = os.environ['REDIRECT_URI']
-auth_code = os.environ['AUTH_CODE']
-
-oauth = OAuth2Session(client_id=client_id, redirect_uri=redirect_uri)
-
-# Exchange authorization code -> token
-token = oauth.fetch_token(
-    token_url='https://openapi.longportapp.com/oauth2/token',
-    code=auth_code,
-    client_secret=client_secret,
-    include_client_id=True,
-    code_verifier=os.environ.get('CODE_VERIFIER', ''),
-)
-
-# Call API with Bearer token (auto injects Authorization header)
-resp = oauth.get('https://openapi.longportapp.com/v1/asset/account', timeout=15)
-print(resp.status_code, resp.json())
-
-# Refresh token
-new_token = oauth.refresh_token(
-    token_url='https://openapi.longportapp.com/oauth2/token',
-    refresh_token=token.get('refresh_token'),
-    client_id=client_id,
-    client_secret=client_secret,
-)
-print('refreshed access token:', new_token.get('access_token'))
-```
+For production projects, use mature OAuth2 client libraries (`simple-oauth2`, `requests-oauthlib`) to handle token exchange / refresh and then call APIs with Bearer tokens.
 
 :::tip
-Legacy signature-based auth in the sections below is kept for compatibility reference. Prefer OAuth 2.0 for new clients.
+The `X-Api-Key` + `X-Api-Signature` sections below are legacy compatibility references. New integrations should use OAuth 2.0.
 :::
+
 
 ## Notes
 
