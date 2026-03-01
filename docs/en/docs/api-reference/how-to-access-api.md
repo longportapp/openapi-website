@@ -88,56 +88,77 @@ curl -X POST https://openapi.longportapp.com/oauth2/token \
 ### Node.js (TypeScript) example
 
 ```ts
-const tokenResp = await fetch('https://openapi.longportapp.com/oauth2/token', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-  body: new URLSearchParams({
-    grant_type: 'authorization_code',
-    client_id: process.env.CLIENT_ID!,
-    client_secret: process.env.CLIENT_SECRET!,
-    redirect_uri: process.env.REDIRECT_URI!,
-    code: process.env.AUTH_CODE!,
-    code_verifier: process.env.CODE_VERIFIER || '',
-  }),
+import { AuthorizationCode } from 'simple-oauth2'
+
+const client = new AuthorizationCode({
+  client: {
+    id: process.env.CLIENT_ID!,
+    secret: process.env.CLIENT_SECRET!,
+  },
+  auth: {
+    tokenHost: 'https://openapi.longportapp.com',
+    tokenPath: '/oauth2/token',
+    authorizePath: '/oauth2/authorize',
+  },
 })
 
-const tokenJson = await tokenResp.json()
-const accessToken = tokenJson.access_token
+// Exchange authorization code -> token
+const tokenParams = {
+  code: process.env.AUTH_CODE!,
+  redirect_uri: process.env.REDIRECT_URI!,
+  code_verifier: process.env.CODE_VERIFIER || '',
+}
 
+const accessToken = await client.getToken(tokenParams)
+
+// Call API with Bearer token
 const apiResp = await fetch('https://openapi.longportapp.com/v1/asset/account', {
-  headers: { Authorization: `Bearer ${accessToken}` },
+  headers: { Authorization: `Bearer ${accessToken.token.access_token}` },
 })
 
 console.log(await apiResp.json())
+
+// Refresh when needed
+if (accessToken.expired()) {
+  const refreshed = await accessToken.refresh()
+  console.log('refreshed access token:', refreshed.token.access_token)
+}
 ```
 
 ### Python example
 
 ```python
 import os
-import requests
+from requests_oauthlib import OAuth2Session
 
-token_resp = requests.post(
-    'https://openapi.longportapp.com/oauth2/token',
-    data={
-        'grant_type': 'authorization_code',
-        'client_id': os.environ['CLIENT_ID'],
-        'client_secret': os.environ['CLIENT_SECRET'],
-        'redirect_uri': os.environ['REDIRECT_URI'],
-        'code': os.environ['AUTH_CODE'],
-        'code_verifier': os.environ.get('CODE_VERIFIER', ''),
-    },
-    timeout=15,
-)
-token_resp.raise_for_status()
-access_token = token_resp.json()['access_token']
+client_id = os.environ['CLIENT_ID']
+client_secret = os.environ['CLIENT_SECRET']
+redirect_uri = os.environ['REDIRECT_URI']
+auth_code = os.environ['AUTH_CODE']
 
-api_resp = requests.get(
-    'https://openapi.longportapp.com/v1/asset/account',
-    headers={'Authorization': f'Bearer {access_token}'},
-    timeout=15,
+oauth = OAuth2Session(client_id=client_id, redirect_uri=redirect_uri)
+
+# Exchange authorization code -> token
+token = oauth.fetch_token(
+    token_url='https://openapi.longportapp.com/oauth2/token',
+    code=auth_code,
+    client_secret=client_secret,
+    include_client_id=True,
+    code_verifier=os.environ.get('CODE_VERIFIER', ''),
 )
-print(api_resp.status_code, api_resp.json())
+
+# Call API with Bearer token (auto injects Authorization header)
+resp = oauth.get('https://openapi.longportapp.com/v1/asset/account', timeout=15)
+print(resp.status_code, resp.json())
+
+# Refresh token
+new_token = oauth.refresh_token(
+    token_url='https://openapi.longportapp.com/oauth2/token',
+    refresh_token=token.get('refresh_token'),
+    client_id=client_id,
+    client_secret=client_secret,
+)
+print('refreshed access token:', new_token.get('access_token'))
 ```
 
 :::tip
