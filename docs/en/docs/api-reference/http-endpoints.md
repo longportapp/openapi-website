@@ -25,7 +25,7 @@ This section provides one page per endpoint mapped from Rust SDK source.
 - [PUT /v1/trade/order](./http-endpoints/put-v1-trade-order)
 - [DELETE /v1/trade/order](./http-endpoints/delete-v1-trade-order)
 - [GET /v1/trade/estimate/buy_limit](./http-endpoints/get-v1-trade-estimate-buy-limit)
-- [GET /v1/asset/account](./http-endpoints/get-v1-asset-account)
+- [GET /v1/asset/account](./http-endpoints/v1-asset-account)
 - [GET /v1/asset/cashflow](./http-endpoints/get-v1-asset-cashflow)
 - [GET /v1/asset/fund](./http-endpoints/get-v1-asset-fund)
 - [GET /v1/asset/stock](./http-endpoints/get-v1-asset-stock)
