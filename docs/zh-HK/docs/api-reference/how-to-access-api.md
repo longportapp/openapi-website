@@ -13,6 +13,8 @@ sidebar_position: 1
 https://open.longbridge.com/sdk
 :::
 
+另见：[HTTP API 端點清單](./http-endpoints)（根據 SDK 原始碼映射）。
+
 ## OAuth 2.0（目前推薦）
 
 新接入建議使用 OAuth 2.0。相比後文 `X-Api-Key` 簽名方式，OAuth 2.0 更簡單。

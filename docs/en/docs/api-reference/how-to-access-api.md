@@ -13,6 +13,8 @@ It is recommended to directly use the SDK to access the API, the SDK has encapsu
 https://open.longbridge.com/sdk
 :::
 
+See also: [HTTP API Endpoints](./http-endpoints) (mapped from SDK source).
+
 ## OAuth 2.0 (Current Recommendation)
 
 Use OAuth 2.0 for new integrations. It is simpler than the legacy `X-Api-Key` signature flow.
