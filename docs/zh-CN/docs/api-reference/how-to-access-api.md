@@ -24,7 +24,7 @@ https://open.longbridge.com/sdk
 
 ## OAuth 2.0（推荐方案）
 
-新接入请直接使用 OAuth 2.0。为避免混淆，本页不再介绍旧的 API Key 签名方案。
+新接入默认使用 OAuth 2.0。API Key 签名方式作为备选兼容方案可保留（例如在 SDK/历史实现中），但不作为默认接入方式。
 
 ### Discovery 地址
 
