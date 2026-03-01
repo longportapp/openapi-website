@@ -13,6 +13,8 @@ sidebar_position: 1
 https://open.longbridge.com/sdk
 :::
 
+另见：[HTTP API 端点清单](./http-endpoints)（根据 SDK 源码映射）。
+
 ## OAuth 2.0（当前推荐）
 
 新接入建议使用 OAuth 2.0。相比后面的 `X-Api-Key` 签名方式，OAuth 2.0 更简单、接入成本更低。
@@ -120,6 +122,7 @@ curl -X POST https://openapi.longportapp.com/oauth2/token \
 | 阅读 OpenAPI 介绍中开通相应服务              | [OpenAPI 如何开通](../docs/#如何开通)             |
 | 阅读 OpenAPI 介绍中使用权限及限制            | [OpenAPI 使用权限及限制](../docs/#使用权限及限制) |
 | 了解通用错误码，便于查找调用接口出错的原因   | [通用错误码](../docs/error-codes)                 |
+| 查看 SDK 对应的 HTTP API 路径清单            | [HTTP API 端点清单](./http-endpoints)             |
 
 ## REST API 文档约定格式
 
