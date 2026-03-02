@@ -102,25 +102,136 @@ go get github.com/longportapp/openapi-go
 
 ## 配置
 
-1. 下載 [Longbridge](https://longbridge.com/download) 並完成開戶。
-2. 從 [Longbridge OpenAPI](https://open.longbridge.com) 官網獲取 `App Key`, `App Secret`, `Access Token` 等信息。
-
-   **_獲取 App Key, App Secret, Access Token 等信息_**
-
-   訪問 [Longbridge OpenAPI](https://open.longbridge.com) 網站，登錄後，進入“個人中心”。
-
-   在頁面上會給出“應用憑證”憑證信息，我們拿到以後設置環境變量，便於後面開發使用方便。
-
 ### 開通開發中帳戶
 
 1. 下載 [Longbridge](https://longbridge.com/download)，並完成開戶
-2. 從 [Longbridge OpenAPI](https://open.longbridge.com) 官網取得 `App Key`, `App Secret`, `Access Token` 等資訊。
+2. 從 [Longbridge OpenAPI](https://open.longbridge.com) 官網取得認證資訊
 
-   **_取得 App Key, App Secret, Access Token 等資訊_**
+### 認證方式
 
-   造訪 [Longbridge OpenAPI](https://open.longbridge.com) 網站，登入後，進入「個人中心」。
+LongPort OpenAPI 支援兩種認證方式：
 
-   在頁面上會給出「應用憑證」憑證訊息，我們拿到以後設定環境變量，方便後面開發使用方便。
+#### 方式一：OAuth 2.0（推薦） ⭐
+
+OAuth 2.0 是現代化的認證方式，使用 Bearer Token，無需 HMAC 簽名，更加安全便捷。
+
+**第一步：註冊 OAuth 客戶端**
+
+造訪 [Longbridge OpenAPI](https://open.longbridge.com) 網站，登入後進入「個人中心」，註冊 OAuth 客戶端獲取 `client_id`：
+
+```bash
+curl -X POST https://openapi.longportapp.com/v1/oauth2/client/register \
+  -H “Content-Type: application/json” \
+  -d '{
+    “name”: “我的應用程式”,
+    “redirect_uris”: [“http://localhost:60355/callback”],
+    “grant_types”: [“authorization_code”, “refresh_token”]
+  }'
+```
+
+回應範例：
+```json
+{
+  “client_id”: “your-client-id-here”,
+  “client_secret”: null,
+  “name”: “我的應用程式”,
+  “redirect_uris”: [“http://localhost:60355/callback”]
+}
+```
+
+儲存 `client_id` 供後續使用。
+
+**第二步：授權並取得 Token**
+
+<Tabs groupId=”programming-language”>
+  <TabItem value=”python” label=”Python” default>
+
+```python
+from longport.openapi import Config
+from longport.oauth import OAuth
+
+# 啟動 OAuth 授權流程
+oauth = OAuth(“your-client-id”)
+token = oauth.authorize()  # 會自動開啟瀏覽器進行授權
+
+# 使用 OAuth Token 建立設定
+config = Config.from_oauth(
+    client_id=oauth.client_id,
+    access_token=token.access_token
+)
+```
+
+  </TabItem>
+  <TabItem value=”javascript” label=”JavaScript”>
+
+```javascript
+const { Config } = require('longport')
+
+// 使用 OAuth Token 建立設定
+const config = Config.fromOauth(
+  'your-client-id',
+  'your-oauth-access-token'
+)
+```
+
+  </TabItem>
+  <TabItem value=”rust” label=”Rust”>
+
+```rust
+use std::sync::Arc;
+use longport::{Config, oauth::OAuth};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // 啟動 OAuth 授權流程
+    let oauth = OAuth::new(“your-client-id”);
+    let token = oauth.authorize().await?;
+
+    // 使用 OAuth Token 建立設定
+    let config = Arc::new(Config::from_oauth(
+        oauth.client_id(),
+        &token.access_token
+    ));
+
+    Ok(())
+}
+```
+
+  </TabItem>
+  <TabItem value=”java” label=”Java”>
+
+```java
+import com.longport.*;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        // 使用 OAuth Token 建立設定
+        Config config = Config.fromOauth(“your-client-id”, “your-oauth-access-token”);
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+:::tip OAuth 優勢
+- ✅ 更安全（無需共享金鑰）
+- ✅ 更簡單（無需計算簽名）
+- ✅ 基於 Token 的現代認證方式
+- ✅ 更適合現代應用程式
+:::
+
+:::caution Token 安全
+OAuth Token 應安全儲存在應用程式中（如加密檔案、安全金鑰鏈），**不要儲存在環境變數中**。
+:::
+
+#### 方式二：傳統 API Key（相容）
+
+**_取得 App Key, App Secret, Access Token 等資訊_**
+
+造訪 [Longbridge OpenAPI](https://open.longbridge.com) 網站，登入後，進入「個人中心」。
+
+在頁面上會給出「應用憑證」憑證訊息，我們拿到以後設定環境變量，方便後面開發使用方便。
 
 ### 環境變量
 
