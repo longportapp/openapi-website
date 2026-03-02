@@ -103,13 +103,177 @@ Let's take obtaining assets as an example to demonstrate how to use the SDK.
 ## Configuration
 
 1. Download App and open an account.
-2. Get App Key, App Secret, Access Token and other information from [Longbridge OpenAPI](https://open.longbridge.com) official website
+2. Get authentication credentials from [Longbridge OpenAPI](https://open.longbridge.com) official website
 
-   **_Get App Key, App Secret, Access Token and other information_**
+### Authentication Methods
 
-   Login the [Longbridge OpenAPI](https://open.longbridge.com) website, and enter the "User Center".
+LongPort OpenAPI supports two authentication methods:
 
-   The "application credential" credential information will be given on the page. After we get it, we will set the environment variable, which is convenient for later development and use.
+#### Method 1: OAuth 2.0 (Recommended) ⭐
+
+OAuth 2.0 is the modern authentication method that uses Bearer tokens without requiring HMAC signatures, making it more secure and convenient.
+
+**Step 1: Register OAuth Client**
+
+Visit [Longbridge OpenAPI](https://open.longbridge.com), login and enter "User Center" to register an OAuth client and get your `client_id`:
+
+```bash
+curl -X POST https://openapi.longportapp.com/v1/oauth2/client/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "My Application",
+    "redirect_uris": ["http://localhost:60355/callback"],
+    "grant_types": ["authorization_code", "refresh_token"]
+  }'
+```
+
+Response example:
+```json
+{
+  "client_id": "your-client-id-here",
+  "client_secret": null,
+  "name": "My Application",
+  "redirect_uris": ["http://localhost:60355/callback"]
+}
+```
+
+Save the `client_id` for later use.
+
+**Step 2: Authorize and Get Token**
+
+Use standard OAuth 2.0 libraries for each language to perform authorization. After obtaining the access token, use `Config.from_oauth()` to create the configuration.
+
+<Tabs groupId="programming-language">
+  <TabItem value="python" label="Python" default>
+
+```python
+from requests_oauthlib import OAuth2Session
+from longport.openapi import Config
+
+# Use standard OAuth library for authorization
+client_id = "your-client-id"
+redirect_uri = "http://localhost:60355/callback"
+
+oauth = OAuth2Session(client_id, redirect_uri=redirect_uri)
+
+# Generate authorization URL
+authorization_url, state = oauth.authorization_url(
+    'https://openapi.longportapp.com/oauth2/authorize'
+)
+print(f'Please visit this URL to authorize: {authorization_url}')
+
+# Get callback URL after authorization
+authorization_response = input('Enter the full callback URL: ')
+
+# Fetch access token
+token = oauth.fetch_token(
+    'https://openapi.longportapp.com/oauth2/token',
+    authorization_response=authorization_response
+)
+
+# Create LongPort config with OAuth token
+config = Config.from_oauth(client_id, token['access_token'])
+```
+
+  </TabItem>
+  <TabItem value="javascript" label="JavaScript">
+
+```javascript
+const { AuthorizationCode } = require('simple-oauth2');
+const { Config } = require('longport');
+
+// Use standard OAuth library for authorization
+const client = new AuthorizationCode({
+  client: {
+    id: 'your-client-id',
+  },
+  auth: {
+    tokenHost: 'https://openapi.longportapp.com',
+    tokenPath: '/oauth2/token',
+    authorizePath: '/oauth2/authorize',
+  },
+});
+
+const authorizationUri = client.authorizeURL({
+  redirect_uri: 'http://localhost:60355/callback',
+});
+
+console.log('Please visit this URL to authorize:', authorizationUri);
+
+// Get token using authorization code from callback
+const tokenParams = {
+  code: 'authorization-code-from-callback',
+  redirect_uri: 'http://localhost:60355/callback',
+};
+
+const accessToken = await client.getToken(tokenParams);
+
+// Create LongPort config with OAuth token
+const config = Config.fromOauth('your-client-id', accessToken.token.access_token);
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+```rust
+use std::sync::Arc;
+use longport::{Config, oauth::OAuth};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // Rust SDK provides built-in OAuth implementation for convenience
+    let oauth = OAuth::new("your-client-id");
+    let token = oauth.authorize().await?;  // Opens browser automatically
+
+    // Create config with OAuth token
+    let config = Arc::new(Config::from_oauth(
+        oauth.client_id(),
+        &token.access_token
+    ));
+
+    Ok(())
+}
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+import com.longport.*;
+// Use standard OAuth library, e.g.: org.springframework.security.oauth2.client
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        // 1. Get token using Spring Security OAuth2 or other standard library
+        // String accessToken = oauth2Client.getAccessToken();
+
+        // 2. Create LongPort config with OAuth token
+        Config config = Config.fromOauth("your-client-id", "your-oauth-access-token");
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+:::tip OAuth Benefits
+- ✅ More secure (no shared secret)
+- ✅ Simpler integration (no signature calculation)
+- ✅ Token-based modern authentication
+- ✅ Better suited for modern applications
+:::
+
+:::caution Token Security
+OAuth tokens should be stored securely in your application (e.g., encrypted file, secure keychain), **not in environment variables** for security reasons.
+:::
+
+#### Method 2: Legacy API Key (Compatible)
+
+**_Get App Key, App Secret, Access Token and other information_**
+
+Login the [Longbridge OpenAPI](https://open.longbridge.com) website, and enter the "User Center".
+
+The "application credential" credential information will be given on the page. After we get it, we will set the environment variable, which is convenient for later development and use.
 
 ### Environment Variables
 
