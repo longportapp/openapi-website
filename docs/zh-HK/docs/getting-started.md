@@ -143,35 +143,75 @@ curl -X POST https://openapi.longportapp.com/v1/oauth2/client/register \
 
 **第二步：授權並取得 Token**
 
+使用各語言的標準 OAuth 2.0 函式庫進行授權，取得 access token 後，使用 `Config.from_oauth()` 建立設定。
+
 <Tabs groupId=”programming-language”>
   <TabItem value=”python” label=”Python” default>
 
 ```python
+from requests_oauthlib import OAuth2Session
 from longport.openapi import Config
-from longport.oauth import OAuth
 
-# 啟動 OAuth 授權流程
-oauth = OAuth(“your-client-id”)
-token = oauth.authorize()  # 會自動開啟瀏覽器進行授權
+# 使用標準 OAuth 函式庫進行授權
+client_id = “your-client-id”
+redirect_uri = “http://localhost:60355/callback”
 
-# 使用 OAuth Token 建立設定
-config = Config.from_oauth(
-    client_id=oauth.client_id,
-    access_token=token.access_token
+oauth = OAuth2Session(client_id, redirect_uri=redirect_uri)
+
+# 產生授權 URL
+authorization_url, state = oauth.authorization_url(
+    'https://openapi.longportapp.com/oauth2/authorize'
 )
+print(f'請造訪此 URL 進行授權: {authorization_url}')
+
+# 授權後取得回呼 URL
+authorization_response = input('請輸入完整的回呼 URL: ')
+
+# 取得 access token
+token = oauth.fetch_token(
+    'https://openapi.longportapp.com/oauth2/token',
+    authorization_response=authorization_response
+)
+
+# 使用 OAuth Token 建立 LongPort 設定
+config = Config.from_oauth(client_id, token['access_token'])
 ```
 
   </TabItem>
   <TabItem value=”javascript” label=”JavaScript”>
 
 ```javascript
-const { Config } = require('longport')
+const { AuthorizationCode } = require('simple-oauth2');
+const { Config } = require('longport');
 
-// 使用 OAuth Token 建立設定
-const config = Config.fromOauth(
-  'your-client-id',
-  'your-oauth-access-token'
-)
+// 使用標準 OAuth 函式庫進行授權
+const client = new AuthorizationCode({
+  client: {
+    id: 'your-client-id',
+  },
+  auth: {
+    tokenHost: 'https://openapi.longportapp.com',
+    tokenPath: '/oauth2/token',
+    authorizePath: '/oauth2/authorize',
+  },
+});
+
+const authorizationUri = client.authorizeURL({
+  redirect_uri: 'http://localhost:60355/callback',
+});
+
+console.log('請造訪此 URL 進行授權:', authorizationUri);
+
+// 授權後使用 code 取得 token
+const tokenParams = {
+  code: 'authorization-code-from-callback',
+  redirect_uri: 'http://localhost:60355/callback',
+};
+
+const accessToken = await client.getToken(tokenParams);
+
+// 使用 OAuth Token 建立 LongPort 設定
+const config = Config.fromOauth('your-client-id', accessToken.token.access_token);
 ```
 
   </TabItem>
@@ -183,9 +223,9 @@ use longport::{Config, oauth::OAuth};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // 啟動 OAuth 授權流程
+    // Rust SDK 提供內建 OAuth 實作以簡化整合
     let oauth = OAuth::new(“your-client-id”);
-    let token = oauth.authorize().await?;
+    let token = oauth.authorize().await?;  // 自動開啟瀏覽器授權
 
     // 使用 OAuth Token 建立設定
     let config = Arc::new(Config::from_oauth(
@@ -202,10 +242,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ```java
 import com.longport.*;
+// 使用標準 OAuth 函式庫，例如：org.springframework.security.oauth2.client
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        // 使用 OAuth Token 建立設定
+        // 1. 使用 Spring Security OAuth2 或其他標準函式庫取得 token
+        // String accessToken = oauth2Client.getAccessToken();
+
+        // 2. 使用 OAuth Token 建立 LongPort 設定
         Config config = Config.fromOauth(“your-client-id”, “your-oauth-access-token”);
     }
 }

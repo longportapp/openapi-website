@@ -141,35 +141,75 @@ Save the `client_id` for later use.
 
 **Step 2: Authorize and Get Token**
 
+Use standard OAuth 2.0 libraries for each language to perform authorization. After obtaining the access token, use `Config.from_oauth()` to create the configuration.
+
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>
 
 ```python
+from requests_oauthlib import OAuth2Session
 from longport.openapi import Config
-from longport.oauth import OAuth
 
-# Start OAuth authorization flow
-oauth = OAuth("your-client-id")
-token = oauth.authorize()  # Opens browser automatically for authorization
+# Use standard OAuth library for authorization
+client_id = "your-client-id"
+redirect_uri = "http://localhost:60355/callback"
 
-# Create config with OAuth token
-config = Config.from_oauth(
-    client_id=oauth.client_id,
-    access_token=token.access_token
+oauth = OAuth2Session(client_id, redirect_uri=redirect_uri)
+
+# Generate authorization URL
+authorization_url, state = oauth.authorization_url(
+    'https://openapi.longportapp.com/oauth2/authorize'
 )
+print(f'Please visit this URL to authorize: {authorization_url}')
+
+# Get callback URL after authorization
+authorization_response = input('Enter the full callback URL: ')
+
+# Fetch access token
+token = oauth.fetch_token(
+    'https://openapi.longportapp.com/oauth2/token',
+    authorization_response=authorization_response
+)
+
+# Create LongPort config with OAuth token
+config = Config.from_oauth(client_id, token['access_token'])
 ```
 
   </TabItem>
   <TabItem value="javascript" label="JavaScript">
 
 ```javascript
-const { Config } = require('longport')
+const { AuthorizationCode } = require('simple-oauth2');
+const { Config } = require('longport');
 
-// Create config with OAuth token
-const config = Config.fromOauth(
-  'your-client-id',
-  'your-oauth-access-token'
-)
+// Use standard OAuth library for authorization
+const client = new AuthorizationCode({
+  client: {
+    id: 'your-client-id',
+  },
+  auth: {
+    tokenHost: 'https://openapi.longportapp.com',
+    tokenPath: '/oauth2/token',
+    authorizePath: '/oauth2/authorize',
+  },
+});
+
+const authorizationUri = client.authorizeURL({
+  redirect_uri: 'http://localhost:60355/callback',
+});
+
+console.log('Please visit this URL to authorize:', authorizationUri);
+
+// Get token using authorization code from callback
+const tokenParams = {
+  code: 'authorization-code-from-callback',
+  redirect_uri: 'http://localhost:60355/callback',
+};
+
+const accessToken = await client.getToken(tokenParams);
+
+// Create LongPort config with OAuth token
+const config = Config.fromOauth('your-client-id', accessToken.token.access_token);
 ```
 
   </TabItem>
@@ -181,9 +221,9 @@ use longport::{Config, oauth::OAuth};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // Start OAuth authorization flow
+    // Rust SDK provides built-in OAuth implementation for convenience
     let oauth = OAuth::new("your-client-id");
-    let token = oauth.authorize().await?;
+    let token = oauth.authorize().await?;  // Opens browser automatically
 
     // Create config with OAuth token
     let config = Arc::new(Config::from_oauth(
@@ -200,10 +240,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ```java
 import com.longport.*;
+// Use standard OAuth library, e.g.: org.springframework.security.oauth2.client
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        // Create config with OAuth token
+        // 1. Get token using Spring Security OAuth2 or other standard library
+        // String accessToken = oauth2Client.getAccessToken();
+
+        // 2. Create LongPort config with OAuth token
         Config config = Config.fromOauth("your-client-id", "your-oauth-access-token");
     }
 }
