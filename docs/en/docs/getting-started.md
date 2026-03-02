@@ -103,13 +103,133 @@ Let's take obtaining assets as an example to demonstrate how to use the SDK.
 ## Configuration
 
 1. Download App and open an account.
-2. Get App Key, App Secret, Access Token and other information from [Longbridge OpenAPI](https://open.longbridge.com) official website
+2. Get authentication credentials from [Longbridge OpenAPI](https://open.longbridge.com) official website
 
-   **_Get App Key, App Secret, Access Token and other information_**
+### Authentication Methods
 
-   Login the [Longbridge OpenAPI](https://open.longbridge.com) website, and enter the "User Center".
+LongPort OpenAPI supports two authentication methods:
 
-   The "application credential" credential information will be given on the page. After we get it, we will set the environment variable, which is convenient for later development and use.
+#### Method 1: OAuth 2.0 (Recommended) ⭐
+
+OAuth 2.0 is the modern authentication method that uses Bearer tokens without requiring HMAC signatures, making it more secure and convenient.
+
+**Step 1: Register OAuth Client**
+
+Visit [Longbridge OpenAPI](https://open.longbridge.com), login and enter "User Center" to register an OAuth client and get your `client_id`:
+
+```bash
+curl -X POST https://openapi.longportapp.com/v1/oauth2/client/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "My Application",
+    "redirect_uris": ["http://localhost:60355/callback"],
+    "grant_types": ["authorization_code", "refresh_token"]
+  }'
+```
+
+Response example:
+```json
+{
+  "client_id": "your-client-id-here",
+  "client_secret": null,
+  "name": "My Application",
+  "redirect_uris": ["http://localhost:60355/callback"]
+}
+```
+
+Save the `client_id` for later use.
+
+**Step 2: Authorize and Get Token**
+
+<Tabs groupId="programming-language">
+  <TabItem value="python" label="Python" default>
+
+```python
+from longport.openapi import Config
+from longport.oauth import OAuth
+
+# Start OAuth authorization flow
+oauth = OAuth("your-client-id")
+token = oauth.authorize()  # Opens browser automatically for authorization
+
+# Create config with OAuth token
+config = Config.from_oauth(
+    client_id=oauth.client_id,
+    access_token=token.access_token
+)
+```
+
+  </TabItem>
+  <TabItem value="javascript" label="JavaScript">
+
+```javascript
+const { Config } = require('longport')
+
+// Create config with OAuth token
+const config = Config.fromOauth(
+  'your-client-id',
+  'your-oauth-access-token'
+)
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+```rust
+use std::sync::Arc;
+use longport::{Config, oauth::OAuth};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // Start OAuth authorization flow
+    let oauth = OAuth::new("your-client-id");
+    let token = oauth.authorize().await?;
+
+    // Create config with OAuth token
+    let config = Arc::new(Config::from_oauth(
+        oauth.client_id(),
+        &token.access_token
+    ));
+
+    Ok(())
+}
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+import com.longport.*;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        // Create config with OAuth token
+        Config config = Config.fromOauth("your-client-id", "your-oauth-access-token");
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+:::tip OAuth Benefits
+- ✅ More secure (no shared secret)
+- ✅ Simpler integration (no signature calculation)
+- ✅ Token-based modern authentication
+- ✅ Better suited for modern applications
+:::
+
+:::caution Token Security
+OAuth tokens should be stored securely in your application (e.g., encrypted file, secure keychain), **not in environment variables** for security reasons.
+:::
+
+#### Method 2: Legacy API Key (Compatible)
+
+**_Get App Key, App Secret, Access Token and other information_**
+
+Login the [Longbridge OpenAPI](https://open.longbridge.com) website, and enter the "User Center".
+
+The "application credential" credential information will be given on the page. After we get it, we will set the environment variable, which is convenient for later development and use.
 
 ### Environment Variables
 

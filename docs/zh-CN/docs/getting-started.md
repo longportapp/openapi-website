@@ -106,13 +106,133 @@ go get github.com/longportapp/openapi-go
 ### 开通开发中账户
 
 1. 下载 [Longbridge](https://longbridge.com/download)，并完成开户
-2. 从 [Longbridge OpenAPI](https://open.longbridge.com) 官网获取 `App Key`, `App Secret`, `Access Token` 等信息。
+2. 从 [Longbridge OpenAPI](https://open.longbridge.com) 官网获取认证信息
 
-   **_获取 App Key, App Secret, Access Token 等信息_**
+### 认证方式
 
-   访问 [Longbridge OpenAPI](https://open.longbridge.com) 网站，登录后，进入“个人中心”。
+LongPort OpenAPI 支持两种认证方式：
 
-   在页面上会给出“应用凭证”凭证信息，我们拿到以后设置环境变量，便于后面开发使用方便。
+#### 方式一：OAuth 2.0（推荐） ⭐
+
+OAuth 2.0 是现代化的认证方式，使用 Bearer Token，无需 HMAC 签名，更加安全便捷。
+
+**第一步：注册 OAuth 客户端**
+
+访问 [Longbridge OpenAPI](https://open.longbridge.com) 网站，登录后进入”个人中心”，注册 OAuth 客户端获取 `client_id`：
+
+```bash
+curl -X POST https://openapi.longportapp.com/v1/oauth2/client/register \
+  -H “Content-Type: application/json” \
+  -d '{
+    “name”: “我的应用”,
+    “redirect_uris”: [“http://localhost:60355/callback”],
+    “grant_types”: [“authorization_code”, “refresh_token”]
+  }'
+```
+
+响应示例：
+```json
+{
+  “client_id”: “your-client-id-here”,
+  “client_secret”: null,
+  “name”: “我的应用”,
+  “redirect_uris”: [“http://localhost:60355/callback”]
+}
+```
+
+保存 `client_id` 供后续使用。
+
+**第二步：授权并获取 Token**
+
+<Tabs groupId=”programming-language”>
+  <TabItem value=”python” label=”Python” default>
+
+```python
+from longport.openapi import Config
+from longport.oauth import OAuth
+
+# 启动 OAuth 授权流程
+oauth = OAuth(“your-client-id”)
+token = oauth.authorize()  # 会自动打开浏览器进行授权
+
+# 使用 OAuth Token 创建配置
+config = Config.from_oauth(
+    client_id=oauth.client_id,
+    access_token=token.access_token
+)
+```
+
+  </TabItem>
+  <TabItem value=”javascript” label=”JavaScript”>
+
+```javascript
+const { Config } = require('longport')
+
+// 使用 OAuth Token 创建配置
+const config = Config.fromOauth(
+  'your-client-id',
+  'your-oauth-access-token'
+)
+```
+
+  </TabItem>
+  <TabItem value=”rust” label=”Rust”>
+
+```rust
+use std::sync::Arc;
+use longport::{Config, oauth::OAuth};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // 启动 OAuth 授权流程
+    let oauth = OAuth::new(“your-client-id”);
+    let token = oauth.authorize().await?;
+
+    // 使用 OAuth Token 创建配置
+    let config = Arc::new(Config::from_oauth(
+        oauth.client_id(),
+        &token.access_token
+    ));
+
+    Ok(())
+}
+```
+
+  </TabItem>
+  <TabItem value=”java” label=”Java”>
+
+```java
+import com.longport.*;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        // 使用 OAuth Token 创建配置
+        Config config = Config.fromOauth(“your-client-id”, “your-oauth-access-token”);
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+:::tip OAuth 优势
+- ✅ 更安全（无需共享密钥）
+- ✅ 更简单（无需计算签名）
+- ✅ 基于 Token 的现代认证方式
+- ✅ 更适合现代应用程序
+:::
+
+:::caution Token 安全
+OAuth Token 应安全存储在应用程序中（如加密文件、安全密钥链），**不要存储在环境变量中**。
+:::
+
+#### 方式二：传统 API Key（兼容）
+
+**_获取 App Key, App Secret, Access Token 等信息_**
+
+访问 [Longbridge OpenAPI](https://open.longbridge.com) 网站，登录后，进入”个人中心”。
+
+在页面上会给出”应用凭证”凭证信息，我们拿到以后设置环境变量，便于后面开发使用方便。
 
 ### 环境变量
 
