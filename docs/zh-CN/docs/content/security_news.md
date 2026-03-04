@@ -1,6 +1,7 @@
 ---
 slug: news
 title: 股票资讯
+sidebar_position: 1
 language_tabs: false
 toc_footers: []
 includes: []
