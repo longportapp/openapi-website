@@ -162,7 +162,7 @@ oauth = OAuth2Session(client_id, redirect_uri=redirect_uri)
 authorization_url, state = oauth.authorization_url(
     'https://openapi.longportapp.com/oauth2/authorize'
 )
-print(f'請造訪此 URL 進行授權: {authorization_url}')
+print(f'請造訪此 URL 進行授權：{authorization_url}')
 
 # 授權後取得回呼 URL
 authorization_response = input('請輸入完整的回呼 URL: ')
@@ -200,7 +200,7 @@ const authorizationUri = client.authorizeURL({
   redirect_uri: 'http://localhost:60355/callback',
 });
 
-console.log('請造訪此 URL 進行授權:', authorizationUri);
+console.log('請造訪此 URL 進行授權：', authorizationUri);
 
 // 授權後使用 code 取得 token
 const tokenParams = {

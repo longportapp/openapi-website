@@ -6,167 +6,113 @@ sidebarCollapsed: true
 id: mcp
 ---
 
-# MCP
+# Longbridge MCP 服务
 
-Longbridge 提供在线 MCP 服务，支持 AI 工具通过 Model Context Protocol 安全访问行情与账户能力。
+Longbridge 提供托管的 MCP（Model Context Protocol）服务，让你在 AI 编程助手或对话工具中直接使用 Longbridge 的行情与账户能力，无需手动管理 API 密钥。
 
-- MCP 服务地址：`https://openapi.longportapp.com/mcp`
-- OAuth 发现地址：`https://openapi.longportapp.com/.well-known/oauth-authorization-server`
+**MCP 服务地址：** `https://openapi.longportapp.com/mcp`
 
-> 本文只介绍 **Longbridge MCP 在线服务** 及其 **OAuth 认证流程**。
+## 前置条件
 
-## Longbridge MCP 在线服务能力
+- 已拥有 Longbridge 账户并完成开户
+- 使用支持 MCP OAuth 2.1 的 AI 客户端（见下方兼容性说明）
 
-在完成授权后，MCP 客户端可以使用 Longbridge 的能力，例如：
+## 可用能力
 
-- 行情快照与实时查询
-- K 线与历史数据查询
-- 账户概览与持仓查询
-- 交易相关操作（取决于账户权限与产品规则）
+接入后，MCP 客户端可调用以下能力：
 
-实际可用能力会因地区、账户等级和授权范围而有所不同。
+| 能力类别 | 说明 |
+| --- | --- |
+| 行情数据 | 实时快照、K 线、历史行情查询 |
+| 账户信息 | 账户概览、资产、持仓查询 |
+| 交易操作 | 下单、改单、撤单（受账户权限与地区限制） |
 
-## OAuth 认证流程
+实际可用能力因地区、账户等级和授权范围而有所不同。
 
-Longbridge MCP 使用 OAuth，用户无需向客户端暴露原始 API 密钥。
+## 客户端接入
 
-### 1）在客户端发起 MCP 连接
+> 各客户端的 MCP 配置格式可能随版本变更，以客户端官方文档为准。以下提供核心配置参数。
 
-在支持 MCP 的客户端（如 Cursor、Claude Desktop、Cherry Studio）中，发起连接 Longbridge MCP 服务。
+在支持 MCP 的客户端中，以 Remote MCP Server 方式添加如下配置：
 
-### 2）跳转 Longbridge 授权页面
+```json
+{
+  "mcpServers": {
+    "longbridge": {
+      "url": "https://openapi.longportapp.com/mcp"
+    }
+  }
+}
+```
 
-客户端会打开浏览器，进入 Longbridge 登录与授权页面。
+各主流客户端的配置入口：
 
-### 3）登录并确认授权
+- **Cursor**：Settings → MCP Servers → 添加 Remote MCP Server
+- **Claude Code**：MCP 配置文件或 `claude mcp add` 命令
+- **ChatGPT**：Settings → Connectors（或工作区 MCP 配置入口）
+- **Zed**：`settings.json` 中的 `context_servers` 字段（key 名称可自定义）
+- **Cherry Studio**：设置 → MCP 服务器 → 添加
 
-查看请求权限（scope），确认后授权。
+配置完成后，客户端会自动引导你完成 OAuth 授权流程。
 
-### 4）回调完成并建立会话
+## OAuth 授权流程
 
-授权成功后，客户端获得 OAuth 凭证，MCP 会话可用。
+Longbridge MCP 使用标准 OAuth 2.1 授权，你无需向客户端提供 API 密钥或 Token。
 
-### 5）刷新与撤销
+```
+AI 客户端                  浏览器                    Longbridge
+    |                        |                           |
+    |--- 发起 MCP 连接 ------>|                           |
+    |                        |-- 跳转授权页 ------------>|
+    |                        |<- 展示登录 & 权限确认 ----|
+    |                        |-- 登录并同意 ------------>|
+    |<-- 返回授权凭证 --------|                           |
+    |--- 携带凭证访问工具 ----------------------------------->|
+```
 
-- 凭证会按 OAuth 策略过期并刷新。
-- 你可以随时在 Longbridge 安全/授权设置中撤销访问。
+**步骤说明：**
 
-## 客户端兼容性说明
+1. **发起连接** — 在客户端添加 Longbridge MCP 配置后，首次调用会触发授权
+2. **浏览器跳转** — 客户端自动打开浏览器，进入 Longbridge 登录与权限确认页
+3. **登录并授权** — 使用 Longbridge 账户登录，查看并同意所请求的权限范围（scope）
+4. **建立会话** — 授权完成后，客户端获得凭证，MCP 工具即可使用
+5. **凭证维护** — 凭证按 OAuth 策略自动刷新；如需撤销，前往 Longbridge 账户安全设置
 
-部分未完整实现 MCP OAuth 2.1 流程的客户端，可能无法接入 Longbridge MCP。
+## 客户端兼容性
 
-例如，部分较早版本的客户端（如早期 Cherry Studio）可能无法完整完成 OAuth 流程。建议升级到客户端最新版本。
+Longbridge MCP 依赖 **MCP OAuth 2.1** 标准。若客户端未完整实现该协议，将无法完成授权。
+
+已知问题：Cherry Studio 早期版本不支持完整 OAuth 流程，请升级至最新版本。
+
+如遇其他客户端连接失败，请确认客户端版本并查阅其 MCP 支持文档。
 
 ## 安全建议
 
-- OAuth 凭证属于敏感信息，客户端应安全存储。
-- 遵循最小权限原则，仅授予必要 scope。
-- 涉及交易操作时，建议始终加入人工确认。
-
-## 客户端接入方式
-> 说明：各客户端 MCP 配置格式可能随版本变化，请以客户端官方文档/界面为准，本文仅提供接入要点与服务地址。
-
-
-### ChatGPT
-
-在 ChatGPT 的 **Settings → Connectors / MCP**（或工作区 MCP 配置入口）中新增远程 MCP 服务：
-
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "url": "https://openapi.longportapp.cn/mcp"
-    }
-  }
-}
-```
-
-然后按页面指引完成 OAuth 授权。
-
-### Claude Code
-
-在 Claude Code 的 MCP 配置中新增远程 MCP 服务：
-
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "url": "https://openapi.longportapp.cn/mcp"
-    }
-  }
-}
-```
-
-浏览器完成 OAuth 后，回到 Claude Code 即可调用工具。
-
-### Cursor
-
-打开 **Cursor Settings → MCP Servers**，新增远程 MCP 服务：
-
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "url": "https://openapi.longportapp.cn/mcp"
-    }
-  }
-}
-```
-
-完成 OAuth 后，确认工具列表已出现。
-
-### Zed
-
-打开 `settings.json`，增加：
-
-```json
-{
-  "context_servers": {
-    "longbridge": {
-      "url": "https://openapi.longportapp.cn/mcp"
-    }
-  }
-}
-```
-
-然后完成 OAuth 授权即可使用。
-
-### OpenClaw
-
-在 OpenClaw 的 MCP/工具集成配置中添加 Longbridge 远程 MCP：
-
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "url": "https://openapi.longportapp.cn/mcp"
-    }
-  }
-}
-```
-
-完成 OAuth 后，在会话中确认工具可用。
+- **最小权限**：授权时仅同意当前任务所需的 scope，避免过度授权
+- **交易确认**：涉及下单等交易操作时，在 AI 提示词中明确要求执行前人工确认
+- **凭证安全**：OAuth 凭证由客户端管理，避免将其复制到不受信任的环境
+- **定期审查**：定期在 Longbridge 账户安全设置中检查并撤销不再使用的授权
 
 ## 推荐使用方式
 
-1. 先从只读能力开始（行情/账户/持仓）。
-2. 确认权限范围和风控后，再开启交易相关能力。
-3. 在提示词中增加约束（金额上限、标的白名单、下单前确认）。
+1. **从只读能力开始**：优先使用行情查询、持仓查看等低风险功能，熟悉工具行为
+2. **逐步开放交易能力**：确认权限范围和风控逻辑后，再使用下单相关工具
+3. **在提示词中加入约束**：例如"每笔交易金额不超过 X"、"执行前向我确认"等明确限制
 
 ## 常见问题
 
 ### OAuth 登录失败
 
-- 确认 Longbridge 账户状态正常。
-- 在客户端重新发起授权。
-- 检查当前账户是否支持所请求的 scope。
+- 确认 Longbridge 账户状态正常，已完成必要的身份验证
+- 在客户端删除现有配置后重新添加并发起授权
+- 检查当前账户是否支持所请求的 scope
 
 ### 已连接但部分工具不可用
 
-- 可能是账户/地区权限限制。
-- 如 scope 有变更，请重新授权。
+- 账户或地区限制：特定市场或功能可能受账户等级或地区限制
+- scope 变更：如工具能力有更新，可能需要重新授权以获得新 scope
 
 ### 交易操作提示权限不足
 
-- 检查账户交易权限与市场可交易资格。
-- 确认当前 MCP 会话已获得对应 OAuth scope。
+- 检查账户的交易权限和市场可交易资格
+- 确认当前 MCP 会话的 OAuth scope 包含交易相关权限
