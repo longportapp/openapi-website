@@ -70,7 +70,7 @@ headingLevel: 2
 | Name  | Type      | Required | Description  |
 | ----- | --------- | -------- | ------------ |
 | items | object[]  | true     | 公告列表     |
-| ∟ id | string    | true     | 文件 ID      |
+| ∟ id | string    | true     | 公告 ID      |
 | ∟ title | string  | true     | 标题         |
 | ∟ description | string | true  | 摘要         |
 | ∟ file_name | string | true | 文件名       |

@@ -70,7 +70,7 @@ Get the filings list for a specified security.
 | Name  | Type      | Required | Description        |
 | ----- | --------- | -------- | ------------------ |
 | items | object[]  | true     | Filings list       |
-| ∟ id | string    | true     | File ID            |
+| ∟ id | string    | true     | Filings ID            |
 | ∟ title | string  | true     | Title               |
 | ∟ description | string | true  | Summary             |
 | ∟ file_name | string | true | File name           |
