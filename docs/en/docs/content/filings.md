@@ -1,7 +1,7 @@
 ---
 slug: filings
 title: Filings
-sidebar_position: 2
+sidebar_position: 3
 language_tabs: false
 toc_footers: []
 includes: []
