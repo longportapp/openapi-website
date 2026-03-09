@@ -100,7 +100,7 @@ go get github.com/longportapp/openapi-go
 
 ## 配置
 
-### 開通開發中帳戶
+### 開通開發者帳戶
 
 1. 下載 [Longbridge](https://longbridge.com/download)，並完成開戶
 2. 從 [Longbridge OpenAPI](https://open.longbridge.com) 官網取得認證資訊

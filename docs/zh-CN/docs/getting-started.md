@@ -101,7 +101,7 @@ go get github.com/longportapp/openapi-go
 
 ## 配置
 
-### 开通开发中账户
+### 开通开发者账户
 
 1. 下载 [Longbridge](https://longbridge.com/download)，并完成开户
 2. 从 [Longbridge OpenAPI](https://open.longbridge.com) 官网获取认证信息
