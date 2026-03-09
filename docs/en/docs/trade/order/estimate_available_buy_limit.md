@@ -37,6 +37,9 @@ This API is used for estimating the maximum purchase quantity for Hong Kong and 
 
 ### Request Example
 
+<Tabs groupId="request-example">
+  <TabItem value="python" label="Python" default>
+
 ```python
 from longbridge.openapi import TradeContext, Config, OrderStatus, OrderType, OrderSide, OAuthBuilder
 
@@ -51,6 +54,97 @@ resp = ctx.estimate_max_purchase_quantity(
 )
 print(resp)
 ```
+
+  </TabItem>
+  <TabItem value="nodejs" label="Node.js">
+
+```javascript
+const { Config, TradeContext, OAuth } = require('longbridge')
+async function main() {
+  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const config = Config.fromOAuth(oauth)
+  const ctx = await TradeContext.new(config)
+  const resp = await ctx.estimateMaxPurchaseQuantity({ symbol: "700.HK", orderType: "LO", side: "Buy", price: "400", quantity: 100 })
+  console.log(resp)
+}
+main().catch(console.error)
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+import com.longport.*;
+import com.longport.trade.*;
+import java.math.BigDecimal;
+class Main {
+    public static void main(String[] args) throws Exception {
+        try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
+             Config config = Config.fromOAuth(oauth);
+             TradeContext ctx = TradeContext.create(config).get()) {
+            EstimateMaxPurchaseQuantityResponse resp = ctx.estimateMaxPurchaseQuantity(EstimateMaxPurchaseQuantityOptions.builder().symbol("700.HK").orderType(OrderType.LO).side(OrderSide.Buy).price(new BigDecimal("400")).quantity(100).build()).get();
+            System.out.println(resp);
+        }
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+```rust
+use std::sync::Arc;
+use longbridge::{oauth::OAuthBuilder, trade::TradeContext, Config};
+use rust_decimal::Decimal;
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
+    let config = Arc::new(Config::from_oauth(oauth));
+    let (ctx, _) = TradeContext::try_new(config).await?;
+    let resp = ctx.estimate_max_purchase_quantity(longbridge::trade::EstimateMaxPurchaseQuantityOptions::builder().symbol("700.HK").order_type(longbridge::trade::OrderType::LO).side(longbridge::trade::OrderSide::Buy).price(Decimal::from(400)).quantity(100).build()).await?;
+    println!("{:?}", resp);
+    Ok(())
+}
+```
+
+  </TabItem>
+  <TabItem value="cpp" label="C++">
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+#ifdef WIN32
+#include <windows.h>
+#endif
+using namespace longbridge;
+using namespace longbridge::trade;
+int main(int argc, char const* argv[]) {
+#ifdef WIN32
+  SetConsoleOutputCP(CP_UTF8);
+#endif
+  const std::string client_id = "your-client-id";
+  OAuthBuilder(client_id).build(
+    [](const std::string& url) { std::cout << "Open this URL to authorize: " << url << std::endl; },
+    [](auto res) {
+      if (!res) { std::cout << "authorization failed" << std::endl; return; }
+      Config config = Config::from_oauth(*res);
+      TradeContext::create(config, [](auto res) {
+        if (!res) { std::cout << "failed" << std::endl; return; }
+        EstimateMaxPurchaseQuantityOptions opts{"700.HK", OrderType::LO, OrderSide::Buy, Decimal(400.0), 100};
+        res.context().estimate_max_purchase_quantity(opts, [](auto res) {
+          if (!res) { std::cout << "failed" << std::endl; return; }
+          std::cout << "max_cash_buy: " << res->max_cash_buy << std::endl;
+        });
+      });
+    });
+  std::cin.get();
+  return 0;
+}
+```
+
+  </TabItem>
+</Tabs>
+
 
 ## Response
 

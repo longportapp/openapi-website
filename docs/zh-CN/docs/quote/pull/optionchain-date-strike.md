@@ -35,6 +35,9 @@ message OptionChainDateStrikeInfoRequest {
 
 ### Request Example
 
+<Tabs groupId="request-example">
+  <TabItem value="python" label="Python" default>
+
 ```python
 # 获取标的的期权链到期日期权标的列表
 # https://open.longbridge.com/docs/quote/pull/optionchain-date-strike
@@ -50,6 +53,121 @@ ctx = QuoteContext(config)
 resp = ctx.option_chain_info_by_date("AAPL.US", date(2023, 1, 20))
 print(resp)
 ```
+
+  </TabItem>
+  <TabItem value="nodejs" label="Node.js">
+
+```javascript
+const { Config, QuoteContext, OAuth } = require('longbridge')
+
+async function main() {
+  const oauth = await OAuth.build("your-client-id", (_, url) => {
+    console.log("Open this URL to authorize: " + url)
+  })
+  const config = Config.fromOAuth(oauth)
+  const ctx = await QuoteContext.new(config)
+  const resp = await ctx.optionChainInfoByDate("AAPL.US", "20230120")
+  console.log(resp)
+}
+main().catch(console.error)
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+import com.longport.*;
+import com.longport.quote.*;
+import java.time.LocalDate;
+
+class Main {
+    public static void main(String[] args) throws Exception {
+        try (OAuth oauth = new OAuthBuilder("your-client-id")
+                .build(url -> System.out.println("Open to authorize: " + url))
+                .get();
+             Config config = Config.fromOAuth(oauth);
+             QuoteContext ctx = QuoteContext.create(config).get()) {
+            StrikePriceInfo[] resp = ctx.getOptionChainInfoByDate("AAPL.US", LocalDate.of(2023, 1, 20)).get();
+            for (StrikePriceInfo o : resp) System.out.println(o);
+        }
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+```rust
+use std::sync::Arc;
+use longbridge::{oauth::OAuthBuilder, quote::QuoteContext, Config};
+use time::macros::date;
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let oauth = OAuthBuilder::new("your-client-id")
+        .build(|url| println!("Open this URL to authorize: {url}"))
+        .await?;
+    let config = Arc::new(Config::from_oauth(oauth));
+    let (ctx, _) = QuoteContext::try_new(config).await?;
+    let resp = ctx.option_chain_info_by_date("AAPL.US", date!(2023 - 01 - 20)).await?;
+    println!("{:?}", resp);
+    Ok(())
+}
+```
+
+  </TabItem>
+  <TabItem value="cpp" label="C++">
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+
+#ifdef WIN32
+#include <windows.h>
+#endif
+
+using namespace longbridge;
+using namespace longbridge::quote;
+
+int main(int argc, char const* argv[]) {
+#ifdef WIN32
+  SetConsoleOutputCP(CP_UTF8);
+#endif
+
+  const std::string client_id = "your-client-id";
+  OAuthBuilder(client_id).build(
+    [](const std::string& url) {
+      std::cout << "Open this URL to authorize: " << url << std::endl;
+    },
+    [](auto res) {
+      if (!res) {
+        std::cout << "authorization failed: " << *res.status().message() << std::endl;
+        return;
+      }
+      Config config = Config::from_oauth(*res);
+      QuoteContext::create(config, [](auto res) {
+        if (!res) {
+          std::cout << "failed to create quote context: " << *res.status().message() << std::endl;
+          return;
+        }
+        res.context().option_chain_info_by_date("AAPL.US", Date{2023, 1, 20}, [](auto res) {
+          if (!res) {
+            std::cout << "failed: " << *res.status().message() << std::endl;
+            return;
+          }
+          for (const auto& o : *res) std::cout << o.price << std::endl;
+        });
+      });
+    });
+
+  std::cin.get();
+  return 0;
+}
+```
+
+  </TabItem>
+</Tabs>
+
 
 ## Response
 
