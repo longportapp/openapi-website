@@ -6,167 +6,113 @@ sidebarCollapsed: true
 id: mcp
 ---
 
-# MCP
+# Longbridge MCP Service
 
-Longbridge provides an online MCP service so AI tools can securely access market and account capabilities through the Model Context Protocol.
+Longbridge provides a hosted MCP (Model Context Protocol) service that lets you use Longbridge market data and account capabilities directly from AI coding assistants and chat tools — without managing API keys manually.
 
-- MCP endpoint: `https://openapi.longportapp.com/mcp`
-- OAuth discovery: `https://openapi.longportapp.com/.well-known/oauth-authorization-server`
+**MCP endpoint:** `https://openapi.longportapp.com/mcp`
 
-> This page describes the **hosted Longbridge MCP service** and its **OAuth authentication flow**.
+## Prerequisites
 
-## What the Longbridge MCP service can do
+- An active Longbridge account with onboarding completed
+- An AI client that supports MCP OAuth 2.1 (see compatibility note below)
 
-After authorization, MCP clients can use Longbridge capabilities such as:
+## Available capabilities
 
-- Market quotes and snapshots
-- Candlesticks and historical data queries
-- Account overview and position queries
-- Trading actions (subject to account permissions and product rules)
+Once connected, MCP clients can call the following tools:
 
-Actual tool availability may vary by region, account level, and permission scope.
+| Category | Description |
+| --- | --- |
+| Market data | Real-time quotes, candlesticks, historical data queries |
+| Account information | Account overview, assets, and position queries |
+| Trading actions | Place, modify, and cancel orders (subject to account permissions and regional restrictions) |
 
-## OAuth authentication flow
-
-Longbridge MCP uses OAuth so users can authorize clients without sharing raw API secrets.
-
-### 1) Start MCP connection from your client
-
-In your MCP-capable client (for example Cursor, Claude Desktop, or Cherry Studio), choose to connect to the Longbridge MCP server.
-
-### 2) Redirect to Longbridge authorization page
-
-The client opens a browser page for Longbridge sign-in and consent.
-
-### 3) Sign in and grant permissions
-
-Review requested scopes and approve access.
-
-### 4) Receive authorization and establish session
-
-After approval, the client receives OAuth credentials and the MCP session becomes available.
-
-### 5) Refresh and revoke
-
-- Access may expire and be refreshed according to OAuth policy.
-- You can revoke access from your Longbridge security/authorization settings at any time.
-
-## Client compatibility note
-
-Some clients that do not fully implement the MCP OAuth 2.1 flow may fail to connect to Longbridge MCP.
-
-For example, older versions of certain clients (such as early Cherry Studio releases) may not complete OAuth correctly. Please upgrade to the latest version of your client.
-
-## Security notes
-
-- OAuth credentials are sensitive and should be stored securely by your client.
-- Use least-privilege scopes whenever possible.
-- For trading-related prompts, always require human confirmation before order placement.
+Actual tool availability varies by region, account level, and granted scopes.
 
 ## Client setup
-> Note: Client MCP configuration format may change by version. Prefer the client official MCP docs/UI as source of truth, and use the Longbridge MCP server URL below.
 
+> Configuration format may vary across client versions. Treat your client's official MCP documentation as the source of truth. The core parameter you need is the server URL below.
 
-### ChatGPT
-
-In ChatGPT, open **Settings → Connectors / MCP** (or the MCP entry in your workspace settings), then add a remote MCP server:
+In any MCP-capable client, add Longbridge as a remote MCP server:
 
 ```json
 {
   "mcpServers": {
     "longbridge": {
-      "url": "https://openapi.longportapp.cn/mcp"
+      "url": "https://openapi.longportapp.com/mcp"
     }
   }
 }
 ```
 
-Then complete OAuth sign-in and grant scopes.
+Where to find the MCP configuration entry in each client:
 
-### Claude Code
+- **Cursor**: Settings → MCP Servers → Add Remote MCP Server
+- **Claude Code**: MCP config file or the `claude mcp add` command
+- **ChatGPT**: Settings → Connectors (or the workspace MCP configuration entry)
+- **Zed**: `context_servers` key in `settings.json` (key name is customizable)
+- **Cherry Studio**: Settings → MCP Servers → Add
 
-In Claude Code MCP settings, add a remote MCP server:
+After saving the configuration, the client will guide you through the OAuth authorization flow automatically.
 
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "url": "https://openapi.longportapp.cn/mcp"
-    }
-  }
-}
+## OAuth authorization flow
+
+Longbridge MCP uses standard OAuth 2.1. You never need to paste API keys or tokens into the client.
+
+```
+AI client                  Browser                   Longbridge
+    |                        |                           |
+    |--- initiate MCP ------->|                           |
+    |                        |--- redirect to auth ------>|
+    |                        |<-- show login & consent ---|
+    |                        |--- sign in & approve ------>|
+    |<-- return credentials --|                           |
+    |--- call tools with credentials ----------------------->|
 ```
 
-Finish OAuth in browser, then return to Claude Code to start using tools.
+**Steps:**
 
-### Cursor
+1. **Initiate connection** — Adding the Longbridge MCP config and calling a tool for the first time triggers the authorization flow
+2. **Browser redirect** — The client opens a browser tab with the Longbridge login and consent page
+3. **Sign in and approve** — Log in with your Longbridge account and review and accept the requested permission scopes
+4. **Session established** — After approval, the client receives credentials and MCP tools become available
+5. **Credential maintenance** — Credentials are refreshed automatically per OAuth policy; to revoke access, visit Longbridge account security settings
 
-Open **Cursor Settings → MCP Servers**, add a remote MCP server endpoint:
+## Client compatibility
 
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "url": "https://openapi.longportapp.cn/mcp"
-    }
-  }
-}
-```
+Longbridge MCP requires clients that fully implement **MCP OAuth 2.1**. Clients with incomplete support will fail during the authorization flow.
 
-Complete OAuth authorization and verify tools are listed.
+Known issue: early versions of Cherry Studio do not support the full OAuth flow. Please upgrade to the latest release.
 
-### Zed
+If another client fails to connect, check its version and MCP support documentation.
 
-Open `settings.json`, add:
+## Security recommendations
 
-```json
-{
-  "context_servers": {
-    "longbridge": {
-      "url": "https://openapi.longportapp.cn/mcp"
-    }
-  }
-}
-```
-
-Then authorize via OAuth and return to Zed for usage.
-
-### OpenClaw
-
-In OpenClaw MCP/tool integration settings, add Longbridge remote MCP endpoint:
-
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "url": "https://openapi.longportapp.cn/mcp"
-    }
-  }
-}
-```
-
-Complete OAuth and confirm the MCP tools are available in your session.
+- **Least privilege**: Only approve the scopes required for your current task; avoid over-granting
+- **Trading confirmation**: For any order placement prompt, explicitly instruct the AI to ask for human confirmation before executing
+- **Credential handling**: OAuth credentials are managed by your client; avoid copying them into untrusted environments
+- **Regular review**: Periodically check and revoke unused authorizations in your Longbridge account security settings
 
 ## Recommended usage pattern
 
-1. Start with read-only tasks (quote/account/position).
-2. Add trading actions only after confirming permission scopes and risk controls.
-3. Set guardrails in prompts (max amount, symbol allowlist, confirmation required).
+1. **Start with read-only tools**: Begin with market data, account overview, and position queries to learn tool behavior at low risk
+2. **Gradually enable trading**: Enable order placement only after verifying scope configuration and your own risk controls
+3. **Add guardrails in prompts**: For example, "keep each trade under X", "always confirm with me before placing an order"
 
 ## Troubleshooting
 
 ### OAuth sign-in failed
 
-- Confirm your Longbridge account is in good standing.
-- Retry authorization from the MCP client.
-- Check whether the requested scopes are supported for your account.
+- Confirm your Longbridge account is in good standing and identity verification is complete
+- Remove the existing MCP configuration from the client and re-add it to trigger a fresh authorization
+- Check whether the requested scopes are supported for your account type
 
 ### Connected but some tools are missing
 
-- Your account/region may not have those permissions.
-- Re-authorize if scope has changed.
+- Account or regional restrictions: certain markets or features may be limited by account level or region
+- Scope changes: if tool capabilities have been updated, re-authorize to receive the new scopes
 
 ### Permission denied on trading actions
 
-- Verify trading permissions and market eligibility on your account.
-- Ensure the MCP session has the required OAuth scopes.
+- Verify trading permissions and market eligibility on your account
+- Confirm that the current MCP session's OAuth scopes include trading-related permissions

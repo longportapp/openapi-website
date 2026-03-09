@@ -163,7 +163,7 @@ oauth = OAuth2Session(client_id, redirect_uri=redirect_uri)
 authorization_url, state = oauth.authorization_url(
     'https://openapi.longportapp.com/oauth2/authorize'
 )
-print(f'请访问此 URL 进行授权: {authorization_url}')
+print(f'请访问此 URL 进行授权：{authorization_url}')
 
 # 授权后获取回调 URL
 authorization_response = input('请输入完整的回调 URL: ')
@@ -201,7 +201,7 @@ const authorizationUri = client.authorizeURL({
   redirect_uri: 'http://localhost:60355/callback',
 });
 
-console.log('请访问此 URL 进行授权:', authorizationUri);
+console.log('请访问此 URL 进行授权：', authorizationUri);
 
 // 授权后使用 code 获取 token
 const tokenParams = {
