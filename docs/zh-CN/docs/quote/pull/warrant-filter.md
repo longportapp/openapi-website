@@ -59,9 +59,10 @@ message FilterConfig {
 ### Request Example
 
 ```python
-from longport.openapi import QuoteContext, Config, WarrantSortBy, SortOrderType
+from longbridge.openapi import QuoteContext, Config, WarrantSortBy, SortOrderType, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 
 resp = ctx.warrant_list("700.HK", WarrantSortBy.LastDone, SortOrderType.Ascending)

@@ -50,9 +50,10 @@ message SecurityCandlestickRequest {
 # https://open.longbridge.com/docs/quote/pull/candlestick
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile app.
-from longport.openapi import QuoteContext, Config, Period, AdjustType, TradeSessions
+from longbridge.openapi import QuoteContext, Config, Period, AdjustType, TradeSessions, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 
 # Get intraday candlestick data for 700.HK

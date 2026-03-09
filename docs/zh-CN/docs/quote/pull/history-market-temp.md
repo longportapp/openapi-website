@@ -29,9 +29,10 @@ sidebar_position: 22
 
 ```python
 import datetime
-from longport.openapi import QuoteContext, Config, Market
+from longbridge.openapi import QuoteContext, Config, Market, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 resp = ctx.history_market_temperature(Market.US, datetime.date(2024, 1, 1), datetime.date(2025, 1, 1))
 print(resp)

@@ -27,8 +27,9 @@ message SubscriptionRequest {
 ### Request Example
 
 ```python
-from longport.openapi import QuoteContext, Config, SubType
-config = Config.from_env()
+from longbridge.openapi import QuoteContext, Config, SubType, OAuthBuilder
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 
 ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote])

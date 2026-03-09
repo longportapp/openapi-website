@@ -42,9 +42,10 @@ associated stock code and capital flow description information.
 # Get Cash Flow
 # https://open.longbridge.com/docs/trade/asset/cashflow
 from datetime import datetime
-from longport.openapi import TradeContext, Config
+from longbridge.openapi import TradeContext, Config, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = TradeContext(config)
 resp = ctx.cash_flow(
     start_at = datetime(2022, 5, 9),

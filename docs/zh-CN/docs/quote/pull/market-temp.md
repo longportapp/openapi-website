@@ -26,9 +26,10 @@ sidebar_position: 21
 ### Request Example
 
 ```python
-from longport.openapi import QuoteContext, Config, Market
+from longbridge.openapi import QuoteContext, Config, Market, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 resp = ctx.market_temperature(Market.US)
 print(resp)

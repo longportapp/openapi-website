@@ -44,9 +44,10 @@ This API is used to replace order, modify quantity or price.
 
 ```python
 from decimal import Decimal
-from longport.openapi import TradeContext, Config
+from longbridge.openapi import TradeContext, Config, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = TradeContext(config)
 
 ctx.replace_order(

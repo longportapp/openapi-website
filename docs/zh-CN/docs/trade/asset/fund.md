@@ -35,9 +35,10 @@ headingLevel: 2
 ```python
 # 获取基金持仓
 # https://open.longbridge.com/docs/trade/asset/fund
-from longport.openapi import TradeContext, Config
+from longbridge.openapi import TradeContext, Config, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = TradeContext(config)
 resp = ctx.fund_positions()
 print(resp)

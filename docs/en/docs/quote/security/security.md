@@ -34,9 +34,10 @@ Retrieve the List of Securities
 #### Request Example
 
 ```python
-from longport.openapi import QuoteContext, Config, Market, SecurityListCategory
+from longbridge.openapi import QuoteContext, Config, Market, SecurityListCategory, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 resp = ctx.security_list(Market.US, SecurityListCategory.Overnight)
 print(resp)

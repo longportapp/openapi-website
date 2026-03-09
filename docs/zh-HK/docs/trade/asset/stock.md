@@ -35,9 +35,10 @@ headingLevel: 2
 ```python
 # 獲取股票持倉
 # https://open.longbridge.com/docs/trade/asset/stock
-from longport.openapi import TradeContext, Config
+from longbridge.openapi import TradeContext, Config, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = TradeContext(config)
 resp = ctx.stock_positions()
 print(resp)

@@ -37,9 +37,10 @@ This API is used to get today order or get order by order id.
 ### Request Example
 
 ```python
-from longport.openapi import TradeContext, Config, OrderStatus, OrderSide, Market
+from longbridge.openapi import TradeContext, Config, OrderStatus, OrderSide, Market, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = TradeContext(config)
 
 resp = ctx.today_orders(

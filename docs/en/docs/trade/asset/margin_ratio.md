@@ -35,9 +35,10 @@ margin ratio of stocks.
 
 ```python
 from datetime import datetime
-from longport.openapi import TradeContext, Config
+from longbridge.openapi import TradeContext, Config, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = TradeContext(config)
 resp = ctx.margin_ratio("700.HK")
 print(resp)

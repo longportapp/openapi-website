@@ -36,9 +36,10 @@ Update watched group
 ### Request Example
 
 ```python
-from longport.openapi import QuoteContext, Config, SecuritiesUpdateMode
+from longbridge.openapi import QuoteContext, Config, SecuritiesUpdateMode, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 ctx.update_watchlist_group(10086, name = "Watchlist2", securities = ["700.HK", "AAPL.US"], SecuritiesUpdateMode.Replace)
 ```

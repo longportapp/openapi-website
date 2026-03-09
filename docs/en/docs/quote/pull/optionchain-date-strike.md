@@ -41,9 +41,10 @@ message OptionChainDateStrikeInfoRequest {
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile app.
 from datetime import date
-from longport.openapi import QuoteContext, Config
+from longbridge.openapi import QuoteContext, Config, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 
 resp = ctx.option_chain_info_by_date("AAPL.US", date(2023, 1, 20))

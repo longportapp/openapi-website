@@ -40,9 +40,10 @@ message SecurityTradeRequest {
 # https://open.longbridge.com/docs/quote/pull/trade
 # 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
 # 如沒有開通行情權限，可以通過“Longbridge”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
-from longport.openapi import QuoteContext, Config
+from longbridge.openapi import QuoteContext, Config, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 
 resp = ctx.trades("700.HK", 10)

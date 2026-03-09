@@ -39,9 +39,10 @@ headingLevel: 2
 
 ```python
 from datetime import datetime
-from longport.openapi import TradeContext, Config, OrderStatus, OrderSide, Market
+from longbridge.openapi import TradeContext, Config, OrderStatus, OrderSide, Market, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = TradeContext(config)
 
 resp = ctx.history_orders(

@@ -69,9 +69,10 @@ message SecurityHistoryCandlestickRequest {
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile app.
 from datetime import datetime, date
-from longport.openapi import QuoteContext, Config, Period, AdjustType
+from longbridge.openapi import QuoteContext, Config, Period, AdjustType, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 
 # Query after 2023-01-01

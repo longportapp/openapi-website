@@ -69,9 +69,10 @@ message SecurityHistoryCandlestickRequest {
 # 運行前請訪問“開發者中心”確保賬戶有正確的行情權限。
 # 如冇有開通行情權限，可以通過“Longbridge”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from datetime import datetime, date
-from longport.openapi import QuoteContext, Config, Period, AdjustType
+from longbridge.openapi import QuoteContext, Config, Period, AdjustType, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 
 # Query after 2023-01-01

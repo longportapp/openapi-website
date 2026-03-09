@@ -10,14 +10,12 @@ Longbridge OpenAPI SDK is implemented based on Rust we have released SDK for Pyt
 
 ## API Host
 
-- HTTP API - `https://openapi.longportapp.com`
-- WebSocket Quote - `wss://openapi-quote.longportapp.com`
-- WebSocket Trade - `wss://openapi-trade.longportapp.com`
+- HTTP API - `https://openapi.longbridge.com`
+- WebSocket Quote - `wss://openapi-quote.longbridge.com`
+- WebSocket Trade - `wss://openapi-trade.longbridge.com`
 
 :::tip
-For access in mainland China, it is recommended to use `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn` to improve access speed.
-
-If you use our SDK, set the `LONGBRIDGE_REGION=cn` environment variable to use the China API region (supported values: `cn`, `hk`).
+For access in mainland China, use `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn`. The SDK automatically selects the access point by network. If the SDK selects incorrectly, set the environment variable `LONGBRIDGE_REGION` (e.g. `cn` or `hk`).
 :::
 
 ## Time Format
@@ -231,13 +229,27 @@ The "application credential" credential information will be given on the page. A
 Please pay attention to protect your **Access Token** information, anyone who gets it can trade your account through OpenAPI!
 :::
 
-| Environment Variable        | Description                                                        | Values          |
-| --------------------------- | ------------------------------------------------------------------ | --------------- |
-| `LONGBRIDGE_APP_KEY`        | App Key from developer center                                      |                 |
-| `LONGBRIDGE_APP_SECRET`     | App Secret from developer center                                   |                 |
-| `LONGBRIDGE_ACCESS_TOKEN`   | Access Token from developer center                                 |                 |
-| `LONGBRIDGE_REGION`         | API region, `cn` for mainland China, `hk` for Hong Kong            | `cn`, `hk`      |
-| `LONGBRIDGE_ENABLE_OVERNIGHT` | Set `true` to enable overnight quote                             | `true`, `false` |
+**API Key credentials (required for legacy API Key):**
+
+| Environment Variable      | Description                    |
+| ------------------------- | ------------------------------ |
+| `LONGBRIDGE_APP_KEY`      | App key from developer center  |
+| `LONGBRIDGE_APP_SECRET`   | App secret from developer center|
+| `LONGBRIDGE_ACCESS_TOKEN` | Access token from developer center |
+
+**Other environment variables:**
+
+| Name                           | Description                                                                      |
+|--------------------------------|----------------------------------------------------------------------------------|
+| `LONGBRIDGE_LANGUAGE`          | Language identifier, `zh-CN`, `zh-HK` or `en` (Default: `en`)                    |
+| `LONGBRIDGE_HTTP_URL`          | HTTP endpoint url (Default: `https://openapi.longbridge.com`)                     |
+| `LONGBRIDGE_QUOTE_WS_URL`      | Quote websocket endpoint url (Default: `wss://openapi-quote.longbridge.com/v2`)  |
+| `LONGBRIDGE_TRADE_WS_URL`      | Trade websocket endpoint url (Default: `wss://openapi-trade.longbridge.com/v2`)  |
+| `LONGBRIDGE_REGION`            | Override API region; SDK auto-selects by network. Set to `cn` or `hk` if incorrect. |
+| `LONGBRIDGE_ENABLE_OVERNIGHT`  | Enable overnight quote, `true` or `false` (Default: `false`)                     |
+| `LONGBRIDGE_PUSH_CANDLESTICK_MODE` | `realtime` or `confirmed` (Default: `realtime`)                              |
+| `LONGBRIDGE_PRINT_QUOTE_PACKAGES`  | Print quote packages when connected, `true` or `false` (Default: `true`)    |
+| `LONGBRIDGE_LOG_PATH`          | Set the path of the log files (Default: no logs)                                  |
 
 :::info
 The SDK also accepts the legacy `LONGPORT_*` variable names as fallback.
@@ -272,7 +284,7 @@ Windows is a little more complicated, we provide two methods to set the environm
 
      <img src="https://assets.lbkrs.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
 
-   - Click "New" in the pop-up window, then enter the environment variable name, such as `LONGBRIDGE_APP_KEY`, `Value` respectively fill in the App Key, App Secret, Access Token, Region obtained from the page.
+   - Click "New" in the pop-up window, then enter the environment variable name, such as `LONGBRIDGE_APP_KEY`, `Value` respectively fill in the App Key, App Secret, Access Token obtained from the page.
 
 2. **Through the CMD**: Press the `Win + R` shortcut keys and enter the `cmd` command to start the command line (it is recommended to use [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) for a better development experience).
 

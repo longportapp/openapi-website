@@ -43,9 +43,10 @@ message MarketTradeDayRequest {
 # Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
 # If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile app.
 from datetime import date
-from longport.openapi import QuoteContext, Config, Market
+from longbridge.openapi import QuoteContext, Config, Market, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 
 resp = ctx.trading_days(Market.HK, date(2022, 1, 1), date(2022, 2, 1))

@@ -36,9 +36,10 @@ funds (fund purchase and redemption) information for each currency of the user.
 ```python
 # Get Account Balance
 # https://open.longbridge.com/docs/trade/asset/account
-from longport.openapi import TradeContext, Config
+from longbridge.openapi import TradeContext, Config, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = TradeContext(config)
 resp = ctx.account_balance()
 print(resp)

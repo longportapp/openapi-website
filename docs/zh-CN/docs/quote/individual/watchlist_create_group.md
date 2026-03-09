@@ -35,9 +35,10 @@ headingLevel: 2
 ### Request Example
 
 ```python
-from longport.openapi import QuoteContext, Config
+from longbridge.openapi import QuoteContext, Config, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 group_id = ctx.create_watchlist_group(name = "Watchlist1", securities = ["700.HK", "AAPL.US"])
 print(group_id)
