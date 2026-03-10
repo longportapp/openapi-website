@@ -7,10 +7,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "VITE_API_BASE_URL=https://openapi.longbridge.xyz vitepress dev docs",
-    "dev:prod": "VITE_API_BASE_URL=https://openapi.longportapp.com vitepress dev docs",
-    "build:canary": "VITE_API_BASE_URL=https://openapi.longbridge.xyz vitepress build docs && bun run build:llms",
-    "build:release": "VITE_API_BASE_URL=https://openapi.longportapp.com vitepress build docs && bun run build:llms",
+    "dev": "cross-env VITE_API_BASE_URL=https://openapi.longbridge.xyz npx vitepress dev docs",
+    "dev:prod": "cross-env VITE_API_BASE_URL=https://openapi.longportapp.com npx vitepress dev docs",
+    "build:canary": "cross-env VITE_API_BASE_URL=https://openapi.longbridge.xyz npx vitepress build docs && bun run build:llms",
+    "build:release": "cross-env VITE_API_BASE_URL=https://openapi.longportapp.com npx vitepress build docs && bun run build:llms",
     "build:llms": "bun run script/normalize_md.ts && bun run script/generate-llms.ts",
     "preview": "vitepress preview docs",
     "lint:docs": "prettier -c --parser typescript \"packages/**/*.{js,ts,vue}\"",
@@ -31,6 +31,7 @@
     "vue-i18n": "11"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "@types/bun": "latest",
     "@types/fs-extra": "^11.0.4",
     "@unocss/extractor-mdc": "^66.1.2",
