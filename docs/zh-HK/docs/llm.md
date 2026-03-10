@@ -73,7 +73,7 @@ https://open.longbridge.com/llms.txt
 
 ### 安裝
 
-開始之前閱讀 [快速開始](/docs/getting-started) 並獲得您的 `LONGPORT_APP_KEY`、`LONGPORT_APP_SECRET` 和 `LONGPORT_ACCESS_TOKEN`。
+開始之前閱讀 [快速開始](/docs/getting-started) 並獲得您的 `LONGBRIDGE_APP_KEY`、`LONGBRIDGE_APP_SECRET` 和 `LONGBRIDGE_ACCESS_TOKEN`（相容舊版 `LONGPORT_*` 環境變數）。
 
 #### macOS 或 Linux
 
@@ -83,15 +83,15 @@ https://open.longbridge.com/llms.txt
 curl -sSL https://raw.githubusercontent.com/longbridge/openapi/refs/heads/main/mcp/install | bash
 ```
 
-腳本執行完後，`longport-mcp` 將會安裝到 `/usr/local/bin/` 目錄下，運行下面的命令驗證是否正確：
+腳本執行完後，`longbridge-mcp` 將會安裝到 `/usr/local/bin/` 目錄下，運行下面的命令驗證是否正確：
 
 ```bash
-longport-mcp -h
+longbridge-mcp -h
 ```
 
 #### Windows
 
-請訪問 [https://github.com/longbridge/openapi/releases](https://github.com/longbridge/openapi/releases) 下載 `longport-mcp-x86_64-pc-windows-msvc.zip` 並解壓獲得 `longport-mcp.exe`。
+請訪問 [https://github.com/longbridge/openapi/releases](https://github.com/longbridge/openapi/releases) 下載 `longbridge-mcp-x86_64-pc-windows-msvc.zip` 並解壓獲得 `longbridge-mcp.exe`。
 
 ### 示例提示
 
@@ -114,12 +114,12 @@ longport-mcp -h
 ```json
 {
   "mcpServers": {
-    "longport-mcp": {
-      "command": "/usr/local/bin/longport-mcp",
+    "longbridge-mcp": {
+      "command": "/usr/local/bin/longbridge-mcp",
       "env": {
-        "LONGPORT_APP_KEY": "your-app-key",
-        "LONGPORT_APP_SECRET": "your-app-secret",
-        "LONGPORT_ACCESS_TOKEN": "your-access-token"
+        "LONGBRIDGE_APP_KEY": "your-app-key",
+        "LONGBRIDGE_APP_SECRET": "your-app-secret",
+        "LONGBRIDGE_ACCESS_TOKEN": "your-access-token"
       }
     }
   }
@@ -138,17 +138,17 @@ longport-mcp -h
 
 **使用 STDIO 模式：**
 
-確保您已經配置了環境變量並在系統中安裝了 `longport-mcp` 命令行工具。
+確保您已經配置了環境變量並在系統中安裝了 `longbridge-mcp` 命令行工具。
 
 ![](https://pub.lbkrs.com/files/202503/QRuojGfGL1Lay7rs/SCR-20250331-jajy.png)
 
-如果你是 Windows，可以參考下面圖的設定方式，你可以把 `E:\` 換成 `longport-mcp.exe` 所在的具體路徑。
-為了避免一些其他影響，建議你放在 `C:\longport-mcp.exe` 先嘗試一下，成功以後，然後再放到其他位置。
+如果你是 Windows，可以參考下面圖的設定方式，你可以把 `E:\` 換成 `longbridge-mcp.exe` 所在的具體路徑。
+為了避免一些其他影響，建議你放在 `C:\longbridge-mcp.exe` 先嘗試一下，成功以後，然後再放到其他位置。
 
 ![](https://assets.lbctrl.com/uploads/4ff72c40-b651-438d-a98d-71dd76d78014/scr-20250814-nfrg.png)
 
-如果你在中國大陸，你可能還需要往環境變數配置裡面額外增加 `LONGPORT_REGION=cn`，這會讓你走我們中國大陸的 CDN 伺服器連接，已獲得更好的穩定性。
+如果你在中國大陸，你可能還需要往環境變數配置裡面額外增加 `LONGBRIDGE_REGION=cn`（相容 `LONGPORT_REGION=cn`），這會讓你走我們中國大陸的 CDN 伺服器連接，已獲得更好的穩定性。
 
 ```
-LONGPORT_REGION=cn
+LONGBRIDGE_REGION=cn
 ```

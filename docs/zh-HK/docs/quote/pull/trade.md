@@ -169,7 +169,7 @@ func main() {
 		log.Fatal(err)
 	}
 	for _, t := range trades {
-		fmt.Println(t.Price, t.Quantity)
+		fmt.Println(t.Price, t.Volume)
 	}
 }
 ```

@@ -121,7 +121,7 @@ A:
 
 - 從環境變數建立 `Config` 對象
 
-設定環境變數 `LONGPORT_ENABLE_OVERNIGHT` 為 `true`
+設定環境變數 `LONGBRIDGE_ENABLE_OVERNIGHT` 為 `true`（相容舊版 `LONGPORT_ENABLE_OVERNIGHT`）
 
 - 從建構函式建立 `Config` 對象
 

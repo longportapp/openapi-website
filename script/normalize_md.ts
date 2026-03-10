@@ -94,23 +94,23 @@ function parseSDKLinks(content: string, locale: Locale): string {
       const links: { title: string; label: string; url: string }[] = [
         {
           title: 'Python',
-          label: `longport.openapi.${klass}.${snakeMethod}`,
-          url: `https://longportapp.github.io/openapi/python/reference_all/#longport.openapi.${klass}.${snakeMethod}`,
+          label: `longbridge.openapi.${klass}.${snakeMethod}`,
+          url: `https://longbridge.github.io/openapi/python/reference_all/#longbridge.openapi.${klass}.${snakeMethod}`,
         },
         {
           title: 'Rust',
-          label: `longport::${module}::${klass}#${snakeMethod}`,
-          url: `https://longportapp.github.io/openapi/rust/longport/${module}/struct.${klass}.html#method.${snakeMethod}`,
+          label: `longbridge::${module}::${klass}#${snakeMethod}`,
+          url: `https://longbridge.github.io/openapi/rust/longbridge/${module}/struct.${klass}.html#method.${snakeMethod}`,
         },
         {
           title: 'Go',
           label: `${klass}.${methodGo}`,
-          url: `https://pkg.go.dev/github.com/longportapp/openapi-go/${module}#${klass}.${methodGo}`,
+          url: `https://pkg.go.dev/github.com/longbridge/openapi-go/${module}#${klass}.${methodGo}`,
         },
         {
           title: 'Node.js',
           label: `${klass}#${camelMethod}`,
-          url: `https://longportapp.github.io/openapi/nodejs/classes/${klass}.html#${camelMethod.toLowerCase()}`,
+          url: `https://longbridge.github.io/openapi/nodejs/classes/${klass}.html#${camelMethod.toLowerCase()}`,
         },
       ]
 
@@ -119,7 +119,7 @@ function parseSDKLinks(content: string, locale: Locale): string {
         links.push({
           title: 'Java',
           label: `${klass}.${getPrefixedMethod}`,
-          url: `https://longportapp.github.io/openapi/java/com/longport/${module}/${klass}.html#${methodJava}`,
+          url: `https://longbridge.github.io/openapi/java/com/longbridge/${module}/${klass}.html#${methodJava}`,
         })
       }
 

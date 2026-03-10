@@ -29,7 +29,7 @@ https://open.longbridge.com/sdk
 ### Discovery 地址
 
 - 生产环境：`https://openapi.longbridge.com/.well-known/oauth-authorization-server`
-- 中国内地：`https://openapi.longportapp.cn/.well-known/oauth-authorization-server`
+- 中国内地：`https://openapi.longbridge.com/.well-known/oauth-authorization-server`
 
 支持授权类型（以 Discovery 返回为准）：
 

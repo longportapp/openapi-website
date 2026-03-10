@@ -66,14 +66,14 @@ const links = computed(() => {
     {
       title: 'Python',
       color: '#3572a5',
-      label: `longport.openapi.${props.klass}.${snakeMethod.value}`,
-      url: `https://longbridge.github.io/openapi/python/reference_all/#longport.openapi.${props.klass}.${snakeMethod.value}`,
+      label: `longbridge.openapi.${props.klass}.${snakeMethod.value}`,
+      url: `https://longbridge.github.io/openapi/python/reference_all/#longbridge.openapi.${props.klass}.${snakeMethod.value}`,
     },
     {
       title: 'Rust',
       color: '#dea584',
-      label: `longport::${props.module}::${props.klass}#${snakeMethod.value}`,
-      url: `https://longbridge.github.io/openapi/rust/longport/${props.module}/struct.${props.klass}.html#method.${snakeMethod.value}`,
+      label: `longbridge::${props.module}::${props.klass}#${snakeMethod.value}`,
+      url: `https://longbridge.github.io/openapi/rust/longbridge/${props.module}/struct.${props.klass}.html#method.${snakeMethod.value}`,
     },
     {
       title: 'Go',

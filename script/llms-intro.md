@@ -84,4 +84,4 @@ Longbridge does not charge any additional fees for activating or using interface
 ## Other
 
 The OpenAPI services are provided by Longbridge and the applicable affiliates (subject to the agreement).
-openapi-trade.longportapp.com
+openapi-trade.longbridge.com

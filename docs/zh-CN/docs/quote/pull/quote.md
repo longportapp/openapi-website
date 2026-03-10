@@ -259,7 +259,7 @@ config = Config(
     enable_overnight=True)
 ```
 
-或者设置环境变量 `LONGPORT_ENABLE_OVERNIGHT` 为 `true`。
+或者设置环境变量 `LONGBRIDGE_ENABLE_OVERNIGHT` 为 `true`（兼容旧版 `LONGPORT_ENABLE_OVERNIGHT`）。
 
 ### Protobuf
 

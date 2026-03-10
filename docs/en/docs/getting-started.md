@@ -15,7 +15,7 @@ Longbridge OpenAPI SDK is implemented based on Rust we have released SDK for Pyt
 - WebSocket Trade - `wss://openapi-trade.longbridge.com`
 
 :::tip
-For access in mainland China, use `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn`. The SDK automatically selects the access point by network. If the SDK selects incorrectly, set the environment variable `LONGBRIDGE_REGION` (e.g. `cn` or `hk`).
+For access in mainland China, use `openapi.longbridge.com`, `openapi-quote.longbridge.com`, `openapi-trade.longbridge.com`. The SDK automatically selects the access point by network. If the SDK selects incorrectly, set the environment variable `LONGBRIDGE_REGION` (e.g. `cn` or `hk`).
 :::
 
 ## Time Format
@@ -107,7 +107,7 @@ Let's take obtaining assets as an example to demonstrate how to use the SDK.
 
 ### Authentication Methods
 
-LongPort OpenAPI supports two authentication methods:
+Longbridge OpenAPI supports two authentication methods:
 
 #### Method 1: OAuth 2.0 (Recommended) ⭐
 
@@ -283,7 +283,7 @@ Please pay attention to protect your **Access Token** information, anyone who ge
 | `LONGBRIDGE_LOG_PATH`          | Set the path of the log files (Default: no logs)                                  |
 
 :::info
-The SDK also accepts the legacy `LONGPORT_*` variable names as fallback.
+The SDK also accepts the legacy `LONGPORT_*` variable names for backward compatibility.
 :::
 
 We recommend that you set the environment variables. For the convenience of demonstration, these environment variables will be used in the sample code in the documents in the following chapters.

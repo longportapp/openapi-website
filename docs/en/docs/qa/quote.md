@@ -121,7 +121,7 @@ A:
 
 - Create `Config` from environment variables
 
-Set environment variable `LONGPORT_ENABLE_OVERNIGHT` to `true`
+Set environment variable `LONGBRIDGE_ENABLE_OVERNIGHT` to `true` (legacy `LONGPORT_ENABLE_OVERNIGHT` also supported)
 
 - Create `Config` object from constructor
 

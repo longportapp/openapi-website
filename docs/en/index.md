@@ -2,7 +2,7 @@
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
 titleTemplate: Flexible Support for Programmatic Trading
-pageClass: longport-home-page
+pageClass: longbridge-home-page
 hero:
   image:
     src: https://pub.lbkrs.com/files/202503/2CChxYnHQXeW9eRu/code.svg
