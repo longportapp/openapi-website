@@ -1,7 +1,8 @@
 ---
 sidebar_position: 0
 id: quote_overview
-title: Overview
+sidebar_label: 概览
+title: 概览
 slug: overview
 ---
 

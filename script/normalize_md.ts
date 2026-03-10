@@ -78,6 +78,8 @@ function parseSDKLinks(content: string, locale: Locale): string {
   const camelCase = (str: string): string => {
     return str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase())
   }
+  // C++ Doxygen class page slug (snake_case class name, no leading underscore)
+  const cppClassSlug = (k: string) => snakeCase(k).replace(/^_/, '')
 
   const JAVA_METHOD_MAP: Record<string, string> = {
     subscribe: 'subscribe',
@@ -185,6 +187,11 @@ function parseSDKLinks(content: string, locale: Locale): string {
           title: 'Java',
           label: `${klass}.${methodJava}`,
           url: `https://longbridge.github.io/openapi/java/com/longbridge/${module}/${klass}.html#${javaAnchor}`,
+        },
+        {
+          title: 'C++',
+          label: `longbridge::${module}::${klass}`,
+          url: `https://longbridge.github.io/openapi/cpp/classlongbridge_1_1${module}_1_1_${cppClassSlug(klass)}.html`,
         },
       ]
 

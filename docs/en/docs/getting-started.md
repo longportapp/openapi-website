@@ -252,9 +252,9 @@ OAuth tokens should be stored securely in your application (e.g., encrypted file
 
 **_Get App Key, App Secret, Access Token and other information_**
 
-Login the [Longbridge OpenAPI](https://open.longbridge.com) website, and enter the "User Center".
+Log in at [https://open.longbridge.com/](https://open.longbridge.com/) and open **User Center**.
 
-The "application credential" credential information will be given on the page. After we get it, we will set the environment variable, which is convenient for later development and use.
+The **application credential** (App Key, App Secret, Access Token) is shown on that page. This Access Token is the **legacy** API Key credential; it is **not** the same as the access token obtained via OAuth or the Refresh Token API. Set these as environment variables for development.
 
 ### Environment Variables
 
@@ -268,7 +268,7 @@ Please pay attention to protect your **Access Token** information, anyone who ge
 | ------------------------- | ------------------------------ |
 | `LONGBRIDGE_APP_KEY`      | App key from developer center  |
 | `LONGBRIDGE_APP_SECRET`   | App secret from developer center|
-| `LONGBRIDGE_ACCESS_TOKEN` | Access token from developer center |
+| `LONGBRIDGE_ACCESS_TOKEN` | Legacy Access Token from [https://open.longbridge.com/](https://open.longbridge.com/) (User Center → application credential). Not the OAuth access token. |
 
 **Other environment variables:**
 

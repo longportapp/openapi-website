@@ -73,7 +73,7 @@ https://open.longbridge.com/llms.txt
 
 ### 安装
 
-开始之前阅读 [快速开始](/docs/getting-started) 并获得您的 `LONGBRIDGE_APP_KEY`、`LONGBRIDGE_APP_SECRET` 和 `LONGBRIDGE_ACCESS_TOKEN`（兼容旧版 `LONGPORT_*` 环境变量）。
+开始之前阅读 [快速开始](/docs/getting-started) 并获得您的 `LONGBRIDGE_APP_KEY`、`LONGBRIDGE_APP_SECRET` 和 `LONGBRIDGE_ACCESS_TOKEN`。其中 `LONGBRIDGE_ACCESS_TOKEN` 请在 [https://open.longbridge.com/](https://open.longbridge.com/) 用户中心（方式二：传统 API Key）获取，与 OAuth 的 access token 不是同一种凭证（兼容旧版 `LONGPORT_*` 环境变量）。
 
 #### macOS 或 Linux
 

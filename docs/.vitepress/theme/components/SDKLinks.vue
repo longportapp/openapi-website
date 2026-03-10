@@ -49,6 +49,13 @@ const snakeCase = (str: string): string => {
   return str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`)
 }
 
+// C++ Doxygen class page: longbridge_1_1{module}_1_1_{class_snake}.html
+const cppClassSlug = computed(() => snakeCase(props.klass ?? 'QuoteContext').replace(/^_/, ''))
+const cppClassUrl = computed(
+  () =>
+    `https://longbridge.github.io/openapi/cpp/classlongbridge_1_1${props.module}_1_1_${cppClassSlug.value}.html`
+)
+
 const camelCase = (str: string): string => {
   return str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase())
 }
@@ -169,6 +176,12 @@ const links = computed(() => {
       color: '#b07219',
       label: `${props.klass}.${methodJava.value}`,
       url: `https://longbridge.github.io/openapi/java/com/longbridge/${props.module}/${props.klass}.html#${javaAnchor.value}`,
+    },
+    {
+      title: 'C++',
+      color: '#f34b7d',
+      label: `longbridge::${props.module}::${props.klass}`,
+      url: cppClassUrl.value,
     },
   ]
   return baseLinks
