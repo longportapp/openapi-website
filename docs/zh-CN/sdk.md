@@ -119,6 +119,47 @@ $ go get github.com/longbridge/openapi-go
 
 [https://pkg.go.dev/github.com/longbridge/openapi-go](https://pkg.go.dev/github.com/longbridge/openapi-go)
 
+### 示例
+
+使用 OAuth 创建配置后获取行情或账户资产：
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+	"github.com/longbridge/openapi-go/quote"
+)
+
+func main() {
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("请打开此 URL 授权：", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	if err != nil {
+		log.Fatal(err)
+	}
+	quoteContext, err := quote.NewFromCfg(conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer quoteContext.Close()
+	ctx := context.Background()
+	quotes, err := quoteContext.Quote(ctx, []string{"700.HK", "AAPL.US"})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("quotes: %+v\n", quotes[0])
+}
+```
+
 </TabItem>
 <TabItem value="c++" label="C++">
 

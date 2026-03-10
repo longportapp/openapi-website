@@ -141,6 +141,52 @@ int main(int argc, char const* argv[]) {
 ```
 
   </TabItem>
+  <TabItem value="go" label="Go">
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+	"time"
+
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+	"github.com/longbridge/openapi-go/trade"
+)
+
+func main() {
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("Open this URL to authorize:", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	if err != nil {
+		log.Fatal(err)
+	}
+	tctx, err := trade.NewFromCfg(conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer tctx.Close()
+	start := time.Date(2024, 5, 1, 0, 0, 0, 0, time.UTC).Unix()
+	end := time.Date(2024, 6, 1, 0, 0, 0, 0, time.UTC).Unix()
+	flows, err := tctx.CashFlow(context.Background(), &trade.GetCashFlow{
+		StartAt:      start,
+		EndAt:        end,
+		BusinessType: trade.BalanceTypeCash,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%+v\n", flows)
+}
+```
+
+  </TabItem>
 </Tabs>
 
 

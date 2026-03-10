@@ -168,6 +168,49 @@ int main(int argc, char const* argv[]) {
 ```
 
   </TabItem>
+  <TabItem value="go" label="Go">
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+	"time"
+
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+	"github.com/longbridge/openapi-go/quote"
+	openapi "github.com/longbridge/openapi-go"
+)
+
+func main() {
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("Open this URL to authorize:", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	if err != nil {
+		log.Fatal(err)
+	}
+	qctx, err := quote.NewFromCfg(conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer qctx.Close()
+	begin := time.Date(2022, 1, 1, 0, 0, 0, 0, time.UTC)
+	end := time.Date(2022, 2, 1, 0, 0, 0, 0, time.UTC)
+	days, err := qctx.TradingDays(context.Background(), openapi.MarketHK, &begin, &end)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("trade_days:", len(days.TradeDay))
+}
+```
+
+  </TabItem>
 </Tabs>
 
 ## Response

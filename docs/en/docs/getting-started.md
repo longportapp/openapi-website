@@ -42,7 +42,7 @@ All API response are used [Unix Timestamp](https://en.wikipedia.org/wiki/Unix_ti
   </TabItem>
   <TabItem value="go" label="Go">
     <li><a href="https://go.dev">Go</a></li>
-    <li><a href="https://pkg.go.dev/github.com/longportapp/openapi-go">Go Docs</a></li>
+    <li><a href="https://pkg.go.dev/github.com/longbridge/openapi-go">Go Docs</a></li>
   </TabItem>
 </Tabs>
 
@@ -89,7 +89,7 @@ tokio = { version = "1", features = "rt-multi-thread" }
   <TabItem value="go" label="Go">
 
 ```shell
-go get github.com/longportapp/openapi-go
+go get github.com/longbridge/openapi-go
 ```
 
   </TabItem>
@@ -198,6 +198,35 @@ public class Main {
             Config config = Config.fromOAuth(oauth);
         }
     }
+}
+```
+
+  </TabItem>
+  <TabItem value="go" label="Go">
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+)
+
+func main() {
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("Open this URL to authorize:", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	if err != nil {
+		log.Fatal(err)
+	}
+	_ = conf // use conf for TradeContext or QuoteContext
 }
 ```
 
@@ -452,31 +481,38 @@ Create `main.go` and paste the code below:
 package main
 
 import (
-    "context"
-    "fmt"
-    "log"
+	"context"
+	"fmt"
+	"log"
 
-    "github.com/longportapp/openapi-go/config"
-    "github.com/longportapp/openapi-go/trade"
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+	"github.com/longbridge/openapi-go/trade"
 )
 
 func main() {
-    conf, err := config.New()
-    // Init config without ENV: use config.WithConfigKey("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN")
-    if err != nil {
-        log.Fatal(err)
-    }
-    tradeContext, err := trade.NewFromCfg(conf)
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer tradeContext.Close()
-    ctx := context.Background()
-    ab, err := tradeContext.AccountBalance(ctx)
-    if err != nil {
-        log.Fatal(err)
-    }
-    fmt.Printf("%+v", ab)
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("Open this URL to authorize:", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	// Or use API Key from ENV: config.New()
+	// Or without ENV: config.New(config.WithConfigKey("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN"))
+	if err != nil {
+		log.Fatal(err)
+	}
+	tradeContext, err := trade.NewFromCfg(conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer tradeContext.Close()
+	ctx := context.Background()
+	ab, err := tradeContext.AccountBalance(ctx, &trade.GetAccountBalance{})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%+v\n", ab[0])
 }
 ```
 
@@ -689,8 +725,8 @@ import (
     "syscall"
     "time"
 
-    "github.com/longportapp/openapi-go/config"
-    "github.com/longportapp/openapi-go/quote"
+    "github.com/longbridge/openapi-go/config"
+    "github.com/longbridge/openapi-go/quote"
 )
 
 func main() {
@@ -958,8 +994,8 @@ import (
 
     "github.com/shopspring/decimal"
 
-    "github.com/longportapp/openapi-go/config"
-    "github.com/longportapp/openapi-go/trade"
+    "github.com/longbridge/openapi-go/config"
+    "github.com/longbridge/openapi-go/trade"
 )
 
 func main() {
@@ -1154,8 +1190,8 @@ import (
     "fmt"
     "log"
 
-    "github.com/longportapp/openapi-go/config"
-    "github.com/longportapp/openapi-go/trade"
+    "github.com/longbridge/openapi-go/config"
+    "github.com/longbridge/openapi-go/trade"
 )
 
 func main() {

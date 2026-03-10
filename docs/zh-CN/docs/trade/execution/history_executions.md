@@ -138,6 +138,54 @@ int main(int argc, char const* argv[]) {
 ```
 
   </TabItem>
+  <TabItem value="go" label="Go">
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+	"time"
+
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+	"github.com/longbridge/openapi-go/trade"
+)
+
+func main() {
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("Open this URL to authorize:", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	if err != nil {
+		log.Fatal(err)
+	}
+	tctx, err := trade.NewFromCfg(conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer tctx.Close()
+	start := time.Date(2024, 5, 1, 0, 0, 0, 0, time.UTC)
+	end := time.Date(2024, 5, 10, 0, 0, 0, 0, time.UTC)
+	executions, err := tctx.HistoryExecutions(context.Background(), &trade.GetHistoryExecutions{
+		Symbol:  "AAPL.US",
+		StartAt: start,
+		EndAt:   end,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, e := range executions {
+		fmt.Println(e.OrderId)
+	}
+}
+```
+
+  </TabItem>
 </Tabs>
 
 

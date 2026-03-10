@@ -138,6 +138,47 @@ int main(int argc, char const* argv[]) {
 ```
 
   </TabItem>
+  <TabItem value="go" label="Go">
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+	"github.com/longbridge/openapi-go/quote"
+)
+
+func main() {
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("Open this URL to authorize:", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	if err != nil {
+		log.Fatal(err)
+	}
+	qctx, err := quote.NewFromCfg(conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer qctx.Close()
+	indexes, err := qctx.CalcIndex(context.Background(), []string{"700.HK", "AAPL.US"}, []quote.CalcIndex{quote.CalcIndexLastDone, quote.CalcIndexChangeRate})
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, o := range indexes {
+		fmt.Println(o.Symbol)
+	}
+}
+```
+
+  </TabItem>
 </Tabs>
 
 

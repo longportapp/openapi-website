@@ -43,7 +43,7 @@ id: getting-started
   </TabItem>
   <TabItem value="go" label="Go">
     <li><a href="https://go.dev">Go</a></li>
-    <li><a href="https://pkg.go.dev/github.com/longportapp/openapi-go">Go Docs</a></li>
+    <li><a href="https://pkg.go.dev/github.com/longbridge/openapi-go">Go Docs</a></li>
   </TabItem>
 </Tabs>
 
@@ -90,7 +90,7 @@ tokio = { version = "1", features = "rt-multi-thread" }
 
 ```shell
 go env -w GOPROXY="https://goproxy.io,direct"
-go get github.com/longportapp/openapi-go
+go get github.com/longbridge/openapi-go
 ```
 
   </TabItem>
@@ -201,6 +201,35 @@ public class Main {
             Config config = Config.fromOAuth(oauth);
         }
     }
+}
+```
+
+  </TabItem>
+  <TabItem value="go" label="Go">
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+)
+
+func main() {
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("请访问此 URL 进行授权：", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	if err != nil {
+		log.Fatal(err)
+	}
+	_ = conf // 用于创建 TradeContext 或 QuoteContext
 }
 ```
 
@@ -450,32 +479,38 @@ mvn compile exec:exec
 package main
 
 import (
-    "context"
-    "fmt"
-    "log"
+	"context"
+	"fmt"
+	"log"
 
-    "github.com/longportapp/openapi-go/config"
-    "github.com/longportapp/openapi-go/trade"
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+	"github.com/longbridge/openapi-go/trade"
 )
 
 func main() {
-    conf, err := config.New()
-    // 不使用 ENV：使用 config.WithConfigKey("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN")
-    if err != nil {
-        log.Fatal(err)
-    }
-    tradeContext, err := trade.NewFromCfg(conf)
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer tradeContext.Close()
-    ctx := context.Background()
-    // Get AccountBalance infomation
-    ab, err := tradeContext.AccountBalance(ctx)
-    if err != nil {
-        log.Fatal(err)
-    }
-    fmt.Printf("%+v", ab)
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("请访问此 URL 进行授权：", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	// 或使用 API Key 环境变量：config.New()
+	// 或不使用 ENV：config.New(config.WithConfigKey("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN"))
+	if err != nil {
+		log.Fatal(err)
+	}
+	tradeContext, err := trade.NewFromCfg(conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer tradeContext.Close()
+	ctx := context.Background()
+	ab, err := tradeContext.AccountBalance(ctx, &trade.GetAccountBalance{})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%+v\n", ab[0])
 }
 ```
 
@@ -688,8 +723,8 @@ import (
     "syscall"
     "time"
 
-    "github.com/longportapp/openapi-go/config"
-    "github.com/longportapp/openapi-go/quote"
+    "github.com/longbridge/openapi-go/config"
+    "github.com/longbridge/openapi-go/quote"
 )
 
 func main() {
@@ -957,8 +992,8 @@ import (
 
     "github.com/shopspring/decimal"
 
-    "github.com/longportapp/openapi-go/config"
-    "github.com/longportapp/openapi-go/trade"
+    "github.com/longbridge/openapi-go/config"
+    "github.com/longbridge/openapi-go/trade"
 )
 
 func main() {
@@ -1153,8 +1188,8 @@ import (
     "fmt"
     "log"
 
-    "github.com/longportapp/openapi-go/config"
-    "github.com/longportapp/openapi-go/trade"
+    "github.com/longbridge/openapi-go/config"
+    "github.com/longbridge/openapi-go/trade"
 )
 
 func main() {

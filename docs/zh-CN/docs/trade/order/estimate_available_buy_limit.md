@@ -143,6 +143,52 @@ int main(int argc, char const* argv[]) {
 ```
 
   </TabItem>
+  <TabItem value="go" label="Go">
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+	"github.com/longbridge/openapi-go/trade"
+	"github.com/shopspring/decimal"
+)
+
+func main() {
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("Open this URL to authorize:", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	if err != nil {
+		log.Fatal(err)
+	}
+	tctx, err := trade.NewFromCfg(conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer tctx.Close()
+	resp, err := tctx.EstimateMaxPurchaseQuantity(context.Background(), &trade.GetEstimateMaxPurchaseQuantity{
+		Symbol:    "AAPL.US",
+		OrderType: trade.OrderTypeLO,
+		Price:     decimal.NewFromFloat(175.62),
+		Currency:  "USD",
+		Side:      trade.OrderSideBuy,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("max_cash_buy:", resp.MaxCashBuy)
+}
+```
+
+  </TabItem>
 </Tabs>
 
 
