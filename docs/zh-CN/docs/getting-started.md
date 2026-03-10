@@ -1,4 +1,4 @@
-﻿---
+---
 sidebar_position: 1
 slug: getting-started
 title: 快速开始
@@ -16,7 +16,7 @@ id: getting-started
 - WebSocket Trade - `wss://openapi-trade.longbridge.com`
 
 :::info
-中国大陆使用 `openapi.longbridge.cn`、`openapi-quote.longbridge.cn`、`openapi-trade.longbridge.cn`。SDK 会自动选择接入点；若判断不正确，可设置环境变量 `LONGBRIDGE_REGION`（如 `cn`、`hk`）。
+中国大陆使用 `openapi.longportapp.cn`、`openapi-quote.longportapp.cn`、`openapi-trade.longportapp.cn`。SDK 会自动选择接入点；若判断不正确，可设置环境变量 `LONGBRIDGE_REGION`（如 `cn`、`hk`）。
 :::
 
 ## 时间格式

@@ -31,7 +31,7 @@ API-key signature mode can remain as a fallback for legacy compatibility, but it
 ### Discovery endpoints
 
 - Production: `https://openapi.longbridge.com/.well-known/oauth-authorization-server`
-- China: `https://openapi.longbridge.cn/.well-known/oauth-authorization-server`
+- China: `https://openapi.longportapp.cn/.well-known/oauth-authorization-server`
 
 Supported grant types (from discovery):
 

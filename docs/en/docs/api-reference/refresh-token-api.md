@@ -17,7 +17,7 @@ This page focuses only on the OAuth 2.0 **refresh token** step.
 Use OAuth token endpoint:
 
 - `POST https://openapi.longbridge.com/oauth2/token`
-- or China: `POST https://openapi.longbridge.cn/oauth2/token`
+- or China: `POST https://openapi.longportapp.cn/oauth2/token`
 
 ### Request parameters (`application/x-www-form-urlencoded`)
 

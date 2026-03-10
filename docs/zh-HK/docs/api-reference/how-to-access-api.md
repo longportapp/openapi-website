@@ -31,7 +31,7 @@ API-key 簽名方式可作為舊系統相容備選，但不作為預設接入方
 ### Discovery 位址
 
 - 生產環境：`https://openapi.longbridge.com/.well-known/oauth-authorization-server`
-- 中國內地：`https://openapi.longbridge.cn/.well-known/oauth-authorization-server`
+- 中國內地：`https://openapi.longportapp.cn/.well-known/oauth-authorization-server`
 
 支援授權類型（以 Discovery 回傳為準）：
 

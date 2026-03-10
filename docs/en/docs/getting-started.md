@@ -1,4 +1,4 @@
-﻿---
+---
 sidebar_position: 1
 slug: getting-started
 title: Getting Started
@@ -15,7 +15,7 @@ Longbridge OpenAPI SDK is implemented based on Rust we have released SDK for Pyt
 - WebSocket Trade - `wss://openapi-trade.longbridge.com`
 
 :::tip
-For access in mainland China, use `openapi.longbridge.cn`, `openapi-quote.longbridge.cn`, `openapi-trade.longbridge.cn`. The SDK automatically selects the access point by network. If the SDK selects incorrectly, set the environment variable `LONGBRIDGE_REGION` (e.g. `cn` or `hk`).
+For access in mainland China, use `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn`. The SDK automatically selects the access point by network. If the SDK selects incorrectly, set the environment variable `LONGBRIDGE_REGION` (e.g. `cn` or `hk`).
 :::
 
 ## Time Format
