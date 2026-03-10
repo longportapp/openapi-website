@@ -109,13 +109,24 @@ longbridge = "4.0.0"
 
 [https://github.com/longbridge/openapi-go](https://github.com/longbridge/openapi-go)
 
-### 安装 SDK for Go
+### 安装 SDK
 
-Go 版本 >= 1.17
+- Go 版本 >= 1.17
+- **SDK 版本须 >= 0.20.0**（必须满足）
+
+在项目目录下执行：
+
+```bash
+$ go get github.com/longbridge/openapi-go@v0.20.0
+```
+
+或安装最新版本（请确保 >= 0.20.0）：
 
 ```bash
 $ go get github.com/longbridge/openapi-go
 ```
+
+然后执行 `go mod tidy` 更新 `go.mod` 和 `go.sum`。
 
 [https://pkg.go.dev/github.com/longbridge/openapi-go](https://pkg.go.dev/github.com/longbridge/openapi-go)
 

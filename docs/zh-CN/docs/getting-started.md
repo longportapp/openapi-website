@@ -88,9 +88,11 @@ tokio = { version = "1", features = "rt-multi-thread" }
   </TabItem>
   <TabItem value="go" label="Go">
 
+SDK 版本须 **>= 0.20.0**。
+
 ```shell
 go env -w GOPROXY="https://goproxy.io,direct"
-go get github.com/longbridge/openapi-go
+go get github.com/longbridge/openapi-go@v0.20.0
 ```
 
   </TabItem>

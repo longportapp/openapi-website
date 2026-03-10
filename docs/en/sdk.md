@@ -105,13 +105,24 @@ Add the following line to your `pom.xml` file
 
 [https://github.com/longbridge/openapi-go](https://github.com/longbridge/openapi-go)
 
-### Get SDK for Go
+### Install SDK
 
-Go version >= 1.17
+- Go version >= 1.17
+- **SDK version >= 0.20.0** (required)
+
+In your project directory, run:
+
+```bash
+$ go get github.com/longbridge/openapi-go@v0.20.0
+```
+
+Or to get the latest version (ensure it is >= 0.20.0):
 
 ```bash
 $ go get github.com/longbridge/openapi-go
 ```
+
+Then run `go mod tidy` to update your `go.mod` and `go.sum`.
 
 [https://pkg.go.dev/github.com/longbridge/openapi-go](https://pkg.go.dev/github.com/longbridge/openapi-go)
 
