@@ -92,6 +92,7 @@ print(resp)
 
 ```javascript
 const { Config, QuoteContext, OAuth, Period, AdjustType } = require('longbridge')
+
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
@@ -128,6 +129,7 @@ class Main {
 use std::sync::Arc;
 use longbridge::{oauth::OAuthBuilder, quote::QuoteContext, Config, quote::{Period, AdjustType}};
 use time::PrimitiveDateTime;
+
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
@@ -151,6 +153,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 #endif
 using namespace longbridge;
 using namespace longbridge::quote;
+
 int main(int argc, char const* argv[]) {
 #ifdef WIN32
   SetConsoleOutputCP(CP_UTF8);

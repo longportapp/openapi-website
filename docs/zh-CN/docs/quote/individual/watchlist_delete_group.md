@@ -50,6 +50,7 @@ ctx.delete_watchlist_group(10086)
 
 ```javascript
 const { Config, QuoteContext, OAuth } = require('longbridge')
+
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
@@ -66,6 +67,7 @@ main().catch(console.error)
 ```java
 import com.longbridge.*;
 import com.longbridge.quote.*;
+
 class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
@@ -84,6 +86,7 @@ class Main {
 ```rust
 use std::sync::Arc;
 use longbridge::{oauth::OAuthBuilder, quote::QuoteContext, Config};
+
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
@@ -106,6 +109,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 #endif
 using namespace longbridge;
 using namespace longbridge::quote;
+
 int main(int argc, char const* argv[]) {
 #ifdef WIN32
   SetConsoleOutputCP(CP_UTF8);
