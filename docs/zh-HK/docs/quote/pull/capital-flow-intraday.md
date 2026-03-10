@@ -1,4 +1,4 @@
----
+﻿---
 id: quote_capital_flow_intraday
 title: 獲取標的當日資金流向
 slug: capital-flow-intraday
@@ -68,8 +68,8 @@ main().catch(console.error)
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();

@@ -30,8 +30,8 @@ API-key signature mode can remain as a fallback for legacy compatibility, but it
 
 ### Discovery endpoints
 
-- Production: `https://openapi.longportapp.com/.well-known/oauth-authorization-server`
-- China: `https://openapi.longportapp.cn/.well-known/oauth-authorization-server`
+- Production: `https://openapi.longbridge.com/.well-known/oauth-authorization-server`
+- China: `https://openapi.longbridge.cn/.well-known/oauth-authorization-server`
 
 Supported grant types (from discovery):
 
@@ -45,7 +45,7 @@ Supported grant types (from discovery):
 If there is no UI for client creation in your environment, register dynamically:
 
 ```bash
-curl -X POST https://openapi.longportapp.com/oauth2/register \
+curl -X POST https://openapi.longbridge.com/oauth2/register \
   -H "Content-Type: application/json" \
   -d '{
     "client_name": "my-openapi-app",
@@ -60,7 +60,7 @@ curl -X POST https://openapi.longportapp.com/oauth2/register \
 ### 2) Build authorization URL and get `code`
 
 ```text
-https://openapi.longportapp.com/oauth2/authorize
+https://openapi.longbridge.com/oauth2/authorize
   ?response_type=code
   &client_id=YOUR_CLIENT_ID
   &redirect_uri=YOUR_REDIRECT_URI
@@ -79,7 +79,7 @@ YOUR_REDIRECT_URI?code=AUTH_CODE&state=YOUR_RANDOM_STATE
 ### 3) Exchange `code` for `access_token`
 
 ```bash
-curl -X POST https://openapi.longportapp.com/oauth2/token \
+curl -X POST https://openapi.longbridge.com/oauth2/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -d "grant_type=authorization_code" \
   -d "client_id=YOUR_CLIENT_ID" \
@@ -93,7 +93,7 @@ curl -X POST https://openapi.longportapp.com/oauth2/token \
 ### 4) Call API with Bearer token (TSLA.US example)
 
 ```bash
-curl -X GET "https://openapi.longportapp.com/v1/quote/get_security_list?market=US&category=Overnight" \
+curl -X GET "https://openapi.longbridge.com/v1/quote/get_security_list?market=US&category=Overnight" \
   -H "Authorization: Bearer ACCESS_TOKEN"
 ```
 
@@ -121,7 +121,7 @@ Real response (excerpt, keeping `TSLA.US` row):
 Use OAuth token endpoint for refresh (details in [Refresh Token](./refresh-token-api)):
 
 ```bash
-curl -X POST https://openapi.longportapp.com/oauth2/token \
+curl -X POST https://openapi.longbridge.com/oauth2/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -d "grant_type=refresh_token" \
   -d "client_id=YOUR_CLIENT_ID" \

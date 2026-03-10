@@ -1,4 +1,4 @@
----
+﻿---
 slug: account
 title: 获取账户资金
 language_tabs: false
@@ -71,8 +71,8 @@ main().catch(console.error)
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
-import com.longport.trade.*;
+import com.longbridge.*;
+import com.longbridge.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {

@@ -27,7 +27,7 @@ const wsConfig: WebSocketConfig = {
   accessToken: '',
   appSecret: '',
   // 可选配置
-  wsUrl: 'wss://openapi-quote.longportapp.com', // 默认值
+  wsUrl: 'wss://openapi-quote.longbridge.com', // 默认值
   timeout: 30000, // 30 秒超时
   autoReconnect: true, // 自动重连
   reconnectInterval: 5000, // 重连间隔 5 秒

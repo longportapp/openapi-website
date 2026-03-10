@@ -1,4 +1,4 @@
----
+﻿---
 id: quote_calc_index.md
 title: 獲取標的計算指標
 slug: calc-index
@@ -70,8 +70,8 @@ main().catch(console.error)
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();

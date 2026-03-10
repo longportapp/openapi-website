@@ -69,7 +69,7 @@ https://open.longbridge.com/llms.txt
 
 並且在我們的 GitHub 組織中也是開源的。
 
-[https://github.com/longportapp/openapi](https://github.com/longportapp/openapi/tree/main/mcp)
+[https://github.com/longbridge/openapi](https://github.com/longbridge/openapi/tree/main/mcp)
 
 ### 安裝
 
@@ -80,7 +80,7 @@ https://open.longbridge.com/llms.txt
 你可以在“終端”下面運行下面的腳本來直接安裝：
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/longportapp/openapi/refs/heads/main/mcp/install | bash
+curl -sSL https://raw.githubusercontent.com/longbridge/openapi/refs/heads/main/mcp/install | bash
 ```
 
 腳本執行完後，`longport-mcp` 將會安裝到 `/usr/local/bin/` 目錄下，運行下面的命令驗證是否正確：
@@ -91,7 +91,7 @@ longport-mcp -h
 
 #### Windows
 
-請訪問 [https://github.com/longportapp/openapi/releases](https://github.com/longportapp/openapi/releases) 下載 `longport-mcp-x86_64-pc-windows-msvc.zip` 並解壓獲得 `longport-mcp.exe`。
+請訪問 [https://github.com/longbridge/openapi/releases](https://github.com/longbridge/openapi/releases) 下載 `longport-mcp-x86_64-pc-windows-msvc.zip` 並解壓獲得 `longport-mcp.exe`。
 
 ### 示例提示
 

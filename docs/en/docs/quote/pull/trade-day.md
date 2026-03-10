@@ -1,4 +1,4 @@
----
+﻿---
 id: quote_trade_day
 title: Market Trading Days
 slug: trade-day
@@ -78,8 +78,8 @@ main().catch(console.error)
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 import java.time.LocalDate;
 
 class Main {

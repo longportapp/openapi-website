@@ -1,4 +1,4 @@
----
+﻿---
 id: quote_optionchain_date_strike
 title: 获取标的的期权链到期日期权标的列表
 slug: optionchain-date-strike
@@ -76,8 +76,8 @@ main().catch(console.error)
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 import java.time.LocalDate;
 
 class Main {

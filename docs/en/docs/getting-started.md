@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 1
 slug: getting-started
 title: Getting Started
@@ -15,7 +15,7 @@ Longbridge OpenAPI SDK is implemented based on Rust we have released SDK for Pyt
 - WebSocket Trade - `wss://openapi-trade.longbridge.com`
 
 :::tip
-For access in mainland China, use `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn`. The SDK automatically selects the access point by network. If the SDK selects incorrectly, set the environment variable `LONGBRIDGE_REGION` (e.g. `cn` or `hk`).
+For access in mainland China, use `openapi.longbridge.cn`, `openapi-quote.longbridge.cn`, `openapi-trade.longbridge.cn`. The SDK automatically selects the access point by network. If the SDK selects incorrectly, set the environment variable `LONGBRIDGE_REGION` (e.g. `cn` or `hk`).
 :::
 
 ## Time Format
@@ -116,7 +116,7 @@ OAuth 2.0 is the modern authentication method that uses Bearer tokens without re
 Visit [Longbridge OpenAPI](https://open.longbridge.com), login and enter "User Center" to register an OAuth client and get your `client_id`:
 
 ```bash
-curl -X POST https://openapi.longportapp.com/v1/oauth2/client/register \
+curl -X POST https://openapi.longbridge.com/v1/oauth2/client/register \
   -H "Content-Type: application/json" \
   -d '{
     "name": "My Application",
@@ -186,7 +186,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
+import com.longbridge.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -444,8 +444,8 @@ cargo run
 Create `Main.java` and paste the code below:
 
 ```java
-import com.longport.*;
-import com.longport.trade.*;
+import com.longbridge.*;
+import com.longbridge.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
@@ -678,8 +678,8 @@ cargo run
 Create `Main.java` and paste the code below:
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
@@ -944,8 +944,8 @@ cargo run
 Create `Main.java` and paste the code below:
 
 ```java
-import com.longport.*;
-import com.longport.trade.*;
+import com.longbridge.*;
+import com.longbridge.trade.*;
 import java.math.BigDecimal;
 
 public class Main {
@@ -1149,8 +1149,8 @@ cargo run
 Create `Main.java` and paste the code below:
 
 ```java
-import com.longport.*;
-import com.longport.trade.*;
+import com.longbridge.*;
+import com.longbridge.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
@@ -1266,13 +1266,13 @@ The above example has fully demonstrated how to use the SDK to access the OpenAP
 
 We provide the complete code of the above examples in the GitHub repository of Longbridge OpenAPI Python SDK, and we will continue to add or update it later.
 
-https://github.com/longportapp/openapi/tree/master/examples
+https://github.com/longbridge/openapi/tree/master/examples
 
 ## SDK API Document
 
 For detailed SDK API document, please visit:
 
-https://longportapp.github.io/openapi/
+https://longbridge.github.io/openapi/
 
 ## Contact & Feedback
 
@@ -1280,4 +1280,4 @@ If there are any questions or suggestions, please feel free to post an issue on 
 
 Or there have a lot old discussion in the GitHub issue, you can search the issue to find the answer.
 
-- GitHub: https://github.com/longportapp/openapi/issues
+- GitHub: https://github.com/longbridge/openapi/issues

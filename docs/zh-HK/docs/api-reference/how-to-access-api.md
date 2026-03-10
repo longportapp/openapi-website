@@ -30,8 +30,8 @@ API-key 簽名方式可作為舊系統相容備選，但不作為預設接入方
 
 ### Discovery 位址
 
-- 生產環境：`https://openapi.longportapp.com/.well-known/oauth-authorization-server`
-- 中國內地：`https://openapi.longportapp.cn/.well-known/oauth-authorization-server`
+- 生產環境：`https://openapi.longbridge.com/.well-known/oauth-authorization-server`
+- 中國內地：`https://openapi.longbridge.cn/.well-known/oauth-authorization-server`
 
 支援授權類型（以 Discovery 回傳為準）：
 
@@ -45,7 +45,7 @@ API-key 簽名方式可作為舊系統相容備選，但不作為預設接入方
 若目前環境沒有可視化建立頁面，可透過接口動態註冊：
 
 ```bash
-curl -X POST https://openapi.longportapp.com/oauth2/register \
+curl -X POST https://openapi.longbridge.com/oauth2/register \
   -H "Content-Type: application/json" \
   -d '{
     "client_name": "my-openapi-app",
@@ -60,7 +60,7 @@ curl -X POST https://openapi.longportapp.com/oauth2/register \
 ### 2）組裝授權連結並取得 code
 
 ```text
-https://openapi.longportapp.com/oauth2/authorize
+https://openapi.longbridge.com/oauth2/authorize
   ?response_type=code
   &client_id=YOUR_CLIENT_ID
   &redirect_uri=YOUR_REDIRECT_URI
@@ -79,7 +79,7 @@ YOUR_REDIRECT_URI?code=AUTH_CODE&state=YOUR_RANDOM_STATE
 ### 3）用 code 換 access_token
 
 ```bash
-curl -X POST https://openapi.longportapp.com/oauth2/token \
+curl -X POST https://openapi.longbridge.com/oauth2/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -d "grant_type=authorization_code" \
   -d "client_id=YOUR_CLIENT_ID" \
@@ -93,7 +93,7 @@ curl -X POST https://openapi.longportapp.com/oauth2/token \
 ### 4）用 Bearer token 呼叫 API（TSLA.US 示例）
 
 ```bash
-curl -X GET "https://openapi.longportapp.com/v1/quote/get_security_list?market=US&category=Overnight" \
+curl -X GET "https://openapi.longbridge.com/v1/quote/get_security_list?market=US&category=Overnight" \
   -H "Authorization: Bearer ACCESS_TOKEN"
 ```
 
@@ -121,7 +121,7 @@ curl -X GET "https://openapi.longportapp.com/v1/quote/get_security_list?market=U
 使用 OAuth token endpoint 刷新（詳見 [刷新 Token](./refresh-token-api)）：
 
 ```bash
-curl -X POST https://openapi.longportapp.com/oauth2/token \
+curl -X POST https://openapi.longbridge.com/oauth2/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -d "grant_type=refresh_token" \
   -d "client_id=YOUR_CLIENT_ID" \

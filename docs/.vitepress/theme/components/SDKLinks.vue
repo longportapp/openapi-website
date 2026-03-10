@@ -67,25 +67,25 @@ const links = computed(() => {
       title: 'Python',
       color: '#3572a5',
       label: `longport.openapi.${props.klass}.${snakeMethod.value}`,
-      url: `https://longportapp.github.io/openapi/python/reference_all/#longport.openapi.${props.klass}.${snakeMethod.value}`,
+      url: `https://longbridge.github.io/openapi/python/reference_all/#longport.openapi.${props.klass}.${snakeMethod.value}`,
     },
     {
       title: 'Rust',
       color: '#dea584',
       label: `longport::${props.module}::${props.klass}#${snakeMethod.value}`,
-      url: `https://longportapp.github.io/openapi/rust/longport/${props.module}/struct.${props.klass}.html#method.${snakeMethod.value}`,
+      url: `https://longbridge.github.io/openapi/rust/longport/${props.module}/struct.${props.klass}.html#method.${snakeMethod.value}`,
     },
     {
       title: 'Go',
       color: '#00ADD8',
       label: `${props.klass}.${methodGo.value}`,
-      url: `https://pkg.go.dev/github.com/longportapp/openapi-go/${props.module}#${props.klass}.${methodGo.value}`,
+      url: `https://pkg.go.dev/github.com/longbridge/openapi-go/${props.module}#${props.klass}.${methodGo.value}`,
     },
     {
       title: 'Node.js',
       color: '#f1e05a',
       label: `${props.klass}#${camelMethod.value}`,
-      url: `https://longportapp.github.io/openapi/nodejs/classes/${props.klass}.html#${camelMethod.value.toLowerCase()}`,
+      url: `https://longbridge.github.io/openapi/nodejs/classes/${props.klass}.html#${camelMethod.value.toLowerCase()}`,
     },
   ]
 
@@ -94,7 +94,7 @@ const links = computed(() => {
       title: 'Java',
       color: '#b07219',
       label: `${props.klass}.${getPrefixedMethod.value}`,
-      url: `https://longportapp.github.io/openapi/java/com/longport/${props.module}/${props.klass}.html#${methodJava.value}`,
+      url: `https://longbridge.github.io/openapi/java/com/longbridge/${props.module}/${props.klass}.html#${methodJava.value}`,
     })
   }
 

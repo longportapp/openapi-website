@@ -1,4 +1,4 @@
----
+﻿---
 title: 历史市场温度
 slug: history_market_temperature
 sidebar_position: 22
@@ -60,8 +60,8 @@ main().catch(console.error)
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 import java.time.LocalDate;
 class Main {
     public static void main(String[] args) throws Exception {

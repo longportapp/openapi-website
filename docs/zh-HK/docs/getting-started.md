@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 1
 slug: /getting-started
 title: 快速開始
@@ -16,7 +16,7 @@ Longbridge OpenAPI SDK 基於 Rust 底層提供標準實現，目前我們已經
 - WebSocket Trade - `wss://openapi-trade.longbridge.com`
 
 :::tip
-中國大陸使用 `openapi.longportapp.cn`、`openapi-quote.longportapp.cn`、`openapi-trade.longportapp.cn`。SDK 會自動選擇接入點；若判斷不正確，可設定環境變數 `LONGBRIDGE_REGION`（如 `cn`、`hk`）。
+中國大陸使用 `openapi.longbridge.cn`、`openapi-quote.longbridge.cn`、`openapi-trade.longbridge.cn`。SDK 會自動選擇接入點；若判斷不正確，可設定環境變數 `LONGBRIDGE_REGION`（如 `cn`、`hk`）。
 :::
 
 ## 時間格式
@@ -118,7 +118,7 @@ OAuth 2.0 是現代化的認證方式，使用 Bearer Token，無需 HMAC 簽名
 造訪 [Longbridge OpenAPI](https://open.longbridge.com) 網站，登入後進入「個人中心」，註冊 OAuth 客戶端獲取 `client_id`：
 
 ```bash
-curl -X POST https://openapi.longportapp.com/v1/oauth2/client/register \
+curl -X POST https://openapi.longbridge.com/v1/oauth2/client/register \
   -H "Content-Type: application/json" \
   -d '{
     "name": "我的應用程式",
@@ -188,7 +188,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
+import com.longbridge.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -440,8 +440,8 @@ cargo run
 創建 `Main.java` 貼入下面的代碼：
 
 ```java
-import com.longport.*;
-import com.longport.trade.*;
+import com.longbridge.*;
+import com.longbridge.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
@@ -674,8 +674,8 @@ cargo run
 創建 `Main.java` 貼入下面的代碼：
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
@@ -872,8 +872,8 @@ cargo run
 創建 `Main.java` 貼入下面的代碼：
 
 ```java
-import com.longport.*;
-import com.longport.trade.*;
+import com.longbridge.*;
+import com.longbridge.trade.*;
 import java.math.BigDecimal;
 
 public class Main {
@@ -1071,8 +1071,8 @@ cargo run
 創建 `Main.java` 貼入下面的代碼：
 
 ```java
-import com.longport.*;
-import com.longport.trade.*;
+import com.longbridge.*;
+import com.longbridge.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
@@ -1182,13 +1182,13 @@ Order {
 
 我們在 Longbridge OpenAPI Python SDK 的 GitHub 倉庫中提供了上面幾個例子的完整代碼，當然後期我們也會持續往裡面補充或更新。
 
-https://github.com/longportapp/openapi/tree/master/examples
+https://github.com/longbridge/openapi/tree/master/examples
 
 ## SDK API 文檔
 
 SDK 的詳細 API 文檔請訪問：
 
-https://longportapp.github.io/openapi/
+https://longbridge.github.io/openapi/
 
 ## 回饋及溝通
 
@@ -1198,4 +1198,4 @@ https://longportapp.github.io/openapi/
 
 在 GitHub 上，也有很多歷史的討論和問題可以參考，你也可以試著搜尋一下，或許也能找到問題的解決方案。
 
-訪問網址：https://github.com/longportapp/openapi/issues
+訪問網址：https://github.com/longbridge/openapi/issues

@@ -1,4 +1,4 @@
----
+﻿---
 id: quote_capital_distribution.md
 title: 获取标的当日资金分布
 slug: capital-distribution
@@ -68,8 +68,8 @@ main().catch(console.error)
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();

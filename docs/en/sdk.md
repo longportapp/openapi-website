@@ -174,6 +174,8 @@ func main() {
 </TabItem>
 </Tabs>
 
+**Examples:** All SDK examples are in [github.com/longbridge/openapi/tree/master/examples](https://github.com/longbridge/openapi/tree/master/examples).
+
 </div>
 
 <style scoped>

@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 1
 slug: getting-started
 title: 快速开始
@@ -7,7 +7,7 @@ id: getting-started
 
 ## 前言
 
-[Longbridge OpenAPI SDK](https://github.com/longportapp/openapi) 基于 Rust 底层提供标准实现，目前我们已经发布了 Python、Node.js、Rust、C++/C、Java 等多种编程语言 SDK，其他语言的支持后面会陆续推出。
+[Longbridge OpenAPI SDK](https://github.com/longbridge/openapi) 基于 Rust 底层提供标准实现，目前我们已经发布了 Python、Node.js、Rust、C++/C、Java 等多种编程语言 SDK，其他语言的支持后面会陆续推出。
 
 ## API Host
 
@@ -16,7 +16,7 @@ id: getting-started
 - WebSocket Trade - `wss://openapi-trade.longbridge.com`
 
 :::info
-中国大陆使用 `openapi.longportapp.cn`、`openapi-quote.longportapp.cn`、`openapi-trade.longportapp.cn`。SDK 会自动选择接入点；若判断不正确，可设置环境变量 `LONGBRIDGE_REGION`（如 `cn`、`hk`）。
+中国大陆使用 `openapi.longbridge.cn`、`openapi-quote.longbridge.cn`、`openapi-trade.longbridge.cn`。SDK 会自动选择接入点；若判断不正确，可设置环境变量 `LONGBRIDGE_REGION`（如 `cn`、`hk`）。
 :::
 
 ## 时间格式
@@ -119,7 +119,7 @@ OAuth 2.0 是现代化的认证方式，使用 Bearer Token，无需 HMAC 签名
 访问 [Longbridge OpenAPI](https://open.longbridge.com) 网站，登录后进入"个人中心"，注册 OAuth 客户端获取 `client_id`：
 
 ```bash
-curl -X POST https://openapi.longportapp.com/v1/oauth2/client/register \
+curl -X POST https://openapi.longbridge.com/v1/oauth2/client/register \
   -H "Content-Type: application/json" \
   -d '{
     "name": "我的应用",
@@ -189,7 +189,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
+import com.longbridge.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -443,8 +443,8 @@ cargo run
 创建 `Main.java` 贴入下面的代码：
 
 ```java
-import com.longport.*;
-import com.longport.trade.*;
+import com.longbridge.*;
+import com.longbridge.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
@@ -676,8 +676,8 @@ cargo run
 创建 `Main.java` 贴入下面的代码：
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
@@ -942,8 +942,8 @@ cargo run
 创建 `Main.java` 贴入下面的代码：
 
 ```java
-import com.longport.*;
-import com.longport.trade.*;
+import com.longbridge.*;
+import com.longbridge.trade.*;
 import java.math.BigDecimal;
 
 public class Main {
@@ -1147,8 +1147,8 @@ cargo run
 创建 `Main.java` 贴入下面的代码：
 
 ```java
-import com.longport.*;
-import com.longport.trade.*;
+import com.longbridge.*;
+import com.longbridge.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
@@ -1251,17 +1251,17 @@ Order {
 }
 ```
 
-上面例子已经完整演示了如何使用 SDK 访问 OpenAPI 的接口，更多其他接口请详细阅读 [Longbridge OpenAPI 文档](https://longportapp.github.io/openapi/)，根据不同的接口使用。
+上面例子已经完整演示了如何使用 SDK 访问 OpenAPI 的接口，更多其他接口请详细阅读 [Longbridge OpenAPI 文档](https://longbridge.github.io/openapi/)，根据不同的接口使用。
 
 ## 更多例子
 
 我们在 Longbridge OpenAPI Python SDK 的 GitHub 仓库中提供了上面几个例子的完整代码，当然后期我们也会持续往里面补充或更新。
 
-https://github.com/longportapp/openapi/tree/master/examples
+https://github.com/longbridge/openapi/tree/master/examples
 
 ## SDK API 文档
 
-SDK 的详细 API 文档请访问：https://longportapp.github.io/openapi/
+SDK 的详细 API 文档请访问：https://longbridge.github.io/openapi/
 
 ## 反馈及沟通
 
@@ -1271,4 +1271,4 @@ SDK 的详细 API 文档请访问：https://longportapp.github.io/openapi/
 
 在 GitHub 上，也有很多历史的讨论和问题可以参考，你也可以试着搜索一下，或许也能找到问题的解决方案。
 
-访问地址：https://github.com/longportapp/openapi/issues
+访问地址：https://github.com/longbridge/openapi/issues

@@ -1,4 +1,4 @@
----
+﻿---
 id: quote_broker_ids
 title: 获取券商席位 ID
 slug: broker-ids
@@ -59,8 +59,8 @@ main().catch(console.error)
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 
 class Main {
     public static void main(String[] args) throws Exception {

@@ -1,4 +1,4 @@
----
+﻿---
 id: quote_static
 title: 获取标的基础信息
 slug: static
@@ -73,8 +73,8 @@ main().catch(console.error)
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 
 class Main {
     public static void main(String[] args) throws Exception {

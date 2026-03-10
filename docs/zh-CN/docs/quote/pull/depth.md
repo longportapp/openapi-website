@@ -1,4 +1,4 @@
----
+﻿---
 id: quote_depth
 title: 获取标的盘口
 slug: depth
@@ -72,8 +72,8 @@ main().catch(console.error)
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 
 class Main {
     public static void main(String[] args) throws Exception {

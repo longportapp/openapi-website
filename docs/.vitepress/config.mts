@@ -87,7 +87,7 @@ export default defineConfig(
     themeConfig: {
       editLink: {
         pattern: ({ filePath }) => {
-          return `https://github.com/longportapp/openapi-website/edit/main/docs/${filePath}`
+          return `https://github.com/longbridge/openapi-website/edit/main/docs/${filePath}`
         },
       },
       logo: {
@@ -110,7 +110,7 @@ export default defineConfig(
         port: 8000,
         proxy: {
           '/api': {
-            target: process.env.VITE_API_BASE_URL || 'https://openapi.longportapp.com',
+            target: process.env.VITE_API_BASE_URL || 'https://openapi.longbridge.com',
             changeOrigin: true,
             rewrite: (path) => path.replace(/^\/api/, ''),
           },

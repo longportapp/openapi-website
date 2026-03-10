@@ -1,4 +1,4 @@
----
+﻿---
 id: quote_optionchain_date
 title: Option Chain Expiry Date List
 slug: optionchain-date
@@ -73,8 +73,8 @@ main().catch(console.error)
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 
 class Main {
     public static void main(String[] args) throws Exception {

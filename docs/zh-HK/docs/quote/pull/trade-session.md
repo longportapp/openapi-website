@@ -1,4 +1,4 @@
----
+﻿---
 id: quote_trade_session
 title: 獲取各市場當日交易時段
 slug: trade-session
@@ -56,8 +56,8 @@ main().catch(console.error)
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();

@@ -1,4 +1,4 @@
----
+﻿---
 id: quote_optionchain_date
 title: 獲取標的的期權鏈到期日列表
 slug: optionchain-date
@@ -73,8 +73,8 @@ main().catch(console.error)
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 
 class Main {
     public static void main(String[] args) throws Exception {

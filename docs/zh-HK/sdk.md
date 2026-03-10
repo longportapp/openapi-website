@@ -177,6 +177,8 @@ func main() {
 </TabItem>
 </Tabs>
 
+**範例程式碼：** 各語言 SDK 範例均在 [github.com/longbridge/openapi/tree/master/examples](https://github.com/longbridge/openapi/tree/master/examples)。
+
 </div>
 
 <style scoped>

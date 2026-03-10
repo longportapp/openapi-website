@@ -1,4 +1,4 @@
----
+﻿---
 id: quote_trade_session
 title: 获取各市场当日交易时段
 slug: trade-session
@@ -60,8 +60,8 @@ main().catch(console.error)
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 
 class Main {
     public static void main(String[] args) throws Exception {

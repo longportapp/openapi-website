@@ -1,4 +1,4 @@
----
+﻿---
 title: Current Market Temperature
 slug: market_temperature
 sidebar_position: 21
@@ -60,8 +60,8 @@ main().catch(console.error)
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 
 class Main {
     public static void main(String[] args) throws Exception {

@@ -28,8 +28,8 @@ https://open.longbridge.com/sdk
 
 ### Discovery 地址
 
-- 生产环境：`https://openapi.longportapp.com/.well-known/oauth-authorization-server`
-- 中国内地：`https://openapi.longportapp.cn/.well-known/oauth-authorization-server`
+- 生产环境：`https://openapi.longbridge.com/.well-known/oauth-authorization-server`
+- 中国内地：`https://openapi.longbridge.cn/.well-known/oauth-authorization-server`
 
 支持授权类型（以 Discovery 返回为准）：
 
@@ -43,7 +43,7 @@ https://open.longbridge.com/sdk
 如果没有可视化后台入口，可通过接口动态注册：
 
 ```bash
-curl -X POST https://openapi.longportapp.com/oauth2/register \
+curl -X POST https://openapi.longbridge.com/oauth2/register \
   -H "Content-Type: application/json" \
   -d '{
     "client_name": "my-openapi-app",
@@ -58,7 +58,7 @@ curl -X POST https://openapi.longportapp.com/oauth2/register \
 ### 2）构造授权链接并获取 code
 
 ```text
-https://openapi.longportapp.com/oauth2/authorize
+https://openapi.longbridge.com/oauth2/authorize
   ?response_type=code
   &client_id=YOUR_CLIENT_ID
   &redirect_uri=YOUR_REDIRECT_URI
@@ -77,7 +77,7 @@ YOUR_REDIRECT_URI?code=AUTH_CODE&state=YOUR_RANDOM_STATE
 ### 3）用 code 换 access_token
 
 ```bash
-curl -X POST https://openapi.longportapp.com/oauth2/token \
+curl -X POST https://openapi.longbridge.com/oauth2/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -d "grant_type=authorization_code" \
   -d "client_id=YOUR_CLIENT_ID" \
@@ -91,7 +91,7 @@ curl -X POST https://openapi.longportapp.com/oauth2/token \
 ### 4）用 Bearer token 调 API（TSLA.US 实例）
 
 ```bash
-curl -X GET "https://openapi.longportapp.com/v1/quote/get_security_list?market=US&category=Overnight" \
+curl -X GET "https://openapi.longbridge.com/v1/quote/get_security_list?market=US&category=Overnight" \
   -H "Authorization: Bearer ACCESS_TOKEN"
 ```
 
@@ -119,7 +119,7 @@ curl -X GET "https://openapi.longportapp.com/v1/quote/get_security_list?market=U
 通过 OAuth token endpoint 刷新（详见 [刷新 Token](./refresh-token-api)）：
 
 ```bash
-curl -X POST https://openapi.longportapp.com/oauth2/token \
+curl -X POST https://openapi.longbridge.com/oauth2/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -d "grant_type=refresh_token" \
   -d "client_id=YOUR_CLIENT_ID" \

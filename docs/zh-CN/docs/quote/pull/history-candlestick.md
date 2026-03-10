@@ -1,4 +1,4 @@
----
+﻿---
 id: quote_history_candlestick
 title: 获取标的历史 K 线
 slug: history-candlestick
@@ -110,8 +110,8 @@ main().catch(console.error)
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 import java.time.LocalDateTime;
 class Main {
     public static void main(String[] args) throws Exception {

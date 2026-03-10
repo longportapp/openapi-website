@@ -1,4 +1,4 @@
----
+﻿---
 slug: submit
 title: Submit Order
 language_tabs: false
@@ -84,8 +84,8 @@ main().catch(console.error)
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
-import com.longport.trade.*;
+import com.longbridge.*;
+import com.longbridge.trade.*;
 import java.math.BigDecimal;
 class Main {
     public static void main(String[] args) throws Exception {
