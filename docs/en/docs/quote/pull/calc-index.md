@@ -1,4 +1,4 @@
-﻿---
+---
 id: quote_calc_index.md
 title: Calculate Indexes Of Securities
 slug: calc-index
@@ -37,10 +37,6 @@ message SecurityCalcQuoteRequest {
   <TabItem value="python" label="Python" default>
 
 ```python
-# Get Security Calc Index
-# https://open.longbridge.com/docs/quote/pull/calc-index
-# Before running, please visit the "Developers" to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile app.
 from longbridge.openapi import QuoteContext, Config, CalcIndex, OAuthBuilder
 
 oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))

@@ -1,4 +1,4 @@
-﻿---
+---
 slug: account
 title: 獲取賬戶資金
 language_tabs: false
@@ -36,8 +36,6 @@ headingLevel: 2
   <TabItem value="python" label="Python" default>
 
 ```python
-# 獲取賬戶資金
-# https://open.longbridge.com/docs/trade/asset/account
 from longbridge.openapi import TradeContext, Config, OAuthBuilder
 
 oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))

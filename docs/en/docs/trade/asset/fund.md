@@ -1,4 +1,4 @@
-﻿---
+---
 slug: fund
 title: Get Fund Positions
 language_tabs: false
@@ -37,8 +37,6 @@ current net worth, and currency.
   <TabItem value="python" label="Python" default>
 
 ```python
-# Get Fund Position
-# https://open.longbridge.com/docs/trade/asset/fund
 from longbridge.openapi import TradeContext, Config, OAuthBuilder
 
 oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))

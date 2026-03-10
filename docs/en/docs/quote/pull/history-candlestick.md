@@ -1,4 +1,4 @@
-﻿---
+---
 id: quote_history_candlestick
 title: Security History Candlesticks
 slug: history-candlestick
@@ -67,10 +67,6 @@ message SecurityHistoryCandlestickRequest {
   <TabItem value="python" label="Python" default>
 
 ```python
-# Get Security History Candlesticks
-# https://open.longbridge.com/docs/quote/pull/candlestick
-# Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile app.
 from datetime import datetime, date
 from longbridge.openapi import QuoteContext, Config, Period, AdjustType, OAuthBuilder
 

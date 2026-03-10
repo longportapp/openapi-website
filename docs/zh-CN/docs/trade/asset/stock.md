@@ -1,4 +1,4 @@
-﻿---
+---
 slug: stock
 title: 获取股票持仓
 language_tabs: false
@@ -36,8 +36,6 @@ headingLevel: 2
   <TabItem value="python" label="Python" default>
 
 ```python
-# 获取股票持仓
-# https://open.longbridge.com/docs/trade/asset/stock
 from longbridge.openapi import TradeContext, Config, OAuthBuilder
 
 oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))

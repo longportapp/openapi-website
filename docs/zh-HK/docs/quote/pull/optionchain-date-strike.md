@@ -1,4 +1,4 @@
-﻿---
+---
 id: quote_optionchain_date_strike
 title: 獲取標的的期權鏈到期日期權標的列表
 slug: optionchain-date-strike
@@ -66,10 +66,6 @@ message StrikePriceInfo {
   <TabItem value="python" label="Python" default>
 
 ```python
-# 獲取標的的期權鏈到期日期權標的列表
-# https://open.longbridge.com/docs/quote/pull/optionchain-date-strike
-# 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過“Longbridge”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from datetime import date
 from longbridge.openapi import QuoteContext, Config, OAuthBuilder
 

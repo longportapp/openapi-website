@@ -1,4 +1,4 @@
-﻿---
+---
 slug: stock
 title: Get Stock Positions
 language_tabs: false
@@ -37,8 +37,6 @@ number of available shares, average position price (calculated according to acco
   <TabItem value="python" label="Python" default>
 
 ```python
-# Get Stock Positions
-# https://open.longbridge.com/docs/trade/asset/stock
 from longbridge.openapi import TradeContext, Config, OAuthBuilder
 
 oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))

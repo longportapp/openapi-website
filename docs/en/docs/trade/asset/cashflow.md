@@ -1,4 +1,4 @@
-﻿---
+---
 slug: cashflow
 title: Get Cash Flow
 language_tabs: false
@@ -42,8 +42,6 @@ associated stock code and capital flow description information.
   <TabItem value="python" label="Python" default>
 
 ```python
-# Get Cash Flow
-# https://open.longbridge.com/docs/trade/asset/cashflow
 from datetime import datetime
 from longbridge.openapi import TradeContext, Config, OAuthBuilder
 

@@ -1,4 +1,4 @@
-﻿---
+---
 id: quote_optionchain_date_strike
 title: Option Chain By Date
 slug: optionchain-date-strike
@@ -39,10 +39,6 @@ message OptionChainDateStrikeInfoRequest {
   <TabItem value="python" label="Python" default>
 
 ```python
-# Get Option Chain Info By Date
-# https://open.longbridge.com/docs/quote/pull/optionchain-date-strike
-# Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile app.
 from datetime import date
 from longbridge.openapi import QuoteContext, Config, OAuthBuilder
 

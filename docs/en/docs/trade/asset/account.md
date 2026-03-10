@@ -1,4 +1,4 @@
-﻿---
+---
 slug: account
 title: Get Account Balance
 language_tabs: false
@@ -37,8 +37,6 @@ funds (fund purchase and redemption) information for each currency of the user.
   <TabItem value="python" label="Python" default>
 
 ```python
-# Get Account Balance
-# https://open.longbridge.com/docs/trade/asset/account
 from longbridge.openapi import TradeContext, Config, OAuthBuilder
 
 oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))

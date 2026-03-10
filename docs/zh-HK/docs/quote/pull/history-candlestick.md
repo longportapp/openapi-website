@@ -1,4 +1,4 @@
-﻿---
+---
 id: quote_history_candlestick
 title: 獲取標的曆史 K 線
 slug: history-candlestick
@@ -67,10 +67,6 @@ message SecurityHistoryCandlestickRequest {
   <TabItem value="python" label="Python" default>
 
 ```python
-# 獲取標的曆史 k 線
-# https://open.longbridge.com/docs/quote/pull/history-candlestick
-# 運行前請訪問“開發者中心”確保賬戶有正確的行情權限。
-# 如冇有開通行情權限，可以通過“Longbridge”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from datetime import datetime, date
 from longbridge.openapi import QuoteContext, Config, Period, AdjustType, OAuthBuilder
 

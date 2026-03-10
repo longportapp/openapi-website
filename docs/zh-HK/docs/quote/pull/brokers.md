@@ -1,4 +1,4 @@
-﻿---
+---
 id: quote_brokers
 title: 獲取標的經紀隊列
 slug: brokers
@@ -35,10 +35,6 @@ message SecurityRequest {
   <TabItem value="python" label="Python" default>
 
 ```python
-# 獲取標的經紀隊列
-# https://open.longbridge.com/docs/quote/pull/brokers
-# 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過“Longbridge”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from longbridge.openapi import QuoteContext, Config, OAuthBuilder
 
 oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))

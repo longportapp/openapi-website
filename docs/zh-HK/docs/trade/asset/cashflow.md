@@ -1,4 +1,4 @@
-﻿---
+---
 slug: cashflow
 title: 獲取資金流水
 language_tabs: false
@@ -41,8 +41,6 @@ headingLevel: 2
   <TabItem value="python" label="Python" default>
 
 ```python
-# 獲取資金流水
-# https://open.longbridge.com/docs/trade/asset/cashflow
 from datetime import datetime
 from longbridge.openapi import TradeContext, Config, OAuthBuilder
 

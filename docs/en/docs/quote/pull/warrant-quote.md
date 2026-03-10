@@ -1,4 +1,4 @@
-﻿---
+---
 id: quote_warrant_quote
 title: Real-time Quotes of Warrant
 slug: warrant-quote
@@ -37,10 +37,6 @@ message MultiSecurityRequest {
   <TabItem value="python" label="Python" default>
 
 ```python
-# Get Real-time Quotes Of Warrant Securities
-# https://open.longbridge.com/docs/quote/pull/warrant-quote
-# Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile app.
 from longbridge.openapi import QuoteContext, Config, OAuthBuilder
 
 oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))

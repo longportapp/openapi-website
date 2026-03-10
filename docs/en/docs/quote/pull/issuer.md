@@ -1,4 +1,4 @@
-﻿---
+---
 id: quote_issuer
 title: Warrant Issuer IDs
 slug: issuer
@@ -23,10 +23,6 @@ This API is used to obtain the warrant issuer IDs data (which can be synchronize
   <TabItem value="python" label="Python" default>
 
 ```python
-# Get Warrant Issuer IDs
-# https://open.longbridge.com/docs/quote/pull/issuer
-# Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile app.
 from longbridge.openapi import QuoteContext, Config, OAuthBuilder
 
 oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
