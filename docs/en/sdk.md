@@ -30,6 +30,10 @@ $ pip install longbridge
 
 - https://longbridge.github.io/openapi/python/index.html
 
+### Examples
+
+- https://github.com/longbridge/openapi/tree/master/examples/python
+
 </TabItem>
 <TabItem value="javascript" label="JavaScript">
 
@@ -50,6 +54,10 @@ $ npm install longbridge --save
 ### API Documents
 
 - https://longbridge.github.io/openapi/nodejs/index.html
+
+### Examples
+
+- https://github.com/longbridge/openapi/tree/master/examples/nodejs
 
 </TabItem>
 <TabItem value="rust" label="Rust">
@@ -72,6 +80,10 @@ longbridge = "4.0.0"
 ### API Documents
 
 - https://longbridge.github.io/openapi/rust/longbridge/index.html
+
+### Examples
+
+- https://github.com/longbridge/openapi/tree/master/examples/rust
 
 </TabItem>
 <TabItem value="java" label="Java">
@@ -98,6 +110,10 @@ Add the following line to your `pom.xml` file
 
 - https://longbridge.github.io/openapi/java/index.html
 
+### Examples
+
+- https://github.com/longbridge/openapi/tree/master/examples/java
+
 </TabItem>
 <TabItem value="go" label="Go">
 
@@ -108,64 +124,18 @@ Add the following line to your `pom.xml` file
 ### Install SDK
 
 - Go version >= 1.17
-- **SDK version >= 0.20.0** (required)
 
 In your project directory, run:
-
-```bash
-$ go get github.com/longbridge/openapi-go@v0.20.0
-```
-
-Or to get the latest version (ensure it is >= 0.20.0):
 
 ```bash
 $ go get github.com/longbridge/openapi-go
 ```
 
-Then run `go mod tidy` to update your `go.mod` and `go.sum`.
-
 [https://pkg.go.dev/github.com/longbridge/openapi-go](https://pkg.go.dev/github.com/longbridge/openapi-go)
 
-### Example
+### Examples
 
-Create config with OAuth, then get quote or account balance:
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"log"
-
-	"github.com/longbridge/openapi-go/config"
-	"github.com/longbridge/openapi-go/oauth"
-	"github.com/longbridge/openapi-go/quote"
-)
-
-func main() {
-	o := oauth.New("your-client-id").
-		OnOpenURL(func(url string) { fmt.Println("Open this URL to authorize:", url) })
-	if err := o.Build(context.Background()); err != nil {
-		log.Fatal(err)
-	}
-	conf, err := config.New(config.WithOAuthClient(o))
-	if err != nil {
-		log.Fatal(err)
-	}
-	quoteContext, err := quote.NewFromCfg(conf)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer quoteContext.Close()
-	ctx := context.Background()
-	quotes, err := quoteContext.Quote(ctx, []string{"700.HK", "AAPL.US"})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("quotes: %+v\n", quotes[0])
-}
-```
+- https://github.com/longbridge/openapi-go/tree/main/examples
 
 </TabItem>
 <TabItem value="c++" label="C++">
@@ -182,10 +152,12 @@ func main() {
 
 - https://longbridge.github.io/openapi/cpp/index.html
 
+### Examples
+
+- https://github.com/longbridge/openapi/tree/master/examples/cpp
+
 </TabItem>
 </Tabs>
-
-**Examples:** All SDK examples are in [github.com/longbridge/openapi/tree/master/examples](https://github.com/longbridge/openapi/tree/master/examples).
 
 </div>
 

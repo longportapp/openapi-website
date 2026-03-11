@@ -88,10 +88,8 @@ tokio = { version = "1", features = "rt-multi-thread" }
 
   <TabItem value="go" label="Go">
 
-SDK version must be **>= 0.20.0**.
-
 ```shell
-go get github.com/longbridge/openapi-go@v0.20.0
+go get github.com/longbridge/openapi-go
 ```
 
   </TabItem>

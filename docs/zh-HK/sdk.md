@@ -34,6 +34,10 @@ $ pip install longbridge -i https://mirrors.aliyun.com/pypi/simple
 
 - https://longbridge.github.io/openapi/python/index.html
 
+### 範例程式碼
+
+- https://github.com/longbridge/openapi/tree/master/examples/python
+
 </TabItem>
 <TabItem value="javascript" label="JavaScript">
 
@@ -54,6 +58,10 @@ $ npm install longbridge --save
 ### API 文檔
 
 - https://longbridge.github.io/openapi/nodejs/index.html
+
+### 範例程式碼
+
+- https://github.com/longbridge/openapi/tree/master/examples/nodejs
 
 </TabItem>
 <TabItem value="rust" label="Rust">
@@ -76,6 +84,10 @@ longbridge = "4.0.0"
 ### API 文檔
 
 - https://longbridge.github.io/openapi/rust/longbridge/index.html
+
+### 範例程式碼
+
+- https://github.com/longbridge/openapi/tree/master/examples/rust
 
 </TabItem>
 <TabItem value="java" label="Java">
@@ -102,6 +114,10 @@ longbridge = "4.0.0"
 
 - https://longbridge.github.io/openapi/java/index.html
 
+### 範例程式碼
+
+- https://github.com/longbridge/openapi/tree/master/examples/java
+
 </TabItem>
 <TabItem value="go" label="Go">
 
@@ -112,64 +128,18 @@ longbridge = "4.0.0"
 ### 安裝 SDK
 
 - Go 版本 >= 1.17
-- **SDK 版本須 >= 0.20.0**（必須滿足）
 
 在專案目錄下執行：
-
-```bash
-$ go get github.com/longbridge/openapi-go@v0.20.0
-```
-
-或安裝最新版本（請確保 >= 0.20.0）：
 
 ```bash
 $ go get github.com/longbridge/openapi-go
 ```
 
-然後執行 `go mod tidy` 更新 `go.mod` 與 `go.sum`。
-
 [https://pkg.go.dev/github.com/longbridge/openapi-go](https://pkg.go.dev/github.com/longbridge/openapi-go)
 
-### 示例
+### 範例程式碼
 
-使用 OAuth 創建配置後獲取行情或賬戶資產：
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"log"
-
-	"github.com/longbridge/openapi-go/config"
-	"github.com/longbridge/openapi-go/oauth"
-	"github.com/longbridge/openapi-go/quote"
-)
-
-func main() {
-	o := oauth.New("your-client-id").
-		OnOpenURL(func(url string) { fmt.Println("請打開此 URL 授權：", url) })
-	if err := o.Build(context.Background()); err != nil {
-		log.Fatal(err)
-	}
-	conf, err := config.New(config.WithOAuthClient(o))
-	if err != nil {
-		log.Fatal(err)
-	}
-	quoteContext, err := quote.NewFromCfg(conf)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer quoteContext.Close()
-	ctx := context.Background()
-	quotes, err := quoteContext.Quote(ctx, []string{"700.HK", "AAPL.US"})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("quotes: %+v\n", quotes[0])
-}
-```
+- https://github.com/longbridge/openapi-go/tree/main/examples
 
 </TabItem>
 <TabItem value="c++" label="C++">
@@ -185,10 +155,13 @@ func main() {
 ### API 文檔
 
 <a href="https://longbridge.github.io/openapi/cpp/index.html">https://longbridge.github.io/openapi/cpp/index.html</a>
+
+### 範例程式碼
+
+- https://github.com/longbridge/openapi/tree/master/examples/cpp
+
 </TabItem>
 </Tabs>
-
-**範例程式碼：** 各語言 SDK 範例均在 [github.com/longbridge/openapi/tree/master/examples](https://github.com/longbridge/openapi/tree/master/examples)。
 
 </div>
 
