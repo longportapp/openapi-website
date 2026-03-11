@@ -10,7 +10,7 @@ id: mcp
 
 Longbridge provides a hosted MCP (Model Context Protocol) service that lets you use Longbridge market data and account capabilities directly from AI coding assistants and chat tools — without managing API keys manually.
 
-**MCP endpoint:** `https://openapi.longportapp.com/mcp`
+**MCP endpoint:** `https://openapi.longbridge.com/mcp`
 
 ## Prerequisites
 
