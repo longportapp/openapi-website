@@ -191,10 +191,6 @@ func main() {
 
   </TabItem>
 </Tabs>
-```
-
-  </TabItem>
-</Tabs>
 
 ## Response
 
