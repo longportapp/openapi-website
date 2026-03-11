@@ -49,6 +49,10 @@ id: getting-started
 
 ## 安装 SDK
 
+:::warning 包名变更
+SDK 包名已从 `longport` 更名为 `longbridge`，旧包名 `longport` 已废弃。如果你之前使用的是 `longport`，请先卸载旧包再安装新包。
+:::
+
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>
 

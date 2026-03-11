@@ -49,6 +49,10 @@ Longbridge OpenAPI SDK 基於 Rust 底層提供標準實現，目前我們已經
 
 ## 安裝 SDK
 
+:::warning 包名變更
+SDK 包名已從 `longport` 更名為 `longbridge`，舊包名 `longport` 已廢棄。如果你之前使用的是 `longport`，請先卸載舊包再安裝新包。
+:::
+
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>
 

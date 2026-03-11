@@ -8,6 +8,14 @@ layout: home
 
 <SDK />
 
+<div class="max-w-4xl w-full mx-auto px-6 md:px-0">
+
+:::warning 包名變更
+SDK 包名已從 `longport` 更名為 `longbridge`，舊包名 `longport` 已廢棄。如果你之前使用的是 `longport`，請先卸載舊包再安裝新包。
+:::
+
+</div>
+
 <div class="border-t-hidden flex flex-col md:flex-row max-w-4xl w-full justify-between md:text-left mx-auto px-6 md:px-0 py-4">
 <Tabs groupId="programming-language">
 <TabItem value="python" label="Python">

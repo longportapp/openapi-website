@@ -48,6 +48,10 @@ All API response are used [Unix Timestamp](https://en.wikipedia.org/wiki/Unix_ti
 
 ## Install SDK
 
+:::warning Package Renamed
+The SDK package has been renamed from `longport` to `longbridge`. The old `longport` package is deprecated. If you were previously using `longport`, please uninstall it before installing the new package.
+:::
+
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>
 
