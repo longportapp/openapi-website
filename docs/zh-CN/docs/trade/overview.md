@@ -1,6 +1,7 @@
 ---
 id: trade_overview
-title: Overview
+sidebar_label: 概览
+title: 概览
 slug: trade-overview
 sidebar_position: 1
 ---
