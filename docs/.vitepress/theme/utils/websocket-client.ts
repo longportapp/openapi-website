@@ -246,8 +246,8 @@ export class LongbridgeWebSocketClient {
 
   constructor(config: WebSocketConfig) {
     this.config = {
-      apiBaseUrl: 'https://openapi.longportapp.com',
-      wsUrl: 'wss://openapi-quote.longportapp.com',
+      apiBaseUrl: 'https://openapi.longbridge.com',
+      wsUrl: 'wss://openapi-quote.longbridge.com',
       timeout: 30000,
       autoReconnect: true,
       reconnectInterval: 5000,

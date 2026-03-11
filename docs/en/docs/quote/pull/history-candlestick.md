@@ -63,15 +63,15 @@ message SecurityHistoryCandlestickRequest {
 
 ### Request Example
 
-```python
-# Get Security History Candlesticks
-# https://open.longbridge.com/docs/quote/pull/candlestick
-# Before running, please visit the "Developers to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile app.
-from datetime import datetime, date
-from longport.openapi import QuoteContext, Config, Period, AdjustType
+<Tabs groupId="request-example">
+  <TabItem value="python" label="Python" default>
 
-config = Config.from_env()
+```python
+from datetime import datetime, date
+from longbridge.openapi import QuoteContext, Config, Period, AdjustType, OAuthBuilder
+
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 
 # Query after 2023-01-01
@@ -86,6 +86,141 @@ print(resp)
 resp = ctx.history_candlesticks_by_date("700.HK", Period.Day, AdjustType.NoAdjust, date(2023, 1, 1), date(2023, 2, 1))
 print(resp)
 ```
+
+  </TabItem>
+  <TabItem value="nodejs" label="Node.js">
+
+```javascript
+const { Config, QuoteContext, OAuth, Period, AdjustType } = require('longbridge')
+
+async function main() {
+  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const config = Config.fromOAuth(oauth)
+  const ctx = await QuoteContext.new(config)
+  const resp = await ctx.historyCandlesticksByOffset("700.HK", Period.Day, AdjustType.NoAdjust, true, 10, new Date("2023-01-01"))
+  console.log(resp)
+}
+main().catch(console.error)
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+import com.longbridge.*;
+import com.longbridge.quote.*;
+import java.time.LocalDateTime;
+class Main {
+    public static void main(String[] args) throws Exception {
+        try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
+             Config config = Config.fromOAuth(oauth);
+             QuoteContext ctx = QuoteContext.create(config).get()) {
+            Candlestick[] resp = ctx.getHistoryCandlesticksByOffset("700.HK", Period.Day, AdjustType.NoAdjust, true, 10, LocalDateTime.of(2023, 1, 1, 0, 0)).get();
+            for (Candlestick c : resp) System.out.println(c);
+        }
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+```rust
+use std::sync::Arc;
+use longbridge::{oauth::OAuthBuilder, quote::QuoteContext, Config, quote::{Period, AdjustType}};
+use time::PrimitiveDateTime;
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
+    let config = Arc::new(Config::from_oauth(oauth));
+    let (ctx, _) = QuoteContext::try_new(config).await?;
+    let dt = PrimitiveDateTime::parse("2023-01-01 00:00", "%Y-%m-%d %H:%M")?;
+    let resp = ctx.history_candlesticks_by_offset("700.HK", Period::Day, AdjustType::NoAdjust, true, Some(dt), 10, None).await?;
+    println!("{:?}", resp);
+    Ok(())
+}
+```
+
+  </TabItem>
+  <TabItem value="cpp" label="C++">
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+#ifdef WIN32
+#include <windows.h>
+#endif
+using namespace longbridge;
+using namespace longbridge::quote;
+
+int main(int argc, char const* argv[]) {
+#ifdef WIN32
+  SetConsoleOutputCP(CP_UTF8);
+#endif
+  const std::string client_id = "your-client-id";
+  OAuthBuilder(client_id).build(
+    [](const std::string& url) { std::cout << "Open this URL to authorize: " << url << std::endl; },
+    [](auto res) {
+      if (!res) { std::cout << "authorization failed: " << *res.status().message() << std::endl; return; }
+      Config config = Config::from_oauth(*res);
+      QuoteContext::create(config, [](auto res) {
+        if (!res) { std::cout << "failed to create quote context: " << *res.status().message() << std::endl; return; }
+        res.context().history_candlesticks_by_offset("700.HK", Period::Day, AdjustType::NoAdjust, true, std::nullopt, 10, TradeSessions::Intraday, [](auto res) {
+          if (!res) { std::cout << "failed: " << *res.status().message() << std::endl; return; }
+          std::cout << "candlesticks: " << res->size() << std::endl;
+        });
+      });
+    });
+  std::cin.get();
+  return 0;
+}
+```
+
+  </TabItem>
+  <TabItem value="go" label="Go">
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+	"time"
+
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+	"github.com/longbridge/openapi-go/quote"
+)
+
+func main() {
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("Open this URL to authorize:", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	if err != nil {
+		log.Fatal(err)
+	}
+	qctx, err := quote.NewFromCfg(conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer qctx.Close()
+	dt := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
+	sticks, err := qctx.HistoryCandlesticksByOffset(context.Background(), "700.HK", quote.PeriodDay, quote.AdjustTypeNo, true, &dt, 10)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("candlesticks:", len(sticks))
+}
+```
+
+  </TabItem>
+</Tabs>
+
 
 ## Response
 

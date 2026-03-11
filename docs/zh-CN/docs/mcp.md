@@ -10,7 +10,7 @@ id: mcp
 
 Longbridge 提供托管的 MCP（Model Context Protocol）服务，让你在 AI 编程助手或对话工具中直接使用 Longbridge 的行情与账户能力，无需手动管理 API 密钥。
 
-**MCP 服务地址：** `https://openapi.longportapp.com/mcp`
+**MCP 服务地址：** `https://openapi.longbridge.com/mcp`
 
 ## 前置条件
 
@@ -39,7 +39,7 @@ Longbridge 提供托管的 MCP（Model Context Protocol）服务，让你在 AI 
 {
   "mcpServers": {
     "longbridge": {
-      "url": "https://openapi.longportapp.com/mcp"
+      "url": "https://openapi.longbridge.com/mcp"
     }
   }
 }

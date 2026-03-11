@@ -37,4 +37,4 @@ A: We do not charge additional fees for accessing market queries, trading, etc.,
 
 ## Q8: How to disable the permission table output in the console after the SDK connects to the server?
 
-A: You can set the environment variable `LONGPORT_PRINT_QUOTE_PACKAGES` to `false`, or set `enable_print_quote_packages` to `false` when creating the `Config` object in the code to disable the permission table output in the console.
+A: You can set the environment variable `LONGBRIDGE_PRINT_QUOTE_PACKAGES` to `false` (or legacy `LONGPORT_PRINT_QUOTE_PACKAGES`), or set `enable_print_quote_packages` to `false` when creating the `Config` object in the code to disable the permission table output in the console.

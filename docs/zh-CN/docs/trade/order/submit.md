@@ -51,10 +51,10 @@ headingLevel: 3
 
 ```py
 from decimal import Decimal
-from longport.openapi import TradeContext, Config, OrderType, OrderSide, TimeInForceType
+from longbridge.openapi import TradeContext, Config, OrderType, OrderSide, TimeInForceType, OAuthBuilder
 
-# Load configuration from environment variables
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 
 # Create a context for trade APIs
 ctx = TradeContext(config)

@@ -1,7 +1,8 @@
 ---
 sidebar_position: 0
 id: quote_overview
-title: Overview
+sidebar_label: 概览
+title: 概览
 slug: overview
 ---
 
@@ -138,4 +139,4 @@ slug: overview
 - 数据包体积小
 - 较强的版本前向后向兼容性
 
-行情 Protobuf 协议文档[下载地址](https://github.com/longportapp/openapi-protobufs/blob/main/quote/api.proto)。
+行情 Protobuf 协议文档[下载地址](https://github.com/longbridge/openapi-protobufs/blob/main/quote/api.proto)。

@@ -8,59 +8,75 @@ layout: home
 
 <SDK />
 
+<div class="max-w-4xl w-full mx-auto px-6 md:px-0">
+
+:::warning 包名變更
+SDK 包名已從 `longport` 更名為 `longbridge`，舊包名 `longport` 已廢棄。如果你之前使用的是 `longport`，請先卸載舊包再安裝新包。
+:::
+
+</div>
+
 <div class="border-t-hidden flex flex-col md:flex-row max-w-4xl w-full justify-between md:text-left mx-auto px-6 md:px-0 py-4">
 <Tabs groupId="programming-language">
 <TabItem value="python" label="Python">
 
 ## Longbridge OpenAPI SDK for Python
 
-[https://github.com/longportapp/openapi/tree/master/python](https://github.com/longportapp/openapi/tree/master/python)
+[https://github.com/longbridge/openapi/tree/master/python](https://github.com/longbridge/openapi/tree/master/python)
 
 ### 安裝 SDK
 
-你可以通過 Pip 安裝 SDK，或者直接訪問 [PyPI](https://pypi.org/project/longport/) 頁面來下載。
+你可以通過 Pip 安裝 SDK，或者直接訪問 [PyPI](https://pypi.org/project/longbridge/) 頁面來下載。
 
 ```bash
-$ pip install longport
+$ pip install longbridge
 ```
 
 如遇到網路安裝問題，可以嘗試：[Aliyun PyPI 鏡像](https://mirrors.aliyun.com/pypi/simple)
 
 ```bash
-$ pip install longport -i https://mirrors.aliyun.com/pypi/simple
+$ pip install longbridge -i https://mirrors.aliyun.com/pypi/simple
 ```
 
 ### API 文檔
 
-- https://longportapp.github.io/openapi/python/index.html
+- https://longbridge.github.io/openapi/python/index.html
+
+### 範例程式碼
+
+- https://github.com/longbridge/openapi/tree/master/examples/python
 
 </TabItem>
 <TabItem value="javascript" label="JavaScript">
 
 ## Longbridge OpenAPI SDK for Node.js
 
-[https://github.com/longportapp/openapi/tree/master/nodejs](https://github.com/longportapp/openapi/tree/master/nodejs)
+[https://github.com/longbridge/openapi/tree/master/nodejs](https://github.com/longbridge/openapi/tree/master/nodejs)
 
 ### 安裝 SDK
 
 你可以通過 Npm 安裝 SDK。
 
 ```bash
-$ npm install longport --save
+$ npm install longbridge --save
 ```
 
-[https://www.npmjs.com/package/longport](https://www.npmjs.com/package/longport)
+[https://www.npmjs.com/package/longbridge](https://www.npmjs.com/package/longbridge)
 
 ### API 文檔
 
-- https://longportapp.github.io/openapi/nodejs/index.html
+- https://longbridge.github.io/openapi/nodejs/index.html
+
+### 範例程式碼
+
+- https://github.com/longbridge/openapi/tree/master/examples/nodejs
 
 </TabItem>
 <TabItem value="rust" label="Rust">
 
 ## Longbridge OpenAPI SDK for Rust
 
-[https://github.com/longportapp/openapi/tree/master/rust](https://github.com/longportapp/openapi/tree/master/rust)
+[https://github.com/longbridge/openapi/tree/master/rust](https://github.com/longbridge/openapi/tree/master/rust)
 
 ### 安裝 SDK
 
@@ -68,21 +84,25 @@ $ npm install longport --save
 
 ```toml
 [dependencies]
-longport = "2.0.0"
+longbridge = "4.0.0"
 ```
 
-[https://crates.io/crates/longport](https://crates.io/crates/longport)
+[https://crates.io/crates/longbridge](https://crates.io/crates/longbridge)
 
 ### API 文檔
 
-- https://longportapp.github.io/openapi/rust/longport/index.html
+- https://longbridge.github.io/openapi/rust/longbridge/index.html
+
+### 範例程式碼
+
+- https://github.com/longbridge/openapi/tree/master/examples/rust
 
 </TabItem>
 <TabItem value="java" label="Java">
 
 ## Longbridge OpenAPI SDK for Java
 
-[https://github.com/longportapp/openapi/tree/master/java](https://github.com/longportapp/openapi/tree/master/java)
+[https://github.com/longbridge/openapi/tree/master/java](https://github.com/longbridge/openapi/tree/master/java)
 
 ### 安裝 SDK
 
@@ -90,49 +110,64 @@ longport = "2.0.0"
 
 ```xml
 <dependency>
-  <groupId>io.github.longportapp</groupId>
+  <groupId>io.github.longbridge</groupId>
   <artifactId>openapi-sdk</artifactId>
-  <version>LATEST</version>
+  <version>4.0.0</version>
 </dependency>
 ```
 
-[https://search.maven.org/artifact/io.github.longportapp/openapi](https://search.maven.org/artifact/io.github.longportapp/openapi)
+[https://search.maven.org/artifact/io.github.longbridge/openapi](https://search.maven.org/artifact/io.github.longbridge/openapi)
 
 ### API 文檔
 
-- https://longportapp.github.io/openapi/java/index.html
+- https://longbridge.github.io/openapi/java/index.html
+
+### 範例程式碼
+
+- https://github.com/longbridge/openapi/tree/master/examples/java
 
 </TabItem>
 <TabItem value="go" label="Go">
 
 ## Longbridge OpenAPI SDK for Go
 
-[https://github.com/longportapp/openapi-go](https://github.com/longportapp/openapi-go)
+[https://github.com/longbridge/openapi-go](https://github.com/longbridge/openapi-go)
 
-### 安裝 SDK for Go
+### 安裝 SDK
 
-Go 版本 >= 1.17
+- Go 版本 >= 1.17
+
+在專案目錄下執行：
 
 ```bash
-$ go get github.com/longportapp/openapi-go
+$ go get github.com/longbridge/openapi-go
 ```
 
-[https://pkg.go.dev/github.com/longportapp/openapi-go](https://pkg.go.dev/github.com/longportapp/openapi-go)
+[https://pkg.go.dev/github.com/longbridge/openapi-go](https://pkg.go.dev/github.com/longbridge/openapi-go)
+
+### 範例程式碼
+
+- https://github.com/longbridge/openapi-go/tree/main/examples
 
 </TabItem>
 <TabItem value="c++" label="C++">
 
 ## Longbridge OpenAPI SDK for C/C++
 
-[https://github.com/longportapp/openapi/tree/master/cpp](https://github.com/longportapp/openapi/tree/master/cpp)
+[https://github.com/longbridge/openapi/tree/master/cpp](https://github.com/longbridge/openapi/tree/master/cpp)
 
 ### 下載地址
 
-- [3.0.17](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-3.0.17.tar.gz)
+- [4.0.0](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-4.0.0.tar.gz)
 
 ### API 文檔
 
-<a href="https://longportapp.github.io/openapi/cpp/index.html">https://longportapp.github.io/openapi/cpp/index.html</a>
+<a href="https://longbridge.github.io/openapi/cpp/index.html">https://longbridge.github.io/openapi/cpp/index.html</a>
+
+### 範例程式碼
+
+- https://github.com/longbridge/openapi/tree/master/examples/cpp
+
 </TabItem>
 </Tabs>
 
