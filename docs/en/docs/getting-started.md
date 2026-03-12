@@ -120,22 +120,30 @@ OAuth 2.0 is the modern authentication method that uses Bearer tokens without re
 Visit [Longbridge OpenAPI](https://open.longbridge.com), login and enter "User Center" to register an OAuth client and get your `client_id`:
 
 ```bash
-curl -X POST https://openapi.longbridge.com/v1/oauth2/client/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "My Application",
-    "redirect_uris": ["http://localhost:60355/callback"],
-    "grant_types": ["authorization_code", "refresh_token"]
-  }'
+curl -X POST https://openapi.longbridge.com/oauth2/register \
+     -H "Content-Type: application/json" \
+     -d '{
+            "redirect_uris": ["http://localhost:60355/callback"],
+            "token_endpoint_auth_method": "none",
+            "grant_types": ["authorization_code","refresh_token"],
+            "response_types": ["code"],
+            "client_name": "My Longbridge OpenAPI"
+        }'
 ```
 
 Response example:
 ```json
 {
-  "client_id": "your-client-id-here",
-  "client_secret": null,
-  "name": "My Application",
-  "redirect_uris": ["http://localhost:60355/callback"]
+   "client_id": "72d9caaf-0bd4-4000-85a7-8c7978c74544",
+   "client_id_issued_at": 1773311221,
+   "client_secret_expires_at": 1773314821,
+   "client_name": "My Longbridge OpenAPI",
+   "redirect_uris": ["http://localhost:60355/callback"],
+   "grant_types": ["authorization_code", "refresh_token"],
+   "token_endpoint_auth_method": "none",
+   "response_types": ["code"],
+   "registration_access_token": "BVlMLEtNUUu4FoRFNItC2FfeR/rLpqLNyEuCJNNTCWE=",
+   "registration_client_uri": "https://openapi.longbridge.com/oauth2/register/72d9caaf-0bd4-4000-85a7-8c7978c74544"
 }
 ```
 
