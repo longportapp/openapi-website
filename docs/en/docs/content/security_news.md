@@ -25,7 +25,7 @@ Get the news list for a specified security.
 
 | Name   | Type   | Required | Description                                         |
 | ------ | ------ | -------- | --------------------------------------------------- |
-| symbol | string | YES      | Stock symbol, use `ticker.region` format, e.g. `APP.US` |
+| symbol | string | YES      | Stock symbol, use `ticker.region` format, e.g. `AAPL.US` |
 
 ## Response
 
