@@ -37,30 +37,160 @@ message SubscribeRequest {
 
 ### Request Example
 
+<Tabs groupId="request-example">
+  <TabItem value="python" label="Python" default>
+
 ```python
-# 订阅行情数据
-#
-# 订阅行情数据请检查“开发者中心” - “行情权限”是否正确
-# https://open.longbridge.com/account
-#
-# - 港股 - BMP 基础报价，无实时行情推送，无法用 WebSocket 订阅
-# - 美股 - LV1 纳斯达克最优报价 (只限 OpenAPI）
-#
-# 运行前请访问“开发者中心”确保账户有正确的行情权限。
-# 如没有开通行情权限，可以通过“Longbridge”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
 from time import sleep
-from longport.openapi import QuoteContext, Config, SubType, PushQuote
+from longbridge.openapi import QuoteContext, Config, SubType, PushQuote, OAuthBuilder
 
 def on_quote(symbol: str, event: PushQuote):
     print(symbol, event)
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 ctx.set_on_quote(on_quote)
 
 ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote])
 sleep(30)
 ```
+
+  </TabItem>
+  <TabItem value="nodejs" label="Node.js">
+
+```javascript
+const { Config, QuoteContext, OAuth, SubType } = require('longbridge')
+
+async function main() {
+  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const config = Config.fromOAuth(oauth)
+  const ctx = await QuoteContext.new(config)
+  ctx.setOnQuote((event) => console.log(event))
+  await ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote], true)
+  await new Promise(r => setTimeout(r, 30000))
+}
+main().catch(console.error)
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+import com.longbridge.*;
+import com.longbridge.quote.*;
+
+class Main {
+    public static void main(String[] args) throws Exception {
+        try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
+             Config config = Config.fromOAuth(oauth);
+             QuoteContext ctx = QuoteContext.create(config).get()) {
+            ctx.setOnQuote(event -> System.out.println(event));
+            ctx.subscribe(new String[] { "700.HK", "AAPL.US" }, new SubType[] { SubType.Quote }, true).get();
+            Thread.sleep(30000);
+        }
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+```rust
+use std::sync::Arc;
+use longbridge::{oauth::OAuthBuilder, quote::QuoteContext, Config, quote::SubFlags};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
+    let config = Arc::new(Config::from_oauth(oauth));
+    let (ctx, _) = QuoteContext::try_new(config).await?;
+    ctx.subscribe(vec!["700.HK".to_string(), "AAPL.US".to_string()], SubFlags::quote(), true).await?;
+    tokio::time::sleep(std::time::Duration::from_secs(30)).await;
+    Ok(())
+}
+```
+
+  </TabItem>
+  <TabItem value="cpp" label="C++">
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+#ifdef WIN32
+#include <windows.h>
+#endif
+using namespace longbridge;
+using namespace longbridge::quote;
+
+int main(int argc, char const* argv[]) {
+#ifdef WIN32
+  SetConsoleOutputCP(CP_UTF8);
+#endif
+  const std::string client_id = "your-client-id";
+  std::vector<std::string> symbols = {"700.HK", "AAPL.US"};
+  OAuthBuilder(client_id).build(
+    [](const std::string& url) { std::cout << "Open this URL to authorize: " << url << std::endl; },
+    [](auto res) {
+      if (!res) { std::cout << "authorization failed: " << *res.status().message() << std::endl; return; }
+      Config config = Config::from_oauth(*res);
+      QuoteContext::create(config, [](auto res) {
+        if (!res) { std::cout << "failed to create quote context: " << *res.status().message() << std::endl; return; }
+        res.context().set_on_quote([](auto e) { std::cout << e->symbol << std::endl; });
+        res.context().subscribe(symbols, SubFlags::QUOTE(), true, [](auto res) {
+          if (!res) { std::cout << "failed: " << *res.status().message() << std::endl; return; }
+        });
+      });
+    });
+  std::cin.get();
+  return 0;
+}
+```
+
+  </TabItem>
+  <TabItem value="go" label="Go">
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+	"github.com/longbridge/openapi-go/quote"
+)
+
+func main() {
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("Open this URL to authorize:", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	if err != nil {
+		log.Fatal(err)
+	}
+	qctx, err := quote.NewFromCfg(conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer qctx.Close()
+	qctx.OnQuote(func(e *quote.PushQuote) { fmt.Println(e.Symbol) })
+	err = qctx.Subscribe(context.Background(), []string{"700.HK", "AAPL.US"}, []quote.SubType{quote.SubTypeQuote}, true)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// keep running to receive push
+	select {}
+}
+```
+
+  </TabItem>
+</Tabs>
+
 
 ## Response
 

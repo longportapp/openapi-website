@@ -16,8 +16,8 @@ This page focuses only on the OAuth 2.0 **refresh token** step.
 
 Use OAuth token endpoint:
 
-- `POST https://openapi.longportapp.com/oauth2/token`
-- or China: `POST https://openapi.longportapp.cn/oauth2/token`
+- `POST https://openapi.longbridge.com/oauth2/token`
+- or China: `POST https://openapi.longbridge.com/oauth2/token`
 
 ### Request parameters (`application/x-www-form-urlencoded`)
 
@@ -31,7 +31,7 @@ Use OAuth token endpoint:
 ### Refresh example
 
 ```bash
-curl -X POST https://openapi.longportapp.com/oauth2/token \
+curl -X POST https://openapi.longbridge.com/oauth2/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -d "grant_type=refresh_token" \
   -d "client_id=YOUR_CLIENT_ID" \

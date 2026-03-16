@@ -12,7 +12,7 @@ export interface ApiConfig {
   accessToken: string
   /** App Secret */
   appSecret: string
-  /** API 基础 URL，默认：https://openapi.longportapp.com */
+  /** API 基础 URL，默认：https://openapi.longbridge.com */
   baseUrl?: string
   /** 请求超时时间 (毫秒)，默认：30000 */
   timeout?: number
@@ -128,7 +128,7 @@ export class LongbridgeApiClient {
 
   constructor(config: ApiConfig) {
     this.config = {
-      baseUrl: 'https://openapi.longportapp.com',
+      baseUrl: 'https://openapi.longbridge.com',
       timeout: 30000,
       ...config,
     }

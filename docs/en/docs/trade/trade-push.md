@@ -12,12 +12,13 @@ Client can get real-time trade updates from trade gateway.
 ```python
 from time import sleep
 from decimal import Decimal
-from longport.openapi import TradeContext, Config, OrderSide, OrderType, TimeInForceType, PushOrderChanged, TopicType
+from longbridge.openapi import TradeContext, Config, OrderSide, OrderType, TimeInForceType, PushOrderChanged, TopicType, OAuthBuilder
 
 def on_order_changed(event: PushOrderChanged):
     print(event)
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = TradeContext(config)
 ctx.set_on_order_changed(on_order_changed)
 ctx.subscribe([TopicType.Private])

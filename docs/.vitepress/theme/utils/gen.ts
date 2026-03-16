@@ -25,7 +25,8 @@ type MSidebar = DefaultTheme.SidebarItem & { position?: number }
  */
 export function genMarkdowDocs(lang: string, basePath: string, debug = false) {
   return function (): DefaultTheme.SidebarItem[] {
-    const rootDir = path.resolve(__dirname, '../../../', lang, basePath)
+    const docsRoot = path.resolve(process.cwd(), 'docs')
+    const rootDir = path.join(docsRoot, lang, basePath)
     const fc = generateSidebarItems(rootDir, `/${basePath}`, `/${basePath}`)
     if (debug) {
       fs.writeFileSync(path.resolve(__dirname, `./${lang}_sidebar.json`), JSON.stringify(fc, null, 2))

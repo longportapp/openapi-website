@@ -121,7 +121,7 @@ A:
 
 -  从环境变量创建 `Config` 对象
 
-设置环境变量 `LONGPORT_ENABLE_OVERNIGHT` 为 `true`
+设置环境变量 `LONGBRIDGE_ENABLE_OVERNIGHT` 为 `true`（兼容旧版 `LONGPORT_ENABLE_OVERNIGHT`）
 
 - 从构造函数创建 `Config` 对象
 

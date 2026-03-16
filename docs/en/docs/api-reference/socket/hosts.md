@@ -11,12 +11,12 @@ Longbridge split Market Quote and Trading real-time pushing endpoints.
 
 | Endpoint                                 | Access Type |
 | ---------------------------------------- | ----------- |
-| tcp://openapi-quote.longportapp.com:2020 | TCP         |
-| wss://openapi-quote.longportapp.com      | WebSocket   |
+| tcp://openapi-quote.longbridge.com:2020 | TCP         |
+| wss://openapi-quote.longbridge.com      | WebSocket   |
 
 ## Trading
 
 | Endpoint                                 | Access Type |
 | ---------------------------------------- | ----------- |
-| tcp://openapi-trade.longportapp.com:2020 | TCP         |
-| wss://openapi-trade.longportapp.com      | WebSocket   |
+| tcp://openapi-trade.longbridge.com:2020 | TCP         |
+| wss://openapi-trade.longbridge.com      | WebSocket   |

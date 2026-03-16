@@ -10,14 +10,12 @@ Longbridge OpenAPI SDK is implemented based on Rust we have released SDK for Pyt
 
 ## API Host
 
-- HTTP API - `https://openapi.longportapp.com`
-- WebSocket Quote - `wss://openapi-quote.longportapp.com`
-- WebSocket Trade - `wss://openapi-trade.longportapp.com`
+- HTTP API - `https://openapi.longbridge.com`
+- WebSocket Quote - `wss://openapi-quote.longbridge.com`
+- WebSocket Trade - `wss://openapi-trade.longbridge.com`
 
 :::tip
-For access in mainland China, it is recommended to use `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn` to improve access speed.
-
-If you are use our SDK, the `LONGPORT_REGION=cn` env variable can to use to setup the API region (Current only support: `cn`, `hk`).
+For access in mainland China, use `openapi.longbridge.com`, `openapi-quote.longbridge.com`, `openapi-trade.longbridge.com`. The SDK automatically selects the access point by network. If the SDK selects incorrectly, set the environment variable `LONGBRIDGE_REGION` (e.g. `cn` or `hk`).
 :::
 
 ## Time Format
@@ -44,24 +42,28 @@ All API response are used [Unix Timestamp](https://en.wikipedia.org/wiki/Unix_ti
   </TabItem>
   <TabItem value="go" label="Go">
     <li><a href="https://go.dev">Go</a></li>
-    <li><a href="https://pkg.go.dev/github.com/longportapp/openapi-go">Go Docs</a></li>
+    <li><a href="https://pkg.go.dev/github.com/longbridge/openapi-go">Go Docs</a></li>
   </TabItem>
 </Tabs>
 
 ## Install SDK
 
+:::warning Package Renamed
+The SDK package has been renamed from `longport` to `longbridge`. The old `longport` package is deprecated. If you were previously using `longport`, please uninstall it before installing the new package.
+:::
+
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>
 
 ```bash
-pip3 install longport
+pip3 install longbridge
 ```
 
   </TabItem>
   <TabItem value="javascript" label="JavaScript">
 
 ```bash
-yarn install longport
+yarn add longbridge
 ```
 
   </TabItem>
@@ -69,7 +71,7 @@ yarn install longport
 
 ```toml
 [dependencies]
-longport = "3.0.17"
+longbridge = "4.0.0"
 tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
@@ -79,9 +81,9 @@ tokio = { version = "1", features = "rt-multi-thread" }
 ```xml
 <dependencies>
     <dependency>
-        <groupId>io.github.longportapp</groupId>
+        <groupId>io.github.longbridge</groupId>
         <artifactId>openapi-sdk</artifactId>
-        <version>LATEST</version>
+        <version>4.0.0</version>
     </dependency>
 </dependencies>
 ```
@@ -91,7 +93,7 @@ tokio = { version = "1", features = "rt-multi-thread" }
   <TabItem value="go" label="Go">
 
 ```shell
-go get github.com/longportapp/openapi-go
+go get github.com/longbridge/openapi-go
 ```
 
   </TabItem>
@@ -107,7 +109,7 @@ Let's take obtaining assets as an example to demonstrate how to use the SDK.
 
 ### Authentication Methods
 
-LongPort OpenAPI supports two authentication methods:
+Longbridge OpenAPI supports two authentication methods:
 
 #### Method 1: OAuth 2.0 (Recommended) ⭐
 
@@ -118,22 +120,30 @@ OAuth 2.0 is the modern authentication method that uses Bearer tokens without re
 Visit [Longbridge OpenAPI](https://open.longbridge.com), login and enter "User Center" to register an OAuth client and get your `client_id`:
 
 ```bash
-curl -X POST https://openapi.longportapp.com/v1/oauth2/client/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "My Application",
-    "redirect_uris": ["http://localhost:60355/callback"],
-    "grant_types": ["authorization_code", "refresh_token"]
-  }'
+curl -X POST https://openapi.longbridge.com/oauth2/register \
+     -H "Content-Type: application/json" \
+     -d '{
+            "redirect_uris": ["http://localhost:60355/callback"],
+            "token_endpoint_auth_method": "none",
+            "grant_types": ["authorization_code","refresh_token"],
+            "response_types": ["code"],
+            "client_name": "My Longbridge OpenAPI"
+        }'
 ```
 
 Response example:
 ```json
 {
-  "client_id": "your-client-id-here",
-  "client_secret": null,
-  "name": "My Application",
-  "redirect_uris": ["http://localhost:60355/callback"]
+   "client_id": "72d9caaf-0bd4-4000-85a7-8c7978c74544",
+   "client_id_issued_at": 1773311221,
+   "client_secret_expires_at": 1773314821,
+   "client_name": "My Longbridge OpenAPI",
+   "redirect_uris": ["http://localhost:60355/callback"],
+   "grant_types": ["authorization_code", "refresh_token"],
+   "token_endpoint_auth_method": "none",
+   "response_types": ["code"],
+   "registration_access_token": "BVlMLEtNUUu4FoRFNItC2FfeR/rLpqLNyEuCJNNTCWE=",
+   "registration_client_uri": "https://openapi.longbridge.com/oauth2/register/72d9caaf-0bd4-4000-85a7-8c7978c74544"
 }
 ```
 
@@ -141,75 +151,32 @@ Save the `client_id` for later use.
 
 **Step 2: Authorize and Get Token**
 
-Use standard OAuth 2.0 libraries for each language to perform authorization. After obtaining the access token, use `Config.from_oauth()` to create the configuration.
+The SDK provides built-in OAuth support. Use `OAuthBuilder` to run the browser flow; after authorization, use `Config.from_oauth()` to create the configuration. The token is persisted automatically and refreshed when expired.
+
+**Token storage path:** `~/.longbridge-openapi/tokens/<client_id>` (macOS/Linux), or `%USERPROFILE%\.longbridge-openapi\tokens\<client_id>` on Windows.
 
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>
 
 ```python
-from requests_oauthlib import OAuth2Session
-from longport.openapi import Config
+from longbridge.openapi import Config, OAuthBuilder
 
-# Use standard OAuth library for authorization
-client_id = "your-client-id"
-redirect_uri = "http://localhost:60355/callback"
-
-oauth = OAuth2Session(client_id, redirect_uri=redirect_uri)
-
-# Generate authorization URL
-authorization_url, state = oauth.authorization_url(
-    'https://openapi.longportapp.com/oauth2/authorize'
+oauth = OAuthBuilder("your-client-id").build(
+    lambda url: print(f"Open this URL to authorize: {url}")
 )
-print(f'Please visit this URL to authorize: {authorization_url}')
-
-# Get callback URL after authorization
-authorization_response = input('Enter the full callback URL: ')
-
-# Fetch access token
-token = oauth.fetch_token(
-    'https://openapi.longportapp.com/oauth2/token',
-    authorization_response=authorization_response
-)
-
-# Create LongPort config with OAuth token
-config = Config.from_oauth(client_id, token['access_token'])
+config = Config.from_oauth(oauth)
 ```
 
   </TabItem>
   <TabItem value="javascript" label="JavaScript">
 
 ```javascript
-const { AuthorizationCode } = require('simple-oauth2');
-const { Config } = require('longport');
+const { Config, OAuth } = require('longbridge');
 
-// Use standard OAuth library for authorization
-const client = new AuthorizationCode({
-  client: {
-    id: 'your-client-id',
-  },
-  auth: {
-    tokenHost: 'https://openapi.longportapp.com',
-    tokenPath: '/oauth2/token',
-    authorizePath: '/oauth2/authorize',
-  },
+const oauth = await OAuth.build("your-client-id", (_, url) => {
+  console.log("Open this URL to authorize: " + url);
 });
-
-const authorizationUri = client.authorizeURL({
-  redirect_uri: 'http://localhost:60355/callback',
-});
-
-console.log('Please visit this URL to authorize:', authorizationUri);
-
-// Get token using authorization code from callback
-const tokenParams = {
-  code: 'authorization-code-from-callback',
-  redirect_uri: 'http://localhost:60355/callback',
-};
-
-const accessToken = await client.getToken(tokenParams);
-
-// Create LongPort config with OAuth token
-const config = Config.fromOauth('your-client-id', accessToken.token.access_token);
+const config = Config.fromOAuth(oauth);
 ```
 
   </TabItem>
@@ -217,20 +184,14 @@ const config = Config.fromOauth('your-client-id', accessToken.token.access_token
 
 ```rust
 use std::sync::Arc;
-use longport::{Config, oauth::OAuth};
+use longbridge::{Config, oauth::OAuthBuilder};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // Rust SDK provides built-in OAuth implementation for convenience
-    let oauth = OAuth::new("your-client-id");
-    let token = oauth.authorize().await?;  // Opens browser automatically
-
-    // Create config with OAuth token
-    let config = Arc::new(Config::from_oauth(
-        oauth.client_id(),
-        &token.access_token
-    ));
-
+    let oauth = OAuthBuilder::new("your-client-id")
+        .build(|url| println!("Open this URL to authorize: {url}"))
+        .await?;
+    let config = Arc::new(Config::from_oauth(oauth));
     Ok(())
 }
 ```
@@ -239,17 +200,47 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   <TabItem value="java" label="Java">
 
 ```java
-import com.longport.*;
-// Use standard OAuth library, e.g.: org.springframework.security.oauth2.client
+import com.longbridge.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        // 1. Get token using Spring Security OAuth2 or other standard library
-        // String accessToken = oauth2Client.getAccessToken();
-
-        // 2. Create LongPort config with OAuth token
-        Config config = Config.fromOauth("your-client-id", "your-oauth-access-token");
+        String clientId = "your-client-id";
+        OAuth oauth = new OAuthBuilder(clientId)
+                .build(url -> System.out.println("Open to authorize: " + url))
+                .get();
+        try (oauth) {
+            Config config = Config.fromOAuth(oauth);
+        }
     }
+}
+```
+
+  </TabItem>
+  <TabItem value="go" label="Go">
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+)
+
+func main() {
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("Open this URL to authorize:", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	if err != nil {
+		log.Fatal(err)
+	}
+	_ = conf // use conf for TradeContext or QuoteContext
 }
 ```
 
@@ -271,9 +262,9 @@ OAuth tokens should be stored securely in your application (e.g., encrypted file
 
 **_Get App Key, App Secret, Access Token and other information_**
 
-Login the [Longbridge OpenAPI](https://open.longbridge.com) website, and enter the "User Center".
+Log in at [https://open.longbridge.com/](https://open.longbridge.com/) and open **User Center**.
 
-The "application credential" credential information will be given on the page. After we get it, we will set the environment variable, which is convenient for later development and use.
+The **application credential** (App Key, App Secret, Access Token) is shown on that page. This Access Token is the **legacy** API Key credential; it is **not** the same as the access token obtained via OAuth or the Refresh Token API. Set these as environment variables for development.
 
 ### Environment Variables
 
@@ -281,13 +272,31 @@ The "application credential" credential information will be given on the page. A
 Please pay attention to protect your **Access Token** information, anyone who gets it can trade your account through OpenAPI!
 :::
 
-| 环境变量                    | 说明                                                               | 值范围          |
-| --------------------------- | ------------------------------------------------------------------ | --------------- |
-| `LONGPORT_APP_KEY`          | App Key get from developer center                                  |                 |
-| `LONGPORT_APP_SECRET`       | App Secret get from developer center                               |                 |
-| `LONGPORT_ACCESS_TOKEN`     | Access Token get from developer center                             |                 |
-| `LONGPORT_REGION`           | The region of the API, `cn` for mainland China, `hk` for Hong Kong | `cn`, `hk`      |
-| `LONGPORT_ENABLE_OVERNIGHT` | Set `true` to enable overnight quote                               | `true`, `false` |
+**API Key credentials (required for legacy API Key):**
+
+| Environment Variable      | Description                    |
+| ------------------------- | ------------------------------ |
+| `LONGBRIDGE_APP_KEY`      | App key from developer center  |
+| `LONGBRIDGE_APP_SECRET`   | App secret from developer center|
+| `LONGBRIDGE_ACCESS_TOKEN` | Legacy Access Token from [https://open.longbridge.com/](https://open.longbridge.com/) (User Center → application credential). Not the OAuth access token. |
+
+**Other environment variables:**
+
+| Name                           | Description                                                                      |
+|--------------------------------|----------------------------------------------------------------------------------|
+| `LONGBRIDGE_LANGUAGE`          | Language identifier, `zh-CN`, `zh-HK` or `en` (Default: `en`)                    |
+| `LONGBRIDGE_HTTP_URL`          | HTTP endpoint url (Default: `https://openapi.longbridge.com`)                     |
+| `LONGBRIDGE_QUOTE_WS_URL`      | Quote websocket endpoint url (Default: `wss://openapi-quote.longbridge.com/v2`)  |
+| `LONGBRIDGE_TRADE_WS_URL`      | Trade websocket endpoint url (Default: `wss://openapi-trade.longbridge.com/v2`)  |
+| `LONGBRIDGE_REGION`            | Override API region; SDK auto-selects by network. Set to `cn` or `hk` if incorrect. |
+| `LONGBRIDGE_ENABLE_OVERNIGHT`  | Enable overnight quote, `true` or `false` (Default: `false`)                     |
+| `LONGBRIDGE_PUSH_CANDLESTICK_MODE` | `realtime` or `confirmed` (Default: `realtime`)                              |
+| `LONGBRIDGE_PRINT_QUOTE_PACKAGES`  | Print quote packages when connected, `true` or `false` (Default: `true`)    |
+| `LONGBRIDGE_LOG_PATH`          | Set the path of the log files (Default: no logs)                                  |
+
+:::info
+The SDK also accepts the legacy `LONGPORT_*` variable names for backward compatibility.
+:::
 
 We recommend that you set the environment variables. For the convenience of demonstration, these environment variables will be used in the sample code in the documents in the following chapters.
 
@@ -295,7 +304,7 @@ We recommend that you set the environment variables. For the convenience of demo
 
 The ENV variables are **not necessary** conditions, if it is inconvenient to set the ENV variables or encounter problems that are difficult to solve, you can not set the ENV variables, but directly use the parameters in the code to initialize.
 
-The `Config` in Longbridge OpenAPI SDK can be directly passed in parameters such as `app_key`, `app_secret`, `access_token` to initialize, pay attention to the comments in the example code below `Init config without ENV`.
+The `Config` in Longbridge OpenAPI SDK can be created with `Config.from_apikey_env()` (or `Config.fromApikeyEnv()` in Node/Java) when using environment variables, or `Config.from_apikey(app_key, app_secret, access_token)` when passing parameters directly. See the comments in the example code below for "Init config without ENV".
 
 :::
 
@@ -304,9 +313,9 @@ The `Config` in Longbridge OpenAPI SDK can be directly passed in parameters such
 Open the terminal and enter the following command:
 
 ```bash
-export LONGPORT_APP_KEY="App Key get from user center"
-export LONGPORT_APP_SECRET="App Secret get from user center"
-export LONGPORT_ACCESS_TOKEN="Access Token get from user center"
+export LONGBRIDGE_APP_KEY="App Key from user center"
+export LONGBRIDGE_APP_SECRET="App Secret from user center"
+export LONGBRIDGE_ACCESS_TOKEN="Access Token from user center"
 ```
 
 #### Set Environment for Windows
@@ -318,20 +327,20 @@ Windows is a little more complicated, we provide two methods to set the environm
 
      <img src="https://assets.lbkrs.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
 
-   - Click "New" in the pop-up window, then enter the environment variable name, such as `LONGPORT_APP_KEY`, `Value` respectively fill in the App Key, App Secret, Access Token, Region obtained from the page.
+   - Click "New" in the pop-up window, then enter the environment variable name, such as `LONGBRIDGE_APP_KEY`, `Value` respectively fill in the App Key, App Secret, Access Token obtained from the page.
 
 2. **Through the CMD**: Press the `Win + R` shortcut keys and enter the `cmd` command to start the command line (it is recommended to use [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) for a better development experience).
 
    Enter the following command in the command line to set the environment variable:
 
    ```bash
-   C:\Users\jason> setx LONGPORT_APP_KEY "App Key get from user center"
+   C:\Users\jason> setx LONGBRIDGE_APP_KEY "App Key from user center"
    Success: the specified value has been saved.
 
-   C:\Users\jason> setx LONGPORT_APP_SECRET "App Secret get from user center"
+   C:\Users\jason> setx LONGBRIDGE_APP_SECRET "App Secret from user center"
    Success: the specified value has been saved.
 
-   C:\Users\jason> setx LONGPORT_ACCESS_TOKEN "Access Token get from user center"
+   C:\Users\jason> setx LONGBRIDGE_ACCESS_TOKEN "Access Token from user center"
    Success: the specified value has been saved.
    ```
 
@@ -344,10 +353,10 @@ Windows is a little more complicated, we provide two methods to set the environm
    After logging out or restarting, open the command line again and enter the following command to verify that the environment variables are set correctly:
 
    ```bash
-   C:\Users\jason> set LONGPORT
-   LONGPORT_APP_KEY=xxxxxxx
-   LONGPORT_APP_SECRET=xxxxxx
-   LONGPORT_ACCESS_TOKEN=xxxxxxx
+   C:\Users\jason> set LONGBRIDGE
+   LONGBRIDGE_APP_KEY=xxxxxxx
+   LONGBRIDGE_APP_SECRET=xxxxxx
+   LONGBRIDGE_ACCESS_TOKEN=xxxxxxx
    ```
 
    If it prints the value you just set correctly, then the environment variable is right.
@@ -359,18 +368,19 @@ Windows is a little more complicated, we provide two methods to set the environm
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>
 
-Cteate `account_asset.py` and paste the code below:
+Create `account_asset.py` and paste the code below:
 
 ```python
-from longport.openapi import TradeContext, Config
+from longbridge.openapi import TradeContext, Config, OAuthBuilder
 
-config = Config.from_env()
-
-# Init config without ENV
-# config = Config(app_key = "YOUR_APP_KEY", app_secret = "YOUR_APP_SECRET", access_token = "YOUR_ACCESS_TOKEN")
+oauth = OAuthBuilder("your-client-id").build(
+    lambda url: print(f"Open this URL to authorize: {url}")
+)
+config = Config.from_oauth(oauth)
+# Or use API Key: config = Config.from_apikey_env()
+# Or without ENV: config = Config.from_apikey("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN")
 
 ctx = TradeContext(config)
-
 resp = ctx.account_balance()
 print(resp)
 ```
@@ -384,51 +394,53 @@ python account_asset.py
   </TabItem>
   <TabItem value="javascript" label="JavaScript">
 
-Cteate `account_asset.js` and paste the code below:
+Create `account_asset.js` and paste the code below:
 
 ```javascript
-const { Config, TradeContext } = require('longport')
+const { Config, TradeContext, OAuth } = require('longbridge')
 
-let config = Config.fromEnv()
-
-// Init config without ENV
-// let config = new Config({ appKey: "YOUR_APP_KEY", appSecret: "YOUR_APP_SECRET", accessToken: "YOUR_ACCESS_TOKEN" })
-
-TradeContext.new(config)
-  .then((ctx) => ctx.accountBalance())
-  .then((resp) => {
-    for (let obj of resp) {
-      console.log(obj.toString())
-    }
+async function main() {
+  const oauth = await OAuth.build("your-client-id", (_, url) => {
+    console.log("Open this URL to authorize: " + url)
   })
+  const config = Config.fromOAuth(oauth)
+  // Or use API Key: const config = Config.fromApikeyEnv()
+  const ctx = await TradeContext.new(config)
+  const resp = await ctx.accountBalance()
+  for (const obj of resp) {
+    console.log(obj.toString())
+  }
+}
+main().catch(console.error)
 ```
 
 Run it
 
 ```bash
-nodejs account_asset.js
+node account_asset.js
 ```
 
   </TabItem>
   <TabItem value="rust" label="Rust">
 
-Cteate `main.rs` and paste the code below:
+Create `main.rs` and paste the code below:
 
 ```rust
 use std::sync::Arc;
 
-use longport::{trade::TradeContext, Config};
+use longbridge::{oauth::OAuthBuilder, trade::TradeContext, Config};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let config = Arc::new(Config::from_env()?);
-
-    // Init config without ENV
-    // let config = Arc::new(Config::new("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN")?);
+    let oauth = OAuthBuilder::new("your-client-id")
+        .build(|url| println!("Open this URL to authorize: {url}"))
+        .await?;
+    let config = Arc::new(Config::from_oauth(oauth));
+    // Or use API Key: let config = Arc::new(Config::from_apikey_env()?);
+    // Or without ENV: let config = Arc::new(Config::from_apikey("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN")?);
 
     let (ctx, _) = TradeContext::try_new(config).await?;
-
-    let resp = ctx.account_balance().await?;
+    let resp = ctx.account_balance(None).await?;
     println!("{:?}", resp);
     Ok(())
 }
@@ -443,21 +455,22 @@ cargo run
   </TabItem>
   <TabItem value="java" label="Java">
 
-Cteate `Main.java` and paste the code below:
+Create `Main.java` and paste the code below:
 
 ```java
-import com.longport.*;
-import com.longport.trade.*;
+import com.longbridge.*;
+import com.longbridge.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
-        Config config = Config.fromEnv();
-
-        // Init config without ENV
-        // https://longportapp.github.io/openapi/java/com/longport/ConfigBuilder.html
-        // Config config = ConfigBuilder("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN").build();
-
-        try (TradeContext ctx = TradeContext.create(config).get()) {
+        String clientId = "your-client-id";
+        OAuth oauth = new OAuthBuilder(clientId)
+                .build(url -> System.out.println("Open to authorize: " + url))
+                .get();
+        try (oauth;
+             Config config = Config.fromOAuth(oauth);
+             TradeContext ctx = TradeContext.create(config).get()) {
+            // Or use API Key: Config.fromApikeyEnv(); TradeContext.create(config).get()
             for (AccountBalance obj : ctx.getAccountBalance().get()) {
                 System.out.println(obj);
             }
@@ -482,36 +495,38 @@ Create `main.go` and paste the code below:
 package main
 
 import (
-    "context"
-    "fmt"
-    "log"
+	"context"
+	"fmt"
+	"log"
 
-    "github.com/longportapp/openapi-go/config"
-    "github.com/longportapp/openapi-go/trade"
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+	"github.com/longbridge/openapi-go/trade"
 )
 
 func main() {
-    conf, err := config.New()
-
-    // Init config without ENV
-    // https://github.com/longportapp/openapi-go/blob/v0.9.2/config/config_test.go#L11
-    // conf, err := config.New(config.WithConfigKey("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN"))
-
-    if err != nil {
-        log.Fatal(err)
-    }
-    tradeContext, err := trade.NewFromCfg(conf)
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer tradeContext.Close()
-    ctx := context.Background()
-    // Get AccountBalance infomation
-    ab, err := tradeContext.AccountBalance(ctx)
-    if err != nil {
-        log.Fatal(err)
-    }
-    fmt.Printf("%+v", ab)
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("Open this URL to authorize:", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	// Or use API Key from ENV: config.New()
+	// Or without ENV: config.New(config.WithConfigKey("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN"))
+	if err != nil {
+		log.Fatal(err)
+	}
+	tradeContext, err := trade.NewFromCfg(conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer tradeContext.Close()
+	ctx := context.Background()
+	ab, err := tradeContext.AccountBalance(ctx, &trade.GetAccountBalance{})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%+v\n", ab[0])
 }
 ```
 
@@ -583,19 +598,20 @@ Create `subscribe_quote.py` and paste the code below:
 
 ```python
 from time import sleep
-from longport.openapi import QuoteContext, Config, SubType, PushQuote
+from longbridge.openapi import QuoteContext, Config, OAuthBuilder, SubType, PushQuote
 
 
 def on_quote(symbol: str, quote: PushQuote):
     print(symbol, quote)
 
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(
+    lambda url: print(f"Open this URL to authorize: {url}")
+)
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 ctx.set_on_quote(on_quote)
-
-symbols = ["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"]
-ctx.subscribe(symbols, [SubType.Quote], True)
+ctx.subscribe(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], [SubType.Quote])
 sleep(30)
 ```
 
@@ -611,19 +627,25 @@ python subscribe_quote.py
 Create `subscribe_quote.js` and paste the code below:
 
 ```javascript
-const { Config, QuoteContext, SubType } = require('longport')
+const { Config, QuoteContext, SubType, OAuth } = require('longbridge')
 
-let config = Config.fromEnv()
-QuoteContext.new(config).then((ctx) => {
+async function main() {
+  const oauth = await OAuth.build("your-client-id", (_, url) => {
+    console.log("Open this URL to authorize: " + url)
+  })
+  const config = Config.fromOAuth(oauth)
+  const ctx = await QuoteContext.new(config)
   ctx.setOnQuote((_, event) => console.log(event.toString()))
-  ctx.subscribe(['700.HK', 'AAPL.US', 'TSLA.US', 'NFLX.US'], [SubType.Quote], true)
-})
+  await ctx.subscribe(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], [SubType.Quote])
+  await new Promise(() => {})
+}
+main().catch(console.error)
 ```
 
 Run it
 
 ```bash
-nodejs subscribe_quote.js
+node subscribe_quote.js
 ```
 
   </TabItem>
@@ -634,22 +656,22 @@ Create `main.rs` and paste the code below:
 ```rust
 use std::sync::Arc;
 
-use longport::{
+use longbridge::{
+    oauth::OAuthBuilder,
     quote::{QuoteContext, SubFlags},
     Config,
 };
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let config = Arc::new(Config::from_env()?);
+    let oauth = OAuthBuilder::new("your-client-id")
+        .build(|url| println!("Open this URL to authorize: {url}"))
+        .await?;
+    let config = Arc::new(Config::from_oauth(oauth));
     let (ctx, mut receiver) = QuoteContext::try_new(config).await?;
 
-    ctx.subscribe(
-        ["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"],
-        SubFlags::QUOTE,
-        true,
-    )
-    .await?;
+    ctx.subscribe(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], SubFlags::QUOTE)
+        .await?;
 
     while let Some(event) = receiver.recv().await {
         println!("{:?}", event);
@@ -670,16 +692,22 @@ cargo run
 Create `Main.java` and paste the code below:
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
-        try (Config config = Config.fromEnv(); QuoteContext ctx = QuoteContext.create(config).get()) {
+        String clientId = "your-client-id";
+        OAuth oauth = new OAuthBuilder(clientId)
+                .build(url -> System.out.println("Open to authorize: " + url))
+                .get();
+        try (oauth;
+             Config config = Config.fromOAuth(oauth);
+             QuoteContext ctx = QuoteContext.create(config).get()) {
             ctx.setOnQuote((symbol, quote) -> {
                 System.out.printf("%s\t%s\n", symbol, quote);
             });
-            ctx.subscribe(new String[] { "700.HK", "AAPL.US", "TSLA.US", "NFLX.US" }, SubFlags.Quote, true).get();
+            ctx.subscribe(new String[] { "700.HK", "AAPL.US", "TSLA.US", "NFLX.US" }, SubFlags.Quote).get();
             Thread.sleep(30000);
         }
     }
@@ -711,8 +739,8 @@ import (
     "syscall"
     "time"
 
-    "github.com/longportapp/openapi-go/config"
-    "github.com/longportapp/openapi-go/quote"
+    "github.com/longbridge/openapi-go/config"
+    "github.com/longbridge/openapi-go/quote"
 )
 
 func main() {
@@ -814,9 +842,12 @@ Create `submit_order.py` and paste the code below:
 
 ```python
 from decimal import Decimal
-from longport.openapi import TradeContext, Config, OrderSide, OrderType, TimeInForceType
+from longbridge.openapi import TradeContext, Config, OAuthBuilder, OrderSide, OrderType, TimeInForceType
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(
+    lambda url: print(f"Open this URL to authorize: {url}")
+)
+config = Config.from_oauth(oauth)
 ctx = TradeContext(config)
 
 resp = ctx.submit_order(
@@ -843,27 +874,39 @@ python submit_order.py
 Create `submit_order.js` and paste the code below:
 
 ```javascript
-const { Config, TradeContext, OrderType, OrderSide, Decimal, TimeInForceType } = require('longport')
+const {
+  Config,
+  TradeContext,
+  OrderType,
+  OrderSide,
+  Decimal,
+  TimeInForceType,
+  OAuth,
+} = require('longbridge')
 
-let config = Config.fromEnv()
-TradeContext.new(config)
-  .then((ctx) =>
-    ctx.submitOrder({
-      symbol: '700.HK',
-      orderType: OrderType.LO,
-      side: OrderSide.Buy,
-      timeInForce: TimeInForceType.Day,
-      submittedQuantity: new Decimal(200),
-      submittedPrice: new Decimal(300),
-    })
-  )
-  .then((resp) => console.log(resp.toString()))
+async function main() {
+  const oauth = await OAuth.build("your-client-id", (_, url) => {
+    console.log("Open this URL to authorize: " + url)
+  })
+  const config = Config.fromOAuth(oauth)
+  const ctx = await TradeContext.new(config)
+  const resp = await ctx.submitOrder({
+    symbol: '700.HK',
+    orderType: OrderType.LO,
+    side: OrderSide.Buy,
+    timeInForce: TimeInForceType.Day,
+    submittedPrice: new Decimal(50),
+    submittedQuantity: new Decimal(200),
+  })
+  console.log(resp.toString())
+}
+main().catch(console.error)
 ```
 
 Run it
 
 ```bash
-nodejs submit_order.js
+node submit_order.js
 ```
 
   </TabItem>
@@ -874,22 +917,26 @@ Create `main.rs` and paste the code below:
 ```rust
 use std::sync::Arc;
 
-use longport::{
+use longbridge::{
     decimal,
+    oauth::OAuthBuilder,
     trade::{OrderSide, OrderType, SubmitOrderOptions, TimeInForceType, TradeContext},
     Config,
 };
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let config = Arc::new(Config::from_env()?);
+    let oauth = OAuthBuilder::new("your-client-id")
+        .build(|url| println!("Open this URL to authorize: {url}"))
+        .await?;
+    let config = Arc::new(Config::from_oauth(oauth));
     let (ctx, _) = TradeContext::try_new(config).await?;
 
     let opts = SubmitOrderOptions::new(
         "700.HK",
         OrderType::LO,
         OrderSide::Buy,
-        decimal!(200i32),
+        decimal!(200),
         TimeInForceType::Day,
     )
     .submitted_price(decimal!(50i32));
@@ -911,13 +958,19 @@ cargo run
 Create `Main.java` and paste the code below:
 
 ```java
-import com.longport.*;
-import com.longport.trade.*;
+import com.longbridge.*;
+import com.longbridge.trade.*;
 import java.math.BigDecimal;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        try (Config config = Config.fromEnv(); TradeContext ctx = TradeContext.create(config).get()) {
+        String clientId = "your-client-id";
+        OAuth oauth = new OAuthBuilder(clientId)
+                .build(url -> System.out.println("Open to authorize: " + url))
+                .get();
+        try (oauth;
+             Config config = Config.fromOAuth(oauth);
+             TradeContext ctx = TradeContext.create(config).get()) {
             SubmitOrderOptions opts = new SubmitOrderOptions("700.HK",
                     OrderType.LO,
                     OrderSide.Buy,
@@ -940,7 +993,7 @@ mvn compile exec:exec
 
   <TabItem value="go" label="Go">
 
-创建 `main.go`，贴入一下内容：
+Create `main.go` and paste the code below:
 
 ```go
 package main
@@ -955,8 +1008,8 @@ import (
 
     "github.com/shopspring/decimal"
 
-    "github.com/longportapp/openapi-go/config"
-    "github.com/longportapp/openapi-go/trade"
+    "github.com/longbridge/openapi-go/config"
+    "github.com/longbridge/openapi-go/trade"
 )
 
 func main() {
@@ -1019,7 +1072,7 @@ After running, the output is as follows:
 SubmitOrderResponse { order_id: "718437534753550336" }
 ```
 
-### Get Today Order
+### Get Today Orders
 
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>
@@ -1027,11 +1080,13 @@ SubmitOrderResponse { order_id: "718437534753550336" }
 Create `today_orders.py` and paste the code below:
 
 ```python
-from longport.openapi import TradeContext, Config
+from longbridge.openapi import TradeContext, Config, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(
+    lambda url: print(f"Open this URL to authorize: {url}")
+)
+config = Config.from_oauth(oauth)
 ctx = TradeContext(config)
-
 resp = ctx.today_orders()
 print(resp)
 ```
@@ -1048,22 +1103,26 @@ python today_orders.py
 Create `today_orders.js` and paste the code below:
 
 ```javascript
-const { Config, TradeContext } = require('longport')
+const { Config, TradeContext, OAuth } = require('longbridge')
 
-let config = Config.fromEnv()
-TradeContext.new(config)
-  .then((ctx) => ctx.todayOrders())
-  .then((resp) => {
-    for (let obj of resp) {
-      console.log(obj.toString())
-    }
+async function main() {
+  const oauth = await OAuth.build("your-client-id", (_, url) => {
+    console.log("Open this URL to authorize: " + url)
   })
+  const config = Config.fromOAuth(oauth)
+  const ctx = await TradeContext.new(config)
+  const resp = await ctx.todayOrders()
+  for (const obj of resp) {
+    console.log(obj.toString())
+  }
+}
+main().catch(console.error)
 ```
 
 Run it
 
 ```bash
-nodejs today_orders.js
+node today_orders.js
 ```
 
   </TabItem>
@@ -1074,11 +1133,14 @@ Create `main.rs` and paste the code below:
 ```rust
 use std::sync::Arc;
 
-use longport::{trade::TradeContext, Config};
+use longbridge::{oauth::OAuthBuilder, trade::TradeContext, Config};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let config = Arc::new(Config::from_env()?);
+    let oauth = OAuthBuilder::new("your-client-id")
+        .build(|url| println!("Open this URL to authorize: {url}"))
+        .await?;
+    let config = Arc::new(Config::from_oauth(oauth));
     let (ctx, _) = TradeContext::try_new(config).await?;
 
     let resp = ctx.today_orders(None).await?;
@@ -1101,12 +1163,18 @@ cargo run
 Create `Main.java` and paste the code below:
 
 ```java
-import com.longport.*;
-import com.longport.trade.*;
+import com.longbridge.*;
+import com.longbridge.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
-        try (Config config = Config.fromEnv(); TradeContext ctx = TradeContext.create(config).get()) {
+        String clientId = "your-client-id";
+        OAuth oauth = new OAuthBuilder(clientId)
+                .build(url -> System.out.println("Open to authorize: " + url))
+                .get();
+        try (oauth;
+             Config config = Config.fromOAuth(oauth);
+             TradeContext ctx = TradeContext.create(config).get()) {
             Order[] orders = ctx.getTodayOrders(null).get();
             for (Order order : orders) {
                 System.out.println(order);
@@ -1126,7 +1194,7 @@ mvn compile exec:exec
 
   <TabItem value="go" label="Go">
 
-Create file `main.go` and paste the code below:
+Create `main.go` and paste the code below:
 
 ```go
 package main
@@ -1136,8 +1204,8 @@ import (
     "fmt"
     "log"
 
-    "github.com/longportapp/openapi-go/config"
-    "github.com/longportapp/openapi-go/trade"
+    "github.com/longbridge/openapi-go/config"
+    "github.com/longbridge/openapi-go/trade"
 )
 
 func main() {
@@ -1212,13 +1280,13 @@ The above example has fully demonstrated how to use the SDK to access the OpenAP
 
 We provide the complete code of the above examples in the GitHub repository of Longbridge OpenAPI Python SDK, and we will continue to add or update it later.
 
-https://github.com/longportapp/openapi/tree/master/examples
+https://github.com/longbridge/openapi/tree/master/examples
 
 ## SDK API Document
 
 For detailed SDK API document, please visit:
 
-https://longportapp.github.io/openapi/
+https://longbridge.github.io/openapi/
 
 ## Contact & Feedback
 
@@ -1226,4 +1294,4 @@ If there are any questions or suggestions, please feel free to post an issue on 
 
 Or there have a lot old discussion in the GitHub issue, you can search the issue to find the answer.
 
-- GitHub: https://github.com/longportapp/openapi/issues
+- GitHub: https://github.com/longbridge/openapi/issues

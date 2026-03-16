@@ -16,9 +16,9 @@ https://open.longbridge.com/sdk
 客户端可以通过 WebSocket 或者 TCP 和行情网关建立长连接，客户端订阅股票行情，行情网关会实时推送客户端订阅的实时行情。
 
 :::info
-WebSocket Endpoint: `wss://openapi-quote.longportapp.com`
+WebSocket Endpoint: `wss://openapi-quote.longbridge.com`
 
-TCP Endpoint: `openapi-quote.longportapp.com:2020`
+TCP Endpoint: `openapi-quote.longbridge.com:2020`
 :::
 
 流程如下：

@@ -64,8 +64,8 @@ def main():
     # runtime existence check (non-404 means route exists)
     runtime = []
     for method, path in keys:
-        prod = check_endpoint('https://openapi.longportapp.com', method, path)
-        test = check_endpoint('https://openapi.longportapp.com', method, path)
+        prod = check_endpoint('https://openapi.longbridge.com', method, path)
+        test = check_endpoint('https://openapi.longbridge.com', method, path)
         runtime.append({
             'method': method,
             'path': path,
@@ -91,7 +91,7 @@ def main():
     md.append('')
     md.append('## Runtime route check (non-404 = endpoint exists)')
     md.append('')
-    md.append('| Method | Path | openapi.longportapp.com | openapi.longportapp.com |')
+    md.append('| Method | Path | openapi.longbridge.com | openapi.longbridge.com |')
     md.append('| --- | --- | --- | --- |')
     for r in runtime:
         md.append(f"| `{r['method']}` | `{r['path']}` | `{r['prod_status']}` | `{r['test_status']}` |")
