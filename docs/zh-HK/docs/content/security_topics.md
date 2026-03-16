@@ -25,7 +25,7 @@ headingLevel: 2
 
 | Name   | Type   | Required | Description                                    |
 | ------ | ------ | -------- | ---------------------------------------------- |
-| symbol | string | YES      | 股票代碼，使用 `ticker.region` 格式，例如：`APP.US` |
+| symbol | string | YES      | 股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US` |
 
 ## Response
 
