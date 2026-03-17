@@ -90,6 +90,13 @@ longbridge capital-dist TSLA.US                                       # Capital 
 longbridge market-temp [HK|US|CN|SG]                                  # Market sentiment temperature (0–100)
 ```
 
+### Company filings & announcements
+
+```bash
+longbridge filings AAPL.US [--count 20]          # Company filings and announcements (earnings, disclosures, SEC filings, etc.)
+longbridge filing-detail AAPL.US <id>            # Full Markdown content of a filing; --file-index N for multi-file filings (e.g. 8-K exhibit)
+```
+
 ### Options & warrants
 
 ```bash
@@ -179,6 +186,62 @@ claude> Show me recent 5 days performance of NVDA and TSLA
   └────────┴────────┴────────┴────────┴────────┴──────────┘
 
   5-day return: -0.92% | Range: $389.95 – $416.38
+```
+
+### Earnings analysis example
+
+AI can use `filings` to discover filing IDs, then `filing-detail` to pull the full content and run cross-company earnings comparisons:
+
+```
+claude> Compare TSLA and NVDA Q4 2025 earnings
+
+⏺ Bash(longbridge filings TSLA.US & longbridge filings NVDA.US & wait)
+  ⎿  TSLA.US  610186794100660481  10-K   2025-02-26  Annual Report FY2025
+     NVDA.US  620129220687041793  8-K    2026-02-26  Q4 FY2026 Earnings Release
+     … +18 filings
+
+⏺ Bash(longbridge filing-detail TSLA.US 610186794100660481 --file-index 0 &
+        longbridge filing-detail NVDA.US 620129220687041793 --file-index 1 & wait)
+  ⎿  [TSLA 10-K FY2025 / NVDA 8-K Exhibit 99.1 Q4 FY2026 loaded]
+
+⏺ Source: official filings via Longbridge filings + filing-detail
+  - TSLA: 10-K FY2025 (filing-detail TSLA.US 610186794100660481 --file-index 0)
+  - NVDA: 8-K Exhibit 99.1 Q4 FY2026 (filing-detail NVDA.US 620129220687041793 --file-index 1)
+
+  1. Income statement comparison (full year)
+
+  ┌──────────────────┬─────────────┬─────────────┬─────────────┐
+  │      Metric      │ TSLA FY2025 │ NVDA FY2026 │    Delta    │
+  ├──────────────────┼─────────────┼─────────────┼─────────────┤
+  │ Revenue          │    $94,827M │   $215,938M │  NVDA 2.3x  │
+  │ Revenue YoY      │         -3% │        +65% │           — │
+  │ Gross profit     │    $17,094M │   $153,463M │    NVDA 9x  │
+  │ Gross margin     │       18.0% │       71.1% │   +53 ppts  │
+  │ Operating income │     $4,355M │   $130,387M │   NVDA 30x  │
+  │ Operating margin │        4.6% │       60.4% │   +56 ppts  │
+  │ Net income       │     $3,794M │   $120,067M │   NVDA 32x  │
+  │ Diluted EPS      │       $1.08 │       $4.90 │           — │
+  └──────────────────┴─────────────┴─────────────┴─────────────┘
+
+  2. Cash flow comparison (full year)
+
+  ┌──────────────────┬─────────────┬─────────────┐
+  │      Metric      │ TSLA FY2025 │ NVDA FY2026 │
+  ├──────────────────┼─────────────┼─────────────┤
+  │ Operating CF     │    $14,747M │   $102,718M │
+  │ CapEx            │     $8,527M │     $6,042M │
+  │ Free cash flow   │     $6,220M │    $96,676M │
+  │ FCF margin       │        6.6% │       44.8% │
+  └──────────────────┴─────────────┴─────────────┘
+
+  NVDA's CapEx is lower than TSLA's yet it generates 15x the free cash flow.
+
+  3. Key risks
+
+  TSLA: intensifying EV competition, brand headwinds, Musk attention risk;
+        auto revenue -10% YoY, partially offset by energy (+27%) and services (+19%).
+  NVDA: China export controls; Q1 FY27 guidance of $78B already excludes China
+        data-center revenue — a single quarter roughly equal to TSLA's full year.
 ```
 
 ## Rate limits
