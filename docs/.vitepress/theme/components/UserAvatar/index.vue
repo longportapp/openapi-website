@@ -20,14 +20,31 @@ const isLogin = ref(false)
 onMounted(() => {
   isLogin.value = window.longportInternal.isLogin()
 
+  function getCookie(name: string) {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
+    return match ? match[2] : null
+  }
+  function getToken() {
+    return getCookie('x-bridge-token') || getCookie('x-bridge-token-h5') || sessionStorage.getItem('x-bridge-token')
+  }
+
+  const isProd = !endsWith(location.hostname, '.xyz')
   window.SupportWidgetConfig = {
     isLoggedIn: function () {
       return isLogin.value
     },
     loginUrl: createLoginRedirectPath(),
-    chatUrl:
-      (endsWith(location.hostname, '.xyz') ? 'https://app.longbridge.xyz' : 'https://longbridge.app.wbrks.com') +
-      '/csp/chat?embedded=1',
+    chatUrl: function () {
+      const chatUrl =
+        (isProd ? 'https://app.longbridge.xyz' : 'https://longbridge.app.wbrks.com') +
+        '/csp/chat?embedded=1&show_transfer=0&skip_agreement=1'
+      const state = btoa(chatUrl)
+      const t = getToken()
+      return (
+        (isProd ? `https://longbridge.activity.wbrks.com` : 'https://activity.longbridge.xyz') +
+        `/auth/callback?t=${t}&state=${state}`
+      )
+    },
   }
 
   const script = document.createElement('script')
