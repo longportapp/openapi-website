@@ -8,10 +8,13 @@ sidebar_position: 1
 # Trade Overview
 
 <table>
+    <thead>
     <tr>
         <td>Type</td>
         <td>Introduction</td>
     </tr>
+    </thead>
+    <tbody>
     <tr>
         <td rowspan="7">Trade</td>
         <td><a href="./order/submit">Submit Order</a></td>
@@ -47,4 +50,5 @@ sidebar_position: 1
 <tr>
         <td><a href="./asset/stock">Get Stock Positions </a></td>
     </tr>
+    </tbody>
 </table>

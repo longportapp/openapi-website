@@ -5,63 +5,57 @@ slug: /refresh-token-api
 sidebar_position: 2
 ---
 
-# 刷新 Access Token
+# 刷新 Token（OAuth 2.0）
 
-在老的 `access_token` 过期之前，通过调用此接口获取新的 `access_token`。调用成功后老的 `access_token` 就会作废。
+本页仅说明 OAuth 2.0 的 **refresh token** 刷新步骤。
 
-> 最后更新于 2022-04-21
+- 如果你还没走完完整授权流程，请先看：[如何访问 API](./how-to-access-api)
+- 本页不重复注册 client / 获取 code 的流程，只关注“刷新”这一步
 
-## 请求
+## 推荐刷新方式（OAuth 2.0）
 
-| 基本信息    |                   |
-| ----------- | ----------------- |
-| HTTP URL    | /v1/token/refresh |
-| HTTP Method | GET               |
+使用 OAuth token endpoint：
 
-### 请求头
+- `POST https://openapi.longbridge.com/oauth2/token`
+- 或中国内地：`POST https://openapi.longbridge.com/oauth2/token`
 
-| 名称          | 类型   | 必须 | 描述 |
-| ------------- | ------ | ---- | ---- |
-| Authorization | string | 是   |      |
+### 请求参数（`application/x-www-form-urlencoded`）
 
-### 请求参数
+| 名称          | 必须 | 说明 |
+| ------------- | ---- | ---- |
+| grant_type    | 是   | 固定为 `refresh_token` |
+| client_id     | 是   | OAuth client id |
+| refresh_token | 是   | 上一次签发的 refresh token |
+| client_secret | 否   | 仅机密客户端需要；public client 不传 |
 
-| 名称       | 类型   | 必须 | 描述 | 默认值                                                                      | 示例                     |
-| ---------- | ------ | ---- | ---- | --------------------------------------------------------------------------- | ------------------------ |
-| expired_at | string | 是   | 格式 | 过期时间戳，格式遵循 [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) 规范 | 2023-04-14T12:13:57.859Z |
+### 刷新示例
 
-## 响应
+```bash
+curl -X POST https://openapi.longbridge.com/oauth2/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=refresh_token" \
+  -d "client_id=YOUR_CLIENT_ID" \
+  -d "refresh_token=YOUR_REFRESH_TOKEN"
+# 仅当你的客户端有 secret 时再加：
+# -d "client_secret=YOUR_CLIENT_SECRET"
+```
 
-### 响应体
-
-| 名称              | 类型   | 描述                  |
-| ----------------- | ------ | --------------------- |
-| code              | int    | 错误码，非 0 表示失败 |
-| msg               | string | 错误描述              |
-| data              | object |                       |
-| ∟token            | string | 新的 access_token     |
-| ∟expired_at       | string | 过期的时间戳          |
-| ∟issued_at        | string | 颁发时间              |
-| ∟account_info     | object | 用户信息              |
-| ∟∟member_id       | string | 用户 id               |
-| ∟∟aaid            | string | aaid                  |
-| ∟∟account_channel | string | account_channel       |
-
-### 响应体示例
+### 响应示例
 
 ```json
 {
-  "code": 0,
-  "message": "",
-  "data": {
-    "token": "xxxxxx",
-    "expired_at": "2022-05-14T12:13:57.859Z",
-    "issued_at": "2022-04-14T12:13:57.859Z",
-    "account_info": {
-      "member_id": 123,
-      "aaid": 13,
-      "account_channel": "lb"
-    }
-  }
+  "access_token": "...",
+  "refresh_token": "...",
+  "expires_in": 2592000,
+  "token_type": "Bearer"
 }
 ```
+
+## 如何消除和主流程文档的重复
+
+- [如何访问 API](./how-to-access-api)：负责完整接入流程（注册、授权、换 token、调用 API、刷新）
+- 本页：只保留 refresh token 的参数与示例，作为“步骤 5”的深入说明
+
+## 兼容说明
+
+历史接口 `/v1/token/refresh` 属于旧方案兼容路径，不建议新接入继续采用。新接入请统一使用 OAuth 2.0 token endpoint。

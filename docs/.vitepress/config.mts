@@ -41,11 +41,21 @@ export default defineConfig(
         localePathname = localePathname.replace('index', '')
       }
       const pathname = localePathname.replace('zh-CN/', '').replace('zh-HK/', '')
+
+      // AI/agent-friendly markdown discovery link
+      // e.g. en/docs/getting-started.md -> /docs/getting-started.md
+      //      zh-CN/docs/index.md      -> /zh-CN/docs.md
+      let markdownPath = page.startsWith('en/') ? page.slice(3) : page
+      if (markdownPath.endsWith('/index.md')) {
+        markdownPath = markdownPath.replace('/index.md', '.md')
+      }
+
       return [
         ['link', { rel: 'canonical', href: `https://open.longbridge.com/${localePathname}` }],
         ['link', { rel: 'alternate', hreflang: 'en', href: `https://open.longbridge.com/${pathname}` }],
         ['link', { rel: 'alternate', hreflang: 'zh-Hans', href: `https://open.longbridge.com/zh-CN/${pathname}` }],
         ['link', { rel: 'alternate', hreflang: 'zh-Hant', href: `https://open.longbridge.com/zh-HK/${pathname}` }],
+        ['link', { rel: 'alternate', type: 'text/markdown', href: `https://open.longbridge.com/${markdownPath}` }],
       ]
     },
 
@@ -58,7 +68,7 @@ export default defineConfig(
 
     /* prettier-ignore */
     head: [
-    ['link', { rel: 'shortcut icon', type: 'image/x-icon', href: 'https://pub.lbkrs.com/files/202107/35tULHe3n4Pp4EtA/logo.png' }],
+    ['link', { rel: 'shortcut icon', type: 'image/x-icon', href: 'https://assets.wbrks.com/assets/logo/logo1.png' }],
     ['meta', { name: 'theme-color', content: '#5f67ee' }],
     ['meta', { name: 'twitter:card', content: 'summary' }],
     ['meta', { name: 'twitter:site', content: 'https://open.longbridge.com' }],
@@ -77,11 +87,11 @@ export default defineConfig(
     themeConfig: {
       editLink: {
         pattern: ({ filePath }) => {
-          return `https://github.com/longportapp/openapi-website/edit/main/docs/${filePath}`
+          return `https://github.com/longbridge/openapi-website/edit/main/docs/${filePath}`
         },
       },
       logo: {
-        src: 'https://assets.lbkrs.com/uploads/f029efba-486b-4c32-8b05-1a87b0fb61f8/logo-without-title-lb.svg',
+        src: 'https://assets.wbrks.com/assets/logo/logo-without-title-lb.svg',
         width: 48,
         height: 48,
       },
@@ -100,7 +110,7 @@ export default defineConfig(
         port: 8000,
         proxy: {
           '/api': {
-            target: process.env.VITE_API_BASE_URL || 'https://openapi.longportapp.com',
+            target: process.env.VITE_API_BASE_URL || 'https://openapi.longbridge.com',
             changeOrigin: true,
             rewrite: (path) => path.replace(/^\/api/, ''),
           },

@@ -19,20 +19,20 @@ sidebar_position: 2
 
 ### Properties
 
-| Name        | Type     | Description               |
-| ----------- | -------- | ------------------------- |
+| Name        | Type     | Description             |
+|-------------|----------|-------------------------|
 | symbol      | string   | 標的代碼，例如：`AAPL.US` |
-| sequence    | int64    | 序列號                    |
-| ask         | object[] | 賣盤                      |
-| ∟ position  | int32    | 檔位                      |
-| ∟ price     | string   | 價格                      |
-| ∟ volume    | int64    | 掛單量                    |
-| ∟ order_num | int64    | 訂單數量                  |
-| bid         | object[] | 買盤                      |
-| ∟ position  | int32    | 檔位                      |
-| ∟ price     | string   | 價格                      |
-| ∟ volume    | int64    | 掛單量                    |
-| ∟ order_num | int64    | 訂單數量                  |
+| sequence    | int64    | 序列號                  |
+| ask         | object[] | 賣盤                    |
+| ∟ position  | int32    | 檔位                    |
+| ∟ price     | string   | 價格                    |
+| ∟ volume    | int64    | 掛單量                  |
+| ∟ order_num | int64    | 訂單數量                |
+| bid         | object[] | 買盤                    |
+| ∟ position  | int32    | 檔位                    |
+| ∟ price     | string   | 價格                    |
+| ∟ volume    | int64    | 掛單量                  |
+| ∟ order_num | int64    | 訂單數量                |
 
 ### Protobuf
 
@@ -55,27 +55,18 @@ message Depth {
 ### Example
 
 ```python
-# 實時盤口推送
-# https://open.longbridge.com/docs/quote/push/push-depth
-# 訂閱行情數據請檢查“開發者中心“ - “行情權限”是否正確
-# https://open.longbridge.com/account
-#
-# - 港股 - BMP 基礎報價，無實時行情推送，無法用 WebSocket 訂閱
-# - 美股 - LV1 納斯達克最優報價 (只限 OpenAPI）
-#
-# 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過“Longbridge”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from time import sleep
-from longport.openapi import QuoteContext, Config, SubType, PushQuote
+from longbridge.openapi import QuoteContext, Config, SubType, PushQuote, OAuthBuilder
 
 def on_depth(symbol: str, event: PushDepth):
     print(symbol, event)
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 ctx.set_on_depth(on_depth)
 
-ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Depth], is_first_push=True)
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Depth])
 sleep(30)
 ```
 

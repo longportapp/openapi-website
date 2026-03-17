@@ -20,7 +20,7 @@ Real-time depth data push of the subscribed security.
 ### Properties
 
 | Name        | Type     | Description                           |
-| ----------- | -------- | ------------------------------------- |
+|-------------|----------|---------------------------------------|
 | symbol      | string   | Security code, for example: `AAPL.US` |
 | sequence    | int64    | Sequence number                       |
 | ask         | object[] | Ask depth                             |
@@ -55,27 +55,18 @@ message Depth {
 ### Example
 
 ```python
-# Push Real-time Depth
-# https://open.longbridge.com/docs/quote/push/push-depth
-# To subscribe quotes data, please check whether "Developers" - "Quote authority" is correct.
-# https://open.longbridge.com/account
-#
-# - HK Market - BMP basic quotation is unable to subscribe with WebSocket as it has no real-time quote push.
-# - US Market - LV1 Nasdaq Basic (Only OpenAPI).
-#
-# Before running, please visit the "Developers" to ensure that the account has the correct quotes authority.
-# If you do not have the quotes authority, you can enter "Me - My Quotes - Store" to purchase the authority through the "Longbridge" mobile app.
 from time import sleep
-from longport.openapi import QuoteContext, Config, SubType, PushDepth
+from longbridge.openapi import QuoteContext, Config, SubType, PushDepth, OAuthBuilder
 
 def on_depth(symbol: str, event: PushDepth):
     print(symbol, event)
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 ctx.set_on_depth(on_depth)
 
-ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Depth], is_first_push=True)
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Depth])
 sleep(30)
 ```
 

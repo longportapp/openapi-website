@@ -37,24 +37,150 @@ message UnsubscribeRequest {
 
 ### Request Example
 
+<Tabs groupId="request-example">
+  <TabItem value="python" label="Python" default>
+
 ```python
-# 取消訂閱行情數據
-#
-# 訂閱行情數據請檢查“開發者中心“ - “行情權限”是否正確
-# https://open.longbridge.com/account
-#
-# - 港股 - BMP 基礎報價，無實時行情推送，無法用 WebSocket 訂閱
-# - 美股 - LV1 納斯達克最優報價 (只限 OpenAPI）
-#
-# 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過“Longbridge”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
-from longport.openapi import QuoteContext, Config, SubType
-config = Config.from_env()
+from longbridge.openapi import QuoteContext, Config, SubType, OAuthBuilder
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 
 ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote])
 ctx.unsubscribe(["AAPL.US"], [SubType.Quote])
 ```
+
+  </TabItem>
+  <TabItem value="nodejs" label="Node.js">
+
+```javascript
+const { Config, QuoteContext, OAuth, SubType } = require('longbridge')
+
+async function main() {
+  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const config = Config.fromOAuth(oauth)
+  const ctx = await QuoteContext.new(config)
+  await ctx.unsubscribe(["700.HK", "AAPL.US"], [SubType.Quote])
+  console.log("unsubscribed")
+}
+main().catch(console.error)
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+import com.longbridge.*;
+import com.longbridge.quote.*;
+
+class Main {
+    public static void main(String[] args) throws Exception {
+        try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
+             Config config = Config.fromOAuth(oauth);
+             QuoteContext ctx = QuoteContext.create(config).get()) {
+            ctx.unsubscribe(new String[] { "700.HK", "AAPL.US" }, new SubType[] { SubType.Quote }).get();
+            System.out.println("unsubscribed");
+        }
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+```rust
+use std::sync::Arc;
+use longbridge::{oauth::OAuthBuilder, quote::QuoteContext, Config, quote::SubFlags};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
+    let config = Arc::new(Config::from_oauth(oauth));
+    let (ctx, _) = QuoteContext::try_new(config).await?;
+    ctx.unsubscribe(vec!["700.HK".to_string(), "AAPL.US".to_string()], SubFlags::quote()).await?;
+    println!("unsubscribed");
+    Ok(())
+}
+```
+
+  </TabItem>
+  <TabItem value="cpp" label="C++">
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+#ifdef WIN32
+#include <windows.h>
+#endif
+using namespace longbridge;
+using namespace longbridge::quote;
+
+int main(int argc, char const* argv[]) {
+#ifdef WIN32
+  SetConsoleOutputCP(CP_UTF8);
+#endif
+  const std::string client_id = "your-client-id";
+  std::vector<std::string> symbols = {"700.HK", "AAPL.US"};
+  OAuthBuilder(client_id).build(
+    [](const std::string& url) { std::cout << "Open this URL to authorize: " << url << std::endl; },
+    [](auto res) {
+      if (!res) { std::cout << "authorization failed: " << *res.status().message() << std::endl; return; }
+      Config config = Config::from_oauth(*res);
+      QuoteContext::create(config, [](auto res) {
+        if (!res) { std::cout << "failed to create quote context: " << *res.status().message() << std::endl; return; }
+        res.context().unsubscribe(symbols, SubFlags::QUOTE(), [](auto res) {
+          if (!res) { std::cout << "failed: " << *res.status().message() << std::endl; return; }
+          std::cout << "unsubscribed" << std::endl;
+        });
+      });
+    });
+  std::cin.get();
+  return 0;
+}
+```
+
+  </TabItem>
+  <TabItem value="go" label="Go">
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+	"github.com/longbridge/openapi-go/quote"
+)
+
+func main() {
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("Open this URL to authorize:", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	if err != nil {
+		log.Fatal(err)
+	}
+	qctx, err := quote.NewFromCfg(conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer qctx.Close()
+	err = qctx.Unsubscribe(context.Background(), false, []string{"700.HK", "AAPL.US"}, []quote.SubType{quote.SubTypeQuote})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("unsubscribed")
+}
+```
+
+  </TabItem>
+</Tabs>
+
 
 ## Response
 

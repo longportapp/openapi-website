@@ -1,7 +1,7 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
-pageClass: longport-home-page
+pageClass: longbridge-home-page
 titleTemplate: 灵活支持程序化交易
 hero:
   image:

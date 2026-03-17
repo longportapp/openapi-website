@@ -1,4 +1,4 @@
----
+﻿---
 slug: history_orders
 title: Get History Order
 language_tabs: false
@@ -37,11 +37,15 @@ This API is used to get history order.
 
 ### Request Example
 
+<Tabs groupId="request-example">
+  <TabItem value="python" label="Python" default>
+
 ```python
 from datetime import datetime
-from longport.openapi import TradeContext, Config, OrderStatus, OrderSide, Market
+from longbridge.openapi import TradeContext, Config, OrderStatus, OrderSide, Market, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = TradeContext(config)
 
 resp = ctx.history_orders(
@@ -54,6 +58,140 @@ resp = ctx.history_orders(
 )
 print(resp)
 ```
+
+  </TabItem>
+  <TabItem value="nodejs" label="Node.js">
+
+```javascript
+const { Config, TradeContext, OAuth } = require('longbridge')
+
+async function main() {
+  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const config = Config.fromOAuth(oauth)
+  const ctx = await TradeContext.new(config)
+  const resp = await ctx.historyOrders({})
+  console.log(resp)
+}
+main().catch(console.error)
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+import com.longbridge.*;
+import com.longbridge.trade.*;
+
+class Main {
+    public static void main(String[] args) throws Exception {
+        try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
+             Config config = Config.fromOAuth(oauth);
+             TradeContext ctx = TradeContext.create(config).get()) {
+            Order[] resp = ctx.getHistoryOrders(null).get();
+            for (Order o : resp) System.out.println(o);
+        }
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+```rust
+use std::sync::Arc;
+use longbridge::{oauth::OAuthBuilder, trade::TradeContext, Config};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
+    let config = Arc::new(Config::from_oauth(oauth));
+    let (ctx, _) = TradeContext::try_new(config).await?;
+    let resp = ctx.history_orders(None).await?;
+    println!("{:?}", resp);
+    Ok(())
+}
+```
+
+  </TabItem>
+  <TabItem value="cpp" label="C++">
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+#ifdef WIN32
+#include <windows.h>
+#endif
+using namespace longbridge;
+using namespace longbridge::trade;
+
+int main(int argc, char const* argv[]) {
+#ifdef WIN32
+  SetConsoleOutputCP(CP_UTF8);
+#endif
+  const std::string client_id = "your-client-id";
+  OAuthBuilder(client_id).build(
+    [](const std::string& url) { std::cout << "Open this URL to authorize: " << url << std::endl; },
+    [](auto res) {
+      if (!res) { std::cout << "authorization failed" << std::endl; return; }
+      Config config = Config::from_oauth(*res);
+      TradeContext::create(config, [](auto res) {
+        if (!res) { std::cout << "failed" << std::endl; return; }
+        res.context().history_orders(std::nullopt, [](auto res) {
+          if (!res) { std::cout << "failed" << std::endl; return; }
+          for (const auto& o : *res) std::cout << o.order_id << std::endl;
+        });
+      });
+    });
+  std::cin.get();
+  return 0;
+}
+```
+
+  </TabItem>
+  <TabItem value="go" label="Go">
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+	"github.com/longbridge/openapi-go/trade"
+)
+
+func main() {
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("Open this URL to authorize:", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	if err != nil {
+		log.Fatal(err)
+	}
+	tctx, err := trade.NewFromCfg(conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer tctx.Close()
+	orders, hasMore, err := tctx.HistoryOrders(context.Background(), &trade.GetHistoryOrders{})
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, o := range orders {
+		fmt.Println(o.OrderId)
+	}
+	_ = hasMore
+}
+```
+
+  </TabItem>
+</Tabs>
+
 
 ## Response
 
@@ -95,7 +233,10 @@ print(resp)
         "trigger_price": "",
         "trigger_status": "NOT_USED",
         "updated_at": "1651644898",
-        "remark": ""
+        "remark": "",
+        "limit_depth_level": 0,
+        "monitor_price": "",
+        "trigger_count": 1
       }
     ]
   }
@@ -149,3 +290,6 @@ print(resp)
 | ∟ currency          | string   | true     | Currency                                                                                                                                                                                                                                            |
 | ∟ outside_rth       | string   | true     | Enable or disable outside regular trading hours<br/> Default is `UnknownOutsideRth` when the order is not a US stock<br/><br/> **Enum Value:**<br/> `RTH_ONLY` - Regular trading hour only<br/> `ANY_TIME` - Any time<br/> `OVERNIGHT` - Overnight" |
 | ∟ remark            | string   | true     | Remark                                                                                                                                                                                                                                              |
+| ∟ limit_depth_level | int32    | true     | Specifies the bid/ask depth level   |
+| ∟ monitor_price     | string   | true     | Monitoring price                    |
+| ∟ trigger_count     | int32    | true     | Number of triggers                  |

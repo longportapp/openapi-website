@@ -35,8 +35,8 @@ export function createDynamicRequest(
   const API_BASE_URL = endsWith(location.hostname, '.xyz')
     ? 'https://openapi.longbridge.xyz'
     : endsWith(location.hostname, '.cn')
-      ? 'https://openapi.longportapp.cn'
-      : 'https://openapi.longportapp.com'
+      ? 'https://openapi.longbridge.com'
+      : 'https://openapi.longbridge.com'
 
   const config: ApiConfig = {
     appKey: authConfig.appKey,

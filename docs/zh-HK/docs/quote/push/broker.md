@@ -20,8 +20,8 @@ sidebar_position: 3
 ### Properties
 
 | Name         | Type     | Description                       |
-| ------------ | -------- | --------------------------------- |
-| symbol       | string   | 標的代碼，例如：`AAPL.US`         |
+|--------------|----------|-----------------------------------|
+| symbol       | string   | 標的代碼，例如：`AAPL.US`           |
 | sequence     | int64    | 序列號                            |
 | ask_brokers  | object[] | 賣槃經紀隊列                      |
 | ∟ position   | int32    | 檔位                              |
@@ -49,27 +49,18 @@ message Brokers {
 ### Example
 
 ```python
-# 實時經紀隊列推送
-# https://open.longbridge.com/docs/quote/push/push-brokers
-# 訂閱行情數據請檢查“開發者中心“ - “行情權限”是否正確
-# https://open.longbridge.com/account
-#
-# - 港股 - BMP 基礎報價，無實時行情推送，無法用 WebSocket 訂閱
-# - 美股 - LV1 納斯達克最優報價 (只限 OpenAPI）
-#
-# 運行前請訪問“開發者中心“確保賬戶有正確的行情權限。
-# 如沒有開通行情權限，可以通過“Longbridge”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
 from time import sleep
-from longport.openapi import QuoteContext, Config, SubType, PushBrokers
+from longbridge.openapi import QuoteContext, Config, SubType, PushBrokers, OAuthBuilder
 
 def on_brokers(symbol: str, event: PushBrokers):
     print(symbol, event)
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 ctx.set_on_brokers(on_brokers)
 
-ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Brokers], is_first_push=True)
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Brokers])
 sleep(30)
 ```
 

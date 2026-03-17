@@ -19,21 +19,21 @@ sidebar_position: 1
 
 ### Properties
 
-| Name             | Type   | Description                                                                           |
-| ---------------- | ------ | ------------------------------------------------------------------------------------- |
-| symbol           | string | 标的代码，例如：`AAPL.US`                                                             |
-| sequence         | int64  | 序列号                                                                                |
-| last_done        | string | 最新价                                                                                |
-| open             | string | 开盘价                                                                                |
-| high             | string | 最高价                                                                                |
-| low              | string | 最低价                                                                                |
-| timestamp        | int64  | 最新成交的时间戳                                                                      |
-| volume           | int64  | 成交量                                                                                |
-| turnover         | string | 成交额                                                                                |
+| Name             | Type   | Description                                                                          |
+|------------------|--------|--------------------------------------------------------------------------------------|
+| symbol           | string | 标的代码，例如：`AAPL.US`                                                              |
+| sequence         | int64  | 序列号                                                                               |
+| last_done        | string | 最新价                                                                               |
+| open             | string | 开盘价                                                                               |
+| high             | string | 最高价                                                                               |
+| low              | string | 最低价                                                                               |
+| timestamp        | int64  | 最新成交的时间戳                                                                     |
+| volume           | int64  | 成交量                                                                               |
+| turnover         | string | 成交额                                                                               |
 | trade_status     | int32  | 交易状态，详见 [TradeStatus](../objects#tradestatus---交易状态)                       |
 | trade_session    | int32  | 交易时段，详见 [TradeSession](../objects#tradesession---交易时段)                     |
-| current_volume   | int32  | 两次推送之间增加的成交量                                                              |
-| current_turnover | string | 两次推送之间增加的成交额                                                              |
+| current_volume   | int32  | 两次推送之间增加的成交量                                                             |
+| current_turnover | string | 两次推送之间增加的成交额                                                             |
 | tag              | int32  | 价格数据标签 <br /><br />**可选值：**<br />`0` - 实时行情<br />`1` - 收盘后的修正数据 |
 
 ### Protobuf
@@ -57,27 +57,18 @@ message PushQuote {
 ### Example
 
 ```python
-# 实时价格推送
-# https://open.longbridge.com/docs/quote/push/push-quote
-# 订阅行情数据请检查“开发者中心” - “行情权限”是否正确
-# https://open.longbridge.com/account
-#
-# - 港股 - BMP 基础报价，无实时行情推送，无法用 WebSocket 订阅
-# - 美股 - LV1 纳斯达克最优报价 (只限 OpenAPI）
-#
-# 运行前请访问“开发者中心”确保账户有正确的行情权限。
-# 如没有开通行情权限，可以通过“Longbridge”手机客户端，并进入“我的 - 我的行情 - 行情商城”购买开通行情权限。
 from time import sleep
-from longport.openapi import QuoteContext, Config, SubType, PushQuote
+from longbridge.openapi import QuoteContext, Config, SubType, PushQuote, OAuthBuilder
 
 def on_quote(symbol: str, event: PushQuote):
     print(symbol, event)
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 ctx.set_on_quote(on_quote)
 
-ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote], is_first_push=True)
+ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote])
 sleep(30)
 ```
 

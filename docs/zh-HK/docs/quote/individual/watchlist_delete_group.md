@@ -1,4 +1,4 @@
----
+﻿---
 slug: watchlist_delete_group
 title: 刪除自選股分組
 language_tabs: false
@@ -33,13 +33,148 @@ headingLevel: 2
 
 ### Request Example
 
-```python
-from longport.openapi import QuoteContext, Config
+<Tabs groupId="request-example">
+  <TabItem value="python" label="Python" default>
 
-config = Config.from_env()
+```python
+from longbridge.openapi import QuoteContext, Config, OAuthBuilder
+
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 ctx.delete_watchlist_group(10086)
 ```
+
+  </TabItem>
+  <TabItem value="nodejs" label="Node.js">
+
+```javascript
+const { Config, QuoteContext, OAuth } = require('longbridge')
+
+async function main() {
+  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const config = Config.fromOAuth(oauth)
+  const ctx = await QuoteContext.new(config)
+  await ctx.deleteWatchlistGroup(1)
+  console.log("deleted")
+}
+main().catch(console.error)
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+import com.longbridge.*;
+import com.longbridge.quote.*;
+
+class Main {
+    public static void main(String[] args) throws Exception {
+        try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
+             Config config = Config.fromOAuth(oauth);
+             QuoteContext ctx = QuoteContext.create(config).get()) {
+            ctx.deleteWatchlistGroup(1).get();
+            System.out.println("deleted");
+        }
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+```rust
+use std::sync::Arc;
+use longbridge::{oauth::OAuthBuilder, quote::QuoteContext, Config};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
+    let config = Arc::new(Config::from_oauth(oauth));
+    let (ctx, _) = QuoteContext::try_new(config).await?;
+    ctx.delete_watchlist_group(1).await?;
+    println!("deleted");
+    Ok(())
+}
+```
+
+  </TabItem>
+  <TabItem value="cpp" label="C++">
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+#ifdef WIN32
+#include <windows.h>
+#endif
+using namespace longbridge;
+using namespace longbridge::quote;
+
+int main(int argc, char const* argv[]) {
+#ifdef WIN32
+  SetConsoleOutputCP(CP_UTF8);
+#endif
+  const std::string client_id = "your-client-id";
+  OAuthBuilder(client_id).build(
+    [](const std::string& url) { std::cout << "Open this URL to authorize: " << url << std::endl; },
+    [](auto res) {
+      if (!res) { std::cout << "authorization failed" << std::endl; return; }
+      Config config = Config::from_oauth(*res);
+      QuoteContext::create(config, [](auto res) {
+        if (!res) { std::cout << "failed" << std::endl; return; }
+        res.context().delete_watchlist_group(1, [](auto res) {
+          if (!res) { std::cout << "failed" << std::endl; return; }
+          std::cout << "deleted" << std::endl;
+        });
+      });
+    });
+  std::cin.get();
+  return 0;
+}
+```
+
+  </TabItem>
+  <TabItem value="go" label="Go">
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+	"github.com/longbridge/openapi-go/quote"
+)
+
+func main() {
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("Open this URL to authorize:", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	if err != nil {
+		log.Fatal(err)
+	}
+	qctx, err := quote.NewFromCfg(conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer qctx.Close()
+	err = qctx.DeleteWatchlistGroup(context.Background(), 1, false)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("deleted")
+}
+```
+
+  </TabItem>
+</Tabs>
+
 
 ## Response
 

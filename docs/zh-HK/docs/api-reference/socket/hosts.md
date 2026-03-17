@@ -11,12 +11,12 @@ sidebar_position: 5
 
 | 域名                                     | 協議      |
 | ---------------------------------------- | --------- |
-| tcp://openapi-quote.longportapp.com:2020 | TCP       |
-| wss://openapi-quote.longportapp.com      | WebSocket |
+| tcp://openapi-quote.longbridge.com:2020 | TCP       |
+| wss://openapi-quote.longbridge.com      | WebSocket |
 
 ## 交易
 
 | 域名                                     | 協議      |
 | ---------------------------------------- | --------- |
-| tcp://openapi-trade.longportapp.com:2020 | TCP       |
-| wss://openapi-trade.longportapp.com      | WebSocket |
+| tcp://openapi-trade.longbridge.com:2020 | TCP       |
+| wss://openapi-trade.longbridge.com      | WebSocket |

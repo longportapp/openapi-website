@@ -1,4 +1,4 @@
----
+﻿---
 slug: today_orders
 title: 获取当日订单
 language_tabs: false
@@ -36,10 +36,14 @@ headingLevel: 2
 
 ### Request Example
 
-```python
-from longport.openapi import TradeContext, Config, OrderStatus, OrderSide, Market
+<Tabs groupId="request-example">
+  <TabItem value="python" label="Python" default>
 
-config = Config.from_env()
+```python
+from longbridge.openapi import TradeContext, Config, OrderStatus, OrderSide, Market, OAuthBuilder
+
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
 ctx = TradeContext(config)
 
 resp = ctx.today_orders(
@@ -50,6 +54,139 @@ resp = ctx.today_orders(
 )
 print(resp)
 ```
+
+  </TabItem>
+  <TabItem value="nodejs" label="Node.js">
+
+```javascript
+const { Config, TradeContext, OAuth } = require('longbridge')
+
+async function main() {
+  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const config = Config.fromOAuth(oauth)
+  const ctx = await TradeContext.new(config)
+  const resp = await ctx.todayOrders({})
+  console.log(resp)
+}
+main().catch(console.error)
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+import com.longbridge.*;
+import com.longbridge.trade.*;
+
+class Main {
+    public static void main(String[] args) throws Exception {
+        try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
+             Config config = Config.fromOAuth(oauth);
+             TradeContext ctx = TradeContext.create(config).get()) {
+            Order[] resp = ctx.getTodayOrders(null).get();
+            for (Order o : resp) System.out.println(o);
+        }
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+```rust
+use std::sync::Arc;
+use longbridge::{oauth::OAuthBuilder, trade::TradeContext, Config};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
+    let config = Arc::new(Config::from_oauth(oauth));
+    let (ctx, _) = TradeContext::try_new(config).await?;
+    let resp = ctx.today_orders(None).await?;
+    println!("{:?}", resp);
+    Ok(())
+}
+```
+
+  </TabItem>
+  <TabItem value="cpp" label="C++">
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+#ifdef WIN32
+#include <windows.h>
+#endif
+using namespace longbridge;
+using namespace longbridge::trade;
+
+int main(int argc, char const* argv[]) {
+#ifdef WIN32
+  SetConsoleOutputCP(CP_UTF8);
+#endif
+  const std::string client_id = "your-client-id";
+  OAuthBuilder(client_id).build(
+    [](const std::string& url) { std::cout << "Open this URL to authorize: " << url << std::endl; },
+    [](auto res) {
+      if (!res) { std::cout << "authorization failed" << std::endl; return; }
+      Config config = Config::from_oauth(*res);
+      TradeContext::create(config, [](auto res) {
+        if (!res) { std::cout << "failed" << std::endl; return; }
+        res.context().today_orders(std::nullopt, [](auto res) {
+          if (!res) { std::cout << "failed" << std::endl; return; }
+          for (const auto& o : *res) std::cout << o.order_id << std::endl;
+        });
+      });
+    });
+  std::cin.get();
+  return 0;
+}
+```
+
+  </TabItem>
+  <TabItem value="go" label="Go">
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+	"github.com/longbridge/openapi-go/trade"
+)
+
+func main() {
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("Open this URL to authorize:", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	if err != nil {
+		log.Fatal(err)
+	}
+	tctx, err := trade.NewFromCfg(conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer tctx.Close()
+	orders, err := tctx.TodayOrders(context.Background(), &trade.GetTodayOrders{})
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, o := range orders {
+		fmt.Println(o.OrderId)
+	}
+}
+```
+
+  </TabItem>
+</Tabs>
+
 
 ## Response
 
@@ -91,7 +228,10 @@ print(resp)
         "trigger_price": "",
         "trigger_status": "NOT_USED",
         "updated_at": "1651644898",
-        "remark": ""
+        "remark": "",
+        "limit_depth_level": 0,
+        "monitor_price": "",
+        "trigger_count": 1
       }
     ]
   }
@@ -144,3 +284,6 @@ print(resp)
 | ∟ currency          | string   | true     | 结算货币                                                                                                                                                                            |
 | ∟ outside_rth       | string   | true     | 是否允许盘前盘后<br/> 当订单不是美股时，默认为 UnknownOutsideRth<br/><br/> **可选值：**<br/> `RTH_ONLY` - 不允许盘前盘后<br/> `ANY_TIME` - 允许盘前盘后<br/> `OVERNIGHT` - 夜盘"    |
 | ∟ remark            | string   | true     | 备注                                                                                                                                                                                |
+| ∟ limit_depth_level | int32    | true     | 指定买卖档位         |
+| ∟ trigger_count     | int32    | true     | 触发次数            |
+| ∟ monitor_price     | string   | true     | 监控价格            |

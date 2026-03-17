@@ -11,14 +11,12 @@ Longbridge OpenAPI SDK 基於 Rust 底層提供標準實現，目前我們已經
 
 ## API Host
 
-- HTTP API - `https://openapi.longportapp.com`
-- WebSocket Quote - `wss://openapi-quote.longportapp.com`
-- Webssocket Trade - `wss://openapi-trade.longportapp.com`
+- HTTP API - `https://openapi.longbridge.com`
+- WebSocket Quote - `wss://openapi-quote.longbridge.com`
+- WebSocket Trade - `wss://openapi-trade.longbridge.com`
 
 :::tip
-中國大陸地區訪問，建議採用 `openapi.longportapp.cn`, `openapi-quote.longportapp.cn`, `openapi-trade.longportapp.cn` 以提升訪問速度。
-
-如果您使用我們的 SDK，可以通過設置環境變量 LONGPORT_REGION=cn 來使用位於中國大陸的接入點，目前我們只有 `hk` 和 `cn` 兩個地區可選。
+中國大陸使用 `openapi.longbridge.com`、`openapi-quote.longbridge.com`、`openapi-trade.longbridge.com`。SDK 會自動選擇接入點；若判斷不正確，可設定環境變數 `LONGBRIDGE_REGION`（如 `cn`、`hk`）。
 :::
 
 ## 時間格式
@@ -45,24 +43,28 @@ Longbridge OpenAPI SDK 基於 Rust 底層提供標準實現，目前我們已經
   </TabItem>
   <TabItem value="go" label="Go">
     <li><a href="https://go.dev">Go</a></li>
-    <li><a href="https://pkg.go.dev/github.com/longportapp/openapi-go">Go Docs</a></li>
+    <li><a href="https://pkg.go.dev/github.com/longbridge/openapi-go">Go Docs</a></li>
   </TabItem>
 </Tabs>
 
 ## 安裝 SDK
 
+:::warning 包名變更
+SDK 包名已從 `longport` 更名為 `longbridge`，舊包名 `longport` 已廢棄。如果你之前使用的是 `longport`，請先卸載舊包再安裝新包。
+:::
+
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>
 
 ```bash
-pip3 install longport
+pip3 install longbridge
 ```
 
   </TabItem>
   <TabItem value="javascript" label="JavaScript">
 
 ```bash
-yarn install longport
+yarn add longbridge
 ```
 
   </TabItem>
@@ -70,7 +72,7 @@ yarn install longport
 
 ```toml
 [dependencies]
-longport = "3.0.17"
+longbridge = "4.0.0"
 tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
@@ -80,9 +82,9 @@ tokio = { version = "1", features = "rt-multi-thread" }
 ```xml
 <dependencies>
     <dependency>
-        <groupId>io.github.longportapp</groupId>
+        <groupId>io.github.longbridge</groupId>
         <artifactId>openapi-sdk</artifactId>
-        <version>LATEST</version>
+        <version>4.0.0</version>
     </dependency>
 </dependencies>
 ```
@@ -92,7 +94,7 @@ tokio = { version = "1", features = "rt-multi-thread" }
   <TabItem value="go" label="Go">
 
 ```shell
-go get github.com/longportapp/openapi-go
+go get github.com/longbridge/openapi-go
 ```
 
   </TabItem>
@@ -102,25 +104,169 @@ go get github.com/longportapp/openapi-go
 
 ## 配置
 
-1. 下載 [Longbridge](https://longbridge.com/download) 並完成開戶。
-2. 從 [Longbridge OpenAPI](https://open.longbridge.com) 官網獲取 `App Key`, `App Secret`, `Access Token` 等信息。
-
-   **_獲取 App Key, App Secret, Access Token 等信息_**
-
-   訪問 [Longbridge OpenAPI](https://open.longbridge.com) 網站，登錄後，進入“個人中心”。
-
-   在頁面上會給出“應用憑證”憑證信息，我們拿到以後設置環境變量，便於後面開發使用方便。
-
-### 開通開發中帳戶
+### 開通開發者帳戶
 
 1. 下載 [Longbridge](https://longbridge.com/download)，並完成開戶
-2. 從 [Longbridge OpenAPI](https://open.longbridge.com) 官網取得 `App Key`, `App Secret`, `Access Token` 等資訊。
+2. 從 [Longbridge OpenAPI](https://open.longbridge.com) 官網取得認證資訊
 
-   **_取得 App Key, App Secret, Access Token 等資訊_**
+### 認證方式
 
-   造訪 [Longbridge OpenAPI](https://open.longbridge.com) 網站，登入後，進入「個人中心」。
+Longbridge OpenAPI 支援兩種認證方式：
 
-   在頁面上會給出「應用憑證」憑證訊息，我們拿到以後設定環境變量，方便後面開發使用方便。
+#### 方式一：OAuth 2.0（推薦） ⭐
+
+OAuth 2.0 是現代化的認證方式，使用 Bearer Token，無需 HMAC 簽名，更加安全便捷。
+
+**第一步：註冊 OAuth 客戶端**
+
+造訪 [Longbridge OpenAPI](https://open.longbridge.com) 網站，登入後進入「個人中心」，註冊 OAuth 客戶端獲取 `client_id`：
+
+```bash
+curl -X POST https://openapi.longbridge.com/oauth2/register \
+     -H "Content-Type: application/json" \
+     -d '{
+            "redirect_uris": ["http://localhost:60355/callback"],
+            "token_endpoint_auth_method": "none",
+            "grant_types": ["authorization_code","refresh_token"],
+            "response_types": ["code"],
+            "client_name": "My Longbridge OpenAPI"
+        }'
+```
+
+回應範例：
+```json
+{
+   "client_id": "72d9caaf-0bd4-4000-85a7-8c7978c74544",
+   "client_id_issued_at": 1773311221,
+   "client_secret_expires_at": 1773314821,
+   "client_name": "My Longbridge OpenAPI",
+   "redirect_uris": ["http://localhost:60355/callback"],
+   "grant_types": ["authorization_code", "refresh_token"],
+   "token_endpoint_auth_method": "none",
+   "response_types": ["code"],
+   "registration_access_token": "BVlMLEtNUUu4FoRFNItC2FfeR/rLpqLNyEuCJNNTCWE=",
+   "registration_client_uri": "https://openapi.longbridge.com/oauth2/register/72d9caaf-0bd4-4000-85a7-8c7978c74544"
+}
+```
+
+儲存 `client_id` 供後續使用。
+
+**第二步：授權並取得 Token**
+
+SDK 提供內建 OAuth 支援。使用 `OAuthBuilder` 完成瀏覽器授權流程，授權後使用 `Config.from_oauth()` 建立設定。Token 會自動持久化，過期時自動刷新。
+
+**Token 儲存路徑：** macOS/Linux 為 `~/.longbridge-openapi/tokens/<client_id>`，Windows 為 `%USERPROFILE%\.longbridge-openapi\tokens\<client_id>`。
+
+<Tabs groupId="programming-language">
+  <TabItem value="python" label="Python" default>
+
+```python
+from longbridge.openapi import Config, OAuthBuilder
+
+oauth = OAuthBuilder("your-client-id").build(
+    lambda url: print(f"請造訪此 URL 進行授權：{url}")
+)
+config = Config.from_oauth(oauth)
+```
+
+  </TabItem>
+  <TabItem value="javascript" label="JavaScript">
+
+```javascript
+const { Config, OAuth } = require('longbridge');
+
+const oauth = await OAuth.build("your-client-id", (_, url) => {
+  console.log("請造訪此 URL 進行授權：" + url);
+});
+const config = Config.fromOAuth(oauth);
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+```rust
+use std::sync::Arc;
+use longbridge::{Config, oauth::OAuthBuilder};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let oauth = OAuthBuilder::new("your-client-id")
+        .build(|url| println!("請造訪此 URL 進行授權：{url}"))
+        .await?;
+    let config = Arc::new(Config::from_oauth(oauth));
+    Ok(())
+}
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+import com.longbridge.*;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String clientId = "your-client-id";
+        OAuth oauth = new OAuthBuilder(clientId)
+                .build(url -> System.out.println("請開啟此 URL 授權：" + url))
+                .get();
+        try (oauth) {
+            Config config = Config.fromOAuth(oauth);
+        }
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="go" label="Go">
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+)
+
+func main() {
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("請打開此 URL 授權：", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	if err != nil {
+		log.Fatal(err)
+	}
+	_ = conf // 用於創建 TradeContext 或 QuoteContext
+}
+```
+
+  </TabItem>
+</Tabs>
+
+:::tip OAuth 優勢
+- ✅ 更安全（無需共享金鑰）
+- ✅ 更簡單（無需計算簽名）
+- ✅ 基於 Token 的現代認證方式
+- ✅ 更適合現代應用程式
+:::
+
+:::caution Token 安全
+OAuth Token 應安全儲存在應用程式中（如加密檔案、安全金鑰鏈），**不要儲存在環境變數中**。
+:::
+
+#### 方式二：傳統 API Key（相容）
+
+**_取得 App Key、App Secret、Access Token 等資訊_**
+
+請登入 [https://open.longbridge.com/](https://open.longbridge.com/)，進入**用戶中心**。
+
+頁面會展示**應用憑證**（App Key、App Secret、Access Token）。此處的 Access Token 為**舊版** API Key 憑證，與 OAuth 或 Refresh Token API 回傳的 access token **不是**同一種東西。取得後請設定為環境變數以便開發使用。
 
 ### 環境變量
 
@@ -128,13 +274,31 @@ go get github.com/longportapp/openapi-go
 請注意保護好您的 **Access Token** 訊息，任何人獲得到它，都可以透過 OpenAPI 來交易你的帳戶！
 :::
 
-| 環境變量                    | 說明                                                         | 值範圍          |
-| --------------------------- | ------------------------------------------------------------ | --------------- |
-| `LONGPORT_APP_KEY`          | 從頁面上取得到的 App Key                                     |                 |
-| `LONGPORT_APP_SECRET`       | 從頁面取得到的 App Secret                                    |                 |
-| `LONGPORT_ACCESS_TOKEN`     | 從頁面上取得到的 Access Token                                |                 |
-| `LONGPORT_REGION`           | API 伺服器存取點，請根據您所在地區設置，以獲得更好的連線速度 | `hk`, `cn`      |
-| `LONGPORT_ENABLE_OVERNIGHT` | 是否開啟夜盤行情，設定 `true` 開啟，`false` 關閉             | `true`, `false` |
+**傳統 API Key 憑證（僅需設定以下 3 個）：**
+
+| 環境變量                  | 說明                         |
+| ------------------------- | ---------------------------- |
+| `LONGBRIDGE_APP_KEY`      | 從頁面上取得的 App Key       |
+| `LONGBRIDGE_APP_SECRET`   | 從頁面上取得的 App Secret    |
+| `LONGBRIDGE_ACCESS_TOKEN` | 在 [https://open.longbridge.com/](https://open.longbridge.com/)（用戶中心 → 應用憑證）取得的舊版 Access Token，非 OAuth access token |
+
+**其他環境變量：**
+
+| 名稱                             | 說明                                                                 |
+|----------------------------------|----------------------------------------------------------------------|
+| `LONGBRIDGE_LANGUAGE`            | 語言識別碼，`zh-CN`、`zh-HK` 或 `en`（預設：`en`）                   |
+| `LONGBRIDGE_HTTP_URL`            | HTTP 介面位址（預設：`https://openapi.longbridge.com`）             |
+| `LONGBRIDGE_QUOTE_WS_URL`        | 行情 WebSocket 位址（預設：`wss://openapi-quote.longbridge.com/v2`）  |
+| `LONGBRIDGE_TRADE_WS_URL`        | 交易 WebSocket 位址（預設：`wss://openapi-trade.longbridge.com/v2`）  |
+| `LONGBRIDGE_REGION`              | 覆寫接入點；SDK 會依網路自動選擇，若判斷不正確可設定（如 `cn`、`hk`）|
+| `LONGBRIDGE_ENABLE_OVERNIGHT`    | 是否開啟夜盤行情，`true` 或 `false`（預設：`false`）                 |
+| `LONGBRIDGE_PUSH_CANDLESTICK_MODE` | K 線推送模式，`realtime` 或 `confirmed`（預設：`realtime`）         |
+| `LONGBRIDGE_PRINT_QUOTE_PACKAGES`  | 連線時是否列印行情包，`true` 或 `false`（預設：`true`）             |
+| `LONGBRIDGE_LOG_PATH`            | 日誌檔案路徑（預設：不寫日誌）                                       |
+
+:::info
+SDK 同時支援舊版 `LONGPORT_*` 環境變數名以保持相容。
+:::
 
 建議您設定好這幾個環境變量，我們後面各章節文件中的範例程式碼都會使用這幾個環境變量。
 
@@ -142,7 +306,7 @@ go get github.com/longportapp/openapi-go
 
 環境變量**非必要**條件，如設定不方便或遇到問題難以解決，可不用環境變量，而是直接在程式碼裡用參數來初始化。
 
-Longbridge OpenAPI SDK 的 `Config` 都可以直接傳入 `app_key`, `app_secret`, `access_token` 等參數來初始化，注意看後面的例子註釋內 `Init config without ENV` 的部分。
+Longbridge OpenAPI SDK 的 `Config` 可使用 `Config.from_apikey_env()`（或 Node/Java 的 `Config.fromApikeyEnv()`）從環境變數建立，或使用 `Config.from_apikey(app_key, app_secret, access_token)` 直接傳參。見下方範例程式碼中的「不使用 ENV 初始化」註釋。
 
 :::
 
@@ -151,9 +315,9 @@ Longbridge OpenAPI SDK 的 `Config` 都可以直接傳入 `app_key`, `app_secret
 打開終端，輸入下面的命令即可：
 
 ```bash
-export LONGPORT_APP_KEY="從頁面上取得到的 App Key"
-export LONGPORT_APP_SECRET="從頁面取得到的 App Secret"
-export LONGPORT_ACCESS_TOKEN="從頁面取得到的 Access Token"
+export LONGBRIDGE_APP_KEY="從頁面上取得到的 App Key"
+export LONGBRIDGE_APP_SECRET="從頁面取得到的 App Secret"
+export LONGBRIDGE_ACCESS_TOKEN="從頁面取得到的 Access Token"
 
 ```
 
@@ -161,25 +325,25 @@ export LONGPORT_ACCESS_TOKEN="從頁面取得到的 Access Token"
 
 Windows 要稍微複雜一些，有以下兩種方式可以設定環境變量：
 
-1. **透過圖形介面設定**：在桌面上找到“我的電腦”，右鍵點擊，選擇“屬性”，在彈出的視窗中點擊“高級系統設定”。
+1. **透過圖形介面設定**：在桌面上找到"我的電腦"，右鍵點擊，選擇"屬性"，在彈出的視窗中點擊"高級系統設定"。
    - 在彈出的視窗中點選「環境變量」。
 
      <img src="https://assets.lbkrs.com/uploads/82e31e5e-6062-4726-966b-2a72954f4192/windows-env-set.png" width="500" />
 
-   - 在彈出的視窗中點擊“新建”，然後輸入環境變量名稱，例如 `LONGPORT_APP_KEY`，`Value` 分別填寫從頁面上取得到的 App Key，App Secret，Access Token，Region。
+   - 在彈出的視窗中點擊"新建"，然後輸入環境變量名稱，例如 `LONGBRIDGE_APP_KEY`，`Value` 分別填寫從頁面上取得的 App Key、App Secret、Access Token。
 
 2. **CMD 命令列設定**：按下`Win + R` 快捷鍵，輸入`cmd` 命令啟動命令列（建議使用[Windows Terminal](https://apps.microsoft.com/store/detail /windows-terminal/9N0DX20HK701) 獲得更好的開發體驗）。
 
    在命令列裡面輸入下面的命令設定環境變量：
 
    ```bash
-   C:\Users\jason> setx LONGPORT_APP_KEY "從頁面上取得到的 App Key"
+   C:\Users\jason> setx LONGBRIDGE_APP_KEY "從頁面上取得到的 App Key"
    成功：指定的值已儲存。
 
-   C:\Users\jason> setx LONGPORT_APP_SECRET "從頁面取得到的 App Secret"
+   C:\Users\jason> setx LONGBRIDGE_APP_SECRET "從頁面取得到的 App Secret"
    成功：指定的值已儲存。
 
-   C:\Users\jason> setx LONGPORT_ACCESS_TOKEN "從頁面取得到的 Access Token"
+   C:\Users\jason> setx LONGBRIDGE_ACCESS_TOKEN "從頁面取得到的 Access Token"
    成功：指定的值已儲存。
    ```
 
@@ -192,10 +356,10 @@ Windows 要稍微複雜一些，有以下兩種方式可以設定環境變量：
    登出或重新啟動後，再次開啟命令列，輸入下面的命令以驗證環境變量是否設定正確：
 
    ```bash
-   C:\Users\jason> set LONGPORT
-   LONGPORT_APP_KEY=xxxxxxx
-   LONGPORT_APP_SECRET=xxxxxx
-   LONGPORT_ACCESS_TOKEN=xxxxxxx
+   C:\Users\jason> set LONGBRIDGE
+   LONGBRIDGE_APP_KEY=xxxxxxx
+   LONGBRIDGE_APP_SECRET=xxxxxx
+   LONGBRIDGE_ACCESS_TOKEN=xxxxxxx
    ```
 
    如果你能正確列印你剛才設定的值，那麼環境變量就是對了。
@@ -210,15 +374,13 @@ Windows 要稍微複雜一些，有以下兩種方式可以設定環境變量：
 創建 `account_asset.py` 貼入下面的代碼：
 
 ```python
-from longport.openapi import TradeContext, Config
+from longbridge.openapi import TradeContext, Config, OAuthBuilder
 
-config = Config.from_env()
-
-# Init config without ENV
-# config = Config(app_key = "YOUR_APP_KEY", app_secret = "YOUR_APP_SECRET", access_token = "YOUR_ACCESS_TOKEN")
-
+oauth = OAuthBuilder("your-client-id").build(
+    lambda url: print(f"請造訪此 URL 進行授權：{url}")
+)
+config = Config.from_oauth(oauth)
 ctx = TradeContext(config)
-
 resp = ctx.account_balance()
 print(resp)
 ```
@@ -235,26 +397,26 @@ python account_asset.py
 創建 `account_asset.js` 貼入下面的代碼：
 
 ```javascript
-const { Config, TradeContext } = require('longport')
+const { Config, TradeContext, OAuth } = require('longbridge')
 
-let config = Config.fromEnv()
-
-// Init config without ENV
-// let config = new Config({ appKey: "YOUR_APP_KEY", appSecret: "YOUR_APP_SECRET", accessToken: "YOUR_ACCESS_TOKEN" })
-
-TradeContext.new(config)
-  .then((ctx) => ctx.accountBalance())
-  .then((resp) => {
-    for (let obj of resp) {
-      console.log(obj.toString())
-    }
+async function main() {
+  const oauth = await OAuth.build("your-client-id", (_, url) => {
+    console.log("請造訪此 URL 進行授權：" + url)
   })
+  const config = Config.fromOAuth(oauth)
+  const ctx = await TradeContext.new(config)
+  const resp = await ctx.accountBalance()
+  for (const obj of resp) {
+    console.log(obj.toString())
+  }
+}
+main().catch(console.error)
 ```
 
 運行
 
 ```bash
-nodejs account_asset.js
+node account_asset.js
 ```
 
   </TabItem>
@@ -265,18 +427,16 @@ nodejs account_asset.js
 ```rust
 use std::sync::Arc;
 
-use longport::{trade::TradeContext, Config};
+use longbridge::{oauth::OAuthBuilder, trade::TradeContext, Config};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let config = Arc::new(Config::from_env()?);
-
-    // Init config without ENV
-    // let config = Arc::new(Config::new("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN")?);
-
+    let oauth = OAuthBuilder::new("your-client-id")
+        .build(|url| println!("請造訪此 URL 進行授權：{url}"))
+        .await?;
+    let config = Arc::new(Config::from_oauth(oauth));
     let (ctx, _) = TradeContext::try_new(config).await?;
-
-    let resp = ctx.account_balance().await?;
+    let resp = ctx.account_balance(None).await?;
     println!("{:?}", resp);
     Ok(())
 }
@@ -294,18 +454,18 @@ cargo run
 創建 `Main.java` 貼入下面的代碼：
 
 ```java
-import com.longport.*;
-import com.longport.trade.*;
+import com.longbridge.*;
+import com.longbridge.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
-        Config config = Config.fromEnv();
-
-        // Init config without ENV
-        // https://longportapp.github.io/openapi/java/com/longport/ConfigBuilder.html
-        // Config config = ConfigBuilder("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN").build();
-
-        try (TradeContext ctx = TradeContext.create(config).get()) {
+        String clientId = "your-client-id";
+        OAuth oauth = new OAuthBuilder(clientId)
+                .build(url -> System.out.println("請開啟此 URL 授權：" + url))
+                .get();
+        try (oauth;
+             Config config = Config.fromOAuth(oauth);
+             TradeContext ctx = TradeContext.create(config).get()) {
             for (AccountBalance obj : ctx.getAccountBalance().get()) {
                 System.out.println(obj);
             }
@@ -330,36 +490,38 @@ mvn compile exec:exec
 package main
 
 import (
-    "context"
-    "fmt"
-    "log"
+	"context"
+	"fmt"
+	"log"
 
-    "github.com/longportapp/openapi-go/config"
-    "github.com/longportapp/openapi-go/trade"
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+	"github.com/longbridge/openapi-go/trade"
 )
 
 func main() {
-    conf, err := config.New()
-
-    // Init config without ENV
-    // https://github.com/longportapp/openapi-go/blob/v0.9.2/config/config_test.go#L11
-    // conf, err := config.New(config.WithConfigKey("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN"))
-
-    if err != nil {
-        log.Fatal(err)
-    }
-    tradeContext, err := trade.NewFromCfg(conf)
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer tradeContext.Close()
-    ctx := context.Background()
-    // Get AccountBalance infomation
-    ab, err := tradeContext.AccountBalance(ctx)
-    if err != nil {
-        log.Fatal(err)
-    }
-    fmt.Printf("%+v", ab)
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("請打開此 URL 授權：", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	// 或使用 API Key 環境變數：config.New()
+	// 或不使用 ENV：config.New(config.WithConfigKey("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN"))
+	if err != nil {
+		log.Fatal(err)
+	}
+	tradeContext, err := trade.NewFromCfg(conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer tradeContext.Close()
+	ctx := context.Background()
+	ab, err := tradeContext.AccountBalance(ctx, &trade.GetAccountBalance{})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%+v\n", ab[0])
 }
 ```
 
@@ -407,7 +569,7 @@ go run ./
 
 ### 訂閱實時行情
 
-訂閱行情數據請檢查 [開發者中心](https://open.longbridge.com/account) - “行情權限”是否正確
+訂閱行情數據請檢查 [開發者中心](https://open.longbridge.com/account) - "行情權限"是否正確
 
 - 港股 - BMP 基礎報價，無實時行情推送，無法用 WebSocket 訂閱
 - 美股 - LV1 納斯達克最優報價 (只限 OpenAPI）
@@ -416,7 +578,7 @@ go run ./
 
 :::info
 
-如沒有開通行情權限，可以通過“Longbridge”手機客戶端，並進入“我的 - 我的行情 - 行情商城”購買開通行情權限。
+如沒有開通行情權限，可以通過"Longbridge"手機客戶端，並進入"我的 - 我的行情 - 行情商城"購買開通行情權限。
 
 https://longbridge.com/download
 :::
@@ -432,19 +594,20 @@ https://longbridge.com/download
 
 ```python
 from time import sleep
-from longport.openapi import QuoteContext, Config, SubType, PushQuote
+from longbridge.openapi import QuoteContext, Config, OAuthBuilder, SubType, PushQuote
 
 
 def on_quote(symbol: str, quote: PushQuote):
     print(symbol, quote)
 
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(
+    lambda url: print(f"請造訪此 URL 進行授權：{url}")
+)
+config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 ctx.set_on_quote(on_quote)
-
-symbols = ["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"]
-ctx.subscribe(symbols, [SubType.Quote], True)
+ctx.subscribe(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], [SubType.Quote])
 sleep(30)
 ```
 
@@ -460,19 +623,25 @@ python subscribe_quote.py
 創建 `subscribe_quote.js` 貼入下面的代碼：
 
 ```javascript
-const { Config, QuoteContext, SubType } = require('longport')
+const { Config, QuoteContext, SubType, OAuth } = require('longbridge')
 
-let config = Config.fromEnv()
-QuoteContext.new(config).then((ctx) => {
+async function main() {
+  const oauth = await OAuth.build("your-client-id", (_, url) => {
+    console.log("請造訪此 URL 進行授權：" + url)
+  })
+  const config = Config.fromOAuth(oauth)
+  const ctx = await QuoteContext.new(config)
   ctx.setOnQuote((_, event) => console.log(event.toString()))
-  ctx.subscribe(['700.HK', 'AAPL.US', 'TSLA.US', 'NFLX.US'], [SubType.Quote], true)
-})
+  await ctx.subscribe(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], [SubType.Quote])
+  await new Promise(() => {})
+}
+main().catch(console.error)
 ```
 
 運行
 
 ```bash
-nodejs subscribe_quote.js
+node subscribe_quote.js
 ```
 
   </TabItem>
@@ -483,22 +652,22 @@ nodejs subscribe_quote.js
 ```rust
 use std::sync::Arc;
 
-use longport::{
+use longbridge::{
+    oauth::OAuthBuilder,
     quote::{QuoteContext, SubFlags},
     Config,
 };
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let config = Arc::new(Config::from_env()?);
+    let oauth = OAuthBuilder::new("your-client-id")
+        .build(|url| println!("請造訪此 URL 進行授權：{url}"))
+        .await?;
+    let config = Arc::new(Config::from_oauth(oauth));
     let (ctx, mut receiver) = QuoteContext::try_new(config).await?;
 
-    ctx.subscribe(
-        ["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"],
-        SubFlags::QUOTE,
-        true,
-    )
-    .await?;
+    ctx.subscribe(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], SubFlags::QUOTE)
+        .await?;
 
     while let Some(event) = receiver.recv().await {
         println!("{:?}", event);
@@ -519,16 +688,22 @@ cargo run
 創建 `Main.java` 貼入下面的代碼：
 
 ```java
-import com.longport.*;
-import com.longport.quote.*;
+import com.longbridge.*;
+import com.longbridge.quote.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
-        try (Config config = Config.fromEnv(); QuoteContext ctx = QuoteContext.create(config).get()) {
+        String clientId = "your-client-id";
+        OAuth oauth = new OAuthBuilder(clientId)
+                .build(url -> System.out.println("請開啟此 URL 授權：" + url))
+                .get();
+        try (oauth;
+             Config config = Config.fromOAuth(oauth);
+             QuoteContext ctx = QuoteContext.create(config).get()) {
             ctx.setOnQuote((symbol, quote) -> {
                 System.out.printf("%s\t%s\n", symbol, quote);
             });
-            ctx.subscribe(new String[] { "700.HK", "AAPL.US", "TSLA.US", "NFLX.US" }, SubFlags.Quote, true).get();
+            ctx.subscribe(new String[] { "700.HK", "AAPL.US", "TSLA.US", "NFLX.US" }, SubFlags.Quote).get();
             Thread.sleep(30000);
         }
     }
@@ -595,9 +770,12 @@ NFLX.US PushQuote {
 
 ```python
 from decimal import Decimal
-from longport.openapi import TradeContext, Config, OrderSide, OrderType, TimeInForceType
+from longbridge.openapi import TradeContext, Config, OAuthBuilder, OrderSide, OrderType, TimeInForceType
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(
+    lambda url: print(f"請造訪此 URL 進行授權：{url}")
+)
+config = Config.from_oauth(oauth)
 ctx = TradeContext(config)
 
 resp = ctx.submit_order(
@@ -624,27 +802,39 @@ python submit_order.py
 創建 `submit_order.js` 貼入下面的代碼：
 
 ```javascript
-const { Config, TradeContext, OrderType, OrderSide, Decimal, TimeInForceType } = require('longport')
+const {
+  Config,
+  TradeContext,
+  OrderType,
+  OrderSide,
+  Decimal,
+  TimeInForceType,
+  OAuth,
+} = require('longbridge')
 
-let config = Config.fromEnv()
-TradeContext.new(config)
-  .then((ctx) =>
-    ctx.submitOrder({
-      symbol: '700.HK',
-      orderType: OrderType.LO,
-      side: OrderSide.Buy,
-      timeInForce: TimeInForceType.Day,
-      submittedQuantity: new Decimal(200),
-      submittedPrice: new Decimal(300),
-    })
-  )
-  .then((resp) => console.log(resp.toString()))
+async function main() {
+  const oauth = await OAuth.build("your-client-id", (_, url) => {
+    console.log("請造訪此 URL 進行授權：" + url)
+  })
+  const config = Config.fromOAuth(oauth)
+  const ctx = await TradeContext.new(config)
+  const resp = await ctx.submitOrder({
+    symbol: '700.HK',
+    orderType: OrderType.LO,
+    side: OrderSide.Buy,
+    timeInForce: TimeInForceType.Day,
+    submittedPrice: new Decimal(50),
+    submittedQuantity: new Decimal(200),
+  })
+  console.log(resp.toString())
+}
+main().catch(console.error)
 ```
 
 運行
 
 ```bash
-nodejs submit_order.js
+node submit_order.js
 ```
 
   </TabItem>
@@ -655,15 +845,19 @@ nodejs submit_order.js
 ```rust
 use std::sync::Arc;
 
-use longport::{
+use longbridge::{
     decimal,
+    oauth::OAuthBuilder,
     trade::{OrderSide, OrderType, SubmitOrderOptions, TimeInForceType, TradeContext},
     Config,
 };
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let config = Arc::new(Config::from_env()?);
+    let oauth = OAuthBuilder::new("your-client-id")
+        .build(|url| println!("請造訪此 URL 進行授權：{url}"))
+        .await?;
+    let config = Arc::new(Config::from_oauth(oauth));
     let (ctx, _) = TradeContext::try_new(config).await?;
 
     let opts = SubmitOrderOptions::new(
@@ -692,13 +886,19 @@ cargo run
 創建 `Main.java` 貼入下面的代碼：
 
 ```java
-import com.longport.*;
-import com.longport.trade.*;
+import com.longbridge.*;
+import com.longbridge.trade.*;
 import java.math.BigDecimal;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        try (Config config = Config.fromEnv(); TradeContext ctx = TradeContext.create(config).get()) {
+        String clientId = "your-client-id";
+        OAuth oauth = new OAuthBuilder(clientId)
+                .build(url -> System.out.println("請開啟此 URL 授權：" + url))
+                .get();
+        try (oauth;
+             Config config = Config.fromOAuth(oauth);
+             TradeContext ctx = TradeContext.create(config).get()) {
             SubmitOrderOptions opts = new SubmitOrderOptions("700.HK",
                     OrderType.LO,
                     OrderSide.Buy,
@@ -736,8 +936,8 @@ import (
     "syscall"
     "time"
 
-    "github.com/longportapp/openapi-go/config"
-    "github.com/longportapp/openapi-go/quote"
+    "github.com/longbridge/openapi-go/config"
+    "github.com/longbridge/openapi-go/quote"
 )
 
 func main() {
@@ -802,11 +1002,13 @@ SubmitOrderResponse { order_id: "718437534753550336" }
 創建 `today_orders.py` 貼入下面的代碼：
 
 ```python
-from longport.openapi import TradeContext, Config
+from longbridge.openapi import TradeContext, Config, OAuthBuilder
 
-config = Config.from_env()
+oauth = OAuthBuilder("your-client-id").build(
+    lambda url: print(f"請造訪此 URL 進行授權：{url}")
+)
+config = Config.from_oauth(oauth)
 ctx = TradeContext(config)
-
 resp = ctx.today_orders()
 print(resp)
 ```
@@ -823,22 +1025,26 @@ python today_orders.py
 創建 `today_orders.js` 貼入下面的代碼：
 
 ```javascript
-const { Config, TradeContext } = require('longport')
+const { Config, TradeContext, OAuth } = require('longbridge')
 
-let config = Config.fromEnv()
-TradeContext.new(config)
-  .then((ctx) => ctx.todayOrders())
-  .then((resp) => {
-    for (let obj of resp) {
-      console.log(obj.toString())
-    }
+async function main() {
+  const oauth = await OAuth.build("your-client-id", (_, url) => {
+    console.log("請造訪此 URL 進行授權：" + url)
   })
+  const config = Config.fromOAuth(oauth)
+  const ctx = await TradeContext.new(config)
+  const resp = await ctx.todayOrders()
+  for (const obj of resp) {
+    console.log(obj.toString())
+  }
+}
+main().catch(console.error)
 ```
 
 運行
 
 ```bash
-nodejs today_orders.js
+node today_orders.js
 ```
 
   </TabItem>
@@ -849,11 +1055,14 @@ nodejs today_orders.js
 ```rust
 use std::sync::Arc;
 
-use longport::{trade::TradeContext, Config};
+use longbridge::{oauth::OAuthBuilder, trade::TradeContext, Config};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let config = Arc::new(Config::from_env()?);
+    let oauth = OAuthBuilder::new("your-client-id")
+        .build(|url| println!("請造訪此 URL 進行授權：{url}"))
+        .await?;
+    let config = Arc::new(Config::from_oauth(oauth));
     let (ctx, _) = TradeContext::try_new(config).await?;
 
     let resp = ctx.today_orders(None).await?;
@@ -876,12 +1085,18 @@ cargo run
 創建 `Main.java` 貼入下面的代碼：
 
 ```java
-import com.longport.*;
-import com.longport.trade.*;
+import com.longbridge.*;
+import com.longbridge.trade.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
-        try (Config config = Config.fromEnv(); TradeContext ctx = TradeContext.create(config).get()) {
+        String clientId = "your-client-id";
+        OAuth oauth = new OAuthBuilder(clientId)
+                .build(url -> System.out.println("請開啟此 URL 授權：" + url))
+                .get();
+        try (oauth;
+             Config config = Config.fromOAuth(oauth);
+             TradeContext ctx = TradeContext.create(config).get()) {
             Order[] orders = ctx.getTodayOrders(null).get();
             for (Order order : orders) {
                 System.out.println(order);
@@ -901,7 +1116,7 @@ mvn compile exec:exec
 
   <TabItem value="go" label="Go">
 
-创建 `main.go`，贴入以下内容：
+創建 `main.go` 貼入以下內容：
 
 ```go
 package main
@@ -911,8 +1126,8 @@ import (
     "fmt"
     "log"
 
-    "github.com/longportapp/openapi-go/config"
-    "github.com/longportapp/openapi-go/trade"
+    "github.com/longbridge/openapi-go/config"
+    "github.com/longbridge/openapi-go/trade"
 )
 
 func main() {
@@ -981,13 +1196,13 @@ Order {
 
 我們在 Longbridge OpenAPI Python SDK 的 GitHub 倉庫中提供了上面幾個例子的完整代碼，當然後期我們也會持續往裡面補充或更新。
 
-https://github.com/longportapp/openapi/tree/master/examples
+https://github.com/longbridge/openapi/tree/master/examples
 
 ## SDK API 文檔
 
 SDK 的詳細 API 文檔請訪問：
 
-https://longportapp.github.io/openapi/
+https://longbridge.github.io/openapi/
 
 ## 回饋及溝通
 
@@ -997,4 +1212,4 @@ https://longportapp.github.io/openapi/
 
 在 GitHub 上，也有很多歷史的討論和問題可以參考，你也可以試著搜尋一下，或許也能找到問題的解決方案。
 
-訪問網址：https://github.com/longportapp/openapi/issues
+訪問網址：https://github.com/longbridge/openapi/issues
