@@ -25,7 +25,9 @@ onMounted(() => {
     return match ? match[2] : null
   }
   function getToken() {
-    return getCookie('x-bridge-token') || getCookie('x-bridge-token-h5') || sessionStorage.getItem('x-bridge-token')
+    return (
+      getCookie('x-bridge-token') || getCookie('x-bridge-token-h5') || sessionStorage.getItem('x-bridge-token') || ''
+    )
   }
 
   const isProd = !endsWith(location.hostname, '.xyz')
