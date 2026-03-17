@@ -4,8 +4,10 @@ import UserAvatarIcon from './UserAvatarIcon.vue'
 import Dropdown from './UserAvatarDropdown.vue'
 import LoginButton from './LoginButton.vue'
 import { localePath } from '../../utils/i18n'
+import { createLoginRedirectPath } from '../../utils/navigate'
 import { useI18n } from 'vue-i18n'
 import { useAvatar } from './uesAvatar'
+import endsWith from 'lodash/endsWith'
 
 const { t } = useI18n()
 
@@ -17,6 +19,21 @@ const isLogin = ref(false)
 
 onMounted(() => {
   isLogin.value = window.longportInternal.isLogin()
+
+  window.SupportWidgetConfig = {
+    isLoggedIn: function () {
+      return isLogin.value
+    },
+    loginUrl: createLoginRedirectPath(),
+    chatUrl: endsWith(location.hostname, '.xyz')
+      ? 'https://app.longbridge.xyz'
+      : 'https://longbridge.app.wbrks.com' + '/csp/chat?embedded=1',
+  }
+
+  const script = document.createElement('script')
+  script.src = 'https://assets.lbkrs.com/h5hub/support-widget/support-widget-1.0.4.iife.js'
+  script.async = true
+  document.head.appendChild(script)
 })
 
 const { avatar } = useAvatar()
