@@ -45,7 +45,7 @@ onMounted(() => {
         (isProd ? 'https://longbridge.app.wbrks.com' : 'https://app.longbridge.xyz') +
         '/csp/chat?embedded=1&show_transfer=0&skip_agreement=1'
       const state = btoa(chatUrl)
-      const t = getToken()
+      const t = encodeURIComponent(getToken())
       return (
         (isProd ? `https://longbridge.activity.wbrks.com` : 'https://activity.longbridge.xyz') +
         `/pages/auth/callback?t=${t}&state=${state}`
