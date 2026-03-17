@@ -52,7 +52,7 @@ $ longbridge quote TSLA.US NVDA.US --format json
 **Homebrew**
 
 ```bash
-brew install longbridge/tap/longbridge-terminal
+brew install --cask longbridge/tap/longbridge-terminal
 ```
 
 **Install script**
