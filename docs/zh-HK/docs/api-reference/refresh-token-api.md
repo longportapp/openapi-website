@@ -17,7 +17,7 @@ sidebar_position: 2
 使用 OAuth token endpoint：
 
 - `POST https://openapi.longbridge.com/oauth2/token`
-- 或中國內地：`POST https://openapi.longbridge.com/oauth2/token`
+- 或中國內地：`POST https://openapi.longbridge.cn/oauth2/token`
 
 ### 請求參數（`application/x-www-form-urlencoded`）
 

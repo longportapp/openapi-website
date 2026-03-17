@@ -16,7 +16,7 @@ id: getting-started
 - WebSocket Trade - `wss://openapi-trade.longbridge.com`
 
 :::info
-中国大陆使用 `openapi.longbridge.com`、`openapi-quote.longbridge.com`、`openapi-trade.longbridge.com`。SDK 会自动选择接入点；若判断不正确，可设置环境变量 `LONGBRIDGE_REGION`（如 `cn`、`hk`）。
+中国大陆使用 `openapi.longbridge.cn`、`openapi-quote.longbridge.cn`、`openapi-trade.longbridge.cn`。SDK 会自动选择接入点；若判断不正确，可设置环境变量 `LONGBRIDGE_REGION`（如 `cn`、`hk`）。
 :::
 
 ## 时间格式

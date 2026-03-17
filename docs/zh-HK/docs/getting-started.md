@@ -16,7 +16,7 @@ Longbridge OpenAPI SDK 基於 Rust 底層提供標準實現，目前我們已經
 - WebSocket Trade - `wss://openapi-trade.longbridge.com`
 
 :::tip
-中國大陸使用 `openapi.longbridge.com`、`openapi-quote.longbridge.com`、`openapi-trade.longbridge.com`。SDK 會自動選擇接入點；若判斷不正確，可設定環境變數 `LONGBRIDGE_REGION`（如 `cn`、`hk`）。
+中國大陸使用 `openapi.longbridge.cn`、`openapi-quote.longbridge.cn`、`openapi-trade.longbridge.cn`。SDK 會自動選擇接入點；若判斷不正確，可設定環境變數 `LONGBRIDGE_REGION`（如 `cn`、`hk`）。
 :::
 
 ## 時間格式
