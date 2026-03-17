@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 2.2
 slug: /llm
 sidebar_label: LLM
 sidebarCollapsed: true
