@@ -25,9 +25,9 @@ onMounted(() => {
       return isLogin.value
     },
     loginUrl: createLoginRedirectPath(),
-    chatUrl: endsWith(location.hostname, '.xyz')
-      ? 'https://app.longbridge.xyz'
-      : 'https://longbridge.app.wbrks.com' + '/csp/chat?embedded=1',
+    chatUrl:
+      (endsWith(location.hostname, '.xyz') ? 'https://app.longbridge.xyz' : 'https://longbridge.app.wbrks.com') +
+      '/csp/chat?embedded=1',
   }
 
   const script = document.createElement('script')
