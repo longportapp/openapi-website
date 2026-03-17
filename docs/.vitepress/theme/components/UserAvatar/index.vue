@@ -29,11 +29,15 @@ onMounted(() => {
   }
 
   const isProd = !endsWith(location.hostname, '.xyz')
+  const loginUrl = createLoginRedirectPath({
+    sw_open: '1',
+  })
+  console.log('loginUrl', loginUrl)
   window.SupportWidgetConfig = {
     isLoggedIn: function () {
       return isLogin.value
     },
-    loginUrl: createLoginRedirectPath(),
+    loginUrl,
     chatUrl: function () {
       const chatUrl =
         (isProd ? 'https://longbridge.app.wbrks.com' : 'https://app.longbridge.xyz') +
