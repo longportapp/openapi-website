@@ -1,7 +1,7 @@
 ---
-slug: topics
-title: Topic
-sidebar_position: 2
+slug: filings
+title: Security Filings
+sidebar_position: 20.5
 language_tabs: false
 toc_footers: []
 includes: []
@@ -10,20 +10,20 @@ highlight_theme: ''
 headingLevel: 2
 ---
 
-Get the topic/discussion list for a specified security.
+Get the filings list for a specified security.
 
-<SDKLinks module="content" klass="ContentContext" method="topics" />
+<SDKLinks module="quote" klass="QuoteContext" method="filings" />
 
 ## Request
 
 <table className="http-basic">
 <tbody>
 <tr><td className="http-basic-key">HTTP Method</td><td>GET</td></tr>
-<tr><td className="http-basic-key">HTTP URL</td><td>/v1/content/{symbol}/topics</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>/v1/quote/filings</td></tr>
 </tbody>
 </table>
 
-### Path Parameters
+### Query Parameters
 
 | Name   | Type   | Required | Description                                         |
 | ------ | ------ | -------- | --------------------------------------------------- |
@@ -35,13 +35,13 @@ Get the topic/discussion list for a specified security.
   <TabItem value="nodejs" label="Node.js" default>
 
 ```javascript
-const { Config, ContentContext, OAuth } = require('longbridge')
+const { Config, QuoteContext, OAuth } = require('longbridge')
 
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
-  const ctx = await ContentContext.new(config)
-  const resp = await ctx.topics("AAPL.US")
+  const ctx = await QuoteContext.new(config)
+  const resp = await ctx.filings("AAPL.US")
   console.log(resp)
 }
 main().catch(console.error)
@@ -52,15 +52,15 @@ main().catch(console.error)
 
 ```java
 import com.longbridge.*;
-import com.longbridge.content.*;
+import com.longbridge.quote.*;
 
 class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
-             ContentContext ctx = ContentContext.create(config).get()) {
-            TopicItem[] resp = ctx.getTopics("AAPL.US").get();
-            for (TopicItem item : resp) System.out.println(item);
+             QuoteContext ctx = QuoteContext.create(config).get()) {
+            FilingItem[] resp = ctx.getFilings("AAPL.US").get();
+            for (FilingItem item : resp) System.out.println(item);
         }
     }
 }
@@ -71,14 +71,14 @@ class Main {
 
 ```rust
 use std::sync::Arc;
-use longbridge::{oauth::OAuthBuilder, content::ContentContext, Config};
+use longbridge::{oauth::OAuthBuilder, quote::QuoteContext, Config};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let ctx = ContentContext::try_new(config)?;
-    let resp = ctx.topics("AAPL.US").await?;
+    let (ctx, _) = QuoteContext::try_new(config).await?;
+    let resp = ctx.filings("AAPL.US").await?;
     println!("{:?}", resp);
     Ok(())
 }
@@ -94,7 +94,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 #include <windows.h>
 #endif
 using namespace longbridge;
-using namespace longbridge::content;
+using namespace longbridge::quote;
 
 int main(int argc, char const* argv[]) {
 #ifdef WIN32
@@ -106,11 +106,11 @@ int main(int argc, char const* argv[]) {
     [](auto res) {
       if (!res) { std::cout << "authorization failed: " << *res.status().message() << std::endl; return; }
       Config config = Config::from_oauth(*res);
-      ContentContext::create(config, [](auto res) {
-        if (!res) { std::cout << "failed to create content context: " << *res.status().message() << std::endl; return; }
-        res.context().topics("AAPL.US", [](auto res) {
+      QuoteContext::create(config, [](auto res) {
+        if (!res) { std::cout << "failed to create quote context: " << *res.status().message() << std::endl; return; }
+        res.context().filings("AAPL.US", [](auto res) {
           if (!res) { std::cout << "failed: " << *res.status().message() << std::endl; return; }
-          std::cout << "topics: " << res->size() << std::endl;
+          std::cout << "filings: " << res->size() << std::endl;
         });
       });
     });
@@ -132,7 +132,7 @@ import (
 
 	"github.com/longbridge/openapi-go/config"
 	"github.com/longbridge/openapi-go/oauth"
-	"github.com/longbridge/openapi-go/content"
+	"github.com/longbridge/openapi-go/quote"
 )
 
 func main() {
@@ -145,15 +145,16 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	ctx, err := content.NewFromCfg(conf)
+	qctx, err := quote.NewFromCfg(conf)
 	if err != nil {
 		log.Fatal(err)
 	}
-	items, err := ctx.Topics(context.Background(), "AAPL.US")
+	defer qctx.Close()
+	items, err := qctx.Filings(context.Background(), "AAPL.US")
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("topics:", len(items))
+	fmt.Println("filings:", len(items))
 }
 ```
 
@@ -176,13 +177,11 @@ func main() {
     "items": [
       {
         "id": "277062200",
-        "title": "AppLovin Post-Earnings Discussion",
-        "description": "Community takeaways and views on Q1 results.",
-        "url": "https://longbridge.com/topics/277062200",
-        "published_at": "1750746101",
-        "comments_count": 10,
-        "likes_count": 25,
-        "shares_count": 3
+        "title": "2024 Q1 Earnings Report",
+        "description": "Q1 revenue and profit summary",
+        "file_name": "10-Q_2024_Q1.pdf",
+        "file_urls": ["https://example.com/file1.pdf", "https://example.com/file2.pdf"],
+        "publish_at": "1750746101"
       }
     ]
   }
@@ -191,25 +190,23 @@ func main() {
 
 ### Response Status
 
-| Status | Description    | Schema                                        |
-| ------ | -------------- | --------------------------------------------- |
-| 200    | Success        | [topics_response](#schematopics_response)     |
-| 500    | Internal error | None                                          |
+| Status | Description    | Schema                                      |
+| ------ | -------------- | ------------------------------------------- |
+| 200    | Success        | [filings_response](#schemafilings_response) |
+| 500    | Internal error | None                                        |
 
 ## Schemas
 
-### topics_response
+### filings_response
 
-<a id="schematopics_response"></a>
+<a id="schemafilings_response"></a>
 
-| Name             | Type      | Required | Description                              |
-| ---------------- | --------- | -------- | ---------------------------------------- |
-| items            | object[]  | true     | Topic list                               |
-| ∟ id             | string    | true     | Topic ID                                 |
-| ∟ title          | string    | true     | Title                                    |
-| ∟ description    | string    | true     | Summary/description                      |
-| ∟ url            | string    | true     | Detail page URL                          |
-| ∟ published_at   | string    | true     | Published time, Unix timestamp (seconds) |
-| ∟ comments_count | int32     | true     | Comment count                            |
-| ∟ likes_count    | int32     | true     | Like count                               |
-| ∟ shares_count   | int32     | true     | Share count                              |
+| Name             | Type      | Required | Description                            |
+| ---------------- | --------- | -------- | -------------------------------------- |
+| items            | object[]  | true     | Filings list                           |
+| ∟ id             | string    | true     | Filing ID                              |
+| ∟ title          | string    | true     | Title                                  |
+| ∟ description    | string    | true     | Summary                                |
+| ∟ file_name      | string    | true     | File name                              |
+| ∟ file_urls      | string[]  | true     | List of file URLs                      |
+| ∟ publish_at     | string    | true     | Publish time, Unix timestamp (seconds) |

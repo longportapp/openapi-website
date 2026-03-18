@@ -12,6 +12,8 @@ headingLevel: 2
 
 獲取指定股票的討論列表。
 
+<SDKLinks module="content" klass="ContentContext" method="topics" />
+
 ## Request
 
 <table className="http-basic">
@@ -26,6 +28,137 @@ headingLevel: 2
 | Name   | Type   | Required | Description                                    |
 | ------ | ------ | -------- | ---------------------------------------------- |
 | symbol | string | YES      | 股票代碼，使用 `ticker.region` 格式，例如：`AAPL.US` |
+
+### Request Example
+
+<Tabs groupId="request-example">
+  <TabItem value="nodejs" label="Node.js" default>
+
+```javascript
+const { Config, ContentContext, OAuth } = require('longbridge')
+
+async function main() {
+  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const config = Config.fromOAuth(oauth)
+  const ctx = await ContentContext.new(config)
+  const resp = await ctx.topics("AAPL.US")
+  console.log(resp)
+}
+main().catch(console.error)
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+import com.longbridge.*;
+import com.longbridge.content.*;
+
+class Main {
+    public static void main(String[] args) throws Exception {
+        try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
+             Config config = Config.fromOAuth(oauth);
+             ContentContext ctx = ContentContext.create(config).get()) {
+            TopicItem[] resp = ctx.getTopics("AAPL.US").get();
+            for (TopicItem item : resp) System.out.println(item);
+        }
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+```rust
+use std::sync::Arc;
+use longbridge::{oauth::OAuthBuilder, content::ContentContext, Config};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
+    let config = Arc::new(Config::from_oauth(oauth));
+    let ctx = ContentContext::try_new(config)?;
+    let resp = ctx.topics("AAPL.US").await?;
+    println!("{:?}", resp);
+    Ok(())
+}
+```
+
+  </TabItem>
+  <TabItem value="cpp" label="C++">
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+#ifdef WIN32
+#include <windows.h>
+#endif
+using namespace longbridge;
+using namespace longbridge::content;
+
+int main(int argc, char const* argv[]) {
+#ifdef WIN32
+  SetConsoleOutputCP(CP_UTF8);
+#endif
+  const std::string client_id = "your-client-id";
+  OAuthBuilder(client_id).build(
+    [](const std::string& url) { std::cout << "Open this URL to authorize: " << url << std::endl; },
+    [](auto res) {
+      if (!res) { std::cout << "authorization failed: " << *res.status().message() << std::endl; return; }
+      Config config = Config::from_oauth(*res);
+      ContentContext::create(config, [](auto res) {
+        if (!res) { std::cout << "failed to create content context: " << *res.status().message() << std::endl; return; }
+        res.context().topics("AAPL.US", [](auto res) {
+          if (!res) { std::cout << "failed: " << *res.status().message() << std::endl; return; }
+          std::cout << "topics: " << res->size() << std::endl;
+        });
+      });
+    });
+  std::cin.get();
+  return 0;
+}
+```
+
+  </TabItem>
+  <TabItem value="go" label="Go">
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+	"github.com/longbridge/openapi-go/content"
+)
+
+func main() {
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("Open this URL to authorize:", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	if err != nil {
+		log.Fatal(err)
+	}
+	ctx, err := content.NewFromCfg(conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	items, err := ctx.Topics(context.Background(), "AAPL.US")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("topics:", len(items))
+}
+```
+
+  </TabItem>
+</Tabs>
 
 ## Response
 
@@ -44,7 +177,7 @@ headingLevel: 2
       {
         "id": "277062200",
         "title": "AppLovin 財報後討論",
-        "description": "社區對 Q1 業績的解讀與觀點匯總。",
+        "description": "社區對 Q1 業績的解讀與觀點彙總。",
         "url": "https://longbridge.com/topics/277062200",
         "published_at": "1750746101",
         "comments_count": 10,
@@ -60,7 +193,7 @@ headingLevel: 2
 
 | Status | Description | Schema                                        |
 | ------ | ----------- | --------------------------------------------- |
-| 200    | 返回成功    | [topics_response](#schematopics_response)    |
+| 200    | 返回成功    | [topics_response](#schematopics_response)     |
 | 500    | 內部錯誤    | None                                          |
 
 ## Schemas
@@ -69,14 +202,14 @@ headingLevel: 2
 
 <a id="schematopics_response"></a>
 
-| Name  | Type      | Required | Description  |
-| ----- | --------- | -------- | ------------ |
-| items | object[]  | true     | 討論列表     |
-| ∟ id | string    | true     | 討論 ID      |
-| ∟ title | string  | true     | 標題         |
-| ∟ description | string | true  | 摘要/描述    |
-| ∟ url | string    | true     | 討論詳情鏈接 |
-| ∟ published_at | string | true | 發佈時間，Unix 時間戳（秒） |
-| ∟ comments_count | int32 | true | 評論數       |
-| ∟ likes_count | int32 | true | 點讚數       |
-| ∟ shares_count | int32 | true | 分享數       |
+| Name               | Type      | Required | Description                   |
+| ------------------ | --------- | -------- | ----------------------------- |
+| items              | object[]  | true     | 討論列表                      |
+| ∟ id               | string    | true     | 討論 ID                       |
+| ∟ title            | string    | true     | 標題                          |
+| ∟ description      | string    | true     | 摘要/描述                     |
+| ∟ url              | string    | true     | 討論詳情鏈接                  |
+| ∟ published_at     | string    | true     | 發佈時間，Unix 時間戳（秒）   |
+| ∟ comments_count   | int32     | true     | 評論數                        |
+| ∟ likes_count      | int32     | true     | 點贊數                        |
+| ∟ shares_count     | int32     | true     | 分享數                        |
