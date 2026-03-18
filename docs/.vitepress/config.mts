@@ -87,7 +87,7 @@ export default defineConfig(
     themeConfig: {
       editLink: {
         pattern: ({ filePath }) => {
-          return `https://github.com/longbridge/openapi-website/edit/main/docs/${filePath}`
+          return `https://github.com/longbridge/developers-website/edit/main/docs/${filePath}`
         },
       },
       logo: {
