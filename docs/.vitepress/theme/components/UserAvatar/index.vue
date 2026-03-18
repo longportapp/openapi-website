@@ -33,7 +33,7 @@ onMounted(() => {
   }
 
   const script = document.createElement('script')
-  script.src = 'https://assets.lbkrs.com/h5hub/support-widget/support-widget-1.0.5.iife.js'
+  script.src = 'https://assets.lbkrs.com/h5hub/support-widget/support-widget-1.0.6.iife.js'
   script.async = true
   document.head.appendChild(script)
 })
