@@ -1,6 +1,6 @@
 ---
 slug: news
-title: News
+title: Security News
 sidebar_position: 1
 language_tabs: false
 toc_footers: []
@@ -32,7 +32,20 @@ Get the news list for a specified security.
 ### Request Example
 
 <Tabs groupId="request-example">
-  <TabItem value="nodejs" label="Node.js" default>
+  <TabItem value="python" label="Python" default>
+
+```python
+from longbridge.openapi import ContentContext, Config, OAuthBuilder
+
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
+ctx = ContentContext(config)
+resp = ctx.news("AAPL.US")
+print(resp)
+```
+
+  </TabItem>
+  <TabItem value="nodejs" label="Node.js">
 
 ```javascript
 const { Config, ContentContext, OAuth } = require('longbridge')
@@ -175,14 +188,14 @@ func main() {
   "data": {
     "items": [
       {
-        "id": "277062200",
-        "title": "P/E Ratio Insights for AppLovin",
-        "description": "AppLovin Inc. (NASDAQ:APP) shares are currently priced at $418.56, reflecting a 1.42% increase, despite a 24.88% decline over the past month and a 31.28% rise over the past year.",
-        "url": "https://longbridge.com/news/277062200",
-        "published_at": "1750746101",
-        "comments_count": 10,
-        "likes_count": 25,
-        "shares_count": 3
+        "id": "279528757",
+        "title": "Beats cross-industry collaboration breaks the circle with Nike! Apple aims to ignite a new wave of wearable consumer trends, while Nike bets on the narrative of \"sports technology.\"",
+        "description": "Apple's Beats has collaborated with Nike to launch a limited edition Powerbeats Pro 2 headphones, featuring Nike's Swoosh logo. The headphones will be available online and at select Apple Stores on March 20, priced at $250. This marks Beats' first collaboration with an external sports brand, signifying further synergy between the two companies in branding and product ecosystems. The headphones feature real-time heart rate tracking and a battery life of up to 45 hours",
+        "url": "https://longbridge.com/news/279528757",
+        "published_at": "1773805586",
+        "comments_count": 0,
+        "likes_count": 0,
+        "shares_count": 0
       }
     ]
   }

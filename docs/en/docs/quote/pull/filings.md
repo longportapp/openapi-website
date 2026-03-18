@@ -32,7 +32,20 @@ Get the filings list for a specified security.
 ### Request Example
 
 <Tabs groupId="request-example">
-  <TabItem value="nodejs" label="Node.js" default>
+  <TabItem value="python" label="Python" default>
+
+```python
+from longbridge.openapi import QuoteContext, Config, OAuthBuilder
+
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
+ctx = QuoteContext(config)
+resp = ctx.filings("AAPL.US")
+print(resp)
+```
+
+  </TabItem>
+  <TabItem value="nodejs" label="Node.js">
 
 ```javascript
 const { Config, QuoteContext, OAuth } = require('longbridge')
@@ -176,12 +189,14 @@ func main() {
   "data": {
     "items": [
       {
-        "id": "277062200",
-        "title": "2024 Q1 Earnings Report",
-        "description": "Q1 revenue and profit summary",
-        "file_name": "10-Q_2024_Q1.pdf",
-        "file_urls": ["https://example.com/file1.pdf", "https://example.com/file2.pdf"],
-        "publish_at": "1750746101"
+        "id": "627391979864985729",
+        "title": "Apple | (4) Statement of changes in beneficial ownership",
+        "description": "",
+        "file_name": "4 - Apple Inc. (0000320193) (Issuer)",
+        "file_urls": [
+          "https://www.sec.gov/Archives/edgar/data/320193/000178052526000005/xslF345X05/wk-form4_1773786674.xml"
+        ],
+        "publish_at": "1773786677"
       }
     ]
   }

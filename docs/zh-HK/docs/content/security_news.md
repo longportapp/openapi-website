@@ -1,6 +1,6 @@
 ---
 slug: news
-title: 股票資訊
+title: 獲取標的資訊
 sidebar_position: 1
 language_tabs: false
 toc_footers: []
@@ -32,7 +32,20 @@ headingLevel: 2
 ### Request Example
 
 <Tabs groupId="request-example">
-  <TabItem value="nodejs" label="Node.js" default>
+  <TabItem value="python" label="Python" default>
+
+```python
+from longbridge.openapi import ContentContext, Config, OAuthBuilder
+
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
+ctx = ContentContext(config)
+resp = ctx.news("AAPL.US")
+print(resp)
+```
+
+  </TabItem>
+  <TabItem value="nodejs" label="Node.js">
 
 ```javascript
 const { Config, ContentContext, OAuth } = require('longbridge')
@@ -175,14 +188,14 @@ func main() {
   "data": {
     "items": [
       {
-        "id": "277062200",
-        "title": "關於 AppLovin 的市盈率分析",
-        "description": "AppLovin Inc.（納斯達克代碼：APP）當前股價為 418.56 美元，反映出 1.42% 的上漲，儘管過去一個月下跌了 24.88%，但過去一年上漲了 31.28%。",
-        "url": "https://longbridge.com/news/277062200",
-        "published_at": "1750746101",
-        "comments_count": 10,
-        "likes_count": 25,
-        "shares_count": 3
+        "id": "279528757",
+        "title": "Beats 跨界联动耐克破圈！ 苹果欲再掀可穿戴消费热潮 耐克押注 "运动科技" 叙事",
+        "description": "苹果公司旗下的 Beats 与耐克合作推出限量版 Powerbeats Pro 2 耳机，耳机上印有耐克的 Swoosh 标志。该耳机将于 3 月 20 日在线及部分 Apple Store 发售，售价为 250 美元。这是 Beats 首次与外部运动品牌合作，标志着两家公司在品牌和产品生态上的进一步协同。耳机具备实时心率追踪功能，续航时间最长可达 45 小时。",
+        "url": "https://longbridge.com/news/279528757",
+        "published_at": "1773805586",
+        "comments_count": 0,
+        "likes_count": 0,
+        "shares_count": 0
       }
     ]
   }

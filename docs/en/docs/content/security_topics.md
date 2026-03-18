@@ -1,6 +1,6 @@
 ---
 slug: topics
-title: Topic
+title: Security Topics
 sidebar_position: 2
 language_tabs: false
 toc_footers: []
@@ -32,7 +32,20 @@ Get the topic/discussion list for a specified security.
 ### Request Example
 
 <Tabs groupId="request-example">
-  <TabItem value="nodejs" label="Node.js" default>
+  <TabItem value="python" label="Python" default>
+
+```python
+from longbridge.openapi import ContentContext, Config, OAuthBuilder
+
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
+ctx = ContentContext(config)
+resp = ctx.topics("AAPL.US")
+print(resp)
+```
+
+  </TabItem>
+  <TabItem value="nodejs" label="Node.js">
 
 ```javascript
 const { Config, ContentContext, OAuth } = require('longbridge')
@@ -175,14 +188,14 @@ func main() {
   "data": {
     "items": [
       {
-        "id": "277062200",
-        "title": "AppLovin Post-Earnings Discussion",
-        "description": "Community takeaways and views on Q1 results.",
-        "url": "https://longbridge.com/topics/277062200",
-        "published_at": "1750746101",
-        "comments_count": 10,
-        "likes_count": 25,
-        "shares_count": 3
+        "id": "39304657",
+        "title": "NVDA GTC in focus; Alibaba 'Token strategy' ramps up | Daily News Recap",
+        "description": "0317 | Dolphin Research Focus: 🐬 Stock #1, $NVIDIA(NVDA.US) — NVIDIA's GTC 2026 officially kicked off, and founder &amp; CEO Jensen Huang delivered the keynote.He announced a Vera Rubin Space Module under the next-gen Vera Rubin architecture, designed for orbital data centers, delivering 25x performance vs. H100.He also unveiled a partnership with Groq to co-develop new LPU chips...",
+        "url": "https://longbridge.com/topics/39304657",
+        "published_at": "1773736144",
+        "comments_count": 1,
+        "likes_count": 7,
+        "shares_count": 4
       }
     ]
   }

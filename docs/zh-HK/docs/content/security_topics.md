@@ -1,6 +1,6 @@
 ---
 slug: topics
-title: 股票討論
+title: 獲取標的討論
 sidebar_position: 2
 language_tabs: false
 toc_footers: []
@@ -32,7 +32,20 @@ headingLevel: 2
 ### Request Example
 
 <Tabs groupId="request-example">
-  <TabItem value="nodejs" label="Node.js" default>
+  <TabItem value="python" label="Python" default>
+
+```python
+from longbridge.openapi import ContentContext, Config, OAuthBuilder
+
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
+ctx = ContentContext(config)
+resp = ctx.topics("AAPL.US")
+print(resp)
+```
+
+  </TabItem>
+  <TabItem value="nodejs" label="Node.js">
 
 ```javascript
 const { Config, ContentContext, OAuth } = require('longbridge')
@@ -175,14 +188,14 @@ func main() {
   "data": {
     "items": [
       {
-        "id": "277062200",
-        "title": "AppLovin 財報後討論",
-        "description": "社區對 Q1 業績的解讀與觀點彙總。",
-        "url": "https://longbridge.com/topics/277062200",
-        "published_at": "1750746101",
-        "comments_count": 10,
-        "likes_count": 25,
-        "shares_count": 3
+        "id": "39304657",
+        "title": "英伟达 GTC 备受关注；阿里 "Token 战略" 再加码｜今日重要消息回顾",
+        "description": "0317 ｜海豚君重点关注：🐬 个股 1、[st]ST/US/NVDA#英伟达.US[/st] 英伟达 GTC 2026 大会正式开幕，英伟达创始人兼 CEO 黄仁勋发表了主题演讲。宣布，其下一代 Vera Rubin 架构将推出专为空间轨道数据中心设计的 Vera Rubin Space Module，性能比 H100 提升 25 倍。同时宣布与 Groq 合作开发新型 LPU 芯片...",
+        "url": "https://longbridge.com/topics/39304657",
+        "published_at": "1773736144",
+        "comments_count": 1,
+        "likes_count": 7,
+        "shares_count": 4
       }
     ]
   }
