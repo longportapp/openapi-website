@@ -135,3 +135,11 @@ html:root {
     --vp-home-hero-image-filter: blur(68px);
   }
 }
+
+.aside-container {
+  height: calc(100vh - 100px) !important;
+}
+
+.aside-curtain {
+  display: none !important;
+}
