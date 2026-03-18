@@ -40,6 +40,7 @@ from longbridge.openapi import QuoteContext, Config, OAuthBuilder
 oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
 config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
+
 resp = ctx.filings("AAPL.US")
 print(resp)
 ```

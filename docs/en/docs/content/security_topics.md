@@ -40,6 +40,7 @@ from longbridge.openapi import ContentContext, Config, OAuthBuilder
 oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
 config = Config.from_oauth(oauth)
 ctx = ContentContext(config)
+
 resp = ctx.topics("AAPL.US")
 print(resp)
 ```
