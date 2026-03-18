@@ -4,6 +4,7 @@ slug: /mcp
 sidebar_label: MCP
 sidebarCollapsed: true
 id: mcp
+sidebar_icon: cpu
 ---
 
 # Longbridge MCP Service

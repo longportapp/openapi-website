@@ -7,12 +7,12 @@ export const zhHKConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   head: [
     ['meta', { property: 'og:url', content: 'https://open.longbridge.com' }],
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:title', content: 'Longbridge OpenAPI：靈活支持程序化交易' }],
+    ['meta', { property: 'og:title', content: 'Longbridge Developers：開放 API、LLM、MCP 與 CLI 開發平台' }],
     [
       'meta',
       {
         property: 'og:description',
-        content: 'Longbridge OpenAPI 為您提供靈活多樣的接入服務，滿足您的量化交易需求，快速構建您的交易策略。',
+        content: '探索 Longbridge Developers，提供 API、LLM、MCP、CLI 等全方位開發資源，助力構建您的金融應用。',
       },
     ],
     [
@@ -23,10 +23,10 @@ export const zhHKConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
       },
     ],
     ['meta', { property: 'og:locale', content: 'zh-HK' }],
-    ['meta', { property: 'og:site_name', content: 'OpenAPI | Longbridge 開放平臺' }],
+    ['meta', { property: 'og:site_name', content: 'Developers | Longbridge 開放平臺' }],
   ],
-  title: 'Longbridge API 文檔',
-  description: 'Longbridge OpenAPI 為您提供靈活多樣的接入服務，滿足您的量化交易需求，快速構建您的交易策略。',
+  title: 'Longbridge Developers',
+  description: '探索 Longbridge Developers，提供 API、LLM、MCP、CLI 等全方位開發資源，助力構建您的金融應用。',
 
   themeConfig: {
     logoLink: logoLink(),

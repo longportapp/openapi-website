@@ -3,6 +3,7 @@ sidebar_position: 2.2
 slug: /llm
 sidebar_label: LLM
 sidebarCollapsed: true
+sidebar_icon: sparkles
 id: llm
 ---
 
@@ -12,11 +13,11 @@ We provide several components for LLMs (Large Language Models) that allow you to
 
 <video src="https://pub.lbkrs.com/files/202503/SGozJNWBfYpta73i/longport-mcp.mp4" width="100%" autoplay loop controls  />
 
-Yes, you can use our LLM components through the Longbridge OpenAPI. Start today!
+Yes, you can use our LLM components through the Longbridge Developers. Start today!
 
 ## LLMs Text
 
-The OpenAPI documentation follows the [LLMs Text](https://llmstxt.org/) standard, providing [llms.txt](https://open.longbridge.com/llms.txt) and Markdown files for each document. Based on this LLMs Text, you can provide AI with a complete dictionary of Longbridge OpenAPI documentation as a reference for AI-assisted development, enabling AI to generate more accurate code.
+The OpenAPI documentation follows the [LLMs Text](https://llmstxt.org/) standard, providing [llms.txt](https://open.longbridge.com/llms.txt) and Markdown files for each document. Based on this LLMs Text, you can provide AI with a complete dictionary of Longbridge Developers documentation as a reference for AI-assisted development, enabling AI to generate more accurate code.
 
 - [https://open.longbridge.com/llms.txt](https://open.longbridge.com/llms.txt) - Approximately 2104 tokens.
 
@@ -49,7 +50,7 @@ This is useful for LLM crawlers, RAG indexing, and tool-based content ingestion 
 
 ### Using in Cursor
 
-Open Cursor, open the command palette (`Command + Shift + P`), search for and select **Add New Custom Docs** and enter the Longbridge OpenAPI LLMs Text address in the dialog box:
+Open Cursor, open the command palette (`Command + Shift + P`), search for and select **Add New Custom Docs** and enter the Longbridge Developers LLMs Text address in the dialog box:
 
 ```
 https://open.longbridge.com/llms.txt

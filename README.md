@@ -1,4 +1,4 @@
-Longbridge OpenAPI Documentation
+Longbridge Developers
 
 https://open.longbridge.com
 

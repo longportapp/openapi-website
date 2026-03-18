@@ -4,6 +4,7 @@ import { computed, provide, useSlots } from 'vue'
 import VPBackdrop from 'vitepress/dist/client/theme-default/components/VPBackdrop.vue'
 import VPContent from 'vitepress/dist/client/theme-default/components/VPContent.vue'
 import VPFooter from 'vitepress/dist/client/theme-default/components/VPFooter.vue'
+import Footer from '../components/HomePage/Footer.vue'
 import VPLocalNav from 'vitepress/dist/client/theme-default/components/VPLocalNav.vue'
 import VPNav from 'vitepress/dist/client/theme-default/components/VPNav.vue'
 import VPSidebar from 'vitepress/dist/client/theme-default/components/VPSidebar.vue'
@@ -70,7 +71,10 @@ provide('hero-image-slot-exists', heroImageSlotExists)
       <template #doc-before><slot name="doc-before" /></template>
       <template #doc-after><slot name="doc-after" /></template>
       <template #doc-top><slot name="doc-top" /></template>
-      <template #doc-bottom><slot name="doc-bottom" /></template>
+      <template #doc-bottom>
+        <slot name="doc-bottom" />
+        <Footer />
+      </template>
 
       <template #aside-top><slot name="aside-top" /></template>
       <template #aside-bottom><slot name="aside-bottom" /></template>

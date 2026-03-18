@@ -23,7 +23,7 @@ const { llmMarkdownLink } = useLLMMarkdownLink()
     </template>
 
     <template #doc-footer-before>
-      <a v-if="llmMarkdownLink" :href="llmMarkdownLink" target="_blank" class="text-sm text-[--vp-c-brand-1] italic"
+      <a v-if="llmMarkdownLink" :href="llmMarkdownLink" target="_blank" class="llms-text-link"
         >LLMs Text</a
       >
     </template>

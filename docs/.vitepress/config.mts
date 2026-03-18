@@ -20,7 +20,7 @@ const insertScript = (html: string) => {
 
 export default defineConfig(
   withMermaid({
-    title: 'Longbridge OpenAPI',
+    title: 'Longbridge Developers',
     appearance: true,
     lastUpdated: true,
     cleanUrls: true,
