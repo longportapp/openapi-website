@@ -3,6 +3,14 @@ import path from 'path'
 import matter from 'gray-matter'
 import { type DefaultTheme } from 'vitepress'
 
+const SIDEBAR_ICONS: Record<string, string> = {
+  book: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
+  zap: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+  cpu: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>`,
+  terminal: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>`,
+  sparkles: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 9.27 9.27 3 12l6.27 2.73L12 21l2.73-6.27L21 12l-6.27-2.73z"/><path d="M19.5 4.5 18 6l1.5 1.5L21 6z"/><path d="M4.5 19.5 6 18l-1.5-1.5L3 18z"/></svg>`,
+}
+
 interface CategoryConfig {
   position?: number
   label?: string
@@ -71,7 +79,12 @@ function sortByPosition<T extends { position?: number }>(items: T[]): T[] {
  * @param relativePath Relative path for links
  * @returns Array of navigation items
  */
-function generateSidebarItems(dirPath: string, relativePath: string, rootPath: string): DefaultTheme.SidebarItem[] {
+function generateSidebarItems(
+  dirPath: string,
+  relativePath: string,
+  rootPath: string,
+  depth = 0
+): DefaultTheme.SidebarItem[] {
   const items: DefaultTheme.SidebarItem[] = []
 
   try {
@@ -85,7 +98,10 @@ function generateSidebarItems(dirPath: string, relativePath: string, rootPath: s
       const filePath = path.join(dirPath, file)
       const fileContent = fs.readFileSync(filePath, 'utf8')
       const { data } = matter(fileContent)
-      const title = data['sidebar_label'] || data['title'] || getDefaultTitle(file)
+      const rawTitle = data['sidebar_label'] || data['title'] || getDefaultTitle(file)
+      const iconKey = data['sidebar_icon'] as string | undefined
+      const iconHtml = iconKey && SIDEBAR_ICONS[iconKey] ? `<span class="sidebar-item-icon">${SIDEBAR_ICONS[iconKey]}</span>` : ''
+      const title = iconHtml ? `${iconHtml}${rawTitle}` : rawTitle
       const slug = data['slug']
 
       const normalizeLink =
@@ -118,11 +134,11 @@ function generateSidebarItems(dirPath: string, relativePath: string, rootPath: s
       const subDirPath = path.join(dirPath, dir)
       const subRelativePath = path.join(relativePath, dir)
       const subCategoryConfig = readCategoryConfig(subDirPath)
-      const subItems = generateSidebarItems(subDirPath, subRelativePath, rootPath)
+      const subItems = generateSidebarItems(subDirPath, subRelativePath, rootPath, depth + 1)
 
       if (subItems.length > 0) {
         const dirTitle = subCategoryConfig?.label || formatDirName(dir)
-        const collapsed = subCategoryConfig?.collapsed || false
+        const collapsed = depth === 0 ? false : (subCategoryConfig?.collapsed ?? true)
         const position = subCategoryConfig?.position
 
         const sidebarItem: MSidebar = {

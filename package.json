@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "longbridge",
   "module": "index.ts",
-  "description": "this is a website of longbridge-openapi",
+  "description": "this is a website of longbridge developers",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -28,6 +28,7 @@
     "gray-matter": "^4.0.3",
     "shiki": "^3.6.0",
     "ufo": "^1.6.1",
+    "vite": "^8.0.0",
     "vue-i18n": "11"
   },
   "devDependencies": {
@@ -44,7 +45,7 @@
     "prettier": "^3.5.3",
     "sass-embedded": "^1.89.2",
     "unocss": "^66.1.2",
-    "vitepress": "2.0.0-alpha.8",
+    "vitepress": "2.0.0-alpha.16",
     "vitepress-plugin-group-icons": "^1.5.2",
     "vitepress-plugin-mermaid": "^2.0.17",
     "vue": "^3.5.13"

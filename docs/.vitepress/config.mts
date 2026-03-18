@@ -20,7 +20,7 @@ const insertScript = (html: string) => {
 
 export default defineConfig(
   withMermaid({
-    title: 'Longbridge OpenAPI',
+    title: 'Longbridge Developers',
     appearance: true,
     lastUpdated: true,
     cleanUrls: true,
@@ -87,7 +87,7 @@ export default defineConfig(
     themeConfig: {
       editLink: {
         pattern: ({ filePath }) => {
-          return `https://github.com/longbridge/openapi-website/edit/main/docs/${filePath}`
+          return `https://github.com/longbridge/developers-website/edit/main/docs/${filePath}`
         },
       },
       logo: {

@@ -3,6 +3,7 @@ sidebar_position: 2.1
 slug: /cli
 sidebar_label: CLI
 sidebarCollapsed: true
+sidebar_icon: terminal
 id: cli
 ---
 

@@ -1,6 +1,6 @@
-# Longbridge OpenAPI Documentation
+# Longbridge Developers Documentation
 
-Longbridge OpenAPI provides programmatic quote trading interfaces for investors with research and development capabilities and assists them to build trading or quote strategy analysis tools based on their own investment strategies. The functions fall into the following categories:
+Longbridge Developers provides programmatic quote trading interfaces for investors with research and development capabilities and assists them to build trading or quote strategy analysis tools based on their own investment strategies. The functions fall into the following categories:
 
 - **Trading** - Create, amend, cancel orders, query today's/past orders and transaction details, etc.
 - **Quotes** - Real-time quotes, acquisition of historical quotes, etc.

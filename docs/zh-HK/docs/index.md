@@ -2,9 +2,10 @@
 sidebar_position: -999
 title: OpenAPI 介紹
 id: getting_started_introduce
+sidebar_icon: book
 ---
 
-Longbridge OpenAPI 為有研發能力的投資者提供程序化行情交易接口，助力投資者根據自身投資策略搭建交易或行情策略分析工具。覆蓋以下類別功能：
+Longbridge Developers 為有研發能力的投資者提供程序化行情交易接口，助力投資者根據自身投資策略搭建交易或行情策略分析工具。覆蓋以下類別功能：
 
 - 交易類 - 創建、修改、撤銷訂單，當日/歷史訂單及成交記錄的查詢等
 - 行情類 - 實時行情報價、歷史行情數的獲取等

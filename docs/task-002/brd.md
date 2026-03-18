@@ -1,35 +1,37 @@
 ---
 annotations:
-- id: ann_22c778cc
-  selector:
-    type: TextQuoteSelector
-    exact: 章节覆盖完整授权流程，开发者无需查阅其他
-  body: '124124124'
-  author: human
-  status: active
-  created_at: 2026-03-05T08:57:43.505484+00:00
-- id: ann_b68a9ba1
-  selector:
-    type: TextQuoteSelector
-    exact: 文档平台（VitePress）的部署流程需纳入发布计划
-  body: 用 Bun + VitePress
-  author: human
-  status: active
-  created_at: 2026-03-05T08:58:24.778493+00:00
+  - id: ann_22c778cc
+    selector:
+      type: TextQuoteSelector
+      exact: 章节覆盖完整授权流程，开发者无需查阅其他
+    body: '124124124'
+    author: human
+    status: active
+    created_at: 2026-03-05T08:57:43.505484+00:00
+  - id: ann_b68a9ba1
+    selector:
+      type: TextQuoteSelector
+      exact: 文档平台（VitePress）的部署流程需纳入发布计划
+    body: 用 Bun + VitePress
+    author: human
+    status: active
+    created_at: 2026-03-05T08:58:24.778493+00:00
 ---
 
 # BRD: 优化 Getting Started 文档的内容
 
 ## 1. 背景与目标
 
-**业务背景**：Longbridge OpenAPI 平台已上线 OAuth 2 认证机制，现有 Getting Started 文档 https://open.longbridge.com/zh-CN/docs/getting-started 中的认证描述基于旧机制，内容零散且与 MCP 文档中已记载的 OAuth 2 内容存在出入，导致开发者在接入时获得不一致的信息。
+**业务背景**：Longbridge Developers 已上线 OAuth 2 认证机制，现有 Getting Started 文档 https://open.longbridge.com/zh-CN/docs/getting-started 中的认证描述基于旧机制，内容零散且与 MCP 文档中已记载的 OAuth 2 内容存在出入，导致开发者在接入时获得不一致的信息。
 
 **核心问题**：
+
 - Getting Started 文档中的认证流程描述未覆盖 OAuth 2 授权码流程，新接入的开发者无法依据文档完成正确的认证配置
 - Getting Started 与 MCP 文档在认证描述上存在冲突，增加开发者理解成本
 - 文档间缺乏明确的交叉引用，开发者需要在多处文档间自行拼凑完整信息
 
 **预期目标**：
+
 - OAuth 2 相关章节覆盖完整授权流程，开发者无需查阅其他资料即可完成接入
 - Getting Started 与 MCP 文档内容一致，不存在相互矛盾的描述
 - 文档满意度（如开发者反馈问题数）在发布后 4 周内较改版前下降 30%
@@ -38,7 +40,7 @@ annotations:
 
 ## 2. 目标用户群体
 
-- **主要用户**：首次接入 Longbridge OpenAPI 的开发者，需要通过 Getting Started 完成环境配置和认证流程
+- **主要用户**：首次接入 Longbridge Developers 的开发者，需要通过 Getting Started 完成环境配置和认证流程
 - **次要用户**：已接入的开发者，因 OAuth 2 机制上线需要迁移/更新现有认证实现
 - **用户规模估算**：当前 OpenAPI 注册开发者规模，以及 MCP 功能上线后引入的新开发者增量（具体数字依赖平台数据，BRD 阶段暂以"现有注册开发者全量"为基准）
 
@@ -89,12 +91,15 @@ annotations:
 ## 5. 风险与依赖
 
 **技术风险**：
+
 - OAuth 2 授权流程的具体实现细节（授权端点、Token 端点的确切参数）需由后端团队提供准确规格，若规格未稳定则文档内容存在返工风险
 
 **合规风险**：
+
 - Token 存储、传输的安全建议需符合平台安全规范，文档中的示例代码不应引导开发者采用不安全的存储方式
 
 **第三方依赖**：
+
 - MCP 文档的维护方需配合完成双向引用的建立，依赖跨团队协同
 - 文档平台（VitePress）的部署流程需纳入发布计划
 
