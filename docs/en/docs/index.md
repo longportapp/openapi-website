@@ -31,6 +31,7 @@ Longbridge provides diversified access methods such as HTTP / WebSockets interfa
         <th>Symbol</th>
     </tr>
     </thead>
+    <tbody>
     <tr>
         <td width="160" rowspan="2">HK Market</td>
         <td>Securities (including equities, ETFs, Warrants, CBBCs)</td>
@@ -55,6 +56,7 @@ Longbridge provides diversified access methods such as HTTP / WebSockets interfa
     <tr>
         <td>Index</td>
     </tr>
+    </tbody>
 </table>
 
 ## Trading
