@@ -2,6 +2,7 @@
 sidebar_position: 1
 slug: getting-started
 title: Getting Started
+sidebar_icon: zap
 ---
 
 ## Foreword
@@ -15,7 +16,13 @@ Longbridge OpenAPI SDK is implemented based on Rust we have released SDK for Pyt
 - WebSocket Trade - `wss://openapi-trade.longbridge.com`
 
 :::tip
-For access in mainland China, use `openapi.longbridge.cn`, `openapi-quote.longbridge.cn`, `openapi-trade.longbridge.cn`. The SDK automatically selects the access point by network. If the SDK selects incorrectly, set the environment variable `LONGBRIDGE_REGION` (e.g. `cn` or `hk`).
+For access in mainland China, you can use `.cn` domains for better connectivity:
+
+- HTTP API - `https://openapi.longbridge.cn`
+- WebSocket Quote - `wss://openapi-quote.longbridge.cn`
+- WebSocket Trade - `wss://openapi-trade.longbridge.cn`
+
+The SDK automatically selects the access point by network. If the SDK selects incorrectly, set the environment variable `LONGBRIDGE_REGION` (e.g. `cn` or `hk`).
 :::
 
 ## Time Format
@@ -26,23 +33,27 @@ All API response are used [Unix Timestamp](https://en.wikipedia.org/wiki/Unix_ti
 
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>
-    <li><a href="https://www.python.org/">Python 3</a></li>
-    <li>Pip</li>
+    <ul>
+        <li><a href="https://www.python.org/">Python 3</a></li>
+        <li>Pip</li>
+    </ul>
   </TabItem>
   <TabItem value="javascript" label="JavaScript">
-    <li><a href="https://nodejs.org/">Node.js</a></li>
-    <li>Yarn</li>
+      <ul>
+          <li><a href="https://nodejs.org/">Node.js</a> or <a href="https://bun.sh">Bun</a></li>
+          <li>Yarn</li>
+      </ul>
   </TabItem>
   <TabItem value="rust" label="Rust">
-    <li><a href="https://www.rust-lang.org/">Rust</a></li>
+      <ul><li><a href="https://www.rust-lang.org/">Rust</a></li></ul>
   </TabItem>
   <TabItem value="java" label="Java">
-    <li><a href="https://openjdk.org/">JDK</a></li>
-    <li><a href="https://maven.apache.org/">Maven</a></li>
+      <ul><li><a href="https://openjdk.org/">JDK</a></li>
+      <li><a href="https://maven.apache.org/">Maven</a></li></ul>
   </TabItem>
   <TabItem value="go" label="Go">
-    <li><a href="https://go.dev">Go</a></li>
-    <li><a href="https://pkg.go.dev/github.com/longbridge/openapi-go">Go Docs</a></li>
+      <ul><li><a href="https://go.dev">Go</a></li>
+      <li><a href="https://pkg.go.dev/github.com/longbridge/openapi-go">Go Docs</a></li></ul>
   </TabItem>
 </Tabs>
 
@@ -105,7 +116,7 @@ Let's take obtaining assets as an example to demonstrate how to use the SDK.
 ## Configuration
 
 1. Download App and open an account.
-2. Get authentication credentials from [Longbridge OpenAPI](https://open.longbridge.com) official website
+2. Get authentication credentials from [Longbridge Developers](https://open.longbridge.com) official website
 
 ### Authentication Methods
 
@@ -117,7 +128,10 @@ OAuth 2.0 is the modern authentication method that uses Bearer tokens without re
 
 **Step 1: Register OAuth Client**
 
-Visit [Longbridge OpenAPI](https://open.longbridge.com), login and enter "User Center" to register an OAuth client and get your `client_id`:
+Visit [Longbridge Developers](https://open.longbridge.com), login and enter "User Center" to register an OAuth client and get your `client_id`:
+
+<Tabs groupId="shell">
+<TabItem value="bash" label="Bash" default>
 
 ```bash
 curl -X POST https://openapi.longbridge.com/oauth2/register \
@@ -131,19 +145,41 @@ curl -X POST https://openapi.longbridge.com/oauth2/register \
         }'
 ```
 
+</TabItem>
+<TabItem value="powershell" label="PowerShell">
+
+```powershell
+$body = @{
+    redirect_uris                = @("http://localhost:60355/callback")
+    token_endpoint_auth_method   = "none"
+    grant_types                  = @("authorization_code", "refresh_token")
+    response_types               = @("code")
+    client_name                  = "My Longbridge OpenAPI"
+} | ConvertTo-Json
+
+Invoke-RestMethod -Method POST `
+    -Uri "https://openapi.longbridge.com/oauth2/register" `
+    -ContentType "application/json" `
+    -Body $body
+```
+
+</TabItem>
+</Tabs>
+
 Response example:
+
 ```json
 {
-   "client_id": "72d9caaf-0bd4-4000-85a7-8c7978c74544",
-   "client_id_issued_at": 1773311221,
-   "client_secret_expires_at": 1773314821,
-   "client_name": "My Longbridge OpenAPI",
-   "redirect_uris": ["http://localhost:60355/callback"],
-   "grant_types": ["authorization_code", "refresh_token"],
-   "token_endpoint_auth_method": "none",
-   "response_types": ["code"],
-   "registration_access_token": "BVlMLEtNUUu4FoRFNItC2FfeR/rLpqLNyEuCJNNTCWE=",
-   "registration_client_uri": "https://openapi.longbridge.com/oauth2/register/72d9caaf-0bd4-4000-85a7-8c7978c74544"
+  "client_id": "72d9caaf-0bd4-4000-85a7-8c7978c74544",
+  "client_id_issued_at": 1773311221,
+  "client_secret_expires_at": 1773314821,
+  "client_name": "My Longbridge OpenAPI",
+  "redirect_uris": ["http://localhost:60355/callback"],
+  "grant_types": ["authorization_code", "refresh_token"],
+  "token_endpoint_auth_method": "none",
+  "response_types": ["code"],
+  "registration_access_token": "BVlMLEtNUUu4FoRFNItC2FfeR/rLpqLNyEuCJNNTCWE=",
+  "registration_client_uri": "https://openapi.longbridge.com/oauth2/register/72d9caaf-0bd4-4000-85a7-8c7978c74544"
 }
 ```
 
@@ -153,7 +189,7 @@ Save the `client_id` for later use.
 
 The SDK provides built-in OAuth support. Use `OAuthBuilder` to run the browser flow; after authorization, use `Config.from_oauth()` to create the configuration. The token is persisted automatically and refreshed when expired.
 
-**Token storage path:** `~/.longbridge-openapi/tokens/<client_id>` (macOS/Linux), or `%USERPROFILE%\.longbridge-openapi\tokens\<client_id>` on Windows.
+**Token storage path:** `~/.longbridge/openapi/tokens/<client_id>` (macOS/Linux), or `%USERPROFILE%\.longbridge\openapi\tokens\<client_id>` on Windows.
 
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>
@@ -171,12 +207,12 @@ config = Config.from_oauth(oauth)
   <TabItem value="javascript" label="JavaScript">
 
 ```javascript
-const { Config, OAuth } = require('longbridge');
+const { Config, OAuth } = require('longbridge')
 
-const oauth = await OAuth.build("your-client-id", (_, url) => {
-  console.log("Open this URL to authorize: " + url);
-});
-const config = Config.fromOAuth(oauth);
+const oauth = await OAuth.build('your-client-id', (_, url) => {
+  console.log('Open this URL to authorize: ' + url)
+})
+const config = Config.fromOAuth(oauth)
 ```
 
   </TabItem>
@@ -248,11 +284,12 @@ func main() {
 </Tabs>
 
 :::tip OAuth Benefits
-- ✅ More secure (no shared secret)
-- ✅ Simpler integration (no signature calculation)
-- ✅ Token-based modern authentication
-- ✅ Better suited for modern applications
-:::
+
+- More secure (no shared secret)
+- Simpler integration (no signature calculation)
+- Token-based modern authentication
+- Better suited for modern applications
+  :::
 
 :::caution Token Security
 OAuth tokens should be stored securely in your application (e.g., encrypted file, secure keychain), **not in environment variables** for security reasons.
@@ -274,25 +311,25 @@ Please pay attention to protect your **Access Token** information, anyone who ge
 
 **API Key credentials (required for legacy API Key):**
 
-| Environment Variable      | Description                    |
-| ------------------------- | ------------------------------ |
-| `LONGBRIDGE_APP_KEY`      | App key from developer center  |
-| `LONGBRIDGE_APP_SECRET`   | App secret from developer center|
+| Environment Variable      | Description                                                                                                                                               |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `LONGBRIDGE_APP_KEY`      | App key from developer center                                                                                                                             |
+| `LONGBRIDGE_APP_SECRET`   | App secret from developer center                                                                                                                          |
 | `LONGBRIDGE_ACCESS_TOKEN` | Legacy Access Token from [https://open.longbridge.com/](https://open.longbridge.com/) (User Center → application credential). Not the OAuth access token. |
 
 **Other environment variables:**
 
-| Name                           | Description                                                                      |
-|--------------------------------|----------------------------------------------------------------------------------|
-| `LONGBRIDGE_LANGUAGE`          | Language identifier, `zh-CN`, `zh-HK` or `en` (Default: `en`)                    |
-| `LONGBRIDGE_HTTP_URL`          | HTTP endpoint url (Default: `https://openapi.longbridge.com`)                     |
-| `LONGBRIDGE_QUOTE_WS_URL`      | Quote websocket endpoint url (Default: `wss://openapi-quote.longbridge.com/v2`)  |
-| `LONGBRIDGE_TRADE_WS_URL`      | Trade websocket endpoint url (Default: `wss://openapi-trade.longbridge.com/v2`)  |
-| `LONGBRIDGE_REGION`            | Override API region; SDK auto-selects by network. Set to `cn` or `hk` if incorrect. |
-| `LONGBRIDGE_ENABLE_OVERNIGHT`  | Enable overnight quote, `true` or `false` (Default: `false`)                     |
-| `LONGBRIDGE_PUSH_CANDLESTICK_MODE` | `realtime` or `confirmed` (Default: `realtime`)                              |
-| `LONGBRIDGE_PRINT_QUOTE_PACKAGES`  | Print quote packages when connected, `true` or `false` (Default: `true`)    |
-| `LONGBRIDGE_LOG_PATH`          | Set the path of the log files (Default: no logs)                                  |
+| Name                               | Description                                                                         |
+| ---------------------------------- | ----------------------------------------------------------------------------------- |
+| `LONGBRIDGE_LANGUAGE`              | Language identifier, `zh-CN`, `zh-HK` or `en` (Default: `en`)                       |
+| `LONGBRIDGE_HTTP_URL`              | HTTP endpoint url (Default: `https://openapi.longbridge.com`)                       |
+| `LONGBRIDGE_QUOTE_WS_URL`          | Quote websocket endpoint url (Default: `wss://openapi-quote.longbridge.com/v2`)     |
+| `LONGBRIDGE_TRADE_WS_URL`          | Trade websocket endpoint url (Default: `wss://openapi-trade.longbridge.com/v2`)     |
+| `LONGBRIDGE_REGION`                | Override API region; SDK auto-selects by network. Set to `cn` or `hk` if incorrect. |
+| `LONGBRIDGE_ENABLE_OVERNIGHT`      | Enable overnight quote, `true` or `false` (Default: `false`)                        |
+| `LONGBRIDGE_PUSH_CANDLESTICK_MODE` | `realtime` or `confirmed` (Default: `realtime`)                                     |
+| `LONGBRIDGE_PRINT_QUOTE_PACKAGES`  | Print quote packages when connected, `true` or `false` (Default: `true`)            |
+| `LONGBRIDGE_LOG_PATH`              | Set the path of the log files (Default: no logs)                                    |
 
 :::info
 The SDK also accepts the legacy `LONGPORT_*` variable names for backward compatibility.
@@ -400,8 +437,8 @@ Create `account_asset.js` and paste the code below:
 const { Config, TradeContext, OAuth } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => {
-    console.log("Open this URL to authorize: " + url)
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
   })
   const config = Config.fromOAuth(oauth)
   // Or use API Key: const config = Config.fromApikeyEnv()
@@ -630,13 +667,13 @@ Create `subscribe_quote.js` and paste the code below:
 const { Config, QuoteContext, SubType, OAuth } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => {
-    console.log("Open this URL to authorize: " + url)
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
   })
   const config = Config.fromOAuth(oauth)
   const ctx = await QuoteContext.new(config)
   ctx.setOnQuote((_, event) => console.log(event.toString()))
-  await ctx.subscribe(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], [SubType.Quote])
+  await ctx.subscribe(['700.HK', 'AAPL.US', 'TSLA.US', 'NFLX.US'], [SubType.Quote])
   await new Promise(() => {})
 }
 main().catch(console.error)
@@ -874,19 +911,11 @@ python submit_order.py
 Create `submit_order.js` and paste the code below:
 
 ```javascript
-const {
-  Config,
-  TradeContext,
-  OrderType,
-  OrderSide,
-  Decimal,
-  TimeInForceType,
-  OAuth,
-} = require('longbridge')
+const { Config, TradeContext, OrderType, OrderSide, Decimal, TimeInForceType, OAuth } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => {
-    console.log("Open this URL to authorize: " + url)
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
   })
   const config = Config.fromOAuth(oauth)
   const ctx = await TradeContext.new(config)
@@ -1106,8 +1135,8 @@ Create `today_orders.js` and paste the code below:
 const { Config, TradeContext, OAuth } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => {
-    console.log("Open this URL to authorize: " + url)
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
   })
   const config = Config.fromOAuth(oauth)
   const ctx = await TradeContext.new(config)
@@ -1274,7 +1303,7 @@ Order {
 }
 ```
 
-The above example has fully demonstrated how to use the SDK to access the OpenAPI interface. For more interfaces, please read the [Longbridge OpenAPI Documentation](https://open.longbridge.com/docs) in detail and use them according to different interfaces.
+The above example has fully demonstrated how to use the SDK to access the OpenAPI interface. For more interfaces, please read the [Longbridge Developers Documentation](https://open.longbridge.com/docs) in detail and use them according to different interfaces.
 
 ## More Examples
 

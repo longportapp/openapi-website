@@ -7,13 +7,13 @@ export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   head: [
     ['meta', { property: 'og:url', content: 'https://open.longbridge.com' }],
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:title', content: 'Longbridge OpenAPI: Flexible Support for Programmatic Trading' }],
+    ['meta', { property: 'og:title', content: 'Longbridge Developers: Build with APIs, LLM, MCP, and CLI' }],
     [
       'meta',
       {
         property: 'og:description',
         content:
-          'Access Longbridge OpenAPI for diversified and flexible support tailored to your programmatic trading needs. Enhance your trading strategies with ease.',
+          'Explore the Longbridge Developers — open APIs, LLM integrations, MCP support, CLI tools, and more to power your financial applications.',
       },
     ],
     [
@@ -24,11 +24,11 @@ export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
       },
     ],
     ['meta', { property: 'og:locale', content: 'en' }],
-    ['meta', { property: 'og:site_name', content: 'OpenAPI | Longbridge' }],
+    ['meta', { property: 'og:site_name', content: 'Developers | Longbridge' }],
   ],
-  title: 'Longbridge OpenAPI',
+  title: 'Longbridge Developers',
   description:
-    'Access Longbridge OpenAPI for diversified and flexible support tailored to your programmatic trading needs. Enhance your trading strategies with ease.',
+    'Explore the Longbridge Developers — open APIs, LLM integrations, MCP support, CLI tools, and more to power your financial applications.',
   themeConfig: {
     logoLink: logoLink(),
     nav: nav(),
@@ -43,7 +43,7 @@ export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
     },
 
     outline: {
-      label: 'Page Navigation',
+      label: 'On this page',
     },
 
     lastUpdated: {

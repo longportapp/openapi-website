@@ -15,12 +15,12 @@ https://open.longbridge.com/sdk
 
 ## Notes
 
-| Precautions | Reference |
-| --- | --- |
-| Prefer SDKs over raw HTTP when possible | [SDK Quick Start](../docs/getting-started) |
-| Enable required OpenAPI services first | [How to enable OpenAPI](../docs/#how-to-enable-openapi) |
-| Understand permissions and restrictions | [Permissions and restrictions](../docs/#permissions-and-restrictions) |
-| Check common error codes for troubleshooting | [Error Codes](../docs/error-codes) |
+| Precautions                                  | Reference                                                             |
+| -------------------------------------------- | --------------------------------------------------------------------- |
+| Prefer SDKs over raw HTTP when possible      | [SDK Quick Start](../docs/getting-started)                            |
+| Enable required OpenAPI services first       | [How to enable OpenAPI](../docs/#how-to-enable-openapi)               |
+| Understand permissions and restrictions      | [Permissions and restrictions](../docs/#permissions-and-restrictions) |
+| Check common error codes for troubleshooting | [Error Codes](../docs/error-codes)                                    |
 
 ## OAuth 2.0 (Default)
 
@@ -44,6 +44,9 @@ Supported grant types (from discovery):
 
 If there is no UI for client creation in your environment, register dynamically:
 
+<Tabs groupId="shell">
+<TabItem value="bash" label="Bash" default>
+
 ```bash
 curl -X POST https://openapi.longbridge.com/oauth2/register \
   -H "Content-Type: application/json" \
@@ -54,6 +57,26 @@ curl -X POST https://openapi.longbridge.com/oauth2/register \
     "response_types": ["code"]
   }'
 ```
+
+</TabItem>
+<TabItem value="powershell" label="PowerShell">
+
+```powershell
+$body = @{
+    client_name    = "my-openapi-app"
+    redirect_uris  = @("https://your-app.com/callback")
+    grant_types    = @("authorization_code", "refresh_token")
+    response_types = @("code")
+} | ConvertTo-Json
+
+Invoke-RestMethod -Method POST `
+    -Uri "https://openapi.longbridge.com/oauth2/register" `
+    -ContentType "application/json" `
+    -Body $body
+```
+
+</TabItem>
+</Tabs>
 
 > Registration may return only `client_id` (public client, no `client_secret`). In this case, use PKCE and do not send `client_secret` in token requests.
 

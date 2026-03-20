@@ -156,7 +156,7 @@ function generateLLMSFullTxt(): void {
       return
     }
 
-    let fullContent = '# Longbridge OpenAPI Documentation'
+    let fullContent = '# Longbridge Developers Documentation'
 
     // Function to recursively process all markdown files
     function processDirectory(dir: string, indent = ''): void {

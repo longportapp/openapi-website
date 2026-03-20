@@ -42,6 +42,9 @@ https://open.longbridge.com/sdk
 
 如果没有可视化后台入口，可通过接口动态注册：
 
+<Tabs groupId="shell">
+<TabItem value="bash" label="Bash" default>
+
 ```bash
 curl -X POST https://openapi.longbridge.com/oauth2/register \
   -H "Content-Type: application/json" \
@@ -52,6 +55,26 @@ curl -X POST https://openapi.longbridge.com/oauth2/register \
     "response_types": ["code"]
   }'
 ```
+
+</TabItem>
+<TabItem value="powershell" label="PowerShell">
+
+```powershell
+$body = @{
+    client_name    = "my-openapi-app"
+    redirect_uris  = @("https://your-app.com/callback")
+    grant_types    = @("authorization_code", "refresh_token")
+    response_types = @("code")
+} | ConvertTo-Json
+
+Invoke-RestMethod -Method POST `
+    -Uri "https://openapi.longbridge.com/oauth2/register" `
+    -ContentType "application/json" `
+    -Body $body
+```
+
+</TabItem>
+</Tabs>
 
 > 注册返回可能仅包含 `client_id`（public client，不返回 `client_secret`）。这种情况下请使用 PKCE，并在 token 请求里不传 `client_secret`。
 
