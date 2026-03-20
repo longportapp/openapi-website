@@ -129,6 +129,9 @@ OAuth 2.0 是现代化的认证方式，使用 Bearer Token，无需 HMAC 签名
 
 访问 [Longbridge Developers](https://open.longbridge.com) 网站，登录后进入"个人中心"，注册 OAuth 客户端获取 `client_id`：
 
+<Tabs groupId="shell">
+<TabItem value="bash" label="Bash" default>
+
 ```bash
 curl -X POST https://openapi.longbridge.com/oauth2/register \
      -H "Content-Type: application/json" \
@@ -140,6 +143,27 @@ curl -X POST https://openapi.longbridge.com/oauth2/register \
             "client_name": "My Longbridge OpenAPI"
         }'
 ```
+
+</TabItem>
+<TabItem value="powershell" label="PowerShell">
+
+```powershell
+$body = @{
+    redirect_uris                = @("http://localhost:60355/callback")
+    token_endpoint_auth_method   = "none"
+    grant_types                  = @("authorization_code", "refresh_token")
+    response_types               = @("code")
+    client_name                  = "My Longbridge OpenAPI"
+} | ConvertTo-Json
+
+Invoke-RestMethod -Method POST `
+    -Uri "https://openapi.longbridge.com/oauth2/register" `
+    -ContentType "application/json" `
+    -Body $body
+```
+
+</TabItem>
+</Tabs>
 
 响应示例：
 

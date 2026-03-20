@@ -130,6 +130,9 @@ OAuth 2.0 is the modern authentication method that uses Bearer tokens without re
 
 Visit [Longbridge Developers](https://open.longbridge.com), login and enter "User Center" to register an OAuth client and get your `client_id`:
 
+<Tabs groupId="shell">
+<TabItem value="bash" label="Bash" default>
+
 ```bash
 curl -X POST https://openapi.longbridge.com/oauth2/register \
      -H "Content-Type: application/json" \
@@ -141,6 +144,27 @@ curl -X POST https://openapi.longbridge.com/oauth2/register \
             "client_name": "My Longbridge OpenAPI"
         }'
 ```
+
+</TabItem>
+<TabItem value="powershell" label="PowerShell">
+
+```powershell
+$body = @{
+    redirect_uris                = @("http://localhost:60355/callback")
+    token_endpoint_auth_method   = "none"
+    grant_types                  = @("authorization_code", "refresh_token")
+    response_types               = @("code")
+    client_name                  = "My Longbridge OpenAPI"
+} | ConvertTo-Json
+
+Invoke-RestMethod -Method POST `
+    -Uri "https://openapi.longbridge.com/oauth2/register" `
+    -ContentType "application/json" `
+    -Body $body
+```
+
+</TabItem>
+</Tabs>
 
 Response example:
 

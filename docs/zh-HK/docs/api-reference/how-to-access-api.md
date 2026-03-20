@@ -15,12 +15,12 @@ https://open.longbridge.com/sdk
 
 ## API 須知
 
-| 注意事項 | 參考文件 |
-| --- | --- |
-| 建議使用各語言 SDK，而非直接呼叫原生介面 | [SDK 快速開始](../docs/getting-started) |
-| 先開通對應 OpenAPI 服務 | [OpenAPI 如何開通](../docs/#如何開通) |
-| 先了解權限與限制 | [OpenAPI 使用權限及限制](../docs/#使用權限及限制) |
-| 出錯時先查通用錯誤碼 | [通用錯誤碼](../docs/error-codes) |
+| 注意事項                                 | 參考文件                                          |
+| ---------------------------------------- | ------------------------------------------------- |
+| 建議使用各語言 SDK，而非直接呼叫原生介面 | [SDK 快速開始](../docs/getting-started)           |
+| 先開通對應 OpenAPI 服務                  | [OpenAPI 如何開通](../docs/#如何開通)             |
+| 先了解權限與限制                         | [OpenAPI 使用權限及限制](../docs/#使用權限及限制) |
+| 出錯時先查通用錯誤碼                     | [通用錯誤碼](../docs/error-codes)                 |
 
 ## OAuth 2.0（預設方案）
 
@@ -44,6 +44,9 @@ API-key 簽名方式可作為舊系統相容備選，但不作為預設接入方
 
 若目前環境沒有可視化建立頁面，可透過接口動態註冊：
 
+<Tabs groupId="shell">
+<TabItem value="bash" label="Bash" default>
+
 ```bash
 curl -X POST https://openapi.longbridge.com/oauth2/register \
   -H "Content-Type: application/json" \
@@ -54,6 +57,26 @@ curl -X POST https://openapi.longbridge.com/oauth2/register \
     "response_types": ["code"]
   }'
 ```
+
+</TabItem>
+<TabItem value="powershell" label="PowerShell">
+
+```powershell
+$body = @{
+    client_name    = "my-openapi-app"
+    redirect_uris  = @("https://your-app.com/callback")
+    grant_types    = @("authorization_code", "refresh_token")
+    response_types = @("code")
+} | ConvertTo-Json
+
+Invoke-RestMethod -Method POST `
+    -Uri "https://openapi.longbridge.com/oauth2/register" `
+    -ContentType "application/json" `
+    -Body $body
+```
+
+</TabItem>
+</Tabs>
 
 > 註冊回傳可能只有 `client_id`（public client，不含 `client_secret`）。此情況請使用 PKCE，且 token 請求中不要傳 `client_secret`。
 
