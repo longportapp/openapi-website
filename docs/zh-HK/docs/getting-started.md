@@ -163,7 +163,7 @@ curl -X POST https://openapi.longbridge.com/oauth2/register \
 
 SDK 提供內建 OAuth 支援。使用 `OAuthBuilder` 完成瀏覽器授權流程，授權後使用 `Config.from_oauth()` 建立設定。Token 會自動持久化，過期時自動刷新。
 
-**Token 儲存路徑：** macOS/Linux 為 `~/.longbridge-openapi/tokens/<client_id>`，Windows 為 `%USERPROFILE%\.longbridge-openapi\tokens\<client_id>`。
+**Token 儲存路徑：** macOS/Linux 為 `~/.longbridge/openapi/tokens/<client_id>`，Windows 為 `%USERPROFILE%\.longbridge\openapi\tokens\<client_id>`。
 
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>

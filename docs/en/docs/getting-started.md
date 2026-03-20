@@ -165,7 +165,7 @@ Save the `client_id` for later use.
 
 The SDK provides built-in OAuth support. Use `OAuthBuilder` to run the browser flow; after authorization, use `Config.from_oauth()` to create the configuration. The token is persisted automatically and refreshed when expired.
 
-**Token storage path:** `~/.longbridge-openapi/tokens/<client_id>` (macOS/Linux), or `%USERPROFILE%\.longbridge-openapi\tokens\<client_id>` on Windows.
+**Token storage path:** `~/.longbridge/openapi/tokens/<client_id>` (macOS/Linux), or `%USERPROFILE%\.longbridge\openapi\tokens\<client_id>` on Windows.
 
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>
