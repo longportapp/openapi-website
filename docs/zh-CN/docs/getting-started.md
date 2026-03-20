@@ -17,7 +17,13 @@ sidebar_icon: zap
 - WebSocket Trade - `wss://openapi-trade.longbridge.com`
 
 :::info
-中国大陆使用 `openapi.longbridge.com`、`openapi-quote.longbridge.com`、`openapi-trade.longbridge.com`。SDK 会自动选择接入点；若判断不正确，可设置环境变量 `LONGBRIDGE_REGION`（如 `cn`、`hk`）。
+中国大陆地区可使用 `.cn` 域名提升访问速度：
+
+- HTTP API - `https://openapi.longbridge.cn`
+- WebSocket Quote - `wss://openapi-quote.longbridge.cn`
+- WebSocket Trade - `wss://openapi-trade.longbridge.cn`
+
+SDK 会自动选择接入点；若判断不正确，可设置环境变量 `LONGBRIDGE_REGION`（如 `cn`、`hk`）。
 :::
 
 ## 时间格式
