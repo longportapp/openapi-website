@@ -69,13 +69,13 @@ print(resp)
   <TabItem value="nodejs" label="Node.js">
 
 ```javascript
-const { Config, TradeContext, OAuth, OrderType, OrderSide, TimeInForceType } = require('longbridge')
+const { Config, TradeContext, OAuth, OrderType, OrderSide, TimeInForceType, Decimal } = require('longbridge')
 
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
   const ctx = await TradeContext.new(config)
-  const resp = await ctx.submitOrder("700.HK", OrderType.LO, OrderSide.Buy, 500, TimeInForceType.Day, { submittedPrice: "50", remark: "Hello" })
+  const resp = await ctx.submitOrder({ symbol: "700.HK", orderType: OrderType.LO, side: OrderSide.Buy, submittedQuantity: new Decimal(500), timeInForce: TimeInForceType.Day, submittedPrice: new Decimal(50), remark: "Hello" })
   console.log(resp)
 }
 main().catch(console.error)
@@ -93,7 +93,7 @@ class Main {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
              TradeContext ctx = TradeContext.create(config).get()) {
-            SubmitOrderResponse resp = ctx.submitOrder(SubmitOrderOptions.builder().symbol("700.HK").orderType(OrderType.LO).side(OrderSide.Buy).quantity(500).timeInForce(TimeInForceType.Day).submittedPrice(new BigDecimal("50")).remark("Hello").build()).get();
+            SubmitOrderResponse resp = ctx.submitOrder(new SubmitOrderOptions("700.HK", OrderType.LO, OrderSide.Buy, new BigDecimal("500"), TimeInForceType.Day).setSubmittedPrice(new BigDecimal("50")).setRemark("Hello")).get();
             System.out.println(resp.orderId);
         }
     }
@@ -105,7 +105,7 @@ class Main {
 
 ```rust
 use std::sync::Arc;
-use longbridge::{oauth::OAuthBuilder, trade::TradeContext, Config};
+use longbridge::{oauth::OAuthBuilder, trade::{TradeContext, SubmitOrderOptions, OrderType, OrderSide, TimeInForceType}, Config};
 use rust_decimal::Decimal;
 
 #[tokio::main]
@@ -113,7 +113,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
     let (ctx, _) = TradeContext::try_new(config).await?;
-    let resp = ctx.submit_order(longbridge::trade::SubmitOrderOptions::builder().symbol("700.HK").order_type(longbridge::trade::OrderType::LO).side(longbridge::trade::OrderSide::Buy).quantity(500).time_in_force(longbridge::trade::TimeInForceType::Day).submitted_price(Decimal::from(50)).remark("Hello").build()).await?;
+    let resp = ctx.submit_order(
+        SubmitOrderOptions::new("700.HK", OrderType::LO, OrderSide::Buy, Decimal::from(500), TimeInForceType::Day)
+            .submitted_price(Decimal::from(50))
+            .remark("Hello")
+    ).await?;
     println!("{:?}", resp);
     Ok(())
 }

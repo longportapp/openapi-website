@@ -64,13 +64,13 @@ ctx.replace_order(
   <TabItem value="nodejs" label="Node.js">
 
 ```javascript
-const { Config, TradeContext, OAuth } = require('longbridge')
+const { Config, TradeContext, OAuth, Decimal } = require('longbridge')
 
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
   const ctx = await TradeContext.new(config)
-  await ctx.replaceOrder("701276261045858304", 400, "60")
+  await ctx.replaceOrder({ orderId: "701276261045858304", quantity: new Decimal(400), price: new Decimal(60) })
   console.log("replaced")
 }
 main().catch(console.error)
@@ -88,7 +88,7 @@ class Main {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
              TradeContext ctx = TradeContext.create(config).get()) {
-            ctx.replaceOrder("701276261045858304", 400, new BigDecimal("60")).get();
+            ctx.replaceOrder(new ReplaceOrderOptions("701276261045858304", new BigDecimal("400")).setPrice(new BigDecimal("60"))).get();
             System.out.println("replaced");
         }
     }
@@ -100,7 +100,7 @@ class Main {
 
 ```rust
 use std::sync::Arc;
-use longbridge::{oauth::OAuthBuilder, trade::TradeContext, Config};
+use longbridge::{oauth::OAuthBuilder, trade::{TradeContext, ReplaceOrderOptions}, Config};
 use rust_decimal::Decimal;
 
 #[tokio::main]
@@ -108,7 +108,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
     let (ctx, _) = TradeContext::try_new(config).await?;
-    ctx.replace_order("701276261045858304", 400, Decimal::from(60)).await?;
+    ctx.replace_order(
+        ReplaceOrderOptions::new("701276261045858304", Decimal::from(400))
+            .price(Decimal::from(60))
+    ).await?;
     println!("replaced");
     Ok(())
 }

@@ -51,7 +51,7 @@ print(resp)
   <TabItem value="nodejs" label="Node.js">
 
 ```javascript
-const { Config, QuoteContext, OAuth } = require('longbridge')
+const { Config, QuoteContext, OAuth, TradeSessions } = require('longbridge')
 
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => {
@@ -59,7 +59,7 @@ async function main() {
   })
   const config = Config.fromOAuth(oauth)
   const ctx = await QuoteContext.new(config)
-  const resp = await ctx.intraday("700.HK")
+  const resp = await ctx.intraday("700.HK", TradeSessions.Intraday)
   console.log(resp)
 }
 main().catch(console.error)
@@ -79,7 +79,7 @@ class Main {
                 .get();
              Config config = Config.fromOAuth(oauth);
              QuoteContext ctx = QuoteContext.create(config).get()) {
-            IntradayLine[] resp = ctx.getIntraday("700.HK").get();
+            IntradayLine[] resp = ctx.getIntraday("700.HK", TradeSessions.Intraday).get();
             for (IntradayLine line : resp) System.out.println(line);
         }
     }
@@ -91,7 +91,7 @@ class Main {
 
 ```rust
 use std::sync::Arc;
-use longbridge::{oauth::OAuthBuilder, quote::QuoteContext, Config};
+use longbridge::{oauth::OAuthBuilder, quote::{QuoteContext, TradeSessions}, Config};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -100,7 +100,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .await?;
     let config = Arc::new(Config::from_oauth(oauth));
     let (ctx, _) = QuoteContext::try_new(config).await?;
-    let resp = ctx.intraday("700.HK").await?;
+    let resp = ctx.intraday("700.HK", TradeSessions::Intraday).await?;
     println!("{:?}", resp);
     Ok(())
 }

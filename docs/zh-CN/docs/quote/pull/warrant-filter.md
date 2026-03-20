@@ -76,13 +76,13 @@ print(resp)
   <TabItem value="nodejs" label="Node.js">
 
 ```javascript
-const { Config, QuoteContext, OAuth } = require('longbridge')
+const { Config, QuoteContext, OAuth, WarrantSortBy, SortOrderType } = require('longbridge')
 
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
   const ctx = await QuoteContext.new(config)
-  const resp = await ctx.warrantList("700.HK")
+  const resp = await ctx.warrantList("700.HK", WarrantSortBy.LastDone, SortOrderType.Ascending)
   console.log(resp)
 }
 main().catch(console.error)
@@ -100,7 +100,7 @@ class Main {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
              QuoteContext ctx = QuoteContext.create(config).get()) {
-            WarrantInfo[] resp = ctx.queryWarrantList("700.HK", null).get();
+            WarrantInfo[] resp = ctx.queryWarrantList(new QueryWarrantOptions("700.HK", WarrantSortBy.LastDone, SortOrderType.Ascending)).get();
             for (WarrantInfo w : resp) System.out.println(w);
         }
     }
@@ -112,14 +112,14 @@ class Main {
 
 ```rust
 use std::sync::Arc;
-use longbridge::{oauth::OAuthBuilder, quote::QuoteContext, Config};
+use longbridge::{oauth::OAuthBuilder, quote::{QuoteContext, WarrantSortBy, SortOrderType}, Config};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
     let (ctx, _) = QuoteContext::try_new(config).await?;
-    let resp = ctx.warrant_list("700.HK", None).await?;
+    let resp = ctx.warrant_list("700.HK", WarrantSortBy::LastDone, SortOrderType::Ascending, None, None, None, None, None).await?;
     println!("{:?}", resp);
     Ok(())
 }

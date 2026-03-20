@@ -73,7 +73,7 @@ async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
   const ctx = await QuoteContext.new(config)
-  const resp = await ctx.candlesticks("700.HK", Period.Day, 10, AdjustType.NoAdjust)
+  const resp = await ctx.candlesticks("700.HK", Period.Day, 10, AdjustType.NoAdjust, TradeSessions.Intraday)
   console.log(resp)
 }
 main().catch(console.error)
@@ -91,7 +91,7 @@ class Main {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
              QuoteContext ctx = QuoteContext.create(config).get()) {
-            Candlestick[] resp = ctx.getCandlesticks("700.HK", Period.Day, 10, AdjustType.NoAdjust).get();
+            Candlestick[] resp = ctx.getCandlesticks("700.HK", Period.Day, 10, AdjustType.NoAdjust, TradeSessions.Intraday).get();
             for (Candlestick c : resp) System.out.println(c);
         }
     }
@@ -103,14 +103,14 @@ class Main {
 
 ```rust
 use std::sync::Arc;
-use longbridge::{oauth::OAuthBuilder, quote::QuoteContext, Config, quote::{Period, AdjustType}};
+use longbridge::{oauth::OAuthBuilder, quote::QuoteContext, Config, quote::{Period, AdjustType, TradeSessions}};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
     let (ctx, _) = QuoteContext::try_new(config).await?;
-    let resp = ctx.candlesticks("700.HK", Period::Day, 10, AdjustType::NoAdjust, None).await?;
+    let resp = ctx.candlesticks("700.HK", Period::Day, 10, AdjustType::NoAdjust, TradeSessions::Intraday).await?;
     println!("{:?}", resp);
     Ok(())
 }
