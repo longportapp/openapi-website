@@ -1,9 +1,10 @@
 ---
-sidebar_position: 6
+sidebar_position: 2.2
 slug: /llm
 sidebar_label: LLM
 sidebarCollapsed: true
 id: llm
+sidebar_icon: sparkles
 ---
 
 # LLM 組件
@@ -12,11 +13,11 @@ id: llm
 
 <video src="https://pub.lbkrs.com/files/202503/SGozJNWBfYpta73i/longport-mcp.mp4" width="100%" autoplay loop controls  />
 
-是的，您可以通過 Longbridge OpenAPI 使用我們的 LLM 組件，今天就開始吧！
+是的，您可以通過 Longbridge Developers 使用我們的 LLM 組件，今天就開始吧！
 
 ## LLMs 文本
 
-OpenAPI 文件遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https://open.longbridge.com/llms.txt) 以及每個文件的 Markdown 文件，基於這個 LLMs 文本，你可以為 AI 提供 Longbridge OpenAPI 完整的文件字典作為 AI 輔助生成開發的參考信息，這樣 AI 能生成出來的代碼可以更準確。
+OpenAPI 文件遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https://open.longbridge.com/llms.txt) 以及每個文件的 Markdown 文件，基於這個 LLMs 文本，你可以為 AI 提供 Longbridge Developers 完整的文件字典作為 AI 輔助生成開發的參考信息，這樣 AI 能生成出來的代碼可以更準確。
 
 - [https://open.longbridge.com/llms.txt](https://open.longbridge.com/llms.txt) - 大約 2104 個 token。
 
@@ -49,7 +50,7 @@ OpenAPI 文件遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https
 
 ### Cursor 內使用
 
-打開 Cursor，打開命令面板（`Command + Shift + P`）搜索並選擇 **Add New Custom Docs**，並在出來的對話框中輸入 Longbridge OpenAPI 的 LLMs Text 地址：
+打開 Cursor，打開命令面板（`Command + Shift + P`）搜索並選擇 **Add New Custom Docs**，並在出來的對話框中輸入 Longbridge Developers 的 LLMs Text 地址：
 
 ```
 https://open.longbridge.com/llms.txt

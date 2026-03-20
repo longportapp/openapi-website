@@ -44,7 +44,7 @@ const { breadcrumbItems } = useBreadcrumb()
 }
 
 .breadcrumb-link {
-  @apply text-[var(--vp-c-text-2)] hover:text-[var(--vp-c-brand-1)] transition-colors duration-200 no-underline;
+  @apply text-[var(--vp-c-text-2)] hover:text-[var(--vp-c-text-1)] transition-colors duration-200 no-underline;
 }
 
 .breadcrumb-text {
@@ -56,6 +56,6 @@ const { breadcrumbItems } = useBreadcrumb()
 }
 
 .breadcrumb-item.is-current .breadcrumb-text {
-  @apply text-[var(--vp-c-brand-1)] font-semibold;
+  @apply text-[var(--vp-c-text-1)] font-medium;
 }
 </style>
