@@ -1,7 +1,7 @@
 ---
-slug: news
-title: Security News
-sidebar_position: 1
+slug: topics
+title: 获取标的讨论
+sidebar_position: 2
 language_tabs: false
 toc_footers: []
 includes: []
@@ -10,24 +10,24 @@ highlight_theme: ''
 headingLevel: 2
 ---
 
-Get the news list for a specified security.
+获取指定股票的讨论列表。
 
-<SDKLinks module="content" klass="ContentContext" method="news" />
+<SDKLinks module="content" klass="ContentContext" method="topics" />
 
 ## Request
 
 <table className="http-basic">
 <tbody>
 <tr><td className="http-basic-key">HTTP Method</td><td>GET</td></tr>
-<tr><td className="http-basic-key">HTTP URL</td><td>/v1/content/{symbol}/news</td></tr>
+<tr><td className="http-basic-key">HTTP URL</td><td>/v1/content/{symbol}/topics</td></tr>
 </tbody>
 </table>
 
 ### Path Parameters
 
-| Name   | Type   | Required | Description                                         |
-| ------ | ------ | -------- | --------------------------------------------------- |
-| symbol | string | YES      | Stock symbol, use `ticker.region` format, e.g. `AAPL.US` |
+| Name   | Type   | Required | Description                                    |
+| ------ | ------ | -------- | ---------------------------------------------- |
+| symbol | string | YES      | 股票代码，使用 `ticker.region` 格式，例如：`AAPL.US` |
 
 ### Request Example
 
@@ -41,7 +41,7 @@ oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
 config = Config.from_oauth(oauth)
 ctx = ContentContext(config)
 
-resp = ctx.news("AAPL.US")
+resp = ctx.topics("AAPL.US")
 print(resp)
 ```
 
@@ -55,7 +55,7 @@ async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
   const ctx = await ContentContext.new(config)
-  const resp = await ctx.news("AAPL.US")
+  const resp = await ctx.topics("AAPL.US")
   console.log(resp)
 }
 main().catch(console.error)
@@ -73,8 +73,8 @@ class Main {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
              ContentContext ctx = ContentContext.create(config).get()) {
-            NewsItem[] resp = ctx.getNews("AAPL.US").get();
-            for (NewsItem item : resp) System.out.println(item);
+            TopicItem[] resp = ctx.getTopics("AAPL.US").get();
+            for (TopicItem item : resp) System.out.println(item);
         }
     }
 }
@@ -92,7 +92,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
     let ctx = ContentContext::try_new(config)?;
-    let resp = ctx.news("AAPL.US").await?;
+    let resp = ctx.topics("AAPL.US").await?;
     println!("{:?}", resp);
     Ok(())
 }
@@ -122,9 +122,9 @@ int main(int argc, char const* argv[]) {
       Config config = Config::from_oauth(*res);
       ContentContext::create(config, [](auto res) {
         if (!res) { std::cout << "failed to create content context: " << *res.status().message() << std::endl; return; }
-        res.context().news("AAPL.US", [](auto res) {
+        res.context().topics("AAPL.US", [](auto res) {
           if (!res) { std::cout << "failed: " << *res.status().message() << std::endl; return; }
-          std::cout << "news: " << res->size() << std::endl;
+          std::cout << "topics: " << res->size() << std::endl;
         });
       });
     });
@@ -163,11 +163,11 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	items, err := ctx.News(context.Background(), "AAPL.US")
+	items, err := ctx.Topics(context.Background(), "AAPL.US")
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("news:", len(items))
+	fmt.Println("topics:", len(items))
 }
 ```
 
@@ -189,14 +189,14 @@ func main() {
   "data": {
     "items": [
       {
-        "id": "279528757",
-        "title": "Beats cross-industry collaboration breaks the circle with Nike! Apple aims to ignite a new wave of wearable consumer trends, while Nike bets on the narrative of \"sports technology.\"",
-        "description": "Apple's Beats has collaborated with Nike to launch a limited edition Powerbeats Pro 2 headphones, featuring Nike's Swoosh logo. The headphones will be available online and at select Apple Stores on March 20, priced at $250. This marks Beats' first collaboration with an external sports brand, signifying further synergy between the two companies in branding and product ecosystems. The headphones feature real-time heart rate tracking and a battery life of up to 45 hours",
-        "url": "https://longbridge.com/news/279528757",
-        "published_at": "1773805586",
-        "comments_count": 0,
-        "likes_count": 0,
-        "shares_count": 0
+        "id": "39304657",
+        "title": "英伟达 GTC 备受关注；阿里 "Token 战略" 再加码｜今日重要消息回顾",
+        "description": "0317 ｜海豚君重点关注：🐬 个股 1、[st]ST/US/NVDA#英伟达.US[/st] 英伟达 GTC 2026 大会正式开幕，英伟达创始人兼 CEO 黄仁勋发表了主题演讲。宣布，其下一代 Vera Rubin 架构将推出专为空间轨道数据中心设计的 Vera Rubin Space Module，性能比 H100 提升 25 倍。同时宣布与 Groq 合作开发新型 LPU 芯片...",
+        "url": "https://longbridge.com/topics/39304657",
+        "published_at": "1773736144",
+        "comments_count": 1,
+        "likes_count": 7,
+        "shares_count": 4
       }
     ]
   }
@@ -205,25 +205,25 @@ func main() {
 
 ### Response Status
 
-| Status | Description    | Schema                                |
-| ------ | -------------- | ------------------------------------- |
-| 200    | Success        | [news_response](#schemanews_response) |
-| 500    | Internal error | None                                  |
+| Status | Description | Schema                                        |
+| ------ | ----------- | --------------------------------------------- |
+| 200    | 返回成功    | [topics_response](#schematopics_response)     |
+| 500    | 内部错误    | None                                          |
 
 ## Schemas
 
-### news_response
+### topics_response
 
-<a id="schemanews_response"></a>
+<a id="schematopics_response"></a>
 
-| Name               | Type      | Required | Description                                |
-| ------------------ | --------- | -------- | ------------------------------------------ |
-| items              | object[]  | true     | News list                                  |
-| ∟ id               | string    | true     | News ID                                    |
-| ∟ title            | string    | true     | Title                                      |
-| ∟ description      | string    | true     | Summary/description                        |
-| ∟ url              | string    | true     | Detail page URL                            |
-| ∟ published_at     | string    | true     | Published time, Unix timestamp (seconds)   |
-| ∟ comments_count   | int32     | true     | Comment count                              |
-| ∟ likes_count      | int32     | true     | Like count                                 |
-| ∟ shares_count     | int32     | true     | Share count                                |
+| Name               | Type      | Required | Description                   |
+| ------------------ | --------- | -------- | ----------------------------- |
+| items              | object[]  | true     | 讨论列表                      |
+| ∟ id               | string    | true     | 讨论 ID                       |
+| ∟ title            | string    | true     | 标题                          |
+| ∟ description      | string    | true     | 摘要/描述                     |
+| ∟ url              | string    | true     | 讨论详情链接                  |
+| ∟ published_at     | string    | true     | 发布时间，Unix 时间戳（秒）   |
+| ∟ comments_count   | int32     | true     | 评论数                        |
+| ∟ likes_count      | int32     | true     | 点赞数                        |
+| ∟ shares_count     | int32     | true     | 分享数                        |
