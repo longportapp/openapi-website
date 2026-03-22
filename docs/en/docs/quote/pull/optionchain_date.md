@@ -79,8 +79,8 @@ class Main {
                 .get();
              Config config = Config.fromOAuth(oauth);
              QuoteContext ctx = QuoteContext.create(config).get()) {
-            String[] resp = ctx.getOptionChainExpiryDateList("AAPL.US").get();
-            for (String d : resp) System.out.println(d);
+            LocalDate[] resp = ctx.getOptionChainExpiryDateList("AAPL.US").get();
+            for (LocalDate d : resp) System.out.println(d);
         }
     }
 }

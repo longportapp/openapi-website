@@ -56,7 +56,7 @@ print(resp)
   <TabItem value="nodejs" label="Node.js">
 
 ```javascript
-const { Config, QuoteContext, OAuth, Market } = require('longbridge')
+const { Config, QuoteContext, OAuth, Market, NaiveDate } = require('longbridge')
 
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => {
@@ -64,7 +64,7 @@ async function main() {
   })
   const config = Config.fromOAuth(oauth)
   const ctx = await QuoteContext.new(config)
-  const resp = await ctx.tradingDays(Market.HK, "20220101", "20220201")
+  const resp = await ctx.tradingDays(Market.HK, new NaiveDate(2022, 1, 1), new NaiveDate(2022, 2, 1))
   console.log(resp)
 }
 main().catch(console.error)

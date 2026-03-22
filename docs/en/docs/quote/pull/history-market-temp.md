@@ -45,13 +45,13 @@ print(resp)
   <TabItem value="nodejs" label="Node.js">
 
 ```javascript
-const { Config, QuoteContext, OAuth, Market } = require('longbridge')
+const { Config, QuoteContext, OAuth, Market, NaiveDate } = require('longbridge')
 
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
   const ctx = await QuoteContext.new(config)
-  const resp = await ctx.historyMarketTemperature(Market.US, "20240101", "20240131")
+  const resp = await ctx.historyMarketTemperature(Market.US, new NaiveDate(2024, 1, 1), new NaiveDate(2024, 1, 31))
   console.log(resp)
 }
 main().catch(console.error)

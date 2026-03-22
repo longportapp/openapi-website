@@ -41,7 +41,7 @@ headingLevel: 2
   <TabItem value="python" label="Python" default>
 
 ```python
-from longbridge.openapi import TradeContext, Config, OrderStatus, OrderType, OrderSide, OAuthBuilder
+from longbridge.openapi import TradeContext, Config, OrderType, OrderSide, OAuthBuilder
 
 oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
 config = Config.from_oauth(oauth)
@@ -59,13 +59,13 @@ print(resp)
   <TabItem value="nodejs" label="Node.js">
 
 ```javascript
-const { Config, TradeContext, OAuth } = require('longbridge')
+const { Config, TradeContext, OAuth, OrderType, OrderSide, Decimal } = require('longbridge')
 
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
   const ctx = await TradeContext.new(config)
-  const resp = await ctx.estimateMaxPurchaseQuantity({ symbol: "700.HK", orderType: "LO", side: "Buy", price: "400", quantity: 100 })
+  const resp = await ctx.estimateMaxPurchaseQuantity({ symbol: "700.HK", orderType: OrderType.LO, side: OrderSide.Buy, price: new Decimal("400"), fractionalShares: false })
   console.log(resp)
 }
 main().catch(console.error)
@@ -83,7 +83,7 @@ class Main {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
              TradeContext ctx = TradeContext.create(config).get()) {
-            EstimateMaxPurchaseQuantityResponse resp = ctx.estimateMaxPurchaseQuantity(EstimateMaxPurchaseQuantityOptions.builder().symbol("700.HK").orderType(OrderType.LO).side(OrderSide.Buy).price(new BigDecimal("400")).quantity(100).build()).get();
+            EstimateMaxPurchaseQuantityResponse resp = ctx.getEstimateMaxPurchaseQuantity(new EstimateMaxPurchaseQuantityOptions("700.HK", OrderType.LO, OrderSide.Buy).setPrice(new BigDecimal("400"))).get();
             System.out.println(resp);
         }
     }
@@ -95,7 +95,7 @@ class Main {
 
 ```rust
 use std::sync::Arc;
-use longbridge::{oauth::OAuthBuilder, trade::TradeContext, Config};
+use longbridge::{oauth::OAuthBuilder, trade::{TradeContext, EstimateMaxPurchaseQuantityOptions, OrderType, OrderSide}, Config};
 use rust_decimal::Decimal;
 
 #[tokio::main]
@@ -103,7 +103,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
     let (ctx, _) = TradeContext::try_new(config).await?;
-    let resp = ctx.estimate_max_purchase_quantity(longbridge::trade::EstimateMaxPurchaseQuantityOptions::builder().symbol("700.HK").order_type(longbridge::trade::OrderType::LO).side(longbridge::trade::OrderSide::Buy).price(Decimal::from(400)).quantity(100).build()).await?;
+    let resp = ctx.estimate_max_purchase_quantity(
+        EstimateMaxPurchaseQuantityOptions::new("700.HK", OrderType::LO, OrderSide::Buy)
+            .price(Decimal::from(400))
+    ).await?;
     println!("{:?}", resp);
     Ok(())
 }

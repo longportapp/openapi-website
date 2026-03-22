@@ -54,7 +54,7 @@ print(resp)
   <TabItem value="nodejs" label="Node.js">
 
 ```javascript
-const { Config, QuoteContext, OAuth } = require('longbridge')
+const { Config, QuoteContext, OAuth, NaiveDate } = require('longbridge')
 
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => {
@@ -62,7 +62,7 @@ async function main() {
   })
   const config = Config.fromOAuth(oauth)
   const ctx = await QuoteContext.new(config)
-  const resp = await ctx.optionChainInfoByDate("AAPL.US", "20230120")
+  const resp = await ctx.optionChainInfoByDate("AAPL.US", new NaiveDate(2023, 1, 20))
   console.log(resp)
 }
 main().catch(console.error)
