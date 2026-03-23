@@ -155,7 +155,7 @@ longbridge positions --format json | jq '.[] | {symbol, quantity}'
 为 AI 工具（如 Claude）安装 Skill，使其掌握全部 `longbridge` 命令知识：
 
 ```bash
-npx skills add longbridge/longbridge-terminal
+npx skills add longbridge/developers
 ```
 
 安装后，AI 可直接从对话中查询行情、执行技术分析、管理交易：
