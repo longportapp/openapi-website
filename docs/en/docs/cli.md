@@ -155,7 +155,7 @@ longbridge positions --format json | jq '.[] | {symbol, quantity}'
 Install the skill to give AI tools (like Claude) full knowledge of all `longbridge` commands:
 
 ```bash
-npx skills add longbridge/longbridge-terminal
+npx skills add longbridge/developers
 ```
 
 Once installed, AI can query market data, run technical analysis, and manage trades directly from the conversation:
