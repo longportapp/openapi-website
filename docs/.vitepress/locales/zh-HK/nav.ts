@@ -8,6 +8,7 @@ export const nav = (lang: string): DefaultTheme.NavItem[] => {
     { text: 'MCP', link: `/${lang}/docs/mcp`, activeMatch: `^/${lang}/docs/mcp` },
     { text: 'CLI', link: `/${lang}/docs/cli`, activeMatch: `^/${lang}/docs/cli` },
     { text: 'LLM', link: `/${lang}/docs/llm`, activeMatch: `^/${lang}/docs/llm` },
+    { text: 'Skill', link: `/${lang}/skill`, activeMatch: `^/${lang}/skill` },
     { text: 'Issues', link: 'https://github.com/longbridge/openapi/issues', target: '_blank' },
   ]
 }
