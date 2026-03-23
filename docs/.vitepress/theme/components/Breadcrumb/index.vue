@@ -1,5 +1,5 @@
 <template>
-  <div v-if="breadcrumbItems.length > 0" class="breadcrumb-container">
+  <div v-if="breadcrumbItems.length > 1" class="breadcrumb-container">
     <nav class="breadcrumb" aria-label="面包屑导航">
       <ol class="breadcrumb-list">
         <li
