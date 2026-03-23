@@ -125,41 +125,41 @@ using namespace longbridge::quote;
 static void
 run(const OAuth& oauth)
 {
-  Config config = Config::from_oauth(oauth);
-  QuoteContext ctx = QuoteContext::create(config);
+    Config config = Config::from_oauth(oauth);
+    QuoteContext ctx = QuoteContext::create(config);
 
-  std::vector<std::string> symbols = {"AAPL230317C160000.US"};
-          ctx.option_quote(symbols, [](auto res) {
-            if (!res) {
-              std::cout << "failed: " << *res.status().message() << std::endl;
-              return;
-            }
-            for (const auto& q : *res) {
-              std::cout << q.symbol << " " << (double)q.last_done << std::endl;
-            }
-          });
+    std::vector<std::string> symbols = {"AAPL230317C160000.US"};
+    ctx.option_quote(symbols, [](auto res) {
+        if (!res) {
+            std::cout << "failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        for (const auto& q : *res) {
+            std::cout << q.symbol << " " << (double)q.last_done << std::endl;
+        }
+    });
 }
 
 int main(int argc, char const* argv[]) {
 #ifdef WIN32
-  SetConsoleOutputCP(CP_UTF8);
+    SetConsoleOutputCP(CP_UTF8);
 #endif
 
-  const std::string client_id = "your-client-id";
-  OAuthBuilder(client_id).build(
+    const std::string client_id = "your-client-id";
+    OAuthBuilder(client_id).build(
     [](const std::string& url) {
-      std::cout << "Open this URL to authorize: " << url << std::endl;
+        std::cout << "Open this URL to authorize: " << url << std::endl;
     },
     [](auto res) {
-      if (!res) {
-        std::cout << "authorization failed: " << *res.status().message() << std::endl;
-        return;
-      }
-      run(*res);
+        if (!res) {
+            std::cout << "authorization failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        run(*res);
     });
 
-  std::cin.get();
-  return 0;
+    std::cin.get();
+    return 0;
 }
 ```
 

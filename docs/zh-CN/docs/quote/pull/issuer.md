@@ -113,40 +113,40 @@ using namespace longbridge::quote;
 static void
 run(const OAuth& oauth)
 {
-  Config config = Config::from_oauth(oauth);
-  QuoteContext ctx = QuoteContext::create(config);
+    Config config = Config::from_oauth(oauth);
+    QuoteContext ctx = QuoteContext::create(config);
 
-  ctx.warrant_issuers([](auto res) {
-            if (!res) {
-              std::cout << "failed: " << *res.status().message() << std::endl;
-              return;
-            }
-            for (const auto& i : *res) {
-              std::cout << i.id << " " << i.name_cn << " " << i.name_en << std::endl;
-            }
-          });
+    ctx.warrant_issuers([](auto res) {
+        if (!res) {
+            std::cout << "failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        for (const auto& i : *res) {
+            std::cout << i.id << " " << i.name_cn << " " << i.name_en << std::endl;
+        }
+    });
 }
 
 int main(int argc, char const* argv[]) {
 #ifdef WIN32
-  SetConsoleOutputCP(CP_UTF8);
+    SetConsoleOutputCP(CP_UTF8);
 #endif
 
-  const std::string client_id = "your-client-id";
-  OAuthBuilder(client_id).build(
+    const std::string client_id = "your-client-id";
+    OAuthBuilder(client_id).build(
     [](const std::string& url) {
-      std::cout << "Open this URL to authorize: " << url << std::endl;
+        std::cout << "Open this URL to authorize: " << url << std::endl;
     },
     [](auto res) {
-      if (!res) {
-        std::cout << "authorization failed: " << *res.status().message() << std::endl;
-        return;
-      }
-      run(*res);
+        if (!res) {
+            std::cout << "authorization failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        run(*res);
     });
 
-  std::cin.get();
-  return 0;
+    std::cin.get();
+    return 0;
 }
 ```
 

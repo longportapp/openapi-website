@@ -112,24 +112,24 @@ using namespace longbridge::content;
 
 int main(int argc, char const* argv[]) {
 #ifdef WIN32
-  SetConsoleOutputCP(CP_UTF8);
+    SetConsoleOutputCP(CP_UTF8);
 #endif
-  const std::string client_id = "your-client-id";
-  OAuthBuilder(client_id).build(
+    const std::string client_id = "your-client-id";
+    OAuthBuilder(client_id).build(
     [](const std::string& url) { std::cout << "Open this URL to authorize: " << url << std::endl; },
     [](auto res) {
-      if (!res) { std::cout << "authorization failed: " << *res.status().message() << std::endl; return; }
-      Config config = Config::from_oauth(*res);
-      ContentContext::create(config, [](auto res) {
-        if (!res) { std::cout << "failed to create content context: " << *res.status().message() << std::endl; return; }
-        res.context().topics("AAPL.US", [](auto res) {
-          if (!res) { std::cout << "failed: " << *res.status().message() << std::endl; return; }
-          std::cout << "topics: " << res->size() << std::endl;
+        if (!res) { std::cout << "authorization failed: " << *res.status().message() << std::endl; return; }
+        Config config = Config::from_oauth(*res);
+        ContentContext::create(config, [](auto res) {
+            if (!res) { std::cout << "failed to create content context: " << *res.status().message() << std::endl; return; }
+            res.context().topics("AAPL.US", [](auto res) {
+                if (!res) { std::cout << "failed: " << *res.status().message() << std::endl; return; }
+                std::cout << "topics: " << res->size() << std::endl;
+            });
         });
-      });
     });
-  std::cin.get();
-  return 0;
+    std::cin.get();
+    return 0;
 }
 ```
 

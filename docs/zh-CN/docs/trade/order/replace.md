@@ -135,36 +135,36 @@ using namespace longbridge::trade;
 static void
 run(const OAuth& oauth)
 {
-  Config config = Config::from_oauth(oauth);
-  TradeContext ctx = TradeContext::create(config);
+    Config config = Config::from_oauth(oauth);
+    TradeContext ctx = TradeContext::create(config);
 
-  ReplaceOrderOptions opts{"701276261045858304", 400, Decimal(60.0)};
-          ctx.replace_order(opts, [](auto res) {
-            if (!res) { std::cout << "failed" << std::endl; return; }
-            std::cout << "replaced" << std::endl;
-          });
+    ReplaceOrderOptions opts{"701276261045858304", 400, Decimal(60.0)};
+    ctx.replace_order(opts, [](auto res) {
+        if (!res) { std::cout << "failed" << std::endl; return; }
+        std::cout << "replaced" << std::endl;
+    });
 }
 
 int main(int argc, char const* argv[]) {
 #ifdef WIN32
-  SetConsoleOutputCP(CP_UTF8);
+    SetConsoleOutputCP(CP_UTF8);
 #endif
 
-  const std::string client_id = "your-client-id";
-  OAuthBuilder(client_id).build(
+    const std::string client_id = "your-client-id";
+    OAuthBuilder(client_id).build(
     [](const std::string& url) {
-      std::cout << "Open this URL to authorize: " << url << std::endl;
+        std::cout << "Open this URL to authorize: " << url << std::endl;
     },
     [](auto res) {
-      if (!res) {
-        std::cout << "authorization failed: " << *res.status().message() << std::endl;
-        return;
-      }
-      run(*res);
+        if (!res) {
+            std::cout << "authorization failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        run(*res);
     });
 
-  std::cin.get();
-  return 0;
+    std::cin.get();
+    return 0;
 }
 ```
 
