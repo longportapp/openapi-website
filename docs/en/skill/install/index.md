@@ -57,15 +57,11 @@ The Skill will be active in all conversations within that project.
 
 ## Claude Code
 
-**Option 1: CLI**
+1. Download [longbridge.zip](/skill/longbridge.zip) and extract it
+2. Copy the extracted files into `.claude/skills/` in your project directory (create the folder if it doesn't exist)
+3. Restart Claude Code or start a new session
 
-Run in your project directory:
-
-```bash
-npx skills add longbridge/developers
-```
-
-After installation, use Longbridge capabilities directly in your Claude Code sessions.
+The Skill will be available in all Claude Code sessions within that project.
 
 ---
 
