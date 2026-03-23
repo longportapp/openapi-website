@@ -22,6 +22,8 @@ Also available on [skills.sh](https://skills.sh/longbridge/developers) and [GitH
 
 ## Claude Desktop / Claude.ai
 
+> Claude.ai's code execution environment only allows access to a fixed whitelist of domains, so automated installation is not possible. Use the manual method below instead.
+
 1. Open [Claude.ai](https://claude.ai) and go to **Projects**
 2. Create a new project or open an existing one → **Project Settings**
 3. Click **Add content** under **Project Knowledge**
@@ -33,6 +35,8 @@ The Skill will be active in all conversations within that project.
 ---
 
 ## ChatGPT
+
+> ChatGPT cannot auto-install Skills during a conversation. Use the GPT configuration page to upload manually.
 
 1. Go to [ChatGPT](https://chatgpt.com) → **My GPTs** → **Create a GPT**
 2. Switch to the **Configure** tab
