@@ -6,7 +6,7 @@ titleTemplate: API、LLM、MCP、CLI 及更多開放能力
 
 hero:
   image:
-    src: https://pub.lbkrs.com/files/202503/2CChxYnHQXeW9eRu/code.svg
+    src: /assets/code.svg
     alt: Longbridge
   text: 'Longbridge <span>Developers</span>'
   tagline: 穩定 · 安全 · 快速

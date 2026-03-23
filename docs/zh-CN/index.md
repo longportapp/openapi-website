@@ -5,7 +5,7 @@ pageClass: longbridge-home-page
 titleTemplate: API、LLM、MCP、CLI 及更多开放能力
 hero:
   image:
-    src: https://pub.lbkrs.com/files/202503/2CChxYnHQXeW9eRu/code.svg
+    src: /assets/code.svg
     alt: Longbridge
   text: 'Longbridge <span>Developers</span>'
   tagline: 稳定 · 安全 · 快速

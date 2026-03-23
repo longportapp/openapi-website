@@ -16,7 +16,7 @@ The SDK package has been renamed from `longport` to `longbridge`. The old `longp
 
 </div>
 
-<div class="border-t-hidden flex flex-col md:flex-row max-w-4xl w-full justify-between md:text-left mx-auto px-6 md:px-0 py-4">
+<div class="border-t-hidden flex flex-col max-w-4xl w-full justify-between md:text-left mx-auto px-6 md:px-0 py-4">
 <Tabs groupId="programming-language">
 <TabItem value="python" label="Python" default>
 
