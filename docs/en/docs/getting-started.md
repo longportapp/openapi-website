@@ -621,6 +621,69 @@ go run ./
 
   </TabItem>
 
+  <TabItem value="cpp" label="C++">
+
+Create `account_asset.cpp` and paste the code below:
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+
+#ifdef WIN32
+#include <windows.h>
+#endif
+
+using namespace longbridge;
+using namespace longbridge::trade;
+
+static void
+run(const OAuth& oauth)
+{
+    Config config = Config::from_oauth(oauth);
+    TradeContext ctx = TradeContext::create(config);
+
+    ctx.account_balance([](auto res) {
+        if (!res) {
+            std::cout << "failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        for (const auto& b : *res) {
+            std::cout << b.currency << " " << (double)b.available_cash << std::endl;
+        }
+    });
+}
+
+int main(int argc, char const* argv[]) {
+#ifdef WIN32
+    SetConsoleOutputCP(CP_UTF8);
+#endif
+
+    const std::string client_id = "your-client-id";
+    OAuthBuilder(client_id).build(
+    [](const std::string& url) {
+        std::cout << "Open this URL to authorize: " << url << std::endl;
+    },
+    [](auto res) {
+        if (!res) {
+            std::cout << "authorization failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        run(*res);
+    });
+
+    std::cin.get();
+    return 0;
+}
+```
+
+Run it
+
+```bash
+g++ -std=c++17 account_asset.cpp -o account_asset -llongbridge && ./account_asset
+```
+
+  </TabItem>
+
 </Tabs>
 
 After running, the output is as follows:
@@ -901,6 +964,74 @@ Run:
 
 ```shell
 go run ./
+```
+
+  </TabItem>
+
+  <TabItem value="cpp" label="C++">
+
+Create `subscribe_quote.cpp` and paste the code below:
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+
+#ifdef WIN32
+#include <windows.h>
+#endif
+
+using namespace longbridge;
+using namespace longbridge::quote;
+
+static QuoteContext g_ctx;
+
+static void
+run(const OAuth& oauth)
+{
+    Config config = Config::from_oauth(oauth);
+    g_ctx = QuoteContext::create(config);
+
+    g_ctx.set_on_quote([](auto event) {
+        std::cout << event->symbol
+                  << " last_done=" << (double)event->last_done
+                  << " volume=" << event->volume << std::endl;
+    });
+
+    std::vector<std::string> symbols = {"700.HK", "AAPL.US", "TSLA.US", "NFLX.US"};
+    g_ctx.subscribe(symbols, SubFlags::QUOTE(), [](auto res) {
+        if (!res) {
+            std::cout << "failed to subscribe: " << *res.status().message() << std::endl;
+        }
+    });
+}
+
+int main(int argc, char const* argv[]) {
+#ifdef WIN32
+    SetConsoleOutputCP(CP_UTF8);
+#endif
+
+    const std::string client_id = "your-client-id";
+    OAuthBuilder(client_id).build(
+    [](const std::string& url) {
+        std::cout << "Open this URL to authorize: " << url << std::endl;
+    },
+    [](auto res) {
+        if (!res) {
+            std::cout << "authorization failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        run(*res);
+    });
+
+    std::cin.get();
+    return 0;
+}
+```
+
+Run it
+
+```bash
+g++ -std=c++17 subscribe_quote.cpp -o subscribe_quote -llongbridge && ./subscribe_quote
 ```
 
   </TabItem>
@@ -1209,6 +1340,74 @@ go run ./
 
   </TabItem>
 
+  <TabItem value="cpp" label="C++">
+
+Create `submit_order.cpp` and paste the code below:
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+
+#ifdef WIN32
+#include <windows.h>
+#endif
+
+using namespace longbridge;
+using namespace longbridge::trade;
+
+static void
+run(const OAuth& oauth)
+{
+    Config config = Config::from_oauth(oauth);
+    TradeContext ctx = TradeContext::create(config);
+
+    SubmitOrderOptions opts{
+        "700.HK",     OrderType::LO,        OrderSide::Buy,
+        Decimal(200), TimeInForceType::Day,  Decimal(50.0),
+        std::nullopt, std::nullopt,          std::nullopt,
+        std::nullopt, std::nullopt,          std::nullopt,
+        std::nullopt,
+    };
+    ctx.submit_order(opts, [](auto res) {
+        if (!res) {
+            std::cout << "failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        std::cout << "order id: " << res->order_id << std::endl;
+    });
+}
+
+int main(int argc, char const* argv[]) {
+#ifdef WIN32
+    SetConsoleOutputCP(CP_UTF8);
+#endif
+
+    const std::string client_id = "your-client-id";
+    OAuthBuilder(client_id).build(
+    [](const std::string& url) {
+        std::cout << "Open this URL to authorize: " << url << std::endl;
+    },
+    [](auto res) {
+        if (!res) {
+            std::cout << "authorization failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        run(*res);
+    });
+
+    std::cin.get();
+    return 0;
+}
+```
+
+Run it
+
+```bash
+g++ -std=c++17 submit_order.cpp -o submit_order -llongbridge && ./submit_order
+```
+
+  </TabItem>
+
 </Tabs>
 
 After running, the output is as follows:
@@ -1409,6 +1608,70 @@ Run:
 
 ```shell
 go run ./
+```
+
+  </TabItem>
+
+  <TabItem value="cpp" label="C++">
+
+Create `today_orders.cpp` and paste the code below:
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+
+#ifdef WIN32
+#include <windows.h>
+#endif
+
+using namespace longbridge;
+using namespace longbridge::trade;
+
+static void
+run(const OAuth& oauth)
+{
+    Config config = Config::from_oauth(oauth);
+    TradeContext ctx = TradeContext::create(config);
+
+    ctx.today_orders(std::nullopt, [](auto res) {
+        if (!res) {
+            std::cout << "failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        for (auto it = res->cbegin(); it != res->cend(); ++it) {
+            std::cout << "order_id=" << it->order_id
+                      << " quantity=" << it->quantity << std::endl;
+        }
+    });
+}
+
+int main(int argc, char const* argv[]) {
+#ifdef WIN32
+    SetConsoleOutputCP(CP_UTF8);
+#endif
+
+    const std::string client_id = "your-client-id";
+    OAuthBuilder(client_id).build(
+    [](const std::string& url) {
+        std::cout << "Open this URL to authorize: " << url << std::endl;
+    },
+    [](auto res) {
+        if (!res) {
+            std::cout << "authorization failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        run(*res);
+    });
+
+    std::cin.get();
+    return 0;
+}
+```
+
+Run it
+
+```bash
+g++ -std=c++17 today_orders.cpp -o today_orders -llongbridge && ./today_orders
 ```
 
   </TabItem>
