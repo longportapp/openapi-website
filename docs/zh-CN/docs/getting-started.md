@@ -445,6 +445,34 @@ python account_asset.py
 ```
 
   </TabItem>
+  <TabItem value="python-async" label="Python (async)">
+
+创建 `account_asset_async.py` 贴入下面的代码：
+
+```python
+import asyncio
+from longbridge.openapi import AsyncTradeContext, Config, OAuthBuilder
+
+async def main() -> None:
+    oauth = await OAuthBuilder("your-client-id").build_async(
+        lambda url: print(f"请访问此 URL 进行授权：{url}")
+    )
+    config = Config.from_oauth(oauth)
+    ctx = AsyncTradeContext.create(config)
+    resp = await ctx.account_balance()
+    print(resp)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+运行
+
+```bash
+python account_asset_async.py
+```
+
+  </TabItem>
   <TabItem value="javascript" label="JavaScript">
 
 创建 `account_asset.js` 贴入下面的代码：
@@ -667,6 +695,40 @@ sleep(30)
 
 ```bash
 python subscribe_quote.py
+```
+
+  </TabItem>
+  <TabItem value="python-async" label="Python (async)">
+
+创建 `subscribe_quote_async.py` 贴入下面的代码：
+
+```python
+import asyncio
+from longbridge.openapi import AsyncQuoteContext, Config, OAuthBuilder, SubType, PushQuote
+
+
+async def on_quote(symbol: str, quote: PushQuote) -> None:
+    print(symbol, quote)
+
+
+async def main() -> None:
+    oauth = await OAuthBuilder("your-client-id").build_async(
+        lambda url: print(f"请访问此 URL 进行授权：{url}")
+    )
+    config = Config.from_oauth(oauth)
+    ctx = AsyncQuoteContext.create(config, loop_=asyncio.get_running_loop())
+    ctx.set_on_quote(on_quote)
+    await ctx.subscribe(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], [SubType.Quote])
+    await asyncio.sleep(30)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+运行
+
+```bash
+python subscribe_quote_async.py
 ```
 
   </TabItem>
@@ -917,6 +979,43 @@ python submit_order.py
 ```
 
   </TabItem>
+  <TabItem value="python-async" label="Python (async)">
+
+创建 `submit_order_async.py` 贴入下面的代码：
+
+```python
+import asyncio
+from decimal import Decimal
+from longbridge.openapi import AsyncTradeContext, Config, OAuthBuilder, OrderSide, OrderType, TimeInForceType
+
+async def main() -> None:
+    oauth = await OAuthBuilder("your-client-id").build_async(
+        lambda url: print(f"请访问此 URL 进行授权：{url}")
+    )
+    config = Config.from_oauth(oauth)
+    ctx = AsyncTradeContext.create(config)
+    resp = await ctx.submit_order(
+        side=OrderSide.Buy,
+        symbol="700.HK",
+        order_type=OrderType.LO,
+        submitted_price=Decimal(50),
+        submitted_quantity=Decimal(200),
+        time_in_force=TimeInForceType.Day,
+        remark="Hello from Python SDK",
+    )
+    print(resp)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+运行
+
+```bash
+python submit_order_async.py
+```
+
+  </TabItem>
   <TabItem value="javascript" label="JavaScript">
 
 创建 `submit_order.js` 贴入下面的代码：
@@ -1135,6 +1234,34 @@ print(resp)
 
 ```bash
 python today_orders.py
+```
+
+  </TabItem>
+  <TabItem value="python-async" label="Python (async)">
+
+创建 `today_orders_async.py` 贴入下面的代码：
+
+```python
+import asyncio
+from longbridge.openapi import AsyncTradeContext, Config, OAuthBuilder
+
+async def main() -> None:
+    oauth = await OAuthBuilder("your-client-id").build_async(
+        lambda url: print(f"请访问此 URL 进行授权：{url}")
+    )
+    config = Config.from_oauth(oauth)
+    ctx = AsyncTradeContext.create(config)
+    resp = await ctx.today_orders()
+    print(resp)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+运行
+
+```bash
+python today_orders_async.py
 ```
 
   </TabItem>
