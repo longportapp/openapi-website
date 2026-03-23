@@ -10,6 +10,37 @@ Full-stack financial data and trading platform: CLI, Python/Rust SDK, MCP, and L
 **Official docs:** https://open.longbridge.com
 **llms.txt:** https://open.longbridge.com/llms.txt
 
+## First-Time Setup
+
+Before using any Longbridge feature, check which tools are available:
+
+**CLI** — run `longbridge --version` to check. If not installed:
+
+```bash
+# macOS
+brew install --cask longbridge/tap/longbridge-terminal
+
+# Any platform
+curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
+```
+
+Then authenticate:
+
+```bash
+longbridge login
+```
+
+**MCP (for AI tools)** — if the user wants to query data or trade directly inside the AI chat (without writing code), add the hosted MCP server:
+
+```bash
+# Claude Code
+claude mcp add longbridge https://openapi.longbridge.com/mcp
+```
+
+First tool call triggers an OAuth browser flow. See [references/mcp.md](references/mcp.md) for other clients (Cursor, ChatGPT, Zed).
+
+---
+
 ## Choose the Right Tool
 
 ```
