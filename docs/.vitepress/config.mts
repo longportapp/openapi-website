@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import Unocss from 'unocss/vite'
 import { markdownConfig } from './config/markdown'
-import { dirname } from 'node:path'
+import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { localesConfig } from './config/locales'
 import { withMermaid } from 'vitepress-plugin-mermaid'
@@ -138,7 +138,7 @@ export default defineConfig(
       plugins: [
         groupIconVitePlugin(),
         Unocss({
-          configFile: '../unocss.config.ts',
+          configFile: resolve(dirname(fileURLToPath(import.meta.url)), '../unocss.config.ts'),
         }),
 
         /**s
