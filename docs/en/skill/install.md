@@ -22,6 +22,8 @@ Also available on [skills.sh](https://skills.sh/longbridge/developers) and [GitH
 
 ## Claude Desktop / Claude.ai
 
+> Claude.ai's code execution environment only allows access to a fixed whitelist of domains, so automated installation is not possible. Use the manual method below instead.
+
 1. Open [Claude.ai](https://claude.ai) and go to **Projects**
 2. Create a new project or open an existing one → **Project Settings**
 3. Click **Add content** under **Project Knowledge**
@@ -33,6 +35,8 @@ The Skill will be active in all conversations within that project.
 ---
 
 ## ChatGPT
+
+> ChatGPT cannot auto-install Skills during a conversation. Use the GPT configuration page to upload manually.
 
 1. Go to [ChatGPT](https://chatgpt.com) → **My GPTs** → **Create a GPT**
 2. Switch to the **Configure** tab
@@ -53,15 +57,11 @@ The Skill will be active in all conversations within that project.
 
 ## Claude Code
 
-**Option 1: CLI**
+1. Download [longbridge.zip](/skill/longbridge.zip) and extract it
+2. Copy the extracted files into `.claude/skills/` in your project directory (create the folder if it doesn't exist)
+3. Restart Claude Code or start a new session
 
-Run in your project directory:
-
-```bash
-npx skills add longbridge/developers
-```
-
-After installation, use Longbridge capabilities directly in your Claude Code sessions.
+The Skill will be available in all Claude Code sessions within that project.
 
 ---
 
