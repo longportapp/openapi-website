@@ -17,6 +17,7 @@ from longbridge.openapi import (
     Config, OAuthBuilder,
     QuoteContext, AsyncQuoteContext,
     TradeContext, AsyncTradeContext,
+    ContentContext, AsyncContentContext,
     HttpClient,
 )
 ```
@@ -28,6 +29,7 @@ from longbridge.openapi import (
 Token cached at `~/.longbridge/openapi/tokens/<client_id>`. Re-runs browser auth only when token is expired.
 
 **Register once:**
+
 ```bash
 curl -X POST https://openapi.longbridge.com/oauth2/register \
   -H "Content-Type: application/json" \
@@ -36,6 +38,7 @@ curl -X POST https://openapi.longbridge.com/oauth2/register \
 ```
 
 **Sync:**
+
 ```python
 from longbridge.openapi import OAuthBuilder, Config
 
@@ -46,6 +49,7 @@ config = Config.from_oauth(oauth)
 ```
 
 **Async:**
+
 ```python
 import asyncio
 from longbridge.openapi import OAuthBuilder, Config
@@ -98,19 +102,19 @@ Config.from_oauth(
 
 ## Environment Variables
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `LONGBRIDGE_APP_KEY` | App Key (legacy) | — |
-| `LONGBRIDGE_APP_SECRET` | App Secret (legacy) | — |
-| `LONGBRIDGE_ACCESS_TOKEN` | Access Token (legacy) | — |
-| `LONGBRIDGE_LANGUAGE` | `zh-CN`, `zh-HK`, `en` | `en` |
-| `LONGBRIDGE_HTTP_URL` | HTTP endpoint | `https://openapi.longbridge.com` |
-| `LONGBRIDGE_QUOTE_WS_URL` | Quote WebSocket | `wss://openapi-quote.longbridge.com/v2` |
-| `LONGBRIDGE_TRADE_WS_URL` | Trade WebSocket | `wss://openapi-trade.longbridge.com/v2` |
-| `LONGBRIDGE_ENABLE_OVERNIGHT` | Enable overnight quotes | `false` |
-| `LONGBRIDGE_PUSH_CANDLESTICK_MODE` | `realtime` or `confirmed` | `realtime` |
-| `LONGBRIDGE_PRINT_QUOTE_PACKAGES` | Print packages on connect | `true` |
-| `LONGBRIDGE_LOG_PATH` | Log file directory | (no logs) |
+| Variable                           | Description               | Default                                 |
+| ---------------------------------- | ------------------------- | --------------------------------------- |
+| `LONGBRIDGE_APP_KEY`               | App Key (legacy)          | —                                       |
+| `LONGBRIDGE_APP_SECRET`            | App Secret (legacy)       | —                                       |
+| `LONGBRIDGE_ACCESS_TOKEN`          | Access Token (legacy)     | —                                       |
+| `LONGBRIDGE_LANGUAGE`              | `zh-CN`, `zh-HK`, `en`    | `en`                                    |
+| `LONGBRIDGE_HTTP_URL`              | HTTP endpoint             | `https://openapi.longbridge.com`        |
+| `LONGBRIDGE_QUOTE_WS_URL`          | Quote WebSocket           | `wss://openapi-quote.longbridge.com/v2` |
+| `LONGBRIDGE_TRADE_WS_URL`          | Trade WebSocket           | `wss://openapi-trade.longbridge.com/v2` |
+| `LONGBRIDGE_ENABLE_OVERNIGHT`      | Enable overnight quotes   | `false`                                 |
+| `LONGBRIDGE_PUSH_CANDLESTICK_MODE` | `realtime` or `confirmed` | `realtime`                              |
+| `LONGBRIDGE_PRINT_QUOTE_PACKAGES`  | Print packages on connect | `true`                                  |
+| `LONGBRIDGE_LOG_PATH`              | Log file directory        | (no logs)                               |
 
 **China Mainland:** SDK auto-selects `.cn` endpoints. To force: `LONGBRIDGE_REGION=cn` or `LONGBRIDGE_REGION=hk`.
 
@@ -146,12 +150,14 @@ Also available: `HttpClient.from_apikey_env()`, `HttpClient.from_apikey(app_key,
 
 ## Sync vs Async
 
-| Class | Nature | When to use |
-|-------|--------|-------------|
-| `QuoteContext` | Sync | Scripts, data pipelines, simple tools |
-| `AsyncQuoteContext` | Async (asyncio) | Concurrent fetches, FastAPI, Jupyter async |
-| `TradeContext` | Sync | Scripts, command-line tools |
-| `AsyncTradeContext` | Async (asyncio) | Async servers, concurrent trade ops |
+| Class                 | Nature          | When to use                                |
+| --------------------- | --------------- | ------------------------------------------ |
+| `QuoteContext`        | Sync            | Scripts, data pipelines, simple tools      |
+| `AsyncQuoteContext`   | Async (asyncio) | Concurrent fetches, FastAPI, Jupyter async |
+| `TradeContext`        | Sync            | Scripts, command-line tools                |
+| `AsyncTradeContext`   | Async (asyncio) | Async servers, concurrent trade ops        |
+| `ContentContext`      | Sync            | Fetch news and discussion topics           |
+| `AsyncContentContext` | Async (asyncio) | Async news/topics fetching                 |
 
 Both variants share identical method signatures — async versions return awaitables instead of values.
 
