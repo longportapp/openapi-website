@@ -82,7 +82,7 @@ yarn add longbridge
 
 ```toml
 [dependencies]
-longbridge = "4.0.0"
+longbridge = "4.0.5"
 tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
@@ -94,7 +94,7 @@ tokio = { version = "1", features = "rt-multi-thread" }
     <dependency>
         <groupId>io.github.longbridge</groupId>
         <artifactId>openapi-sdk</artifactId>
-        <version>4.0.0</version>
+        <version>4.0.5</version>
     </dependency>
 </dependencies>
 ```
@@ -204,6 +204,23 @@ config = Config.from_oauth(oauth)
 ```
 
   </TabItem>
+  <TabItem value="python-async" label="Python (async)">
+
+```python
+import asyncio
+from longbridge.openapi import Config, OAuthBuilder
+
+async def main() -> None:
+    oauth = await OAuthBuilder("your-client-id").build_async(
+        lambda url: print(f"Open this URL to authorize: {url}")
+    )
+    config = Config.from_oauth(oauth)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+  </TabItem>
   <TabItem value="javascript" label="JavaScript">
 
 ```javascript
@@ -281,6 +298,36 @@ func main() {
 ```
 
   </TabItem>
+  <TabItem value="cpp" label="C++">
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+
+using namespace longbridge;
+
+int main(int argc, char const* argv[]) {
+    const std::string client_id = "your-client-id";
+    OAuthBuilder(client_id).build(
+    [](const std::string& url) {
+        std::cout << "Open this URL to authorize: " << url << std::endl;
+    },
+    [](auto res) {
+        if (!res) {
+            std::cout << "authorization failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        Config config = Config::from_oauth(*res);
+        // Use config to create QuoteContext or TradeContext
+    });
+
+    std::cin.get();
+    return 0;
+}
+```
+
+  </TabItem>
+
 </Tabs>
 
 :::tip OAuth Benefits
@@ -429,6 +476,34 @@ python account_asset.py
 ```
 
   </TabItem>
+  <TabItem value="python-async" label="Python (async)">
+
+Create `account_asset_async.py` and paste the code below:
+
+```python
+import asyncio
+from longbridge.openapi import AsyncTradeContext, Config, OAuthBuilder
+
+async def main() -> None:
+    oauth = await OAuthBuilder("your-client-id").build_async(
+        lambda url: print(f"Open this URL to authorize: {url}")
+    )
+    config = Config.from_oauth(oauth)
+    ctx = AsyncTradeContext.create(config)
+    resp = await ctx.account_balance()
+    print(resp)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+Run it
+
+```bash
+python account_asset_async.py
+```
+
+  </TabItem>
   <TabItem value="javascript" label="JavaScript">
 
 Create `account_asset.js` and paste the code below:
@@ -442,7 +517,7 @@ async function main() {
   })
   const config = Config.fromOAuth(oauth)
   // Or use API Key: const config = Config.fromApikeyEnv()
-  const ctx = await TradeContext.new(config)
+  const ctx = TradeContext.new(config)
   const resp = await ctx.accountBalance()
   for (const obj of resp) {
     console.log(obj.toString())
@@ -476,7 +551,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Or use API Key: let config = Arc::new(Config::from_apikey_env()?);
     // Or without ENV: let config = Arc::new(Config::from_apikey("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN")?);
 
-    let (ctx, _) = TradeContext::try_new(config).await?;
+    let (ctx, _) = TradeContext::new(config);
     let resp = ctx.account_balance(None).await?;
     println!("{:?}", resp);
     Ok(())
@@ -506,8 +581,8 @@ class Main {
                 .get();
         try (oauth;
              Config config = Config.fromOAuth(oauth);
-             TradeContext ctx = TradeContext.create(config).get()) {
-            // Or use API Key: Config.fromApikeyEnv(); TradeContext.create(config).get()
+             TradeContext ctx = TradeContext.create(config)) {
+            // Or use API Key: Config.fromApikeyEnv(); TradeContext.create(config)
             for (AccountBalance obj : ctx.getAccountBalance().get()) {
                 System.out.println(obj);
             }
@@ -572,6 +647,69 @@ Run:
 ```shell
 go mod tidy
 go run ./
+```
+
+  </TabItem>
+
+  <TabItem value="cpp" label="C++">
+
+Create `account_asset.cpp` and paste the code below:
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+
+#ifdef WIN32
+#include <windows.h>
+#endif
+
+using namespace longbridge;
+using namespace longbridge::trade;
+
+static void
+run(const OAuth& oauth)
+{
+    Config config = Config::from_oauth(oauth);
+    TradeContext ctx = TradeContext::create(config);
+
+    ctx.account_balance([](auto res) {
+        if (!res) {
+            std::cout << "failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        for (const auto& b : *res) {
+            std::cout << b.currency << " " << (double)b.available_cash << std::endl;
+        }
+    });
+}
+
+int main(int argc, char const* argv[]) {
+#ifdef WIN32
+    SetConsoleOutputCP(CP_UTF8);
+#endif
+
+    const std::string client_id = "your-client-id";
+    OAuthBuilder(client_id).build(
+    [](const std::string& url) {
+        std::cout << "Open this URL to authorize: " << url << std::endl;
+    },
+    [](auto res) {
+        if (!res) {
+            std::cout << "authorization failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        run(*res);
+    });
+
+    std::cin.get();
+    return 0;
+}
+```
+
+Run it
+
+```bash
+g++ -std=c++17 account_asset.cpp -o account_asset -llongbridge && ./account_asset
 ```
 
   </TabItem>
@@ -659,6 +797,40 @@ python subscribe_quote.py
 ```
 
   </TabItem>
+  <TabItem value="python-async" label="Python (async)">
+
+Create `subscribe_quote_async.py` and paste the code below:
+
+```python
+import asyncio
+from longbridge.openapi import AsyncQuoteContext, Config, OAuthBuilder, SubType, PushQuote
+
+
+async def on_quote(symbol: str, quote: PushQuote) -> None:
+    print(symbol, quote)
+
+
+async def main() -> None:
+    oauth = await OAuthBuilder("your-client-id").build_async(
+        lambda url: print(f"Open this URL to authorize: {url}")
+    )
+    config = Config.from_oauth(oauth)
+    ctx = AsyncQuoteContext.create(config, loop_=asyncio.get_running_loop())
+    ctx.set_on_quote(on_quote)
+    await ctx.subscribe(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], [SubType.Quote])
+    await asyncio.sleep(30)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+Run it
+
+```bash
+python subscribe_quote_async.py
+```
+
+  </TabItem>
   <TabItem value="javascript" label="JavaScript">
 
 Create `subscribe_quote.js` and paste the code below:
@@ -671,7 +843,7 @@ async function main() {
     console.log('Open this URL to authorize: ' + url)
   })
   const config = Config.fromOAuth(oauth)
-  const ctx = await QuoteContext.new(config)
+  const ctx = QuoteContext.new(config)
   ctx.setOnQuote((_, event) => console.log(event.toString()))
   await ctx.subscribe(['700.HK', 'AAPL.US', 'TSLA.US', 'NFLX.US'], [SubType.Quote])
   await new Promise(() => {})
@@ -705,7 +877,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build(|url| println!("Open this URL to authorize: {url}"))
         .await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, mut receiver) = QuoteContext::try_new(config).await?;
+    let (ctx, mut receiver) = QuoteContext::new(config);
 
     ctx.subscribe(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], SubFlags::QUOTE)
         .await?;
@@ -740,7 +912,7 @@ class Main {
                 .get();
         try (oauth;
              Config config = Config.fromOAuth(oauth);
-             QuoteContext ctx = QuoteContext.create(config).get()) {
+             QuoteContext ctx = QuoteContext.create(config)) {
             ctx.setOnQuote((symbol, quote) -> {
                 System.out.printf("%s\t%s\n", symbol, quote);
             });
@@ -826,6 +998,74 @@ go run ./
 
   </TabItem>
 
+  <TabItem value="cpp" label="C++">
+
+Create `subscribe_quote.cpp` and paste the code below:
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+
+#ifdef WIN32
+#include <windows.h>
+#endif
+
+using namespace longbridge;
+using namespace longbridge::quote;
+
+static QuoteContext g_ctx;
+
+static void
+run(const OAuth& oauth)
+{
+    Config config = Config::from_oauth(oauth);
+    g_ctx = QuoteContext::create(config);
+
+    g_ctx.set_on_quote([](auto event) {
+        std::cout << event->symbol
+                  << " last_done=" << (double)event->last_done
+                  << " volume=" << event->volume << std::endl;
+    });
+
+    std::vector<std::string> symbols = {"700.HK", "AAPL.US", "TSLA.US", "NFLX.US"};
+    g_ctx.subscribe(symbols, SubFlags::QUOTE(), [](auto res) {
+        if (!res) {
+            std::cout << "failed to subscribe: " << *res.status().message() << std::endl;
+        }
+    });
+}
+
+int main(int argc, char const* argv[]) {
+#ifdef WIN32
+    SetConsoleOutputCP(CP_UTF8);
+#endif
+
+    const std::string client_id = "your-client-id";
+    OAuthBuilder(client_id).build(
+    [](const std::string& url) {
+        std::cout << "Open this URL to authorize: " << url << std::endl;
+    },
+    [](auto res) {
+        if (!res) {
+            std::cout << "authorization failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        run(*res);
+    });
+
+    std::cin.get();
+    return 0;
+}
+```
+
+Run it
+
+```bash
+g++ -std=c++17 subscribe_quote.cpp -o subscribe_quote -llongbridge && ./subscribe_quote
+```
+
+  </TabItem>
+
 </Tabs>
 
 After running, the output is as follows:
@@ -906,6 +1146,43 @@ python submit_order.py
 ```
 
   </TabItem>
+  <TabItem value="python-async" label="Python (async)">
+
+Create `submit_order_async.py` and paste the code below:
+
+```python
+import asyncio
+from decimal import Decimal
+from longbridge.openapi import AsyncTradeContext, Config, OAuthBuilder, OrderSide, OrderType, TimeInForceType
+
+async def main() -> None:
+    oauth = await OAuthBuilder("your-client-id").build_async(
+        lambda url: print(f"Open this URL to authorize: {url}")
+    )
+    config = Config.from_oauth(oauth)
+    ctx = AsyncTradeContext.create(config)
+    resp = await ctx.submit_order(
+        side=OrderSide.Buy,
+        symbol="700.HK",
+        order_type=OrderType.LO,
+        submitted_price=Decimal(50),
+        submitted_quantity=Decimal(200),
+        time_in_force=TimeInForceType.Day,
+        remark="Hello from Python SDK",
+    )
+    print(resp)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+Run it
+
+```bash
+python submit_order_async.py
+```
+
+  </TabItem>
   <TabItem value="javascript" label="JavaScript">
 
 Create `submit_order.js` and paste the code below:
@@ -918,7 +1195,7 @@ async function main() {
     console.log('Open this URL to authorize: ' + url)
   })
   const config = Config.fromOAuth(oauth)
-  const ctx = await TradeContext.new(config)
+  const ctx = TradeContext.new(config)
   const resp = await ctx.submitOrder({
     symbol: '700.HK',
     orderType: OrderType.LO,
@@ -959,7 +1236,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build(|url| println!("Open this URL to authorize: {url}"))
         .await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = TradeContext::try_new(config).await?;
+    let (ctx, _) = TradeContext::new(config);
 
     let opts = SubmitOrderOptions::new(
         "700.HK",
@@ -999,7 +1276,7 @@ public class Main {
                 .get();
         try (oauth;
              Config config = Config.fromOAuth(oauth);
-             TradeContext ctx = TradeContext.create(config).get()) {
+             TradeContext ctx = TradeContext.create(config)) {
             SubmitOrderOptions opts = new SubmitOrderOptions("700.HK",
                     OrderType.LO,
                     OrderSide.Buy,
@@ -1093,6 +1370,74 @@ go run ./
 
   </TabItem>
 
+  <TabItem value="cpp" label="C++">
+
+Create `submit_order.cpp` and paste the code below:
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+
+#ifdef WIN32
+#include <windows.h>
+#endif
+
+using namespace longbridge;
+using namespace longbridge::trade;
+
+static void
+run(const OAuth& oauth)
+{
+    Config config = Config::from_oauth(oauth);
+    TradeContext ctx = TradeContext::create(config);
+
+    SubmitOrderOptions opts{
+        "700.HK",     OrderType::LO,        OrderSide::Buy,
+        Decimal(200), TimeInForceType::Day,  Decimal(50.0),
+        std::nullopt, std::nullopt,          std::nullopt,
+        std::nullopt, std::nullopt,          std::nullopt,
+        std::nullopt,
+    };
+    ctx.submit_order(opts, [](auto res) {
+        if (!res) {
+            std::cout << "failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        std::cout << "order id: " << res->order_id << std::endl;
+    });
+}
+
+int main(int argc, char const* argv[]) {
+#ifdef WIN32
+    SetConsoleOutputCP(CP_UTF8);
+#endif
+
+    const std::string client_id = "your-client-id";
+    OAuthBuilder(client_id).build(
+    [](const std::string& url) {
+        std::cout << "Open this URL to authorize: " << url << std::endl;
+    },
+    [](auto res) {
+        if (!res) {
+            std::cout << "authorization failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        run(*res);
+    });
+
+    std::cin.get();
+    return 0;
+}
+```
+
+Run it
+
+```bash
+g++ -std=c++17 submit_order.cpp -o submit_order -llongbridge && ./submit_order
+```
+
+  </TabItem>
+
 </Tabs>
 
 After running, the output is as follows:
@@ -1127,6 +1472,34 @@ python today_orders.py
 ```
 
   </TabItem>
+  <TabItem value="python-async" label="Python (async)">
+
+Create `today_orders_async.py` and paste the code below:
+
+```python
+import asyncio
+from longbridge.openapi import AsyncTradeContext, Config, OAuthBuilder
+
+async def main() -> None:
+    oauth = await OAuthBuilder("your-client-id").build_async(
+        lambda url: print(f"Open this URL to authorize: {url}")
+    )
+    config = Config.from_oauth(oauth)
+    ctx = AsyncTradeContext.create(config)
+    resp = await ctx.today_orders()
+    print(resp)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+Run it
+
+```bash
+python today_orders_async.py
+```
+
+  </TabItem>
   <TabItem value="javascript" label="JavaScript">
 
 Create `today_orders.js` and paste the code below:
@@ -1139,7 +1512,7 @@ async function main() {
     console.log('Open this URL to authorize: ' + url)
   })
   const config = Config.fromOAuth(oauth)
-  const ctx = await TradeContext.new(config)
+  const ctx = TradeContext.new(config)
   const resp = await ctx.todayOrders()
   for (const obj of resp) {
     console.log(obj.toString())
@@ -1170,7 +1543,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build(|url| println!("Open this URL to authorize: {url}"))
         .await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = TradeContext::try_new(config).await?;
+    let (ctx, _) = TradeContext::new(config);
 
     let resp = ctx.today_orders(None).await?;
     for obj in resp {
@@ -1203,7 +1576,7 @@ class Main {
                 .get();
         try (oauth;
              Config config = Config.fromOAuth(oauth);
-             TradeContext ctx = TradeContext.create(config).get()) {
+             TradeContext ctx = TradeContext.create(config)) {
             Order[] orders = ctx.getTodayOrders(null).get();
             for (Order order : orders) {
                 System.out.println(order);
@@ -1265,6 +1638,70 @@ Run:
 
 ```shell
 go run ./
+```
+
+  </TabItem>
+
+  <TabItem value="cpp" label="C++">
+
+Create `today_orders.cpp` and paste the code below:
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+
+#ifdef WIN32
+#include <windows.h>
+#endif
+
+using namespace longbridge;
+using namespace longbridge::trade;
+
+static void
+run(const OAuth& oauth)
+{
+    Config config = Config::from_oauth(oauth);
+    TradeContext ctx = TradeContext::create(config);
+
+    ctx.today_orders(std::nullopt, [](auto res) {
+        if (!res) {
+            std::cout << "failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        for (auto it = res->cbegin(); it != res->cend(); ++it) {
+            std::cout << "order_id=" << it->order_id
+                      << " quantity=" << it->quantity << std::endl;
+        }
+    });
+}
+
+int main(int argc, char const* argv[]) {
+#ifdef WIN32
+    SetConsoleOutputCP(CP_UTF8);
+#endif
+
+    const std::string client_id = "your-client-id";
+    OAuthBuilder(client_id).build(
+    [](const std::string& url) {
+        std::cout << "Open this URL to authorize: " << url << std::endl;
+    },
+    [](auto res) {
+        if (!res) {
+            std::cout << "authorization failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        run(*res);
+    });
+
+    std::cin.get();
+    return 0;
+}
+```
+
+Run it
+
+```bash
+g++ -std=c++17 today_orders.cpp -o today_orders -llongbridge && ./today_orders
 ```
 
   </TabItem>

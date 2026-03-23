@@ -150,7 +150,7 @@ export default defineConfig(
       plugins: [
         groupIconVitePlugin(),
         Unocss({
-          configFile: '../unocss.config.ts',
+          configFile: resolve(dirname(fileURLToPath(import.meta.url)), '../unocss.config.ts'),
         }),
 
         /**s

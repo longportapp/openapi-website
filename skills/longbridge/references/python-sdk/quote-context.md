@@ -219,6 +219,13 @@ trades   = ctx.realtime_trades("700.HK", 100)      # List[Trade]
 candles  = ctx.realtime_candlesticks("AAPL.US", Period.Min_1, 50)  # List[Candlestick]
 ```
 
+## Filings
+
+```python
+items = ctx.filings("700.HK")   # List of filing objects
+# Each item: symbol, name, title, lang, type, url, published_at
+```
+
 ## Account Info
 
 ```python
