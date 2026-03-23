@@ -122,6 +122,23 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 using namespace longbridge;
 using namespace longbridge::trade;
 
+static void
+run(const OAuth& oauth)
+{
+  Config config = Config::from_oauth(oauth);
+  TradeContext ctx = TradeContext::create(config);
+
+  ctx.account_balance([](auto res) {
+            if (!res) {
+              std::cout << "failed: " << *res.status().message() << std::endl;
+              return;
+            }
+            for (const auto& b : *res) {
+              std::cout << b.currency << " " << (double)b.available << std::endl;
+            }
+          });
+}
+
 int main(int argc, char const* argv[]) {
 #ifdef WIN32
   SetConsoleOutputCP(CP_UTF8);
@@ -137,22 +154,7 @@ int main(int argc, char const* argv[]) {
         std::cout << "authorization failed: " << *res.status().message() << std::endl;
         return;
       }
-      Config config = Config::from_oauth(*res);
-      TradeContext::create(config, [](auto res) {
-        if (!res) {
-          std::cout << "failed to create trade context: " << *res.status().message() << std::endl;
-          return;
-        }
-        res.context().account_balance([](auto res) {
-          if (!res) {
-            std::cout << "failed: " << *res.status().message() << std::endl;
-            return;
-          }
-          for (const auto& b : *res) {
-            std::cout << b.currency << " " << (double)b.available << std::endl;
-          }
-        });
-      });
+      run(*res);
     });
 
   std::cin.get();

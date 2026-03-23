@@ -117,31 +117,44 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```cpp
 #include <iostream>
 #include <longbridge.hpp>
+
 #ifdef WIN32
 #include <windows.h>
 #endif
+
 using namespace longbridge;
 using namespace longbridge::quote;
+
+static void
+run(const OAuth& oauth)
+{
+  Config config = Config::from_oauth(oauth);
+  QuoteContext ctx = QuoteContext::create(config);
+
+  ctx.set_on_quote([](auto e) { std::cout << e->symbol << std::endl; });
+          ctx.subscribe(symbols, SubFlags::QUOTE(), true, [](auto res) {
+            if (!res) { std::cout << "failed: " << *res.status().message() << std::endl; return; }
+          });
+}
 
 int main(int argc, char const* argv[]) {
 #ifdef WIN32
   SetConsoleOutputCP(CP_UTF8);
 #endif
+
   const std::string client_id = "your-client-id";
-  std::vector<std::string> symbols = {"700.HK", "AAPL.US"};
   OAuthBuilder(client_id).build(
-    [](const std::string& url) { std::cout << "Open this URL to authorize: " << url << std::endl; },
+    [](const std::string& url) {
+      std::cout << "Open this URL to authorize: " << url << std::endl;
+    },
     [](auto res) {
-      if (!res) { std::cout << "authorization failed: " << *res.status().message() << std::endl; return; }
-      Config config = Config::from_oauth(*res);
-      QuoteContext::create(config, [](auto res) {
-        if (!res) { std::cout << "failed to create quote context: " << *res.status().message() << std::endl; return; }
-        res.context().set_on_quote([](auto e) { std::cout << e->symbol << std::endl; });
-        res.context().subscribe(symbols, SubFlags::QUOTE(), true, [](auto res) {
-          if (!res) { std::cout << "failed: " << *res.status().message() << std::endl; return; }
-        });
-      });
+      if (!res) {
+        std::cout << "authorization failed: " << *res.status().message() << std::endl;
+        return;
+      }
+      run(*res);
     });
+
   std::cin.get();
   return 0;
 }

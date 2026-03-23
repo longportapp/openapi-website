@@ -106,31 +106,44 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```cpp
 #include <iostream>
 #include <longbridge.hpp>
+
 #ifdef WIN32
 #include <windows.h>
 #endif
+
 using namespace longbridge;
 using namespace longbridge::quote;
+
+static void
+run(const OAuth& oauth)
+{
+  Config config = Config::from_oauth(oauth);
+  QuoteContext ctx = QuoteContext::create(config);
+
+  ctx.create_watchlist_group("My Group", symbols, [](auto res) {
+            if (!res) { std::cout << "failed" << std::endl; return; }
+            std::cout << "created: " << res->name << std::endl;
+          });
+}
 
 int main(int argc, char const* argv[]) {
 #ifdef WIN32
   SetConsoleOutputCP(CP_UTF8);
 #endif
+
   const std::string client_id = "your-client-id";
-  std::vector<std::string> symbols = {"700.HK", "AAPL.US"};
   OAuthBuilder(client_id).build(
-    [](const std::string& url) { std::cout << "Open this URL to authorize: " << url << std::endl; },
+    [](const std::string& url) {
+      std::cout << "Open this URL to authorize: " << url << std::endl;
+    },
     [](auto res) {
-      if (!res) { std::cout << "authorization failed" << std::endl; return; }
-      Config config = Config::from_oauth(*res);
-      QuoteContext::create(config, [](auto res) {
-        if (!res) { std::cout << "failed to create quote context" << std::endl; return; }
-        res.context().create_watchlist_group("My Group", symbols, [](auto res) {
-          if (!res) { std::cout << "failed" << std::endl; return; }
-          std::cout << "created: " << res->name << std::endl;
-        });
-      });
+      if (!res) {
+        std::cout << "authorization failed: " << *res.status().message() << std::endl;
+        return;
+      }
+      run(*res);
     });
+
   std::cin.get();
   return 0;
 }

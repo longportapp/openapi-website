@@ -122,6 +122,24 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 using namespace longbridge;
 using namespace longbridge::quote;
 
+static void
+run(const OAuth& oauth)
+{
+  Config config = Config::from_oauth(oauth);
+  QuoteContext ctx = QuoteContext::create(config);
+
+  std::vector<std::string> symbols = {"700.HK", "AAPL.US", "TSLA.US", "NFLX.US"};
+          ctx.quote(symbols, [](auto res) {
+            if (!res) {
+              std::cout << "failed: " << *res.status().message() << std::endl;
+              return;
+            }
+            for (const auto& it : *res) {
+              std::cout << it.symbol << " last_done=" << (double)it.last_done << std::endl;
+            }
+          });
+}
+
 int main(int argc, char const* argv[]) {
 #ifdef WIN32
   SetConsoleOutputCP(CP_UTF8);
@@ -137,23 +155,7 @@ int main(int argc, char const* argv[]) {
         std::cout << "authorization failed: " << *res.status().message() << std::endl;
         return;
       }
-      Config config = Config::from_oauth(*res);
-      QuoteContext::create(config, [](auto res) {
-        if (!res) {
-          std::cout << "failed to create quote context: " << *res.status().message() << std::endl;
-          return;
-        }
-        std::vector<std::string> symbols = {"700.HK", "AAPL.US", "TSLA.US", "NFLX.US"};
-        res.context().quote(symbols, [](auto res) {
-          if (!res) {
-            std::cout << "failed: " << *res.status().message() << std::endl;
-            return;
-          }
-          for (const auto& it : *res) {
-            std::cout << it.symbol << " last_done=" << (double)it.last_done << std::endl;
-          }
-        });
-      });
+      run(*res);
     });
 
   std::cin.get();
