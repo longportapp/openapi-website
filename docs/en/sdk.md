@@ -80,7 +80,7 @@ Add the following line to your `Cargo.toml` file
 
 ```toml
 [dependencies]
-longbridge = "4.0.0"
+longbridge = "4.0.5"
 ```
 
 [https://crates.io/crates/longbridge](https://crates.io/crates/longbridge)
@@ -108,7 +108,7 @@ Add the following line to your `pom.xml` file
 <dependency>
   <groupId>io.github.longbridge</groupId>
   <artifactId>openapi-sdk</artifactId>
-  <version>4.0.0</version>
+  <version>4.0.5</version>
 </dependency>
 ```
 
@@ -154,7 +154,7 @@ $ go get github.com/longbridge/openapi-go
 
 ### Download
 
-- [4.0.0](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-4.0.0.tar.gz)
+- [4.0.5](https://static.lbctrl.com/openapi-sdk/openapi-cpp-sdk-4.0.5.tar.gz)
 
 ### API Documents
 

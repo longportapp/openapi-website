@@ -79,7 +79,7 @@ yarn add longbridge
 
 ```toml
 [dependencies]
-longbridge = "4.0.0"
+longbridge = "4.0.5"
 tokio = { version = "1", features = "rt-multi-thread" }
 ```
 
@@ -91,7 +91,7 @@ tokio = { version = "1", features = "rt-multi-thread" }
     <dependency>
         <groupId>io.github.longbridge</groupId>
         <artifactId>openapi-sdk</artifactId>
-        <version>4.0.0</version>
+        <version>4.0.5</version>
     </dependency>
 </dependencies>
 ```
