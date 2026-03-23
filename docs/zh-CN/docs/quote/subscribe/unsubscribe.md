@@ -59,7 +59,7 @@ const { Config, QuoteContext, OAuth, SubType } = require('longbridge')
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
-  const ctx = await QuoteContext.new(config)
+  const ctx = QuoteContext.new(config)
   await ctx.unsubscribe(["700.HK", "AAPL.US"], [SubType.Quote])
   console.log("unsubscribed")
 }
@@ -77,7 +77,7 @@ class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
-             QuoteContext ctx = QuoteContext.create(config).get()) {
+             QuoteContext ctx = QuoteContext.create(config)) {
             ctx.unsubscribe(new String[] { "700.HK", "AAPL.US" }, new SubType[] { SubType.Quote }).get();
             System.out.println("unsubscribed");
         }
@@ -96,7 +96,7 @@ use longbridge::{oauth::OAuthBuilder, quote::QuoteContext, Config, quote::SubFla
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = QuoteContext::try_new(config).await?;
+    let (ctx, _) = QuoteContext::new(config);
     ctx.unsubscribe(vec!["700.HK".to_string(), "AAPL.US".to_string()], SubFlags::quote()).await?;
     println!("unsubscribed");
     Ok(())

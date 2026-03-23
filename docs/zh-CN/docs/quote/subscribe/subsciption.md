@@ -49,7 +49,7 @@ const { Config, QuoteContext, OAuth } = require('longbridge')
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
-  const ctx = await QuoteContext.new(config)
+  const ctx = QuoteContext.new(config)
   const resp = await ctx.subscriptions()
   console.log(resp)
 }
@@ -67,7 +67,7 @@ class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
-             QuoteContext ctx = QuoteContext.create(config).get()) {
+             QuoteContext ctx = QuoteContext.create(config)) {
             Subscription[] resp = ctx.getSubscriptions().get();
             for (Subscription s : resp) System.out.println(s);
         }
@@ -86,7 +86,7 @@ use longbridge::{oauth::OAuthBuilder, quote::QuoteContext, Config};
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = QuoteContext::try_new(config).await?;
+    let (ctx, _) = QuoteContext::new(config);
     let resp = ctx.subscriptions().await?;
     println!("{:?}", resp);
     Ok(())

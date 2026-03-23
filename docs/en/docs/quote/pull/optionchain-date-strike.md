@@ -61,7 +61,7 @@ async function main() {
     console.log("Open this URL to authorize: " + url)
   })
   const config = Config.fromOAuth(oauth)
-  const ctx = await QuoteContext.new(config)
+  const ctx = QuoteContext.new(config)
   const resp = await ctx.optionChainInfoByDate("AAPL.US", new NaiveDate(2023, 1, 20))
   console.log(resp)
 }
@@ -82,7 +82,7 @@ class Main {
                 .build(url -> System.out.println("Open to authorize: " + url))
                 .get();
              Config config = Config.fromOAuth(oauth);
-             QuoteContext ctx = QuoteContext.create(config).get()) {
+             QuoteContext ctx = QuoteContext.create(config)) {
             StrikePriceInfo[] resp = ctx.getOptionChainInfoByDate("AAPL.US", LocalDate.of(2023, 1, 20)).get();
             for (StrikePriceInfo o : resp) System.out.println(o);
         }
@@ -104,7 +104,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build(|url| println!("Open this URL to authorize: {url}"))
         .await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = QuoteContext::try_new(config).await?;
+    let (ctx, _) = QuoteContext::new(config);
     let resp = ctx.option_chain_info_by_date("AAPL.US", date!(2023 - 01 - 20)).await?;
     println!("{:?}", resp);
     Ok(())

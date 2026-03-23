@@ -53,7 +53,7 @@ const { Config, TradeContext, OAuth } = require('longbridge')
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
-  const ctx = await TradeContext.new(config)
+  const ctx = TradeContext.new(config)
   const resp = await ctx.fundPositions()
   console.log(resp)
 }
@@ -71,7 +71,7 @@ class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
-             TradeContext ctx = TradeContext.create(config).get()) {
+             TradeContext ctx = TradeContext.create(config)) {
             FundPositionsResponse resp = ctx.getFundPositions(null).get();
             System.out.println(resp);
         }
@@ -90,7 +90,7 @@ use longbridge::{oauth::OAuthBuilder, trade::TradeContext, Config};
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = TradeContext::try_new(config).await?;
+    let (ctx, _) = TradeContext::new(config);
     let resp = ctx.fund_positions(None).await?;
     println!("{:?}", resp);
     Ok(())

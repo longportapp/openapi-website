@@ -50,7 +50,7 @@ const { Config, QuoteContext, OAuth, Market, NaiveDate } = require('longbridge')
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
-  const ctx = await QuoteContext.new(config)
+  const ctx = QuoteContext.new(config)
   const resp = await ctx.historyMarketTemperature(Market.US, new NaiveDate(2024, 1, 1), new NaiveDate(2024, 1, 31))
   console.log(resp)
 }
@@ -68,7 +68,7 @@ class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
-             QuoteContext ctx = QuoteContext.create(config).get()) {
+             QuoteContext ctx = QuoteContext.create(config)) {
             HistoryMarketTemperatureResponse resp = ctx.getHistoryMarketTemperature(Market.US, LocalDate.of(2024, 1, 1), LocalDate.of(2024, 1, 31)).get();
             System.out.println(resp);
         }
@@ -88,7 +88,7 @@ use time::macros::date;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = QuoteContext::try_new(config).await?;
+    let (ctx, _) = QuoteContext::new(config);
     let resp = ctx.history_market_temperature(Market::US, date!(2024 - 01 - 01), date!(2024 - 01 - 31)).await?;
     println!("{:?}", resp);
     Ok(())

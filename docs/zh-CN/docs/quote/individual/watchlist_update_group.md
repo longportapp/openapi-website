@@ -57,7 +57,7 @@ const { Config, QuoteContext, OAuth } = require('longbridge')
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
-  const ctx = await QuoteContext.new(config)
+  const ctx = QuoteContext.new(config)
   await ctx.updateWatchlistGroup(1, "New Name", ["700.HK"])
   console.log("updated")
 }
@@ -75,7 +75,7 @@ class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
-             QuoteContext ctx = QuoteContext.create(config).get()) {
+             QuoteContext ctx = QuoteContext.create(config)) {
             ctx.updateWatchlistGroup(1, "New Name", new String[] { "700.HK" }).get();
             System.out.println("updated");
         }
@@ -94,7 +94,7 @@ use longbridge::{oauth::OAuthBuilder, quote::QuoteContext, Config};
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = QuoteContext::try_new(config).await?;
+    let (ctx, _) = QuoteContext::new(config);
     ctx.update_watchlist_group(1, "New Name", vec!["700.HK".to_string()]).await?;
     println!("updated");
     Ok(())

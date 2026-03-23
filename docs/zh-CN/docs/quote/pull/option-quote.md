@@ -56,7 +56,7 @@ async function main() {
     console.log("Open this URL to authorize: " + url)
   })
   const config = Config.fromOAuth(oauth)
-  const ctx = await QuoteContext.new(config)
+  const ctx = QuoteContext.new(config)
   const resp = await ctx.optionQuote(["AAPL230317P160000.US"])
   for (const obj of resp) {
     console.log(obj.toString())
@@ -78,7 +78,7 @@ class Main {
                 .build(url -> System.out.println("Open to authorize: " + url))
                 .get();
              Config config = Config.fromOAuth(oauth);
-             QuoteContext ctx = QuoteContext.create(config).get()) {
+             QuoteContext ctx = QuoteContext.create(config)) {
             OptionQuote[] resp = ctx.getOptionQuote(new String[] { "AAPL230317P160000.US" }).get();
             for (OptionQuote obj : resp) {
                 System.out.println(obj);
@@ -101,7 +101,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build(|url| println!("Open this URL to authorize: {url}"))
         .await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = QuoteContext::try_new(config).await?;
+    let (ctx, _) = QuoteContext::new(config);
     let resp = ctx.option_quote(["AAPL230317P160000.US"]).await?;
     println!("{:?}", resp);
     Ok(())

@@ -64,7 +64,7 @@ const { Config, TradeContext, OAuth } = require('longbridge')
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
-  const ctx = await TradeContext.new(config)
+  const ctx = TradeContext.new(config)
   const resp = await ctx.cashFlow({ startAt: new Date(2022, 4, 9), endAt: new Date(2022, 4, 12) })
   console.log(resp)
 }
@@ -83,7 +83,7 @@ class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
-             TradeContext ctx = TradeContext.create(config).get()) {
+             TradeContext ctx = TradeContext.create(config)) {
             GetCashFlowOptions opts = new GetCashFlowOptions(
                 OffsetDateTime.of(2022, 5, 9, 0, 0, 0, 0, ZoneOffset.UTC),
                 OffsetDateTime.of(2022, 5, 12, 0, 0, 0, 0, ZoneOffset.UTC));
@@ -106,7 +106,7 @@ use time::macros::datetime;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = TradeContext::try_new(config).await?;
+    let (ctx, _) = TradeContext::new(config);
     let opts = GetCashFlowOptions::new(datetime!(2022-05-09 0:00 UTC), datetime!(2022-05-12 0:00 UTC));
     let resp = ctx.cash_flow(opts).await?;
     println!("{:?}", resp);

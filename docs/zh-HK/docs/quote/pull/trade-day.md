@@ -63,7 +63,7 @@ async function main() {
     console.log("Open this URL to authorize: " + url)
   })
   const config = Config.fromOAuth(oauth)
-  const ctx = await QuoteContext.new(config)
+  const ctx = QuoteContext.new(config)
   const resp = await ctx.tradingDays(Market.HK, new NaiveDate(2022, 1, 1), new NaiveDate(2022, 2, 1))
   console.log(resp)
 }
@@ -84,7 +84,7 @@ class Main {
                 .build(url -> System.out.println("Open to authorize: " + url))
                 .get();
              Config config = Config.fromOAuth(oauth);
-             QuoteContext ctx = QuoteContext.create(config).get()) {
+             QuoteContext ctx = QuoteContext.create(config)) {
             MarketTradingDays resp = ctx.getTradingDays(Market.HK, LocalDate.of(2022, 1, 1), LocalDate.of(2022, 2, 1)).get();
             System.out.println(resp);
         }
@@ -106,7 +106,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build(|url| println!("Open this URL to authorize: {url}"))
         .await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = QuoteContext::try_new(config).await?;
+    let (ctx, _) = QuoteContext::new(config);
     let resp = ctx.trading_days(Market::HK, date!(2022 - 01 - 01), date!(2022 - 02 - 01)).await?;
     println!("{:?}", resp);
     Ok(())

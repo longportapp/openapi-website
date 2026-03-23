@@ -58,7 +58,7 @@ async function main() {
     console.log("Open this URL to authorize: " + url)
   })
   const config = Config.fromOAuth(oauth)
-  const ctx = await QuoteContext.new(config)
+  const ctx = QuoteContext.new(config)
   const resp = await ctx.calcIndexes(["700.HK", "AAPL.US"], [CalcIndex.LastDone, CalcIndex.ChangeRate])
   console.log(resp)
 }
@@ -78,7 +78,7 @@ class Main {
                 .build(url -> System.out.println("Open to authorize: " + url))
                 .get();
              Config config = Config.fromOAuth(oauth);
-             QuoteContext ctx = QuoteContext.create(config).get()) {
+             QuoteContext ctx = QuoteContext.create(config)) {
             SecurityCalcIndex[] resp = ctx.getCalcIndexes(
                 new String[] { "700.HK", "AAPL.US" },
                 new CalcIndex[] { CalcIndex.LastDone, CalcIndex.ChangeRate }
@@ -102,7 +102,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build(|url| println!("Open this URL to authorize: {url}"))
         .await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = QuoteContext::try_new(config).await?;
+    let (ctx, _) = QuoteContext::new(config);
     let resp = ctx.calc_indexes(
         vec!["700.HK".to_string(), "AAPL.US".to_string()],
         vec![CalcIndex::LastDone, CalcIndex::ChangeRate],

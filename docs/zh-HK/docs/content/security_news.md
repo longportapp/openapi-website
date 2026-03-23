@@ -54,7 +54,7 @@ const { Config, ContentContext, OAuth } = require('longbridge')
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
-  const ctx = await ContentContext.new(config)
+  const ctx = ContentContext.new(config)
   const resp = await ctx.news("AAPL.US")
   console.log(resp)
 }
@@ -72,7 +72,7 @@ class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
-             ContentContext ctx = ContentContext.create(config).get()) {
+             ContentContext ctx = ContentContext.create(config)) {
             NewsItem[] resp = ctx.getNews("AAPL.US").get();
             for (NewsItem item : resp) System.out.println(item);
         }
@@ -91,7 +91,7 @@ use longbridge::{oauth::OAuthBuilder, content::ContentContext, Config};
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let ctx = ContentContext::try_new(config)?;
+    let ctx = ContentContext::new(config);
     let resp = ctx.news("AAPL.US").await?;
     println!("{:?}", resp);
     Ok(())

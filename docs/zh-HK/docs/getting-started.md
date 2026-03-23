@@ -437,7 +437,7 @@ async function main() {
     console.log('請造訪此 URL 進行授權：' + url)
   })
   const config = Config.fromOAuth(oauth)
-  const ctx = await TradeContext.new(config)
+  const ctx = TradeContext.new(config)
   const resp = await ctx.accountBalance()
   for (const obj of resp) {
     console.log(obj.toString())
@@ -468,7 +468,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build(|url| println!("請造訪此 URL 進行授權：{url}"))
         .await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = TradeContext::try_new(config).await?;
+    let (ctx, _) = TradeContext::new(config);
     let resp = ctx.account_balance(None).await?;
     println!("{:?}", resp);
     Ok(())
@@ -498,7 +498,7 @@ class Main {
                 .get();
         try (oauth;
              Config config = Config.fromOAuth(oauth);
-             TradeContext ctx = TradeContext.create(config).get()) {
+             TradeContext ctx = TradeContext.create(config)) {
             for (AccountBalance obj : ctx.getAccountBalance().get()) {
                 System.out.println(obj);
             }
@@ -663,7 +663,7 @@ async function main() {
     console.log('請造訪此 URL 進行授權：' + url)
   })
   const config = Config.fromOAuth(oauth)
-  const ctx = await QuoteContext.new(config)
+  const ctx = QuoteContext.new(config)
   ctx.setOnQuote((_, event) => console.log(event.toString()))
   await ctx.subscribe(['700.HK', 'AAPL.US', 'TSLA.US', 'NFLX.US'], [SubType.Quote])
   await new Promise(() => {})
@@ -697,7 +697,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build(|url| println!("請造訪此 URL 進行授權：{url}"))
         .await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, mut receiver) = QuoteContext::try_new(config).await?;
+    let (ctx, mut receiver) = QuoteContext::new(config);
 
     ctx.subscribe(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], SubFlags::QUOTE)
         .await?;
@@ -732,7 +732,7 @@ class Main {
                 .get();
         try (oauth;
              Config config = Config.fromOAuth(oauth);
-             QuoteContext ctx = QuoteContext.create(config).get()) {
+             QuoteContext ctx = QuoteContext.create(config)) {
             ctx.setOnQuote((symbol, quote) -> {
                 System.out.printf("%s\t%s\n", symbol, quote);
             });
@@ -842,7 +842,7 @@ async function main() {
     console.log('請造訪此 URL 進行授權：' + url)
   })
   const config = Config.fromOAuth(oauth)
-  const ctx = await TradeContext.new(config)
+  const ctx = TradeContext.new(config)
   const resp = await ctx.submitOrder({
     symbol: '700.HK',
     orderType: OrderType.LO,
@@ -883,7 +883,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build(|url| println!("請造訪此 URL 進行授權：{url}"))
         .await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = TradeContext::try_new(config).await?;
+    let (ctx, _) = TradeContext::new(config);
 
     let opts = SubmitOrderOptions::new(
         "700.HK",
@@ -923,7 +923,7 @@ public class Main {
                 .get();
         try (oauth;
              Config config = Config.fromOAuth(oauth);
-             TradeContext ctx = TradeContext.create(config).get()) {
+             TradeContext ctx = TradeContext.create(config)) {
             SubmitOrderOptions opts = new SubmitOrderOptions("700.HK",
                     OrderType.LO,
                     OrderSide.Buy,
@@ -1057,7 +1057,7 @@ async function main() {
     console.log('請造訪此 URL 進行授權：' + url)
   })
   const config = Config.fromOAuth(oauth)
-  const ctx = await TradeContext.new(config)
+  const ctx = TradeContext.new(config)
   const resp = await ctx.todayOrders()
   for (const obj of resp) {
     console.log(obj.toString())
@@ -1088,7 +1088,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build(|url| println!("請造訪此 URL 進行授權：{url}"))
         .await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = TradeContext::try_new(config).await?;
+    let (ctx, _) = TradeContext::new(config);
 
     let resp = ctx.today_orders(None).await?;
     for obj in resp {
@@ -1121,7 +1121,7 @@ class Main {
                 .get();
         try (oauth;
              Config config = Config.fromOAuth(oauth);
-             TradeContext ctx = TradeContext.create(config).get()) {
+             TradeContext ctx = TradeContext.create(config)) {
             Order[] orders = ctx.getTodayOrders(null).get();
             for (Order order : orders) {
                 System.out.println(order);

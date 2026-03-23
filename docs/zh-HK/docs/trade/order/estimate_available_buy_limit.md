@@ -64,7 +64,7 @@ const { Config, TradeContext, OAuth, OrderType, OrderSide, Decimal } = require('
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
-  const ctx = await TradeContext.new(config)
+  const ctx = TradeContext.new(config)
   const resp = await ctx.estimateMaxPurchaseQuantity({ symbol: "700.HK", orderType: OrderType.LO, side: OrderSide.Buy, price: new Decimal("400"), fractionalShares: false })
   console.log(resp)
 }
@@ -82,7 +82,7 @@ class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
-             TradeContext ctx = TradeContext.create(config).get()) {
+             TradeContext ctx = TradeContext.create(config)) {
             EstimateMaxPurchaseQuantityResponse resp = ctx.getEstimateMaxPurchaseQuantity(new EstimateMaxPurchaseQuantityOptions("700.HK", OrderType.LO, OrderSide.Buy).setPrice(new BigDecimal("400"))).get();
             System.out.println(resp);
         }
@@ -102,7 +102,7 @@ use rust_decimal::Decimal;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = TradeContext::try_new(config).await?;
+    let (ctx, _) = TradeContext::new(config);
     let resp = ctx.estimate_max_purchase_quantity(
         EstimateMaxPurchaseQuantityOptions::new("700.HK", OrderType::LO, OrderSide::Buy)
             .price(Decimal::from(400))

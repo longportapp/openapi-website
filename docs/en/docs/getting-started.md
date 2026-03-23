@@ -442,7 +442,7 @@ async function main() {
   })
   const config = Config.fromOAuth(oauth)
   // Or use API Key: const config = Config.fromApikeyEnv()
-  const ctx = await TradeContext.new(config)
+  const ctx = TradeContext.new(config)
   const resp = await ctx.accountBalance()
   for (const obj of resp) {
     console.log(obj.toString())
@@ -476,7 +476,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Or use API Key: let config = Arc::new(Config::from_apikey_env()?);
     // Or without ENV: let config = Arc::new(Config::from_apikey("YOUR_APP_KEY", "YOUR_APP_SECRET", "YOUR_ACCESS_TOKEN")?);
 
-    let (ctx, _) = TradeContext::try_new(config).await?;
+    let (ctx, _) = TradeContext::new(config);
     let resp = ctx.account_balance(None).await?;
     println!("{:?}", resp);
     Ok(())
@@ -506,8 +506,8 @@ class Main {
                 .get();
         try (oauth;
              Config config = Config.fromOAuth(oauth);
-             TradeContext ctx = TradeContext.create(config).get()) {
-            // Or use API Key: Config.fromApikeyEnv(); TradeContext.create(config).get()
+             TradeContext ctx = TradeContext.create(config)) {
+            // Or use API Key: Config.fromApikeyEnv(); TradeContext.create(config)
             for (AccountBalance obj : ctx.getAccountBalance().get()) {
                 System.out.println(obj);
             }
@@ -671,7 +671,7 @@ async function main() {
     console.log('Open this URL to authorize: ' + url)
   })
   const config = Config.fromOAuth(oauth)
-  const ctx = await QuoteContext.new(config)
+  const ctx = QuoteContext.new(config)
   ctx.setOnQuote((_, event) => console.log(event.toString()))
   await ctx.subscribe(['700.HK', 'AAPL.US', 'TSLA.US', 'NFLX.US'], [SubType.Quote])
   await new Promise(() => {})
@@ -705,7 +705,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build(|url| println!("Open this URL to authorize: {url}"))
         .await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, mut receiver) = QuoteContext::try_new(config).await?;
+    let (ctx, mut receiver) = QuoteContext::new(config);
 
     ctx.subscribe(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"], SubFlags::QUOTE)
         .await?;
@@ -740,7 +740,7 @@ class Main {
                 .get();
         try (oauth;
              Config config = Config.fromOAuth(oauth);
-             QuoteContext ctx = QuoteContext.create(config).get()) {
+             QuoteContext ctx = QuoteContext.create(config)) {
             ctx.setOnQuote((symbol, quote) -> {
                 System.out.printf("%s\t%s\n", symbol, quote);
             });
@@ -918,7 +918,7 @@ async function main() {
     console.log('Open this URL to authorize: ' + url)
   })
   const config = Config.fromOAuth(oauth)
-  const ctx = await TradeContext.new(config)
+  const ctx = TradeContext.new(config)
   const resp = await ctx.submitOrder({
     symbol: '700.HK',
     orderType: OrderType.LO,
@@ -959,7 +959,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build(|url| println!("Open this URL to authorize: {url}"))
         .await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = TradeContext::try_new(config).await?;
+    let (ctx, _) = TradeContext::new(config);
 
     let opts = SubmitOrderOptions::new(
         "700.HK",
@@ -999,7 +999,7 @@ public class Main {
                 .get();
         try (oauth;
              Config config = Config.fromOAuth(oauth);
-             TradeContext ctx = TradeContext.create(config).get()) {
+             TradeContext ctx = TradeContext.create(config)) {
             SubmitOrderOptions opts = new SubmitOrderOptions("700.HK",
                     OrderType.LO,
                     OrderSide.Buy,
@@ -1139,7 +1139,7 @@ async function main() {
     console.log('Open this URL to authorize: ' + url)
   })
   const config = Config.fromOAuth(oauth)
-  const ctx = await TradeContext.new(config)
+  const ctx = TradeContext.new(config)
   const resp = await ctx.todayOrders()
   for (const obj of resp) {
     console.log(obj.toString())
@@ -1170,7 +1170,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build(|url| println!("Open this URL to authorize: {url}"))
         .await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = TradeContext::try_new(config).await?;
+    let (ctx, _) = TradeContext::new(config);
 
     let resp = ctx.today_orders(None).await?;
     for obj in resp {
@@ -1203,7 +1203,7 @@ class Main {
                 .get();
         try (oauth;
              Config config = Config.fromOAuth(oauth);
-             TradeContext ctx = TradeContext.create(config).get()) {
+             TradeContext ctx = TradeContext.create(config)) {
             Order[] orders = ctx.getTodayOrders(null).get();
             for (Order order : orders) {
                 System.out.println(order);

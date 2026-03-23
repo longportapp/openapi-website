@@ -81,7 +81,7 @@ const { Config, QuoteContext, OAuth, WarrantSortBy, SortOrderType } = require('l
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
-  const ctx = await QuoteContext.new(config)
+  const ctx = QuoteContext.new(config)
   const resp = await ctx.warrantList("700.HK", WarrantSortBy.LastDone, SortOrderType.Ascending)
   console.log(resp)
 }
@@ -99,7 +99,7 @@ class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
-             QuoteContext ctx = QuoteContext.create(config).get()) {
+             QuoteContext ctx = QuoteContext.create(config)) {
             WarrantInfo[] resp = ctx.queryWarrantList(new QueryWarrantOptions("700.HK", WarrantSortBy.LastDone, SortOrderType.Ascending)).get();
             for (WarrantInfo w : resp) System.out.println(w);
         }
@@ -118,7 +118,7 @@ use longbridge::{oauth::OAuthBuilder, quote::{QuoteContext, WarrantSortBy, SortO
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = QuoteContext::try_new(config).await?;
+    let (ctx, _) = QuoteContext::new(config);
     let resp = ctx.warrant_list("700.HK", WarrantSortBy::LastDone, SortOrderType::Ascending, None, None, None, None, None).await?;
     println!("{:?}", resp);
     Ok(())

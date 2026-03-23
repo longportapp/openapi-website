@@ -42,7 +42,7 @@ async function main() {
     console.log("Open this URL to authorize: " + url)
   })
   const config = Config.fromOAuth(oauth)
-  const ctx = await QuoteContext.new(config)
+  const ctx = QuoteContext.new(config)
   const resp = await ctx.participants()
   for (const obj of resp) {
     console.log(obj.toString())
@@ -64,7 +64,7 @@ class Main {
                 .build(url -> System.out.println("Open to authorize: " + url))
                 .get();
              Config config = Config.fromOAuth(oauth);
-             QuoteContext ctx = QuoteContext.create(config).get()) {
+             QuoteContext ctx = QuoteContext.create(config)) {
             ParticipantInfo[] resp = ctx.getParticipants().get();
             for (ParticipantInfo obj : resp) {
                 System.out.println(obj);
@@ -87,7 +87,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build(|url| println!("Open this URL to authorize: {url}"))
         .await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = QuoteContext::try_new(config).await?;
+    let (ctx, _) = QuoteContext::new(config);
     let resp = ctx.participants().await?;
     println!("{:?}", resp);
     Ok(())

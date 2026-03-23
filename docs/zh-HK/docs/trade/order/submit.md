@@ -74,7 +74,7 @@ const { Config, TradeContext, OAuth, OrderType, OrderSide, TimeInForceType, Deci
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
-  const ctx = await TradeContext.new(config)
+  const ctx = TradeContext.new(config)
   const resp = await ctx.submitOrder({ symbol: "700.HK", orderType: OrderType.LO, side: OrderSide.Buy, submittedQuantity: new Decimal(500), timeInForce: TimeInForceType.Day, submittedPrice: new Decimal(50), remark: "Hello" })
   console.log(resp)
 }
@@ -92,7 +92,7 @@ class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
-             TradeContext ctx = TradeContext.create(config).get()) {
+             TradeContext ctx = TradeContext.create(config)) {
             SubmitOrderResponse resp = ctx.submitOrder(new SubmitOrderOptions("700.HK", OrderType.LO, OrderSide.Buy, new BigDecimal("500"), TimeInForceType.Day).setSubmittedPrice(new BigDecimal("50")).setRemark("Hello")).get();
             System.out.println(resp.orderId);
         }
@@ -112,7 +112,7 @@ use rust_decimal::Decimal;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = TradeContext::try_new(config).await?;
+    let (ctx, _) = TradeContext::new(config);
     let resp = ctx.submit_order(
         SubmitOrderOptions::new("700.HK", OrderType::LO, OrderSide::Buy, Decimal::from(500), TimeInForceType::Day)
             .submitted_price(Decimal::from(50))

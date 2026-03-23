@@ -65,7 +65,7 @@ const { Config, QuoteContext, OAuth, SubType } = require('longbridge')
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
-  const ctx = await QuoteContext.new(config)
+  const ctx = QuoteContext.new(config)
   ctx.setOnQuote((event) => console.log(event))
   await ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote], true)
   await new Promise(r => setTimeout(r, 30000))
@@ -84,7 +84,7 @@ class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
-             QuoteContext ctx = QuoteContext.create(config).get()) {
+             QuoteContext ctx = QuoteContext.create(config)) {
             ctx.setOnQuote(event -> System.out.println(event));
             ctx.subscribe(new String[] { "700.HK", "AAPL.US" }, new SubType[] { SubType.Quote }, true).get();
             Thread.sleep(30000);
@@ -104,7 +104,7 @@ use longbridge::{oauth::OAuthBuilder, quote::QuoteContext, Config, quote::SubFla
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = QuoteContext::try_new(config).await?;
+    let (ctx, _) = QuoteContext::new(config);
     ctx.subscribe(vec!["700.HK".to_string(), "AAPL.US".to_string()], SubFlags::quote(), true).await?;
     tokio::time::sleep(std::time::Duration::from_secs(30)).await;
     Ok(())

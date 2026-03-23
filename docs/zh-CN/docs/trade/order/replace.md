@@ -70,7 +70,7 @@ const { Config, TradeContext, OAuth, Decimal } = require('longbridge')
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
-  const ctx = await TradeContext.new(config)
+  const ctx = TradeContext.new(config)
   await ctx.replaceOrder({ orderId: "701276261045858304", quantity: new Decimal(400), price: new Decimal(60) })
   console.log("replaced")
 }
@@ -88,7 +88,7 @@ class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
-             TradeContext ctx = TradeContext.create(config).get()) {
+             TradeContext ctx = TradeContext.create(config)) {
             ctx.replaceOrder(new ReplaceOrderOptions("701276261045858304", new BigDecimal("400")).setPrice(new BigDecimal("60"))).get();
             System.out.println("replaced");
         }
@@ -108,7 +108,7 @@ use rust_decimal::Decimal;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = TradeContext::try_new(config).await?;
+    let (ctx, _) = TradeContext::new(config);
     ctx.replace_order(
         ReplaceOrderOptions::new("701276261045858304", Decimal::from(400))
             .price(Decimal::from(60))
