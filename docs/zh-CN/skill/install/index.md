@@ -4,7 +4,7 @@ title: Skill 安装指引
 description: 在 OpenClaw、Claude、ChatGPT、Cursor、Claude Code 等 AI 工具中安装 Longbridge Skill
 ---
 
-# Skill 安装指引
+# Longbridge Skill 安装指引
 
 ## OpenClaw
 

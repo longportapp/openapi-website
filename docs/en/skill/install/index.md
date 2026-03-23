@@ -4,7 +4,7 @@ title: Skill Installation Guide
 description: Install Longbridge Skill for OpenClaw, Claude, ChatGPT, Cursor, Claude Code, and more
 ---
 
-# Skill Installation Guide
+# Longbridge Skill Installation Guide
 
 ## OpenClaw
 
