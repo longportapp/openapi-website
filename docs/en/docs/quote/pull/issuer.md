@@ -40,7 +40,6 @@ print(resp)
 import asyncio
 from longbridge.openapi import AsyncQuoteContext, Config, OAuthBuilder
 
-
 async def main() -> None:
     oauth = await OAuthBuilder("your-client-id").build_async(lambda url: print("Visit:", url))
     config = Config.from_oauth(oauth)
@@ -48,7 +47,6 @@ async def main() -> None:
 
     resp = await ctx.warrant_issuers()
     print(resp)
-
 
 if __name__ == "__main__":
     asyncio.run(main())

@@ -95,7 +95,6 @@ import asyncio
 from datetime import datetime, date
 from longbridge.openapi import AsyncQuoteContext, Config, Period, AdjustType, OAuthBuilder
 
-
 async def main() -> None:
     oauth = await OAuthBuilder("your-client-id").build_async(lambda url: print("Visit:", url))
     config = Config.from_oauth(oauth)
@@ -112,7 +111,6 @@ async def main() -> None:
     # Query 2023-01-01 to 2023-02-01
     resp = await ctx.history_candlesticks_by_date("700.HK", Period.Day, AdjustType.NoAdjust, date(2023, 1, 1), date(2023, 2, 1))
     print(resp)
-
 
 if __name__ == "__main__":
     asyncio.run(main())

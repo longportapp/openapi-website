@@ -62,7 +62,6 @@ import asyncio
 from datetime import datetime
 from longbridge.openapi import AsyncTradeContext, Config, OAuthBuilder
 
-
 async def main() -> None:
     oauth = await OAuthBuilder("your-client-id").build_async(lambda url: print("Visit:", url))
     config = Config.from_oauth(oauth)
@@ -72,7 +71,6 @@ async def main() -> None:
         end_at = datetime(2022, 5, 12),
     )
     print(resp)
-
 
 if __name__ == "__main__":
     asyncio.run(main())

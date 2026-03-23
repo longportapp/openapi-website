@@ -68,7 +68,6 @@ import asyncio
 from decimal import Decimal
 from longbridge.openapi import AsyncTradeContext, Config, OAuthBuilder
 
-
 async def main() -> None:
     oauth = await OAuthBuilder("your-client-id").build_async(lambda url: print("Visit:", url))
     config = Config.from_oauth(oauth)
@@ -79,7 +78,6 @@ async def main() -> None:
         quantity = Decimal(100),
         price = Decimal(50),
     )
-
 
 if __name__ == "__main__":
     asyncio.run(main())

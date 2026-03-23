@@ -209,13 +209,11 @@ config = Config.from_oauth(oauth)
 import asyncio
 from longbridge.openapi import Config, OAuthBuilder
 
-
 async def main() -> None:
     oauth = await OAuthBuilder("your-client-id").build_async(
         lambda url: print(f"请访问此 URL 进行授权：{url}")
     )
     config = Config.from_oauth(oauth)
-
 
 if __name__ == "__main__":
     asyncio.run(main())

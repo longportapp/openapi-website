@@ -54,14 +54,12 @@ print(group_id)
 import asyncio
 from longbridge.openapi import AsyncQuoteContext, Config, OAuthBuilder
 
-
 async def main() -> None:
     oauth = await OAuthBuilder("your-client-id").build_async(lambda url: print("Visit:", url))
     config = Config.from_oauth(oauth)
     ctx = AsyncQuoteContext.create(config)
     group_id = ctx.create_watchlist_group(name = "Watchlist1", securities = ["700.HK", "AAPL.US"])
     print(group_id)
-
 
 if __name__ == "__main__":
     asyncio.run(main())

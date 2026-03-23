@@ -70,7 +70,6 @@ resp = ctx.candlesticks("700.HK", Period.Day, 10, AdjustType.NoAdjust, trade_ses
 import asyncio
 from longbridge.openapi import AsyncQuoteContext, Config, Period, AdjustType, TradeSessions, OAuthBuilder
 
-
 async def main() -> None:
     oauth = await OAuthBuilder("your-client-id").build_async(lambda url: print("Visit:", url))
     config = Config.from_oauth(oauth)
@@ -82,7 +81,6 @@ async def main() -> None:
 
     # Get all candlestick data for 700.HK
     resp = await ctx.candlesticks("700.HK", Period.Day, 10, AdjustType.NoAdjust, trade_session=TradeSessions.All)
-
 
 if __name__ == "__main__":
     asyncio.run(main())

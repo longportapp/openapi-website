@@ -63,7 +63,6 @@ sleep(30)
 import asyncio
 from longbridge.openapi import AsyncQuoteContext, Config, SubType, PushQuote, OAuthBuilder
 
-
 async def main() -> None:
     async def on_quote(symbol: str, event: PushQuote) -> None:
         print(symbol, event)
@@ -75,7 +74,6 @@ async def main() -> None:
 
     await ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote])
     await asyncio.sleep(30)
-
 
 if __name__ == "__main__":
     asyncio.run(main())

@@ -54,7 +54,6 @@ print(resp)
 import asyncio
 from longbridge.openapi import AsyncQuoteContext, Config, CalcIndex, OAuthBuilder
 
-
 async def main() -> None:
     oauth = await OAuthBuilder("your-client-id").build_async(lambda url: print("Visit:", url))
     config = Config.from_oauth(oauth)
@@ -62,7 +61,6 @@ async def main() -> None:
 
     resp = await ctx.calc_indexes(["700.HK", "AAPL.US"], [CalcIndex.LastDone, CalcIndex.ChangeRate])
     print(resp)
-
 
 if __name__ == "__main__":
     asyncio.run(main())

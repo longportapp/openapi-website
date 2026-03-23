@@ -51,13 +51,11 @@ resp = ctx.fund_positions()
 import asyncio
 from longbridge.openapi import AsyncTradeContext, Config, OAuthBuilder
 
-
 async def main() -> None:
     oauth = await OAuthBuilder("your-client-id").build_async(lambda url: print("Visit:", url))
     config = Config.from_oauth(oauth)
     ctx = AsyncTradeContext.create(config)
     resp = await ctx.fund_positions()
-
 
 if __name__ == "__main__":
     asyncio.run(main())
