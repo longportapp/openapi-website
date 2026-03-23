@@ -59,12 +59,6 @@ Run in your project directory:
 npx skills add longbridge/developers
 ```
 
-**Option 2: Plugin command**
-
-```
-/plugin install longbridge/developers
-```
-
 After installation, use Longbridge capabilities directly in your Claude Code sessions.
 
 ---
