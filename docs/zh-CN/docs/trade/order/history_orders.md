@@ -60,6 +60,35 @@ print(resp)
 ```
 
   </TabItem>
+  <TabItem value="python-async" label="Python (async)">
+
+```python
+import asyncio
+from datetime import datetime
+from longbridge.openapi import AsyncTradeContext, Config, OrderStatus, OrderSide, Market, OAuthBuilder
+
+
+async def main() -> None:
+    oauth = await OAuthBuilder("your-client-id").build_async(lambda url: print("Visit:", url))
+    config = Config.from_oauth(oauth)
+    ctx = AsyncTradeContext.create(config)
+
+    resp = await ctx.history_orders(
+        symbol = "700.HK",
+        status = [OrderStatus.Filled, OrderStatus.New],
+        side = OrderSide.Buy,
+        market = Market.HK,
+        start_at = datetime(2022, 5, 9),
+        end_at = datetime(2022, 5, 12),
+    )
+    print(resp)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+  </TabItem>
   <TabItem value="nodejs" label="Node.js">
 
 ```javascript

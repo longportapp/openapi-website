@@ -46,6 +46,27 @@ print(resp)
 ```
 
   </TabItem>
+  <TabItem value="python-async" label="Python (async)">
+
+```python
+import asyncio
+from longbridge.openapi import AsyncContentContext, Config, OAuthBuilder
+
+
+async def main() -> None:
+    oauth = await OAuthBuilder("your-client-id").build_async(lambda url: print("Visit:", url))
+    config = Config.from_oauth(oauth)
+    ctx = AsyncContentContext.create(config)
+
+    resp = await ctx.news("AAPL.US")
+    print(resp)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+  </TabItem>
   <TabItem value="nodejs" label="Node.js">
 
 ```javascript

@@ -204,6 +204,25 @@ config = Config.from_oauth(oauth)
 ```
 
   </TabItem>
+  <TabItem value="python-async" label="Python (async)">
+
+```python
+import asyncio
+from longbridge.openapi import Config, OAuthBuilder
+
+
+async def main() -> None:
+    oauth = await OAuthBuilder("your-client-id").build_async(
+        lambda url: print(f"Open this URL to authorize: {url}")
+    )
+    config = Config.from_oauth(oauth)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+  </TabItem>
   <TabItem value="javascript" label="JavaScript">
 
 ```javascript
