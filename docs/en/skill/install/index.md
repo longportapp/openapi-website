@@ -16,6 +16,8 @@ Type the following command in any OpenClaw chat:
 
 Takes effect immediately — no restart required.
 
+Also available on [skills.sh](https://skills.sh/longbridge/developers) and [GitHub](https://github.com/longbridge/developers/tree/main/skills).
+
 ---
 
 ## Claude Desktop / Claude.ai
