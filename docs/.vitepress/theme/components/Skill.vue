@@ -1156,9 +1156,7 @@ const currentMessages = computed(() => {
               </svg>
               {{ copiedOneLiner ? t.copied.value : t.copy.value }}
             </button>
-            <Transition name="skill-tooltip">
-              <span v-if="copiedOneLiner" class="skill-copy-tooltip">{{ t.copied.value }}</span>
-            </Transition>
+            <span class="skill-copy-tooltip" :class="{ 'skill-copy-tooltip--show': copiedOneLiner }">{{ t.copied.value }}</span>
           </div>
         </div>
 
@@ -1337,9 +1335,7 @@ const currentMessages = computed(() => {
               </svg>
               {{ copiedOneLiner ? t.copied.value : t.copy.value }}
             </button>
-            <Transition name="skill-tooltip">
-              <span v-if="copiedOneLiner" class="skill-copy-tooltip">{{ t.copied.value }}</span>
-            </Transition>
+            <span class="skill-copy-tooltip" :class="{ 'skill-copy-tooltip--show': copiedOneLiner }">{{ t.copied.value }}</span>
           </div>
         </div>
       </div>
@@ -1398,9 +1394,7 @@ const currentMessages = computed(() => {
                 </svg>
                 {{ copiedNpx ? t.copied.value : t.copy.value }}
               </button>
-              <Transition name="skill-tooltip">
-                <span v-if="copiedNpx" class="skill-copy-tooltip">{{ t.copied.value }}</span>
-              </Transition>
+              <span class="skill-copy-tooltip" :class="{ 'skill-copy-tooltip--show': copiedNpx }">{{ t.copied.value }}</span>
             </div>
           </div>
         </div>
@@ -1591,7 +1585,7 @@ const currentMessages = computed(() => {
   position: absolute;
   bottom: calc(100% + 6px);
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(4px);
   background: var(--vp-c-text-1);
   color: var(--vp-c-bg);
   font-size: 0.6875rem;
@@ -1601,6 +1595,12 @@ const currentMessages = computed(() => {
   white-space: nowrap;
   pointer-events: none;
   z-index: 100;
+  opacity: 0;
+  transition: opacity 0.15s, transform 0.15s;
+}
+.skill-copy-tooltip--show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 .skill-copy-tooltip::after {
   content: '';
@@ -1610,17 +1610,6 @@ const currentMessages = computed(() => {
   transform: translateX(-50%);
   border: 4px solid transparent;
   border-top-color: var(--vp-c-text-1);
-}
-.skill-tooltip-enter-active,
-.skill-tooltip-leave-active {
-  transition:
-    opacity 0.15s,
-    transform 0.15s;
-}
-.skill-tooltip-enter-from,
-.skill-tooltip-leave-to {
-  opacity: 0;
-  transform: translateX(-50%) translateY(4px);
 }
 .skill-cta-hint {
   font-size: 0.875rem;
