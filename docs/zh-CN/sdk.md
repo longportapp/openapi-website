@@ -16,7 +16,7 @@ SDK 包名已从 `longport` 更名为 `longbridge`，旧包名 `longport` 已废
 
 </div>
 
-<div class="border-t-hidden flex flex-col md:flex-row max-w-4xl w-full justify-between md:text-left mx-auto px-6 md:px-0 py-4">
+<div class="border-t-hidden flex flex-col max-w-4xl w-full justify-between md:text-left mx-auto px-6 md:px-0 py-4">
 <Tabs groupId="programming-language">
 <TabItem value="python" label="Python">
 
