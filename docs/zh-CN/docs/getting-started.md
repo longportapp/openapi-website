@@ -297,6 +297,36 @@ func main() {
 ```
 
   </TabItem>
+  <TabItem value="cpp" label="C++">
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+
+using namespace longbridge;
+
+int main(int argc, char const* argv[]) {
+    const std::string client_id = "your-client-id";
+    OAuthBuilder(client_id).build(
+    [](const std::string& url) {
+        std::cout << "请访问此 URL 进行授权：" << url << std::endl;
+    },
+    [](auto res) {
+        if (!res) {
+            std::cout << "authorization failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        Config config = Config::from_oauth(*res);
+        // 使用 config 创建 QuoteContext 或 TradeContext
+    });
+
+    std::cin.get();
+    return 0;
+}
+```
+
+  </TabItem>
+
 </Tabs>
 
 :::tip OAuth 优势
