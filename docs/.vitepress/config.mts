@@ -2,12 +2,16 @@ import { defineConfig } from 'vitepress'
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import Unocss from 'unocss/vite'
 import { markdownConfig } from './config/markdown'
-import { dirname } from 'node:path'
+import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { mkdirSync } from 'node:fs'
+import { execSync } from 'node:child_process'
 import { localesConfig } from './config/locales'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 import { rewriteMarkdownPath } from './utils'
 import * as cheerio from 'cheerio'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const insertScript = (html: string) => {
   const $ = cheerio.load(html)
@@ -59,6 +63,14 @@ export default defineConfig(
       ]
     },
 
+    buildEnd(siteConfig) {
+      const skillsDir = resolve(__dirname, '../../skills')
+      const outSkillDir = resolve(siteConfig.outDir, 'skill')
+      mkdirSync(outSkillDir, { recursive: true })
+      execSync(`zip -r "${outSkillDir}/longbridge.zip" longbridge`, { cwd: skillsDir })
+      console.log('✓ skill/longbridge.zip generated')
+    },
+
     sitemap: {
       hostname: 'https://open.longbridge.com',
       transformItems(items) {
@@ -87,7 +99,7 @@ export default defineConfig(
     themeConfig: {
       editLink: {
         pattern: ({ filePath }) => {
-          return `https://github.com/longbridge/developers-website/edit/main/docs/${filePath}`
+          return `https://github.com/longbridge/developers/edit/main/docs/${filePath}`
         },
       },
       logo: {
@@ -138,7 +150,7 @@ export default defineConfig(
       plugins: [
         groupIconVitePlugin(),
         Unocss({
-          configFile: '../unocss.config.ts',
+          configFile: resolve(dirname(fileURLToPath(import.meta.url)), '../unocss.config.ts'),
         }),
 
         /**s

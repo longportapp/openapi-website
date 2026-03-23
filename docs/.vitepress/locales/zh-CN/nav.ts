@@ -3,11 +3,9 @@ import type { DefaultTheme } from 'vitepress'
 export const nav = (lang: string): DefaultTheme.NavItem[] => {
   return [
     { text: '首页', link: `/${lang}/`, activeMatch: `^/${lang}/$` },
+    { text: 'Skill', link: `/${lang}/skill`, activeMatch: `^/${lang}/skill` },
     { text: 'SDK', link: `/${lang}/sdk`, activeMatch: `^/${lang}/sdk` },
-    { text: '文档', link: `/${lang}/docs`, activeMatch: `^/${lang}/docs(?!/llm|/mcp|/cli)` },
-    { text: 'MCP', link: `/${lang}/docs/mcp`, activeMatch: `^/${lang}/docs/mcp` },
-    { text: 'CLI', link: `/${lang}/docs/cli`, activeMatch: `^/${lang}/docs/cli` },
-    { text: 'LLM', link: `/${lang}/docs/llm`, activeMatch: `^/${lang}/docs/llm` },
+    { text: '文档', link: `/${lang}/docs`, activeMatch: `^/${lang}/docs` },
     { text: 'Issues', link: 'https://github.com/longbridge/openapi/issues', target: '_blank' },
   ]
 }

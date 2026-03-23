@@ -46,6 +46,25 @@ print(resp)
 ```
 
   </TabItem>
+  <TabItem value="python-async" label="Python (async)">
+
+```python
+import asyncio
+from longbridge.openapi import AsyncContentContext, Config, OAuthBuilder
+
+async def main() -> None:
+    oauth = await OAuthBuilder("your-client-id").build_async(lambda url: print("Visit:", url))
+    config = Config.from_oauth(oauth)
+    ctx = AsyncContentContext.create(config)
+
+    resp = await ctx.topics("AAPL.US")
+    print(resp)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+  </TabItem>
   <TabItem value="nodejs" label="Node.js">
 
 ```javascript
@@ -54,7 +73,7 @@ const { Config, ContentContext, OAuth } = require('longbridge')
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
-  const ctx = await ContentContext.new(config)
+  const ctx = ContentContext.new(config)
   const resp = await ctx.topics("AAPL.US")
   console.log(resp)
 }
@@ -72,7 +91,7 @@ class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
-             ContentContext ctx = ContentContext.create(config).get()) {
+             ContentContext ctx = ContentContext.create(config)) {
             TopicItem[] resp = ctx.getTopics("AAPL.US").get();
             for (TopicItem item : resp) System.out.println(item);
         }
@@ -91,7 +110,7 @@ use longbridge::{oauth::OAuthBuilder, content::ContentContext, Config};
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let ctx = ContentContext::try_new(config)?;
+    let ctx = ContentContext::new(config);
     let resp = ctx.topics("AAPL.US").await?;
     println!("{:?}", resp);
     Ok(())
@@ -104,32 +123,46 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```cpp
 #include <iostream>
 #include <longbridge.hpp>
+
 #ifdef WIN32
 #include <windows.h>
 #endif
+
 using namespace longbridge;
 using namespace longbridge::content;
 
+static void
+run(const OAuth& oauth)
+{
+    Config config = Config::from_oauth(oauth);
+    ContentContext ctx = ContentContext::create(config);
+
+    ctx.topics("AAPL.US", [](auto res) {
+        if (!res) { std::cout << "failed: " << *res.status().message() << std::endl; return; }
+        std::cout << "topics: " << res->size() << std::endl;
+    });
+}
+
 int main(int argc, char const* argv[]) {
 #ifdef WIN32
-  SetConsoleOutputCP(CP_UTF8);
+    SetConsoleOutputCP(CP_UTF8);
 #endif
-  const std::string client_id = "your-client-id";
-  OAuthBuilder(client_id).build(
-    [](const std::string& url) { std::cout << "Open this URL to authorize: " << url << std::endl; },
+
+    const std::string client_id = "your-client-id";
+    OAuthBuilder(client_id).build(
+    [](const std::string& url) {
+        std::cout << "Open this URL to authorize: " << url << std::endl;
+    },
     [](auto res) {
-      if (!res) { std::cout << "authorization failed: " << *res.status().message() << std::endl; return; }
-      Config config = Config::from_oauth(*res);
-      ContentContext::create(config, [](auto res) {
-        if (!res) { std::cout << "failed to create content context: " << *res.status().message() << std::endl; return; }
-        res.context().topics("AAPL.US", [](auto res) {
-          if (!res) { std::cout << "failed: " << *res.status().message() << std::endl; return; }
-          std::cout << "topics: " << res->size() << std::endl;
-        });
-      });
+        if (!res) {
+            std::cout << "authorization failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        run(*res);
     });
-  std::cin.get();
-  return 0;
+
+    std::cin.get();
+    return 0;
 }
 ```
 

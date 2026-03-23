@@ -88,6 +88,35 @@ print(resp)
 ```
 
   </TabItem>
+  <TabItem value="python-async" label="Python (async)">
+
+```python
+import asyncio
+from datetime import datetime, date
+from longbridge.openapi import AsyncQuoteContext, Config, Period, AdjustType, OAuthBuilder
+
+async def main() -> None:
+    oauth = await OAuthBuilder("your-client-id").build_async(lambda url: print("Visit:", url))
+    config = Config.from_oauth(oauth)
+    ctx = AsyncQuoteContext.create(config)
+
+    # Query after 2023-01-01
+    resp = await ctx.history_candlesticks_by_offset("700.HK", Period.Day, AdjustType.NoAdjust, True, 10, datetime(2023, 1, 1))
+    print(resp)
+
+    # Query before 2023-01-01
+    resp = await ctx.history_candlesticks_by_offset("700.HK", Period.Day, AdjustType.NoAdjust, False, 10, datetime(2023, 1, 1))
+    print(resp)
+
+    # Query 2023-01-01 to 2023-02-01
+    resp = await ctx.history_candlesticks_by_date("700.HK", Period.Day, AdjustType.NoAdjust, date(2023, 1, 1), date(2023, 2, 1))
+    print(resp)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+  </TabItem>
   <TabItem value="nodejs" label="Node.js">
 
 ```javascript
@@ -96,7 +125,7 @@ const { Config, QuoteContext, OAuth, Period, AdjustType, TradeSessions, NaiveDat
 async function main() {
   const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
   const config = Config.fromOAuth(oauth)
-  const ctx = await QuoteContext.new(config)
+  const ctx = QuoteContext.new(config)
   const datetime = new NaiveDatetime(new NaiveDate(2023, 1, 1), new Time(0, 0, 0))
   const resp = await ctx.historyCandlesticksByOffset("700.HK", Period.Day, AdjustType.NoAdjust, true, datetime, 10, TradeSessions.Intraday)
   console.log(resp)
@@ -115,7 +144,7 @@ class Main {
     public static void main(String[] args) throws Exception {
         try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
              Config config = Config.fromOAuth(oauth);
-             QuoteContext ctx = QuoteContext.create(config).get()) {
+             QuoteContext ctx = QuoteContext.create(config)) {
             Candlestick[] resp = ctx.getHistoryCandlesticksByOffset("700.HK", Period.Day, AdjustType.NoAdjust, true, LocalDateTime.of(2023, 1, 1, 0, 0), 10, TradeSessions.Intraday).get();
             for (Candlestick c : resp) System.out.println(c);
         }
@@ -135,7 +164,7 @@ use time::macros::datetime;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
-    let (ctx, _) = QuoteContext::try_new(config).await?;
+    let (ctx, _) = QuoteContext::new(config);
     let dt = datetime!(2023-01-01 00:00);
     let resp = ctx.history_candlesticks_by_offset("700.HK", Period::Day, AdjustType::NoAdjust, true, Some(dt), 10, TradeSessions::Intraday).await?;
     println!("{:?}", resp);
@@ -149,32 +178,46 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```cpp
 #include <iostream>
 #include <longbridge.hpp>
+
 #ifdef WIN32
 #include <windows.h>
 #endif
+
 using namespace longbridge;
 using namespace longbridge::quote;
 
+static void
+run(const OAuth& oauth)
+{
+    Config config = Config::from_oauth(oauth);
+    QuoteContext ctx = QuoteContext::create(config);
+
+    ctx.history_candlesticks_by_offset("700.HK", Period::Day, AdjustType::NoAdjust, true, std::nullopt, 10, TradeSessions::Intraday, [](auto res) {
+        if (!res) { std::cout << "failed: " << *res.status().message() << std::endl; return; }
+        std::cout << "candlesticks: " << res->size() << std::endl;
+    });
+}
+
 int main(int argc, char const* argv[]) {
 #ifdef WIN32
-  SetConsoleOutputCP(CP_UTF8);
+    SetConsoleOutputCP(CP_UTF8);
 #endif
-  const std::string client_id = "your-client-id";
-  OAuthBuilder(client_id).build(
-    [](const std::string& url) { std::cout << "Open this URL to authorize: " << url << std::endl; },
+
+    const std::string client_id = "your-client-id";
+    OAuthBuilder(client_id).build(
+    [](const std::string& url) {
+        std::cout << "Open this URL to authorize: " << url << std::endl;
+    },
     [](auto res) {
-      if (!res) { std::cout << "authorization failed: " << *res.status().message() << std::endl; return; }
-      Config config = Config::from_oauth(*res);
-      QuoteContext::create(config, [](auto res) {
-        if (!res) { std::cout << "failed to create quote context: " << *res.status().message() << std::endl; return; }
-        res.context().history_candlesticks_by_offset("700.HK", Period::Day, AdjustType::NoAdjust, true, std::nullopt, 10, TradeSessions::Intraday, [](auto res) {
-          if (!res) { std::cout << "failed: " << *res.status().message() << std::endl; return; }
-          std::cout << "candlesticks: " << res->size() << std::endl;
-        });
-      });
+        if (!res) {
+            std::cout << "authorization failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        run(*res);
     });
-  std::cin.get();
-  return 0;
+
+    std::cin.get();
+    return 0;
 }
 ```
 
