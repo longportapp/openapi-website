@@ -6,7 +6,14 @@ import { useI18n } from 'vue-i18n'
 import spec from '../../../../openapi.yaml?raw'
 
 const { t, locale } = useI18n()
-const md = new MarkdownIt({ html: false, linkify: false })
+const md = new MarkdownIt({
+  html: false,
+  linkify: false,
+  highlight: (str: string, lang: string) => {
+    const code = highlightCode(str, lang)
+    return `<div class="language-${lang || 'text'}"><pre><code>${code}\n</code></pre></div>`
+  },
+})
 const isZh = computed(() => locale.value.startsWith('zh'))
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -916,7 +923,8 @@ onUnmounted(() => {
 .api-main {
   flex: 1;
   display: flex;
-  overflow: hidden;
+  overflow-y: auto;
+  align-items: flex-start;
   min-width: 0;
 }
 
@@ -924,7 +932,6 @@ onUnmounted(() => {
 .api-content {
   flex: 1;
   min-width: 0;
-  overflow-y: auto;
   padding: 36px 44px 64px;
 }
 
@@ -1069,7 +1076,6 @@ onUnmounted(() => {
 .code-panel {
   flex: 1;
   min-width: 320px;
-  overflow-y: auto;
   padding: 36px 20px 64px;
 }
 
