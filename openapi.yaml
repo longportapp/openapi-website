@@ -5,6 +5,394 @@ info:
     Longbridge OpenAPI provides programmatic access to market data, trading, account management,
     watchlist management, and content queries for the Longbridge trading platform.
   version: '1.0.0'
+x-pages:
+  - id: authentication
+    title: Authentication
+    x-title-zh: 认证
+    content: |
+      This page is reorganized as a practical **OAuth 2.0 access flow** for new integrations.
+
+      > **Tip:** Prefer using SDKs for faster integration: https://open.longbridge.com/sdk
+
+      ## Notes
+
+      | Precautions                                  | Reference                                                             |
+      | -------------------------------------------- | --------------------------------------------------------------------- |
+      | Prefer SDKs over raw HTTP when possible      | [SDK Quick Start](../docs/getting-started)                            |
+      | Enable required OpenAPI services first       | [How to enable OpenAPI](../docs/#how-to-enable-openapi)               |
+      | Understand permissions and restrictions      | [Permissions and restrictions](../docs/#permissions-and-restrictions) |
+      | Check common error codes for troubleshooting | [Error Codes](../docs/error-codes)                                    |
+
+      ## OAuth 2.0 (Default)
+
+      For new integrations, OAuth 2.0 is the default path.
+
+      API-key signature mode can remain as a fallback for legacy compatibility, but it is not the default.
+
+      ### Discovery endpoints
+
+      - Production: `https://openapi.longbridge.com/.well-known/oauth-authorization-server`
+      - China: `https://openapi.longbridge.cn/.well-known/oauth-authorization-server`
+
+      Supported grant types (from discovery):
+
+      - `authorization_code`
+      - `refresh_token`
+
+      ## OAuth 2.0 flow (step-by-step)
+
+      ### 1) Register OAuth client
+
+      If there is no UI for client creation in your environment, register dynamically:
+
+      ```bash
+      curl -X POST https://openapi.longbridge.com/oauth2/register \
+        -H "Content-Type: application/json" \
+        -d '{
+          "client_name": "my-openapi-app",
+          "redirect_uris": ["https://your-app.com/callback"],
+          "grant_types": ["authorization_code", "refresh_token"],
+          "response_types": ["code"]
+        }'
+      ```
+
+      > Registration may return only `client_id` (public client, no `client_secret`). In this case, use PKCE and do not send `client_secret` in token requests.
+
+      ### 2) Build authorization URL and get `code`
+
+      ```text
+      https://openapi.longbridge.com/oauth2/authorize
+        ?response_type=code
+        &client_id=YOUR_CLIENT_ID
+        &redirect_uri=YOUR_REDIRECT_URI
+        &scope=3
+        &state=YOUR_RANDOM_STATE
+        &code_challenge=YOUR_CODE_CHALLENGE
+        &code_challenge_method=S256
+      ```
+
+      After user consent, callback receives:
+
+      ```text
+      YOUR_REDIRECT_URI?code=AUTH_CODE&state=YOUR_RANDOM_STATE
+      ```
+
+      ### 3) Exchange `code` for `access_token`
+
+      ```bash
+      curl -X POST https://openapi.longbridge.com/oauth2/token \
+        -H "Content-Type: application/x-www-form-urlencoded" \
+        -d "grant_type=authorization_code" \
+        -d "client_id=YOUR_CLIENT_ID" \
+        -d "redirect_uri=YOUR_REDIRECT_URI" \
+        -d "code=AUTH_CODE" \
+        -d "code_verifier=YOUR_CODE_VERIFIER"
+      # only when your client has secret:
+      # -d "client_secret=YOUR_CLIENT_SECRET"
+      ```
+
+      ### 4) Call API with Bearer token (TSLA.US example)
+
+      ```bash
+      curl -X GET "https://openapi.longbridge.com/v1/quote/get_security_list?market=US&category=Overnight" \
+        -H "Authorization: Bearer ACCESS_TOKEN"
+      ```
+
+      Real response (excerpt, keeping `TSLA.US` row):
+
+      ```json
+      {
+        "code": 0,
+        "message": "success",
+        "data": {
+          "list": [
+            {
+              "symbol": "TSLA.US",
+              "name_cn": "特斯拉",
+              "name_hk": "",
+              "name_en": ""
+            }
+          ]
+        }
+      }
+      ```
+
+      ### 5) Refresh token
+
+      Use OAuth token endpoint for refresh (details in Refresh Token section below):
+
+      ```bash
+      curl -X POST https://openapi.longbridge.com/oauth2/token \
+        -H "Content-Type: application/x-www-form-urlencoded" \
+        -d "grant_type=refresh_token" \
+        -d "client_id=YOUR_CLIENT_ID" \
+        -d "refresh_token=REFRESH_TOKEN"
+      # only when your client has secret:
+      # -d "client_secret=YOUR_CLIENT_SECRET"
+      ```
+
+      ## Relationship with legacy docs
+
+      - This page: OAuth 2.0 main flow for new integrations.
+      - Refresh Token section below: refresh step details only, to avoid duplication.
+
+      ---
+
+      # Refresh Token (OAuth 2.0)
+
+      This page focuses only on the OAuth 2.0 **refresh token** step.
+
+      - If you have not completed the full flow yet, read the Authentication section above first.
+      - This page does not repeat client registration / authorization code steps.
+
+      ## Recommended refresh method (OAuth 2.0)
+
+      Use OAuth token endpoint:
+
+      - `POST https://openapi.longbridge.com/oauth2/token`
+      - or China: `POST https://openapi.longbridge.cn/oauth2/token`
+
+      ### Request parameters (`application/x-www-form-urlencoded`)
+
+      | Name | Required | Description |
+      | --- | --- | --- |
+      | grant_type | Yes | Must be `refresh_token` |
+      | client_id | Yes | OAuth client id |
+      | refresh_token | Yes | Previously issued refresh token |
+      | client_secret | Optional | Required only for confidential clients; omit for public clients |
+
+      ### Refresh example
+
+      ```bash
+      curl -X POST https://openapi.longbridge.com/oauth2/token \
+        -H "Content-Type: application/x-www-form-urlencoded" \
+        -d "grant_type=refresh_token" \
+        -d "client_id=YOUR_CLIENT_ID" \
+        -d "refresh_token=YOUR_REFRESH_TOKEN"
+      # only when your client has secret:
+      # -d "client_secret=YOUR_CLIENT_SECRET"
+      ```
+
+      ### Response example
+
+      ```json
+      {
+        "access_token": "...",
+        "refresh_token": "...",
+        "expires_in": 2592000,
+        "token_type": "Bearer"
+      }
+      ```
+
+      ## Compatibility note
+
+      Legacy `/v1/token/refresh` remains for backward compatibility.
+      For new integrations, use OAuth 2.0 token endpoint as default.
+    x-content-zh: |
+      本页按 **OAuth 2.0 实际接入流程** 重新整理，用于新接入用户快速走通。
+
+      > **提示：** 优先使用 SDK，接入更简单：https://open.longbridge.com/sdk
+
+      ## API 须知
+
+      | 注意事项                                     | 参考文档                                          |
+      | -------------------------------------------- | ------------------------------------------------- |
+      | 推荐使用各自语言的 SDK，而不是调用原生的接口 | [SDK 快速开始页面](../docs/getting-started)       |
+      | 阅读 OpenAPI 介绍中开通相应服务              | [OpenAPI 如何开通](../docs/#如何开通)             |
+      | 阅读 OpenAPI 介绍中使用权限及限制            | [OpenAPI 使用权限及限制](../docs/#使用权限及限制) |
+      | 了解通用错误码，便于查找调用接口出错的原因   | [通用错误码](../docs/error-codes)                 |
+
+      ## OAuth 2.0（推荐方案）
+
+      新接入默认使用 OAuth 2.0。API Key 签名方式作为备选兼容方案可保留（例如在 SDK/历史实现中），但不作为默认接入方式。
+
+      ### Discovery 地址
+
+      - 生产环境：`https://openapi.longbridge.com/.well-known/oauth-authorization-server`
+      - 中国内地：`https://openapi.longbridge.cn/.well-known/oauth-authorization-server`
+
+      支持授权类型（以 Discovery 返回为准）：
+
+      - `authorization_code`
+      - `refresh_token`
+
+      ## OAuth 2.0 接入流程（一步一步）
+
+      ### 1）注册 OAuth 客户端
+
+      如果没有可视化后台入口，可通过接口动态注册：
+
+      ```bash
+      curl -X POST https://openapi.longbridge.com/oauth2/register \
+        -H "Content-Type: application/json" \
+        -d '{
+          "client_name": "my-openapi-app",
+          "redirect_uris": ["https://your-app.com/callback"],
+          "grant_types": ["authorization_code", "refresh_token"],
+          "response_types": ["code"]
+        }'
+      ```
+
+      > 注册返回可能仅包含 `client_id`（public client，不返回 `client_secret`）。这种情况下请使用 PKCE，并在 token 请求里不传 `client_secret`。
+
+      ### 2）构造授权链接并获取 code
+
+      ```text
+      https://openapi.longbridge.com/oauth2/authorize
+        ?response_type=code
+        &client_id=YOUR_CLIENT_ID
+        &redirect_uri=YOUR_REDIRECT_URI
+        &scope=3
+        &state=YOUR_RANDOM_STATE
+        &code_challenge=YOUR_CODE_CHALLENGE
+        &code_challenge_method=S256
+      ```
+
+      用户授权后，回调地址会收到：
+
+      ```text
+      YOUR_REDIRECT_URI?code=AUTH_CODE&state=YOUR_RANDOM_STATE
+      ```
+
+      ### 3）用 code 换 access_token
+
+      ```bash
+      curl -X POST https://openapi.longbridge.com/oauth2/token \
+        -H "Content-Type: application/x-www-form-urlencoded" \
+        -d "grant_type=authorization_code" \
+        -d "client_id=YOUR_CLIENT_ID" \
+        -d "redirect_uri=YOUR_REDIRECT_URI" \
+        -d "code=AUTH_CODE" \
+        -d "code_verifier=YOUR_CODE_VERIFIER"
+      # 仅当客户端有 secret 时再加：
+      # -d "client_secret=YOUR_CLIENT_SECRET"
+      ```
+
+      ### 4）用 Bearer token 调 API（TSLA.US 实例）
+
+      ```bash
+      curl -X GET "https://openapi.longbridge.com/v1/quote/get_security_list?market=US&category=Overnight" \
+        -H "Authorization: Bearer ACCESS_TOKEN"
+      ```
+
+      实际返回（节选，保留 `TSLA.US` 项）：
+
+      ```json
+      {
+        "code": 0,
+        "message": "success",
+        "data": {
+          "list": [
+            {
+              "symbol": "TSLA.US",
+              "name_cn": "特斯拉",
+              "name_hk": "",
+              "name_en": ""
+            }
+          ]
+        }
+      }
+      ```
+
+      ### 5）刷新 token
+
+      通过 OAuth token endpoint 刷新（详见下方"刷新 Token"部分）：
+
+      ```bash
+      curl -X POST https://openapi.longbridge.com/oauth2/token \
+        -H "Content-Type: application/x-www-form-urlencoded" \
+        -d "grant_type=refresh_token" \
+        -d "client_id=YOUR_CLIENT_ID" \
+        -d "refresh_token=REFRESH_TOKEN"
+      # 仅当客户端有 secret 时再加：
+      # -d "client_secret=YOUR_CLIENT_SECRET"
+      ```
+
+      ## 与旧文档的关系
+
+      - 本页：只讲 **OAuth 2.0 主流程**（新接入默认看这里）。
+      - 下方"刷新 Token"部分：只讲刷新步骤细节与常见问题，避免重复。
+
+      ---
+
+      # 刷新 Token（OAuth 2.0）
+
+      本页仅说明 OAuth 2.0 的 **refresh token** 刷新步骤。
+
+      - 如果你还没走完完整授权流程，请先看上方认证部分。
+      - 本页不重复注册 client / 获取 code 的流程，只关注"刷新"这一步
+
+      ## 推荐刷新方式（OAuth 2.0）
+
+      使用 OAuth token endpoint：
+
+      - `POST https://openapi.longbridge.com/oauth2/token`
+      - 或中国内地：`POST https://openapi.longbridge.cn/oauth2/token`
+
+      ### 请求参数（`application/x-www-form-urlencoded`）
+
+      | 名称          | 必须 | 说明 |
+      | ------------- | ---- | ---- |
+      | grant_type    | 是   | 固定为 `refresh_token` |
+      | client_id     | 是   | OAuth client id |
+      | refresh_token | 是   | 上一次签发的 refresh token |
+      | client_secret | 否   | 仅机密客户端需要；public client 不传 |
+
+      ### 刷新示例
+
+      ```bash
+      curl -X POST https://openapi.longbridge.com/oauth2/token \
+        -H "Content-Type: application/x-www-form-urlencoded" \
+        -d "grant_type=refresh_token" \
+        -d "client_id=YOUR_CLIENT_ID" \
+        -d "refresh_token=YOUR_REFRESH_TOKEN"
+      # 仅当你的客户端有 secret 时再加：
+      # -d "client_secret=YOUR_CLIENT_SECRET"
+      ```
+
+      ### 响应示例
+
+      ```json
+      {
+        "access_token": "...",
+        "refresh_token": "...",
+        "expires_in": 2592000,
+        "token_type": "Bearer"
+      }
+      ```
+
+      ## 兼容说明
+
+      历史接口 `/v1/token/refresh` 属于旧方案兼容路径，不建议新接入继续采用。新接入请统一使用 OAuth 2.0 token endpoint。
+  - id: error-codes
+    title: Error Codes
+    x-title-zh: 错误码
+    content: |
+      ### Error Codes
+
+      | HTTP Status | Code   | Message                | Description                                                        |
+      | ----------- | ------ | ---------------------- | ------------------------------------------------------------------ |
+      | 403         | 403201 | signature invalid      | signature is invalid                                               |
+      | 403         | 403202 | duplicate request      | Repeat request, same request without replacement `x-timestamp`     |
+      | 403         | 403203 | apikey illegal         | `App Key` is illegal                                               |
+      | 403         | 403205 | ip is not allowed      | IP address is not authorized to access                             |
+      | 401         | 401003 | token expired          | Access token expired. Legacy API Key: obtain a new token from [https://open.longbridge.com/](https://open.longbridge.com/). OAuth: use the refresh token flow. |
+      | 429         | 429001 | ip request ratelimit   | Too frequent requests as a same IP address, please try again later |
+      | 429         | 429002 | api request is limited | Too frequent requests on an API, please try again later            |
+      | 500         | 500000 | internal error         | server internal error, please contact customer support             |
+    x-content-zh: |
+      ### 错误码
+
+      | HTTP Status | code   | message                | 说明                                     |
+      | ----------- | ------ | ---------------------- | ---------------------------------------- |
+      | 403         | 403201 | signature invalid      | 签名无效                                 |
+      | 403         | 403202 | duplicate request      | 重复请求，同一个请求没有更换 X-Timestamp |
+      | 403         | 403203 | apikey illegal         | App Key 无效                             |
+      | 403         | 403205 | ip is not allowed      | IP 地址无权访问                          |
+      | 401         | 401003 | token expired          | Access Token 已过期。旧版 API Key：请在 [https://open.longbridge.com/](https://open.longbridge.com/) 重新获取；OAuth：请使用 refresh token 流程刷新。 |
+      | 429         | 429001 | ip request ratelimit   | IP 访问过于频繁，请稍后再试              |
+      | 429         | 429002 | api request is limited | 接口访问过于频繁，请稍后再试             |
+      | 500         | 500000 | internal error         | 服务内部错误，请联系客户经理进行处理         |
 servers:
   - url: https://openapi.longbridge.com
     description: Global
