@@ -6,9 +6,9 @@ info:
     watchlist management, and content queries for the Longbridge trading platform.
   version: '1.0.0'
 x-pages:
-  - id: authentication
-    title: Authentication
-    x-title-zh: 认证
+  - id: overview
+    title: Overview
+    x-title-zh: 概览
     x-icon: lock
     content: |
       This page is reorganized as a practical **OAuth 2.0 access flow** for new integrations.
