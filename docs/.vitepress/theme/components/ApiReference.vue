@@ -8,7 +8,7 @@ import spec from '../../../../openapi.yaml?raw'
 const { t, locale } = useI18n()
 const md = new MarkdownIt({
   html: false,
-  linkify: false,
+  linkify: true,
   highlight: (str: string, lang: string) => {
     const code = highlightCode(str, lang)
     return `<div class="language-${lang || 'text'}"><pre><code>${code}\n</code></pre></div>`
