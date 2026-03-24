@@ -2,8 +2,10 @@
 import { load } from 'js-yaml'
 import MarkdownIt from 'markdown-it'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import spec from '../../../../openapi.yaml?raw'
 
+const { t } = useI18n()
 const md = new MarkdownIt({ html: false, linkify: false })
 
 interface Parameter {
@@ -12,6 +14,21 @@ interface Parameter {
   required?: boolean
   description?: string
   schema?: { type?: string }
+}
+
+interface ParamRow {
+  name: string
+  type: string
+  location: string
+  required: boolean
+  description: string
+}
+
+interface Section {
+  key: string
+  title: string
+  params: ParamRow[]
+  fallback?: boolean
 }
 
 interface Operation {
@@ -30,25 +47,26 @@ interface Operation {
       }
     }
   }
+  responses?: Record<string, {
+    description?: string
+    content?: {
+      'application/json'?: {
+        schema?: {
+          properties?: Record<string, { type?: string; description?: string }>
+        }
+      }
+    }
+  }>
 }
 
-interface EndpointItem {
-  method: string
-  path: string
-  operation: Operation
-}
-
-interface TagGroup {
-  name: string
-  endpoints: EndpointItem[]
-}
+interface EndpointItem { method: string; path: string; operation: Operation }
+interface TagGroup { name: string; endpoints: EndpointItem[] }
 
 function parseSpec(): TagGroup[] {
   const parsed = load(spec) as any
   const paths = parsed.paths ?? {}
   const httpMethods = ['get', 'post', 'put', 'delete', 'patch']
   const endpointsByTag: Record<string, EndpointItem[]> = {}
-
   for (const [path, pathItem] of Object.entries(paths as Record<string, any>)) {
     for (const method of httpMethods) {
       const operation = pathItem[method] as Operation | undefined
@@ -60,16 +78,9 @@ function parseSpec(): TagGroup[] {
       }
     }
   }
-
   const specTags: string[] = ((parsed.tags ?? []) as any[]).map((t: any) => t.name)
-  const orderedTags = [
-    ...specTags,
-    ...Object.keys(endpointsByTag).filter(t => !specTags.includes(t)),
-  ]
-
-  return orderedTags
-    .filter(tag => endpointsByTag[tag])
-    .map(tag => ({ name: tag, endpoints: endpointsByTag[tag] }))
+  const orderedTags = [...specTags, ...Object.keys(endpointsByTag).filter(t => !specTags.includes(t))]
+  return orderedTags.filter(tag => endpointsByTag[tag]).map(tag => ({ name: tag, endpoints: endpointsByTag[tag] }))
 }
 
 function splitDescriptionAndCode(mdText: string): { prose: string; codeBlocks: string[] } {
@@ -85,36 +96,25 @@ function parseCodeBlock(raw: string): { lang: string; code: string } {
 }
 
 const STORAGE_KEY = 'api-reference-sidebar-width'
-
 const tagGroups = ref<TagGroup[]>([])
 const selectedEndpoint = ref<EndpointItem | null>(null)
 const sidebarWidth = ref(240)
 const isCollapsed = ref(false)
-
+const copiedIndex = ref<number | null>(null)
 let isResizing = false
 
-function onResizeMousedown(e: MouseEvent) {
-  isResizing = true
-  e.preventDefault()
-}
-
+function onResizeMousedown(e: MouseEvent) { isResizing = true; e.preventDefault() }
 function onMousemove(e: MouseEvent) {
   if (!isResizing) return
   sidebarWidth.value = Math.min(400, Math.max(160, e.clientX))
   localStorage.setItem(STORAGE_KEY, String(sidebarWidth.value))
 }
-
-function onMouseup() {
-  isResizing = false
-}
-
-function toggleSidebar() {
-  isCollapsed.value = !isCollapsed.value
-}
+function onMouseup() { isResizing = false }
+function toggleSidebar() { isCollapsed.value = !isCollapsed.value }
 
 const selectedSplit = computed(() => {
   const desc = selectedEndpoint.value?.operation.description
-  if (!desc) return { prose: '', codeBlocks: [] }
+  if (!desc) return { prose: '', codeBlocks: [] as string[] }
   return splitDescriptionAndCode(desc)
 })
 
@@ -125,34 +125,107 @@ const selectedProse = computed(() => {
 
 const selectedCodeBlocks = computed(() => selectedSplit.value.codeBlocks.map(parseCodeBlock))
 
-const selectedParameters = computed(() => selectedEndpoint.value?.operation.parameters ?? [])
+const selectedSections = computed((): Section[] => {
+  const ep = selectedEndpoint.value
+  if (!ep) return []
+  const sections: Section[] = []
 
-const selectedRequestBody = computed(() => {
-  const rb = selectedEndpoint.value?.operation.requestBody
-  if (!rb) return null
-  const schema = rb.content?.['application/json']?.schema
-  if (!schema?.properties) return 'fallback' as const
-  return Object.entries(schema.properties).map(([name, prop]: [string, any]) => ({
-    name,
-    type: prop.type ?? 'object',
-    description: prop.description ?? '',
-    required: (schema.required ?? []).includes(name),
-  }))
+  // Authorizations (global OAuth2 Bearer applies to all endpoints)
+  sections.push({
+    key: 'auth',
+    title: t('api.section.authorizations'),
+    params: [{
+      name: 'Authorization',
+      type: 'string',
+      location: 'header',
+      required: true,
+      description: t('api.authDescription'),
+    }],
+  })
+
+  // Path parameters
+  const pathParams = (ep.operation.parameters ?? []).filter(p => p.in === 'path')
+  if (pathParams.length > 0) {
+    sections.push({
+      key: 'path',
+      title: t('api.section.pathParams'),
+      params: pathParams.map(p => ({
+        name: p.name,
+        type: p.schema?.type ?? 'string',
+        location: 'path',
+        required: p.required !== false,
+        description: p.description ?? '',
+      })),
+    })
+  }
+
+  // Query parameters
+  const queryParams = (ep.operation.parameters ?? []).filter(p => p.in === 'query')
+  if (queryParams.length > 0) {
+    sections.push({
+      key: 'query',
+      title: t('api.section.queryParams'),
+      params: queryParams.map(p => ({
+        name: p.name,
+        type: p.schema?.type ?? 'string',
+        location: 'query',
+        required: p.required === true,
+        description: p.description ?? '',
+      })),
+    })
+  }
+
+  // Request body
+  const rb = ep.operation.requestBody
+  if (rb) {
+    const schema = rb.content?.['application/json']?.schema
+    if (schema?.properties) {
+      sections.push({
+        key: 'body',
+        title: t('api.section.body'),
+        params: Object.entries(schema.properties).map(([name, prop]: [string, any]) => ({
+          name,
+          type: prop.type ?? 'object',
+          location: 'body',
+          required: (schema.required ?? []).includes(name),
+          description: prop.description ?? '',
+        })),
+      })
+    } else {
+      sections.push({ key: 'body', title: t('api.section.body'), params: [], fallback: true })
+    }
+  }
+
+  // Response 200
+  const resp = ep.operation.responses?.['200']
+  if (resp?.content?.['application/json']?.schema?.properties) {
+    sections.push({
+      key: 'response',
+      title: t('api.section.response'),
+      params: Object.entries(resp.content['application/json']!.schema!.properties!).map(([name, prop]: [string, any]) => ({
+        name,
+        type: prop.type ?? 'object',
+        location: '',
+        required: false,
+        description: prop.description ?? '',
+      })),
+    })
+  }
+
+  return sections
 })
 
-async function copyCode(code: string) {
+async function copyCode(code: string, index: number) {
   await navigator.clipboard.writeText(code).catch(() => {})
+  copiedIndex.value = index
+  setTimeout(() => { copiedIndex.value = null }, 1500)
 }
 
-function methodClass(method: string) {
-  return `method-${method.toLowerCase()}`
-}
+function methodClass(method: string) { return `method-${method.toLowerCase()}` }
 
 onMounted(() => {
   tagGroups.value = parseSpec()
-  if (tagGroups.value[0]?.endpoints[0]) {
-    selectedEndpoint.value = tagGroups.value[0].endpoints[0]
-  }
+  if (tagGroups.value[0]?.endpoints[0]) selectedEndpoint.value = tagGroups.value[0].endpoints[0]
   const stored = localStorage.getItem(STORAGE_KEY)
   if (stored) {
     const n = parseInt(stored, 10)
@@ -170,6 +243,7 @@ onUnmounted(() => {
 
 <template>
   <div class="api-reference-page">
+    <!-- Left sidebar -->
     <div
       class="api-sidebar"
       :class="{ collapsed: isCollapsed }"
@@ -192,74 +266,60 @@ onUnmounted(() => {
       </div>
     </div>
 
+    <!-- Resize handle + collapse toggle -->
     <div class="resize-handle" @mousedown="onResizeMousedown">
       <button class="toggle-btn" @click.stop="toggleSidebar">
         {{ isCollapsed ? '›' : '‹' }}
       </button>
     </div>
 
-    <div v-if="selectedEndpoint" class="api-content">
-      <div class="content-top">
-        <div class="endpoint-header">
+    <!-- Main: content + code panel side by side -->
+    <div v-if="selectedEndpoint" class="api-main">
+      <!-- Content area -->
+      <div class="api-content">
+        <div class="endpoint-tag">{{ selectedEndpoint.operation.tags?.[0] ?? '' }}</div>
+        <h1 class="endpoint-title">{{ selectedEndpoint.operation.summary }}</h1>
+
+        <div class="endpoint-path-row">
           <span class="method-badge large" :class="methodClass(selectedEndpoint.method)">
             {{ selectedEndpoint.method }}
           </span>
           <code class="endpoint-path">{{ selectedEndpoint.path }}</code>
         </div>
-        <h2 class="endpoint-title">{{ selectedEndpoint.operation.summary }}</h2>
 
         <div v-if="selectedProse" class="prose vp-doc" v-html="selectedProse" />
 
-        <div class="params-section">
-          <div class="section-label">Parameters</div>
-          <p v-if="selectedParameters.length === 0" class="no-params">No parameters.</p>
-          <table v-else class="params-table">
-            <thead>
-              <tr>
-                <th>Name</th><th>Type</th><th>In</th><th>Required</th><th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="p in selectedParameters" :key="p.name">
-                <td><code>{{ p.name }}</code></td>
-                <td>{{ p.schema?.type ?? '—' }}</td>
-                <td>{{ p.in }}</td>
-                <td>{{ p.required ? '✓' : '' }}</td>
-                <td>{{ p.description ?? '' }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div v-if="selectedRequestBody" class="params-section">
-          <div class="section-label">Request Body</div>
-          <p v-if="selectedRequestBody === 'fallback'" class="no-params">
-            Request body — see code example below.
-          </p>
-          <table v-else class="params-table">
-            <thead>
-              <tr>
-                <th>Field</th><th>Type</th><th>Required</th><th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="field in (selectedRequestBody as any[])" :key="field.name">
-                <td><code>{{ field.name }}</code></td>
-                <td>{{ field.type }}</td>
-                <td>{{ field.required ? '✓' : '' }}</td>
-                <td>{{ field.description }}</td>
-              </tr>
-            </tbody>
-          </table>
+        <!-- Sections -->
+        <div v-for="section in selectedSections" :key="section.key" class="api-section">
+          <h4 class="section-title">{{ section.title }}</h4>
+          <p v-if="section.fallback" class="no-content">{{ $t('api.bodyFallback') }}</p>
+          <div v-else class="param-list">
+            <div v-for="param in section.params" :key="param.name" class="param-field">
+              <div class="param-head">
+                <span class="param-name">{{ param.name }}</span>
+                <span class="param-badge type-badge">{{ param.type }}</span>
+                <span v-if="param.location" class="param-badge location-badge">{{ param.location }}</span>
+                <span
+                  v-if="section.key !== 'response'"
+                  class="param-badge"
+                  :class="param.required ? 'required-badge' : 'optional-badge'"
+                >{{ param.required ? $t('api.param.required') : $t('api.param.optional') }}</span>
+              </div>
+              <p v-if="param.description" class="param-desc">{{ param.description }}</p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="content-bottom">
-        <p v-if="selectedCodeBlocks.length === 0" class="no-params">No code examples.</p>
+      <!-- Code panel -->
+      <div class="api-code-panel">
+        <p v-if="selectedCodeBlocks.length === 0" class="no-content">{{ $t('api.noCodeExamples') }}</p>
         <div v-for="(block, i) in selectedCodeBlocks" :key="i" class="code-block-wrapper">
           <div class="code-block-header">
             <span class="lang-label">{{ block.lang || 'code' }}</span>
-            <button class="copy-btn" @click="copyCode(block.code)">Copy</button>
+            <button class="copy-btn" @click="copyCode(block.code, i)">
+              {{ copiedIndex === i ? $t('api.copied') : $t('api.copy') }}
+            </button>
           </div>
           <pre class="code-block-pre"><code>{{ block.code }}</code></pre>
         </div>
@@ -273,8 +333,10 @@ onUnmounted(() => {
   display: flex;
   height: calc(100vh - var(--vp-nav-height));
   overflow: hidden;
+  font-size: 14px;
 }
 
+/* ── Sidebar ── */
 .api-sidebar {
   flex-shrink: 0;
   background: var(--vp-c-bg-soft);
@@ -289,20 +351,20 @@ onUnmounted(() => {
 }
 
 .sidebar-content {
-  padding: 12px 8px;
+  padding: 16px 8px;
 }
 
 .tag-group {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .tag-label {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   color: var(--vp-c-text-3);
-  padding: 0 8px;
+  padding: 0 10px;
   margin-bottom: 4px;
 }
 
@@ -311,8 +373,8 @@ onUnmounted(() => {
   align-items: center;
   gap: 7px;
   width: 100%;
-  padding: 5px 10px;
-  margin-bottom: 2px;
+  padding: 4px 10px;
+  margin-bottom: 1px;
   border-radius: 6px;
   border: none;
   background: transparent;
@@ -320,6 +382,7 @@ onUnmounted(() => {
   text-align: left;
   color: var(--vp-c-text-2);
   font-size: 12px;
+  line-height: 1.5;
 }
 
 .endpoint-item:hover {
@@ -338,20 +401,22 @@ onUnmounted(() => {
   white-space: nowrap;
 }
 
+/* ── Method badges ── */
 .method-badge {
   display: inline-flex;
   align-items: center;
   font-size: 9px;
   font-weight: 700;
-  padding: 1px 6px;
+  padding: 1px 5px;
   border-radius: 4px;
   flex-shrink: 0;
   font-family: var(--vp-font-family-mono);
+  letter-spacing: 0.02em;
 }
 
 .method-badge.large {
   font-size: 11px;
-  padding: 3px 10px;
+  padding: 2px 8px;
   border-radius: 5px;
 }
 
@@ -361,6 +426,7 @@ onUnmounted(() => {
 .method-delete { color: var(--vp-c-danger-1);    background: var(--vp-c-danger-soft);    }
 .method-patch  { color: var(--vp-c-important-1); background: var(--vp-c-important-soft); }
 
+/* ── Resize handle ── */
 .resize-handle {
   width: 8px;
   flex-shrink: 0;
@@ -390,120 +456,187 @@ onUnmounted(() => {
   padding: 0;
 }
 
-.api-content {
+/* ── Main area ── */
+.api-main {
   flex: 1;
   display: flex;
-  flex-direction: column;
   overflow: hidden;
   min-width: 0;
 }
 
-.content-top {
+/* ── Content area ── */
+.api-content {
   flex: 1;
   overflow-y: auto;
-  padding: 24px 28px;
-  border-bottom: 1px solid var(--vp-c-divider);
+  padding: 32px 40px 48px;
+  min-width: 0;
 }
 
-.content-bottom {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px 28px;
-}
-
-.endpoint-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-}
-
-.endpoint-path {
-  font-size: 14px;
-  font-family: var(--vp-font-family-mono);
-  color: var(--vp-c-text-1);
-  background: var(--vp-c-bg-soft);
-  padding: 2px 8px;
-  border-radius: 4px;
+.endpoint-tag {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--vp-c-brand-1);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .endpoint-title {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0 0 10px;
+  font-size: 26px;
+  font-weight: 700;
   color: var(--vp-c-text-1);
+  margin: 0 0 14px;
+  line-height: 1.25;
   border: none;
   padding: 0;
+  letter-spacing: -0.02em;
+}
+
+.endpoint-path-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 8px 12px;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.endpoint-path {
+  font-size: 13px;
+  font-family: var(--vp-font-family-mono);
+  color: var(--vp-c-text-1);
+  background: transparent;
+  padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .prose {
   font-size: 14px;
   color: var(--vp-c-text-2);
-  line-height: 1.6;
-  margin-bottom: 16px;
+  line-height: 1.65;
+  margin-bottom: 24px;
 }
 
-.params-section {
-  margin-bottom: 16px;
+/* ── Sections ── */
+.api-section {
+  margin-top: 28px;
 }
 
-.section-label {
-  font-size: 11px;
+.section-title {
+  font-size: 15px;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--vp-c-text-3);
-  margin-bottom: 8px;
+  color: var(--vp-c-text-1);
+  margin: 0 0 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--vp-c-divider);
+  letter-spacing: 0;
+  border-top: none;
 }
 
-.no-params {
+.no-content {
   font-size: 13px;
   color: var(--vp-c-text-3);
-  margin: 0;
+  margin: 12px 0 0;
+  padding: 0;
 }
 
-.params-table {
-  width: 100%;
-  border-collapse: collapse;
+/* ── Param rows ── */
+.param-list {
+  margin-top: 0;
+}
+
+.param-field {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.param-field:last-child {
+  border-bottom: none;
+}
+
+.param-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-family: var(--vp-font-family-mono);
   font-size: 13px;
 }
 
-.params-table th,
-.params-table td {
-  padding: 8px 10px;
-  border: 1px solid var(--vp-c-divider);
-  text-align: left;
+.param-name {
+  color: var(--vp-c-text-1);
+  font-weight: 600;
+}
+
+.param-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-family: var(--vp-font-family-mono);
+  padding: 1px 6px;
+  border-radius: 4px;
+  line-height: 1.6;
+}
+
+.type-badge {
+  background: var(--vp-c-bg-mute);
   color: var(--vp-c-text-2);
 }
 
-.params-table th {
-  background: var(--vp-c-bg-soft);
-  font-weight: 600;
-  color: var(--vp-c-text-1);
-  font-size: 12px;
+.location-badge {
+  background: var(--vp-c-bg-mute);
+  color: var(--vp-c-text-3);
 }
 
-.params-table code {
-  font-family: var(--vp-font-family-mono);
-  font-size: 12px;
+.required-badge {
+  background: color-mix(in srgb, var(--vp-c-danger-1) 12%, transparent);
+  color: var(--vp-c-danger-1);
+  font-weight: 600;
+}
+
+.optional-badge {
+  background: transparent;
+  color: var(--vp-c-text-3);
+}
+
+.param-desc {
+  font-size: 13px;
+  color: var(--vp-c-text-2);
+  line-height: 1.6;
+  margin: 6px 0 0;
+  padding: 0;
+  font-family: var(--vp-font-family-base);
+}
+
+/* ── Code panel ── */
+.api-code-panel {
+  width: 420px;
+  flex-shrink: 0;
+  border-left: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg-soft);
-  padding: 1px 4px;
-  border-radius: 3px;
+  overflow-y: auto;
+  padding: 20px 16px;
 }
 
 .code-block-wrapper {
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .code-block-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 14px;
-  background: var(--vp-c-bg-soft);
+  padding: 5px 12px;
+  background: var(--vp-c-bg-mute);
   border-bottom: 1px solid var(--vp-c-divider);
 }
 
@@ -521,6 +654,8 @@ onUnmounted(() => {
   cursor: pointer;
   padding: 2px 6px;
   border-radius: 3px;
+  font-family: var(--vp-font-family-base);
+  transition: color 0.15s;
 }
 
 .copy-btn:hover {
@@ -530,11 +665,11 @@ onUnmounted(() => {
 
 .code-block-pre {
   margin: 0;
-  padding: 14px 16px;
+  padding: 12px 14px;
   background: var(--vp-code-block-bg);
   color: var(--vp-code-block-color);
   font-family: var(--vp-font-family-mono);
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.6;
   overflow-x: auto;
   white-space: pre;
