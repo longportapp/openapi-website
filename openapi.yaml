@@ -21,6 +21,9 @@ tags:
     description: Query regulatory filings, news articles, and community discussion topics for a given symbol. Suitable for investment research, news monitoring, and content aggregation.
   - name: Trade Execution & Order Management
     description: Full order lifecycle management including order detail queries, today's and historical order queries, today's and historical execution reports, order modification, order cancellation, and pre-order maximum purchasable quantity estimation.
+security:
+  - oauth2:
+      - openapi
 paths:
   /watchlist/groups:
     get:
@@ -2782,6 +2785,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://openapi.longbridge.com/oauth2/authorize
+          tokenUrl: https://openapi.longbridge.com/oauth2/token
+          scopes:
+            openapi: Full OpenAPI access
   schemas:
     Error:
       type: object
