@@ -836,7 +836,7 @@ onUnmounted(() => {
   cursor: pointer;
   text-align: left;
   color: var(--vp-c-text-2);
-  font-size: 12.5px;
+  font-size: 14px;
   line-height: 1.4;
   transition:
     background 0.1s,
