@@ -45,12 +45,17 @@ Replace the Scalar third-party component with a custom Vue component that render
 - Active item: rounded corners + teal brand-color background (`color-mix(in srgb, var(--vp-c-brand-1) 14%, transparent)`), no left border
 - Inactive item: plain text, hover state with subtle background
 
-HTTP method badge colors:
-- GET: green (`#dcfce7` bg / `#16a34a` text)
-- POST: blue (`#dbeafe` bg / `#2563eb` text)
-- PUT: amber (`#fef3c7` bg / `#d97706` text)
-- DELETE: red (`#fee2e2` bg / `#dc2626` text)
-- PATCH: purple (`#f3e8ff` bg / `#7c3aed` text)
+HTTP method badge colors — use VitePress semantic CSS variables so dark mode is handled automatically:
+
+| Method | Color variable (text) | Color variable (bg) |
+|--------|----------------------|---------------------|
+| GET    | `var(--vp-c-success-1)` | `var(--vp-c-success-soft)` |
+| POST   | `var(--vp-c-brand-1)`   | `var(--vp-c-brand-soft)`   |
+| PUT    | `var(--vp-c-warning-1)` | `var(--vp-c-warning-soft)` |
+| DELETE | `var(--vp-c-danger-1)`  | `var(--vp-c-danger-soft)`  |
+| PATCH  | `var(--vp-c-important-1)` | `var(--vp-c-important-soft)` |
+
+This mirrors the existing pattern in `TryIt/Content.vue` and automatically adapts to light/dark mode.
 
 ## Right Panel — Top Half
 
@@ -76,21 +81,41 @@ function splitDescriptionAndCode(md: string): { prose: string; codeBlocks: strin
 }
 ```
 
-Rendering:
-- `prose` → `md.render(prose)` → `v-html` in top half
-- Each `codeBlocks[i]` → `md.render(block)` → `v-html` in bottom half
-- This produces standard VitePress `.vp-doc` styled output with syntax highlighting and Copy button
-- **No `box-shadow`** on code blocks. Because `v-html` content does not receive Vue scoped attribute markers, the override must use an unscoped wrapper class:
+Rendering — two different renderers for prose vs code blocks:
 
-```css
-/* in <style> (not scoped) — namespace under component root class */
-.api-reference-page .vp-doc div[class*='language-'] {
-  box-shadow: none;
+**Prose (top half):** `md.render(prose)` → `v-html`. Plain `markdown-it` with no special highlight option. Prose in endpoint descriptions contains no fenced code blocks (those are stripped out), so highlighting is irrelevant here.
+
+**Code blocks (bottom half):** Do NOT re-render through `markdown-it`. Instead render each extracted block as a plain styled `<pre><code>` element manually:
+
+```ts
+// Extract lang and content from the fenced block string
+function parseCodeBlock(raw: string): { lang: string; code: string } {
+  const match = raw.match(/^```([\w-]*)\n([\s\S]*?)^```/m)
+  return { lang: match?.[1] ?? '', code: match?.[2] ?? '' }
 }
 ```
 
-The component root element gets class `api-reference-page` to scope this override.
+Then render in template:
+```html
+<div class="code-block-wrapper">
+  <div class="code-block-header">
+    <span class="lang-label">{{ block.lang }}</span>
+    <button @click="copy(block.code)">Copy</button>
+  </div>
+  <pre><code>{{ block.code }}</code></pre>
+</div>
+```
 
+Style `.code-block-wrapper` using VitePress CSS variables to match the docs code block appearance:
+- Background: `var(--vp-code-block-bg)`
+- Text: `var(--vp-code-block-color)`
+- Font: `var(--vp-font-family-mono)`
+- Border-radius: `8px`, border: `1px solid var(--vp-c-divider)`
+- No `box-shadow` (intentional — no global override needed)
+
+**No Shiki syntax highlighting** for the bottom panel code blocks. The content (cURL commands and JSON responses) is fully readable without token coloring. This avoids a Shiki dependency and is implementable with zero additional packages.
+
+- `markdown-it` is instantiated once at module level: `const md = new MarkdownIt({ html: false, linkify: false })`
 - Code blocks appear in order: `shell` (cURL) first, then `json` (response example)
 
 ## Data Flow
