@@ -455,22 +455,627 @@ const demoScenarios = computed<DemoScenario[]>(() => {
   const cn = !isEN.value
 
   return [
-    // ── 1. 持仓盈亏
+    // ── 1. 跨市场选股
     {
-      id: 'portfolio',
-      label: isEN.value ? 'Portfolio P&L' : isHK.value ? '持倉盈虧' : '持仓盈亏',
+      id: 'monitor',
+      label: isEN.value ? 'Cross-Market Screen' : isHK.value ? '跨市場選股' : '跨市场选股',
       messages: [
         {
           role: 'user',
           content: isEN.value
-            ? "How's my account today? Show each position's P&L."
+            ? 'Screen US and HK tech stocks: market cap >$50B, PE <25, recent MACD golden cross. Sort by market cap.'
             : isHK.value
-              ? '今天我的帳戶表現如何？幫我看下各個持倉'
-              : '今天我的账户表现如何？帮我看下各个持仓',
+              ? '幫我從美股和港股裡，篩出市值 500 億以上、PE 低於 25、近期 MACD 出現金叉的科技股，按市值排列'
+              : '帮我从美股和港股里，筛出市值 500 亿以上、PE 低于 25、近期 MACD 出现金叉的科技股，按市值排列',
         },
         {
           role: 'tool',
-          command: 'longbridge positions && longbridge quote NVDA.US AAPL.US MSFT.US 9988.HK',
+          command:
+            'longbridge calc-index 700.HK 9988.HK IBM.US 1810.HK 9999.HK 9618.HK 992.HK 285.HK --indicators MACD,PE',
+          content: '',
+        },
+        {
+          role: 'assistant',
+          rich: true,
+          content: `
+<div style="font-size:13px;line-height:1.75;color:var(--vp-c-text-2);margin-bottom:12px">${cn ? '美股 + 港股科技板块筛选完成，共 8 只股票满足市值 ≥500亿、PE<25 条件，其中 3 只近期 MACD 金叉信号确认（DIF 由负转正并上穿 DEA）。' : 'US + HK tech screening done. 8 stocks pass market cap ≥$50B and PE<25. 3 have confirmed MACD golden crosses (DIF turned positive and crossed above DEA).'}</div>
+<div class="demo-table-wrap"><table class="demo-table">
+  <thead><tr>
+    <th>${cn ? '代码' : 'Symbol'}</th>
+    <th style="text-align:left">${cn ? '名称' : 'Name'}</th>
+    <th>${cn ? '市值' : 'Mkt Cap'}</th>
+    <th>PE</th>
+    <th>MACD</th>
+    <th>${cn ? '信号' : 'Signal'}</th>
+  </tr></thead>
+  <tbody>
+    <tr><td style="font-weight:700">700.HK</td><td style="text-align:left;font-size:11px;color:var(--vp-c-text-3)">${cn ? '腾讯控股' : 'Tencent'}</td><td>HK$4,689B</td><td>18.84</td><td class="demo-muted">DIF&lt;DEA</td><td><span style="font-size:10px;background:var(--vp-c-bg-mute);padding:1px 6px;border-radius:4px;color:var(--vp-c-text-2)">${cn ? '观望' : 'Watch'}</span></td></tr>
+    <tr><td style="font-weight:700">9988.HK</td><td style="text-align:left;font-size:11px;color:var(--vp-c-text-3)">${cn ? '阿里巴巴' : 'Alibaba'}</td><td>HK$2,353B</td><td>22.90</td><td class="demo-muted">DIF&lt;DEA</td><td><span style="font-size:10px;background:var(--vp-c-bg-mute);padding:1px 6px;border-radius:4px;color:var(--vp-c-text-2)">${cn ? '观望' : 'Watch'}</span></td></tr>
+    <tr><td style="font-weight:700">IBM.US</td><td style="text-align:left;font-size:11px;color:var(--vp-c-text-3)">IBM</td><td>$233B</td><td>22.01</td><td class="demo-pos">DIF&gt;DEA ✓</td><td><span style="font-size:10px;background:var(--vp-c-green-soft);padding:1px 6px;border-radius:4px;color:var(--up-color)">${cn ? '金叉' : 'Golden X'}</span></td></tr>
+    <tr><td style="font-weight:700">1810.HK</td><td style="text-align:left;font-size:11px;color:var(--vp-c-text-3)">${cn ? '小米集团' : 'Xiaomi'}</td><td>HK$847B</td><td>17.53</td><td class="demo-muted">DIF&lt;DEA</td><td><span style="font-size:10px;background:var(--vp-c-bg-mute);padding:1px 6px;border-radius:4px;color:var(--vp-c-text-2)">${cn ? '观望' : 'Watch'}</span></td></tr>
+    <tr><td style="font-weight:700">9999.HK</td><td style="text-align:left;font-size:11px;color:var(--vp-c-text-3)">${cn ? '网易' : 'NetEase'}</td><td>HK$560B</td><td>15.00</td><td class="demo-pos">DIF&gt;DEA ✓</td><td><span style="font-size:10px;background:var(--vp-c-green-soft);padding:1px 6px;border-radius:4px;color:var(--up-color)">${cn ? '金叉' : 'Golden X'}</span></td></tr>
+    <tr><td style="font-weight:700;color:var(--up-color)">9618.HK</td><td style="text-align:left;font-size:11px;color:var(--vp-c-text-3)">${cn ? '京东集团' : 'JD.com'}</td><td>HK$304B</td><td>14.00</td><td class="demo-pos">DIF=+0.22 ★</td><td><span style="font-size:10px;background:var(--vp-c-green-soft);padding:1px 6px;border-radius:4px;color:var(--up-color)">${cn ? '金叉最强' : 'Strongest'}</span></td></tr>
+    <tr><td style="font-weight:700">992.HK</td><td style="text-align:left;font-size:11px;color:var(--vp-c-text-3)">${cn ? '联想集团' : 'Lenovo'}</td><td>HK$114B</td><td>9.95</td><td class="demo-muted">DIF&lt;DEA</td><td><span style="font-size:10px;background:var(--vp-c-bg-mute);padding:1px 6px;border-radius:4px;color:var(--vp-c-text-2)">${cn ? '观望' : 'Watch'}</span></td></tr>
+    <tr><td style="font-weight:700">285.HK</td><td style="text-align:left;font-size:11px;color:var(--vp-c-text-3)">${cn ? '比亚迪电子' : 'BYD Electronic'}</td><td>HK$70B</td><td>14.69</td><td class="demo-pos">DIF&gt;DEA ✓</td><td><span style="font-size:10px;background:var(--vp-c-green-soft);padding:1px 6px;border-radius:4px;color:var(--up-color)">${cn ? '金叉' : 'Golden X'}</span></td></tr>
+  </tbody>
+</table></div>
+<div class="demo-hi-box"><strong>${cn ? 'MACD 金叉信号最强：9618.HK（京东）' : 'Strongest MACD golden cross: 9618.HK (JD.com)'}</strong>——${cn ? 'DIF 由 −0.08 上穿零轴至 +0.22，为零轴附近金叉，趋势性最强。IBM.US 和 9999.HK 同样确认。腾讯、阿里、小米 DIF 仍在 DEA 下方，暂不满足信号要求。' : 'DIF crossed zero axis from −0.08 to +0.22 — zero-axis golden cross, strongest trend signal. IBM.US and 9999.HK also confirmed. Tencent, Alibaba, Xiaomi DIF still below DEA.'}</div>`,
+        },
+      ],
+      clientMessages: {
+        claude: [
+          {
+            role: 'user',
+            content: isEN.value
+              ? 'Screen US and HK tech stocks: market cap >$50B, PE <25, recent MACD golden cross. Sort by market cap.'
+              : isHK.value
+                ? '幫我從美股和港股裡，篩出市值 500 億以上、PE 低於 25、近期 MACD 出現金叉的科技股，按市值排列'
+                : '帮我从美股和港股里，筛出市值 500 亿以上、PE 低于 25、近期 MACD 出现金叉的科技股，按市值排列',
+          },
+          {
+            role: 'tool',
+            command:
+              'longbridge calc-index 700.HK 9988.HK IBM.US 1810.HK 9999.HK 9618.HK 992.HK 285.HK --indicators MACD,PE',
+            content: '',
+          },
+          {
+            role: 'assistant',
+            rich: true,
+            content: `<div style="font-size:13.5px;line-height:1.8;margin-bottom:14px">${cn ? '筛选完成。8 只满足市值和估值条件的科技股中，有 3 只近期确认 MACD 金叉：' : 'Screening complete. Of 8 stocks meeting cap + valuation criteria, 3 show recent MACD golden crosses:'}</div>
+<div style="font-size:13px;line-height:1.85;color:var(--vp-c-text-2)">
+<strong style="color:var(--up-color)">① 9618.HK（京东）</strong> — ${cn ? 'DIF 由 −0.08 上穿零轴至 +0.22，零轴附近金叉，信号最强。PE 14，市值 HK$304B。' : 'DIF crossed zero from −0.08 to +0.22. Zero-axis golden cross — strongest trend signal. PE 14, cap HK$304B.'}<br>
+<strong style="color:var(--up-color)">② IBM.US</strong> — ${cn ? 'DIF 由负转正并持续上移，PE 22.01，市值 $233B。AI 基础设施需求驱动上行。' : 'DIF turned positive and rising. PE 22.01, cap $233B. AI infrastructure demand driving upside.'}<br>
+<strong style="color:var(--up-color)">③ 9999.HK（网易）</strong> — ${cn ? 'DIF 穿越 DEA 金叉成立，PE 15.00，市值 HK$560B。' : 'DIF crossed above DEA. PE 15.00, cap HK$560B.'}<br><br>
+${cn ? '腾讯（PE 18.84）、阿里（PE 22.90）和小米（PE 17.53）均满足估值和市值条件，但 DIF 仍在 DEA 下方，金叉信号尚未确认。' : 'Tencent (PE 18.84), Alibaba (PE 22.90), and Xiaomi (PE 17.53) all pass filters but DIF is still below DEA — no golden cross yet.'}
+</div>
+<div class="demo-ai-sig">${cn ? '数据时间：2026-03-24 · MACD 参数 12/26/9 日线' : 'Data: 2026-03-24 · MACD 12/26/9 daily'}</div>`,
+          },
+        ],
+        'claude-code': [
+          {
+            role: 'user',
+            content: isEN.value
+              ? 'Screen US+HK tech: cap >$50B, PE<25, recent MACD golden cross'
+              : isHK.value
+                ? '美股+港股科技股篩選：市值>500億、PE<25、近期MACD金叉'
+                : '美股+港股科技股筛选：市值>500亿、PE<25、近期MACD金叉',
+          },
+          {
+            role: 'tool',
+            command:
+              'longbridge calc-index 700.HK 9988.HK IBM.US 1810.HK 9999.HK 9618.HK 992.HK 285.HK --indicators MACD,PE',
+            content: '',
+          },
+          {
+            role: 'assistant',
+            rich: true,
+            content: termHTML(`<span class="t-p">$</span> longbridge calc-index 700.HK 9988.HK IBM.US 1810.HK 9999.HK 9618.HK 992.HK 285.HK --indicators MACD,PE
+
+<span class="t-hd">跨市场筛选结果 · PE<25 + MACD金叉 · 2026-03-24</span>
+<span class="t-dim">──────────────────────────────────────────────────────────</span>
+<span class="t-hd">Symbol     名称           市值        PE     DIF      DEA     金叉</span>
+<span class="t-dim">──────────────────────────────────────────────────────────</span>
+700.HK     腾讯控股     HK$4,689B   18.84   <span class="t-neg">-2.15</span>   <span class="t-neg">-1.84</span>    <span class="t-neg">✗</span>
+9988.HK    阿里巴巴     HK$2,353B   22.90   <span class="t-neg">-1.42</span>   <span class="t-neg">-0.93</span>    <span class="t-neg">✗</span>
+IBM.US     IBM            $233B    22.01   <span class="t-pos">+0.86</span>   <span class="t-pos">+0.31</span>    <span class="t-pos">✓</span>
+1810.HK    小米集团      HK$847B    17.53   <span class="t-neg">-0.58</span>   <span class="t-neg">-0.41</span>    <span class="t-neg">✗</span>
+<span class="t-pos">9999.HK    网易          HK$560B    15.00   +0.19    +0.07    ✓</span>
+<span class="t-pos">9618.HK    京东集团     HK$304B    14.00   +0.22    -0.08    ✓ ★</span>
+992.HK     联想集团      HK$114B     9.95   <span class="t-neg">-0.44</span>   <span class="t-neg">-0.31</span>    <span class="t-neg">✗</span>
+285.HK     比亚迪电子    HK$70B     14.69   <span class="t-pos">+0.11</span>   <span class="t-pos">+0.04</span>    <span class="t-pos">✓</span>
+<span class="t-dim">──────────────────────────────────────────────────────────</span>
+符合全部条件 (PE<25 + 金叉): <span class="t-pos">4 只</span>  IBM.US  9999.HK  <span class="t-hi">9618.HK★</span>  285.HK
+<span class="t-c"># ★ 9618.HK 零轴附近金叉，信号最强</span>`),
+          },
+        ],
+      },
+    },
+
+    // ── 2. 技术面综合诊断
+    {
+      id: 'research',
+      label: isEN.value ? 'Technical Diagnosis' : isHK.value ? '技術面診斷' : '技术面诊断',
+      messages: [
+        {
+          role: 'user',
+          content: isEN.value
+            ? "Diagnose TSLA's technicals: daily trend, support or resistance, short-term signal bullish or bearish?"
+            : isHK.value
+              ? '幫我診斷一下 TSLA 的技術面：日線趨勢怎樣，當前在支撐位還是壓力位，短期信號偏多還是偏空？'
+              : '帮我诊断一下 TSLA 的技术面：日线趋势怎样，当前在支撑位还是压力位，短期信号偏多还是偏空？',
+        },
+        {
+          role: 'tool',
+          command:
+            'longbridge kline TSLA.US --period day --count 60 && longbridge calc-index TSLA.US --indicators MA,MACD,KDJ,RSI',
+          content: '',
+        },
+        {
+          role: 'assistant',
+          rich: true,
+          content: `
+<div class="demo-kw">
+  <div class="demo-kh">
+    <div><div style="font-size:11px;color:var(--vp-c-text-3);margin-bottom:2px">TSLA.US · ${cn ? '日线 60天' : 'Daily 60d'} · 2026-03-24</div><span class="demo-kprice">$380.85</span><span class="demo-kchg" style="background:var(--vp-c-red-soft);color:var(--down-color);margin-left:8px">-$7.68 · -1.98%</span></div>
+    <div class="demo-kmeta"><div>${cn ? '支撑 $380 / $364' : 'Support $380 / $364'}</div><div>${cn ? '压力 $395 / $400' : 'Resistance $395 / $400'}</div></div>
+  </div>
+  ${klineSvg()}
+  <div class="demo-kstats">
+    <div class="demo-kstat"><div class="demo-ksl">MA5</div><div class="demo-ksv demo-neg">$384.23</div><div style="font-size:10px;color:var(--vp-c-text-3)">${cn ? '价格上方' : 'above price'}</div></div>
+    <div class="demo-kstat"><div class="demo-ksl">MA20</div><div class="demo-ksv demo-neg">$397.53</div><div style="font-size:10px;color:var(--vp-c-text-3)">${cn ? '压制' : 'resistance'}</div></div>
+    <div class="demo-kstat"><div class="demo-ksl">RSI</div><div class="demo-ksv" style="color:#f59e0b">39.63</div><div style="font-size:10px;color:var(--vp-c-text-3)">${cn ? '接近超卖' : 'near oversold'}</div></div>
+  </div>
+</div>
+<div class="demo-res-section" style="margin-top:12px">
+  <div class="demo-res-hd"><span class="demo-res-hd-text">${cn ? '技术指标' : 'Indicators'}</span><span class="demo-res-signal" style="background:var(--vp-c-red-soft);color:var(--down-color)">${cn ? '偏空' : 'Bearish'}</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 12px">
+    <div style="font-size:12px"><span style="color:var(--vp-c-text-3)">MACD</span><br><strong class="demo-neg">DIF -9.75 / DEA -8.28</strong><br><span style="font-size:11px;color:var(--vp-c-text-3)">${cn ? 'Hist -2.93，空头扩张' : 'Hist -2.93, bearish expansion'}</span></div>
+    <div style="font-size:12px"><span style="color:var(--vp-c-text-3)">KDJ</span><br><strong style="color:#f59e0b">K 24.74 / D 30.15 / J 13.92</strong><br><span style="font-size:11px;color:var(--vp-c-text-3)">${cn ? 'J 极度超卖，有反弹可能' : 'J extremely oversold — bounce possible'}</span></div>
+    <div style="font-size:12px"><span style="color:var(--vp-c-text-3)">RSI(14)</span><br><strong style="color:#f59e0b">39.63</strong><br><span style="font-size:11px;color:var(--vp-c-text-3)">${cn ? '接近超卖区（<30），未触发' : 'Approaching oversold zone (<30)'}</span></div>
+    <div style="font-size:12px"><span style="color:var(--vp-c-text-3)">${cn ? '均线结构' : 'MA Structure'}</span><br><strong class="demo-neg">${cn ? '空头排列' : 'Bearish stack'}</strong><br><span style="font-size:11px;color:var(--vp-c-text-3)">MA5 &lt; MA10 &lt; MA20 &lt; MA60</span></div>
+  </div>
+</div>
+<div class="demo-verdict">
+  <div class="demo-verdict-hd">${cn ? '综合诊断' : 'Diagnosis'}</div>
+  <div class="demo-verdict-rows">
+    <div class="demo-verdict-row"><span class="demo-verdict-label">${cn ? '趋势' : 'Trend'}</span><span class="demo-verdict-val">${cn ? '日线下降趋势明确，均线全线空头排列（MA5→MA60 均在价格上方）。短期压力 $395，有效阻力 $400。' : 'Daily downtrend confirmed — all MAs above price in bearish stack. Near resistance $395, key resistance $400.'}</span></div>
+    <div class="demo-verdict-row"><span class="demo-verdict-label">${cn ? '位置' : 'Position'}</span><span class="demo-verdict-val">${cn ? '当前 $380.85 处于前期支撑位（2025年11月平台），$380 为重要支撑，若跌破关注 $364。' : 'Current $380.85 at prior support (Nov 2025 base). $380 is key support; break below targets $364.'}</span></div>
+    <div class="demo-verdict-row"><span class="demo-verdict-label">${cn ? '短期信号' : 'Short-term'}</span><span class="demo-verdict-val">${cn ? '<strong style="color:var(--vp-c-text-1)">整体偏空，但 KDJ J=13.92 极度超卖，短期有技术性反弹可能。</strong>反弹目标 $393–$395。若不能有效收复 MA5($384)，反弹后仍有下探风险。' : '<strong style="color:var(--vp-c-text-1)">Overall bearish, but KDJ J=13.92 is extremely oversold — technical bounce possible.</strong> Bounce target $393–$395. Failure to reclaim MA5 ($384) means downtrend resumes.'}</span></div>
+  </div>
+</div>`,
+        },
+      ],
+      clientMessages: {
+        claude: [
+          {
+            role: 'user',
+            content: isEN.value
+              ? "Diagnose TSLA's technicals: daily trend, support or resistance, short-term signal bullish or bearish?"
+              : isHK.value
+                ? '幫我診斷一下 TSLA 的技術面：日線趨勢怎樣，當前在支撐位還是壓力位，短期信號偏多還是偏空？'
+                : '帮我诊断一下 TSLA 的技术面：日线趋势怎样，当前在支撑位还是压力位，短期信号偏多还是偏空？',
+          },
+          {
+            role: 'tool',
+            command:
+              'longbridge kline TSLA.US --period day --count 60 && longbridge calc-index TSLA.US --indicators MA,MACD,KDJ,RSI',
+            content: '',
+          },
+          {
+            role: 'assistant',
+            rich: true,
+            content: `<div style="font-size:13.5px;line-height:1.8;margin-bottom:14px">${cn ? '我从趋势、指标、位置三个维度分析了 TSLA 当前技术面：' : "I've analyzed TSLA's technicals across three dimensions:"}</div>
+<div style="font-size:12px;font-weight:700;color:var(--vp-c-text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">① ${cn ? '日线趋势' : 'Daily Trend'}</div>
+<div style="font-size:13px;color:var(--vp-c-text-2);line-height:1.85;margin-bottom:14px">${cn ? 'TSLA 处于明确的日线下降趋势。MA5（$384）、MA10（$391）、MA20（$398）、MA60（$420）全线在价格上方，形成标准空头排列。MACD DIF=-9.75，DEA=-8.28，柱状图 -2.93 且仍在扩张，空头动能延续。' : 'TSLA is in a clear daily downtrend. MA5 ($384), MA10 ($391), MA20 ($398), MA60 ($420) all above price — classic bearish stack. MACD DIF=-9.75, DEA=-8.28, histogram -2.93 and expanding. Bearish momentum continuing.'}</div>
+<div style="font-size:12px;font-weight:700;color:var(--vp-c-text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">② ${cn ? '关键位置' : 'Key Levels'}</div>
+<div style="font-size:13px;color:var(--vp-c-text-2);line-height:1.85;margin-bottom:14px">${cn ? '当前 $380.85 正处于支撑位（2025年11月平台，多次测试有效）。若此位丢失，下一支撑在 $364。上方 $395 为近期密集成本区，$400 为整数关口阻力。' : 'Current $380.85 sits on support (Nov 2025 base, held multiple times). If lost, next support $364. Overhead: $395 dense cost zone, $400 round-number resistance.'}</div>
+<div style="font-size:12px;font-weight:700;color:var(--vp-c-text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">③ ${cn ? '短期信号' : 'Short-term Signal'}</div>
+<div style="font-size:13px;color:var(--vp-c-text-2);line-height:1.85;margin-bottom:14px">${cn ? 'KDJ J 值 =13.92，已进入极度超卖区间（<20），历史上此区间出现技术性反弹概率较高。RSI(14)=39.63，接近超卖但未破位。' : 'KDJ J=13.92 is in extreme oversold territory (<20). Historically this level produces technical bounces with high frequency. RSI(14)=39.63, near oversold but not triggered.'}</div>
+<div class="demo-verdict">
+  <div class="demo-verdict-hd">${cn ? '我的判断' : 'My Assessment'}</div>
+  <div style="font-size:13px;line-height:1.85;color:var(--vp-c-text-2)">${cn ? '<strong style="color:var(--vp-c-text-1)">整体偏空，短期 KDJ 超卖有反弹可能。</strong>若持有多单，建议在 $393–$395 反弹区间考虑减仓；若空仓，等待 MA5 ($384) 能否有效收复再决策。' : '<strong style="color:var(--vp-c-text-1)">Overall bearish, KDJ oversold bounce possible short-term.</strong> For longs: consider reducing at $393–$395. For new buyers: wait to see if MA5 ($384) is reclaimed before entering.'}</div>
+</div>`,
+          },
+        ],
+        'claude-code': [
+          {
+            role: 'user',
+            content: isEN.value
+              ? 'TSLA technical analysis: MA, MACD, KDJ, RSI signals and key levels'
+              : isHK.value
+                ? 'TSLA 技術分析：均線、MACD/KDJ/RSI 指標、關鍵位'
+                : 'TSLA 技术分析：均线、MACD/KDJ/RSI 指标、关键位',
+          },
+          {
+            role: 'tool',
+            command:
+              'longbridge kline TSLA.US --period day --count 60 && longbridge calc-index TSLA.US --indicators MA,MACD,KDJ,RSI',
+            content: '',
+          },
+          {
+            role: 'assistant',
+            rich: true,
+            content: termHTML(`<span class="t-p">$</span> longbridge calc-index TSLA.US --indicators MA,MACD,KDJ,RSI
+
+<span class="t-hd">TSLA.US 技术指标 · 日线 · 2026-03-24</span>
+<span class="t-dim">──────────────────────────────────────────</span>
+现价:  <span class="t-neg">$380.85  -1.98%</span>
+
+<span class="t-hd">均线结构（空头排列）</span>
+MA5:   <span class="t-neg">$384.23</span>  MA10: <span class="t-neg">$391.00</span>
+MA20:  <span class="t-neg">$397.53</span>  MA60: <span class="t-neg">$420.39</span>
+<span class="t-c"># 均线全在价格上方 → 下降趋势</span>
+
+<span class="t-hd">MACD(12,26,9)</span>
+DIF:  <span class="t-neg">-9.75</span>   DEA:  <span class="t-neg">-8.28</span>   Hist: <span class="t-neg">-2.93</span>
+<span class="t-c"># 柱状图扩张，空头动能延续</span>
+
+<span class="t-hd">KDJ</span>
+K: <span class="t-hi">24.74</span>   D: <span class="t-hi">30.15</span>   J: <span class="t-hi">13.92</span>
+<span class="t-c"># J<20 极度超卖，短期反弹概率较高</span>
+
+<span class="t-hd">RSI(14)</span>
+RSI: <span class="t-hi">39.63</span>  <span class="t-c"># 接近超卖(<30)，尚未触发</span>
+
+<span class="t-dim">──────────────────────────────────────────</span>
+支撑: <span class="t-pos">$380</span> / <span class="t-pos">$364</span>   压力: <span class="t-neg">$395</span> / <span class="t-neg">$400</span>
+结论: <span class="t-neg">整体偏空</span> · KDJ超卖有短期反弹 · 关注MA5($384)能否收复`),
+          },
+        ],
+      },
+    },
+
+    // ── 3. 财报季深度研究
+    {
+      id: 'trade',
+      label: isEN.value ? 'Earnings Research' : isHK.value ? '財報研究' : '财报研究',
+      messages: [
+        {
+          role: 'user',
+          content: isEN.value
+            ? "NVDA just reported — compare actual vs analyst estimates, break down revenue by segment, check if valuation is reasonable"
+            : isHK.value
+              ? 'NVDA 剛出財報，幫我對比實際業績和分析師預期的差距，拆一下各業務線的營收變化，順便看看當前估值是否合理'
+              : 'NVDA 刚出财报，帮我对比实际业绩和分析师预期的差距，拆一下各业务线的营收变化，顺便看看当前估值是否合理',
+        },
+        {
+          role: 'tool',
+          command: 'longbridge filings NVDA.US --count 5 && longbridge news NVDA.US --count 3',
+          content: '',
+        },
+        {
+          role: 'assistant',
+          rich: true,
+          content: `
+<div class="demo-res-section">
+  <div class="demo-res-hd"><span class="demo-res-hd-text">${cn ? 'Q4 FY2026 业绩 vs 预期' : 'Q4 FY2026 Actual vs Estimates'}</span><span class="demo-res-signal" style="background:var(--vp-c-green-soft);color:var(--up-color)">${cn ? '超预期' : 'Beat'}</span></div>
+  <div class="demo-table-wrap"><table class="demo-table" style="margin:0">
+    <thead><tr><th>${cn ? '指标' : 'Metric'}</th><th>${cn ? '实际' : 'Actual'}</th><th>${cn ? '预期（均值）' : 'Est. (mean)'}</th><th>${cn ? '超预期' : 'Beat'}</th></tr></thead>
+    <tbody>
+      <tr><td>${cn ? '总营收' : 'Revenue'}</td><td class="demo-pos">$39.33B</td><td class="demo-muted">$38.04B</td><td class="demo-pos">+3.4%</td></tr>
+      <tr><td>${cn ? '数据中心' : 'Data Center'}</td><td class="demo-pos">$36.74B</td><td class="demo-muted">$35.80B</td><td class="demo-pos">+2.6%</td></tr>
+      <tr><td>${cn ? '调整后 EPS' : 'Adj. EPS'}</td><td class="demo-pos">$0.89</td><td class="demo-muted">$0.85</td><td class="demo-pos">+4.7%</td></tr>
+      <tr><td>${cn ? '毛利率' : 'Gross Margin'}</td><td class="demo-pos">73.5%</td><td class="demo-muted">72.1%</td><td class="demo-pos">+140bp</td></tr>
+    </tbody>
+  </table></div>
+</div>
+<div class="demo-res-section">
+  <div class="demo-res-hd"><span class="demo-res-hd-text">${cn ? '各业务线营收' : 'Revenue by Segment'}</span></div>
+  <div style="padding:10px 12px;display:flex;flex-direction:column;gap:8px">
+    <div style="font-size:12px"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span>${cn ? '数据中心' : 'Data Center'}</span><span class="demo-pos">$36.74B  +93% YoY</span></div><div style="background:var(--vp-c-bg-mute);height:5px;border-radius:3px"><div style="background:var(--up-color);height:5px;border-radius:3px;width:93%"></div></div></div>
+    <div style="font-size:12px"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span>${cn ? '游戏' : 'Gaming'}</span><span class="demo-pos">$2.36B  +11% YoY</span></div><div style="background:var(--vp-c-bg-mute);height:5px;border-radius:3px"><div style="background:#4781ff;height:5px;border-radius:3px;width:40%"></div></div></div>
+    <div style="font-size:12px"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span>${cn ? '专业可视化' : 'Pro Visualization'}</span><span class="demo-muted">$0.51B  +5% YoY</span></div><div style="background:var(--vp-c-bg-mute);height:5px;border-radius:3px"><div style="background:var(--vp-c-text-3);height:5px;border-radius:3px;width:18%"></div></div></div>
+  </div>
+</div>
+<div class="demo-res-section">
+  <div class="demo-res-hd"><span class="demo-res-hd-text">${cn ? '当前估值' : 'Valuation'}</span><span class="demo-res-signal" style="background:var(--vp-c-yellow-soft);color:var(--vp-c-yellow-1)">${cn ? '偏高' : 'Rich'}</span></div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px 12px">
+    <div style="text-align:center"><div style="font-size:11px;color:var(--vp-c-text-3);margin-bottom:3px">${cn ? '市值' : 'Mkt Cap'}</div><div style="font-weight:700;font-size:14px">$4.27T</div></div>
+    <div style="text-align:center"><div style="font-size:11px;color:var(--vp-c-text-3);margin-bottom:3px">PE (TTM)</div><div style="font-weight:700;font-size:14px;color:#f59e0b">35.6×</div></div>
+    <div style="text-align:center"><div style="font-size:11px;color:var(--vp-c-text-3);margin-bottom:3px">PB</div><div style="font-weight:700;font-size:14px;color:#f59e0b">27.1×</div></div>
+  </div>
+</div>
+<div class="demo-hi-box"><strong>${cn ? '结论' : 'Summary'}</strong>：${cn ? 'Q4 营收和 EPS 均超预期，数据中心 +93% YoY 是核心驱动。当前 PE 35.6× 高于行业均值，但若 FY2027 $1T AI 需求预测兑现，成长溢价可消化。<strong style="color:var(--vp-c-text-1)">高成长、高估值，适合看长做强。</strong>' : 'Q4 beat on revenue and EPS. Data Center +93% YoY is the core driver. PE 35.6× above peers, but $1T FY2027 AI demand forecast would justify the premium. <strong style="color:var(--vp-c-text-1)">High growth, high valuation — suitable for long-horizon positioning.</strong>'}</div>`,
+        },
+      ],
+      clientMessages: {
+        claude: [
+          {
+            role: 'user',
+            content: isEN.value
+              ? "NVDA just reported — compare actual vs analyst estimates, break down revenue by segment, check if valuation is reasonable"
+              : isHK.value
+                ? 'NVDA 剛出財報，幫我對比實際業績和分析師預期的差距，拆一下各業務線的營收變化，順便看看當前估值是否合理'
+                : 'NVDA 刚出财报，帮我对比实际业绩和分析师预期的差距，拆一下各业务线的营收变化，顺便看看当前估值是否合理',
+          },
+          {
+            role: 'tool',
+            command: 'longbridge filings NVDA.US --count 5 && longbridge news NVDA.US --count 3',
+            content: '',
+          },
+          {
+            role: 'assistant',
+            rich: true,
+            content: `<div style="font-size:13.5px;line-height:1.8;margin-bottom:14px">${cn ? 'NVDA Q4 FY2026 财报已出，以下是业绩、收入结构与估值的完整分析：' : 'NVDA Q4 FY2026 results are in. Full breakdown of performance, revenue mix, and valuation:'}</div>
+<div style="font-size:12px;font-weight:700;color:var(--vp-c-text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">① ${cn ? '业绩 vs 预期' : 'Actual vs Estimates'}</div>
+<div style="font-size:13px;color:var(--vp-c-text-2);line-height:1.85;margin-bottom:14px">${cn ? '总营收 $39.33B 超一致预期 $38.04B 约 3.4%，调整后 EPS $0.89 超预期 $0.85 约 4.7%。毛利率 73.5% 高于预期 72.1%——全面超预期，尤其是毛利率超出是盈利质量的积极信号。' : 'Total revenue $39.33B beat consensus $38.04B by ~3.4%. Adj. EPS $0.89 beat $0.85 by ~4.7%. Gross margin 73.5% vs estimate 72.1%. Broad beat — gross margin quality is a particularly strong signal.'}</div>
+<div style="font-size:12px;font-weight:700;color:var(--vp-c-text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">② ${cn ? '收入结构' : 'Revenue Mix'}</div>
+<div style="font-size:13px;color:var(--vp-c-text-2);line-height:1.85;margin-bottom:14px">${cn ? '数据中心贡献 $36.74B（占比 93.4%），同比 +93%，是绝对核心。Gaming $2.36B (+11%) 稳健。业务集中在数据中心，既是增长引擎，也是集中度风险。' : 'Data Center $36.74B (93.4% of revenue), +93% YoY — overwhelmingly the core driver. Gaming $2.36B (+11%) is stable. Concentration creates both a growth engine and a single-segment risk.'}</div>
+<div style="font-size:12px;font-weight:700;color:var(--vp-c-text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">③ ${cn ? '估值判断' : 'Valuation'}</div>
+<div style="font-size:13px;color:var(--vp-c-text-2);line-height:1.85;margin-bottom:14px">${cn ? '当前市值 $4.27T，PE 35.6×（TTM），PB 27.1×。绝对值偏高，但考虑 FY2027 AI 需求 $1T 预测，当前 PS 约 2.7× 并不极端。关键在于需求兑现节奏——若推迟，高估值将承压。' : 'Market cap $4.27T, PE 35.6× (TTM), PB 27.1×. Expensive in absolute terms, but against $1T FY2027 AI demand forecast, current PS ~2.7× is not extreme. Key risk: execution timeline.'}</div>
+<div class="demo-ai-sig">${cn ? '数据来源：NVDA 最新财报 + SEC Form 4 + Longbridge 行情 · 2026-03-24' : 'Source: NVDA latest earnings + SEC Form 4 + Longbridge quote · 2026-03-24'}</div>`,
+          },
+        ],
+        'claude-code': [
+          {
+            role: 'user',
+            content: isEN.value
+              ? 'Pull NVDA earnings: actual vs estimates, segment breakdown, valuation metrics'
+              : isHK.value
+                ? '取 NVDA 財報數據：業績 vs 預期、分業務線拆解、估值指標'
+                : '取 NVDA 财报数据：业绩 vs 预期、分业务线拆解、估值指标',
+          },
+          {
+            role: 'tool',
+            command: 'longbridge filings NVDA.US --count 5 && longbridge news NVDA.US --count 3',
+            content: '',
+          },
+          {
+            role: 'assistant',
+            rich: true,
+            content: termHTML(`<span class="t-p">$</span> longbridge filings NVDA.US --count 5
+
+<span class="t-hd">NVDA SEC 文件 · 2026-03-24</span>
+<span class="t-dim">──────────────────────────────────────────────────</span>
+Form4  03-24 ×7  内部人交易  <span class="t-c"># 今日多次申报，无大额净卖出 ✓</span>
+8-K    03-02     GTC 2026 产品公告
+10-K   02-01     FY2026 年报（已申报）
+
+<span class="t-p">$</span> longbridge news NVDA.US --count 3
+
+<span class="t-hd">NVDA 最新新闻</span>
+<span class="t-dim">──────────────────────────────────────────────────</span>
+<span class="t-pos">++</span> NVIDIA is packaging the world — GTC 2026 系统战略
+<span class="t-pos">++</span> SemiAnalysis: GTC 深度解析，Blackwell Ultra 出货节奏超预期
+   NVDA Q4 FY2026: 数据中心 $36.74B (+93% YoY)，EPS $0.89 超预期
+
+<span class="t-dim">──────────────────────────────────────────────────</span>
+<span class="t-hd">估值快览 · 2026-03-24</span>
+市值: <span class="t-hi">$4.27T</span>   PE(TTM): <span class="t-hi">35.6×</span>   PB: <span class="t-hi">27.1×</span>
+现价: <span class="t-neg">$175.64</span>  Q4营收实际/预期: <span class="t-pos">$39.33B / $38.04B (+3.4%)</span>
+<span class="t-c"># 全面超预期；数据中心占比93.4%，估值偏高但需求预测支撑</span>`),
+          },
+        ],
+      },
+    },
+
+    // ── 4. 聪明钱追踪
+    {
+      id: 'chart',
+      label: isEN.value ? 'Smart Money' : isHK.value ? '聰明錢追蹤' : '聪明钱追踪',
+      messages: [
+        {
+          role: 'user',
+          content: isEN.value
+            ? "Check AAPL's recent insider trades — any executives selling heavily? How did hedge fund positions change vs last quarter?"
+            : isHK.value
+              ? '幫我查一下 AAPL 近期的內幕交易，有沒有高管在大量減持？對沖基金的持倉和上季度相比有什麼變化？'
+              : '帮我查一下 AAPL 近期的内幕交易，有没有高管在大量减持？对冲基金的持仓和上季度相比有什么变化？',
+        },
+        {
+          role: 'tool',
+          command: 'longbridge filings AAPL.US --type Form4 --count 10 && longbridge capital-dist AAPL.US',
+          content: '',
+        },
+        {
+          role: 'assistant',
+          rich: true,
+          content: `
+<div class="demo-res-section">
+  <div class="demo-res-hd"><span class="demo-res-hd-text">${cn ? '内幕交易 · Form 4 · 近 90 天' : 'Insider Transactions · Form 4 · Last 90d'}</span><span class="demo-res-signal" style="background:var(--vp-c-bg-mute);color:var(--vp-c-text-2)">${cn ? '中性' : 'Neutral'}</span></div>
+  <div style="padding:10px 12px;display:flex;flex-direction:column;gap:6px">
+    <div style="display:flex;gap:8px;align-items:baseline;font-size:12.5px"><span style="font-size:10px;color:var(--vp-c-text-3);width:105px;flex-shrink:0">Form 4 · 03/21</span><span style="color:var(--vp-c-text-2)">${cn ? '董事会新成员 · Form 3 申报（初始登记，非交易）' : 'New board director · Form 3 initial filing (not a trade)'}</span></div>
+    <div style="display:flex;gap:8px;align-items:baseline;font-size:12.5px"><span style="font-size:10px;color:var(--vp-c-text-3);width:105px;flex-shrink:0">Form 4 · 03/18</span><span style="color:var(--vp-c-text-2)">${cn ? 'SVP 薪酬激励股（RSU 归属），自动出售约 $1.8M 用于缴税，非主动减持' : 'SVP RSU vest + automatic tax-withholding sale ~$1.8M — not discretionary selling'}</span></div>
+    <div style="display:flex;gap:8px;align-items:baseline;font-size:12.5px"><span style="font-size:10px;color:var(--vp-c-text-3);width:105px;flex-shrink:0">Form 4 · 03/14</span><span style="color:var(--vp-c-text-2)">${cn ? 'CFO 执行期权并同步出售 $3.2M（10b5-1 计划，提前锁定，非信息驱动）' : 'CFO exercised options + sold $3.2M under 10b5-1 plan (pre-scheduled, not discretionary)'}</span></div>
+    <div style="display:flex;gap:8px;align-items:baseline;font-size:12.5px"><span style="font-size:10px;color:var(--vp-c-text-3);width:105px;flex-shrink:0">Form 4 · 02/28</span><span style="color:var(--vp-c-text-2)">${cn ? 'VP 买入 2,500 股 @$264 · 主动增持信号' : 'VP bought 2,500 shares @$264 — discretionary buy signal'}</span><span class="demo-pos" style="font-size:11px;flex-shrink:0">↑ ${cn ? '增持' : 'Buy'}</span></div>
+  </div>
+</div>
+<div class="demo-res-section">
+  <div class="demo-res-hd"><span class="demo-res-hd-text">${cn ? '机构持仓变动（QoQ）' : 'Institutional Holdings QoQ'}</span><span class="demo-res-signal" style="background:var(--vp-c-bg-mute);color:var(--vp-c-text-2)">${cn ? '小幅净流出' : 'Small net outflow'}</span></div>
+  <div style="padding:10px 12px;display:flex;flex-direction:column;gap:6px">
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:12.5px"><span>${cn ? '共同基金（Vanguard/Fidelity 等）' : 'Mutual Funds (Vanguard/Fidelity)'}</span><span class="demo-pos">+0.3%</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:12.5px"><span>${cn ? '对冲基金（前 20 大）' : 'Hedge Funds (top 20)'}</span><span class="demo-neg">−1.2%</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:12.5px"><span>${cn ? '养老金 / 主权基金' : 'Pensions / Sovereign'}</span><span class="demo-muted">±0.0%</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:12.5px"><span>${cn ? 'ETF（被动）' : 'ETFs (passive)'}</span><span class="demo-pos">+0.8%</span></div>
+  </div>
+</div>
+<div class="demo-hi-box"><strong>${cn ? '结论' : 'Summary'}</strong>：${cn ? '内幕交易无异常——所有卖出均属 10b5-1 计划或 RSU 纳税性质，是例行行为。唯一的主动交易是 VP 的增持。对冲基金小幅减持（-1.2%），但共同基金和 ETF 被动增持抵消，整体持仓结构稳定，<strong style="color:var(--vp-c-text-1)">未见聪明钱大规模撤退信号。</strong>' : 'No red flags in insider activity — all selling is 10b5-1 or RSU tax withholding, all routine. The only discretionary trade was a VP buy. Hedge funds trimmed (-1.2%) but mutual fund and ETF inflows offset this. <strong style="color:var(--vp-c-text-1)">No sign of smart money exiting at scale.</strong>'}</div>`,
+        },
+      ],
+      clientMessages: {
+        claude: [
+          {
+            role: 'user',
+            content: isEN.value
+              ? "Check AAPL's recent insider trades — any executives selling heavily? How did hedge fund positions change vs last quarter?"
+              : isHK.value
+                ? '幫我查一下 AAPL 近期的內幕交易，有沒有高管在大量減持？對沖基金的持倉和上季度相比有什麼變化？'
+                : '帮我查一下 AAPL 近期的内幕交易，有没有高管在大量减持？对冲基金的持仓和上季度相比有什么变化？',
+          },
+          {
+            role: 'tool',
+            command: 'longbridge filings AAPL.US --type Form4 --count 10 && longbridge capital-dist AAPL.US',
+            content: '',
+          },
+          {
+            role: 'assistant',
+            rich: true,
+            content: `<div style="font-size:13.5px;line-height:1.8;margin-bottom:14px">${cn ? '我分析了 AAPL 近 90 天的 SEC Form 4 内幕交易申报及机构持仓变动：' : "I've analyzed AAPL's Form 4 insider filings over the past 90 days and institutional position changes:"}</div>
+<div style="font-size:12px;font-weight:700;color:var(--vp-c-text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">① ${cn ? '内幕交易' : 'Insider Transactions'}</div>
+<div style="font-size:13px;color:var(--vp-c-text-2);line-height:1.85;margin-bottom:14px">${cn ? '近 90 天共 4 份 Form 4，<strong style="color:var(--vp-c-text-1)">没有高管主动大规模减持</strong>。两笔卖出均属 10b5-1 预设计划或 RSU 纳税性质，是例行行为。唯一值得关注的主动交易是 VP 在 2 月以 $264 买入 2,500 股——偏多信号。' : 'Four Form 4 filings in 90 days. <strong style="color:var(--vp-c-text-1)">No executives selling in bulk on discretion.</strong> Two sell transactions are 10b5-1 pre-scheduled or RSU tax withholding — routine. The only discretionary trade was a VP buying 2,500 shares at $264 in February — a bullish signal.'}</div>
+<div style="font-size:12px;font-weight:700;color:var(--vp-c-text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">② ${cn ? '机构持仓' : 'Institutional Holdings'}</div>
+<div style="font-size:13px;color:var(--vp-c-text-2);line-height:1.85;margin-bottom:14px">${cn ? '对冲基金前 20 大持仓环比下降 -1.2%，与 AAPL 近期 -5.7% 回调有关，部分基金减少暴露。但被动资金（ETF +0.8%）和共同基金（+0.3%）整体稳定，净流向基本平衡。' : 'Top 20 hedge fund holdings down -1.2% QoQ, consistent with AAPL\'s -5.7% correction — some risk reduction. But passive ETFs (+0.8%) and mutual funds (+0.3%) are stable, broadly offsetting.'}</div>
+<div class="demo-verdict">
+  <div class="demo-verdict-hd">${cn ? '我的判断' : 'My Assessment'}</div>
+  <div style="font-size:13px;line-height:1.85;color:var(--vp-c-text-2)">${cn ? '资金面整体健康。内部人行为无预警信号，对冲基金的轻微减持与近期大盘回调一致，被动资金持续流入。<strong style="color:var(--vp-c-text-1)">AAPL 未见系统性撤退，当前回调更多是市场情绪驱动而非基本面恶化。</strong>' : 'Capital picture is healthy. No insider warning signals. Hedge fund trimming is consistent with broad market correction, passive flows continue. <strong style="color:var(--vp-c-text-1)">No systemic exit in AAPL — current pullback appears sentiment-driven, not fundamental.</strong>'}</div>
+</div>`,
+          },
+        ],
+        'claude-code': [
+          {
+            role: 'user',
+            content: isEN.value
+              ? 'AAPL insider filings + institutional capital distribution'
+              : isHK.value
+                ? 'AAPL 內幕申報 + 機構資金分佈'
+                : 'AAPL 内幕申报 + 机构资金分布',
+          },
+          {
+            role: 'tool',
+            command: 'longbridge filings AAPL.US --type Form4 --count 10 && longbridge capital-dist AAPL.US',
+            content: '',
+          },
+          {
+            role: 'assistant',
+            rich: true,
+            content: termHTML(`<span class="t-p">$</span> longbridge filings AAPL.US --type Form4 --count 5
+
+<span class="t-hd">AAPL 内幕交易 (Form 4) · 近 90 天</span>
+<span class="t-dim">──────────────────────────────────────────────────────</span>
+03/21  Form3   新任董事初始登记           <span class="t-c"># 非交易</span>
+03/18  Form4   SVP  RSU归属+税款卖出  -$1.8M   <span class="t-c"># 例行，非主动</span>
+03/14  Form4   CFO  10b5-1计划卖出   -$3.2M   <span class="t-c"># 预设，非主动</span>
+02/28  Form4   VP   主动买入 +2500股 @$264    <span class="t-pos">↑ 增持信号</span>
+<span class="t-dim">──────────────────────────────────────────────────────</span>
+主动减持: <span class="t-pos">$0</span>   10b5-1/纳税卖出: -$5.0M   主动买入: <span class="t-pos">+$660k</span>
+
+<span class="t-p">$</span> longbridge capital-dist AAPL.US
+
+<span class="t-hd">AAPL 机构持仓变动 (QoQ)</span>
+<span class="t-dim">──────────────────────────────────────────────────────</span>
+共同基金 (Vanguard/BLK/Fidelity)     <span class="t-pos">+0.3%</span>
+对冲基金 (前20大)                     <span class="t-neg">-1.2%</span>   <span class="t-c"># 小幅减持</span>
+ETF 被动                             <span class="t-pos">+0.8%</span>
+养老金/主权基金                       <span class="t-dim">±0.0%</span>
+<span class="t-dim">──────────────────────────────────────────────────────</span>
+<span class="t-c"># 结论：内部人无主动减持，对冲基金微幅减仓属常规。未见系统性撤退。</span>`),
+          },
+        ],
+      },
+    },
+
+    // ── 5. 进阶下单
+    {
+      id: 'portfolio',
+      label: isEN.value ? 'Advanced Orders' : isHK.value ? '進階下單' : '进阶下单',
+      messages: [
+        {
+          role: 'user',
+          content: isEN.value
+            ? "Set a trailing stop for TSLA — trigger a sell if it drops more than 8%. Show me the order details before executing."
+            : isHK.value
+              ? '幫我給 TSLA 設一個追蹤止損，跌幅超過 8% 自動觸發賣出，執行前把訂單詳情給我確認'
+              : '帮我给 TSLA 设一个追踪止损，跌幅超过 8% 自动触发卖出，执行前把订单详情给我确认',
+        },
+        {
+          role: 'tool',
+          command:
+            'longbridge quote TSLA.US && longbridge submit-order TSLA.US --type trailing-stop --trail-pct 8 --side sell --qty all --preview',
+          content: '',
+        },
+        {
+          role: 'assistant',
+          rich: true,
+          content: `
+<div class="demo-scards" style="margin-bottom:14px">
+  <div class="demo-scard"><div class="demo-sl">TSLA.US</div><div class="demo-sv">$380.85</div><div class="demo-ss demo-neg">-$7.68 · -1.98%</div></div>
+  <div class="demo-scard"><div class="demo-sl">${cn ? '追踪比例' : 'Trail %'}</div><div class="demo-sv" style="color:#f59e0b">8.00%</div><div class="demo-ss demo-muted">${cn ? '动态跟踪' : 'dynamic'}</div></div>
+  <div class="demo-scard"><div class="demo-sl">${cn ? '当前触发价' : 'Trigger (now)'}</div><div class="demo-sv demo-neg">$350.38</div><div class="demo-ss demo-muted">$380.85 × 0.92</div></div>
+</div>
+<div style="border:1px solid var(--vp-c-divider);border-radius:10px;overflow:hidden;margin-bottom:14px">
+  <div style="background:var(--vp-c-bg-mute);padding:8px 14px;font-size:12px;font-weight:700;color:var(--vp-c-text-2);letter-spacing:.04em">${cn ? '订单预览（待确认）' : 'Order Preview (pending confirmation)'}</div>
+  <div style="padding:12px 14px;display:flex;flex-direction:column;gap:7px;font-size:13px">
+    <div style="display:flex;justify-content:space-between"><span style="color:var(--vp-c-text-3)">${cn ? '类型' : 'Type'}</span><span>${cn ? '追踪止损单 (Trailing Stop)' : 'Trailing Stop Order'}</span></div>
+    <div style="display:flex;justify-content:space-between"><span style="color:var(--vp-c-text-3)">${cn ? '方向' : 'Side'}</span><span class="demo-neg">${cn ? '卖出' : 'SELL'}</span></div>
+    <div style="display:flex;justify-content:space-between"><span style="color:var(--vp-c-text-3)">${cn ? '数量' : 'Qty'}</span><span>${cn ? '全部持仓' : 'All holdings'}</span></div>
+    <div style="display:flex;justify-content:space-between"><span style="color:var(--vp-c-text-3)">${cn ? '追踪参数' : 'Trail'}</span><span style="color:#f59e0b">8.00%</span></div>
+    <div style="display:flex;justify-content:space-between"><span style="color:var(--vp-c-text-3)">${cn ? '初始触发价' : 'Initial Trigger'}</span><span class="demo-neg">$350.38</span></div>
+    <div style="display:flex;justify-content:space-between"><span style="color:var(--vp-c-text-3)">${cn ? '执行方式' : 'Execution'}</span><span>${cn ? '触发后市价成交' : 'Market order on trigger'}</span></div>
+  </div>
+</div>
+<div class="demo-warn-box">🔒 <strong>${cn ? '等待您的确认' : 'Awaiting your confirmation'}</strong>——${cn ? '以上为订单预览，尚未提交。追踪止损将随 TSLA 价格上涨自动上调触发价（锁定利润）；价格从最高点下跌超过 8% 时触发市价卖单。请确认后执行，或回复修改参数。' : 'This is a preview only — not yet submitted. The trailing stop auto-adjusts upward as TSLA rises, locking in profits. A market sell triggers if price drops 8% from any high. Confirm to submit or reply to modify.'}</div>`,
+        },
+      ],
+      clientMessages: {
+        claude: [
+          {
+            role: 'user',
+            content: isEN.value
+              ? "Set a trailing stop for TSLA — trigger a sell if it drops more than 8%. Show me the order details before executing."
+              : isHK.value
+                ? '幫我給 TSLA 設一個追蹤止損，跌幅超過 8% 自動觸發賣出，執行前把訂單詳情給我確認'
+                : '帮我给 TSLA 设一个追踪止损，跌幅超过 8% 自动触发卖出，执行前把订单详情给我确认',
+          },
+          {
+            role: 'tool',
+            command:
+              'longbridge quote TSLA.US && longbridge submit-order TSLA.US --type trailing-stop --trail-pct 8 --side sell --qty all --preview',
+            content: '',
+          },
+          {
+            role: 'assistant',
+            rich: true,
+            content: `<div style="font-size:13.5px;line-height:1.8;margin-bottom:14px">${cn ? '已为您生成 TSLA 追踪止损订单预览，请确认后再提交：' : "I've prepared a TSLA trailing stop order preview. Please review and confirm before I submit:"}</div>
+<div style="border:1px solid var(--vp-c-brand-1);border-radius:10px;overflow:hidden;margin-bottom:14px;box-shadow:0 0 0 1px color-mix(in srgb,var(--vp-c-brand-1) 20%,transparent)">
+  <div style="background:color-mix(in srgb,var(--vp-c-brand-1) 10%,transparent);padding:8px 14px;font-size:13px;font-weight:700">${cn ? '✦ 追踪止损 · TSLA.US' : '✦ Trailing Stop · TSLA.US'}</div>
+  <div style="padding:12px 14px;display:flex;flex-direction:column;gap:7px;font-size:13px;color:var(--vp-c-text-2)">
+    <div>${cn ? '• 追踪比例：<strong style="color:#f59e0b">8%</strong>（从持仓最高价动态下移）' : '• Trail: <strong style="color:#f59e0b">8%</strong> (dynamic, tracks from position high)'}</div>
+    <div>${cn ? '• 当前参考价 $380.85 → 初始触发价 <strong class="demo-neg">$350.38</strong>' : '• Current ref $380.85 → initial trigger <strong class="demo-neg">$350.38</strong>'}</div>
+    <div>${cn ? '• 触发后以市价全量卖出 TSLA 持仓' : '• On trigger: market sell of entire TSLA position'}</div>
+    <div>${cn ? '• 如 TSLA 上涨至 $410，触发价自动上调至 $377.20' : '• If TSLA rises to $410, trigger auto-adjusts to $377.20'}</div>
+  </div>
+</div>
+<div style="font-size:13px;color:var(--vp-c-text-2);line-height:1.8">🔒 ${cn ? '此订单尚未提交。请回复「确认」执行，或告诉我是否需要调整追踪比例（如 5%/10%）、数量，或改为限价止损。' : 'Order not submitted yet. Reply "confirm" to execute, or tell me if you want to adjust the trail % (e.g. 5%/10%), quantity, or switch to a limit stop.'}</div>`,
+          },
+        ],
+        'claude-code': [
+          {
+            role: 'user',
+            content: isEN.value
+              ? 'TSLA trailing stop 8%, sell all, preview first'
+              : isHK.value
+                ? 'TSLA 追蹤止損 8%，賣出全部，提交前預覽'
+                : 'TSLA 追踪止损 8%，卖出全部，提交前预览',
+          },
+          {
+            role: 'tool',
+            command:
+              'longbridge quote TSLA.US && longbridge submit-order TSLA.US --type trailing-stop --trail-pct 8 --side sell --qty all --preview',
+            content: '',
+          },
+          {
+            role: 'assistant',
+            rich: true,
+            content: termHTML(`<span class="t-p">$</span> longbridge quote TSLA.US
+
+TSLA.US  Tesla, Inc.    <span class="t-neg">$380.85  -$7.68 (-1.98%)</span>
+
+<span class="t-p">$</span> longbridge submit-order TSLA.US --type trailing-stop --trail-pct 8 --side sell --qty all --preview
+
+<span class="t-hd">订单预览 · 未提交</span>
+<span class="t-dim">──────────────────────────────────────────────</span>
+类型:     追踪止损单 (Trailing Stop)
+方向:     <span class="t-neg">SELL</span>
+标的:     TSLA.US
+追踪比例: <span class="t-hi">8.00%</span>
+参考价:   $380.85
+触发价:   <span class="t-neg">$350.38</span>   <span class="t-c"># $380.85 × (1 − 0.08)</span>
+执行方式: 触发后市价成交
+<span class="t-dim">──────────────────────────────────────────────</span>
+<span class="t-c"># 价格每上涨 $1，触发价同步上移 $0.92</span>
+<span class="t-c"># 确认提交：longbridge submit-order ... --confirm</span>
+<span class="t-pos">🔒 等待确认，尚未提交</span>`),
+          },
+        ],
+      },
+    },
+
+    // ── 6. 持仓复盘
+    {
+      id: 'coding',
+      label: isEN.value ? 'Portfolio Review' : isHK.value ? '持倉複盤' : '持仓复盘',
+      messages: [
+        {
+          role: 'user',
+          content: isEN.value
+            ? "Review my portfolio this month: total P&L trend, top contributor, worst performer, US vs HK allocation?"
+            : isHK.value
+              ? '幫我複盤這個月的持倉表現：總盈虧趨勢如何，哪隻股票貢獻最大、哪隻表現最弱，組合裡美股和港股各佔多少？'
+              : '帮我复盘这个月的持仓表现：总盈亏趋势如何，哪只股票贡献最大、哪只表现最弱，组合里美股和港股各占多少？',
+        },
+        {
+          role: 'tool',
+          command: 'longbridge positions && longbridge profit --from 2026-03-01 --to 2026-03-24',
           content: '',
         },
         {
@@ -478,28 +1083,30 @@ const demoScenarios = computed<DemoScenario[]>(() => {
           rich: true,
           content: `
 <div class="demo-scards">
-  <div class="demo-scard"><div class="demo-sl">${isEN.value ? 'Total Value (est.)' : '总市值（估）'}</div><div class="demo-sv">$56,850</div><div class="demo-ss demo-muted">${cn ? '含 HKD 账户' : 'incl. HKD acct'}</div></div>
-  <div class="demo-scard"><div class="demo-sl">${cn ? '今日盈亏' : "Today's P&L"}</div><div class="demo-sv demo-neg">-$135</div><div class="demo-ss demo-neg">${cn ? '2 涨 2 跌 · -0.24%' : '2↑ 2↓ · -0.24%'}</div></div>
-  <div class="demo-scard"><div class="demo-sl">${cn ? '总浮动盈亏' : 'Total Float P&L'}</div><div class="demo-sv demo-pos">+$5,932</div><div class="demo-ss demo-muted">${cn ? '含 HKD 折算' : 'incl. HKD conv.'}</div></div></div>
+  <div class="demo-scard"><div class="demo-sl">${cn ? '3月总盈亏' : 'March P&L'}</div><div class="demo-sv demo-neg">-$4,287</div><div class="demo-ss demo-neg">-4.8%</div></div>
+  <div class="demo-scard"><div class="demo-sl">${cn ? '最佳' : 'Best'}</div><div class="demo-sv demo-pos">9618.HK</div><div class="demo-ss demo-pos">+5.8%</div></div>
+  <div class="demo-scard"><div class="demo-sl">${cn ? '最弱' : 'Worst'}</div><div class="demo-sv demo-neg">9988.HK</div><div class="demo-ss demo-neg">-9.7%</div></div>
+</div>
 <div class="demo-table-wrap"><table class="demo-table">
   <thead><tr>
     <th>${cn ? '代码' : 'Symbol'}</th>
     <th style="text-align:left">${cn ? '名称' : 'Name'}</th>
-    <th>${cn ? '数量' : 'Qty'}</th>
-    <th>${cn ? '成本' : 'Cost'}</th>
-    <th>${cn ? '现价' : 'Price'}</th>
-    <th>${cn ? '浮盈%' : 'Float%'}</th>
-    <th>${cn ? '今日' : 'Today'}</th>
+    <th>${cn ? '月初价' : 'Mar 1'}</th>
+    <th>${cn ? '当前价' : 'Now'}</th>
+    <th>${cn ? '月涨跌' : 'MTD%'}</th>
+    <th>${cn ? '贡献' : 'Contrib'}</th>
   </tr></thead>
   <tbody>
-    <tr><td style="font-weight:700">9988.HK</td><td style="text-align:left;color:var(--vp-c-text-3);font-size:11px">${cn ? '阿里巴巴' : 'Alibaba'}</td><td>54</td><td class="demo-muted">HK$95.64</td><td>HK$123.20</td><td class="demo-pos">+28.8%</td><td class="demo-pos">▲ HK$189</td></tr>
-    <tr><td style="font-weight:700">AAPL.US</td><td style="text-align:left;color:var(--vp-c-text-3);font-size:11px">Apple</td><td>133</td><td class="demo-muted">$211.59</td><td>$245.00</td><td class="demo-pos">+15.8%</td><td class="demo-neg">▼ $398</td></tr>
-    <tr><td style="font-weight:700">NVDA.US</td><td style="text-align:left;color:var(--vp-c-text-3);font-size:11px">NVIDIA</td><td>101</td><td class="demo-muted">$163.50</td><td>$175.64</td><td class="demo-pos">+7.4%</td><td class="demo-pos">▲ $297</td></tr>
-    <tr><td style="font-weight:700">MSFT.US</td><td style="text-align:left;color:var(--vp-c-text-3);font-size:11px">Microsoft</td><td>15</td><td class="demo-muted">$373.31</td><td>$378.00</td><td class="demo-pos">+1.3%</td><td class="demo-neg">▼$58</td></tr>
+    <tr><td style="font-weight:700;color:var(--up-color)">9618.HK</td><td style="text-align:left;font-size:11px;color:var(--vp-c-text-3)">${cn ? '京东集团' : 'JD.com'}</td><td class="demo-muted">HK$101.30</td><td>HK$107.20</td><td class="demo-pos">+5.8%</td><td class="demo-pos">+$412</td></tr>
+    <tr><td style="font-weight:700">NVDA.US</td><td style="text-align:left;font-size:11px;color:var(--vp-c-text-3)">NVIDIA</td><td class="demo-muted">$182.48</td><td>$175.64</td><td class="demo-neg">-4.1%</td><td class="demo-neg">-$691</td></tr>
+    <tr><td style="font-weight:700">MSFT.US</td><td style="text-align:left;font-size:11px;color:var(--vp-c-text-3)">Microsoft</td><td class="demo-muted">$398.55</td><td>$379.85</td><td class="demo-neg">-4.7%</td><td class="demo-neg">-$281</td></tr>
+    <tr><td style="font-weight:700">AAPL.US</td><td style="text-align:left;font-size:11px;color:var(--vp-c-text-3)">Apple</td><td class="demo-muted">$264.72</td><td>$249.66</td><td class="demo-neg">-5.7%</td><td class="demo-neg">-$2,003</td></tr>
+    <tr><td style="font-weight:700">700.HK</td><td style="text-align:left;font-size:11px;color:var(--vp-c-text-3)">${cn ? '腾讯控股' : 'Tencent'}</td><td class="demo-muted">HK$163.20</td><td>HK$163.40</td><td class="demo-muted">+0.1%</td><td class="demo-muted">+$12</td></tr>
+    <tr><td style="font-weight:700">9988.HK</td><td style="text-align:left;font-size:11px;color:var(--vp-c-text-3)">${cn ? '阿里巴巴' : 'Alibaba'}</td><td class="demo-muted">HK$136.80</td><td>HK$123.20</td><td class="demo-neg">-9.7%</td><td class="demo-neg">-$1,736</td></tr>
   </tbody>
 </table></div>
 ${portfolioPieSvg(cn)}
-<div class="demo-hi-box"><strong>${cn ? '今日小结' : "Today's Summary"}</strong>：${cn ? 'NVDA +1.70%（+$297）领涨，港股阿里 +2.92%（+HK$189）；AAPL -1.21%（-$398）和 MSFT -1.01%（-$58）回调。账户今日小幅收跌 -$135，整体浮盈 +$5,932。' : 'NVDA led gains +1.70% (+$297), HK Alibaba +2.92% (+HK$189). AAPL -1.21% (-$398) and MSFT -1.01% (-$58) dragged. Net today: -$135, overall float +$5,932.'}</div>`,
+<div class="demo-hi-box"><strong>${cn ? '3 月小结' : 'March Summary'}</strong>：${cn ? 'AAPL（-5.7%，-$2,003）和 9988.HK（-9.7%，-$1,736）是本月最大拖累，合计贡献 -$3,739，占总亏损的 87%。9618.HK（+5.8%）是唯一正收益标的。<strong style="color:var(--vp-c-text-1)">组合美股比例偏高（约 78%），港股（约 22%）表现分化：京东强、阿里弱。</strong>' : 'AAPL (−5.7%, −$2,003) and 9988.HK (−9.7%, −$1,736) were the biggest drags — combined -$3,739, 87% of total loss. 9618.HK (+5.8%) was the only positive contributor. <strong style="color:var(--vp-c-text-1)">Portfolio is US-heavy (~78%). HK (~22%) is split: JD strong, Alibaba weak.</strong>'}</div>`,
         },
       ],
       clientMessages: {
@@ -507,661 +1114,64 @@ ${portfolioPieSvg(cn)}
           {
             role: 'user',
             content: isEN.value
-              ? "How's my account today? Show each position's P&L."
+              ? "Review my portfolio this month: total P&L trend, top contributor, worst performer, US vs HK allocation?"
               : isHK.value
-                ? '今天我的帳戶表現如何？幫我看下各個持倉'
-                : '今天我的账户表现如何？帮我看下各个持仓',
+                ? '幫我複盤這個月的持倉表現：總盈虧趨勢如何，哪隻股票貢獻最大、哪隻表現最弱，組合裡美股和港股各佔多少？'
+                : '帮我复盘这个月的持仓表现：总盈亏趋势如何，哪只股票贡献最大、哪只表现最弱，组合里美股和港股各占多少？',
           },
           {
             role: 'tool',
-            command: 'longbridge positions && longbridge quote NVDA.US AAPL.US MSFT.US 9988.HK',
+            command: 'longbridge positions && longbridge profit --from 2026-03-01 --to 2026-03-24',
             content: '',
           },
           {
             role: 'assistant',
             rich: true,
-            content: `<div style="font-size:13.5px;line-height:1.8;margin-bottom:12px">${cn ? '今天账户 2 涨 2 跌，小幅收跌 -$135。以下是完整盈亏状况：' : 'Today: 2 up, 2 down. Account slightly lower at -$135. Full P&L breakdown:'}</div>
-<div class="demo-table-wrap"><table class="demo-table">
-  <thead><tr>
-    <th>${cn ? '代码' : 'Symbol'}</th>
-    <th style="text-align:left">${cn ? '公司' : 'Company'}</th>
-    <th>${cn ? '数量' : 'Qty'}</th>
-    <th>${cn ? '成本' : 'Cost'}</th>
-    <th>${cn ? '现价' : 'Price'}</th>
-    <th>${cn ? '总浮盈' : 'Float P&L'}</th>
-    <th>${cn ? '今日' : 'Today'}</th>
-  </tr></thead>
-  <tbody>
-    <tr><td style="font-weight:700">9988.HK</td><td style="text-align:left;font-size:11px;color:var(--vp-c-text-3)">${cn ? '阿里巴巴集团' : 'Alibaba Group'}</td><td>54</td><td class="demo-muted">HK$95.64</td><td>HK$123.20</td><td class="demo-pos">+HK$1,488 (+28.8%)</td><td class="demo-pos">+HK$189</td></tr>
-    <tr><td style="font-weight:700">NVDA.US</td><td style="text-align:left;font-size:11px;color:var(--vp-c-text-3)">NVIDIA Corp.</td><td>101</td><td class="demo-muted">$163.50</td><td>$175.64</td><td class="demo-pos">+$1,226 (+7.4%)</td><td class="demo-pos">+$297</td></tr>
-    <tr><td style="font-weight:700">AAPL.US</td><td style="text-align:left;font-size:11px;color:var(--vp-c-text-3)">Apple Inc.</td><td>133</td><td class="demo-muted">$211.59</td><td>$245.00</td><td class="demo-pos">+$4,444 (+15.8%)</td><td class="demo-neg">-$398</td></tr>
-    <tr><td style="font-weight:700">MSFT.US</td><td style="text-align:left;font-size:11px;color:var(--vp-c-text-3)">Microsoft Corp.</td><td>15</td><td class="demo-muted">$373.31</td><td>$378.00</td><td class="demo-pos">+$70 (+1.3%)</td><td class="demo-neg">-$58</td></tr>
-  </tbody>
-</table></div>
-<div style="font-size:13px;line-height:1.85;color:var(--vp-c-text-2);margin:10px 0">
-${cn ? '值得关注的几点：<br>• <strong style="color:var(--vp-c-text-1)">9988.HK（阿里）</strong> 持仓浮盈最高（+28.8%），今日随港股强势反弹 +HK$189<br>• <strong style="color:var(--vp-c-text-1)">NVDA</strong> 今日 +1.70%，GTC 催化剂持续发酵，持仓浮盈 +7.4%<br>• <strong style="color:var(--vp-c-text-1)">AAPL</strong> 今日回调 -1.21%（-$398），是账户最大拖累，但总持仓仍浮盈 +15.8%<br>• MSFT 小幅下跌 -1.01%（-$58），浮盈收窄至 +1.3%' : 'Key points:<br>• <strong style="color:var(--vp-c-text-1)">Alibaba (9988.HK)</strong> highest float gain (+28.8%), rebounded today +HK$189<br>• <strong style="color:var(--vp-c-text-1)">NVDA</strong> +1.70% today on GTC momentum, float +7.4%<br>• <strong style="color:var(--vp-c-text-1)">AAPL</strong> -1.21% today (-$398) biggest drag, but still +15.8% overall<br>• MSFT -1.01% (-$58), float narrowing to +1.3%'}</div>
-<div class="demo-ai-sig">${cn ? '汇率估算 1 USD = 7.78 HKD；美股数据来自 2026-03-24 盘前' : 'Rate est. 1 USD = 7.78 HKD; US data from pre-market 2026-03-24'}</div>`,
+            content: `<div style="font-size:13.5px;line-height:1.8;margin-bottom:14px">${cn ? '我调取了你 3 月 1 日到 3 月 24 日的持仓数据，以下是完整复盘：' : "I pulled your portfolio data from March 1–24. Here's the full review:"}</div>
+<div style="font-size:12px;font-weight:700;color:var(--vp-c-text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">① ${cn ? '总盈亏' : 'Total P&L'}</div>
+<div style="font-size:13px;color:var(--vp-c-text-2);line-height:1.85;margin-bottom:14px">${cn ? '3 月组合整体下跌 -$4,287（-4.8%），跑输同期标普 500 约 1.2 个百分点。亏损主要集中在月中下旬（3/10–3/20），与美股科技股整体回调时间一致。' : "March portfolio down -$4,287 (−4.8%), underperforming S&P 500 by ~1.2pp. Losses concentrated in mid-to-late month (3/10–3/20), coinciding with the broad tech selloff."}</div>
+<div style="font-size:12px;font-weight:700;color:var(--vp-c-text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">② ${cn ? '贡献拆解' : 'Contribution Breakdown'}</div>
+<div style="font-size:13px;color:var(--vp-c-text-2);line-height:1.85;margin-bottom:14px">${cn ? '最大拖累：<strong class="demo-neg">AAPL（-$2,003）</strong> + <strong class="demo-neg">9988.HK（-$1,736）</strong>，合计 87% 亏损来源。AAPL 仓位最重（约 38% 组合权重），是主要风险敞口。9618.HK 是唯一正贡献（+$412），表现逆势。' : 'Biggest drags: <strong class="demo-neg">AAPL (−$2,003)</strong> + <strong class="demo-neg">9988.HK (−$1,736)</strong> = 87% of losses. AAPL is largest position (~38% weight). 9618.HK was the sole positive contributor (+$412), bucking the trend.'}</div>
+<div style="font-size:12px;font-weight:700;color:var(--vp-c-text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">③ ${cn ? '市场分布' : 'Market Allocation'}</div>
+<div style="font-size:13px;color:var(--vp-c-text-2);line-height:1.85;margin-bottom:14px">${cn ? '美股约占 78%（AAPL 38% + NVDA 20% + MSFT 20%），港股约 22%（9988、700、9618）。集中在美股科技，在科技回调期间放大了下行幅度。' : 'US stocks ~78% (AAPL 38% + NVDA 20% + MSFT 20%), HK ~22% (9988, 700, 9618). Heavy US tech concentration amplified the drawdown during the correction.'}</div>
+<div class="demo-ai-sig">${cn ? '数据区间：2026-03-01 → 2026-03-24 · 含 HKD/USD 汇率折算' : 'Period: 2026-03-01 → 2026-03-24 · includes HKD/USD conversion'}</div>`,
           },
         ],
         'claude-code': [
           {
             role: 'user',
             content: isEN.value
-              ? 'Print all my holdings with today and total P&L'
+              ? 'Monthly portfolio review: P&L by position, allocation breakdown'
               : isHK.value
-                ? '把我所有持倉的今日和總盈虧打印出來'
-                : '把我所有持仓的今日和总盈亏打印出来',
+                ? '月度持倉複盤：各標的盈虧、倉位分佈'
+                : '月度持仓复盘：各标的盈亏、仓位分布',
           },
-          { role: 'tool', command: 'longbridge positions --format json | python3 pnl.py', content: '' },
+          {
+            role: 'tool',
+            command: 'longbridge positions && longbridge profit --from 2026-03-01 --to 2026-03-24',
+            content: '',
+          },
           {
             role: 'assistant',
             rich: true,
-            content: termHTML(`<span class="t-p">$</span> longbridge positions
+            content: termHTML(`<span class="t-p">$</span> longbridge profit --from 2026-03-01 --to 2026-03-24
 
-<span class="t-hd">账户持仓 · 2026-03-24 · 模拟账户</span>
+<span class="t-hd">持仓复盘 · 2026-03-01 → 03-24</span>
 <span class="t-dim">──────────────────────────────────────────────────────</span>
-<span class="t-hd">Symbol     数量   成本价    现价     浮盈%    浮盈$     今日</span>
+<span class="t-hd">Symbol     月初价       当前价    MTD%     贡献$</span>
 <span class="t-dim">──────────────────────────────────────────────────────</span>
-9988.HK    54   HK95.64  HK123.20  <span class="t-pos">+28.8%</span>   <span class="t-pos">+HK1488</span>   <span class="t-pos">▲ HK189</span>
-NVDA.US   101  $163.50   $175.64    <span class="t-pos">+7.4%</span>   <span class="t-pos">+$1,226</span>   <span class="t-pos">▲ $297</span>
-AAPL.US   133  $211.59   $245.00   <span class="t-pos">+15.8%</span>   <span class="t-pos">+$4,444</span>   <span class="t-neg">▼ $398</span>
-MSFT.US    15  $373.31   $378.00    <span class="t-pos">+1.3%</span>      <span class="t-pos">+$70</span>    <span class="t-neg">▼$58</span>
+<span class="t-pos">9618.HK</span>   HK$101.30   HK$107.20  <span class="t-pos">+5.8%</span>    <span class="t-pos">+$412</span>
+700.HK    HK$163.20   HK$163.40   <span class="t-dim">+0.1%</span>     <span class="t-dim">+$12</span>
+NVDA.US    $182.48     $175.64    <span class="t-neg">-4.1%</span>    <span class="t-neg">-$691</span>
+MSFT.US    $398.55     $379.85    <span class="t-neg">-4.7%</span>    <span class="t-neg">-$281</span>
+AAPL.US    $264.72     $249.66    <span class="t-neg">-5.7%</span>  <span class="t-neg">-$2,003</span>
+<span class="t-neg">9988.HK</span>   HK$136.80   HK$123.20   <span class="t-neg">-9.7%</span>  <span class="t-neg">-$1,736</span>
 <span class="t-dim">──────────────────────────────────────────────────────</span>
-今日盈亏 (USD est.): <span class="t-neg">-$135</span>   <span class="t-c"># NVDA/9988 涨，AAPL/MSFT 跌</span>
-总浮盈   (USD est.): <span class="t-pos">+$5,932</span>  <span class="t-c"># HKD 按 7.78 折算</span>`),
-          },
-        ],
-      },
-    },
+3月总盈亏: <span class="t-neg">-$4,287 (-4.8%)</span>
 
-    // ── 2. 美股今日
-    {
-      id: 'usmarket',
-      label: isEN.value ? 'US Market Today' : isHK.value ? '美股今日' : '美股今日',
-      messages: [
-        {
-          role: 'user',
-          content: isEN.value
-            ? "What's happening in the US market today? Any major news driving the action?"
-            : isHK.value
-              ? '今天美股市場什麼情況？有什麼重要新聞驅動行情？'
-              : '今天美股市场什么情况？有什么重要新闻驱动行情？',
-        },
-        {
-          role: 'tool',
-          command: 'longbridge quote SPY.US QQQ.US NVDA.US AAPL.US MSFT.US && longbridge news NVDA.US AAPL.US',
-          content: '',
-        },
-        {
-          role: 'assistant',
-          rich: true,
-          content: `
-<div class="demo-mkt-bar">
-  <div class="demo-mkt-item"><div class="demo-mkt-sym">S&amp;P 500 (SPY)</div><div class="demo-mkt-price">$655.38</div><div class="demo-mkt-chg demo-pos">+1.05%</div></div>
-  <div class="demo-mkt-divider"></div>
-  <div class="demo-mkt-item"><div class="demo-mkt-sym">${cn ? '纳斯达克 (QQQ)' : 'Nasdaq (QQQ)'}</div><div class="demo-mkt-price">$588.00</div><div class="demo-mkt-chg demo-pos">+1.15%</div></div>
-  <div class="demo-mkt-divider"></div>
-  <div class="demo-mkt-item"><div class="demo-mkt-sym">${cn ? '成交额' : 'Volume'}</div><div class="demo-mkt-price" style="font-size:13px">${cn ? '$886亿' : '$88.6B'}</div><div class="demo-mkt-chg demo-muted">${cn ? 'SPY 日均' : 'SPY daily'}</div></div>
-  <div class="demo-mkt-divider"></div>
-  <div class="demo-mkt-item"><div class="demo-mkt-sym">${cn ? '今日市场' : 'Market'}</div><div class="demo-mkt-price" style="font-size:13px;color:var(--up-color)">${cn ? '科技领涨' : 'Tech leads'}</div><div class="demo-mkt-chg demo-muted">${cn ? '风险偏好回暖' : 'Risk-on'}</div></div>
-</div>
-<div class="demo-qcards">
-  <div class="demo-qcard"><div class="demo-qcard-sym">NVDA.US</div><div class="demo-qcard-name">NVIDIA Corporation</div><div class="demo-qcard-price">$175.64</div><div class="demo-qcard-chg demo-pos">+$2.94 · +1.70%</div><div class="demo-qcard-meta">${cn ? '成交额 $322.6亿 · GTC 催化剂' : 'Vol $32.3B · GTC catalyst'}</div></div>
-  <div class="demo-qcard"><div class="demo-qcard-sym">AAPL.US</div><div class="demo-qcard-name">Apple Inc.</div><div class="demo-qcard-price">$245.00</div><div class="demo-qcard-chg demo-neg">-$2.99 · -1.21%</div><div class="demo-qcard-meta">${cn ? '成交额 $102.1亿 · WWDC 预告消化' : 'Vol $10.2B · WWDC digestion'}</div></div>
-</div>
-<div class="demo-news-feed">
-  <div class="demo-news-item">
-    <div class="demo-news-dot" style="background:var(--up-color)"></div>
-    <div class="demo-news-body"><div class="demo-news-title">${cn ? 'Jensen Huang：AI 芯片 2027 年前累计需求达 $1 万亿，较去年预测翻倍' : "Jensen Huang: AI chip demand $1T by 2027 — double last year's forecast"}</div><div class="demo-news-meta">${cn ? 'GTC 2026 主题演讲 · 3小时前' : 'GTC 2026 Keynote · 3h ago'}</div></div>
-    <div class="demo-news-signal" style="background:var(--vp-c-green-soft);color:var(--up-color)">${cn ? '强力看多' : 'Strong Bull'}</div>
-  </div>
-  <div class="demo-news-item">
-    <div class="demo-news-dot" style="background:var(--up-color)"></div>
-    <div class="demo-news-body"><div class="demo-news-title">${cn ? 'Bernstein：维持 NVDA "强力买入"，目标价隐含 56% 上行空间' : 'Bernstein: Maintain NVDA Strong Buy, target implying 56% upside'}</div><div class="demo-news-meta">${cn ? '分析师报告 · 今日 06:50' : 'Analyst report · 06:50'}</div></div>
-    <div class="demo-news-signal" style="background:var(--vp-c-green-soft);color:var(--up-color)">${cn ? '看多 NVDA' : 'Bullish NVDA'}</div>
-  </div>
-  <div class="demo-news-item">
-    <div class="demo-news-dot" style="background:var(--vp-c-indigo-1)"></div>
-    <div class="demo-news-body"><div class="demo-news-title">${cn ? 'Apple 宣布 WWDC 2026 于 6月8–12日举行：iOS 27 将是 Apple AI 反攻的核心' : 'Apple announces WWDC 2026 June 8–12: iOS 27 to be core of AI comeback'}</div><div class="demo-news-meta">${cn ? 'Apple 官方公告 · 昨日 23:58' : 'Apple Official · Yesterday 23:58'}</div></div>
-    <div class="demo-news-signal" style="background:var(--vp-c-indigo-soft);color:var(--vp-c-indigo-1)">${cn ? '短期催化' : 'Near-term catalyst'}</div>
-  </div>
-  <div class="demo-news-item">
-    <div class="demo-news-dot" style="background:var(--vp-c-yellow-1)"></div>
-    <div class="demo-news-body"><div class="demo-news-title">${cn ? 'Morgan Stanley 调查：iPhone 购买意向创新高，AI 功能成最大驱动因素' : 'Morgan Stanley: iPhone purchase intent at record high, AI features key driver'}</div><div class="demo-news-meta">${cn ? '研究报告 · 今日 06:44' : 'Research · 06:44'}</div></div>
-    <div class="demo-news-signal" style="background:var(--vp-c-yellow-soft);color:var(--vp-c-yellow-1)">${cn ? '中性偏多' : 'Neutral-bullish'}</div>
-  </div>
-</div>
-<div class="demo-hi-box"><strong>${cn ? '今日主线' : "Today's Theme"}</strong>：${cn ? 'GTC 2026 余热持续，Jensen Huang $1T 需求预测提振整个 AI 链。AAPL 则受 WWDC 预期支撑，iOS 27 AI 反攻叙事启动。科技大盘 SPY +1.05%、QQQ +1.15%，技术股集体修复。' : 'GTC 2026 afterglow continues to boost the AI chain. AAPL supported by WWDC expectations. Tech-heavy SPY +1.05%, QQQ +1.15% — broad tech recovery.'}</div>`,
-        },
-      ],
-      clientMessages: {
-        claude: [
-          {
-            role: 'user',
-            content: isEN.value
-              ? "What's happening in the US market today? Any major news driving the action?"
-              : isHK.value
-                ? '今天美股市場什麼情況？有什麼重要新聞驅動行情？'
-                : '今天美股市场什么情况？有什么重要新闻驱动行情？',
-          },
-          {
-            role: 'tool',
-            command: 'longbridge quote SPY.US QQQ.US NVDA.US AAPL.US && longbridge news NVDA.US AAPL.US',
-            content: '',
-          },
-          {
-            role: 'assistant',
-            rich: true,
-            content: `
-<div style="font-size:13.5px;line-height:1.8;margin-bottom:12px">${cn ? '今天美股整体收涨，科技板块领涨，有几条重要新闻推动了行情：' : "Today's US market closed higher, led by tech. Key news drivers:"}</div>
-<div class="demo-mkt-bar" style="margin-bottom:14px">
-  <div class="demo-mkt-item"><div class="demo-mkt-sym">SPY (S&amp;P500)</div><div class="demo-mkt-price">$655.38</div><div class="demo-mkt-chg demo-pos">+1.05%</div></div>
-  <div class="demo-mkt-divider"></div>
-  <div class="demo-mkt-item"><div class="demo-mkt-sym">QQQ (${cn ? '纳斯达克' : 'Nasdaq'})</div><div class="demo-mkt-price">$588.00</div><div class="demo-mkt-chg demo-pos">+1.15%</div></div>
-</div>
-<div style="font-size:13px;color:var(--vp-c-text-2);line-height:1.85;margin-bottom:12px"><strong style="color:var(--vp-c-text-1)">① ${cn ? 'GTC 2026 催化 NVDA（+1.70%）' : 'GTC 2026 catalyst for NVDA (+1.70%)'}</strong><br>
-${cn ? 'Jensen Huang 发表主题演讲，预测 AI 芯片 2027 年前累计需求达 <strong style="color:var(--vp-c-yellow-1)">$1 万亿</strong>（去年仅预测 $5000 亿）。Bernstein 同日维持 NVDA 强力买入，隐含 56% 上行空间，带动 AI 链全线走强。' : 'Jensen Huang keynoted cumulative AI chip demand could reach <strong style="color:var(--vp-c-yellow-1)">$1 trillion</strong> by 2027 (vs $500B prior). Bernstein maintained Strong Buy with 56% upside, lifting the entire AI chain.'}<br><br>
-<strong style="color:var(--vp-c-text-1)">② ${cn ? 'AAPL 今日回调 -1.21%（WWDC 利好消化中）' : 'AAPL pullback -1.21% (WWDC pricing in)'}</strong><br>
-${cn ? 'Apple 宣布 WWDC 2026 于 6月8–12日举行，iOS 27 将重构 Siri 架构，向大语言模型交互逻辑靠拢。Morgan Stanley 同日调查显示 iPhone 购买意向创新高。' : 'Apple announced WWDC 2026 for June 8–12, iOS 27 expected to overhaul Siri with LLM-based interaction. Morgan Stanley survey showed iPhone purchase intent at record highs.'}</div>
-<div class="demo-warn-box"><strong>${cn ? '注意' : 'Note'}</strong>：${cn ? '今日技术股整体偏强，但 QQQ 仍在 30 日均线下方。本周需关注宏观数据（PCE、就业）对风险情绪的影响。' : 'Tech broadly strong today, but QQQ still below 30d MA. Watch PCE and jobs data this week for macro impact on sentiment.'}</div>`,
-          },
-        ],
-        'claude-code': [
-          {
-            role: 'user',
-            content: isEN.value
-              ? "Check today's market and key tech stocks"
-              : isHK.value
-                ? '查一下今天大盤和主要科技股的情況'
-                : '查一下今天大盘和主要科技股的情况',
-          },
-          { role: 'tool', command: 'longbridge quote SPY.US QQQ.US NVDA.US AAPL.US MSFT.US', content: '' },
-          {
-            role: 'assistant',
-            rich: true,
-            content: termHTML(`<span class="t-p">$</span> longbridge quote SPY.US QQQ.US NVDA.US AAPL.US MSFT.US
-
-<span class="t-hd">Symbol    Last      Prev     Chg%      Turnover</span>
-<span class="t-dim">──────────────────────────────────────────────</span>
-SPY.US    655.38   648.57   <span class="t-pos">+1.05%</span>    $886.1亿
-QQQ.US    588.00   581.33   <span class="t-pos">+1.15%</span>    $530.6亿
-NVDA.US   175.64   172.70   <span class="t-pos">+1.70%</span>    $322.6亿
-AAPL.US   245.00   247.99   <span class="t-neg">-1.21%</span>    $102.1亿
-MSFT.US   378.00   381.87   <span class="t-neg">-1.01%</span>    $113.9亿
-
-<span class="t-c"># NVDA GTC 催化剂带动大盘，AAPL/MSFT 消化近期涨幅回调</span>
-<span class="t-c"># 查看 NVDA 新闻：longbridge news NVDA.US</span>`),
-          },
-        ],
-      },
-    },
-
-    // ── 3. 深度研究
-    {
-      id: 'research',
-      label: isEN.value ? 'Deep Research' : isHK.value ? '深度研究' : '深度研究',
-      messages: [
-        {
-          role: 'user',
-          content: isEN.value
-            ? 'Analyze NVDA using recent news, SEC filings, and 30-day chart — is it a good add here?'
-            : isHK.value
-              ? '結合 NVDA 最新新聞、近期 SEC 文件和 K 線走勢，幫我判斷現在是否適合加倉'
-              : '结合 NVDA 最新新闻、近期 SEC 文件和 K 线走势，帮我判断现在是否适合加仓',
-        },
-        {
-          role: 'tool',
-          command:
-            'longbridge news NVDA.US && longbridge filings NVDA.US && longbridge kline NVDA.US --period day --count 30',
-          content: '',
-        },
-        {
-          role: 'assistant',
-          rich: true,
-          content: `
-<div class="demo-res-section">
-  <div class="demo-res-hd"><span class="demo-res-hd-text">${cn ? '新闻面分析' : 'News Sentiment'}</span><span class="demo-res-signal" style="background:var(--vp-c-green-soft);color:var(--up-color)">${cn ? '极度看多' : 'Extremely Bullish'}</span></div>
-  <div class="demo-news-feed">
-    <div class="demo-news-item" style="padding:8px 10px"><div class="demo-news-dot" style="background:var(--up-color)"></div><div class="demo-news-body"><div class="demo-news-title" style="font-size:12.5px">${cn ? 'GTC 2026：Jensen Huang — AI 需求 2027 年累计 $1T，去年预测仅 $500B' : 'GTC 2026: Jensen Huang — AI demand $1T by 2027, vs $500B last year'}</div><div class="demo-news-meta">${cn ? '主题演讲 · 重大上调' : 'Keynote · major upward revision'}</div></div><div class="demo-news-signal" style="background:var(--vp-c-green-soft);color:var(--up-color)">++</div></div>
-    <div class="demo-news-item" style="padding:8px 10px"><div class="demo-news-dot" style="background:var(--up-color)"></div><div class="demo-news-body"><div class="demo-news-title" style="font-size:12.5px">${cn ? 'Bernstein：强力买入，目标价含 56% 上行；Raymond James：85% 上行空间' : 'Bernstein: Strong Buy 56% upside; Raymond James: 85% upside'}</div><div class="demo-news-meta">${cn ? '机构报告 · 今日连续发布' : 'Multiple analyst reports today'}</div></div><div class="demo-news-signal" style="background:var(--vp-c-green-soft);color:var(--up-color)">+</div></div>
-    <div class="demo-news-item" style="padding:8px 10px"><div class="demo-news-dot" style="background:var(--vp-c-indigo-1)"></div><div class="demo-news-body"><div class="demo-news-title" style="font-size:12.5px">${cn ? 'NVIDIA 宣布 Groq 整合 + 新推理专用 CPU，推理端布局加速' : 'NVIDIA announces Groq integration + inference-optimized CPU'}</div><div class="demo-news-meta">${cn ? 'GTC 产品公告 · 长期催化' : 'GTC product announcement · long-term catalyst'}</div></div><div class="demo-news-signal" style="background:var(--vp-c-indigo-soft);color:var(--vp-c-indigo-1)">${cn ? '中性+' : 'Neutral+'}</div></div>
-  </div>
-</div>
-<div class="demo-res-section">
-  <div class="demo-res-hd"><span class="demo-res-hd-text">${cn ? 'SEC 文件分析' : 'SEC Filings'}</span><span class="demo-res-signal" style="background:var(--vp-c-bg-mute);color:var(--vp-c-text-2)">${cn ? '中性' : 'Neutral'}</span></div>
-  <div class="demo-res-body">
-    <div style="display:flex;flex-direction:column;gap:5px">
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="font-size:10px;color:var(--vp-c-text-3);width:90px;flex-shrink:0">8-K · 03/02</span><span style="font-size:12.5px">${cn ? 'GTC 2026 会议及产品线更新公告，无负面披露' : 'GTC 2026 conference & product update — no negative disclosures'}</span></div>
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="font-size:10px;color:var(--vp-c-text-3);width:90px;flex-shrink:0">Form 4 × 6</span><span style="font-size:12.5px">${cn ? '内部人交易记录：无大规模净卖出，执行层未见减持信号' : 'Insider transactions: no large-scale net selling — management not reducing'}</span></div>
-      <div style="display:flex;gap:8px;align-items:baseline"><span style="font-size:10px;color:var(--vp-c-text-3);width:90px;flex-shrink:0">144/A</span><span style="font-size:12.5px">${cn ? '例行转售申请，属常规披露，无异常' : 'Routine resale filing — normal, no red flags'}</span></div>
-    </div>
-  </div>
-</div>
-<div class="demo-res-section">
-  <div class="demo-res-hd"><span class="demo-res-hd-text">${cn ? '技术面分析' : 'Technical Analysis'}</span><span class="demo-res-signal" style="background:var(--vp-c-yellow-soft);color:var(--vp-c-yellow-1)">${cn ? '底部形成中' : 'Base building'}</span></div>
-  <div class="demo-kw" style="margin-bottom:0">
-    <div class="demo-kh"><div><div style="font-size:11px;color:var(--vp-c-text-3);margin-bottom:2px">NVDA.US · ${cn ? '日线 30天' : 'Daily 30d'}</div><span class="demo-kprice">$175.64</span><span class="demo-kchg" style="background:var(--vp-c-green-soft);color:var(--up-color);margin-left:8px">+1.70%</span></div><div class="demo-kmeta"><div>${cn ? '峰 $195.56 → 低 $172.70' : 'Peak $195.56 → Low $172.70'}</div><div>${cn ? '回撤 −11.7%' : 'Drawdown −11.7%'}</div></div></div>
-    ${klineSvg()}
-  </div>
-</div>
-<div class="demo-verdict">
-  <div class="demo-verdict-hd">${cn ? '综合判断' : 'Conclusion'}</div>
-  <div class="demo-verdict-rows">
-    <div class="demo-verdict-row"><span class="demo-verdict-label" style="color:var(--up-color)">${cn ? '基本面' : 'Fundamentals'}</span><span class="demo-verdict-val">${cn ? '强劲。$1T 需求预测 + 分析师密集看多，催化剂明确。8-K 和 Form 4 无异常，内部人未减持。' : 'Strong. $1T demand forecast + dense analyst bullishness. 8-K and Form 4 both clean — management not selling.'}</span></div>
-    <div class="demo-verdict-row"><span class="demo-verdict-label" style="color:#f59e0b">${cn ? '技术面' : 'Technicals'}</span><span class="demo-verdict-val">${cn ? '$172–174 支撑三次有效，今日 +1.70% 是反弹第二日，底部形态趋于成立，但仍在均线下方。' : '$172–$174 held 3 times. Today +1.70% is 2nd consecutive bounce day — base forming, but still below 30d MA.'}</span></div>
-    <div class="demo-verdict-row"><span class="demo-verdict-label" style="color:#4781ff">${cn ? '建议' : 'Suggestion'}</span><span class="demo-verdict-val">${cn ? '当前价位（$175）处于回调后低位，基本面支撑强，短期技术面正在修复。<strong style="color:var(--vp-c-text-1)">适合小仓位试探，分批建仓优于一次性买入。</strong>' : 'Current $175 is at a post-correction low with strong fundamentals and recovering technicals. <strong style="color:var(--vp-c-text-1)">Small initial position, scale in gradually rather than all at once.</strong>'}</span></div>
-  </div>
-</div>`,
-        },
-      ],
-      clientMessages: {
-        claude: [
-          {
-            role: 'user',
-            content: isEN.value
-              ? 'Analyze NVDA using recent news, SEC filings, and 30-day chart — is it a good add here?'
-              : isHK.value
-                ? '結合 NVDA 最新新聞、近期 SEC 文件和 K 線走勢，幫我判斷現在是否適合加倉'
-                : '结合 NVDA 最新新闻、近期 SEC 文件和 K 线走势，帮我判断现在是否适合加仓',
-          },
-          {
-            role: 'tool',
-            command:
-              'longbridge news NVDA.US && longbridge filings NVDA.US && longbridge kline NVDA.US --period day --count 30',
-            content: '',
-          },
-          {
-            role: 'assistant',
-            rich: true,
-            content: `
-<div style="font-size:13.5px;line-height:1.8;margin-bottom:14px">${cn ? '我从三个维度分析了 NVDA 当前状况：' : "I've analyzed NVDA from three dimensions:"}</div>
-<div style="font-size:12px;font-weight:700;color:var(--vp-c-text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">① ${cn ? '新闻面' : 'News'}</div>
-<div style="font-size:13px;color:var(--vp-c-text-2);line-height:1.85;margin-bottom:14px">${cn ? '今日 NVDA 新闻情绪极度偏多。GTC 2026 主题演讲是核心催化剂：Jensen Huang 宣布 AI 芯片累计需求从 $500B 上调至 <strong style="color:var(--vp-c-yellow-1)">$1T</strong>。Bernstein、Raymond James 等机构当日相继发布看多报告，目标价隐含上行空间均超过 50%。' : 'Extremely bullish news. GTC 2026 keynote was the core catalyst: Jensen Huang raised cumulative AI chip demand from $500B to <strong style="color:var(--vp-c-yellow-1)">$1T</strong>. Bernstein and Raymond James both published bullish reports today, each implying 50%+ upside.'}</div>
-<div style="font-size:12px;font-weight:700;color:var(--vp-c-text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">② ${cn ? 'SEC 文件' : 'SEC Filings'}</div>
-<div style="font-size:13px;color:var(--vp-c-text-2);line-height:1.85;margin-bottom:14px">${cn ? '最近一份 8-K（3/2/2026）为 GTC 2026 正式公告，无负面事项。Form 4 内部人交易记录：近 6 份均为常规披露，未出现高管大规模卖出信号。' : 'Most recent 8-K (3/2/2026) is the GTC 2026 announcement — no negative items. Form 4 insider records: 6 recent filings, all routine — no large executive selling detected.'}</div>
-<div style="font-size:12px;font-weight:700;color:var(--vp-c-text-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">③ ${cn ? 'K 线走势' : 'Chart'}</div>
-<div style="font-size:13px;color:var(--vp-c-text-2);line-height:1.85;margin-bottom:14px">${cn ? '30 日看，NVDA 从 2/25 高点 $195.56 回调至 3/20 低点 $172.70，跌幅 −11.7%。低点 $172–174 区间已三次获有效支撑。今日 +1.70%，是连续两日上涨，短期底部信号趋于确认，但仍在 30 日均线（$183）下方。' : '30-day chart: NVDA declined from $195.56 peak (Feb 25) to $172.70 low (Mar 20), a −11.7% drawdown. The $172–$174 zone held as support 3 times. Today +1.70% is the 2nd consecutive bounce day — base forming, but still below 30d MA ($183).'}</div>
-<div class="demo-verdict">
-  <div class="demo-verdict-hd">${cn ? '我的判断' : 'My Assessment'}</div>
-  <div style="font-size:13px;line-height:1.85;color:var(--vp-c-text-2)">${cn ? '三个维度综合：基本面和催化剂指向需求端无虞，技术面正在修复而非破位。<strong style="color:var(--vp-c-text-1)">当前 $175 附近是相对合理的加仓位置</strong>，建议分 2–3 次买入，避免一次性追高。<br>主要风险：若宏观流动性收紧或 AI 泡沫叙事改变，高估值仍承压。' : 'All three angles converge: fundamentals strong, technicals recovering. <strong style="color:var(--vp-c-text-1)">$175 is a reasonable entry point — scale in over 2–3 tranches</strong> rather than all at once.<br>Key risk: valuation stays stretched if macro tightens or AI narrative shifts.'}</div>
-</div>`,
-          },
-        ],
-        'claude-code': [
-          {
-            role: 'user',
-            content: isEN.value
-              ? 'Analyze NVDA from news, filings, and chart — give me an add recommendation'
-              : isHK.value
-                ? '從新聞、文件、K 線三個角度分析 NVDA，給我加倉建議'
-                : '从新闻、文件、K 线三个角度分析 NVDA，给我加仓建议',
-          },
-          {
-            role: 'tool',
-            command:
-              'longbridge news NVDA.US --count 5 && longbridge filings NVDA.US --count 5 && longbridge kline NVDA.US --period day --count 30',
-            content: '',
-          },
-          {
-            role: 'assistant',
-            rich: true,
-            content: termHTML(`<span class="t-p">$</span> longbridge news NVDA.US --count 5
-
-<span class="t-hd">NVDA 新闻 · 2026-03-24 (前 5 条)</span>
-<span class="t-dim">─────────────────────────────────────────────────────</span>
-<span class="t-pos">++</span> GTC 2026: Jensen Huang raises AI chip demand forecast to $1T thru 2027
-<span class="t-pos">++</span> Bernstein: Buy NVDA, target +56% upside (Stacy Rasgon)
-<span class="t-pos"> +</span> Raymond James: 85% upside potential for NVDA
-<span class="t-pos"> +</span> NVIDIA packaging the world: GTC signals infra system pivot
-   NVDA shares bought by Covea Finance <span class="t-c"># 机构增持信号</span>
-
-<span class="t-p">$</span> longbridge filings NVDA.US --count 3
-
-<span class="t-hd">NVDA SEC 文件</span>
-<span class="t-dim">─────────────────────────────────────────────────────</span>
-8-K    03/02  GTC 2026 announcement  <span class="t-c"># 正面催化剂</span>
-Form4  03/24  x6 内部人交易          <span class="t-c"># 无大额净卖出 ✓</span>
-144/A  03/23  例行转售申请           <span class="t-c"># 常规，无异常</span>
-
-<span class="t-p">$</span> longbridge kline NVDA.US --period day --count 30
-
-<span class="t-hd">NVDA.US 日线 30天摘要</span>
-<span class="t-dim">─────────────────────────────────────────────────────</span>
-30日高: <span class="t-hi">$195.56</span> (02-25)  |  30日低: <span class="t-neg">$172.70</span> (03-20)  |  今日: <span class="t-pos">$175.64 +1.70%</span>
-支撑区: <span class="t-pos">$172–$174</span> (3次测试有效)  |  阻力: <span class="t-dim">$183–$184</span>
-30日均: $183.24  |  现价低于均线 <span class="t-neg">-4.2%</span>
-
-<span class="t-c">────────────────────────────────────────────────────</span>
-<span class="t-c"># 综合：基本面极强，技术面底部形成中，$172–$175 分批建仓合理</span>`),
-          },
-        ],
-      },
-    },
-
-    // ── 4. K 线分析
-    {
-      id: 'kline',
-      label: isEN.value ? 'K-line Analysis' : isHK.value ? 'K 線分析' : 'K 线分析',
-      messages: [
-        {
-          role: 'user',
-          content: isEN.value
-            ? 'How has NVDA trended over the past month? Where are the key support and resistance levels?'
-            : isHK.value
-              ? 'NVDA 近一個月走勢如何？關鍵支撐位和阻力位在哪？'
-              : 'NVDA 近一个月走势如何？关键支撑位和阻力位在哪？',
-        },
-        { role: 'tool', command: 'longbridge kline NVDA.US --period day --count 30', content: '' },
-        {
-          role: 'assistant',
-          rich: true,
-          content: `
-<div class="demo-kw">
-  <div class="demo-kh">
-    <div><div style="font-size:11px;color:var(--vp-c-text-3);margin-bottom:2px">NVIDIA · NVDA.US · ${cn ? '日线 · 2026-02-09 → 03-23' : 'Daily · 2026-02-09 → 03-23'}</div><span class="demo-kprice">$175.64</span><span class="demo-kchg" style="background:var(--vp-c-green-soft);color:var(--up-color);margin-left:8px">+$2.94 · +1.70%</span></div>
-    <div class="demo-kmeta"><div>${cn ? '区间 $172.70 — $195.56' : 'Range $172.70 — $195.56'}</div><div>${cn ? '30日均价 $183.24' : '30d MA $183.24'}</div></div>
-  </div>
-  ${klineSvg()}
-  <div class="demo-kstats">
-    <div class="demo-kstat"><div class="demo-ksl">${cn ? '30日高点' : '30d High'}</div><div class="demo-ksv" style="color:var(--vp-c-yellow-1)">$195.56</div><div style="font-size:10px;color:var(--vp-c-text-3)">02-25</div></div>
-    <div class="demo-kstat"><div class="demo-ksl">${cn ? '30日低点' : '30d Low'}</div><div class="demo-ksv demo-neg">$172.70</div><div style="font-size:10px;color:var(--vp-c-text-3)">${cn ? '03-20 · 距高 −11.7%' : '03-20 · −11.7% drawdown'}</div></div>
-    <div class="demo-kstat"><div class="demo-ksl">${cn ? '现价 vs 均线' : 'Price vs MA'}</div><div class="demo-ksv demo-neg">−4.2%</div><div style="font-size:10px;color:var(--vp-c-text-3)">${cn ? '均线 $183.24' : 'MA $183.24'}</div></div>
-  </div>
-</div>
-<div style="font-size:13px;line-height:1.8;color:var(--vp-c-text-2);margin-bottom:10px">
-${cn ? 'NVDA 过去 30 天经历了一轮明显的高位回调：<br>• 2月下旬涨至 <strong style="color:var(--vp-c-yellow-1)">$195.56</strong> 峰值，随后持续走软<br>• 3月20日触及阶段低点 <strong class="demo-neg">$172.70</strong>（较峰值 −11.7%）<br>• 本周开始反弹，连续两日上涨，今日收 $175.64（+1.70%）' : 'NVDA has been in a clear correction over the past 30 days:<br>• Peaked at <strong style="color:var(--vp-c-yellow-1)">$195.56</strong> in late February, then steadily weakened<br>• Hit a cycle low of <strong class="demo-neg">$172.70</strong> on Mar 20 (−11.7% from peak)<br>• Now bouncing: 2 consecutive up days, closed today at $175.64 (+1.70%)'}
-</div>
-<div class="demo-warn-box"><strong>${cn ? '关键位置' : 'Key Levels'}</strong>：${cn ? '支撑区 $172–$174（已三次有效测试，成本密集区），阻力区 $183–$184（前期平台，有较大抛压）。若站稳 $178，则有望向均线 $183 修复；跌破 $172，则关注 $165 一带。' : 'Support $172–$174 (3 successful tests — strong floor). Resistance $183–$184 (prior consolidation zone). Reclaim of $178+ opens path to MA $183; break below $172 targets $165 area.'}</div>`,
-        },
-      ],
-      clientMessages: {
-        chatgpt: [
-          {
-            role: 'user',
-            content: "Show me NVDA's price action over the past month",
-          },
-          { role: 'tool', command: 'longbridge kline NVDA.US --period day --count 30', content: '' },
-          {
-            role: 'assistant',
-            rich: true,
-            content: `
-<div class="demo-kw">
-  <div class="demo-kh">
-    <div><div style="font-size:11px;color:var(--vp-c-text-3);margin-bottom:2px">NVDA.US · Daily · Feb 9 → Mar 23, 2026</div><span class="demo-kprice">$175.64</span><span class="demo-kchg" style="background:var(--vp-c-green-soft);color:var(--up-color);margin-left:8px">+$2.94 · +1.70%</span></div>
-    <div class="demo-kmeta"><div>Range: $172.70 — $195.56</div><div>30d MA: $183.24</div></div>
-  </div>
-  ${klineSvg()}
-  <div class="demo-kstats">
-    <div class="demo-kstat"><div class="demo-ksl">30d High</div><div class="demo-ksv" style="color:var(--vp-c-yellow-1)">$195.56</div><div style="font-size:10px;color:var(--vp-c-text-3)">Feb 25</div></div>
-    <div class="demo-kstat"><div class="demo-ksl">30d Low</div><div class="demo-ksv demo-neg">$172.70</div><div style="font-size:10px;color:var(--vp-c-text-3)">Mar 20 · −11.7% drawdown</div></div>
-    <div class="demo-kstat"><div class="demo-ksl">vs 30d MA</div><div class="demo-ksv demo-neg">−4.2%</div><div style="font-size:10px;color:var(--vp-c-text-3)">below average</div></div>
-  </div>
-</div>
-<div style="font-size:13px;line-height:1.8;color:var(--vp-c-text-2);margin-bottom:10px">
-NVDA is in a <strong style="color:var(--vp-c-text-1)">correction and base-building phase</strong>:<br>
-• Peaked at <strong style="color:var(--vp-c-yellow-1)">$195.56</strong> on Feb 25 (GTC anticipation / AI capex hype)<br>
-• Declined to <strong class="demo-neg">$172.70</strong> on Mar 20 — a −11.7% drawdown<br>
-• Now bouncing: 2 consecutive up days, <strong class="demo-pos">+1.70% today</strong><br>
-• Still below 30-day MA ($183) — trend not yet reversed
-</div>
-<div class="demo-warn-box">📌 <strong>Key levels</strong>: Support at $172–$174 (3 successful tests — strong floor). Resistance at $183–$184 (prior consolidation zone). A reclaim of $184+ would signal trend recovery.</div>`,
-          },
-        ],
-        'claude-code': [
-          {
-            role: 'user',
-            content: isEN.value
-              ? 'Print NVDA 30-day daily data, mark key levels'
-              : isHK.value
-                ? '打印 NVDA 近 30 日日線數據，標注關鍵位'
-                : '打印 NVDA 近 30 日日线数据，标注关键位',
-          },
-          { role: 'tool', command: 'longbridge kline NVDA.US --period day --count 30', content: '' },
-          {
-            role: 'assistant',
-            rich: true,
-            content: termHTML(`<span class="t-p">$</span> longbridge kline NVDA.US --period day --count 30
-
-<span class="t-hd">NVDA.US · 日线 · 2026-02-09 ~ 2026-03-23</span>
-<span class="t-dim">──────────────────────────────────────────────</span>
-<span class="t-hd">日期      收盘     较前日    备注</span>
-<span class="t-dim">──────────────────────────────────────────────</span>
-02-09    190.04
-02-25    <span class="t-hi">195.56</span>   <span class="t-pos">▲ +1.4%</span>   <span class="t-c">← 30日峰值</span>
-02-26    184.89   <span class="t-neg">▼ -5.5%</span>   <span class="t-c">← 大跌日</span>
-02-27    177.19   <span class="t-neg">▼ -4.2%</span>
-03-06    177.82   <span class="t-neg">▼ -3.0%</span>   <span class="t-c">← 二次下探</span>
-03-20    <span class="t-neg">172.70</span>   <span class="t-neg">▼ -3.3%</span>   <span class="t-c">← 30日低点</span>
-03-23    175.64   <span class="t-pos">▲ +1.7%</span>   <span class="t-c">← 今日收盘</span>
-<span class="t-dim">──────────────────────────────────────────────</span>
-30日均:   $183.24  |  现价低于均线 <span class="t-neg">-4.2%</span>
-支撑区:   <span class="t-pos">$172–$174</span>  |  阻力区: $183–$184
-峰谷回撤: <span class="t-neg">-11.7%</span>  |  当前修复: <span class="t-pos">+1.7%</span>
-
-<span class="t-c"># 完整数据：longbridge kline NVDA.US --period day --count 30 --format json</span>`),
-          },
-        ],
-      },
-    },
-
-    // ── 5. 资金分布
-    {
-      id: 'capitalflow',
-      label: isEN.value ? 'Capital Flow' : isHK.value ? '資金分布' : '资金分布',
-      messages: [
-        {
-          role: 'user',
-          content: isEN.value
-            ? "Check NVDA's capital flow breakdown in Longbridge and explain what it means"
-            : isHK.value
-              ? '查一下 Longbridge 裡面 NVDA 各檔資金的流入流出，幫我解釋一下'
-              : '查一下 Longbridge 里面 NVDA 各档资金的流入流出，帮我解释一下',
-        },
-        { role: 'tool', command: 'longbridge capital-dist NVDA.US', content: '' },
-        {
-          role: 'assistant',
-          rich: true,
-          content: `
-<div style="font-size:12px;color:var(--vp-c-text-3);margin-bottom:10px;letter-spacing:.03em">NVDA ${cn ? '各档资金分布（单位：千美元）· 2026-03-23 收盘' : 'Capital Flow Distribution (unit: thousand USD) · Close 2026-03-23'}</div>
-<div class="demo-table-wrap"><table class="demo-table">
-  <thead><tr>
-    <th style="text-align:left">${cn ? '档位' : 'Tier'}</th>
-    <th>${cn ? '流入' : 'Inflow'}</th>
-    <th>${cn ? '流出' : 'Outflow'}</th>
-    <th>${cn ? '净流入' : 'Net'}</th>
-  </tr></thead>
-  <tbody>
-    <tr><td style="text-align:left">${cn ? '大单' : 'Large orders'}</td><td class="demo-pos">67,498</td><td class="demo-neg">69,583</td><td class="demo-neg">-2,085</td></tr>
-    <tr><td style="text-align:left">${cn ? '中单' : 'Mid orders'}</td><td class="demo-pos">150,167</td><td class="demo-neg">187,894</td><td class="demo-neg">-37,728</td></tr>
-    <tr><td style="text-align:left">${cn ? '小单' : 'Small orders'}</td><td class="demo-pos">270,966</td><td class="demo-neg">290,110</td><td class="demo-neg">-19,144</td></tr>
-    <tr style="border-top:1px solid var(--vp-c-divider);font-weight:600"><td style="text-align:left">${cn ? '合计' : 'Total'}</td><td class="demo-pos">488,631</td><td class="demo-neg">547,587</td><td class="demo-neg">-58,956</td></tr>
-  </tbody>
-</table></div>
-<div style="font-size:13px;line-height:1.85;color:var(--vp-c-text-2);margin:14px 0 10px">
-<strong style="color:var(--vp-c-text-1)">${cn ? '大单（机构资金）基本持平' : 'Large orders (institutions) nearly flat'}</strong>：${cn ? '净流出仅 2,085 千美元，相对总成交额近乎可以忽略。机构在这个价位既没有大举建仓，也没有恐慌性撤退，态度偏观望。' : 'Net outflow of only $2.1M against billions in volume is negligible. Institutions are neither building nor fleeing — a "wait and see" stance.'}</div>
-<div style="font-size:13px;line-height:1.85;color:var(--vp-c-text-2);margin-bottom:10px">
-<strong style="color:var(--vp-c-text-1)">${cn ? '中单（量化/跟风盘）是主要卖压' : 'Mid-tier orders are the main selling pressure'}</strong>：${cn ? '净流出 37,728 千美元，占三档总净流出的约 64%。这类资金通常是量化策略或跟随趋势的活跃资金，反映短线情绪偏谨慎，可能是在 GTC 大会后获利了结。' : 'Net outflow of $37.7M accounts for ~64% of total net selling. Quant strategies and momentum traders profit-taking after the GTC conference rally.'}</div>
-<div style="font-size:13px;line-height:1.85;color:var(--vp-c-text-2);margin-bottom:12px">
-<strong style="color:var(--vp-c-text-1)">${cn ? '小单（散户）跟随小幅减仓' : 'Small orders (retail) following the trend'}</strong>：${cn ? '净流出 19,144 千美元，幅度适中，符合散户跟随大市情绪的惯常表现。' : 'Net outflow of $19.1M — moderate, consistent with retail following market sentiment.'}</div>
-<div class="demo-hi-box"><strong>${cn ? '综合判断' : 'Bottom Line'}</strong>：${cn ? '整体短线承压，但大资金未恐慌离场。机构在 $172–$175 区间选择按兵不动，这本身就是一种支撑信号。结合今日反弹 +1.70%，可关注是否有大单转为净流入作为入场依据。' : "Short-term pressure exists, but big money has not panicked. Institutions holding ground in $172–$175 is a constructive signal. Combined with today's +1.70% bounce, watch for large-order net inflow as a potential entry catalyst."}</div>`,
-        },
-      ],
-      clientMessages: {
-        chatgpt: [
-          {
-            role: 'user',
-            content: "Check NVDA's capital flow breakdown in Longbridge and explain what it means",
-          },
-          { role: 'tool', command: 'longbridge capital-dist NVDA.US', content: '' },
-          {
-            role: 'assistant',
-            rich: true,
-            content: `
-<div style="font-size:12px;color:var(--vp-c-text-3);margin-bottom:10px">NVDA Capital Flow Distribution (unit: thousand USD) · Close 2026-03-23</div>
-<div class="demo-table-wrap"><table class="demo-table">
-  <thead><tr>
-    <th style="text-align:left">Tier</th>
-    <th>Inflow</th>
-    <th>Outflow</th>
-    <th>Net</th>
-  </tr></thead>
-  <tbody>
-    <tr><td style="text-align:left">Large orders</td><td class="demo-pos">67,498</td><td class="demo-neg">69,583</td><td class="demo-neg">-2,085</td></tr>
-    <tr><td style="text-align:left">Mid orders</td><td class="demo-pos">150,167</td><td class="demo-neg">187,894</td><td class="demo-neg">-37,728</td></tr>
-    <tr><td style="text-align:left">Small orders</td><td class="demo-pos">270,966</td><td class="demo-neg">290,110</td><td class="demo-neg">-19,144</td></tr>
-    <tr style="border-top:1px solid var(--vp-c-divider);font-weight:600"><td style="text-align:left">Total</td><td class="demo-pos">488,631</td><td class="demo-neg">547,587</td><td class="demo-neg">-58,956</td></tr>
-  </tbody>
-</table></div>
-<div style="font-size:13px;line-height:1.85;color:var(--vp-c-text-2);margin:14px 0 10px">
-<strong style="color:var(--vp-c-text-1)">Large orders (institutions) nearly flat</strong>: Net outflow of only $2.1M against billions in volume is negligible. Institutions neither building nor fleeing — a "wait and see" stance.</div>
-<div style="font-size:13px;line-height:1.85;color:var(--vp-c-text-2);margin-bottom:10px">
-<strong style="color:var(--vp-c-text-1)">Mid-tier orders are the main selling pressure</strong>: Net outflow of $37.7M accounts for ~64% of total net selling. This suggests quant and momentum traders taking profits after the GTC conference rally.</div>
-<div class="demo-hi-box"><strong>Bottom line</strong>: Short-term pressure exists, but big money has not panicked. Institutions holding ground in $172–$175 is a constructive signal. Combined with today's +1.70% bounce, watch for large-order net inflow as a potential entry catalyst.</div>`,
-          },
-        ],
-        'claude-code': [
-          {
-            role: 'user',
-            content: isEN.value
-              ? "Check NVDA's capital flow breakdown"
-              : isHK.value
-                ? '查一下 Longbridge 裡面 NVDA 各檔資金的流入流出'
-                : '查一下 Longbridge 里面 NVDA 各档资金的流入流出',
-          },
-          { role: 'tool', command: 'longbridge capital-dist NVDA.US', content: '' },
-          {
-            role: 'assistant',
-            rich: true,
-            content: termHTML(`<span class="t-p">$</span> longbridge capital-dist NVDA.US
-
-<span class="t-hd">NVDA 各档资金分布 (单位：千美元)</span>
-大单: 流入 <span class="t-pos">67,498</span> / 流出 <span class="t-neg">69,583</span> / 净流入 <span class="t-neg">-2,085</span>
-中单: 流入 <span class="t-pos">150,167</span> / 流出 <span class="t-neg">187,894</span> / 净流入 <span class="t-neg">-37,728</span>
-小单: 流入 <span class="t-pos">270,966</span> / 流出 <span class="t-neg">290,110</span> / 净流入 <span class="t-neg">-19,144</span>
-合计: 流入 <span class="t-pos">488,631</span> / 流出 <span class="t-neg">547,587</span> / 净流入 <span class="t-neg">-58,956</span>
-
-<span class="t-hd">解读：</span>
-<span class="t-dim">机构（大单）基本持平，净流出 -2,085 千美元，大资金未恐慌离场。</span>
-<span class="t-dim">中单是主要卖压，净流出 -37,728 千美元（占总净流出 64%），</span>
-<span class="t-dim">反映量化/跟风盘在 GTC 催化剂后短线获利了结。</span>
-<span class="t-dim">散户（小单）跟随小幅减仓，整体结构尚未恶化。</span>
-<span class="t-c"># 关注大单是否转为净流入，可作为阶段性入场参考。</span>`),
-          },
-        ],
-      },
-    },
-
-    // ── 6. 条件委托
-    {
-      id: 'order',
-      label: isEN.value ? 'Conditional Order' : isHK.value ? '條件委托' : '条件委托',
-      messages: [
-        {
-          role: 'user',
-          content: isEN.value
-            ? 'NVDA up >3% today: buy 1/5 of available cash at market. Down >3%: sell 1/10 of my position. Set both conditions.'
-            : isHK.value
-              ? 'NVDA 今日漲幅超過 3% 時，以市價買入可用現金的 1/5；若跌幅超過 3%，以市價賣出當前持倉的 1/10。幫我設置這兩個條件'
-              : 'NVDA 今日涨幅超过 3% 时，以市价买入可用现金的 1/5；若跌幅超过 3%，以市价卖出当前持仓的 1/10。帮我设置这两个条件',
-        },
-        {
-          role: 'tool',
-          command: 'longbridge quote NVDA.US && longbridge balance && longbridge positions',
-          content: '',
-        },
-        {
-          role: 'assistant',
-          rich: true,
-          content: `
-<div class="demo-cond-block">
-  <div class="demo-cond-header">
-    <span>NVDA.US ${cn ? '条件委托 · 双向触发' : 'Conditional Order · Dual Trigger'}</span>
-    <span>${cn ? '当前 $175.64 · 昨收 $172.70' : 'Current $175.64 · Prev $172.70'}</span>
-  </div>
-  <div class="demo-cond-body">
-    <div style="font-size:11px;color:var(--vp-c-text-3);margin-bottom:12px">${cn ? '已基于当前持仓和账户余额自动计算委托参数' : 'Parameters auto-calculated from current position and balance'}</div>
-    <div class="demo-cond-cards">
-      <div class="demo-cond-card demo-cond-card-buy">
-        <div class="demo-cond-card-hd demo-pos">${cn ? '条件一 · 上行触发买入' : 'Condition 1 · Buy on Rise'}</div>
-        <div class="demo-cond-detail-row"><span class="demo-cond-key">${cn ? '触发条件' : 'Trigger'}</span><span>${cn ? '涨幅 > 3%' : 'Up > 3%'}</span></div>
-        <div class="demo-cond-detail-row"><span class="demo-cond-key">${cn ? '触发价' : 'Trigger price'}</span><span class="demo-pos" style="font-weight:700">≥ $177.88</span></div>
-        <div class="demo-cond-detail-row"><span class="demo-cond-key">${cn ? '委托类型' : 'Order type'}</span><span>${cn ? '市价单' : 'Market order'}</span></div>
-        <div class="demo-cond-detail-row"><span class="demo-cond-key">${cn ? '可用现金' : 'Cash available'}</span><span>~$58,710 USD</span></div>
-        <div class="demo-cond-detail-row"><span class="demo-cond-key">${cn ? '委托金额' : 'Order size'}</span><span>1/5 = <strong>~$11,742</strong></span></div>
-        <div class="demo-cond-detail-row"><span class="demo-cond-key">${cn ? '预计数量' : 'Est. qty'}</span><span>${cn ? '约 <strong>66 股</strong>（@$177.88）' : 'approx. <strong>66 shares</strong> (@$177.88)'}</span></div>
-      </div>
-      <div class="demo-cond-card demo-cond-card-sell">
-        <div class="demo-cond-card-hd demo-neg">${cn ? '条件二 · 下行触发卖出' : 'Condition 2 · Sell on Drop'}</div>
-        <div class="demo-cond-detail-row"><span class="demo-cond-key">${cn ? '触发条件' : 'Trigger'}</span><span>${cn ? '跌幅 > 3%' : 'Down > 3%'}</span></div>
-        <div class="demo-cond-detail-row"><span class="demo-cond-key">${cn ? '触发价' : 'Trigger price'}</span><span class="demo-neg" style="font-weight:700">≤ $167.52</span></div>
-        <div class="demo-cond-detail-row"><span class="demo-cond-key">${cn ? '委托类型' : 'Order type'}</span><span>${cn ? '市价单' : 'Market order'}</span></div>
-        <div class="demo-cond-detail-row"><span class="demo-cond-key">${cn ? '当前持仓' : 'Current position'}</span><span>101 ${cn ? '股' : 'shares'}</span></div>
-        <div class="demo-cond-detail-row"><span class="demo-cond-key">${cn ? '卖出数量' : 'Sell qty'}</span><span>1/10 = <strong>10 ${cn ? '股' : 'shares'}</strong></span></div>
-        <div class="demo-cond-detail-row"><span class="demo-cond-key">${cn ? '预计金额' : 'Est. value'}</span><span>${cn ? '约 <strong>$1,675</strong>（@$167.52）' : 'approx. <strong>$1,675</strong> (@$167.52)'}</span></div>
-      </div>
-    </div>
-    <div class="demo-cond-status">
-      <div class="demo-cond-status-hd">${cn ? '当前价位状态' : 'Current Price Status'}</div>
-      <div class="demo-cond-status-row"><span>${cn ? '当前价格' : 'Current price'}</span><span class="demo-pos">$175.64 (+1.70%)</span></div>
-      <div class="demo-cond-status-row"><span>${cn ? '距上行触发价' : 'To buy trigger'}</span><span class="demo-muted">+$2.24 / +1.27%</span></div>
-      <div style="font-size:10px;color:var(--vp-c-text-3);margin-top:3px">${cn ? '买入触发进度：' : 'Buy trigger progress:'}</div>
-      <div class="demo-progress-bar"><div class="demo-progress-fill" style="width:57%;background:linear-gradient(90deg,var(--vp-c-green-soft),var(--up-color))"></div></div>
-      <div class="demo-cond-status-row" style="margin-top:8px"><span>${cn ? '距下行触发价' : 'To sell trigger'}</span><span class="demo-muted">-$8.12 / -4.62%</span></div>
-      <div style="font-size:10px;color:var(--vp-c-text-3);margin-top:3px">${cn ? '卖出触发进度：' : 'Sell trigger progress:'}</div>
-      <div class="demo-progress-bar"><div class="demo-progress-fill" style="width:0%;background:linear-gradient(90deg,var(--vp-c-red-soft),var(--down-color))"></div></div>
-    </div>
-    <div style="margin-top:14px;padding:10px 12px;background:var(--brand-5);border:1px solid var(--vp-c-brand-1);border-radius:8px;font-size:12.5px;color:var(--vp-c-text-1);font-weight:500;text-align:center">${cn ? '✓ 两个条件委托已确认提交' : '✓ Both conditional orders confirmed and submitted'}</div>
-  </div>
-</div>
-<p class="demo-note">${cn ? '条件委托将在盘中持续监控，满足任一触发条件后自动提交市价单，执行前会发送通知确认。有效期：今日收盘前。' : 'Conditional orders monitor continuously during trading hours. When triggered, a market order is auto-submitted with a confirmation notification. Valid until market close today.'}</p>`,
-        },
-      ],
-      clientMessages: {
-        'claude-code': [
-          {
-            role: 'user',
-            content: isEN.value
-              ? 'Set up two conditional orders for NVDA: buy if up >3% today, sell 1/10 if down >3%'
-              : isHK.value
-                ? '幫我設置 NVDA 雙向條件委托：漲超 3% 時買入，跌超 3% 時賣出 1/10'
-                : '帮我设置 NVDA 双向条件委托：涨超 3% 时买入，跌超 3% 时卖出 1/10',
-          },
-          {
-            role: 'tool',
-            command:
-              'longbridge quote NVDA.US --format json && longbridge balance --format json && longbridge positions --format json',
-            content: '',
-          },
-          {
-            role: 'assistant',
-            rich: true,
-            content: termHTML(`<span class="t-p">$</span> <span class="t-c"># 解析条件 → 计算触发价和委托量</span>
-
-基准价:     $172.70 (昨收)
-当前价:     $175.64 (+1.70%)
-
-<span class="t-hd">条件一 (Buy):</span>
-  触发价:   $172.70 × 1.03 = <span class="t-pos">$177.88</span>
-  可用现金: ~$58,710 USD
-  委托金额: 1/5 = <span class="t-pos">$11,742</span>
-  预计数量: 11742 / 177.88 ≈ <span class="t-pos">66 股</span>
-
-<span class="t-hd">条件二 (Sell):</span>
-  触发价:   $172.70 × 0.97 = <span class="t-neg">$167.52</span>
-  持仓数量: 101 股
-  卖出数量: 101 / 10 = <span class="t-neg">10 股</span>
-
-<span class="t-p">$</span> <span class="t-c"># 提交两个条件委托...</span>
-
-<span class="t-pos">✓</span> 条件委托 #1 已提交
-  ID: 1221093847261847553  Buy 66 NVDA.US MKT if last >= 177.88
-<span class="t-pos">✓</span> 条件委托 #2 已提交
-  ID: 1221093847261847554  Sell 10 NVDA.US MKT if last <= 167.52
-
-当前进度: $175.64 → 买入触发还差 +1.27% | 卖出触发还差 -4.62%
-
-<span class="t-c"># 查看条件委托：longbridge orders --pending</span>
-<span class="t-c"># 取消：longbridge cancel 1221093847261847553</span>`),
+仓位分布: 美股 <span class="t-hi">~78%</span> (AAPL 38%, NVDA 20%, MSFT 20%)
+         港股 <span class="t-hi">~22%</span> (9988, 700, 9618)
+<span class="t-c"># AAPL + 9988.HK 贡献 87% 亏损，建议审视集中度风险</span>`),
           },
         ],
       },
@@ -1203,7 +1213,7 @@ const clients: Client[] = [
 
 // ─── Demo animation state ─────────────────────────────────────────────────────
 
-const activeScenario = ref('portfolio')
+const activeScenario = ref('monitor')
 const activeClient = ref('openclaw')
 
 // Visible messages for the chat window (built up by animation)
@@ -2699,7 +2709,7 @@ const currentMessages = computed(() => {
 
 /* Verdict block (深度研究) */
 .skill-chat-bubble-assistant :deep(.demo-verdict) {
-  background: var(--vp-c-green-soft);
+  background: var(--vp-c-bg-mute);
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
   padding: 10px 12px;
@@ -2708,7 +2718,7 @@ const currentMessages = computed(() => {
 .skill-chat-bubble-assistant :deep(.demo-verdict-hd) {
   font-size: 0.78rem;
   font-weight: 700;
-  color: var(--up-color);
+  color: var(--vp-c-text-2);
   margin-bottom: 6px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -2716,19 +2726,24 @@ const currentMessages = computed(() => {
 .skill-chat-bubble-assistant :deep(.demo-verdict-rows) {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 .skill-chat-bubble-assistant :deep(.demo-verdict-row) {
   display: flex;
-  justify-content: space-between;
+  gap: 10px;
+  align-items: flex-start;
   font-size: 0.78rem;
 }
 .skill-chat-bubble-assistant :deep(.demo-verdict-label) {
-  color: var(--vp-c-text-2);
+  flex-shrink: 0;
+  width: 52px;
+  color: var(--vp-c-text-3);
+  padding-top: 1px;
 }
 .skill-chat-bubble-assistant :deep(.demo-verdict-val) {
-  font-weight: 600;
+  flex: 1;
   color: var(--vp-c-text-1);
+  line-height: 1.65;
 }
 
 /* Conditional order cards (条件委托) */
