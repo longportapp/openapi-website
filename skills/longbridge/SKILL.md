@@ -1,6 +1,6 @@
 ---
 name: longbridge
-description: "Longbridge Developers platform expert. Use when: (1) querying market data or executing trades via CLI (`longbridge` command), (2) writing Python/Rust programs using the `longbridge` SDK, (3) configuring the Longbridge MCP server for AI tools (Cursor, Claude Code, ChatGPT), (4) integrating Longbridge docs into LLM/RAG systems via llms.txt or Markdown API. Covers all markets: HK, US, CN (SH/SZ), SG, Crypto. Triggers on `longbridge` imports, stock symbols (TSLA.US, 700.HK), API key setup, order placement, WebSocket subscriptions, or any Longbridge platform capability question."
+description: 'Longbridge Developers platform expert. Use when: (1) querying market data or executing trades via CLI (`longbridge` command), (2) writing Python/Rust programs using the `longbridge` SDK, (3) configuring the Longbridge MCP server for AI tools (Cursor, Claude Code, ChatGPT), (4) integrating Longbridge docs into LLM/RAG systems via llms.txt or Markdown API. Covers all markets: HK, US, CN (SH/SZ), SG, Crypto. Triggers on `longbridge` imports, stock symbols (TSLA.US, 700.HK), API key setup, order placement, WebSocket subscriptions, or any Longbridge platform capability question.'
 ---
 
 # Longbridge Developers Platform
@@ -63,21 +63,21 @@ Add Longbridge API docs to IDE/RAG       LLMs.txt / Markdown API
 
 `<CODE>.<MARKET>` — applies to all tools.
 
-| Market | Suffix | Examples |
-|--------|--------|---------|
-| Hong Kong | `HK` | `700.HK`, `9988.HK`, `2318.HK` |
-| United States | `US` | `TSLA.US`, `AAPL.US`, `NVDA.US` |
-| China Shanghai | `SH` | `600519.SH`, `000001.SH` |
-| China Shenzhen | `SZ` | `000568.SZ`, `300750.SZ` |
-| Singapore | `SG` | `D05.SG`, `U11.SG` |
-| Crypto | `HAS` | `BTCUSD.HAS`, `ETHUSD.HAS` |
+| Market         | Suffix | Examples                        |
+| -------------- | ------ | ------------------------------- |
+| Hong Kong      | `HK`   | `700.HK`, `9988.HK`, `2318.HK`  |
+| United States  | `US`   | `TSLA.US`, `AAPL.US`, `NVDA.US` |
+| China Shanghai | `SH`   | `600519.SH`, `000001.SH`        |
+| China Shenzhen | `SZ`   | `000568.SZ`, `300750.SZ`        |
+| Singapore      | `SG`   | `D05.SG`, `U11.SG`              |
+| Crypto         | `HAS`  | `BTCUSD.HAS`, `ETHUSD.HAS`      |
 
 ## Authentication Overview
 
-| Method | Credential | Best for |
-|--------|-----------|---------|
-| OAuth 2.0 ⭐ | `client_id` only, no secret | CLI, SDK scripts, MCP |
-| API Key | `APP_KEY` + `APP_SECRET` + `ACCESS_TOKEN` | Legacy / server-side |
+| Method       | Credential                                | Best for              |
+| ------------ | ----------------------------------------- | --------------------- |
+| OAuth 2.0 ⭐ | `client_id` only, no secret               | CLI, SDK scripts, MCP |
+| API Key      | `APP_KEY` + `APP_SECRET` + `ACCESS_TOKEN` | Legacy / server-side  |
 
 **OAuth token cache:** `~/.longbridge/openapi/tokens/<client_id>`
 **Register OAuth client:** POST `https://openapi.longbridge.com/oauth2/register`
@@ -91,19 +91,20 @@ Add Longbridge API docs to IDE/RAG       LLMs.txt / Markdown API
 ## Reference Files
 
 ### CLI (Terminal)
-- **Overview** — install, auth, output formats, AI integration: [references/cli/overview.md](references/cli/overview.md)
-- **Quote commands** — quotes, depth, kline, options, warrants, market data: [references/cli/quote.md](references/cli/quote.md)
-- **Trade commands** — orders, buy/sell, positions, balance, executions: [references/cli/trade.md](references/cli/trade.md)
-- **Content commands** — news, filings, earnings, community topics: [references/cli/content.md](references/cli/content.md)
-- **Watchlist commands** — manage watchlist groups: [references/cli/watchlist.md](references/cli/watchlist.md)
+
+- **Overview** — install, auth, output formats, patterns: [references/cli/overview.md](references/cli/overview.md)
+
+**Always use `longbridge --help` to list available commands, and `longbridge <command> --help` for specific options and flags.** Do not rely on hardcoded documentation — the CLI's built-in help is always up-to-date.
 
 ### Python SDK
+
 - **Overview** — install, Config, auth, HttpClient: [references/python-sdk/overview.md](references/python-sdk/overview.md)
 - **QuoteContext** — all quote methods + subscriptions: [references/python-sdk/quote-context.md](references/python-sdk/quote-context.md)
 - **TradeContext** — orders, account, executions: [references/python-sdk/trade-context.md](references/python-sdk/trade-context.md)
 - **Types & Enums** — Period, OrderType, SubType, push types: [references/python-sdk/types.md](references/python-sdk/types.md)
 
 ### Rust SDK
+
 - **Overview** — Cargo.toml, Config, auth, error handling: [references/rust-sdk/overview.md](references/rust-sdk/overview.md)
 - **QuoteContext** — all methods, SubFlags, PushEvent: [references/rust-sdk/quote-context.md](references/rust-sdk/quote-context.md)
 - **TradeContext** — orders, SubmitOrderOptions builder, account: [references/rust-sdk/trade-context.md](references/rust-sdk/trade-context.md)
@@ -111,7 +112,8 @@ Add Longbridge API docs to IDE/RAG       LLMs.txt / Markdown API
 - **Types & Enums** — all Rust enums and structs: [references/rust-sdk/types.md](references/rust-sdk/types.md)
 
 ### AI Integration
-- **MCP** — hosted service + self-hosted server + all 28 tools: [references/mcp.md](references/mcp.md)
+
+- **MCP** — hosted service, self-hosted server, setup & auth: [references/mcp.md](references/mcp.md)
 - **LLMs & Markdown** — llms.txt, `open.longbridge.com` doc Markdown, `longbridge.com` live news/quote pages (`.md` suffix + Accept header), Cursor/IDE integration: [references/llm.md](references/llm.md)
 
 Load specific reference files on demand — do not load all at once.

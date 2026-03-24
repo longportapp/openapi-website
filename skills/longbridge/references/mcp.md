@@ -23,6 +23,7 @@ Add to MCP config in any compatible client:
 ```
 
 **Per-client setup:**
+
 - **Cursor**: Settings → MCP Servers → Add Remote MCP Server
 - **Claude Code**: `claude mcp add longbridge https://openapi.longbridge.com/mcp`
 - **ChatGPT**: Settings → Connectors
@@ -76,83 +77,11 @@ longbridge-mcp
 
 ---
 
-## Available MCP Tools (28 total)
+## Available MCP Tools
 
-### Utility
-| Tool | Description |
-|------|-------------|
-| `now` | Get current UTC time (RFC3339) |
+When the MCP server is connected, available tools are automatically exposed to the AI — no hardcoded list needed. The AI can directly inspect and call all tools.
 
-### Quote Tools
-| Tool | Key Parameters |
-|------|---------------|
-| `static_info` | `symbols: Vec<String>` |
-| `quote` | `symbols: Vec<String>` |
-| `option_quote` | `symbols: Vec<String>` |
-| `depth` | `symbol: String` |
-| `trades` | `symbol: String`, `count: usize` (max 1000) |
-| `candlesticks` | `symbol`, `period` (see below), `count` (max 1000), `forward_adjust: bool`, `trade_sessions: "intraday"\|"all"` |
-| `trading_days` | `market: "HK"\|"US"\|"CN"\|"SG"`, `start_date: "yyyy-mm-dd"`, `end_date: "yyyy-mm-dd"` |
-| `broker_queue` | `symbol: String` |
-| `broker_info` | — (HK only) |
-| `option_chain_list` | `symbol: String` — returns expiry dates |
-| `option_chain_info` | `symbol: String`, `expiry_date: "yyyy-mm-dd"` |
-| `capital_flow` | `symbol: String` |
-| `capital_distribution` | `symbol: String` |
-| `current_market_temperature` | `market: "HK"\|"US"\|"CN"\|"SG"` |
-| `history_market_temperature` | `market`, `start: "yyyy-mm-dd"`, `end: "yyyy-mm-dd"` |
-
-### Trade Tools
-| Tool | Key Parameters |
-|------|---------------|
-| `account_balance` | — |
-| `stock_positions` | — |
-| `fund_positions` | — |
-| `magin_ratio` | `symbol: String` |
-| `submit_order` | See below |
-| `cancel_order` | `order_id: String` |
-| `order_detail` | `order_id: String` |
-| `today_orders` | — |
-| `history_orders` | `symbol?`, `start_at: RFC3339`, `end_at: RFC3339` |
-
-### Content Tools
-| Tool | Key Parameters |
-|------|---------------|
-| `news` | `symbol: String` |
-| `topics` | `symbol: String` |
-| `filings` | `symbol: String` |
-
----
-
-## candlesticks Period Values
-
-```
-"1m"   "2m"   "3m"   "5m"   "10m"  "15m"  "20m"  "30m"  "45m"
-"60m"  "120m" "180m" "240m"
-"day"  "week" "month" "quarter" "year"
-```
-
----
-
-## submit_order Parameters
-
-```
-symbol:            String             (required) e.g. "700.HK"
-order_type:        String             (required) "LO"|"ELO"|"MO"|"AO"|"ALO"|"ODD"|"LIT"|"MIT"|"TSLPAMT"|"TSLPPCT"|"SLO"
-side:              String             (required) "Buy"|"Sell"
-submitted_quantity: Decimal           (required)
-time_in_force:     String             (required) "Day"|"GTC"|"GTD"
-submitted_price:   Decimal?           (required for LO/ELO/ALO/ODD/LIT)
-trigger_price:     Decimal?           (required for LIT/MIT)
-limit_offset:      Decimal?           (required for TSLPAMT/TSLPPCT)
-trailing_amount:   Decimal?           (for TSLPAMT)
-trailing_percent:  Decimal?           (for TSLPPCT, value 0-1)
-expire_date:       String?            ("yyyy-mm-dd", required for GTD)
-outside_rth:       String?            "RTH_ONLY"|"ANY_TIME"|"OVERNIGHT" (US only)
-limit_depth_level: i32?
-trigger_count:     i32?
-monitor_price:     Decimal?
-```
+If you need to know what tools are available, ask the AI to list the connected MCP tools, or check the official docs: https://open.longbridge.com
 
 ---
 
