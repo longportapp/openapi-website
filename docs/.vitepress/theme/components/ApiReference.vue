@@ -328,12 +328,14 @@ function selectEndpoint(ep: EndpointItem) {
   selectedPage.value = null
   selectedEndpoint.value = ep
   history.pushState(null, '', `${location.pathname}?op=${epId(ep)}`)
+  window.scrollTo(0, 0)
 }
 
 function selectPage(page: PageItem) {
   selectedEndpoint.value = null
   selectedPage.value = page
   history.pushState(null, '', `${location.pathname}?page=${page.id}`)
+  window.scrollTo(0, 0)
 }
 
 function findEndpointByQuery(): EndpointItem | null {
@@ -764,9 +766,8 @@ onUnmounted(() => {
 /* ── Layout ────────────────────────────────────────────────────────────────── */
 .api-reference-page {
   display: flex;
+  align-items: flex-start;
   margin-top: var(--vp-nav-height);
-  height: calc(100vh - var(--vp-nav-height));
-  overflow: hidden;
   font-size: 14px;
   background: var(--vp-c-bg);
   max-width: var(--vp-layout-max-width, 1440px);
@@ -777,8 +778,11 @@ onUnmounted(() => {
 
 /* ── Sidebar ───────────────────────────────────────────────────────────────── */
 .api-sidebar {
+  position: sticky;
+  top: var(--vp-nav-height);
   flex-shrink: 0;
   width: 300px;
+  height: calc(100vh - var(--vp-nav-height));
   border-right: 1px solid var(--vp-c-divider);
   display: flex;
   flex-direction: column;
@@ -939,7 +943,6 @@ onUnmounted(() => {
 .api-main {
   flex: 1;
   display: flex;
-  overflow-y: auto;
   align-items: flex-start;
   min-width: 0;
 }
