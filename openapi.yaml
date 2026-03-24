@@ -30,7 +30,7 @@ paths:
   /watchlist/groups:
     get:
       operationId: list_watchlist_groups
-      summary: Get Watchlist Group List
+      summary: Get Watchlists
       description: |
         Get all watchlist groups for the current user. Each group contains an ID, name, and a list
         of securities with the price and timestamp at which each security was added.
@@ -51,19 +51,19 @@ paths:
                 message: success
                 data:
                   groups:
-                  - id: '2630'
-                    name: My Watchlist
-                    securities:
-                    - symbol: AAPL.US
-                      market: US
-                      name: Apple Inc.
-                      watched_price: '211.59'
-                      watched_at: '1741690995'
-                    - symbol: 700.HK
-                      market: HK
-                      name: 腾讯控股
-                      watched_price: '460.00'
-                      watched_at: '1725511157'
+                    - id: '2630'
+                      name: My Watchlist
+                      securities:
+                        - symbol: AAPL.US
+                          market: US
+                          name: Apple Inc.
+                          watched_price: '211.59'
+                          watched_at: '1741690995'
+                        - symbol: 700.HK
+                          market: HK
+                          name: 腾讯控股
+                          watched_price: '460.00'
+                          watched_at: '1725511157'
         default:
           description: Unexpected error
           content:
@@ -72,7 +72,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     post:
       operationId: create_watchlist_group
-      summary: Create Watchlist Group
+      summary: Create Watchlist
       description: |
         Create a new watchlist group, optionally pre-populated with securities.
       tags:
@@ -119,7 +119,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     put:
       operationId: update_watchlist_group
-      summary: Update Watchlist Group
+      summary: Update Watchlist
       description: |
         Update the name or member list of a watchlist group. Use `mode` to control how
         `securities` are applied: `add` appends, `remove` removes, `replace` overwrites the entire list.
@@ -181,7 +181,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     delete:
       operationId: delete_watchlist_group
-      summary: Delete Watchlist Group
+      summary: Delete Watchlist
       description: |
         Delete the specified watchlist group. Set `purge=true` to also clear all securities
         from the group before deletion.
@@ -260,10 +260,10 @@ paths:
                 message: success
                 data:
                   list:
-                  - symbol: AAPL.US
-                    name_cn: 苹果
-                    name_hk: 蘋果
-                    name_en: Apple Inc.
+                    - symbol: AAPL.US
+                      name_cn: 苹果
+                      name_hk: 蘋果
+                      name_en: Apple Inc.
         default:
           description: Unexpected error
           content:
@@ -318,14 +318,14 @@ paths:
                 message: success
                 data:
                   list:
-                  - timestamp: '1735794000'
-                    temperature: 58
-                    valuation: 54
-                    sentiment: 61
-                  - timestamp: '1735880400'
-                    temperature: 59
-                    valuation: 56
-                    sentiment: 63
+                    - timestamp: '1735794000'
+                      temperature: 58
+                      valuation: 54
+                      sentiment: 61
+                    - timestamp: '1735880400'
+                      temperature: 59
+                      valuation: 56
+                      sentiment: 63
                   type: day
         default:
           description: Unexpected error
@@ -382,7 +382,7 @@ paths:
   /asset/cashflow:
     get:
       operationId: list_cash_flow
-      summary: Cash Flow Query
+      summary: Cash Flow
       description: |
         Query account cash flow history. Covers deposit, withdrawal, dividends, settlement,
         and other business types. Supports time range and pagination.
@@ -448,14 +448,14 @@ paths:
                 message: success
                 data:
                   list:
-                  - transaction_flow_name: 在途分红
-                    direction: 1
-                    business_type: 0
-                    balance: '13.65'
-                    currency: USD
-                    business_time: '1771826509'
-                    symbol: MSFT.US
-                    description: 'MSFT.US Cash Dividend: 0.91 USD per share(in transit)'
+                    - transaction_flow_name: 在途分红
+                      direction: 1
+                      business_type: 0
+                      balance: '13.65'
+                      currency: USD
+                      business_time: '1771826509'
+                      symbol: MSFT.US
+                      description: 'MSFT.US Cash Dividend: 0.91 USD per share(in transit)'
         default:
           description: Unexpected error
           content:
@@ -465,7 +465,7 @@ paths:
   /asset/account:
     get:
       operationId: account_cash
-      summary: Account Cash Information Query
+      summary: Account Cash
       description: |
         Query account cash balance, buying power, margin details, and per-currency cash breakdown.
       tags:
@@ -493,30 +493,30 @@ paths:
                 message: success
                 data:
                   list:
-                  - total_cash: '456943.18'
-                    max_finance_amount: '3200000.00'
-                    remaining_finance_amount: '3654289.90'
-                    risk_level: '0'
-                    margin_call: '0'
-                    currency: HKD
-                    net_assets: '962678.11'
-                    init_margin: '141090.88'
-                    maintenance_margin: '123141.91'
-                    buy_power: '821587.22'
-                    frozen_transaction_fees: []
-                    cash_infos:
-                    - currency: USD
-                      withdraw_cash: '-38665.68'
-                      available_cash: '-38665.68'
-                      frozen_cash: '332.19'
-                      settling_cash: '-10108.02'
-                      redemption_cash: '0.00'
-                    - currency: HKD
-                      withdraw_cash: '755592.21'
-                      available_cash: '755592.21'
-                      frozen_cash: '64.69'
-                      settling_cash: '-27760.00'
-                      redemption_cash: '0.00'
+                    - total_cash: '456943.18'
+                      max_finance_amount: '3200000.00'
+                      remaining_finance_amount: '3654289.90'
+                      risk_level: '0'
+                      margin_call: '0'
+                      currency: HKD
+                      net_assets: '962678.11'
+                      init_margin: '141090.88'
+                      maintenance_margin: '123141.91'
+                      buy_power: '821587.22'
+                      frozen_transaction_fees: []
+                      cash_infos:
+                        - currency: USD
+                          withdraw_cash: '-38665.68'
+                          available_cash: '-38665.68'
+                          frozen_cash: '332.19'
+                          settling_cash: '-10108.02'
+                          redemption_cash: '0.00'
+                        - currency: HKD
+                          withdraw_cash: '755592.21'
+                          available_cash: '755592.21'
+                          frozen_cash: '64.69'
+                          settling_cash: '-27760.00'
+                          redemption_cash: '0.00'
         default:
           description: Unexpected error
           content:
@@ -526,7 +526,7 @@ paths:
   /asset/stock:
     get:
       operationId: list_stock_positions
-      summary: Stock Position Information Query
+      summary: Stock Position
       description: |
         Query all stock (equity) positions, grouped by sub-account channel.
       tags:
@@ -556,24 +556,24 @@ paths:
                 message: success
                 data:
                   list:
-                  - account_channel: lb_papertrading
-                    stock_info:
-                    - symbol: NVDA.US
-                      symbol_name: 英伟达
-                      currency: USD
-                      quantity: '101'
-                      available_quantity: '101'
-                      cost_price: '50.229'
-                      market: US
-                      init_quantity: '101'
-                    - symbol: AAPL.US
-                      symbol_name: 苹果
-                      currency: USD
-                      quantity: '133'
-                      available_quantity: '133'
-                      cost_price: '211.589'
-                      market: US
-                      init_quantity: '133'
+                    - account_channel: lb_papertrading
+                      stock_info:
+                        - symbol: NVDA.US
+                          symbol_name: 英伟达
+                          currency: USD
+                          quantity: '101'
+                          available_quantity: '101'
+                          cost_price: '50.229'
+                          market: US
+                          init_quantity: '101'
+                        - symbol: AAPL.US
+                          symbol_name: 苹果
+                          currency: USD
+                          quantity: '133'
+                          available_quantity: '133'
+                          cost_price: '211.589'
+                          market: US
+                          init_quantity: '133'
         default:
           description: Unexpected error
           content:
@@ -583,7 +583,7 @@ paths:
   /asset/fund:
     get:
       operationId: list_fund_positions
-      summary: Fund Position Information Query
+      summary: Fund Position
       description: |
         Query all public fund positions, grouped by sub-account channel.
       tags:
@@ -613,14 +613,14 @@ paths:
                 message: success
                 data:
                   list:
-                  - fund_info:
-                    - symbol: HK0000676533
-                      symbol_name: 某只基金
-                      holding_units: '1000.00'
-                      current_net_asset_value: '1.2345'
-                      cost_net_asset_value: '1.1000'
-                      net_asset_value_day: '1774310400'
-                      currency: HKD
+                    - fund_info:
+                        - symbol: HK0000676533
+                          symbol_name: 某只基金
+                          holding_units: '1000.00'
+                          current_net_asset_value: '1.2345'
+                          cost_net_asset_value: '1.1000'
+                          net_asset_value_day: '1774310400'
+                          currency: HKD
         default:
           description: Unexpected error
           content:
@@ -630,7 +630,7 @@ paths:
   /quote/filings:
     get:
       operationId: list_filings
-      summary: Get Symbol Regulatory Filings
+      summary: Get Filings by Symbol
       description: |
         Get the list of regulatory filings or disclosure documents for the specified symbol.
         Each filing includes a title, file name, download URLs, and publication timestamp.
@@ -658,13 +658,13 @@ paths:
                 message: success
                 data:
                   items:
-                  - id: '627391979864985729'
-                    title: 苹果 | 4 - Apple Inc. (0000320193) (Issuer)
-                    description: ''
-                    file_name: 4 - Apple Inc. (0000320193) (Issuer)
-                    file_urls:
-                    - https://www.sec.gov/Archives/edgar/data/320193/.../wk-form4_1773786674.xml
-                    publish_at: '1773786677'
+                    - id: '627391979864985729'
+                      title: 苹果 | 4 - Apple Inc. (0000320193) (Issuer)
+                      description: ''
+                      file_name: 4 - Apple Inc. (0000320193) (Issuer)
+                      file_urls:
+                        - https://www.sec.gov/Archives/edgar/data/320193/.../wk-form4_1773786674.xml
+                      publish_at: '1773786677'
         default:
           description: Unexpected error
           content:
@@ -674,7 +674,7 @@ paths:
   /content/{symbol}/news:
     get:
       operationId: list_news
-      summary: Get Symbol News
+      summary: Get News by Symbol
       description: |
         Get the latest news articles for the specified symbol.
       tags:
@@ -701,14 +701,14 @@ paths:
                 message: success
                 data:
                   items:
-                  - id: '280228333'
-                    title: 苹果拟在地图应用引入广告
-                    description: 苹果计划在其地图应用中引入广告，以推动服务业务增长...
-                    url: https://longbridge.com/news/280228333
-                    published_at: '1774310775'
-                    comments_count: 0
-                    likes_count: 0
-                    shares_count: 0
+                    - id: '280228333'
+                      title: 苹果拟在地图应用引入广告
+                      description: 苹果计划在其地图应用中引入广告，以推动服务业务增长...
+                      url: https://longbridge.com/news/280228333
+                      published_at: '1774310775'
+                      comments_count: 0
+                      likes_count: 0
+                      shares_count: 0
         default:
           description: Unexpected error
           content:
@@ -718,7 +718,7 @@ paths:
   /content/{symbol}/topics:
     get:
       operationId: list_topics
-      summary: Get Symbol Community Topics
+      summary: Get Community Topics by Symbol
       description: |
         Get the list of community discussion topics for the specified symbol.
       tags:
@@ -745,14 +745,14 @@ paths:
                 message: success
                 data:
                   items:
-                  - id: '39469738'
-                    title: ''
-                    description: 期待苹果的 AI。我相信在用户端侧，苹果能把 AI 做得很好。
-                    url: https://longbridge.com/topics/39469738
-                    published_at: '1774325592'
-                    comments_count: 0
-                    likes_count: 0
-                    shares_count: 0
+                    - id: '39469738'
+                      title: ''
+                      description: 期待苹果的 AI。我相信在用户端侧，苹果能把 AI 做得很好。
+                      url: https://longbridge.com/topics/39469738
+                      published_at: '1774325592'
+                      comments_count: 0
+                      likes_count: 0
+                      shares_count: 0
         default:
           description: Unexpected error
           content:
@@ -808,23 +808,23 @@ paths:
                 message: success
                 data:
                   items:
-                  - id: '39304657'
-                    title: My Analysis on AAPL
-                    description: A brief summary of my article...
-                    body: Full markdown content here...
-                    topic_type: article
-                    likes_count: 12
-                    comments_count: 3
-                    views_count: 200
-                    shares_count: 1
-                    tickers:
-                    - AAPL.US
-                    hashtags:
-                    - earnings
-                    license: 1
-                    detail_url: https://longbridge.com/topics/39304657
-                    created_at: '1742000000'
-                    updated_at: '1742000000'
+                    - id: '39304657'
+                      title: My Analysis on AAPL
+                      description: A brief summary of my article...
+                      body: Full markdown content here...
+                      topic_type: article
+                      likes_count: 12
+                      comments_count: 3
+                      views_count: 200
+                      shares_count: 1
+                      tickers:
+                        - AAPL.US
+                      hashtags:
+                        - earnings
+                      license: 1
+                      detail_url: https://longbridge.com/topics/39304657
+                      created_at: '1742000000'
+                      updated_at: '1742000000'
         default:
           description: Unexpected error
           content:
@@ -894,9 +894,9 @@ paths:
                   title: My View on AAPL
                   topic_type: article
                   tickers:
-                  - AAPL.US
+                    - AAPL.US
                   hashtags:
-                  - earnings
+                    - earnings
                   created_at: '1742000000'
         default:
           description: Unexpected error
@@ -907,7 +907,7 @@ paths:
   /trade/execution/history:
     get:
       operationId: list_history_executions
-      summary: Historical Execution Query
+      summary: Historical Execution
       description: |
         Query historical execution (fill) records. Supports filtering by time range, order ID,
         and symbol, with pagination.
@@ -967,12 +967,12 @@ paths:
                 message: success
                 data:
                   trades:
-                  - trade_id: '218942971868942337'
-                    order_id: '218942971868942336'
-                    symbol: NVDA.US
-                    price: '177.50'
-                    quantity: '10'
-                    trade_done_at: '1774330500'
+                    - trade_id: '218942971868942337'
+                      order_id: '218942971868942336'
+                      symbol: NVDA.US
+                      price: '177.50'
+                      quantity: '10'
+                      trade_done_at: '1774330500'
                   has_more: false
         default:
           description: Unexpected error
@@ -983,7 +983,7 @@ paths:
   /trade/order:
     get:
       operationId: order_detail
-      summary: Order Detail Query
+      summary: Order Detail
       description: |
         Query full details of a single order by order ID, including fee breakdown and status history.
       tags:
@@ -1050,9 +1050,9 @@ paths:
                   history: []
                   charge_detail:
                     items:
-                    - code: BROKER_FEES
-                      name: 收费明细
-                      fees: []
+                      - code: BROKER_FEES
+                        name: 收费明细
+                        fees: []
                     total_amount: '0.00'
                     currency: USD
         default:
@@ -1300,7 +1300,7 @@ paths:
   /trade/order/history:
     get:
       operationId: list_history_orders
-      summary: Historical Order Query
+      summary: Historical Order
       description: |
         Query historical order records with pagination. Supports filtering by time range, symbol,
         market, side, and status.
@@ -1417,35 +1417,35 @@ paths:
                 message: success
                 data:
                   orders:
-                  - order_id: '1220968184320942080'
-                    status: FilledStatus
-                    stock_name: 苹果
-                    quantity: '10'
-                    executed_quantity: '10'
-                    price: '200.00'
-                    executed_price: '199.85'
-                    submitted_at: '1770000000'
-                    side: Buy
-                    symbol: AAPL.US
-                    order_type: LO
-                    last_done: '199.85'
-                    trigger_price: ''
-                    msg: ''
-                    tag: Normal
-                    time_in_force: Day
-                    expire_date: '2026-02-01'
-                    updated_at: '1770000600'
-                    trigger_at: '0'
-                    trailing_amount: ''
-                    trailing_percent: ''
-                    limit_offset: ''
-                    trigger_status: DEACTIVE
-                    outside_rth: RTH_ONLY
-                    currency: USD
-                    remark: ''
-                    limit_depth_level: 0
-                    trigger_count: 0
-                    monitor_price: ''
+                    - order_id: '1220968184320942080'
+                      status: FilledStatus
+                      stock_name: 苹果
+                      quantity: '10'
+                      executed_quantity: '10'
+                      price: '200.00'
+                      executed_price: '199.85'
+                      submitted_at: '1770000000'
+                      side: Buy
+                      symbol: AAPL.US
+                      order_type: LO
+                      last_done: '199.85'
+                      trigger_price: ''
+                      msg: ''
+                      tag: Normal
+                      time_in_force: Day
+                      expire_date: '2026-02-01'
+                      updated_at: '1770000600'
+                      trigger_at: '0'
+                      trailing_amount: ''
+                      trailing_percent: ''
+                      limit_offset: ''
+                      trigger_status: DEACTIVE
+                      outside_rth: RTH_ONLY
+                      currency: USD
+                      remark: ''
+                      limit_depth_level: 0
+                      trigger_count: 0
+                      monitor_price: ''
                   has_more: false
         default:
           description: Unexpected error
@@ -1456,7 +1456,7 @@ paths:
   /trade/execution/today:
     get:
       operationId: list_today_executions
-      summary: Today's Execution Query
+      summary: Today's Execution
       description: |
         Query today's execution (fill) records. Supports filtering by order ID and symbol.
       tags:
@@ -1494,12 +1494,12 @@ paths:
                 message: success
                 data:
                   trades:
-                  - trade_id: '218942971868942337'
-                    order_id: '218942971868942336'
-                    symbol: NVDA.US
-                    price: '177.50'
-                    quantity: '10'
-                    trade_done_at: '1774330500'
+                    - trade_id: '218942971868942337'
+                      order_id: '218942971868942336'
+                      symbol: NVDA.US
+                      price: '177.50'
+                      quantity: '10'
+                      trade_done_at: '1774330500'
         default:
           description: Unexpected error
           content:
@@ -1509,7 +1509,7 @@ paths:
   /trade/order/today:
     get:
       operationId: list_today_orders
-      summary: Today's Order Query
+      summary: Today's Order
       description: |
         Query today's orders with support for multi-condition filtering.
       tags:
@@ -1618,35 +1618,35 @@ paths:
                 message: success
                 data:
                   orders:
-                  - order_id: '1220968184320942080'
-                    status: CanceledStatus
-                    stock_name: 英伟达
-                    quantity: '10'
-                    executed_quantity: '0'
-                    price: ''
-                    executed_price: '0'
-                    submitted_at: '1774330299'
-                    side: Buy
-                    symbol: NVDA.US
-                    order_type: MIT
-                    last_done: ''
-                    trigger_price: '177.88'
-                    msg: ''
-                    tag: Normal
-                    time_in_force: Day
-                    expire_date: '2026-03-24'
-                    updated_at: '1774330401'
-                    trigger_at: '0'
-                    trailing_amount: ''
-                    trailing_percent: ''
-                    limit_offset: ''
-                    trigger_status: DEACTIVE
-                    outside_rth: RTH_ONLY
-                    currency: USD
-                    remark: ''
-                    limit_depth_level: 0
-                    trigger_count: 0
-                    monitor_price: ''
+                    - order_id: '1220968184320942080'
+                      status: CanceledStatus
+                      stock_name: 英伟达
+                      quantity: '10'
+                      executed_quantity: '0'
+                      price: ''
+                      executed_price: '0'
+                      submitted_at: '1774330299'
+                      side: Buy
+                      symbol: NVDA.US
+                      order_type: MIT
+                      last_done: ''
+                      trigger_price: '177.88'
+                      msg: ''
+                      tag: Normal
+                      time_in_force: Day
+                      expire_date: '2026-03-24'
+                      updated_at: '1774330401'
+                      trigger_at: '0'
+                      trailing_amount: ''
+                      trailing_percent: ''
+                      limit_offset: ''
+                      trigger_status: DEACTIVE
+                      outside_rth: RTH_ONLY
+                      currency: USD
+                      remark: ''
+                      limit_depth_level: 0
+                      trigger_count: 0
+                      monitor_price: ''
                   has_more: false
         default:
           description: Unexpected error

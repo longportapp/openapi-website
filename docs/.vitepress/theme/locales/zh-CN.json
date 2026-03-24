@@ -19,7 +19,7 @@
   "api.intro.httpTitle": "HTTP API",
   "api.intro.httpDesc": "本参考文档涵盖交易、行情和持仓管理等 HTTP 接口，所有接口均需要 OAuth 2.0 Bearer Token 认证。",
   "api.intro.wsTitle": "WebSocket / TCP API",
-  "api.intro.wsDesc": "实时行情推送、订单状态更新等实时数据通过 WebSocket 或 TCP 连接下发，详情请参阅侧边栏中的 WebSocket API 文档。",
+  "api.intro.wsDesc": "实时行情推送、订单状态更新等实时数据通过 WebSocket 或 TCP 连接下发。",
   "api.intro.hint": "在侧边栏选择一个接口开始探索",
   "tryIt.send": "发送",
   "vitepress_theme_components_tryit_index_2": "尝试一下",
