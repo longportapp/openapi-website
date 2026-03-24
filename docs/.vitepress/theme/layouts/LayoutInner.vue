@@ -16,6 +16,7 @@ import { useTryItMode } from '../composables'
 import TryItContent from '../components/TryIt/Content.vue'
 import Content from './Content.vue'
 import 'vitepress/theme'
+import ScalarApiReference from '../components/ScalarApiReference.vue'
 
 const { isOpen: isSidebarOpen, open: openSidebar, close: closeSidebar } = useSidebarControl()
 
@@ -27,6 +28,7 @@ const slots = useSlots()
 const heroImageSlotExists = computed(() => !!slots['home-hero-image'])
 
 const { showTryIt } = useTryItMode()
+const isApiReference = computed(() => frontmatter.value.layout === 'api-reference')
 
 provide('hero-image-slot-exists', heroImageSlotExists)
 </script>
@@ -45,14 +47,14 @@ provide('hero-image-slot-exists', heroImageSlotExists)
       <template #nav-screen-content-before><slot name="nav-screen-content-before" /></template>
       <template #nav-screen-content-after><slot name="nav-screen-content-after" /></template>
     </VPNav>
-    <VPLocalNav :open="isSidebarOpen" @open-menu="openSidebar" />
+    <VPLocalNav v-if="!isApiReference" :open="isSidebarOpen" @open-menu="openSidebar" />
 
-    <VPSidebar :open="isSidebarOpen">
+    <VPSidebar v-if="!isApiReference" :open="isSidebarOpen">
       <template #sidebar-nav-before><slot name="sidebar-nav-before" /></template>
       <template #sidebar-nav-after><slot name="sidebar-nav-after" /></template>
     </VPSidebar>
 
-    <VPContent v-if="!showTryIt">
+    <VPContent v-if="!showTryIt && !isApiReference">
       <template #page-top><slot name="page-top" /></template>
       <template #page-bottom><slot name="page-bottom" /></template>
 
@@ -83,10 +85,13 @@ provide('hero-image-slot-exists', heroImageSlotExists)
       <template #aside-ads-before><slot name="aside-ads-before" /></template>
       <template #aside-ads-after><slot name="aside-ads-after" /></template>
     </VPContent>
-    <ClientOnly v-else>
+    <ClientOnly v-else-if="showTryIt">
       <Content>
         <TryItContent />
       </Content>
+    </ClientOnly>
+    <ClientOnly v-else-if="isApiReference">
+      <ScalarApiReference />
     </ClientOnly>
 
     <VPFooter />
