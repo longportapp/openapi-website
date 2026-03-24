@@ -8,7 +8,7 @@ info:
 servers:
   - url: https://openapi.longbridge.com
     description: Global
-  - url: https://openapi.longbridgeapp.com
+  - url: https://openapi.longbridge.cn
     description: China mainland
 tags:
   - name: Watchlist Management
