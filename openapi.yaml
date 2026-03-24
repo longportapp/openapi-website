@@ -34,106 +34,36 @@ paths:
       description: |
         Get all watchlist groups for the current user. Each group contains an ID, name, and a list
         of securities with the price and timestamp at which each security was added.
-
-        ## CLI
-
-        ```bash
-        longbridge watchlist
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/watchlist/groups"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "groups": [
-              {
-                "id": "2630",
-                "name": "My Watchlist",
-                "securities": [
-                  {
-                    "symbol": "AAPL.US",
-                    "market": "US",
-                    "name": "Apple Inc.",
-                    "watched_price": "211.59",
-                    "watched_at": "1741690995"
-                  },
-                  {
-                    "symbol": "700.HK",
-                    "market": "HK",
-                    "name": "腾讯控股",
-                    "watched_price": "460.00",
-                    "watched_at": "1725511157"
-                  }
-                ]
-              }
-            ]
-          }
-        }
-        ```
       tags:
         - Watchlist Management
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge watchlist
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    description: Response code. `0` indicates success.
-                  message:
-                    type: string
-                    description: Response message.
-                  data:
-                    type: object
-                    properties:
-                      groups:
-                        type: array
-                        nullable: true
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: string
-                              description: Group ID.
-                            name:
-                              type: string
-                              description: Group name.
-                            securities:
-                              type: array
-                              nullable: true
-                              items:
-                                type: object
-                                properties:
-                                  symbol:
-                                    type: string
-                                    description: Security symbol (e.g. `AAPL.US`).
-                                  market:
-                                    type: string
-                                    description: Market code. One of `US`, `HK`, `SH`, `SZ`, `SG`.
-                                  name:
-                                    type: string
-                                    description: Security display name.
-                                  watched_price:
-                                    type: string
-                                    description: Price at the time the security was added to the watchlist.
-                                  watched_at:
-                                    type: string
-                                    description: Unix timestamp (seconds) when the security was added.
+              example:
+                code: 0
+                message: success
+                data:
+                  groups:
+                  - id: '2630'
+                    name: My Watchlist
+                    securities:
+                    - symbol: AAPL.US
+                      market: US
+                      name: Apple Inc.
+                      watched_price: '211.59'
+                      watched_at: '1741690995'
+                    - symbol: 700.HK
+                      market: HK
+                      name: 腾讯控股
+                      watched_price: '460.00'
+                      watched_at: '1725511157'
         default:
           description: Unexpected error
           content:
@@ -145,36 +75,6 @@ paths:
       summary: Create Watchlist Group
       description: |
         Create a new watchlist group, optionally pre-populated with securities.
-
-        ## CLI
-
-        ```bash
-        longbridge watchlist create "NAME"
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -X POST \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          -H "Content-Type: application/json" \
-          -d '{"name":"My Tech Stocks","securities":["AAPL.US","NVDA.US"]}' \
-          "https://openapi.longbridge.com/watchlist/groups"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "id": "4303353"
-          }
-        }
-        ```
       tags:
         - Watchlist Management
       requestBody:
@@ -196,24 +96,21 @@ paths:
                   description: Optional list of security symbols to pre-populate the group on creation (e.g. `["AAPL.US", "700.HK"]`).
                   items:
                     type: string
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge watchlist create "NAME"
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        description: ID of the newly created group.
+              example:
+                code: 0
+                message: success
+                data:
+                  id: '4303353'
         default:
           description: Unexpected error
           content:
@@ -226,34 +123,6 @@ paths:
       description: |
         Update the name or member list of a watchlist group. Use `mode` to control how
         `securities` are applied: `add` appends, `remove` removes, `replace` overwrites the entire list.
-
-        ## CLI
-
-        ```bash
-        longbridge watchlist update <ID>
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -X PUT \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          -H "Content-Type: application/json" \
-          -d '{"id":"4303353","name":"Renamed Group","mode":"add","securities":["TSLA.US"]}' \
-          "https://openapi.longbridge.com/watchlist/groups"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {}
-        }
-        ```
       tags:
         - Watchlist Management
       requestBody:
@@ -290,20 +159,20 @@ paths:
                   description: List of security symbols affected by the operation (e.g. `["AAPL.US", "700.HK"]`).
                   items:
                     type: string
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge watchlist update <ID>
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
+              example:
+                code: 0
+                message: success
+                data: {}
         default:
           description: Unexpected error
           content:
@@ -316,32 +185,6 @@ paths:
       description: |
         Delete the specified watchlist group. Set `purge=true` to also clear all securities
         from the group before deletion.
-
-        ## CLI
-
-        ```bash
-        longbridge watchlist delete <ID>
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -X DELETE \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/watchlist/groups?id=4303353&purge=true"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {}
-        }
-        ```
       tags:
         - Watchlist Management
       parameters:
@@ -358,20 +201,20 @@ paths:
           schema:
             type: boolean
             nullable: true
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge watchlist delete <ID>
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
+              example:
+                code: 0
+                message: success
+                data: {}
         default:
           description: Unexpected error
           content:
@@ -386,40 +229,6 @@ paths:
         Query the list of tradable securities filtered by market and category. Primarily used to
         retrieve securities eligible for extended-hours (pre-market / after-hours) trading sessions.
         Both `market` and `category` are required parameters.
-
-        ## CLI
-
-        ```bash
-        longbridge security-list
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/quote/get_security_list?market=US&category=overnight"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "list": [
-              {
-                "symbol": "AAPL.US",
-                "name_cn": "苹果",
-                "name_hk": "蘋果",
-                "name_en": "Apple Inc."
-              }
-            ]
-          }
-        }
-        ```
       tags:
         - Watchlist Management
       parameters:
@@ -436,43 +245,25 @@ paths:
           schema:
             type: string
             nullable: true
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge security-list
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      list:
-                        type: array
-                        nullable: true
-                        items:
-                          type: object
-                          properties:
-                            symbol:
-                              type: string
-                              nullable: true
-                              description: Security symbol (e.g. `AAPL.US`).
-                            name_cn:
-                              type: string
-                              nullable: true
-                              description: Simplified Chinese name.
-                            name_hk:
-                              type: string
-                              nullable: true
-                              description: Traditional Chinese name.
-                            name_en:
-                              type: string
-                              nullable: true
-                              description: English name.
+              example:
+                code: 0
+                message: success
+                data:
+                  list:
+                  - symbol: AAPL.US
+                    name_cn: 苹果
+                    name_hk: 蘋果
+                    name_en: Apple Inc.
         default:
           description: Unexpected error
           content:
@@ -486,47 +277,6 @@ paths:
       description: |
         Get the historical market temperature time series for the specified market within a date range.
         Each data point contains the daily temperature, valuation, and sentiment scores (all scored 0–100).
-
-        ## CLI
-
-        ```bash
-        longbridge market-temp [MARKET] --history --start YYYY-MM-DD --end YYYY-MM-DD
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/quote/history_market_temperature?market=US&start_date=20250101&end_date=20250110"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "list": [
-              {
-                "timestamp": "1735794000",
-                "temperature": 58,
-                "valuation": 54,
-                "sentiment": 61
-              },
-              {
-                "timestamp": "1735880400",
-                "temperature": 59,
-                "valuation": 56,
-                "sentiment": 63
-              }
-            ],
-            "type": "day"
-          }
-        }
-        ```
       tags:
         - Market Temperature
       parameters:
@@ -553,42 +303,30 @@ paths:
           description: End date in `YYYYMMDD` format (e.g. `20250110`).
           schema:
             type: string
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge market-temp [MARKET] --history --start YYYY-MM-DD --end YYYY-MM-DD
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      list:
-                        type: array
-                        nullable: true
-                        items:
-                          type: object
-                          properties:
-                            timestamp:
-                              type: string
-                              description: Unix timestamp (seconds) of the data point.
-                            temperature:
-                              type: integer
-                              description: Overall market temperature score (0–100).
-                            valuation:
-                              type: integer
-                              description: Valuation sub-score (0–100).
-                            sentiment:
-                              type: integer
-                              description: Sentiment sub-score (0–100).
-                      type:
-                        type: string
-                        description: Granularity of the data series. Currently always `"day"`.
+              example:
+                code: 0
+                message: success
+                data:
+                  list:
+                  - timestamp: '1735794000'
+                    temperature: 58
+                    valuation: 54
+                    sentiment: 61
+                  - timestamp: '1735880400'
+                    temperature: 59
+                    valuation: 56
+                    sentiment: 63
+                  type: day
         default:
           description: Unexpected error
           content:
@@ -602,37 +340,6 @@ paths:
       description: |
         Get the current sentiment temperature snapshot for the specified market.
         Scores range from 0–100; a higher value indicates a more bullish market.
-
-        ## CLI
-
-        ```bash
-        longbridge market-temp [MARKET]
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/quote/market_temperature?market=US"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "temperature": 70,
-            "description": "温度温暖并快速上升中",
-            "valuation": 59,
-            "sentiment": 82,
-            "updated_at": "1774317902"
-          }
-        }
-        ```
       tags:
         - Market Temperature
       parameters:
@@ -647,37 +354,25 @@ paths:
             - `SG` — Singapore
           schema:
             type: string
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge market-temp [MARKET]
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      temperature:
-                        type: integer
-                        description: Overall market temperature score (0–100).
-                      description:
-                        type: string
-                        nullable: true
-                        description: Human-readable description of the current temperature level.
-                      valuation:
-                        type: integer
-                        description: Valuation sub-score (0–100).
-                      sentiment:
-                        type: integer
-                        description: Sentiment sub-score (0–100).
-                      updated_at:
-                        type: string
-                        description: Unix timestamp (seconds) of the last data update.
+              example:
+                code: 0
+                message: success
+                data:
+                  temperature: 70
+                  description: 温度温暖并快速上升中
+                  valuation: 59
+                  sentiment: 82
+                  updated_at: '1774317902'
         default:
           description: Unexpected error
           content:
@@ -691,44 +386,6 @@ paths:
       description: |
         Query account cash flow history. Covers deposit, withdrawal, dividends, settlement,
         and other business types. Supports time range and pagination.
-
-        ## CLI
-
-        ```bash
-        longbridge cash-flow
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/asset/cashflow?start_time=1740000000&end_time=1774400000&page=1&size=20"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "list": [
-              {
-                "transaction_flow_name": "在途分红",
-                "direction": 1,
-                "business_type": 0,
-                "balance": "13.65",
-                "currency": "USD",
-                "business_time": "1771826509",
-                "symbol": "MSFT.US",
-                "description": "MSFT.US Cash Dividend: 0.91 USD per share(in transit)"
-              }
-            ]
-          }
-        }
-        ```
       tags:
         - Portfolio & Cash
       parameters:
@@ -776,59 +433,29 @@ paths:
           schema:
             type: integer
             nullable: true
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge cash-flow
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      list:
-                        type: array
-                        nullable: true
-                        items:
-                          type: object
-                          properties:
-                            transaction_flow_name:
-                              type: string
-                              nullable: true
-                              description: Human-readable flow name.
-                            business_type:
-                              type: integer
-                              nullable: true
-                              description: Business type code (integer).
-                            direction:
-                              type: integer
-                              nullable: true
-                              description: Flow direction. `1` = inflow, `2` = outflow.
-                            balance:
-                              type: string
-                              nullable: true
-                              description: Transaction amount (decimal string).
-                            currency:
-                              type: string
-                              nullable: true
-                              description: Currency code (e.g. `USD`, `HKD`).
-                            business_time:
-                              type: string
-                              nullable: true
-                              description: Unix timestamp (seconds) of the transaction.
-                            symbol:
-                              type: string
-                              nullable: true
-                              description: Associated security symbol, if any.
-                            description:
-                              type: string
-                              nullable: true
-                              description: Transaction description.
+              example:
+                code: 0
+                message: success
+                data:
+                  list:
+                  - transaction_flow_name: 在途分红
+                    direction: 1
+                    business_type: 0
+                    balance: '13.65'
+                    currency: USD
+                    business_time: '1771826509'
+                    symbol: MSFT.US
+                    description: 'MSFT.US Cash Dividend: 0.91 USD per share(in transit)'
         default:
           description: Unexpected error
           content:
@@ -841,65 +468,6 @@ paths:
       summary: Account Cash Information Query
       description: |
         Query account cash balance, buying power, margin details, and per-currency cash breakdown.
-
-        ## CLI
-
-        ```bash
-        longbridge balance
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/asset/account"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "list": [
-              {
-                "total_cash": "456943.18",
-                "max_finance_amount": "3200000.00",
-                "remaining_finance_amount": "3654289.90",
-                "risk_level": "0",
-                "margin_call": "0",
-                "currency": "HKD",
-                "net_assets": "962678.11",
-                "init_margin": "141090.88",
-                "maintenance_margin": "123141.91",
-                "buy_power": "821587.22",
-                "frozen_transaction_fees": [],
-                "cash_infos": [
-                  {
-                    "currency": "USD",
-                    "withdraw_cash": "-38665.68",
-                    "available_cash": "-38665.68",
-                    "frozen_cash": "332.19",
-                    "settling_cash": "-10108.02",
-                    "redemption_cash": "0.00"
-                  },
-                  {
-                    "currency": "HKD",
-                    "withdraw_cash": "755592.21",
-                    "available_cash": "755592.21",
-                    "frozen_cash": "64.69",
-                    "settling_cash": "-27760.00",
-                    "redemption_cash": "0.00"
-                  }
-                ]
-              }
-            ]
-          }
-        }
-        ```
       tags:
         - Portfolio & Cash
       parameters:
@@ -910,110 +478,45 @@ paths:
           schema:
             type: string
             nullable: true
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge balance
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      list:
-                        type: array
-                        nullable: true
-                        items:
-                          type: object
-                          properties:
-                            total_cash:
-                              type: string
-                              nullable: true
-                              description: Total cash balance (decimal string, in `currency`).
-                            max_finance_amount:
-                              type: string
-                              nullable: true
-                              description: Maximum financing amount available.
-                            remaining_finance_amount:
-                              type: string
-                              nullable: true
-                              description: Remaining financing amount available.
-                            risk_level:
-                              type: string
-                              nullable: true
-                              description: Account risk level code.
-                            margin_call:
-                              type: string
-                              nullable: true
-                              description: Margin call amount. `"0"` means no margin call.
-                            currency:
-                              type: string
-                              nullable: true
-                              description: Base currency of this sub-account.
-                            net_assets:
-                              type: string
-                              nullable: true
-                              description: Net asset value.
-                            init_margin:
-                              type: string
-                              nullable: true
-                              description: Initial margin requirement.
-                            maintenance_margin:
-                              type: string
-                              nullable: true
-                              description: Maintenance margin requirement.
-                            buy_power:
-                              type: string
-                              nullable: true
-                              description: Available buying power.
-                            frozen_transaction_fees:
-                              type: array
-                              nullable: true
-                              description: List of frozen transaction fee items.
-                              items:
-                                type: object
-                                properties:
-                                  currency:
-                                    type: string
-                                    nullable: true
-                                  frozen_transaction_fee:
-                                    type: string
-                                    nullable: true
-                            cash_infos:
-                              type: array
-                              nullable: true
-                              description: Per-currency cash breakdown.
-                              items:
-                                type: object
-                                properties:
-                                  currency:
-                                    type: string
-                                    nullable: true
-                                  withdraw_cash:
-                                    type: string
-                                    nullable: true
-                                    description: Withdrawable cash amount.
-                                  available_cash:
-                                    type: string
-                                    nullable: true
-                                    description: Available cash amount.
-                                  frozen_cash:
-                                    type: string
-                                    nullable: true
-                                    description: Frozen cash amount.
-                                  settling_cash:
-                                    type: string
-                                    nullable: true
-                                    description: Cash pending settlement.
-                                  redemption_cash:
-                                    type: string
-                                    nullable: true
-                                    description: Cash pending fund redemption.
+              example:
+                code: 0
+                message: success
+                data:
+                  list:
+                  - total_cash: '456943.18'
+                    max_finance_amount: '3200000.00'
+                    remaining_finance_amount: '3654289.90'
+                    risk_level: '0'
+                    margin_call: '0'
+                    currency: HKD
+                    net_assets: '962678.11'
+                    init_margin: '141090.88'
+                    maintenance_margin: '123141.91'
+                    buy_power: '821587.22'
+                    frozen_transaction_fees: []
+                    cash_infos:
+                    - currency: USD
+                      withdraw_cash: '-38665.68'
+                      available_cash: '-38665.68'
+                      frozen_cash: '332.19'
+                      settling_cash: '-10108.02'
+                      redemption_cash: '0.00'
+                    - currency: HKD
+                      withdraw_cash: '755592.21'
+                      available_cash: '755592.21'
+                      frozen_cash: '64.69'
+                      settling_cash: '-27760.00'
+                      redemption_cash: '0.00'
         default:
           description: Unexpected error
           content:
@@ -1026,59 +529,6 @@ paths:
       summary: Stock Position Information Query
       description: |
         Query all stock (equity) positions, grouped by sub-account channel.
-
-        ## CLI
-
-        ```bash
-        longbridge positions
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/asset/stock"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "list": [
-              {
-                "account_channel": "lb_papertrading",
-                "stock_info": [
-                  {
-                    "symbol": "NVDA.US",
-                    "symbol_name": "英伟达",
-                    "currency": "USD",
-                    "quantity": "101",
-                    "available_quantity": "101",
-                    "cost_price": "50.229",
-                    "market": "US",
-                    "init_quantity": "101"
-                  },
-                  {
-                    "symbol": "AAPL.US",
-                    "symbol_name": "苹果",
-                    "currency": "USD",
-                    "quantity": "133",
-                    "available_quantity": "133",
-                    "cost_price": "211.589",
-                    "market": "US",
-                    "init_quantity": "133"
-                  }
-                ]
-              }
-            ]
-          }
-        }
-        ```
       tags:
         - Portfolio & Cash
       parameters:
@@ -1091,69 +541,39 @@ paths:
             nullable: true
             items:
               type: string
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge positions
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      list:
-                        type: array
-                        nullable: true
-                        items:
-                          type: object
-                          properties:
-                            account_channel:
-                              type: string
-                              nullable: true
-                              description: Sub-account channel identifier (e.g. `lb_papertrading`).
-                            stock_info:
-                              type: array
-                              nullable: true
-                              items:
-                                type: object
-                                properties:
-                                  symbol:
-                                    type: string
-                                    nullable: true
-                                    description: Security symbol (e.g. `AAPL.US`).
-                                  symbol_name:
-                                    type: string
-                                    nullable: true
-                                    description: Security display name.
-                                  currency:
-                                    type: string
-                                    nullable: true
-                                    description: Settlement currency (e.g. `USD`, `HKD`).
-                                  quantity:
-                                    type: string
-                                    nullable: true
-                                    description: Total held quantity.
-                                  available_quantity:
-                                    type: string
-                                    nullable: true
-                                    description: Quantity available to sell.
-                                  cost_price:
-                                    type: string
-                                    nullable: true
-                                    description: Average cost price per share.
-                                  market:
-                                    type: string
-                                    nullable: true
-                                    description: Market code (e.g. `US`, `HK`).
-                                  init_quantity:
-                                    type: string
-                                    nullable: true
-                                    description: Position quantity at market open.
+              example:
+                code: 0
+                message: success
+                data:
+                  list:
+                  - account_channel: lb_papertrading
+                    stock_info:
+                    - symbol: NVDA.US
+                      symbol_name: 英伟达
+                      currency: USD
+                      quantity: '101'
+                      available_quantity: '101'
+                      cost_price: '50.229'
+                      market: US
+                      init_quantity: '101'
+                    - symbol: AAPL.US
+                      symbol_name: 苹果
+                      currency: USD
+                      quantity: '133'
+                      available_quantity: '133'
+                      cost_price: '211.589'
+                      market: US
+                      init_quantity: '133'
         default:
           description: Unexpected error
           content:
@@ -1166,47 +586,6 @@ paths:
       summary: Fund Position Information Query
       description: |
         Query all public fund positions, grouped by sub-account channel.
-
-        ## CLI
-
-        ```bash
-        longbridge fund-positions
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/asset/fund"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "list": [
-              {
-                "fund_info": [
-                  {
-                    "symbol": "HK0000676533",
-                    "symbol_name": "某只基金",
-                    "holding_units": "1000.00",
-                    "current_net_asset_value": "1.2345",
-                    "cost_net_asset_value": "1.1000",
-                    "net_asset_value_day": "1774310400",
-                    "currency": "HKD"
-                  }
-                ]
-              }
-            ]
-          }
-        }
-        ```
       tags:
         - Portfolio & Cash
       parameters:
@@ -1219,65 +598,29 @@ paths:
             nullable: true
             items:
               type: string
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge fund-positions
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      list:
-                        type: array
-                        nullable: true
-                        items:
-                          type: object
-                          properties:
-                            account_channel:
-                              type: string
-                              nullable: true
-                              description: Sub-account channel identifier.
-                            fund_info:
-                              type: array
-                              nullable: true
-                              items:
-                                type: object
-                                properties:
-                                  symbol:
-                                    type: string
-                                    nullable: true
-                                    description: Fund symbol.
-                                  symbol_name:
-                                    type: string
-                                    nullable: true
-                                    description: Fund display name.
-                                  holding_units:
-                                    type: string
-                                    nullable: true
-                                    description: Number of fund units held.
-                                  current_net_asset_value:
-                                    type: string
-                                    nullable: true
-                                    description: Current net asset value (NAV) per unit.
-                                  cost_net_asset_value:
-                                    type: string
-                                    nullable: true
-                                    description: Average cost NAV per unit.
-                                  net_asset_value_day:
-                                    type: string
-                                    nullable: true
-                                    description: Unix timestamp (seconds) of the NAV date.
-                                  currency:
-                                    type: string
-                                    nullable: true
-                                    description: Fund currency.
+              example:
+                code: 0
+                message: success
+                data:
+                  list:
+                  - fund_info:
+                    - symbol: HK0000676533
+                      symbol_name: 某只基金
+                      holding_units: '1000.00'
+                      current_net_asset_value: '1.2345'
+                      cost_net_asset_value: '1.1000'
+                      net_asset_value_day: '1774310400'
+                      currency: HKD
         default:
           description: Unexpected error
           content:
@@ -1291,44 +634,6 @@ paths:
       description: |
         Get the list of regulatory filings or disclosure documents for the specified symbol.
         Each filing includes a title, file name, download URLs, and publication timestamp.
-
-        ## CLI
-
-        ```bash
-        longbridge filings <SYMBOL>
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/quote/filings?symbol=AAPL.US"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "items": [
-              {
-                "id": "627391979864985729",
-                "title": "苹果 | 4 - Apple Inc. (0000320193) (Issuer)",
-                "description": "",
-                "file_name": "4 - Apple Inc. (0000320193) (Issuer)",
-                "file_urls": [
-                  "https://www.sec.gov/Archives/edgar/data/320193/.../wk-form4_1773786674.xml"
-                ],
-                "publish_at": "1773786677"
-              }
-            ]
-          }
-        }
-        ```
       tags:
         - News & Filings
       parameters:
@@ -1338,53 +643,28 @@ paths:
           description: 'Security symbol to query filings for (e.g. `AAPL.US`, `700.HK`).'
           schema:
             type: string
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge filings <SYMBOL>
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      items:
-                        type: array
-                        nullable: true
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: string
-                              nullable: true
-                              description: Filing ID.
-                            title:
-                              type: string
-                              nullable: true
-                              description: Filing title.
-                            description:
-                              type: string
-                              nullable: true
-                              description: Filing summary or description (may be empty).
-                            file_name:
-                              type: string
-                              nullable: true
-                              description: Filing document file name.
-                            file_urls:
-                              type: array
-                              nullable: true
-                              description: List of download URLs for the filing document(s).
-                              items:
-                                type: string
-                            publish_at:
-                              type: string
-                              nullable: true
-                              description: Unix timestamp (seconds) when the filing was published.
+              example:
+                code: 0
+                message: success
+                data:
+                  items:
+                  - id: '627391979864985729'
+                    title: 苹果 | 4 - Apple Inc. (0000320193) (Issuer)
+                    description: ''
+                    file_name: 4 - Apple Inc. (0000320193) (Issuer)
+                    file_urls:
+                    - https://www.sec.gov/Archives/edgar/data/320193/.../wk-form4_1773786674.xml
+                    publish_at: '1773786677'
         default:
           description: Unexpected error
           content:
@@ -1397,44 +677,6 @@ paths:
       summary: Get Symbol News
       description: |
         Get the latest news articles for the specified symbol.
-
-        ## CLI
-
-        ```bash
-        longbridge news <SYMBOL>
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/content/AAPL.US/news"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "items": [
-              {
-                "id": "280228333",
-                "title": "苹果拟在地图应用引入广告",
-                "description": "苹果计划在其地图应用中引入广告，以推动服务业务增长...",
-                "url": "https://longbridge.com/news/280228333",
-                "published_at": "1774310775",
-                "comments_count": 0,
-                "likes_count": 0,
-                "shares_count": 0
-              }
-            ]
-          }
-        }
-        ```
       tags:
         - News & Filings
       parameters:
@@ -1444,59 +686,29 @@ paths:
           description: 'Security symbol to query news for (e.g. `AAPL.US`, `700.HK`).'
           schema:
             type: string
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge news <SYMBOL>
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      items:
-                        type: array
-                        nullable: true
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: string
-                              nullable: true
-                              description: Article ID.
-                            title:
-                              type: string
-                              nullable: true
-                              description: Article title.
-                            description:
-                              type: string
-                              nullable: true
-                              description: Article summary.
-                            url:
-                              type: string
-                              nullable: true
-                              description: Link to the full article.
-                            published_at:
-                              type: string
-                              nullable: true
-                              description: Unix timestamp (seconds) of publication.
-                            comments_count:
-                              type: integer
-                              nullable: true
-                              description: Number of comments.
-                            likes_count:
-                              type: integer
-                              nullable: true
-                              description: Number of likes.
-                            shares_count:
-                              type: integer
-                              nullable: true
-                              description: Number of shares.
+              example:
+                code: 0
+                message: success
+                data:
+                  items:
+                  - id: '280228333'
+                    title: 苹果拟在地图应用引入广告
+                    description: 苹果计划在其地图应用中引入广告，以推动服务业务增长...
+                    url: https://longbridge.com/news/280228333
+                    published_at: '1774310775'
+                    comments_count: 0
+                    likes_count: 0
+                    shares_count: 0
         default:
           description: Unexpected error
           content:
@@ -1509,44 +721,6 @@ paths:
       summary: Get Symbol Community Topics
       description: |
         Get the list of community discussion topics for the specified symbol.
-
-        ## CLI
-
-        ```bash
-        longbridge topics <SYMBOL>
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/content/AAPL.US/topics"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "items": [
-              {
-                "id": "39469738",
-                "title": "",
-                "description": "期待苹果的 AI。我相信在用户端侧，苹果能把 AI 做得很好。",
-                "url": "https://longbridge.com/topics/39469738",
-                "published_at": "1774325592",
-                "comments_count": 0,
-                "likes_count": 0,
-                "shares_count": 0
-              }
-            ]
-          }
-        }
-        ```
       tags:
         - News & Filings
       parameters:
@@ -1556,59 +730,29 @@ paths:
           description: 'Security symbol to query topics for (e.g. `AAPL.US`, `700.HK`).'
           schema:
             type: string
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge topics <SYMBOL>
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      items:
-                        type: array
-                        nullable: true
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: string
-                              nullable: true
-                              description: Topic ID.
-                            title:
-                              type: string
-                              nullable: true
-                              description: Topic title (may be empty).
-                            description:
-                              type: string
-                              nullable: true
-                              description: Topic content summary.
-                            url:
-                              type: string
-                              nullable: true
-                              description: Link to the full topic.
-                            published_at:
-                              type: string
-                              nullable: true
-                              description: Unix timestamp (seconds) of publication.
-                            comments_count:
-                              type: integer
-                              nullable: true
-                              description: Number of comments.
-                            likes_count:
-                              type: integer
-                              nullable: true
-                              description: Number of likes.
-                            shares_count:
-                              type: integer
-                              nullable: true
-                              description: Number of shares.
+              example:
+                code: 0
+                message: success
+                data:
+                  items:
+                  - id: '39469738'
+                    title: ''
+                    description: 期待苹果的 AI。我相信在用户端侧，苹果能把 AI 做得很好。
+                    url: https://longbridge.com/topics/39469738
+                    published_at: '1774325592'
+                    comments_count: 0
+                    likes_count: 0
+                    shares_count: 0
         default:
           description: Unexpected error
           content:
@@ -1622,45 +766,6 @@ paths:
       description: |
         Get the list of topics published by the current authenticated user.
         Supports pagination and filtering by topic type.
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/content/topics/mine?page=1&size=25"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "items": [
-              {
-                "id": "39304657",
-                "title": "My Analysis on AAPL",
-                "description": "A brief summary of my article...",
-                "body": "Full markdown content here...",
-                "topic_type": "article",
-                "likes_count": 12,
-                "comments_count": 3,
-                "views_count": 200,
-                "shares_count": 1,
-                "tickers": ["AAPL.US"],
-                "hashtags": ["earnings"],
-                "license": 1,
-                "detail_url": "https://longbridge.com/topics/39304657",
-                "created_at": "1742000000",
-                "updated_at": "1742000000"
-              }
-            ]
-          }
-        }
-        ```
       tags:
         - Community
       parameters:
@@ -1698,122 +803,28 @@ paths:
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      items:
-                        type: array
-                        nullable: true
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: string
-                              nullable: true
-                              description: Topic ID.
-                            title:
-                              type: string
-                              nullable: true
-                              description: Topic title (may be empty for short posts).
-                            description:
-                              type: string
-                              nullable: true
-                              description: Plain-text summary of the topic body.
-                            body:
-                              type: string
-                              nullable: true
-                              description: Full topic body in Markdown format.
-                            topic_type:
-                              type: string
-                              nullable: true
-                              description: Topic type. One of `article`, `post`.
-                            tickers:
-                              type: array
-                              nullable: true
-                              description: Associated security symbols (e.g. `["AAPL.US", "700.HK"]`).
-                              items:
-                                type: string
-                            hashtags:
-                              type: array
-                              nullable: true
-                              description: Associated hashtag names.
-                              items:
-                                type: string
-                            images:
-                              type: array
-                              nullable: true
-                              description: Images attached to the topic.
-                              items:
-                                type: object
-                                properties:
-                                  url:
-                                    type: string
-                                    nullable: true
-                                    description: Original image URL.
-                                  sm:
-                                    type: string
-                                    nullable: true
-                                    description: Small thumbnail URL.
-                                  lg:
-                                    type: string
-                                    nullable: true
-                                    description: Large thumbnail URL.
-                            likes_count:
-                              type: integer
-                              nullable: true
-                              description: Number of likes.
-                            comments_count:
-                              type: integer
-                              nullable: true
-                              description: Number of comments.
-                            views_count:
-                              type: integer
-                              nullable: true
-                              description: Number of views.
-                            shares_count:
-                              type: integer
-                              nullable: true
-                              description: Number of shares.
-                            license:
-                              type: integer
-                              nullable: true
-                              description: Copyright declaration. `0` = none, `1` = original, `2` = non-original.
-                            detail_url:
-                              type: string
-                              nullable: true
-                              description: Link to the topic detail page.
-                            author:
-                              type: object
-                              nullable: true
-                              description: Author information.
-                              properties:
-                                member_id:
-                                  type: string
-                                  nullable: true
-                                  description: Author member ID.
-                                name:
-                                  type: string
-                                  nullable: true
-                                  description: Author display name.
-                                avatar:
-                                  type: string
-                                  nullable: true
-                                  description: Author avatar URL.
-                            created_at:
-                              type: string
-                              nullable: true
-                              description: Unix timestamp (seconds) when the topic was created.
-                            updated_at:
-                              type: string
-                              nullable: true
-                              description: Unix timestamp (seconds) when the topic was last updated.
+              example:
+                code: 0
+                message: success
+                data:
+                  items:
+                  - id: '39304657'
+                    title: My Analysis on AAPL
+                    description: A brief summary of my article...
+                    body: Full markdown content here...
+                    topic_type: article
+                    likes_count: 12
+                    comments_count: 3
+                    views_count: 200
+                    shares_count: 1
+                    tickers:
+                    - AAPL.US
+                    hashtags:
+                    - earnings
+                    license: 1
+                    detail_url: https://longbridge.com/topics/39304657
+                    created_at: '1742000000'
+                    updated_at: '1742000000'
         default:
           description: Unexpected error
           content:
@@ -1826,35 +837,6 @@ paths:
       summary: Create Topic
       description: |
         Create a new community topic (long-form article or short post).
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -X POST \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          -H "Content-Type: application/json" \
-          -d '{"title":"My View on AAPL","body":"Apple reported strong earnings...","topic_type":"article","tickers":["AAPL.US"],"hashtags":["earnings"],"license":1}' \
-          "https://openapi.longbridge.com/content/topics"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "id": "39304657",
-            "title": "My View on AAPL",
-            "topic_type": "article",
-            "tickers": ["AAPL.US"],
-            "hashtags": ["earnings"],
-            "created_at": "1742000000"
-          }
-        }
-        ```
       tags:
         - Community
       requestBody:
@@ -1904,44 +886,18 @@ paths:
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        nullable: true
-                        description: ID of the newly created topic.
-                      title:
-                        type: string
-                        nullable: true
-                        description: Topic title.
-                      topic_type:
-                        type: string
-                        nullable: true
-                        description: Topic type. One of `article`, `post`.
-                      tickers:
-                        type: array
-                        nullable: true
-                        description: Associated security symbols.
-                        items:
-                          type: string
-                      hashtags:
-                        type: array
-                        nullable: true
-                        description: Associated hashtag names.
-                        items:
-                          type: string
-                      created_at:
-                        type: string
-                        nullable: true
-                        description: Unix timestamp (seconds) when the topic was created.
+              example:
+                code: 0
+                message: success
+                data:
+                  id: '39304657'
+                  title: My View on AAPL
+                  topic_type: article
+                  tickers:
+                  - AAPL.US
+                  hashtags:
+                  - earnings
+                  created_at: '1742000000'
         default:
           description: Unexpected error
           content:
@@ -1955,43 +911,6 @@ paths:
       description: |
         Query historical execution (fill) records. Supports filtering by time range, order ID,
         and symbol, with pagination.
-
-        ## CLI
-
-        ```bash
-        longbridge executions --history
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/trade/execution/history?start_at=1740000000&end_at=1774400000&page=1"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "trades": [
-              {
-                "trade_id": "218942971868942337",
-                "order_id": "218942971868942336",
-                "symbol": "NVDA.US",
-                "price": "177.50",
-                "quantity": "10",
-                "trade_done_at": "1774330500"
-              }
-            ],
-            "has_more": false
-          }
-        }
-        ```
       tags:
         - Trade Execution & Order Management
       parameters:
@@ -2033,55 +952,28 @@ paths:
           schema:
             type: integer
             nullable: true
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge executions --history
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      trades:
-                        type: array
-                        nullable: true
-                        items:
-                          type: object
-                          properties:
-                            trade_id:
-                              type: string
-                              nullable: true
-                              description: Execution (trade) ID.
-                            order_id:
-                              type: string
-                              nullable: true
-                              description: Associated order ID.
-                            symbol:
-                              type: string
-                              nullable: true
-                              description: Security symbol.
-                            price:
-                              type: string
-                              nullable: true
-                              description: Execution price.
-                            quantity:
-                              type: string
-                              nullable: true
-                              description: Execution quantity.
-                            trade_done_at:
-                              type: string
-                              nullable: true
-                              description: Unix timestamp (seconds) when the execution was completed.
-                      has_more:
-                        type: boolean
-                        nullable: true
-                        description: Whether more records exist on the next page.
+              example:
+                code: 0
+                message: success
+                data:
+                  trades:
+                  - trade_id: '218942971868942337'
+                    order_id: '218942971868942336'
+                    symbol: NVDA.US
+                    price: '177.50'
+                    quantity: '10'
+                    trade_done_at: '1774330500'
+                  has_more: false
         default:
           description: Unexpected error
           content:
@@ -2094,82 +986,6 @@ paths:
       summary: Order Detail Query
       description: |
         Query full details of a single order by order ID, including fee breakdown and status history.
-
-        ## CLI
-
-        ```bash
-        longbridge order <ORDER_ID>
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/trade/order?order_id=1220968184320942080"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "order_id": "1220968184320942080",
-            "status": "CanceledStatus",
-            "stock_name": "英伟达",
-            "quantity": "10",
-            "executed_quantity": "0",
-            "price": "",
-            "executed_price": "0",
-            "submitted_at": "1774330299",
-            "side": "Buy",
-            "symbol": "NVDA.US",
-            "order_type": "MIT",
-            "last_done": "",
-            "trigger_price": "177.88",
-            "msg": "",
-            "tag": "Normal",
-            "time_in_force": "Day",
-            "expire_date": "2026-03-24",
-            "updated_at": "1774330401",
-            "trigger_at": "0",
-            "trailing_amount": "",
-            "trailing_percent": "",
-            "limit_offset": "",
-            "trigger_status": "DEACTIVE",
-            "outside_rth": "RTH_ONLY",
-            "currency": "USD",
-            "remark": "",
-            "limit_depth_level": 0,
-            "trigger_count": 0,
-            "monitor_price": "",
-            "free_status": "None",
-            "free_amount": "",
-            "free_currency": "",
-            "deductions_status": "NONE",
-            "deductions_amount": "",
-            "deductions_currency": "",
-            "platform_deducted_status": "NONE",
-            "platform_deducted_amount": "",
-            "platform_deducted_currency": "",
-            "history": [],
-            "charge_detail": {
-              "items": [
-                {
-                  "code": "BROKER_FEES",
-                  "name": "收费明细",
-                  "fees": []
-                }
-              ],
-              "total_amount": "0.00",
-              "currency": "USD"
-            }
-          }
-        }
-        ```
       tags:
         - Trade Execution & Order Management
       parameters:
@@ -2179,241 +995,66 @@ paths:
           description: Order ID to query.
           schema:
             type: string
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge order <ORDER_ID>
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      order_id:
-                        type: string
-                        nullable: true
-                        description: Order ID.
-                      status:
-                        type: string
-                        nullable: true
-                        description: Order status (e.g. `NewStatus`, `FilledStatus`, `CanceledStatus`).
-                      stock_name:
-                        type: string
-                        nullable: true
-                        description: Security display name.
-                      quantity:
-                        type: string
-                        nullable: true
-                        description: Ordered quantity.
-                      executed_quantity:
-                        type: string
-                        nullable: true
-                        description: Filled quantity.
-                      price:
-                        type: string
-                        nullable: true
-                        description: Limit price (empty for market orders).
-                      executed_price:
-                        type: string
-                        nullable: true
-                        description: Average fill price.
-                      submitted_at:
-                        type: string
-                        nullable: true
-                        description: Unix timestamp (seconds) when the order was submitted.
-                      side:
-                        type: string
-                        nullable: true
-                        description: Order side. One of `Buy`, `Sell`.
-                      symbol:
-                        type: string
-                        nullable: true
-                        description: Security symbol.
-                      order_type:
-                        type: string
-                        nullable: true
-                        description: Order type (e.g. `LO`, `MO`, `MIT`, `LIT`, `TSLPAMT`).
-                      last_done:
-                        type: string
-                        nullable: true
-                        description: Last execution price.
-                      trigger_price:
-                        type: string
-                        nullable: true
-                        description: Trigger price for MIT/LIT orders.
-                      msg:
-                        type: string
-                        nullable: true
-                        description: Order message or rejection reason.
-                      tag:
-                        type: string
-                        nullable: true
-                        description: Order tag (e.g. `Normal`, `GTC`).
-                      time_in_force:
-                        type: string
-                        nullable: true
-                        description: Time-in-force (e.g. `Day`, `GTC`, `GTD`).
-                      expire_date:
-                        type: string
-                        nullable: true
-                        description: Order expiry date in `YYYY-MM-DD` format (for GTD orders).
-                      updated_at:
-                        type: string
-                        nullable: true
-                        description: Unix timestamp (seconds) of the last status update.
-                      trigger_at:
-                        type: string
-                        nullable: true
-                        description: Unix timestamp (seconds) when the trigger condition was met.
-                      trailing_amount:
-                        type: string
-                        nullable: true
-                        description: Trailing stop amount (for TSLPAMT/TSMAMT orders).
-                      trailing_percent:
-                        type: string
-                        nullable: true
-                        description: Trailing stop percentage (for TSMPCT/TSLPPCT orders).
-                      limit_offset:
-                        type: string
-                        nullable: true
-                        description: Limit offset for LIT orders.
-                      trigger_status:
-                        type: string
-                        nullable: true
-                        description: Trigger status (e.g. `ACTIVE`, `DEACTIVE`, `TRIGGERED`).
-                      outside_rth:
-                        type: string
-                        nullable: true
-                        description: Extended-hours setting. One of `RTH_ONLY`, `ANY_TIME`, `OVERNIGHT`.
-                      currency:
-                        type: string
-                        nullable: true
-                        description: Settlement currency.
-                      remark:
-                        type: string
-                        nullable: true
-                        description: Order remark.
-                      limit_depth_level:
-                        type: integer
-                        nullable: true
-                        description: Limit depth level (for ELO orders).
-                      trigger_count:
-                        type: integer
-                        nullable: true
-                        description: Number of times the trigger has fired.
-                      monitor_price:
-                        type: string
-                        nullable: true
-                        description: Monitor price for conditional orders.
-                      free_status:
-                        type: string
-                        nullable: true
-                        description: Commission-free status.
-                      free_amount:
-                        type: string
-                        nullable: true
-                        description: Commission-free amount.
-                      free_currency:
-                        type: string
-                        nullable: true
-                        description: Currency of the commission-free amount.
-                      deductions_status:
-                        type: string
-                        nullable: true
-                        description: LongPoint deduction status.
-                      deductions_amount:
-                        type: string
-                        nullable: true
-                        description: LongPoint deduction amount.
-                      deductions_currency:
-                        type: string
-                        nullable: true
-                        description: Currency of LongPoint deduction.
-                      platform_deducted_status:
-                        type: string
-                        nullable: true
-                        description: Platform fee deduction status.
-                      platform_deducted_amount:
-                        type: string
-                        nullable: true
-                        description: Platform fee deduction amount.
-                      platform_deducted_currency:
-                        type: string
-                        nullable: true
-                        description: Currency of platform fee deduction.
-                      history:
-                        type: array
-                        nullable: true
-                        description: Order status change history.
-                        items:
-                          type: object
-                          properties:
-                            price:
-                              type: string
-                              nullable: true
-                            quantity:
-                              type: string
-                              nullable: true
-                            status:
-                              type: string
-                              nullable: true
-                            msg:
-                              type: string
-                              nullable: true
-                            time:
-                              type: string
-                              nullable: true
-                              description: Unix timestamp (seconds) of this status change.
-                      charge_detail:
-                        type: object
-                        nullable: true
-                        description: Fee breakdown.
-                        properties:
-                          total_amount:
-                            type: string
-                            nullable: true
-                            description: Total fees charged.
-                          currency:
-                            type: string
-                            nullable: true
-                            description: Fee currency.
-                          items:
-                            type: array
-                            nullable: true
-                            items:
-                              type: object
-                              properties:
-                                code:
-                                  type: string
-                                  nullable: true
-                                  description: Fee category code (e.g. `BROKER_FEES`, `THIRD_FEES`).
-                                name:
-                                  type: string
-                                  nullable: true
-                                  description: Fee category display name.
-                                fees:
-                                  type: array
-                                  nullable: true
-                                  items:
-                                    type: object
-                                    properties:
-                                      code:
-                                        type: string
-                                        nullable: true
-                                      name:
-                                        type: string
-                                        nullable: true
-                                      amount:
-                                        type: string
-                                        nullable: true
-                                      currency:
-                                        type: string
-                                        nullable: true
+              example:
+                code: 0
+                message: success
+                data:
+                  order_id: '1220968184320942080'
+                  status: CanceledStatus
+                  stock_name: 英伟达
+                  quantity: '10'
+                  executed_quantity: '0'
+                  price: ''
+                  executed_price: '0'
+                  submitted_at: '1774330299'
+                  side: Buy
+                  symbol: NVDA.US
+                  order_type: MIT
+                  last_done: ''
+                  trigger_price: '177.88'
+                  msg: ''
+                  tag: Normal
+                  time_in_force: Day
+                  expire_date: '2026-03-24'
+                  updated_at: '1774330401'
+                  trigger_at: '0'
+                  trailing_amount: ''
+                  trailing_percent: ''
+                  limit_offset: ''
+                  trigger_status: DEACTIVE
+                  outside_rth: RTH_ONLY
+                  currency: USD
+                  remark: ''
+                  limit_depth_level: 0
+                  trigger_count: 0
+                  monitor_price: ''
+                  free_status: None
+                  free_amount: ''
+                  free_currency: ''
+                  deductions_status: NONE
+                  deductions_amount: ''
+                  deductions_currency: ''
+                  platform_deducted_status: NONE
+                  platform_deducted_amount: ''
+                  platform_deducted_currency: ''
+                  history: []
+                  charge_detail:
+                    items:
+                    - code: BROKER_FEES
+                      name: 收费明细
+                      fees: []
+                    total_amount: '0.00'
+                    currency: USD
         default:
           description: Unexpected error
           content:
@@ -2426,28 +1067,6 @@ paths:
       description: |
         Modify the parameters of a pending order. Only orders in `NewStatus` or `PartialFilledStatus`
         can be modified.
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -X PUT \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          -H "Content-Type: application/json" \
-          -d '{"order_id":"1220968184320942080","price":"175.00","quantity":"5"}' \
-          "https://openapi.longbridge.com/trade/order"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {}
-        }
-        ```
       tags:
         - Trade Execution & Order Management
       requestBody:
@@ -2514,15 +1133,10 @@ paths:
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
+              example:
+                code: 0
+                message: success
+                data: {}
         default:
           description: Unexpected error
           content:
@@ -2535,26 +1149,6 @@ paths:
       description: |
         Cancel a pending order. Only orders in `NewStatus` or `PartialFilledStatus` can be cancelled.
         After successful cancellation the order status changes to `CanceledStatus`.
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -X DELETE \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/trade/order?order_id=1220968184320942080"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {}
-        }
-        ```
       tags:
         - Trade Execution & Order Management
       parameters:
@@ -2569,15 +1163,10 @@ paths:
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
+              example:
+                code: 0
+                message: success
+                data: {}
         default:
           description: Unexpected error
           content:
@@ -2591,34 +1180,6 @@ paths:
       description: |
         Estimate the maximum purchasable quantity for a security based on the current account
         balance and margin, given a specific order type and price.
-
-        ## CLI
-
-        ```bash
-        longbridge max-qty <SYMBOL> --side buy --price <PRICE>
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/trade/estimate/buy_limit?symbol=AAPL.US&order_type=LO&side=Buy&price=200"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "cash_max_qty": "0",
-            "margin_max_qty": "1859"
-          }
-        }
-        ```
       tags:
         - Trade Execution & Order Management
       parameters:
@@ -2714,29 +1275,22 @@ paths:
           schema:
             type: string
             nullable: true
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge max-qty <SYMBOL> --side buy --price <PRICE>
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      cash_max_qty:
-                        type: string
-                        nullable: true
-                        description: Maximum purchasable quantity using available cash only.
-                      margin_max_qty:
-                        type: string
-                        nullable: true
-                        description: Maximum purchasable quantity including available financing margin.
+              example:
+                code: 0
+                message: success
+                data:
+                  cash_max_qty: '0'
+                  margin_max_qty: '1859'
         default:
           description: Unexpected error
           content:
@@ -2750,66 +1304,6 @@ paths:
       description: |
         Query historical order records with pagination. Supports filtering by time range, symbol,
         market, side, and status.
-
-        ## CLI
-
-        ```bash
-        longbridge orders --history
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/trade/order/history?start_at=1740000000&end_at=1774400000&page=1&size=20"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "orders": [
-              {
-                "order_id": "1220968184320942080",
-                "status": "FilledStatus",
-                "stock_name": "苹果",
-                "quantity": "10",
-                "executed_quantity": "10",
-                "price": "200.00",
-                "executed_price": "199.85",
-                "submitted_at": "1770000000",
-                "side": "Buy",
-                "symbol": "AAPL.US",
-                "order_type": "LO",
-                "last_done": "199.85",
-                "trigger_price": "",
-                "msg": "",
-                "tag": "Normal",
-                "time_in_force": "Day",
-                "expire_date": "2026-02-01",
-                "updated_at": "1770000600",
-                "trigger_at": "0",
-                "trailing_amount": "",
-                "trailing_percent": "",
-                "limit_offset": "",
-                "trigger_status": "DEACTIVE",
-                "outside_rth": "RTH_ONLY",
-                "currency": "USD",
-                "remark": "",
-                "limit_depth_level": 0,
-                "trigger_count": 0,
-                "monitor_price": ""
-              }
-            ],
-            "has_more": false
-          }
-        }
-        ```
       tags:
         - Trade Execution & Order Management
       parameters:
@@ -2908,30 +1402,51 @@ paths:
           schema:
             type: integer
             nullable: true
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge orders --history
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      orders:
-                        type: array
-                        nullable: true
-                        items:
-                          $ref: '#/components/schemas/Order'
-                      has_more:
-                        type: boolean
-                        nullable: true
-                        description: Whether more records exist on the next page.
+              example:
+                code: 0
+                message: success
+                data:
+                  orders:
+                  - order_id: '1220968184320942080'
+                    status: FilledStatus
+                    stock_name: 苹果
+                    quantity: '10'
+                    executed_quantity: '10'
+                    price: '200.00'
+                    executed_price: '199.85'
+                    submitted_at: '1770000000'
+                    side: Buy
+                    symbol: AAPL.US
+                    order_type: LO
+                    last_done: '199.85'
+                    trigger_price: ''
+                    msg: ''
+                    tag: Normal
+                    time_in_force: Day
+                    expire_date: '2026-02-01'
+                    updated_at: '1770000600'
+                    trigger_at: '0'
+                    trailing_amount: ''
+                    trailing_percent: ''
+                    limit_offset: ''
+                    trigger_status: DEACTIVE
+                    outside_rth: RTH_ONLY
+                    currency: USD
+                    remark: ''
+                    limit_depth_level: 0
+                    trigger_count: 0
+                    monitor_price: ''
+                  has_more: false
         default:
           description: Unexpected error
           content:
@@ -2944,42 +1459,6 @@ paths:
       summary: Today's Execution Query
       description: |
         Query today's execution (fill) records. Supports filtering by order ID and symbol.
-
-        ## CLI
-
-        ```bash
-        longbridge executions
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/trade/execution/today"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "trades": [
-              {
-                "trade_id": "218942971868942337",
-                "order_id": "218942971868942336",
-                "symbol": "NVDA.US",
-                "price": "177.50",
-                "quantity": "10",
-                "trade_done_at": "1774330500"
-              }
-            ]
-          }
-        }
-        ```
       tags:
         - Trade Execution & Order Management
       parameters:
@@ -3000,51 +1479,27 @@ paths:
             maxLength: 32
             minLength: 4
             pattern: '^([\w.]*\.[A-Za-z][A-Za-z])$'
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge executions
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      trades:
-                        type: array
-                        nullable: true
-                        items:
-                          type: object
-                          properties:
-                            trade_id:
-                              type: string
-                              nullable: true
-                              description: Execution (trade) ID.
-                            order_id:
-                              type: string
-                              nullable: true
-                              description: Associated order ID.
-                            symbol:
-                              type: string
-                              nullable: true
-                              description: Security symbol.
-                            price:
-                              type: string
-                              nullable: true
-                              description: Execution price.
-                            quantity:
-                              type: string
-                              nullable: true
-                              description: Execution quantity.
-                            trade_done_at:
-                              type: string
-                              nullable: true
-                              description: Unix timestamp (seconds) when the execution was completed.
+              example:
+                code: 0
+                message: success
+                data:
+                  trades:
+                  - trade_id: '218942971868942337'
+                    order_id: '218942971868942336'
+                    symbol: NVDA.US
+                    price: '177.50'
+                    quantity: '10'
+                    trade_done_at: '1774330500'
         default:
           description: Unexpected error
           content:
@@ -3057,66 +1512,6 @@ paths:
       summary: Today's Order Query
       description: |
         Query today's orders with support for multi-condition filtering.
-
-        ## CLI
-
-        ```bash
-        longbridge orders
-        ```
-
-        ## Code sample
-
-        ```shell
-        curl -L \
-          -H "Accept: application/json" \
-          -H "Authorization: Bearer <YOUR_TOKEN>" \
-          "https://openapi.longbridge.com/trade/order/today"
-        ```
-
-        ## Response
-
-        ```json
-        {
-          "code": 0,
-          "message": "success",
-          "data": {
-            "orders": [
-              {
-                "order_id": "1220968184320942080",
-                "status": "CanceledStatus",
-                "stock_name": "英伟达",
-                "quantity": "10",
-                "executed_quantity": "0",
-                "price": "",
-                "executed_price": "0",
-                "submitted_at": "1774330299",
-                "side": "Buy",
-                "symbol": "NVDA.US",
-                "order_type": "MIT",
-                "last_done": "",
-                "trigger_price": "177.88",
-                "msg": "",
-                "tag": "Normal",
-                "time_in_force": "Day",
-                "expire_date": "2026-03-24",
-                "updated_at": "1774330401",
-                "trigger_at": "0",
-                "trailing_amount": "",
-                "trailing_percent": "",
-                "limit_offset": "",
-                "trigger_status": "DEACTIVE",
-                "outside_rth": "RTH_ONLY",
-                "currency": "USD",
-                "remark": "",
-                "limit_depth_level": 0,
-                "trigger_count": 0,
-                "monitor_price": ""
-              }
-            ],
-            "has_more": false
-          }
-        }
-        ```
       tags:
         - Trade Execution & Order Management
       parameters:
@@ -3208,30 +1603,51 @@ paths:
           schema:
             type: integer
             nullable: true
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge orders
       responses:
         '200':
           description: Successful response
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      orders:
-                        type: array
-                        nullable: true
-                        items:
-                          $ref: '#/components/schemas/Order'
-                      has_more:
-                        type: boolean
-                        nullable: true
-                        description: Whether more records exist on the next page.
+              example:
+                code: 0
+                message: success
+                data:
+                  orders:
+                  - order_id: '1220968184320942080'
+                    status: CanceledStatus
+                    stock_name: 英伟达
+                    quantity: '10'
+                    executed_quantity: '0'
+                    price: ''
+                    executed_price: '0'
+                    submitted_at: '1774330299'
+                    side: Buy
+                    symbol: NVDA.US
+                    order_type: MIT
+                    last_done: ''
+                    trigger_price: '177.88'
+                    msg: ''
+                    tag: Normal
+                    time_in_force: Day
+                    expire_date: '2026-03-24'
+                    updated_at: '1774330401'
+                    trigger_at: '0'
+                    trailing_amount: ''
+                    trailing_percent: ''
+                    limit_offset: ''
+                    trigger_status: DEACTIVE
+                    outside_rth: RTH_ONLY
+                    currency: USD
+                    remark: ''
+                    limit_depth_level: 0
+                    trigger_count: 0
+                    monitor_price: ''
+                  has_more: false
         default:
           description: Unexpected error
           content:

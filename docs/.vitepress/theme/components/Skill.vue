@@ -401,7 +401,7 @@ function klineSvg(): string {
     )
     .join('')
   const curY = py(prices[prices.length - 1])
-  return `<svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="kg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00b8b8" stop-opacity="0.2"/><stop offset="100%" stop-color="#00b8b8" stop-opacity="0"/></linearGradient></defs><path d="${fp}" fill="url(#kg)"/><polyline points="${pts}" fill="none" stroke="#00b8b8" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/><line x1="${pad.l}" y1="${curY.toFixed(1)}" x2="${w - pad.r}" y2="${curY.toFixed(1)}" stroke="#00b8b8" stroke-width="1" stroke-dasharray="3,3" opacity="0.35"/><circle cx="${px(peakI).toFixed(1)}" cy="${py(prices[peakI]).toFixed(1)}" r="3.5" fill="var(--vp-c-yellow-1)"/><text x="${(px(peakI) + 5).toFixed(1)}" y="${(py(prices[peakI]) - 3).toFixed(1)}" font-size="9" fill="var(--vp-c-yellow-1)" font-weight="700">峰 $195.56</text><circle cx="${px(troughI).toFixed(1)}" cy="${py(prices[troughI]).toFixed(1)}" r="3.5" fill="#ff4d4f"/><text x="${(px(troughI) + 5).toFixed(1)}" y="${(py(prices[troughI]) + 13).toFixed(1)}" font-size="9" fill="#ff4d4f" font-weight="700">低 $172.70</text><rect x="${pad.l}" y="${py(174.5).toFixed(1)}" width="${iw}" height="${(py(171.5) - py(174.5)).toFixed(1)}" fill="#ff4d4f" opacity="0.05"/>${xLbls}</svg>`
+  return `<svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="kg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--vp-c-brand-1)" stop-opacity="0.2"/><stop offset="100%" stop-color="var(--vp-c-brand-1)" stop-opacity="0"/></linearGradient></defs><path d="${fp}" fill="url(#kg)"/><polyline points="${pts}" fill="none" stroke="var(--vp-c-brand-1)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/><line x1="${pad.l}" y1="${curY.toFixed(1)}" x2="${w - pad.r}" y2="${curY.toFixed(1)}" stroke="var(--vp-c-brand-1)" stroke-width="1" stroke-dasharray="3,3" opacity="0.35"/><circle cx="${px(peakI).toFixed(1)}" cy="${py(prices[peakI]).toFixed(1)}" r="3.5" fill="var(--vp-c-yellow-1)"/><text x="${(px(peakI) + 5).toFixed(1)}" y="${(py(prices[peakI]) - 3).toFixed(1)}" font-size="9" fill="var(--vp-c-yellow-1)" font-weight="700">峰 $195.56</text><circle cx="${px(troughI).toFixed(1)}" cy="${py(prices[troughI]).toFixed(1)}" r="3.5" fill="#ff4d4f"/><text x="${(px(troughI) + 5).toFixed(1)}" y="${(py(prices[troughI]) + 13).toFixed(1)}" font-size="9" fill="#ff4d4f" font-weight="700">低 $172.70</text><rect x="${pad.l}" y="${py(174.5).toFixed(1)}" width="${iw}" height="${(py(171.5) - py(174.5)).toFixed(1)}" fill="#ff4d4f" opacity="0.05"/>${xLbls}</svg>`
 }
 
 function portfolioPieSvg(cn: boolean): string {
@@ -409,12 +409,16 @@ function portfolioPieSvg(cn: boolean): string {
   const data = [
     { sym: 'AAPL.US', val: 32585, color: '#4781ff' },
     { sym: 'NVDA.US', val: 17740, color: '#00c88c' },
-    { sym: 'MSFT.US', val: 5670,  color: '#a78bfa' },
-    { sym: '9988.HK', val: 855,   color: '#f59e0b' },
+    { sym: 'MSFT.US', val: 5670, color: '#a78bfa' },
+    { sym: '9988.HK', val: 855, color: '#f59e0b' },
   ]
   const total = data.reduce((a, b) => a + b.val, 0)
-  const cx = 76, cy = 76, r = 64, ri = 40
-  let ang = -Math.PI / 2, paths = ''
+  const cx = 76,
+    cy = 76,
+    r = 64,
+    ri = 40
+  let ang = -Math.PI / 2,
+    paths = ''
   for (const d of data) {
     const slice = (d.val / total) * 2 * Math.PI
     const end = ang + slice
@@ -426,12 +430,14 @@ function portfolioPieSvg(cn: boolean): string {
     paths += `<path d="M${x1.toFixed(1)},${y1.toFixed(1)} A${r},${r} 0 ${la},1 ${x2.toFixed(1)},${y2.toFixed(1)} L${x3.toFixed(1)},${y3.toFixed(1)} A${ri},${ri} 0 ${la},0 ${x4.toFixed(1)},${y4.toFixed(1)} Z" fill="${d.color}" opacity=".9" stroke="var(--vp-c-bg)" stroke-width="2"/>`
     ang = end
   }
-  const legendRows = data.map((ld, li) => {
-    const pct = (ld.val / total * 100).toFixed(1)
-    const sep = li > 0 ? 'border-top:1px solid var(--vp-c-divider);' : ''
-    return `<div style="${sep}display:flex;align-items:center;gap:8px;padding:6px 0"><span style="width:10px;height:10px;border-radius:3px;background:${ld.color};flex-shrink:0;display:inline-block"></span><span style="font-size:12px;font-weight:600;color:var(--vp-c-text-1);flex:1">${ld.sym}</span><span style="font-size:13px;font-weight:700;color:${ld.color}">${pct}%</span><span style="font-size:11px;color:var(--vp-c-text-3);width:44px;text-align:right">$${(ld.val/1000).toFixed(1)}k</span></div>`
-  }).join('')
-  return `<div style="display:flex;align-items:center;gap:14px;margin:10px 0 12px"><svg width="152" height="152" viewBox="0 0 152 152" style="flex-shrink:0">${paths}<text x="${cx}" y="${cy-5}" text-anchor="middle" font-size="9" fill="currentColor" opacity="0.4" letter-spacing=".05em">${cn ? '市值占比' : 'ALLOCATION'}</text><text x="${cx}" y="${cy+12}" text-anchor="middle" font-size="15" font-weight="800" fill="currentColor">$56.8k</text></svg><div style="flex:1;border:1px solid var(--vp-c-divider);border-radius:9px;padding:4px 12px;background:var(--vp-c-bg)">${legendRows}</div></div>`
+  const legendRows = data
+    .map((ld, li) => {
+      const pct = ((ld.val / total) * 100).toFixed(1)
+      const sep = li > 0 ? 'border-top:1px solid var(--vp-c-divider);' : ''
+      return `<div style="${sep}display:flex;align-items:center;gap:8px;padding:6px 0"><span style="width:10px;height:10px;border-radius:3px;background:${ld.color};flex-shrink:0;display:inline-block"></span><span style="font-size:12px;font-weight:600;color:var(--vp-c-text-1);flex:1">${ld.sym}</span><span style="font-size:13px;font-weight:700;color:${ld.color}">${pct}%</span><span style="font-size:11px;color:var(--vp-c-text-3);width:44px;text-align:right">$${(ld.val / 1000).toFixed(1)}k</span></div>`
+    })
+    .join('')
+  return `<div style="display:flex;align-items:center;gap:14px;margin:10px 0 12px"><svg width="152" height="152" viewBox="0 0 152 152" style="flex-shrink:0">${paths}<text x="${cx}" y="${cy - 5}" text-anchor="middle" font-size="9" fill="currentColor" opacity="0.4" letter-spacing=".05em">${cn ? '市值占比' : 'ALLOCATION'}</text><text x="${cx}" y="${cy + 12}" text-anchor="middle" font-size="15" font-weight="800" fill="currentColor">$56.8k</text></svg><div style="flex:1;border:1px solid var(--vp-c-divider);border-radius:9px;padding:4px 12px;background:var(--vp-c-bg)">${legendRows}</div></div>`
 }
 
 const demoScenarios = computed<DemoScenario[]>(() => {
@@ -554,24 +560,6 @@ MSFT.US    15  $373.31   $378.00    <span class="t-pos">+1.3%</span>      <span 
 总浮盈   (USD est.): <span class="t-pos">+$5,932</span>  <span class="t-c"># HKD 按 7.78 折算</span>`),
           },
         ],
-        codex: [
-          {
-            role: 'user',
-            content: isEN.value
-              ? 'Write Python to fetch my positions and compute total P&L'
-              : isHK.value
-                ? '幫我寫 Python 腳本獲取持倉並計算總盈虧'
-                : '帮我写 Python 脚本获取持仓并计算总盈亏',
-          },
-          { role: 'tool', command: 'longbridge positions --format json', content: '' },
-          {
-            role: 'assistant',
-            rich: true,
-            content: codeHTML(
-              'from longbridge.openapi import TradeContext, QuoteContext\n\nctx = TradeContext.from_env()\nqctx = QuoteContext.from_env()\npositions = ctx.stock_positions().channels[0].positions\nsyms = [p.symbol for p in positions]\nqs = {q.symbol: q for q in qctx.quote(syms)}\n\nfor p in sorted(positions, key=lambda x: -(float(qs[x.symbol].last_done)-float(x.cost_price))/float(x.cost_price)):\n    cost = float(p.cost_price); price = float(qs[p.symbol].last_done)\n    qty = int(p.quantity); pct = (price-cost)/cost*100\n    total_pnl = (price-cost)*qty\n    today_pnl = (price-float(qs[p.symbol].prev_close))*qty\n    print(f"{p.symbol:<10} qty={qty:>4}  {pct:>+7.1f}%  total={total_pnl:>+10,.0f}  today={today_pnl:>+8,.0f}")\n\n# 9988.HK    qty=  54  +28.8%  total=  +1,488 HKD  today=   +189\n# NVDA.US    qty= 101   +7.4%  total=  +1,226      today=   +297\n# AAPL.US    qty= 133  +15.8%  total=  +4,444      today=   -398\n# MSFT.US    qty=  15   +1.3%  total=     +70      today=    -58'
-            ),
-          },
-        ],
       },
     },
 
@@ -604,7 +592,7 @@ MSFT.US    15  $373.31   $378.00    <span class="t-pos">+1.3%</span>      <span 
   <div class="demo-mkt-divider"></div>
   <div class="demo-mkt-item"><div class="demo-mkt-sym">${cn ? '成交额' : 'Volume'}</div><div class="demo-mkt-price" style="font-size:13px">${cn ? '$886亿' : '$88.6B'}</div><div class="demo-mkt-chg demo-muted">${cn ? 'SPY 日均' : 'SPY daily'}</div></div>
   <div class="demo-mkt-divider"></div>
-  <div class="demo-mkt-item"><div class="demo-mkt-sym">${cn ? '今日市场' : 'Market'}</div><div class="demo-mkt-price" style="font-size:13px;color:#00c48c">${cn ? '科技领涨' : 'Tech leads'}</div><div class="demo-mkt-chg demo-muted">${cn ? '风险偏好回暖' : 'Risk-on'}</div></div>
+  <div class="demo-mkt-item"><div class="demo-mkt-sym">${cn ? '今日市场' : 'Market'}</div><div class="demo-mkt-price" style="font-size:13px;color:var(--up-color)">${cn ? '科技领涨' : 'Tech leads'}</div><div class="demo-mkt-chg demo-muted">${cn ? '风险偏好回暖' : 'Risk-on'}</div></div>
 </div>
 <div class="demo-qcards">
   <div class="demo-qcard"><div class="demo-qcard-sym">NVDA.US</div><div class="demo-qcard-name">NVIDIA Corporation</div><div class="demo-qcard-price">$175.64</div><div class="demo-qcard-chg demo-pos">+$2.94 · +1.70%</div><div class="demo-qcard-meta">${cn ? '成交额 $322.6亿 · GTC 催化剂' : 'Vol $32.3B · GTC catalyst'}</div></div>
@@ -612,14 +600,14 @@ MSFT.US    15  $373.31   $378.00    <span class="t-pos">+1.3%</span>      <span 
 </div>
 <div class="demo-news-feed">
   <div class="demo-news-item">
-    <div class="demo-news-dot" style="background:var(--vp-c-green-1)"></div>
+    <div class="demo-news-dot" style="background:var(--up-color)"></div>
     <div class="demo-news-body"><div class="demo-news-title">${cn ? 'Jensen Huang：AI 芯片 2027 年前累计需求达 $1 万亿，较去年预测翻倍' : "Jensen Huang: AI chip demand $1T by 2027 — double last year's forecast"}</div><div class="demo-news-meta">${cn ? 'GTC 2026 主题演讲 · 3小时前' : 'GTC 2026 Keynote · 3h ago'}</div></div>
-    <div class="demo-news-signal" style="background:var(--vp-c-green-soft);color:var(--vp-c-green-1)">${cn ? '强力看多' : 'Strong Bull'}</div>
+    <div class="demo-news-signal" style="background:var(--vp-c-green-soft);color:var(--up-color)">${cn ? '强力看多' : 'Strong Bull'}</div>
   </div>
   <div class="demo-news-item">
-    <div class="demo-news-dot" style="background:var(--vp-c-green-1)"></div>
+    <div class="demo-news-dot" style="background:var(--up-color)"></div>
     <div class="demo-news-body"><div class="demo-news-title">${cn ? 'Bernstein：维持 NVDA "强力买入"，目标价隐含 56% 上行空间' : 'Bernstein: Maintain NVDA Strong Buy, target implying 56% upside'}</div><div class="demo-news-meta">${cn ? '分析师报告 · 今日 06:50' : 'Analyst report · 06:50'}</div></div>
-    <div class="demo-news-signal" style="background:var(--vp-c-green-soft);color:var(--vp-c-green-1)">${cn ? '看多 NVDA' : 'Bullish NVDA'}</div>
+    <div class="demo-news-signal" style="background:var(--vp-c-green-soft);color:var(--up-color)">${cn ? '看多 NVDA' : 'Bullish NVDA'}</div>
   </div>
   <div class="demo-news-item">
     <div class="demo-news-dot" style="background:var(--vp-c-indigo-1)"></div>
@@ -721,10 +709,10 @@ MSFT.US   378.00   381.87   <span class="t-neg">-1.01%</span>    $113.9亿
           rich: true,
           content: `
 <div class="demo-res-section">
-  <div class="demo-res-hd"><span class="demo-res-hd-text">${cn ? '新闻面分析' : 'News Sentiment'}</span><span class="demo-res-signal" style="background:var(--vp-c-green-soft);color:var(--vp-c-green-1)">${cn ? '极度看多' : 'Extremely Bullish'}</span></div>
+  <div class="demo-res-hd"><span class="demo-res-hd-text">${cn ? '新闻面分析' : 'News Sentiment'}</span><span class="demo-res-signal" style="background:var(--vp-c-green-soft);color:var(--up-color)">${cn ? '极度看多' : 'Extremely Bullish'}</span></div>
   <div class="demo-news-feed">
-    <div class="demo-news-item" style="padding:8px 10px"><div class="demo-news-dot" style="background:var(--vp-c-green-1)"></div><div class="demo-news-body"><div class="demo-news-title" style="font-size:12.5px">${cn ? 'GTC 2026：Jensen Huang — AI 需求 2027 年累计 $1T，去年预测仅 $500B' : 'GTC 2026: Jensen Huang — AI demand $1T by 2027, vs $500B last year'}</div><div class="demo-news-meta">${cn ? '主题演讲 · 重大上调' : 'Keynote · major upward revision'}</div></div><div class="demo-news-signal" style="background:var(--vp-c-green-soft);color:var(--vp-c-green-1)">++</div></div>
-    <div class="demo-news-item" style="padding:8px 10px"><div class="demo-news-dot" style="background:var(--vp-c-green-1)"></div><div class="demo-news-body"><div class="demo-news-title" style="font-size:12.5px">${cn ? 'Bernstein：强力买入，目标价含 56% 上行；Raymond James：85% 上行空间' : 'Bernstein: Strong Buy 56% upside; Raymond James: 85% upside'}</div><div class="demo-news-meta">${cn ? '机构报告 · 今日连续发布' : 'Multiple analyst reports today'}</div></div><div class="demo-news-signal" style="background:var(--vp-c-green-soft);color:var(--vp-c-green-1)">+</div></div>
+    <div class="demo-news-item" style="padding:8px 10px"><div class="demo-news-dot" style="background:var(--up-color)"></div><div class="demo-news-body"><div class="demo-news-title" style="font-size:12.5px">${cn ? 'GTC 2026：Jensen Huang — AI 需求 2027 年累计 $1T，去年预测仅 $500B' : 'GTC 2026: Jensen Huang — AI demand $1T by 2027, vs $500B last year'}</div><div class="demo-news-meta">${cn ? '主题演讲 · 重大上调' : 'Keynote · major upward revision'}</div></div><div class="demo-news-signal" style="background:var(--vp-c-green-soft);color:var(--up-color)">++</div></div>
+    <div class="demo-news-item" style="padding:8px 10px"><div class="demo-news-dot" style="background:var(--up-color)"></div><div class="demo-news-body"><div class="demo-news-title" style="font-size:12.5px">${cn ? 'Bernstein：强力买入，目标价含 56% 上行；Raymond James：85% 上行空间' : 'Bernstein: Strong Buy 56% upside; Raymond James: 85% upside'}</div><div class="demo-news-meta">${cn ? '机构报告 · 今日连续发布' : 'Multiple analyst reports today'}</div></div><div class="demo-news-signal" style="background:var(--vp-c-green-soft);color:var(--up-color)">+</div></div>
     <div class="demo-news-item" style="padding:8px 10px"><div class="demo-news-dot" style="background:var(--vp-c-indigo-1)"></div><div class="demo-news-body"><div class="demo-news-title" style="font-size:12.5px">${cn ? 'NVIDIA 宣布 Groq 整合 + 新推理专用 CPU，推理端布局加速' : 'NVIDIA announces Groq integration + inference-optimized CPU'}</div><div class="demo-news-meta">${cn ? 'GTC 产品公告 · 长期催化' : 'GTC product announcement · long-term catalyst'}</div></div><div class="demo-news-signal" style="background:var(--vp-c-indigo-soft);color:var(--vp-c-indigo-1)">${cn ? '中性+' : 'Neutral+'}</div></div>
   </div>
 </div>
@@ -741,14 +729,14 @@ MSFT.US   378.00   381.87   <span class="t-neg">-1.01%</span>    $113.9亿
 <div class="demo-res-section">
   <div class="demo-res-hd"><span class="demo-res-hd-text">${cn ? '技术面分析' : 'Technical Analysis'}</span><span class="demo-res-signal" style="background:var(--vp-c-yellow-soft);color:var(--vp-c-yellow-1)">${cn ? '底部形成中' : 'Base building'}</span></div>
   <div class="demo-kw" style="margin-bottom:0">
-    <div class="demo-kh"><div><div style="font-size:11px;color:var(--vp-c-text-3);margin-bottom:2px">NVDA.US · ${cn ? '日线 30天' : 'Daily 30d'}</div><span class="demo-kprice">$175.64</span><span class="demo-kchg" style="background:var(--vp-c-green-soft);color:var(--vp-c-green-1);margin-left:8px">+1.70%</span></div><div class="demo-kmeta"><div>${cn ? '峰 $195.56 → 低 $172.70' : 'Peak $195.56 → Low $172.70'}</div><div>${cn ? '回撤 −11.7%' : 'Drawdown −11.7%'}</div></div></div>
+    <div class="demo-kh"><div><div style="font-size:11px;color:var(--vp-c-text-3);margin-bottom:2px">NVDA.US · ${cn ? '日线 30天' : 'Daily 30d'}</div><span class="demo-kprice">$175.64</span><span class="demo-kchg" style="background:var(--vp-c-green-soft);color:var(--up-color);margin-left:8px">+1.70%</span></div><div class="demo-kmeta"><div>${cn ? '峰 $195.56 → 低 $172.70' : 'Peak $195.56 → Low $172.70'}</div><div>${cn ? '回撤 −11.7%' : 'Drawdown −11.7%'}</div></div></div>
     ${klineSvg()}
   </div>
 </div>
 <div class="demo-verdict">
   <div class="demo-verdict-hd">${cn ? '综合判断' : 'Conclusion'}</div>
   <div class="demo-verdict-rows">
-    <div class="demo-verdict-row"><span class="demo-verdict-label" style="color:#00c48c">${cn ? '基本面' : 'Fundamentals'}</span><span class="demo-verdict-val">${cn ? '强劲。$1T 需求预测 + 分析师密集看多，催化剂明确。8-K 和 Form 4 无异常，内部人未减持。' : 'Strong. $1T demand forecast + dense analyst bullishness. 8-K and Form 4 both clean — management not selling.'}</span></div>
+    <div class="demo-verdict-row"><span class="demo-verdict-label" style="color:var(--up-color)">${cn ? '基本面' : 'Fundamentals'}</span><span class="demo-verdict-val">${cn ? '强劲。$1T 需求预测 + 分析师密集看多，催化剂明确。8-K 和 Form 4 无异常，内部人未减持。' : 'Strong. $1T demand forecast + dense analyst bullishness. 8-K and Form 4 both clean — management not selling.'}</span></div>
     <div class="demo-verdict-row"><span class="demo-verdict-label" style="color:#f59e0b">${cn ? '技术面' : 'Technicals'}</span><span class="demo-verdict-val">${cn ? '$172–174 支撑三次有效，今日 +1.70% 是反弹第二日，底部形态趋于成立，但仍在均线下方。' : '$172–$174 held 3 times. Today +1.70% is 2nd consecutive bounce day — base forming, but still below 30d MA.'}</span></div>
     <div class="demo-verdict-row"><span class="demo-verdict-label" style="color:#4781ff">${cn ? '建议' : 'Suggestion'}</span><span class="demo-verdict-val">${cn ? '当前价位（$175）处于回调后低位，基本面支撑强，短期技术面正在修复。<strong style="color:var(--vp-c-text-1)">适合小仓位试探，分批建仓优于一次性买入。</strong>' : 'Current $175 is at a post-correction low with strong fundamentals and recovering technicals. <strong style="color:var(--vp-c-text-1)">Small initial position, scale in gradually rather than all at once.</strong>'}</span></div>
   </div>
@@ -859,7 +847,7 @@ Form4  03/24  x6 内部人交易          <span class="t-c"># 无大额净卖出
           content: `
 <div class="demo-kw">
   <div class="demo-kh">
-    <div><div style="font-size:11px;color:var(--vp-c-text-3);margin-bottom:2px">NVIDIA · NVDA.US · ${cn ? '日线 · 2026-02-09 → 03-23' : 'Daily · 2026-02-09 → 03-23'}</div><span class="demo-kprice">$175.64</span><span class="demo-kchg" style="background:var(--vp-c-green-soft);color:var(--vp-c-green-1);margin-left:8px">+$2.94 · +1.70%</span></div>
+    <div><div style="font-size:11px;color:var(--vp-c-text-3);margin-bottom:2px">NVIDIA · NVDA.US · ${cn ? '日线 · 2026-02-09 → 03-23' : 'Daily · 2026-02-09 → 03-23'}</div><span class="demo-kprice">$175.64</span><span class="demo-kchg" style="background:var(--vp-c-green-soft);color:var(--up-color);margin-left:8px">+$2.94 · +1.70%</span></div>
     <div class="demo-kmeta"><div>${cn ? '区间 $172.70 — $195.56' : 'Range $172.70 — $195.56'}</div><div>${cn ? '30日均价 $183.24' : '30d MA $183.24'}</div></div>
   </div>
   ${klineSvg()}
@@ -888,7 +876,7 @@ ${cn ? 'NVDA 过去 30 天经历了一轮明显的高位回调：<br>• 2月下
             content: `
 <div class="demo-kw">
   <div class="demo-kh">
-    <div><div style="font-size:11px;color:var(--vp-c-text-3);margin-bottom:2px">NVDA.US · Daily · Feb 9 → Mar 23, 2026</div><span class="demo-kprice">$175.64</span><span class="demo-kchg" style="background:var(--vp-c-green-soft);color:var(--vp-c-green-1);margin-left:8px">+$2.94 · +1.70%</span></div>
+    <div><div style="font-size:11px;color:var(--vp-c-text-3);margin-bottom:2px">NVDA.US · Daily · Feb 9 → Mar 23, 2026</div><span class="demo-kprice">$175.64</span><span class="demo-kchg" style="background:var(--vp-c-green-soft);color:var(--up-color);margin-left:8px">+$2.94 · +1.70%</span></div>
     <div class="demo-kmeta"><div>Range: $172.70 — $195.56</div><div>30d MA: $183.24</div></div>
   </div>
   ${klineSvg()}
@@ -1106,10 +1094,10 @@ NVDA is in a <strong style="color:var(--vp-c-text-1)">correction and base-buildi
       <div class="demo-cond-status-row"><span>${cn ? '当前价格' : 'Current price'}</span><span class="demo-pos">$175.64 (+1.70%)</span></div>
       <div class="demo-cond-status-row"><span>${cn ? '距上行触发价' : 'To buy trigger'}</span><span class="demo-muted">+$2.24 / +1.27%</span></div>
       <div style="font-size:10px;color:var(--vp-c-text-3);margin-top:3px">${cn ? '买入触发进度：' : 'Buy trigger progress:'}</div>
-      <div class="demo-progress-bar"><div class="demo-progress-fill" style="width:57%;background:linear-gradient(90deg,var(--vp-c-green-soft),var(--vp-c-green-1))"></div></div>
+      <div class="demo-progress-bar"><div class="demo-progress-fill" style="width:57%;background:linear-gradient(90deg,var(--vp-c-green-soft),var(--up-color))"></div></div>
       <div class="demo-cond-status-row" style="margin-top:8px"><span>${cn ? '距下行触发价' : 'To sell trigger'}</span><span class="demo-muted">-$8.12 / -4.62%</span></div>
       <div style="font-size:10px;color:var(--vp-c-text-3);margin-top:3px">${cn ? '卖出触发进度：' : 'Sell trigger progress:'}</div>
-      <div class="demo-progress-bar"><div class="demo-progress-fill" style="width:0%;background:linear-gradient(90deg,var(--vp-c-red-soft),var(--vp-c-red-1))"></div></div>
+      <div class="demo-progress-bar"><div class="demo-progress-fill" style="width:0%;background:linear-gradient(90deg,var(--vp-c-red-soft),var(--down-color))"></div></div>
     </div>
     <div style="margin-top:14px;padding:10px 12px;background:var(--brand-5);border:1px solid var(--vp-c-brand-1);border-radius:8px;font-size:12.5px;color:var(--vp-c-text-1);font-weight:500;text-align:center">${cn ? '✓ 两个条件委托已确认提交' : '✓ Both conditional orders confirmed and submitted'}</div>
   </div>
@@ -1200,7 +1188,6 @@ const clients: Client[] = [
   { id: 'chatgpt', label: 'ChatGPT', color: '#10b981' },
   { id: 'claude', label: 'Claude', color: '#f97316' },
   { id: 'claude-code', label: 'Claude Code', color: '#818cf8' },
-  { id: 'codex', label: 'Codex', color: '#94a3b8' },
 ]
 
 // ─── Demo animation state ─────────────────────────────────────────────────────
@@ -2192,11 +2179,11 @@ const currentMessages = computed(() => {
   text-align: right;
 }
 .skill-chat-bubble-assistant :deep(.demo-pos) {
-  color: #16a34a;
+  color: var(--up-color);
   font-weight: 600;
 }
 .skill-chat-bubble-assistant :deep(.demo-neg) {
-  color: #dc2626;
+  color: var(--down-color);
   font-weight: 600;
 }
 .skill-chat-bubble-assistant :deep(.demo-muted) {
@@ -2314,8 +2301,8 @@ const currentMessages = computed(() => {
 
 /* ── Code blocks with syntax highlighting ── */
 .skill-chat-bubble-assistant :deep(.demo-code-block) {
-  background: #1a1a2e;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
   padding: 12px 14px;
   margin: 4px 0;
@@ -2323,7 +2310,7 @@ const currentMessages = computed(() => {
   font-size: 0.78125rem;
   line-height: 1.65;
   overflow-x: auto;
-  color: #e2e8f0;
+  color: var(--vp-c-text-1);
 }
 .skill-chat-bubble-assistant :deep(.demo-code-block code) {
   background: none;
@@ -2333,23 +2320,23 @@ const currentMessages = computed(() => {
   white-space: pre;
 }
 .skill-chat-bubble-assistant :deep(.hl-k) {
-  color: #f472b6;
+  color: var(--vp-c-indigo-1);
 }
 .skill-chat-bubble-assistant :deep(.hl-s) {
-  color: #86efac;
+  color: var(--up-color);
 }
 .skill-chat-bubble-assistant :deep(.hl-c) {
-  color: #64748b;
+  color: var(--vp-c-text-3);
   font-style: italic;
 }
 .skill-chat-bubble-assistant :deep(.hl-n) {
-  color: #fb923c;
+  color: var(--vp-c-yellow-1);
 }
 .skill-chat-bubble-assistant :deep(.hl-b) {
-  color: #7dd3fc;
+  color: var(--vp-c-brand-1);
 }
 .skill-chat-bubble-assistant :deep(.hl-prompt) {
-  color: #00b8b8;
+  color: var(--vp-c-brand-1);
   user-select: none;
 }
 
@@ -2596,8 +2583,8 @@ const currentMessages = computed(() => {
 
 /* Highlight / warning boxes */
 .skill-chat-bubble-assistant :deep(.demo-hi-box) {
-  background: rgba(0, 200, 140, 0.08);
-  border-left: 3px solid #00c88c;
+  background: var(--vp-c-green-soft);
+  border-left: 3px solid var(--up-color);
   border-radius: 0 6px 6px 0;
   padding: 8px 12px;
   font-size: 0.8rem;
@@ -2606,8 +2593,8 @@ const currentMessages = computed(() => {
   margin-top: 4px;
 }
 .skill-chat-bubble-assistant :deep(.demo-warn-box) {
-  background: rgba(245, 158, 11, 0.08);
-  border-left: 3px solid #f59e0b;
+  background: var(--vp-c-yellow-soft);
+  border-left: 3px solid var(--vp-c-yellow-1);
   border-radius: 0 6px 6px 0;
   padding: 8px 12px;
   font-size: 0.8rem;
@@ -2701,8 +2688,8 @@ const currentMessages = computed(() => {
 
 /* Verdict block (深度研究) */
 .skill-chat-bubble-assistant :deep(.demo-verdict) {
-  background: rgba(0, 200, 140, 0.06);
-  border: 1px solid rgba(0, 200, 140, 0.25);
+  background: var(--vp-c-green-soft);
+  border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
   padding: 10px 12px;
   margin-top: 8px;
@@ -2710,7 +2697,7 @@ const currentMessages = computed(() => {
 .skill-chat-bubble-assistant :deep(.demo-verdict-hd) {
   font-size: 0.78rem;
   font-weight: 700;
-  color: #00c88c;
+  color: var(--up-color);
   margin-bottom: 6px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -2763,10 +2750,10 @@ const currentMessages = computed(() => {
   padding: 10px 12px;
 }
 .skill-chat-bubble-assistant :deep(.demo-cond-card-buy) {
-  border-top: 2px solid #00c88c;
+  border-top: 2px solid var(--up-color);
 }
 .skill-chat-bubble-assistant :deep(.demo-cond-card-sell) {
-  border-top: 2px solid #ef4444;
+  border-top: 2px solid var(--down-color);
 }
 .skill-chat-bubble-assistant :deep(.demo-cond-card-hd) {
   font-size: 0.82rem;
@@ -2821,7 +2808,7 @@ const currentMessages = computed(() => {
 .skill-chat-bubble-assistant :deep(.demo-progress-fill) {
   height: 100%;
   border-radius: 4px;
-  background: linear-gradient(90deg, #4781ff, #00c88c);
+  background: linear-gradient(90deg, var(--vp-c-indigo-1), var(--up-color));
 }
 
 /* AI signal badge */
@@ -2830,9 +2817,9 @@ const currentMessages = computed(() => {
   align-items: center;
   gap: 4px;
   font-size: 0.68rem;
-  color: #a78bfa;
-  background: rgba(167, 139, 250, 0.1);
-  border: 1px solid rgba(167, 139, 250, 0.25);
+  color: var(--vp-c-indigo-1);
+  background: var(--vp-c-indigo-soft);
+  border: 1px solid var(--vp-c-divider);
   border-radius: 4px;
   padding: 1px 6px;
 }
@@ -2862,15 +2849,15 @@ const currentMessages = computed(() => {
   color: var(--vp-c-text-3);
 }
 .skill-chat-bubble-assistant :deep(.demo-term .t-pos) {
-  color: #16a34a;
+  color: var(--up-color);
 }
 .skill-chat-bubble-assistant :deep(.demo-term .t-neg) {
-  color: #dc2626;
+  color: var(--down-color);
 }
 .skill-chat-bubble-assistant :deep(.demo-term .t-hi) {
-  color: #b45309;
+  color: var(--vp-c-yellow-1);
 }
 .skill-chat-bubble-assistant :deep(.demo-term .t-c) {
-  color: #7c3aed;
+  color: var(--vp-c-indigo-1);
 }
 </style>
