@@ -4,7 +4,7 @@ info:
   description: |
     Longbridge OpenAPI provides programmatic access to market data, trading, account management,
     watchlist management, and content queries for the Longbridge trading platform.
-  version: "1.0.0"
+  version: '1.0.0'
 servers:
   - url: https://openapi.longbridge.com
     description: Global
@@ -13,12 +13,14 @@ servers:
 tags:
   - name: Watchlist Management
     description: Manage user watchlist groups (list/create/update/delete) and query the securities contained in each group. Supports adding, removing, or replacing securities within a group.
-  - name: Market Temperature Query
+  - name: Market Temperature
     description: Query the Market Temperature indicator (a fear-gauge-like sentiment thermometer, scored 0–100 where higher means more bullish) across equity markets. Supports fetching the current snapshot and historical time series for sentiment measurement, trend visualization, and comparative analysis.
-  - name: Account Holdings & Cash Ledger Query
+  - name: Portfolio & Cash
     description: Provides read access to account asset and cash information, including fund holdings, stock holdings, account cash balance, and cash flow history for portfolio overview, position display, and reconciliation analysis.
-  - name: Symbol Content & Filings Query
+  - name: News & Filings
     description: Query regulatory filings, news articles, and community discussion topics for a given symbol. Suitable for investment research, news monitoring, and content aggregation.
+  - name: Community
+    description: Interact with the Longbridge community. Supports listing your published topics with pagination and type filtering, and creating new topics (long-form articles or short posts) with associated tickers, hashtags, and license settings.
   - name: Trade Execution & Order Management
     description: Full order lifecycle management including order detail queries, today's and historical order queries, today's and historical execution reports, order modification, order cancellation, and pre-order maximum purchasable quantity estimation.
 security:
@@ -32,6 +34,12 @@ paths:
       description: |
         Get all watchlist groups for the current user. Each group contains an ID, name, and a list
         of securities with the price and timestamp at which each security was added.
+
+        ## CLI
+
+        ```bash
+        longbridge watchlist
+        ```
 
         ## Code sample
 
@@ -77,7 +85,7 @@ paths:
       tags:
         - Watchlist Management
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -138,6 +146,12 @@ paths:
       description: |
         Create a new watchlist group, optionally pre-populated with securities.
 
+        ## CLI
+
+        ```bash
+        longbridge watchlist create "NAME"
+        ```
+
         ## Code sample
 
         ```shell
@@ -183,7 +197,7 @@ paths:
                   items:
                     type: string
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -212,6 +226,12 @@ paths:
       description: |
         Update the name or member list of a watchlist group. Use `mode` to control how
         `securities` are applied: `add` appends, `remove` removes, `replace` overwrites the entire list.
+
+        ## CLI
+
+        ```bash
+        longbridge watchlist update <ID>
+        ```
 
         ## Code sample
 
@@ -271,7 +291,7 @@ paths:
                   items:
                     type: string
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -296,6 +316,12 @@ paths:
       description: |
         Delete the specified watchlist group. Set `purge=true` to also clear all securities
         from the group before deletion.
+
+        ## CLI
+
+        ```bash
+        longbridge watchlist delete <ID>
+        ```
 
         ## Code sample
 
@@ -333,7 +359,7 @@ paths:
             type: boolean
             nullable: true
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -360,6 +386,12 @@ paths:
         Query the list of tradable securities filtered by market and category. Primarily used to
         retrieve securities eligible for extended-hours (pre-market / after-hours) trading sessions.
         Both `market` and `category` are required parameters.
+
+        ## CLI
+
+        ```bash
+        longbridge security-list
+        ```
 
         ## Code sample
 
@@ -405,7 +437,7 @@ paths:
             type: string
             nullable: true
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -455,6 +487,12 @@ paths:
         Get the historical market temperature time series for the specified market within a date range.
         Each data point contains the daily temperature, valuation, and sentiment scores (all scored 0–100).
 
+        ## CLI
+
+        ```bash
+        longbridge market-temp [MARKET] --history --start YYYY-MM-DD --end YYYY-MM-DD
+        ```
+
         ## Code sample
 
         ```shell
@@ -490,7 +528,7 @@ paths:
         }
         ```
       tags:
-        - Market Temperature Query
+        - Market Temperature
       parameters:
         - name: market
           in: query
@@ -516,7 +554,7 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -565,6 +603,12 @@ paths:
         Get the current sentiment temperature snapshot for the specified market.
         Scores range from 0–100; a higher value indicates a more bullish market.
 
+        ## CLI
+
+        ```bash
+        longbridge market-temp [MARKET]
+        ```
+
         ## Code sample
 
         ```shell
@@ -590,7 +634,7 @@ paths:
         }
         ```
       tags:
-        - Market Temperature Query
+        - Market Temperature
       parameters:
         - name: market
           in: query
@@ -604,7 +648,7 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -648,6 +692,12 @@ paths:
         Query account cash flow history. Covers deposit, withdrawal, dividends, settlement,
         and other business types. Supports time range and pagination.
 
+        ## CLI
+
+        ```bash
+        longbridge cash-flow
+        ```
+
         ## Code sample
 
         ```shell
@@ -680,7 +730,7 @@ paths:
         }
         ```
       tags:
-        - Account Holdings & Cash Ledger Query
+        - Portfolio & Cash
       parameters:
         - name: start_time
           in: query
@@ -727,7 +777,7 @@ paths:
             type: integer
             nullable: true
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -792,6 +842,12 @@ paths:
       description: |
         Query account cash balance, buying power, margin details, and per-currency cash breakdown.
 
+        ## CLI
+
+        ```bash
+        longbridge balance
+        ```
+
         ## Code sample
 
         ```shell
@@ -845,7 +901,7 @@ paths:
         }
         ```
       tags:
-        - Account Holdings & Cash Ledger Query
+        - Portfolio & Cash
       parameters:
         - name: currency
           in: query
@@ -855,7 +911,7 @@ paths:
             type: string
             nullable: true
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -971,6 +1027,12 @@ paths:
       description: |
         Query all stock (equity) positions, grouped by sub-account channel.
 
+        ## CLI
+
+        ```bash
+        longbridge positions
+        ```
+
         ## Code sample
 
         ```shell
@@ -1018,7 +1080,7 @@ paths:
         }
         ```
       tags:
-        - Account Holdings & Cash Ledger Query
+        - Portfolio & Cash
       parameters:
         - name: symbol
           in: query
@@ -1030,7 +1092,7 @@ paths:
             items:
               type: string
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -1105,6 +1167,12 @@ paths:
       description: |
         Query all public fund positions, grouped by sub-account channel.
 
+        ## CLI
+
+        ```bash
+        longbridge fund-positions
+        ```
+
         ## Code sample
 
         ```shell
@@ -1123,7 +1191,6 @@ paths:
           "data": {
             "list": [
               {
-                "account_channel": "lb_securities",
                 "fund_info": [
                   {
                     "symbol": "HK0000676533",
@@ -1141,7 +1208,7 @@ paths:
         }
         ```
       tags:
-        - Account Holdings & Cash Ledger Query
+        - Portfolio & Cash
       parameters:
         - name: symbol
           in: query
@@ -1153,7 +1220,7 @@ paths:
             items:
               type: string
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -1225,6 +1292,12 @@ paths:
         Get the list of regulatory filings or disclosure documents for the specified symbol.
         Each filing includes a title, file name, download URLs, and publication timestamp.
 
+        ## CLI
+
+        ```bash
+        longbridge filings <SYMBOL>
+        ```
+
         ## Code sample
 
         ```shell
@@ -1257,16 +1330,16 @@ paths:
         }
         ```
       tags:
-        - Symbol Content & Filings Query
+        - News & Filings
       parameters:
         - name: symbol
           in: query
           required: true
-          description: "Security symbol to query filings for (e.g. `AAPL.US`, `700.HK`)."
+          description: 'Security symbol to query filings for (e.g. `AAPL.US`, `700.HK`).'
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -1325,6 +1398,12 @@ paths:
       description: |
         Get the latest news articles for the specified symbol.
 
+        ## CLI
+
+        ```bash
+        longbridge news <SYMBOL>
+        ```
+
         ## Code sample
 
         ```shell
@@ -1357,16 +1436,16 @@ paths:
         }
         ```
       tags:
-        - Symbol Content & Filings Query
+        - News & Filings
       parameters:
         - name: symbol
           in: path
           required: true
-          description: "Security symbol to query news for (e.g. `AAPL.US`, `700.HK`)."
+          description: 'Security symbol to query news for (e.g. `AAPL.US`, `700.HK`).'
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -1431,6 +1510,12 @@ paths:
       description: |
         Get the list of community discussion topics for the specified symbol.
 
+        ## CLI
+
+        ```bash
+        longbridge topics <SYMBOL>
+        ```
+
         ## Code sample
 
         ```shell
@@ -1463,16 +1548,16 @@ paths:
         }
         ```
       tags:
-        - Symbol Content & Filings Query
+        - News & Filings
       parameters:
         - name: symbol
           in: path
           required: true
-          description: "Security symbol to query topics for (e.g. `AAPL.US`, `700.HK`)."
+          description: 'Security symbol to query topics for (e.g. `AAPL.US`, `700.HK`).'
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -1530,6 +1615,339 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /content/topics/mine:
+    get:
+      operationId: list_my_topics
+      summary: Get My Topic List
+      description: |
+        Get the list of topics published by the current authenticated user.
+        Supports pagination and filtering by topic type.
+
+        ## Code sample
+
+        ```shell
+        curl -L \
+          -H "Accept: application/json" \
+          -H "Authorization: Bearer <YOUR_TOKEN>" \
+          "https://openapi.longbridge.com/content/topics/mine?page=1&size=25"
+        ```
+
+        ## Response
+
+        ```json
+        {
+          "code": 0,
+          "message": "success",
+          "data": {
+            "items": [
+              {
+                "id": "39304657",
+                "title": "My Analysis on AAPL",
+                "description": "A brief summary of my article...",
+                "body": "Full markdown content here...",
+                "topic_type": "article",
+                "likes_count": 12,
+                "comments_count": 3,
+                "views_count": 200,
+                "shares_count": 1,
+                "tickers": ["AAPL.US"],
+                "hashtags": ["earnings"],
+                "license": 1,
+                "detail_url": "https://longbridge.com/topics/39304657",
+                "created_at": "1742000000",
+                "updated_at": "1742000000"
+              }
+            ]
+          }
+        }
+        ```
+      tags:
+        - Community
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: Page number (1-based). Defaults to `1`.
+          schema:
+            type: integer
+            nullable: true
+        - name: size
+          in: query
+          required: false
+          description: Number of items per page, range 1–50. Defaults to `25`.
+          schema:
+            type: integer
+            nullable: true
+        - name: topic_type
+          in: query
+          required: false
+          description: |
+            Filter by topic type. One of:
+            - `article` — long-form article (has title)
+            - `post` — short post
+
+            Omit to return all types.
+          schema:
+            type: string
+            nullable: true
+            enum:
+              - article
+              - post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        nullable: true
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              nullable: true
+                              description: Topic ID.
+                            title:
+                              type: string
+                              nullable: true
+                              description: Topic title (may be empty for short posts).
+                            description:
+                              type: string
+                              nullable: true
+                              description: Plain-text summary of the topic body.
+                            body:
+                              type: string
+                              nullable: true
+                              description: Full topic body in Markdown format.
+                            topic_type:
+                              type: string
+                              nullable: true
+                              description: Topic type. One of `article`, `post`.
+                            tickers:
+                              type: array
+                              nullable: true
+                              description: Associated security symbols (e.g. `["AAPL.US", "700.HK"]`).
+                              items:
+                                type: string
+                            hashtags:
+                              type: array
+                              nullable: true
+                              description: Associated hashtag names.
+                              items:
+                                type: string
+                            images:
+                              type: array
+                              nullable: true
+                              description: Images attached to the topic.
+                              items:
+                                type: object
+                                properties:
+                                  url:
+                                    type: string
+                                    nullable: true
+                                    description: Original image URL.
+                                  sm:
+                                    type: string
+                                    nullable: true
+                                    description: Small thumbnail URL.
+                                  lg:
+                                    type: string
+                                    nullable: true
+                                    description: Large thumbnail URL.
+                            likes_count:
+                              type: integer
+                              nullable: true
+                              description: Number of likes.
+                            comments_count:
+                              type: integer
+                              nullable: true
+                              description: Number of comments.
+                            views_count:
+                              type: integer
+                              nullable: true
+                              description: Number of views.
+                            shares_count:
+                              type: integer
+                              nullable: true
+                              description: Number of shares.
+                            license:
+                              type: integer
+                              nullable: true
+                              description: Copyright declaration. `0` = none, `1` = original, `2` = non-original.
+                            detail_url:
+                              type: string
+                              nullable: true
+                              description: Link to the topic detail page.
+                            author:
+                              type: object
+                              nullable: true
+                              description: Author information.
+                              properties:
+                                member_id:
+                                  type: string
+                                  nullable: true
+                                  description: Author member ID.
+                                name:
+                                  type: string
+                                  nullable: true
+                                  description: Author display name.
+                                avatar:
+                                  type: string
+                                  nullable: true
+                                  description: Author avatar URL.
+                            created_at:
+                              type: string
+                              nullable: true
+                              description: Unix timestamp (seconds) when the topic was created.
+                            updated_at:
+                              type: string
+                              nullable: true
+                              description: Unix timestamp (seconds) when the topic was last updated.
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /content/topics:
+    post:
+      operationId: create_topic
+      summary: Create Topic
+      description: |
+        Create a new community topic (long-form article or short post).
+
+        ## Code sample
+
+        ```shell
+        curl -L \
+          -X POST \
+          -H "Accept: application/json" \
+          -H "Authorization: Bearer <YOUR_TOKEN>" \
+          -H "Content-Type: application/json" \
+          -d '{"title":"My View on AAPL","body":"Apple reported strong earnings...","topic_type":"article","tickers":["AAPL.US"],"hashtags":["earnings"],"license":1}' \
+          "https://openapi.longbridge.com/content/topics"
+        ```
+
+        ## Response
+
+        ```json
+        {
+          "code": 0,
+          "message": "success",
+          "data": {
+            "id": "39304657",
+            "title": "My View on AAPL",
+            "topic_type": "article",
+            "tickers": ["AAPL.US"],
+            "hashtags": ["earnings"],
+            "created_at": "1742000000"
+          }
+        }
+        ```
+      tags:
+        - Community
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - body
+              properties:
+                title:
+                  type: string
+                  description: Topic title (required).
+                body:
+                  type: string
+                  description: Topic body in Markdown format (required).
+                topic_type:
+                  type: string
+                  nullable: true
+                  enum:
+                    - article
+                    - post
+                  description: |
+                    Topic type. One of:
+                    - `article` — long-form article with a title
+                    - `post` — short post (default)
+                tickers:
+                  type: array
+                  nullable: true
+                  description: 'Associated security symbols, format `{symbol}.{market}` (e.g. `["AAPL.US", "700.HK"]`). Maximum 10.'
+                  items:
+                    type: string
+                hashtags:
+                  type: array
+                  nullable: true
+                  description: Associated hashtag names (e.g. `["earnings", "fed"]`). Maximum 5.
+                  items:
+                    type: string
+                license:
+                  type: integer
+                  nullable: true
+                  description: Copyright declaration. `0` = none (default), `1` = original, `2` = non-original.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        nullable: true
+                        description: ID of the newly created topic.
+                      title:
+                        type: string
+                        nullable: true
+                        description: Topic title.
+                      topic_type:
+                        type: string
+                        nullable: true
+                        description: Topic type. One of `article`, `post`.
+                      tickers:
+                        type: array
+                        nullable: true
+                        description: Associated security symbols.
+                        items:
+                          type: string
+                      hashtags:
+                        type: array
+                        nullable: true
+                        description: Associated hashtag names.
+                        items:
+                          type: string
+                      created_at:
+                        type: string
+                        nullable: true
+                        description: Unix timestamp (seconds) when the topic was created.
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /trade/execution/history:
     get:
       operationId: list_history_executions
@@ -1537,6 +1955,12 @@ paths:
       description: |
         Query historical execution (fill) records. Supports filtering by time range, order ID,
         and symbol, with pagination.
+
+        ## CLI
+
+        ```bash
+        longbridge executions --history
+        ```
 
         ## Code sample
 
@@ -1595,7 +2019,7 @@ paths:
         - name: symbol
           in: query
           required: false
-          description: "Filter by security symbol (e.g. `NVDA.US`)."
+          description: 'Filter by security symbol (e.g. `NVDA.US`).'
           schema:
             type: string
             nullable: true
@@ -1610,7 +2034,7 @@ paths:
             type: integer
             nullable: true
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -1670,6 +2094,12 @@ paths:
       summary: Order Detail Query
       description: |
         Query full details of a single order by order ID, including fee breakdown and status history.
+
+        ## CLI
+
+        ```bash
+        longbridge order <ORDER_ID>
+        ```
 
         ## Code sample
 
@@ -1750,7 +2180,7 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -2080,7 +2510,7 @@ paths:
                   maxLength: 255
                   description: Order remark (max 255 characters).
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -2135,7 +2565,7 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -2161,6 +2591,12 @@ paths:
       description: |
         Estimate the maximum purchasable quantity for a security based on the current account
         balance and margin, given a specific order type and price.
+
+        ## CLI
+
+        ```bash
+        longbridge max-qty <SYMBOL> --side buy --price <PRICE>
+        ```
 
         ## Code sample
 
@@ -2189,7 +2625,7 @@ paths:
         - name: symbol
           in: query
           required: true
-          description: "Security symbol (e.g. `AAPL.US`, `700.HK`)."
+          description: 'Security symbol (e.g. `AAPL.US`, `700.HK`).'
           schema:
             type: string
             maxLength: 32
@@ -2279,7 +2715,7 @@ paths:
             type: string
             nullable: true
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -2314,6 +2750,12 @@ paths:
       description: |
         Query historical order records with pagination. Supports filtering by time range, symbol,
         market, side, and status.
+
+        ## CLI
+
+        ```bash
+        longbridge orders --history
+        ```
 
         ## Code sample
 
@@ -2388,7 +2830,7 @@ paths:
         - name: symbol
           in: query
           required: false
-          description: "Filter by security symbol (e.g. `AAPL.US`)."
+          description: 'Filter by security symbol (e.g. `AAPL.US`).'
           schema:
             type: string
             nullable: true
@@ -2467,7 +2909,7 @@ paths:
             type: integer
             nullable: true
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -2502,6 +2944,12 @@ paths:
       summary: Today's Execution Query
       description: |
         Query today's execution (fill) records. Supports filtering by order ID and symbol.
+
+        ## CLI
+
+        ```bash
+        longbridge executions
+        ```
 
         ## Code sample
 
@@ -2545,7 +2993,7 @@ paths:
         - name: symbol
           in: query
           required: false
-          description: "Filter by security symbol (e.g. `NVDA.US`)."
+          description: 'Filter by security symbol (e.g. `NVDA.US`).'
           schema:
             type: string
             nullable: true
@@ -2553,7 +3001,7 @@ paths:
             minLength: 4
             pattern: '^([\w.]*\.[A-Za-z][A-Za-z])$'
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -2609,6 +3057,12 @@ paths:
       summary: Today's Order Query
       description: |
         Query today's orders with support for multi-condition filtering.
+
+        ## CLI
+
+        ```bash
+        longbridge orders
+        ```
 
         ## Code sample
 
@@ -2669,7 +3123,7 @@ paths:
         - name: symbol
           in: query
           required: false
-          description: "Filter by security symbol (e.g. `NVDA.US`)."
+          description: 'Filter by security symbol (e.g. `NVDA.US`).'
           schema:
             type: string
             nullable: true
@@ -2755,7 +3209,7 @@ paths:
             type: integer
             nullable: true
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:

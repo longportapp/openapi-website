@@ -8,6 +8,8 @@ import spec from '../../../../openapi.yaml?raw'
 const { t } = useI18n()
 const md = new MarkdownIt({ html: false, linkify: false })
 
+// ── Types ─────────────────────────────────────────────────────────────────────
+
 interface Parameter {
   name: string
   in: string
@@ -47,70 +49,240 @@ interface Operation {
       }
     }
   }
-  responses?: Record<string, {
-    description?: string
-    content?: {
-      'application/json'?: {
-        schema?: {
-          properties?: Record<string, { type?: string; description?: string }>
+  responses?: Record<
+    string,
+    {
+      description?: string
+      content?: {
+        'application/json'?: {
+          schema?: {
+            properties?: Record<string, { type?: string; description?: string }>
+          }
         }
       }
     }
-  }>
+  >
 }
 
-interface EndpointItem { method: string; path: string; operation: Operation }
-interface TagGroup { name: string; endpoints: EndpointItem[] }
+interface EndpointItem {
+  method: string
+  path: string
+  operation: Operation
+}
+interface TagGroup {
+  name: string
+  endpoints: EndpointItem[]
+}
+interface CodeBlock {
+  lang: string
+  code: string
+  label: string
+}
+interface PathSeg {
+  text: string
+  isParam: boolean
+}
 
-function parseSpec(): TagGroup[] {
+// ── Spec parsing ──────────────────────────────────────────────────────────────
+
+function parseSpec(): { groups: TagGroup[]; serverUrl: string } {
   const parsed = load(spec) as any
-  const paths = parsed.paths ?? {}
-  const httpMethods = ['get', 'post', 'put', 'delete', 'patch']
-  const endpointsByTag: Record<string, EndpointItem[]> = {}
-  for (const [path, pathItem] of Object.entries(paths as Record<string, any>)) {
-    for (const method of httpMethods) {
-      const operation = pathItem[method] as Operation | undefined
-      if (!operation) continue
-      const tags = operation.tags?.length ? operation.tags : ['Other']
+  const serverUrl: string = parsed.servers?.[0]?.url ?? ''
+  const methods = ['get', 'post', 'put', 'delete', 'patch']
+  const byTag: Record<string, EndpointItem[]> = {}
+  for (const [path, pathItem] of Object.entries((parsed.paths ?? {}) as Record<string, any>)) {
+    for (const method of methods) {
+      const op = pathItem[method] as Operation | undefined
+      if (!op) continue
+      const tags = op.tags?.length ? op.tags : ['Other']
       for (const tag of tags) {
-        if (!endpointsByTag[tag]) endpointsByTag[tag] = []
-        endpointsByTag[tag].push({ method: method.toUpperCase(), path, operation })
+        if (!byTag[tag]) byTag[tag] = []
+        byTag[tag].push({ method: method.toUpperCase(), path, operation: op })
       }
     }
   }
-  const specTags: string[] = ((parsed.tags ?? []) as any[]).map((t: any) => t.name)
-  const orderedTags = [...specTags, ...Object.keys(endpointsByTag).filter(t => !specTags.includes(t))]
-  return orderedTags.filter(tag => endpointsByTag[tag]).map(tag => ({ name: tag, endpoints: endpointsByTag[tag] }))
+  const specTags: string[] = ((parsed.tags ?? []) as any[]).map((x: any) => x.name)
+  const ordered = [...specTags, ...Object.keys(byTag).filter((x) => !specTags.includes(x))]
+  return {
+    groups: ordered.filter((x) => byTag[x]).map((x) => ({ name: x, endpoints: byTag[x] })),
+    serverUrl,
+  }
 }
 
-function splitDescriptionAndCode(mdText: string): { prose: string; codeBlocks: string[] } {
-  const codeBlockRegex = /^```[\w-]*\n[\s\S]*?^```/gm
-  const codeBlocks = [...mdText.matchAll(codeBlockRegex)].map(m => m[0])
-  const prose = mdText.replace(codeBlockRegex, '').trim()
+function splitDescriptionAndCode(text: string) {
+  const codeRe = /^```[\w-]*\n[\s\S]*?^```/gm
+  const codeBlocks = [...text.matchAll(codeRe)].map((m) => m[0])
+  // Remove "## Heading\n\n```...\n```" so headings don't float without content
+  const withHeadings = /^#{1,3} [^\n]+\n+```[\w-]*\n[\s\S]*?^```/gm
+  const prose = text.replace(withHeadings, '').replace(codeRe, '').trim()
   return { prose, codeBlocks }
 }
 
-function parseCodeBlock(raw: string): { lang: string; code: string } {
-  const match = raw.match(/^```([\w-]*)\n([\s\S]*?)^```/m)
-  return { lang: match?.[1] ?? '', code: match?.[2]?.trimEnd() ?? '' }
+function parseCodeBlock(raw: string) {
+  const m = raw.match(/^```([\w-]*)\n([\s\S]*?)^```/m)
+  return { lang: m?.[1] ?? '', code: m?.[2]?.trimEnd() ?? '' }
 }
 
-const STORAGE_KEY = 'api-reference-sidebar-width'
+// ── Syntax highlighting ───────────────────────────────────────────────────────
+
+function esc(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+}
+
+function highlightCode(code: string, lang: string): string {
+  const e = esc(code)
+  const l = lang.toLowerCase()
+
+  if (l === 'json') {
+    return e
+      .replace(/("(?:[^"\\]|\\.)*")(\s*:)/g, '<span class="hl-k">$1</span>$2')
+      .replace(/(:[ \t]*)("(?:[^"\\]|\\.)*")/g, '$1<span class="hl-s">$2</span>')
+      .replace(/(:[ \t]*)(-?\d+(?:\.\d+)?)/g, '$1<span class="hl-n">$2</span>')
+      .replace(/(:[ \t]*)(true|false|null)/g, '$1<span class="hl-b">$2</span>')
+  }
+
+  if (['bash', 'shell', 'sh', 'curl'].includes(l)) {
+    return e
+      .replace(/^(curl|wget)\b/gm, '<span class="hl-cmd">$1</span>')
+      .replace(/(--[\w-]+)/g, '<span class="hl-flag">$1</span>')
+      .replace(/('[^']*')/g, '<span class="hl-s">$1</span>')
+      .replace(/(\\)(\s*$)/gm, '<span class="hl-punct">$1</span>$2')
+  }
+
+  if (['typescript', 'javascript', 'ts', 'js'].includes(l)) {
+    return e
+      .replace(/("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)/g, '<span class="hl-s">$1</span>')
+      .replace(
+        /\b(const|let|var|function|class|import|export|from|default|if|else|return|async|await|new|true|false|null|undefined)\b/g,
+        '<span class="hl-k">$1</span>'
+      )
+      .replace(/(\/\/[^\n]*)/g, '<span class="hl-comment">$1</span>')
+  }
+
+  if (['python', 'py'].includes(l)) {
+    return e
+      .replace(/("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')/g, '<span class="hl-s">$1</span>')
+      .replace(
+        /\b(import|from|def|class|if|elif|else|for|while|return|True|False|None|and|or|not|in|print|with|as|try|except)\b/g,
+        '<span class="hl-k">$1</span>'
+      )
+      .replace(/(#[^\n]*)/g, '<span class="hl-comment">$1</span>')
+  }
+
+  return e
+}
+
+// ── Code generation ───────────────────────────────────────────────────────────
+
+let serverUrl = ''
+
+function buildCurl(ep: EndpointItem): string {
+  const lines: string[] = [
+    `curl --request ${ep.method} \\`,
+    `  --url '${serverUrl}${ep.path}' \\`,
+    `  --header 'Authorization: Bearer <token>'`,
+  ]
+  const schema = ep.operation.requestBody?.content?.['application/json']?.schema
+  if (schema?.properties && ['POST', 'PUT', 'PATCH'].includes(ep.method)) {
+    const required: string[] = schema.required ?? []
+    const body: Record<string, any> = {}
+    for (const [k, v] of Object.entries(schema.properties as Record<string, any>)) {
+      if (required.includes(k)) {
+        body[k] = (v as any).type === 'integer' ? 0 : `<${k}>`
+      }
+    }
+    if (Object.keys(body).length) {
+      lines[lines.length - 1] += ' \\'
+      lines.push(`  --header 'Content-Type: application/json' \\`)
+      lines.push(`  --data '${JSON.stringify(body)}'`)
+    }
+  }
+  return lines.join('\n')
+}
+
+function buildResponseExample(ep: EndpointItem): string | null {
+  const schema = ep.operation.responses?.['200']?.content?.['application/json']?.schema
+  if (!schema) return null
+  if (schema.properties) {
+    const obj: Record<string, any> = {}
+    for (const [k, v] of Object.entries(schema.properties as Record<string, any>)) {
+      const vt = (v as any).type
+      obj[k] =
+        vt === 'integer' || vt === 'number'
+          ? 0
+          : vt === 'boolean'
+            ? false
+            : vt === 'array'
+              ? []
+              : typeof vt === 'undefined'
+                ? {}
+                : `<${k}>`
+    }
+    return JSON.stringify(obj, null, 2)
+  }
+  return `{\n  "code": 0\n}`
+}
+
+function formatPath(path: string): PathSeg[] {
+  return path
+    .split(/(\{[^}]+\})/)
+    .filter(Boolean)
+    .map((s) => ({ text: s, isParam: s.startsWith('{') }))
+}
+
+function epId(ep: EndpointItem): string {
+  return (
+    ep.operation.operationId ??
+    `${ep.method.toLowerCase()}-${ep.path.replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '')}`
+  )
+}
+
+// ── State ─────────────────────────────────────────────────────────────────────
+
 const tagGroups = ref<TagGroup[]>([])
 const selectedEndpoint = ref<EndpointItem | null>(null)
-const sidebarWidth = ref(240)
-const isCollapsed = ref(false)
 const copiedIndex = ref<number | null>(null)
-let isResizing = false
+const copiedPath = ref(false)
+const searchQuery = ref('')
 
-function onResizeMousedown(e: MouseEvent) { isResizing = true; e.preventDefault() }
-function onMousemove(e: MouseEvent) {
-  if (!isResizing) return
-  sidebarWidth.value = Math.min(400, Math.max(160, e.clientX))
-  localStorage.setItem(STORAGE_KEY, String(sidebarWidth.value))
+const filteredGroups = computed(() => {
+  const q = searchQuery.value.trim().toLowerCase()
+  if (!q) return tagGroups.value
+  return tagGroups.value
+    .map((group) => ({
+      ...group,
+      endpoints: group.endpoints.filter(
+        (ep) =>
+          ep.operation.summary.toLowerCase().includes(q) ||
+          ep.path.toLowerCase().includes(q) ||
+          ep.method.toLowerCase().includes(q)
+      ),
+    }))
+    .filter((group) => group.endpoints.length > 0)
+})
+
+function selectEndpoint(ep: EndpointItem) {
+  selectedEndpoint.value = ep
+  history.pushState(null, '', `${location.pathname}?op=${epId(ep)}`)
 }
-function onMouseup() { isResizing = false }
-function toggleSidebar() { isCollapsed.value = !isCollapsed.value }
+
+function findByQuery(): EndpointItem | null {
+  const op = new URLSearchParams(location.search).get('op')
+  if (!op) return null
+  for (const group of tagGroups.value) {
+    for (const ep of group.endpoints) {
+      if (epId(ep) === op) return ep
+    }
+  }
+  return null
+}
+
+function onPopState() {
+  const ep = findByQuery()
+  if (ep) selectedEndpoint.value = ep
+}
+
+// ── Computed ──────────────────────────────────────────────────────────────────
 
 const selectedSplit = computed(() => {
   const desc = selectedEndpoint.value?.operation.description
@@ -119,37 +291,48 @@ const selectedSplit = computed(() => {
 })
 
 const selectedProse = computed(() => {
-  if (!selectedSplit.value.prose) return ''
-  return md.render(selectedSplit.value.prose)
+  const p = selectedSplit.value.prose
+  return p ? md.render(p) : ''
 })
 
-const selectedCodeBlocks = computed(() => selectedSplit.value.codeBlocks.map(parseCodeBlock))
+const selectedCodeBlocks = computed((): CodeBlock[] => {
+  const ep = selectedEndpoint.value
+  if (!ep) return []
+  const blocks: CodeBlock[] = [{ lang: 'bash', code: buildCurl(ep), label: t('api.code.request') }]
+  for (const raw of selectedSplit.value.codeBlocks) {
+    const { lang, code } = parseCodeBlock(raw)
+    blocks.push({ lang, code, label: lang || 'code' })
+  }
+  const resp = buildResponseExample(ep)
+  if (resp) blocks.push({ lang: 'json', code: resp, label: t('api.code.response') })
+  return blocks
+})
 
 const selectedSections = computed((): Section[] => {
   const ep = selectedEndpoint.value
   if (!ep) return []
-  const sections: Section[] = []
+  const s: Section[] = []
 
-  // Authorizations (global OAuth2 Bearer applies to all endpoints)
-  sections.push({
+  s.push({
     key: 'auth',
     title: t('api.section.authorizations'),
-    params: [{
-      name: 'Authorization',
-      type: 'string',
-      location: 'header',
-      required: true,
-      description: t('api.authDescription'),
-    }],
+    params: [
+      {
+        name: 'Authorization',
+        type: 'string',
+        location: 'header',
+        required: true,
+        description: t('api.authDescription'),
+      },
+    ],
   })
 
-  // Path parameters
-  const pathParams = (ep.operation.parameters ?? []).filter(p => p.in === 'path')
-  if (pathParams.length > 0) {
-    sections.push({
+  const pathParams = (ep.operation.parameters ?? []).filter((p) => p.in === 'path')
+  if (pathParams.length) {
+    s.push({
       key: 'path',
       title: t('api.section.pathParams'),
-      params: pathParams.map(p => ({
+      params: pathParams.map((p) => ({
         name: p.name,
         type: p.schema?.type ?? 'string',
         location: 'path',
@@ -159,13 +342,12 @@ const selectedSections = computed((): Section[] => {
     })
   }
 
-  // Query parameters
-  const queryParams = (ep.operation.parameters ?? []).filter(p => p.in === 'query')
-  if (queryParams.length > 0) {
-    sections.push({
+  const queryParams = (ep.operation.parameters ?? []).filter((p) => p.in === 'query')
+  if (queryParams.length) {
+    s.push({
       key: 'query',
       title: t('api.section.queryParams'),
-      params: queryParams.map(p => ({
+      params: queryParams.map((p) => ({
         name: p.name,
         type: p.schema?.type ?? 'string',
         location: 'query',
@@ -175,12 +357,11 @@ const selectedSections = computed((): Section[] => {
     })
   }
 
-  // Request body
   const rb = ep.operation.requestBody
   if (rb) {
     const schema = rb.content?.['application/json']?.schema
     if (schema?.properties) {
-      sections.push({
+      s.push({
         key: 'body',
         title: t('api.section.body'),
         params: Object.entries(schema.properties).map(([name, prop]: [string, any]) => ({
@@ -192,136 +373,202 @@ const selectedSections = computed((): Section[] => {
         })),
       })
     } else {
-      sections.push({ key: 'body', title: t('api.section.body'), params: [], fallback: true })
+      s.push({ key: 'body', title: t('api.section.body'), params: [], fallback: true })
     }
   }
 
-  // Response 200
-  const resp = ep.operation.responses?.['200']
-  if (resp?.content?.['application/json']?.schema?.properties) {
-    sections.push({
+  const resp200 = ep.operation.responses?.['200']
+  if (resp200?.content?.['application/json']?.schema?.properties) {
+    s.push({
       key: 'response',
       title: t('api.section.response'),
-      params: Object.entries(resp.content['application/json']!.schema!.properties!).map(([name, prop]: [string, any]) => ({
-        name,
-        type: prop.type ?? 'object',
-        location: '',
-        required: false,
-        description: prop.description ?? '',
-      })),
+      params: Object.entries(resp200.content['application/json']!.schema!.properties!).map(
+        ([name, prop]: [string, any]) => ({
+          name,
+          type: prop.type ?? 'object',
+          location: '',
+          required: false,
+          description: prop.description ?? '',
+        })
+      ),
     })
   }
 
-  return sections
+  return s
 })
 
 async function copyCode(code: string, index: number) {
   await navigator.clipboard.writeText(code).catch(() => {})
   copiedIndex.value = index
-  setTimeout(() => { copiedIndex.value = null }, 1500)
+  setTimeout(() => {
+    copiedIndex.value = null
+  }, 1500)
 }
 
-function methodClass(method: string) { return `method-${method.toLowerCase()}` }
+async function copyPath(ep: EndpointItem) {
+  await navigator.clipboard.writeText(`${ep.method.toUpperCase()} ${ep.path}`).catch(() => {})
+  copiedPath.value = true
+  setTimeout(() => {
+    copiedPath.value = false
+  }, 1500)
+}
+
+function methodClass(m: string) {
+  return `method-${m.toLowerCase()}`
+}
 
 onMounted(() => {
-  tagGroups.value = parseSpec()
-  if (tagGroups.value[0]?.endpoints[0]) selectedEndpoint.value = tagGroups.value[0].endpoints[0]
-  const stored = localStorage.getItem(STORAGE_KEY)
-  if (stored) {
-    const n = parseInt(stored, 10)
-    if (!isNaN(n)) sidebarWidth.value = n
+  const result = parseSpec()
+  tagGroups.value = result.groups
+  serverUrl = result.serverUrl
+
+  const fromQuery = findByQuery()
+  const first = result.groups[0]?.endpoints[0] ?? null
+  selectedEndpoint.value = fromQuery ?? first
+  if (selectedEndpoint.value && !fromQuery) {
+    history.replaceState(null, '', `${location.pathname}?op=${epId(selectedEndpoint.value)}`)
   }
-  document.addEventListener('mousemove', onMousemove)
-  document.addEventListener('mouseup', onMouseup)
+  window.addEventListener('popstate', onPopState)
 })
 
 onUnmounted(() => {
-  document.removeEventListener('mousemove', onMousemove)
-  document.removeEventListener('mouseup', onMouseup)
+  window.removeEventListener('popstate', onPopState)
 })
 </script>
 
 <template>
   <div class="api-reference-page">
-    <!-- Left sidebar -->
-    <div
-      class="api-sidebar"
-      :class="{ collapsed: isCollapsed }"
-      :style="isCollapsed ? {} : { width: sidebarWidth + 'px' }"
-    >
-      <div v-if="!isCollapsed" class="sidebar-content">
-        <div v-for="group in tagGroups" :key="group.name" class="tag-group">
+    <!-- Sidebar -->
+    <aside class="api-sidebar">
+      <div class="sidebar-search">
+        <input v-model="searchQuery" class="search-input" type="text" :placeholder="$t('api.search')" />
+      </div>
+      <div class="sidebar-scroll">
+        <div v-for="group in filteredGroups" :key="group.name" class="tag-group">
           <div class="tag-label">{{ group.name }}</div>
           <button
             v-for="ep in group.endpoints"
             :key="ep.operation.operationId ?? `${ep.method}-${ep.path}`"
-            class="endpoint-item"
+            class="nav-item"
             :class="{ active: selectedEndpoint?.operation.operationId === ep.operation.operationId }"
-            @click="selectedEndpoint = ep"
-          >
-            <span class="method-badge" :class="methodClass(ep.method)">{{ ep.method }}</span>
-            <span class="endpoint-summary">{{ ep.operation.summary }}</span>
+            @click="selectEndpoint(ep)">
+            <span class="nav-method" :class="methodClass(ep.method)">{{ ep.method }}</span>
+            <span class="nav-label">{{ ep.operation.summary }}</span>
           </button>
         </div>
       </div>
-    </div>
+    </aside>
 
-    <!-- Resize handle + collapse toggle -->
-    <div class="resize-handle" @mousedown="onResizeMousedown">
-      <button class="toggle-btn" @click.stop="toggleSidebar">
-        {{ isCollapsed ? '›' : '‹' }}
-      </button>
-    </div>
-
-    <!-- Main: content + code panel side by side -->
+    <!-- Main -->
     <div v-if="selectedEndpoint" class="api-main">
-      <!-- Content area -->
+      <!-- Content -->
       <div class="api-content">
-        <div class="endpoint-tag">{{ selectedEndpoint.operation.tags?.[0] ?? '' }}</div>
-        <h1 class="endpoint-title">{{ selectedEndpoint.operation.summary }}</h1>
+        <p class="ep-tag">{{ selectedEndpoint.operation.tags?.[0] ?? '' }}</p>
+        <h1 class="ep-title">{{ selectedEndpoint.operation.summary }}</h1>
 
-        <div class="endpoint-path-row">
-          <span class="method-badge large" :class="methodClass(selectedEndpoint.method)">
+        <div class="ep-path">
+          <span class="ep-method-badge" :class="methodClass(selectedEndpoint.method)">
             {{ selectedEndpoint.method }}
           </span>
-          <code class="endpoint-path">{{ selectedEndpoint.path }}</code>
+          <code class="ep-path-text">
+            <template v-for="seg in formatPath(selectedEndpoint.path)" :key="seg.text">
+              <span v-if="seg.isParam" class="path-param">{{ seg.text }}</span>
+              <span v-else>{{ seg.text }}</span>
+            </template>
+          </code>
+          <button class="path-copy-btn" @click="copyPath(selectedEndpoint)" :title="$t('api.copy')">
+            <svg
+              v-if="!copiedPath"
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+            </svg>
+            <svg
+              v-else
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          </button>
         </div>
 
         <div v-if="selectedProse" class="prose vp-doc" v-html="selectedProse" />
 
-        <!-- Sections -->
-        <div v-for="section in selectedSections" :key="section.key" class="api-section">
+        <section v-for="section in selectedSections" :key="section.key" class="api-section">
           <h4 class="section-title">{{ section.title }}</h4>
-          <p v-if="section.fallback" class="no-content">{{ $t('api.bodyFallback') }}</p>
+          <p v-if="section.fallback" class="fallback-note">{{ $t('api.bodyFallback') }}</p>
           <div v-else class="param-list">
-            <div v-for="param in section.params" :key="param.name" class="param-field">
+            <div v-for="param in section.params" :key="param.name" class="param-row">
               <div class="param-head">
                 <span class="param-name">{{ param.name }}</span>
-                <span class="param-badge type-badge">{{ param.type }}</span>
-                <span v-if="param.location" class="param-badge location-badge">{{ param.location }}</span>
+                <span class="param-meta">{{ param.type }}</span>
+                <span v-if="param.location" class="param-meta">{{ param.location }}</span>
                 <span
                   v-if="section.key !== 'response'"
                   class="param-badge"
-                  :class="param.required ? 'required-badge' : 'optional-badge'"
-                >{{ param.required ? $t('api.param.required') : $t('api.param.optional') }}</span>
+                  :class="param.required ? 'is-required' : 'is-optional'"
+                  >{{ param.required ? $t('api.param.required') : $t('api.param.optional') }}</span
+                >
               </div>
               <p v-if="param.description" class="param-desc">{{ param.description }}</p>
             </div>
           </div>
-        </div>
+        </section>
       </div>
 
       <!-- Code panel -->
-      <div class="api-code-panel">
-        <p v-if="selectedCodeBlocks.length === 0" class="no-content">{{ $t('api.noCodeExamples') }}</p>
-        <div v-for="(block, i) in selectedCodeBlocks" :key="i" class="code-block-wrapper">
-          <div class="code-block-header">
-            <span class="lang-label">{{ block.lang || 'code' }}</span>
-            <button class="copy-btn" @click="copyCode(block.code, i)">
-              {{ copiedIndex === i ? $t('api.copied') : $t('api.copy') }}
+      <div class="code-panel">
+        <div v-for="(block, i) in selectedCodeBlocks" :key="i" class="code-card">
+          <div class="card-header">
+            <span class="card-label">{{ block.label }}</span>
+            <button class="copy-btn" @click="copyCode(block.code, i)" :title="$t('api.copy')">
+              <svg
+                v-if="copiedIndex !== i"
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+              </svg>
+              <svg
+                v-else
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
             </button>
           </div>
-          <pre class="code-block-pre"><code>{{ block.code }}</code></pre>
+          <div class="card-body">
+            <pre class="code-pre"><code v-html="highlightCode(block.code, block.lang)" /></pre>
+          </div>
         </div>
       </div>
     </div>
@@ -329,51 +576,83 @@ onUnmounted(() => {
 </template>
 
 <style>
+/* ── Layout ────────────────────────────────────────────────────────────────── */
 .api-reference-page {
   display: flex;
+  margin-top: var(--vp-nav-height);
   height: calc(100vh - var(--vp-nav-height));
   overflow: hidden;
   font-size: 14px;
+  background: var(--vp-c-bg);
+  max-width: var(--vp-layout-max-width, 1440px);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
-/* ── Sidebar ── */
+/* ── Sidebar ───────────────────────────────────────────────────────────────── */
 .api-sidebar {
   flex-shrink: 0;
-  background: var(--vp-c-bg-soft);
+  width: 300px;
   border-right: 1px solid var(--vp-c-divider);
-  overflow-y: auto;
-  width: 240px;
-}
-
-.api-sidebar.collapsed {
-  width: 0 !important;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
 }
 
-.sidebar-content {
-  padding: 16px 8px;
+.sidebar-search {
+  margin-top: 24px;
+  padding: 12px 18px;
+  flex-shrink: 0;
+}
+
+.search-input {
+  width: 100%;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 6px;
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s;
+  font-family: var(--vp-font-family-base);
+}
+
+.search-input::placeholder {
+  color: var(--vp-c-text-3);
+}
+
+.search-input:focus {
+  border-color: var(--vp-c-brand-1);
+}
+
+.sidebar-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 8px 24px;
 }
 
 .tag-group {
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .tag-label {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
   color: var(--vp-c-text-3);
   padding: 0 10px;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
-.endpoint-item {
+.nav-item {
   display: flex;
   align-items: center;
   gap: 7px;
   width: 100%;
-  padding: 4px 10px;
+  padding: 5px 10px;
   margin-bottom: 1px;
   border-radius: 6px;
   border: none;
@@ -381,82 +660,79 @@ onUnmounted(() => {
   cursor: pointer;
   text-align: left;
   color: var(--vp-c-text-2);
-  font-size: 12px;
-  line-height: 1.5;
+  font-size: 12.5px;
+  line-height: 1.4;
+  transition:
+    background 0.1s,
+    color 0.1s;
 }
 
-.endpoint-item:hover {
+.nav-item:hover {
   background: var(--vp-c-default-soft);
+  color: var(--vp-c-text-1);
 }
 
-.endpoint-item.active {
-  background: color-mix(in srgb, var(--vp-c-brand-1) 14%, transparent);
+.nav-item.active {
+  background: color-mix(in srgb, var(--vp-c-brand-1) 10%, transparent);
   color: var(--vp-c-brand-1);
-  font-weight: 600;
 }
 
-.endpoint-summary {
+.nav-label {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  flex: 1;
+  min-width: 0;
 }
 
-/* ── Method badges ── */
-.method-badge {
+/* ── Method badges ─────────────────────────────────────────────────────────── */
+.nav-method {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   font-size: 9px;
-  font-weight: 700;
-  padding: 1px 5px;
-  border-radius: 4px;
+  padding: 1px 0;
+  width: 45px;
+  border-radius: 3px;
   flex-shrink: 0;
   font-family: var(--vp-font-family-mono);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
 }
 
-.method-badge.large {
+.ep-method-badge {
+  display: inline-flex;
+  align-items: center;
   font-size: 11px;
-  padding: 2px 8px;
-  border-radius: 5px;
-}
-
-.method-get    { color: var(--vp-c-success-1);   background: var(--vp-c-success-soft);   }
-.method-post   { color: var(--vp-c-brand-1);     background: var(--vp-c-brand-soft);     }
-.method-put    { color: var(--vp-c-warning-1);   background: var(--vp-c-warning-soft);   }
-.method-delete { color: var(--vp-c-danger-1);    background: var(--vp-c-danger-soft);    }
-.method-patch  { color: var(--vp-c-important-1); background: var(--vp-c-important-soft); }
-
-/* ── Resize handle ── */
-.resize-handle {
-  width: 8px;
+  font-weight: 700;
+  padding: 4px 10px;
+  line-height: 1.2;
+  border-radius: 6px;
   flex-shrink: 0;
-  background: var(--vp-c-divider);
-  cursor: col-resize;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-family: var(--vp-font-family-mono);
 }
 
-.toggle-btn {
-  position: absolute;
-  right: -10px;
-  width: 18px;
-  height: 32px;
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 0 4px 4px 0;
-  cursor: pointer;
-  font-size: 12px;
-  color: var(--vp-c-text-3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  padding: 0;
+.method-get {
+  color: var(--vp-c-success-1);
+  background: var(--vp-c-success-soft);
+}
+.method-post {
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+}
+.method-put {
+  color: var(--vp-c-warning-1);
+  background: var(--vp-c-warning-soft);
+}
+.method-delete {
+  color: var(--vp-c-danger-1);
+  background: var(--vp-c-danger-soft);
+}
+.method-patch {
+  color: var(--vp-c-important-1);
+  background: var(--vp-c-important-soft);
 }
 
-/* ── Main area ── */
+/* ── Main area ─────────────────────────────────────────────────────────────── */
 .api-main {
   flex: 1;
   display: flex;
@@ -464,51 +740,49 @@ onUnmounted(() => {
   min-width: 0;
 }
 
-/* ── Content area ── */
+/* ── Content area ──────────────────────────────────────────────────────────── */
 .api-content {
   flex: 1;
-  overflow-y: auto;
-  padding: 32px 40px 48px;
   min-width: 0;
+  overflow-y: auto;
+  padding: 36px 44px 64px;
 }
 
-.endpoint-tag {
-  font-size: 12px;
+.ep-tag {
+  font-size: 13px;
   font-weight: 500;
   color: var(--vp-c-brand-1);
-  margin-bottom: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  margin: 0 0 8px;
 }
 
-.endpoint-title {
-  font-size: 26px;
+.ep-title {
+  font-size: 30px;
   font-weight: 700;
   color: var(--vp-c-text-1);
-  margin: 0 0 14px;
-  line-height: 1.25;
+  margin: 0 0 16px;
+  line-height: 36px;
+  letter-spacing: -0.75px;
   border: none;
   padding: 0;
-  letter-spacing: -0.02em;
 }
 
-.endpoint-path-row {
+.ep-path {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 20px;
-  padding: 8px 12px;
-  background: var(--vp-c-bg-soft);
+  padding: 5px 10px 5px 5px;
+  background: var(--vp-c-bg);
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
-  width: fit-content;
-  max-width: 100%;
+  margin-bottom: 24px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.endpoint-path {
+.ep-path-text {
   font-size: 13px;
   font-family: var(--vp-font-family-mono);
-  color: var(--vp-c-text-1);
+  color: var(--vp-c-text-2);
   background: transparent;
   padding: 0;
   white-space: nowrap;
@@ -516,47 +790,51 @@ onUnmounted(() => {
   text-overflow: ellipsis;
 }
 
-.prose {
-  font-size: 14px;
-  color: var(--vp-c-text-2);
-  line-height: 1.65;
-  margin-bottom: 24px;
+.path-param {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
 }
 
-/* ── Sections ── */
+.prose {
+  font-size: 15px;
+  color: var(--vp-c-text-1);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+/* ── Sections ──────────────────────────────────────────────────────────────── */
 .api-section {
-  margin-top: 28px;
+  margin-top: 36px;
 }
 
 .section-title {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--vp-c-text-1);
-  margin: 0 0 0;
-  padding-bottom: 10px;
+  margin: 0;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--vp-c-divider);
-  letter-spacing: 0;
   border-top: none;
+  letter-spacing: -0.1px;
 }
 
-.no-content {
+.fallback-note {
   font-size: 13px;
   color: var(--vp-c-text-3);
-  margin: 12px 0 0;
-  padding: 0;
+  margin: 14px 0 0;
 }
 
-/* ── Param rows ── */
+/* ── Param rows ────────────────────────────────────────────────────────────── */
 .param-list {
   margin-top: 0;
 }
 
-.param-field {
-  padding: 14px 0;
+.param-row {
+  padding: 16px 0;
   border-bottom: 1px solid var(--vp-c-divider);
 }
 
-.param-field:last-child {
+.param-row:last-child {
   border-bottom: none;
 }
 
@@ -565,97 +843,99 @@ onUnmounted(() => {
   align-items: center;
   flex-wrap: wrap;
   gap: 6px;
-  font-family: var(--vp-font-family-mono);
-  font-size: 13px;
 }
 
 .param-name {
-  color: var(--vp-c-text-1);
   font-weight: 600;
+  font-size: 13.5px;
+  font-family: var(--vp-font-family-mono);
+  color: var(--vp-c-brand-1);
+}
+
+.param-meta {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--vp-c-text-3);
 }
 
 .param-badge {
   display: inline-flex;
   align-items: center;
   font-size: 11px;
-  font-family: var(--vp-font-family-mono);
-  padding: 1px 6px;
-  border-radius: 4px;
+  font-weight: 500;
+  padding: 1px 8px;
+  border-radius: 20px;
   line-height: 1.6;
 }
 
-.type-badge {
-  background: var(--vp-c-bg-mute);
-  color: var(--vp-c-text-2);
-}
-
-.location-badge {
-  background: var(--vp-c-bg-mute);
-  color: var(--vp-c-text-3);
-}
-
-.required-badge {
+.is-required {
   background: color-mix(in srgb, var(--vp-c-danger-1) 12%, transparent);
   color: var(--vp-c-danger-1);
-  font-weight: 600;
 }
 
-.optional-badge {
-  background: transparent;
+.is-optional {
   color: var(--vp-c-text-3);
 }
 
 .param-desc {
   font-size: 13px;
-  color: var(--vp-c-text-2);
-  line-height: 1.6;
-  margin: 6px 0 0;
-  padding: 0;
+  color: var(--vp-c-text-1);
+  line-height: 1.65;
+  margin: 7px 0 0;
   font-family: var(--vp-font-family-base);
 }
 
-/* ── Code panel ── */
-.api-code-panel {
-  width: 420px;
-  flex-shrink: 0;
-  border-left: 1px solid var(--vp-c-divider);
-  background: var(--vp-c-bg-soft);
+/* ── Code panel ────────────────────────────────────────────────────────────── */
+.code-panel {
+  flex: 1;
+  min-width: 320px;
   overflow-y: auto;
-  padding: 20px 16px;
+  padding: 36px 20px 64px;
 }
 
-.code-block-wrapper {
-  border: 1px solid var(--vp-c-divider);
+.code-card {
+  background: color-mix(in srgb, var(--vp-c-brand-1) 5%, var(--vp-c-bg-mute));
+  border: 1px solid color-mix(in srgb, var(--vp-c-divider) 80%, transparent);
   border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
-.code-block-header {
+.card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5px 12px;
-  background: var(--vp-c-bg-mute);
-  border-bottom: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+  border-bottom: 1px solid color-mix(in srgb, var(--vp-c-divider) 60%, transparent);
+  padding: 2px 8px;
+
+  .copy-btn {
+    svg {
+      width: 10px;
+      height: 10px;
+    }
+  }
 }
 
-.lang-label {
-  font-size: 11px;
-  font-family: var(--vp-font-family-mono);
-  color: var(--vp-c-text-3);
+.card-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
 }
 
 .copy-btn {
-  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: var(--vp-c-text-3);
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 2px 6px;
-  border-radius: 3px;
-  font-family: var(--vp-font-family-base);
-  transition: color 0.15s;
+  padding: 5px;
+  border-radius: 4px;
+  transition:
+    background 0.12s,
+    color 0.12s;
 }
 
 .copy-btn:hover {
@@ -663,23 +943,107 @@ onUnmounted(() => {
   color: var(--vp-c-text-1);
 }
 
-.code-block-pre {
-  margin: 0;
-  padding: 12px 14px;
-  background: var(--vp-code-block-bg);
-  color: var(--vp-code-block-color);
-  font-family: var(--vp-font-family-mono);
-  font-size: 12px;
-  line-height: 1.6;
-  overflow-x: auto;
-  white-space: pre;
+.path-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  flex-shrink: 0;
+  color: var(--vp-c-text-3);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition:
+    background 0.12s,
+    color 0.12s;
 }
 
-.code-block-pre code {
+.path-copy-btn:hover {
+  background: var(--vp-c-default-soft);
+  color: var(--vp-c-text-1);
+}
+
+.card-body {
+  background: var(--vp-c-bg);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.code-pre {
+  margin: 0;
+  padding: 8px;
+  font-size: 12.5px;
+  line-height: 1.65;
+  overflow-x: auto;
+  white-space: pre;
+  font-family: var(--vp-font-family-mono);
+  color: rgb(36, 41, 47);
+}
+
+.dark .code-pre {
+  color: rgb(201, 209, 217);
+}
+
+.code-pre code {
   font-family: inherit;
   font-size: inherit;
   background: transparent;
-  padding: 0;
   color: inherit;
+  padding: 0;
+}
+
+/* ── Syntax highlighting ───────────────────────────────────────────────────── */
+.hl-k {
+  color: #0550ae;
+}
+.hl-s {
+  color: #0a3069;
+}
+.hl-n {
+  color: #0550ae;
+}
+.hl-b {
+  color: #8250df;
+}
+.hl-cmd {
+  color: #953800;
+  font-weight: 600;
+}
+.hl-flag {
+  color: #0550ae;
+}
+.hl-punct {
+  color: #cf222e;
+}
+.hl-comment {
+  color: #6e7781;
+  font-style: italic;
+}
+
+.dark .hl-k {
+  color: #79c0ff;
+}
+.dark .hl-s {
+  color: #a5d6ff;
+}
+.dark .hl-n {
+  color: #79c0ff;
+}
+.dark .hl-b {
+  color: #d2a8ff;
+}
+.dark .hl-cmd {
+  color: #ffa657;
+}
+.dark .hl-flag {
+  color: #79c0ff;
+}
+.dark .hl-punct {
+  color: #ff7b72;
+}
+.dark .hl-comment {
+  color: #8b949e;
 }
 </style>
