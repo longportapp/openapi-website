@@ -16,7 +16,7 @@ import { useTryItMode } from '../composables'
 import TryItContent from '../components/TryIt/Content.vue'
 import Content from './Content.vue'
 import 'vitepress/theme'
-import ScalarApiReference from '../components/ScalarApiReference.vue'
+import ApiReference from '../components/ApiReference.vue'
 
 const { isOpen: isSidebarOpen, open: openSidebar, close: closeSidebar } = useSidebarControl()
 
@@ -91,7 +91,7 @@ provide('hero-image-slot-exists', heroImageSlotExists)
       </Content>
     </ClientOnly>
     <ClientOnly v-else-if="isApiReference">
-      <ScalarApiReference />
+      <ApiReference />
     </ClientOnly>
 
     <VPFooter />
