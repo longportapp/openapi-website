@@ -6,9 +6,10 @@ info:
     watchlist management, and content queries for the Longbridge trading platform.
   version: '1.0.0'
 x-pages:
-  - id: authentication
-    title: Authentication
-    x-title-zh: 认证
+  - id: overview
+    title: Overview
+    x-title-zh: 概览
+    x-icon: lock
     content: |
       This page is reorganized as a practical **OAuth 2.0 access flow** for new integrations.
 
@@ -45,7 +46,7 @@ x-pages:
 
       If there is no UI for client creation in your environment, register dynamically:
 
-      ```bash
+      ```shell
       curl -X POST https://openapi.longbridge.com/oauth2/register \
         -H "Content-Type: application/json" \
         -d '{
@@ -79,7 +80,7 @@ x-pages:
 
       ### 3) Exchange `code` for `access_token`
 
-      ```bash
+      ```shell
       curl -X POST https://openapi.longbridge.com/oauth2/token \
         -H "Content-Type: application/x-www-form-urlencoded" \
         -d "grant_type=authorization_code" \
@@ -93,7 +94,7 @@ x-pages:
 
       ### 4) Call API with Bearer token (TSLA.US example)
 
-      ```bash
+      ```shell
       curl -X GET "https://openapi.longbridge.com/v1/quote/get_security_list?market=US&category=Overnight" \
         -H "Authorization: Bearer ACCESS_TOKEN"
       ```
@@ -364,9 +365,80 @@ x-pages:
       ## 兼容说明
 
       历史接口 `/v1/token/refresh` 属于旧方案兼容路径，不建议新接入继续采用。新接入请统一使用 OAuth 2.0 token endpoint。
+  - id: real-time-data
+    title: Real-Time Market Data
+    x-title-zh: 实时行情
+    x-icon: activity
+    content: |
+      > **Note:** Real-time market data is **not** part of this HTTP REST API. Quotes, price feeds, order book depth, broker queues, and trade ticks are delivered via **WebSocket / TCP long connection** through a dedicated quote gateway — see the [Socket Feed](/socket/hosts) documentation.
+
+      ## Overview
+
+      The HTTP REST API (documented on this page) covers trading operations, account management, and historical/snapshot data queries. Real-time streaming data — all market quote subscriptions and push feeds — is a separate system:
+
+      | Data Type | Access Method |
+      |-----------|---------------|
+      | Trading orders, account info, watchlist | HTTP REST API (this page) |
+      | Real-time quotes, depth, trade ticks | WebSocket / TCP Socket Feed |
+
+      ## Connecting to the Quote Gateway
+
+      Connect to Longbridge's quote gateway directly via WebSocket or TCP:
+
+      **WebSocket:** `wss://openapi-quote.longbridge.com`
+
+      **TCP:** `openapi-quote.longbridge.com:2020`
+
+      > Mainland China users: `wss://openapi-quote.longbridge.cn` / `openapi-quote.longbridge.cn:2020`
+
+      ## Subscribing to Market Data
+
+      After connecting, authenticate with your API credentials, then send a subscribe command specifying symbols and subscription types (price, depth, broker queue, trade ticks). The server will then push real-time data as it arrives.
+
+      The SDK handles connection lifecycle and subscriptions automatically — for most integrations the SDK is the recommended approach: https://open.longbridge.com/sdk
+
+      ## Further Reading
+
+      - [Socket Feed endpoints](/socket/hosts)
+      - [Subscribe to market data](/socket/subscribe_quote)
+      - [Protocol overview](/socket/protocol/overview)
+    x-content-zh: |
+      > **注意：** 实时行情数据**不**属于本 HTTP REST API 的范围。报价、价格推送、盘口、经纪队列及成交明细通过专用行情网关以 **WebSocket / TCP 长连接**方式推送，详见 [Socket 实时推送](/socket/hosts) 文档。
+
+      ## 概述
+
+      本 HTTP REST API（即本页面记录的接口）涵盖交易操作、账户管理及历史/快照数据查询。实时流式数据——所有行情订阅与推送——属于独立的系统：
+
+      | 数据类型 | 接入方式 |
+      |----------|----------|
+      | 交易委托、账户信息、自选股 | HTTP REST API（本页） |
+      | 实时报价、盘口、成交明细 | WebSocket / TCP Socket Feed |
+
+      ## 连接行情网关
+
+      通过 WebSocket 或 TCP 直连 Longbridge 行情网关：
+
+      **WebSocket：** `wss://openapi-quote.longbridge.com`
+
+      **TCP：** `openapi-quote.longbridge.com:2020`
+
+      > 中国大陆用户：`wss://openapi-quote.longbridge.cn` / `openapi-quote.longbridge.cn:2020`
+
+      ## 订阅行情
+
+      连接后，使用 API 凭证完成鉴权，然后发送订阅指令，指定标的和订阅类型（价格、盘口、经纪队列、成交明细）。服务端将实时推送订阅的行情数据。
+
+      SDK 已完整实现连接生命周期管理与订阅功能，推荐大多数接入场景直接使用 SDK：https://open.longbridge.com/sdk
+
+      ## 相关文档
+
+      - [Socket 实时推送接入地址](/socket/hosts)
+      - [订阅行情推送](/socket/subscribe_quote)
+      - [协议概览](/socket/protocol/overview)
   - id: error-codes
     title: Error Codes
     x-title-zh: 错误码
+    x-icon: alert-circle
     content: |
       ## Error Codes
 

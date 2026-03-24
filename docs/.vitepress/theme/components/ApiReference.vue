@@ -6,7 +6,14 @@ import { useI18n } from 'vue-i18n'
 import spec from '../../../../openapi.yaml?raw'
 
 const { t, locale } = useI18n()
-const md = new MarkdownIt({ html: false, linkify: false })
+const md = new MarkdownIt({
+  html: false,
+  linkify: true,
+  highlight: (str: string, lang: string) => {
+    const code = highlightCode(str, lang)
+    return `<div class="language-${lang || 'text'}"><pre><code>${code}\n</code></pre></div>`
+  },
+})
 const isZh = computed(() => locale.value.startsWith('zh'))
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -81,6 +88,21 @@ interface EndpointItem {
   path: string
   operation: Operation
 }
+
+interface PageItem {
+  id: string
+  title: string
+  titleZh?: string
+  content: string
+  contentZh?: string
+  icon?: string
+}
+
+const PAGE_ICONS: Record<string, string> = {
+  lock: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+  activity: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+  'alert-circle': `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+}
 interface TagGroup {
   name: string
   nameZh?: string
@@ -98,7 +120,7 @@ interface PathSeg {
 
 // ── Spec parsing ──────────────────────────────────────────────────────────────
 
-function parseSpec(): { groups: TagGroup[]; serverUrl: string } {
+function parseSpec(): { groups: TagGroup[]; pages: PageItem[]; serverUrl: string } {
   const parsed = load(spec) as any
   const serverUrl: string = parsed.servers?.[0]?.url ?? ''
   const methods = ['get', 'post', 'put', 'delete', 'patch']
@@ -121,10 +143,21 @@ function parseSpec(): { groups: TagGroup[]; serverUrl: string } {
   }
   const specTags: string[] = specTagObjs.map((x: any) => x.name)
   const ordered = [...specTags, ...Object.keys(byTag).filter((x) => !specTags.includes(x))]
+  const rawPages: any[] = (parsed['x-pages'] ?? []) as any[]
+  const pages: PageItem[] = rawPages.map((p: any) => ({
+    id: p.id,
+    title: p.title,
+    titleZh: p['x-title-zh'],
+    content: p.content ?? '',
+    contentZh: p['x-content-zh'],
+    icon: p['x-icon'],
+  }))
+
   return {
     groups: ordered
       .filter((x) => byTag[x])
       .map((x) => ({ name: x, nameZh: tagZhMap[x], endpoints: byTag[x] })),
+    pages,
     serverUrl,
   }
 }
@@ -268,6 +301,8 @@ const selectedEndpoint = ref<EndpointItem | null>(null)
 const copiedIndex = ref<number | null>(null)
 const copiedPath = ref(false)
 const searchQuery = ref('')
+const pages = ref<PageItem[]>([])
+const selectedPage = ref<PageItem | null>(null)
 
 const filteredGroups = computed(() => {
   const q = searchQuery.value.trim().toLowerCase()
@@ -290,11 +325,20 @@ const filteredGroups = computed(() => {
 })
 
 function selectEndpoint(ep: EndpointItem) {
+  selectedPage.value = null
   selectedEndpoint.value = ep
   history.pushState(null, '', `${location.pathname}?op=${epId(ep)}`)
+  window.scrollTo(0, 0)
 }
 
-function findByQuery(): EndpointItem | null {
+function selectPage(page: PageItem) {
+  selectedEndpoint.value = null
+  selectedPage.value = page
+  history.pushState(null, '', `${location.pathname}?page=${page.id}`)
+  window.scrollTo(0, 0)
+}
+
+function findEndpointByQuery(): EndpointItem | null {
   const op = new URLSearchParams(location.search).get('op')
   if (!op) return null
   for (const group of tagGroups.value) {
@@ -305,8 +349,15 @@ function findByQuery(): EndpointItem | null {
   return null
 }
 
+function findPageByQuery(): PageItem | null {
+  const pageId = new URLSearchParams(location.search).get('page')
+  if (!pageId) return null
+  return pages.value.find((p) => p.id === pageId) ?? null
+}
+
 function onPopState() {
-  selectedEndpoint.value = findByQuery()
+  selectedEndpoint.value = findEndpointByQuery()
+  selectedPage.value = findPageByQuery()
 }
 
 // ── Computed ──────────────────────────────────────────────────────────────────
@@ -355,6 +406,13 @@ const selectedCodeBlocks = computed((): CodeBlock[] => {
   const resp = buildResponseExample(ep)
   if (resp) blocks.push({ lang: 'json', code: resp, label: t('api.code.response') })
   return blocks
+})
+
+const selectedPageHtml = computed(() => {
+  const page = selectedPage.value
+  if (!page) return ''
+  const content = (isZh.value && page.contentZh) ? page.contentZh : page.content
+  return content ? md.render(content) : ''
 })
 
 const selectedSections = computed((): Section[] => {
@@ -476,10 +534,11 @@ function methodClass(m: string) {
 onMounted(() => {
   const result = parseSpec()
   tagGroups.value = result.groups
+  pages.value = result.pages
   serverUrl = result.serverUrl
 
-  const fromQuery = findByQuery()
-  selectedEndpoint.value = fromQuery
+  selectedEndpoint.value = findEndpointByQuery()
+  selectedPage.value = findPageByQuery()
   window.addEventListener('popstate', onPopState)
 })
 
@@ -496,6 +555,17 @@ onUnmounted(() => {
         <input v-model="searchQuery" class="search-input" type="text" :placeholder="$t('api.search')" />
       </div>
       <div class="sidebar-scroll">
+        <div v-if="pages.length" class="page-group">
+          <button
+            v-for="page in pages"
+            :key="page.id"
+            class="nav-item nav-item-page"
+            :class="{ active: selectedPage?.id === page.id }"
+            @click="selectPage(page)">
+            <span v-if="page.icon && PAGE_ICONS[page.icon]" class="nav-page-icon" v-html="PAGE_ICONS[page.icon]" />
+            <span class="nav-label">{{ isZh ? (page.titleZh || page.title) : page.title }}</span>
+          </button>
+        </div>
         <div v-for="group in filteredGroups" :key="group.name" class="tag-group">
           <div class="tag-label">{{ isZh ? (group.nameZh || group.name) : group.name }}</div>
           <button
@@ -512,7 +582,7 @@ onUnmounted(() => {
     </aside>
 
     <!-- Intro (no endpoint selected) -->
-    <div v-if="!selectedEndpoint" class="api-intro">
+    <div v-if="!selectedEndpoint && !selectedPage" class="api-intro">
       <div class="intro-content">
         <h1 class="intro-title">{{ $t('api.intro.title') }}</h1>
         <p class="intro-desc">{{ $t('api.intro.desc') }}</p>
@@ -563,6 +633,16 @@ onUnmounted(() => {
         </div>
 
         <p class="intro-hint">← {{ $t('api.intro.hint') }}</p>
+      </div>
+    </div>
+
+    <!-- Page content (info page selected) -->
+    <div v-if="selectedPage && !selectedEndpoint" class="api-main">
+      <div class="api-content api-page-content">
+        <div class="vp-doc">
+          <h1>{{ isZh ? (selectedPage.titleZh || selectedPage.title) : selectedPage.title }}</h1>
+          <div v-html="selectedPageHtml" />
+        </div>
       </div>
     </div>
 
@@ -686,9 +766,8 @@ onUnmounted(() => {
 /* ── Layout ────────────────────────────────────────────────────────────────── */
 .api-reference-page {
   display: flex;
+  align-items: flex-start;
   margin-top: var(--vp-nav-height);
-  height: calc(100vh - var(--vp-nav-height));
-  overflow: hidden;
   font-size: 14px;
   background: var(--vp-c-bg);
   max-width: var(--vp-layout-max-width, 1440px);
@@ -699,8 +778,11 @@ onUnmounted(() => {
 
 /* ── Sidebar ───────────────────────────────────────────────────────────────── */
 .api-sidebar {
+  position: sticky;
+  top: var(--vp-nav-height);
   flex-shrink: 0;
   width: 300px;
+  height: calc(100vh - var(--vp-nav-height));
   border-right: 1px solid var(--vp-c-divider);
   display: flex;
   flex-direction: column;
@@ -767,7 +849,7 @@ onUnmounted(() => {
   cursor: pointer;
   text-align: left;
   color: var(--vp-c-text-2);
-  font-size: 12.5px;
+  font-size: 14px;
   line-height: 1.4;
   transition:
     background 0.1s,
@@ -790,6 +872,24 @@ onUnmounted(() => {
   white-space: nowrap;
   flex: 1;
   min-width: 0;
+}
+
+.page-group {
+  border-bottom: 1px solid var(--vp-c-divider);
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+}
+
+.nav-page-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.api-page-content {
+  max-width: 752px;
+  font-size: 16px;
 }
 
 /* ── Method badges ─────────────────────────────────────────────────────────── */
@@ -843,7 +943,7 @@ onUnmounted(() => {
 .api-main {
   flex: 1;
   display: flex;
-  overflow: hidden;
+  align-items: flex-start;
   min-width: 0;
 }
 
@@ -851,7 +951,6 @@ onUnmounted(() => {
 .api-content {
   flex: 1;
   min-width: 0;
-  overflow-y: auto;
   padding: 36px 44px 64px;
 }
 
@@ -996,7 +1095,6 @@ onUnmounted(() => {
 .code-panel {
   flex: 1;
   min-width: 320px;
-  overflow-y: auto;
   padding: 36px 20px 64px;
 }
 
