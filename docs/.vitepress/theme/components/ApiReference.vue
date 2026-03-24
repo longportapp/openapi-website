@@ -112,17 +112,18 @@ function toggleSidebar() {
   isCollapsed.value = !isCollapsed.value
 }
 
-const selectedProse = computed(() => {
+const selectedSplit = computed(() => {
   const desc = selectedEndpoint.value?.operation.description
-  if (!desc) return ''
-  return md.render(splitDescriptionAndCode(desc).prose)
+  if (!desc) return { prose: '', codeBlocks: [] }
+  return splitDescriptionAndCode(desc)
 })
 
-const selectedCodeBlocks = computed(() => {
-  const desc = selectedEndpoint.value?.operation.description
-  if (!desc) return []
-  return splitDescriptionAndCode(desc).codeBlocks.map(parseCodeBlock)
+const selectedProse = computed(() => {
+  if (!selectedSplit.value.prose) return ''
+  return md.render(selectedSplit.value.prose)
 })
+
+const selectedCodeBlocks = computed(() => selectedSplit.value.codeBlocks.map(parseCodeBlock))
 
 const selectedParameters = computed(() => selectedEndpoint.value?.operation.parameters ?? [])
 
@@ -140,7 +141,7 @@ const selectedRequestBody = computed(() => {
 })
 
 async function copyCode(code: string) {
-  await navigator.clipboard.writeText(code)
+  await navigator.clipboard.writeText(code).catch(() => {})
 }
 
 function methodClass(method: string) {
@@ -153,7 +154,10 @@ onMounted(() => {
     selectedEndpoint.value = tagGroups.value[0].endpoints[0]
   }
   const stored = localStorage.getItem(STORAGE_KEY)
-  if (stored) sidebarWidth.value = parseInt(stored, 10)
+  if (stored) {
+    const n = parseInt(stored, 10)
+    if (!isNaN(n)) sidebarWidth.value = n
+  }
   document.addEventListener('mousemove', onMousemove)
   document.addEventListener('mouseup', onMouseup)
 })
@@ -176,7 +180,7 @@ onUnmounted(() => {
           <div class="tag-label">{{ group.name }}</div>
           <button
             v-for="ep in group.endpoints"
-            :key="ep.operation.operationId"
+            :key="ep.operation.operationId ?? `${ep.method}-${ep.path}`"
             class="endpoint-item"
             :class="{ active: selectedEndpoint?.operation.operationId === ep.operation.operationId }"
             @click="selectedEndpoint = ep"
