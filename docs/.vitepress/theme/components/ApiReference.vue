@@ -33,12 +33,19 @@ interface Section {
   fallback?: boolean
 }
 
+interface CodeSample {
+  lang: string
+  label: string
+  source: string
+}
+
 interface Operation {
   operationId: string
   summary: string
   description?: string
   tags?: string[]
   parameters?: Parameter[]
+  'x-codeSamples'?: CodeSample[]
   requestBody?: {
     content?: {
       'application/json'?: {
@@ -55,6 +62,7 @@ interface Operation {
       description?: string
       content?: {
         'application/json'?: {
+          example?: any
           schema?: {
             properties?: Record<string, { type?: string; description?: string }>
           }
@@ -201,9 +209,13 @@ function buildCurl(ep: EndpointItem): string {
 }
 
 function buildResponseExample(ep: EndpointItem): string | null {
-  const schema = ep.operation.responses?.['200']?.content?.['application/json']?.schema
-  if (!schema) return null
-  if (schema.properties) {
+  const resp200 = ep.operation.responses?.['200']?.content?.['application/json']
+  if (!resp200) return null
+  if (resp200.example !== undefined) {
+    return JSON.stringify(resp200.example, null, 2)
+  }
+  const schema = resp200.schema
+  if (schema?.properties) {
     const obj: Record<string, any> = {}
     for (const [k, v] of Object.entries(schema.properties as Record<string, any>)) {
       const vt = (v as any).type
@@ -220,7 +232,7 @@ function buildResponseExample(ep: EndpointItem): string | null {
     }
     return JSON.stringify(obj, null, 2)
   }
-  return `{\n  "code": 0\n}`
+  return null
 }
 
 function formatPath(path: string): PathSeg[] {
@@ -298,10 +310,18 @@ const selectedCodeBlocks = computed((): CodeBlock[] => {
   const ep = selectedEndpoint.value
   if (!ep) return []
   const blocks: CodeBlock[] = [{ lang: 'bash', code: buildCurl(ep), label: t('api.code.request') }]
+
+  // x-codeSamples from OpenAPI spec (e.g. CLI examples)
+  for (const sample of ep.operation['x-codeSamples'] ?? []) {
+    blocks.push({ lang: sample.lang, code: sample.source.trimEnd(), label: sample.label })
+  }
+
+  // inline code blocks extracted from description
   for (const raw of selectedSplit.value.codeBlocks) {
     const { lang, code } = parseCodeBlock(raw)
     blocks.push({ lang, code, label: lang || 'code' })
   }
+
   const resp = buildResponseExample(ep)
   if (resp) blocks.push({ lang: 'json', code: resp, label: t('api.code.response') })
   return blocks
