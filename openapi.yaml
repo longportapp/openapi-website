@@ -9,6 +9,7 @@ x-pages:
   - id: authentication
     title: Authentication
     x-title-zh: 认证
+    x-icon: lock
     content: |
       This page is reorganized as a practical **OAuth 2.0 access flow** for new integrations.
 
@@ -367,6 +368,7 @@ x-pages:
   - id: real-time-data
     title: Real-Time Market Data
     x-title-zh: 实时行情
+    x-icon: activity
     content: |
       > **Note:** Real-time market data is **not** part of this HTTP REST API. Quotes, price feeds, order book depth, broker queues, and trade ticks are delivered via **WebSocket / TCP long connection** through a dedicated quote gateway — see the [Socket Feed](/socket/hosts) documentation.
 
@@ -436,6 +438,7 @@ x-pages:
   - id: error-codes
     title: Error Codes
     x-title-zh: 错误码
+    x-icon: alert-circle
     content: |
       ## Error Codes
 

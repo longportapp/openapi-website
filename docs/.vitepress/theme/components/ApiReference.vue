@@ -95,6 +95,13 @@ interface PageItem {
   titleZh?: string
   content: string
   contentZh?: string
+  icon?: string
+}
+
+const PAGE_ICONS: Record<string, string> = {
+  lock: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+  activity: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+  'alert-circle': `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
 }
 interface TagGroup {
   name: string
@@ -143,6 +150,7 @@ function parseSpec(): { groups: TagGroup[]; pages: PageItem[]; serverUrl: string
     titleZh: p['x-title-zh'],
     content: p.content ?? '',
     contentZh: p['x-content-zh'],
+    icon: p['x-icon'],
   }))
 
   return {
@@ -552,6 +560,7 @@ onUnmounted(() => {
             class="nav-item nav-item-page"
             :class="{ active: selectedPage?.id === page.id }"
             @click="selectPage(page)">
+            <span v-if="page.icon && PAGE_ICONS[page.icon]" class="nav-page-icon" v-html="PAGE_ICONS[page.icon]" />
             <span class="nav-label">{{ isZh ? (page.titleZh || page.title) : page.title }}</span>
           </button>
         </div>
@@ -865,6 +874,13 @@ onUnmounted(() => {
   border-bottom: 1px solid var(--vp-c-divider);
   margin-bottom: 8px;
   padding-bottom: 4px;
+}
+
+.nav-page-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  opacity: 0.6;
 }
 
 .api-page-content {
