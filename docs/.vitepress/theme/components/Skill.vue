@@ -1892,9 +1892,7 @@ const currentMessages = computed(() => {
 .dark .skill-chat-bubble-user {
   background: var(--brand-60);
 }
-.dark .skill-chat-bubble-assistant {
-  background: var(--brand-10);
-}
+
 .skill-chat-tool {
   display: flex;
   gap: 8px;
