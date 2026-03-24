@@ -278,8 +278,7 @@ function findByQuery(): EndpointItem | null {
 }
 
 function onPopState() {
-  const ep = findByQuery()
-  if (ep) selectedEndpoint.value = ep
+  selectedEndpoint.value = findByQuery()
 }
 
 // ── Computed ──────────────────────────────────────────────────────────────────
@@ -423,11 +422,7 @@ onMounted(() => {
   serverUrl = result.serverUrl
 
   const fromQuery = findByQuery()
-  const first = result.groups[0]?.endpoints[0] ?? null
-  selectedEndpoint.value = fromQuery ?? first
-  if (selectedEndpoint.value && !fromQuery) {
-    history.replaceState(null, '', `${location.pathname}?op=${epId(selectedEndpoint.value)}`)
-  }
+  selectedEndpoint.value = fromQuery
   window.addEventListener('popstate', onPopState)
 })
 
@@ -458,6 +453,61 @@ onUnmounted(() => {
         </div>
       </div>
     </aside>
+
+    <!-- Intro (no endpoint selected) -->
+    <div v-if="!selectedEndpoint" class="api-intro">
+      <div class="intro-content">
+        <h1 class="intro-title">{{ $t('api.intro.title') }}</h1>
+        <p class="intro-desc">{{ $t('api.intro.desc') }}</p>
+
+        <div class="intro-card intro-card-http">
+          <div class="intro-card-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="intro-card-title">{{ $t('api.intro.httpTitle') }}</h3>
+            <p class="intro-card-desc">{{ $t('api.intro.httpDesc') }}</p>
+          </div>
+        </div>
+
+        <div class="intro-card intro-card-ws">
+          <div class="intro-card-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+              <path d="M1.42 9a16 16 0 0 1 21.16 0" />
+              <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+              <line x1="12" y1="20" x2="12.01" y2="20" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="intro-card-title">{{ $t('api.intro.wsTitle') }}</h3>
+            <p class="intro-card-desc">{{ $t('api.intro.wsDesc') }}</p>
+          </div>
+        </div>
+
+        <p class="intro-hint">← {{ $t('api.intro.hint') }}</p>
+      </div>
+    </div>
 
     <!-- Main -->
     <div v-if="selectedEndpoint" class="api-main">
@@ -1045,5 +1095,90 @@ onUnmounted(() => {
 }
 .dark .hl-comment {
   color: #8b949e;
+}
+
+/* ── Intro page ────────────────────────────────────────────────────────────── */
+.api-intro {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 64px 44px;
+}
+
+.intro-content {
+  max-width: 560px;
+  width: 100%;
+}
+
+.intro-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+  margin: 0 0 16px;
+  letter-spacing: -0.75px;
+  border: none;
+  padding: 0;
+  line-height: 1.2;
+}
+
+.intro-desc {
+  font-size: 15px;
+  color: var(--vp-c-text-2);
+  line-height: 1.7;
+  margin: 0 0 32px;
+}
+
+.intro-card {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid var(--vp-c-divider);
+  margin-bottom: 14px;
+}
+
+.intro-card-http {
+  background: color-mix(in srgb, var(--vp-c-brand-1) 5%, var(--vp-c-bg-soft));
+}
+
+.intro-card-ws {
+  background: color-mix(in srgb, var(--vp-c-success-1) 5%, var(--vp-c-bg-soft));
+}
+
+.intro-card-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-2);
+  border: 1px solid var(--vp-c-divider);
+}
+
+.intro-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  margin: 0 0 6px;
+  padding: 0;
+  border: none;
+}
+
+.intro-card-desc {
+  font-size: 13px;
+  color: var(--vp-c-text-2);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.intro-hint {
+  font-size: 13px;
+  color: var(--vp-c-text-3);
+  margin: 24px 0 0;
 }
 </style>
