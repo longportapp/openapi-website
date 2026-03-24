@@ -5,8 +5,9 @@ import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import spec from '../../../../openapi.yaml?raw'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const md = new MarkdownIt({ html: false, linkify: false })
+const isZh = computed(() => locale.value.startsWith('zh'))
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -15,6 +16,7 @@ interface Parameter {
   in: string
   required?: boolean
   description?: string
+  'x-description-zh'?: string
   schema?: { type?: string }
 }
 
@@ -42,7 +44,9 @@ interface CodeSample {
 interface Operation {
   operationId: string
   summary: string
+  'x-summary-zh'?: string
   description?: string
+  'x-description-zh'?: string
   tags?: string[]
   parameters?: Parameter[]
   'x-codeSamples'?: CodeSample[]
@@ -79,6 +83,7 @@ interface EndpointItem {
 }
 interface TagGroup {
   name: string
+  nameZh?: string
   endpoints: EndpointItem[]
 }
 interface CodeBlock {
@@ -109,10 +114,17 @@ function parseSpec(): { groups: TagGroup[]; serverUrl: string } {
       }
     }
   }
-  const specTags: string[] = ((parsed.tags ?? []) as any[]).map((x: any) => x.name)
+  const specTagObjs: any[] = (parsed.tags ?? []) as any[]
+  const tagZhMap: Record<string, string> = {}
+  for (const t of specTagObjs) {
+    if (t['x-name-zh']) tagZhMap[t.name] = t['x-name-zh']
+  }
+  const specTags: string[] = specTagObjs.map((x: any) => x.name)
   const ordered = [...specTags, ...Object.keys(byTag).filter((x) => !specTags.includes(x))]
   return {
-    groups: ordered.filter((x) => byTag[x]).map((x) => ({ name: x, endpoints: byTag[x] })),
+    groups: ordered
+      .filter((x) => byTag[x])
+      .map((x) => ({ name: x, nameZh: tagZhMap[x], endpoints: byTag[x] })),
     serverUrl,
   }
 }
@@ -263,12 +275,16 @@ const filteredGroups = computed(() => {
   return tagGroups.value
     .map((group) => ({
       ...group,
-      endpoints: group.endpoints.filter(
-        (ep) =>
-          ep.operation.summary.toLowerCase().includes(q) ||
+      endpoints: group.endpoints.filter((ep) => {
+        const summary = isZh.value
+          ? (ep.operation['x-summary-zh'] ?? ep.operation.summary)
+          : ep.operation.summary
+        return (
+          summary.toLowerCase().includes(q) ||
           ep.path.toLowerCase().includes(q) ||
           ep.method.toLowerCase().includes(q)
-      ),
+        )
+      }),
     }))
     .filter((group) => group.endpoints.length > 0)
 })
@@ -296,9 +312,23 @@ function onPopState() {
 // ── Computed ──────────────────────────────────────────────────────────────────
 
 const selectedSplit = computed(() => {
-  const desc = selectedEndpoint.value?.operation.description
+  const op = selectedEndpoint.value?.operation
+  if (!op) return { prose: '', codeBlocks: [] as string[] }
+  const desc = (isZh.value && op['x-description-zh']) ? op['x-description-zh'] : op.description
   if (!desc) return { prose: '', codeBlocks: [] as string[] }
   return splitDescriptionAndCode(desc)
+})
+
+const selectedSummaryLocalized = computed(() => {
+  const op = selectedEndpoint.value?.operation
+  if (!op) return ''
+  return (isZh.value && op['x-summary-zh']) ? op['x-summary-zh'] : op.summary
+})
+
+const selectedTagNameLocalized = computed(() => {
+  const tag = selectedEndpoint.value?.operation.tags?.[0] ?? ''
+  if (!tag || !isZh.value) return tag
+  return tagGroups.value.find((g) => g.name === tag)?.nameZh ?? tag
 })
 
 const selectedProse = computed(() => {
@@ -346,6 +376,13 @@ const selectedSections = computed((): Section[] => {
     ],
   })
 
+  function pdesc(p: Parameter): string {
+    return (isZh.value && p['x-description-zh']) ? p['x-description-zh'] : (p.description ?? '')
+  }
+  function propdesc(prop: any): string {
+    return (isZh.value && prop['x-description-zh']) ? prop['x-description-zh'] : (prop.description ?? '')
+  }
+
   const pathParams = (ep.operation.parameters ?? []).filter((p) => p.in === 'path')
   if (pathParams.length) {
     s.push({
@@ -356,7 +393,7 @@ const selectedSections = computed((): Section[] => {
         type: p.schema?.type ?? 'string',
         location: 'path',
         required: p.required !== false,
-        description: p.description ?? '',
+        description: pdesc(p),
       })),
     })
   }
@@ -371,7 +408,7 @@ const selectedSections = computed((): Section[] => {
         type: p.schema?.type ?? 'string',
         location: 'query',
         required: p.required === true,
-        description: p.description ?? '',
+        description: pdesc(p),
       })),
     })
   }
@@ -388,7 +425,7 @@ const selectedSections = computed((): Section[] => {
           type: prop.type ?? 'object',
           location: 'body',
           required: (schema.required ?? []).includes(name),
-          description: prop.description ?? '',
+          description: propdesc(prop),
         })),
       })
     } else {
@@ -407,7 +444,7 @@ const selectedSections = computed((): Section[] => {
           type: prop.type ?? 'object',
           location: '',
           required: false,
-          description: prop.description ?? '',
+          description: propdesc(prop),
         })
       ),
     })
@@ -460,7 +497,7 @@ onUnmounted(() => {
       </div>
       <div class="sidebar-scroll">
         <div v-for="group in filteredGroups" :key="group.name" class="tag-group">
-          <div class="tag-label">{{ group.name }}</div>
+          <div class="tag-label">{{ isZh ? (group.nameZh || group.name) : group.name }}</div>
           <button
             v-for="ep in group.endpoints"
             :key="ep.operation.operationId ?? `${ep.method}-${ep.path}`"
@@ -468,7 +505,7 @@ onUnmounted(() => {
             :class="{ active: selectedEndpoint?.operation.operationId === ep.operation.operationId }"
             @click="selectEndpoint(ep)">
             <span class="nav-method" :class="methodClass(ep.method)">{{ ep.method }}</span>
-            <span class="nav-label">{{ ep.operation.summary }}</span>
+            <span class="nav-label">{{ isZh ? (ep.operation['x-summary-zh'] || ep.operation.summary) : ep.operation.summary }}</span>
           </button>
         </div>
       </div>
@@ -533,8 +570,8 @@ onUnmounted(() => {
     <div v-if="selectedEndpoint" class="api-main">
       <!-- Content -->
       <div class="api-content">
-        <p class="ep-tag">{{ selectedEndpoint.operation.tags?.[0] ?? '' }}</p>
-        <h1 class="ep-title">{{ selectedEndpoint.operation.summary }}</h1>
+        <p class="ep-tag">{{ selectedTagNameLocalized }}</p>
+        <h1 class="ep-title">{{ selectedSummaryLocalized }}</h1>
 
         <div class="ep-path">
           <span class="ep-method-badge" :class="methodClass(selectedEndpoint.method)">

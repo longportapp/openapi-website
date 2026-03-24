@@ -12,16 +12,22 @@ servers:
     description: China mainland
 tags:
   - name: Watchlist Management
+    x-name-zh: 自选股管理
     description: Manage user watchlist groups (list/create/update/delete) and query the securities contained in each group. Supports adding, removing, or replacing securities within a group.
   - name: Market Temperature
+    x-name-zh: 市场情绪
     description: Query the Market Temperature indicator (a fear-gauge-like sentiment thermometer, scored 0–100 where higher means more bullish) across equity markets. Supports fetching the current snapshot and historical time series for sentiment measurement, trend visualization, and comparative analysis.
   - name: Portfolio & Cash
+    x-name-zh: 持仓与资金
     description: Provides read access to account asset and cash information, including fund holdings, stock holdings, account cash balance, and cash flow history for portfolio overview, position display, and reconciliation analysis.
   - name: News & Filings
+    x-name-zh: 新闻与公告
     description: Query regulatory filings, news articles, and community discussion topics for a given symbol. Suitable for investment research, news monitoring, and content aggregation.
   - name: Community
+    x-name-zh: 社区互动
     description: Interact with the Longbridge community. Supports listing your published topics with pagination and type filtering, and creating new topics (long-form articles or short posts) with associated tickers, hashtags, and license settings.
   - name: Trade Execution & Order Management
+    x-name-zh: 交易与订单管理
     description: Full order lifecycle management including order detail queries, today's and historical order queries, today's and historical execution reports, order modification, order cancellation, and pre-order maximum purchasable quantity estimation.
 security:
   - oauth2:
@@ -31,9 +37,11 @@ paths:
     get:
       operationId: list_watchlist_groups
       summary: Get Watchlists
+      x-summary-zh: 获取自选股分组列表
       description: |
         Get all watchlist groups for the current user. Each group contains an ID, name, and a list
         of securities with the price and timestamp at which each security was added.
+      x-description-zh: 获取当前用户的所有自选股分组，每个分组包含 ID、名称及其中的证券列表（含加入价格和时间戳）。
       tags:
         - Watchlist Management
       x-codeSamples:
@@ -73,8 +81,10 @@ paths:
     post:
       operationId: create_watchlist_group
       summary: Create Watchlist
+      x-summary-zh: 创建自选股分组
       description: |
         Create a new watchlist group, optionally pre-populated with securities.
+      x-description-zh: 创建新的自选股分组，可选择在创建时预填充证券。
       tags:
         - Watchlist Management
       requestBody:
@@ -120,9 +130,11 @@ paths:
     put:
       operationId: update_watchlist_group
       summary: Update Watchlist
+      x-summary-zh: 更新自选股分组
       description: |
         Update the name or member list of a watchlist group. Use `mode` to control how
         `securities` are applied: `add` appends, `remove` removes, `replace` overwrites the entire list.
+      x-description-zh: 更新自选股分组的名称或成员列表。使用 `mode` 控制 `securities` 的操作方式：`add` 追加、`remove` 移除、`replace` 替换全部。
       tags:
         - Watchlist Management
       requestBody:
@@ -182,9 +194,11 @@ paths:
     delete:
       operationId: delete_watchlist_group
       summary: Delete Watchlist
+      x-summary-zh: 删除自选股分组
       description: |
         Delete the specified watchlist group. Set `purge=true` to also clear all securities
         from the group before deletion.
+      x-description-zh: 删除指定的自选股分组。设置 `purge=true` 可在删除前清空分组中的所有证券。
       tags:
         - Watchlist Management
       parameters:
@@ -225,10 +239,12 @@ paths:
     get:
       operationId: list_securities
       summary: Query Tradable Securities List
+      x-summary-zh: 查询可交易证券列表
       description: |
         Query the list of tradable securities filtered by market and category. Primarily used to
         retrieve securities eligible for extended-hours (pre-market / after-hours) trading sessions.
         Both `market` and `category` are required parameters.
+      x-description-zh: 按市场和类别筛选可交易证券列表，主要用于获取符合盘前/盘后延长交易时段条件的证券。`market` 和 `category` 均为必填参数。
       tags:
         - Watchlist Management
       parameters:
@@ -274,9 +290,11 @@ paths:
     get:
       operationId: list_market_temperature
       summary: Get Historical Market Temperature
+      x-summary-zh: 获取历史市场情绪
       description: |
         Get the historical market temperature time series for the specified market within a date range.
         Each data point contains the daily temperature, valuation, and sentiment scores (all scored 0–100).
+      x-description-zh: 获取指定市场在日期范围内的历史市场情绪时间序列，每个数据点包含当日情绪温度、估值和情绪分项评分（均为 0–100 分制）。
       tags:
         - Market Temperature
       parameters:
@@ -337,9 +355,11 @@ paths:
     get:
       operationId: market_temperature
       summary: Get Current Market Temperature
+      x-summary-zh: 获取当前市场情绪
       description: |
         Get the current sentiment temperature snapshot for the specified market.
         Scores range from 0–100; a higher value indicates a more bullish market.
+      x-description-zh: 获取指定市场的当前情绪温度快照。评分范围 0–100，数值越高表示市场越乐观。
       tags:
         - Market Temperature
       parameters:
@@ -383,9 +403,11 @@ paths:
     get:
       operationId: list_cash_flow
       summary: Cash Flow
+      x-summary-zh: 资金流水查询
       description: |
         Query account cash flow history. Covers deposit, withdrawal, dividends, settlement,
         and other business types. Supports time range and pagination.
+      x-description-zh: 查询账户资金流水历史，涵盖入金、出金、分红、结算等业务类型，支持时间范围筛选和分页。
       tags:
         - Portfolio & Cash
       parameters:
@@ -466,8 +488,10 @@ paths:
     get:
       operationId: account_cash
       summary: Account Cash
+      x-summary-zh: 账户现金
       description: |
         Query account cash balance, buying power, margin details, and per-currency cash breakdown.
+      x-description-zh: 查询账户现金余额、购买力、保证金详情及各币种资金明细。
       tags:
         - Portfolio & Cash
       parameters:
@@ -527,8 +551,10 @@ paths:
     get:
       operationId: list_stock_positions
       summary: Stock Position
+      x-summary-zh: 股票持仓
       description: |
         Query all stock (equity) positions, grouped by sub-account channel.
+      x-description-zh: 查询所有股票（权益类）持仓，按子账户渠道分组返回。
       tags:
         - Portfolio & Cash
       parameters:
@@ -584,8 +610,10 @@ paths:
     get:
       operationId: list_fund_positions
       summary: Fund Position
+      x-summary-zh: 基金持仓
       description: |
         Query all public fund positions, grouped by sub-account channel.
+      x-description-zh: 查询所有公募基金持仓，按子账户渠道分组返回。
       tags:
         - Portfolio & Cash
       parameters:
@@ -631,9 +659,11 @@ paths:
     get:
       operationId: list_filings
       summary: Get Filings by Symbol
+      x-summary-zh: 获取标的监管文件
       description: |
         Get the list of regulatory filings or disclosure documents for the specified symbol.
         Each filing includes a title, file name, download URLs, and publication timestamp.
+      x-description-zh: 获取指定标的的监管文件或信息披露文件列表，每条记录包含标题、文件名、下载链接和发布时间戳。
       tags:
         - News & Filings
       parameters:
@@ -675,8 +705,10 @@ paths:
     get:
       operationId: list_news
       summary: Get News by Symbol
+      x-summary-zh: 获取标的新闻
       description: |
         Get the latest news articles for the specified symbol.
+      x-description-zh: 获取指定标的的最新新闻资讯列表。
       tags:
         - News & Filings
       parameters:
@@ -719,8 +751,10 @@ paths:
     get:
       operationId: list_topics
       summary: Get Community Topics by Symbol
+      x-summary-zh: 按标的获取社区讨论
       description: |
         Get the list of community discussion topics for the specified symbol.
+      x-description-zh: 获取指定标的的社区讨论。
       tags:
         - News & Filings
       parameters:
@@ -763,9 +797,11 @@ paths:
     get:
       operationId: list_my_topics
       summary: Get My Topic List
+      x-summary-zh: 获取我的讨论列表
       description: |
         Get the list of topics published by the current authenticated user.
         Supports pagination and filtering by topic type.
+      x-description-zh: 获取当前认证用户已发布的讨论列表，支持分页和按讨论类型筛选。
       tags:
         - Community
       parameters:
@@ -835,8 +871,10 @@ paths:
     post:
       operationId: create_topic
       summary: Create Topic
+      x-summary-zh: 创建讨论
       description: |
         Create a new community topic (long-form article or short post).
+      x-description-zh: 创建新的社区讨论（长文或短帖）。
       tags:
         - Community
       requestBody:
@@ -908,9 +946,11 @@ paths:
     get:
       operationId: list_history_executions
       summary: Historical Execution
+      x-summary-zh: 历史成交查询
       description: |
         Query historical execution (fill) records. Supports filtering by time range, order ID,
         and symbol, with pagination.
+      x-description-zh: 查询历史成交（成交明细）记录，支持按时间范围、订单 ID 和标的筛选，并支持分页。
       tags:
         - Trade Execution & Order Management
       parameters:
@@ -984,8 +1024,10 @@ paths:
     get:
       operationId: order_detail
       summary: Order Detail
+      x-summary-zh: 订单详情查询
       description: |
         Query full details of a single order by order ID, including fee breakdown and status history.
+      x-description-zh: 通过订单 ID 查询单笔订单的完整详情，包括费用明细和状态变更历史。
       tags:
         - Trade Execution & Order Management
       parameters:
@@ -1064,9 +1106,11 @@ paths:
     put:
       operationId: replace_order
       summary: Modify Order
+      x-summary-zh: 修改订单
       description: |
         Modify the parameters of a pending order. Only orders in `NewStatus` or `PartialFilledStatus`
         can be modified.
+      x-description-zh: 修改待成交订单的参数。仅 `NewStatus`（已报）或 `PartialFilledStatus`（部分成交）状态的订单可修改。
       tags:
         - Trade Execution & Order Management
       requestBody:
@@ -1146,9 +1190,11 @@ paths:
     delete:
       operationId: cancel_order
       summary: Cancel Order
+      x-summary-zh: 撤销订单
       description: |
         Cancel a pending order. Only orders in `NewStatus` or `PartialFilledStatus` can be cancelled.
         After successful cancellation the order status changes to `CanceledStatus`.
+      x-description-zh: 撤销待成交订单。仅 `NewStatus`（已报）或 `PartialFilledStatus`（部分成交）状态的订单可撤销，撤销成功后订单状态变更为 `CanceledStatus`（已撤销）。
       tags:
         - Trade Execution & Order Management
       parameters:
@@ -1177,9 +1223,11 @@ paths:
     get:
       operationId: estimate_max_buy_quantity
       summary: Estimate Maximum Buy Quantity
+      x-summary-zh: 估算最大可买数量
       description: |
         Estimate the maximum purchasable quantity for a security based on the current account
         balance and margin, given a specific order type and price.
+      x-description-zh: 根据当前账户余额和保证金，在指定订单类型和价格条件下，估算某只证券的最大可买数量。
       tags:
         - Trade Execution & Order Management
       parameters:
@@ -1301,9 +1349,11 @@ paths:
     get:
       operationId: list_history_orders
       summary: Historical Order
+      x-summary-zh: 历史订单查询
       description: |
         Query historical order records with pagination. Supports filtering by time range, symbol,
         market, side, and status.
+      x-description-zh: 分页查询历史订单记录，支持按时间范围、标的、市场、方向和状态筛选。
       tags:
         - Trade Execution & Order Management
       parameters:
@@ -1457,8 +1507,10 @@ paths:
     get:
       operationId: list_today_executions
       summary: Today's Execution
+      x-summary-zh: 当日成交查询
       description: |
         Query today's execution (fill) records. Supports filtering by order ID and symbol.
+      x-description-zh: 查询当日成交（成交明细）记录，支持按订单 ID 和标的筛选。
       tags:
         - Trade Execution & Order Management
       parameters:
@@ -1510,8 +1562,10 @@ paths:
     get:
       operationId: list_today_orders
       summary: Today's Order
+      x-summary-zh: 当日订单查询
       description: |
         Query today's orders with support for multi-condition filtering.
+      x-description-zh: 查询当日订单，支持多条件组合筛选。
       tags:
         - Trade Execution & Order Management
       parameters:
