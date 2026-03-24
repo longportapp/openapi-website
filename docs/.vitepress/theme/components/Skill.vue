@@ -121,127 +121,138 @@ const scenarioCards = computed<ScenarioCard[]>(() =>
         {
           id: 'monitor',
           color: '#00b8b8',
-          label: 'Market Monitor',
-          title: 'Track market moves and capital flows in real time',
-          desc: 'Query real-time quotes, Level 2 order book depth, and capital flows. Get AI to aggregate multi-dimensional data to help you read market direction.',
-          example: '"Which tech stocks saw the most net capital inflow today? What\'s the direction of large orders?"',
+          label: 'Cross-Market Screener',
+          title: 'HK, US, A-shares, Singapore — screen across markets in one go',
+          desc: 'Multi-market opportunities are hard to track simultaneously. Tell the AI your criteria: market cap range, P/E ratio, sector — and layer in technical signals like KDJ golden cross or bullish MACD. Cross-market screening, results returned together.',
+          example:
+            '"From US and HK stocks, find tech stocks with market cap above $50B, P/E below 25, and a recent MACD golden cross — sorted by market cap."',
         },
         {
           id: 'research',
-          color: '#1890ff',
-          label: 'Stock Research',
-          title: 'Understand a company from earnings to valuation to news',
-          desc: 'Pull earnings reports, SEC filings, announcements and analyst data. AI extracts key metrics, compares competitors, and generates readable investment summaries.',
+          color: '#4781ff',
+          label: 'Technical Diagnosis',
+          title: 'Not just reading charts — let AI give you a direct technical read',
+          desc: 'The analysis after getting the candlesticks is often the most time-consuming part. Tell the AI which stock you want. It pulls daily, hourly, and 15-minute data, combines MACD, KDJ, RSI and other indicators to assess the current trend and key price levels — including pre/post-market data.',
           example:
-            '"Analyze NVDA: highlights from the latest quarter, whether the valuation is reasonable, and key risks."',
+            '"Diagnose TSLA\'s technicals: what\'s the daily trend, is it near support or resistance, and do short-term signals lean bullish or bearish?"',
         },
         {
           id: 'trade',
-          color: '#ff5000',
-          label: 'Smart Trading',
-          title: 'Place, modify, and check orders in one sentence',
-          desc: 'No need to open a trading app. Say your intent in the conversation. AI shows order details and asks for confirmation before executing.',
-          example: '"Buy 100 shares of AAPL at market price, tell me the current price first."',
+          color: '#1890ff',
+          label: 'Earnings Deep Dive',
+          title: 'Earnings out? Unpack it in 5 minutes: actuals vs. estimates, revenue breakdown, analyst views',
+          desc: "The hardest part of earnings season isn't reading the numbers — it's putting them in context. AI pulls the three financial statements, consensus analyst estimates (high/low/mean), historical revenue by segment and region, valuation metrics, and SEC filings — cross-references everything and generates a complete summary.",
+          example:
+            '"NVDA just reported. Compare actual results against analyst estimates, break down revenue changes by segment, and check whether the current valuation is reasonable."',
         },
         {
           id: 'chart',
-          color: '#4781ff',
-          label: 'Chart & Technical Analysis',
-          title: 'Use historical data to find timing references',
-          desc: 'Get candlestick charts and historical trade data for any timeframe. Let AI analyze trends with technical indicators and highlight key support and resistance levels.',
-          example: '"How has TSLA trended in the past 3 months? Is it near a key support or resistance level?"',
+          color: '#ff5000',
+          label: 'Smart Money Tracker',
+          title: 'Are insiders buying or selling? Has institutional ownership changed?',
+          desc: "Researching a stock goes beyond earnings — you need to follow the money. AI pulls insider trading records for executives and major shareholders over the past three months, plus the top 20 holders ranked by position changes across institution types (mutual funds, hedge funds, pension funds, etc.).",
+          example:
+            '"Check AAPL\'s recent insider trading — are any executives selling heavily? How did hedge fund positions change versus last quarter?"',
         },
         {
           id: 'portfolio',
-          color: '#00b99a',
-          label: 'Portfolio & Account',
-          title: 'Know your full portfolio and P&L at any time',
-          desc: 'Query account balance, stock and fund holdings, and daily trade records. Let AI summarize portfolio performance and identify the main drivers of gains and losses.',
+          color: '#ff7333',
+          label: 'Advanced Orders',
+          title: 'Beyond buy/sell — set conditional orders, trailing stops, and options in one sentence',
+          desc: 'When you spot an opportunity or want to lock in risk protection, just express your intent in the conversation. Supports limit orders, market orders, stop-limit orders, trailing stops, and options and warrants order placement and modification. AI shows order details and waits for your confirmation before executing.',
           example:
-            '"How is my portfolio performing today? Which stock contributed the most and which is dragging it down?"',
+            '"Set a trailing stop on TSLA: trigger a sell if it drops more than 8%, and show me the order details for confirmation before executing."',
         },
         {
           id: 'coding',
-          color: '#ff7333',
-          label: 'Programming & Automation',
-          title: 'Let AI write trading scripts and automation for you',
-          desc: 'Describe your needs in natural language. Claude Code or Codex will generate complete Python/Rust programs using the Longbridge SDK — from data pipelines to real-time order systems.',
+          color: '#00b99a',
+          label: 'Portfolio Review',
+          title: 'Did you make or lose money this month? What worked, what dragged you down?',
+          desc: "The value of a review is understanding what your portfolio is doing — not just looking at up/down numbers. AI pulls the P&L trend for a selected period, a ranking of each position's P&L, portfolio allocation breakdown, and a detailed P&L transaction log — consolidated into a complete portfolio review report.",
           example:
-            '"Write a Python script that pulls my holdings after market close each day and saves the P&L and market value to CSV."',
+            '"Review my portfolio performance this month: how the overall P&L trended, which stock contributed most, which performed worst, and what percentage is US vs. HK stocks?"',
         },
       ]
     : [
         {
           id: 'monitor',
           color: '#00b8b8',
-          label: isHK.value ? '行情監控' : '行情监控',
-          title: isHK.value ? '即時掌握市場動態，洞察資金與盤口' : '实时掌握市场动态，洞察资金与盘口',
+          label: isHK.value ? '跨市場選股' : '跨市场选股',
+          title: isHK.value
+            ? '港股、美股、A 股、新加坡，跨市場條件篩選，一次完成'
+            : '港股、美股、A 股、新加坡，跨市场条件筛选，一次完成',
           desc: isHK.value
-            ? '查詢即時報價、Level 2 盤口深度與資金流向，讓 AI 匯總多維度數據，幫你判斷市場風向。'
-            : '查询实时报价、Level 2 盘口深度与资金流向，让 AI 汇总多维度数据，帮你判断市场风向。',
+            ? '多市場機會往往難以同步追蹤。直接告訴 AI 你的條件：市值範圍、PE 區間、行業板塊，還可以疊加技術信號——比如只看 KDJ 金叉、MACD 看漲的標的。跨市場篩選，結果統一返回。'
+            : '多市场机会往往难以同步追踪。直接告诉 AI 你的条件：市值范围、PE 区间、行业板块，还可以叠加技术信号——比如只看 KDJ 金叉、MACD 看涨的标的。跨市场筛选，结果统一返回。',
           example: isHK.value
-            ? '"今天科技板塊資金淨流入最多的是哪幾隻？主力大單方向怎樣？"'
-            : '"今天科技板块资金净流入最多的是哪几只？主力大单方向怎样？"',
+            ? '"幫我從美股和港股裡，篩出市值 500 億以上、PE 低於 25、近期 MACD 出現金叉的科技股，按市值排列"'
+            : '"帮我从美股和港股里，筛出市值 500 亿以上、PE 低于 25、近期 MACD 出现金叉的科技股，按市值排列"',
         },
         {
           id: 'research',
-          color: '#1890ff',
-          label: isHK.value ? '個股全景分析' : '个股全景分析',
-          title: isHK.value ? '讀懂一家公司，從財報到估值到新聞' : '读懂一家公司，从财报到估值到新闻',
+          color: '#4781ff',
+          label: isHK.value ? '技術面綜合診斷' : '技术面综合诊断',
+          title: isHK.value ? '不只是看圖——讓 AI 直接給你一個技術面判斷' : '不只是看图——让 AI 直接给你一个技术面判断',
           desc: isHK.value
-            ? '拉取財報、SEC 申報、公告與分析師數據；AI 提煉核心指標，橫向對比競爭對手，生成可讀的投資參考摘要。'
-            : '拉取财报、SEC 申报、公告与分析师数据；AI 提炼核心指标，横向对比竞争对手，生成可读的投资参考摘要。',
+            ? '拿到 K 線之後的分析，往往才是最耗時的部分。告訴 AI 你想看哪隻股票，它會調取日線、小時線、15 分鐘線數據，結合 MACD、KDJ、RSI 等技術指標，判斷當前趨勢與關鍵價位，給你一份清晰的技術面參考——含盤前盤後數據。'
+            : '拿到 K 线之后的分析，往往才是最耗时的部分。告诉 AI 你想看哪只股票，它会调取日线、小时线、15 分钟线数据，结合 MACD、KDJ、RSI 等技术指标，判断当前趋势与关键价位，给你一份清晰的技术面参考——含盘前盘后数据。',
           example: isHK.value
-            ? '"分析 NVDA：最新季報亮點、當前估值是否合理，以及主要風險"'
-            : '"分析 NVDA：最新季报亮点、当前估值是否合理，以及主要风险"',
+            ? '"幫我診斷一下 TSLA 的技術面：日線趨勢怎樣，當前在支撐位還是壓力位，短期信號偏多還是偏空？"'
+            : '"帮我诊断一下 TSLA 的技术面：日线趋势怎样，当前在支撑位还是压力位，短期信号偏多还是偏空？"',
         },
         {
           id: 'trade',
-          color: '#ff5000',
-          label: isHK.value ? '智能交易' : '智能交易',
-          title: isHK.value ? '一句話完成下單、改單、查持倉' : '一句话完成下单、改单、查持仓',
+          color: '#1890ff',
+          label: isHK.value ? '財報季深度研究' : '财报季深度研究',
+          title: isHK.value
+            ? '財報一出，5 分鐘完成拆解：實際 vs 預期，收入結構，機構怎麼看'
+            : '财报一出，5 分钟完成拆解：实际 vs 预期，收入结构，机构怎么看',
           desc: isHK.value
-            ? '無需打開交易軟件，直接在對話中說出意圖。AI 先展示訂單詳情並請你確認，確認後才真正執行。'
-            : '无需打开交易软件，直接在对话中说出意图。AI 先展示订单详情并请你确认，确认后才真正执行。',
+            ? '財報季最耗時的，不是讀數字，而是把數字放在一起理解。AI 同時調取財務三表、分析師一致預期（含高/低/均值）、按業務線和地區拆分的歷史營收、估值指標及 SEC 申報原文，交叉對比，生成一份從數據到結論的完整分析摘要。'
+            : '财报季最耗时的，不是读数字，而是把数字放在一起理解。AI 同时调取财务三表、分析师一致预期（含高/低/均值）、按业务线和地区拆分的历史营收、估值指标及 SEC 申报原文，交叉对比，生成一份从数据到结论的完整分析摘要。',
           example: isHK.value
-            ? '"以市價買入 100 股 AAPL，執行前告訴我當前價格"'
-            : '"以市价买入 100 股 AAPL，执行前告诉我当前价格"',
+            ? '"NVDA 剛出財報，幫我對比實際業績和分析師預期的差距，拆一下各業務線的營收變化，順便看看當前估值是否合理"'
+            : '"NVDA 刚出财报，帮我对比实际业绩和分析师预期的差距，拆一下各业务线的营收变化，顺便看看当前估值是否合理"',
         },
         {
           id: 'chart',
-          color: '#4781ff',
-          label: isHK.value ? '走勢 & 技術分析' : '走势 & 技术分析',
-          title: isHK.value ? '用歷史數據，找到買賣的時機參考' : '用历史数据，找到买卖的时机参考',
+          color: '#ff5000',
+          label: isHK.value ? '聰明錢追蹤' : '聪明钱追踪',
+          title: isHK.value ? '大股東在買還是賣？機構持倉有沒有變化？' : '大股东在买还是卖？机构持仓有没有变化？',
           desc: isHK.value
-            ? '獲取任意週期 K 線與歷史成交數據，讓 AI 結合技術指標分析趨勢，標出關鍵支撐與壓力位。'
-            : '获取任意周期 K 线与历史成交数据，让 AI 结合技术指标分析趋势，标出关键支撑与压力位。',
+            ? '研究一隻股票，財報之外還要關注資金動向。AI 幫你調取近三個月高管與大股東的內幕交易記錄，以及按機構類型（共同基金、對沖基金、養老金等）分組的前 20 大持股變動，清晰呈現「聰明錢」的最新動態。'
+            : '研究一只股票，财报之外还要关注资金动向。AI 帮你调取近三个月高管与大股东的内幕交易记录，以及按机构类型（共同基金、对冲基金、养老金等）分组的前 20 大持股变动，清晰呈现"聪明钱"的最新动态。',
           example: isHK.value
-            ? '"TSLA 近 3 個月走勢怎樣？當前在關鍵支撐位還是壓力位附近？"'
-            : '"TSLA 近 3 个月走势怎样？当前在关键支撑位还是压力位附近？"',
+            ? '"幫我查一下 AAPL 近期的內幕交易，有沒有高管在大量減持？對沖基金的持倉和上季度相比有什麼變化？"'
+            : '"帮我查一下 AAPL 近期的内幕交易，有没有高管在大量减持？对冲基金的持仓和上季度相比有什么变化？"',
         },
         {
           id: 'portfolio',
-          color: '#00b99a',
-          label: isHK.value ? '持倉 & 賬戶' : '持仓 & 账户',
-          title: isHK.value ? '隨時了解你的資產全貌與盈虧狀況' : '随时了解你的资产全貌与盈亏状况',
+          color: '#ff7333',
+          label: isHK.value ? '進階下單' : '进阶下单',
+          title: isHK.value
+            ? '不只是買入賣出——條件單、追蹤止損、期權，一句話設好'
+            : '不只是买入卖出——条件单、追踪止损、期权，一句话设好',
           desc: isHK.value
-            ? '查詢賬戶餘額、股票與基金持倉、當日成交記錄，讓 AI 匯總你的組合表現並指出主要盈虧來源。'
-            : '查询账户余额、股票与基金持仓、当日成交记录，让 AI 汇总你的组合表现并指出主要盈亏来源。',
+            ? '捕捉到機會，或想提前設好風險保護，直接在對話中表達意圖即可。支持限價單、市價單、觸價限價單、追蹤止損，以及股票期權和權證的下單與改單。AI 展示訂單詳情，等你確認後才執行。'
+            : '捕捉到机会，或想提前设好风险保护，直接在对话中表达意图即可。支持限价单、市价单、触价限价单、追踪止损，以及股票期权和权证的下单与改单。AI 展示订单详情，等你确认后才执行。',
           example: isHK.value
-            ? '"我今天持倉盈虧怎樣？哪隻股票貢獻最多，哪隻在拖累組合？"'
-            : '"我今天持仓盈亏怎样？哪只股票贡献最多，哪只在拖累组合？"',
+            ? '"幫我給 TSLA 設一個追蹤止損，跌幅超過 8% 自動觸發賣出，執行前把訂單詳情給我確認"'
+            : '"帮我给 TSLA 设一个追踪止损，跌幅超过 8% 自动触发卖出，执行前把订单详情给我确认"',
         },
         {
           id: 'coding',
-          color: '#ff7333',
-          label: isHK.value ? '編程 & 自動化' : '编程 & 自动化',
-          title: isHK.value ? '讓 AI 幫你寫交易腳本與自動化策略' : '让 AI 帮你写交易脚本与自动化策略',
+          color: '#00b99a',
+          label: isHK.value ? '持倉復盤' : '持仓复盘',
+          title: isHK.value
+            ? '這個月賺了還是虧了？哪些決策對了，哪些拖了後腿？'
+            : '这个月赚了还是亏了？哪些决策对了，哪些拖了后腿？',
           desc: isHK.value
-            ? '用自然語言描述需求，借助 Claude Code 或 Codex，AI 生成調用 Longbridge Python/Rust SDK 的完整程序——無論是數據分析腳本、批量下單策略還是實時推送監控。'
-            : '用自然语言描述需求，借助 Claude Code 或 Codex，AI 生成调用 Longbridge Python/Rust SDK 的完整程序——无论是数据分析脚本、批量下单策略还是实时推送监控。',
+            ? '復盤的價值在於理解自己的組合在做什麼，而不只是看漲跌數字。AI 調取指定週期內的盈虧趨勢、各標的盈虧排行、持倉結構佔比，以及單隻股票的盈虧流水明細，彙總成一份完整的組合復盤報告。'
+            : '复盘的价值在于理解自己的组合在做什么，而不只是看涨跌数字。AI 调取指定周期内的盈亏趋势、各标的盈亏排行、持仓结构占比，以及单只股票的盈亏流水明细，汇总成一份完整的组合复盘报告。',
           example: isHK.value
-            ? '"幫我寫一個 Python 腳本，每天收盤後自動拉取持倉，把總市值和各股漲跌存入 CSV"'
-            : '"帮我写一个 Python 脚本，每天收盘后自动拉取持仓，把总市值和各股涨跌存入 CSV"',
+            ? '"幫我復盤這個月的持倉表現：總盈虧趨勢如何，哪隻股票貢獻最大、哪隻表現最弱，組合裡美股和港股各佔多少？"'
+            : '"帮我复盘这个月的持仓表现：总盈亏趋势如何，哪只股票贡献最大、哪只表现最弱，组合里美股和港股各占多少？"',
         },
       ]
 )
