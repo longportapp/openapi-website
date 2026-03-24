@@ -268,7 +268,8 @@ function escHtml(s: string): string {
 
 function colorizeTokens(raw: string): string {
   // Single-pass tokenizer: processes raw text once to avoid regex-on-html corruption
-  const KW = /^(from|import|def|class|for|if|else|elif|return|in|as|with|not|and|or|True|False|None|print|float|int|str|dict|list|abs|len|range)\b/
+  const KW =
+    /^(from|import|def|class|for|if|else|elif|return|in|as|with|not|and|or|True|False|None|print|float|int|str|dict|list|abs|len|range)\b/
   const NUM = /^\d+(?:\.\d+)?(?:[BKMbkm])?\b/
   let out = ''
   let i = 0
@@ -1156,7 +1157,9 @@ const currentMessages = computed(() => {
               </svg>
               {{ copiedOneLiner ? t.copied.value : t.copy.value }}
             </button>
-            <span class="skill-copy-tooltip" :class="{ 'skill-copy-tooltip--show': copiedOneLiner }">{{ t.copied.value }}</span>
+            <span class="skill-copy-tooltip" :class="{ 'skill-copy-tooltip--show': copiedOneLiner }">{{
+              t.copied.value
+            }}</span>
           </div>
         </div>
 
@@ -1171,8 +1174,8 @@ const currentMessages = computed(() => {
           <span v-if="clientIcons[c.id]" class="skill-client-icon" v-html="clientIcons[c.id]" />
           {{ c.label }}
         </span>
-        <span class="skill-client-chip skill-client-more">
-          {{ isEN.value ? 'More...' : '更多...' }}
+        <span class="skill-client-more">
+          {{ isEN.value ? 'Cursor, Zed, and more...' : 'Cursor, Zed, 更多...' }}
         </span>
       </div>
     </div>
@@ -1335,7 +1338,9 @@ const currentMessages = computed(() => {
               </svg>
               {{ copiedOneLiner ? t.copied.value : t.copy.value }}
             </button>
-            <span class="skill-copy-tooltip" :class="{ 'skill-copy-tooltip--show': copiedOneLiner }">{{ t.copied.value }}</span>
+            <span class="skill-copy-tooltip" :class="{ 'skill-copy-tooltip--show': copiedOneLiner }">{{
+              t.copied.value
+            }}</span>
           </div>
         </div>
       </div>
@@ -1394,7 +1399,9 @@ const currentMessages = computed(() => {
                 </svg>
                 {{ copiedNpx ? t.copied.value : t.copy.value }}
               </button>
-              <span class="skill-copy-tooltip" :class="{ 'skill-copy-tooltip--show': copiedNpx }">{{ t.copied.value }}</span>
+              <span class="skill-copy-tooltip" :class="{ 'skill-copy-tooltip--show': copiedNpx }">{{
+                t.copied.value
+              }}</span>
             </div>
           </div>
         </div>
@@ -1596,7 +1603,9 @@ const currentMessages = computed(() => {
   pointer-events: none;
   z-index: 100;
   opacity: 0;
-  transition: opacity 0.15s, transform 0.15s;
+  transition:
+    opacity 0.15s,
+    transform 0.15s;
 }
 .skill-copy-tooltip--show {
   opacity: 1;
@@ -1657,8 +1666,10 @@ const currentMessages = computed(() => {
   opacity: 0.8;
 }
 .skill-client-more {
-  color: var(--vp-c-text-3) !important;
+  color: var(--vp-c-text-3);
+  font-size: 0.8125rem;
   font-weight: 400;
+  align-self: center;
 }
 
 /* ─── Scenario cards ─────────────────────────────────────────────────────── */

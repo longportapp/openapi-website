@@ -4,6 +4,17 @@
 
 AI-native CLI covering every Longbridge OpenAPI endpoint. Designed for scripting, AI-agent tool-calling, and daily trading workflows from the terminal.
 
+## Discovering Commands
+
+Always use the CLI's built-in help — it reflects the currently installed version:
+
+```bash
+longbridge --help                  # List all available commands
+longbridge <command> --help        # Options and flags for a specific command
+```
+
+Do not rely on hardcoded documentation for command syntax or flags — use `--help` instead.
+
 ## Installation
 
 ```bash
@@ -43,14 +54,6 @@ longbridge orders --format json | jq '.[] | select(.status == "New")'
 ```
 
 ## AI Agent Integration
-
-### Install the skill
-
-```bash
-npx skills add longbridge/developers
-```
-
-Once installed, AI tools (Claude Code, Cursor, etc.) have full knowledge of all `longbridge` commands. The AI can run `longbridge` commands directly.
 
 ### Parallel execution pattern
 
