@@ -128,7 +128,7 @@ openapi.yaml (imported as ?raw string)
       operation.description           # markdown string
         → splitDescriptionAndCode()   # regex splits prose vs code blocks
             prose   → markdown-it.render() → v-html in top half
-            code[]  → markdown-it.render() → v-html in bottom half
+            code[]  → parseCodeBlock() → <pre><code> in bottom half
       operation.parameters[]          # array → parameters table
       operation.requestBody           # optional → request body table
 ```
