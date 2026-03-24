@@ -15,6 +15,11 @@ onMounted(() => {
 const configuration = computed(() => ({
   content: spec,
   darkMode: isDark.value,
+  defaultHttpClient: {
+    targetKey: 'shell',
+    clientKey: 'curl',
+  },
+  hiddenClients: true,
   authentication: {
     securitySchemes: {
       oauth2: {
