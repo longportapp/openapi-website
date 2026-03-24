@@ -33,8 +33,8 @@ Replace the Scalar third-party component with a custom Vue component that render
 ```
 
 - Left sidebar: fixed background, resizable via drag handle (min 160px / max 400px), collapsible via toggle button `‹ ›`
-- Sidebar width persisted to `localStorage`
-- Right area split top/bottom with a horizontal divider
+- Sidebar width persisted to `localStorage` under key `api-reference-sidebar-width`
+- Right area split top/bottom with a fixed horizontal divider (not resizable) at 50/50 proportion
 - Top half: scrollable, contains endpoint header + description + parameters
 - Bottom half: scrollable, contains cURL shell block + JSON response block
 
@@ -50,7 +50,7 @@ HTTP method badge colors:
 - POST: blue (`#dbeafe` bg / `#2563eb` text)
 - PUT: amber (`#fef3c7` bg / `#d97706` text)
 - DELETE: red (`#fee2e2` bg / `#dc2626` text)
-- PATCH: purple
+- PATCH: purple (`#f3e8ff` bg / `#7c3aed` text)
 
 ## Right Panel — Top Half
 
@@ -61,16 +61,36 @@ Per endpoint:
 4. Parameters section:
    - Has parameters: table with columns — Name / Type / Location / Required / Description
    - No parameters: single line `No parameters.` in muted color
-5. Request body (POST/PUT/PATCH): fields extracted from `requestBody.content['application/json'].schema.properties`, rendered same as parameters table
+5. Request body (POST/PUT/PATCH): fields extracted from `requestBody.content['application/json'].schema.properties`, rendered same as parameters table. If `schema` has no `properties` key (e.g. `$ref`, `allOf`, array body), show a single row: "Request body — see code example below."
 
 ## Right Panel — Bottom Half
 
-Code blocks are extracted from the endpoint's `description` Markdown using regex ` ```lang\n...\n``` `.
+Code blocks are extracted from the endpoint's `description` Markdown using `splitDescriptionAndCode()`:
+
+```ts
+function splitDescriptionAndCode(md: string): { prose: string; codeBlocks: string[] } {
+  const codeBlockRegex = /^```[\w-]*\n[\s\S]*?^```/gm
+  const codeBlocks = [...md.matchAll(codeBlockRegex)].map(m => m[0])
+  const prose = md.replace(codeBlockRegex, '').trim()
+  return { prose, codeBlocks }
+}
+```
 
 Rendering:
-- Each extracted code block is rendered via `markdown-it` to produce standard VitePress `.vp-doc` styled output
-- This gives consistent syntax highlighting, language label bar, and Copy button — identical to regular docs pages
-- **No `box-shadow`** on code blocks (override `.vp-doc div[class*=language-] { box-shadow: none }` scoped to this component)
+- `prose` → `md.render(prose)` → `v-html` in top half
+- Each `codeBlocks[i]` → `md.render(block)` → `v-html` in bottom half
+- This produces standard VitePress `.vp-doc` styled output with syntax highlighting and Copy button
+- **No `box-shadow`** on code blocks. Because `v-html` content does not receive Vue scoped attribute markers, the override must use an unscoped wrapper class:
+
+```css
+/* in <style> (not scoped) — namespace under component root class */
+.api-reference-page .vp-doc div[class*='language-'] {
+  box-shadow: none;
+}
+```
+
+The component root element gets class `api-reference-page` to scope this override.
+
 - Code blocks appear in order: `shell` (cURL) first, then `json` (response example)
 
 ## Data Flow
@@ -143,13 +163,14 @@ Nav files — unchanged.
 ## Dependencies
 
 Add:
-- `js-yaml` — YAML parsing at runtime
-- `@types/js-yaml` — TypeScript types (dev dep)
+- `js-yaml` — YAML parsing at runtime (move to `dependencies`)
+- `@types/js-yaml` — TypeScript types (devDependencies)
 
 Remove:
 - `@scalar/api-reference`
 
-`markdown-it` is already a project dependency — no change needed.
+Move:
+- `markdown-it` — currently in `devDependencies`, must be moved to `dependencies` so it is available in the client bundle at runtime. Run `bun remove markdown-it && bun add markdown-it` to move it.
 
 ## Not In Scope
 
