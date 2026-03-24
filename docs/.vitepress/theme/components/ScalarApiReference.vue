@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ApiReferenceVue as ApiReference } from '@scalar/api-reference'
+import { ApiReference } from '@scalar/api-reference'
 import '@scalar/api-reference/style.css'
 import { useData } from 'vitepress'
 import { computed, onMounted, ref } from 'vue'
