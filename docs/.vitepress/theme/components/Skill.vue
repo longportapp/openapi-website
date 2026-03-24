@@ -1506,7 +1506,7 @@ const currentMessages = computed(() => {
   justify-content: center;
   gap: 8px;
   background: var(--vp-c-brand-1);
-  color: #fff;
+  color: var(--vp-button-brand-text) !important;
   padding: 12px 20px;
   border-radius: 8px;
   font-size: 0.875rem;
@@ -1774,7 +1774,7 @@ const currentMessages = computed(() => {
 .skill-demo-scenario-active {
   background: var(--vp-c-brand-1) !important;
   border-color: var(--vp-c-brand-1) !important;
-  color: var(--vp-c-white) !important;
+  color: var(--vp-button-brand-text) !important;
 }
 .dark .skill-demo-scenario-active {
   background: var(--brand-60) !important;
@@ -1886,7 +1886,7 @@ const currentMessages = computed(() => {
 }
 .skill-chat-bubble-user {
   background: var(--vp-c-brand-1);
-  color: #fff;
+  color: var(--vp-button-brand-text);
   border-radius: 12px 12px 2px 12px;
 }
 .dark .skill-chat-bubble-user {
