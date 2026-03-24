@@ -620,9 +620,11 @@ onUnmounted(() => {
 
     <!-- Page content (info page selected) -->
     <div v-if="selectedPage && !selectedEndpoint" class="api-main">
-      <div class="api-content">
-        <h1 class="ep-title">{{ isZh ? (selectedPage.titleZh || selectedPage.title) : selectedPage.title }}</h1>
-        <div class="prose vp-doc" v-html="selectedPageHtml" />
+      <div class="api-content api-page-content">
+        <div class="vp-doc">
+          <h1>{{ isZh ? (selectedPage.titleZh || selectedPage.title) : selectedPage.title }}</h1>
+          <div v-html="selectedPageHtml" />
+        </div>
       </div>
     </div>
 
@@ -858,8 +860,9 @@ onUnmounted(() => {
   padding-bottom: 4px;
 }
 
-.nav-item-page .nav-label {
-  font-style: italic;
+.api-page-content {
+  max-width: 752px;
+  font-size: 16px;
 }
 
 /* ── Method badges ─────────────────────────────────────────────────────────── */
