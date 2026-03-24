@@ -797,7 +797,7 @@ paths:
     get:
       operationId: list_my_topics
       summary: Get My Topic List
-      x-summary-zh: 获取我的讨论列表
+      x-summary-zh: 获取我的发布的讨论
       description: |
         Get the list of topics published by the current authenticated user.
         Supports pagination and filtering by topic type.
@@ -871,7 +871,7 @@ paths:
     post:
       operationId: create_topic
       summary: Create Topic
-      x-summary-zh: 创建讨论
+      x-summary-zh: 创建社区讨论
       description: |
         Create a new community topic (long-form article or short post).
       x-description-zh: 创建新的社区讨论（长文或短帖）。
