@@ -1,6 +1,6 @@
 ---
 slug: topics
-title: 获取标的讨论
+title: 获取标的社区讨论
 sidebar_position: 2
 language_tabs: false
 toc_footers: []

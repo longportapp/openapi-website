@@ -98,6 +98,18 @@ longbridge filings AAPL.US [--count 20]          # Company filings and announcem
 longbridge filing-detail AAPL.US <id>            # Full Markdown content of a filing; --file-index N for multi-file filings (e.g. 8-K exhibit)
 ```
 
+### Community content
+
+```bash
+longbridge my-topics                           # My published topics (all types)
+longbridge my-topics --type article            # Articles only
+longbridge my-topics --type post --size 10     # Short posts, 10 per page
+longbridge my-topics --page 2                  # Paginate
+longbridge create-topic --body "Bullish on 700.HK"                                    # Short post (plain text)
+longbridge create-topic --body "NVDA GTC highlights" --tickers NVDA.US                # With related tickers
+longbridge create-topic --title "My Analysis" --body "$(cat post.md)" --type article  # Article from file
+```
+
 ### Options & warrants
 
 ```bash

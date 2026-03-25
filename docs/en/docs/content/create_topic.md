@@ -10,7 +10,14 @@ highlight_theme: ''
 headingLevel: 2
 ---
 
-Create a new community topic (long-form article or short post).
+Create a new community topic. Two content types are supported:
+
+| Type | `title` | `body` format | Notes |
+|------|---------|---------------|-------|
+| `post` (default) | Optional | Plain text only | Markdown syntax (e.g. `**bold**`, `# heading`) is NOT rendered — it appears as literal characters, similar to a tweet. |
+| `article` | **Required** | Markdown | The server converts Markdown to HTML for display. Supports headers, tables, bold, code blocks, etc. |
+
+<SDKLinks module="content" klass="ContentContext" method="create_topic" />
 
 ## Request
 
@@ -23,26 +30,269 @@ Create a new community topic (long-form article or short post).
 
 ### Request Body
 
-| Name        | Type     | Required | Description                                                                                                |
-| ----------- | -------- | -------- | ---------------------------------------------------------------------------------------------------------- |
-| title       | string   | YES      | Topic title                                                                                                |
-| body        | string   | YES      | Topic body in Markdown format                                                                              |
-| topic_type  | string   | NO       | Topic type. `article` (long-form with title) or `post` (short post, default)                               |
-| tickers     | string[] | NO       | Associated security symbols, format `{symbol}.{market}` (e.g. `["AAPL.US", "700.HK"]`). Maximum 10.      |
-| hashtags    | string[] | NO       | Associated hashtag names (e.g. `["earnings", "fed"]`). Maximum 5.                                         |
-| license     | int32    | NO       | Copyright declaration. `0` = none (default), `1` = original, `2` = non-original.                          |
+| Name        | Type     | Required          | Description                                                                                                |
+| ----------- | -------- | ----------------- | ---------------------------------------------------------------------------------------------------------- |
+| title       | string   | YES (for article) | Topic title. Required when `topic_type` is `article`; optional for `post`.                                 |
+| body        | string   | YES               | Topic body. For `post`: plain text only — Markdown is not rendered. For `article`: Markdown is supported.  |
+| topic_type  | string   | NO                | Content type: `post` (plain text, default) or `article` (Markdown).                                        |
+| tickers     | string[] | NO                | Related security symbols, format `{symbol}.{market}` (e.g. `["AAPL.US", "700.HK"]`). Maximum 10.          |
+| hashtags    | string[] | NO                | Hashtag names (e.g. `["earnings", "fed"]`). Maximum 5.                                                     |
+| license     | int32    | NO                | Copyright declaration. `0` = none (default), `1` = original, `2` = non-original.                           |
 
 ### Request Example
 
-```shell
-curl -L \
-  -X POST \
-  -H "Accept: application/json" \
-  -H "Authorization: Bearer <YOUR_TOKEN>" \
-  -H "Content-Type: application/json" \
-  -d '{"title":"My View on AAPL","body":"Apple reported strong earnings...","topic_type":"article","tickers":["AAPL.US"],"hashtags":["earnings"],"license":1}' \
-  "https://openapi.longbridge.com/content/topics"
+<Tabs groupId="request-example">
+  <TabItem value="cli" label="CLI" default>
+
+```bash
+# Short post — plain text (default). Markdown is NOT rendered.
+longbridge create-topic --body "Bullish on 700.HK today"
+
+# Short post with related tickers
+longbridge create-topic --body "NVDA GTC highlights" --tickers NVDA.US,700.HK
+
+# Article — Markdown body, title is required
+longbridge create-topic --title "My Analysis" --body "**Bullish** on 700.HK because..." --type article
+
+# Article from a Markdown file
+longbridge create-topic --title "Q4 Earnings Preview" --body "$(cat analysis.md)" --type article
+
+# JSON output
+longbridge create-topic --body "Test post" --format json
 ```
+
+  </TabItem>
+  <TabItem value="python" label="Python">
+
+```python
+from longbridge.openapi import ContentContext, Config, OAuthBuilder
+
+oauth = OAuthBuilder("your-client-id").build(lambda url: print("Visit:", url))
+config = Config.from_oauth(oauth)
+ctx = ContentContext(config)
+
+# Short post (plain text)
+resp = ctx.create_topic(
+    title="",
+    body="Bullish on 700.HK today",
+    topic_type="post",
+    tickers=["700.HK"],
+)
+print(resp)
+
+# Article (Markdown)
+resp = ctx.create_topic(
+    title="My Analysis",
+    body="**Bullish** on 700.HK because...",
+    topic_type="article",
+    tickers=["700.HK"],
+    license=1,
+)
+print(resp)
+```
+
+  </TabItem>
+  <TabItem value="python-async" label="Python (async)">
+
+```python
+import asyncio
+from longbridge.openapi import AsyncContentContext, Config, OAuthBuilder
+
+async def main() -> None:
+    oauth = await OAuthBuilder("your-client-id").build_async(lambda url: print("Visit:", url))
+    config = Config.from_oauth(oauth)
+    ctx = AsyncContentContext.create(config)
+
+    resp = await ctx.create_topic(
+        title="My Analysis",
+        body="**Bullish** on 700.HK because...",
+        topic_type="article",
+        tickers=["700.HK"],
+    )
+    print(resp)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+  </TabItem>
+  <TabItem value="nodejs" label="Node.js">
+
+```javascript
+const { Config, ContentContext, OAuth } = require('longbridge')
+
+async function main() {
+  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const config = Config.fromOAuth(oauth)
+  const ctx = ContentContext.new(config)
+
+  // Article (Markdown body)
+  const resp = await ctx.createTopic({
+    title: "My Analysis",
+    body: "**Bullish** on 700.HK because...",
+    topicType: "article",
+    tickers: ["700.HK"],
+  })
+  console.log(resp)
+}
+main().catch(console.error)
+```
+
+  </TabItem>
+  <TabItem value="java" label="Java">
+
+```java
+import com.longbridge.*;
+import com.longbridge.content.*;
+
+class Main {
+    public static void main(String[] args) throws Exception {
+        try (OAuth oauth = new OAuthBuilder("your-client-id").build(url -> System.out.println("Open to authorize: " + url)).get();
+             Config config = Config.fromOAuth(oauth);
+             ContentContext ctx = ContentContext.create(config)) {
+            // Article (Markdown body, title required)
+            CreateTopicOptions opts = new CreateTopicOptions("My Analysis", "**Bullish** on 700.HK because...")
+                .setTopicType("article")
+                .setTickers(new String[]{"700.HK"})
+                .setLicense(1);
+            OwnedTopic resp = ctx.createTopic(opts).get();
+            System.out.println(resp);
+        }
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="rust" label="Rust">
+
+```rust
+use std::sync::Arc;
+use longbridge::{oauth::OAuthBuilder, content::{ContentContext, CreateTopicOptions}, Config};
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let oauth = OAuthBuilder::new("your-client-id").build(|url| println!("Open this URL to authorize: {url}")).await?;
+    let config = Arc::new(Config::from_oauth(oauth));
+    let ctx = ContentContext::new(config);
+
+    // Article (Markdown body, title required)
+    let opts = CreateTopicOptions {
+        title: "My Analysis".to_string(),
+        body: "**Bullish** on 700.HK because...".to_string(),
+        topic_type: Some("article".to_string()),
+        tickers: Some(vec!["700.HK".to_string()]),
+        hashtags: None,
+        license: Some(1),
+    };
+    let resp = ctx.create_topic(opts).await?;
+    println!("{:?}", resp);
+    Ok(())
+}
+```
+
+  </TabItem>
+  <TabItem value="cpp" label="C++">
+
+```cpp
+#include <iostream>
+#include <longbridge.hpp>
+
+#ifdef WIN32
+#include <windows.h>
+#endif
+
+using namespace longbridge;
+using namespace longbridge::content;
+
+static void
+run(const OAuth& oauth)
+{
+    Config config = Config::from_oauth(oauth);
+    ContentContext ctx = ContentContext::create(config);
+
+    // Article (Markdown body, title required)
+    CreateTopicOptions opts;
+    opts.title = "My Analysis";
+    opts.body = "**Bullish** on 700.HK because...";
+    opts.topic_type = "article";
+    opts.tickers = {"700.HK"};
+
+    ctx.create_topic(opts, [](auto res) {
+        if (!res) { std::cout << "failed: " << *res.status().message() << std::endl; return; }
+        std::cout << "created topic: " << res->id << std::endl;
+    });
+}
+
+int main(int argc, char const* argv[]) {
+#ifdef WIN32
+    SetConsoleOutputCP(CP_UTF8);
+#endif
+
+    const std::string client_id = "your-client-id";
+    OAuthBuilder(client_id).build(
+    [](const std::string& url) {
+        std::cout << "Open this URL to authorize: " << url << std::endl;
+    },
+    [](auto res) {
+        if (!res) {
+            std::cout << "authorization failed: " << *res.status().message() << std::endl;
+            return;
+        }
+        run(*res);
+    });
+
+    std::cin.get();
+    return 0;
+}
+```
+
+  </TabItem>
+  <TabItem value="go" label="Go">
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/longbridge/openapi-go/config"
+	"github.com/longbridge/openapi-go/oauth"
+	"github.com/longbridge/openapi-go/content"
+)
+
+func main() {
+	o := oauth.New("your-client-id").
+		OnOpenURL(func(url string) { fmt.Println("Open this URL to authorize:", url) })
+	if err := o.Build(context.Background()); err != nil {
+		log.Fatal(err)
+	}
+	conf, err := config.New(config.WithOAuthClient(o))
+	if err != nil {
+		log.Fatal(err)
+	}
+	ctx, err := content.NewFromCfg(conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// Article (Markdown body, title required)
+	opts := content.CreateTopicOptions{
+		Title:     "My Analysis",
+		Body:      "**Bullish** on 700.HK because...",
+		TopicType: "article",
+		Tickers:   []string{"700.HK"},
+	}
+	resp, err := ctx.CreateTopic(context.Background(), opts)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("created topic: %s\n", resp.ID)
+}
+```
+
+  </TabItem>
+</Tabs>
 
 ## Response
 
@@ -57,12 +307,14 @@ curl -L \
   "code": 0,
   "message": "success",
   "data": {
-    "id": "39304657",
-    "title": "My View on AAPL",
-    "topic_type": "article",
-    "tickers": ["AAPL.US"],
-    "hashtags": ["earnings"],
-    "created_at": "1742000000"
+    "item": {
+      "id": "39304657",
+      "title": "My View on AAPL",
+      "topic_type": "article",
+      "tickers": ["AAPL.US"],
+      "hashtags": ["earnings"],
+      "created_at": "1742000000"
+    }
   }
 }
 ```

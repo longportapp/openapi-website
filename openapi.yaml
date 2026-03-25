@@ -1216,7 +1216,7 @@ paths:
         Get the list of community discussion topics for the specified symbol.
       x-description-zh: 获取指定标的的社区讨论。
       tags:
-        - News & Filings
+        - Community
       parameters:
         - name: symbol
           in: path
@@ -1256,14 +1256,22 @@ paths:
   /content/topics/mine:
     get:
       operationId: list_my_topics
-      summary: Get My Topic List
-      x-summary-zh: 获取我的发布的讨论
+      summary: Get My Published Topics
+      x-summary-zh: 获取我发布的讨论
       description: |
         Get the list of topics published by the current authenticated user.
         Supports pagination and filtering by topic type.
       x-description-zh: 获取当前认证用户已发布的讨论列表，支持分页和按讨论类型筛选。
       tags:
         - Community
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge my-topics
+            longbridge my-topics --type article
+            longbridge my-topics --type post --size 10 --page 2
+            longbridge my-topics --format json
       parameters:
         - name: page
           in: query
@@ -1275,7 +1283,7 @@ paths:
         - name: size
           in: query
           required: false
-          description: Number of items per page, range 1–50. Defaults to `25`.
+          description: Number of items per page, range 1–500. Defaults to `50`.
           schema:
             type: integer
             nullable: true
@@ -1333,10 +1341,27 @@ paths:
       summary: Create Topic
       x-summary-zh: 创建社区讨论
       description: |
-        Create a new community topic (long-form article or short post).
+        Create a new community topic. Two content types are supported:
+        - `post` (default) — plain text body; Markdown is NOT rendered. Title is optional.
+        - `article` — Markdown body (server converts to HTML). Title is **required**.
       x-description-zh: 创建新的社区讨论（长文或短帖）。
       tags:
         - Community
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            # Short post (plain text, Markdown not rendered)
+            longbridge create-topic --body "Bullish on 700.HK today"
+
+            # Short post with tickers
+            longbridge create-topic --body "NVDA GTC highlights" --tickers NVDA.US,700.HK
+
+            # Article (Markdown, title required)
+            longbridge create-topic --title "My Analysis" --body "**Bullish** on 700.HK because..." --type article
+
+            # Article from file
+            longbridge create-topic --title "Q4 Preview" --body "$(cat analysis.md)" --type article
       requestBody:
         required: true
         content:
@@ -1344,15 +1369,14 @@ paths:
             schema:
               type: object
               required:
-                - title
                 - body
               properties:
                 title:
                   type: string
-                  description: Topic title (required).
+                  description: Topic title. Required when `topic_type` is `article`; optional for `post`.
                 body:
                   type: string
-                  description: Topic body in Markdown format (required).
+                  description: Topic body. For `post`&#58; plain text only — Markdown is not rendered. For `article`&#58; Markdown is supported.
                 topic_type:
                   type: string
                   nullable: true
