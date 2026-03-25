@@ -1283,7 +1283,7 @@ paths:
         - name: size
           in: query
           required: false
-          description: Number of items per page, range 1–50. Defaults to `25`.
+          description: Number of items per page, range 1–500. Defaults to `50`.
           schema:
             type: integer
             nullable: true
