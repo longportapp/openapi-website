@@ -1,6 +1,6 @@
 ---
 slug: topics
-title: Security Topics
+title: Get Community Topics by Symbol
 sidebar_position: 2
 language_tabs: false
 toc_footers: []

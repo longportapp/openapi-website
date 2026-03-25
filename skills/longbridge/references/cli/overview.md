@@ -35,6 +35,7 @@ longbridge login    # Opens browser OAuth flow; token saved to
                     # ~/.longbridge/terminal/.openapi-session
 longbridge logout   # Clear saved session token
 longbridge check    # Verify connectivity and token (no auth required)
+longbridge update   # Update the CLI to the latest version
 ```
 
 **China Mainland:** The CLI auto-detects CN by probing `geotest.lbkrs.com` on startup (non-blocking). Result cached at `~/.longbridge/openapi/region-cache`. CN users automatically use `.cn` endpoints.
