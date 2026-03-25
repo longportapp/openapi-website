@@ -6,21 +6,52 @@ description: Install Longbridge Skill for OpenClaw, Claude, ChatGPT, Cursor, Cla
 
 # Longbridge Skill Installation Guide
 
-## OpenClaw
+## Installation Methods
 
-Type the following command in any OpenClaw chat:
+### Method 1: ZIP File (Recommended)
 
-```
-/skills add longbridge/developers
-```
+Download the Skill package and install it in your AI client.
 
-Takes effect immediately — no restart required.
+**[Download longbridge.zip](/skill/longbridge.zip)**
+
+After downloading, extract the zip and follow the client-specific guide below to place the files in the right location.
 
 Also available on [skills.sh](https://skills.sh/longbridge/developers) and [GitHub](https://github.com/longbridge/developers/tree/main/skills).
 
 ---
 
-## Claude Desktop / Claude.ai
+### Method 2: CLI (npx / bunx)
+
+For CLI-based tools, run the following command in your terminal:
+
+```bash
+# Recommended: install globally and skip the confirmation prompt
+npx skills add longbridge/developers -g -y
+
+# If you have Bun installed, use bunx instead of npx:
+bunx skills add longbridge/developers -g -y
+```
+
+- `-g` — installs the Skill globally, making it available across **all** your projects (not just the current directory)
+- `-y` — automatically confirms the installation prompt without requiring manual input
+
+---
+
+## Client Setup
+
+### OpenClaw
+
+In the OpenClaw chat, send the following message and OpenClaw will handle the installation automatically:
+
+```
+Install the Longbridge Developers Skill from this zip file: https://open.longbridge.com/skill/longbridge.zip
+```
+
+Takes effect immediately — no restart required.
+
+---
+
+### Claude Desktop / Claude.ai
 
 > Claude.ai's code execution environment only allows access to a fixed whitelist of domains, so automated installation is not possible. Use the manual method below instead.
 
@@ -34,7 +65,7 @@ The Skill will be active in all conversations within that project.
 
 ---
 
-## ChatGPT
+### ChatGPT
 
 > ChatGPT cannot auto-install Skills during a conversation. Use the GPT configuration page to upload manually.
 
@@ -46,7 +77,7 @@ The Skill will be active in all conversations within that project.
 
 ---
 
-## Cursor
+### Cursor
 
 1. Open Cursor → **Settings** → **Rules**
 2. Choose **Project Rules** (current project) or **User Rules** (global)
@@ -55,7 +86,7 @@ The Skill will be active in all conversations within that project.
 
 ---
 
-## Claude Code
+### Claude Code
 
 1. Download [longbridge.zip](/skill/longbridge.zip) and extract it
 2. Copy the extracted files into `.claude/skills/` in your project directory (create the folder if it doesn't exist)
@@ -65,24 +96,9 @@ The Skill will be available in all Claude Code sessions within that project.
 
 ---
 
-## Codex / CLI Tools
+### Codex / Zed / Other CLI Tools
 
-Run in your project directory:
-
-```bash
-npx skills add longbridge/developers
-```
-
-This writes the Skill configuration into your project. Compatible with Codex, Zed, and other tools that support project-level context.
-
----
-
-## Zed
-
-1. Open Zed → **Settings** (`cmd+,`)
-2. Find **Assistant** → **Context**
-3. Download [longbridge.zip](/skill/longbridge.zip) and extract it
-4. Add the file paths to the Context configuration as described in the README
+Run [Method 2](#method-2-cli-npx--bunx) above in your terminal. The Skill configuration will be written to your system and picked up automatically by tools that support project-level context.
 
 ---
 
