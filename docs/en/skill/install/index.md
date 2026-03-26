@@ -39,15 +39,25 @@ bunx skills add longbridge/developers -g -y
 
 ## Authorize Your Longbridge Account
 
-After installing the Skill, you'll need to complete a one-time OAuth 2.0 authorization to connect your AI client to your Longbridge account. **No additional tools required** — the authorization flow is triggered automatically by the client.
+The Skill uses the Longbridge CLI to complete OAuth 2.0 authorization. Install the CLI first, then log in.
 
-### Authorization Flow
+### Step 1: Install the CLI
 
-1. Complete the Skill installation for your client (see instructions below)
-2. Start any Longbridge data query in the AI conversation (e.g., a quote or portfolio lookup)
-3. The client automatically opens (or prompts you to open) a browser
-4. Log in to your Longbridge account in the browser and approve the requested scopes
-5. Once authorized, credentials are saved locally and reused automatically — no repeated logins needed; tokens refresh automatically when they expire
+```bash
+# macOS (recommended)
+brew install --cask longbridge/tap/longbridge-terminal
+
+# Any platform
+curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
+```
+
+### Step 2: Complete OAuth Authorization
+
+```bash
+longbridge login
+```
+
+A browser window opens to the Longbridge login page. Sign in and approve the requested scopes — the token is saved locally, reused automatically, and refreshes when it expires.
 
 ### Revoking Authorization
 
