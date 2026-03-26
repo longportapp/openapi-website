@@ -10,7 +10,7 @@ export const zhHKConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
       'meta',
       {
         property: 'og:image',
-        content: 'https://assets.lbkrs.com/uploads/48641e8e-a157-4b0f-a58e-bd3998d10d54/group427321346.webp',
+        content: 'https://assets.wbrks.com/assets/logo/base-og-img.jpg',
       },
     ],
     ['meta', { property: 'og:locale', content: 'zh-HK' }],
