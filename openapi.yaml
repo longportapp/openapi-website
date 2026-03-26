@@ -1716,10 +1716,10 @@ paths:
           label: CLI
           source: |
             # Top-level reply
-            longbridge create-reply 6993508780031016960 --body "Great post!"
+            longbridge create-topic-reply 6993508780031016960 --body "Great post!"
 
             # Reply to an existing comment
-            longbridge create-reply 6993508780031016960 --body "Agreed!" --reply-to 7001234567890123456
+            longbridge create-topic-reply 6993508780031016960 --body "Agreed!" --reply-to 7001234567890123456
       requestBody:
         required: true
         content:

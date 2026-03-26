@@ -1,5 +1,5 @@
 ---
-slug: create-reply
+slug: create-topic-reply
 title: 创建讨论回复
 sidebar_position: 7
 language_tabs: false
@@ -20,7 +20,7 @@ headingLevel: 2
 正文中提到的标的代码（如 `700.HK`、`TSLA.US`）会被平台自动识别并关联为相关标的。
 
 > ⚠️ 请勿滥用此功能关联与内容无关的标的，否则后台内容运营可能会限制发布，甚至有可能禁言。
-</TipContainer>
+> </TipContainer>
 
 **频率限制：** 同一用户在同一讨论下，前 3 条无间隔限制；此后每条须与上一条保持递增间隔（3 s → 5 s → 8 s → 13 s → 21 s → 34 s → 55 s 封顶），超出限制返回 `429`。
 
@@ -39,16 +39,16 @@ headingLevel: 2
 
 ### Path Parameters
 
-| Name      | Type   | Required | Description                                              |
-| --------- | ------ | -------- | -------------------------------------------------------- |
-| topic_id  | string | YES      | 讨论 ID，如 `6993508780031016960`                        |
+| Name     | Type   | Required | Description                       |
+| -------- | ------ | -------- | --------------------------------- |
+| topic_id | string | YES      | 讨论 ID，如 `6993508780031016960` |
 
 ### Request Body
 
-| Name         | Type   | Required | Description                                                                                      |
-| ------------ | ------ | -------- | ------------------------------------------------------------------------------------------------ |
-| body         | string | YES      | 回复正文，仅支持纯文本。正文中提到的标的代码会被平台自动识别并关联。                             |
-| reply_to_id  | string | NO       | 被回复的回复 ID；不填或填 `"0"` 表示发顶层回复，填入有效 ID 则嵌套在该回复下。                  |
+| Name        | Type   | Required | Description                                                                    |
+| ----------- | ------ | -------- | ------------------------------------------------------------------------------ |
+| body        | string | YES      | 回复正文，仅支持纯文本。正文中提到的标的代码会被平台自动识别并关联。           |
+| reply_to_id | string | NO       | 被回复的回复 ID；不填或填 `"0"` 表示发顶层回复，填入有效 ID 则嵌套在该回复下。 |
 
 ### Request Example
 
@@ -57,10 +57,10 @@ headingLevel: 2
 
 ```bash
 # 顶层回复
-longbridge create-reply 6993508780031016960 --body "分析得很好！"
+longbridge create-topic-reply 6993508780031016960 --body "分析得很好！"
 
 # 嵌套回复
-longbridge create-reply 6993508780031016960 --body "同意你的观点。" --reply-to 7001234567890123456
+longbridge create-topic-reply 6993508780031016960 --body "同意你的观点。" --reply-to 7001234567890123456
 ```
 
   </TabItem>
@@ -200,12 +200,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### Response Status
 
-| Status | Description | Schema                                                      |
-| ------ | ----------- | ----------------------------------------------------------- |
-| 200    | 返回成功    | [create_reply_response](#schemacreate_reply_response)       |
-| 403    | 权限不足    | 用户未开户或无资产                                          |
-| 429    | 频率超限    | 超过同讨论下的发帖频率限制，请等待后重试                    |
-| 500    | 内部错误    | None                                                        |
+| Status | Description | Schema                                                |
+| ------ | ----------- | ----------------------------------------------------- |
+| 200    | 返回成功    | [create_reply_response](#schemacreate_reply_response) |
+| 403    | 权限不足    | 用户未开户或无资产                                    |
+| 429    | 频率超限    | 超过同讨论下的发帖频率限制，请等待后重试              |
+| 500    | 内部错误    | None                                                  |
 
 ## Schemas
 
@@ -213,21 +213,21 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 <a id="schemacreate_reply_response"></a>
 
-| Name                | Type     | Required | Description                                        |
-| ------------------- | -------- | -------- | -------------------------------------------------- |
-| item                | object   | true     | 新建回复详情                                       |
-| ∟ id                | string   | true     | 回复 ID                                            |
-| ∟ topic_id          | string   | true     | 所属讨论 ID                                        |
-| ∟ body              | string   | false    | 回复正文（纯文本）                                 |
-| ∟ reply_to_id       | string   | false    | 父回复 ID，`"0"` 表示顶层回复                      |
-| ∟ author            | object   | false    | 作者信息                                           |
-| ∟∟ member_id        | string   | false    | 作者 member ID                                     |
-| ∟∟ name             | string   | false    | 作者昵称                                           |
-| ∟∟ avatar           | string   | false    | 作者头像 URL                                       |
-| ∟ images            | object[] | false    | 附图列表                                           |
-| ∟∟ url              | string   | false    | 原始图片 URL                                       |
-| ∟∟ sm               | string   | false    | 小缩略图 URL                                       |
-| ∟∟ lg               | string   | false    | 大缩略图 URL                                       |
-| ∟ likes_count       | int32    | false    | 点赞数                                             |
-| ∟ comments_count    | int32    | false    | 嵌套回复数                                         |
-| ∟ created_at        | string   | true     | 创建时间，Unix 时间戳（秒）                        |
+| Name             | Type     | Required | Description                   |
+| ---------------- | -------- | -------- | ----------------------------- |
+| item             | object   | true     | 新建回复详情                  |
+| ∟ id             | string   | true     | 回复 ID                       |
+| ∟ topic_id       | string   | true     | 所属讨论 ID                   |
+| ∟ body           | string   | false    | 回复正文（纯文本）            |
+| ∟ reply_to_id    | string   | false    | 父回复 ID，`"0"` 表示顶层回复 |
+| ∟ author         | object   | false    | 作者信息                      |
+| ∟∟ member_id     | string   | false    | 作者 member ID                |
+| ∟∟ name          | string   | false    | 作者昵称                      |
+| ∟∟ avatar        | string   | false    | 作者头像 URL                  |
+| ∟ images         | object[] | false    | 附图列表                      |
+| ∟∟ url           | string   | false    | 原始图片 URL                  |
+| ∟∟ sm            | string   | false    | 小缩略图 URL                  |
+| ∟∟ lg            | string   | false    | 大缩略图 URL                  |
+| ∟ likes_count    | int32    | false    | 点赞数                        |
+| ∟ comments_count | int32    | false    | 嵌套回复数                    |
+| ∟ created_at     | string   | true     | 创建时间，Unix 时间戳（秒）   |

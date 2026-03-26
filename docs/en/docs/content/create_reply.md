@@ -1,5 +1,5 @@
 ---
-slug: create-reply
+slug: create-topic-reply
 title: Create Topic Reply
 sidebar_position: 7
 language_tabs: false
@@ -20,7 +20,7 @@ Only users who have opened a **Longbridge account and hold assets** are allowed 
 Stock symbols mentioned in the body (e.g. `700.HK`, `TSLA.US`) are automatically recognized and linked as related stocks by the platform.
 
 > ⚠️ Do not abuse symbol linking to associate unrelated stocks. Content moderation may restrict publishing or mute the account.
-</TipContainer>
+> </TipContainer>
 
 **Rate limit:** The first 3 replies per user per topic have no wait requirement. After that, each subsequent reply must wait an incrementally longer interval since the previous one:
 
@@ -69,10 +69,10 @@ Exceeding the limit returns `429`.
 
 ```bash
 # Top-level reply
-longbridge create-reply 6993508780031016960 --body "Great analysis!"
+longbridge create-topic-reply 6993508780031016960 --body "Great analysis!"
 
 # Nested reply
-longbridge create-reply 6993508780031016960 --body "I agree." --reply-to 7001234567890123456
+longbridge create-topic-reply 6993508780031016960 --body "I agree." --reply-to 7001234567890123456
 ```
 
   </TabItem>
