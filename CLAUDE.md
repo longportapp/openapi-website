@@ -99,6 +99,27 @@ Sidebar 通过 `docs/.vitepress/theme/utils/gen.ts` 的 `genMarkdowDocs(lang, ba
 
 `../openapi-website-private`（相对本项目）是配套私有仓库，存放不公开的功能实现（如开发者中心）。涉及相关改动时需检查两个仓库是否需要同步。
 
+### Skills
+
+`skills/` contains AI agent skill files. Currently includes skills for the Longbridge terminal:
+
+```
+skills/
+└── longbridge/
+    ├── SKILL.md                   # skill entry point — tool selection and quick reference
+    └── references/
+        ├── cli/overview.md        # CLI usage overview (features, extended hours, etc.)
+        ├── python-sdk/            # Python SDK reference
+        ├── rust-sdk/              # Rust SDK reference
+        ├── llm.md                 # LLM/AI integration
+        └── mcp.md                 # MCP setup
+```
+
+**Documentation update rules:**
+
+- All CLI docs, SDK references, and skill files for the Longbridge terminal (`../longbridge-terminal`) are maintained here in `skills/longbridge/` — `../longbridge-terminal` no longer has its own `skills/` directory.
+- Skill files should stay high-level. For command flags and output details, defer to the CLI's built-in `--help` — do not copy help text into skill files.
+
 ### 图片/静态资源
 
 静态资源必须上传 CDN 后引用 URL，不要放进项目中。

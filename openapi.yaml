@@ -1210,7 +1210,7 @@ paths:
   /content/{symbol}/topics:
     get:
       operationId: list_topics
-      summary: Get Community Topics by Symbol
+      summary: List Community Topics by Symbol
       x-summary-zh: 按标的获取社区讨论
       description: |
         Get the list of community discussion topics for the specified symbol.
@@ -1256,7 +1256,7 @@ paths:
   /content/topics/mine:
     get:
       operationId: list_my_topics
-      summary: Get My Published Topics
+      summary: List My Published Topics
       x-summary-zh: 获取我发布的讨论
       description: |
         Get the list of topics published by the current authenticated user.
@@ -1342,13 +1342,38 @@ paths:
       x-summary-zh: 创建社区讨论
       description: |
         Create a new community topic. Two content types are supported:
-        - `post` (default) — plain text body; Markdown is NOT rendered. Title is optional.
-        - `article` — Markdown body (server converts to HTML). Title is **required**.
-      x-description-zh: 创建新的社区讨论（长文或短帖）。
+
+        - `post` (default): Plain text only, Markdown is **not** rendered — appears as literal characters.
+        - `article`: This should with `title` params, suppports Markdown with headers, tables, bold, code blocks, etc.
+
+        Only users who have opened a **Longbridge account and hold assets** are allowed.
+
+        Symbols mentioned in the body (e.g. `TSLA.US`, `700.HK`) are automatically recognized and linked as related stocks. Use `tickers` to associate additional symbols not explicitly mentioned in the body.
+
+        ⚠️ Do not abuse symbol linking to associate unrelated stocks. Content moderation may restrict publishing or mute the account.
+
+        **Rate limit:** Max 3 topics per user per minute, 10 per 24 hours. Exceeding the limit returns `429`.
+
+        > Rate limit thresholds are for reference only and may be adjusted at any time.
+      x-description-zh: |
+        创建新的社区讨论，根据 `topic_type` 支持两种类型的发布：
+
+        - `post`:（默认），仅支持**纯文本**, 不支持 Markdown。
+        - `article`: 选择这项类型，`title` 字段必填，支持 Markdown 格式包含标题、表格、加粗等格式支持。
+
+        仅限 **Longbridge 开户且持有资产** 的用户才允许通过 Longbridge Developers 的 API 或 CLI 发布社区讨论和回复。
+
+        正文中提到的标的代码（如 `TSLA.US`, `700.HK`）会被平台自动识别并关联。`tickers` 用于补充正文中未显式提及的标的。
+
+        ⚠️ 请勿滥用此功能关联与内容无关的标的，否则后台内容运营可能会限制发布，甚至有可能禁言。
+
+        **频率限制：** 同一用户每分钟最多创建 3 篇，24 小时内最多 10 篇，超出返回 `429`。
+
+        > 频率限制规则仅供参考，平台可能随时进行内部调整。
       tags:
         - Community
       x-codeSamples:
-        - lang: Shell
+        - lang: Bash
           label: CLI
           source: |
             # Short post (plain text, Markdown not rendered)
@@ -1376,7 +1401,11 @@ paths:
                   description: Topic title. Required when `topic_type` is `article`; optional for `post`.
                 body:
                   type: string
-                  description: Topic body. For `post`&#58; plain text only — Markdown is not rendered. For `article`&#58; Markdown is supported.
+                  description: |
+                    Topic body.
+
+                    - `post`: plain text only — Markdown is not rendered.
+                    - `article`: Markdown is supported.
                 topic_type:
                   type: string
                   nullable: true
@@ -1399,10 +1428,6 @@ paths:
                   description: Associated hashtag names (e.g. `["earnings", "fed"]`). Maximum 5.
                   items:
                     type: string
-                license:
-                  type: integer
-                  nullable: true
-                  description: Copyright declaration. `0` = none (default), `1` = original, `2` = non-original.
       responses:
         '200':
           description: Successful response
@@ -1412,14 +1437,346 @@ paths:
                 code: 0
                 message: success
                 data:
-                  id: '39304657'
-                  title: My View on AAPL
-                  topic_type: article
-                  tickers:
-                    - AAPL.US
-                  hashtags:
-                    - earnings
-                  created_at: '1742000000'
+                  item:
+                    id: '39304657'
+                    title: My View on AAPL
+                    description: Brief plain-text summary...
+                    body: '**Bullish** on AAPL because...'
+                    topic_type: article
+                    tickers:
+                      - AAPL.US
+                    hashtags:
+                      - earnings
+                    images: []
+                    likes_count: 0
+                    comments_count: 0
+                    views_count: 0
+                    shares_count: 0
+                    detail_url: https://longbridge.com/topics/39304657
+                    author:
+                      member_id: '10086'
+                      name: Jane Doe
+                      avatar: https://example.com/avatar.jpg
+                    created_at: '1742000000'
+                    updated_at: '1742000000'
+        '403':
+          description: Forbidden — user has not opened a Longbridge account or has no assets.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests — rate limit exceeded (3/min or 10/24h per user).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /content/topics/{id}:
+    get:
+      operationId: topic_detail
+      summary: Topic Detail
+      x-summary-zh: 获取讨论详情
+      description: |
+        Get the full details of a community topic by its ID.
+
+        The response includes:
+        - Full body text (Markdown for `article` type, plain text for `post`)
+        - Author profile (member ID, display name, avatar)
+        - Associated tickers and hashtags
+        - Engagement counts (likes, replies, views, shares)
+        - Direct URL to the topic page
+      x-description-zh: |
+        根据 ID 获取社区讨论的完整详情。
+
+        返回内容包括：
+        - 完整正文（`article` 类型为 Markdown，`post` 类型为纯文本）
+        - 作者信息（member ID、昵称、头像）
+        - 关联标的代码和标签
+        - 互动数据（点赞、回复、浏览、分享数）
+        - 讨论页面直链
+      tags:
+        - Community
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: 'Topic ID (e.g. `6993508780031016960`).'
+          schema:
+            type: string
+      x-codeSamples:
+        - lang: bash
+          label: CLI
+          source: |
+            longbridge topic-detail 6993508780031016960
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                code: 0
+                message: success
+                data:
+                  item:
+                    id: '6993508780031016960'
+                    title: My Analysis on AAPL
+                    description: A brief plain-text summary of the topic.
+                    body: '**Bullish** on AAPL because...'
+                    topic_type: article
+                    author:
+                      member_id: '1000001'
+                      name: Jane Doe
+                      avatar: https://cdn.longbridge.com/avatars/1000001.jpg
+                    tickers:
+                      - AAPL.US
+                    hashtags:
+                      - earnings
+                    images:
+                      - url: https://cdn.longbridge.com/img/abc.jpg
+                        sm: https://cdn.longbridge.com/img/abc_sm.jpg
+                        lg: https://cdn.longbridge.com/img/abc_lg.jpg
+                    likes_count: 42
+                    comments_count: 7
+                    views_count: 1500
+                    shares_count: 3
+                    detail_url: https://longbridge.com/topics/6993508780031016960
+                    created_at: '1742000000'
+                    updated_at: '1742001000'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /content/topics/{topic_id}/comments:
+    get:
+      operationId: list_topic_replies
+      summary: List Topic Replies
+      x-summary-zh: 获取讨论回复列表
+      description: |
+        Get the reply list for a specific topic, with pagination.
+
+        Each reply includes:
+        - Author profile (member ID, display name, avatar)
+        - Body (plain text)
+        - Engagement counts (likes, nested replies)
+        - `reply_to_id`: `"0"` means a top-level reply; any other value is the ID of the parent reply it is nested under.
+      x-description-zh: |
+        获取指定讨论下的回复列表，支持分页。
+
+        每条回复包含：
+        - 作者信息（member ID、昵称、头像）
+        - 正文（纯文本）
+        - 互动数据（点赞数、嵌套回复数）
+        - `reply_to_id`：`"0"` 表示顶层回复，其他值表示对指定回复的嵌套回复
+      tags:
+        - Community
+      parameters:
+        - name: topic_id
+          in: path
+          required: true
+          description: 'Topic ID (e.g. `6993508780031016960`).'
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: false
+          description: Page number (1-based). Defaults to `1`.
+          schema:
+            type: integer
+            nullable: true
+        - name: size
+          in: query
+          required: false
+          description: Number of items per page, range 1–50. Defaults to `20`.
+          schema:
+            type: integer
+            nullable: true
+            minimum: 1
+            maximum: 50
+      x-codeSamples:
+        - lang: bash
+          label: CLI
+          source: |
+            longbridge topic-replies 6993508780031016960
+            longbridge topic-replies 6993508780031016960 --page 2 --size 20
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                code: 0
+                message: success
+                data:
+                  items:
+                    - id: '7001234567890123456'
+                      topic_id: '6993508780031016960'
+                      body: Great analysis, fully agree!
+                      reply_to_id: '0'
+                      author:
+                        member_id: '1000002'
+                        name: John Smith
+                        avatar: https://cdn.longbridge.com/avatars/1000002.jpg
+                      images: []
+                      likes_count: 5
+                      comments_count: 2
+                      created_at: '1742001500'
+                    - id: '7001234567890123457'
+                      topic_id: '6993508780031016960'
+                      body: I disagree on the valuation part.
+                      reply_to_id: '7001234567890123456'
+                      author:
+                        member_id: '1000003'
+                        name: Alice Lee
+                        avatar: https://cdn.longbridge.com/avatars/1000003.jpg
+                      images: []
+                      likes_count: 1
+                      comments_count: 0
+                      created_at: '1742001800'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: create_topic_reply
+      summary: Create Topic Reply
+      x-summary-zh: 创建讨论回复
+      description: |
+        Post a reply to a community topic. Supports nesting under an existing reply.
+
+        Plain text only — HTML and Markdown are **not** rendered.
+
+        Only users who have opened a **Longbridge account and hold assets** are allowed.
+
+        Symbols mentioned in the body (e.g. `TSLA.US`, `700.HK`) are automatically recognized and linked as related stocks. Use `tickers` to associate additional symbols not explicitly mentioned in the body.
+
+        ⚠️ Do not abuse symbol linking to associate unrelated stocks. Content moderation may restrict publishing or mute the account.
+
+        **Rate limit:** The first 3 replies per user per topic have no wait requirement. After that, each subsequent reply must wait an incrementally longer interval:
+
+        | Reply # (after 3rd) | Required wait |
+        | ------------------- | ------------- |
+        | 4th                 | 3 s           |
+        | 5th                 | 5 s           |
+        | 6th                 | 8 s           |
+        | 7th                 | 13 s          |
+        | 8th                 | 21 s          |
+        | 9th                 | 34 s          |
+        | 10th+               | 55 s (cap)    |
+
+        Exceeding the rate limit returns `429`.
+
+        > Rate limit thresholds are for reference only and may be adjusted at any time.
+      x-description-zh: |
+        在指定讨论下发布回复，支持嵌套回复已有回复。
+
+        **正文格式：** 仅支持纯文本，不支持 HTML 或 Markdown。
+
+        仅限 **Longbridge 开户且持有资产** 的用户才允许通过 Longbridge Developers 的 API 或 CLI 发布社区讨论和回复。
+
+        正文中提到的标的代码（如 `TSLA.US`, `700.HK`）会被平台自动识别并关联。`tickers` 用于补充正文中未显式提及的标的。
+
+        ⚠️ 请勿滥用此功能关联与内容无关的标的，否则后台内容运营可能会限制发布，甚至有可能禁言。
+
+        **频率限制：** 同一用户在同一讨论下，前 3 条无间隔限制；第 4 条起须与上一条间隔递增：
+
+        | 回复条数（第 3 条后）| 须等待时长 |
+        | -------------------- | ---------- |
+        | 第 4 条              | 3 秒       |
+        | 第 5 条              | 5 秒       |
+        | 第 6 条              | 8 秒       |
+        | 第 7 条              | 13 秒      |
+        | 第 8 条              | 21 秒      |
+        | 第 9 条              | 34 秒      |
+        | 第 10 条起           | 55 秒（上限）|
+
+        超出限制返回 `429`。
+
+        > 频率限制规则仅供参考，平台可能随时进行内部调整。
+      tags:
+        - Community
+      parameters:
+        - name: topic_id
+          in: path
+          required: true
+          description: 'Topic ID to reply to (e.g. `6993508780031016960`).'
+          schema:
+            type: string
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            # Top-level reply
+            longbridge create-topic-reply 6993508780031016960 --body "Great post!"
+
+            # Reply to an existing comment
+            longbridge create-topic-reply 6993508780031016960 --body "Agreed!" --reply-to 7001234567890123456
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - body
+              properties:
+                body:
+                  type: string
+                  description: |
+                    The reply body content.
+
+                    Plain text only — HTML and Markdown are **not** rendered.
+                reply_to_id:
+                  type: string
+                  nullable: true
+                  description: |
+                    ID of the comment to reply to.
+
+                    Omit or set to `"0"` to post a top-level comment.
+                    When set to a valid comment ID, the new comment will be treated as a reply to that comment.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                code: 0
+                message: success
+                data:
+                  item:
+                    id: '7001234567890123460'
+                    topic_id: '6993508780031016960'
+                    body: Great post!
+                    reply_to_id: '0'
+                    author:
+                      member_id: '1000001'
+                      name: Jane Doe
+                      avatar: https://cdn.longbridge.com/avatars/1000001.jpg
+                    images: []
+                    likes_count: 0
+                    comments_count: 0
+                    created_at: '1742002000'
+        '403':
+          description: Forbidden — the authenticated user has not opened a Longbridge account or does not hold assets.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests — rate limit exceeded for this user in this topic. Wait for the required interval before retrying.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         default:
           description: Unexpected error
           content:

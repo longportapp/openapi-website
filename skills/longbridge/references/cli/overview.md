@@ -74,6 +74,13 @@ longbridge filings TSLA.US
 longbridge filing-detail TSLA.US 610186794100660481 --file-index 0
 ```
 
+## Extended Hours (Pre/Post Market)
+
+`quote`, `intraday`, `kline`, `kline-history` all support extended-hours data. Use `longbridge <command> --help` for exact flags — key points:
+
+- **`quote`**: always returns `pre_market_quote` / `post_market_quote` / `overnight_quote` when available (US only). Table format appends an "Extended Hours" section; JSON includes them as nested objects.
+- **`intraday` / `kline` / `kline-history`**: default to intraday session only; pass `--session all` to include pre/post-market data. `kline`/`kline-history` add a **Session** column when `--session all` is used.
+
 ## Rate Limits
 
 - Max **10 API calls/second**

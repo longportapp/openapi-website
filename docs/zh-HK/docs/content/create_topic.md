@@ -17,6 +17,18 @@ headingLevel: 2
 | `post`（默認） | 可選 | 純文本 | Markdown 語法（如 `**加粗**`、`# 標題`）**不會渲染**，將作為字面字符顯示，類似發推文。 |
 | `article` | **必填** | Markdown | 服務端將 Markdown 轉為 HTML 展示，支持標題、表格、加粗、代碼塊等。 |
 
+僅限 **Longbridge 開戶且持有資產** 的用戶才允許通過 Longbridge Developers 的 API 或 CLI 發布社區討論和回覆。否則返回 `403`。
+
+<TipContainer type="tip">
+正文中提到的標的代碼（如 `700.HK`、`TSLA.US`）會被平台自動識別並關聯為相關標的。`tickers` 字段用於補充正文中未顯式提及的標的。
+
+> ⚠️ 請勿濫用此功能關聯與內容無關的標的，否則後台內容運營可能會限制發布，甚至有可能禁言。
+</TipContainer>
+
+**頻率限制：** 同一用戶每分鐘最多創建 3 篇，24 小時內最多 10 篇，超出返回 `429`。
+
+> ⚠️ 以上頻率限制規則僅供參考，平台可能隨時進行內部調整。
+
 <SDKLinks module="content" klass="ContentContext" method="create_topic" />
 
 ## Request
@@ -35,9 +47,8 @@ headingLevel: 2
 | title       | string   | 是（article 類型必填） | 標題。`topic_type` 為 `article` 時必填，`post` 時可省略。                                              |
 | body        | string   | YES                   | 正文。`post` 類型為純文本，Markdown 不渲染；`article` 類型支持 Markdown。                              |
 | topic_type  | string   | NO                    | 內容類型：`post`（純文本，默認）或 `article`（Markdown）                                               |
-| tickers     | string[] | NO                    | 關聯標的代碼，格式 `{symbol}.{market}`，如 `["AAPL.US", "700.HK"]`，最多 10 個                        |
+| tickers     | string[] | NO                    | 關聯標的代碼，格式 `{symbol}.{market}`，如 `["AAPL.US", "700.HK"]`，最多 10 個。**注意：** 正文中提到的標的代碼（如 `700.HK`、`TSLA.US`）會被平台自動識別並關聯，`tickers` 用於補充正文中未顯式提及的標的。 |
 | hashtags    | string[] | NO                    | 討論標籤名稱列表，如 `["earnings", "fed"]`，最多 5 個                                                  |
-| license     | int32    | NO                    | 版權聲明，`0`=無聲明（默認），`1`=原創，`2`=非原創                                                     |
 
 ### Request Example
 
@@ -324,6 +335,8 @@ func main() {
 | Status | Description | Schema                                                |
 | ------ | ----------- | ----------------------------------------------------- |
 | 200    | 返回成功    | [create_topic_response](#schemacreate_topic_response) |
+| 403    | 權限不足    | 用戶未開戶或無資產                                    |
+| 429    | 頻率超限    | 超過每分鐘或每日創建上限，請稍後重試                  |
 | 500    | 內部錯誤    | None                                                  |
 
 ## Schemas
@@ -332,11 +345,28 @@ func main() {
 
 <a id="schemacreate_topic_response"></a>
 
-| Name        | Type     | Required | Description                    |
-| ----------- | -------- | -------- | ------------------------------ |
-| id          | string   | true     | 新建討論 ID                    |
-| title       | string   | false    | 標題                           |
-| topic_type  | string   | false    | 內容類型，`article` 或 `post`  |
-| tickers     | string[] | false    | 關聯標的代碼                   |
-| hashtags    | string[] | false    | 討論標籤名稱列表               |
-| created_at  | string   | true     | 創建時間，Unix 時間戳（秒）    |
+| Name                | Type     | Required | Description                            |
+| ------------------- | -------- | -------- | -------------------------------------- |
+| item                | object   | true     | 新建討論詳情                           |
+| ∟ id                | string   | true     | 討論 ID                                |
+| ∟ title             | string   | false    | 標題                                   |
+| ∟ description       | string   | false    | 純文本摘要（由正文自動截取）           |
+| ∟ body              | string   | false    | 完整正文（`article` 類型為 Markdown）  |
+| ∟ topic_type        | string   | false    | 內容類型，`article` 或 `post`          |
+| ∟ tickers           | string[] | false    | 關聯標的代碼                           |
+| ∟ hashtags          | string[] | false    | 討論標籤名稱列表                       |
+| ∟ images            | object[] | false    | 附圖列表                               |
+| ∟∟ url              | string   | false    | 原始圖片 URL                           |
+| ∟∟ sm               | string   | false    | 小縮略圖 URL                           |
+| ∟∟ lg               | string   | false    | 大縮略圖 URL                           |
+| ∟ likes_count       | int32    | false    | 點讚數                                 |
+| ∟ comments_count    | int32    | false    | 回覆數                                 |
+| ∟ views_count       | int32    | false    | 瀏覽數                                 |
+| ∟ shares_count      | int32    | false    | 分享數                                 |
+| ∟ detail_url        | string   | false    | 討論頁面直鏈                           |
+| ∟ author            | object   | false    | 作者信息                               |
+| ∟∟ member_id        | string   | false    | 作者 member ID                         |
+| ∟∟ name             | string   | false    | 作者暱稱                               |
+| ∟∟ avatar           | string   | false    | 作者頭像 URL                           |
+| ∟ created_at        | string   | true     | 創建時間，Unix 時間戳（秒）            |
+| ∟ updated_at        | string   | false    | 最近更新時間，Unix 時間戳（秒）        |
