@@ -154,9 +154,7 @@ function parseSpec(): { groups: TagGroup[]; pages: PageItem[]; serverUrl: string
   }))
 
   return {
-    groups: ordered
-      .filter((x) => byTag[x])
-      .map((x) => ({ name: x, nameZh: tagZhMap[x], endpoints: byTag[x] })),
+    groups: ordered.filter((x) => byTag[x]).map((x) => ({ name: x, nameZh: tagZhMap[x], endpoints: byTag[x] })),
     pages,
     serverUrl,
   }
@@ -311,13 +309,9 @@ const filteredGroups = computed(() => {
     .map((group) => ({
       ...group,
       endpoints: group.endpoints.filter((ep) => {
-        const summary = isZh.value
-          ? (ep.operation['x-summary-zh'] ?? ep.operation.summary)
-          : ep.operation.summary
+        const summary = isZh.value ? (ep.operation['x-summary-zh'] ?? ep.operation.summary) : ep.operation.summary
         return (
-          summary.toLowerCase().includes(q) ||
-          ep.path.toLowerCase().includes(q) ||
-          ep.method.toLowerCase().includes(q)
+          summary.toLowerCase().includes(q) || ep.path.toLowerCase().includes(q) || ep.method.toLowerCase().includes(q)
         )
       }),
     }))
@@ -365,7 +359,7 @@ function onPopState() {
 const selectedSplit = computed(() => {
   const op = selectedEndpoint.value?.operation
   if (!op) return { prose: '', codeBlocks: [] as string[] }
-  const desc = (isZh.value && op['x-description-zh']) ? op['x-description-zh'] : op.description
+  const desc = isZh.value && op['x-description-zh'] ? op['x-description-zh'] : op.description
   if (!desc) return { prose: '', codeBlocks: [] as string[] }
   return splitDescriptionAndCode(desc)
 })
@@ -373,7 +367,7 @@ const selectedSplit = computed(() => {
 const selectedSummaryLocalized = computed(() => {
   const op = selectedEndpoint.value?.operation
   if (!op) return ''
-  return (isZh.value && op['x-summary-zh']) ? op['x-summary-zh'] : op.summary
+  return isZh.value && op['x-summary-zh'] ? op['x-summary-zh'] : op.summary
 })
 
 const selectedTagNameLocalized = computed(() => {
@@ -411,7 +405,7 @@ const selectedCodeBlocks = computed((): CodeBlock[] => {
 const selectedPageHtml = computed(() => {
   const page = selectedPage.value
   if (!page) return ''
-  const content = (isZh.value && page.contentZh) ? page.contentZh : page.content
+  const content = isZh.value && page.contentZh ? page.contentZh : page.content
   return content ? md.render(content) : ''
 })
 
@@ -435,10 +429,10 @@ const selectedSections = computed((): Section[] => {
   })
 
   function pdesc(p: Parameter): string {
-    return (isZh.value && p['x-description-zh']) ? p['x-description-zh'] : (p.description ?? '')
+    return isZh.value && p['x-description-zh'] ? p['x-description-zh'] : (p.description ?? '')
   }
   function propdesc(prop: any): string {
-    return (isZh.value && prop['x-description-zh']) ? prop['x-description-zh'] : (prop.description ?? '')
+    return isZh.value && prop['x-description-zh'] ? prop['x-description-zh'] : (prop.description ?? '')
   }
 
   const pathParams = (ep.operation.parameters ?? []).filter((p) => p.in === 'path')
@@ -563,11 +557,11 @@ onUnmounted(() => {
             :class="{ active: selectedPage?.id === page.id }"
             @click="selectPage(page)">
             <span v-if="page.icon && PAGE_ICONS[page.icon]" class="nav-page-icon" v-html="PAGE_ICONS[page.icon]" />
-            <span class="nav-label">{{ isZh ? (page.titleZh || page.title) : page.title }}</span>
+            <span class="nav-label">{{ isZh ? page.titleZh || page.title : page.title }}</span>
           </button>
         </div>
         <div v-for="group in filteredGroups" :key="group.name" class="tag-group">
-          <div class="tag-label">{{ isZh ? (group.nameZh || group.name) : group.name }}</div>
+          <div class="tag-label">{{ isZh ? group.nameZh || group.name : group.name }}</div>
           <button
             v-for="ep in group.endpoints"
             :key="ep.operation.operationId ?? `${ep.method}-${ep.path}`"
@@ -575,7 +569,9 @@ onUnmounted(() => {
             :class="{ active: selectedEndpoint?.operation.operationId === ep.operation.operationId }"
             @click="selectEndpoint(ep)">
             <span class="nav-method" :class="methodClass(ep.method)">{{ ep.method }}</span>
-            <span class="nav-label">{{ isZh ? (ep.operation['x-summary-zh'] || ep.operation.summary) : ep.operation.summary }}</span>
+            <span class="nav-label">{{
+              isZh ? ep.operation['x-summary-zh'] || ep.operation.summary : ep.operation.summary
+            }}</span>
           </button>
         </div>
       </div>
@@ -640,7 +636,7 @@ onUnmounted(() => {
     <div v-if="selectedPage && !selectedEndpoint" class="api-main">
       <div class="api-content api-page-content">
         <div class="vp-doc">
-          <h1>{{ isZh ? (selectedPage.titleZh || selectedPage.title) : selectedPage.title }}</h1>
+          <h1>{{ isZh ? selectedPage.titleZh || selectedPage.title : selectedPage.title }}</h1>
           <div v-html="selectedPageHtml" />
         </div>
       </div>
@@ -707,12 +703,12 @@ onUnmounted(() => {
                 <span v-if="param.location" class="param-meta">{{ param.location }}</span>
                 <span
                   v-if="section.key !== 'response'"
-                  class="param-badge"
+                  class="param-badge uppercase"
                   :class="param.required ? 'is-required' : 'is-optional'"
                   >{{ param.required ? $t('api.param.required') : $t('api.param.optional') }}</span
                 >
               </div>
-              <p v-if="param.description" class="param-desc">{{ param.description }}</p>
+              <div v-if="param.description" class="param-desc vp-doc" v-html="md.render(param.description)" />
             </div>
           </div>
         </section>
@@ -1087,8 +1083,15 @@ onUnmounted(() => {
   font-size: 13px;
   color: var(--vp-c-text-1);
   line-height: 1.65;
-  margin: 7px 0 0;
+  margin: 0;
   font-family: var(--vp-font-family-base);
+}
+.param-desc p,
+.param-desc ul,
+.param-desc ol,
+.param-desc table {
+  margin: 0 0 8px 0;
+  line-height: 1.65;
 }
 
 /* ── Code panel ────────────────────────────────────────────────────────────── */

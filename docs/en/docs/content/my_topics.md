@@ -1,6 +1,6 @@
 ---
 slug: my-topics
-title: Get My Published Topics
+title: List My Published Topics
 sidebar_position: 3
 language_tabs: false
 toc_footers: []
@@ -25,11 +25,11 @@ Get the list of topics I have published.
 
 ### Query Parameters
 
-| Name        | Type   | Required | Description                                                                                  |
-| ----------- | ------ | -------- | -------------------------------------------------------------------------------------------- |
-| page        | int32  | NO       | Page number (1-based). Defaults to `1`.                                                      |
-| size        | int32  | NO       | Number of items per page, range 1–500. Defaults to `50`.                                     |
-| topic_type  | string | NO       | Filter by type. One of `article` (long-form), `post` (short post). Omit to return all types. |
+| Name       | Type   | Required | Description                                                                                  |
+| ---------- | ------ | -------- | -------------------------------------------------------------------------------------------- |
+| page       | int32  | NO       | Page number (1-based). Defaults to `1`.                                                      |
+| size       | int32  | NO       | Number of items per page, range 1–500. Defaults to `50`.                                     |
+| topic_type | string | NO       | Filter by type. One of `article` (long-form), `post` (short post). Omit to return all types. |
 
 ### Request Example
 
@@ -84,10 +84,12 @@ if __name__ == "__main__":
 const { Config, ContentContext, OAuth } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
+  })
   const config = Config.fromOAuth(oauth)
   const ctx = ContentContext.new(config)
-  const resp = await ctx.topicsMine({ page: 1, size: 50, topicType: "article" })
+  const resp = await ctx.topicsMine({ page: 1, size: 50, topicType: 'article' })
   console.log(resp)
 }
 main().catch(console.error)
@@ -277,10 +279,10 @@ func main() {
 
 ### Response Status
 
-| Status | Description    | Schema                                            |
-| ------ | -------------- | ------------------------------------------------- |
-| 200    | Success        | [my_topics_response](#schemamy_topics_response)   |
-| 500    | Internal error | None                                              |
+| Status | Description    | Schema                                          |
+| ------ | -------------- | ----------------------------------------------- |
+| 200    | Success        | [my_topics_response](#schemamy_topics_response) |
+| 500    | Internal error | None                                            |
 
 ## Schemas
 
@@ -288,29 +290,29 @@ func main() {
 
 <a id="schemamy_topics_response"></a>
 
-| Name                | Type     | Required | Description                                                              |
-| ------------------- | -------- | -------- | ------------------------------------------------------------------------ |
-| items               | object[] | true     | Topic list                                                               |
-| ∟ id                | string   | true     | Topic ID                                                                 |
-| ∟ title             | string   | false    | Topic title (may be empty for short posts)                               |
-| ∟ description       | string   | false    | Plain-text summary of the topic body                                     |
-| ∟ body              | string   | false    | Full topic body in Markdown format                                       |
-| ∟ topic_type        | string   | true     | Topic type. One of `article`, `post`                                     |
-| ∟ tickers           | string[] | false    | Associated security symbols (e.g. `["AAPL.US", "700.HK"]`)              |
-| ∟ hashtags          | string[] | false    | Associated hashtag names                                                 |
-| ∟ images            | object[] | false    | Images attached to the topic                                             |
-| ∟∟ url              | string   | false    | Original image URL                                                       |
-| ∟∟ sm               | string   | false    | Small thumbnail URL                                                      |
-| ∟∟ lg               | string   | false    | Large thumbnail URL                                                      |
-| ∟ likes_count       | int32    | false    | Number of likes                                                          |
-| ∟ comments_count    | int32    | false    | Number of comments                                                       |
-| ∟ views_count       | int32    | false    | Number of views                                                          |
-| ∟ shares_count      | int32    | false    | Number of shares                                                         |
-| ∟ license           | int32    | false    | Copyright declaration. `0` = none, `1` = original, `2` = non-original   |
-| ∟ detail_url        | string   | false    | Link to the topic detail page                                            |
-| ∟ author            | object   | false    | Author information                                                       |
-| ∟∟ member_id        | string   | false    | Author member ID                                                         |
-| ∟∟ name             | string   | false    | Author display name                                                      |
-| ∟∟ avatar           | string   | false    | Author avatar URL                                                        |
-| ∟ created_at        | string   | true     | Unix timestamp (seconds) when the topic was created                      |
-| ∟ updated_at        | string   | false    | Unix timestamp (seconds) when the topic was last updated                 |
+| Name             | Type     | Required | Description                                                           |
+| ---------------- | -------- | -------- | --------------------------------------------------------------------- |
+| items            | object[] | true     | Topic list                                                            |
+| ∟ id             | string   | true     | Topic ID                                                              |
+| ∟ title          | string   | false    | Topic title (may be empty for short posts)                            |
+| ∟ description    | string   | false    | Plain-text summary of the topic body                                  |
+| ∟ body           | string   | false    | Full topic body in Markdown format                                    |
+| ∟ topic_type     | string   | true     | Topic type. One of `article`, `post`                                  |
+| ∟ tickers        | string[] | false    | Associated security symbols (e.g. `["AAPL.US", "700.HK"]`)            |
+| ∟ hashtags       | string[] | false    | Associated hashtag names                                              |
+| ∟ images         | object[] | false    | Images attached to the topic                                          |
+| ∟∟ url           | string   | false    | Original image URL                                                    |
+| ∟∟ sm            | string   | false    | Small thumbnail URL                                                   |
+| ∟∟ lg            | string   | false    | Large thumbnail URL                                                   |
+| ∟ likes_count    | int32    | false    | Number of likes                                                       |
+| ∟ comments_count | int32    | false    | Number of comments                                                    |
+| ∟ views_count    | int32    | false    | Number of views                                                       |
+| ∟ shares_count   | int32    | false    | Number of shares                                                      |
+| ∟ license        | int32    | false    | Copyright declaration. `0` = none, `1` = original, `2` = non-original |
+| ∟ detail_url     | string   | false    | Link to the topic detail page                                         |
+| ∟ author         | object   | false    | Author information                                                    |
+| ∟∟ member_id     | string   | false    | Author member ID                                                      |
+| ∟∟ name          | string   | false    | Author display name                                                   |
+| ∟∟ avatar        | string   | false    | Author avatar URL                                                     |
+| ∟ created_at     | string   | true     | Unix timestamp (seconds) when the topic was created                   |
+| ∟ updated_at     | string   | false    | Unix timestamp (seconds) when the topic was last updated              |

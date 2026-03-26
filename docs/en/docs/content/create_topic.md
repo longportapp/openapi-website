@@ -12,10 +12,22 @@ headingLevel: 2
 
 Create a new community topic. Two content types are supported:
 
-| Type | `title` | `body` format | Notes |
-|------|---------|---------------|-------|
-| `post` (default) | Optional | Plain text only | Markdown syntax (e.g. `**bold**`, `# heading`) is NOT rendered — it appears as literal characters, similar to a tweet. |
-| `article` | **Required** | Markdown | The server converts Markdown to HTML for display. Supports headers, tables, bold, code blocks, etc. |
+| Type             | `title`      | `body` format   | Notes                                                                                                                  |
+| ---------------- | ------------ | --------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `post` (default) | Optional     | Plain text only | Markdown syntax (e.g. `**bold**`, `# heading`) is NOT rendered — it appears as literal characters, similar to a tweet. |
+| `article`        | **Required** | Markdown        | The server converts Markdown to HTML for display. Supports headers, tables, bold, code blocks, etc.                    |
+
+Only users who have opened a **Longbridge account and hold assets** are allowed to publish community topics and replies via Longbridge Developers API or CLI. Returns `403` otherwise.
+
+<TipContainer type="tip">
+Stock symbols mentioned in the body (e.g. `700.HK`, `TSLA.US`) are automatically recognized and linked as related stocks by the platform. Use `tickers` to associate additional symbols not explicitly mentioned in the body.
+
+> ⚠️ Do not abuse symbol linking to associate unrelated stocks. Content moderation may restrict publishing or suspend accounts for misuse.
+</TipContainer>
+
+**Rate limit:** Max 3 topics per user per minute and 10 per 24 hours. Exceeding the limit returns `429`.
+
+> ⚠️ Rate limit thresholds are for reference only and may be adjusted by the platform at any time.
 
 <SDKLinks module="content" klass="ContentContext" method="create_topic" />
 
@@ -30,14 +42,13 @@ Create a new community topic. Two content types are supported:
 
 ### Request Body
 
-| Name        | Type     | Required          | Description                                                                                                |
-| ----------- | -------- | ----------------- | ---------------------------------------------------------------------------------------------------------- |
-| title       | string   | YES (for article) | Topic title. Required when `topic_type` is `article`; optional for `post`.                                 |
-| body        | string   | YES               | Topic body. For `post`: plain text only — Markdown is not rendered. For `article`: Markdown is supported.  |
-| topic_type  | string   | NO                | Content type: `post` (plain text, default) or `article` (Markdown).                                        |
-| tickers     | string[] | NO                | Related security symbols, format `{symbol}.{market}` (e.g. `["AAPL.US", "700.HK"]`). Maximum 10.          |
-| hashtags    | string[] | NO                | Hashtag names (e.g. `["earnings", "fed"]`). Maximum 5.                                                     |
-| license     | int32    | NO                | Copyright declaration. `0` = none (default), `1` = original, `2` = non-original.                           |
+| Name       | Type     | Required          | Description                                                                                                                                                                                                                                                                                                      |
+| ---------- | -------- | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| title      | string   | YES (for article) | Topic title. Required when `topic_type` is `article`; optional for `post`.                                                                                                                                                                                                                                       |
+| body       | string   | YES               | Topic body. \n- For `post`: plain text only — Markdown is not rendered.\n- For `article`: Markdown is supported.                                                                                                                                                                                                 |
+| topic_type | string   | NO                | Content type: `post` (plain text, default) or `article` (Markdown).                                                                                                                                                                                                                                              |
+| tickers    | string[] | NO                | Related security symbols, format `{symbol}.{market}` (e.g. `["AAPL.US", "700.HK"]`). Maximum 10. **Note:** Symbols mentioned in the body (e.g. `700.HK`, `TSLA.US`) are automatically recognized and linked by the platform. Use `tickers` to associate additional symbols not explicitly mentioned in the body. |
+| hashtags   | string[] | NO                | Hashtag names (e.g. `["earnings", "fed"]`). Maximum 5.                                                                                                                                                                                                                                                           |
 
 ### Request Example
 
@@ -122,16 +133,18 @@ if __name__ == "__main__":
 const { Config, ContentContext, OAuth } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
+  })
   const config = Config.fromOAuth(oauth)
   const ctx = ContentContext.new(config)
 
   // Article (Markdown body)
   const resp = await ctx.createTopic({
-    title: "My Analysis",
-    body: "**Bullish** on 700.HK because...",
-    topicType: "article",
-    tickers: ["700.HK"],
+    title: 'My Analysis',
+    body: '**Bullish** on 700.HK because...',
+    topicType: 'article',
+    tickers: ['700.HK'],
   })
   console.log(resp)
 }
@@ -321,10 +334,12 @@ func main() {
 
 ### Response Status
 
-| Status | Description    | Schema                                              |
-| ------ | -------------- | --------------------------------------------------- |
-| 200    | Success        | [create_topic_response](#schemacreate_topic_response) |
-| 500    | Internal error | None                                                |
+| Status | Description                                                            | Schema                                                |
+| ------ | ---------------------------------------------------------------------- | ----------------------------------------------------- |
+| 200    | Success                                                                | [create_topic_response](#schemacreate_topic_response) |
+| 403    | Forbidden — user has not opened a Longbridge account or has no assets  | None                                                  |
+| 429    | Too Many Requests — rate limit exceeded (3/min or 10/24h); retry later | None                                                  |
+| 500    | Internal error                                                         | None                                                  |
 
 ## Schemas
 
@@ -332,11 +347,28 @@ func main() {
 
 <a id="schemacreate_topic_response"></a>
 
-| Name        | Type     | Required | Description                                       |
-| ----------- | -------- | -------- | ------------------------------------------------- |
-| id          | string   | true     | ID of the newly created topic                     |
-| title       | string   | false    | Topic title                                       |
-| topic_type  | string   | false    | Topic type. One of `article`, `post`              |
-| tickers     | string[] | false    | Associated security symbols                       |
-| hashtags    | string[] | false    | Associated hashtag names                          |
-| created_at  | string   | true     | Unix timestamp (seconds) when the topic was created |
+| Name                | Type     | Required | Description                                         |
+| ------------------- | -------- | -------- | --------------------------------------------------- |
+| item                | object   | true     | Newly created topic details                         |
+| ∟ id                | string   | true     | Topic ID                                            |
+| ∟ title             | string   | false    | Topic title                                         |
+| ∟ description       | string   | false    | Plain-text summary (auto-generated from body)       |
+| ∟ body              | string   | false    | Full body text (Markdown for `article`)             |
+| ∟ topic_type        | string   | false    | Topic type. One of `article`, `post`                |
+| ∟ tickers           | string[] | false    | Associated security symbols                         |
+| ∟ hashtags          | string[] | false    | Associated hashtag names                            |
+| ∟ images            | object[] | false    | Image list                                          |
+| ∟∟ url              | string   | false    | Original image URL                                  |
+| ∟∟ sm               | string   | false    | Small thumbnail URL                                 |
+| ∟∟ lg               | string   | false    | Large thumbnail URL                                 |
+| ∟ likes_count       | int32    | false    | Number of likes                                     |
+| ∟ comments_count    | int32    | false    | Number of replies                                   |
+| ∟ views_count       | int32    | false    | Number of views                                     |
+| ∟ shares_count      | int32    | false    | Number of shares                                    |
+| ∟ detail_url        | string   | false    | Direct URL to the topic                             |
+| ∟ author            | object   | false    | Author information                                  |
+| ∟∟ member_id        | string   | false    | Author member ID                                    |
+| ∟∟ name             | string   | false    | Author display name                                 |
+| ∟∟ avatar           | string   | false    | Author avatar URL                                   |
+| ∟ created_at        | string   | true     | Unix timestamp (seconds) when the topic was created |
+| ∟ updated_at        | string   | false    | Unix timestamp (seconds) of last update             |
