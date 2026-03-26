@@ -37,6 +37,34 @@ bunx skills add longbridge/developers -g -y
 
 ---
 
+## Authorize Your Longbridge Account
+
+After installing the Skill, you'll need to complete a one-time OAuth 2.0 authorization to connect your AI tool to your Longbridge account.
+
+### Authorization Flow
+
+1. Start any Longbridge data query in the AI conversation (e.g., a quote or portfolio lookup)
+2. The AI tool automatically triggers the authorization flow and opens (or prompts you to open) a browser
+3. Log in to your Longbridge account in the browser and approve the requested scopes
+4. Once authorized, credentials are saved locally and reused automatically — no repeated logins needed
+5. Tokens refresh automatically when they expire
+
+### Explicit CLI Authorization
+
+To authorize upfront before making any queries, run in your terminal:
+
+```bash
+longbridge login
+```
+
+Complete the login in the browser. The token is saved to `~/.longbridge/terminal/.openapi-session`.
+
+### Revoking Authorization
+
+To revoke access, go to your Longbridge account → **Security Settings** → manage authorized apps.
+
+---
+
 ## Client Setup
 
 ### OpenClaw
@@ -102,6 +130,14 @@ Run [Method 2](#method-2-cli-npx--bunx) above in your terminal. The Skill config
 
 ---
 
+## Updating the Skill
+
+The Skill content inside `longbridge.zip` is updated periodically. We recommend checking for updates occasionally to get the latest improvements.
+
+To update, re-download [longbridge.zip](/skill/longbridge.zip) and overwrite the existing files following the same installation steps.
+
+---
+
 ## Verify Installation
 
 After installing, send the following in a conversation:
@@ -122,7 +158,7 @@ Some clients require a restart or a new conversation to load the Skill. Confirm 
 
 **Prompted for authorization when querying data**
 
-The Skill needs to connect to your Longbridge account. Follow the OAuth prompt, or get an API Token from the [Longbridge Developer Platform](https://open.longbridge.com).
+The Skill needs to connect to your Longbridge account. Follow the [Authorization Flow](#authorization-flow) above to complete OAuth 2.0 authorization — no API Key configuration required.
 
 **Trading operations not working**
 

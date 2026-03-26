@@ -37,6 +37,34 @@ bunx skills add longbridge/developers -g -y
 
 ---
 
+## 授权 Longbridge 账户
+
+安装 Skill 后，首次查询数据时需要完成 OAuth 2.0 授权，将 AI 工具与你的 Longbridge 账户连接。
+
+### 授权流程
+
+1. 在 AI 对话中发起任意 Longbridge 数据查询（如报价、持仓）
+2. AI 工具自动触发授权流程，弹出或提示打开浏览器
+3. 在浏览器中登录 Longbridge 账户并确认授权范围
+4. 授权完成后，凭证保存在本地，后续请求自动使用，无需重复登录
+5. Token 过期时自动刷新，全程无需手动操作
+
+### CLI 显式授权
+
+如果希望提前完成授权，可以在终端执行：
+
+```bash
+longbridge login
+```
+
+浏览器打开后完成登录，Token 保存至 `~/.longbridge/terminal/.openapi-session`。
+
+### 撤销授权
+
+如需撤销，进入 Longbridge 账户 → **安全设置** → 管理已授权应用。
+
+---
+
 ## 各客户端安装说明
 
 ### OpenClaw
@@ -102,6 +130,14 @@ bunx skills add longbridge/developers -g -y
 
 ---
 
+## 更新 Skill
+
+`longbridge.zip` 中的 Skill 内容会不定期更新，建议定期检查并更新到最新版本以获得最佳体验。
+
+重新下载 [longbridge.zip](/skill/longbridge.zip) 后，按照原安装步骤覆盖旧文件即可。
+
+---
+
 ## 验证安装
 
 安装完成后，在对话中发送：
@@ -122,7 +158,7 @@ bunx skills add longbridge/developers -g -y
 
 **查询数据时需要授权**
 
-Skill 需要连接你的 Longbridge 账户。按提示完成 OAuth 授权，或在 [Longbridge 开发者平台](https://open.longbridge.com) 获取 API Token。
+Skill 需要连接你的 Longbridge 账户。按照上方 [授权流程](#授权流程) 完成 OAuth 2.0 授权即可，无需配置 API Key。
 
 **交易操作无法执行**
 
