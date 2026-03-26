@@ -25,9 +25,9 @@ Get the full details of a community topic by its ID, including the body (Markdow
 
 ### Path Parameters
 
-| Name | Type   | Required | Description                                              |
-| ---- | ------ | -------- | -------------------------------------------------------- |
-| id   | string | YES      | Topic ID (e.g. `6993508780031016960`)                    |
+| Name | Type   | Required | Description                           |
+| ---- | ------ | -------- | ------------------------------------- |
+| id   | string | YES      | Topic ID (e.g. `6993508780031016960`) |
 
 ### Request Example
 
@@ -35,7 +35,7 @@ Get the full details of a community topic by its ID, including the body (Markdow
   <TabItem value="cli" label="CLI" default>
 
 ```bash
-longbridge topic 6993508780031016960
+longbridge topic-detail 6993508780031016960
 ```
 
   </TabItem>
@@ -171,10 +171,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### Response Status
 
-| Status | Description      | Schema                                                  |
-| ------ | ---------------- | ------------------------------------------------------- |
-| 200    | Success          | [topic_detail_response](#schematopic_detail_response)   |
-| 500    | Internal error   | None                                                    |
+| Status | Description    | Schema                                                |
+| ------ | -------------- | ----------------------------------------------------- |
+| 200    | Success        | [topic_detail_response](#schematopic_detail_response) |
+| 500    | Internal error | None                                                  |
 
 ## Schemas
 
@@ -182,28 +182,28 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 <a id="schematopic_detail_response"></a>
 
-| Name                | Type     | Required | Description                                                              |
-| ------------------- | -------- | -------- | ------------------------------------------------------------------------ |
-| item                | object   | true     | Topic detail object                                                      |
-| ∟ id                | string   | true     | Topic ID                                                                 |
-| ∟ title             | string   | false    | Title (may be empty for short posts)                                     |
-| ∟ description       | string   | false    | Plain-text excerpt                                                       |
-| ∟ body              | string   | false    | Markdown body                                                            |
-| ∟ topic_type        | string   | true     | Content type: `article` or `post`                                        |
-| ∟ tickers           | string[] | false    | Associated security symbols (e.g. `["AAPL.US", "700.HK"]`)              |
-| ∟ hashtags          | string[] | false    | Hashtag names                                                            |
-| ∟ images            | object[] | false    | Attached images                                                          |
-| ∟∟ url              | string   | false    | Original image URL                                                       |
-| ∟∟ sm               | string   | false    | Small thumbnail URL                                                      |
-| ∟∟ lg               | string   | false    | Large image URL                                                          |
-| ∟ likes_count       | int32    | false    | Likes count                                                              |
-| ∟ comments_count    | int32    | false    | Replies count                                                            |
-| ∟ views_count       | int32    | false    | Views count                                                              |
-| ∟ shares_count      | int32    | false    | Shares count                                                             |
-| ∟ detail_url        | string   | false    | URL to the topic detail page                                             |
-| ∟ author            | object   | false    | Author info                                                              |
-| ∟∟ member_id        | string   | false    | Author member ID                                                         |
-| ∟∟ name             | string   | false    | Author display name                                                      |
-| ∟∟ avatar           | string   | false    | Author avatar URL                                                        |
-| ∟ created_at        | string   | true     | Creation time as Unix timestamp (seconds)                                |
-| ∟ updated_at        | string   | false    | Last updated time as Unix timestamp (seconds)                            |
+| Name             | Type     | Required | Description                                                |
+| ---------------- | -------- | -------- | ---------------------------------------------------------- |
+| item             | object   | true     | Topic detail object                                        |
+| ∟ id             | string   | true     | Topic ID                                                   |
+| ∟ title          | string   | false    | Title (may be empty for short posts)                       |
+| ∟ description    | string   | false    | Plain-text excerpt                                         |
+| ∟ body           | string   | false    | Markdown body                                              |
+| ∟ topic_type     | string   | true     | Content type: `article` or `post`                          |
+| ∟ tickers        | string[] | false    | Associated security symbols (e.g. `["AAPL.US", "700.HK"]`) |
+| ∟ hashtags       | string[] | false    | Hashtag names                                              |
+| ∟ images         | object[] | false    | Attached images                                            |
+| ∟∟ url           | string   | false    | Original image URL                                         |
+| ∟∟ sm            | string   | false    | Small thumbnail URL                                        |
+| ∟∟ lg            | string   | false    | Large image URL                                            |
+| ∟ likes_count    | int32    | false    | Likes count                                                |
+| ∟ comments_count | int32    | false    | Replies count                                              |
+| ∟ views_count    | int32    | false    | Views count                                                |
+| ∟ shares_count   | int32    | false    | Shares count                                               |
+| ∟ detail_url     | string   | false    | URL to the topic detail page                               |
+| ∟ author         | object   | false    | Author info                                                |
+| ∟∟ member_id     | string   | false    | Author member ID                                           |
+| ∟∟ name          | string   | false    | Author display name                                        |
+| ∟∟ avatar        | string   | false    | Author avatar URL                                          |
+| ∟ created_at     | string   | true     | Creation time as Unix timestamp (seconds)                  |
+| ∟ updated_at     | string   | false    | Last updated time as Unix timestamp (seconds)              |

@@ -1513,7 +1513,7 @@ paths:
         - lang: bash
           label: CLI
           source: |
-            longbridge topic 6993508780031016960
+            longbridge topic-detail 6993508780031016960
       responses:
         '200':
           description: Successful response

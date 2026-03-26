@@ -25,9 +25,9 @@ headingLevel: 2
 
 ### Path Parameters
 
-| Name | Type   | Required | Description                                              |
-| ---- | ------ | -------- | -------------------------------------------------------- |
-| id   | string | YES      | 討論 ID，如 `6993508780031016960`                        |
+| Name | Type   | Required | Description                       |
+| ---- | ------ | -------- | --------------------------------- |
+| id   | string | YES      | 討論 ID，如 `6993508780031016960` |
 
 ### Request Example
 
@@ -35,7 +35,7 @@ headingLevel: 2
   <TabItem value="cli" label="CLI" default>
 
 ```bash
-longbridge topic 6993508780031016960
+longbridge topic-detail 6993508780031016960
 ```
 
   </TabItem>
@@ -165,10 +165,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### Response Status
 
-| Status | Description | Schema                                                  |
-| ------ | ----------- | ------------------------------------------------------- |
-| 200    | 返回成功    | [topic_detail_response](#schematopic_detail_response)   |
-| 500    | 內部錯誤    | None                                                    |
+| Status | Description | Schema                                                |
+| ------ | ----------- | ----------------------------------------------------- |
+| 200    | 返回成功    | [topic_detail_response](#schematopic_detail_response) |
+| 500    | 內部錯誤    | None                                                  |
 
 ## Schemas
 
@@ -176,28 +176,28 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 <a id="schematopic_detail_response"></a>
 
-| Name                | Type     | Required | Description                                                         |
-| ------------------- | -------- | -------- | ------------------------------------------------------------------- |
-| item                | object   | true     | 討論詳情                                                            |
-| ∟ id                | string   | true     | 討論 ID                                                             |
-| ∟ title             | string   | false    | 標題（短帖可能為空）                                                |
-| ∟ description       | string   | false    | 純文本摘要                                                          |
-| ∟ body              | string   | false    | Markdown 格式正文                                                   |
-| ∟ topic_type        | string   | true     | 內容類型，`article`（長文）或 `post`（短帖）                         |
-| ∟ tickers           | string[] | false    | 關聯標的代碼，如 `["AAPL.US", "700.HK"]`                           |
-| ∟ hashtags          | string[] | false    | 討論標籤名稱列表                                                    |
-| ∟ images            | object[] | false    | 附圖列表                                                            |
-| ∟∟ url              | string   | false    | 原始圖片 URL                                                        |
-| ∟∟ sm               | string   | false    | 小縮略圖 URL                                                        |
-| ∟∟ lg               | string   | false    | 大縮略圖 URL                                                        |
-| ∟ likes_count       | int32    | false    | 點讚數                                                              |
-| ∟ comments_count    | int32    | false    | 回覆數                                                              |
-| ∟ views_count       | int32    | false    | 瀏覽數                                                              |
-| ∟ shares_count      | int32    | false    | 分享數                                                              |
-| ∟ detail_url        | string   | false    | 討論詳情頁鏈接                                                      |
-| ∟ author            | object   | false    | 作者信息                                                            |
-| ∟∟ member_id        | string   | false    | 作者 member ID                                                      |
-| ∟∟ name             | string   | false    | 作者暱稱                                                            |
-| ∟∟ avatar           | string   | false    | 作者頭像 URL                                                        |
-| ∟ created_at        | string   | true     | 創建時間，Unix 時間戳（秒）                                         |
-| ∟ updated_at        | string   | false    | 最後更新時間，Unix 時間戳（秒）                                     |
+| Name             | Type     | Required | Description                                  |
+| ---------------- | -------- | -------- | -------------------------------------------- |
+| item             | object   | true     | 討論詳情                                     |
+| ∟ id             | string   | true     | 討論 ID                                      |
+| ∟ title          | string   | false    | 標題（短帖可能為空）                         |
+| ∟ description    | string   | false    | 純文本摘要                                   |
+| ∟ body           | string   | false    | Markdown 格式正文                            |
+| ∟ topic_type     | string   | true     | 內容類型，`article`（長文）或 `post`（短帖） |
+| ∟ tickers        | string[] | false    | 關聯標的代碼，如 `["AAPL.US", "700.HK"]`     |
+| ∟ hashtags       | string[] | false    | 討論標籤名稱列表                             |
+| ∟ images         | object[] | false    | 附圖列表                                     |
+| ∟∟ url           | string   | false    | 原始圖片 URL                                 |
+| ∟∟ sm            | string   | false    | 小縮略圖 URL                                 |
+| ∟∟ lg            | string   | false    | 大縮略圖 URL                                 |
+| ∟ likes_count    | int32    | false    | 點讚數                                       |
+| ∟ comments_count | int32    | false    | 回覆數                                       |
+| ∟ views_count    | int32    | false    | 瀏覽數                                       |
+| ∟ shares_count   | int32    | false    | 分享數                                       |
+| ∟ detail_url     | string   | false    | 討論詳情頁鏈接                               |
+| ∟ author         | object   | false    | 作者信息                                     |
+| ∟∟ member_id     | string   | false    | 作者 member ID                               |
+| ∟∟ name          | string   | false    | 作者暱稱                                     |
+| ∟∟ avatar        | string   | false    | 作者頭像 URL                                 |
+| ∟ created_at     | string   | true     | 創建時間，Unix 時間戳（秒）                  |
+| ∟ updated_at     | string   | false    | 最後更新時間，Unix 時間戳（秒）              |
