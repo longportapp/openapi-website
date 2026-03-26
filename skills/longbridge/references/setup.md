@@ -25,14 +25,11 @@ claude mcp add longbridge https://openapi.longbridge.com/mcp
 
 First tool call triggers an OAuth browser flow. See [references/mcp.md](references/mcp.md) for Cursor, ChatGPT, Zed.
 
-## Authentication Methods
+## Authentication
 
-| Method       | Credential                                | Best for              |
-| ------------ | ----------------------------------------- | --------------------- |
-| OAuth 2.0 ⭐ | `client_id` only, no secret               | CLI, SDK scripts, MCP |
-| API Key      | `APP_KEY` + `APP_SECRET` + `ACCESS_TOKEN` | Legacy / server-side  |
+All tools use **OAuth 2.0** — no manual token or API key management needed.
 
-**OAuth token cache:** `~/.longbridge/openapi/tokens/<client_id>`
+**Token cache:** `~/.longbridge/openapi/tokens/<client_id>`
 **Register OAuth client:** POST `https://openapi.longbridge.com/oauth2/register`
 
 ## Rate Limits

@@ -63,27 +63,6 @@ async def main():
 asyncio.run(main())
 ```
 
-### Legacy API Key
-
-Set environment variables, then create config:
-
-```bash
-export LONGBRIDGE_APP_KEY="your-app-key"
-export LONGBRIDGE_APP_SECRET="your-app-secret"
-export LONGBRIDGE_ACCESS_TOKEN="your-access-token"
-```
-
-```python
-config = Config.from_apikey_env()
-
-# Or explicitly:
-config = Config.from_apikey(
-    app_key="...",
-    app_secret="...",
-    access_token="..."
-)
-```
-
 ## Config Options
 
 ```python
@@ -104,9 +83,6 @@ Config.from_oauth(
 
 | Variable                           | Description               | Default                                 |
 | ---------------------------------- | ------------------------- | --------------------------------------- |
-| `LONGBRIDGE_APP_KEY`               | App Key (legacy)          | —                                       |
-| `LONGBRIDGE_APP_SECRET`            | App Secret (legacy)       | —                                       |
-| `LONGBRIDGE_ACCESS_TOKEN`          | Access Token (legacy)     | —                                       |
 | `LONGBRIDGE_LANGUAGE`              | `zh-CN`, `zh-HK`, `en`    | `en`                                    |
 | `LONGBRIDGE_HTTP_URL`              | HTTP endpoint             | `https://openapi.longbridge.com`        |
 | `LONGBRIDGE_QUOTE_WS_URL`          | Quote WebSocket           | `wss://openapi-quote.longbridge.com/v2` |
@@ -146,7 +122,6 @@ resp = http_cli.request("get", "/v1/some/endpoint",
     headers={"X-Custom-Header": "value"})
 ```
 
-Also available: `HttpClient.from_apikey_env()`, `HttpClient.from_apikey(app_key, app_secret, access_token)`
 
 ## Sync vs Async
 

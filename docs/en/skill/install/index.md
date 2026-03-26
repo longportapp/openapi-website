@@ -37,6 +37,34 @@ bunx skills add longbridge/developers -g -y
 
 ---
 
+## Authorize Your Longbridge Account
+
+The Skill uses the Longbridge CLI to complete OAuth 2.0 authorization. Install the CLI first, then log in.
+
+### Step 1: Install the CLI
+
+```bash
+# macOS (recommended)
+brew install --cask longbridge/tap/longbridge-terminal
+
+# Any platform
+curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
+```
+
+### Step 2: Complete OAuth Authorization
+
+```bash
+longbridge login
+```
+
+A browser window opens to the Longbridge login page. Sign in and approve the requested scopes — the token is saved locally, reused automatically, and refreshes when it expires.
+
+### Revoking Authorization
+
+To revoke access, go to your Longbridge account → **Security Settings** → manage authorized apps.
+
+---
+
 ## Client Setup
 
 ### OpenClaw
@@ -102,6 +130,14 @@ Run [Method 2](#method-2-cli-npx--bunx) above in your terminal. The Skill config
 
 ---
 
+## Updating the Skill
+
+The Skill content inside `longbridge.zip` is updated periodically. We recommend checking for updates occasionally to get the latest improvements.
+
+To update, re-download [longbridge.zip](/skill/longbridge.zip) and overwrite the existing files following the same installation steps.
+
+---
+
 ## Verify Installation
 
 After installing, send the following in a conversation:
@@ -122,7 +158,7 @@ Some clients require a restart or a new conversation to load the Skill. Confirm 
 
 **Prompted for authorization when querying data**
 
-The Skill needs to connect to your Longbridge account. Follow the OAuth prompt, or get an API Token from the [Longbridge Developer Platform](https://open.longbridge.com).
+The Skill needs to connect to your Longbridge account. Follow the [Authorization Flow](#authorization-flow) above to complete OAuth 2.0 authorization — no API Key configuration required.
 
 **Trading operations not working**
 

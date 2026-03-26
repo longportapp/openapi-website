@@ -46,37 +46,6 @@ Add to MCP config in any compatible client:
 
 ---
 
-## Self-Hosted Binary (Advanced)
-
-For server automation or environments where interactive OAuth login is not possible. Requires legacy API key credentials.
-
-```bash
-# Install
-cargo install longbridge-mcp
-
-# Run (stdio transport, uses LONGBRIDGE_APP_KEY/APP_SECRET/ACCESS_TOKEN env vars)
-longbridge-mcp
-```
-
-```json
-{
-  "mcpServers": {
-    "longbridge": {
-      "command": "longbridge-mcp",
-      "env": {
-        "LONGBRIDGE_APP_KEY": "...",
-        "LONGBRIDGE_APP_SECRET": "...",
-        "LONGBRIDGE_ACCESS_TOKEN": "..."
-      }
-    }
-  }
-}
-```
-
-**Prefer the hosted service** (`https://openapi.longbridge.com/mcp`) for most use cases — it uses OAuth 2.1 and requires no credential management.
-
----
-
 ## Available MCP Tools
 
 When the MCP server is connected, available tools are automatically exposed to the AI — no hardcoded list needed. The AI can directly inspect and call all tools.

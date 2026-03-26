@@ -37,6 +37,34 @@ bunx skills add longbridge/developers -g -y
 
 ---
 
+## 授权 Longbridge 账户
+
+Skill 通过 Longbridge CLI 完成 OAuth 2.0 授权。需要先安装 CLI，再执行登录。
+
+### 第一步：安装 CLI
+
+```bash
+# macOS（推荐）
+brew install --cask longbridge/tap/longbridge-terminal
+
+# 任意平台
+curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
+```
+
+### 第二步：完成 OAuth 授权
+
+```bash
+longbridge login
+```
+
+浏览器自动打开 Longbridge 登录页，完成登录并确认授权范围后，Token 保存至本地，后续请求自动使用，过期自动刷新。
+
+### 撤销授权
+
+如需撤销，进入 Longbridge 账户 → **安全设置** → 管理已授权应用。
+
+---
+
 ## 各客户端安装说明
 
 ### OpenClaw
@@ -102,6 +130,14 @@ bunx skills add longbridge/developers -g -y
 
 ---
 
+## 更新 Skill
+
+`longbridge.zip` 中的 Skill 内容会不定期更新，建议定期检查并更新到最新版本以获得最佳体验。
+
+重新下载 [longbridge.zip](/skill/longbridge.zip) 后，按照原安装步骤覆盖旧文件即可。
+
+---
+
 ## 验证安装
 
 安装完成后，在对话中发送：
@@ -122,7 +158,7 @@ bunx skills add longbridge/developers -g -y
 
 **查询数据时需要授权**
 
-Skill 需要连接你的 Longbridge 账户。按提示完成 OAuth 授权，或在 [Longbridge 开发者平台](https://open.longbridge.com) 获取 API Token。
+Skill 需要连接你的 Longbridge 账户。按照上方 [授权流程](#授权流程) 完成 OAuth 2.0 授权即可，无需配置 API Key。
 
 **交易操作无法执行**
 

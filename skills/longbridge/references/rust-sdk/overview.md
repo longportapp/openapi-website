@@ -41,21 +41,6 @@ let oauth = OAuthBuilder::new("your-client-id")
 let config = Config::from_oauth(oauth);
 ```
 
-### Legacy API Key
-
-```bash
-export LONGBRIDGE_APP_KEY="your-app-key"
-export LONGBRIDGE_APP_SECRET="your-app-secret"
-export LONGBRIDGE_ACCESS_TOKEN="your-access-token"
-```
-
-```rust
-let config = Config::from_apikey_env()?;
-
-// Or explicitly:
-let config = Config::from_apikey("app_key", "app_secret", "access_token");
-```
-
 ## Config Options
 
 ```rust
@@ -80,7 +65,10 @@ use longbridge::{Config, QuoteContext, TradeContext};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let config = Arc::new(Config::from_apikey_env()?);
+    let oauth = OAuthBuilder::new("your-client-id")
+        .build(|url| println!("Open URL to authorize: {url}"))
+        .await?;
+    let config = Arc::new(Config::from_oauth(oauth));
 
     // Returns (context, push_receiver)
     let (quote_ctx, mut push_rx) = QuoteContext::new(config.clone());
