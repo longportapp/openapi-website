@@ -19,7 +19,7 @@ Only users who have opened a **Longbridge account and hold assets** are allowed 
 <TipContainer type="tip">
 Stock symbols mentioned in the body (e.g. `700.HK`, `TSLA.US`) are automatically recognized and linked as related stocks by the platform.
 
-> ⚠️ Do not abuse symbol linking to associate unrelated stocks. Content moderation may restrict publishing or suspend accounts for misuse.
+> ⚠️ Do not abuse symbol linking to associate unrelated stocks. Content moderation may restrict publishing or mute the account.
 </TipContainer>
 
 **Rate limit:** The first 3 replies per user per topic have no wait requirement. After that, each subsequent reply must wait an incrementally longer interval since the previous one:

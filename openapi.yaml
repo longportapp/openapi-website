@@ -1350,7 +1350,7 @@ paths:
 
         Symbols mentioned in the body (e.g. `TSLA.US`, `700.HK`) are automatically recognized and linked as related stocks. Use `tickers` to associate additional symbols not explicitly mentioned in the body.
 
-        ⚠️ Do not abuse symbol linking to associate unrelated stocks. Content moderation may restrict publishing or suspend accounts for misuse.
+        ⚠️ Do not abuse symbol linking to associate unrelated stocks. Content moderation may restrict publishing or mute the account.
 
         **Rate limit:** Max 3 topics per user per minute, 10 per 24 hours. Exceeding the limit returns `429`.
 
@@ -1365,7 +1365,7 @@ paths:
 
         正文中提到的标的代码（如 `TSLA.US`, `700.HK`）会被平台自动识别并关联。`tickers` 用于补充正文中未显式提及的标的。
 
-        ⚠️ 请勿滥用此功能关联与内容无关的标的，否则后台内容运营可能会限制发布，甚至禁用账号。
+        ⚠️ 请勿滥用此功能关联与内容无关的标的，否则后台内容运营可能会限制发布，甚至有可能禁言。
 
         **频率限制：** 同一用户每分钟最多创建 3 篇，24 小时内最多 10 篇，超出返回 `429`。
 
@@ -1659,7 +1659,7 @@ paths:
 
         Symbols mentioned in the body (e.g. `TSLA.US`, `700.HK`) are automatically recognized and linked as related stocks. Use `tickers` to associate additional symbols not explicitly mentioned in the body.
 
-        ⚠️ Do not abuse symbol linking to associate unrelated stocks. Content moderation may restrict publishing or suspend accounts for misuse.
+        ⚠️ Do not abuse symbol linking to associate unrelated stocks. Content moderation may restrict publishing or mute the account.
 
         **Rate limit:** The first 3 replies per user per topic have no wait requirement. After that, each subsequent reply must wait an incrementally longer interval:
 
@@ -1685,7 +1685,7 @@ paths:
 
         正文中提到的标的代码（如 `TSLA.US`, `700.HK`）会被平台自动识别并关联。`tickers` 用于补充正文中未显式提及的标的。
 
-        ⚠️ 请勿滥用此功能关联与内容无关的标的，否则后台内容运营可能会限制发布，甚至禁用账号。
+        ⚠️ 请勿滥用此功能关联与内容无关的标的，否则后台内容运营可能会限制发布，甚至有可能禁言。
 
         **频率限制：** 同一用户在同一讨论下，前 3 条无间隔限制；第 4 条起须与上一条间隔递增：
 
