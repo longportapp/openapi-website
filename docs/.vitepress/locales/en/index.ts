@@ -5,22 +5,12 @@ import { sidebar } from './sidebar'
 import { logoLink } from '../../theme/utils/link'
 export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   head: [
-    ['meta', { property: 'og:url', content: 'https://open.longbridge.com' }],
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:title', content: 'Longbridge Developers: Build with APIs, LLM, MCP, and CLI' }],
-    [
-      'meta',
-      {
-        property: 'og:description',
-        content:
-          'Explore the Longbridge Developers — open APIs, LLM integrations, MCP support, CLI tools, and more to power your financial applications.',
-      },
-    ],
     [
       'meta',
       {
         property: 'og:image',
-        content: 'https://assets.lbkrs.com/uploads/48641e8e-a157-4b0f-a58e-bd3998d10d54/group427321346.webp',
+        content: 'https://assets.wbrks.com/assets/logo/base-og-img.jpg',
       },
     ],
     ['meta', { property: 'og:locale', content: 'en' }],

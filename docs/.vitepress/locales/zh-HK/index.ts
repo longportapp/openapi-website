@@ -5,21 +5,12 @@ import { sidebar } from './sidebar'
 import { logoLink } from '../../theme/utils/link'
 export const zhHKConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   head: [
-    ['meta', { property: 'og:url', content: 'https://open.longbridge.com' }],
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:title', content: 'Longbridge Developers：開放 API、LLM、MCP 與 CLI 開發平台' }],
-    [
-      'meta',
-      {
-        property: 'og:description',
-        content: '探索 Longbridge Developers，提供 API、LLM、MCP、CLI 等全方位開發資源，助力構建您的金融應用。',
-      },
-    ],
     [
       'meta',
       {
         property: 'og:image',
-        content: 'https://assets.lbkrs.com/uploads/48641e8e-a157-4b0f-a58e-bd3998d10d54/group427321346.webp',
+        content: 'https://assets.wbrks.com/assets/logo/base-og-img.jpg',
       },
     ],
     ['meta', { property: 'og:locale', content: 'zh-HK' }],
