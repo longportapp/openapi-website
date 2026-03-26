@@ -39,25 +39,15 @@ bunx skills add longbridge/developers -g -y
 
 ## 授權 Longbridge 賬戶
 
-安裝 Skill 後，首次查詢數據時需要完成 OAuth 2.0 授權，將 AI 工具與你的 Longbridge 賬戶連接。
+安裝 Skill 後，首次查詢數據時需要完成 OAuth 2.0 授權，將 AI 客戶端與你的 Longbridge 賬戶連接。**無需安裝任何額外工具**，授權流程完全由客戶端自動觸發。
 
 ### 授權流程
 
-1. 在 AI 對話中發起任意 Longbridge 數據查詢（如報價、持倉）
-2. AI 工具自動觸發授權流程，彈出或提示打開瀏覽器
-3. 在瀏覽器中登入 Longbridge 賬戶並確認授權範圍
-4. 授權完成後，憑證保存在本地，後續請求自動使用，無需重複登入
-5. Token 過期時自動刷新，全程無需手動操作
-
-### CLI 顯式授權
-
-如果希望提前完成授權，可以在終端執行：
-
-```bash
-longbridge login
-```
-
-瀏覽器打開後完成登入，Token 保存至 `~/.longbridge/terminal/.openapi-session`。
+1. 按下方各客戶端說明完成 Skill 安裝
+2. 在 AI 對話中發起任意 Longbridge 數據查詢（如報價、持倉）
+3. 客戶端自動彈出或提示打開瀏覽器
+4. 在瀏覽器中登入 Longbridge 賬戶並確認授權範圍
+5. 授權完成後，憑證保存在本地，後續請求自動使用，無需重複登入；Token 過期時自動刷新
 
 ### 撤銷授權
 
