@@ -5,16 +5,7 @@ import { sidebar } from './sidebar'
 import { logoLink } from '../../theme/utils/link'
 export const zhHKConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   head: [
-    ['meta', { property: 'og:url', content: 'https://open.longbridge.com' }],
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:title', content: 'Longbridge Developers：開放 API、LLM、MCP 與 CLI 開發平台' }],
-    [
-      'meta',
-      {
-        property: 'og:description',
-        content: '探索 Longbridge Developers，提供 API、LLM、MCP、CLI 等全方位開發資源，助力構建您的金融應用。',
-      },
-    ],
     [
       'meta',
       {

@@ -5,17 +5,7 @@ import { sidebar } from './sidebar'
 import { logoLink } from '../../theme/utils/link'
 export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   head: [
-    ['meta', { property: 'og:url', content: 'https://open.longbridge.com' }],
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:title', content: 'Longbridge Developers: Build with APIs, LLM, MCP, and CLI' }],
-    [
-      'meta',
-      {
-        property: 'og:description',
-        content:
-          'Explore the Longbridge Developers — open APIs, LLM integrations, MCP support, CLI tools, and more to power your financial applications.',
-      },
-    ],
     [
       'meta',
       {

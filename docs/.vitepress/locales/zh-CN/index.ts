@@ -5,16 +5,7 @@ import { sidebar } from './sidebar'
 import { logoLink } from '../../theme/utils/link'
 export const zhCNConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
   head: [
-    ['meta', { property: 'og:url', content: 'https://open.longbridge.com' }],
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:title', content: 'Longbridge Developers：开放 API、LLM、MCP 与 CLI 开发平台' }],
-    [
-      'meta',
-      {
-        property: 'og:description',
-        content: '探索 Longbridge Developers，提供 API、LLM、MCP、CLI 等全方位开发资源，助力构建您的金融应用。',
-      },
-    ],
     [
       'meta',
       {

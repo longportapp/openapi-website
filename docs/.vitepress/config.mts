@@ -60,6 +60,11 @@ export default defineConfig(
         ['link', { rel: 'alternate', hreflang: 'zh-Hans', href: `https://open.longbridge.com/zh-CN/${pathname}` }],
         ['link', { rel: 'alternate', hreflang: 'zh-Hant', href: `https://open.longbridge.com/zh-HK/${pathname}` }],
         ['link', { rel: 'alternate', type: 'text/markdown', href: `https://open.longbridge.com/${markdownPath}` }],
+        ['meta', { property: 'og:url', content: `https://open.longbridge.com/${localePathname}` }],
+        ['meta', { property: 'og:title', content: context.title }],
+        ['meta', { property: 'og:description', content: context.description }],
+        ['meta', { name: 'twitter:title', content: context.title }],
+        ['meta', { name: 'twitter:description', content: context.description }],
       ]
     },
 
