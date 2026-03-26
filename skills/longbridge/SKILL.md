@@ -1,6 +1,6 @@
 ---
 name: longbridge
-description: 'Longbridge Developers platform expert. Use when: (1) querying market data or executing trades via CLI (`longbridge` command), (2) writing Python/Rust programs using the `longbridge` SDK, (3) configuring the Longbridge MCP server for AI tools (Cursor, Claude Code, ChatGPT), (4) integrating Longbridge docs into LLM/RAG systems via llms.txt or Markdown API. Covers all markets: HK, US, CN (SH/SZ), SG, Crypto. Triggers on `longbridge` imports, stock symbols (TSLA.US, 700.HK), API key setup, order placement, WebSocket subscriptions, or any Longbridge platform capability question.'
+description: 'Longbridge platform expert for BOTH investment analysis AND developer tasks. TRIGGER on ANY of: (1) stock/market analysis in any language — "分析 ARM 表现", "持仓建议", "昨天股价", portfolio advice, buy/sell decisions; (2) stock names without suffix — ARM, Tesla, NVDA, AAPL, 腾讯, 阿里 etc.; (3) stock symbols with suffix — TSLA.US, 700.HK, 600519.SH; (4) "我的持仓" / "持仓" / positions / portfolio; (5) querying market data via CLI (`longbridge` command); (6) writing Python/Rust with `longbridge` SDK; (7) configuring Longbridge MCP server; (8) integrating Longbridge docs into LLM/RAG. Covers HK, US, CN (SH/SZ), SG, Crypto markets.'
 ---
 
 # Longbridge Developers Platform
