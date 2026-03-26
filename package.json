@@ -9,9 +9,10 @@
   "scripts": {
     "dev": "cross-env VITE_API_BASE_URL=https://openapi.longbridge.xyz npx vitepress dev docs",
     "dev:prod": "cross-env VITE_API_BASE_URL=https://openapi.longbridge.com npx vitepress dev docs",
-    "build:canary": "cross-env NODE_OPTIONS=--max-old-space-size=6144 VITE_API_BASE_URL=https://openapi.longbridge.xyz npx vitepress build docs && bun run build:llms",
-    "build:release": "cross-env NODE_OPTIONS=--max-old-space-size=6144 VITE_API_BASE_URL=https://openapi.longbridge.com npx vitepress build docs && bun run build:llms",
+    "build:canary": "cross-env NODE_OPTIONS=--max-old-space-size=6144 VITE_API_BASE_URL=https://openapi.longbridge.xyz npx vitepress build docs && bun run build:llms && bun run build:copy-routes",
+    "build:release": "cross-env NODE_OPTIONS=--max-old-space-size=6144 VITE_API_BASE_URL=https://openapi.longbridge.com npx vitepress build docs && bun run build:llms && bun run build:copy-routes",
     "build:llms": "bun run scripts/normalize_md.ts && bun run scripts/generate-llms.ts",
+    "build:copy-routes": "bun run scripts/copy-routes.ts",
     "preview": "vitepress preview docs",
     "lint:docs": "prettier -c --parser typescript \"packages/**/*.{js,ts,vue}\"",
     "format:docs": "prettier --write \"packages/**/*.{js,ts,vue}\""
