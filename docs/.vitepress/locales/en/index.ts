@@ -10,11 +10,13 @@ export const enConfig: LocaleSpecificConfig<DefaultTheme.Config> = {
       'meta',
       {
         property: 'og:image',
-        content: 'https://assets.wbrks.com/assets/logo/base-og-img.jpg',
+        content: 'https://assets.lbctrl.com/uploads/b510b04f-9238-4fe0-b39d-11e076876ac1/longbridge-og.png',
       },
     ],
+    ['meta', { property: 'og:image:type', content: 'image/png' }],
+    ['meta', { property: 'og:image:alt', content: 'Longbridge Developers' }],
     ['meta', { property: 'og:locale', content: 'en' }],
-    ['meta', { property: 'og:site_name', content: 'Developers | Longbridge' }],
+    ['meta', { property: 'og:site_name', content: 'Longbridge Developers' }],
   ],
   title: 'Longbridge Developers',
   description:

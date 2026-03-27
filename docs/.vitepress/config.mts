@@ -63,6 +63,7 @@ export default defineConfig(
         ['meta', { property: 'og:url', content: `https://open.longbridge.com/${localePathname}` }],
         ['meta', { property: 'og:title', content: context.title }],
         ['meta', { property: 'og:description', content: context.description }],
+        ['meta', { name: 'twitter:image', content: 'https://assets.lbctrl.com/uploads/b510b04f-9238-4fe0-b39d-11e076876ac1/longbridge-og.png' }],
         ['meta', { name: 'twitter:title', content: context.title }],
         ['meta', { name: 'twitter:description', content: context.description }],
       ]
@@ -87,7 +88,7 @@ export default defineConfig(
     head: [
     ['link', { rel: 'shortcut icon', type: 'image/x-icon', href: 'https://assets.wbrks.com/assets/logo/logo1.png' }],
     ['meta', { name: 'theme-color', content: '#5f67ee' }],
-    ['meta', { name: 'twitter:card', content: 'summary' }],
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:site', content: 'https://open.longbridge.com' }],
     ['meta', { name: 'robots', content: 'index,follow' }],
     ['meta', { name: 'googlebot', content: 'index,follow' }],
