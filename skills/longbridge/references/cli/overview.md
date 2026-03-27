@@ -40,6 +40,23 @@ longbridge update   # Update the CLI to the latest version
 
 **China Mainland:** The CLI auto-detects CN by probing `geotest.lbkrs.com` on startup (non-blocking). Result cached at `~/.longbridge/openapi/region-cache`. CN users automatically use `.cn` endpoints.
 
+## Environment Variables
+
+| Variable         | Value     | Description                                                        |
+| ---------------- | --------- | ------------------------------------------------------------------ |
+| `LONGBRIDGE_ENV` | `staging` | Switch all endpoints to the staging environment (`openapi.longbridge.xyz`). Useful for testing against non-production data. |
+
+```bash
+# Run any command against the staging environment
+LONGBRIDGE_ENV=staging longbridge login
+LONGBRIDGE_ENV=staging longbridge statement list
+
+# Or export for the entire shell session
+export LONGBRIDGE_ENV=staging
+```
+
+When set, OAuth, HTTP API, and WebSocket endpoints are all redirected to staging. Unset the variable (or omit it) to use production.
+
 ## Output Formats
 
 ```bash
