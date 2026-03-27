@@ -59,22 +59,26 @@ Docs 页面以 en 为主，zh-CN / zh-HK 为翻译版本，三者内容保持一
 ```yaml
 ---
 title: 'Page Title'
-id: category_filename           # 例：quote_pull-static
-slug: '/quote/pull/static'      # 以 / 开头，对应 URL 路径
-sidebar_position: 3             # 数字越小越靠前
-sidebar_icon: book              # 可选：book | zap | cpu | terminal | sparkles
+id: category_filename # 例：quote_pull-static
+slug: '/quote/pull/static' # 以 / 开头，对应 URL 路径
+sidebar_position: 3 # 数字越小越靠前
+sidebar_icon: book # 可选：book | zap | cpu | terminal | sparkles
 ---
 ```
+
+## Skills
+
+`skills/longbridge/` 存放 AI Agent 的 Skill 文件。Skill 文件保持高层级描述，命令 flag 和输出细节参考 CLI 的 `--help`，不要复制 help 文本进 Skill。
 
 ## 关联子模块
 
 本项目通过 submodule 统一管理以下仓库，修改文档时需同步检查：
 
-| 仓库 | 用途 | 同步时机 |
-|------|------|----------|
-| `longbridge/openapi` | OpenAPI 规范源（`openapi/` 目录） | API 参数/响应变更时 |
-| `longbridge/openapi-go` | Go SDK | API 方法签名/参数名变更时 |
-| `longbridge/longbridge-terminal` | CLI 二进制 | CLI 命令/flag 变更时 |
+| 仓库                             | 用途                              | 同步时机                  |
+| -------------------------------- | --------------------------------- | ------------------------- |
+| `longbridge/openapi`             | OpenAPI 规范源（`openapi/` 目录） | API 参数/响应变更时       |
+| `longbridge/openapi-go`          | Go SDK                            | API 方法签名/参数名变更时 |
+| `longbridge/longbridge-terminal` | CLI 二进制                        | CLI 命令/flag 变更时      |
 
 `openapi.yaml`（根目录）是 API Reference 的权威来源，`openapi/` 目录下是各模块的分片 YAML。
 
@@ -92,6 +96,7 @@ longbridge quote AAPL.US NVDA.US
 ```
 
 规则：
+
 - 注释行（`# ...`）放在对应命令**前面**，不用行尾注释
 - 每个 CliCommand 提供 2–4 个示例，使用真实 symbol（优先美股）
 - 命令需实际验证正确后再写入文档（交易类命令除外）
@@ -109,15 +114,15 @@ longbridge quote AAPL.US NVDA.US
 
 在 `docs/.vitepress/theme/components/index.ts` 中导出的组件可直接在 Markdown 中使用：
 
-| 组件 | 用途 |
-|------|------|
-| `<Tabs>` / `<TabItem>` | 代码分组标签页 |
-| `<TipContainer>` | 提示框 |
-| `<TryIt>` | API 在线调试 |
-| `<SDKLinks>` / `<SDK>` | SDK 链接展示 |
-| `<CliCommand>` | CLI 命令块（带高亮和安装引导） |
-| `<Skill>` | AI Skill 展示页 |
-| `<HomePage>` | 首页 |
+| 组件                   | 用途                           |
+| ---------------------- | ------------------------------ |
+| `<Tabs>` / `<TabItem>` | 代码分组标签页                 |
+| `<TipContainer>`       | 提示框                         |
+| `<TryIt>`              | API 在线调试                   |
+| `<SDKLinks>` / `<SDK>` | SDK 链接展示                   |
+| `<CliCommand>`         | CLI 命令块（带高亮和安装引导） |
+| `<Skill>`              | AI Skill 展示页                |
+| `<HomePage>`           | 首页                           |
 
 新增组件需在 `index.ts` 中 export。
 
@@ -128,7 +133,3 @@ longbridge quote AAPL.US NVDA.US
 ## 静态资源
 
 所有图片/静态文件必须上传 CDN 后引用 URL，不得放入仓库。
-
-## Skills
-
-`skills/longbridge/` 存放 AI Agent 的 Skill 文件，不在 `../longbridge-terminal`。Skill 文件保持高层级描述，命令 flag 和输出细节参考 CLI 的 `--help`，不要复制 help 文本进 Skill。
