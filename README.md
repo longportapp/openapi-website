@@ -6,6 +6,17 @@ Longbridge Developers is the official developer platform for Longbridge — prov
 
 ---
 
+- [What you can build](#what-you-can-build)
+- [Access methods](#access-methods)
+- [Quick start](#quick-start)
+- [Market coverage](#market-coverage)
+- [Documentation](#documentation)
+- [LLM-friendly docs](#llm-friendly-docs)
+- [Pricing](#pricing)
+- [Contributing](#contributing)
+
+---
+
 ## What you can build
 
 - Automated trading strategies and order management
