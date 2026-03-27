@@ -8,8 +8,10 @@ sidebar_position: 4
 该接口用于获取港股轮证标的的实时行情，包括轮证的特有数据。
 
 <CliCommand>
-longbridge warrant-quote 25228.HK  # 腾讯相关权证实时行情
-longbridge warrant-quote 24687.HK  # 另一只腾讯相关权证实时行情
+# 腾讯相关权证实时行情
+longbridge warrant-quote 25228.HK
+# 另一只腾讯相关权证实时行情
+longbridge warrant-quote 24687.HK
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="warrant_quote" />

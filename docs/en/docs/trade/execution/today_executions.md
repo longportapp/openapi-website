@@ -11,7 +11,9 @@ headingLevel: 2
 
 This API is used to get today executions.
 
-<CliCommand>longbridge executions</CliCommand>
+<CliCommand>
+longbridge executions
+</CliCommand>
 
 <SDKLinks module="trade" klass="TradeContext" method="today_executions" />
 

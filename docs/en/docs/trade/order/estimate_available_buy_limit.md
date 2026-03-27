@@ -11,7 +11,9 @@ headingLevel: 2
 
 This API is used for estimating the maximum purchase quantity for Hong Kong and US stocks, warrants, and options.
 
-<CliCommand>longbridge max-qty TSLA.US</CliCommand>
+<CliCommand>
+longbridge max-qty TSLA.US
+</CliCommand>
 
 <SDKLinks module="trade" klass="TradeContext" method="estimate_max_purchase_quantity" />
 

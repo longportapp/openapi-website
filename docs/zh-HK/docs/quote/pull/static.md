@@ -8,9 +8,12 @@ sidebar_position: 1
 該接口用於獲取標的的基礎信息。
 
 <CliCommand>
-longbridge static TSLA.US  # Tesla 靜態資訊（名稱、手數、股本等）
-longbridge static AAPL.US NVDA.US  # 多隻美股靜態資訊
-longbridge static TSLA.US 700.HK  # 美港股混合查詢
+# Tesla 靜態資訊（名稱、手數、股本等）
+longbridge static TSLA.US
+# 多隻美股靜態資訊
+longbridge static AAPL.US NVDA.US
+# 美港股混合查詢
+longbridge static TSLA.US 700.HK
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="static_info" />

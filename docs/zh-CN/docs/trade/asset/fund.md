@@ -11,7 +11,9 @@ headingLevel: 2
 
 该接口用于获取包括账户、基金代码、持有份额、成本净值、当前净值、币种在内的基金持仓信息。
 
-<CliCommand>longbridge fund-positions</CliCommand>
+<CliCommand>
+longbridge fund-positions
+</CliCommand>
 
 <SDKLinks module="trade" klass="TradeContext" method="fund_positions" />
 

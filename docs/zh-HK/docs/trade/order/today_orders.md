@@ -11,7 +11,9 @@ headingLevel: 2
 
 該接口用於獲取當日訂單和訂單查詢。
 
-<CliCommand>longbridge orders</CliCommand>
+<CliCommand>
+longbridge orders
+</CliCommand>
 
 <SDKLinks module="trade" klass="TradeContext" method="today_orders" />
 

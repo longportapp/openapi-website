@@ -8,8 +8,10 @@ sidebar_position: 6
 该接口用于获取标的的实时经纪队列数据。
 
 <CliCommand>
-longbridge brokers 700.HK  # 腾讯经纪商队列（仅港股）
-longbridge brokers 9988.HK  # 阿里巴巴经纪商队列
+# 腾讯经纪商队列（仅港股）
+longbridge brokers 700.HK
+# 阿里巴巴经纪商队列
+longbridge brokers 9988.HK
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="brokers" />

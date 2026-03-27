@@ -8,9 +8,12 @@ sidebar_position: 17
 該接口用於獲取標的當日的資金流向。
 
 <CliCommand>
-longbridge capital-flow TSLA.US  # Tesla 今日資金流向時序
-longbridge capital-flow AAPL.US  # Apple 今日資金流向時序
-longbridge capital-flow NVDA.US  # NVDA 今日資金流向時序
+# Tesla 今日資金流向時序
+longbridge capital-flow TSLA.US
+# Apple 今日資金流向時序
+longbridge capital-flow AAPL.US
+# NVDA 今日資金流向時序
+longbridge capital-flow NVDA.US
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="capital_flow" />

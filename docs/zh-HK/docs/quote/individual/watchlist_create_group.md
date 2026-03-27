@@ -12,8 +12,10 @@ headingLevel: 2
 創建自選股分組
 
 <CliCommand>
-longbridge watchlist create "My Portfolio"  # 建立新的自選股分組
-longbridge watchlist create "Tech Stocks"  # 建立另一個分組
+# 建立新的自選股分組
+longbridge watchlist create "My Portfolio"
+# 建立另一個分組
+longbridge watchlist create "Tech Stocks"
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="create_watchlist_group" />

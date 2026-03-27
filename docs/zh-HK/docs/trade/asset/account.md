@@ -11,7 +11,9 @@ headingLevel: 2
 
 該接口用於獲取用戶每個幣種可用、可取、凍結、待結算金額、在途資金 (基金申購贖回) 信息。
 
-<CliCommand>longbridge balance</CliCommand>
+<CliCommand>
+longbridge balance
+</CliCommand>
 
 <SDKLinks module="trade" klass="TradeContext" method="account_balance" />
 

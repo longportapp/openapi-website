@@ -7,9 +7,12 @@ sidebar_position: 22
 This interface is used to get historical market temperature.
 
 <CliCommand>
-longbridge market-temp HK --history --start 2025-01-01 --end 2025-03-31  # HK temperature Q1 2025
-longbridge market-temp US --history --start 2025-01-01 --end 2025-01-31  # US temperature Jan 2025
-longbridge market-temp CN --history --start 2025-01-01 --end 2025-06-30  # CN A-share temperature H1 2025
+# HK temperature Q1 2025
+longbridge market-temp HK --history --start 2025-01-01 --end 2025-03-31
+# US temperature Jan 2025
+longbridge market-temp US --history --start 2025-01-01 --end 2025-01-31
+# CN A-share temperature H1 2025
+longbridge market-temp CN --history --start 2025-01-01 --end 2025-06-30
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="history_market_temperature" />

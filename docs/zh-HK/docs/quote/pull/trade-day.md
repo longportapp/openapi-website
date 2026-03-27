@@ -8,9 +8,12 @@ sidebar_position: 16
 該接口用於獲取市場的交易日信息。
 
 <CliCommand>
-longbridge trading-days HK  # 港股未來交易日
-longbridge trading-days US  # 美股未來交易日
-longbridge trading-days CN  # A 股未來交易日
+# 港股未來交易日
+longbridge trading-days HK
+# 美股未來交易日
+longbridge trading-days US
+# A 股未來交易日
+longbridge trading-days CN
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="trading_days" />

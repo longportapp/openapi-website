@@ -11,7 +11,9 @@ headingLevel: 2
 
 該接口用於獲取包括賬戶、股票代碼、持倉股數、可用股數、持倉均價（按賬戶設置計算均價方式）、幣種在內的股票持倉信息。
 
-<CliCommand>longbridge positions</CliCommand>
+<CliCommand>
+longbridge positions
+</CliCommand>
 
 <SDKLinks module="trade" klass="TradeContext" method="stock_positions" />
 

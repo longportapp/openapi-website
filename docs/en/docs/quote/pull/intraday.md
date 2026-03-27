@@ -8,9 +8,12 @@ sidebar_position: 9
 This API is used to obtain the intraday data of security.
 
 <CliCommand>
-longbridge intraday TSLA.US  # minute-by-minute intraday data for Tesla
-longbridge intraday AAPL.US  # minute-by-minute intraday data for Apple
-longbridge intraday 700.HK  # minute-by-minute intraday data for Tencent
+# minute-by-minute intraday data for Tesla
+longbridge intraday TSLA.US
+# minute-by-minute intraday data for Apple
+longbridge intraday AAPL.US
+# minute-by-minute intraday data for Tencent
+longbridge intraday 700.HK
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="intraday" />

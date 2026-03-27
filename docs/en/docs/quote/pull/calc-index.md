@@ -8,9 +8,12 @@ sidebar_position: 19
 This API is used to obtain the calculate indexes of securities.
 
 <CliCommand>
-longbridge calc-index TSLA.US NVDA.US  # PE, PB, EPS and other indexes
-longbridge calc-index AAPL.US --index pe,pb,eps,turnover_rate  # select specific indexes
-longbridge calc-index TSLA.US --index pe,total_market_value  # market cap indexes
+# PE, PB, EPS and other indexes
+longbridge calc-index TSLA.US NVDA.US
+# select specific indexes
+longbridge calc-index AAPL.US --index pe,pb,eps,turnover_rate
+# market cap indexes
+longbridge calc-index TSLA.US --index pe,total_market_value
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="calc_indexes" go="CalcIndex" />

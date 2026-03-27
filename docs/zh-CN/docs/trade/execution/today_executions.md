@@ -11,7 +11,9 @@ headingLevel: 2
 
 该接口用于获取当日订单的成交明细。
 
-<CliCommand>longbridge executions</CliCommand>
+<CliCommand>
+longbridge executions
+</CliCommand>
 
 <SDKLinks module="trade" klass="TradeContext" method="today_executions" />
 

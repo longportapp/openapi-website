@@ -8,7 +8,8 @@ sidebar_position: 15
 該接口用於獲取各市場當日交易時段。
 
 <CliCommand>
-longbridge trading-session  # 所有市場今日交易時段（美股、港股、A 股、新加坡）
+# 所有市場今日交易時段（美股、港股、A 股、新加坡）
+longbridge trading-session
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="trading_session" />

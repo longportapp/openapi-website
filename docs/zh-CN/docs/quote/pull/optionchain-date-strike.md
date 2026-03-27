@@ -8,8 +8,10 @@ sidebar_position: 12
 该接口用于获取标的的期权链到期日期权标的列表。
 
 <CliCommand>
-longbridge option-chain AAPL.US --date 2026-04-17  # AAPL 2026-04-17 到期的行权价列表
-longbridge option-chain TSLA.US --date 2026-04-17  # TSLA 2026-04-17 到期的行权价列表
+# AAPL 2026-04-17 到期的行权价列表
+longbridge option-chain AAPL.US --date 2026-04-17
+# TSLA 2026-04-17 到期的行权价列表
+longbridge option-chain TSLA.US --date 2026-04-17
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="option_chain_info_by_date" />

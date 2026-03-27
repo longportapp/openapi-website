@@ -12,7 +12,9 @@ headingLevel: 2
 
 获取当前登录用户发布的讨论列表，支持分页与类型过滤。
 
-<CliCommand>longbridge my-topics</CliCommand>
+<CliCommand>
+longbridge my-topics
+</CliCommand>
 
 <SDKLinks module="content" klass="ContentContext" method="topics_mine" />
 

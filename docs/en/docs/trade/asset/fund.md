@@ -12,7 +12,9 @@ headingLevel: 2
 The API is used to obtain fund position information including account, fund code, holding share, cost net worth,
 current net worth, and currency.
 
-<CliCommand>longbridge fund-positions</CliCommand>
+<CliCommand>
+longbridge fund-positions
+</CliCommand>
 
 <SDKLinks module="trade" klass="TradeContext" method="fund_positions" />
 

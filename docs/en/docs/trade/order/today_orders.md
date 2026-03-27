@@ -11,7 +11,9 @@ headingLevel: 2
 
 This API is used to get today order or get order by order id.
 
-<CliCommand>longbridge orders</CliCommand>
+<CliCommand>
+longbridge orders
+</CliCommand>
 
 <SDKLinks module="trade" klass="TradeContext" method="today_orders" />
 

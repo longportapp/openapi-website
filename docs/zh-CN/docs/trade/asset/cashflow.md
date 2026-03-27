@@ -11,7 +11,9 @@ headingLevel: 2
 
 该接口用于获取资金流入/流出方向、资金类别、资金金额、发生时间、关联股票代码和资金流水说明信息。
 
-<CliCommand>longbridge cash-flow</CliCommand>
+<CliCommand>
+longbridge cash-flow
+</CliCommand>
 
 <SDKLinks module="trade" klass="TradeContext" method="cash_flow" />
 

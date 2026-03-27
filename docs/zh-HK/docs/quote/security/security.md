@@ -12,7 +12,8 @@ headingLevel: 2
 獲取標的列表
 
 <CliCommand>
-longbridge security-list  # 美股夜盤可交易標的列表
+# 美股夜盤可交易標的列表
+longbridge security-list
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="security_list" />

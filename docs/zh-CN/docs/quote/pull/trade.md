@@ -8,9 +8,12 @@ sidebar_position: 8
 该接口用于获取标的的成交明细数据。
 
 <CliCommand>
-longbridge trades TSLA.US  # Tesla 最新逐笔成交
-longbridge trades AAPL.US  # Apple 最新逐笔成交
-longbridge trades NVDA.US  # NVDA 最新逐笔成交
+# Tesla 最新逐笔成交
+longbridge trades TSLA.US
+# Apple 最新逐笔成交
+longbridge trades AAPL.US
+# NVDA 最新逐笔成交
+longbridge trades NVDA.US
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="trades" />

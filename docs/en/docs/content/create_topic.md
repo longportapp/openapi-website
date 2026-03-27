@@ -30,8 +30,10 @@ Stock symbols mentioned in the body (e.g. `700.HK`, `TSLA.US`) are automatically
 > ⚠️ Rate limit thresholds are for reference only and may be adjusted by the platform at any time.
 
 <CliCommand>
-longbridge create-topic TSLA.US "Tesla Q1 earnings analysis"  # publish a topic for Tesla
-longbridge create-topic AAPL.US "Apple WWDC preview"  # publish a topic for Apple
+# publish a topic for Tesla
+longbridge create-topic TSLA.US "Tesla Q1 earnings analysis"
+# publish a topic for Apple
+longbridge create-topic AAPL.US "Apple WWDC preview"
 </CliCommand>
 
 <SDKLinks module="content" klass="ContentContext" method="create_topic" />

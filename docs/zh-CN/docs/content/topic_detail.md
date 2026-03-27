@@ -12,7 +12,9 @@ headingLevel: 2
 
 根据讨论 ID 获取完整详情，包含正文（Markdown）、作者信息、关联标的与标签、互动数据及详情页链接。
 
-<CliCommand>longbridge topic-detail 6993508780031016960</CliCommand>
+<CliCommand>
+longbridge topic-detail 6993508780031016960
+</CliCommand>
 
 <SDKLinks module="content" klass="ContentContext" method="topic_detail" />
 

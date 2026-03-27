@@ -8,9 +8,12 @@ sidebar_position: 5
 This API is used to obtain the depth data of security.
 
 <CliCommand>
-longbridge depth TSLA.US  # Level 2 order book for Tesla
-longbridge depth AAPL.US  # Level 2 order book for Apple
-longbridge depth 700.HK  # Level 2 order book for Tencent (HK)
+# Level 2 order book for Tesla
+longbridge depth TSLA.US
+# Level 2 order book for Apple
+longbridge depth AAPL.US
+# Level 2 order book for Tencent (HK)
+longbridge depth 700.HK
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="depth" />

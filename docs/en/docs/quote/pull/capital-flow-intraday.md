@@ -8,9 +8,12 @@ sidebar_position: 17
 This API is used to obtain the daily capital flow intraday of security.
 
 <CliCommand>
-longbridge capital-flow TSLA.US  # intraday capital flow time series for Tesla
-longbridge capital-flow AAPL.US  # intraday capital flow time series for Apple
-longbridge capital-flow NVDA.US  # intraday capital flow time series for NVDA
+# intraday capital flow time series for Tesla
+longbridge capital-flow TSLA.US
+# intraday capital flow time series for Apple
+longbridge capital-flow AAPL.US
+# intraday capital flow time series for NVDA
+longbridge capital-flow NVDA.US
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="capital_flow" />

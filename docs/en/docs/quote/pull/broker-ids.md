@@ -8,7 +8,8 @@ sidebar_position: 7
 This API is used to obtain participant IDs data (which can be synchronized once a day).
 
 <CliCommand>
-longbridge participants  # list all market maker broker IDs and names (HK market)
+# list all market maker broker IDs and names (HK market)
+longbridge participants
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="participants" />

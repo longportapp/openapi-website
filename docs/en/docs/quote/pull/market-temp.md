@@ -7,9 +7,12 @@ sidebar_position: 21
 Get Current Market Temperature
 
 <CliCommand>
-longbridge market-temp HK  # HK market sentiment temperature
-longbridge market-temp US  # US market sentiment temperature
-longbridge market-temp CN  # China A-share market temperature
+# HK market sentiment temperature
+longbridge market-temp HK
+# US market sentiment temperature
+longbridge market-temp US
+# China A-share market temperature
+longbridge market-temp CN
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="market_temperature" />

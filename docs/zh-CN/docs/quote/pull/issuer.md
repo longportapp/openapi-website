@@ -8,7 +8,8 @@ sidebar_position: 13
 该接口用于获取轮证发行商 ID 数据 (可每天同步一次)。
 
 <CliCommand>
-longbridge warrant-issuers  # 港股权证发行商完整列表
+# 港股权证发行商完整列表
+longbridge warrant-issuers
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="warrant_issuers" />

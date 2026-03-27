@@ -8,9 +8,12 @@ sidebar_position: 2
 This API is used to obtain the real-time quotes of securities, and supports all types of securities.
 
 <CliCommand>
-longbridge quote TSLA.US  # real-time quote for Tesla
-longbridge quote AAPL.US NVDA.US  # query multiple US stocks at once
-longbridge quote TSLA.US 700.HK AAPL.US  # mix US and HK stocks
+# real-time quote for Tesla
+longbridge quote TSLA.US
+# query multiple US stocks at once
+longbridge quote AAPL.US NVDA.US
+# mix US and HK stocks
+longbridge quote TSLA.US 700.HK AAPL.US
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="quote" />

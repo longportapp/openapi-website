@@ -8,9 +8,12 @@ sidebar_position: 10
 该接口用于获取标的的历史 K 线数据。
 
 <CliCommand>
-longbridge kline-history TSLA.US --start 2025-01-01 --end 2025-03-31  # 2025 年 Q1 日 K
-longbridge kline-history AAPL.US --start 2024-01-01 --end 2024-12-31 --period week  # 2024 全年周 K
-longbridge kline-history NVDA.US --start 2025-01-01 --end 2025-12-31  # 2025 全年日 K
+# 2025 年 Q1 日 K
+longbridge kline-history TSLA.US --start 2025-01-01 --end 2025-03-31
+# 2024 全年周 K
+longbridge kline-history AAPL.US --start 2024-01-01 --end 2024-12-31 --period week
+# 2025 全年日 K
+longbridge kline-history NVDA.US --start 2025-01-01 --end 2025-12-31
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="history_candlesticks_by_offset" />

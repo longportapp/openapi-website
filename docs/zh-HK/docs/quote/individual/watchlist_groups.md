@@ -12,7 +12,8 @@ headingLevel: 2
 獲取關注分組
 
 <CliCommand>
-longbridge watchlist  # 查看所有自選股分組及標的
+# 查看所有自選股分組及標的
+longbridge watchlist
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="watchlist" />

@@ -11,7 +11,9 @@ headingLevel: 2
 
 該接口用於港美股，窩輪，期權的預估最大購買數量。
 
-<CliCommand>longbridge max-qty TSLA.US</CliCommand>
+<CliCommand>
+longbridge max-qty TSLA.US
+</CliCommand>
 
 <SDKLinks module="trade" klass="TradeContext" method="estimate_max_purchase_quantity" />
 

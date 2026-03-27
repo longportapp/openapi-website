@@ -8,8 +8,10 @@ sidebar_position: 12
 This API is used to obtain a list of option securities by the option chain expiry date.
 
 <CliCommand>
-longbridge option-chain AAPL.US --date 2026-04-17  # AAPL strike prices for 2026-04-17 expiry
-longbridge option-chain TSLA.US --date 2026-04-17  # TSLA strike prices for 2026-04-17 expiry
+# AAPL strike prices for 2026-04-17 expiry
+longbridge option-chain AAPL.US --date 2026-04-17
+# TSLA strike prices for 2026-04-17 expiry
+longbridge option-chain TSLA.US --date 2026-04-17
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="option_chain_info_by_date" />
