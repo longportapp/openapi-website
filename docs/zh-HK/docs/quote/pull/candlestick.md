@@ -12,7 +12,7 @@ sidebar_position: 20
 :::
 
 <CliCommand>
-longbridge kline TSLA.US  # Tesla 日K線（最近100根）
+longbridge kline TSLA.US  # Tesla 日 K 線（最近 100 根）
 longbridge kline AAPL.US --period week  # Apple 週K線
 longbridge kline NVDA.US --period day --count 20  # NVDA 最近20根日K
 </CliCommand>
