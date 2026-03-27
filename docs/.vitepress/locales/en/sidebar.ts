@@ -5,6 +5,6 @@ const docsSidebar = genMarkdowDocs('en', 'docs')
 const wsApiSidebar = genMarkdowDocs('en', 'docs/api/ws')
 
 export const sidebar: DefaultTheme.Sidebar = {
-  '/docs/api/ws/': wsApiSidebar(),
+  '/docs/api/ws': wsApiSidebar(),
   '/docs/': docsSidebar(),
 }

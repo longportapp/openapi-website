@@ -2,10 +2,12 @@
 import { load } from 'js-yaml'
 import MarkdownIt from 'markdown-it'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { useData } from 'vitepress'
 import { useI18n } from 'vue-i18n'
 import spec from '../../../../openapi.yaml?raw'
 
 const { t, locale } = useI18n()
+const { localeIndex } = useData()
 const md = new MarkdownIt({
   html: false,
   linkify: true,
@@ -15,6 +17,10 @@ const md = new MarkdownIt({
   },
 })
 const isZh = computed(() => locale.value.startsWith('zh'))
+const wsApiLink = computed(() => {
+  const prefix = localeIndex.value === 'root' ? '' : `/${localeIndex.value}`
+  return `${prefix}/docs/api/ws`
+})
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -604,7 +610,7 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <div class="intro-card intro-card-ws">
+        <a :href="wsApiLink" class="intro-card intro-card-ws intro-card-link">
           <div class="intro-card-icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -626,7 +632,7 @@ onUnmounted(() => {
             <h3 class="intro-card-title">{{ $t('api.intro.wsTitle') }}</h3>
             <p class="intro-card-desc">{{ $t('api.intro.wsDesc') }}</p>
           </div>
-        </div>
+        </a>
 
         <p class="intro-hint">← {{ $t('api.intro.hint') }}</p>
       </div>
@@ -1303,6 +1309,17 @@ onUnmounted(() => {
 
 .intro-card-ws {
   background: color-mix(in srgb, var(--vp-c-success-1) 5%, var(--vp-c-bg-soft));
+}
+
+.intro-card-link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.intro-card-link:hover {
+  border-color: var(--vp-c-success-1);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--vp-c-success-1) 15%, transparent);
 }
 
 .intro-card-icon {
