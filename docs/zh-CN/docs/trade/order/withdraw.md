@@ -11,6 +11,11 @@ headingLevel: 2
 
 该接口用于订单撤销。
 
+<CliCommand>
+# 将下方订单 ID 替换为实际的订单 ID
+longbridge cancel 693664675163312128
+</CliCommand>
+
 <SDKLinks module="trade" klass="TradeContext" method="cancel_order" />
 
 ## Request

@@ -7,6 +7,13 @@ sidebar_position: 3
 
 该接口用于获取美股期权标的的实时行情，包括期权的特有数据。
 
+<CliCommand>
+# AAPL 看涨期权 $250 行权价 2026-04-17 到期
+longbridge option-quote AAPL260417C250000.US
+# TSLA 看跌期权 $350 行权价 2026-04-18 到期
+longbridge option-quote TSLA260418P350000.US
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="option_quote" />
 
 :::info

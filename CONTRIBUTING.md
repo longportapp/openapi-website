@@ -32,13 +32,15 @@ This is the source for **https://open.longbridge.com** — the official Longbrid
 │   ├── en/                  # English content
 │   ├── zh-CN/               # Simplified Chinese content
 │   └── zh-HK/               # Traditional Chinese content
+├── openapi/                 # Submodule: github.com/longbridge/openapi
+├── openapi-go/              # Submodule: github.com/longbridge/openapi-go
+├── longbridge-terminal/     # Submodule: github.com/longbridge/longbridge-terminal
 ├── skills/
 │   └── longbridge/
 │       └── SKILL.md         # The AI Skill for Longbridge APIs
 ├── scripts/                 # Build scripts
 │   ├── generate-llms.ts     # Generates llms.txt
 │   └── normalize_md.ts      # Normalizes Markdown formatting
-├── openapi/                 # OpenAPI specifications (YAML)
 ├── CONTRIBUTING.md          # This file
 └── package.json
 ```
@@ -212,21 +214,69 @@ The `docs/.vitepress/utils.ts` `rewriteMarkdownPath` function handles URL genera
 
 ---
 
-## Related Repositories
+## Submodules
 
-When making changes that affect the API surface, check whether these related repositories need corresponding updates:
+This repo includes three submodules for unified cross-repo development. Always `cd` into the submodule directory to make changes there — commits must be made inside the submodule, then the parent repo updated to reference the new commit.
 
-### [`longbridge/openapi`](https://github.com/longbridge/openapi)
+```bash
+# Initialize after cloning
+git submodule update --init --recursive
 
-The canonical OpenAPI specification source. The `openapi/` directory in this repo may mirror or derive from it. If the API schema changes, both repos may need updating.
+# Update all submodules to latest
+git submodule update --remote --merge
+```
 
-### [`longbridge/openapi-go`](https://github.com/longbridge/openapi-go)
+### [`openapi/`](https://github.com/longbridge/openapi) — OpenAPI & SDK source
 
-The official Go SDK. Reflects the same API surface documented here. If you update API docs, check whether the Go SDK's method signatures, parameter names, or response types are consistent with what's documented.
+Contains the canonical OpenAPI specification and multi-language SDK source code (Python, Rust, Go, Node.js, Java, C++).
 
-### [`longbridge/longbridge-terminal`](https://github.com/longbridge/longbridge-terminal)
+**Sync when:**
+- An API endpoint is added, removed, or its parameters/response shape changes
+- A new SDK language is added
+- An existing SDK method is renamed or its signature changes
 
-The `longbridge` CLI binary (distributed via Homebrew). CLI reference docs at `docs/{lang}/cli.md` must accurately reflect the CLI's actual commands and flags. When documenting CLI features, verify against the terminal repo.
+**What to change:**
+- `openapi/openapi.yaml` — the authoritative API spec; all other changes derive from this
+- SDK source files for any affected method across all languages
+
+### [`openapi-go/`](https://github.com/longbridge/openapi-go) — Go SDK
+
+The official Go SDK. Method names, parameter types, and response structs must stay consistent with what is documented in `docs/{lang}/` and defined in `openapi/openapi.yaml`.
+
+**Sync when:**
+- An API method signature changes (parameter added/removed/renamed)
+- A new endpoint is added that needs a Go implementation
+- Response struct fields change
+
+**What to change:**
+- Go struct definitions and method signatures in `openapi-go/`
+- Ensure Go method names in `SDKLinks` component (`docs/.vitepress/theme/components/SDKLinks.vue`) match
+
+### [`longbridge-terminal/`](https://github.com/longbridge/longbridge-terminal) — CLI binary
+
+The `longbridge` CLI distributed via Homebrew. CLI docs (`docs/{lang}/docs/cli.md`) and `<CliCommand>` examples in API docs must reflect the actual CLI behavior.
+
+**Sync when:**
+- A new CLI command or flag is added
+- A command's output format or behavior changes
+- A command is deprecated or removed
+
+**What to change:**
+- CLI source in `longbridge-terminal/`
+- `docs/{lang}/docs/cli.md` in all three locales
+- Any `<CliCommand>` blocks in docs that use the affected command
+- `skills/longbridge/references/cli/overview.md`
+
+### Cross-repo change workflow
+
+When a change touches multiple repos (e.g., a new API endpoint):
+
+1. Update `openapi/openapi.yaml` (API spec)
+2. Update SDK implementations in `openapi/` and `openapi-go/` as needed
+3. Update CLI in `longbridge-terminal/` if a new command is needed
+4. Update `docs/{lang}/` pages (all three locales) with new `<CliCommand>` examples and SDK request examples
+5. Update `skills/longbridge/SKILL.md` if the AI Skill needs to know about the new endpoint
+6. Commit each submodule separately, then update the parent repo's submodule reference
 
 ---
 
@@ -262,6 +312,7 @@ Before submitting a PR, verify:
 - [ ] Frontmatter is present and correct (`title`, `id`, `slug`, `sidebar_position`)
 - [ ] No images or static assets added to the repo (use CDN URLs)
 - [ ] If a new component was added, it is exported from `theme/components/index.ts`
-- [ ] If the API surface changed, `openapi/` YAML and the AI Skill (`skills/longbridge/SKILL.md`) are updated
-- [ ] Related repositories are checked for consistency
+- [ ] If the API surface changed: `openapi/openapi.yaml`, SDK source in `openapi/` and `openapi-go/`, and `skills/longbridge/SKILL.md` are updated
+- [ ] If CLI commands changed: `longbridge-terminal/` source, `docs/{lang}/docs/cli.md`, and affected `<CliCommand>` blocks are updated
+- [ ] Submodule commits are made inside the submodule directory; parent repo references the new commit
 - [ ] Markdown formatting is clean (run `autocorrect --fix .` for Chinese/English spacing)

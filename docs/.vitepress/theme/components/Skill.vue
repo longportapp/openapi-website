@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useData } from 'vitepress'
+import Footer from './HomePage/Footer.vue'
 
 const { lang } = useData()
 
@@ -1633,6 +1634,9 @@ const currentMessages = computed(() => {
       </div>
     </div>
   </div>
+  <div class="skill-footer-wrap">
+    <Footer />
+  </div>
 </template>
 
 <style scoped>
@@ -2886,5 +2890,11 @@ const currentMessages = computed(() => {
 }
 .skill-chat-bubble-assistant :deep(.demo-term .t-c) {
   color: var(--vp-c-indigo-1);
+}
+.skill-footer-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  border-top: 1px solid var(--vp-c-divider);
 }
 </style>

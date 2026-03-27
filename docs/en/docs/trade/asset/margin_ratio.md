@@ -12,6 +12,10 @@ headingLevel: 2
 This API is used to obtain the initial margin ratio, maintain the margin ratio and strengthen the
 margin ratio of stocks.
 
+<CliCommand>
+longbridge margin-ratio TSLA.US
+</CliCommand>
+
 <SDKLinks module="trade" klass="TradeContext" method="margin_ratio" />
 
 ## Request

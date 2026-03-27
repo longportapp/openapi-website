@@ -11,6 +11,13 @@ headingLevel: 2
 
 Create watched group
 
+<CliCommand>
+# create a new watchlist group
+longbridge watchlist create "My Portfolio"
+# create another watchlist group
+longbridge watchlist create "Tech Stocks"
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="create_watchlist_group" />
 
 ## Request

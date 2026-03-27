@@ -7,6 +7,15 @@ sidebar_position: 8
 
 This API is used to obtain the trades data of security.
 
+<CliCommand>
+# recent tick-by-tick trades for Tesla
+longbridge trades TSLA.US
+# recent tick-by-tick trades for Apple
+longbridge trades AAPL.US
+# recent tick-by-tick trades for NVDA
+longbridge trades NVDA.US
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="trades" />
 
 :::info

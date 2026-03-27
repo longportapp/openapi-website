@@ -11,6 +11,11 @@ headingLevel: 2
 
 Delete watched group
 
+<CliCommand>
+# delete a watchlist group by ID (get ID from: longbridge watchlist)
+longbridge watchlist delete <id>
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="delete_watchlist_group" />
 
 ## Request

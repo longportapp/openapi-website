@@ -7,6 +7,15 @@ sidebar_position: 14
 
 This API is used to obtain the quotes of HK warrants, and supports sorting and filtering.
 
+<CliCommand>
+# list warrants linked to Tencent
+longbridge warrant-list 700.HK
+# list warrants linked to Alibaba
+longbridge warrant-list 9988.HK
+# list warrants linked to JD.com
+longbridge warrant-list 9618.HK
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="warrant_list" />
 
 :::info

@@ -7,6 +7,11 @@ sidebar_position: 15
 
 This API is used to obtain the daily trading hours of each market.
 
+<CliCommand>
+# trading session schedule for all markets (US, HK, CN, SG)
+longbridge trading-session
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="trading_session" />
 
 :::info

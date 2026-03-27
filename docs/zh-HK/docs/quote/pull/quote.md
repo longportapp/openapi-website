@@ -7,6 +7,15 @@ sidebar_position: 2
 
 該接口用於獲取標的的實時行情 (支持所有類型標的）。
 
+<CliCommand>
+# Tesla 實時行情
+longbridge quote TSLA.US
+# 同時查詢多隻美股
+longbridge quote AAPL.US NVDA.US
+# 混合查詢美港股
+longbridge quote TSLA.US 700.HK AAPL.US
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="quote" />
 
 :::info

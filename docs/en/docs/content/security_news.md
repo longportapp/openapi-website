@@ -12,6 +12,15 @@ headingLevel: 2
 
 Get the news list for a specified security.
 
+<CliCommand>
+# latest news for Tesla
+longbridge news TSLA.US
+# latest news for Apple
+longbridge news AAPL.US
+# latest news for NVDA
+longbridge news NVDA.US
+</CliCommand>
+
 <SDKLinks module="content" klass="ContentContext" method="news" />
 
 ## Request

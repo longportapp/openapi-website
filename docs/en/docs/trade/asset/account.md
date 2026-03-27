@@ -12,6 +12,10 @@ headingLevel: 2
 The API is used to obtain the available, desirable, frozen, to-be-settled, and in-transit
 funds (fund purchase and redemption) information for each currency of the user.
 
+<CliCommand>
+longbridge balance
+</CliCommand>
+
 <SDKLinks module="trade" klass="TradeContext" method="account_balance" />
 
 ## Request

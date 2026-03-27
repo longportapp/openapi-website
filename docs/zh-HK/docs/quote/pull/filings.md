@@ -12,6 +12,15 @@ headingLevel: 2
 
 獲取指定股票的公告列表。
 
+<CliCommand>
+# Apple 監管文件和公告
+longbridge filings AAPL.US
+# Tesla 監管文件和公告
+longbridge filings TSLA.US
+# NVDA 監管文件和公告
+longbridge filings NVDA.US
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="filings" />
 
 ## Request

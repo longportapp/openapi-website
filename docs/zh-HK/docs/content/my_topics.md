@@ -12,6 +12,10 @@ headingLevel: 2
 
 獲取當前登錄用戶發布的討論列表，支持分頁與類型過濾。
 
+<CliCommand>
+longbridge my-topics
+</CliCommand>
+
 <SDKLinks module="content" klass="ContentContext" method="topics_mine" />
 
 ## Request

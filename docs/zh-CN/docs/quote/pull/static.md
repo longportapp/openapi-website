@@ -7,6 +7,15 @@ sidebar_position: 1
 
 该接口用于获取标的的基础信息。
 
+<CliCommand>
+# Tesla 静态信息（名称、手数、股本等）
+longbridge static TSLA.US
+# 多只美股静态信息
+longbridge static AAPL.US NVDA.US
+# 美港股混合查询
+longbridge static TSLA.US 700.HK
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="static_info" />
 
 :::info

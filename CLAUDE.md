@@ -11,115 +11,125 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-# 开发（连接 canary 环境 API）
-bun run dev
-
-# 开发（连接生产环境 API）
-bun run dev:prod
-
-# 构建
-bun run build:canary   # canary 环境
-bun run build:release  # 生产环境
-
-# 构建 llms.txt（在 build 之后单独执行）
-bun run build:llms
-
-# 预览构建产物
-bun run preview
+bun run dev          # 开发（canary 环境 API）
+bun run dev:prod     # 开发（生产环境 API）
+bun run build:canary   # 构建 canary 环境
+bun run build:release  # 构建生产环境
+bun run build:llms     # 构建 llms.txt（在 build 之后执行）
+bun run preview        # 预览构建产物
 ```
 
-无测试命令，不需要跑测试。
+无测试命令。
 
-## 架构概览
+## 内容架构
 
-这是一个基于 **VitePress 2.0 alpha** 的多语言文档网站，面向 Longbridge 开发者平台（open.longbridge.com）。
+本站分两类内容，定位不同：
 
-### 目录结构
+### Docs（`docs/{lang}/docs/`）
 
-```
-docs/
-├── .vitepress/
-│   ├── config.mts          # VitePress 主配置（含路由重写、HTML 注入）
-│   ├── config/
-│   │   ├── locales.ts      # 三语言 locale 聚合（en / zh-CN / zh-HK）
-│   │   └── markdown.ts     # Markdown 插件注册
-│   ├── locales/            # 每个语言的 nav / sidebar / search 配置
-│   │   ├── en/
-│   │   ├── zh-CN/
-│   │   └── zh-HK/
-│   ├── theme/
-│   │   ├── index.ts        # 主题入口，注册全局组件和 vue-i18n
-│   │   ├── components/     # Vue 组件（全局注册，可直接在 md 中使用）
-│   │   ├── composables/    # Vue composables
-│   │   ├── locales/        # i18n 翻译文件（en.json / zh-CN.json / zh-HK.json）
-│   │   └── utils/
-│   │       └── gen.ts      # 自动从文件系统生成 sidebar 的核心逻辑
-│   ├── md-plugins/         # 自定义 Markdown-it 插件
-│   └── utils.ts            # 路由重写逻辑（处理 slug 和语言前缀）
-├── en/                     # 英文文档内容
-├── zh-CN/                  # 简体中文文档内容
-└── zh-HK/                  # 繁体中文文档内容
-scripts/                    # 构建脚本（generate-llms.ts、normalize_md.ts 等）
-```
+面向**业务场景**的使用指引。内容包括：
 
-### 多语言路由
+- 入门指南、认证流程
+- CLI 命令使用示例（用 `<CliCommand>` 块）
+- SDK 调用示例（Python / Rust / Go / Node.js / Java / C++）
+- 功能介绍（行情、交易、账户、MCP、AI Skill 等）
 
-- **英文**为 root locale（`/docs/...`），文件在 `docs/en/`
-- **简中**路径为 `/zh-CN/docs/...`，文件在 `docs/zh-CN/`
-- **繁中**路径为 `/zh-HK/docs/...`，文件在 `docs/zh-HK/`
-- 路由重写由 `docs/.vitepress/utils.ts` 的 `rewriteMarkdownPath` 处理：支持 frontmatter `slug` 字段做绝对/相对路径覆盖
+Docs 页面以 en 为主，zh-CN / zh-HK 为翻译版本，三者内容保持一致。
 
-### Sidebar 自动生成
+### API Reference（`docs/{lang}/api/`）
 
-Sidebar 通过 `docs/.vitepress/theme/utils/gen.ts` 的 `genMarkdowDocs(lang, basePath)` 自动从文件系统读取生成，无需手动维护。控制方式：
+面向 **HTTP/WebSocket API** 的技术参考。以 `openapi.yaml` 为准：
 
-- **排序**：frontmatter `sidebar_position` 字段（数字越小越靠前）
-- **分类标题**：子目录下的 `_category_.json`（`label`、`position`、`collapsed` 等）
-- **自定义链接**：frontmatter `slug` 字段
-- **侧边栏图标**：frontmatter `sidebar_icon` 字段（支持 `book`、`zap`、`cpu`、`terminal`、`sparkles`）
+- 参数名称、类型、Required 字段必须与 `openapi.yaml` 完全一致
+- 响应结构、错误码以规范为准，不得自行发明
+- 更新 API 文档时，先改 `openapi.yaml`，再同步各语言页面
 
-### 新增页面流程
+## 三语言规则
 
-每个 `.md` 文件需要在三个语言目录下各有一份（`en/`、`zh-CN/`、`zh-HK/`）。如果只在某个 locale 的 nav 中显示，需要同步修改对应的 `docs/.vitepress/locales/{lang}/nav.ts`。
+每个 `.md` 页面必须在三个语言目录下都有对应文件：
 
-### 全局 Vue 组件
+- `docs/en/` — 英文（root locale，URL 为 `/docs/...`）
+- `docs/zh-CN/` — 简体中文（URL 为 `/zh-CN/docs/...`）
+- `docs/zh-HK/` — 繁体中文（URL 为 `/zh-HK/docs/...`）
 
-在 `docs/.vitepress/theme/components/index.ts` 中导出的组件会全局注册，可直接在 Markdown 中以标签形式使用：
+**以 en 为主**，zh-CN / zh-HK 跟随 en 的结构和内容。新增或修改页面时，三个目录必须同步。
 
-- `<Tabs>` / `<TabItem>` — 代码分组标签页
-- `<TipContainer>` — 提示框
-- `<TryIt>` — API 在线调试
-- `<SDKLinks>` / `<SDK>` — SDK 展示
-- `<Skill>` — Skills 展示页
-- `<HomePage>` — 首页
+### Frontmatter
 
-新增组件需要在 `index.ts` 中 export。
-
-### 私有配套仓库
-
-`../openapi-website-private`（相对本项目）是配套私有仓库，存放不公开的功能实现（如开发者中心）。涉及相关改动时需检查两个仓库是否需要同步。
-
-### Skills
-
-`skills/` contains AI agent skill files. Currently includes skills for the Longbridge terminal:
-
-```
-skills/
-└── longbridge/
-    ├── SKILL.md                   # skill entry point — tool selection and quick reference
-    └── references/
-        ├── cli/overview.md        # CLI usage overview (features, extended hours, etc.)
-        ├── python-sdk/            # Python SDK reference
-        ├── rust-sdk/              # Rust SDK reference
-        ├── llm.md                 # LLM/AI integration
-        └── mcp.md                 # MCP setup
+```yaml
+---
+title: 'Page Title'
+id: category_filename # 例：quote_pull-static
+slug: '/quote/pull/static' # 以 / 开头，对应 URL 路径
+sidebar_position: 3 # 数字越小越靠前
+sidebar_icon: book # 可选：book | zap | cpu | terminal | sparkles
+---
 ```
 
-**Documentation update rules:**
+## Skills
 
-- All CLI docs, SDK references, and skill files for the Longbridge terminal (`../longbridge-terminal`) are maintained here in `skills/longbridge/` — `../longbridge-terminal` no longer has its own `skills/` directory.
-- Skill files should stay high-level. For command flags and output details, defer to the CLI's built-in `--help` — do not copy help text into skill files.
+`skills/longbridge/` 存放 AI Agent 的 Skill 文件。Skill 文件保持高层级描述，命令 flag 和输出细节参考 CLI 的 `--help`，不要复制 help 文本进 Skill。
 
-### 图片/静态资源
+## 关联子模块
 
-静态资源必须上传 CDN 后引用 URL，不要放进项目中。
+本项目通过 submodule 统一管理以下仓库，修改文档时需同步检查：
+
+| 仓库                             | 用途                              | 同步时机                  |
+| -------------------------------- | --------------------------------- | ------------------------- |
+| `longbridge/openapi`             | OpenAPI 规范源（`openapi/` 目录） | API 参数/响应变更时       |
+| `longbridge/openapi-go`          | Go SDK                            | API 方法签名/参数名变更时 |
+| `longbridge/longbridge-terminal` | CLI 二进制                        | CLI 命令/flag 变更时      |
+
+`openapi.yaml`（根目录）是 API Reference 的权威来源，`openapi/` 目录下是各模块的分片 YAML。
+
+## CliCommand 块
+
+在 Docs 中展示 CLI 命令使用 `<CliCommand>` 标签，由 `docs/.vitepress/md-plugins/cli-command.ts` 渲染：
+
+```markdown
+<CliCommand>
+# 注释说明写在命令前面
+longbridge quote TSLA.US
+# 可以有多个示例
+longbridge quote AAPL.US NVDA.US
+</CliCommand>
+```
+
+规则：
+
+- 注释行（`# ...`）放在对应命令**前面**，不用行尾注释
+- 每个 CliCommand 提供 2–4 个示例，使用真实 symbol（优先美股）
+- 命令需实际验证正确后再写入文档（交易类命令除外）
+- 尖括号占位符（如 `<order_id>`）会被 Vue 解析为 HTML tag 导致构建失败，改用数字示例 + 注释说明
+
+## Sidebar 自动生成
+
+由 `docs/.vitepress/theme/utils/gen.ts` 的 `genMarkdowDocs()` 从文件系统自动生成，无需手动维护。子目录需有 `_category_.json`：
+
+```json
+{ "position": 1, "label": "Market Data", "collapsed": false }
+```
+
+## 全局 Vue 组件
+
+在 `docs/.vitepress/theme/components/index.ts` 中导出的组件可直接在 Markdown 中使用：
+
+| 组件                   | 用途                           |
+| ---------------------- | ------------------------------ |
+| `<Tabs>` / `<TabItem>` | 代码分组标签页                 |
+| `<TipContainer>`       | 提示框                         |
+| `<TryIt>`              | API 在线调试                   |
+| `<SDKLinks>` / `<SDK>` | SDK 链接展示                   |
+| `<CliCommand>`         | CLI 命令块（带高亮和安装引导） |
+| `<Skill>`              | AI Skill 展示页                |
+| `<HomePage>`           | 首页                           |
+
+新增组件需在 `index.ts` 中 export。
+
+## 路由重写
+
+`docs/.vitepress/utils.ts` 的 `rewriteMarkdownPath` 处理 URL 生成。`slug` frontmatter 覆盖默认路径：绝对 slug（`/foo`）替换整个路径；相对 slug 相对文件目录解析。
+
+## 静态资源
+
+所有图片/静态文件必须上传 CDN 后引用 URL，不得放入仓库。

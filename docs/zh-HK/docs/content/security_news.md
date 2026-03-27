@@ -12,6 +12,15 @@ headingLevel: 2
 
 獲取指定股票的資訊列表。
 
+<CliCommand>
+# Tesla 最新資訊
+longbridge news TSLA.US
+# Apple 最新資訊
+longbridge news AAPL.US
+# NVDA 最新資訊
+longbridge news NVDA.US
+</CliCommand>
+
 <SDKLinks module="content" klass="ContentContext" method="news" />
 
 ## Request

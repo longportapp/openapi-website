@@ -11,6 +11,10 @@ headingLevel: 2
 
 This API is used to get history order.
 
+<CliCommand>
+longbridge orders --history
+</CliCommand>
+
 <SDKLinks module="trade" klass="TradeContext" method="history_orders" />
 
 ## Request

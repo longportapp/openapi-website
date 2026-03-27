@@ -12,6 +12,15 @@ headingLevel: 2
 
 獲取指定股票的討論列表。
 
+<CliCommand>
+# Tesla 社群討論帖子
+longbridge topics TSLA.US
+# Apple 社群討論帖子
+longbridge topics AAPL.US
+# NVDA 社群討論帖子
+longbridge topics NVDA.US
+</CliCommand>
+
 <SDKLinks module="content" klass="ContentContext" method="topics" />
 
 ## Request

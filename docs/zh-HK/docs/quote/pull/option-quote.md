@@ -7,6 +7,13 @@ sidebar_position: 3
 
 該接口用於獲取美股期權標的的實時行情，包括期權的特有數據。
 
+<CliCommand>
+# AAPL 認購期權 $250 行權價 2026-04-17 到期
+longbridge option-quote AAPL260417C250000.US
+# TSLA 認沽期權 $350 行權價 2026-04-18 到期
+longbridge option-quote TSLA260418P350000.US
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="option_quote" />
 
 :::info

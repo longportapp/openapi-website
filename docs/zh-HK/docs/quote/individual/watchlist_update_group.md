@@ -11,6 +11,15 @@ headingLevel: 2
 
 更新自選股分組
 
+<CliCommand>
+# 向分組添加標的
+longbridge watchlist update <id> --add TSLA.US AAPL.US
+# 從分組移除標的
+longbridge watchlist update <id> --remove NVDA.US
+# 同時添加和移除
+longbridge watchlist update <id> --add TSLA.US --remove AAPL.US
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="update_watchlist_group" />
 
 ## Request

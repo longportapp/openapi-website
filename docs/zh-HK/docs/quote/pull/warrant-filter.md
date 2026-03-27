@@ -7,6 +7,15 @@ sidebar_position: 14
 
 該接口用於獲取輪證行情列表數據，支持按不同字段排序和篩選輪證。
 
+<CliCommand>
+# 騰訊相關窩輪列表
+longbridge warrant-list 700.HK
+# 阿里巴巴相關窩輪列表
+longbridge warrant-list 9988.HK
+# 京東相關窩輪列表
+longbridge warrant-list 9618.HK
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="warrant_list" />
 
 :::info

@@ -7,6 +7,15 @@ sidebar_position: 5
 
 該接口用於獲取標的的盤口數據。
 
+<CliCommand>
+# Tesla Level 2 盤口
+longbridge depth TSLA.US
+# Apple Level 2 盤口
+longbridge depth AAPL.US
+# 騰訊 Level 2 盤口（港股）
+longbridge depth 700.HK
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="depth" />
 
 :::info

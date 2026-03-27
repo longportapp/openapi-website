@@ -7,6 +7,15 @@ sidebar_position: 18
 
 This API is used to obtain the daily capital distribution of security.
 
+<CliCommand>
+# capital distribution snapshot for Tesla (large/medium/small)
+longbridge capital-dist TSLA.US
+# capital distribution snapshot for Apple
+longbridge capital-dist AAPL.US
+# capital distribution snapshot for NVDA
+longbridge capital-dist NVDA.US
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="capital_distribution" />
 
 :::info

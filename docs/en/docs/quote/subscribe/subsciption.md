@@ -7,6 +7,11 @@ sidebar_position: 3
 
 This API is used to obtain the subscription information.
 
+<CliCommand>
+# list active real-time WebSocket subscriptions
+longbridge subscriptions
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="subscriptions" />
 
 :::info

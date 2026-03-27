@@ -143,3 +143,31 @@ html:root {
 .aside-curtain {
   display: none !important;
 }
+
+/* CLI Command block */
+.vp-cli-command h2 {
+  display: flex;
+  align-items: center;
+}
+
+.vp-cli-install-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--vp-c-text-2) !important;
+  text-decoration: none !important;
+  transition: color 0.15s;
+  margin-left: auto;
+}
+
+.vp-cli-install-link::after {
+  content: '↗';
+  font-size: 11px;
+}
+
+.vp-cli-install-link:hover {
+  color: var(--vp-c-text-1) !important;
+}

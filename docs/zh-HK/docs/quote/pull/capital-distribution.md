@@ -7,6 +7,15 @@ sidebar_position: 18
 
 該接口用於獲取標的當日的資金分佈。
 
+<CliCommand>
+# Tesla 資金分佈快照（大/中/小單）
+longbridge capital-dist TSLA.US
+# Apple 資金分佈快照
+longbridge capital-dist AAPL.US
+# NVDA 資金分佈快照
+longbridge capital-dist NVDA.US
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="capital_distribution" />
 
 :::info

@@ -6,6 +6,26 @@ Longbridge Developers is the official developer platform for Longbridge — prov
 
 ---
 
+## Repository structure
+
+```
+/
+├── docs/                        # Site content and VitePress config
+│   ├── .vitepress/              # Theme, components, markdown plugins, locale configs
+│   ├── en/                      # English content (root locale)
+│   ├── zh-CN/                   # Simplified Chinese content
+│   └── zh-HK/                   # Traditional Chinese content
+├── openapi/                     # Submodule: OpenAPI spec + SDK source (openapi, Python, Rust, etc.)
+├── openapi-go/                  # Submodule: Go SDK
+├── longbridge-terminal/         # Submodule: CLI binary source (longbridge)
+├── skills/longbridge/           # AI Skill — knowledge base for AI agents
+├── scripts/                     # Build scripts (llms.txt generation, markdown normalization)
+├── openapi.yaml                 # Canonical API specification (source of truth for API Reference)
+└── CONTRIBUTING.md              # Contribution guidelines for AI agents and humans
+```
+
+---
+
 ## What you can build
 
 - Automated trading strategies and order management
@@ -15,13 +35,13 @@ Longbridge Developers is the official developer platform for Longbridge — prov
 
 ## Access methods
 
-| Method | Best for |
-|--------|----------|
-| [SDK](https://open.longbridge.com/sdk) | Python, Rust, Node.js, Go, Java, C++ apps |
-| [HTTP / WebSocket API](https://open.longbridge.com/api) | Any language, custom integrations |
-| [CLI](https://open.longbridge.com/cli) (`longbridge`) | Terminal workflows, scripting, AI tool-calling |
-| [MCP](https://open.longbridge.com/mcp) | AI coding assistants (Cursor, Claude, ChatGPT, etc.) |
-| [Skill](https://open.longbridge.com/skill) | Give any AI direct knowledge of Longbridge APIs |
+| Method                                                  | Best for                                             |
+| ------------------------------------------------------- | ---------------------------------------------------- |
+| [SDK](https://open.longbridge.com/sdk)                  | Python, Rust, Node.js, Go, Java, C++ apps            |
+| [HTTP / WebSocket API](https://open.longbridge.com/api) | Any language, custom integrations                    |
+| [CLI](https://open.longbridge.com/cli) (`longbridge`)   | Terminal workflows, scripting, AI tool-calling       |
+| [MCP](https://open.longbridge.com/mcp)                  | AI coding assistants (Cursor, Claude, ChatGPT, etc.) |
+| [Skill](https://open.longbridge.com/skill)              | Give any AI direct knowledge of Longbridge APIs      |
 
 ## Quick start
 
@@ -69,11 +89,11 @@ npx skills add longbridge/developers -g -y
 
 ## Market coverage
 
-| Market | Instruments |
-|--------|-------------|
-| Hong Kong | Equities, ETFs, Warrants, CBBCs, Hang Seng Index |
-| United States | Stocks, ETFs, OPRA Options, Nasdaq Index |
-| China A-share | Stocks, ETFs, Index |
+| Market        | Instruments                                      |
+| ------------- | ------------------------------------------------ |
+| Hong Kong     | Equities, ETFs, Warrants, CBBCs, Hang Seng Index |
+| United States | Stocks, ETFs, OPRA Options, Nasdaq Index         |
+| China A-share | Stocks, ETFs, Index                              |
 
 ## Documentation
 
@@ -106,4 +126,22 @@ OpenAPI access is free for Longbridge Integrated Account holders. No additional 
 
 ## Contributing
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md).
+### Local development setup
+
+```bash
+git clone --recurse-submodules https://github.com/longbridge/developers.git
+cd developers
+bun install
+bun run dev
+```
+
+If you already cloned without `--recurse-submodules`:
+
+```bash
+git submodule update --init --recursive
+bun run dev
+```
+
+The dev server starts at `http://localhost:5173` and connects to the canary API. Use `bun run dev:prod` to connect to the production API instead.
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for full contribution guidelines.
