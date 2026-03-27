@@ -16,6 +16,7 @@ interface CategoryConfig {
   label?: string
   collapsible?: boolean
   collapsed?: boolean
+  exclude?: boolean
   link?: string | null | { title: string; slug: string }
   childFileSort?: {
     sortByType: 'ext' | 'dir'
@@ -134,6 +135,9 @@ function generateSidebarItems(
       const subDirPath = path.join(dirPath, dir)
       const subRelativePath = path.join(relativePath, dir)
       const subCategoryConfig = readCategoryConfig(subDirPath)
+
+      if (subCategoryConfig?.exclude) continue
+
       const subItems = generateSidebarItems(subDirPath, subRelativePath, rootPath, depth + 1)
 
       if (subItems.length > 0) {
