@@ -11,7 +11,7 @@ headingLevel: 2
 
 This API is used to withdraw an open order.
 
-<CliCommand>longbridge cancel <order_id></CliCommand>
+<CliCommand>longbridge cancel 693664675163312128</CliCommand>
 
 <SDKLinks module="trade" klass="TradeContext" method="cancel_order" />
 
