@@ -106,4 +106,23 @@ OpenAPI access is free for Longbridge Integrated Account holders. No additional 
 
 ## Contributing
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md).
+### Local development setup
+
+```bash
+git clone --recurse-submodules https://github.com/longbridge/developers.git
+cd developers
+bun install
+bun run dev
+```
+
+If you already cloned without `--recurse-submodules`:
+
+```bash
+git submodule update --init --recursive
+bun install
+bun run dev
+```
+
+The dev server starts at `http://localhost:5173` and connects to the canary API. Use `bun run dev:prod` to connect to the production API instead.
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for full contribution guidelines.
