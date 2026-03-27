@@ -14,7 +14,7 @@ sidebar_position: 20
 <CliCommand>
 longbridge kline TSLA.US  # Tesla 日 K 线（最近 100 根）
 longbridge kline AAPL.US --period week  # Apple 周 K 线
-longbridge kline NVDA.US --period day --count 20  # NVDA 最近20根日K
+longbridge kline NVDA.US --period day --count 20  # NVDA 最近 20 根日 K
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="candlesticks" />
