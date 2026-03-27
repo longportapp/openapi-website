@@ -11,6 +11,8 @@ headingLevel: 2
 
 This API is used to replace order, modify quantity or price.
 
+<CliCommand>longbridge replace <order_id> --qty 200 --price 255.00</CliCommand>
+
 <SDKLinks module="trade" klass="TradeContext" method="replace_order" />
 
 ## Request

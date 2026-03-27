@@ -7,6 +7,12 @@ sidebar_position: 18
 
 该接口用于获取标的当日的资金分布。
 
+<CliCommand>
+longbridge capital-dist TSLA.US  # Tesla 资金分布快照（大/中/小单）
+longbridge capital-dist AAPL.US  # Apple 资金分布快照
+longbridge capital-dist NVDA.US  # NVDA 资金分布快照
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="capital_distribution" />
 
 :::info

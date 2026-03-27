@@ -11,6 +11,8 @@ headingLevel: 2
 
 该接口用于港美股，窝轮，期权的预估最大购买数量。
 
+<CliCommand>longbridge max-qty TSLA.US</CliCommand>
+
 <SDKLinks module="trade" klass="TradeContext" method="estimate_max_purchase_quantity" />
 
 ## Request

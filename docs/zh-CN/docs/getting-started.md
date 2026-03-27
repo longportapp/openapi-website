@@ -54,6 +54,47 @@ SDK 会自动选择接入点；若判断不正确，可设置环境变量 `LONGB
   </TabItem>
 </Tabs>
 
+## CLI 快速入门
+
+如果你不需要写代码，[Longbridge Terminal CLI](/docs/cli) 提供更轻量的接入方式——安装即用，OAuth 一键授权，无需配置环境变量。
+
+### 安装
+
+<Tabs groupId="cli-install">
+  <TabItem value="homebrew" label="macOS (Homebrew)" default>
+
+```bash
+brew install --cask longbridge/tap/longbridge-terminal
+```
+
+  </TabItem>
+  <TabItem value="script" label="Linux / macOS (脚本)">
+
+```bash
+curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
+```
+
+  </TabItem>
+</Tabs>
+
+### 登录
+
+```bash
+longbridge login
+```
+
+浏览器会自动打开授权页面，完成后 Token 自动保存，后续无需重复操作。
+
+### 快速验证
+
+```bash
+longbridge quote AAPL.US TSLA.US    # 实时行情
+longbridge positions                 # 查看持仓
+longbridge --help                    # 查看全部可用命令
+```
+
+查看完整命令列表见 [CLI 参考文档](/docs/cli)。
+
 ## 安装 SDK
 
 :::warning 包名变更

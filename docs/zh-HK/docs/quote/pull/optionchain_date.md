@@ -7,6 +7,11 @@ sidebar_position: 11
 
 該接口用於獲取標的的期權鏈到期日列表。
 
+<CliCommand>
+longbridge option-chain AAPL.US  # AAPL 期權到期日列表
+longbridge option-chain TSLA.US  # TSLA 期權到期日列表
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="option_chain_expiry_date_list" />
 
 :::info

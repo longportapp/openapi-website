@@ -11,6 +11,10 @@ headingLevel: 2
 
 获取标的列表
 
+<CliCommand>
+longbridge security-list  # 美股夜盘可交易标的列表
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="security_list" />
 
 ## Request

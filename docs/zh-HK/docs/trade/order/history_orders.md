@@ -11,6 +11,8 @@ headingLevel: 2
 
 該接口用於獲取歷史訂單。
 
+<CliCommand>longbridge orders --history</CliCommand>
+
 <SDKLinks module="trade" klass="TradeContext" method="history_orders" />
 
 ## Request

@@ -38,6 +38,8 @@ Exceeding the limit returns `429`.
 
 > ⚠️ Rate limit thresholds are for reference only and may be adjusted by the platform at any time.
 
+<CliCommand>longbridge create-topic-reply 6993508780031016960 --body "Great analysis!"</CliCommand>
+
 <SDKLinks module="content" klass="ContentContext" method="create_topic_reply" />
 
 ## Request

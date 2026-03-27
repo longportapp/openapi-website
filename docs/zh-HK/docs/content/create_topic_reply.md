@@ -26,6 +26,8 @@ headingLevel: 2
 
 > ⚠️ 以上頻率限制規則僅供參考，平台可能隨時進行內部調整。
 
+<CliCommand>longbridge create-topic-reply 6993508780031016960 --body "分析得好！"</CliCommand>
+
 <SDKLinks module="content" klass="ContentContext" method="create_topic_reply" />
 
 ## Request

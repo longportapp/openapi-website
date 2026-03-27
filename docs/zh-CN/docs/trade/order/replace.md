@@ -11,6 +11,8 @@ headingLevel: 2
 
 该接口用于修改订单的价格，数量。
 
+<CliCommand>longbridge replace <order_id> --qty 200 --price 255.00</CliCommand>
+
 <SDKLinks module="trade" klass="TradeContext" method="replace_order" />
 
 ## Request

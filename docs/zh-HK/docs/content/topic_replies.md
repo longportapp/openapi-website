@@ -14,6 +14,11 @@ headingLevel: 2
 
 每條回覆包含作者信息、正文（純文本）、互動數據及 `reply_to_id` 字段：`"0"` 表示頂層回覆，其他值表示對指定回覆的嵌套回覆。
 
+<CliCommand>
+longbridge topic-replies 6993508780031016960
+longbridge topic-replies 6993508780031016960 --page 2 --size 20
+</CliCommand>
+
 <SDKLinks module="content" klass="ContentContext" method="list_topic_replies" />
 
 ## Request

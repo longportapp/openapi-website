@@ -12,6 +12,12 @@ headingLevel: 2
 
 Get the topic/discussion list for a specified security.
 
+<CliCommand>
+longbridge topics TSLA.US  # community discussion topics for Tesla
+longbridge topics AAPL.US  # community discussion topics for Apple
+longbridge topics NVDA.US  # community discussion topics for NVDA
+</CliCommand>
+
 <SDKLinks module="content" klass="ContentContext" method="topics" />
 
 ## Request

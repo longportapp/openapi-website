@@ -11,6 +11,10 @@ headingLevel: 2
 
 删除自选股分组
 
+<CliCommand>
+longbridge watchlist delete <id>  # 删除指定分组（ID 通过 longbridge watchlist 查询）
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="delete_watchlist_group" />
 
 ## Request

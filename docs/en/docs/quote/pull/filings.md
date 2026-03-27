@@ -12,6 +12,12 @@ headingLevel: 2
 
 Get the filings list for a specified security.
 
+<CliCommand>
+longbridge filings AAPL.US  # regulatory filings for Apple
+longbridge filings TSLA.US  # regulatory filings for Tesla
+longbridge filings NVDA.US  # regulatory filings for NVDA
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="filings" />
 
 ## Request

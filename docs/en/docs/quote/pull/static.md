@@ -7,6 +7,12 @@ sidebar_position: 1
 
 This API is used to obtain the basic information of securities.
 
+<CliCommand>
+longbridge static TSLA.US  # static info for Tesla (name, lot size, shares, etc.)
+longbridge static AAPL.US NVDA.US  # static info for multiple US stocks
+longbridge static TSLA.US 700.HK  # static info for US and HK stocks
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="static_info" />
 
 :::info

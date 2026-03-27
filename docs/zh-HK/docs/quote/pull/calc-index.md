@@ -7,6 +7,12 @@ sidebar_position: 19
 
 該接口用於獲取標的計算指標數據，根據請求指定的計算指標返回數據。
 
+<CliCommand>
+longbridge calc-index TSLA.US NVDA.US  # PE、PB、EPS 等核心指標
+longbridge calc-index AAPL.US --index pe,pb,eps,turnover_rate  # 指定查詢的指標
+longbridge calc-index TSLA.US --index pe,total_market_value  # 市值相關指標
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="calc_indexes" go="CalcIndex" />
 
 :::info

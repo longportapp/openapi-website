@@ -12,6 +12,8 @@ headingLevel: 2
 
 Get the list of topics I have published.
 
+<CliCommand>longbridge my-topics</CliCommand>
+
 <SDKLinks module="content" klass="ContentContext" method="topics_mine" />
 
 ## Request

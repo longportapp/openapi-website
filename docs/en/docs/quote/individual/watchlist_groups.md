@@ -11,6 +11,10 @@ headingLevel: 2
 
 Get watched groups
 
+<CliCommand>
+longbridge watchlist  # list all watchlist groups and their symbols
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="watchlist" />
 
 ## Request

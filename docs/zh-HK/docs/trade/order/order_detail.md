@@ -11,6 +11,8 @@ headingLevel: 2
 
 該接口用於訂單詳情查詢。
 
+<CliCommand>longbridge order <order_id></CliCommand>
+
 <SDKLinks module="trade" klass="TradeContext" method="order_detail" />
 
 ## Request

@@ -11,6 +11,8 @@ headingLevel: 2
 
 該接口用於訂單撤銷。
 
+<CliCommand>longbridge cancel <order_id></CliCommand>
+
 <SDKLinks module="trade" klass="TradeContext" method="cancel_order" />
 
 ## Request

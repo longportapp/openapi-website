@@ -6,6 +6,12 @@ sidebar_position: 22
 
 该接口用于获取历史市场温度。
 
+<CliCommand>
+longbridge market-temp HK --history --start 2025-01-01 --end 2025-03-31  # 港股 2025 年 Q1 历史温度
+longbridge market-temp US --history --start 2025-01-01 --end 2025-01-31  # 美股 2025 年 1 月历史温度
+longbridge market-temp CN --history --start 2025-01-01 --end 2025-06-30  # A 股 2025 年上半年历史温度
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="history_market_temperature" />
 
 ## Request

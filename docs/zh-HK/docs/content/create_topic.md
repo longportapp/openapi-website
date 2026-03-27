@@ -29,6 +29,11 @@ headingLevel: 2
 
 > ⚠️ 以上頻率限制規則僅供參考，平台可能隨時進行內部調整。
 
+<CliCommand>
+longbridge create-topic TSLA.US "Tesla Q1 財報分析"  # 發佈 Tesla 相關話題
+longbridge create-topic AAPL.US "Apple WWDC 前瞻"  # 發佈 Apple 相關話題
+</CliCommand>
+
 <SDKLinks module="content" klass="ContentContext" method="create_topic" />
 
 ## Request

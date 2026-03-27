@@ -11,6 +11,10 @@ headingLevel: 2
 
 Retrieve the List of Securities
 
+<CliCommand>
+longbridge security-list  # list of US overnight-eligible securities
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="security_list" />
 
 ### Request

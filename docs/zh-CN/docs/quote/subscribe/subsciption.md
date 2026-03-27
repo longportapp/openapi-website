@@ -7,6 +7,10 @@ sidebar_position: 3
 
 该接口用于获取当前连接已订阅的标的行情。
 
+<CliCommand>
+longbridge subscriptions  # 查看当前 WebSocket 实时订阅状态
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="subscriptions" />
 
 :::info

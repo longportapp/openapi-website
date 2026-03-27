@@ -11,6 +11,12 @@ headingLevel: 2
 
 Update watched group
 
+<CliCommand>
+longbridge watchlist update <id> --add TSLA.US AAPL.US  # add symbols to a group
+longbridge watchlist update <id> --remove NVDA.US  # remove a symbol from a group
+longbridge watchlist update <id> --add TSLA.US --remove AAPL.US  # add and remove at the same time
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="update_watchlist_group" />
 
 ## Request

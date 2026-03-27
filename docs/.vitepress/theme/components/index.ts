@@ -1,3 +1,4 @@
+export { default as CliCommand } from './CliCommand.vue'
 export { default as Tabs } from './Tabs.vue'
 export { default as TabItem } from './TabItem.vue'
 export { default as TipContainer } from './TipContainer.vue'

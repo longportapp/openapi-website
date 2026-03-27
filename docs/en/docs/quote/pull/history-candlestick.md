@@ -7,6 +7,12 @@ sidebar_position: 10
 
 This API is used to obtain the history candlestick data of security.
 
+<CliCommand>
+longbridge kline-history TSLA.US --start 2025-01-01 --end 2025-03-31  # Q1 2025 daily bars
+longbridge kline-history AAPL.US --start 2024-01-01 --end 2024-12-31 --period week  # full year 2024 weekly bars
+longbridge kline-history NVDA.US --start 2025-01-01 --end 2025-12-31  # full year 2025 daily bars
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="history_candlesticks_by_offset" />
 
 :::info

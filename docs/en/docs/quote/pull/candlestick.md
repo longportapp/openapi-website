@@ -11,6 +11,12 @@ This API is used to obtain the candlestick data of security.
 Note: This interface can only retrieve the last 1000 candlesticks. To obtain longer historical data, please visit the interface: Get Security History Candlesticks.
 :::
 
+<CliCommand>
+longbridge kline TSLA.US  # daily candlestick for Tesla (last 100 bars)
+longbridge kline AAPL.US --period week  # weekly candlestick for Apple
+longbridge kline NVDA.US --period day --count 20  # last 20 daily bars for NVDA
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="candlesticks" />
 
 :::info

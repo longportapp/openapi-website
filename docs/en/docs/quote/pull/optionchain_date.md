@@ -7,6 +7,11 @@ sidebar_position: 11
 
 This API is used to obtain the the list of expiration dates of option chain
 
+<CliCommand>
+longbridge option-chain AAPL.US  # list all expiry dates for AAPL options
+longbridge option-chain TSLA.US  # list all expiry dates for TSLA options
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="option_chain_expiry_date_list" />
 
 :::info

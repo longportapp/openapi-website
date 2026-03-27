@@ -26,6 +26,8 @@ headingLevel: 2
 
 > ⚠️ 以上频率限制规则仅供参考，平台可能随时进行内部调整。
 
+<CliCommand>longbridge create-topic-reply 6993508780031016960 --body "分析得很好！"</CliCommand>
+
 <SDKLinks module="content" klass="ContentContext" method="create_topic_reply" />
 
 ## Request

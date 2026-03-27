@@ -7,6 +7,11 @@ sidebar_position: 4
 
 This API is used to obtain the real-time quotes of HK warrants, including the warrant-specific data.
 
+<CliCommand>
+longbridge warrant-quote 25228.HK  # real-time quote for a Tencent-linked warrant
+longbridge warrant-quote 24687.HK  # real-time quote for another Tencent-linked warrant
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="warrant_quote" />
 
 :::info

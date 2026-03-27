@@ -7,6 +7,12 @@ sidebar_position: 9
 
 該接口用於獲取標的的當日分時數據。
 
+<CliCommand>
+longbridge intraday TSLA.US  # Tesla 今日分時數據
+longbridge intraday AAPL.US  # Apple 今日分時數據
+longbridge intraday 700.HK  # 騰訊今日分時數據
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="intraday" />
 
 :::info

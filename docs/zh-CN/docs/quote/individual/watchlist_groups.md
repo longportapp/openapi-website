@@ -11,6 +11,10 @@ headingLevel: 2
 
 获取自选股分组
 
+<CliCommand>
+longbridge watchlist  # 查看所有自选股分组及标的
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="watchlist" />
 
 

@@ -7,6 +7,12 @@ sidebar_position: 16
 
 This API is used to obtain the trading days of the market.
 
+<CliCommand>
+longbridge trading-days HK  # upcoming HK trading days
+longbridge trading-days US  # upcoming US trading days
+longbridge trading-days CN  # upcoming A-share trading days
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="trading_days" />
 
 :::info

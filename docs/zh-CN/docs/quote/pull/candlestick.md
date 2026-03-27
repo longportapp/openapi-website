@@ -11,6 +11,12 @@ sidebar_position: 20
 注意：本接口只能获取到最近 1000 根 K 线，如需获取较长的历史数据，请访问接口：获取标的历史 K 线。
 :::
 
+<CliCommand>
+longbridge kline TSLA.US  # Tesla 日K线（最近100根）
+longbridge kline AAPL.US --period week  # Apple 周K线
+longbridge kline NVDA.US --period day --count 20  # NVDA 最近20根日K
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="candlesticks" />
 
 :::info

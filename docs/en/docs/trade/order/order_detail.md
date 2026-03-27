@@ -11,6 +11,8 @@ headingLevel: 2
 
 This API is used for order detail query
 
+<CliCommand>longbridge order <order_id></CliCommand>
+
 <SDKLinks module="trade" klass="TradeContext" method="order_detail" />
 
 ## Request

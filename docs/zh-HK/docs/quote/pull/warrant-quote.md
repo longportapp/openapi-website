@@ -7,6 +7,11 @@ sidebar_position: 4
 
 該接口用於獲取港股輪證標的的實時行情，包括輪證的特有數據。
 
+<CliCommand>
+longbridge warrant-quote 25228.HK  # 騰訊相關窩輪實時行情
+longbridge warrant-quote 24687.HK  # 另一隻騰訊相關窩輪實時行情
+</CliCommand>
+
 <SDKLinks module="quote" klass="QuoteContext" method="warrant_quote" />
 
 :::info
