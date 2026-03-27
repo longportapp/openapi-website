@@ -35,13 +35,13 @@ Longbridge Developers is the official developer platform for Longbridge — prov
 
 ## Access methods
 
-| Method | Best for |
-|--------|----------|
-| [SDK](https://open.longbridge.com/sdk) | Python, Rust, Node.js, Go, Java, C++ apps |
-| [HTTP / WebSocket API](https://open.longbridge.com/api) | Any language, custom integrations |
-| [CLI](https://open.longbridge.com/cli) (`longbridge`) | Terminal workflows, scripting, AI tool-calling |
-| [MCP](https://open.longbridge.com/mcp) | AI coding assistants (Cursor, Claude, ChatGPT, etc.) |
-| [Skill](https://open.longbridge.com/skill) | Give any AI direct knowledge of Longbridge APIs |
+| Method                                                  | Best for                                             |
+| ------------------------------------------------------- | ---------------------------------------------------- |
+| [SDK](https://open.longbridge.com/sdk)                  | Python, Rust, Node.js, Go, Java, C++ apps            |
+| [HTTP / WebSocket API](https://open.longbridge.com/api) | Any language, custom integrations                    |
+| [CLI](https://open.longbridge.com/cli) (`longbridge`)   | Terminal workflows, scripting, AI tool-calling       |
+| [MCP](https://open.longbridge.com/mcp)                  | AI coding assistants (Cursor, Claude, ChatGPT, etc.) |
+| [Skill](https://open.longbridge.com/skill)              | Give any AI direct knowledge of Longbridge APIs      |
 
 ## Quick start
 
@@ -89,11 +89,11 @@ npx skills add longbridge/developers -g -y
 
 ## Market coverage
 
-| Market | Instruments |
-|--------|-------------|
-| Hong Kong | Equities, ETFs, Warrants, CBBCs, Hang Seng Index |
-| United States | Stocks, ETFs, OPRA Options, Nasdaq Index |
-| China A-share | Stocks, ETFs, Index |
+| Market        | Instruments                                      |
+| ------------- | ------------------------------------------------ |
+| Hong Kong     | Equities, ETFs, Warrants, CBBCs, Hang Seng Index |
+| United States | Stocks, ETFs, OPRA Options, Nasdaq Index         |
+| China A-share | Stocks, ETFs, Index                              |
 
 ## Documentation
 
@@ -139,7 +139,6 @@ If you already cloned without `--recurse-submodules`:
 
 ```bash
 git submodule update --init --recursive
-bun install
 bun run dev
 ```
 
