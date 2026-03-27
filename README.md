@@ -6,14 +6,23 @@ Longbridge Developers is the official developer platform for Longbridge — prov
 
 ---
 
-- [What you can build](#what-you-can-build)
-- [Access methods](#access-methods)
-- [Quick start](#quick-start)
-- [Market coverage](#market-coverage)
-- [Documentation](#documentation)
-- [LLM-friendly docs](#llm-friendly-docs)
-- [Pricing](#pricing)
-- [Contributing](#contributing)
+## Repository structure
+
+```
+/
+├── docs/                        # Site content and VitePress config
+│   ├── .vitepress/              # Theme, components, markdown plugins, locale configs
+│   ├── en/                      # English content (root locale)
+│   ├── zh-CN/                   # Simplified Chinese content
+│   └── zh-HK/                   # Traditional Chinese content
+├── openapi/                     # Submodule: OpenAPI spec + SDK source (openapi, Python, Rust, etc.)
+├── openapi-go/                  # Submodule: Go SDK
+├── longbridge-terminal/         # Submodule: CLI binary source (longbridge)
+├── skills/longbridge/           # AI Skill — knowledge base for AI agents
+├── scripts/                     # Build scripts (llms.txt generation, markdown normalization)
+├── openapi.yaml                 # Canonical API specification (source of truth for API Reference)
+└── CONTRIBUTING.md              # Contribution guidelines for AI agents and humans
+```
 
 ---
 
