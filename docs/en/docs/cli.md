@@ -143,6 +143,15 @@ longbridge fund-positions                              # Fund positions
 longbridge executions                                  # Trade executions (fills)
 ```
 
+### Account statements
+
+```bash
+longbridge statement list                                                       # List recent daily statements
+longbridge statement list --type monthly                                        # List monthly statements
+longbridge statement export --file-key <KEY> --section equity_holdings          # Export a section as Markdown to stdout
+longbridge statement export --file-key <KEY> --section stock_trades -o trades.csv  # Export to CSV file
+```
+
 ### Symbol format
 
 ```

@@ -35,6 +35,10 @@ longbridge news-detail <id>         # full article content
 longbridge filing-detail <id>       # regulatory filing (earnings reports, etc.)
 longbridge topics SYMBOL.US         # community discussion
 longbridge market-temp              # market sentiment index (0–100)
+
+# Account statements
+longbridge statement list           # list available statements
+longbridge statement export --file-key <KEY> --section asset equity_holdings  # account summary
 ```
 
 Only fall back to WebSearch when Longbridge news is insufficient (e.g., breaking news not yet indexed, macro events unrelated to a specific symbol).
@@ -77,6 +81,7 @@ Add Longbridge API docs to IDE/RAG       LLMs.txt / Markdown API
 ### CLI (Terminal)
 
 - **Overview** — install, auth, output formats, patterns: [references/cli/overview.md](references/cli/overview.md)
+- **Statement** — query and export account statements: [references/cli/statement.md](references/cli/statement.md)
 
 **Always use `longbridge --help` to list available commands, and `longbridge <command> --help` for specific options and flags.** Do not rely on hardcoded documentation — the CLI's built-in help is always up-to-date.
 
