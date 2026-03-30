@@ -143,6 +143,15 @@ longbridge fund-positions                              # 基金持仓
 longbridge executions                                  # 成交记录
 ```
 
+### 账户结单
+
+```bash
+longbridge statement list                                                       # 列出最近的日结单
+longbridge statement list --type monthly                                        # 列出月结单
+longbridge statement export --file-key <KEY> --section equity_holdings          # 导出某个板块为 Markdown 到终端
+longbridge statement export --file-key <KEY> --section stock_trades -o trades.csv  # 导出为 CSV 文件
+```
+
 ### 标的格式
 
 ```

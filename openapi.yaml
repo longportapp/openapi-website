@@ -489,6 +489,9 @@ tags:
   - name: Trade Execution & Order Management
     x-name-zh: 交易与订单管理
     description: Full order lifecycle management including order detail queries, today's and historical order queries, today's and historical execution reports, order modification, order cancellation, and pre-order maximum purchasable quantity estimation.
+  - name: Statement
+    x-name-zh: 结单
+    description: Query and download account statements (daily or monthly). Statements contain detailed breakdowns of assets, holdings, trades, fees, and corporate actions.
 security:
   - oauth2:
       - openapi
@@ -1109,6 +1112,118 @@ paths:
                           cost_net_asset_value: '1.1000'
                           net_asset_value_day: '1774310400'
                           currency: HKD
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/statement/list:
+    get:
+      operationId: list_statements
+      summary: List Statements
+      x-summary-zh: 查询结单列表
+      description: |
+        Query available account statements (daily or monthly). Returns a list of statement
+        dates and file keys that can be used with the download endpoint.
+      x-description-zh: 查询可用的账户结单（日结单或月结单），返回结单日期和文件标识列表，可用于下载接口。
+      tags:
+        - Statement
+      parameters:
+        - name: statement_type
+          in: query
+          required: false
+          description: 'Statement type: 1 = daily (default), 2 = monthly.'
+          schema:
+            type: integer
+            enum: [1, 2]
+            default: 1
+        - name: page
+          in: query
+          required: false
+          description: Page number for pagination.
+          schema:
+            type: integer
+        - name: page_size
+          in: query
+          required: false
+          description: Number of results per page.
+          schema:
+            type: integer
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge statement list
+            longbridge statement list --type monthly
+            longbridge statement list --start-date 20260101 --limit 10
+      responses:
+        '200':
+          description: Statement list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    date:
+                      type: string
+                      description: Statement date (string, e.g. "20260327").
+                    file_key:
+                      type: string
+                      description: File key used to request the download URL.
+              example:
+                - date: "20260327"
+                  file_key: "/statement_data/data/lb/1/20260327/10000104.json"
+                - date: "20260324"
+                  file_key: "/statement_data/data/lb/1/20260324/10000104.json"
+                - date: "20260323"
+                  file_key: "/statement_data/data/lb/1/20260323/10000104.json"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/statement/download:
+    get:
+      operationId: get_statement_download_url
+      summary: Get Statement Download URL
+      x-summary-zh: 获取结单下载地址
+      description: |
+        Get a presigned download URL for a specific statement file. The URL returns a JSON
+        document containing the full statement content with all sections.
+      x-description-zh: 获取指定结单文件的预签名下载地址，返回包含结单全部板块的 JSON 文档。
+      tags:
+        - Statement
+      parameters:
+        - name: file_key
+          in: query
+          required: true
+          description: File key obtained from the list statements endpoint.
+          schema:
+            type: string
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge statement export --file-key abc123xyz456 --section equity_holdings
+            longbridge statement export --file-key abc123xyz456 --section stock_trades -o trades.csv
+            longbridge statement export --file-key abc123xyz456 --all -o ./report/
+      responses:
+        '200':
+          description: Download URL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    description: Presigned URL to download the statement JSON.
+              example:
+                url: "https://storage.example.com/statements/abc123xyz456.json?X-Amz-Signature=..."
         default:
           description: Unexpected error
           content:
