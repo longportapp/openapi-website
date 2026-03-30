@@ -1420,7 +1420,7 @@ grep -rl "news-detail\|create-topic\|topic-detail\|topic-replies\|my-topics\|fil
 
 - [ ] **Step 2: Update each file**
 
-For each file returned, apply the substitutions from the table in Task 6 Step 1. These are `<CliCommand>` blocks; only the command strings inside them need updating. The surrounding prose/descriptions remain unchanged.
+For each file returned, apply the substitutions from the table in Task 6 Step 1. These are `CliCommand` blocks; only the command strings inside them need updating. The surrounding prose/descriptions remain unchanged.
 
 Key files known to contain old commands:
 - `docs/{en,zh-CN,zh-HK}/docs/cli.md` — main CLI reference page
