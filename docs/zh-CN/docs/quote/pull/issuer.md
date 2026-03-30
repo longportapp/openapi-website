@@ -9,7 +9,7 @@ sidebar_position: 13
 
 <CliCommand>
 # 港股权证发行商完整列表
-longbridge warrant-issuers
+longbridge warrant issuers
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="warrant_issuers" />

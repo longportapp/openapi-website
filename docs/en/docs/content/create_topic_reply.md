@@ -39,7 +39,7 @@ Exceeding the limit returns `429`.
 > ⚠️ Rate limit thresholds are for reference only and may be adjusted by the platform at any time.
 
 <CliCommand>
-longbridge create-topic-reply 6993508780031016960 --body "Great analysis!"
+longbridge topic create-reply 6993508780031016960 --body "Great analysis!"
 </CliCommand>
 
 <SDKLinks module="content" klass="ContentContext" method="create_topic_reply" />
@@ -73,10 +73,10 @@ longbridge create-topic-reply 6993508780031016960 --body "Great analysis!"
 
 ```bash
 # Top-level reply
-longbridge create-topic-reply 6993508780031016960 --body "Great analysis!"
+longbridge topic create-reply 6993508780031016960 --body "Great analysis!"
 
 # Nested reply
-longbridge create-topic-reply 6993508780031016960 --body "I agree." --reply-to 7001234567890123456
+longbridge topic create-reply 6993508780031016960 --body "I agree." --reply-to 7001234567890123456
 ```
 
   </TabItem>

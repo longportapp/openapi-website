@@ -82,42 +82,42 @@ longbridge quote TSLA.US 700.HK                                       # Real-tim
 longbridge depth TSLA.US                                              # Level 2 order book depth
 longbridge trades TSLA.US [--count 50]                                # Recent tick-by-tick trades
 longbridge kline TSLA.US [--period day] [--count 100]                 # OHLCV candlestick data
-longbridge kline-history TSLA.US --start 2024-01-01 --end 2024-12-31 # Historical candlestick data
+longbridge kline history TSLA.US --start 2024-01-01 --end 2024-12-31 # Historical candlestick data
 longbridge intraday TSLA.US                                           # Intraday minute-by-minute data
 longbridge static TSLA.US                                             # Static reference info
 longbridge calc-index TSLA.US --index pe,pb,eps                       # Financial indexes (PE, PB, EPS, etc.)
-longbridge capital-flow TSLA.US                                       # Intraday capital flow time series
-longbridge capital-dist TSLA.US                                       # Capital distribution snapshot
+longbridge capital flow TSLA.US                                       # Intraday capital flow time series
+longbridge capital dist TSLA.US                                       # Capital distribution snapshot
 longbridge market-temp [HK|US|CN|SG]                                  # Market sentiment temperature (0–100)
 ```
 
 ### Company filings & announcements
 
 ```bash
-longbridge filings AAPL.US [--count 20]          # Company filings and announcements (earnings, disclosures, SEC filings, etc.)
-longbridge filing-detail AAPL.US <id>            # Full Markdown content of a filing; --file-index N for multi-file filings (e.g. 8-K exhibit)
+longbridge filing list AAPL.US [--count 20]          # Company filings and announcements (earnings, disclosures, SEC filings, etc.)
+longbridge filing detail AAPL.US <id>            # Full Markdown content of a filing; --file-index N for multi-file filings (e.g. 8-K exhibit)
 ```
 
 ### Community content
 
 ```bash
-longbridge my-topics                           # My published topics (all types)
-longbridge my-topics --type article            # Articles only
-longbridge my-topics --type post --size 10     # Short posts, 10 per page
-longbridge my-topics --page 2                  # Paginate
-longbridge create-topic --body "Bullish on 700.HK"                                    # Short post (plain text)
-longbridge create-topic --body "NVDA GTC highlights" --tickers NVDA.US                # With related tickers
-longbridge create-topic --title "My Analysis" --body "$(cat post.md)" --type article  # Article from file
+longbridge topic mine                           # My published topics (all types)
+longbridge topic mine --type article            # Articles only
+longbridge topic mine --type post --size 10     # Short posts, 10 per page
+longbridge topic mine --page 2                  # Paginate
+longbridge topic create --body "Bullish on 700.HK"                                    # Short post (plain text)
+longbridge topic create --body "NVDA GTC highlights" --tickers NVDA.US                # With related tickers
+longbridge topic create --title "My Analysis" --body "$(cat post.md)" --type article  # Article from file
 ```
 
 ### Options & warrants
 
 ```bash
-longbridge option-quote AAPL240119C190000         # Real-time option quotes
-longbridge option-chain AAPL.US                   # Option chain: all expiry dates
-longbridge option-chain AAPL.US --date 2024-01-19 # Strike prices for a given expiry
-longbridge warrant-quote 12345.HK                 # Real-time warrant quotes
-longbridge warrant-list 700.HK                    # Warrants linked to an underlying
+longbridge option quote AAPL240119C190000         # Real-time option quotes
+longbridge option chain AAPL.US                   # Option chain: all expiry dates
+longbridge option chain AAPL.US --date 2024-01-19 # Strike prices for a given expiry
+longbridge warrant quote 12345.HK                 # Real-time warrant quotes
+longbridge warrant list 700.HK                    # Warrants linked to an underlying
 ```
 
 ### Watchlist
@@ -219,13 +219,13 @@ AI can use `filings` to discover filing IDs, then `filing-detail` to pull the fu
 ```
 claude> Compare TSLA and NVDA Q4 2025 earnings
 
-⏺ Bash(longbridge filings TSLA.US & longbridge filings NVDA.US & wait)
+⏺ Bash(longbridge filing list TSLA.US & longbridge filing list NVDA.US & wait)
   ⎿  TSLA.US  610186794100660481  10-K   2025-02-26  Annual Report FY2025
      NVDA.US  620129220687041793  8-K    2026-02-26  Q4 FY2026 Earnings Release
      … +18 filings
 
-⏺ Bash(longbridge filing-detail TSLA.US 610186794100660481 --file-index 0 &
-        longbridge filing-detail NVDA.US 620129220687041793 --file-index 1 & wait)
+⏺ Bash(longbridge filing detail TSLA.US 610186794100660481 --file-index 0 &
+        longbridge filing detail NVDA.US 620129220687041793 --file-index 1 & wait)
   ⎿  [TSLA 10-K FY2025 / NVDA 8-K Exhibit 99.1 Q4 FY2026 loaded]
 
 ⏺ Source: official filings via Longbridge filings + filing-detail

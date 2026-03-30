@@ -9,9 +9,9 @@ sidebar_position: 3
 
 <CliCommand>
 # AAPL 看涨期权 $250 行权价 2026-04-17 到期
-longbridge option-quote AAPL260417C250000.US
+longbridge option quote AAPL260417C250000.US
 # TSLA 看跌期权 $350 行权价 2026-04-18 到期
-longbridge option-quote TSLA260418P350000.US
+longbridge option quote TSLA260418P350000.US
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="option_quote" />

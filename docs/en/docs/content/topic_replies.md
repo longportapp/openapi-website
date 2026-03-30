@@ -15,8 +15,8 @@ Get a paginated list of replies for a specific topic.
 Each reply includes author info, body (plain text), engagement counts, and a `reply_to_id` field: `"0"` indicates a top-level reply; any other value identifies the parent reply for nested replies.
 
 <CliCommand>
-longbridge topic-replies 6993508780031016960
-longbridge topic-replies 6993508780031016960 --page 2 --size 20
+longbridge topic replies 6993508780031016960
+longbridge topic replies 6993508780031016960 --page 2 --size 20
 </CliCommand>
 
 <SDKLinks module="content" klass="ContentContext" method="list_topic_replies" />
@@ -49,8 +49,8 @@ longbridge topic-replies 6993508780031016960 --page 2 --size 20
   <TabItem value="cli" label="CLI" default>
 
 ```bash
-longbridge topic-replies 6993508780031016960
-longbridge topic-replies 6993508780031016960 --page 2 --size 20
+longbridge topic replies 6993508780031016960
+longbridge topic replies 6993508780031016960 --page 2 --size 20
 ```
 
   </TabItem>

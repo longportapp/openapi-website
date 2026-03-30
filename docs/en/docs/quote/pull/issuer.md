@@ -9,7 +9,7 @@ This API is used to obtain the warrant issuer IDs data (which can be synchronize
 
 <CliCommand>
 # list all warrant issuers in the HK market
-longbridge warrant-issuers
+longbridge warrant issuers
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="warrant_issuers" />

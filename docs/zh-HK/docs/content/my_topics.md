@@ -13,7 +13,7 @@ headingLevel: 2
 獲取當前登錄用戶發布的討論列表，支持分頁與類型過濾。
 
 <CliCommand>
-longbridge my-topics
+longbridge topic mine
 </CliCommand>
 
 <SDKLinks module="content" klass="ContentContext" method="topics_mine" />
@@ -41,11 +41,11 @@ longbridge my-topics
   <TabItem value="cli" label="CLI" default>
 
 ```bash
-longbridge my-topics                           # 全部類型（默認每頁 50 條）
-longbridge my-topics --type article            # 僅長文
-longbridge my-topics --type post --size 10     # 短帖，每頁 10 條
-longbridge my-topics --page 2                  # 第二頁
-longbridge my-topics --format json             # JSON 格式，適合腳本處理
+longbridge topic mine                           # 全部類型（默認每頁 50 條）
+longbridge topic mine --type article            # 僅長文
+longbridge topic mine --type post --size 10     # 短帖，每頁 10 條
+longbridge topic mine --page 2                  # 第二頁
+longbridge topic mine --format json             # JSON 格式，適合腳本處理
 ```
 
   </TabItem>

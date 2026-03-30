@@ -31,9 +31,9 @@ Stock symbols mentioned in the body (e.g. `700.HK`, `TSLA.US`) are automatically
 
 <CliCommand>
 # publish a topic for Tesla
-longbridge create-topic TSLA.US "Tesla Q1 earnings analysis"
+longbridge topic create TSLA.US "Tesla Q1 earnings analysis"
 # publish a topic for Apple
-longbridge create-topic AAPL.US "Apple WWDC preview"
+longbridge topic create AAPL.US "Apple WWDC preview"
 </CliCommand>
 
 <SDKLinks module="content" klass="ContentContext" method="create_topic" />
@@ -64,19 +64,19 @@ longbridge create-topic AAPL.US "Apple WWDC preview"
 
 ```bash
 # Short post — plain text (default). Markdown is NOT rendered.
-longbridge create-topic --body "Bullish on 700.HK today"
+longbridge topic create --body "Bullish on 700.HK today"
 
 # Short post with related tickers
-longbridge create-topic --body "NVDA GTC highlights" --tickers NVDA.US,700.HK
+longbridge topic create --body "NVDA GTC highlights" --tickers NVDA.US,700.HK
 
 # Article — Markdown body, title is required
-longbridge create-topic --title "My Analysis" --body "**Bullish** on 700.HK because..." --type article
+longbridge topic create --title "My Analysis" --body "**Bullish** on 700.HK because..." --type article
 
 # Article from a Markdown file
-longbridge create-topic --title "Q4 Earnings Preview" --body "$(cat analysis.md)" --type article
+longbridge topic create --title "Q4 Earnings Preview" --body "$(cat analysis.md)" --type article
 
 # JSON output
-longbridge create-topic --body "Test post" --format json
+longbridge topic create --body "Test post" --format json
 ```
 
   </TabItem>
