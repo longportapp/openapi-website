@@ -39,15 +39,18 @@ longbridge statement list  --start-date 20250101 --limit 10
 ### `statement export` — Export statement sections
 
 ```bash
-longbridge statement export --file-key <KEY> --section <SECTION>... [--format csv|md] [-o <OUTPUT>]
+longbridge statement export --file-key <KEY> [--section <SECTION>... | --all] [--export-format csv|md] [-o <OUTPUT>]
 ```
 
-| Flag           | Required | Description                                                                                    |
-| -------------- | -------- | ---------------------------------------------------------------------------------------------- |
-| `--file-key`   | Yes      | File key obtained from `statement list`                                                        |
-| `--section`    | Yes      | One or more sections to export (see table below)                                               |
-| `--format`     | No       | `csv` or `md`. Defaults to `md` when `-o` is omitted, `csv` when `-o` is provided.             |
-| `-o, --output` | No       | Output path. Omit to print to stdout. Single section: file path. Multiple sections: directory. |
+| Flag              | Required | Description                                                                                    |
+| ----------------- | -------- | ---------------------------------------------------------------------------------------------- |
+| `--file-key`      | Yes      | File key obtained from `statement list`                                                        |
+| `--section`       | *        | One or more sections to export (see table below). Conflicts with `--all`.                      |
+| `--all`           | *        | Export all sections, skipping any section whose data is empty. Conflicts with `--section`.      |
+| `--export-format` | No       | `csv` or `md`. Defaults to `md` when `-o` is omitted, `csv` when `-o` is provided.             |
+| `-o, --output`    | No       | Output path. Omit to print to stdout. Single section: file path. Multiple sections: directory. |
+
+> \* Either `--section` or `--all` must be provided (but not both).
 
 **Print markdown to stdout (default without `-o`):**
 
@@ -73,10 +76,22 @@ longbridge statement export --file-key abc123 \
 #   ./statement-2025-03/interests.csv
 ```
 
+**Export all non-empty sections to stdout:**
+
+```bash
+longbridge statement export --file-key abc123 --all
+```
+
+**Export all non-empty sections as CSV files to a directory:**
+
+```bash
+longbridge statement export --file-key abc123 --all -o ./statement-2025-03/
+```
+
 **Force markdown format to file:**
 
 ```bash
-longbridge statement export --file-key abc123 --section asset --format md -o asset.md
+longbridge statement export --file-key abc123 --section asset --export-format md -o asset.md
 ```
 
 ## StatementSection Reference
@@ -113,7 +128,7 @@ longbridge statement export --file-key abc123 --section asset --format md -o ass
 | Check margin interest / financing costs        | `interests`                                                |
 | Review lending and custody costs               | `lending_fees` `custodian_fees`                            |
 | Check corporate actions (dividends, splits)    | `corps`                                                    |
-| Full statement export                          | all sections                                               |
+| Full statement export                          | `--all`                                                    |
 
 ## Common Recipes
 
@@ -123,10 +138,11 @@ longbridge statement list
 longbridge statement export --file-key <KEY> \
   --section asset equity_holdings stock_trades account_balance_changes
 
-# Save daily report as CSV files
-longbridge statement export --file-key <KEY> \
-  --section asset equity_holdings stock_trades account_balance_changes \
-  -o ./daily-report/
+# Export everything (empty sections are auto-skipped)
+longbridge statement export --file-key <KEY> --all
+
+# Save full statement as CSV files
+longbridge statement export --file-key <KEY> --all -o ./daily-report/
 
 # Export only interest and fee sections from a monthly statement
 longbridge statement list --type monthly

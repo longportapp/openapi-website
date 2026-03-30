@@ -39,6 +39,7 @@ longbridge market-temp              # market sentiment index (0–100)
 # Account statements
 longbridge statement list           # list available statements
 longbridge statement export --file-key <KEY> --section asset equity_holdings  # account summary
+longbridge statement export --file-key <KEY> --all                          # export all non-empty sections
 ```
 
 Only fall back to WebSearch when Longbridge news is insufficient (e.g., breaking news not yet indexed, macro events unrelated to a specific symbol).
