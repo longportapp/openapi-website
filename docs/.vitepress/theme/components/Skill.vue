@@ -16,10 +16,10 @@ const t = {
   heroTitle1: computed(() => 'Longbridge Skill'),
   heroTitle2: computed(() =>
     isEN.value
-      ? 'Unlock investing and analysis for your AI'
+      ? 'Unlock market insights, deep research and intelligent trading for your AI'
       : isHK.value
-        ? '為你的 AI 解鎖投資、分析能力'
-        : '为你的 AI 解锁投资、分析能力'
+        ? '為你的 AI 解鎖市場洞察、深度研究與智能交易'
+        : '为你的 AI 解锁市场洞察、深度研究与智能交易'
   ),
   heroSubtitle: computed(() =>
     isEN.value
