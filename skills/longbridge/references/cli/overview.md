@@ -26,6 +26,16 @@ curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | s
 # Installs `longbridge` binary to /usr/local/bin
 ```
 
+## Update
+
+```bash
+# Built-in updater
+longbridge update
+
+# Or re-run the install script (any platform)
+curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
+```
+
 ## Authentication
 
 Uses OAuth 2.0 — no manual token or key management needed:
@@ -35,7 +45,6 @@ longbridge login    # Opens browser OAuth flow; token saved to
                     # ~/.longbridge/terminal/.openapi-session
 longbridge logout   # Clear saved session token
 longbridge check    # Verify connectivity and token (no auth required)
-longbridge update   # Update the CLI to the latest version
 ```
 
 **China Mainland:** The CLI auto-detects CN by probing `geotest.lbkrs.com` on startup (non-blocking). Result cached at `~/.longbridge/openapi/region-cache`. CN users automatically use `.cn` endpoints.

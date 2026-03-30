@@ -16,6 +16,16 @@ Authenticate:
 longbridge login
 ```
 
+## CLI Update
+
+```bash
+# Built-in updater
+longbridge update
+
+# Or re-run the install script
+curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
+```
+
 ## MCP (for AI tools — no code)
 
 ```bash
