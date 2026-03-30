@@ -82,7 +82,6 @@ Add Longbridge API docs to IDE/RAG       LLMs.txt / Markdown API
 ### CLI (Terminal)
 
 - **Overview** — install, auth, output formats, patterns: [references/cli/overview.md](references/cli/overview.md)
-- **Statement** — query and export account statements: [references/cli/statement.md](references/cli/statement.md)
 
 **Always use `longbridge --help` to list available commands, and `longbridge <command> --help` for specific options and flags.** Do not rely on hardcoded documentation — the CLI's built-in help is always up-to-date.
 

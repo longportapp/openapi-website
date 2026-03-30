@@ -1150,25 +1150,36 @@ paths:
           description: Number of results per page.
           schema:
             type: integer
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge statement list
+            longbridge statement list --type monthly
+            longbridge statement list --start-date 20260101 --limit 10
       responses:
         '200':
           description: Statement list
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  list:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        dt:
-                          type: integer
-                          description: Statement date (integer, e.g. 20250301).
-                        file_key:
-                          type: string
-                          description: File key used to request the download URL.
+                type: array
+                items:
+                  type: object
+                  properties:
+                    date:
+                      type: string
+                      description: Statement date (string, e.g. "20260327").
+                    file_key:
+                      type: string
+                      description: File key used to request the download URL.
+              example:
+                - date: "20260327"
+                  file_key: "/statement_data/data/lb/1/20260327/10000104.json"
+                - date: "20260324"
+                  file_key: "/statement_data/data/lb/1/20260324/10000104.json"
+                - date: "20260323"
+                  file_key: "/statement_data/data/lb/1/20260323/10000104.json"
         default:
           description: Unexpected error
           content:
@@ -1193,6 +1204,13 @@ paths:
           description: File key obtained from the list statements endpoint.
           schema:
             type: string
+      x-codeSamples:
+        - lang: Shell
+          label: CLI
+          source: |
+            longbridge statement export --file-key abc123xyz456 --section equity_holdings
+            longbridge statement export --file-key abc123xyz456 --section stock_trades -o trades.csv
+            longbridge statement export --file-key abc123xyz456 --all -o ./report/
       responses:
         '200':
           description: Download URL
@@ -1204,6 +1222,8 @@ paths:
                   url:
                     type: string
                     description: Presigned URL to download the statement JSON.
+              example:
+                url: "https://storage.example.com/statements/abc123xyz456.json?X-Amz-Signature=..."
         default:
           description: Unexpected error
           content:
