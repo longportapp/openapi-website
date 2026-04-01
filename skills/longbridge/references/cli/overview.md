@@ -21,9 +21,15 @@ Do not rely on hardcoded documentation for command syntax or flags — use `--he
 # macOS (Homebrew — recommended)
 brew install --cask longbridge/tap/longbridge-terminal
 
-# Any platform (install script)
+# macOS / Linux (install script)
 curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
 # Installs `longbridge` binary to /usr/local/bin
+```
+
+Windows (Scoop):
+
+```powershell
+scoop install https://raw.githubusercontent.com/longbridge/longbridge-terminal/main/longbridge.json
 ```
 
 ## Update

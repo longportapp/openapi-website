@@ -58,6 +58,12 @@ brew install --cask longbridge/tap/longbridge-terminal
 curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
 ```
 
+**Windows**（[Scoop](https://scoop.sh)）：
+
+```powershell
+scoop install https://raw.githubusercontent.com/longbridge/longbridge-terminal/main/longbridge.json
+```
+
 **Windows**（PowerShell）：
 
 ```powershell
@@ -131,3 +137,7 @@ https://openapi.longbridge.com/mcp
 **交易操作無法執行**
 
 確認帳戶已開通 OpenAPI 交易權限，以及該市場（港股 / 美股）的交易資格。
+
+**撤銷授權**
+
+如需撤銷訪問權限，前往 Longbridge 帳戶 → 安全設定 → 管理已授權應用程式。

@@ -113,6 +113,8 @@ const t = {
         ? '將以下這句話發送給任意 AI 助手（Claude、ChatGPT 等），它會自動引導你完成安裝。'
         : '将以下这句话发送给任意 AI 助手（Claude、ChatGPT 等），它会自动引导你完成安装。'
   ),
+  alsoAvailablePrefix: computed(() => (isEN.value ? 'Also available on ' : '同样可在 ')),
+  alsoAvailableAnd: computed(() => (isEN.value ? ' and ' : isHK.value ? ' 和 ' : ' 和 ')),
 }
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -1809,6 +1811,9 @@ const currentMessages = computed(() => {
           <a href="/skill/longbridge.zip" download class="skill-btn-primary">
             {{ t.downloadZip.value }}
           </a>
+          <p class="skill-also-available">
+            {{ t.alsoAvailablePrefix.value }}<a href="https://skills.sh/longbridge/developers" target="_blank" rel="noopener">skills.sh</a>{{ t.alsoAvailableAnd.value }}<a href="https://github.com/longbridge/developers" target="_blank" rel="noopener">GitHub</a>.
+          </p>
           <a :href="installGuideUrl" class="skill-guide-link" style="margin-top: auto">{{ t.installGuide.value }}</a>
         </div>
 
@@ -2139,6 +2144,16 @@ const currentMessages = computed(() => {
   text-decoration: underline;
   text-underline-offset: 3px;
   cursor: pointer;
+}
+.skill-also-available {
+  font-size: 0.75rem;
+  color: var(--vp-c-text-3);
+  margin: 6px 0 0;
+}
+.skill-also-available a {
+  color: var(--vp-c-text-2);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 /* ─── Client chips ───────────────────────────────────────────────────────── */

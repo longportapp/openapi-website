@@ -3,11 +3,17 @@
 ## CLI Installation
 
 ```bash
-# macOS
+# macOS (Homebrew)
 brew install --cask longbridge/tap/longbridge-terminal
 
-# Any platform
+# macOS / Linux
 curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
+```
+
+Windows (Scoop):
+
+```powershell
+scoop install https://raw.githubusercontent.com/longbridge/longbridge-terminal/main/longbridge.json
 ```
 
 Authenticate:
@@ -34,6 +40,10 @@ claude mcp add longbridge https://openapi.longbridge.com/mcp
 ```
 
 First tool call triggers an OAuth browser flow. See [references/mcp.md](references/mcp.md) for Cursor, ChatGPT, Zed.
+
+## Revoking Authorization
+
+To revoke access, go to your Longbridge account → Security Settings → manage authorized apps.
 
 ## Authentication
 
