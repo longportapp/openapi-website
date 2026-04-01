@@ -319,13 +319,13 @@ Longbridge OpenAPI 最高支持每秒 10 次调用，SDK 自动刷新 OAuth Toke
 
 ## Release Notes
 
-### v0.13.0
+### [v0.13.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.13.0)
 
 - **新增：基本面与分析命令** — `financial-report`、`valuation`、`forecast-eps`、`consensus`、`institution-rating`、`shareholder`、`fund-holder`、`dividend`、`finance-calendar`、`exchange-rate`
 - **重大变更：命令结构调整** — 19 个扁平命令迁移为子命令树（如 `news-detail` → `news detail`、`kline-history` → `kline history`、`warrant-list` → `warrant list`）
 - **中国区节点支持** — 设置 `LONGBRIDGE_REGION=cn` 可路由至国内节点
 
-### v0.12.0
+### [v0.12.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.12.0)
 
 - **新增：`statement` 命令** — 列出和导出日结单/月结单
 - **TUI** — 修复 `q` 退出；自选股页面新增资讯列表与详情视图

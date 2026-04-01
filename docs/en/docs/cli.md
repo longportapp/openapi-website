@@ -321,13 +321,13 @@ Longbridge OpenAPI: maximum 10 calls per second. The SDK auto-refreshes OAuth to
 
 ## Release notes
 
-### v0.13.0
+### [v0.13.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.13.0)
 
 - **New: Fundamentals & analysis commands** — `financial-report`, `valuation`, `forecast-eps`, `consensus`, `institution-rating`, `shareholder`, `fund-holder`, `dividend`, `finance-calendar`, `exchange-rate`
 - **Breaking: command restructure** — 19 flat commands moved into subcommand trees (e.g. `news-detail` → `news detail`, `kline-history` → `kline history`, `warrant-list` → `warrant list`)
 - **CN region support** — set `LONGBRIDGE_REGION=cn` to route through the China endpoint
 
-### v0.12.0
+### [v0.12.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.12.0)
 
 - **New: `statement` commands** — list and export daily/monthly account statements
 - **TUI** — fixed `q` quit; added news list and detail views inside watchlist
