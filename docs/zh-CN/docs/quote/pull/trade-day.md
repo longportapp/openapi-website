@@ -9,11 +9,11 @@ sidebar_position: 16
 
 <CliCommand>
 # 港股未来交易日
-longbridge trading-days HK
+longbridge trading days HK
 # 美股未来交易日
-longbridge trading-days US
+longbridge trading days US
 # A 股未来交易日
-longbridge trading-days CN
+longbridge trading days CN
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="trading_days" />

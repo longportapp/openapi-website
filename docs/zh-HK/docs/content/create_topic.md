@@ -31,9 +31,9 @@ headingLevel: 2
 
 <CliCommand>
 # 發佈 Tesla 相關話題
-longbridge create-topic TSLA.US "Tesla Q1 財報分析"
+longbridge topic create TSLA.US "Tesla Q1 財報分析"
 # 發佈 Apple 相關話題
-longbridge create-topic AAPL.US "Apple WWDC 前瞻"
+longbridge topic create AAPL.US "Apple WWDC 前瞻"
 </CliCommand>
 
 <SDKLinks module="content" klass="ContentContext" method="create_topic" />
@@ -64,19 +64,19 @@ longbridge create-topic AAPL.US "Apple WWDC 前瞻"
 
 ```bash
 # 短帖 — 純文本（默認），Markdown 不渲染
-longbridge create-topic --body "今天看好 700.HK"
+longbridge topic create --body "今天看好 700.HK"
 
 # 短帖 + 關聯標的
-longbridge create-topic --body "NVDA GTC 看點" --tickers NVDA.US,700.HK
+longbridge topic create --body "NVDA GTC 看點" --tickers NVDA.US,700.HK
 
 # 長文 — 支持 Markdown，必須填寫標題
-longbridge create-topic --title "我的分析" --body "**看好** 700.HK，因為..." --type article
+longbridge topic create --title "我的分析" --body "**看好** 700.HK，因為..." --type article
 
 # 長文 — 從 Markdown 文件讀取正文
-longbridge create-topic --title "Q4 財報前瞻" --body "$(cat analysis.md)" --type article
+longbridge topic create --title "Q4 財報前瞻" --body "$(cat analysis.md)" --type article
 
 # JSON 輸出
-longbridge create-topic --body "測試帖" --format json
+longbridge topic create --body "測試帖" --format json
 ```
 
   </TabItem>

@@ -9,11 +9,11 @@ This API is used to obtain the trading days of the market.
 
 <CliCommand>
 # upcoming HK trading days
-longbridge trading-days HK
+longbridge trading days HK
 # upcoming US trading days
-longbridge trading-days US
+longbridge trading days US
 # upcoming A-share trading days
-longbridge trading-days CN
+longbridge trading days CN
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="trading_days" />

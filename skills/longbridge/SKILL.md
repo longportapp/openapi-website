@@ -26,13 +26,13 @@ When the user asks about stock performance, portfolio advice, or market analysis
 # Market data
 longbridge quote SYMBOL.US
 longbridge positions                # always pull when user asks about "my portfolio"
-longbridge kline-history SYMBOL.US --start YYYY-MM-DD --end YYYY-MM-DD --period day
+longbridge kline history SYMBOL.US --start YYYY-MM-DD --end YYYY-MM-DD --period day
 longbridge intraday SYMBOL.US
 
 # News & content (prefer these over WebSearch)
 longbridge news SYMBOL.US           # latest news articles
-longbridge news-detail <id>         # full article content
-longbridge filing-detail <id>       # regulatory filing (earnings reports, etc.)
+longbridge news detail <id>         # full article content
+longbridge filing detail <id>       # regulatory filing (earnings reports, etc.)
 longbridge topics SYMBOL.US         # community discussion
 longbridge market-temp              # market sentiment index (0–100)
 

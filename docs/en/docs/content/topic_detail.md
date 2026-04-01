@@ -13,7 +13,7 @@ headingLevel: 2
 Get the full details of a community topic by its ID, including the body (Markdown), author info, associated tickers and hashtags, engagement counts, and the direct URL.
 
 <CliCommand>
-longbridge topic-detail 6993508780031016960
+longbridge topic detail 6993508780031016960
 </CliCommand>
 
 <SDKLinks module="content" klass="ContentContext" method="topic_detail" />
@@ -39,7 +39,7 @@ longbridge topic-detail 6993508780031016960
   <TabItem value="cli" label="CLI" default>
 
 ```bash
-longbridge topic-detail 6993508780031016960
+longbridge topic detail 6993508780031016960
 ```
 
   </TabItem>

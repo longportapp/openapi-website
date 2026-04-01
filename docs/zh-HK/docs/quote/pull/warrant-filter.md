@@ -9,11 +9,11 @@ sidebar_position: 14
 
 <CliCommand>
 # 騰訊相關窩輪列表
-longbridge warrant-list 700.HK
+longbridge warrant list 700.HK
 # 阿里巴巴相關窩輪列表
-longbridge warrant-list 9988.HK
+longbridge warrant list 9988.HK
 # 京東相關窩輪列表
-longbridge warrant-list 9618.HK
+longbridge warrant list 9618.HK
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="warrant_list" />

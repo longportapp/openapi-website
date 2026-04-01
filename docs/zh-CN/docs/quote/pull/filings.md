@@ -14,11 +14,11 @@ headingLevel: 2
 
 <CliCommand>
 # Apple 监管文件和公告
-longbridge filings AAPL.US
+longbridge filing list AAPL.US
 # Tesla 监管文件和公告
-longbridge filings TSLA.US
+longbridge filing list TSLA.US
 # NVDA 监管文件和公告
-longbridge filings NVDA.US
+longbridge filing list NVDA.US
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="filings" />

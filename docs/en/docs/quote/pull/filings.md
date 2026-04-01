@@ -14,11 +14,11 @@ Get the filings list for a specified security.
 
 <CliCommand>
 # regulatory filings for Apple
-longbridge filings AAPL.US
+longbridge filing list AAPL.US
 # regulatory filings for Tesla
-longbridge filings TSLA.US
+longbridge filing list TSLA.US
 # regulatory filings for NVDA
-longbridge filings NVDA.US
+longbridge filing list NVDA.US
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="filings" />

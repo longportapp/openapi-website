@@ -9,7 +9,7 @@ sidebar_position: 15
 
 <CliCommand>
 # 所有市场今日交易时段（美股、港股、A 股、新加坡）
-longbridge trading-session
+longbridge trading session
 </CliCommand>
 
 <SDKLinks module="quote" klass="QuoteContext" method="trading_session" />

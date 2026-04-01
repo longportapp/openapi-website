@@ -1252,7 +1252,7 @@ paths:
         - lang: Shell
           label: CLI
           source: |
-            longbridge filings <SYMBOL>
+            longbridge filing list <SYMBOL>
       responses:
         '200':
           description: Successful response
@@ -1383,10 +1383,10 @@ paths:
         - lang: Shell
           label: CLI
           source: |
-            longbridge my-topics
-            longbridge my-topics --type article
-            longbridge my-topics --type post --size 10 --page 2
-            longbridge my-topics --format json
+            longbridge topic mine
+            longbridge topic mine --type article
+            longbridge topic mine --type post --size 10 --page 2
+            longbridge topic mine --format json
       parameters:
         - name: page
           in: query
@@ -1492,16 +1492,16 @@ paths:
           label: CLI
           source: |
             # Short post (plain text, Markdown not rendered)
-            longbridge create-topic --body "Bullish on 700.HK today"
+            longbridge topic create --body "Bullish on 700.HK today"
 
             # Short post with tickers
-            longbridge create-topic --body "NVDA GTC highlights" --tickers NVDA.US,700.HK
+            longbridge topic create --body "NVDA GTC highlights" --tickers NVDA.US,700.HK
 
             # Article (Markdown, title required)
-            longbridge create-topic --title "My Analysis" --body "**Bullish** on 700.HK because..." --type article
+            longbridge topic create --title "My Analysis" --body "**Bullish** on 700.HK because..." --type article
 
             # Article from file
-            longbridge create-topic --title "Q4 Preview" --body "$(cat analysis.md)" --type article
+            longbridge topic create --title "Q4 Preview" --body "$(cat analysis.md)" --type article
       requestBody:
         required: true
         content:
@@ -1628,7 +1628,7 @@ paths:
         - lang: bash
           label: CLI
           source: |
-            longbridge topic-detail 6993508780031016960
+            longbridge topic detail 6993508780031016960
       responses:
         '200':
           description: Successful response
@@ -1719,8 +1719,8 @@ paths:
         - lang: bash
           label: CLI
           source: |
-            longbridge topic-replies 6993508780031016960
-            longbridge topic-replies 6993508780031016960 --page 2 --size 20
+            longbridge topic replies 6993508780031016960
+            longbridge topic replies 6993508780031016960 --page 2 --size 20
       responses:
         '200':
           description: Successful response
@@ -1831,10 +1831,10 @@ paths:
           label: CLI
           source: |
             # Top-level reply
-            longbridge create-topic-reply 6993508780031016960 --body "Great post!"
+            longbridge topic create-reply 6993508780031016960 --body "Great post!"
 
             # Reply to an existing comment
-            longbridge create-topic-reply 6993508780031016960 --body "Agreed!" --reply-to 7001234567890123456
+            longbridge topic create-reply 6993508780031016960 --body "Agreed!" --reply-to 7001234567890123456
       requestBody:
         required: true
         content:

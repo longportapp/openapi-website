@@ -13,7 +13,7 @@ headingLevel: 2
 Get the list of topics I have published.
 
 <CliCommand>
-longbridge my-topics
+longbridge topic mine
 </CliCommand>
 
 <SDKLinks module="content" klass="ContentContext" method="topics_mine" />
@@ -41,11 +41,11 @@ longbridge my-topics
   <TabItem value="cli" label="CLI" default>
 
 ```bash
-longbridge my-topics                           # All types (default: 50 per page)
-longbridge my-topics --type article            # Articles only
-longbridge my-topics --type post --size 10     # Short posts, 10 per page
-longbridge my-topics --page 2                  # Page 2
-longbridge my-topics --format json             # JSON output for scripting
+longbridge topic mine                           # All types (default: 50 per page)
+longbridge topic mine --type article            # Articles only
+longbridge topic mine --type post --size 10     # Short posts, 10 per page
+longbridge topic mine --page 2                  # Page 2
+longbridge topic mine --format json             # JSON output for scripting
 ```
 
   </TabItem>

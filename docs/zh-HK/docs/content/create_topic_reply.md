@@ -27,7 +27,7 @@ headingLevel: 2
 > ⚠️ 以上頻率限制規則僅供參考，平台可能隨時進行內部調整。
 
 <CliCommand>
-longbridge create-topic-reply 6993508780031016960 --body "分析得好！"
+longbridge topic create-reply 6993508780031016960 --body "分析得好！"
 </CliCommand>
 
 <SDKLinks module="content" klass="ContentContext" method="create_topic_reply" />
@@ -61,10 +61,10 @@ longbridge create-topic-reply 6993508780031016960 --body "分析得好！"
 
 ```bash
 # 頂層回覆
-longbridge create-topic-reply 6993508780031016960 --body "分析得很好！"
+longbridge topic create-reply 6993508780031016960 --body "分析得很好！"
 
 # 嵌套回覆
-longbridge create-topic-reply 6993508780031016960 --body "同意你的觀點。" --reply-to 7001234567890123456
+longbridge topic create-reply 6993508780031016960 --body "同意你的觀點。" --reply-to 7001234567890123456
 ```
 
   </TabItem>

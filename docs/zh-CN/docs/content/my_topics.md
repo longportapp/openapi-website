@@ -13,7 +13,7 @@ headingLevel: 2
 获取当前登录用户发布的讨论列表，支持分页与类型过滤。
 
 <CliCommand>
-longbridge my-topics
+longbridge topic mine
 </CliCommand>
 
 <SDKLinks module="content" klass="ContentContext" method="topics_mine" />
@@ -41,11 +41,11 @@ longbridge my-topics
   <TabItem value="cli" label="CLI" default>
 
 ```bash
-longbridge my-topics                           # 全部类型（默认每页 50 条）
-longbridge my-topics --type article            # 仅长文
-longbridge my-topics --type post --size 10     # 短帖，每页 10 条
-longbridge my-topics --page 2                  # 第二页
-longbridge my-topics --format json             # JSON 格式，适合脚本处理
+longbridge topic mine                           # 全部类型（默认每页 50 条）
+longbridge topic mine --type article            # 仅长文
+longbridge topic mine --type post --size 10     # 短帖，每页 10 条
+longbridge topic mine --page 2                  # 第二页
+longbridge topic mine --format json             # JSON 格式，适合脚本处理
 ```
 
   </TabItem>
