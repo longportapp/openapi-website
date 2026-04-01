@@ -98,6 +98,53 @@ longbridge filing list AAPL.US [--count 20]          # Company filings and annou
 longbridge filing detail AAPL.US <id>            # Full Markdown content of a filing; --file-index N for multi-file filings (e.g. 8-K exhibit)
 ```
 
+### Fundamentals & analysis
+
+```bash
+# Financial statements (income, balance sheet, cash flow)
+longbridge financial-report TSLA.US
+# Income statement, annual
+longbridge financial-report TSLA.US --kind IS --report af
+# Balance sheet, quarterly
+longbridge financial-report TSLA.US --kind BS --report qf
+# Valuation snapshot: P/E, P/B, P/S, dividend yield + peer comparison
+longbridge valuation TSLA.US
+# Historical P/E time series
+longbridge valuation TSLA.US --history
+# P/B history, 5-year range
+longbridge valuation TSLA.US --history --indicator pb --range 5
+# Analyst EPS forecast consensus
+longbridge forecast-eps TSLA.US
+# Revenue/profit/EPS consensus with beat/miss annotations
+longbridge consensus TSLA.US
+# Rating distribution and consensus target price
+longbridge institution-rating TSLA.US
+# Monthly rating trends and analyst accuracy
+longbridge institution-rating detail TSLA.US
+# Institutional shareholders with change tracking
+longbridge shareholder AAPL.US
+# Increasing holders, sorted by position size
+longbridge shareholder AAPL.US --range inc --sort owned
+# Funds and ETFs that hold a symbol (top 20)
+longbridge fund-holder AAPL.US
+# All holders
+longbridge fund-holder AAPL.US --count -1
+# Historical dividends
+longbridge dividend AAPL.US
+# Dividend distribution plan details
+longbridge dividend detail AAPL.US
+# Upcoming financial events
+longbridge finance-calendar financial
+# Earnings calendar for specific symbols
+longbridge finance-calendar report --symbol AAPL.US --symbol TSLA.US
+# High-importance macro events only
+longbridge finance-calendar macrodata --star 3
+# Upcoming US dividend events
+longbridge finance-calendar dividend --market US
+# Exchange rates for all supported currencies
+longbridge exchange-rate
+```
+
 ### Community content
 
 ```bash
@@ -271,3 +318,20 @@ claude> Compare TSLA and NVDA Q4 2025 earnings
 ## Rate limits
 
 Longbridge OpenAPI: maximum 10 calls per second. The SDK auto-refreshes OAuth tokens.
+
+## Release notes
+
+### [v0.13.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.13.0)
+
+- **New: Fundamentals & analysis commands** — `financial-report`, `valuation`, `forecast-eps`, `consensus`, `institution-rating`, `shareholder`, `fund-holder`, `dividend`, `finance-calendar`, `exchange-rate`
+- **Breaking: command restructure** — 19 flat commands moved into subcommand trees (e.g. `news-detail` → `news detail`, `kline-history` → `kline history`, `warrant-list` → `warrant list`)
+- **CN region support** — set `LONGBRIDGE_REGION=cn` to route through the China endpoint
+
+### [v0.12.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.12.0)
+
+- **New: `statement` commands** — list and export daily/monthly account statements
+- **TUI** — fixed `q` quit; added news list and detail views inside watchlist
+
+---
+
+Full changelog: [github.com/longbridge/longbridge-terminal/releases](https://github.com/longbridge/longbridge-terminal/releases)

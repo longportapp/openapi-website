@@ -133,3 +133,13 @@ longbridge quote AAPL.US NVDA.US
 ## 静态资源
 
 所有图片/静态文件必须上传 CDN 后引用 URL，不得放入仓库。
+
+## CLI 页面 Release Notes
+
+`docs/{lang}/docs/cli.md` 末尾维护 **Release Notes** 章节，记录每个 CLI 版本的更新摘要：
+
+- 每个版本 1–3 条要点，只写重点（新增了什么、有无破坏性变更），不列命令细节
+- 版本标题带链接：`### [v0.x.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.x.0)`
+- 最新版本在最上方
+- 章节末尾保留完整 Releases 列表链接：`https://github.com/longbridge/longbridge-terminal/releases`
+- 三个语言版本同步更新
