@@ -220,11 +220,22 @@ longbridge positions --format json | jq '.[] | {symbol, quantity}'
 
 ### 安装 AI Skill
 
-为 AI 工具（如 Claude）安装 Skill，使其掌握全部 `longbridge` 命令知识：
+安装 Longbridge Skill 后，你的 AI 助手（Claude Code、Codex、Cursor 等）就能帮你调用所有 `longbridge` 命令。安装完成后，直接用自然语言提需求，AI 会自动完成数据获取、分析和下单操作。
+
+安装 Skill 后可以做的事情：
+
+- 跨市场选股：港股、美股、A 股、新加坡，可叠加市值、PE、技术信号等条件筛选
+- 对任意股票做技术面综合诊断——均线、MACD、KDJ、RSI、支撑压力位，覆盖日线、小时线、15 分钟线及盘前盘后数据
+- 财报深度研究：实际业绩 vs 分析师预期、各业务线营收拆解、估值指标、SEC 申报原文
+- 追踪内幕交易记录与机构持仓变化
+- 下限价单、追踪止损单、期权单——AI 展示订单详情，等你确认后才执行
+- 复盘组合盈亏：指定日期范围的 P&L 趋势、各标的贡献排行、持仓结构分析
 
 ```bash
 npx skills add longbridge/developers
 ```
+
+如果 Skill 没有被自动触发，可以在提问前加上 `/longbridge` 强制引用，例如：`/longbridge 查一下 AAPL 当前报价`。
 
 安装后，AI 可直接从对话中查询行情、执行技术分析、管理交易：
 

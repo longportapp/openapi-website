@@ -1,140 +1,100 @@
 ---
 sidebar: false
 title: Skill 安装指引
-description: 在 OpenClaw、Claude、ChatGPT、Cursor、Claude Code 等 AI 工具中安装 Longbridge Skill
+description: 在 OpenClaw、Claude Code、Cursor、Codex 等 AI 工具中安装 Longbridge Skill
 ---
 
 # Longbridge Skill 安装指引
 
-## 安装方式
+安装完成后，你可以直接问 AI 助手这样的问题，并得到真实的答案：
 
-### 方式一：下载 ZIP 文件（推荐）
-
-下载 Skill 安装包，在你使用的 AI 客户端中安装。
-
-**[下载 longbridge.zip](/skill/longbridge.zip)**
-
-下载后解压，参考下方各客户端说明将文件放到对应位置。
-
-也可通过 [skills.sh](https://skills.sh/longbridge/developers) 或 [GitHub](https://github.com/longbridge/developers/tree/main/skills) 安装。
+- _"帮我从美股和港股里，筛出市值 500 亿以上、PE 低于 25、近期 MACD 出现金叉的科技股，按市值排列"_
+- _"NVDA 刚出财报，帮我对比实际业绩和分析师预期的差距，拆一下各业务线的营收变化，顺便看看当前估值是否合理"_
+- _"帮我给 TSLA 设一个追踪止损，跌幅超过 8% 自动触发卖出，执行前把订单详情给我确认"_
+- _"帮我复盘这个月的持仓表现：总盈亏趋势如何，哪只股票贡献最大、哪只表现最弱，组合里美股和港股各占多少"_
 
 ---
 
-### 方式二：CLI（npx / bunx）
+## 第一步：安装 Skill
 
-适用于命令行工具，在终端中执行：
+Skill 是一组指令文件，告诉 AI 助手 Longbridge 能做什么。安装方式有两种：
+
+**通过 npx / bunx（推荐，全局安装）：**
 
 ```bash
-# 推荐：全局安装并跳过确认提示
+# Node.js
 npx skills add longbridge/developers -g -y
-
-# 如果已安装 Bun，可以用 bunx 替代 npx：
+# Bun
 bunx skills add longbridge/developers -g -y
 ```
 
-- `-g` — 全局安装，Skill 对**所有**项目生效（不限于当前目录）
-- `-y` — 自动确认安装提示，无需手动输入
+> 需要 [Node.js](https://nodejs.org) 或 [Bun](https://bun.sh) 环境。
 
----
+**或下载 ZIP 手动安装：**
 
-## 授权 Longbridge 账户
+下载 [longbridge.zip](/skill/longbridge.zip) 并解压，将文件放入你的 AI 工具指定的 Skill 目录（Claude Code 放 `.claude/skills/`，Cursor 粘贴到 Rules 编辑框，其他工具参考 README）。
 
-Skill 通过 Longbridge CLI 完成 OAuth 2.0 授权。需要先安装 CLI，再执行登录。
-
-### 第一步：安装 CLI
-
-```bash
-# macOS（推荐）
-brew install --cask longbridge/tap/longbridge-terminal
-
-# 任意平台
-curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
-```
-
-### 第二步：完成 OAuth 授权
-
-```bash
-longbridge login
-```
-
-浏览器自动打开 Longbridge 登录页，完成登录并确认授权范围后，Token 保存至本地，后续请求自动使用，过期自动刷新。
-
-### 撤销授权
-
-如需撤销，进入 Longbridge 账户 → **安全设置** → 管理已授权应用。
-
----
-
-## 各客户端安装说明
-
-### OpenClaw
-
-在 OpenClaw 对话中发送以下消息，OpenClaw 会自动完成安装：
+**OpenClaw** 直接在对话中发送以下消息，自动完成安装：
 
 ```
 从以下 zip 文件安装 Longbridge Developers Skill：https://open.longbridge.com/skill/longbridge.zip
 ```
 
-安装完成后即时生效，无需重启。
+---
+
+## 第二步：连接 Longbridge 账户
+
+Skill 只是让 AI 知道能做什么，要真正获取行情数据或执行交易，还需要连接 Longbridge 账户。根据你的 AI 工具选择接入方式：
+
+### 方式 A：安装 CLI（适用于有 shell 执行能力的工具）
+
+Claude Code、Codex、Gemini CLI、Warp 等可以直接在终端执行命令的工具适用此方式。
+
+```bash
+# macOS（需要 Homebrew，未安装请先访问 https://brew.sh）
+brew install --cask longbridge/tap/longbridge-terminal
+
+# Linux
+curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
+```
+
+**Windows：** 从 [GitHub Releases](https://github.com/longbridge/longbridge-terminal/releases/latest) 下载 `longbridge-terminal-windows-amd64.zip`，解压后将目录添加到 `PATH` 即可。
+
+```bash
+longbridge login
+```
+
+### 方式 B：连接 MCP 服务器（适用于支持 MCP 的工具）
+
+Claude Desktop、Cursor、Zed、Gemini CLI、Warp 等支持 MCP 的工具适用此方式。
+
+在 AI 工具的 MCP 配置中添加以下服务器地址：
+
+```
+https://openapi.longbridge.com/mcp
+```
+
+> 中国大陆用户可使用加速地址：`https://openapi.longbridge.cn/mcp`
+
+各工具配置入口：
+
+| 工具 | 配置位置 |
+| --- | --- |
+| Claude Desktop | 编辑 `~/Library/Application Support/Claude/claude_desktop_config.json`（macOS）或 `%APPDATA%\Claude\claude_desktop_config.json`（Windows） |
+| Cursor | Settings → MCP Servers → Add Remote MCP Server |
+| Zed | `~/.config/zed/settings.json` 中的 `context_servers` 字段 |
+| Gemini CLI | `~/.gemini/settings.json` 中的 `mcpServers` 字段 |
+| Warp | Settings → AI → MCP Servers → Add |
+
+首次提问时客户端会自动弹出浏览器完成 OAuth 授权，无需配置 API Key。
 
 ---
 
-### Claude Desktop / Claude.ai
+## 为什么 Claude.ai 和 ChatGPT.com 无法使用
 
-> Claude.ai 的代码执行环境仅开放固定白名单域名，无法通过命令行自动安装。只能通过以下手动方式完成。
+**Claude.ai**（网页版）和 **ChatGPT.com**（网页版）是基于浏览器的界面，无法访问你的本地系统，既不能执行 shell 命令，也无法连接外部 MCP 服务器，因此 Skill 无法获取实时行情或执行交易。
 
-1. 打开 [Claude.ai](https://claude.ai) 并进入 **Projects**
-2. 创建新项目或选择已有项目 → **Project Settings**
-3. 在 **Project Knowledge** 区域点击 **Add content**
-4. 下载 [longbridge.zip](/skill/longbridge.zip) 并解压
-5. 将解压后的文件上传到 Project Knowledge
-
-安装后在该项目的对话中即可直接使用 Longbridge 数据能力。
-
----
-
-### ChatGPT
-
-> ChatGPT 同样无法在对话中自动安装，需通过 GPT 配置页手动上传。
-
-1. 进入 [ChatGPT](https://chatgpt.com) → 左侧 **My GPTs** → **Create a GPT**
-2. 切换到 **Configure** 标签
-3. 下载 [longbridge.zip](/skill/longbridge.zip) 并解压
-4. 在 **Knowledge** 区域上传解压后的文件
-5. 保存并发布 GPT
-
----
-
-### Cursor
-
-1. 打开 Cursor → **Settings** → **Rules**
-2. 选择 **Project Rules**（作用于当前项目）或 **User Rules**（全局生效）
-3. 下载 [longbridge.zip](/skill/longbridge.zip) 并解压
-4. 将解压后的内容粘贴到规则编辑框，或按 README 说明放置文件
-
----
-
-### Claude Code
-
-1. 下载 [longbridge.zip](/skill/longbridge.zip) 并解压
-2. 将解压后的文件复制到项目目录下的 `.claude/skills/`（文件夹不存在时手动创建）
-3. 重启 Claude Code 或新建会话
-
-安装后在该项目的 Claude Code 会话中即可直接使用 Longbridge 数据能力。
-
----
-
-### Codex / Zed / 其他 CLI 工具
-
-在终端中执行上方的[方式二](#方式二cli-npx--bunx)命令。Skill 配置文件会写入系统，支持项目级上下文配置的工具会自动识别。
-
----
-
-## 更新 Skill
-
-`longbridge.zip` 中的 Skill 内容会不定期更新，建议定期检查并更新到最新版本以获得最佳体验。
-
-重新下载 [longbridge.zip](/skill/longbridge.zip) 后，按照原安装步骤覆盖旧文件即可。
+如果你使用 Claude，请安装 [Claude Desktop](https://claude.ai/download) 并通过上方的 MCP 方式接入。
 
 ---
 
@@ -148,6 +108,8 @@ longbridge login
 
 如果 AI 能返回实时报价数据，说明安装成功。
 
+> **提示：** 如果 Skill 没有被自动触发，可以在提问前加上 `/longbridge` 强制引用，例如：`/longbridge 查一下 AAPL 当前报价`。
+
 ---
 
 ## 常见问题
@@ -158,7 +120,7 @@ longbridge login
 
 **查询数据时需要授权**
 
-Skill 需要连接你的 Longbridge 账户。按照上方 [授权流程](#授权流程) 完成 OAuth 2.0 授权即可，无需配置 API Key。
+在终端中运行 `longbridge login` 完成 OAuth 授权即可，无需配置 API Key。
 
 **交易操作无法执行**
 

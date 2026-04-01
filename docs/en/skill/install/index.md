@@ -1,152 +1,104 @@
 ---
 sidebar: false
 title: Skill Installation Guide
-description: Install Longbridge Skill for OpenClaw, Claude, ChatGPT, Cursor, Claude Code, and more
+description: Install Longbridge Skill for OpenClaw, Claude Code, Cursor, Codex, and more
 ---
 
 # Longbridge Skill Installation Guide
 
-## Installation Methods
+Once installed, you can say things like this to your AI assistant and get real answers:
 
-### Method 1: ZIP File (Recommended)
-
-Download the Skill package and install it in your AI client.
-
-**[Download longbridge.zip](/skill/longbridge.zip)**
-
-After downloading, extract the zip and follow the client-specific guide below to place the files in the right location.
-
-Also available on [skills.sh](https://skills.sh/longbridge/developers) and [GitHub](https://github.com/longbridge/developers/tree/main/skills).
+- _"Screen US and HK stocks: market cap above $50B, P/E below 25, recent MACD golden cross — ranked by market cap"_
+- _"NVDA just reported — compare actuals vs analyst estimates, break down revenue by segment, and check if valuation is reasonable"_
+- _"Set a trailing stop on TSLA: trigger a sell if it drops more than 8%, show me the order details before executing"_
+- _"Review my portfolio this month: P&L trend, biggest winner, worst drag, US vs HK allocation"_
 
 ---
 
-### Method 2: CLI (npx / bunx)
+## How it works
 
-For CLI-based tools, run the following command in your terminal:
+Longbridge Skill gives your AI assistant knowledge of what the `longbridge` CLI can do. To actually fetch live data or execute trades, the AI needs one of two capabilities:
 
-```bash
-# Recommended: install globally and skip the confirmation prompt
-npx skills add longbridge/developers -g -y
-
-# If you have Bun installed, use bunx instead of npx:
-bunx skills add longbridge/developers -g -y
-```
-
-- `-g` — installs the Skill globally, making it available across **all** your projects (not just the current directory)
-- `-y` — automatically confirms the installation prompt without requiring manual input
+- **Shell execution** — the AI runs `longbridge` commands directly in a terminal
+- **MCP integration** — the AI connects to the Longbridge MCP server over the network
 
 ---
 
-## Authorize Your Longbridge Account
+## Method 1 — Install the CLI
 
-The Skill uses the Longbridge CLI to complete OAuth 2.0 authorization. Install the CLI first, then log in.
+For AI tools that can execute shell commands (Claude Code, Codex, Gemini CLI, Warp, etc.).
 
-### Step 1: Install the CLI
+**Install the CLI:**
 
 ```bash
-# macOS (recommended)
+# macOS (requires Homebrew — install at https://brew.sh if not already installed)
 brew install --cask longbridge/tap/longbridge-terminal
 
-# Any platform
+# Linux
 curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
 ```
 
-### Step 2: Complete OAuth Authorization
+**Windows:** Download `longbridge-terminal-windows-amd64.zip` from [GitHub Releases](https://github.com/longbridge/longbridge-terminal/releases/latest), extract it, and add the folder to your `PATH`.
+
+**Connect your Longbridge account:**
 
 ```bash
 longbridge login
 ```
 
-A browser window opens to the Longbridge login page. Sign in and approve the requested scopes — the token is saved locally, reused automatically, and refreshes when it expires.
+That's it. The AI can now call `longbridge` commands on your behalf.
 
-### Revoking Authorization
-
-To revoke access, go to your Longbridge account → **Security Settings** → manage authorized apps.
-
----
-
-## Client Setup
-
-### OpenClaw
-
-In the OpenClaw chat, send the following message and OpenClaw will handle the installation automatically:
+**OpenClaw** handles installation differently — send this message in chat and it takes care of everything:
 
 ```
 Install the Longbridge Developers Skill from this zip file: https://open.longbridge.com/skill/longbridge.zip
 ```
 
-Takes effect immediately — no restart required.
+---
+
+## Method 2 — Connect the MCP server
+
+For AI tools that support MCP (Claude Desktop, Cursor, Zed, Gemini CLI, Warp, etc.).
+
+Add the following as a remote MCP server in your AI tool:
+
+```
+https://openapi.longbridge.com/mcp
+```
+
+Where to find the MCP configuration in each client:
+
+| Client | Where to configure |
+| --- | --- |
+| Claude Desktop | Edit `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows) |
+| Cursor | Settings → MCP Servers → Add Remote MCP Server |
+| Zed | `context_servers` key in `~/.config/zed/settings.json` |
+| Gemini CLI | `mcpServers` key in `~/.gemini/settings.json` |
+| Warp | Settings → AI → MCP Servers → Add |
+
+The first time you ask a Longbridge question, your client will open a browser tab for OAuth authorization — no API key required.
 
 ---
 
-### Claude Desktop / Claude.ai
+## Why Claude.ai and ChatGPT.com don't work
 
-> Claude.ai's code execution environment only allows access to a fixed whitelist of domains, so automated installation is not possible. Use the manual method below instead.
+**Claude.ai** (web) and **ChatGPT.com** (web) are browser-based interfaces with no access to your local system. They cannot run shell commands or connect to external MCP servers, so the Skill has no way to fetch live market data or execute trades.
 
-1. Open [Claude.ai](https://claude.ai) and go to **Projects**
-2. Create a new project or open an existing one → **Project Settings**
-3. Click **Add content** under **Project Knowledge**
-4. Download [longbridge.zip](/skill/longbridge.zip) and extract it
-5. Upload the extracted files to Project Knowledge
-
-The Skill will be active in all conversations within that project.
+If you use Claude, install [Claude Desktop](https://claude.ai/download) and use the MCP method above.
 
 ---
 
-### ChatGPT
+## Verify installation
 
-> ChatGPT cannot auto-install Skills during a conversation. Use the GPT configuration page to upload manually.
-
-1. Go to [ChatGPT](https://chatgpt.com) → **My GPTs** → **Create a GPT**
-2. Switch to the **Configure** tab
-3. Download [longbridge.zip](/skill/longbridge.zip) and extract it
-4. Upload the extracted files under **Knowledge**
-5. Save and publish the GPT
-
----
-
-### Cursor
-
-1. Open Cursor → **Settings** → **Rules**
-2. Choose **Project Rules** (current project) or **User Rules** (global)
-3. Download [longbridge.zip](/skill/longbridge.zip) and extract it
-4. Paste the extracted content into the rules editor, or place the files as described in the README
-
----
-
-### Claude Code
-
-1. Download [longbridge.zip](/skill/longbridge.zip) and extract it
-2. Copy the extracted files into `.claude/skills/` in your project directory (create the folder if it doesn't exist)
-3. Restart Claude Code or start a new session
-
-The Skill will be available in all Claude Code sessions within that project.
-
----
-
-### Codex / Zed / Other CLI Tools
-
-Run [Method 2](#method-2-cli-npx--bunx) above in your terminal. The Skill configuration will be written to your system and picked up automatically by tools that support project-level context.
-
----
-
-## Updating the Skill
-
-The Skill content inside `longbridge.zip` is updated periodically. We recommend checking for updates occasionally to get the latest improvements.
-
-To update, re-download [longbridge.zip](/skill/longbridge.zip) and overwrite the existing files following the same installation steps.
-
----
-
-## Verify Installation
-
-After installing, send the following in a conversation:
+After installing, ask your AI assistant:
 
 ```
 Use Longbridge to get the current quote for AAPL
 ```
 
-If the AI returns live quote data, the installation was successful.
+If it returns live data, you're all set.
+
+> **Tip:** If the Skill isn't triggered automatically, prefix your request with `/longbridge` to force it — for example: `/longbridge get the current quote for AAPL`.
 
 ---
 
@@ -158,7 +110,7 @@ Some clients require a restart or a new conversation to load the Skill. Confirm 
 
 **Prompted for authorization when querying data**
 
-The Skill needs to connect to your Longbridge account. Follow the [Authorization Flow](#authorization-flow) above to complete OAuth 2.0 authorization — no API Key configuration required.
+Run `longbridge login` in your terminal and complete the OAuth flow — no API Key required.
 
 **Trading operations not working**
 
