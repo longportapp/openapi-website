@@ -62,6 +62,12 @@ brew install --cask longbridge/tap/longbridge-terminal
 curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
 ```
 
+**Windows**（[Scoop](https://scoop.sh)）
+
+```powershell
+scoop install https://raw.githubusercontent.com/longbridge/longbridge-terminal/main/scoop.json
+```
+
 **Windows**（PowerShell）
 
 ```powershell

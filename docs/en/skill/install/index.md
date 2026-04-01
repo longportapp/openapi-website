@@ -38,6 +38,12 @@ brew install --cask longbridge/tap/longbridge-terminal
 curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
 ```
 
+**Windows** ([Scoop](https://scoop.sh)):
+
+```powershell
+scoop install https://raw.githubusercontent.com/longbridge/longbridge-terminal/main/scoop.json
+```
+
 **Windows** (PowerShell):
 
 ```powershell
@@ -121,3 +127,7 @@ Run `longbridge login` in your terminal and complete the OAuth flow — no API K
 **Trading operations not working**
 
 Confirm your account has OpenAPI trading permissions enabled and is eligible to trade in the target market (HK / US).
+
+**Revoking Authorization**
+
+To revoke access, go to your Longbridge account → Security Settings → manage authorized apps.
