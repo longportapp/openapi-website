@@ -50,19 +50,32 @@ $ longbridge quote TSLA.US NVDA.US --format json
 
 ## Installation
 
-**Homebrew**
+**macOS** (requires [Homebrew](https://brew.sh))
 
 ```bash
 brew install --cask longbridge/tap/longbridge-terminal
 ```
 
-**Install script**
+**macOS / Linux**
 
 ```bash
 curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
 ```
 
-Installs the `longbridge` binary to `/usr/local/bin`.
+**Windows** (PowerShell)
+
+```powershell
+iwr https://github.com/longbridge/longbridge-terminal/raw/main/install.ps1 | iex
+```
+
+Installs `longbridge` to `/usr/local/bin` (macOS/Linux) or `%LOCALAPPDATA%\Programs\longbridge` (Windows). On Windows the binary is `longbridge.exe`.
+
+After installation, authenticate and explore available commands:
+
+```bash
+longbridge --help   # List all available commands
+longbridge login    # Opens browser for OAuth, saves token to ~/.longbridge/terminal/.openapi-session
+```
 
 ## Authentication
 
@@ -222,11 +235,22 @@ longbridge positions --format json | jq '.[] | {symbol, quantity}'
 
 ### Install the AI skill
 
-Install the skill to give AI tools (like Claude) full knowledge of all `longbridge` commands:
+Install the Longbridge Skill to let your AI assistant (Claude Code, Codex, Cursor, etc.) use all `longbridge` commands on your behalf. Once installed, you can ask in plain language and the AI handles the data fetching, analysis, and order execution.
+
+Things you can do after installing the Skill:
+
+- Screen stocks across US, HK, A-shares, and Singapore markets using conditions like market cap, P/E, and technical signals
+- Get a full technical diagnosis for any stock — MA, MACD, KDJ, RSI, support/resistance levels, across daily/hourly/15-min charts
+- Analyze earnings: actual vs analyst estimates, revenue by segment, valuation metrics, SEC filings
+- Track insider trades and institutional position changes for any stock
+- Place limit orders, trailing stops, and options orders — with confirmation before execution
+- Review your portfolio P&L, position breakdown, and contribution by stock for any date range
 
 ```bash
 npx skills add longbridge/developers
 ```
+
+If the Skill isn't triggered automatically, prefix your request with `/longbridge` to force it — for example: `/longbridge get the current quote for AAPL`.
 
 Once installed, AI can query market data, run technical analysis, and manage trades directly from the conversation:
 

@@ -23,10 +23,10 @@ const t = {
   ),
   heroSubtitle: computed(() =>
     isEN.value
-      ? 'With Longbridge Skill, let your AI assistant (OpenClaw, ChatGPT, Claude, etc.) directly access Hong Kong and US stock data and trading capabilities.'
+      ? 'With Longbridge Skill, your AI assistant (OpenClaw, Claude Code, Cursor, etc.) can screen stocks across markets, decode earnings, track insider moves, and place orders — all in plain conversation, no app-switching required.'
       : isHK.value
-        ? '透過 Longbridge Skill，讓你的 AI 助手（OpenClaw、ChatGPT、Claude 等）直接存取港美股即時數據與交易能力。'
-        : '通过 Longbridge Skill，让你的 AI 助手（OpenClaw、ChatGPT、Claude 等）直接访问港美股实时数据与交易能力。'
+        ? '安裝 Longbridge Skill 後，你的 AI 助手（OpenClaw、Claude Code、Cursor 等）就能幫你跨市場選股、解讀財報、追蹤主力持倉、直接下單——全部在對話裡完成，不用再切換 App 或手動查數據。'
+        : '安装 Longbridge Skill 后，你的 AI 助手（OpenClaw、Claude Code、Cursor 等）就能帮你跨市场选股、解读财报、追踪主力持仓、直接下单——全部在对话里完成，不用再切换 App 或手动查数据。'
   ),
   downloadZip: computed(() => (isEN.value ? 'Download Skill ZIP' : isHK.value ? '下載 Skill ZIP' : '下载 Skill ZIP')),
   recommended: computed(() => (isEN.value ? 'Recommended' : '推荐')),
@@ -63,6 +63,16 @@ const t = {
       : isHK.value
         ? '直接告訴你的 AI 助手你想做什麼——它來調用 Longbridge 的數據與交易能力。'
         : '直接告诉你的 AI 助手你想做什么——它来调用 Longbridge 的数据与交易能力。'
+  ),
+  capabilitiesTitle: computed(() =>
+    isEN.value ? 'Capability Reference' : isHK.value ? '功能清單' : '功能清单'
+  ),
+  capabilitiesSubtitle: computed(() =>
+    isEN.value
+      ? 'Full coverage of Longbridge CLI commands and MCP tools — available to your AI in plain conversation.'
+      : isHK.value
+        ? '覆蓋所有 Longbridge CLI 命令與 MCP 工具，AI 通過對話幫你調用。'
+        : '覆盖所有 Longbridge CLI 命令与 MCP 工具，AI 通过对话帮你调用。'
   ),
   demoTitle: computed(() =>
     isEN.value ? 'See it in action' : isHK.value ? '了解 Skill 能做什麼' : '了解 Skill 能做什么'
@@ -1187,6 +1197,199 @@ interface Client {
   color: string
 }
 
+// ─── Capability groups ────────────────────────────────────────────────────────
+
+interface CapabilityItem {
+  desc: string
+}
+interface CapabilityGroup {
+  iconSvg: string
+  color: string
+  label: string
+  items: CapabilityItem[]
+}
+
+const capIcons: Record<string, string> = {
+  trending: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>`,
+  barChart: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`,
+  users: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+  calendar: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>`,
+  fileText: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
+  layers: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>`,
+  briefcase: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`,
+  zap: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+}
+
+const capabilityGroups = computed<CapabilityGroup[]>(() =>
+  isEN.value
+    ? [
+        {
+          iconSvg: capIcons.trending,
+          color: '#00b8b8',
+          label: 'Real-time Market Data',
+          items: [
+            { desc: 'Live quotes for one or more symbols' },
+            { desc: 'Level 2 order book depth (bid/ask ladder)' },
+            { desc: 'Tick-by-tick recent trades' },
+            { desc: 'Intraday minute-by-minute price & volume' },
+            { desc: 'OHLCV candlesticks & historical date-range data' },
+            { desc: 'Intraday capital flow & distribution' },
+            { desc: 'Market sentiment temperature index (0–100)' },
+            { desc: 'Static reference info (lot size, shares, EPS…)' },
+            { desc: 'Option quotes & option chain' },
+            { desc: 'Warrant quotes & warrants by underlying' },
+          ],
+        },
+        {
+          iconSvg: capIcons.barChart,
+          color: '#4781ff',
+          label: 'Fundamentals & Research',
+          items: [
+            { desc: 'Income statement, balance sheet, cash flow' },
+            { desc: 'P/E, P/B, P/S, dividend yield + peer comparison' },
+            { desc: 'Analyst EPS forecasts' },
+            { desc: 'Revenue & profit consensus with beat/miss' },
+            { desc: 'Institution ratings & target price distribution' },
+            { desc: 'Calculated financial indexes (PE, PB, DPS rate…)' },
+            { desc: 'Institutional shareholders with position changes' },
+            { desc: 'Funds & ETFs that hold a given symbol' },
+            { desc: 'Dividend history & distribution details' },
+            { desc: 'SEC / regulatory filings with full Markdown content' },
+          ],
+        },
+        {
+          iconSvg: capIcons.calendar,
+          color: '#8b5cf6',
+          label: 'Calendar & Events',
+          items: [
+            { desc: 'Upcoming earnings events by symbol' },
+            { desc: 'High-importance macro data events' },
+            { desc: 'Upcoming dividend events by market' },
+            { desc: 'Trading session schedule & holiday calendar' },
+          ],
+        },
+        {
+          iconSvg: capIcons.fileText,
+          color: '#f59e0b',
+          label: 'News, Community & Watchlist',
+          items: [
+            { desc: 'Latest news articles for a symbol' },
+            { desc: 'Community discussion topics' },
+            { desc: 'Watchlist groups: list, create, update, delete' },
+          ],
+        },
+        {
+          iconSvg: capIcons.briefcase,
+          color: '#6366f1',
+          label: 'Account & Portfolio',
+          items: [
+            { desc: 'Stock positions across all sub-accounts' },
+            { desc: 'Fund positions across all sub-accounts' },
+            { desc: 'Account cash balance & financing info' },
+            { desc: 'Cash flow records (deposits, withdrawals, dividends)' },
+            { desc: 'Account statements (daily / monthly)' },
+            { desc: 'Exchange rates for all supported currencies' },
+          ],
+        },
+        {
+          iconSvg: capIcons.zap,
+          color: '#ef4444',
+          label: 'Trading',
+          items: [
+            { desc: 'Limit, market, or stop-limit orders' },
+            { desc: 'List today\'s orders, view detail, executions' },
+            { desc: 'Cancel a pending order' },
+            { desc: 'Modify quantity or price of a pending order' },
+            { desc: 'Estimate max buy/sell quantity' },
+            { desc: 'Margin ratio requirements for a symbol' },
+          ],
+        },
+      ]
+    : [
+        {
+          iconSvg: capIcons.trending,
+          color: '#00b8b8',
+          label: isHK.value ? '實時行情' : '实时行情',
+          items: [
+            { desc: isHK.value ? '一個或多個標的實時報價' : '一个或多个标的实时报价' },
+            { desc: isHK.value ? 'Level 2 盤口深度（買賣盤階梯）' : 'Level 2 盘口深度（买卖盘阶梯）' },
+            { desc: isHK.value ? '逐筆成交記錄' : '逐笔成交记录' },
+            { desc: isHK.value ? '盤中分鐘線價格與成交量' : '盘中分钟线价格与成交量' },
+            { desc: isHK.value ? 'K 線 / 歷史區間 OHLCV 數據' : 'K 线 / 历史区间 OHLCV 数据' },
+            { desc: isHK.value ? '盤中資金流向與分布' : '盘中资金流向与分布' },
+            { desc: isHK.value ? '市場情緒溫度指數（0–100）' : '市场情绪温度指数（0–100）' },
+            { desc: isHK.value ? '靜態參考信息（手數、股本、EPS…）' : '静态参考信息（手数、股本、EPS…）' },
+            { desc: isHK.value ? '期權報價與期權鏈' : '期权报价与期权链' },
+            { desc: isHK.value ? '權證報價及掛鉤標的的權證列表' : '权证报价及挂钩标的的权证列表' },
+          ],
+        },
+        {
+          iconSvg: capIcons.barChart,
+          color: '#4781ff',
+          label: isHK.value ? '基本面研究' : '基本面研究',
+          items: [
+            { desc: isHK.value ? '財務三表（收入表、資產負債表、現金流量表）' : '财务三表（收入表、资产负债表、现金流量表）' },
+            { desc: isHK.value ? 'PE/PB/PS、股息率 + 同行估值對比' : 'PE/PB/PS、股息率 + 同行估值对比' },
+            { desc: isHK.value ? '分析師 EPS 預測' : '分析师 EPS 预测' },
+            { desc: isHK.value ? '營收與利潤一致性預期（含超預期/不及預期標注）' : '营收与利润一致性预期（含超预期/不及预期标注）' },
+            { desc: isHK.value ? '機構評級與目標價分布' : '机构评级与目标价分布' },
+            { desc: isHK.value ? '計算財務指標（PE、PB、股息率…）' : '计算财务指标（PE、PB、股息率…）' },
+            { desc: isHK.value ? '機構持股及變動追蹤' : '机构持股及变动追踪' },
+            { desc: isHK.value ? '持有某標的的基金與 ETF' : '持有某标的的基金与 ETF' },
+            { desc: isHK.value ? '股息歷史與派息詳情' : '股息历史与派息详情' },
+            { desc: isHK.value ? 'SEC / 監管申報原文（完整 Markdown）' : 'SEC / 监管申报原文（完整 Markdown）' },
+          ],
+        },
+        {
+          iconSvg: capIcons.calendar,
+          color: '#8b5cf6',
+          label: isHK.value ? '日曆與事件' : '日历与事件',
+          items: [
+            { desc: isHK.value ? '個股財報日曆' : '个股财报日历' },
+            { desc: isHK.value ? '高重要性宏觀數據事件' : '高重要性宏观数据事件' },
+            { desc: isHK.value ? '按市場的即將派息事件' : '按市场的即将派息事件' },
+            { desc: isHK.value ? '交易時段安排與假期日曆' : '交易时段安排与假期日历' },
+          ],
+        },
+        {
+          iconSvg: capIcons.fileText,
+          color: '#f59e0b',
+          label: isHK.value ? '新聞、社區與自選' : '新闻、社区与自选',
+          items: [
+            { desc: isHK.value ? '個股最新新聞資訊' : '个股最新新闻资讯' },
+            { desc: isHK.value ? '社區話題討論' : '社区话题讨论' },
+            { desc: isHK.value ? '自選股管理（查詢、新增、更新、刪除）' : '自选股管理（查询、新增、更新、删除）' },
+          ],
+        },
+        {
+          iconSvg: capIcons.briefcase,
+          color: '#6366f1',
+          label: isHK.value ? '賬戶與持倉' : '账户与持仓',
+          items: [
+            { desc: isHK.value ? '全子賬戶股票持倉' : '全子账户股票持仓' },
+            { desc: isHK.value ? '全子賬戶基金持倉' : '全子账户基金持仓' },
+            { desc: isHK.value ? '賬戶現金餘額與融資信息' : '账户现金余额与融资信息' },
+            { desc: isHK.value ? '資金流水（入金、出金、股息）' : '资金流水（入金、出金、股息）' },
+            { desc: isHK.value ? '賬戶對賬單（日報 / 月報）' : '账户对账单（日报 / 月报）' },
+            { desc: isHK.value ? '各幣種匯率' : '各币种汇率' },
+          ],
+        },
+        {
+          iconSvg: capIcons.zap,
+          color: '#ef4444',
+          label: isHK.value ? '交易執行' : '交易执行',
+          items: [
+            { desc: isHK.value ? '限價、市價、止損限價下單' : '限价、市价、止损限价下单' },
+            { desc: isHK.value ? '訂單列表、詳情、成交記錄' : '订单列表、详情、成交记录' },
+            { desc: isHK.value ? '撤銷待成交訂單' : '撤销待成交订单' },
+            { desc: isHK.value ? '修改訂單數量或價格' : '修改订单数量或价格' },
+            { desc: isHK.value ? '最大可買賣數量估算' : '最大可买卖数量估算' },
+            { desc: isHK.value ? '標的保證金比例' : '标的保证金比例' },
+          ],
+        },
+      ]
+)
+
 // SVG icons for each client (Simple Icons paths, viewBox="0 0 24 24")
 const clientIcons: Record<string, string> = {
   openclaw: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="currentColor" width="15" height="15"><path d="M60 10 C30 10 15 35 15 55 C15 75 30 95 45 100 L45 110 L55 110 L55 100 C55 100 60 102 65 100 L65 110 L75 110 L75 100 C90 95 105 75 105 55 C105 35 90 10 60 10Z"/><path d="M20 45 C5 40 0 50 5 60 C10 70 20 65 25 55 C28 48 25 45 20 45Z"/><path d="M100 45 C115 40 120 50 115 60 C110 70 100 65 95 55 C92 48 95 45 100 45Z"/></svg>`,
@@ -1517,6 +1720,29 @@ const currentMessages = computed(() => {
     </div>
   </div>
 
+  <!-- ─── Capabilities ─────────────────────────────────────────────────────── -->
+  <div class="skill-section">
+    <div class="skill-section-inner">
+      <div class="skill-section-header">
+        <h2 class="skill-section-title">{{ t.capabilitiesTitle.value }}</h2>
+        <p class="skill-section-sub">{{ t.capabilitiesSubtitle.value }}</p>
+      </div>
+      <div class="skill-cap-grid">
+        <div v-for="group in capabilityGroups" :key="group.label" class="skill-cap-card">
+          <div class="skill-cap-header">
+            <span class="skill-cap-icon" :style="{ color: group.color }" v-html="group.iconSvg" />
+            <span class="skill-cap-label" :style="{ color: group.color }">{{ group.label }}</span>
+          </div>
+          <ul class="skill-cap-list">
+            <li v-for="(item, i) in group.items" :key="i">
+              <span class="skill-cap-desc">{{ item.desc }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ─── Install ───────────────────────────────────────────────────────────── -->
   <div id="install" class="skill-section">
     <div class="skill-section-inner">
@@ -1673,6 +1899,59 @@ const currentMessages = computed(() => {
 }
 .skill-section-sub {
   font-size: 0.9375rem;
+  color: var(--vp-c-text-2);
+}
+
+/* ─── Capabilities ───────────────────────────────────────────────────────── */
+.skill-cap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 768px) {
+  .skill-cap-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .skill-cap-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.skill-cap-card {
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+.skill-cap-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.skill-cap-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.skill-cap-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.skill-cap-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.skill-cap-list li {
+  line-height: 1.5;
+}
+.skill-cap-desc {
+  font-size: 0.8125rem;
   color: var(--vp-c-text-2);
 }
 
