@@ -50,19 +50,32 @@ $ longbridge quote TSLA.US NVDA.US --format json
 
 ## 安裝
 
-**Homebrew**
+**macOS**（需要 [Homebrew](https://brew.sh)）
 
 ```bash
 brew install --cask longbridge/tap/longbridge-terminal
 ```
 
-**安裝腳本**
+**macOS / Linux**
 
 ```bash
 curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
 ```
 
-安裝完成後，`longbridge` 二進位檔案位於 `/usr/local/bin`。
+**Windows**（PowerShell）
+
+```powershell
+iwr https://github.com/longbridge/longbridge-terminal/raw/main/install.ps1 | iex
+```
+
+安裝完成後，`longbridge` 二進位檔案位於 `/usr/local/bin`（macOS/Linux）或 `%LOCALAPPDATA%\Programs\longbridge`（Windows），Windows 下可執行檔名為 `longbridge.exe`。
+
+安裝完成後，完成登入並查看可用指令：
+
+```bash
+longbridge --help   # 查看所有可用指令
+longbridge login    # 開啟瀏覽器完成 OAuth 授權，Token 儲存至 ~/.longbridge/terminal/.openapi-session
+```
 
 ## 認證
 

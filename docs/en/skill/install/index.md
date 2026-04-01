@@ -34,11 +34,15 @@ For AI tools that can execute shell commands (Claude Code, Codex, Gemini CLI, Wa
 # macOS (requires Homebrew — install at https://brew.sh if not already installed)
 brew install --cask longbridge/tap/longbridge-terminal
 
-# Linux
+# macOS / Linux
 curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
 ```
 
-**Windows:** Download `longbridge-terminal-windows-amd64.zip` from [GitHub Releases](https://github.com/longbridge/longbridge-terminal/releases/latest), extract it, and add the folder to your `PATH`.
+**Windows** (PowerShell):
+
+```powershell
+iwr https://github.com/longbridge/longbridge-terminal/raw/main/install.ps1 | iex
+```
 
 **Connect your Longbridge account:**
 
@@ -47,6 +51,8 @@ longbridge login
 ```
 
 That's it. The AI can now call `longbridge` commands on your behalf.
+
+> See the [CLI reference](/docs/cli) for the full command list and installation details.
 
 **OpenClaw** handles installation differently — send this message in chat and it takes care of everything:
 

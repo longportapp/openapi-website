@@ -50,19 +50,32 @@ $ longbridge quote TSLA.US NVDA.US --format json
 
 ## Installation
 
-**Homebrew**
+**macOS** (requires [Homebrew](https://brew.sh))
 
 ```bash
 brew install --cask longbridge/tap/longbridge-terminal
 ```
 
-**Install script**
+**macOS / Linux**
 
 ```bash
 curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
 ```
 
-Installs the `longbridge` binary to `/usr/local/bin`.
+**Windows** (PowerShell)
+
+```powershell
+iwr https://github.com/longbridge/longbridge-terminal/raw/main/install.ps1 | iex
+```
+
+Installs `longbridge` to `/usr/local/bin` (macOS/Linux) or `%LOCALAPPDATA%\Programs\longbridge` (Windows). On Windows the binary is `longbridge.exe`.
+
+After installation, authenticate and explore available commands:
+
+```bash
+longbridge --help   # List all available commands
+longbridge login    # Opens browser for OAuth, saves token to ~/.longbridge/terminal/.openapi-session
+```
 
 ## Authentication
 
