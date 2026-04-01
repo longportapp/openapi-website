@@ -5,6 +5,38 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2026-04-01
+
+### CLI v0.13.0
+
+- Add **Fundamentals & Analysis** commands:
+  - `financial-report` — financial statements with period and type filters
+  - `valuation` — P/E, P/B, P/S, dividend yield snapshot with peer comparison and history mode
+  - `forecast-eps` — analyst EPS forecast consensus
+  - `consensus` — revenue/profit/EPS consensus with beat/miss annotations
+  - `institution-rating` / `institution-rating detail` — rating distribution and monthly trends
+  - `shareholder` — institutional shareholders with change tracking and sort options
+  - `fund-holder` — funds and ETFs holding a symbol
+  - `dividend` / `dividend detail` — dividend history and distribution plan
+  - `finance-calendar` — financial calendar by event type (financial, report, dividend, ipo, macrodata, closed)
+  - `exchange-rate` — exchange rates for all supported currencies
+- Refactor CLI commands with domain-grouped naming convention
+
+## 2026-03-30
+
+- Add Statement API:
+  - `GET /v1/statement/list` — list daily or monthly account statements
+  - `GET /v1/statement/download` — get presigned download URL for a statement file
+
+## 2026-03-25
+
+- Add Community API:
+  - `GET /content/topics/mine` — list my published topics
+  - `POST /content/topics` — create a new community topic
+  - `GET /content/topics/{id}` — get topic detail
+  - `GET /content/topics/{topic_id}/comments` — list topic replies
+  - `POST /content/topics/{topic_id}/comments` — create a topic reply
+
 ## 2025-06-17
 
 - Update the interface for Get Account Balance

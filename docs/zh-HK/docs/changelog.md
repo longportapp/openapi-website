@@ -5,6 +5,38 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2026-04-01
+
+### CLI v0.13.0
+
+- 新增**基本面 & 分析**命令：
+  - `financial-report` — 財務報表，支援期間和類型篩選
+  - `valuation` — P/E、P/B、P/S、股息率快照，支援同行對比和歷史模式
+  - `forecast-eps` — 分析師 EPS 預測一致預期
+  - `consensus` — 營收/利潤/EPS 一致預期，帶超預期/未達預期標注
+  - `institution-rating` / `institution-rating detail` — 評級分佈及月度趨勢
+  - `shareholder` — 機構持股，支援變動追蹤和排序
+  - `fund-holder` — 持有該標的的基金和 ETF
+  - `dividend` / `dividend detail` — 分紅歷史和分配方案
+  - `finance-calendar` — 財務日曆，支援按事件類型篩選（財務、報告、分紅、IPO、宏觀數據、停市）
+  - `exchange-rate` — 所有支援貨幣的匯率
+- CLI 命令按業務域重新分組命名
+
+## 2026-03-30
+
+- 新增結單 API：
+  - `GET /v1/statement/list` — 查詢日結單或月結單列表
+  - `GET /v1/statement/download` — 獲取指定結單文件的預簽名下載地址
+
+## 2026-03-25
+
+- 新增社區 API：
+  - `GET /content/topics/mine` — 獲取我發布的討論列表
+  - `POST /content/topics` — 創建社區討論
+  - `GET /content/topics/{id}` — 獲取討論詳情
+  - `GET /content/topics/{topic_id}/comments` — 獲取討論回覆列表
+  - `POST /content/topics/{topic_id}/comments` — 創建討論回覆
+
 ## 2025-06-17
 
 - 更新獲取賬戶資金接口

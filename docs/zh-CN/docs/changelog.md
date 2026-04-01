@@ -5,6 +5,38 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2026-04-01
+
+### CLI v0.13.0
+
+- 新增**基本面 & 分析**命令：
+  - `financial-report` — 财务报表，支持期间和类型筛选
+  - `valuation` — P/E、P/B、P/S、股息率快照，支持同行对比和历史模式
+  - `forecast-eps` — 分析师 EPS 预测一致预期
+  - `consensus` — 营收/利润/EPS 一致预期，带超预期/未达预期标注
+  - `institution-rating` / `institution-rating detail` — 评级分布及月度趋势
+  - `shareholder` — 机构持股，支持变动追踪和排序
+  - `fund-holder` — 持有该标的的基金和 ETF
+  - `dividend` / `dividend detail` — 分红历史和分配方案
+  - `finance-calendar` — 财务日历，支持按事件类型筛选（财务、报告、分红、IPO、宏观数据、停市）
+  - `exchange-rate` — 所有支持货币的汇率
+- CLI 命令按业务域重新分组命名
+
+## 2026-03-30
+
+- 新增结单 API：
+  - `GET /v1/statement/list` — 查询日结单或月结单列表
+  - `GET /v1/statement/download` — 获取指定结单文件的预签名下载地址
+
+## 2026-03-25
+
+- 新增社区 API：
+  - `GET /content/topics/mine` — 获取我发布的讨论列表
+  - `POST /content/topics` — 创建社区讨论
+  - `GET /content/topics/{id}` — 获取讨论详情
+  - `GET /content/topics/{topic_id}/comments` — 获取讨论回复列表
+  - `POST /content/topics/{topic_id}/comments` — 创建讨论回复
+
 ## 2025-06-17
 
 - 更新获取账户资金接口
