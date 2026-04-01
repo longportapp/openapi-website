@@ -14,7 +14,7 @@ Windows (Scoop or PowerShell):
 
 ```powershell
 # Scoop
-scoop install https://raw.githubusercontent.com/longbridge/longbridge-terminal/main/longbridge.json
+scoop install https://raw.githubusercontent.com/longbridge/longbridge-terminal/main/scoop.json
 
 # Or PowerShell install script
 iwr https://github.com/longbridge/longbridge-terminal/raw/main/install.ps1 | iex
