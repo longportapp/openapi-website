@@ -101,27 +101,48 @@ longbridge filing detail AAPL.US <id>            # Full Markdown content of a fi
 ### Fundamentals & analysis
 
 ```bash
-longbridge financial-report TSLA.US                                     # Financial statements (income, balance sheet, cash flow)
-longbridge financial-report TSLA.US --kind IS --report af               # Income statement, annual
-longbridge financial-report TSLA.US --kind BS --report qf               # Balance sheet, quarterly
-longbridge valuation TSLA.US                                            # Valuation snapshot: P/E, P/B, P/S, dividend yield + peer comparison
-longbridge valuation TSLA.US --history                                  # Historical P/E time series
-longbridge valuation TSLA.US --history --indicator pb --range 5         # P/B history, 5-year range
-longbridge forecast-eps TSLA.US                                         # Analyst EPS forecast consensus
-longbridge consensus TSLA.US                                            # Revenue/profit/EPS consensus with beat/miss annotations
-longbridge institution-rating TSLA.US                                   # Rating distribution and consensus target price
-longbridge institution-rating detail TSLA.US                            # Monthly rating trends and analyst accuracy
-longbridge shareholder AAPL.US                                          # Institutional shareholders with change tracking
-longbridge shareholder AAPL.US --range inc --sort owned                 # Increasing holders, sorted by position size
-longbridge fund-holder AAPL.US                                          # Funds and ETFs that hold a symbol (top 20)
-longbridge fund-holder AAPL.US --count -1                               # All holders
-longbridge dividend AAPL.US                                             # Historical dividends
-longbridge dividend detail AAPL.US                                      # Dividend distribution plan details
-longbridge finance-calendar financial                                    # Upcoming financial events
-longbridge finance-calendar report --symbol AAPL.US --symbol TSLA.US   # Earnings calendar for specific symbols
-longbridge finance-calendar macrodata --star 3                          # High-importance macro events only
-longbridge finance-calendar dividend --market US                        # Upcoming US dividend events
-longbridge exchange-rate                                                # Exchange rates for all supported currencies
+# Financial statements (income, balance sheet, cash flow)
+longbridge financial-report TSLA.US
+# Income statement, annual
+longbridge financial-report TSLA.US --kind IS --report af
+# Balance sheet, quarterly
+longbridge financial-report TSLA.US --kind BS --report qf
+# Valuation snapshot: P/E, P/B, P/S, dividend yield + peer comparison
+longbridge valuation TSLA.US
+# Historical P/E time series
+longbridge valuation TSLA.US --history
+# P/B history, 5-year range
+longbridge valuation TSLA.US --history --indicator pb --range 5
+# Analyst EPS forecast consensus
+longbridge forecast-eps TSLA.US
+# Revenue/profit/EPS consensus with beat/miss annotations
+longbridge consensus TSLA.US
+# Rating distribution and consensus target price
+longbridge institution-rating TSLA.US
+# Monthly rating trends and analyst accuracy
+longbridge institution-rating detail TSLA.US
+# Institutional shareholders with change tracking
+longbridge shareholder AAPL.US
+# Increasing holders, sorted by position size
+longbridge shareholder AAPL.US --range inc --sort owned
+# Funds and ETFs that hold a symbol (top 20)
+longbridge fund-holder AAPL.US
+# All holders
+longbridge fund-holder AAPL.US --count -1
+# Historical dividends
+longbridge dividend AAPL.US
+# Dividend distribution plan details
+longbridge dividend detail AAPL.US
+# Upcoming financial events
+longbridge finance-calendar financial
+# Earnings calendar for specific symbols
+longbridge finance-calendar report --symbol AAPL.US --symbol TSLA.US
+# High-importance macro events only
+longbridge finance-calendar macrodata --star 3
+# Upcoming US dividend events
+longbridge finance-calendar dividend --market US
+# Exchange rates for all supported currencies
+longbridge exchange-rate
 ```
 
 ### Community content
