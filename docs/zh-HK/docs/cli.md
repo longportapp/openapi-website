@@ -65,7 +65,7 @@ curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | s
 **Windows**（[Scoop](https://scoop.sh)）
 
 ```powershell
-scoop install https://raw.githubusercontent.com/longbridge/longbridge-terminal/main/scoop.json
+scoop install https://raw.githubusercontent.com/longbridge/longbridge-terminal/main/.scoop/longbridge.json
 ```
 
 **Windows**（PowerShell）
