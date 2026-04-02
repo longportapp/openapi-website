@@ -5,6 +5,7 @@ on:
       - main
       - release
       - feat/lb
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -46,3 +47,11 @@ jobs:
           ${{github.workspace}}/ossutil cp ./docs/.vitepress/dist oss://lb-assets/github/release/open.longbridge.com/new-docs/raw/ -u -r -j 10 -e oss-cn-hangzhou.aliyuncs.com -i ${{ secrets.FE_LB_ASSET_ACCESS_KEY_ID }} -k ${{ secrets.FE_LB_ASSET_ACCESS_KEY_SECRET }} --include "*.md" --meta "Cache-Control:no-cache#Content-type:text/markdown;charset=utf-8"
           ${{github.workspace}}/ossutil cp ./docs/.vitepress/dist oss://lb-assets/github/release/open.longbridge.com/new-docs/raw/ -u -r -j 10 -e oss-cn-hangzhou.aliyuncs.com -i ${{ secrets.FE_LB_ASSET_ACCESS_KEY_ID }} -k ${{ secrets.FE_LB_ASSET_ACCESS_KEY_SECRET }} --include "*.txt" --meta "Cache-Control:no-cache#Content-type:text/plain;charset=utf-8"
           ${{github.workspace}}/ossutil cp ./docs/.vitepress/dist/ oss://lb-assets/github/release/open.longbridge.com/new-docs/raw/ -u -r -j 10 -e oss-cn-hangzhou.aliyuncs.com -i ${{ secrets.FE_LB_ASSET_ACCESS_KEY_ID }} -k ${{ secrets.FE_LB_ASSET_ACCESS_KEY_SECRET }} --include "*.html" --meta "Cache-Control:no-cache#Content-type:text/html;charset=utf-8"
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-deploy-action@v1
+        with:
+          api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          project-name: developers
+          directory: docs/.vitepress/dist
