@@ -143,3 +143,13 @@ longbridge quote AAPL.US NVDA.US
 - 最新版本在最上方
 - 章节末尾保留完整 Releases 列表链接：`https://github.com/longbridge/longbridge-terminal/releases`
 - 三个语言版本同步更新
+
+## Changelog 页面
+
+`docs/{lang}/docs/changelog.md` 以 **整个 Longbridge Developers 平台**的角度记录变更，不限于 CLI：
+
+- 以日期为单位（`## YYYY-MM-DD`），最新在最上方
+- CLI 版本用子标题 `### CLI vX.Y.Z` 标注，平台/API 变更直接写在日期下
+- 每条只写重点（1–3 条），从平台视角描述功能价值，不堆砌命令细节
+- 发布 CLI 新版本时，同步在 changelog 添加对应条目
+- 三个语言版本同步更新
