@@ -5,6 +5,8 @@ on:
       - main
       - release
       - feat/lb
+      - cloudflare-pages
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -38,6 +40,13 @@ jobs:
         run: bun run build:release
         env:
           VITE_PORTAL_GATEWAY_BASE_URL: 'https://m.lbkrs.com'
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 335162bab35b74f065a0351212011d5a
+          command: pages deploy docs/.vitepress/dist --project-name=longbridge-developers --branch=main
 
       - name: Upload to Aliyun OSS
         run: |
