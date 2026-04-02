@@ -50,9 +50,8 @@ jobs:
           ${{github.workspace}}/ossutil cp ./docs/.vitepress/dist/ oss://lb-assets/github/release/open.longbridge.com/new-docs/raw/ -u -r -j 10 -e oss-cn-hangzhou.aliyuncs.com -i ${{ secrets.FE_LB_ASSET_ACCESS_KEY_ID }} -k ${{ secrets.FE_LB_ASSET_ACCESS_KEY_SECRET }} --include "*.html" --meta "Cache-Control:no-cache#Content-type:text/html;charset=utf-8"
 
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-deploy-action@v1
+        uses: cloudflare/wrangler-action@v3
         with:
-          api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          project-name: developers
-          directory: docs/.vitepress/dist
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy docs/.vitepress/dist --project-name=developers
