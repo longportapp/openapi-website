@@ -80,15 +80,15 @@ After installation, authenticate and explore available commands:
 
 ```bash
 longbridge --help   # List all available commands
-longbridge login    # Opens browser for OAuth, saves token to ~/.longbridge/terminal/.openapi-session
+longbridge login    # Authenticate via device flow — displays a URL and code to authorize on any device
 ```
 
 ## Authentication
 
-Uses OAuth 2.0 — no manual token management required:
+Uses OAuth 2.0 device authorization flow — works in any environment (local, SSH, headless):
 
 ```bash
-longbridge login    # Opens browser for OAuth, saves token to ~/.longbridge/terminal/.openapi-session
+longbridge login    # Displays a verification URL and code; authorize on any device or browser
 longbridge logout   # Clear saved token
 ```
 
@@ -350,6 +350,12 @@ claude> Compare TSLA and NVDA Q4 2025 earnings
 Longbridge OpenAPI: maximum 10 calls per second. The SDK auto-refreshes OAuth tokens.
 
 ## Release notes
+
+### [v0.14.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.14.0)
+
+- **New: Device auth login** — `longbridge login` now uses OAuth device flow; displays a URL and code to authorize on any device, works in SSH and headless environments; `--headless` flag removed
+- **New: Order enhancements** — trailing stop and AO order types; `--expire-date`, `--outside-rth`, `--remark` added to order commands
+- **Fix: Linux segfault** — prebuilt Linux binary now uses musl to fix crash on some distributions
 
 ### [v0.13.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.13.0)
 

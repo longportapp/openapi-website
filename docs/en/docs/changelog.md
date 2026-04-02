@@ -5,6 +5,14 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2026-04-02
+
+### CLI v0.14.0
+
+- **Device auth** — the Longbridge Developers platform now supports OAuth Device Authorization Flow; `longbridge login` displays a verification URL and code to authorize from any device, including SSH and headless environments
+- **Order enhancements** — trailing stop and AO order types; `--expire-date`, `--outside-rth`, `--remark` added to order commands
+- **Fix** — prebuilt Linux binary now uses musl to fix segfault on some distributions
+
 ## 2026-04-01
 
 ### CLI v0.13.0

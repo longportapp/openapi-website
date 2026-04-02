@@ -5,6 +5,14 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2026-04-02
+
+### CLI v0.14.0
+
+- **Device Auth** — Longbridge Developers 平台现已支持 OAuth Device Auth 授权流程；`longbridge login` 显示验证 URL 和 Code，可在任意设备完成授权，支持 SSH 和无头环境
+- **订单增强** — 支持追踪止损和 AO 订单类型；订单命令新增 `--expire-date`、`--outside-rth`、`--remark` 参数
+- **修复** — Linux 预构建二进制改为 musl，修复在部分发行版的 Segfault
+
 ## 2026-04-01
 
 ### CLI v0.13.0
