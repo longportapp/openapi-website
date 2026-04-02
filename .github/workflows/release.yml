@@ -46,7 +46,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: 335162bab35b74f065a0351212011d5a
-          command: pages deploy docs/.vitepress/dist --project-name=developers
+          command: pages deploy docs/.vitepress/dist --project-name=developers --branch=main
 
       - name: Upload to Aliyun OSS
         run: |
