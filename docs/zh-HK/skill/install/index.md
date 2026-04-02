@@ -62,7 +62,7 @@ curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | s
 **Windows**（[Scoop](https://scoop.sh)）：
 
 ```powershell
-scoop install https://raw.githubusercontent.com/longbridge/longbridge-terminal/main/scoop.json
+scoop install https://github.com/longbridge/longbridge-terminal/raw/refs/heads/main/.scoop/longbridge.json
 ```
 
 **Windows**（PowerShell）：
@@ -91,13 +91,13 @@ https://openapi.longbridge.com/mcp
 
 各工具配置入口：
 
-| 工具 | 配置位置 |
-| --- | --- |
+| 工具           | 配置位置                                                                                                                                   |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | Claude Desktop | 編輯 `~/Library/Application Support/Claude/claude_desktop_config.json`（macOS）或 `%APPDATA%\Claude\claude_desktop_config.json`（Windows） |
-| Cursor | Settings → MCP Servers → Add Remote MCP Server |
-| Zed | `~/.config/zed/settings.json` 中的 `context_servers` 字段 |
-| Gemini CLI | `~/.gemini/settings.json` 中的 `mcpServers` 字段 |
-| Warp | Settings → AI → MCP Servers → Add |
+| Cursor         | Settings → MCP Servers → Add Remote MCP Server                                                                                             |
+| Zed            | `~/.config/zed/settings.json` 中的 `context_servers` 字段                                                                                  |
+| Gemini CLI     | `~/.gemini/settings.json` 中的 `mcpServers` 字段                                                                                           |
+| Warp           | Settings → AI → MCP Servers → Add                                                                                                          |
 
 首次提問時客戶端會自動彈出瀏覽器完成 OAuth 授權，無需配置 API Key。
 

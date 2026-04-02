@@ -30,7 +30,7 @@ Windows (Scoop or PowerShell):
 
 ```powershell
 # Scoop
-scoop install https://raw.githubusercontent.com/longbridge/longbridge-terminal/main/scoop.json
+scoop install https://github.com/longbridge/longbridge-terminal/raw/refs/heads/main/.scoop/longbridge.json
 
 # Or PowerShell install script
 iwr https://github.com/longbridge/longbridge-terminal/raw/main/install.ps1 | iex
@@ -61,8 +61,8 @@ longbridge check    # Verify connectivity and token (no auth required)
 
 ## Environment Variables
 
-| Variable         | Value     | Description                                                        |
-| ---------------- | --------- | ------------------------------------------------------------------ |
+| Variable         | Value     | Description                                                                                                                 |
+| ---------------- | --------- | --------------------------------------------------------------------------------------------------------------------------- |
 | `LONGBRIDGE_ENV` | `staging` | Switch all endpoints to the staging environment (`openapi.longbridge.xyz`). Useful for testing against non-production data. |
 
 ```bash

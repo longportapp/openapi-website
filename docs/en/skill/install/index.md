@@ -42,7 +42,7 @@ curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | s
 **Windows** ([Scoop](https://scoop.sh)):
 
 ```powershell
-scoop install https://raw.githubusercontent.com/longbridge/longbridge-terminal/main/scoop.json
+scoop install https://github.com/longbridge/longbridge-terminal/raw/refs/heads/main/.scoop/longbridge.json
 ```
 
 **Windows** (PowerShell):
@@ -81,13 +81,13 @@ https://openapi.longbridge.com/mcp
 
 Where to find the MCP configuration in each client:
 
-| Client | Where to configure |
-| --- | --- |
+| Client         | Where to configure                                                                                                                        |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | Claude Desktop | Edit `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows) |
-| Cursor | Settings → MCP Servers → Add Remote MCP Server |
-| Zed | `context_servers` key in `~/.config/zed/settings.json` |
-| Gemini CLI | `mcpServers` key in `~/.gemini/settings.json` |
-| Warp | Settings → AI → MCP Servers → Add |
+| Cursor         | Settings → MCP Servers → Add Remote MCP Server                                                                                            |
+| Zed            | `context_servers` key in `~/.config/zed/settings.json`                                                                                    |
+| Gemini CLI     | `mcpServers` key in `~/.gemini/settings.json`                                                                                             |
+| Warp           | Settings → AI → MCP Servers → Add                                                                                                         |
 
 The first time you ask a Longbridge question, your client will open a browser tab for OAuth authorization — no API key required.
 
