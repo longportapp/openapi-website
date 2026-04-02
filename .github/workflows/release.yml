@@ -5,6 +5,7 @@ on:
       - main
       - release
       - feat/lb
+      - cloudflare-pages
   workflow_dispatch:
 
 concurrency:
