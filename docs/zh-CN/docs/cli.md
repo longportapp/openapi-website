@@ -80,15 +80,15 @@ iwr https://github.com/longbridge/longbridge-terminal/raw/main/install.ps1 | iex
 
 ```bash
 longbridge --help   # 查看所有可用命令
-longbridge login    # 打开浏览器完成 OAuth 授权，Token 存储至 ~/.longbridge/terminal/.openapi-session
+longbridge login    # 通过 Device Flow 认证 — 显示验证 URL 和 Code，在任意设备上完成授权
 ```
 
 ## 认证
 
-使用 OAuth 2.0 认证，无需手动管理 Token：
+使用 OAuth 2.0 Device Auth Flow，支持本地、SSH、无头环境：
 
 ```bash
-longbridge login    # 打开浏览器完成 OAuth 授权，Token 保存至 ~/.longbridge/terminal/.openapi-session
+longbridge login    # 显示验证 URL 和 Code，在任意设备或浏览器上完成授权
 longbridge logout   # 清除已保存的 Token
 ```
 
@@ -348,6 +348,12 @@ claude> 对比分析 TSLA 和 NVDA 2025 Q4 的财报数据
 Longbridge OpenAPI 最高支持每秒 10 次调用，SDK 自动刷新 OAuth Token。
 
 ## Release Notes
+
+### [v0.14.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.14.0)
+
+- **新增：Device Auth 登录** — `longbridge login` 改为 OAuth Device Flow，显示验证 URL 和 Code，在任意设备完成授权，支持 SSH 和无头环境；`--headless` 标志已移除
+- **新增：订单增强** — 支持追踪止损和 AO 订单类型；订单命令新增 `--expire-date`、`--outside-rth`、`--remark` 参数
+- **修复：Linux Segfault** — Linux 预构建二进制改为 musl，修复在部分发行版崩溃的问题
 
 ### [v0.13.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.13.0)
 
