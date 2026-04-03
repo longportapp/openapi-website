@@ -16,16 +16,42 @@ Once installed, you can say things like this to your AI assistant and get real a
 
 ---
 
-## How it works
+## Step 1 — Install the Skill
 
-Longbridge Skill gives your AI assistant knowledge of what the `longbridge` CLI can do. To actually fetch live data or execute trades, the AI needs one of two capabilities:
+The Skill is a set of instruction files that tell your AI assistant what Longbridge can do. Two ways to install:
+
+**Via npx / bunx (recommended, global install):**
+
+```bash
+# Node.js
+npx skills add longbridge/developers -g -y
+# Bun
+bunx skills add longbridge/developers -g -y
+```
+
+> Requires [Node.js](https://nodejs.org) or [Bun](https://bun.sh).
+
+**Or download the ZIP and install manually:**
+
+Download [longbridge.zip](https://open.longbridge.com/skill/longbridge.zip) and unzip it, then place the files in your AI tool's Skill directory (Claude Code: `.claude/skills/`, Cursor: paste into the Rules editor, other tools: see the README).
+
+**OpenClaw** — send this message in chat and it handles everything automatically:
+
+```
+Install the Longbridge Developers Skill from this zip file:
+https://open.longbridge.com/skill/longbridge.zip
+```
+
+---
+
+## Step 2 — Connect your Longbridge account
+
+The Skill tells the AI what's possible. To actually fetch live data or execute trades, you need one of two capabilities:
 
 - **Shell execution** — the AI runs `longbridge` commands directly in a terminal
 - **MCP integration** — the AI connects to the Longbridge MCP server over the network
 
----
-
-## Method 1 — Install the CLI
+### Method A — Install the CLI
 
 For AI tools that can execute shell commands (Claude Code, Codex, Gemini CLI, Warp, etc.).
 
@@ -61,15 +87,7 @@ That's it. The AI can now call `longbridge` commands on your behalf.
 
 > See the [CLI reference](/docs/cli) for the full command list and installation details.
 
-**OpenClaw** handles installation differently — send this message in chat and it takes care of everything:
-
-```
-Install the Longbridge Developers Skill from this zip file: https://open.longbridge.com/skill/longbridge.zip
-```
-
----
-
-## Method 2 — Connect the MCP server
+### Method B — Connect the MCP server
 
 For AI tools that support MCP (Claude Desktop, Cursor, Zed, Gemini CLI, Warp, etc.).
 
