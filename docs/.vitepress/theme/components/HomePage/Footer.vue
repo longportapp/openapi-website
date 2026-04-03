@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <footer v-if="!isCN" class="footer">
     <div class="flex flex-wrap items-center text-xs gap-x-5 gap-y-2">
       <a v-if="beianText" class="beian-link" href="https://beian.miit.gov.cn/" rel="nofollow">
         {{ beianText }}
@@ -39,13 +39,11 @@ import { isServer } from '../../utils/i18n'
 
 const { t, locale } = useI18n()
 
+const isCN = computed(() => !isServer() && window.location.host.endsWith('.cn'))
+
 // 备案文案
 const beianText = computed(() => {
-  if (isServer()) {
-    return ''
-  }
-  const hostIsCN = window.location.host.endsWith('.cn')
-  return hostIsCN && locale.value === 'zh-CN' ? `© ${new Date().getFullYear()} 粤 ICP 备 2025433117 号` : ''
+  return isCN.value && locale.value === 'zh-CN' ? `© ${new Date().getFullYear()} 粤 ICP 备 2025433117 号` : ''
 })
 
 const leftLinks = computed(() => [
