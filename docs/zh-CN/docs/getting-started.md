@@ -71,7 +71,7 @@ brew install --cask longbridge/tap/longbridge-terminal
   <TabItem value="script" label="Linux / macOS (脚本)">
 
 ```bash
-curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
+curl -sSL https://open.longbridge.com/longbridge/longbridge-terminal/install | sh
 ```
 
   </TabItem>

@@ -7,17 +7,17 @@
 brew install --cask longbridge/tap/longbridge-terminal
 
 # macOS / Linux
-curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
+curl -sSL https://open.longbridge.com/longbridge/longbridge-terminal/install | sh
 ```
 
 Windows (Scoop or PowerShell):
 
 ```powershell
 # Scoop
-scoop install https://github.com/longbridge/longbridge-terminal/raw/refs/heads/main/.scoop/longbridge.json
+scoop install https://open.longbridge.com/longbridge/longbridge-terminal/longbridge.json
 
 # Or PowerShell install script
-iwr https://github.com/longbridge/longbridge-terminal/raw/main/install.ps1 | iex
+iwr https://open.longbridge.com/longbridge/longbridge-terminal/install.ps1 | iex
 ```
 
 Authenticate:
@@ -33,7 +33,7 @@ longbridge login
 longbridge update
 
 # Or re-run the install script
-curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
+curl -sSL https://open.longbridge.com/longbridge/longbridge-terminal/install | sh
 ```
 
 ## MCP (for AI tools — no code)

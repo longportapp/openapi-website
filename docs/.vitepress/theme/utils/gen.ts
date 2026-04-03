@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import { type DefaultTheme } from 'vitepress'
+import { isPageIncluded } from '../../region-utils'
 
 const SIDEBAR_ICONS: Record<string, string> = {
   book: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
@@ -35,7 +36,7 @@ export function genMarkdowDocs(lang: string, basePath: string, debug = false) {
   return function (): DefaultTheme.SidebarItem[] {
     const docsRoot = path.resolve(process.cwd(), 'docs')
     const rootDir = path.join(docsRoot, lang, basePath)
-    const fc = generateSidebarItems(rootDir, `/${basePath}`, `/${basePath}`)
+    const fc = generateSidebarItems(rootDir, `/${basePath}`, `/${basePath}`, 0, docsRoot)
     if (debug) {
       fs.writeFileSync(path.resolve(__dirname, `./${lang}_sidebar.json`), JSON.stringify(fc, null, 2))
     }
@@ -83,7 +84,8 @@ function generateSidebarItems(
   dirPath: string,
   relativePath: string,
   rootPath: string,
-  depth = 0
+  depth = 0,
+  docsRoot?: string
 ): DefaultTheme.SidebarItem[] {
   const items: DefaultTheme.SidebarItem[] = []
 
@@ -96,6 +98,11 @@ function generateSidebarItems(
 
     for (const file of mdFiles) {
       const filePath = path.join(dirPath, file)
+      // Region whitelist filtering: skip pages not in the whitelist
+      if (docsRoot) {
+        const relFromDocs = path.relative(docsRoot, filePath)
+        if (!isPageIncluded(relFromDocs)) continue
+      }
       const fileContent = fs.readFileSync(filePath, 'utf8')
       const { data } = matter(fileContent)
       const rawTitle = data['sidebar_label'] || data['title'] || getDefaultTitle(file)
@@ -134,7 +141,7 @@ function generateSidebarItems(
       const subDirPath = path.join(dirPath, dir)
       const subRelativePath = path.join(relativePath, dir)
       const subCategoryConfig = readCategoryConfig(subDirPath)
-      const subItems = generateSidebarItems(subDirPath, subRelativePath, rootPath, depth + 1)
+      const subItems = generateSidebarItems(subDirPath, subRelativePath, rootPath, depth + 1, docsRoot)
 
       if (subItems.length > 0) {
         const dirTitle = subCategoryConfig?.label || formatDirName(dir)

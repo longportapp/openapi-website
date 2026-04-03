@@ -1511,12 +1511,13 @@ onUnmounted(() => {
 
 const npxCommand = 'npx skills add longbridge/developers'
 const openclawCommand = '/skills add longbridge/developers'
+import { siteHostname } from '../utils/region'
 const oneLinerCommand = computed(() =>
   isEN.value
-    ? 'Install Longbridge Skill following the guide: \nhttps://open.longbridge.com/skill/install.md'
+    ? `Install Longbridge Skill following the guide: \n${siteHostname}/skill/install.md`
     : isHK.value
-      ? '根據指引安裝 Longbridge SKILL：\nhttps://open.longbridge.com/skill/install.md'
-      : '根据指引安装 Longbridge SKILL：\nhttps://open.longbridge.com/skill/install.md'
+      ? `根據指引安裝 Longbridge SKILL：\n${siteHostname}/skill/install.md`
+      : `根据指引安装 Longbridge SKILL：\n${siteHostname}/skill/install.md`
 )
 
 const copiedNpx = ref(false)

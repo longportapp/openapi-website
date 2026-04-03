@@ -59,19 +59,19 @@ brew install --cask longbridge/tap/longbridge-terminal
 **macOS / Linux**
 
 ```bash
-curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
+curl -sSL https://open.longbridge.com/longbridge/longbridge-terminal/install | sh
 ```
 
 **Windows** ([Scoop](https://scoop.sh))
 
 ```powershell
-scoop install https://raw.githubusercontent.com/longbridge/longbridge-terminal/main/.scoop/longbridge.json
+scoop install https://open.longbridge.com/longbridge/longbridge-terminal/longbridge.json
 ```
 
 **Windows** (PowerShell)
 
 ```powershell
-iwr https://github.com/longbridge/longbridge-terminal/raw/main/install.ps1 | iex
+iwr https://open.longbridge.com/longbridge/longbridge-terminal/install.ps1 | iex
 ```
 
 Installs `longbridge` to `/usr/local/bin` (macOS/Linux) or `%LOCALAPPDATA%\Programs\longbridge` (Windows). On Windows the binary is `longbridge.exe`.

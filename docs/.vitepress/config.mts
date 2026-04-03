@@ -4,14 +4,18 @@ import Unocss from 'unocss/vite'
 import { markdownConfig } from './config/markdown'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { mkdirSync } from 'node:fs'
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { execSync } from 'node:child_process'
 import { localesConfig } from './config/locales'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 import { rewriteMarkdownPath } from './utils'
+import { getRegionConfig, computeSrcExclude } from './region-utils'
 import * as cheerio from 'cheerio'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
+const docsRoot = resolve(__dirname, '..')
+const regionCfg = getRegionConfig()
+const regionSrcExclude = computeSrcExclude(docsRoot)
 
 const insertScript = (html: string) => {
   const $ = cheerio.load(html)
@@ -32,11 +36,16 @@ export default defineConfig(
     ignoreDeadLinks: true,
     base: '/',
 
-    srcExclude: ['README.md'],
+    srcExclude: ['README.md', ...regionSrcExclude],
     rewrites: rewriteMarkdownPath,
     markdown: markdownConfig,
     transformHtml(code) {
-      return insertScript(code)
+      let html = insertScript(code)
+      // Region URL rewriting: replace global hostname with region hostname in final HTML
+      if (regionCfg?.siteHostname && regionCfg.siteHostname !== 'https://open.longbridge.com') {
+        html = html.split('https://open.longbridge.com').join(regionCfg.siteHostname)
+      }
+      return html
     },
     transformHead(context) {
       const { page } = context
@@ -54,13 +63,14 @@ export default defineConfig(
         markdownPath = markdownPath.replace('/index.md', '.md')
       }
 
+      const siteHost = regionCfg?.siteHostname || 'https://open.longbridge.com'
       return [
-        ['link', { rel: 'canonical', href: `https://open.longbridge.com/${localePathname}` }],
-        ['link', { rel: 'alternate', hreflang: 'en', href: `https://open.longbridge.com/${pathname}` }],
-        ['link', { rel: 'alternate', hreflang: 'zh-Hans', href: `https://open.longbridge.com/zh-CN/${pathname}` }],
-        ['link', { rel: 'alternate', hreflang: 'zh-Hant', href: `https://open.longbridge.com/zh-HK/${pathname}` }],
-        ['link', { rel: 'alternate', type: 'text/markdown', href: `https://open.longbridge.com/${markdownPath}` }],
-        ['meta', { property: 'og:url', content: `https://open.longbridge.com/${localePathname}` }],
+        ['link', { rel: 'canonical', href: `${siteHost}/${localePathname}` }],
+        ['link', { rel: 'alternate', hreflang: 'en', href: `${siteHost}/${pathname}` }],
+        ['link', { rel: 'alternate', hreflang: 'zh-Hans', href: `${siteHost}/zh-CN/${pathname}` }],
+        ['link', { rel: 'alternate', hreflang: 'zh-Hant', href: `${siteHost}/zh-HK/${pathname}` }],
+        ['link', { rel: 'alternate', type: 'text/markdown', href: `${siteHost}/${markdownPath}` }],
+        ['meta', { property: 'og:url', content: `${siteHost}/${localePathname}` }],
         ['meta', { property: 'og:title', content: context.title }],
         ['meta', { property: 'og:description', content: context.description }],
         ['meta', { name: 'twitter:image', content: 'https://assets.lbctrl.com/uploads/b510b04f-9238-4fe0-b39d-11e076876ac1/longbridge-og.png' }],
@@ -75,10 +85,21 @@ export default defineConfig(
       mkdirSync(outSkillDir, { recursive: true })
       execSync(`zip -r "${outSkillDir}/longbridge.zip" longbridge`, { cwd: skillsDir })
       console.log('✓ skill/longbridge.zip generated')
+
+      // Region URL rewriting for static assets
+      if (regionCfg?.siteHostname && regionCfg.siteHostname !== 'https://open.longbridge.com') {
+        const installDir = resolve(siteConfig.outDir, 'longbridge-terminal')
+        for (const file of ['install', 'install.ps1']) {
+          const filePath = resolve(installDir, file)
+          const content = readFileSync(filePath, 'utf-8')
+          writeFileSync(filePath, content.split('https://open.longbridge.com').join(regionCfg.siteHostname))
+        }
+        console.log('✓ install scripts rewritten for region')
+      }
     },
 
     sitemap: {
-      hostname: 'https://open.longbridge.com',
+      hostname: regionCfg?.siteHostname || 'https://open.longbridge.com',
       transformItems(items) {
         return items.filter((item) => !item.url.includes('migration'))
       },
