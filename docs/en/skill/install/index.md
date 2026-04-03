@@ -36,19 +36,19 @@ For AI tools that can execute shell commands (Claude Code, Codex, Gemini CLI, Wa
 brew install --cask longbridge/tap/longbridge-terminal
 
 # macOS / Linux
-curl -sSL https://github.com/longbridge/longbridge-terminal/raw/main/install | sh
+curl -sSL https://open.longbridge.com/longbridge/longbridge-terminal/install | sh
 ```
 
 **Windows** ([Scoop](https://scoop.sh)):
 
 ```powershell
-scoop install https://github.com/longbridge/longbridge-terminal/raw/refs/heads/main/.scoop/longbridge.json
+scoop install https://open.longbridge.com/longbridge/longbridge-terminal/longbridge.json
 ```
 
 **Windows** (PowerShell):
 
 ```powershell
-iwr https://github.com/longbridge/longbridge-terminal/raw/main/install.ps1 | iex
+iwr https://open.longbridge.com/longbridge/longbridge-terminal/install.ps1 | iex
 ```
 
 **Connect your Longbridge account:**

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="breadcrumbItems.length > 1" class="breadcrumb-container">
+  <div v-if="!isCN && breadcrumbItems.length > 1" class="breadcrumb-container">
     <nav class="breadcrumb" aria-label="面包屑导航">
       <ol class="breadcrumb-list">
         <li
@@ -22,7 +22,9 @@
 
 <script setup lang="ts">
 import { useBreadcrumb } from '../../composables/useBreadcrumb'
+import { siteHostname } from '../../utils/region'
 
+const isCN = siteHostname.includes('longbridge.cn')
 const { breadcrumbItems } = useBreadcrumb()
 </script>
 

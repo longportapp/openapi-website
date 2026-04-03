@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import { getRegionConfig } from '../docs/.vitepress/region-utils'
 
 // Simple capitalize function to replace lodash
 function capitalize(str: string): string {
@@ -123,12 +124,14 @@ function traverseDirectory(dir: string, rootDir: string): DirectoryStructure {
  * @param structure - Directory structure and links
  * @returns Formatted Markdown link list
  */
+const llmsSiteHost = getRegionConfig()?.siteHostname || 'https://open.longbridge.com'
+
 function generateMarkdownList(structure: DirectoryStructure): string {
   let output = ''
 
   // Add links for current directory
   for (const link of structure.links) {
-    output += `- [${link.title}](https://open.longbridge.com${link.slug})\n`
+    output += `- [${link.title}](${llmsSiteHost}${link.slug})\n`
   }
 
   // Add links for subdirectories
