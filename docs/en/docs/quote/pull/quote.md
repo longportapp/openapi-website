@@ -266,7 +266,7 @@ func main() {
 | ∟∟ high             | string   | High                                                                                 |
 | ∟∟ low              | string   | Low                                                                                  |
 | ∟∟ prev_close       | string   | Close of the last trade session                                                      |
-| ∟ over_night_quote  | object   | Quote of US overnight market                                                         |
+| ∟ over_night_quote  | object   | Quote of US overnight market<br/><br/>Note: Requires purchasing the "LV1 Real-time Quote (OpenAPI)" quote card in the Longbridge App and enabling the `enable_overnight` parameter. Returns null otherwise. |
 | ∟∟ last_done        | string   | Latest price                                                                         |
 | ∟∟ timestamp        | int64    | Time of latest price                                                                 |
 | ∟∟ volume           | int64    | Volume                                                                               |

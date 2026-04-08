@@ -99,7 +99,9 @@ A:
 
 A:
 
-- 夜盘行情需要主动开启，方式为在鉴权接口的 `metadata` 字段填充 key `need_over_night_quote`, value `true`。
+- **夜盘数据默认不包含**，需要在手机 Longbridge App 的「行情商店」购买 **「LV1 实时行情 (OpenAPI)」** 行情卡才能获取夜盘数据。
+- 目前夜盘行情**仅支持美股**，港股暂不支持夜盘。
+- 开通夜盘权限后，还需要主动开启，方式为在鉴权接口的 `metadata` 字段填充 key `need_over_night_quote`, value `true`。
 
 ```protobuf
 message AuthRequest {
