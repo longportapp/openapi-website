@@ -31,7 +31,7 @@ sidebar_position: 2
 
 - **订单查询接口**：调用 API 查询订单实时状态
 - **WebSocket 推送**：订阅交易推送，实时接收订单更新
-- **CLI**：通过 [Longbridge Terminal CLI](/docs/cli) 在命令行查询，例如 `longbridge orders`
+- **CLI**：通过 [Longbridge CLI](/docs/cli) 在命令行查询，例如 `longbridge orders`
 - **App / PC**：直接在终端产品中查看对应账户下的订单及其状态
 
 ## Q7: 如何知道账户资金是否足够交易？

@@ -31,7 +31,7 @@ After placing orders via the OpenAPI, you can view them through any of the follo
 
 - **Order inquiry API**: Call the API to query real-time order status
 - **WebSocket push**: Subscribe to trade push events to receive order updates in real time
-- **CLI**: Use the [Longbridge Terminal CLI](/docs/cli) to query from the command line, e.g. `longbridge orders`
+- **CLI**: Use the [Longbridge CLI](/docs/cli) to query from the command line, e.g. `longbridge orders`
 - **App / PC**: View orders and their statuses directly in the terminal products
 
 ## Q7: How can I know if my account has sufficient funds for trading?

@@ -1,6 +1,6 @@
 ---
 sidebar_position: -999
-title: Introduction
+title: Platform Introduction
 id: getting_started_introduce
 sidebar_icon: book
 ---

@@ -47,7 +47,7 @@ sidebar_position: 0
 
 **CLI（命令行工具）**
 
-安装 [Longbridge Terminal CLI](/docs/cli)，通过简单命令即可查询行情数据，无需编写任何代码：
+安装 [Longbridge CLI](/docs/cli)，通过简单命令即可查询行情数据，无需编写任何代码：
 
 ```bash
 longbridge quote AAPL.US TSLA.US

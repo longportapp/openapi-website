@@ -1,6 +1,6 @@
 ---
 sidebar_position: -999
-title: OpenAPI 介绍
+title: 平台介绍
 id: getting_started_introduce
 sidebar_icon: book
 ---

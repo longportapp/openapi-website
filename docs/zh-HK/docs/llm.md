@@ -1,13 +1,13 @@
 ---
-sidebar_position: 2.2
+sidebar_position: 2.3
 slug: /llm
-sidebar_label: LLM
+sidebar_label: LLMs
 sidebarCollapsed: true
 id: llm
 sidebar_icon: sparkles
 ---
 
-# LLM 組件
+# LLMs 組件
 
 我們提供了一些用於 LLM（大型語言模型）的組件，您可以輕鬆訪問和分析金融數據、實時市場數據，甚至可以讓 AI 提交訂單。
 

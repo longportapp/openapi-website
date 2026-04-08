@@ -7,9 +7,9 @@ id: cli
 sidebar_icon: terminal
 ---
 
-# Longbridge Terminal CLI
+# Longbridge CLI
 
-Longbridge Terminal 是一款 AI-native 命令列工具，涵蓋全部 Longbridge Developers 端點，支援即時行情、帳戶管理與交易操作。專為腳本自動化、AI 代理工具調用及日常終端交易工作流程設計。
+Longbridge CLI 是一款 AI-native 命令列工具，涵蓋全部 Longbridge Developers 端點，支援即時行情、帳戶管理與交易操作。專為腳本自動化、AI 代理工具調用及日常終端交易工作流程設計。
 
 **GitHub：** [longbridge/longbridge-terminal](https://github.com/longbridge/longbridge-terminal)
 
@@ -50,29 +50,36 @@ $ longbridge quote TSLA.US NVDA.US --format json
 
 ## 安裝
 
-**macOS**（需要 [Homebrew](https://brew.sh)）
+<Tabs groupId="cli-install">
+  <TabItem value="homebrew" label="macOS (Homebrew)" default>
 
 ```bash
 brew install --cask longbridge/tap/longbridge-terminal
 ```
 
-**macOS / Linux**
+  </TabItem>
+  <TabItem value="script" label="Linux / macOS (腳本)">
 
 ```bash
 curl -sSL https://open.longbridge.com/longbridge/longbridge-terminal/install | sh
 ```
 
-**Windows**（[Scoop](https://scoop.sh)）
+  </TabItem>
+  <TabItem value="scoop" label="Windows (Scoop)">
 
 ```powershell
 scoop install https://open.longbridge.com/longbridge/longbridge-terminal/longbridge.json
 ```
 
-**Windows**（PowerShell）
+  </TabItem>
+  <TabItem value="powershell" label="Windows (PowerShell)">
 
 ```powershell
 iwr https://open.longbridge.com/longbridge/longbridge-terminal/install.ps1 | iex
 ```
+
+  </TabItem>
+</Tabs>
 
 安裝完成後，`longbridge` 二進位檔案位於 `/usr/local/bin`（macOS/Linux）或 `%LOCALAPPDATA%\Programs\longbridge`（Windows），Windows 下可執行檔名為 `longbridge.exe`。
 

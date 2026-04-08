@@ -34,28 +34,79 @@ All API response are used [Unix Timestamp](https://en.wikipedia.org/wiki/Unix_ti
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>
     <ul>
-        <li><a href="https://www.python.org/">Python 3</a></li>
-        <li>Pip</li>
+      <li><a href="https://www.python.org/">Python 3</a></li>
+      <li>Pip</li>
     </ul>
   </TabItem>
   <TabItem value="javascript" label="JavaScript">
-      <ul>
-          <li><a href="https://nodejs.org/">Node.js</a> or <a href="https://bun.sh">Bun</a></li>
-          <li>Yarn</li>
-      </ul>
+    <ul>
+      <li><a href="https://nodejs.org/">Node.js</a> or <a href="https://bun.sh">Bun</a></li>
+      <li>Yarn</li>
+    </ul>
   </TabItem>
   <TabItem value="rust" label="Rust">
-      <ul><li><a href="https://www.rust-lang.org/">Rust</a></li></ul>
+    <ul>
+      <li><a href="https://www.rust-lang.org/">Rust</a></li>
+    </ul>
   </TabItem>
   <TabItem value="java" label="Java">
-      <ul><li><a href="https://openjdk.org/">JDK</a></li>
-      <li><a href="https://maven.apache.org/">Maven</a></li></ul>
+    <ul>
+      <li><a href="https://openjdk.org/">JDK</a></li>
+      <li><a href="https://maven.apache.org/">Maven</a></li>
+    </ul>
   </TabItem>
   <TabItem value="go" label="Go">
-      <ul><li><a href="https://go.dev">Go</a></li>
-      <li><a href="https://pkg.go.dev/github.com/longbridge/openapi-go">Go Docs</a></li></ul>
+    <ul>
+      <li><a href="https://go.dev">Go</a></li>
+      <li><a href="https://pkg.go.dev/github.com/longbridge/openapi-go">Go Docs</a></li>
+    </ul>
   </TabItem>
 </Tabs>
+
+## CLI Quick Start
+
+If you don't need to write code, the [Longbridge CLI](/docs/cli) offers a lightweight alternative — install once, authorize via OAuth, no environment variables needed.
+
+### Installation
+
+<Tabs groupId="cli-install">
+  <TabItem value="homebrew" label="macOS (Homebrew)" default>
+
+```bash
+brew install --cask longbridge/tap/longbridge-terminal
+```
+
+  </TabItem>
+  <TabItem value="script" label="Linux / macOS (Script)">
+
+```bash
+curl -sSL https://open.longbridge.com/longbridge/longbridge-terminal/install | sh
+```
+
+  </TabItem>
+  <TabItem value="scoop" label="Windows (Scoop)">
+
+```powershell
+scoop install https://open.longbridge.com/longbridge/longbridge-terminal/longbridge.json
+```
+
+  </TabItem>
+  <TabItem value="powershell" label="Windows (PowerShell)">
+
+```powershell
+iwr https://open.longbridge.com/longbridge/longbridge-terminal/install.ps1 | iex
+```
+
+  </TabItem>
+</Tabs>
+
+### Login
+
+```bash
+longbridge login
+```
+
+The browser opens the authorization page automatically. The token is saved after approval — no need to repeat.
 
 ## Install SDK
 

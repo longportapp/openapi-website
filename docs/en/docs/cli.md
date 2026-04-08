@@ -7,9 +7,9 @@ sidebar_icon: terminal
 id: cli
 ---
 
-# Longbridge Terminal CLI
+# Longbridge CLI
 
-Longbridge Terminal is an AI-native CLI covering every Longbridge OpenAPI endpoint — real-time market data, account management, and trading. Designed for scripting, AI-agent tool-calling, and daily trading workflows from the terminal.
+Longbridge CLI is an AI-native CLI tool covering every Longbridge OpenAPI endpoint — real-time market data, account management, and trading. Designed for scripting, AI-agent tool-calling, and daily trading workflows from the terminal.
 
 **GitHub:** [longbridge/longbridge-terminal](https://github.com/longbridge/longbridge-terminal)
 
@@ -50,29 +50,36 @@ $ longbridge quote TSLA.US NVDA.US --format json
 
 ## Installation
 
-**macOS** (requires [Homebrew](https://brew.sh))
+<Tabs groupId="cli-install">
+  <TabItem value="homebrew" label="macOS (Homebrew)" default>
 
 ```bash
 brew install --cask longbridge/tap/longbridge-terminal
 ```
 
-**macOS / Linux**
+  </TabItem>
+  <TabItem value="script" label="Linux / macOS (Script)">
 
 ```bash
 curl -sSL https://open.longbridge.com/longbridge/longbridge-terminal/install | sh
 ```
 
-**Windows** ([Scoop](https://scoop.sh))
+  </TabItem>
+  <TabItem value="scoop" label="Windows (Scoop)">
 
 ```powershell
 scoop install https://open.longbridge.com/longbridge/longbridge-terminal/longbridge.json
 ```
 
-**Windows** (PowerShell)
+  </TabItem>
+  <TabItem value="powershell" label="Windows (PowerShell)">
 
 ```powershell
 iwr https://open.longbridge.com/longbridge/longbridge-terminal/install.ps1 | iex
 ```
+
+  </TabItem>
+</Tabs>
 
 Installs `longbridge` to `/usr/local/bin` (macOS/Linux) or `%LOCALAPPDATA%\Programs\longbridge` (Windows). On Windows the binary is `longbridge.exe`.
 
