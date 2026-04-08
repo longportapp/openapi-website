@@ -5,7 +5,18 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2026-04-08
+
+### CLI v0.14.2
+
+- **`--lang` 标志** — 为所有命令指定内容语言（`zh-CN`、`zh-HK`、`en`），自动回退到系统 `LANG` 环境变量
+
 ## 2026-04-02
+
+### CLI v0.14.1
+
+- **CN 区域登录** — `longbridge login` 支持中国大陆区域路由
+- **`-v` 标志** — 快速查看版本号
 
 ### CLI v0.14.0
 

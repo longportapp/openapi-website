@@ -356,6 +356,15 @@ Longbridge OpenAPI 最高支持每秒 10 次调用，SDK 自动刷新 OAuth Toke
 
 ## Release Notes
 
+### [v0.14.2](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.14.2)
+
+- **新增：`--lang` 全局标志** — 为所有命令指定内容语言（`zh-CN`、`zh-HK`、`en`），优先级：`--lang` → 系统 `LANG` 环境变量 → `en`
+
+### [v0.14.1](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.14.1)
+
+- **新增：CN 区域登录** — `longbridge login` 支持中国大陆区域路由
+- **新增：`-v` 标志** — 快速查看版本号
+
 ### [v0.14.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.14.0)
 
 - **新增：Device Auth 登录** — `longbridge login` 改为 OAuth Device Flow，显示验证 URL 和 Code，在任意设备完成授权，支持 SSH 和无头环境；`--headless` 标志已移除
