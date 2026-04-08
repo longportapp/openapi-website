@@ -50,9 +50,9 @@ Where to find the MCP configuration entry in each client:
 
 - **Cursor**: Settings → MCP Servers → Add Remote MCP Server
 - **Claude Code**: MCP config file or the `claude mcp add` command
-- **ChatGPT**: Settings → Connectors (or the workspace MCP configuration entry)
 - **Zed**: `context_servers` key in `settings.json` (key name is customizable)
 - **Cherry Studio**: Settings → MCP Servers → Add
+- **Codex**: Click Settings (bottom right) → MCP Servers → Add Server. In the "Connect to a custom MCP" screen, set Name to `longbridge`, select **Streamable HTTP**, enter `https://openapi.longbridge.com/mcp` as the URL, leave all other fields empty, then click Save. Back in the MCP Servers list, click **Authenticate** on the longbridge entry to complete OAuth authorization.
 
 After saving the configuration, the client will guide you through the OAuth authorization flow automatically.
 
