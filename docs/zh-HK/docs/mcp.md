@@ -11,11 +11,14 @@ sidebar_icon: cpu
 
 Longbridge 提供托管的 MCP（Model Context Protocol）服務，讓你在 AI 編程助手或對話工具中直接使用 Longbridge 的行情與帳戶能力，無需手動管理 API 金鑰。
 
-**MCP 服務地址：** `https://openapi.longbridge.com/mcp`
+:::tip MCP 服務地址
+- 全球：`https://openapi.longbridge.com/mcp`
+- 中國大陸：`https://openapi.longbridge.cn/mcp`（訪問更快）
+:::
 
 ## 前置條件
 
-- 已擁有 Longbridge 帳戶並完成開戶
+- 已擁有 Longbridge 帳戶並完成開戶，或開通模擬帳戶
 - 使用支援 MCP OAuth 2.1 的 AI 客戶端（見下方相容性說明）
 
 ## 可用能力
@@ -34,7 +37,34 @@ Longbridge 提供托管的 MCP（Model Context Protocol）服務，讓你在 AI 
 
 > 各客戶端的 MCP 配置格式可能隨版本變更，以客戶端官方文件為準。以下提供核心配置參數。
 
-在支援 MCP 的客戶端中，以 Remote MCP Server 方式加入如下配置：
+### Claude Code
+
+在終端執行以下命令：
+
+```bash
+claude mcp add --transport http longbridge https://openapi.longbridge.com/mcp
+```
+
+然後進入 `claude` 終端介面，輸入 `/mcp`，選擇 `longbridge`，再選擇 **Authenticate** 跟隨流程完成 OAuth 授權。
+
+### Codex
+
+1. 點擊右下角 **Settings** → **MCP Servers** → **Add Server**
+2. 在 "Connect to a custom MCP" 介面填寫：
+   - Name：`longbridge`
+   - 類型：**Streamable HTTP**
+   - URL：`https://openapi.longbridge.com/mcp`
+   - 其他欄位留空
+3. 點擊 **Save**
+4. 回到 MCP Servers 列表，點擊 `longbridge` 條目上的 **Authenticate** 完成 OAuth 授權
+
+### Cursor
+
+Settings → MCP Servers → 添加 Remote MCP Server，填入上方地址即可。
+
+### Zed
+
+在 `settings.json` 的 `context_servers` 欄位（key 名稱可自訂）中加入：
 
 ```json
 {
@@ -46,15 +76,9 @@ Longbridge 提供托管的 MCP（Model Context Protocol）服務，讓你在 AI 
 }
 ```
 
-各主流客戶端的配置入口：
+### Cherry Studio
 
-- **Cursor**：Settings → MCP Servers → 添加 Remote MCP Server
-- **Claude Code**：MCP 配置文件或 `claude mcp add` 命令
-- **Zed**：`settings.json` 中的 `context_servers` 欄位（key 名稱可自訂）
-- **Cherry Studio**：設定 → MCP 伺服器 → 添加
-- **Codex**：點擊右下角 Settings → MCP Servers → Add Server，在 "Connect to a custom MCP" 介面填寫 Name `longbridge`，類型選擇 **Streamable HTTP**，URL 填入 `https://openapi.longbridge.com/mcp`，其他欄位留空，點擊 Save。回到 MCP Servers 列表後，點擊 longbridge 條目上的 **Authenticate** 完成 OAuth 授權。
-
-配置完成後，客戶端會自動引導你完成 OAuth 授權流程。
+設定 → MCP 伺服器 → 添加，填入上方地址即可。
 
 ## OAuth 授權流程
 
