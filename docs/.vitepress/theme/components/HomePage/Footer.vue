@@ -54,7 +54,7 @@ const leftLinks = computed(() => [
     label: t('side-footer.section-terms.terms-of-service'),
   },
   {
-    href: `https://support.longbridgewhale.com/topics/misc/privacy-policy?locale=${locale.value}`,
+    href: 'https://longbridge.com/hk/support/topics/accountsecurity/c0yg7',
     label: t('side-footer.section-terms.privacy-policy'),
   },
 ])
