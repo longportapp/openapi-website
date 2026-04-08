@@ -9,7 +9,7 @@ sidebar_icon: cpu
 
 # Longbridge MCP 服務
 
-Longbridge 提供托管的 MCP（Model Context Protocol）服務，讓你在 AI 編程助手或對話工具中直接使用 Longbridge 的行情與帳戶能力，無需手動管理 API 金鑰。
+Longbridge 提供托管的 HTTP MCP（Model Context Protocol）服務，讓你在 AI 編程助手或對話工具中直接使用 Longbridge 的行情與帳戶能力，無需手動管理 API 金鑰。
 
 :::tip MCP 服務地址
 - 全球：`https://openapi.longbridge.com/mcp`

@@ -1,13 +1,13 @@
 ---
-sidebar_position: 2.2
+sidebar_position: 2.3
 slug: /llm
-sidebar_label: LLM
+sidebar_label: LLMs
 sidebarCollapsed: true
 sidebar_icon: sparkles
 id: llm
 ---
 
-# LLM Components
+# LLMs Components
 
 We provide several components for LLMs (Large Language Models) that allow you to easily access and analyze financial data, real-time market data, and even enable AI to place orders.
 
