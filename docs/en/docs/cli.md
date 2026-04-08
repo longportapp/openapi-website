@@ -358,6 +358,15 @@ Longbridge OpenAPI: maximum 10 calls per second. The SDK auto-refreshes OAuth to
 
 ## Release notes
 
+### [v0.14.2](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.14.2)
+
+- **New: `--lang` global flag** — set content language (`zh-CN`, `zh-HK`, `en`) for all commands; falls back to system `LANG` env var then `en`
+
+### [v0.14.1](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.14.1)
+
+- **New: CN region login** — `longbridge login` now supports China region routing
+- **New: `-v` flag** — show version without entering the full command
+
 ### [v0.14.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.14.0)
 
 - **New: Device auth login** — `longbridge login` now uses OAuth device flow; displays a URL and code to authorize on any device, works in SSH and headless environments; `--headless` flag removed

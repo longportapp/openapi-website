@@ -5,7 +5,18 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2026-04-08
+
+### CLI v0.14.2
+
+- **`--lang` flag** — set content language (`zh-CN`, `zh-HK`, `en`) for all commands; falls back to system `LANG` env var
+
 ## 2026-04-02
+
+### CLI v0.14.1
+
+- **CN region login** — `longbridge login` now supports China region routing
+- **`-v` flag** — quick version check
 
 ### CLI v0.14.0
 
