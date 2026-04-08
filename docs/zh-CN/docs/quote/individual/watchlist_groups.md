@@ -230,7 +230,8 @@ func main() {
             "market": "HK",
             "name": "腾讯控股",
             "watched_price": "364.4",
-            "watched_at": 1652855022
+            "watched_at": 1652855022,
+            "is_pinned": true
           }
         ]
       }
@@ -267,3 +268,4 @@ func main() {
 | ∟∟ name          | string   | true     | 名称         |
 | ∟∟ watched_price | string   | true     | 关注时的价格 |
 | ∟∟ watched_at    | integer  | true     | 关注时间     |
+| ∟∟ is_pinned     | boolean  | true     | 是否置顶     |

@@ -229,7 +229,8 @@ func main() {
             "market": "HK",
             "name": "Tencent",
             "watched_price": "364.4",
-            "watched_at": 1652855022
+            "watched_at": 1652855022,
+            "is_pinned": true
           }
         ]
       }
@@ -266,3 +267,4 @@ func main() {
 | ∟∟ name          | string   | true     | Name          |
 | ∟∟ watched_price | string   | true     | Watched price |
 | ∟∟ watched_at    | integer  | true     | Watched time  |
+| ∟∟ is_pinned     | boolean  | true     | Whether the security is pinned |
