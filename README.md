@@ -38,9 +38,9 @@ Longbridge Developers is the official developer platform for Longbridge — prov
 | Method                                                  | Best for                                             |
 | ------------------------------------------------------- | ---------------------------------------------------- |
 | [SDK](https://open.longbridge.com/sdk)                  | Python, Rust, Node.js, Go, Java, C++ apps            |
-| [HTTP / WebSocket API](https://open.longbridge.com/api) | Any language, custom integrations                    |
-| [CLI](https://open.longbridge.com/cli) (`longbridge`)   | Terminal workflows, scripting, AI tool-calling       |
-| [MCP](https://open.longbridge.com/mcp)                  | AI coding assistants (Cursor, Claude, ChatGPT, etc.) |
+| [HTTP / WebSocket API](https://open.longbridge.com/docs/api) | Any language, custom integrations                    |
+| [CLI](https://open.longbridge.com/docs/cli) (`longbridge`)   | Terminal workflows, scripting, AI tool-calling       |
+| [MCP](https://open.longbridge.com/docs/mcp)                  | AI coding assistants (Cursor, Claude, ChatGPT, etc.) |
 | [Skill](https://open.longbridge.com/skill)              | Give any AI direct knowledge of Longbridge APIs      |
 
 ## Quick start
@@ -98,11 +98,11 @@ npx skills add longbridge/developers -g -y
 ## Documentation
 
 - **Getting Started** — https://open.longbridge.com/docs/getting-started
-- **API Reference** — https://open.longbridge.com/api
+- **API Reference** — https://open.longbridge.com/docs/api
 - **SDK Reference** — https://open.longbridge.com/sdk
-- **CLI Reference** — https://open.longbridge.com/cli
-- **MCP Setup** — https://open.longbridge.com/mcp
-- **LLM / AI Integration** — https://open.longbridge.com/llm
+- **CLI Reference** — https://open.longbridge.com/docs/cli
+- **MCP Setup** — https://open.longbridge.com/docs/mcp
+- **LLM / AI Integration** — https://open.longbridge.com/docs/llm
 - **Changelog** — https://open.longbridge.com/docs/changelog
 
 ## LLM-friendly docs
