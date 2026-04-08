@@ -66,7 +66,7 @@ SDK 會自動選擇接入點；若判斷不正確，可設定環境變數 `LONGB
 
 ## CLI 快速入門
 
-如果你不需要寫程式，[Longbridge Terminal CLI](/docs/cli) 提供更輕量的接入方式——安裝即用，OAuth 一鍵授權，無需配置環境變數。
+如果你不需要寫程式，[Longbridge CLI](/docs/cli) 提供更輕量的接入方式——安裝即用，OAuth 一鍵授權，無需配置環境變數。
 
 ### 安裝
 

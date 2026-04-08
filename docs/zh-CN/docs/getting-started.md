@@ -66,7 +66,7 @@ SDK 会自动选择接入点；若判断不正确，可设置环境变量 `LONGB
 
 ## CLI 快速入门
 
-如果你不需要写代码，[Longbridge Terminal CLI](/docs/cli) 提供更轻量的接入方式——安装即用，OAuth 一键授权，无需配置环境变量。
+如果你不需要写代码，[Longbridge CLI](/docs/cli) 提供更轻量的接入方式——安装即用，OAuth 一键授权，无需配置环境变量。
 
 ### 安装
 

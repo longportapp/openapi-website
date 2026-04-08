@@ -7,9 +7,9 @@ sidebar_icon: terminal
 id: cli
 ---
 
-# Longbridge Terminal CLI
+# Longbridge CLI
 
-Longbridge Terminal is an AI-native CLI covering every Longbridge OpenAPI endpoint — real-time market data, account management, and trading. Designed for scripting, AI-agent tool-calling, and daily trading workflows from the terminal.
+Longbridge CLI is an AI-native CLI tool covering every Longbridge OpenAPI endpoint — real-time market data, account management, and trading. Designed for scripting, AI-agent tool-calling, and daily trading workflows from the terminal.
 
 **GitHub:** [longbridge/longbridge-terminal](https://github.com/longbridge/longbridge-terminal)
 

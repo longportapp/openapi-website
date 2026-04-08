@@ -47,7 +47,7 @@ The platform offers two ways to access stock data without writing any code:
 
 **CLI (Command-line Tool)**
 
-Install the [Longbridge Terminal CLI](/docs/cli) and query market data with simple commands — no programming required:
+Install the [Longbridge CLI](/docs/cli) and query market data with simple commands — no programming required:
 
 ```bash
 longbridge quote AAPL.US TSLA.US

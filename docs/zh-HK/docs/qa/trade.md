@@ -31,7 +31,7 @@ sidebar_position: 2
 
 - **訂單查詢接口**：調用 API 查詢訂單即時狀態
 - **WebSocket 推送**：訂閱交易推送，即時接收訂單更新
-- **CLI**：透過 [Longbridge Terminal CLI](/docs/cli) 在命令列查詢，例如 `longbridge orders`
+- **CLI**：透過 [Longbridge CLI](/docs/cli) 在命令列查詢，例如 `longbridge orders`
 - **App / PC**：直接在終端產品中查看對應帳戶下的訂單及其狀態
 
 ## Q7: 如何確定帳戶資金是否足夠進行交易？

@@ -7,9 +7,9 @@ id: cli
 sidebar_icon: terminal
 ---
 
-# Longbridge Terminal CLI
+# Longbridge CLI
 
-Longbridge Terminal 是一款 AI-native 命令列工具，涵蓋全部 Longbridge Developers 端點，支援即時行情、帳戶管理與交易操作。專為腳本自動化、AI 代理工具調用及日常終端交易工作流程設計。
+Longbridge CLI 是一款 AI-native 命令列工具，涵蓋全部 Longbridge Developers 端點，支援即時行情、帳戶管理與交易操作。專為腳本自動化、AI 代理工具調用及日常終端交易工作流程設計。
 
 **GitHub：** [longbridge/longbridge-terminal](https://github.com/longbridge/longbridge-terminal)
 

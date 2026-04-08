@@ -65,7 +65,7 @@ All API response are used [Unix Timestamp](https://en.wikipedia.org/wiki/Unix_ti
 
 ## CLI Quick Start
 
-If you don't need to write code, the [Longbridge Terminal CLI](/docs/cli) offers a lightweight alternative — install once, authorize via OAuth, no environment variables needed.
+If you don't need to write code, the [Longbridge CLI](/docs/cli) offers a lightweight alternative — install once, authorize via OAuth, no environment variables needed.
 
 ### Installation
 
