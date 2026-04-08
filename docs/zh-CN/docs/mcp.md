@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 2.2
 slug: /mcp
 sidebar_label: MCP
 sidebarCollapsed: true

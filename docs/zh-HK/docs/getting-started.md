@@ -34,25 +34,80 @@ SDK 會自動選擇接入點；若判斷不正確，可設定環境變數 `LONGB
 
 <Tabs groupId="programming-language">
   <TabItem value="python" label="Python" default>
-    <li><a href="https://www.python.org/">Python 3</a></li>
-    <li>Pip</li>
+    <ul>
+      <li><a href="https://www.python.org/">Python 3</a></li>
+      <li>Pip</li>
+    </ul>
   </TabItem>
   <TabItem value="javascript" label="JavaScript">
-    <li><a href="https://nodejs.org/">Node.js</a></li>
-    <li>Yarn</li>
+    <ul>
+      <li><a href="https://nodejs.org/">Node.js</a></li>
+      <li>Yarn</li>
+    </ul>
   </TabItem>
   <TabItem value="rust" label="Rust">
-    <li><a href="https://www.rust-lang.org/">Rust</a></li>
+    <ul>
+      <li><a href="https://www.rust-lang.org/">Rust</a></li>
+    </ul>
   </TabItem>
   <TabItem value="java" label="Java">
-    <li><a href="https://openjdk.org/">JDK</a></li>
-    <li><a href="https://maven.apache.org/">Maven</a></li>
+    <ul>
+      <li><a href="https://openjdk.org/">JDK</a></li>
+      <li><a href="https://maven.apache.org/">Maven</a></li>
+    </ul>
   </TabItem>
   <TabItem value="go" label="Go">
-    <li><a href="https://go.dev">Go</a></li>
-    <li><a href="https://pkg.go.dev/github.com/longbridge/openapi-go">Go Docs</a></li>
+    <ul>
+      <li><a href="https://go.dev">Go</a></li>
+      <li><a href="https://pkg.go.dev/github.com/longbridge/openapi-go">Go Docs</a></li>
+    </ul>
   </TabItem>
 </Tabs>
+
+## CLI 快速入門
+
+如果你不需要寫程式，[Longbridge Terminal CLI](/docs/cli) 提供更輕量的接入方式——安裝即用，OAuth 一鍵授權，無需配置環境變數。
+
+### 安裝
+
+<Tabs groupId="cli-install">
+  <TabItem value="homebrew" label="macOS (Homebrew)" default>
+
+```bash
+brew install --cask longbridge/tap/longbridge-terminal
+```
+
+  </TabItem>
+  <TabItem value="script" label="Linux / macOS (腳本)">
+
+```bash
+curl -sSL https://open.longbridge.com/longbridge/longbridge-terminal/install | sh
+```
+
+  </TabItem>
+  <TabItem value="scoop" label="Windows (Scoop)">
+
+```powershell
+scoop install https://open.longbridge.com/longbridge/longbridge-terminal/longbridge.json
+```
+
+  </TabItem>
+  <TabItem value="powershell" label="Windows (PowerShell)">
+
+```powershell
+iwr https://open.longbridge.com/longbridge/longbridge-terminal/install.ps1 | iex
+```
+
+  </TabItem>
+</Tabs>
+
+### 登入
+
+```bash
+longbridge login
+```
+
+瀏覽器會自動開啟授權頁面，完成後 Token 自動儲存，後續無需重複操作。
 
 ## 安裝 SDK
 
