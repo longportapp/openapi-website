@@ -11,6 +11,36 @@ sidebar_position: 7
 
 - **`portfolio` 命令** — 组合总损益、各市场资产分布、持仓及现金明细
 - **`investors` 命令** — 基于 SEC 13F 数据的主动基金经理排行榜，按 CIK 查询指定投资者持仓（含实时价格）
+  ```
+  $ longbridge investors
+  | #  | name                                        | AUM      | period      | cik        |
+  |----|---------------------------------------------|----------|-------------|------------|
+  | 1  | Capital International Investors             | $637.97B | 31-DEC-2025 | 0001562230 |
+  | 2  | Capital Research Global Investors           | $541.73B | 31-DEC-2025 | 0001422848 |
+  | 3  | CTC LLC                                     | $404.44B | 31-DEC-2025 | 0001445893 |
+  | 4  | BERKSHIRE HATHAWAY INC                      | $274.16B | 31-DEC-2025 | 0001067983 |
+  | 5  | DODGE & COX                                 | $185.26B | 31-DEC-2025 | 0000200217 |
+
+  $ longbridge investors 0001067983
+  Period: 2025-12-31  (filed: 2026-02-17)
+
+  BERKSHIRE HATHAWAY INC (period: 2025-12-31)
+
+  Portfolio: 42 positions, total value ~$274.16B
+
+  | company                      | value    | shares  | weight |
+  |------------------------------|----------|---------|--------|
+  | APPLE INC                    | $61.96B  | 227.92M | 22.6%  |
+  | AMERICAN EXPRESS CO          | $56.09B  | 151.61M | 20.5%  |
+  | BANK AMERICA CORP            | $28.45B  | 517.30M | 10.4%  |
+  | COCA COLA CO                 | $27.96B  | 400.00M | 10.2%  |
+  | CHEVRON CORP NEW             | $19.84B  | 130.16M | 7.2%   |
+  | MOODYS CORP                  | $12.60B  | 24.67M  | 4.6%   |
+  | OCCIDENTAL PETE CORP         | $10.89B  | 264.94M | 4.0%   |
+  | CHUBB LIMITED                | $10.69B  | 34.25M  | 3.9%   |
+  | KRAFT HEINZ CO               | $7.90B   | 325.63M | 2.9%   |
+  | ALPHABET INC                 | $5.59B   | 17.85M  | 2.0%   |
+  ```
 - **`watchlist pin/unpin`** — 将标的置顶至自选股分组顶部
 - **`assets` 命令** — 原 `balance` 更名，展示完整资产概览：净资产、购买力、保证金、风险等级及分币种现金明细
 
