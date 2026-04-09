@@ -210,7 +210,7 @@ longbridge buy TSLA.US 100 --price 250.00              # 買入（執行前需�
 longbridge sell TSLA.US 100 --price 260.00             # 賣出（執行前需確認）
 longbridge cancel <order_id>                           # 撤單（執行前需確認）
 longbridge replace <order_id> --qty 200 --price 255.00 # 改單
-longbridge balance                                     # 帳戶現金餘額
+longbridge assets                                      # 帳戶現金餘額
 longbridge positions                                   # 股票持倉
 longbridge fund-positions                              # 基金持倉
 longbridge executions                                  # 成交記錄
