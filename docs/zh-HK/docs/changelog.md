@@ -5,6 +5,59 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2026-04-09
+
+### CLI v0.15.0
+
+- **`portfolio` 指令** — 組合總損益、各市場資產分布、持倉及現金明細
+- **`investors` 指令** — 基於 SEC 13F 資料的主動基金經理排行榜，按 CIK 查詢指定投資者持倉（含即時價格）
+  ```
+  $ longbridge investors
+  | #  | name                                        | AUM      | period      | cik        |
+  |----|---------------------------------------------|----------|-------------|------------|
+  | 1  | Capital International Investors             | $637.97B | 31-DEC-2025 | 0001562230 |
+  | 2  | Capital Research Global Investors           | $541.73B | 31-DEC-2025 | 0001422848 |
+  | 3  | CTC LLC                                     | $404.44B | 31-DEC-2025 | 0001445893 |
+  | 4  | BERKSHIRE HATHAWAY INC                      | $274.16B | 31-DEC-2025 | 0001067983 |
+  | 5  | DODGE & COX                                 | $185.26B | 31-DEC-2025 | 0000200217 |
+
+  $ longbridge investors 0001067983
+  Period: 2025-12-31  (filed: 2026-02-17)
+
+  BERKSHIRE HATHAWAY INC (period: 2025-12-31)
+
+  Portfolio: 42 positions, total value ~$274.16B
+
+  | company                      | value    | shares  | weight |
+  |------------------------------|----------|---------|--------|
+  | APPLE INC                    | $61.96B  | 227.92M | 22.6%  |
+  | AMERICAN EXPRESS CO          | $56.09B  | 151.61M | 20.5%  |
+  | BANK AMERICA CORP            | $28.45B  | 517.30M | 10.4%  |
+  | COCA COLA CO                 | $27.96B  | 400.00M | 10.2%  |
+  | CHEVRON CORP NEW             | $19.84B  | 130.16M | 7.2%   |
+  | MOODYS CORP                  | $12.60B  | 24.67M  | 4.6%   |
+  | OCCIDENTAL PETE CORP         | $10.89B  | 264.94M | 4.0%   |
+  | CHUBB LIMITED                | $10.69B  | 34.25M  | 3.9%   |
+  | KRAFT HEINZ CO               | $7.90B   | 325.63M | 2.9%   |
+  | ALPHABET INC                 | $5.59B   | 17.85M  | 2.0%   |
+  ```
+- **`insider-trades`** — 查看任意標的的內部人士交易記錄（SEC Form 4）
+  ```
+  $ longbridge insider-trades TSLA.US
+  Fetching 20 Form 4 filings...
+
+  | date       | filer        | title         | type     | shares | price   | value    | owned_after |
+  |------------|--------------|---------------|----------|--------|---------|----------|-------------|
+  | 2026-03-31 | Zhu Xiaotong | SVP           | EXERCISE | 20.00K | $20.57  | $411.40K | 20.00K      |
+  | 2025-09-11 | Zhu Xiaotong | SVP, APAC and | SELL     | 20.00K | $363.75 | $7.28M   | 47.60K      |
+  | 2025-06-12 | Zhu Xiaotong | SVP, APAC     | EXERCISE | 15.00K | $20.57  | $308.55K | 82.60K      |
+  | 2025-06-12 | Zhu Xiaotong | SVP, APAC     | SELL     | 15.00K | $323.81 | $4.86M   | 67.60K      |
+
+  Source: SEC EDGAR Form 4 — TSLA
+  ```
+- **`watchlist pin/unpin`** — 將標的置頂至自選股分組頂部
+- **`assets` 指令** — 原 `balance` 更名，展示完整資產概覽：淨資產、購買力、保證金、風險等級及分幣種現金明細
+
 ## 2026-04-08
 
 ### CLI v0.14.2

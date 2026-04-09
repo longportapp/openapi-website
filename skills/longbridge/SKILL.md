@@ -25,7 +25,8 @@ When the user asks about stock performance, portfolio advice, or market analysis
 ```bash
 # Market data
 longbridge quote SYMBOL.US
-longbridge positions                # always pull when user asks about "my portfolio"
+longbridge positions                # stock positions
+longbridge portfolio                # P/L, asset distribution, holdings, cash (always pull when user asks about "my portfolio")
 longbridge kline history SYMBOL.US --start YYYY-MM-DD --end YYYY-MM-DD --period day
 longbridge intraday SYMBOL.US
 
@@ -36,10 +37,16 @@ longbridge filing detail <id>       # regulatory filing (earnings reports, etc.)
 longbridge topics SYMBOL.US         # community discussion
 longbridge market-temp              # market sentiment index (0–100)
 
-# Account statements
+# Account
+longbridge assets                   # full asset overview: cash, buying power, margin, risk level
 longbridge statement list           # list available statements
 longbridge statement export --file-key <KEY> --section asset equity_holdings  # account summary
 longbridge statement export --file-key <KEY> --all                          # export all non-empty sections
+
+# Institutional investors (SEC 13F)
+longbridge investors                # top active fund managers by AUM
+longbridge investors 0001067983     # holdings for a specific investor by CIK
+longbridge insider-trades SYMBOL.US # SEC Form 4 insider transaction history
 ```
 
 Only fall back to WebSearch when Longbridge news is insufficient (e.g., breaking news not yet indexed, macro events unrelated to a specific symbol).

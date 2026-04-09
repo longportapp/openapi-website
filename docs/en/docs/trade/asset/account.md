@@ -1,6 +1,6 @@
 ---
 slug: account
-title: Get Account Balance
+title: Get Account Assets
 language_tabs: false
 toc_footers: []
 includes: []
@@ -13,7 +13,7 @@ The API is used to obtain the available, desirable, frozen, to-be-settled, and i
 funds (fund purchase and redemption) information for each currency of the user.
 
 <CliCommand>
-longbridge balance
+longbridge assets
 </CliCommand>
 
 <SDKLinks module="trade" klass="TradeContext" method="account_balance" />
