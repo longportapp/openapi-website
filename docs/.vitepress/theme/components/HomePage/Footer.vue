@@ -41,6 +41,10 @@ const { t, locale } = useI18n()
 
 const isCN = computed(() => !isServer() && window.location.host.endsWith('.cn'))
 
+const sgBaseUrl = computed(() =>
+  locale.value === 'en' ? 'https://longbridge.com/sg' : 'https://longbridge.com/sg/zh-CN',
+)
+
 // 备案文案
 const beianText = computed(() => {
   return isCN.value && locale.value === 'zh-CN' ? `© ${new Date().getFullYear()} 粤 ICP 备 2025433117 号` : ''
@@ -50,11 +54,11 @@ const leftLinks = computed(() => [
   { href: 'https://longbridge.com', label: 'Longbridge' },
   { href: 'https://longbridge.com/download', label: 'Download' },
   {
-    href: `https://support.longbridgewhale.com/topics/misc.disable/lp-user-agreement?locale=${locale.value}`,
+    href: `${sgBaseUrl.value}/support/topics/us-trade/user-agreement`,
     label: t('side-footer.section-terms.terms-of-service'),
   },
   {
-    href: 'https://longbridge.com/hk/support/topics/accountsecurity/c0yg7',
+    href: `${sgBaseUrl.value}/support/topics/Other/privacy-policy`,
     label: t('side-footer.section-terms.privacy-policy'),
   },
 ])
