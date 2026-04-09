@@ -175,6 +175,8 @@ longbridge investors
 longbridge investors --top 10
 # 查看指定投資者的持倉（SEC CIK）
 longbridge investors 0001067983
+# 內部人士交易記錄（SEC Form 4）
+longbridge insider-trades TSLA.US
 ```
 
 ### 社區內容
@@ -365,10 +367,11 @@ Longbridge OpenAPI 最高支援每秒 10 次調用，SDK 自動刷新 OAuth Toke
 
 ## Release Notes
 
-### [v0.14.3](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.14.3)
+### [v0.15.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.15.0)
 
 - **新增：`portfolio` 指令** — 組合總損益、各市場資產分布（美/港/A 股/新加坡/現金）、持倉及現金明細
 - **新增：`investors` 指令** — 基於 SEC 13F 資料的主動基金經理排行榜，支援按 CIK 查詢指定投資者的最新持倉（含即時價格）
+- **新增：`insider-trades`** — 查看任意標的的內部人士交易記錄（SEC Form 4）
 - **新增：`watchlist pin/unpin`** — 將標的置頂至自選股分組頂部
 - **更名並增強：`assets`** — 原 `balance` 指令更名，展示完整資產概覽：淨資產、購買力、保證金、風險等級及分幣種現金明細
 

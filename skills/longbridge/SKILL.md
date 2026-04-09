@@ -46,6 +46,7 @@ longbridge statement export --file-key <KEY> --all                          # ex
 # Institutional investors (SEC 13F)
 longbridge investors                # top active fund managers by AUM
 longbridge investors 0001067983     # holdings for a specific investor by CIK
+longbridge insider-trades SYMBOL.US # SEC Form 4 insider transaction history
 ```
 
 Only fall back to WebSearch when Longbridge news is insufficient (e.g., breaking news not yet indexed, macro events unrelated to a specific symbol).

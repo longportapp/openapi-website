@@ -7,7 +7,7 @@ sidebar_position: 7
 
 ## 2026-04-09
 
-### CLI v0.14.3
+### CLI v0.15.0
 
 - **`portfolio` 命令** — 组合总损益、各市场资产分布、持仓及现金明细
 - **`investors` 命令** — 基于 SEC 13F 数据的主动基金经理排行榜，按 CIK 查询指定投资者持仓（含实时价格）
@@ -40,6 +40,20 @@ sidebar_position: 7
   | CHUBB LIMITED                | $10.69B  | 34.25M  | 3.9%   |
   | KRAFT HEINZ CO               | $7.90B   | 325.63M | 2.9%   |
   | ALPHABET INC                 | $5.59B   | 17.85M  | 2.0%   |
+  ```
+- **`insider-trades`** — 查看任意标的的内部人士交易记录（SEC Form 4）
+  ```
+  $ longbridge insider-trades TSLA.US
+  Fetching 20 Form 4 filings...
+
+  | date       | filer        | title         | type     | shares | price   | value    | owned_after |
+  |------------|--------------|---------------|----------|--------|---------|----------|-------------|
+  | 2026-03-31 | Zhu Xiaotong | SVP           | EXERCISE | 20.00K | $20.57  | $411.40K | 20.00K      |
+  | 2025-09-11 | Zhu Xiaotong | SVP, APAC and | SELL     | 20.00K | $363.75 | $7.28M   | 47.60K      |
+  | 2025-06-12 | Zhu Xiaotong | SVP, APAC     | EXERCISE | 15.00K | $20.57  | $308.55K | 82.60K      |
+  | 2025-06-12 | Zhu Xiaotong | SVP, APAC     | SELL     | 15.00K | $323.81 | $4.86M   | 67.60K      |
+
+  Source: SEC EDGAR Form 4 — TSLA
   ```
 - **`watchlist pin/unpin`** — 将标的置顶至自选股分组顶部
 - **`assets` 命令** — 原 `balance` 更名，展示完整资产概览：净资产、购买力、保证金、风险等级及分币种现金明细

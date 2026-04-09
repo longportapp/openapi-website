@@ -175,6 +175,8 @@ longbridge investors
 longbridge investors --top 10
 # Holdings for a specific investor by SEC CIK
 longbridge investors 0001067983
+# Insider trades (SEC Form 4) for a symbol
+longbridge insider-trades TSLA.US
 ```
 
 ### Community content
@@ -367,10 +369,11 @@ Longbridge OpenAPI: maximum 10 calls per second. The SDK auto-refreshes OAuth to
 
 ## Release notes
 
-### [v0.14.3](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.14.3)
+### [v0.15.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.15.0)
 
 - **New: `portfolio` command** — total P/L, asset distribution by market (US/HK/CN/SG/Cash), holdings, and cash balances
 - **New: `investors` command** — SEC 13F-based active fund manager rankings; view any investor's holdings by CIK with live prices
+- **New: `insider-trades`** — SEC Form 4 insider transaction history for any symbol
 - **New: `watchlist pin/unpin`** — pin securities to the top of a watchlist group
 - **Enhanced: `assets`** — renamed from `balance`; now shows full asset overview: net assets, buying power, margin, risk level, and per-currency cash breakdown
 
