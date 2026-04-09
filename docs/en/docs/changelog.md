@@ -5,6 +5,15 @@ slug: changelog
 sidebar_position: 7
 ---
 
+## 2026-04-09
+
+### CLI v0.14.3
+
+- **`portfolio` command** — total P/L, asset distribution by market, holdings, and cash balances
+- **`investors` command** — active fund manager rankings from SEC 13F data; view any investor's holdings by CIK with live prices
+- **`watchlist pin/unpin`** — pin securities to the top of a watchlist group
+- **`assets` command** — renamed from `balance`; full asset overview: net assets, buying power, margin, risk level, and per-currency cash breakdown
+
 ## 2026-04-08
 
 ### CLI v0.14.2

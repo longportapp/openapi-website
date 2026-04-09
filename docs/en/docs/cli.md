@@ -169,6 +169,12 @@ longbridge finance-calendar macrodata --star 3
 longbridge finance-calendar dividend --market US
 # Exchange rates for all supported currencies
 longbridge exchange-rate
+# Top active fund managers by AUM (SEC 13F data; passive index giants excluded)
+longbridge investors
+# Top 10 only
+longbridge investors --top 10
+# Holdings for a specific investor by SEC CIK
+longbridge investors 0001067983
 ```
 
 ### Community content
@@ -200,6 +206,8 @@ longbridge watchlist                                             # List watchlis
 longbridge watchlist create "My Portfolio"                       # Create a new group
 longbridge watchlist update <id> --add TSLA.US --remove AAPL.US  # Add/remove securities
 longbridge watchlist delete <id>                                 # Delete a group
+longbridge watchlist pin TSLA.US AAPL.US                         # Pin securities to the top of their group
+longbridge watchlist pin --remove 700.HK                         # Unpin
 ```
 
 ### Trading
@@ -210,7 +218,8 @@ longbridge buy TSLA.US 100 --price 250.00              # Submit a buy order (pro
 longbridge sell TSLA.US 100 --price 260.00             # Submit a sell order (prompts for confirmation)
 longbridge cancel <order_id>                           # Cancel a pending order (prompts for confirmation)
 longbridge replace <order_id> --qty 200 --price 255.00 # Modify a pending order
-longbridge assets                                      # Account cash balance
+longbridge assets                                      # Full account assets overview (cash, buying power, margin, risk level)
+longbridge portfolio                                   # Portfolio P/L, asset distribution by market, holdings, and cash
 longbridge positions                                   # Stock positions
 longbridge fund-positions                              # Fund positions
 longbridge executions                                  # Trade executions (fills)
@@ -357,6 +366,13 @@ claude> Compare TSLA and NVDA Q4 2025 earnings
 Longbridge OpenAPI: maximum 10 calls per second. The SDK auto-refreshes OAuth tokens.
 
 ## Release notes
+
+### [v0.14.3](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.14.3)
+
+- **New: `portfolio` command** — total P/L, asset distribution by market (US/HK/CN/SG/Cash), holdings, and cash balances
+- **New: `investors` command** — SEC 13F-based active fund manager rankings; view any investor's holdings by CIK with live prices
+- **New: `watchlist pin/unpin`** — pin securities to the top of a watchlist group
+- **Enhanced: `assets`** — renamed from `balance`; now shows full asset overview: net assets, buying power, margin, risk level, and per-currency cash breakdown
 
 ### [v0.14.2](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.14.2)
 
