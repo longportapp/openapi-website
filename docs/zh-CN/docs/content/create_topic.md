@@ -55,7 +55,7 @@ longbridge topic create AAPL.US "Apple WWDC 前瞻"
 | body        | string   | YES                   | 正文。`post` 类型为纯文本，Markdown 不渲染；`article` 类型支持 Markdown。                              |
 | topic_type  | string   | NO                    | 内容类型：`post`（纯文本，默认）或 `article`（Markdown）                                               |
 | tickers     | string[] | NO                    | 关联标的代码，格式 `{symbol}.{market}`，如 `["AAPL.US", "700.HK"]`，最多 10 个。**注意：** 正文中提到的标的代码（如 `700.HK`、`TSLA.US`）会被平台自动识别并关联，`tickers` 用于补充正文中未显式提及的标的。 |
-| hashtags    | string[] | NO                    | 讨论标签名称列表，如 `["earnings", "fed"]`，最多 5 个                                                  |
+| hashtags    | string[] | NO                    | 讨论标签名称列表，如 `["earnings", "fed"]`，最多 1 个                                                  |
 
 ### Request Example
 

@@ -530,11 +530,13 @@ paths:
                           name: Apple Inc.
                           watched_price: '211.59'
                           watched_at: '1741690995'
+                          is_pinned: true
                         - symbol: 700.HK
                           market: HK
                           name: 腾讯控股
                           watched_price: '460.00'
                           watched_at: '1725511157'
+                          is_pinned: false
         default:
           description: Unexpected error
           content:
@@ -1540,7 +1542,7 @@ paths:
                 hashtags:
                   type: array
                   nullable: true
-                  description: Associated hashtag names (e.g. `["earnings", "fed"]`). Maximum 5.
+                  description: Associated hashtag names (e.g. `["earnings", "fed"]`). Maximum 1.
                   items:
                     type: string
       responses:
