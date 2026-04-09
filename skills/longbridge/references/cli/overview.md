@@ -110,24 +110,6 @@ longbridge filing list TSLA.US
 longbridge filing detail TSLA.US 610186794100660481 --file-index 0
 ```
 
-## Congressional Trades (STOCK Act)
-
-Senate members must disclose stock trades within 45 days under the STOCK Act. The `congress-trades` command fetches these filings directly from the Senate eFD system — no authentication required.
-
-```bash
-longbridge congress-trades                                # Recent Senate PTR filings (newest first)
-longbridge congress-trades --name "Warren"                # Filter by senator last name
-longbridge congress-trades --name "Nancy Pelosi"          # Filter by full name
-longbridge congress-trades --ticker NVDA                  # Filter by ticker across all senators
-longbridge congress-trades --name "Warren" --ticker AAPL  # Combined filter
-longbridge congress-trades --format json                  # JSON output
-```
-
-**Notes:**
-- Senate-only (House PTRs are PDF-only with no machine-readable API)
-- Each filing (PTR) may contain multiple individual trades
-- `--limit N` controls how many PTR filings to fetch (default 20); total trades may be higher
-
 ## Extended Hours (Pre/Post Market)
 
 `quote`, `intraday`, `kline`, `kline history` all support extended-hours data. Use `longbridge <command> --help` for exact flags — key points:
