@@ -138,7 +138,9 @@ onUnmounted(clear)
             @click="switchTo(i)"
           >{{ p.label }}</button>
           <button ref="copyBtnRef" class="ht-copy" :class="{ 'ht-copy--done': copied }" aria-label="Copy install command" @click="copy">
-            {{ copied ? $t('api.copied') : $t('api.copy') }}
+            <svg v-if="copied" class="ht-copy-icon ht-copy-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg v-else class="ht-copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            <span>{{ copied ? $t('api.copied') : $t('api.copy') }}</span>
           </button>
         </div>
 
@@ -212,12 +214,30 @@ onUnmounted(clear)
 
 .ht-copy:hover { color: var(--code-fg); border-color: rgba(255,255,255,0.25); }
 
+.ht-copy-icon { flex-shrink: 0; }
+
+@keyframes check-draw {
+  from { stroke-dashoffset: 24; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes copy-pop {
+  0% { transform: scale(0.9); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
 .ht-copy--done {
-  color: var(--code-accent) !important;
-  border-color: var(--code-accent) !important;
-  background: rgba(0, 212, 184, 0.1);
-  transform: scale(1.05);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--code-accent);
+  border-color: var(--code-accent);
+  background: rgba(0, 212, 184, 0.12);
+  animation: copy-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ht-copy-check {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 0;
+  animation: check-draw 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Command area */
