@@ -17,10 +17,10 @@ longbridge dividend 700.HK
 ```
 | desc                                 | ex_date    | payment_date | record_date |
 |--------------------------------------|------------|--------------|-------------|
-| 每股派息 5.3 HKD                     | 2026.05.15 | 2026.06.01   | 2026.05.18  |
-| 每股派息 4.5 HKD                     | 2025.05.16 | 2025.05.30   | 2025.05.19  |
-| 每股派息 3.4 HKD                     | 2024.05.17 | 2024.05.31   | 2024.05.20  |
-| 每股派息 2.4 HKD                     | 2023.05.19 | 2023.06.05   | 2023.05.22  |
+| Dividend: HKD 5.3/share                     | 2026.05.15 | 2026.06.01   | 2026.05.18  |
+| Dividend: HKD 4.5/share                     | 2025.05.16 | 2025.05.30   | 2025.05.19  |
+| Dividend: HKD 3.4/share                     | 2024.05.17 | 2024.05.31   | 2024.05.20  |
+| Dividend: HKD 2.4/share                     | 2023.05.19 | 2023.06.05   | 2023.05.22  |
 ```
 
 ## Scenarios
@@ -65,4 +65,4 @@ The `detail` subcommand shows the full distribution scheme — useful when a div
 longbridge dividend AAPL.US --format json
 ```
 
-Returns structured JSON with `ex_date`, `payment_date`, `record_date`, and a `desc` field containing the dividend amount description (e.g., `"每股派息 0.26 USD"`) — suitable for piping into scripts or tracking tools.
+Returns structured JSON with `ex_date`, `payment_date`, `record_date`, and a `desc` field containing the dividend amount description (e.g., `"Dividend: USD 0.26/share"`) — suitable for piping into scripts or tracking tools.

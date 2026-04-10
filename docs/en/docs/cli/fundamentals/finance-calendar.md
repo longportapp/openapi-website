@@ -15,9 +15,9 @@ longbridge finance-calendar financial --symbol TSLA.US
 ```
 
 ```
-2026.01.28 (美东)  [Financials]  US  特斯拉 (TSLA.US)
-  2025 财年第 4 季度业绩披露
-  EPS: Est 0.3466 / Act 0.24  |  Revenue: Est 248 亿 / Act 249 亿
+2026.01.28 (ET)  [Financials]  US  Tesla (TSLA.US)
+  Q4 FY2025 Earnings Release
+  EPS: Est 0.3466 / Act 0.24  |  Revenue: Est $24.8B / Act $24.9B
 ```
 
 ## Scenarios

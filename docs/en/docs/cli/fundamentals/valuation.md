@@ -19,12 +19,12 @@ Overview:
 | indicator | current | high   | low   | median | industry_median | date       |
 |-----------|---------|--------|-------|--------|-----------------|------------|
 | PE        | 341.83x | 284.01 | 51.31 | 96.85  | -0.11           | 2026-04-09 |
-当前市盈率 341.83，高于合理区间，比近 5 年 8.85% 的时间便宜，行业排名 19/49
+Current P/E 341.83, above fair range, cheaper than 8.85% of last 5 years, industry rank 19/49
 
 Peers (5):
-| name   | pe     |
-|--------|--------|
-| 特斯拉 | 341.83 |
+| name  | pe     |
+|-------|--------|
+| TSLA  | 341.83 |
 ...
 ```
 
