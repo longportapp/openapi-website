@@ -1,7 +1,7 @@
 ---
 title: 'tui'
 sidebar_label: 'tui'
-sidebar_position: 2
+sidebar_position: 99
 ---
 
 # longbridge tui
@@ -11,9 +11,9 @@ management, live candlestick charts, portfolio view, and stock search. Vim-style
 
 ## Basic Usage
 
-<CliCommand>
+```bash
 longbridge tui
-</CliCommand>
+```
 
 ## Scenarios
 

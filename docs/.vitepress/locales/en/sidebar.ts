@@ -6,5 +6,5 @@ const cliSidebar  = genMarkdowDocs('en', 'docs/cli')
 
 export const sidebar: DefaultTheme.Sidebar = {
   '/docs/cli': cliSidebar(),
-  '/docs/':    docsSidebar(),
+  '/docs':     docsSidebar(),
 }
