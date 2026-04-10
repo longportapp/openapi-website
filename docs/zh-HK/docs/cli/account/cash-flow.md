@@ -1,7 +1,7 @@
 ---
 title: 'cash-flow'
 sidebar_label: 'cash-flow'
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 # longbridge cash-flow

@@ -1,7 +1,7 @@
 ---
 title: 'positions'
 sidebar_label: 'positions'
-sidebar_position: 4
+sidebar_position: 2
 ---
 
 # longbridge positions
