@@ -43,21 +43,20 @@ Tracks Tencent's price-to-book ratio over time. Supported indicators for `--hist
 ### JSON for monitoring
 
 <CliCommand>
-longbridge valuation TSLA.US --format json
+# Export historical P/B data as JSON for scripting or monitoring pipelines
+longbridge valuation TSLA.US --history --indicator pb --format json
 </CliCommand>
 
 ```json
 {
-  "history": {
-    "metrics": {
-      "pb": {
-        "desc": "current P/B 15.79, in reasonable range, cheaper than 50.31% of last 5 years, industry rank 35/49",
-        "high": "24.35",
-        "list": [
-          { "timestamp": "1619841600", "value": "26.87" },
-          { "timestamp": "1622520000", "value": "24.53" }
-        ]
-      }
+  "metrics": {
+    "pb": {
+      "desc": "current P/B 15.79, in reasonable range, cheaper than 50.31% of last 5 years, industry rank 35/49",
+      "high": "24.35",
+      "list": [
+        { "timestamp": "1619841600", "value": "26.87" },
+        { "timestamp": "1622520000", "value": "24.53" }
+      ]
     }
   }
 }

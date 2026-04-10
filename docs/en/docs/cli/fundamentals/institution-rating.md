@@ -24,6 +24,15 @@ longbridge institution-rating TSLA.US
 
 Shows the breakdown of analyst ratings (Buy, Hold, Sell, and variants), the consensus price target range, and industry peer ranking.
 
+### View historical rating changes over time
+
+<CliCommand>
+# Show week-by-week rating count history and individual analyst target prices
+longbridge institution-rating detail TSLA.US
+</CliCommand>
+
+The `detail` subcommand lists the historical rating distribution by week and individual analyst price targets, so you can track how sentiment has shifted over time.
+
 ### JSON for monitoring
 
 <CliCommand>

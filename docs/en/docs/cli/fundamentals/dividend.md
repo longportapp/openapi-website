@@ -32,6 +32,24 @@ longbridge dividend 700.HK
 
 Works the same for Hong Kong-listed stocks. Tencent pays dividends periodically and this shows the full payment history.
 
+### Find the next ex-dividend date
+
+<CliCommand>
+# The ex_date field shows the ex-dividend date for each record
+longbridge dividend AAPL.US
+</CliCommand>
+
+The most recent record shows the last known ex-dividend date. For upcoming dividends not yet announced, check `finance-calendar` with the `dividend` type.
+
+### View dividend distribution scheme details
+
+<CliCommand>
+# Show detailed dividend distribution scheme (lot size, currency, ratio)
+longbridge dividend detail AAPL.US
+</CliCommand>
+
+The `detail` subcommand shows the full distribution scheme — useful when a dividend includes bonus shares or rights alongside cash.
+
 ### JSON for automation
 
 <CliCommand>
