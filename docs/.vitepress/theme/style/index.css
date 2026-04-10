@@ -8,6 +8,7 @@
 @import './sidebar.css';
 @import './custom.scss';
 @import './css-var.scss';
+@import './homepage.scss';
 
 .VPContent {
   .VPHero .heading .text {

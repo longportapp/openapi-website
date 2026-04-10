@@ -1,0 +1,200 @@
+// Homepage styles
+// All colors use CSS variables from css-var.scss — no hardcoded values.
+
+// ---------------------------------------------------------------------------
+// Layout
+// ---------------------------------------------------------------------------
+.homepage-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.homepage-section {
+  padding: 80px 0;
+}
+
+.homepage-section--alt {
+  background: var(--home-bg-color);
+}
+
+.homepage-section--white {
+  background: var(--home-bg-color-1);
+}
+
+// ---------------------------------------------------------------------------
+// Scroll reveal
+// ---------------------------------------------------------------------------
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-d1 {
+  transition-delay: 0.08s;
+}
+.reveal-d2 {
+  transition-delay: 0.16s;
+}
+.reveal-d3 {
+  transition-delay: 0.24s;
+}
+.reveal-d4 {
+  transition-delay: 0.32s;
+}
+
+// ---------------------------------------------------------------------------
+// Hero character-by-character animation
+// ---------------------------------------------------------------------------
+.hero-char {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(8px);
+  animation: blur-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes blur-in {
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+// ---------------------------------------------------------------------------
+// Tab content transition
+// ---------------------------------------------------------------------------
+@keyframes tab-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tab-content-enter {
+  animation: tab-fade-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+// ---------------------------------------------------------------------------
+// Typing cursor
+// ---------------------------------------------------------------------------
+.typing-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--brand-color);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: cursor-blink 0.8s steps(2) infinite;
+}
+
+@keyframes cursor-blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Code block base (homepage variant)
+// ---------------------------------------------------------------------------
+.homepage-code {
+  background: var(--home-bg-color-1);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+// ---------------------------------------------------------------------------
+// Product section grid
+// ---------------------------------------------------------------------------
+.product-section-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.product-section-grid--reverse {
+  direction: rtl;
+
+  > * {
+    direction: ltr;
+  }
+}
+
+@media (max-width: 900px) {
+  .product-section-grid,
+  .product-section-grid--reverse {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    direction: ltr;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Reduce motion
+// ---------------------------------------------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .reveal-d1,
+  .reveal-d2,
+  .reveal-d3,
+  .reveal-d4 {
+    transition-delay: 0s;
+  }
+
+  .hero-char {
+    opacity: 1;
+    filter: none;
+    animation: none;
+  }
+
+  .hero-fade-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .tab-content-enter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .typing-cursor {
+    animation: none;
+    opacity: 1;
+  }
+}
