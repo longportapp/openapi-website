@@ -1,7 +1,7 @@
 ---
 title: 'portfolio'
 sidebar_label: 'portfolio'
-sidebar_position: 3
+sidebar_position: 1
 ---
 
 # longbridge portfolio
