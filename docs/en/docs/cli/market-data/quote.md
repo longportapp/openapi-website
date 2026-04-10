@@ -32,3 +32,12 @@ longbridge quote TSLA.US NVDA.US 700.HK --format json
 </CliCommand>
 
 Pass multiple symbols in one call to compare quotes side by side. Symbols from different markets (US, HK, CN) are all supported. US stocks include `pre_market_quote` and `post_market_quote` fields when extended-hours data is available.
+
+### Get pre-market and after-hours data
+
+<CliCommand>
+# pre_market_quote and post_market_quote fields appear in US stock output
+longbridge quote TSLA.US --format json
+</CliCommand>
+
+For US stocks, JSON output includes `pre_market_quote` and `post_market_quote` objects when extended-hours data is available. These fields are `null` during regular US market hours.

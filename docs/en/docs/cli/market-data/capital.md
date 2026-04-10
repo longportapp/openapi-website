@@ -30,7 +30,7 @@ longbridge capital flow TSLA.US --format json
 ]
 ```
 
-Each bar shows net inflow (in thousands) for that minute. Positive values indicate net buying; negative values indicate net selling.
+Each bar shows net inflow for that minute. Positive values indicate net buying; negative values indicate net selling.
 
 ### Snapshot: large/medium/small money distribution
 

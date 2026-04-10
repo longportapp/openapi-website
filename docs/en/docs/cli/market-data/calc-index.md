@@ -36,10 +36,10 @@ When `--index` is omitted, the default set is returned: `pe`, `pb`, `dps_rate`, 
 ### Options greeks for a derivative
 
 <CliCommand>
-longbridge calc-index 700.HK --index delta gamma vega theta
+longbridge calc-index 24760.HK --index delta gamma vega theta
 </CliCommand>
 
-For options and warrants, request greeks directly. Only indexes applicable to the instrument type will appear in the output.
+For options and warrants, request greeks directly. Only indexes applicable to the instrument type will appear in the output. Greek values are only meaningful for option/warrant symbols — passing a plain stock symbol returns no greek data.
 
 ## Notes
 

@@ -35,4 +35,4 @@ If a real-time quote feed goes silent, run `subscriptions` to confirm the symbol
 
 ## Notes
 
-Returns an empty list if you have no active subscriptions. Subscriptions are created through the TUI or via `longbridge subscribe`. They are session-scoped and reset when you log out or the session expires.
+Returns an empty list if you have no active subscriptions. Subscriptions are created through the TUI (or programmatically via the OpenAPI SDK). They are session-scoped and reset when you log out or the session expires.

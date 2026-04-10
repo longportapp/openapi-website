@@ -30,7 +30,7 @@ Returns the last 100 daily candles by default, with open, high, low, close, volu
 longbridge kline TSLA.US --period 1h --count 48
 </CliCommand>
 
-Use `--period` to switch granularity (e.g. `1m`, `5m`, `15m`, `30m`, `1h`, `4h`, `day`, `week`, `month`) and `--count` to control how many bars are returned.
+Use `--period` to switch granularity (e.g. `1m`, `5m`, `15m`, `30m`, `1h`, `day`, `week`, `month`, `year`) and `--count` to control how many bars are returned.
 
 ### Historical range
 
