@@ -32,6 +32,14 @@ longbridge financial-report TSLA.US
 
 Fetches the income statement, balance sheet, and cash flow statement together. Equivalent to `--kind ALL`.
 
+### Get the cash flow statement
+
+<CliCommand>
+longbridge financial-report TSLA.US --kind CF
+</CliCommand>
+
+Returns the cash flow statement, covering operating, investing, and financing activities.
+
 ### Annual balance sheet
 
 <CliCommand>
