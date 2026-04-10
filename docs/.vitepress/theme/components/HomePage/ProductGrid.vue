@@ -120,16 +120,14 @@ const products = [
 }
 
 .pg-cmd {
-  background: var(--home-bg-color-1);
+  background: #1b1b1f;
   border-radius: 6px; padding: 10px 12px;
   font-family: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11.5px; color: var(--text-color-1);
+  font-size: 11.5px; color: #e5e7eb;
   margin-bottom: 14px; word-break: break-all; line-height: 1.6;
 }
 
-.dark .pg-cmd { background: var(--home-bg-color-1); }
-
-.pg-ps { color: var(--brand-color); user-select: none; margin-right: 6px; }
+.pg-ps { color: #00d4b8; user-select: none; margin-right: 6px; }
 
 .pg-link {
   font-size: 13px; font-weight: 600;

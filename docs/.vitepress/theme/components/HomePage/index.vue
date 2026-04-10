@@ -93,13 +93,13 @@ const openApiCodeTabs = [
       </template>
       <template #visual>
         <TerminalPreview>
-          <div style="color:var(--text-color-3)">$ longbridge quote TSLA.US AAPL.US NVDA.US</div>
+          <div style="color:#6b7280">$ longbridge quote TSLA.US AAPL.US NVDA.US</div>
           <br />
           <table style="width:100%;border-collapse:collapse;font-size:12px">
-            <tr style="color:var(--text-color-3)"><td>Symbol</td><td>Last</td><td>Change</td><td>Volume</td></tr>
-            <tr><td>TSLA.US</td><td>248.50</td><td style="color:var(--up-color)">+2.18%</td><td style="color:var(--text-color-3)">42.1M</td></tr>
-            <tr><td>AAPL.US</td><td>195.20</td><td style="color:var(--down-color)">-0.71%</td><td style="color:var(--text-color-3)">58.3M</td></tr>
-            <tr><td>NVDA.US</td><td>875.30</td><td style="color:var(--up-color)">+1.48%</td><td style="color:var(--text-color-3)">31.7M</td></tr>
+            <tr style="color:#6b7280"><td>Symbol</td><td>Last</td><td>Change</td><td>Volume</td></tr>
+            <tr><td>TSLA.US</td><td>248.50</td><td style="color:#34d399">+2.18%</td><td style="color:#6b7280">42.1M</td></tr>
+            <tr><td>AAPL.US</td><td>195.20</td><td style="color:#f87171">-0.71%</td><td style="color:#6b7280">58.3M</td></tr>
+            <tr><td>NVDA.US</td><td>875.30</td><td style="color:#34d399">+1.48%</td><td style="color:#6b7280">31.7M</td></tr>
           </table>
         </TerminalPreview>
       </template>
@@ -120,14 +120,14 @@ const openApiCodeTabs = [
       </template>
       <template #visual>
         <TerminalPreview title="AI Assistant with SKILL">
-          <div style="color:var(--text-color-3)">User: <span style="color:var(--link-text-color)">"帮我从美股里筛出市值 500 亿以上、PE 低于 25、近期 MACD 金叉的科技股"</span></div>
+          <div style="color:#6b7280">User: <span style="color:#7dd3fc">"帮我从美股里筛出市值 500 亿以上、PE 低于 25、近期 MACD 金叉的科技股"</span></div>
           <br />
-          <div style="color:var(--up-color)">&#10003; Longbridge SKILL activated</div>
+          <div style="color:#34d399">&#10003; Longbridge SKILL activated</div>
           <br />
-          <div style="color:var(--text-color-3)">Found 3 matching securities:</div>
-          <div>INTC.US &nbsp;PE: 22.1 &nbsp;<span style="color:var(--up-color)">MACD golden cross (2d ago)</span></div>
-          <div>CSCO.US &nbsp;PE: 16.8 &nbsp;<span style="color:var(--up-color)">MACD golden cross (1d ago)</span></div>
-          <div>ORCL.US &nbsp;PE: 24.3 &nbsp;<span style="color:var(--up-color)">MACD golden cross (today)</span></div>
+          <div style="color:#6b7280">Found 3 matching securities:</div>
+          <div>INTC.US &nbsp;PE: 22.1 &nbsp;<span style="color:#34d399">MACD golden cross (2d ago)</span></div>
+          <div>CSCO.US &nbsp;PE: 16.8 &nbsp;<span style="color:#34d399">MACD golden cross (1d ago)</span></div>
+          <div>ORCL.US &nbsp;PE: 24.3 &nbsp;<span style="color:#34d399">MACD golden cross (today)</span></div>
         </TerminalPreview>
       </template>
     </ProductSection>

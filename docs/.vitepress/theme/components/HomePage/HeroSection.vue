@@ -121,29 +121,25 @@ onUnmounted(() => { if (timer) clearTimeout(timer) })
 /* Terminal */
 .hero__term {
   max-width: 580px; margin: 0 auto 32px;
-  background: var(--home-bg-color-1); border-radius: 8px;
-  overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.1); text-align: left;
+  background: #1b1b1f; border-radius: 8px;
+  overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.15); text-align: left;
 }
-
-.dark .hero__term { box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
 
 .hero__term-bar {
   display: flex; align-items: center; gap: 6px;
-  padding: 10px 14px; background: rgba(0,0,0,0.02);
+  padding: 10px 14px; background: rgba(255,255,255,0.04);
 }
-
-.dark .hero__term-bar { background: rgba(255,255,255,0.04); }
 
 .hero__dot { width: 8px; height: 8px; border-radius: 50%; }
 
 .hero__term-cmd {
   padding: 16px 20px;
   font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
-  font-size: 14px; color: var(--text-color-1); display: flex; align-items: center;
+  font-size: 14px; color: #e5e7eb; display: flex; align-items: center;
   min-height: 50px;
 }
 
-.hero__ps { color: var(--brand-color); user-select: none; margin-right: 10px; font-weight: 600; }
+.hero__ps { color: #00d4b8; user-select: none; margin-right: 10px; font-weight: 600; }
 .hero__typed { white-space: nowrap; overflow: hidden; }
 
 /* CTA */

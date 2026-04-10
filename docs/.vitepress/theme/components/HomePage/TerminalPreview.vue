@@ -18,10 +18,10 @@ defineProps<{ title?: string }>()
 
 <style scoped>
 .terminal {
-  background: var(--home-bg-color-1);
+  background: #1b1b1f;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .terminal__header {
@@ -29,12 +29,8 @@ defineProps<{ title?: string }>()
   align-items: center;
   gap: 6px;
   padding: 10px 14px;
-  background: rgba(0, 0, 0, 0.03);
-  border-bottom: 1px solid var(--border-color);
-}
-
-.dark .terminal__header {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .terminal__dot {
@@ -49,7 +45,7 @@ defineProps<{ title?: string }>()
 
 .terminal__title {
   font-size: 12px;
-  color: var(--text-color-3);
+  color: #6b7280;
   margin-left: 8px;
   font-family: 'SF Mono', ui-monospace, monospace;
 }
@@ -58,7 +54,7 @@ defineProps<{ title?: string }>()
   padding: 16px 20px;
   font-family: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
   font-size: 12px;
-  color: var(--text-color-1);
+  color: #e5e7eb;
   line-height: 1.9;
   overflow-x: auto;
 }
