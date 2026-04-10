@@ -13,10 +13,10 @@ interface Product {
 }
 
 const products: Product[] = [
-  { key: 'openapi', label: 'OpenAPI', install: 'pip install longbridge', desc: 'Python SDK — 实时行情、交易执行、6 种语言' },
-  { key: 'mcp', label: 'MCP', install: 'claude mcp add --transport http longbridge https://openapi.longbridge.com/mcp', desc: 'AI 工具直连 — Claude、Cursor、Zed、ChatGPT' },
   { key: 'cli', label: 'CLI', install: 'curl -fsSL https://longbridge.sh/install | bash', desc: '40+ 命令 — 行情、交易、财报、选股' },
   { key: 'skill', label: 'SKILL', install: 'npx skills add longbridge/developers -g -y', desc: 'AI 知识库 — 自动识别股票、智能调用分析' },
+  { key: 'mcp', label: 'MCP', install: 'claude mcp add --transport http longbridge https://openapi.longbridge.com/mcp', desc: 'AI 工具直连 — Claude、Cursor、Zed、ChatGPT' },
+  { key: 'openapi', label: 'OpenAPI', install: 'pip install longbridge', desc: 'Python SDK — 实时行情、交易执行、6 种语言' },
 ]
 
 const activeIdx = ref(0)
@@ -137,10 +137,9 @@ onUnmounted(clear)
             class="ht-tab" :class="{ active: activeIdx === i }"
             @click="switchTo(i)"
           >{{ p.label }}</button>
-          <button ref="copyBtnRef" class="ht-copy" :class="{ 'ht-copy--done': copied }" aria-label="Copy install command" @click="copy">
-            <svg v-if="copied" class="ht-copy-icon ht-copy-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <svg v-else class="ht-copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-            <span>{{ copied ? $t('api.copied') : $t('api.copy') }}</span>
+          <button ref="copyBtnRef" class="ht-copy" :class="{ 'ht-copy--done': copied }" :aria-label="copied ? $t('api.copied') : $t('api.copy')" @click="copy">
+            <svg v-if="copied" class="ht-copy-icon ht-copy-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg v-else class="ht-copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
           </button>
         </div>
 
@@ -206,13 +205,14 @@ onUnmounted(clear)
 .ht-tab:hover { color: var(--code-fg); }
 
 .ht-copy {
-  margin-left: auto; padding: 0.25rem 0.75rem; font-size: var(--text-xs); font-weight: var(--weight-medium);
-  border: 1px solid rgba(255,255,255,0.12); border-radius: 4px;
+  margin-left: auto; padding: 6px;
+  border: none; border-radius: 4px;
   background: transparent; color: var(--code-dim); cursor: pointer;
-  font-family: inherit; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
 }
 
-.ht-copy:hover { color: var(--code-fg); border-color: rgba(255,255,255,0.25); }
+.ht-copy:hover { color: var(--code-fg); background: rgba(255,255,255,0.08); }
 
 .ht-copy-icon { flex-shrink: 0; }
 
@@ -229,8 +229,7 @@ onUnmounted(clear)
 
 .ht-copy--done {
   color: var(--code-accent);
-  border-color: var(--code-accent);
-  background: rgba(0, 212, 184, 0.12);
+  background: rgba(0, 212, 184, 0.15);
   animation: copy-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

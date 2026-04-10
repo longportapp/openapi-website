@@ -39,50 +39,7 @@ const openApiCodeTabs = [
     <HeroSection />
     <PlatformStats />
 
-    <!-- OpenAPI -->
-    <ProductSection accent="brand">
-      <template #content>
-        <div class="ps-header">
-          <span class="ps-badge ps-badge--brand">API</span>
-          <div class="ps-product-name ps-product-name--brand">OpenAPI</div>
-        </div>
-        <h2 class="ps-title">{{ t('home.openapi.title') }}</h2>
-        <p class="ps-desc">{{ t('home.openapi.desc') }}</p>
-        <ul class="ps-features">
-          <li><strong>{{ t('home.openapi.feat1.title') }}</strong> — {{ t('home.openapi.feat1.desc') }}</li>
-          <li><strong>{{ t('home.openapi.feat2.title') }}</strong> — {{ t('home.openapi.feat2.desc') }}</li>
-          <li><strong>{{ t('home.openapi.feat3.title') }}</strong> — {{ t('home.openapi.feat3.desc') }}</li>
-          <li><strong>{{ t('home.openapi.feat4.title') }}</strong> — {{ t('home.openapi.feat4.desc') }}</li>
-        </ul>
-        <a href="/docs/getting-started" class="ps-link">{{ t('home.openapi.link') }} &rarr;</a>
-      </template>
-      <template #visual>
-        <CodeBlockTabs :tabs="openApiCodeTabs" />
-      </template>
-    </ProductSection>
-
-    <!-- MCP -->
-    <ProductSection accent="purple" reverse>
-      <template #content>
-        <div class="ps-header">
-          <span class="ps-badge ps-badge--purple">AI</span>
-          <div class="ps-product-name ps-product-name--purple">MCP</div>
-        </div>
-        <h2 class="ps-title">{{ t('home.mcp.title') }}</h2>
-        <p class="ps-desc">{{ t('home.mcp.desc') }}</p>
-        <ul class="ps-features">
-          <li><strong>{{ t('home.mcp.feat1.title') }}</strong> — {{ t('home.mcp.feat1.desc') }}</li>
-          <li><strong>{{ t('home.mcp.feat2.title') }}</strong> — {{ t('home.mcp.feat2.desc') }}</li>
-          <li><strong>{{ t('home.mcp.feat3.title') }}</strong> — {{ t('home.mcp.feat3.desc') }}</li>
-        </ul>
-        <a href="/docs/mcp" class="ps-link">{{ t('home.mcp.link') }} &rarr;</a>
-      </template>
-      <template #visual>
-        <McpShowcase />
-      </template>
-    </ProductSection>
-
-    <!-- CLI -->
+    <!-- CLI (1st — normal layout) -->
     <ProductSection accent="amber">
       <template #content>
         <div class="ps-header">
@@ -123,7 +80,7 @@ const openApiCodeTabs = [
       </template>
     </ProductSection>
 
-    <!-- SKILL -->
+    <!-- SKILL (2nd — reverse layout) -->
     <ProductSection accent="pink" reverse>
       <template #content>
         <div class="ps-header">
@@ -159,6 +116,49 @@ const openApiCodeTabs = [
           <div>CSCO.US &nbsp;PE: 16.8 &nbsp;<span style="color:var(--code-up)">MACD golden cross (1d ago)</span></div>
           <div>ORCL.US &nbsp;PE: 24.3 &nbsp;<span style="color:var(--code-up)">MACD golden cross (today)</span></div>
         </TerminalPreview>
+      </template>
+    </ProductSection>
+
+    <!-- MCP (3rd — normal layout) -->
+    <ProductSection accent="purple">
+      <template #content>
+        <div class="ps-header">
+          <span class="ps-badge ps-badge--purple">AI</span>
+          <div class="ps-product-name ps-product-name--purple">MCP</div>
+        </div>
+        <h2 class="ps-title">{{ t('home.mcp.title') }}</h2>
+        <p class="ps-desc">{{ t('home.mcp.desc') }}</p>
+        <ul class="ps-features">
+          <li><strong>{{ t('home.mcp.feat1.title') }}</strong> — {{ t('home.mcp.feat1.desc') }}</li>
+          <li><strong>{{ t('home.mcp.feat2.title') }}</strong> — {{ t('home.mcp.feat2.desc') }}</li>
+          <li><strong>{{ t('home.mcp.feat3.title') }}</strong> — {{ t('home.mcp.feat3.desc') }}</li>
+        </ul>
+        <a href="/docs/mcp" class="ps-link">{{ t('home.mcp.link') }} &rarr;</a>
+      </template>
+      <template #visual>
+        <McpShowcase />
+      </template>
+    </ProductSection>
+
+    <!-- OpenAPI (4th — reverse layout) -->
+    <ProductSection accent="brand" reverse>
+      <template #content>
+        <div class="ps-header">
+          <span class="ps-badge ps-badge--brand">API</span>
+          <div class="ps-product-name ps-product-name--brand">OpenAPI</div>
+        </div>
+        <h2 class="ps-title">{{ t('home.openapi.title') }}</h2>
+        <p class="ps-desc">{{ t('home.openapi.desc') }}</p>
+        <ul class="ps-features">
+          <li><strong>{{ t('home.openapi.feat1.title') }}</strong> — {{ t('home.openapi.feat1.desc') }}</li>
+          <li><strong>{{ t('home.openapi.feat2.title') }}</strong> — {{ t('home.openapi.feat2.desc') }}</li>
+          <li><strong>{{ t('home.openapi.feat3.title') }}</strong> — {{ t('home.openapi.feat3.desc') }}</li>
+          <li><strong>{{ t('home.openapi.feat4.title') }}</strong> — {{ t('home.openapi.feat4.desc') }}</li>
+        </ul>
+        <a href="/docs/getting-started" class="ps-link">{{ t('home.openapi.link') }} &rarr;</a>
+      </template>
+      <template #visual>
+        <CodeBlockTabs :tabs="openApiCodeTabs" />
       </template>
     </ProductSection>
 
