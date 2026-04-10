@@ -24,7 +24,7 @@ longbridge news TSLA.US
 ...
 ```
 
-## Scenarios
+## Examples
 
 ### Latest news for a stock
 

@@ -31,7 +31,7 @@ Target price range:
 | 125.000      | 600.000       | 345.62     |
 ```
 
-## Scenarios
+## Examples
 
 ### Check analyst consensus
 

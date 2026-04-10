@@ -32,7 +32,7 @@ Bid Brokers:
 | 3        | 4482, 4483    |
 ```
 
-## Scenarios
+## Examples
 
 ### View broker distribution
 

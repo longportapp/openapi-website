@@ -22,7 +22,7 @@ longbridge kline TSLA.US --period day --count 3
 | 2026-04-09 04:00:00 | 343.150 | 348.880 | 337.250 | 345.620 | 62164016 | 21375312140.000 |
 ```
 
-## Scenarios
+## Examples
 
 ### Daily candles (last 100 days, default)
 

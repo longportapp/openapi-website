@@ -29,7 +29,7 @@ Extended Hours:
 | NVDA.US | Post    | 183.020 | 183.950 | 182.900 | 6021581 | 183.910    | 2026-04-09 23:59:58 |
 ```
 
-## Scenarios
+## Examples
 
 ### Check a single stock
 

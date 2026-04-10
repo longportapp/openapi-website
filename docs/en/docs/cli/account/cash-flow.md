@@ -19,7 +19,7 @@ longbridge cash-flow
 |-----------|--------|---------------|---------|----------|------|-------------|
 ```
 
-## Scenarios
+## Examples
 
 ### View last 30 days of cash flow
 

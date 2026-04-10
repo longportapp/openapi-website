@@ -24,7 +24,7 @@ longbridge fund-holder AAPL.US
 ...
 ```
 
-## Scenarios
+## Examples
 
 ### Find top ETF holders of a stock
 

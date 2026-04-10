@@ -23,7 +23,7 @@ longbridge dividend 700.HK
 | Dividend: HKD 2.4/share                     | 2023.05.19 | 2023.06.05   | 2023.05.22  |
 ```
 
-## Scenarios
+## Examples
 
 ### View dividend history
 

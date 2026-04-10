@@ -23,7 +23,7 @@ longbridge insider-trades TSLA.US
 | 2025-06-12 | Zhu Xiaotong | SVP, APAC     | SELL     | 15.00K | $323.81 | $4.86M   | 67.60K      |
 ```
 
-## Scenarios
+## Examples
 
 ### Check insider activity
 

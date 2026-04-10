@@ -23,7 +23,7 @@ longbridge positions
 | 9988.HK | BABA-W    | 500      | 500       | 95.640     | HKD      | HK     |
 ```
 
-## Scenarios
+## Examples
 
 ### View all positions
 

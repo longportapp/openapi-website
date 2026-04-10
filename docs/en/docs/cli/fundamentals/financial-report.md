@@ -26,7 +26,7 @@ longbridge financial-report TSLA.US --kind IS
 | Net Margin          | 3.37%   | 4.89%   | 5.21%   | 2.12%   | 8.28%   |
 ```
 
-## Scenarios
+## Examples
 
 ### Get the latest income statement
 

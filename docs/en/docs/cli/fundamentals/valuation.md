@@ -28,7 +28,7 @@ Peers (5):
 ...
 ```
 
-## Scenarios
+## Examples
 
 ### Current valuation snapshot
 

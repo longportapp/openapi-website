@@ -25,7 +25,7 @@ longbridge investors
 ...
 ```
 
-## Scenarios
+## Examples
 
 ### Browse top fund managers
 

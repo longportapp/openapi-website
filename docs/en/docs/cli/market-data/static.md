@@ -20,7 +20,7 @@ longbridge static TSLA.US
 | TSLA.US | Tesla, Inc. | NASD     | USD      | 1        | 3752431984   | 2812676349   | 1.0111 | 1.0111  | 21.889 | 0        |
 ```
 
-## Scenarios
+## Examples
 
 ### Look up multiple symbols at once
 

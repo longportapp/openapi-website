@@ -23,7 +23,7 @@ longbridge topic TSLA.US
 ...
 ```
 
-## Scenarios
+## Examples
 
 ### View community discussions
 

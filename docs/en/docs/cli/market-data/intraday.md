@@ -23,7 +23,7 @@ longbridge intraday TSLA.US
 ...
 ```
 
-## Scenarios
+## Examples
 
 ### View today's intraday price line
 

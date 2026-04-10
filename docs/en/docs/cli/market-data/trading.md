@@ -24,7 +24,7 @@ longbridge trading session
 | HK     | Intraday | 13:00:00 | 16:00:00 |
 ```
 
-## Scenarios
+## Examples
 
 ### View trading hours for all markets
 

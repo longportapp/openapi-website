@@ -25,7 +25,7 @@ longbridge capital flow TSLA.US
 ...
 ```
 
-## Scenarios
+## Examples
 
 ### Track minute-by-minute large money inflow
 

@@ -24,7 +24,7 @@ EPS Forecasts (recent 19):
 ...
 ```
 
-## Scenarios
+## Examples
 
 ### Check EPS forecast
 

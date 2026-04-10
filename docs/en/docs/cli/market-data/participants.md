@@ -26,7 +26,7 @@ longbridge participants
 ...
 ```
 
-## Scenarios
+## Examples
 
 ### Look up all broker IDs
 

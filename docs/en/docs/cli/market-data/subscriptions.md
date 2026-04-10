@@ -14,7 +14,7 @@ List your current active real-time quote subscriptions.
 longbridge subscriptions
 ```
 
-## Scenarios
+## Examples
 
 ### Check active subscriptions
 

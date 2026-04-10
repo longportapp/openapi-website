@@ -24,7 +24,7 @@ longbridge market-temp US
 | Sentiment   | 45                                    |
 ```
 
-## Scenarios
+## Examples
 
 ### Current market temperature
 

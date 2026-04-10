@@ -24,7 +24,7 @@ longbridge shareholder TSLA.US
 | Geode Capital Management, LLC      | -      | 1.75%    | +375.95K   | 2025-12-31  |
 ```
 
-## Scenarios
+## Examples
 
 ### Check top shareholders
 

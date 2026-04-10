@@ -22,7 +22,7 @@ longbridge max-qty TSLA.US --side buy --price 340.00
 | Margin Max Qty | 896     |
 ```
 
-## Scenarios
+## Examples
 
 ### Max buy quantity at a price
 

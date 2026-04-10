@@ -23,7 +23,7 @@ longbridge exchange-rate
 | HKD → CNY | 1.1465       | 1.1465   | 1.1465     |
 ```
 
-## Scenarios
+## Examples
 
 ### View all exchange rates
 

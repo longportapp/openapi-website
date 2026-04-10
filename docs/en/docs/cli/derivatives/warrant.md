@@ -24,7 +24,7 @@ longbridge warrant 700.HK
 ...
 ```
 
-## Scenarios
+## Examples
 
 ### List all warrants on a stock
 

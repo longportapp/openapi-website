@@ -20,7 +20,7 @@ longbridge calc-index TSLA.US
 | TSLA.US | 341.83 | 15.79 | -        | 2.21          | 1296915542310.08    |
 ```
 
-## Scenarios
+## Examples
 
 ### Check P/E and P/B ratios
 

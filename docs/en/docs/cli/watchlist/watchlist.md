@@ -25,7 +25,7 @@ Group: all (ID: 2630)
 | QQQI.US    | NEOS Nasdaq-100(R) High Income ETF | US     |        |
 ```
 
-## Scenarios
+## Examples
 
 ### View all watchlist groups and their securities
 

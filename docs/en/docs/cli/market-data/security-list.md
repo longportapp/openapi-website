@@ -25,7 +25,7 @@ longbridge security-list
 ...
 ```
 
-## Scenarios
+## Examples
 
 ### View overnight-eligible US securities
 

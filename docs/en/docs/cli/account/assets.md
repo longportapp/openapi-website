@@ -25,7 +25,7 @@ longbridge assets
 | HKD      | 755592.21      | 64.69       | -27760.00     | 755592.21    |
 ```
 
-## Scenarios
+## Examples
 
 ### Check account overview
 

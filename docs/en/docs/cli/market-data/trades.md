@@ -25,7 +25,7 @@ longbridge trades TSLA.US
 | 2026-04-09 23:59:52 | 344.975 | 100    | Neutral   |      |
 ```
 
-## Scenarios
+## Examples
 
 ### View last 20 trades
 

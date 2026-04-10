@@ -25,7 +25,7 @@ longbridge option chain AAPL.US
 ...
 ```
 
-## Scenarios
+## Examples
 
 ### Browse the option chain for a stock
 

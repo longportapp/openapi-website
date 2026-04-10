@@ -24,7 +24,7 @@ Currency: USD | Period: qf
 ...
 ```
 
-## Scenarios
+## Examples
 
 ### Check consensus estimates
 

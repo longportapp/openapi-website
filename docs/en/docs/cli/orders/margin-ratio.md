@@ -23,7 +23,7 @@ longbridge margin-ratio TSLA.US
 | Forced Liquidation Ratio | 0.25    |
 ```
 
-## Scenarios
+## Examples
 
 ### Check margin requirements before buying on margin
 

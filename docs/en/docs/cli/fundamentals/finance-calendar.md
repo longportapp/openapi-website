@@ -20,7 +20,7 @@ longbridge finance-calendar financial --symbol TSLA.US
   EPS: Est 0.3466 / Act 0.24  |  Revenue: Est $24.8B / Act $24.9B
 ```
 
-## Scenarios
+## Examples
 
 ### Upcoming earnings for a stock
 

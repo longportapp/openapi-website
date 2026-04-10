@@ -32,7 +32,7 @@ Bids (Buy):
 | 3        | 344.960 | 250    | 3      |
 ```
 
-## Scenarios
+## Examples
 
 ### View the order book
 

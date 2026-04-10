@@ -34,7 +34,7 @@ longbridge portfolio
 | Cash   | 58638.84    | 46.75%  |
 ```
 
-## Scenarios
+## Examples
 
 ### View portfolio summary
 

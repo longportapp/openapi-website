@@ -15,7 +15,7 @@ management, live candlestick charts, portfolio view, and stock search. Vim-style
 longbridge tui
 ```
 
-## Scenarios
+## Examples
 
 ### Monitor a watchlist in real time
 

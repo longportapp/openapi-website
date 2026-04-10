@@ -19,7 +19,7 @@ longbridge fund-positions
 |--------|------|-----------------|----------------------|----------|---------------|
 ```
 
-## Scenarios
+## Examples
 
 ### View fund/ETF holdings
 
