@@ -145,12 +145,21 @@ html:root {
 }
 
 /* CLI Command block */
-.vp-cli-command .language-bash {
-  border-radius: 0 0 8px 8px;
-  margin-top: 0;
+.vp-cli-command {
+  margin: 16px 0 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px 0 rgb(0 0 0 / 40%);
 }
 
-.vp-cli-command .language-bash .lang {
+.vp-cli-command div[class*="language-"].vp-adaptive-theme {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding-top: 0 !important;
+  margin: 0 !important;
+}
+
+.vp-cli-command div[class*="language-"].vp-adaptive-theme::before {
   display: none;
 }
 
