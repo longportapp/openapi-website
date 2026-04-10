@@ -137,20 +137,32 @@ const sdks = ['Python', 'Node.js', 'Rust', 'Go', 'Java', 'C++']
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
+  border: none;
+}
+
+.mc-table th,
+.mc-table td {
+  border: none;
+  background: transparent;
 }
 
 .mc-table th {
   text-align: left;
   font-weight: 500;
   color: var(--text-color-3);
-  padding: 6px 0;
+  padding: 8px 0;
   border-bottom: 1px solid var(--border-color);
   font-size: 12px;
 }
 
 .mc-table td {
-  padding: 8px 0;
+  padding: 10px 0;
   color: var(--text-color-1);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mc-table tr:last-child td {
+  border-bottom: none;
 }
 
 .mc-table td:not(:first-child),
