@@ -8,7 +8,6 @@ import ProductSection from './ProductSection.vue'
 import CodeBlockTabs from './CodeBlockTabs.vue'
 import McpShowcase from './McpShowcase.vue'
 import TerminalPreview from './TerminalPreview.vue'
-import GetStarted from './GetStarted.vue'
 import MarketCoverage from './MarketCoverage.vue'
 import Footer from './Footer.vue'
 
@@ -131,7 +130,6 @@ const openApiCodeTabs = [
       </template>
     </ProductSection>
 
-    <GetStarted />
     <MarketCoverage />
     <Footer />
   </div>
