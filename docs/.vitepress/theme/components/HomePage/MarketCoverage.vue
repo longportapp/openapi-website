@@ -5,10 +5,35 @@ import IconComponent from './IconComponent.vue'
 const { t } = useI18n()
 
 const markets = [
-  { key: 'HK', icon: 'market_round_HK', nameKey: 'home.market.hk', productsKey: 'home.market.hkProducts' },
-  { key: 'US', icon: 'market_round_US', nameKey: 'home.market.us', productsKey: 'home.market.usProducts' },
-  { key: 'CN', icon: 'market_round_CN', nameKey: 'home.market.cn', productsKey: 'home.market.cnProducts' },
-  { key: 'SG', icon: 'market_round_SG', nameKey: 'home.market.sg', productsKey: 'home.market.sgProducts' },
+  {
+    key: 'HK',
+    icon: 'market_round_HK',
+    nameKey: 'home.market.hk',
+    products: [
+      { nameKey: 'home.market.stocks', trade: true, quotes: true },
+      { nameKey: 'home.market.etf', trade: true, quotes: true },
+      { nameKey: 'home.market.warrant', trade: true, quotes: true },
+    ],
+  },
+  {
+    key: 'US',
+    icon: 'market_round_US',
+    nameKey: 'home.market.us',
+    products: [
+      { nameKey: 'home.market.stocks', trade: true, quotes: true },
+      { nameKey: 'home.market.etf', trade: true, quotes: true },
+      { nameKey: 'home.market.options', trade: true, quotes: true },
+    ],
+  },
+  {
+    key: 'CN',
+    icon: 'market_round_CN',
+    nameKey: 'home.market.cn',
+    products: [
+      { nameKey: 'home.market.stocks', trade: true, quotes: true },
+      { nameKey: 'home.market.etf', trade: true, quotes: true },
+    ],
+  },
 ]
 
 const sdks = ['Python', 'Node.js', 'Rust', 'Go', 'Java', 'C++']
@@ -18,17 +43,39 @@ const sdks = ['Python', 'Node.js', 'Rust', 'Go', 'Java', 'C++']
   <section class="homepage-section">
     <div class="homepage-container">
       <div class="mc-header reveal">
-        <h2 class="mc-title">{{ t('home.marketCoverage.title') }}</h2>
+        <h2 class="mc-main-title">{{ t('home.marketCoverage.title') }}</h2>
         <p class="mc-subtitle">{{ t('home.marketCoverage.subtitle') }}</p>
       </div>
-      <div class="mc-grid reveal">
-        <div v-for="m in markets" :key="m.key" class="mc-card">
-          <IconComponent :type="m.icon" class-name="mc-icon" />
-          <div class="mc-name">{{ t(m.nameKey) }}</div>
-          <div class="mc-products">{{ t(m.productsKey) }}</div>
+
+      <!-- Market matrix -->
+      <div class="mc-matrix reveal">
+        <div v-for="m in markets" :key="m.key" class="mc-market">
+          <div class="mc-market-header">
+            <IconComponent :type="m.icon" class-name="mc-flag" />
+            <span class="mc-market-name">{{ t(m.nameKey) }}</span>
+          </div>
+          <table class="mc-table">
+            <thead>
+              <tr>
+                <th>{{ t('home.market.product') }}</th>
+                <th>{{ t('home.market.trade') }}</th>
+                <th>{{ t('home.market.quotes') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="p in m.products" :key="p.nameKey">
+                <td>{{ t(p.nameKey) }}</td>
+                <td><span v-if="p.trade" class="mc-dot" /></td>
+                <td><span v-if="p.quotes" class="mc-dot" /></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-      <div class="mc-sdks reveal reveal-d1">
+
+      <!-- SDK row -->
+      <div class="mc-sdk-row reveal reveal-d1">
+        <span class="mc-sdk-label">SDK</span>
         <span v-for="sdk in sdks" :key="sdk" class="mc-sdk">{{ sdk }}</span>
       </div>
     </div>
@@ -38,8 +85,8 @@ const sdks = ['Python', 'Node.js', 'Rust', 'Go', 'Java', 'C++']
 <style scoped>
 .mc-header { text-align: center; margin-bottom: 40px; }
 
-.mc-title {
-  font-size: 28px;
+.mc-main-title {
+  font-size: var(--text-xl, 1.75rem);
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--text-color-1);
@@ -53,42 +100,88 @@ const sdks = ['Python', 'Node.js', 'Rust', 'Go', 'Java', 'C++']
   margin: 0 auto;
 }
 
-.mc-grid {
+/* Market matrix */
+.mc-matrix {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
   margin-bottom: 32px;
 }
 
-.mc-card {
+.mc-market {
   background: var(--home-bg-color-1);
   border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 20px;
+}
+
+.mc-market-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+:deep(.mc-flag) {
+  width: 28px;
+  height: 28px;
+}
+
+.mc-market-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-color-1);
+}
+
+.mc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.mc-table th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--text-color-3);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 12px;
+}
+
+.mc-table td {
+  padding: 8px 0;
+  color: var(--text-color-1);
+}
+
+.mc-table td:not(:first-child),
+.mc-table th:not(:first-child) {
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 60px;
 }
 
-.mc-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+.mc-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand-color);
 }
 
-:deep(.mc-icon) {
-  width: 36px;
-  height: 36px;
-  margin: 0 auto 8px;
-}
-
-.mc-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; color: var(--text-color-1); }
-.mc-products { font-size: 12px; color: var(--text-color-3); }
-
-.mc-sdks {
+/* SDK row */
+.mc-sdk-row {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+.mc-sdk-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-color-3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .mc-sdk {
@@ -108,11 +201,7 @@ const sdks = ['Python', 'Node.js', 'Rust', 'Go', 'Java', 'C++']
   background: var(--brand-5);
 }
 
-@media (max-width: 640px) {
-  .mc-grid { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 900px) and (min-width: 641px) {
-  .mc-grid { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 768px) {
+  .mc-matrix { grid-template-columns: 1fr; }
 }
 </style>

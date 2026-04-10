@@ -46,6 +46,7 @@ const openApiCodeTabs = [
           <span class="ps-badge ps-badge--amber">Terminal</span>
           <div class="ps-product-name ps-product-name--amber">CLI</div>
         </div>
+        <p class="ps-value">{{ t('home.cli.value') }}</p>
         <h2 class="ps-title">{{ t('home.cli.title') }}</h2>
         <p class="ps-desc">{{ t('home.cli.desc') }}</p>
         <ul class="ps-features">
@@ -84,6 +85,7 @@ const openApiCodeTabs = [
           <span class="ps-badge ps-badge--pink">AI Agent</span>
           <div class="ps-product-name ps-product-name--pink">SKILL</div>
         </div>
+        <p class="ps-value">{{ t('home.skill.value') }}</p>
         <h2 class="ps-title">{{ t('home.skill.title') }}</h2>
         <p class="ps-desc">{{ t('home.skill.desc') }}</p>
         <ul class="ps-features">
@@ -120,6 +122,7 @@ const openApiCodeTabs = [
           <span class="ps-badge ps-badge--purple">AI</span>
           <div class="ps-product-name ps-product-name--purple">MCP</div>
         </div>
+        <p class="ps-value">{{ t('home.mcp.value') }}</p>
         <h2 class="ps-title">{{ t('home.mcp.title') }}</h2>
         <p class="ps-desc">{{ t('home.mcp.desc') }}</p>
         <ul class="ps-features">
@@ -141,6 +144,7 @@ const openApiCodeTabs = [
           <span class="ps-badge ps-badge--brand">API</span>
           <div class="ps-product-name ps-product-name--brand">OpenAPI</div>
         </div>
+        <p class="ps-value">{{ t('home.openapi.value') }}</p>
         <h2 class="ps-title">{{ t('home.openapi.title') }}</h2>
         <p class="ps-desc">{{ t('home.openapi.desc') }}</p>
         <ul class="ps-features">
@@ -199,13 +203,21 @@ const openApiCodeTabs = [
 .ps-product-name--amber { color: var(--product-cli); }
 .ps-product-name--pink { color: var(--product-skill); }
 
-.ps-title {
-  font-size: var(--text-lg, 1.25rem);
-  font-weight: var(--weight-semibold, 600);
-  letter-spacing: -0.01em;
-  margin-bottom: 12px;
-  line-height: var(--leading-snug, 1.3);
+.ps-value {
+  font-size: var(--text-xl, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 8px;
   color: var(--text-color-1);
+}
+
+.ps-title {
+  font-size: var(--text-base, 1rem);
+  font-weight: var(--weight-medium, 500);
+  margin-bottom: 12px;
+  line-height: var(--leading-normal, 1.5);
+  color: var(--text-color-2);
 }
 
 .ps-desc {
