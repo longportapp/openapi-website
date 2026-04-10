@@ -22,22 +22,11 @@ longbridge news TSLA.US
 longbridge news TSLA.US
 # Get more articles
 longbridge news NVDA.US --count 5
-</CliCommand>
-
-Lists the most recent news articles for the symbol with titles, publication times, and URLs.
-
-### JSON output for processing
-
-<CliCommand>
+# Output as JSON for scripting
 longbridge news TSLA.US --format json
 </CliCommand>
 
-```json
-[
-  { "comments_count": 7, "id": "39798312", "likes_count": 41, "published_at": 1775734323, "title": "AI's Hard Limit: Compute Boom Meets a Power Crunch; Gas Turbines the Hidden Boss?", "url": "https://longbridge.cn/topics/39798312" },
-  { "comments_count": 0, "id": "282276051", "likes_count": 0, "published_at": 1775787387, "title": "In response to market rumors that 'Tesla is developing a brand new...'", "url": "https://longbridge.cn/news/282276051" }
-]
-```
+Lists the most recent news articles for the symbol with titles, publication times, and URLs.
 
 ### Get full article content
 

@@ -20,6 +20,8 @@ longbridge margin-ratio TSLA.US
 
 <CliCommand>
 longbridge margin-ratio TSLA.US
+# Output as JSON for scripting
+longbridge margin-ratio TSLA.US --format json
 </CliCommand>
 
 Displays the initial margin ratio, maintenance margin ratio, and forced liquidation ratio for the symbol. Use this before placing a margin buy to understand the capital requirements.
@@ -32,17 +34,6 @@ longbridge margin-ratio TSLA.US NVDA.US
 
 Pass multiple symbols to compare their margin requirements side by side.
 
-### JSON output
+## Requirements
 
-<CliCommand>
-longbridge margin-ratio TSLA.US --format json
-</CliCommand>
-
-```json
-[
-  { "field": "Symbol", "value": "TSLA.US" },
-  { "field": "Initial Margin Ratio", "value": "0.35" },
-  { "field": "Maintenance Margin Ratio", "value": "0.33" },
-  { "field": "Forced Liquidation Ratio", "value": "0.25" }
-]
-```
+OAuth trade or account permission is required to query margin ratios. See [Trade Permissions](/docs/trade/) for setup details.

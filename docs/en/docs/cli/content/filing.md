@@ -20,21 +20,17 @@ longbridge filing TSLA.US
 
 <CliCommand>
 longbridge filing TSLA.US
-</CliCommand>
-
-Lists the most recent filings for the symbol with titles, form types, and publication dates.
-
-### JSON with download links
-
-<CliCommand>
+# Output as JSON for scripting
 longbridge filing TSLA.US --format json
 </CliCommand>
 
-```json
-[
-  { "description": "", "file_count": 1, "file_name": "4 - Tesla, Inc. (0001318605) (Issuer)", "file_urls": ["https://www.sec.gov/Archives/edgar/data/1318605/000197292826000002/xslF345X06/edgardoc.xml"], "id": "633214836329945345", "publish_at": 1775174932, "title": "Tesla | 4 - Tesla, Inc. (0001318605) (Issuer)" },
-  { "description": "", "file_count": 2, "file_name": "8-K - Tesla, Inc. (0001318605) (Filer)", "file_urls": ["https://www.sec.gov/Archives/edgar/data/1318605/000162828026022956/tsla-20260402.htm", "https://www.sec.gov/Archives/edgar/data/1318605/000162828026022956/exhibit9911111.htm"], "id": "633048285147044097", "publish_at": 1775135233, "title": "Tesla | 8-K - Tesla, Inc. (0001318605) (Filer)" }
-]
-```
+Lists the most recent filings for the symbol with titles, form types, and publication dates. The `file_urls` field in JSON output contains direct download links to the filing documents on SEC EDGAR.
 
-The `file_urls` array contains direct download links to the filing documents on SEC EDGAR. Filings with multiple documents (e.g., 8-K with exhibits) will have more than one URL.
+### Read a full filing
+
+<CliCommand>
+# Use the id from the filing list to read the full document
+longbridge filing detail 633214836329945345
+</CliCommand>
+
+Returns the full text content of the filing. Useful for extracting specific disclosures or feeding to an AI model for analysis.

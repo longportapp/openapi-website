@@ -43,7 +43,15 @@ Lists all watchlist groups with their IDs, names, and securities. Group IDs are 
 longbridge watchlist update 2630 --add NVDA.US --add AAPL.US
 </CliCommand>
 
-Adds one or more symbols to an existing group. Use `--remove` to remove symbols from a group. Run `longbridge watchlist` first to find group IDs.
+Adds one or more symbols to an existing group. Run `longbridge watchlist` first to find group IDs.
+
+### Remove symbols from a group
+
+<CliCommand>
+longbridge watchlist update 2630 --remove NVDA.US --remove AAPL.US
+</CliCommand>
+
+Removes one or more symbols from an existing group. Run `longbridge watchlist` first to confirm the group ID and current securities.
 
 ### Create a new watchlist group
 
@@ -52,6 +60,14 @@ longbridge watchlist create "Tech Stocks"
 </CliCommand>
 
 Creates a new empty watchlist group with the given name. Use `update` afterward to add securities.
+
+### Rename a group
+
+<CliCommand>
+longbridge watchlist update 2630 --name "New Name"
+</CliCommand>
+
+Renames an existing watchlist group. Run `longbridge watchlist` first to find the group ID.
 
 ### Pin a security to the top
 
@@ -68,3 +84,7 @@ longbridge watchlist delete 2630
 </CliCommand>
 
 Permanently deletes a watchlist group and all its securities. Run `longbridge watchlist` first to confirm the group ID before deleting.
+
+## Requirements
+
+A valid OAuth login is required. Run `longbridge login` if you have not yet authenticated.

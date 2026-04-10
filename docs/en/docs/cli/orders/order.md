@@ -56,10 +56,37 @@ longbridge order executions
 
 Lists all filled trade executions for the current day, including execution price, quantity, and time.
 
+### View order details
+
+<CliCommand>
+# Fetch full detail for a specific order
+longbridge order detail 701276261045858304
+</CliCommand>
+
+Returns execution details, timestamps, and fill information for the order.
+
+### Cancel a pending order
+
+<CliCommand>
+# Cancel prompts for confirmation before submitting
+longbridge order cancel 701276261045858304
+</CliCommand>
+
+Only orders in cancellable states (New, PartialFilled, etc.) are accepted. Use `-y` to skip the confirmation prompt in scripts.
+
+### Modify an open order
+
+<CliCommand>
+# Adjust quantity or price on a pending order
+longbridge order replace 701276261045858304 --qty 5 --price 350.00
+</CliCommand>
+
+`--qty` is required. Omit `--price` to keep the current limit price. Use `-y` to skip the confirmation prompt in scripts.
+
 ## Requirements
 
 OAuth trade permission is required to place, cancel, or replace orders. See the [trade permission setup](/docs/trade/) guide to enable trading access.
 
 ## Notes
 
-`buy` and `sell` always prompt for confirmation before submitting — there is no `--yes` flag to skip it. Use `longbridge order detail <id>` to inspect a specific order by ID. Use `longbridge order cancel <id>` to cancel a pending order. Use `longbridge order replace <id>` to modify a pending order's price or quantity.
+`buy` and `sell` always prompt for confirmation before submitting. Use `-y` with `cancel` and `replace` to skip confirmation in scripting contexts.

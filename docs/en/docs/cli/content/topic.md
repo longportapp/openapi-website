@@ -26,17 +26,11 @@ longbridge topic NVDA.US
 
 Lists community posts and discussions related to the symbol, including titles, descriptions, and engagement metrics.
 
-### JSON output
+### Find high-engagement posts
 
 <CliCommand>
-longbridge topic TSLA.US --format json
+# Filter posts with significant likes using jq
+longbridge topic TSLA.US --format json | jq '[.[] | select(.likes_count > 10)]'
 </CliCommand>
 
-```json
-[
-  { "comments_count": 7, "description": "Who has the winning power-delivery solution for AI data centers?", "id": "39798312", "likes_count": 41, "published_at": 1775734323, "shares_count": 96, "title": "AI's Hard Limit: Compute Boom Meets a Power Crunch; Gas Turbines the Hidden Boss?", "url": "https://longbridge.cn/topics/39798312" },
-  { "comments_count": 0, "description": "TSLA.US short comment from community user", "id": "39820569", "likes_count": 1, "published_at": 1775788293, "shares_count": 0, "title": "", "url": "https://longbridge.cn/topics/39820569" }
-]
-```
-
-Each topic includes `comments_count`, `likes_count`, and `shares_count` for engagement data, and a `url` linking to the full discussion on the Longbridge platform.
+Combines with `jq` to surface the most-discussed posts. Useful for gauging retail sentiment spikes around earnings or news events.
