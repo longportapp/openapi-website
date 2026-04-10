@@ -18,10 +18,6 @@ longbridge investors
 
 ### Browse top fund managers
 
-<CliCommand>
-longbridge investors
-</CliCommand>
-
 Lists the largest institutional investors ranked by AUM, with their CIK identifier, name, reported AUM, and the period of the latest 13F filing.
 
 ### View a fund manager's holdings

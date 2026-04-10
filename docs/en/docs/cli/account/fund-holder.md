@@ -35,4 +35,4 @@ Use `--count` to retrieve more results beyond the default limit.
 
 ## Requirements
 
-OAuth account permission is required. See [Trade Permissions](/docs/trade/) for setup details.
+OAuth account permission required. See the [account permission setup](/docs/trade/) guide.

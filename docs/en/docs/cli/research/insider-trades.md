@@ -25,7 +25,7 @@ longbridge insider-trades TSLA.US --format json
 
 Lists recent insider transactions including the insider's name, title, transaction date, type, share count, and price.
 
-### Filter by date range
+### Expand the filing history
 
 <CliCommand>
 # Fetch more filings to cover a wider date range
