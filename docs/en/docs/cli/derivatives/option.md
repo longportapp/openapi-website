@@ -10,9 +10,20 @@ Look up real-time quotes for US option contracts and browse the full option chai
 
 ## Basic Usage
 
-<CliCommand>
+```bash
 longbridge option chain AAPL.US
-</CliCommand>
+```
+
+```
+| Strike | Call Symbol          | Put Symbol           | Standard |
+|--------|----------------------|----------------------|----------|
+| 180    | AAPL260406C180000.US | AAPL260406P180000.US | true     |
+| 185    | AAPL260406C185000.US | AAPL260406P185000.US | true     |
+| 190    | AAPL260406C190000.US | AAPL260406P190000.US | true     |
+| 195    | AAPL260406C195000.US | AAPL260406P195000.US | true     |
+| 200    | AAPL260406C200000.US | AAPL260406P200000.US | true     |
+...
+```
 
 ## Scenarios
 
@@ -22,9 +33,9 @@ Without `--date`, this returns all available expiry dates for AAPL options. Pick
 
 ### View strikes for a specific expiry
 
-<CliCommand>
+```bash
 longbridge option chain AAPL.US --date 2026-04-17 --format json
-</CliCommand>
+```
 
 ```json
 [
@@ -38,9 +49,9 @@ Each row shows the call and put symbols for that strike. Copy a symbol from `cal
 
 ### Get a real-time quote for an option contract
 
-<CliCommand>
+```bash
 longbridge option quote AAPL260417C190000.US --format json
-</CliCommand>
+```
 
 ```json
 [

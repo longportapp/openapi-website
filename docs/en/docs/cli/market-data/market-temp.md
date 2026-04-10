@@ -10,15 +10,25 @@ Get the Longbridge market temperature index — a composite 0–100 sentiment ga
 
 ## Basic Usage
 
-<CliCommand>
-longbridge market-temp HK
-</CliCommand>
+```bash
+longbridge market-temp US
+```
+
+```
+| Field       | Value                                 |
+|-------------|---------------------------------------|
+| Market      | US                                    |
+| Temperature | 64                                    |
+| Description | Temp Comfortable & Gradually Dropping |
+| Valuation   | 83                                    |
+| Sentiment   | 45                                    |
+```
 
 ## Scenarios
 
 ### Current market temperature
 
-<CliCommand>
+```bash
 # Hong Kong market
 longbridge market-temp HK
 # US market
@@ -27,15 +37,15 @@ longbridge market-temp US
 longbridge market-temp CN
 # JSON output for scripting or monitoring
 longbridge market-temp US --format json
-</CliCommand>
+```
 
 Supported markets: `HK` (default), `US`, `CN` (aliases: `SH`, `SZ`), `SG`. Running without an argument defaults to `HK`.
 
 ### Historical temperature trend
 
-<CliCommand>
+```bash
 longbridge market-temp US --history --start 2026-04-01 --end 2026-04-09 --format json
-</CliCommand>
+```
 
 ```json
 [
@@ -46,4 +56,3 @@ longbridge market-temp US --history --start 2026-04-01 --end 2026-04-09 --format
 ```
 
 Returns one record per trading day over the specified range. Useful for charting sentiment shifts around market events.
-

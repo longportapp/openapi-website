@@ -10,17 +10,27 @@ Look up trading session schedules and trading day calendars for any market.
 
 ## Basic Usage
 
-<CliCommand>
+```bash
 longbridge trading session
-</CliCommand>
+```
+
+```
+| Market | Session  | Open     | Close    |
+|--------|----------|----------|----------|
+| US     | Pre      | 04:00:00 | 09:30:00 |
+| US     | Intraday | 09:30:00 | 16:00:00 |
+| US     | Post     | 16:00:00 | 20:00:00 |
+| HK     | Intraday | 09:30:00 | 12:00:00 |
+| HK     | Intraday | 13:00:00 | 16:00:00 |
+```
 
 ## Scenarios
 
 ### View trading hours for all markets
 
-<CliCommand>
+```bash
 longbridge trading session --format json
-</CliCommand>
+```
 
 ```json
 [
@@ -46,9 +56,9 @@ The US market has three sessions (Pre, Intraday, Post). HK has two Intraday bloc
 
 ### Get trading calendar for a date range
 
-<CliCommand>
+```bash
 longbridge trading days HK --start 2026-04-01 --end 2026-04-10 --format json
-</CliCommand>
+```
 
 ```json
 {
@@ -61,8 +71,8 @@ Returns the list of full trading days and any half-trading days within the range
 
 ### Check if today is a trading day
 
-<CliCommand>
+```bash
 longbridge trading days US
-</CliCommand>
+```
 
 Omitting `--start` and `--end` returns today's trading status. If today is a trading day, it appears in the `trading_days` list.

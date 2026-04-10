@@ -10,26 +10,36 @@ Find which ETFs and funds hold a given stock, along with each fund's position ra
 
 ## Basic Usage
 
-<CliCommand>
+```bash
 longbridge fund-holder AAPL.US
-</CliCommand>
+```
+
+```
+| name                                   | symbol  | currency | weight | report_date |
+|----------------------------------------|---------|----------|--------|-------------|
+| T-Rex 2X Long Apple Daily Target ETF   | AAPX.US | USD      | 67.62% | 2026.04.03  |
+| Global X PureCap MSCI Infor Tech ETF   | GXPT.US | USD      | 19.58% | 2026.04.06  |
+| AAPL 周收益 ETF - Roundhill             | AAPW.US | USD      | 16.76% | 2026.04.06  |
+| 信息科技 ETF - Vanguard                 | VGT.US  | USD      | 15.84% | 2026.02.28  |
+...
+```
 
 ## Scenarios
 
 ### Find top ETF holders of a stock
 
-<CliCommand>
+```bash
 longbridge fund-holder AAPL.US
 longbridge fund-holder AAPL.US --format json
-</CliCommand>
+```
 
 Lists the ETFs and funds with the largest exposure to the given stock, sorted by position ratio.
 
 ### Get more holders
 
-<CliCommand>
+```bash
 longbridge fund-holder TSLA.US --count 50
-</CliCommand>
+```
 
 Use `--count` to retrieve more results beyond the default limit.
 

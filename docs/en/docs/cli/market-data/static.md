@@ -10,25 +10,31 @@ Get static reference data for any symbol — name, exchange, currency, lot size,
 
 ## Basic Usage
 
-<CliCommand>
-longbridge static NVDA.US
-</CliCommand>
+```bash
+longbridge static TSLA.US
+```
+
+```
+| Symbol  | Name        | Exchange | Currency | Lot Size | Total Shares | Circ. Shares | EPS    | EPS TTM | BPS    | Dividend |
+|---------|-------------|----------|----------|----------|--------------|--------------|--------|---------|--------|----------|
+| TSLA.US | Tesla, Inc. | NASD     | USD      | 1        | 3752431984   | 2812676349   | 1.0111 | 1.0111  | 21.889 | 0        |
+```
 
 ## Scenarios
 
 ### Look up multiple symbols at once
 
-<CliCommand>
+```bash
 longbridge static NVDA.US TSLA.US
 longbridge static NVDA.US TSLA.US --format json
-</CliCommand>
+```
 
 Returns reference data for all requested symbols in one call. Useful for quick comparison of fundamental attributes.
 
 ### Verify a symbol before trading
 
-<CliCommand>
+```bash
 longbridge static 700.HK
-</CliCommand>
+```
 
 Confirms the symbol is valid and shows its exchange, currency, lot size, and current share count — handy before placing a trade.

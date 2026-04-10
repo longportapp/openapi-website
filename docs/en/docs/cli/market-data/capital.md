@@ -10,17 +10,28 @@ Track intraday capital flow — see where large, medium, and small money is movi
 
 ## Basic Usage
 
-<CliCommand>
+```bash
 longbridge capital flow TSLA.US
-</CliCommand>
+```
+
+```
+| Time                | Inflow   |
+|---------------------|----------|
+| 2026-04-09 13:30:00 | 1100.46  |
+| 2026-04-09 13:31:00 | 1129.09  |
+| 2026-04-09 13:32:00 | 1711.27  |
+| 2026-04-09 13:33:00 | 1955.54  |
+| 2026-04-09 13:34:00 | 1609.27  |
+...
+```
 
 ## Scenarios
 
 ### Track minute-by-minute large money inflow
 
-<CliCommand>
+```bash
 longbridge capital flow TSLA.US --format json
-</CliCommand>
+```
 
 ```json
 [
@@ -34,9 +45,9 @@ Each bar shows net inflow for that minute. Positive values indicate net buying; 
 
 ### Snapshot: large/medium/small money distribution
 
-<CliCommand>
+```bash
 longbridge capital dist TSLA.US --format json
-</CliCommand>
+```
 
 ```json
 {

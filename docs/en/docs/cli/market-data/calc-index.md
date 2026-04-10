@@ -10,34 +10,40 @@ Compute financial indexes for any symbol — P/E, P/B, dividend yield, turnover 
 
 ## Basic Usage
 
-<CliCommand>
+```bash
 longbridge calc-index TSLA.US
-</CliCommand>
+```
+
+```
+| Symbol  | PE TTM | PB    | DPS Rate | Turnover Rate | Total Market Value  |
+|---------|--------|-------|----------|---------------|---------------------|
+| TSLA.US | 341.83 | 15.79 | -        | 2.21          | 1296915542310.08    |
+```
 
 ## Scenarios
 
 ### Check P/E and P/B ratios
 
-<CliCommand>
+```bash
 longbridge calc-index TSLA.US NVDA.US --index pe pb
 longbridge calc-index TSLA.US NVDA.US --index pe pb --format json
-</CliCommand>
+```
 
 Calculates the specified indexes for each symbol. Multiple symbols and multiple indexes can be requested in a single call. Only indexes that have data appear in the JSON output — indexes with no value are omitted.
 
 ### Default indexes (PE, PB, dividend yield, turnover rate, market cap)
 
-<CliCommand>
+```bash
 longbridge calc-index TSLA.US
-</CliCommand>
+```
 
 When `--index` is omitted, the default set is returned: `pe`, `pb`, `dps_rate`, `turnover_rate`, `total_market_value`.
 
 ### Options greeks for a derivative
 
-<CliCommand>
+```bash
 longbridge calc-index 24760.HK --index delta gamma vega theta
-</CliCommand>
+```
 
 For options and warrants, request greeks directly. Only indexes applicable to the instrument type will appear in the output. Greek values are only meaningful for option/warrant symbols — passing a plain stock symbol returns no greek data.
 

@@ -10,17 +10,27 @@ View the top shareholders of a company — institutional and individual — with
 
 ## Basic Usage
 
-<CliCommand>
+```bash
 longbridge shareholder TSLA.US
-</CliCommand>
+```
+
+```
+| shareholder                        | symbol | % shares | chg shares | report_date |
+|------------------------------------|--------|----------|------------|-------------|
+| Elon R. Musk                       | -      | 24.86%   | +423.53M   | 2025-12-30  |
+| The Vanguard Group, Inc.           | -      | 6.90%    | +6.54M     | 2025-12-31  |
+| BlackRock, Inc.                    | BLK.US | 5.57%    | +2.81M     | 2025-12-31  |
+| State Street Global Advisors, Inc. | -      | 3.06%    | +1.08M     | 2025-12-31  |
+| Geode Capital Management, LLC      | -      | 1.75%    | +375.95K   | 2025-12-31  |
+```
 
 ## Scenarios
 
 ### Check top shareholders
 
-<CliCommand>
+```bash
 longbridge shareholder TSLA.US
 longbridge shareholder TSLA.US --format json
-</CliCommand>
+```
 
 Lists the largest shareholders by ownership percentage, including both institutional investors and individual insiders.

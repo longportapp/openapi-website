@@ -10,23 +10,54 @@ Browse HK warrants — list all warrants on an underlying, get real-time quotes 
 
 ## Basic Usage
 
-<CliCommand>
+```bash
 longbridge warrant 700.HK
-</CliCommand>
+```
+
+```
+| Symbol   | Name            | Last | Leverage Ratio | Expiry     | Type |
+|----------|-----------------|------|----------------|------------|------|
+| 24760.HK | UBTENCT@EP2606B | 0.66 | 7.65           | 2026-06-30 | Call |
+| 25228.HK | GJTENCT@EP2606B | 0.65 | 7.77           | 2026-06-30 | Call |
+| 24687.HK | JPTENCT@EP2606A | 0.65 | 7.77           | 2026-06-30 | Call |
+| 24880.HK | CITENCT@EP2606B | 0.64 | 7.89           | 2026-06-30 | Call |
+...
+```
 
 ## Scenarios
 
 ### List all warrants on a stock
 
-<CliCommand>
+```bash
 longbridge warrant 700.HK --format json
-</CliCommand>
+```
 
 ```json
 [
-  { "expiry": "2026-06-30", "last": "0.65", "leverage_ratio": "7.7846153846153845", "name": "UBTENCT@EP2606B", "symbol": "24760.HK", "type": "Put" },
-  { "expiry": "2026-06-30", "last": "0.65", "leverage_ratio": "7.7846153846153845", "name": "JPTENCT@EP2606A", "symbol": "24687.HK", "type": "Put" },
-  { "expiry": "2026-06-30", "last": "0.64", "leverage_ratio": "7.90625", "name": "GJTENCT@EP2606B", "symbol": "25228.HK", "type": "Put" }
+  {
+    "expiry": "2026-06-30",
+    "last": "0.65",
+    "leverage_ratio": "7.7846153846153845",
+    "name": "UBTENCT@EP2606B",
+    "symbol": "24760.HK",
+    "type": "Put"
+  },
+  {
+    "expiry": "2026-06-30",
+    "last": "0.65",
+    "leverage_ratio": "7.7846153846153845",
+    "name": "JPTENCT@EP2606A",
+    "symbol": "24687.HK",
+    "type": "Put"
+  },
+  {
+    "expiry": "2026-06-30",
+    "last": "0.64",
+    "leverage_ratio": "7.90625",
+    "name": "GJTENCT@EP2606B",
+    "symbol": "25228.HK",
+    "type": "Put"
+  }
 ]
 ```
 
@@ -34,13 +65,20 @@ Returns all listed warrants for the underlying, including type (Call/Put), last 
 
 ### Get a quote for one warrant
 
-<CliCommand>
+```bash
 longbridge warrant quote 24760.HK --format json
-</CliCommand>
+```
 
 ```json
 [
-  { "expiry": "2026-06-30", "implied_vol": "0.344", "last": "0.650", "prev_close": "0.640", "symbol": "24760.HK", "type": "Put" }
+  {
+    "expiry": "2026-06-30",
+    "implied_vol": "0.344",
+    "last": "0.650",
+    "prev_close": "0.640",
+    "symbol": "24760.HK",
+    "type": "Put"
+  }
 ]
 ```
 
@@ -48,9 +86,9 @@ Returns the real-time quote including implied volatility alongside the last and 
 
 ### Look up warrant issuers
 
-<CliCommand>
+```bash
 longbridge warrant issuers --format json
-</CliCommand>
+```
 
 ```json
 [

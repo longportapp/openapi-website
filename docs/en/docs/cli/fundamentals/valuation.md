@@ -10,42 +10,56 @@ Analyze a stock's current valuation (P/E, P/B, P/S, dividend yield) with 5-year 
 
 ## Basic Usage
 
-<CliCommand>
-longbridge valuation TSLA.US
-</CliCommand>
+```bash
+longbridge valuation TSLA.US --indicator pe
+```
+
+```
+Overview:
+| indicator | current | high   | low   | median | industry_median | date       |
+|-----------|---------|--------|-------|--------|-----------------|------------|
+| PE        | 341.83x | 284.01 | 51.31 | 96.85  | -0.11           | 2026-04-09 |
+当前市盈率 341.83，高于合理区间，比近 5 年 8.85% 的时间便宜，行业排名 19/49
+
+Peers (5):
+| name   | pe     |
+|--------|--------|
+| 特斯拉 | 341.83 |
+...
+```
 
 ## Scenarios
 
 ### Current valuation snapshot
 
-<CliCommand>
+```bash
 longbridge valuation TSLA.US
-</CliCommand>
+```
 
 Shows current P/E, P/B, P/S, and dividend yield alongside the 5-year historical range and where the current value sits within that range. Includes industry peer rank.
 
 ### Historical P/E chart
 
-<CliCommand>
+```bash
 longbridge valuation TSLA.US --history --indicator pe --range 5
-</CliCommand>
+```
 
 Returns a 5-year time series of Tesla's P/E ratio. Use `--range` to set the lookback window: `1`, `3`, `5`, or `10` years.
 
 ### Compare P/B over time
 
-<CliCommand>
+```bash
 longbridge valuation 700.HK --history --indicator pb
-</CliCommand>
+```
 
 Tracks Tencent's price-to-book ratio over time. Supported indicators for `--history` mode: `pe`, `pb`, `ps`, `dvd_yld`.
 
 ### JSON for monitoring
 
-<CliCommand>
+```bash
 # Export historical P/B data as JSON for scripting or monitoring pipelines
 longbridge valuation TSLA.US --history --indicator pb --format json
-</CliCommand>
+```
 
 ```json
 {

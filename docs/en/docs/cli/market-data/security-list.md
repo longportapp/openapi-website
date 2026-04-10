@@ -10,22 +10,33 @@ List US securities that are eligible for overnight trading on Longbridge.
 
 ## Basic Usage
 
-<CliCommand>
+```bash
 longbridge security-list
-</CliCommand>
+```
+
+```
+| Symbol   | Name                       |
+|----------|----------------------------|
+| GDS.US   | GDS                        |
+| ZK.US    | ZEEKR Intelligent Tech     |
+| ALTM.US  | Arcadium Lithium           |
+| HE.US    | Hawaiian Electric Inds     |
+| WB.US    | Weibo                      |
+...
+```
 
 ## Scenarios
 
 ### View overnight-eligible US securities
 
-<CliCommand>
+```bash
 # Default (US market)
 longbridge security-list
 # Explicit market
 longbridge security-list US
 # JSON output for validating eligibility before placing trades
 longbridge security-list US --format json
-</CliCommand>
+```
 
 Returns the full list of US symbols currently eligible for overnight trading sessions on Longbridge. Use `--format json` to get a machine-readable list for automating eligibility checks.
 

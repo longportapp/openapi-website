@@ -10,18 +10,23 @@ List your current fund and ETF positions.
 
 ## Basic Usage
 
-<CliCommand>
+```bash
 longbridge fund-positions
-</CliCommand>
+```
+
+```
+| Symbol | Name | Net Asset Value | Cost Net Asset Value | Currency | Holding Units |
+|--------|------|-----------------|----------------------|----------|---------------|
+```
 
 ## Scenarios
 
 ### View fund/ETF holdings
 
-<CliCommand>
+```bash
 longbridge fund-positions
 longbridge fund-positions --format json
-</CliCommand>
+```
 
 Displays all fund and ETF positions in your account, including symbol, quantity, and cost information.
 

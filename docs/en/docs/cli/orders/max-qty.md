@@ -10,27 +10,35 @@ Estimate the maximum quantity you can buy or sell given your current account bal
 
 ## Basic Usage
 
-<CliCommand>
+```bash
 longbridge max-qty TSLA.US --side buy --price 340.00
-</CliCommand>
+```
+
+```
+| Field          | Value   |
+|----------------|---------|
+| Symbol         | TSLA.US |
+| Cash Max Qty   | 0       |
+| Margin Max Qty | 896     |
+```
 
 ## Scenarios
 
 ### Max buy quantity at a price
 
-<CliCommand>
+```bash
 longbridge max-qty TSLA.US --side buy --price 340.00
 # Output as JSON for scripting
 longbridge max-qty TSLA.US --side buy --price 340.00 --format json
-</CliCommand>
+```
 
 Returns the maximum number of shares you can purchase at the given price, broken down by cash and margin buying power.
 
 ### Max sell quantity
 
-<CliCommand>
+```bash
 longbridge max-qty TSLA.US --side sell
-</CliCommand>
+```
 
 Returns the maximum number of shares you can sell, based on your current holdings.
 

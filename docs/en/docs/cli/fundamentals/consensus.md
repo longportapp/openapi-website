@@ -10,25 +10,35 @@ See Wall Street's consensus financial estimates — revenue, EBIT, and EPS — f
 
 ## Basic Usage
 
-<CliCommand>
+```bash
 longbridge consensus TSLA.US
-</CliCommand>
+```
+
+```
+Currency: USD | Period: qf
+| metric   | Q3 2026 | Q2 2026 | Q1 2026  | Q4 2025   | Q3 2025  |
+|----------|---------|---------|----------|-----------|----------|
+| 营业收入  | ~27.14B | ~24.71B | ~22.75B  | 24.90B ↑  | 28.09B ↑ |
+| 净利润    | ~1.28B  | ~1.08B  | ~879.54M | 840.00M ↓ | 1.37B ↓  |
+| 每股收益  | ~0.3818 | ~0.2969 | ~0.2390  | 0.2400 ↓  | 0.3900 ↓ |
+...
+```
 
 ## Scenarios
 
 ### Check consensus estimates
 
-<CliCommand>
+```bash
 longbridge consensus TSLA.US
-</CliCommand>
+```
 
 Displays the analyst consensus estimates for the upcoming reporting period, covering key metrics like revenue, EBIT, and EPS.
 
 ### JSON output
 
-<CliCommand>
+```bash
 longbridge consensus TSLA.US --format json
-</CliCommand>
+```
 
 ```json
 {

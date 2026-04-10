@@ -10,27 +10,36 @@ Look up the margin requirements for a symbol — initial, maintenance, and force
 
 ## Basic Usage
 
-<CliCommand>
+```bash
 longbridge margin-ratio TSLA.US
-</CliCommand>
+```
+
+```
+| Field                    | Value   |
+|--------------------------|---------|
+| Symbol                   | TSLA.US |
+| Initial Margin Ratio     | 0.35    |
+| Maintenance Margin Ratio | 0.33    |
+| Forced Liquidation Ratio | 0.25    |
+```
 
 ## Scenarios
 
 ### Check margin requirements before buying on margin
 
-<CliCommand>
+```bash
 longbridge margin-ratio TSLA.US
 # Output as JSON for scripting
 longbridge margin-ratio TSLA.US --format json
-</CliCommand>
+```
 
 Displays the initial margin ratio, maintenance margin ratio, and forced liquidation ratio for the symbol. Use this before placing a margin buy to understand the capital requirements.
 
 ### Compare multiple symbols
 
-<CliCommand>
+```bash
 longbridge margin-ratio TSLA.US NVDA.US
-</CliCommand>
+```
 
 Pass multiple symbols to compare their margin requirements side by side.
 

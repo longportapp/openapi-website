@@ -10,18 +10,29 @@ View your full account overview — net assets, buying power, margin status, ris
 
 ## Basic Usage
 
-<CliCommand>
+```bash
 longbridge assets
-</CliCommand>
+```
+
+```
+| Currency | Net Assets | Total Cash | Buy Power  | Max Finance | Remaining Finance | Init Margin | Maintenance Margin | Risk Level |
+|----------|------------|------------|------------|-------------|-------------------|-------------|--------------------|------------|
+| USD      | 125422.43  | 58638.84   | 106743.46  | 410651.27   | 371985.59         | 18678.97    | 16305.97           | Safe       |
+
+| Currency | Available Cash | Frozen Cash | Settling Cash | Withdrawable |
+|----------|----------------|-------------|---------------|--------------|
+| USD      | -38665.68      | 332.19      | -10108.02     | -38665.68    |
+| HKD      | 755592.21      | 64.69       | -27760.00     | 755592.21    |
+```
 
 ## Scenarios
 
 ### Check account overview
 
-<CliCommand>
+```bash
 longbridge assets
 longbridge assets --format json
-</CliCommand>
+```
 
 Displays net assets, total cash, buying power, margin usage, and risk level in a readable table.
 

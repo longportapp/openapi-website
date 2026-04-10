@@ -10,18 +10,36 @@ View the Level 2 order book for a symbol — the top 10 bid and ask prices with 
 
 ## Basic Usage
 
-<CliCommand>
-longbridge depth 700.HK
-</CliCommand>
+```bash
+longbridge depth TSLA.US
+```
+
+```
+Symbol: TSLA.US
+
+Asks (Sell):
+| Position | Price   | Volume | Orders |
+|----------|---------|--------|--------|
+| 1        | 344.990 | 200    | 3      |
+| 2        | 345.000 | 500    | 8      |
+| 3        | 345.010 | 300    | 4      |
+
+Bids (Buy):
+| Position | Price   | Volume | Orders |
+|----------|---------|--------|--------|
+| 1        | 344.980 | 400    | 6      |
+| 2        | 344.970 | 600    | 9      |
+| 3        | 344.960 | 250    | 3      |
+```
 
 ## Scenarios
 
 ### View the order book
 
-<CliCommand>
+```bash
 longbridge depth 700.HK
 longbridge depth 700.HK --format json
-</CliCommand>
+```
 
 Shows the current bid and ask ladder for 700.HK, including price levels, volume at each level, and order count. Up to 10 levels are returned per side when the market is open.
 

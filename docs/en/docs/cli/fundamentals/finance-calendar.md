@@ -10,40 +10,46 @@ Browse upcoming financial events — earnings reports, dividend payments, IPOs, 
 
 ## Basic Usage
 
-<CliCommand>
-longbridge finance-calendar financial
-</CliCommand>
+```bash
+longbridge finance-calendar financial --symbol TSLA.US
+```
+
+```
+2026.01.28 (美东)  [Financials]  US  特斯拉 (TSLA.US)
+  2025 财年第 4 季度业绩披露
+  EPS: Est 0.3466 / Act 0.24  |  Revenue: Est 248 亿 / Act 249 亿
+```
 
 ## Scenarios
 
 ### Upcoming earnings for a stock
 
-<CliCommand>
+```bash
 longbridge finance-calendar financial --symbol TSLA.US
-</CliCommand>
+```
 
 Shows Tesla's upcoming earnings dates along with analyst estimates for EPS and revenue. Use `--symbol` to narrow down to a specific stock.
 
 ### Today's dividend events for the US market
 
-<CliCommand>
+```bash
 longbridge finance-calendar dividend --market US
-</CliCommand>
+```
 
 Lists all dividend-related events (ex-dividend dates, payment dates) scheduled for US-listed stocks. Useful for tracking which stocks are going ex-dividend.
 
 ### High-importance macro events
 
-<CliCommand>
+```bash
 longbridge finance-calendar macrodata --star 3
-</CliCommand>
+```
 
 Filters macroeconomic events to only show high-importance releases (3-star). Covers data like CPI, NFP, Fed rate decisions, and similar market-moving events.
 
 ### IPO calendar
 
-<CliCommand>
+```bash
 longbridge finance-calendar ipo
-</CliCommand>
+```
 
 Shows upcoming IPOs across supported markets. Combine with `--market` to filter by a specific exchange.

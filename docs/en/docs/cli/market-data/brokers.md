@@ -10,18 +10,36 @@ See which broker IDs are present at each price level in the HK order book. Usefu
 
 ## Basic Usage
 
-<CliCommand>
+```bash
 longbridge brokers 700.HK
-</CliCommand>
+```
+
+```
+Symbol: 700.HK
+
+Ask Brokers:
+| Position | Broker IDs    |
+|----------|---------------|
+| 1        | 3014, 6409    |
+| 2        | 7707, 724     |
+| 3        | 1142          |
+
+Bid Brokers:
+| Position | Broker IDs    |
+|----------|---------------|
+| 1        | 5428, 3423    |
+| 2        | 3506, 3507    |
+| 3        | 4482, 4483    |
+```
 
 ## Scenarios
 
 ### View broker distribution
 
-<CliCommand>
+```bash
 longbridge brokers 700.HK
 longbridge brokers 700.HK --format json
-</CliCommand>
+```
 
 Displays each price level in the HK order book along with the broker IDs placing orders at that level.
 

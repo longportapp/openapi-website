@@ -10,27 +10,36 @@ Fetch community discussion topics related to a symbol from the Longbridge platfo
 
 ## Basic Usage
 
-<CliCommand>
+```bash
 longbridge topic TSLA.US
-</CliCommand>
+```
+
+```
+| id       | title                                           | published_at         | likes | comments | shares |
+|----------|-------------------------------------------------|----------------------|-------|----------|--------|
+| 39798312 | AI's Hard Limit: Compute Boom Meets a Power Cr… | 2026-04-09T11:32:03Z | 41    | 7        | 97     |
+| 39816927 | Tesla is weirdly terrible. Other stocks are up… | 2026-04-09T19:54:50Z | 6     | 4        | 0      |
+| 39822930 | What does everyone think about current Tesla?   | 2026-04-10T04:43:49Z | 0     | 0        | 0      |
+...
+```
 
 ## Scenarios
 
 ### View community discussions
 
-<CliCommand>
+```bash
 longbridge topic TSLA.US
 # View discussions for another symbol
 longbridge topic NVDA.US
-</CliCommand>
+```
 
 Lists community posts and discussions related to the symbol, including titles, descriptions, and engagement metrics.
 
 ### Find high-engagement posts
 
-<CliCommand>
+```bash
 # Filter posts with significant likes using jq
 longbridge topic TSLA.US --format json | jq '[.[] | select(.likes_count > 10)]'
-</CliCommand>
+```
 
 Combines with `jq` to surface the most-discussed posts. Useful for gauging retail sentiment spikes around earnings or news events.

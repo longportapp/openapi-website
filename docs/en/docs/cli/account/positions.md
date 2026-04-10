@@ -10,18 +10,27 @@ List your current stock positions — symbol, quantity, available quantity, cost
 
 ## Basic Usage
 
-<CliCommand>
+```bash
 longbridge positions
-</CliCommand>
+```
+
+```
+| Symbol  | Name      | Quantity | Available | Cost Price | Currency | Market |
+|---------|-----------|----------|-----------|------------|----------|--------|
+| NVDA.US | NVIDIA    | 101      | 101       | 50.229     | USD      | US     |
+| MSFT.US | Microsoft | 15       | 15        | 373.310    | USD      | US     |
+| AAPL.US | Apple     | 133      | 133       | 211.589    | USD      | US     |
+| 9988.HK | BABA-W    | 500      | 500       | 95.640     | HKD      | HK     |
+```
 
 ## Scenarios
 
 ### View all positions
 
-<CliCommand>
+```bash
 longbridge positions
 longbridge positions --format json
-</CliCommand>
+```
 
 Displays every open stock position with its name, symbol, quantity, available quantity for trading, cost price, and market.
 

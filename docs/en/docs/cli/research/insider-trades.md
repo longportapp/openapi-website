@@ -10,28 +10,37 @@ View SEC Form 4 insider transaction history for any US-listed stock — purchase
 
 ## Basic Usage
 
-<CliCommand>
+```bash
 longbridge insider-trades TSLA.US
-</CliCommand>
+```
+
+```
+| date       | filer        | title         | type     | shares | price   | value    | owned_after |
+|------------|--------------|---------------|----------|--------|---------|----------|-------------|
+| 2026-03-31 | Zhu Xiaotong | SVP           | EXERCISE | 20.00K | $20.57  | $411.40K | 20.00K      |
+| 2025-09-11 | Zhu Xiaotong | SVP, APAC and | SELL     | 20.00K | $363.75 | $7.28M   | 47.60K      |
+| 2025-06-12 | Zhu Xiaotong | SVP, APAC     | EXERCISE | 15.00K | $20.57  | $308.55K | 82.60K      |
+| 2025-06-12 | Zhu Xiaotong | SVP, APAC     | SELL     | 15.00K | $323.81 | $4.86M   | 67.60K      |
+```
 
 ## Scenarios
 
 ### Check insider activity
 
-<CliCommand>
+```bash
 longbridge insider-trades TSLA.US
 longbridge insider-trades TSLA.US --format json
-</CliCommand>
+```
 
 Lists recent insider transactions including the insider's name, title, transaction date, type, share count, and price.
 
 ### Expand the filing history
 
-<CliCommand>
+```bash
 # Fetch more filings to cover a wider date range
 longbridge insider-trades TSLA.US --count 100
 longbridge insider-trades AAPL.US --count 100 --format json
-</CliCommand>
+```
 
 Use `--count` to retrieve more Form 4 filings and cover a broader time window. Useful for tracking insider activity around earnings announcements or major corporate events.
 

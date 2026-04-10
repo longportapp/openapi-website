@@ -10,22 +10,34 @@ View and manage your Longbridge watchlists — list groups, add or remove symbol
 
 ## Basic Usage
 
-<CliCommand>
+```bash
 longbridge watchlist
-</CliCommand>
+```
+
+```
+Group: all (ID: 2630)
+| Symbol     | Name                               | Market | Pinned |
+|------------|------------------------------------|--------|--------|
+| SPY.US     | SPDR S&P 500                       | US     | yes    |
+| QQQ.US     | Invesco QQQ Trust                  | US     | yes    |
+| TSLA.US    | Tesla                              | US     |        |
+| AAPL.US    | Apple                              | US     |        |
+| QQQI.US    | NEOS Nasdaq-100(R) High Income ETF | US     |        |
+```
 
 ## Scenarios
 
 ### View all watchlist groups and their securities
 
-<CliCommand>
+```bash
 longbridge watchlist
-</CliCommand>
+```
 
 ```json
 [
   {
-    "id": 2630, "name": "all",
+    "id": 2630,
+    "name": "all",
     "securities": [
       { "is_pinned": true, "market": "US", "name": "SPDR S&P 500", "symbol": "SPY.US" },
       { "is_pinned": true, "market": "US", "name": "Invesco QQQ Trust", "symbol": "QQQ.US" },
@@ -39,49 +51,49 @@ Lists all watchlist groups with their IDs, names, and securities. Group IDs are 
 
 ### Add symbols to a group
 
-<CliCommand>
+```bash
 longbridge watchlist update 2630 --add NVDA.US --add AAPL.US
-</CliCommand>
+```
 
 Adds one or more symbols to an existing group. Run `longbridge watchlist` first to find group IDs.
 
 ### Remove symbols from a group
 
-<CliCommand>
+```bash
 longbridge watchlist update 2630 --remove NVDA.US --remove AAPL.US
-</CliCommand>
+```
 
 Removes one or more symbols from an existing group. Run `longbridge watchlist` first to confirm the group ID and current securities.
 
 ### Create a new watchlist group
 
-<CliCommand>
+```bash
 longbridge watchlist create "Tech Stocks"
-</CliCommand>
+```
 
 Creates a new empty watchlist group with the given name. Use `update` afterward to add securities.
 
 ### Rename a group
 
-<CliCommand>
+```bash
 longbridge watchlist update 2630 --name "New Name"
-</CliCommand>
+```
 
 Renames an existing watchlist group. Run `longbridge watchlist` first to find the group ID.
 
 ### Pin a security to the top
 
-<CliCommand>
+```bash
 longbridge watchlist pin 2630 TSLA.US
-</CliCommand>
+```
 
 Pins a security to the top of a watchlist group. Pinned securities appear first and have `is_pinned: true` in the output. Run the command again on a pinned security to unpin it.
 
 ### Remove a group
 
-<CliCommand>
+```bash
 longbridge watchlist delete 2630
-</CliCommand>
+```
 
 Permanently deletes a watchlist group and all its securities. Run `longbridge watchlist` first to confirm the group ID before deleting.
 
