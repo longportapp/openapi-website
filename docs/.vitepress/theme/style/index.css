@@ -150,24 +150,29 @@ html:root {
   align-items: center;
 }
 
-.vp-cli-install-link {
+.vp-cli-links {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.vp-cli-usage-link,
+.vp-cli-install-link {
   font-size: 12px;
   font-weight: 500;
   line-height: 1;
   color: var(--vp-c-text-2) !important;
   text-decoration: none !important;
   transition: color 0.15s;
-  margin-left: auto;
 }
 
-.vp-cli-install-link::after {
-  content: '↗';
-  font-size: 11px;
-}
-
+.vp-cli-usage-link:hover,
 .vp-cli-install-link:hover {
   color: var(--vp-c-text-1) !important;
+}
+
+.vp-cli-link-sep {
+  font-size: 12px;
+  color: var(--vp-c-divider);
 }
