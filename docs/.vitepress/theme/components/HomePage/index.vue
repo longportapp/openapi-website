@@ -53,9 +53,6 @@ const openApiCodeTabs = [
           <li><strong>{{ t('home.cli.feat2.title') }}</strong> — {{ t('home.cli.feat2.desc') }}</li>
           <li><strong>{{ t('home.cli.feat3.title') }}</strong> — {{ t('home.cli.feat3.desc') }}</li>
         </ul>
-        <div class="ps-install">
-          <code>curl -fsSL https://longbridge.sh/install | bash</code>
-        </div>
         <a href="/docs/cli" class="ps-link">{{ t('home.cli.link') }} &rarr;</a>
       </template>
       <template #visual>
@@ -94,9 +91,6 @@ const openApiCodeTabs = [
           <li><strong>{{ t('home.skill.feat2.title') }}</strong> — {{ t('home.skill.feat2.desc') }}</li>
           <li><strong>{{ t('home.skill.feat3.title') }}</strong> — {{ t('home.skill.feat3.desc') }}</li>
         </ul>
-        <div class="ps-install">
-          <code>npx skills add longbridge/developers -g -y</code>
-        </div>
         <a href="/skill" class="ps-link">{{ t('home.skill.link') }} &rarr;</a>
       </template>
       <template #visual>
