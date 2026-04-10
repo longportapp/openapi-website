@@ -13,7 +13,7 @@ Longbridge CLI（`longbridge`）是面向 Longbridge OpenAPI 全端点的 AI 原
 
 ## 快速开始
 
-参见[安装说明](/zh-CN/docs/cli/installation)了解平台安装方式与鉴权配置。安装后可直接运行任意命令：
+参见[安装说明](/zh-CN/docs/cli/install)了解平台安装方式与鉴权配置。安装后可直接运行任意命令：
 
 ```bash
 # 查询实时行情

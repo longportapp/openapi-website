@@ -79,7 +79,7 @@ function getUsageTitle(localeIndex: string): string {
 }
 
 function getInstallUrl(localeIndex: string): string {
-  return `${getLocalePrefix(localeIndex)}/docs/cli/installation`
+  return `${getLocalePrefix(localeIndex)}/docs/cli/install`
 }
 
 function extractFirstCommand(content: string): string | null {

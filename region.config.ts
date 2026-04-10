@@ -35,6 +35,8 @@ export const regionConfig: Record<string, RegionConfig> = {
     includePages: [
       // Only CLI under /docs/
       '**/docs/cli.md',
+      '**/docs/cli/index.md',
+      '**/docs/cli/install.md',
 
       // AI Skills
       '**/skill/**',
