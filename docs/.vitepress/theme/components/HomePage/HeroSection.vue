@@ -83,13 +83,20 @@ watch(activeIdx, () => {
   }
 })
 
-// Copy
+// Copy with animation
 const copied = ref(false)
+const copyBtnRef = ref<HTMLElement | null>(null)
 async function copy() {
   try {
     await navigator.clipboard.writeText(active.value.install)
     copied.value = true
-    setTimeout(() => { copied.value = false }, 1500)
+    // Flash the terminal background
+    const terminal = copyBtnRef.value?.closest('.hero__terminal')
+    terminal?.classList.add('copy-flash')
+    setTimeout(() => {
+      copied.value = false
+      terminal?.classList.remove('copy-flash')
+    }, 1500)
   } catch { /* noop */ }
 }
 
@@ -130,7 +137,7 @@ onUnmounted(clear)
             class="ht-tab" :class="{ active: activeIdx === i }"
             @click="switchTo(i)"
           >{{ p.label }}</button>
-          <button class="ht-copy" aria-label="Copy install command" @click="copy">
+          <button ref="copyBtnRef" class="ht-copy" :class="{ 'ht-copy--done': copied }" aria-label="Copy install command" @click="copy">
             {{ copied ? $t('api.copied') : $t('api.copy') }}
           </button>
         </div>
@@ -147,7 +154,7 @@ onUnmounted(clear)
       </div>
 
       <div class="hero__cta hero-fade-up" style="animation-delay:0.95s">
-        <a href="/docs/getting-started" class="hero__btn hero__btn--pri">{{ t('home.getStarted') }}</a>
+        <a href="/docs/getting-started" class="hero__btn hero__btn--pri btn-sweep">{{ t('home.getStarted') }}</a>
         <a href="/docs/api" class="hero__btn hero__btn--sec">{{ t('home.apiReference') }}</a>
       </div>
     </div>
@@ -204,6 +211,14 @@ onUnmounted(clear)
 }
 
 .ht-copy:hover { color: var(--code-fg); border-color: rgba(255,255,255,0.25); }
+
+.ht-copy--done {
+  color: var(--code-accent) !important;
+  border-color: var(--code-accent) !important;
+  background: rgba(0, 212, 184, 0.1);
+  transform: scale(1.05);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
 /* Command area */
 .ht-cmd {
