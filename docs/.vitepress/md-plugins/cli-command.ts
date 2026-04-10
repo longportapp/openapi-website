@@ -92,10 +92,8 @@ function extractFirstCommand(content: string): string | null {
   return null
 }
 
-function getUsageUrl(cmd: string, localeIndex: string): string | null {
-  const path = CLI_COMMAND_MAP[cmd]
-  if (!path) return null
-  return `${getLocalePrefix(localeIndex)}${path}`
+function getUsageUrl(cmd: string): string | null {
+  return CLI_COMMAND_MAP[cmd] ?? null
 }
 
 // Colors matching github-light / github-dark shiki themes (auto-switch via CSS vars)
@@ -176,7 +174,7 @@ function replaceCliCommand(src: string, installTitle: string, installUrl: string
     (_, content: string) => {
       const trimmed = content.trim()
       const cmd = extractFirstCommand(trimmed)
-      const usageUrl = cmd ? getUsageUrl(cmd, localeIndex) : null
+      const usageUrl = cmd ? getUsageUrl(cmd) : null
       return generateCliBlock(trimmed, installTitle, installUrl, usageTitle, usageUrl)
     },
   )
