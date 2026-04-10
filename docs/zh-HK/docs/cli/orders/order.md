@@ -15,8 +15,11 @@ longbridge order
 ```
 
 ```
-| Order ID | Symbol | Side | Order Type | Status | Quantity | Price | Executed Quantity | Executed Price | Created At |
-|----------|--------|------|------------|--------|----------|-------|-------------------|----------------|------------|
+| Order ID           | Symbol  | Side | Order Type | Status        | Qty | Price  | Exec Qty | Exec Price | Created At          |
+|--------------------|---------|------|------------|---------------|-----|--------|----------|------------|---------------------|
+| 701276261045858304 | TSLA.US | Buy  | LO         | Filled        | 10  | 340.00 | 10       | 339.85     | 2026-04-10 09:32:14 |
+| 701276261045858305 | NVDA.US | Sell | LO         | PartialFilled | 20  | 185.00 | 12       | 185.00     | 2026-04-10 09:45:01 |
+| 701276261045858306 | AAPL.US | Buy  | MO         | New           | 5   | -      | 0        | -          | 2026-04-10 10:01:33 |
 ```
 
 ## 示例
