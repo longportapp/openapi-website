@@ -11,6 +11,10 @@ Longbridge CLI（`longbridge`）是面向 Longbridge OpenAPI 全端點的 AI 原
 
 **GitHub：** [longbridge/longbridge-terminal](https://github.com/longbridge/longbridge-terminal)
 
+<a href="https://asciinema.org/a/912409" target="_blank">
+  <img src="https://asciinema.org/a/912409.svg" alt="Longbridge CLI showcase" />
+</a>
+
 ## 快速開始
 
 參見[安裝說明](/zh-HK/docs/cli/install)了解平台安裝方式與鑑權配置。安裝後可直接執行任意命令：

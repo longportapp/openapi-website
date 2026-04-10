@@ -13,6 +13,10 @@ scripting, AI-agent tool-calling, and daily workflows from the terminal.
 
 **GitHub:** [longbridge/longbridge-terminal](https://github.com/longbridge/longbridge-terminal)
 
+<a href="https://asciinema.org/a/912409" target="_blank">
+  <img src="https://asciinema.org/a/912409.svg" alt="Longbridge CLI showcase" />
+</a>
+
 ## Quick Start
 
 See [Installation](/docs/cli/install) for platform-specific install instructions and authentication setup. After installing, try any command:
