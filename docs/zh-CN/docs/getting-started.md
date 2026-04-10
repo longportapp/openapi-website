@@ -1812,4 +1812,4 @@ SDK 的详细 API 文档请访问：https://longbridge.github.io/openapi/
 
 在 GitHub 上，也有很多历史的讨论和问题可以参考，你也可以试着搜索一下，或许也能找到问题的解决方案。
 
-访问地址：https://github.com/longbridge/openapi/issues
+访问地址：https://github.com/longbridge/developers/issues
