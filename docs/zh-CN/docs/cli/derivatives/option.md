@@ -74,7 +74,7 @@ longbridge option quote AAPL260417C190000.US --format json
 
 ## 权限要求
 
-`option quote` 需要期权账户及期权行情权限；`option chain` 需要一级行情权限。参见[行情订阅](/docs/quote/)了解权限详情。
+`option quote` 需要期权账户及期权行情权限；`option chain` 需要一级行情权限。参见[行情订阅](/zh-CN/docs/quote/)了解权限详情。
 
 ## 说明
 

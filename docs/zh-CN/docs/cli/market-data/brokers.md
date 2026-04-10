@@ -45,7 +45,7 @@ longbridge brokers 700.HK --format json
 
 ## 权限要求
 
-需要 Level 2 行情订阅，仅支持港股市场。详见 [行情订阅](/docs/quote/) 中的订阅选项。
+需要 Level 2 行情订阅，仅支持港股市场。详见 [行情订阅](/zh-CN/docs/quote/) 中的订阅选项。
 
 ## 说明
 

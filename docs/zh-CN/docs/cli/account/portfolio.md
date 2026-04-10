@@ -47,4 +47,4 @@ longbridge portfolio --format json
 
 ## 权限要求
 
-需要 OAuth 账户权限。参见[账户权限设置](/docs/trade/)。
+需要 OAuth 账户权限。参见[账户权限设置](/zh-CN/docs/trade/)。
