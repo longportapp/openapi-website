@@ -1,6 +1,6 @@
 ---
 title: 'tui'
-sidebar_label: 'tui'
+sidebar_label: 'TUI'
 sidebar_position: 99
 ---
 
