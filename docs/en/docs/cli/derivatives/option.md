@@ -50,7 +50,7 @@ Returns the latest bid, ask, last price, implied volatility, and greeks for the 
 
 ## Requirements
 
-`option quote` requires an options account and options market data permission. `option chain` works with Level 1 quote access.
+`option quote` requires an options account and options market data permission. `option chain` works with Level 1 quote access. See [Quote Permissions](/docs/quote/) for subscription details.
 
 ## Notes
 
