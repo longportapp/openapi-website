@@ -20,17 +20,10 @@ longbridge fund-positions
 
 <CliCommand>
 longbridge fund-positions
-</CliCommand>
-
-Displays all fund and ETF positions in your account, including symbol, quantity, and cost information.
-
-### JSON output
-
-<CliCommand>
 longbridge fund-positions --format json
 </CliCommand>
 
-Returns fund position data as a JSON array, suitable for scripting or integration with other tools.
+Displays all fund and ETF positions in your account, including symbol, quantity, and cost information.
 
 ## Requirements
 
