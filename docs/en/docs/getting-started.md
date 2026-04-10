@@ -1811,4 +1811,4 @@ If there are any questions or suggestions, please feel free to post an issue on 
 
 Or there have a lot old discussion in the GitHub issue, you can search the issue to find the answer.
 
-- GitHub: https://github.com/longbridge/openapi/issues
+- GitHub: https://github.com/longbridge/developers/issues

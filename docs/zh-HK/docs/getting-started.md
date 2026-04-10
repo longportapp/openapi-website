@@ -1729,4 +1729,4 @@ https://longbridge.github.io/openapi/
 
 在 GitHub 上，也有很多歷史的討論和問題可以參考，你也可以試著搜尋一下，或許也能找到問題的解決方案。
 
-訪問網址：https://github.com/longbridge/openapi/issues
+訪問網址：https://github.com/longbridge/developers/issues
