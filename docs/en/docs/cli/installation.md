@@ -2,6 +2,7 @@
 title: 'Installation'
 sidebar_label: 'Installation'
 sidebar_position: 2
+sidebar_icon: cpu
 ---
 
 # Installation

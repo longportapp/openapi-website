@@ -2,6 +2,7 @@
 title: '安装'
 sidebar_label: '安装'
 sidebar_position: 2
+sidebar_icon: cpu
 ---
 
 # 安装
