@@ -23,24 +23,11 @@ longbridge security-list
 longbridge security-list
 # Explicit market
 longbridge security-list US
-</CliCommand>
-
-Returns the full list of US symbols currently eligible for overnight trading sessions on Longbridge.
-
-### JSON output for automation
-
-<CliCommand>
+# JSON output for validating eligibility before placing trades
 longbridge security-list US --format json
 </CliCommand>
 
-```json
-[
-  { "name": "GDS", "symbol": "GDS.US" },
-  { "name": "ZEEKR Intelligent Tech", "symbol": "ZK.US" }
-]
-```
-
-Each entry contains the symbol and its display name. Use this list to validate overnight order eligibility before placing trades.
+Returns the full list of US symbols currently eligible for overnight trading sessions on Longbridge. Use `--format json` to get a machine-readable list for automating eligibility checks.
 
 ## Notes
 

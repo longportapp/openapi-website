@@ -20,25 +20,10 @@ longbridge depth 700.HK
 
 <CliCommand>
 longbridge depth 700.HK
-</CliCommand>
-
-Shows the current bid and ask ladder for 700.HK, including price levels, volume at each level, and order count.
-
-### JSON output for programmatic use
-
-<CliCommand>
 longbridge depth 700.HK --format json
 </CliCommand>
 
-```json
-{
-  "asks": [{ "order_num": 63, "position": 1, "price": "505.500", "volume": 42400 }],
-  "bids": [{ "order_num": 72, "position": 1, "price": "505.000", "volume": 67700 }],
-  "symbol": "700.HK"
-}
-```
-
-Each entry includes `position` (price level rank), `price`, `volume` (total shares at that level), and `order_num` (number of orders). Up to 10 levels are returned per side when the market is open.
+Shows the current bid and ask ladder for 700.HK, including price levels, volume at each level, and order count. Up to 10 levels are returned per side when the market is open.
 
 ## Requirements
 

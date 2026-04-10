@@ -20,9 +20,10 @@ longbridge calc-index TSLA.US
 
 <CliCommand>
 longbridge calc-index TSLA.US NVDA.US --index pe pb
+longbridge calc-index TSLA.US NVDA.US --index pe pb --format json
 </CliCommand>
 
-Calculates the specified indexes for each symbol. Multiple symbols and multiple indexes can be requested in a single call.
+Calculates the specified indexes for each symbol. Multiple symbols and multiple indexes can be requested in a single call. Only indexes that have data appear in the JSON output — indexes with no value are omitted.
 
 ### Default indexes (PE, PB, dividend yield, turnover rate, market cap)
 
@@ -39,21 +40,6 @@ longbridge calc-index 700.HK --index delta gamma vega theta
 </CliCommand>
 
 For options and warrants, request greeks directly. Only indexes applicable to the instrument type will appear in the output.
-
-### JSON output
-
-<CliCommand>
-longbridge calc-index TSLA.US NVDA.US --index pe pb dividend_yield --format json
-</CliCommand>
-
-```json
-[
-  { "pe": "341.83", "symbol": "TSLA.US" },
-  { "pe": "37.22", "symbol": "NVDA.US" }
-]
-```
-
-Only indexes that have data appear in each result object. In this example, `dividend_yield` was 0 for both symbols and was omitted.
 
 ## Notes
 

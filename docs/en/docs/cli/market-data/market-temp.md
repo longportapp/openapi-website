@@ -25,6 +25,8 @@ longbridge market-temp HK
 longbridge market-temp US
 # China A-shares
 longbridge market-temp CN
+# JSON output for scripting or monitoring
+longbridge market-temp US --format json
 </CliCommand>
 
 Supported markets: `HK` (default), `US`, `CN` (aliases: `SH`, `SZ`), `SG`. Running without an argument defaults to `HK`.
@@ -45,20 +47,3 @@ longbridge market-temp US --history --start 2026-04-01 --end 2026-04-09 --format
 
 Returns one record per trading day over the specified range. Useful for charting sentiment shifts around market events.
 
-### JSON snapshot for monitoring
-
-<CliCommand>
-longbridge market-temp HK --format json
-</CliCommand>
-
-```json
-[
-  { "field": "Market", "value": "HK" },
-  { "field": "Temperature", "value": "82" },
-  { "field": "Description", "value": "Temp Warm & Gradually Rising" },
-  { "field": "Valuation", "value": "88" },
-  { "field": "Sentiment", "value": "75" }
-]
-```
-
-The snapshot includes the overall temperature score, a plain-language description, and the underlying valuation and sentiment sub-scores.

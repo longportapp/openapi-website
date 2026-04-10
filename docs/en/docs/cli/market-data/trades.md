@@ -32,18 +32,11 @@ longbridge trades TSLA.US --count 50
 
 Use `--count` to fetch up to 50 (or more) recent trades in a single call.
 
-### JSON output for analysis
+### Read buy/sell pressure from trade direction
 
 <CliCommand>
-longbridge trades TSLA.US --count 3 --format json
+# The direction field shows Up, Down, or Neutral relative to the prior trade
+longbridge trades TSLA.US --count 50 --format json
 </CliCommand>
 
-```json
-[
-  { "direction": "Neutral", "price": "344.940", "time": "2026-04-09 23:59:55", "type": "I", "volume": "3" },
-  { "direction": "Neutral", "price": "344.968", "time": "2026-04-09 23:59:56", "type": "I", "volume": "5" },
-  { "direction": "Down", "price": "344.930", "time": "2026-04-09 23:59:59", "type": "I", "volume": "5" }
-]
-```
-
-The `direction` field is `Up`, `Down`, or `Neutral` relative to the preceding trade price.
+Each entry includes a `direction` field indicating whether the trade printed above, below, or at the previous price — useful for gauging short-term momentum.

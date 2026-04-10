@@ -20,26 +20,10 @@ longbridge participants
 
 <CliCommand>
 longbridge participants
-</CliCommand>
-
-Returns the full directory of HK exchange participants, each with their broker ID(s) and firm name.
-
-### JSON output
-
-<CliCommand>
 longbridge participants --format json
 </CliCommand>
 
-```json
-[
-  { "broker_id": "6596", "name_cn": "维恩证券", "name_en": "WE" },
-  { "broker_id": "3014", "name_cn": "DRW (Hong Kong) Limited", "name_en": "DRW (Hong Kong) Limited" },
-  { "broker_id": "7707, 7708, 7709", "name_cn": "同舟证券", "name_en": "Ark Securities (Hong Kong) Limited" },
-  { "broker_id": "724", "name_cn": "UTR8 Hong Kong Limited", "name_en": "UTR8 Hong Kong Limited" }
-]
-```
-
-Some firms have multiple broker IDs listed together in a single `broker_id` string.
+Returns the full directory of HK exchange participants, each with their broker ID(s) and firm name. Some firms have multiple broker IDs listed together in a single `broker_id` string.
 
 ## Notes
 
