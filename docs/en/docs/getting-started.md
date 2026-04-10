@@ -417,17 +417,17 @@ Please pay attention to protect your **Access Token** information, anyone who ge
 
 **Other environment variables:**
 
-| Name                               | Description                                                                         |
-| ---------------------------------- | ----------------------------------------------------------------------------------- |
-| `LONGBRIDGE_LANGUAGE`              | Language identifier, `zh-CN`, `zh-HK` or `en` (Default: `en`)                       |
-| `LONGBRIDGE_HTTP_URL`              | HTTP endpoint url (Default: `https://openapi.longbridge.com`)                       |
-| `LONGBRIDGE_QUOTE_WS_URL`          | Quote websocket endpoint url (Default: `wss://openapi-quote.longbridge.com/v2`)     |
-| `LONGBRIDGE_TRADE_WS_URL`          | Trade websocket endpoint url (Default: `wss://openapi-trade.longbridge.com/v2`)     |
-| `LONGBRIDGE_REGION`                | Override API region; SDK auto-selects by network. Set to `cn` or `hk` if incorrect. |
-| `LONGBRIDGE_ENABLE_OVERNIGHT`      | Enable overnight quote, `true` or `false` (Default: `false`). Requires purchasing the "LV1 Real-time Quote (OpenAPI)" quote card in the Longbridge App. US stocks only.  |
-| `LONGBRIDGE_PUSH_CANDLESTICK_MODE` | `realtime` or `confirmed` (Default: `realtime`)                                     |
-| `LONGBRIDGE_PRINT_QUOTE_PACKAGES`  | Print quote packages when connected, `true` or `false` (Default: `true`)            |
-| `LONGBRIDGE_LOG_PATH`              | Set the path of the log files (Default: no logs)                                    |
+| Name                               | Description                                                                                                                                                             |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `LONGBRIDGE_LANGUAGE`              | Language identifier, `zh-CN`, `zh-HK` or `en` (Default: `en`)                                                                                                           |
+| `LONGBRIDGE_HTTP_URL`              | HTTP endpoint url (Default: `https://openapi.longbridge.com`)                                                                                                           |
+| `LONGBRIDGE_QUOTE_WS_URL`          | Quote websocket endpoint url (Default: `wss://openapi-quote.longbridge.com/v2`)                                                                                         |
+| `LONGBRIDGE_TRADE_WS_URL`          | Trade websocket endpoint url (Default: `wss://openapi-trade.longbridge.com/v2`)                                                                                         |
+| `LONGBRIDGE_REGION`                | Override API region; SDK auto-selects by network. Set to `cn` or `hk` if incorrect.                                                                                     |
+| `LONGBRIDGE_ENABLE_OVERNIGHT`      | Enable overnight quote, `true` or `false` (Default: `false`). Requires purchasing the "LV1 Real-time Quote (OpenAPI)" quote card in the Longbridge App. US stocks only. |
+| `LONGBRIDGE_PUSH_CANDLESTICK_MODE` | `realtime` or `confirmed` (Default: `realtime`)                                                                                                                         |
+| `LONGBRIDGE_PRINT_QUOTE_PACKAGES`  | Print quote packages when connected, `true` or `false` (Default: `true`)                                                                                                |
+| `LONGBRIDGE_LOG_PATH`              | Set the path of the log files (Default: no logs)                                                                                                                        |
 
 :::info
 The SDK also accepts the legacy `LONGPORT_*` variable names for backward compatibility.
@@ -1811,4 +1811,4 @@ If there are any questions or suggestions, please feel free to post an issue on 
 
 Or there have a lot old discussion in the GitHub issue, you can search the issue to find the answer.
 
-- GitHub: https://github.com/longbridge/openapi/issues
+- GitHub: https://github.com/longbridge/developers/issues
