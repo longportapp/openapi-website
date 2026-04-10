@@ -76,44 +76,79 @@ const openApiCodeTabs = [
       </template>
     </ProductSection>
 
-    <!-- CLI + SKILL: compact 2-column cards -->
-    <section class="homepage-section homepage-section--alt">
-      <div class="homepage-container">
-        <div class="compact-grid reveal">
-          <!-- CLI -->
-          <div class="compact-card">
-            <span class="ps-badge ps-badge--amber">CLI</span>
-            <h3 class="compact-title">{{ t('home.cli.title') }}</h3>
-            <p class="compact-desc">{{ t('home.cli.desc') }}</p>
-            <TerminalPreview>
-              <div style="color:var(--code-dim)">$ longbridge quote TSLA.US AAPL.US</div>
-              <br />
-              <table style="width:100%;border-collapse:collapse;font-size:11px">
-                <tr style="color:var(--code-dim)"><td>Symbol</td><td>Last</td><td>Change</td></tr>
-                <tr><td>TSLA.US</td><td>248.50</td><td style="color:var(--code-up)">+2.18%</td></tr>
-                <tr><td>AAPL.US</td><td>195.20</td><td style="color:var(--code-down)">-0.71%</td></tr>
-              </table>
-            </TerminalPreview>
-            <a href="/docs/cli" class="ps-link" style="margin-top:16px">{{ t('home.cli.link') }} &rarr;</a>
-          </div>
-
-          <!-- SKILL -->
-          <div class="compact-card">
-            <span class="ps-badge ps-badge--pink">SKILL</span>
-            <h3 class="compact-title">{{ t('home.skill.title') }}</h3>
-            <p class="compact-desc">{{ t('home.skill.desc') }}</p>
-            <TerminalPreview title="AI + SKILL">
-              <div style="color:var(--code-dim)">User: <span style="color:var(--code-str)">"筛出 PE&lt;25 的美股科技股"</span></div>
-              <br />
-              <div style="color:var(--code-up)">&#10003; SKILL activated</div>
-              <div>INTC.US PE:22.1 <span style="color:var(--code-up)">MACD 金叉</span></div>
-              <div>CSCO.US PE:16.8 <span style="color:var(--code-up)">MACD 金叉</span></div>
-            </TerminalPreview>
-            <a href="/skill" class="ps-link" style="margin-top:16px">{{ t('home.skill.link') }} &rarr;</a>
-          </div>
+    <!-- CLI -->
+    <ProductSection accent="amber">
+      <template #content>
+        <span class="ps-badge ps-badge--amber">CLI</span>
+        <h2 class="ps-title">{{ t('home.cli.title') }}</h2>
+        <p class="ps-desc">{{ t('home.cli.desc') }}</p>
+        <ul class="ps-features">
+          <li><strong>{{ t('home.cli.feat1.title') }}</strong> — {{ t('home.cli.feat1.desc') }}</li>
+          <li><strong>{{ t('home.cli.feat2.title') }}</strong> — {{ t('home.cli.feat2.desc') }}</li>
+          <li><strong>{{ t('home.cli.feat3.title') }}</strong> — {{ t('home.cli.feat3.desc') }}</li>
+        </ul>
+        <div class="ps-install">
+          <code>curl -fsSL https://longbridge.sh/install | bash</code>
         </div>
-      </div>
-    </section>
+        <a href="/docs/cli" class="ps-link">{{ t('home.cli.link') }} &rarr;</a>
+      </template>
+      <template #visual>
+        <TerminalPreview>
+          <div style="color:var(--code-dim)">$ longbridge quote TSLA.US AAPL.US NVDA.US</div>
+          <br />
+          <table style="width:100%;border-collapse:collapse;font-size:12px">
+            <tr style="color:var(--code-dim)"><td>Symbol</td><td>Last</td><td>Change</td><td>Change%</td><td>Volume</td></tr>
+            <tr><td>TSLA.US</td><td>248.50</td><td style="color:var(--code-up)">+5.30</td><td style="color:var(--code-up)">+2.18%</td><td style="color:var(--code-dim)">42.1M</td></tr>
+            <tr><td>AAPL.US</td><td>195.20</td><td style="color:var(--code-down)">-1.40</td><td style="color:var(--code-down)">-0.71%</td><td style="color:var(--code-dim)">58.3M</td></tr>
+            <tr><td>NVDA.US</td><td>875.30</td><td style="color:var(--code-up)">+12.80</td><td style="color:var(--code-up)">+1.48%</td><td style="color:var(--code-dim)">31.7M</td></tr>
+          </table>
+          <br />
+          <div style="color:var(--code-dim)">$ longbridge insider-trades NVDA.US</div>
+          <br />
+          <table style="width:100%;border-collapse:collapse;font-size:12px">
+            <tr style="color:var(--code-dim)"><td>Date</td><td>Name</td><td>Type</td><td>Shares</td><td>Price</td></tr>
+            <tr><td style="color:var(--code-dim)">2026-04-08</td><td>Jensen Huang</td><td style="color:var(--code-down)">Sell</td><td style="color:var(--code-dim)">120,000</td><td style="color:var(--code-dim)">$871.50</td></tr>
+            <tr><td style="color:var(--code-dim)">2026-04-05</td><td>Colette Kress</td><td style="color:var(--code-down)">Sell</td><td style="color:var(--code-dim)">25,000</td><td style="color:var(--code-dim)">$865.20</td></tr>
+          </table>
+        </TerminalPreview>
+      </template>
+    </ProductSection>
+
+    <!-- SKILL -->
+    <ProductSection accent="pink" reverse>
+      <template #content>
+        <span class="ps-badge ps-badge--pink">SKILL</span>
+        <h2 class="ps-title">{{ t('home.skill.title') }}</h2>
+        <p class="ps-desc">{{ t('home.skill.desc') }}</p>
+        <ul class="ps-features">
+          <li><strong>{{ t('home.skill.feat1.title') }}</strong> — {{ t('home.skill.feat1.desc') }}</li>
+          <li><strong>{{ t('home.skill.feat2.title') }}</strong> — {{ t('home.skill.feat2.desc') }}</li>
+          <li><strong>{{ t('home.skill.feat3.title') }}</strong> — {{ t('home.skill.feat3.desc') }}</li>
+        </ul>
+        <div class="ps-install">
+          <code>npx skills add longbridge/developers -g -y</code>
+        </div>
+        <a href="/skill" class="ps-link">{{ t('home.skill.link') }} &rarr;</a>
+      </template>
+      <template #visual>
+        <TerminalPreview title="AI Assistant with SKILL">
+          <div style="color:var(--code-dim)">User: <span style="color:var(--code-str)">"帮我从美股里筛出市值 500 亿以上、PE 低于 25、</span></div>
+          <div style="color:var(--code-str)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;近期 MACD 出现金叉的科技股"</div>
+          <br />
+          <div style="color:var(--code-up)">&#10003; Longbridge SKILL activated</div>
+          <br />
+          <div style="color:var(--code-dim)">AI: 正在执行跨市场选股...</div>
+          <div style="color:var(--code-fn)">$ longbridge screener --market us \</div>
+          <div style="color:var(--code-fn)">&nbsp;&nbsp;--sector technology --min-market-cap 50B \</div>
+          <div style="color:var(--code-fn)">&nbsp;&nbsp;--max-pe 25 --signal macd-golden-cross</div>
+          <br />
+          <div style="color:var(--code-dim)">Found 3 matching securities:</div>
+          <div>INTC.US &nbsp;PE: 22.1 &nbsp;<span style="color:var(--code-up)">MACD golden cross (2d ago)</span></div>
+          <div>CSCO.US &nbsp;PE: 16.8 &nbsp;<span style="color:var(--code-up)">MACD golden cross (1d ago)</span></div>
+          <div>ORCL.US &nbsp;PE: 24.3 &nbsp;<span style="color:var(--code-up)">MACD golden cross (today)</span></div>
+        </TerminalPreview>
+      </template>
+    </ProductSection>
 
     <MarketCoverage />
     <Footer />
@@ -186,38 +221,22 @@ const openApiCodeTabs = [
 
 .ps-link:hover { gap: 10px; }
 
-/* Compact 2-column for CLI + SKILL */
-.compact-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
-
-.compact-card {
-  background: var(--home-bg-color-1);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-}
-
-.compact-title {
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin-bottom: 8px;
-  color: var(--text-color-1);
-}
-
-.compact-desc {
-  font-size: 13px;
-  color: var(--text-color-1-supplement);
-  line-height: 1.6;
+/* Install command inline */
+.ps-install {
   margin-bottom: 16px;
+  padding: 10px 14px;
+  background: var(--code-bg);
+  border-radius: 6px;
+  font-family: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12.5px;
+  color: var(--code-fg);
+  word-break: break-all;
 }
 
-@media (max-width: 768px) {
-  .compact-grid { grid-template-columns: 1fr; }
+.ps-install code {
+  font-family: inherit;
+  background: none;
+  padding: 0;
+  color: inherit;
 }
 </style>

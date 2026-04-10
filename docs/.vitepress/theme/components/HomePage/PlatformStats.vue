@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useCountUp } from '../../composables/useCountUp'
+import IconComponent from './IconComponent.vue'
 
 const { t } = useI18n()
 const statsRef = ref<HTMLElement | null>(null)
@@ -16,10 +17,10 @@ useCountUp(statsRef)
           <div class="ps-num"><span data-count-target="4">0</span></div>
           <div class="ps-title">{{ t('home.stats.marketsTitle') }}</div>
           <div class="ps-detail">
-            <span class="ps-dot" style="--c:#FF3A9D">HK</span>
-            <span class="ps-dot" style="--c:#2A99FE">US</span>
-            <span class="ps-dot" style="--c:#FF3A3A">CN</span>
-            <span class="ps-dot" style="--c:#3AD8FF">SG</span>
+            <span class="ps-flag"><IconComponent type="market_round_HK" class-name="ps-flag-icon" /> HK</span>
+            <span class="ps-flag"><IconComponent type="market_round_US" class-name="ps-flag-icon" /> US</span>
+            <span class="ps-flag"><IconComponent type="market_round_CN" class-name="ps-flag-icon" /> CN</span>
+            <span class="ps-flag"><IconComponent type="market_round_SG" class-name="ps-flag-icon" /> SG</span>
           </div>
           <div class="ps-sub">{{ t('home.stats.marketsSub') }}</div>
         </div>
@@ -124,7 +125,7 @@ useCountUp(statsRef)
   text-align: center;
 }
 
-.ps-dot {
+.ps-flag {
   font-size: 11px;
   font-weight: 600;
   padding: 4px 10px;
@@ -133,15 +134,12 @@ useCountUp(statsRef)
   color: var(--text-color-1);
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
 }
 
-.ps-dot::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--c);
+:deep(.ps-flag-icon) {
+  width: 18px;
+  height: 18px;
 }
 
 .ps-pill {
