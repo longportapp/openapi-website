@@ -65,6 +65,7 @@
   "home.grid.mcp": "托管 MCP 服务，让 Claude、Cursor、Zed 等 AI 工具直接查行情、下单。OAuth 一键授权。",
   "home.grid.cli": "40+ 命令覆盖行情、交易、财报、选股、技术诊断。支持 JSON/CSV/Markdown 输出。",
   "home.grid.skill": "一条命令为 AI 注入完整金融知识库。自动识别股票代码，智能调用分析和交易。",
+  "home.apply": "立即申请",
   "home.getStarted": "快速开始",
   "home.apiReference": "API 参考",
   "home.stats.marketsTitle": "覆盖市场",

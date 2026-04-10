@@ -71,8 +71,8 @@ const openApiCodeTabs = [
           <br />
           <table style="width:100%;border-collapse:collapse;font-size:12px">
             <tr style="color:var(--code-dim)"><td>Date</td><td>Name</td><td>Type</td><td>Shares</td><td>Price</td></tr>
-            <tr><td style="color:var(--code-dim)">2026-04-08</td><td>Jensen Huang</td><td style="color:var(--code-down)">Sell</td><td style="color:var(--code-dim)">120,000</td><td style="color:var(--code-dim)">$871.50</td></tr>
-            <tr><td style="color:var(--code-dim)">2026-04-05</td><td>Colette Kress</td><td style="color:var(--code-down)">Sell</td><td style="color:var(--code-dim)">25,000</td><td style="color:var(--code-dim)">$865.20</td></tr>
+            <tr><td style="color:var(--code-dim)">2026-04-08</td><td>Jensen Huang</td><td style="color:var(--code-dim)">Sell</td><td style="color:var(--code-dim)">120,000</td><td style="color:var(--code-dim)">$871.50</td></tr>
+            <tr><td style="color:var(--code-dim)">2026-04-05</td><td>Colette Kress</td><td style="color:var(--code-dim)">Sell</td><td style="color:var(--code-dim)">25,000</td><td style="color:var(--code-dim)">$865.20</td></tr>
           </table>
         </TerminalPreview>
       </template>

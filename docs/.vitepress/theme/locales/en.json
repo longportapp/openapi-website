@@ -65,6 +65,7 @@
   "home.grid.mcp": "Hosted MCP service for Claude, Cursor, Zed and other AI tools. OAuth one-click auth, query quotes and trade.",
   "home.grid.cli": "40+ commands for quotes, trading, financial reports, screening, and technical analysis. JSON/CSV/Markdown output.",
   "home.grid.skill": "One command to inject full Longbridge knowledge into any AI assistant. Auto-detects stock symbols and market queries.",
+  "home.apply": "Apply Now",
   "home.getStarted": "Get Started",
   "home.apiReference": "API Reference",
   "home.stats.marketsTitle": "Global Markets",

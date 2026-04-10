@@ -6,6 +6,16 @@ const { t } = useI18n()
 
 const markets = [
   {
+    key: 'US',
+    icon: 'market_round_US',
+    nameKey: 'home.market.us',
+    products: [
+      { nameKey: 'home.market.stocks', trade: true, quotes: true },
+      { nameKey: 'home.market.etf', trade: true, quotes: true },
+      { nameKey: 'home.market.options', trade: true, quotes: true },
+    ],
+  },
+  {
     key: 'HK',
     icon: 'market_round_HK',
     nameKey: 'home.market.hk',
@@ -16,13 +26,12 @@ const markets = [
     ],
   },
   {
-    key: 'US',
-    icon: 'market_round_US',
-    nameKey: 'home.market.us',
+    key: 'SG',
+    icon: 'market_round_SG',
+    nameKey: 'home.market.sg',
     products: [
       { nameKey: 'home.market.stocks', trade: true, quotes: true },
       { nameKey: 'home.market.etf', trade: true, quotes: true },
-      { nameKey: 'home.market.options', trade: true, quotes: true },
     ],
   },
   {
@@ -103,7 +112,7 @@ const sdks = ['Python', 'Node.js', 'Rust', 'Go', 'Java', 'C++']
 /* Market matrix */
 .mc-matrix {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   margin-bottom: 32px;
 }
@@ -134,16 +143,24 @@ const sdks = ['Python', 'Node.js', 'Rust', 'Go', 'Java', 'C++']
 }
 
 .mc-table {
-  width: 100%;
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  table-layout: fixed;
   border-collapse: collapse;
   font-size: 13px;
-  border: none;
+  border: none !important;
+  display: table !important;
 }
 
 .mc-table th,
 .mc-table td {
   border: none;
-  background: transparent;
+  background: transparent !important;
+}
+
+.mc-table tr {
+  background: transparent !important;
 }
 
 .mc-table th {
@@ -213,7 +230,11 @@ const sdks = ['Python', 'Node.js', 'Rust', 'Go', 'Java', 'C++']
   background: var(--brand-5);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .mc-matrix { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 540px) {
   .mc-matrix { grid-template-columns: 1fr; }
 }
 </style>

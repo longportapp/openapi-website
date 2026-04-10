@@ -155,8 +155,8 @@ onUnmounted(clear)
       </div>
 
       <div class="hero__cta hero-fade-up" style="animation-delay:0.95s">
-        <a href="/docs/getting-started" class="hero__btn hero__btn--pri btn-sweep">{{ t('home.getStarted') }}</a>
-        <a href="/docs/api" class="hero__btn hero__btn--sec">{{ t('home.apiReference') }}</a>
+        <a href="https://open.longbridge.com" target="_blank" rel="noopener" class="hero__btn hero__btn--pri btn-sweep">{{ t('home.apply') }}</a>
+        <a href="/docs/getting-started" class="hero__btn hero__btn--sec">{{ t('home.getStarted') }}</a>
       </div>
     </div>
   </section>
@@ -263,10 +263,10 @@ onUnmounted(clear)
 .hero__btn {
   border-radius: 6px; padding: 12px 28px; font-size: 14.5px; font-weight: 600;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  text-decoration: none; display: inline-block;
+  text-decoration: none !important; display: inline-block;
 }
 
-.hero__btn--pri { background: var(--brand-color); color: #fff; }
+.hero__btn--pri { background: var(--brand-color); color: #fff; text-decoration: none; }
 .hero__btn--pri:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,184,184,0.3); }
 
 .hero__btn--sec { background: transparent; color: var(--brand-color); border: 1.5px solid var(--brand-color); }
