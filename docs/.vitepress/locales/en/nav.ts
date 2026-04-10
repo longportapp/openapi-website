@@ -1,8 +1,7 @@
 import type { DefaultTheme } from 'vitepress'
-import { filterNavItems, getRegion } from '../../region-utils'
+import { filterNavItems } from '../../region-utils'
 
 export const nav = (): DefaultTheme.NavItem[] => {
-  const isCN = getRegion() === 'cn'
   return filterNavItems([
     { text: 'Home', link: '/', activeMatch: '^(/en)?/$' },
     { text: 'Skill', link: '/skill', activeMatch: '^(/en)?/skill' },
