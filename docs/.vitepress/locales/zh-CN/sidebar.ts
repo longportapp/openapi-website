@@ -1,11 +1,26 @@
 import { DefaultTheme } from 'vitepress'
-import { genMarkdowDocs } from '../../theme/utils/gen'
+import { genMarkdowDocs, SIDEBAR_ICONS_MAP } from '../../theme/utils/gen'
 
 const lang = 'zh-CN'
 const docsSidebar = genMarkdowDocs(lang, 'docs', { exclude: ['cli'] })
 const cliSidebar  = genMarkdowDocs(lang, 'docs/cli')
 
+function buildCliSidebar(): DefaultTheme.SidebarItem[] {
+  const items = cliSidebar()
+  const installIdx = items.findIndex((item) => typeof item.link === 'string' && item.link.includes('installation'))
+  const githubItem: DefaultTheme.SidebarItem = {
+    text: `<span class="sidebar-item-icon">${SIDEBAR_ICONS_MAP.github}</span>GitHub`,
+    link: 'https://github.com/longbridge/longbridge-terminal',
+  }
+  if (installIdx !== -1) {
+    items.splice(installIdx + 1, 0, githubItem)
+  } else {
+    items.push(githubItem)
+  }
+  return items
+}
+
 export const sidebar: DefaultTheme.Sidebar = {
-  [`/${lang}/docs/cli`]: { base: `/${lang}/docs/cli/`, items: cliSidebar() },
-  [`/${lang}/docs`]:     { base: `/${lang}/`, items: docsSidebar() },
+  [`/${lang}/docs/cli`]: buildCliSidebar(),
+  [`/${lang}/docs`]:     docsSidebar(),
 }
