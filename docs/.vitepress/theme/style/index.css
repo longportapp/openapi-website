@@ -85,11 +85,14 @@ html:root {
 }
 
 .llms-text-link {
-  font-size: 13px;
-  font-style: italic;
+  display: inline-flex;
+  align-items: center;
+  line-height: 32px;
+  font-size: 14px;
+  font-weight: 400;
   color: var(--vp-c-text-2);
   text-decoration: none;
-  white-space: nowrap;
+  transition: color 0.25s;
 }
 
 .llms-text-link:hover {

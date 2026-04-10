@@ -128,6 +128,7 @@ export default defineConfig(
         pattern: ({ filePath }) => {
           return `https://github.com/longbridge/developers/edit/main/docs/${filePath}`
         },
+        text: 'Edit',
       },
       logo: {
         src: 'https://assets.wbrks.com/assets/logo/logo-without-title-lb.svg',
