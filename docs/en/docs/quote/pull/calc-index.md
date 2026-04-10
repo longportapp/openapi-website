@@ -82,12 +82,12 @@ if __name__ == "__main__":
 const { Config, QuoteContext, OAuth, CalcIndex } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => {
-    console.log("Open this URL to authorize: " + url)
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
   })
   const config = Config.fromOAuth(oauth)
   const ctx = QuoteContext.new(config)
-  const resp = await ctx.calcIndexes(["700.HK", "AAPL.US"], [CalcIndex.LastDone, CalcIndex.ChangeRate])
+  const resp = await ctx.calcIndexes(['700.HK', 'AAPL.US'], [CalcIndex.LastDone, CalcIndex.ChangeRate])
   console.log(resp)
 }
 main().catch(console.error)

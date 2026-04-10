@@ -80,12 +80,12 @@ if __name__ == "__main__":
 const { Config, QuoteContext, OAuth } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => {
-    console.log("Open this URL to authorize: " + url)
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
   })
   const config = Config.fromOAuth(oauth)
   const ctx = QuoteContext.new(config)
-  const resp = await ctx.capitalFlow("700.HK")
+  const resp = await ctx.capitalFlow('700.HK')
   console.log(resp)
 }
 main().catch(console.error)

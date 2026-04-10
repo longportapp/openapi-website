@@ -38,9 +38,9 @@ longbridge topic detail 6993508780031016960
 <Tabs groupId="request-example">
   <TabItem value="cli" label="CLI" default>
 
-```bash
+<CliCommand>
 longbridge topic detail 6993508780031016960
-```
+</CliCommand>
 
   </TabItem>
   <TabItem value="python" label="Python">

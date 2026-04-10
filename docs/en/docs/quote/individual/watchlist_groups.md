@@ -67,7 +67,9 @@ if __name__ == "__main__":
 const { Config, QuoteContext, OAuth } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
+  })
   const config = Config.fromOAuth(oauth)
   const ctx = QuoteContext.new(config)
   const resp = await ctx.watchlist()
@@ -206,7 +208,6 @@ func main() {
   </TabItem>
 </Tabs>
 
-
 ## Response
 
 ### Response Headers
@@ -256,15 +257,15 @@ func main() {
 <a id="schemagroups_response"></a>
 <a id="schemagroups_response"></a>
 
-| Name             | Type     | Required | Description   |
-| ---------------- | -------- | -------- | ------------- |
-| groups           | object[] | false    | Groups        |
-| ∟ id             | integer  | true     | Group ID      |
-| ∟ name           | string   | true     | Name          |
-| ∟ securities     | object[] | true     | Security      |
-| ∟∟ symbol        | string   | true     | Symbol        |
-| ∟∟ market        | string   | true     | Market        |
-| ∟∟ name          | string   | true     | Name          |
-| ∟∟ watched_price | string   | true     | Watched price |
-| ∟∟ watched_at    | integer  | true     | Watched time  |
+| Name             | Type     | Required | Description                    |
+| ---------------- | -------- | -------- | ------------------------------ |
+| groups           | object[] | false    | Groups                         |
+| ∟ id             | integer  | true     | Group ID                       |
+| ∟ name           | string   | true     | Name                           |
+| ∟ securities     | object[] | true     | Security                       |
+| ∟∟ symbol        | string   | true     | Symbol                         |
+| ∟∟ market        | string   | true     | Market                         |
+| ∟∟ name          | string   | true     | Name                           |
+| ∟∟ watched_price | string   | true     | Watched price                  |
+| ∟∟ watched_at    | integer  | true     | Watched time                   |
 | ∟∟ is_pinned     | boolean  | true     | Whether the security is pinned |

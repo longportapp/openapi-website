@@ -34,8 +34,8 @@ longbridge topics NVDA.US
 
 ### Path Parameters
 
-| Name   | Type   | Required | Description                                         |
-| ------ | ------ | -------- | --------------------------------------------------- |
+| Name   | Type   | Required | Description                                              |
+| ------ | ------ | -------- | -------------------------------------------------------- |
 | symbol | string | YES      | Stock symbol, use `ticker.region` format, e.g. `AAPL.US` |
 
 ### Request Example
@@ -80,10 +80,12 @@ if __name__ == "__main__":
 const { Config, ContentContext, OAuth } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
+  })
   const config = Config.fromOAuth(oauth)
   const ctx = ContentContext.new(config)
-  const resp = await ctx.topics("AAPL.US")
+  const resp = await ctx.topics('AAPL.US')
   console.log(resp)
 }
 main().catch(console.error)
@@ -247,10 +249,10 @@ func main() {
 
 ### Response Status
 
-| Status | Description    | Schema                                        |
-| ------ | -------------- | --------------------------------------------- |
-| 200    | Success        | [topics_response](#schematopics_response)     |
-| 500    | Internal error | None                                          |
+| Status | Description    | Schema                                    |
+| ------ | -------------- | ----------------------------------------- |
+| 200    | Success        | [topics_response](#schematopics_response) |
+| 500    | Internal error | None                                      |
 
 ## Schemas
 
@@ -258,14 +260,14 @@ func main() {
 
 <a id="schematopics_response"></a>
 
-| Name             | Type      | Required | Description                              |
-| ---------------- | --------- | -------- | ---------------------------------------- |
-| items            | object[]  | true     | Topic list                               |
-| ∟ id             | string    | true     | Topic ID                                 |
-| ∟ title          | string    | true     | Title                                    |
-| ∟ description    | string    | true     | Summary/description                      |
-| ∟ url            | string    | true     | Detail page URL                          |
-| ∟ published_at   | string    | true     | Published time, Unix timestamp (seconds) |
-| ∟ comments_count | int32     | true     | Comment count                            |
-| ∟ likes_count    | int32     | true     | Like count                               |
-| ∟ shares_count   | int32     | true     | Share count                              |
+| Name             | Type     | Required | Description                              |
+| ---------------- | -------- | -------- | ---------------------------------------- |
+| items            | object[] | true     | Topic list                               |
+| ∟ id             | string   | true     | Topic ID                                 |
+| ∟ title          | string   | true     | Title                                    |
+| ∟ description    | string   | true     | Summary/description                      |
+| ∟ url            | string   | true     | Detail page URL                          |
+| ∟ published_at   | string   | true     | Published time, Unix timestamp (seconds) |
+| ∟ comments_count | int32    | true     | Comment count                            |
+| ∟ likes_count    | int32    | true     | Like count                               |
+| ∟ shares_count   | int32    | true     | Share count                              |

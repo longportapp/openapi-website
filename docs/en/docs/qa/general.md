@@ -49,10 +49,10 @@ The platform offers two ways to access stock data without writing any code:
 
 Install the [Longbridge CLI](/docs/cli) and query market data with simple commands — no programming required:
 
-```bash
+<CliCommand>
 longbridge quote AAPL.US TSLA.US
 longbridge static NVDA.US
-```
+</CliCommand>
 
 **MCP (AI Tool Integration)**
 

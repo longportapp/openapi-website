@@ -62,7 +62,7 @@ longbridge topic create AAPL.US "Apple WWDC preview"
 <Tabs groupId="request-example">
   <TabItem value="cli" label="CLI" default>
 
-```bash
+<CliCommand>
 # Short post — plain text (default). Markdown is NOT rendered.
 longbridge topic create --body "Bullish on 700.HK today"
 
@@ -77,7 +77,7 @@ longbridge topic create --title "Q4 Earnings Preview" --body "$(cat analysis.md)
 
 # JSON output
 longbridge topic create --body "Test post" --format json
-```
+</CliCommand>
 
   </TabItem>
   <TabItem value="python" label="Python">
@@ -354,28 +354,28 @@ func main() {
 
 <a id="schemacreate_topic_response"></a>
 
-| Name                | Type     | Required | Description                                         |
-| ------------------- | -------- | -------- | --------------------------------------------------- |
-| item                | object   | true     | Newly created topic details                         |
-| ∟ id                | string   | true     | Topic ID                                            |
-| ∟ title             | string   | false    | Topic title                                         |
-| ∟ description       | string   | false    | Plain-text summary (auto-generated from body)       |
-| ∟ body              | string   | false    | Full body text (Markdown for `article`)             |
-| ∟ topic_type        | string   | false    | Topic type. One of `article`, `post`                |
-| ∟ tickers           | string[] | false    | Associated security symbols                         |
-| ∟ hashtags          | string[] | false    | Associated hashtag names                            |
-| ∟ images            | object[] | false    | Image list                                          |
-| ∟∟ url              | string   | false    | Original image URL                                  |
-| ∟∟ sm               | string   | false    | Small thumbnail URL                                 |
-| ∟∟ lg               | string   | false    | Large thumbnail URL                                 |
-| ∟ likes_count       | int32    | false    | Number of likes                                     |
-| ∟ comments_count    | int32    | false    | Number of replies                                   |
-| ∟ views_count       | int32    | false    | Number of views                                     |
-| ∟ shares_count      | int32    | false    | Number of shares                                    |
-| ∟ detail_url        | string   | false    | Direct URL to the topic                             |
-| ∟ author            | object   | false    | Author information                                  |
-| ∟∟ member_id        | string   | false    | Author member ID                                    |
-| ∟∟ name             | string   | false    | Author display name                                 |
-| ∟∟ avatar           | string   | false    | Author avatar URL                                   |
-| ∟ created_at        | string   | true     | Unix timestamp (seconds) when the topic was created |
-| ∟ updated_at        | string   | false    | Unix timestamp (seconds) of last update             |
+| Name             | Type     | Required | Description                                         |
+| ---------------- | -------- | -------- | --------------------------------------------------- |
+| item             | object   | true     | Newly created topic details                         |
+| ∟ id             | string   | true     | Topic ID                                            |
+| ∟ title          | string   | false    | Topic title                                         |
+| ∟ description    | string   | false    | Plain-text summary (auto-generated from body)       |
+| ∟ body           | string   | false    | Full body text (Markdown for `article`)             |
+| ∟ topic_type     | string   | false    | Topic type. One of `article`, `post`                |
+| ∟ tickers        | string[] | false    | Associated security symbols                         |
+| ∟ hashtags       | string[] | false    | Associated hashtag names                            |
+| ∟ images         | object[] | false    | Image list                                          |
+| ∟∟ url           | string   | false    | Original image URL                                  |
+| ∟∟ sm            | string   | false    | Small thumbnail URL                                 |
+| ∟∟ lg            | string   | false    | Large thumbnail URL                                 |
+| ∟ likes_count    | int32    | false    | Number of likes                                     |
+| ∟ comments_count | int32    | false    | Number of replies                                   |
+| ∟ views_count    | int32    | false    | Number of views                                     |
+| ∟ shares_count   | int32    | false    | Number of shares                                    |
+| ∟ detail_url     | string   | false    | Direct URL to the topic                             |
+| ∟ author         | object   | false    | Author information                                  |
+| ∟∟ member_id     | string   | false    | Author member ID                                    |
+| ∟∟ name          | string   | false    | Author display name                                 |
+| ∟∟ avatar        | string   | false    | Author avatar URL                                   |
+| ∟ created_at     | string   | true     | Unix timestamp (seconds) when the topic was created |
+| ∟ updated_at     | string   | false    | Unix timestamp (seconds) of last update             |

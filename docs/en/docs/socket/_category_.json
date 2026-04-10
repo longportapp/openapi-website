@@ -3,5 +3,6 @@
   "label": "Socket Feed",
   "collapsible": true,
   "collapsed": true,
-  "link": null
+  "link": null,
+  "icon": "zap"
 }

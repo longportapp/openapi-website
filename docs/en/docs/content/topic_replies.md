@@ -32,26 +32,26 @@ longbridge topic replies 6993508780031016960 --page 2 --size 20
 
 ### Path Parameters
 
-| Name      | Type   | Required | Description                                              |
-| --------- | ------ | -------- | -------------------------------------------------------- |
-| topic_id  | string | YES      | Topic ID (e.g. `6993508780031016960`)                    |
+| Name     | Type   | Required | Description                           |
+| -------- | ------ | -------- | ------------------------------------- |
+| topic_id | string | YES      | Topic ID (e.g. `6993508780031016960`) |
 
 ### Query Parameters
 
-| Name  | Type  | Required | Description                                    |
-| ----- | ----- | -------- | ---------------------------------------------- |
-| page  | int32 | NO       | Page number (1-based). Defaults to `1`.        |
-| size  | int32 | NO       | Items per page, range 1–50. Defaults to `20`.  |
+| Name | Type  | Required | Description                                   |
+| ---- | ----- | -------- | --------------------------------------------- |
+| page | int32 | NO       | Page number (1-based). Defaults to `1`.       |
+| size | int32 | NO       | Items per page, range 1–50. Defaults to `20`. |
 
 ### Request Example
 
 <Tabs groupId="request-example">
   <TabItem value="cli" label="CLI" default>
 
-```bash
+<CliCommand>
 longbridge topic replies 6993508780031016960
 longbridge topic replies 6993508780031016960 --page 2 --size 20
-```
+</CliCommand>
 
   </TabItem>
   <TabItem value="python" label="Python">
@@ -201,10 +201,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### Response Status
 
-| Status | Description    | Schema                                                          |
-| ------ | -------------- | --------------------------------------------------------------- |
-| 200    | Success        | [topic_replies_response](#schematopic_replies_response)         |
-| 500    | Internal error | None                                                            |
+| Status | Description    | Schema                                                  |
+| ------ | -------------- | ------------------------------------------------------- |
+| 200    | Success        | [topic_replies_response](#schematopic_replies_response) |
+| 500    | Internal error | None                                                    |
 
 ## Schemas
 
@@ -212,21 +212,21 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 <a id="schematopic_replies_response"></a>
 
-| Name                | Type     | Required | Description                                                               |
-| ------------------- | -------- | -------- | ------------------------------------------------------------------------- |
-| items               | object[] | true     | List of replies                                                           |
-| ∟ id                | string   | true     | Reply ID                                                                  |
-| ∟ topic_id          | string   | true     | Parent topic ID                                                           |
-| ∟ body              | string   | false    | Reply body (plain text)                                                   |
-| ∟ reply_to_id       | string   | false    | Parent reply ID; `"0"` = top-level reply                                  |
-| ∟ author            | object   | false    | Author info                                                               |
-| ∟∟ member_id        | string   | false    | Author member ID                                                          |
-| ∟∟ name             | string   | false    | Author display name                                                       |
-| ∟∟ avatar           | string   | false    | Author avatar URL                                                         |
-| ∟ images            | object[] | false    | Attached images                                                           |
-| ∟∟ url              | string   | false    | Original image URL                                                        |
-| ∟∟ sm               | string   | false    | Small thumbnail URL                                                       |
-| ∟∟ lg               | string   | false    | Large image URL                                                           |
-| ∟ likes_count       | int32    | false    | Likes count                                                               |
-| ∟ comments_count    | int32    | false    | Nested replies count                                                      |
-| ∟ created_at        | string   | true     | Creation time as Unix timestamp (seconds)                                 |
+| Name             | Type     | Required | Description                               |
+| ---------------- | -------- | -------- | ----------------------------------------- |
+| items            | object[] | true     | List of replies                           |
+| ∟ id             | string   | true     | Reply ID                                  |
+| ∟ topic_id       | string   | true     | Parent topic ID                           |
+| ∟ body           | string   | false    | Reply body (plain text)                   |
+| ∟ reply_to_id    | string   | false    | Parent reply ID; `"0"` = top-level reply  |
+| ∟ author         | object   | false    | Author info                               |
+| ∟∟ member_id     | string   | false    | Author member ID                          |
+| ∟∟ name          | string   | false    | Author display name                       |
+| ∟∟ avatar        | string   | false    | Author avatar URL                         |
+| ∟ images         | object[] | false    | Attached images                           |
+| ∟∟ url           | string   | false    | Original image URL                        |
+| ∟∟ sm            | string   | false    | Small thumbnail URL                       |
+| ∟∟ lg            | string   | false    | Large image URL                           |
+| ∟ likes_count    | int32    | false    | Likes count                               |
+| ∟ comments_count | int32    | false    | Nested replies count                      |
+| ∟ created_at     | string   | true     | Creation time as Unix timestamp (seconds) |

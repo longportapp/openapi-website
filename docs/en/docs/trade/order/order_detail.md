@@ -81,10 +81,12 @@ if __name__ == "__main__":
 const { Config, TradeContext, OAuth } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
+  })
   const config = Config.fromOAuth(oauth)
   const ctx = TradeContext.new(config)
-  const resp = await ctx.orderDetail("701276261045858304")
+  const resp = await ctx.orderDetail('701276261045858304')
   console.log(resp)
 }
 main().catch(console.error)
@@ -217,7 +219,6 @@ func main() {
 
   </TabItem>
 </Tabs>
-
 
 ## Response
 
@@ -379,6 +380,6 @@ Order Information
 | ∟∟∟ name                   | string   | true     | Charge name                                                                                                                                                                                                                                                    |
 | ∟∟∟ amount                 | string   | true     | Charge amount                                                                                                                                                                                                                                                  |
 | ∟∟∟ currency               | string   | true     | Charge currency                                                                                                                                                                                                                                                |
-| ∟∟∟ limit_depth_level      | int32    | true     | Specifies the bid/ask depth level   |
-| ∟∟∟ monitor_price          | string   | true     | Monitoring price                    |
-| ∟∟∟ trigger_count          | int32    | true     | Number of triggers                  |
+| ∟∟∟ limit_depth_level      | int32    | true     | Specifies the bid/ask depth level                                                                                                                                                                                                                              |
+| ∟∟∟ monitor_price          | string   | true     | Monitoring price                                                                                                                                                                                                                                               |
+| ∟∟∟ trigger_count          | int32    | true     | Number of triggers                                                                                                                                                                                                                                             |

@@ -29,7 +29,7 @@ longbridge market-temp CN --history --start 2025-01-01 --end 2025-06-30
 ### Parameters
 
 | Name       | Type   | Required | Description                                 |
-|------------|--------|----------|---------------------------------------------|
+| ---------- | ------ | -------- | ------------------------------------------- |
 | market     | string | YES      | Market, currently supports US, HK, SG, CN   |
 | start_date | string | YES      | Start date, minimum to 2016, e.g.: 20240101 |
 | end_date   | string | YES      | End date, e.g.: 20250101                    |
@@ -76,7 +76,9 @@ if __name__ == "__main__":
 const { Config, QuoteContext, OAuth, Market, NaiveDate } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
+  })
   const config = Config.fromOAuth(oauth)
   const ctx = QuoteContext.new(config)
   const resp = await ctx.historyMarketTemperature(Market.US, new NaiveDate(2024, 1, 1), new NaiveDate(2024, 1, 31))
@@ -212,7 +214,6 @@ func main() {
   </TabItem>
 </Tabs>
 
-
 ## Response
 
 ### Response Headers
@@ -247,7 +248,7 @@ func main() {
 #### Response Status
 
 | Status | Description     | Schema                                                                   |
-|--------|-----------------|--------------------------------------------------------------------------|
+| ------ | --------------- | ------------------------------------------------------------------------ |
 | 200    | Success         | [HistoryMarketTemperatureResponse](#history_market_temperature_response) |
 | 400    | Parameter Error | None                                                                     |
 
@@ -261,7 +262,7 @@ func main() {
 <a id="history_market_temperature_response"></a>
 
 | Name         | Type     | Required | Description                                                     |
-|--------------|----------|----------|-----------------------------------------------------------------|
+| ------------ | -------- | -------- | --------------------------------------------------------------- |
 | list         | object[] | true     | List                                                            |
 | ∟timestamp   | integer  | true     | Timestamp                                                       |
 | ∟temperature | integer  | true     | Temperature                                                     |
@@ -272,5 +273,5 @@ func main() {
 ## Error Codes
 
 | Business Error Code | Description           | Troubleshooting Suggestions               |
-|---------------------|-----------------------|-------------------------------------------|
+| ------------------- | --------------------- | ----------------------------------------- |
 | 2601500             | Server Internal Error | Please retry or contact technical support |

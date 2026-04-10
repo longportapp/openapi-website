@@ -85,11 +85,14 @@ html:root {
 }
 
 .llms-text-link {
-  font-size: 13px;
-  font-style: italic;
+  display: inline-flex;
+  align-items: center;
+  line-height: 32px;
+  font-size: 14px;
+  font-weight: 400;
   color: var(--vp-c-text-2);
   text-decoration: none;
-  white-space: nowrap;
+  transition: color 0.25s;
 }
 
 .llms-text-link:hover {
@@ -145,29 +148,64 @@ html:root {
 }
 
 /* CLI Command block */
-.vp-cli-command h2 {
-  display: flex;
-  align-items: center;
+.vp-cli-command {
+  margin: 16px 0 20px;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.vp-cli-install-link {
+.vp-cli-command div[class*="language-"].vp-adaptive-theme {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding-top: 0 !important;
+  margin: 0 !important;
+}
+
+.vp-cli-command div[class*="language-"].vp-adaptive-theme::before {
+  display: none;
+}
+
+.vp-cli-header {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px 6px 14px;
+  border-radius: 8px 8px 0 0;
+  border-bottom: 1px solid var(--vp-code-block-divider-color, rgba(128,128,128,0.15));
+  background-color: var(--vp-code-block-bg);
+}
+
+.vp-cli-badge {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1;
-  color: var(--vp-c-text-2) !important;
-  text-decoration: none !important;
-  transition: color 0.15s;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-3);
+  user-select: none;
+}
+
+.vp-cli-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
   margin-left: auto;
 }
 
-.vp-cli-install-link::after {
-  content: '↗';
-  font-size: 11px;
+.vp-cli-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 5px;
+  color: var(--vp-c-text-3);
+  text-decoration: none !important;
+  transition: color 0.15s, background-color 0.15s;
 }
 
-.vp-cli-install-link:hover {
-  color: var(--vp-c-text-1) !important;
+.vp-cli-action:hover {
+  color: var(--vp-c-text-1);
+  background-color: var(--vp-c-default-soft);
 }

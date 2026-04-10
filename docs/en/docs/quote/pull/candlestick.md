@@ -32,12 +32,12 @@ longbridge kline NVDA.US --period day --count 20
 
 ### Parameters
 
-| Name          | Type   | Required | Description                                                                                              |
-| ------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------- |
-| symbol        | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK`                                           |
-| period        | int32  | Yes      | Candlestick period, for example: `1000`, see [Period](../objects#period---candlestick-period)            |
-| count         | int32  | Yes      | Count of cancdlestick, for example: `100`<br /><br />**Check rules:** <br />maximum count is `1000`      |
-| adjust_type   | int32  | Yes      | Adjustment type, for example: `0`, see [AdjustType](../objects#adjusttype---candlestick-adjustment-type) |
+| Name          | Type   | Required | Description                                                                                                                                                                               |
+| ------------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol        | string | Yes      | Security code, in `ticker.region` format, for example:`700.HK`                                                                                                                            |
+| period        | int32  | Yes      | Candlestick period, for example: `1000`, see [Period](../objects#period---candlestick-period)                                                                                             |
+| count         | int32  | Yes      | Count of cancdlestick, for example: `100`<br /><br />**Check rules:** <br />maximum count is `1000`                                                                                       |
+| adjust_type   | int32  | Yes      | Adjustment type, for example: `0`, see [AdjustType](../objects#adjusttype---candlestick-adjustment-type)                                                                                  |
 | trade_session | int32  | No       | Trading session, 0: intraday, 100: All (pre, intraday, post, overnight)<br/><br/>Note: Overnight data requires purchasing the "LV1 Real-time Quote (OpenAPI)" quote card. US stocks only. |
 
 ### Protobuf
@@ -102,10 +102,12 @@ if __name__ == "__main__":
 const { Config, QuoteContext, OAuth, Period, AdjustType, TradeSessions } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
+  })
   const config = Config.fromOAuth(oauth)
   const ctx = QuoteContext.new(config)
-  const resp = await ctx.candlesticks("700.HK", Period.Day, 10, AdjustType.NoAdjust, TradeSessions.Intraday)
+  const resp = await ctx.candlesticks('700.HK', Period.Day, 10, AdjustType.NoAdjust, TradeSessions.Intraday)
   console.log(resp)
 }
 main().catch(console.error)
@@ -238,7 +240,6 @@ func main() {
 
   </TabItem>
 </Tabs>
-
 
 ## Response
 

@@ -102,9 +102,9 @@ iwr https://open.longbridge.com/longbridge/longbridge-terminal/install.ps1 | iex
 
 ### Login
 
-```bash
+<CliCommand>
 longbridge login
-```
+</CliCommand>
 
 The browser opens the authorization page automatically. The token is saved after approval — no need to repeat.
 

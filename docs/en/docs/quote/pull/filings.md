@@ -34,8 +34,8 @@ longbridge filing list NVDA.US
 
 ### Query Parameters
 
-| Name   | Type   | Required | Description                                         |
-| ------ | ------ | -------- | --------------------------------------------------- |
+| Name   | Type   | Required | Description                                              |
+| ------ | ------ | -------- | -------------------------------------------------------- |
 | symbol | string | YES      | Stock symbol, use `ticker.region` format, e.g. `AAPL.US` |
 
 ### Request Example
@@ -80,10 +80,12 @@ if __name__ == "__main__":
 const { Config, QuoteContext, OAuth } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
+  })
   const config = Config.fromOAuth(oauth)
   const ctx = QuoteContext.new(config)
-  const resp = await ctx.filings("AAPL.US")
+  const resp = await ctx.filings('AAPL.US')
   console.log(resp)
 }
 main().catch(console.error)
@@ -259,12 +261,12 @@ func main() {
 
 <a id="schemafilings_response"></a>
 
-| Name             | Type      | Required | Description                            |
-| ---------------- | --------- | -------- | -------------------------------------- |
-| items            | object[]  | true     | Filings list                           |
-| ∟ id             | string    | true     | Filing ID                              |
-| ∟ title          | string    | true     | Title                                  |
-| ∟ description    | string    | true     | Summary                                |
-| ∟ file_name      | string    | true     | File name                              |
-| ∟ file_urls      | string[]  | true     | List of file URLs                      |
-| ∟ publish_at     | string    | true     | Publish time, Unix timestamp (seconds) |
+| Name          | Type     | Required | Description                            |
+| ------------- | -------- | -------- | -------------------------------------- |
+| items         | object[] | true     | Filings list                           |
+| ∟ id          | string   | true     | Filing ID                              |
+| ∟ title       | string   | true     | Title                                  |
+| ∟ description | string   | true     | Summary                                |
+| ∟ file_name   | string   | true     | File name                              |
+| ∟ file_urls   | string[] | true     | List of file URLs                      |
+| ∟ publish_at  | string   | true     | Publish time, Unix timestamp (seconds) |
