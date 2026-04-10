@@ -149,7 +149,6 @@ html:root {
   margin: 16px 0 20px;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 10px 30px 0 rgb(0 0 0 / 40%);
 }
 
 .vp-cli-command div[class*="language-"].vp-adaptive-theme {
