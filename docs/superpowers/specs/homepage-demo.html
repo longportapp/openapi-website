@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Longbridge Developers - Homepage Redesign Demo v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lb-brand: #00B8B8;
+    --lb-brand-hover: #00a3a3;
+    --lb-brand-light: rgba(0,184,184,0.06);
+    --lb-brand-light2: rgba(0,184,184,0.12);
+    --lb-text-primary: #0a0f1e;
+    --lb-text-secondary: #656b76;
+    --lb-text-tertiary: #9ca0a8;
+    --lb-body-bg: #f8f9fb;
+    --lb-bg-secondary: #f0f1f3;
+    --lb-card-bg: #ffffff;
+    --lb-border-card: #e5e7ea;
+    --lb-shadow-card: 0px 2px 8px 0px rgba(0, 0, 0, 0.08);
+    --lb-shadow-hover: 0px 8px 24px rgba(0, 0, 0, 0.12);
+    --lb-code-bg: #1b1b1f;
+    --lb-code-text: #e5e7eb;
+    --market-hk: #FF3A9D;
+    --market-us: #2A99FE;
+    --market-cn: #FF3A3A;
+    --market-sg: #3AD8FF;
+    --purple: #8b5cf6;
+    --amber: #f59e0b;
+    --pink: #ec4899;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--lb-body-bg); color: var(--lb-text-primary);
+    line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  a { color: var(--lb-brand); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-d1 { transition-delay: 0.08s; } .reveal-d2 { transition-delay: 0.16s; }
+  .reveal-d3 { transition-delay: 0.24s; } .reveal-d4 { transition-delay: 0.32s; }
+
+  /* ===== NAV ===== */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(248,249,251,0.85); backdrop-filter: blur(16px) saturate(180%);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    height: 60px; display: flex; align-items: center;
+    transition: box-shadow 0.3s;
+  }
+  .nav.scrolled { box-shadow: 0 1px 12px rgba(0,0,0,0.08); }
+  .nav .container { display: flex; align-items: center; gap: 32px; width: 100%; }
+  .nav-logo { font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 8px; color: var(--lb-text-primary); text-decoration: none; white-space: nowrap; }
+  .nav-logo:hover { text-decoration: none; }
+  .nav-logo svg { width: 26px; height: 26px; }
+  .nav-links { display: flex; gap: 24px; font-size: 13.5px; font-weight: 500; margin-left: auto; }
+  .nav-links a { color: var(--lb-text-secondary); position: relative; }
+  .nav-links a::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:2px; background:var(--lb-brand); transition:width 0.3s var(--ease-out-expo); border-radius:1px; }
+  .nav-links a:hover { color: var(--lb-brand); text-decoration: none; }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a.active { color: var(--lb-brand); }
+  .nav-links a.active::after { width: 100%; }
+  .nav-search {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(0,0,0,0.03); border: 1px solid transparent;
+    border-radius: 7px; padding: 6px 12px; font-size: 13px; color: var(--lb-text-tertiary);
+    cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  }
+  .nav-search:hover { border-color: var(--lb-border-card); background: #fff; }
+  .nav-search kbd { font-size: 11px; background: rgba(255,255,255,0.8); border: 1px solid var(--lb-border-card); border-radius: 3px; padding: 1px 4px; font-family: inherit; }
+  .nav-login {
+    background: var(--lb-brand); color: #fff; border: none; border-radius: 6px;
+    padding: 6px 16px; font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: all 0.2s; font-family: inherit; white-space: nowrap;
+  }
+  .nav-login:hover { background: var(--lb-brand-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,184,184,0.25); }
+
+  /* ===== HERO ===== */
+  .hero { text-align: center; padding: 88px 0 72px; }
+  .hero-title {
+    font-size: 50px; font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--lb-text-primary) 0%, #374151 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hero-title .char { display: inline-block; opacity: 0; filter: blur(8px); animation: blurIn 0.5s var(--ease-out-expo) forwards; }
+  @keyframes blurIn { to { opacity: 1; filter: blur(0); } }
+  .hero-subtitle { font-size: 18px; color: var(--lb-text-secondary); margin-bottom: 40px; opacity: 0; animation: fadeUp 0.7s 0.5s var(--ease-out-expo) forwards; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Tabs */
+  .tabs-wrap { opacity: 0; animation: fadeUp 0.5s 0.65s var(--ease-out-expo) forwards; }
+  .product-tabs {
+    display: inline-flex; gap: 3px; background: rgba(0,0,0,0.04); border-radius: 9px; padding: 3px;
+    margin-bottom: 24px; position: relative;
+  }
+  .product-tab {
+    padding: 9px 22px; border-radius: 7px; font-size: 13.5px; font-weight: 600;
+    cursor: pointer; transition: all 0.25s var(--ease-out-expo);
+    border: none; background: transparent; color: var(--lb-text-secondary); font-family: inherit; position: relative; z-index: 1;
+  }
+  .product-tab.active { color: #fff; }
+  .product-tab:not(.active):hover { color: var(--lb-text-primary); background: rgba(0,0,0,0.02); }
+  .tab-indicator {
+    position: absolute; height: calc(100% - 6px); top: 3px;
+    background: var(--lb-brand); border-radius: 7px;
+    transition: all 0.35s var(--ease-out-expo); box-shadow: 0 2px 8px rgba(0,184,184,0.3);
+  }
+
+  /* Hero code block */
+  .code-wrap { opacity: 0; animation: fadeUp 0.5s 0.8s var(--ease-out-expo) forwards; }
+  .hero-code {
+    max-width: 620px; margin: 0 auto 32px; background: var(--lb-code-bg); border-radius: 10px;
+    padding: 20px 24px; text-align: left; position: relative;
+    font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', monospace; font-size: 13.5px; line-height: 1.8;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15); overflow: hidden;
+  }
+  .hero-code::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(0,184,184,0.4),transparent); }
+  .hero-code .p { color: #6b7280; user-select: none; }
+  .hero-code .c { color: var(--lb-code-text); }
+  .hero-code .u { color: #7dd3fc; }
+  .hero-code .f { color: #fbbf24; }
+  .hero-code .k { color: #a78bfa; }
+  .copy-btn {
+    position: absolute; top: 12px; right: 12px;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+    color: #9ca3af; border-radius: 5px; padding: 4px 10px; cursor: pointer;
+    font-size: 11px; font-family: inherit; transition: all 0.2s;
+  }
+  .copy-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+  .tab-content { display: none; opacity: 0; transform: translateY(6px); }
+  .tab-content.active { display: block; animation: tabIn 0.3s var(--ease-out-expo) forwards; }
+  @keyframes tabIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+  .typing-cursor { display:inline-block; width:2px; height:1.1em; background:var(--lb-brand); margin-left:2px; animation:blink 1s step-end infinite; vertical-align:text-bottom; }
+  @keyframes blink { 50% { opacity:0; } }
+
+  .hero-cta { display: flex; justify-content: center; gap: 12px; opacity: 0; animation: fadeUp 0.5s 0.95s var(--ease-out-expo) forwards; }
+  .btn-primary {
+    background: var(--lb-brand); color: #fff; border: none; border-radius: 8px;
+    padding: 12px 28px; font-size: 14.5px; font-weight: 600; cursor: pointer;
+    transition: all 0.25s var(--ease-out-expo); font-family: inherit; position: relative; overflow: hidden;
+  }
+  .btn-primary::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,0.15) 50%,transparent 70%); transform:translateX(-100%); transition:transform 0.5s; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,184,184,0.3); }
+  .btn-primary:hover::after { transform: translateX(100%); }
+  .btn-secondary {
+    background: transparent; color: var(--lb-brand); border: 1.5px solid var(--lb-brand);
+    border-radius: 8px; padding: 11px 28px; font-size: 14.5px; font-weight: 600;
+    cursor: pointer; transition: all 0.25s var(--ease-out-expo); font-family: inherit;
+  }
+  .btn-secondary:hover { background: var(--lb-brand-light); transform: translateY(-2px); }
+
+  /* ===== PLATFORM STATS (new) ===== */
+  .platform-stats {
+    padding: 48px 0; border-top: 1px solid var(--lb-border-card); border-bottom: 1px solid var(--lb-border-card);
+    background: #fff;
+  }
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: center;
+  }
+  .stat-item { }
+  .stat-value { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; color: var(--lb-text-primary); }
+  .stat-value .brand { color: var(--lb-brand); }
+  .stat-label { font-size: 13px; color: var(--lb-text-secondary); margin-top: 4px; }
+
+  /* ===== PRODUCT SECTIONS (full-width per product) ===== */
+  .product-section { padding: 80px 0; }
+  .product-section:nth-child(even) { background: var(--lb-bg-secondary); }
+  .product-section .container { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .product-section.reverse .container { direction: rtl; }
+  .product-section.reverse .container > * { direction: ltr; }
+  .ps-content {}
+  .ps-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 6px; margin-bottom: 16px;
+  }
+  .ps-badge.api { background: var(--lb-brand-light2); color: var(--lb-brand); }
+  .ps-badge.mcp { background: rgba(139,92,246,0.1); color: var(--purple); }
+  .ps-badge.cli { background: rgba(245,158,11,0.1); color: var(--amber); }
+  .ps-badge.skill { background: rgba(236,72,153,0.1); color: var(--pink); }
+  .ps-title { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px; line-height: 1.2; }
+  .ps-desc { font-size: 15px; color: var(--lb-text-secondary); margin-bottom: 24px; line-height: 1.7; }
+  .ps-features { list-style: none; margin-bottom: 24px; }
+  .ps-features li {
+    font-size: 14px; color: var(--lb-text-secondary); padding: 8px 0;
+    display: flex; align-items: flex-start; gap: 12px; line-height: 1.5;
+  }
+  .ps-features li strong { color: var(--lb-text-primary); font-weight: 600; }
+  .feat-icon {
+    width: 20px; height: 20px; border-radius: 5px; flex-shrink: 0; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .feat-icon svg { width: 12px; height: 12px; }
+  .ps-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 600; color: var(--lb-brand);
+    transition: gap 0.2s var(--ease-out-expo);
+  }
+  .ps-link:hover { gap: 10px; text-decoration: none; }
+
+  /* Product code/visual block */
+  .ps-visual {}
+  .ps-code-block {
+    background: var(--lb-code-bg); border-radius: 10px; overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  }
+  .ps-code-header {
+    display: flex; align-items: center; gap: 6px; padding: 12px 16px;
+    background: rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .ps-code-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .ps-code-title { font-size: 12px; color: #6b7280; margin-left: 8px; font-family: 'SF Mono', monospace; }
+  .ps-code-body {
+    padding: 20px; font-family: 'SF Mono', 'JetBrains Mono', monospace;
+    font-size: 12.5px; color: var(--lb-code-text); line-height: 1.8; overflow-x: auto;
+  }
+  .ps-code-tabs { display: flex; gap: 0; padding: 0 16px; background: rgba(255,255,255,0.03); }
+  .ps-code-tab {
+    padding: 8px 16px; font-size: 12px; font-weight: 500; color: #6b7280;
+    border: none; background: none; cursor: pointer; font-family: inherit;
+    border-bottom: 2px solid transparent; transition: all 0.2s;
+  }
+  .ps-code-tab.active { color: var(--lb-code-text); border-bottom-color: var(--lb-brand); }
+  .ps-code-tab:hover { color: var(--lb-code-text); }
+  .ps-tab-panel { display: none; }
+  .ps-tab-panel.active { display: block; }
+
+  /* MCP endpoint highlight */
+  .mcp-box {
+    background: var(--lb-card-bg); border: 1px solid var(--lb-border-card);
+    border-radius: 10px; padding: 24px; box-shadow: var(--lb-shadow-card);
+  }
+  .mcp-endpoint-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--lb-text-tertiary); margin-bottom: 8px; }
+  .mcp-endpoint-url {
+    font-family: 'SF Mono', monospace; font-size: 14px; color: var(--lb-brand); font-weight: 600;
+    background: var(--lb-brand-light); padding: 10px 14px; border-radius: 6px; margin-bottom: 16px;
+    word-break: break-all;
+  }
+  .mcp-tools { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .mcp-tool {
+    font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 6px;
+    background: var(--lb-bg-secondary); color: var(--lb-text-secondary); transition: all 0.2s;
+    border: 1px solid transparent;
+  }
+  .mcp-tool:hover { border-color: var(--purple); color: var(--purple); background: rgba(139,92,246,0.06); }
+  .mcp-setup-cmd {
+    font-family: 'SF Mono', monospace; font-size: 12px; color: var(--lb-text-secondary);
+    background: var(--lb-bg-secondary); padding: 10px 14px; border-radius: 6px;
+  }
+
+  /* Terminal preview */
+  .terminal-preview {
+    background: var(--lb-code-bg); border-radius: 10px; overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  }
+  .terminal-header {
+    display: flex; align-items: center; gap: 6px; padding: 10px 14px;
+    background: rgba(255,255,255,0.05);
+  }
+  .terminal-body {
+    padding: 16px 20px; font-family: 'SF Mono', monospace; font-size: 12px;
+    color: var(--lb-code-text); line-height: 1.9;
+  }
+  .terminal-body .out { color: #9ca3af; }
+  .terminal-body .success { color: #34d399; }
+  .terminal-body .header-row { color: #6b7280; }
+  .terminal-body .val-up { color: #34d399; }
+  .terminal-body .val-down { color: #f87171; }
+  .terminal-body table { border-collapse: collapse; width: 100%; }
+  .terminal-body td { padding: 2px 12px 2px 0; white-space: nowrap; }
+
+  /* ===== GET STARTED (simplified) ===== */
+  .get-started { padding: 80px 0; background: #fff; }
+  .gs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .gs-card {
+    background: var(--lb-body-bg); border: 1px solid var(--lb-border-card);
+    border-radius: 6px; padding: 24px; text-align: center;
+    transition: all 0.3s var(--ease-out-expo); cursor: pointer;
+  }
+  .gs-card:hover { transform: translateY(-4px); box-shadow: var(--lb-shadow-hover); border-color: rgba(0,184,184,0.2); }
+  .gs-icon { margin-bottom: 12px; }
+  .gs-icon svg { width: 32px; height: 32px; }
+  .gs-name { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .gs-cmd {
+    font-family: 'SF Mono', monospace; font-size: 11.5px; color: var(--lb-text-tertiary);
+    background: var(--lb-bg-secondary); padding: 6px 10px; border-radius: 5px;
+    margin-bottom: 12px; word-break: break-all;
+  }
+  .gs-link { font-size: 13px; font-weight: 600; color: var(--lb-brand); }
+
+  /* ===== MARKET COVERAGE ===== */
+  .market-section { padding: 64px 0; }
+  .market-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+  .market-card {
+    background: var(--lb-card-bg); border: 1px solid var(--lb-border-card);
+    border-radius: 6px; padding: 20px; text-align: center; box-shadow: var(--lb-shadow-card);
+    transition: all 0.3s var(--ease-out-expo);
+  }
+  .market-card:hover { transform: translateY(-2px); box-shadow: var(--lb-shadow-hover); }
+  .market-flag { font-size: 28px; margin-bottom: 8px; }
+  .market-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .market-products { font-size: 12px; color: var(--lb-text-tertiary); }
+  .sdk-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+  .sdk-pill {
+    font-size: 13px; font-weight: 500; color: var(--lb-text-secondary);
+    padding: 6px 16px; border-radius: 6px; border: 1px solid var(--lb-border-card);
+    background: var(--lb-card-bg); transition: all 0.2s;
+  }
+  .sdk-pill:hover { border-color: var(--lb-brand); color: var(--lb-brand); background: var(--lb-brand-light); }
+
+  /* ===== FOOTER ===== */
+  .footer { padding: 32px 0; border-top: 1px solid var(--lb-border-card); }
+  .footer .container { display: flex; justify-content: space-between; align-items: center; }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-size: 13px; color: var(--lb-text-tertiary); }
+  .footer-links a:hover { color: var(--lb-brand); text-decoration: none; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .product-section .container { grid-template-columns: 1fr; gap: 32px; }
+    .product-section.reverse .container { direction: ltr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .gs-grid { grid-template-columns: repeat(2, 1fr); }
+    .market-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .hero-title { font-size: 34px; }
+    .gs-grid, .market-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .nav-links { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <a class="nav-logo" href="#">
+      <svg viewBox="0 0 26 26" fill="none"><rect width="26" height="26" rx="6" fill="var(--lb-brand)"/><path d="M5 19L9 7L15 13L21 5" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Longbridge Developers
+    </a>
+    <div class="nav-search">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      Search <kbd>&#8984;K</kbd>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="active">Home</a>
+      <a href="#">Skill</a>
+      <a href="#">Docs</a>
+      <a href="#">API Reference</a>
+      <a href="#">SDK</a>
+    </div>
+    <button class="nav-login">Login</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-title" id="hero-title">Longbridge Developers</h1>
+    <p class="hero-subtitle">为有研发能力的投资者提供程序化行情交易接口<br>助力搭建交易策略分析工具、AI 投研工作流与自动化系统</p>
+
+    <div class="tabs-wrap">
+      <div class="product-tabs" id="product-tabs">
+        <div class="tab-indicator" id="tab-indicator"></div>
+        <button class="product-tab active" data-tab="openapi">OpenAPI</button>
+        <button class="product-tab" data-tab="mcp">MCP</button>
+        <button class="product-tab" data-tab="cli">CLI</button>
+        <button class="product-tab" data-tab="skill">SKILL</button>
+      </div>
+    </div>
+
+    <div class="code-wrap">
+      <div class="hero-code" id="hero-code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <div class="tab-content active" id="tab-openapi"><span class="p">$</span> <span class="c">pip install</span> <span class="k">longbridge</span><span class="typing-cursor"></span></div>
+        <div class="tab-content" id="tab-mcp"><span class="p">$</span> <span class="c">claude mcp add</span> <span class="f">--transport http</span> \<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">longbridge</span> \<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="u">https://openapi.longbridge.com/mcp</span></div>
+        <div class="tab-content" id="tab-cli"><span class="p">$</span> <span class="c">curl -fsSL</span> <span class="u">https://longbridge.sh/install</span> <span class="c">| bash</span></div>
+        <div class="tab-content" id="tab-skill"><span class="p">$</span> <span class="c">npx skills add</span> <span class="k">longbridge/developers</span> <span class="f">-g -y</span></div>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <button class="btn-primary">Get Started</button>
+      <button class="btn-secondary">API Reference</button>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM STATS -->
+<section class="platform-stats reveal">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-value"><span class="brand count-up" data-target="4">0</span></div>
+        <div class="stat-label">覆盖市场（港股 · 美股 · A股 · 新加坡）</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value"><span class="brand count-up" data-target="6">0</span></div>
+        <div class="stat-label">SDK 语言（Python · Node.js · Rust · Go · Java · C++）</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value"><span class="count-up" data-target="40">0</span>+</div>
+        <div class="stat-label">CLI 命令（行情 · 交易 · 财务 · 社区）</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">免费</div>
+        <div class="stat-label">OpenAPI 接口零额外费用，仅按交易费率计费</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT 1: OpenAPI -->
+<section class="product-section" id="openapi">
+  <div class="container">
+    <div class="ps-content reveal">
+      <div class="ps-badge api">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        OpenAPI
+      </div>
+      <h2 class="ps-title">程序化行情交易接口</h2>
+      <p class="ps-desc">通过统一接口获取港股、美股、A 股及新加坡市场的实时行情与历史数据，执行多种订单类型的交易操作。支持 HTTP REST 和 WebSocket 二进制长连接协议，满足从策略回测到实盘交易的完整需求。</p>
+      <ul class="ps-features">
+        <li>
+          <span class="feat-icon" style="background:var(--lb-brand-light2);color:var(--lb-brand)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+          <span><strong>完整市场覆盖</strong> &mdash; 港股（股票、ETF、窝轮、牛熊证）、美股（纽交所、纳斯达克、OPRA 期权）、A 股通及新加坡市场。支持 L1/L2 深度行情、逐笔成交、资金流向、市场温度指数。</span>
+        </li>
+        <li>
+          <span class="feat-icon" style="background:var(--lb-brand-light2);color:var(--lb-brand)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span>
+          <span><strong>多层次交易功能</strong> &mdash; 支持限价单、市价单、条件单（到价触发）、跟踪止盈止损等订单类型。完整的订单生命周期管理：下单、改单、撤单、查询。</span>
+        </li>
+        <li>
+          <span class="feat-icon" style="background:var(--lb-brand-light2);color:var(--lb-brand)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
+          <span><strong>6 种语言 SDK</strong> &mdash; Python、Node.js、Rust、Go、Java、C++/C，均支持异步调用、Protobuf 序列化。SDK 内置频率控制与自动延迟机制，开箱即用。</span>
+        </li>
+        <li>
+          <span class="feat-icon" style="background:var(--lb-brand-light2);color:var(--lb-brand)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg></span>
+          <span><strong>历史数据与财务分析</strong> &mdash; 分钟到月线 K 线、历史行情回溯、财务报表、盈利预测、机构评级、内部人交易记录，支撑技术面与基本面研究。</span>
+        </li>
+      </ul>
+      <a href="#" class="ps-link">查看 OpenAPI 文档 <span>&rarr;</span></a>
+    </div>
+    <div class="ps-visual reveal reveal-d2">
+      <div class="ps-code-block">
+        <div class="ps-code-tabs">
+          <button class="ps-code-tab active" onclick="switchCodeTab(this,'python')">Python</button>
+          <button class="ps-code-tab" onclick="switchCodeTab(this,'nodejs')">Node.js</button>
+          <button class="ps-code-tab" onclick="switchCodeTab(this,'rust')">Rust</button>
+        </div>
+        <div class="ps-code-body">
+          <div class="ps-tab-panel active" data-lang="python"><span style="color:#c084fc">from</span> longbridge.openapi <span style="color:#c084fc">import</span> QuoteContext, Config<br><br><span style="color:#6b7280"># Initialize with environment variables</span><br>config = Config.from_env()<br>ctx = QuoteContext(config)<br><br><span style="color:#6b7280"># Get real-time quotes</span><br>resp = ctx.quote([<span style="color:#a5d6ff">"TSLA.US"</span>, <span style="color:#a5d6ff">"700.HK"</span>, <span style="color:#a5d6ff">"AAPL.US"</span>])<br><span style="color:#c084fc">for</span> q <span style="color:#c084fc">in</span> resp:<br>&nbsp;&nbsp;print(<span style="color:#c084fc">f</span><span style="color:#a5d6ff">"{q.symbol}: {q.last_done}"</span>)<br><br><span style="color:#6b7280"># Subscribe to real-time push</span><br>ctx.subscribe([<span style="color:#a5d6ff">"TSLA.US"</span>], SubType.Quote)</div>
+          <div class="ps-tab-panel" data-lang="nodejs"><span style="color:#c084fc">import</span> { Config, QuoteContext } <span style="color:#c084fc">from</span> <span style="color:#a5d6ff">'longbridge'</span><br><br><span style="color:#6b7280">// Initialize client</span><br><span style="color:#c084fc">const</span> config = Config.fromEnv()<br><span style="color:#c084fc">const</span> ctx = <span style="color:#c084fc">await</span> QuoteContext.open(config)<br><br><span style="color:#6b7280">// Get real-time quotes</span><br><span style="color:#c084fc">const</span> quotes = <span style="color:#c084fc">await</span> ctx.quote([<span style="color:#a5d6ff">"TSLA.US"</span>, <span style="color:#a5d6ff">"700.HK"</span>])<br>quotes.forEach(q =&gt; {<br>&nbsp;&nbsp;console.log(<span style="color:#a5d6ff">`${q.symbol}: ${q.lastDone}`</span>)<br>})</div>
+          <div class="ps-tab-panel" data-lang="rust"><span style="color:#c084fc">use</span> longbridge::quote::QuoteContext;<br><span style="color:#c084fc">use</span> longbridge::Config;<br><br><span style="color:#c084fc">let</span> config = Config::from_env()?;<br><span style="color:#c084fc">let</span> (ctx, _) = QuoteContext::try_new(config).<span style="color:#c084fc">await</span>?;<br><br><span style="color:#6b7280">// Get real-time quotes</span><br><span style="color:#c084fc">let</span> quotes = ctx.quote([<span style="color:#a5d6ff">"TSLA.US"</span>, <span style="color:#a5d6ff">"700.HK"</span>]).<span style="color:#c084fc">await</span>?;<br><span style="color:#c084fc">for</span> q <span style="color:#c084fc">in</span> quotes {<br>&nbsp;&nbsp;println!(<span style="color:#a5d6ff">"{}: {}"</span>, q.symbol, q.last_done);<br>}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT 2: MCP -->
+<section class="product-section reverse" id="mcp">
+  <div class="container">
+    <div class="ps-content reveal">
+      <div class="ps-badge mcp">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        MCP
+      </div>
+      <h2 class="ps-title">让 AI 助手直接<br>调用行情与交易</h2>
+      <p class="ps-desc">托管的 HTTP MCP 服务，让 Claude Code、Cursor、Zed 等 AI 编程助手直接获取实时行情、管理账户、执行交易。采用标准 OAuth 2.1 授权流程，无需手动配置 API 密钥，浏览器一键授权即可开始使用。</p>
+      <ul class="ps-features">
+        <li>
+          <span class="feat-icon" style="background:rgba(139,92,246,0.1);color:var(--purple)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
+          <span><strong>零密钥配置</strong> &mdash; 标准 OAuth 2.1 授权流程，一键浏览器授权。凭证由 AI 客户端托管自动刷新，可在账户安全设置中随时撤销。</span>
+        </li>
+        <li>
+          <span class="feat-icon" style="background:rgba(139,92,246,0.1);color:var(--purple)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+          <span><strong>完整行情与交易能力</strong> &mdash; AI 可查询实时行情快照、K 线历史、账户资产与持仓，也可执行下单、改单、撤单操作（受账户权限与地区限制）。</span>
+        </li>
+        <li>
+          <span class="feat-icon" style="background:rgba(139,92,246,0.1);color:var(--purple)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+          <span><strong>多客户端开箱即用</strong> &mdash; 支持 Claude Code、Claude Desktop、Cursor、Codex、Zed、Cherry Studio 等主流 AI 工具。全球节点与中国大陆加速节点可选。</span>
+        </li>
+      </ul>
+      <a href="#" class="ps-link">查看 MCP 文档 <span>&rarr;</span></a>
+    </div>
+    <div class="ps-visual reveal reveal-d2">
+      <div class="mcp-box">
+        <div class="mcp-endpoint-label">MCP Endpoint</div>
+        <div class="mcp-endpoint-url">https://openapi.longbridge.com/mcp</div>
+        <div class="mcp-endpoint-label" style="margin-top:16px">Supported AI Tools</div>
+        <div class="mcp-tools">
+          <span class="mcp-tool">Claude Code</span>
+          <span class="mcp-tool">Cursor</span>
+          <span class="mcp-tool">Zed</span>
+          <span class="mcp-tool">ChatGPT</span>
+          <span class="mcp-tool">Codex</span>
+          <span class="mcp-tool">Cherry Studio</span>
+        </div>
+        <div class="mcp-endpoint-label">Quick Setup</div>
+        <div class="mcp-setup-cmd">$ claude mcp add --transport http longbridge https://openapi.longbridge.com/mcp</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT 3: CLI -->
+<section class="product-section" id="cli">
+  <div class="container">
+    <div class="ps-content reveal">
+      <div class="ps-badge cli">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        CLI
+      </div>
+      <h2 class="ps-title">AI-native 命令行<br>全功能终端工具</h2>
+      <p class="ps-desc">覆盖全部 Longbridge 端点的命令行工具。实时行情查询、财报分析、技术面诊断、订单管理、持仓复盘——一条命令搞定。支持 <code style="background:var(--lb-bg-secondary);padding:2px 6px;border-radius:3px;font-size:12px">--format json</code> 结构化输出，AI 代理可直接调用。</p>
+      <ul class="ps-features">
+        <li>
+          <span class="feat-icon" style="background:rgba(245,158,11,0.1);color:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg></span>
+          <span><strong>全功能行情</strong> &mdash; 实时报价、L2 盘口深度、K 线（日线到分钟）、逐笔成交、资金流向、市场温度指数。覆盖股票、ETF、期权、窝轮。</span>
+        </li>
+        <li>
+          <span class="feat-icon" style="background:rgba(245,158,11,0.1);color:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></span>
+          <span><strong>深度财务分析</strong> &mdash; 完整财务报表（利润表、资产负债表、现金流量表）、估值指标对标（PE/PB/PS/股息率）、分析师 EPS 预测共识、机构评级、SEC Form 4 内幕交易记录。</span>
+        </li>
+        <li>
+          <span class="feat-icon" style="background:rgba(245,158,11,0.1);color:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg></span>
+          <span><strong>跨市场选股与技术诊断</strong> &mdash; 港美 A 股叠加市值、PE、技术指标筛选。均线、MACD、KDJ、RSI、支撑压力位诊断，覆盖日线到 15 分钟级别。输出支持 Table、JSON、CSV、Markdown 格式。</span>
+        </li>
+      </ul>
+      <a href="#" class="ps-link">查看 CLI 文档 <span>&rarr;</span></a>
+    </div>
+    <div class="ps-visual reveal reveal-d2">
+      <div class="terminal-preview">
+        <div class="terminal-header">
+          <div class="ps-code-dot" style="background:#ff5f57"></div>
+          <div class="ps-code-dot" style="background:#febc2e"></div>
+          <div class="ps-code-dot" style="background:#28c840"></div>
+          <span class="ps-code-title">terminal</span>
+        </div>
+        <div class="terminal-body">
+          <span class="p" style="color:#6b7280">$</span> longbridge quote TSLA.US AAPL.US NVDA.US<br><br>
+          <table>
+            <tr class="header-row"><td>Symbol</td><td>Last</td><td>Change</td><td>Change%</td><td>Volume</td></tr>
+            <tr><td style="color:#fff">TSLA.US</td><td style="color:#fff">248.50</td><td class="val-up">+5.30</td><td class="val-up">+2.18%</td><td class="out">42.1M</td></tr>
+            <tr><td style="color:#fff">AAPL.US</td><td style="color:#fff">195.20</td><td class="val-down">-1.40</td><td class="val-down">-0.71%</td><td class="out">58.3M</td></tr>
+            <tr><td style="color:#fff">NVDA.US</td><td style="color:#fff">875.30</td><td class="val-up">+12.80</td><td class="val-up">+1.48%</td><td class="out">31.7M</td></tr>
+          </table>
+          <br>
+          <span class="p" style="color:#6b7280">$</span> longbridge insider-trades NVDA.US<br><br>
+          <table>
+            <tr class="header-row"><td>Date</td><td>Name</td><td>Type</td><td>Shares</td><td>Price</td></tr>
+            <tr><td class="out">2026-04-08</td><td style="color:#fff">Jensen Huang</td><td class="val-down">Sell</td><td class="out">120,000</td><td class="out">$871.50</td></tr>
+            <tr><td class="out">2026-04-05</td><td style="color:#fff">Colette Kress</td><td class="val-down">Sell</td><td class="out">25,000</td><td class="out">$865.20</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT 4: SKILL -->
+<section class="product-section reverse" id="skill">
+  <div class="container">
+    <div class="ps-content reveal">
+      <div class="ps-badge skill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 01-1.3 1.3L3 12l5.8 1.9a2 2 0 011.3 1.3L12 21l1.9-5.8a2 2 0 011.3-1.3L21 12l-5.8-1.9a2 2 0 01-1.3-1.3L12 3z"/></svg>
+        SKILL
+      </div>
+      <h2 class="ps-title">AI 助手的金融<br>能力扩展包</h2>
+      <p class="ps-desc">一条命令为 Claude、Cursor 等 AI 助手注入完整的 Longbridge 知识库。AI 自动识别股票代码和市场分析需求，智能调用行情查询、财务分析、选股诊断和交易执行。支持中英文混合提问。</p>
+      <ul class="ps-features">
+        <li>
+          <span class="feat-icon" style="background:rgba(236,72,153,0.1);color:var(--pink)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14a1 1 0 01-.78-1.63l9.9-10.2a.5.5 0 01.86.46l-1.92 6.02A1 1 0 0013 10h7a1 1 0 01.78 1.63l-9.9 10.2a.5.5 0 01-.86-.46l1.92-6.02A1 1 0 0011 14H4z"/></svg></span>
+          <span><strong>自动触发的智能识别</strong> &mdash; 提到股票代码（AAPL.US、700.HK）、市场分析、持仓查询时自动激活。支持 <code style="background:var(--lb-bg-secondary);padding:2px 6px;border-radius:3px;font-size:12px">/longbridge</code> 前缀强制触发。</span>
+        </li>
+        <li>
+          <span class="feat-icon" style="background:rgba(236,72,153,0.1);color:var(--pink)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg></span>
+          <span><strong>全栈投资分析</strong> &mdash; 跨市场选股（市值+PE+技术信号叠加）、技术面诊断（MACD/KDJ/RSI/支撑压力位）、财报对标分析、SEC 13F 机构持仓追踪、Form 4 内幕交易监控。</span>
+        </li>
+        <li>
+          <span class="feat-icon" style="background:rgba(236,72,153,0.1);color:var(--pink)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></span>
+          <span><strong>完整知识参考</strong> &mdash; 包含 CLI 命令全集、Python QuoteContext / TradeContext / ContentContext 三大上下文 API、Rust SDK 文档、全部类型定义与枚举值。</span>
+        </li>
+      </ul>
+      <a href="#" class="ps-link">查看 SKILL 文档 <span>&rarr;</span></a>
+    </div>
+    <div class="ps-visual reveal reveal-d2">
+      <div class="ps-code-block">
+        <div class="ps-code-header">
+          <div class="ps-code-dot" style="background:#ff5f57"></div>
+          <div class="ps-code-dot" style="background:#febc2e"></div>
+          <div class="ps-code-dot" style="background:#28c840"></div>
+          <span class="ps-code-title">AI Assistant with SKILL</span>
+        </div>
+        <div class="ps-code-body">
+          <span style="color:#6b7280">User:</span> <span style="color:#a5d6ff">"帮我从美股里筛出市值 500 亿以上、PE 低于 25、</span><br>
+          <span style="color:#a5d6ff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;近期 MACD 出现金叉的科技股"</span><br><br>
+          <span style="color:#34d399">&#10003; Longbridge SKILL activated</span><br><br>
+          <span style="color:#6b7280">AI: 正在执行跨市场选股...</span><br>
+          <span style="color:#fbbf24">$ longbridge screener --market us \</span><br>
+          <span style="color:#fbbf24">&nbsp;&nbsp;--sector technology \</span><br>
+          <span style="color:#fbbf24">&nbsp;&nbsp;--min-market-cap 50B \</span><br>
+          <span style="color:#fbbf24">&nbsp;&nbsp;--max-pe 25 \</span><br>
+          <span style="color:#fbbf24">&nbsp;&nbsp;--signal macd-golden-cross</span><br><br>
+          <span style="color:#6b7280">找到 3 只符合条件的标的：</span><br>
+          <span style="color:#fff">INTC.US</span>&nbsp; PE: 22.1&nbsp; <span style="color:#34d399">MACD 金叉 (2d ago)</span><br>
+          <span style="color:#fff">CSCO.US</span>&nbsp; PE: 16.8&nbsp; <span style="color:#34d399">MACD 金叉 (1d ago)</span><br>
+          <span style="color:#fff">ORCL.US</span>&nbsp; PE: 24.3&nbsp; <span style="color:#34d399">MACD 金叉 (today)</span><br>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GET STARTED (simplified quick links) -->
+<section class="get-started">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:center;margin-bottom:40px">
+      <h2 class="section-title" style="font-size:28px">快速开始</h2>
+    </div>
+    <div class="gs-grid">
+      <div class="gs-card reveal reveal-d1">
+        <div class="gs-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--lb-brand)" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <div class="gs-name">OpenAPI</div>
+        <div class="gs-cmd">pip install longbridge</div>
+        <a href="#" class="gs-link">Quick Start &rarr;</a>
+      </div>
+      <div class="gs-card reveal reveal-d2">
+        <div class="gs-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
+        <div class="gs-name">MCP</div>
+        <div class="gs-cmd">claude mcp add longbridge ...</div>
+        <a href="#" class="gs-link">Quick Start &rarr;</a>
+      </div>
+      <div class="gs-card reveal reveal-d3">
+        <div class="gs-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></div>
+        <div class="gs-name">CLI</div>
+        <div class="gs-cmd">curl -fsSL .../install | bash</div>
+        <a href="#" class="gs-link">Quick Start &rarr;</a>
+      </div>
+      <div class="gs-card reveal reveal-d4">
+        <div class="gs-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--pink)" stroke-width="1.5"><path d="m12 3-1.9 5.8a2 2 0 01-1.3 1.3L3 12l5.8 1.9a2 2 0 011.3 1.3L12 21l1.9-5.8a2 2 0 011.3-1.3L21 12l-5.8-1.9a2 2 0 01-1.3-1.3L12 3z"/></svg></div>
+        <div class="gs-name">SKILL</div>
+        <div class="gs-cmd">npx skills add longbridge/...</div>
+        <a href="#" class="gs-link">Quick Start &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET COVERAGE -->
+<section class="market-section">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:center;margin-bottom:40px">
+      <h2 class="section-title" style="font-size:28px">市场覆盖与 SDK</h2>
+      <p class="section-subtitle" style="font-size:15px;color:var(--lb-text-secondary);max-width:520px;margin:8px auto 0">股票、ETF、期权、窝轮、牛熊证，四大市场统一接口。开户即可免费获取港股 LV2 及 A 股 LV1 行情数据。</p>
+    </div>
+    <div class="market-grid reveal">
+      <div class="market-card">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--market-hk);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:13px">HK</div>
+        <div class="market-name">香港市场</div>
+        <div class="market-products">股票 &middot; ETF &middot; 窝轮 &middot; 牛熊证 &middot; 界内证</div>
+      </div>
+      <div class="market-card">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--market-us);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:13px">US</div>
+        <div class="market-name">美国市场</div>
+        <div class="market-products">股票 &middot; ETF &middot; 期权（OPRA）</div>
+      </div>
+      <div class="market-card">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--market-cn);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:13px">CN</div>
+        <div class="market-name">A 股通</div>
+        <div class="market-products">股票 &middot; ETF</div>
+      </div>
+      <div class="market-card">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--market-sg);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:13px">SG</div>
+        <div class="market-name">新加坡市场</div>
+        <div class="market-products">股票 &middot; ETF</div>
+      </div>
+    </div>
+    <div class="sdk-row reveal reveal-d1">
+      <span class="sdk-pill">Python</span><span class="sdk-pill">Node.js</span><span class="sdk-pill">Rust</span><span class="sdk-pill">Go</span><span class="sdk-pill">Java</span><span class="sdk-pill">C++</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="#">Longbridge</a><a href="#">Download</a><a href="#">Terms of Service</a><a href="#">Privacy Policy</a>
+    </div>
+    <div class="footer-links">
+      <a href="#">OpenAPI</a><a href="#">MCP</a><a href="#">CLI</a><a href="#">SKILL</a>
+      <a href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Blur text
+!function(){const t=document.getElementById('hero-title'),x=t.textContent;t.innerHTML='';[...x].forEach((c,i)=>{const s=document.createElement('span');s.className='char';s.textContent=c===' '?'\u00A0':c;s.style.animationDelay=i*0.03+'s';t.appendChild(s)})}();
+
+// Tab switching
+const tabs=document.querySelectorAll('.product-tab'),indicator=document.getElementById('tab-indicator');
+function updInd(t){const r=t.getBoundingClientRect(),p=t.parentElement.getBoundingClientRect();indicator.style.width=r.width+'px';indicator.style.left=(r.left-p.left)+'px'}
+function switchTab(n){tabs.forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));const a=document.querySelector(`[data-tab="${n}"]`);a.classList.add('active');document.getElementById('tab-'+n).classList.add('active');updInd(a)}
+tabs.forEach(t=>t.addEventListener('click',()=>switchTab(t.dataset.tab)));
+window.addEventListener('load',()=>updInd(document.querySelector('.product-tab.active')));
+requestAnimationFrame(()=>updInd(document.querySelector('.product-tab.active')));
+
+// Code tabs in product sections
+function switchCodeTab(btn,lang){const p=btn.closest('.ps-code-block');p.querySelectorAll('.ps-code-tab').forEach(t=>t.classList.remove('active'));p.querySelectorAll('.ps-tab-panel').forEach(t=>t.classList.remove('active'));btn.classList.add('active');p.querySelector(`[data-lang="${lang}"]`).classList.add('active')}
+
+// Scroll reveal
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target)}})},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(e=>ro.observe(e));
+
+// Nav scroll
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',scrollY>10)},{passive:true});
+
+// Copy
+function copyCode(b){const a=b.parentElement.querySelector('.tab-content.active');const t=a.textContent.replace(/^\$\s*/gm,'').replace(/\s+/g,' ').trim();navigator.clipboard.writeText(t);b.textContent='Copied!';b.style.color='#00B8B8';setTimeout(()=>{b.textContent='Copy';b.style.color=''},1500)}
+
+// Count up
+const co=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){const el=x.target,tg=parseInt(el.dataset.target);let c=0;const d=1e3,s=tg/(d/16);const iv=setInterval(()=>{c+=s;if(c>=tg){c=tg;clearInterval(iv)}el.textContent=Math.floor(c)},16);co.unobserve(el)}})},{threshold:0.5});
+document.querySelectorAll('.count-up[data-target]').forEach(e=>co.observe(e));
+</script>
+</body>
+</html>
