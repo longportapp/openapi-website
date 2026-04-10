@@ -1,102 +1,52 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 const titleRef = ref<HTMLElement | null>(null)
+const typingEl = ref<HTMLElement | null>(null)
 
-interface Product {
-  key: string
-  label: string
-  command: string
-}
-
-const products: Product[] = [
-  { key: 'openapi', label: 'OpenAPI', command: 'pip install longbridge' },
-  { key: 'mcp', label: 'MCP', command: 'claude mcp add --transport http longbridge https://openapi.longbridge.com/mcp' },
-  { key: 'cli', label: 'CLI', command: 'curl -fsSL https://longbridge.sh/install | bash' },
-  { key: 'skill', label: 'SKILL', command: 'npx skills add longbridge/developers -g -y' },
+const cmds = [
+  'pip install longbridge',
+  'longbridge quote TSLA.US AAPL.US NVDA.US',
+  'claude mcp add longbridge https://openapi.longbridge.com/mcp',
+  'longbridge financial-report AAPL.US --format json',
+  'npx skills add longbridge/developers -g -y',
+  'longbridge insider-trades NVDA.US',
+  'ctx.quote(["TSLA.US", "700.HK", "AAPL.US"])',
+  'longbridge screener --market us --sector technology',
 ]
 
-const activeIdx = ref(0)
-const active = computed(() => products[activeIdx.value])
-const tabsRef = ref<HTMLElement | null>(null)
-const indicatorStyle = ref({ width: '0px', left: '0px' })
-
-// Typing
-const displayedCmd = ref(products[0].command)
-const showCursor = ref(true)
+let ci = 0
 let timer: ReturnType<typeof setTimeout> | null = null
-let autoTimer: ReturnType<typeof setTimeout> | null = null
-let userClicked = false
 
-function clear() {
-  if (timer) clearTimeout(timer)
-  if (autoTimer) clearTimeout(autoTimer)
-}
-
-function typeCmd(text: string, cb?: () => void) {
+function typeLoop() {
+  if (!typingEl.value) return
+  const cmd = cmds[ci]
   let i = 0
-  displayedCmd.value = ''
-  showCursor.value = true
+  typingEl.value.textContent = ''
   function step() {
-    if (i < text.length) {
-      displayedCmd.value = text.slice(0, ++i)
-      timer = setTimeout(step, 20 + Math.random() * 15)
+    if (!typingEl.value) return
+    if (i < cmd.length) {
+      typingEl.value.textContent = cmd.slice(0, ++i)
+      timer = setTimeout(step, 25 + Math.random() * 15)
     } else {
-      showCursor.value = true
-      cb?.()
+      timer = setTimeout(delLoop, 2800)
     }
   }
   step()
 }
 
-function autoNext() {
-  autoTimer = setTimeout(() => {
-    if (userClicked) { userClicked = false; return }
-    activeIdx.value = (activeIdx.value + 1) % products.length
-  }, 3500)
-}
-
-function switchTo(idx: number) {
-  clear()
-  userClicked = true
-  activeIdx.value = idx
-  // Instant show on click
-  displayedCmd.value = products[idx].command
-  showCursor.value = true
-  // Resume auto-cycle after pause
-  autoTimer = setTimeout(() => {
-    userClicked = false
-    autoNext()
-  }, 5000)
-}
-
-function updateIndicator() {
-  if (!tabsRef.value) return
-  const el = tabsRef.value.querySelector<HTMLElement>(`[data-idx="${activeIdx.value}"]`)
-  if (!el) return
-  const pr = tabsRef.value.getBoundingClientRect()
-  const r = el.getBoundingClientRect()
-  indicatorStyle.value = { width: `${r.width}px`, left: `${r.left - pr.left}px` }
-}
-
-watch(activeIdx, () => {
-  nextTick(updateIndicator)
-  if (!userClicked) {
-    clear()
-    typeCmd(active.value.command, autoNext)
+function delLoop() {
+  if (!typingEl.value) return
+  const txt = typingEl.value.textContent || ''
+  if (txt.length > 0) {
+    typingEl.value.textContent = txt.slice(0, -1)
+    timer = setTimeout(delLoop, 12)
+  } else {
+    ci = (ci + 1) % cmds.length
+    timer = setTimeout(typeLoop, 250)
   }
-})
-
-// Copy
-const copied = ref(false)
-async function copy() {
-  try {
-    await navigator.clipboard.writeText(active.value.command)
-    copied.value = true
-    setTimeout(() => { copied.value = false }, 1500)
-  } catch { /* noop */ }
 }
 
 onMounted(() => {
@@ -112,40 +62,35 @@ onMounted(() => {
       titleRef.value!.appendChild(span)
     })
   }
-  nextTick(updateIndicator)
-  // Start typing first command after title animation
-  timer = setTimeout(() => typeCmd(active.value.command, autoNext), 900)
+  timer = setTimeout(typeLoop, 800)
 })
 
-onUnmounted(clear)
+onUnmounted(() => { if (timer) clearTimeout(timer) })
 </script>
 
 <template>
   <section class="hero">
     <div class="homepage-container">
       <h1 ref="titleRef" class="hero__title">Longbridge Developers</h1>
-      <p class="hero__sub hero-fade-up" style="animation-delay:0.5s">{{ t('home.subtitle') }}</p>
+      <p class="hero__tagline hero-fade-up" style="animation-delay:0.4s">
+        <strong>OpenAPI</strong>. <strong>MCP</strong>. <strong>CLI</strong>. <strong>SKILL</strong>.
+      </p>
+      <p class="hero__desc hero-fade-up" style="animation-delay:0.55s">{{ t('home.subtitle') }}</p>
 
       <div class="hero__term hero-fade-up" style="animation-delay:0.7s">
-        <!-- Tabs -->
-        <div ref="tabsRef" class="ht-bar">
-          <div class="ht-ind" :style="indicatorStyle" />
-          <button
-            v-for="(p, i) in products" :key="p.key" :data-idx="i"
-            class="ht-tab" :class="{ active: activeIdx === i }"
-            @click="switchTo(i)"
-          >{{ p.label }}</button>
-          <button class="ht-copy" @click="copy">{{ copied ? $t('api.copied') : $t('api.copy') }}</button>
+        <div class="hero__term-bar">
+          <span class="hero__dot" style="background:#ff5f57" />
+          <span class="hero__dot" style="background:#febc2e" />
+          <span class="hero__dot" style="background:#28c840" />
         </div>
-        <!-- Command -->
-        <div class="ht-cmd">
-          <span class="ht-ps">$</span>
-          <span class="ht-text">{{ displayedCmd }}</span>
-          <span v-if="showCursor" class="typing-cursor" />
+        <div class="hero__term-cmd">
+          <span class="hero__ps">$</span>
+          <span ref="typingEl" class="hero__typed" />
+          <span class="typing-cursor" />
         </div>
       </div>
 
-      <div class="hero__cta hero-fade-up" style="animation-delay:0.95s">
+      <div class="hero__cta hero-fade-up" style="animation-delay:0.9s">
         <a href="/docs/getting-started" class="hero__btn hero__btn--pri">{{ t('home.getStarted') }}</a>
         <a href="/docs/api" class="hero__btn hero__btn--sec">{{ t('home.apiReference') }}</a>
       </div>
@@ -154,121 +99,74 @@ onUnmounted(clear)
 </template>
 
 <style scoped>
-.hero {
-  text-align: center;
-  padding: 80px 0 48px;
-}
+.hero { text-align: center; padding: 80px 0 48px; }
+
 .hero__title {
-  font-size: 50px;
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  margin-bottom: 16px;
-  color: var(--text-color-1);
+  font-size: 52px; font-weight: 900; letter-spacing: -0.035em;
+  line-height: 1.05; margin-bottom: 12px; color: var(--text-color-1);
 }
-.hero__sub {
-  font-size: 17px;
-  color: var(--text-color-1-supplement);
-  margin-bottom: 36px;
+
+.hero__tagline {
+  font-size: 20px; color: var(--text-color-2); margin-bottom: 8px; font-weight: 500;
+}
+
+.hero__tagline strong { color: var(--brand-color); font-weight: 700; }
+
+.hero__desc {
+  font-size: 15px; color: var(--text-color-3); margin-bottom: 36px;
+  max-width: 540px; margin-left: auto; margin-right: auto; line-height: 1.6;
   white-space: pre-line;
-  line-height: 1.6;
 }
 
-/* ===== Terminal ===== */
+/* Terminal */
 .hero__term {
-  max-width: 660px;
-  margin: 0 auto 32px;
-  background: var(--home-bg-color-1);
-  border-radius: 10px;
-  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
-  overflow: hidden;
+  max-width: 580px; margin: 0 auto 32px;
+  background: var(--home-bg-color-1); border-radius: 8px;
+  overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.1); text-align: left;
 }
-.dark .hero__term { box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
 
-/* Tab bar */
-.ht-bar {
-  display: flex;
-  align-items: center;
-  position: relative;
-  border-bottom: 1px solid var(--border-color);
-  padding: 0 12px;
-}
-.ht-ind {
-  position: absolute;
-  bottom: 0;
-  height: 2px;
-  background: var(--brand-color);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.ht-tab {
-  padding: 10px 16px;
-  font-size: 13px;
-  font-weight: 600;
-  border: none;
-  background: none;
-  color: var(--text-color-3);
-  cursor: pointer;
-  font-family: inherit;
-  transition: color 0.2s;
-  position: relative;
-  z-index: 1;
-}
-.ht-tab.active { color: var(--brand-color); }
-.ht-tab:hover { color: var(--text-color-1); }
-.ht-copy {
-  margin-left: auto;
-  padding: 4px 12px;
-  font-size: 11px;
-  font-weight: 500;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  background: transparent;
-  color: var(--text-color-3);
-  cursor: pointer;
-  font-family: inherit;
-  transition: all 0.2s;
-}
-.ht-copy:hover { color: var(--text-color-1); border-color: var(--text-color-3); }
+.dark .hero__term { box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
 
-/* Command area */
-.ht-cmd {
-  padding: 20px 24px;
+.hero__term-bar {
+  display: flex; align-items: center; gap: 6px;
+  padding: 10px 14px; background: rgba(0,0,0,0.02);
+}
+
+.dark .hero__term-bar { background: rgba(255,255,255,0.04); }
+
+.hero__dot { width: 8px; height: 8px; border-radius: 50%; }
+
+.hero__term-cmd {
+  padding: 16px 20px;
   font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
-  font-size: 14.5px;
-  line-height: 1.6;
-  color: var(--text-color-1);
-  text-align: left;
-  min-height: 62px;
-  display: flex;
-  align-items: center;
+  font-size: 14px; color: var(--text-color-1); display: flex; align-items: center;
+  min-height: 50px;
 }
-.ht-ps {
-  color: var(--brand-color);
-  user-select: none;
-  margin-right: 10px;
-  font-weight: 700;
-}
-.ht-text {
-  word-break: break-all;
-}
+
+.hero__ps { color: var(--brand-color); user-select: none; margin-right: 10px; font-weight: 600; }
+.hero__typed { white-space: nowrap; overflow: hidden; }
 
 /* CTA */
 .hero__cta { display: flex; justify-content: center; gap: 12px; }
+
 .hero__btn {
-  border-radius: 6px; padding: 12px 28px; font-size: 14.5px; font-weight: 600;
-  cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 6px; padding: 11px 26px; font-size: 14px; font-weight: 600;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none; display: inline-block;
 }
+
 .hero__btn--pri { background: var(--brand-color); color: #fff; }
 .hero__btn--pri:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,184,184,0.3); }
+
 .hero__btn--sec { background: transparent; color: var(--brand-color); border: 1.5px solid var(--brand-color); }
 .hero__btn--sec:hover { background: var(--brand-5); transform: translateY(-2px); }
 
 @media (max-width: 640px) {
   .hero { padding: 56px 0 36px; }
   .hero__title { font-size: 34px; }
-  .hero__sub { font-size: 15px; }
+  .hero__tagline { font-size: 17px; }
+  .hero__desc { font-size: 14px; }
   .hero__cta { flex-direction: column; align-items: center; }
-  .ht-cmd { font-size: 12.5px; padding: 16px 18px; }
+  .hero__term-cmd { font-size: 12px; }
 }
 </style>

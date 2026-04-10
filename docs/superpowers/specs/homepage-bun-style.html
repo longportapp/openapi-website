@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Longbridge Developers — bun.sh style</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --max-w: 1200px;
+  --px: 48px;
+  --brand: #00B8B8;
+  --brand-dim: rgba(0,184,184,0.08);
+  --fg: #0a0f1e;
+  --fg2: #4b5563;
+  --fg3: #9ca3af;
+  --bg: #ffffff;
+  --bg2: #f8f9fb;
+  --bg3: #f0f1f3;
+  --border: #e5e7ea;
+  --code-bg: #1b1b1f;
+  --code-fg: #e5e7eb;
+  --purple: #8b5cf6;
+  --amber: #f59e0b;
+  --pink: #ec4899;
+  --up: #00ada2;
+  --down: #ff3a75;
+  --mono: 'SF Mono','JetBrains Mono','Fira Code',ui-monospace,monospace;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased;line-height:1.6}
+.wrap{max-width:var(--max-w);margin:0 auto;padding:0 var(--px)}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ===== NAV ===== */
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:56px;display:flex;align-items:center}
+.nav .wrap{display:flex;align-items:center;width:100%}
+.nav-logo{font-weight:800;font-size:15px;display:flex;align-items:center;gap:8px;color:var(--fg);text-decoration:none}
+.nav-logo svg{width:24px;height:24px}
+.nav-links{display:flex;gap:24px;font-size:13px;font-weight:500;margin-left:auto;margin-right:16px}
+.nav-links a{color:var(--fg2)}
+.nav-links a:hover{color:var(--brand);text-decoration:none}
+.nav-install{background:var(--brand);color:#fff;border:none;border-radius:99px;padding:6px 18px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:transform 0.1s}
+.nav-install:hover{transform:scale(1.04)}
+
+/* ===== HERO ===== */
+.hero{padding:80px 0 64px;text-align:center}
+.hero h1{font-size:52px;font-weight:900;letter-spacing:-0.035em;line-height:1.05;margin-bottom:12px}
+.hero h1 .char{display:inline-block;opacity:0;filter:blur(8px);animation:blurIn 0.5s var(--ease) forwards}
+@keyframes blurIn{to{opacity:1;filter:blur(0)}}
+.hero-tagline{font-size:20px;color:var(--fg2);margin-bottom:8px;font-weight:500}
+.hero-tagline strong{color:var(--brand);font-weight:700}
+.hero-desc{font-size:15px;color:var(--fg3);margin-bottom:36px;max-width:540px;margin-left:auto;margin-right:auto}
+
+/* Terminal */
+.hero-term{max-width:580px;margin:0 auto 36px;background:var(--code-bg);border-radius:8px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.12);text-align:left}
+.hero-term-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:rgba(255,255,255,0.04)}
+.hero-term-dot{width:8px;height:8px;border-radius:50%}
+.hero-term-cmd{padding:16px 20px;font-family:var(--mono);font-size:14px;color:var(--code-fg);display:flex;align-items:center;min-height:50px}
+.hero-term-ps{color:var(--brand);margin-right:10px;user-select:none;font-weight:600}
+.hero-term-text{white-space:nowrap;overflow:hidden}
+.cursor{display:inline-block;width:2px;height:1.1em;background:var(--brand);vertical-align:text-bottom;animation:blink 0.8s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+
+.hero-cta{display:flex;justify-content:center;gap:12px}
+.btn{border-radius:6px;padding:11px 26px;font-size:14px;font-weight:600;display:inline-block;transition:all 0.2s var(--ease);text-decoration:none;cursor:pointer;border:none;font-family:inherit}
+.btn-pri{background:var(--brand);color:#fff}
+.btn-pri:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,184,184,0.3);text-decoration:none}
+.btn-sec{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
+.btn-sec:hover{background:var(--brand-dim);transform:translateY(-2px);text-decoration:none}
+
+/* ===== PRODUCTS TAGLINE ===== */
+.products-tag{text-align:center;padding:48px 0 0;font-size:15px;color:var(--fg3);font-weight:500}
+.products-tag b{color:var(--fg);font-weight:700}
+
+/* ===== PRODUCT GRID ===== */
+.products{padding:32px 0 64px}
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.product-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:24px;transition:all 0.3s var(--ease);position:relative;overflow:hidden}
+.product-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.08);border-color:var(--brand)}
+.product-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--card-accent);opacity:0;transition:opacity 0.2s}
+.product-card:hover::before{opacity:1}
+.pc-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.pc-icon svg{width:18px;height:18px}
+.pc-name{font-size:18px;font-weight:800;margin-bottom:6px;letter-spacing:-0.01em}
+.pc-desc{font-size:13px;color:var(--fg2);line-height:1.5;margin-bottom:14px;min-height:60px}
+.pc-cmd{background:var(--code-bg);border-radius:6px;padding:10px 12px;font-family:var(--mono);font-size:11.5px;color:var(--code-fg);margin-bottom:14px;word-break:break-all;line-height:1.6}
+.pc-cmd .ps{color:var(--brand);user-select:none;margin-right:6px}
+.pc-link{font-size:13px;font-weight:600;color:var(--brand);display:inline-flex;align-items:center;gap:4px;transition:gap 0.2s}
+.pc-link:hover{gap:8px;text-decoration:none}
+
+/* ===== PRODUCT DETAILS (alternating sections) ===== */
+.detail{padding:64px 0}
+.detail:nth-child(even){background:var(--bg2)}
+.detail .wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.detail.reverse .wrap{direction:rtl}
+.detail.reverse .wrap>*{direction:ltr}
+.dt-badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;padding:4px 10px;border-radius:5px;margin-bottom:14px}
+.dt-badge.api{background:var(--brand-dim);color:var(--brand)}
+.dt-badge.mcp{background:rgba(139,92,246,0.08);color:var(--purple)}
+.dt-badge.cli{background:rgba(245,158,11,0.08);color:var(--amber)}
+.dt-badge.skill{background:rgba(236,72,153,0.08);color:var(--pink)}
+.dt-title{font-size:26px;font-weight:800;letter-spacing:-0.02em;margin-bottom:10px;line-height:1.2}
+.dt-desc{font-size:14px;color:var(--fg2);margin-bottom:18px;line-height:1.7}
+.dt-features{list-style:none;margin-bottom:18px}
+.dt-features li{font-size:13px;color:var(--fg2);padding:5px 0;line-height:1.5;display:flex;gap:8px}
+.dt-features li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--card-accent,var(--brand));margin-top:7px;flex-shrink:0}
+.dt-features li strong{color:var(--fg);font-weight:600}
+.dt-link{font-size:13px;font-weight:600;color:var(--brand);display:inline-flex;align-items:center;gap:4px}
+.dt-link:hover{gap:8px;text-decoration:none}
+
+/* Code/Terminal blocks in details */
+.dt-code{background:var(--code-bg);border-radius:10px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.1)}
+.dt-code-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:rgba(255,255,255,0.04)}
+.dt-code-bar span{width:8px;height:8px;border-radius:50%}
+.dt-code-tabs{display:flex;padding:0 14px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.dt-code-tab{padding:7px 14px;font-size:11px;font-weight:500;color:#6b7280;border:none;background:none;cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;transition:all 0.2s}
+.dt-code-tab.active{color:var(--code-fg);border-bottom-color:var(--brand)}
+.dt-code-body{padding:16px 18px;font-family:var(--mono);font-size:12px;color:var(--code-fg);line-height:1.8;overflow-x:auto}
+.dt-code-body .cm{color:#6b7280}
+.dt-code-body .kw{color:#c084fc}
+.dt-code-body .str{color:#7dd3fc}
+.dt-code-body .fn{color:#fbbf24}
+
+/* Terminal output table */
+.term-table{width:100%;border-collapse:collapse;font-size:12px;font-family:var(--mono);color:var(--code-fg)}
+.term-table td{padding:2px 12px 2px 0;white-space:nowrap}
+.term-table .hdr{color:#6b7280}
+.term-table .up{color:var(--up)}
+.term-table .dn{color:var(--down)}
+.term-table .dim{color:#6b7280}
+
+/* ===== MARKET & SDK ===== */
+.market-section{padding:56px 0;text-align:center}
+.market-section h2{font-size:24px;font-weight:800;margin-bottom:8px}
+.market-section p{font-size:14px;color:var(--fg3);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
+.market-row{display:flex;justify-content:center;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.market-pill{display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:6px;border:1px solid var(--border);background:var(--bg);font-size:13px;font-weight:600;transition:all 0.2s}
+.market-pill:hover{border-color:var(--brand);color:var(--brand)}
+.market-dot{width:8px;height:8px;border-radius:50%}
+.sdk-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.sdk-pill{padding:6px 14px;border-radius:6px;border:1px solid var(--border);font-size:12px;font-weight:500;color:var(--fg2);background:var(--bg);transition:all 0.2s}
+.sdk-pill:hover{border-color:var(--brand);color:var(--brand);background:var(--brand-dim)}
+
+/* ===== FOOTER ===== */
+.footer{padding:28px 0;border-top:1px solid var(--border)}
+.footer .wrap{display:flex;justify-content:space-between;align-items:center}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-size:12px;color:var(--fg3)}
+.footer-links a:hover{color:var(--brand);text-decoration:none}
+
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease)}
+.reveal.vis{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:0.06s}.reveal-d2{transition-delay:0.12s}.reveal-d3{transition-delay:0.18s}.reveal-d4{transition-delay:0.24s}
+
+/* Responsive */
+@media(max-width:900px){
+  :root{--px:24px}
+  .hero h1{font-size:36px}
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .detail .wrap{grid-template-columns:1fr;gap:28px}
+  .detail.reverse .wrap{direction:ltr}
+}
+@media(max-width:640px){
+  .hero h1{font-size:30px}
+  .product-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .hero-cta{flex-direction:column;align-items:center}
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none}
+  .hero h1 .char{opacity:1;filter:none;animation:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-logo" href="#">
+      <svg viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="var(--brand)"/><path d="M5 17L8 6L14 12L19 5" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Longbridge Developers
+    </a>
+    <div class="nav-links">
+      <a href="#">Docs</a>
+      <a href="#">API Reference</a>
+      <a href="#">SDK</a>
+      <a href="#">Skill</a>
+    </div>
+    <button class="nav-install" onclick="navigator.clipboard.writeText('pip install longbridge')">pip install longbridge</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <h1 id="hero-title">Longbridge Developers</h1>
+    <p class="hero-tagline"><strong>OpenAPI</strong>. <strong>MCP</strong>. <strong>CLI</strong>. <strong>SKILL</strong>.</p>
+    <p class="hero-desc">程序化行情交易接口 · AI 智能体集成 · 命令行工具 · 知识库扩展包<br>港股 · 美股 · A 股 · 新加坡，6 种 SDK 语言</p>
+
+    <div class="hero-term">
+      <div class="hero-term-bar">
+        <div class="hero-term-dot" style="background:#ff5f57"></div>
+        <div class="hero-term-dot" style="background:#febc2e"></div>
+        <div class="hero-term-dot" style="background:#28c840"></div>
+      </div>
+      <div class="hero-term-cmd">
+        <span class="hero-term-ps">$</span>
+        <span class="hero-term-text" id="typing-text"></span>
+        <span class="cursor"></span>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#" class="btn btn-pri">Get Started</a>
+      <a href="#" class="btn btn-sec">API Reference</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT GRID -->
+<section class="products">
+  <div class="wrap">
+    <p class="products-tag reveal">四个产品，一个平台 — <b>从行情数据到 AI 智能投研</b></p>
+
+    <div class="product-grid">
+      <!-- OpenAPI -->
+      <div class="product-card reveal reveal-d1" style="--card-accent:var(--brand)">
+        <div class="pc-icon" style="background:var(--brand-dim);color:var(--brand)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <div class="pc-name">OpenAPI</div>
+        <p class="pc-desc">实时行情、历史 K 线、深度数据、交易执行。支持港美 A 股 + 新加坡，6 种 SDK。</p>
+        <div class="pc-cmd"><span class="ps">$</span>pip install longbridge</div>
+        <a href="#" class="pc-link">Docs &rarr;</a>
+      </div>
+
+      <!-- MCP -->
+      <div class="product-card reveal reveal-d2" style="--card-accent:var(--purple)">
+        <div class="pc-icon" style="background:rgba(139,92,246,0.08);color:var(--purple)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <div class="pc-name">MCP</div>
+        <p class="pc-desc">托管 MCP 服务，让 Claude、Cursor、Zed 等 AI 工具直接查行情、下单。OAuth 一键授权。</p>
+        <div class="pc-cmd"><span class="ps">$</span>claude mcp add longbridge https://openapi.longbridge.com/mcp</div>
+        <a href="#" class="pc-link">Docs &rarr;</a>
+      </div>
+
+      <!-- CLI -->
+      <div class="product-card reveal reveal-d3" style="--card-accent:var(--amber)">
+        <div class="pc-icon" style="background:rgba(245,158,11,0.08);color:var(--amber)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        </div>
+        <div class="pc-name">CLI</div>
+        <p class="pc-desc">40+ 命令覆盖行情、交易、财报、选股、技术诊断。支持 JSON/CSV/Markdown 输出。</p>
+        <div class="pc-cmd"><span class="ps">$</span>curl -fsSL https://longbridge.sh/install | bash</div>
+        <a href="#" class="pc-link">Docs &rarr;</a>
+      </div>
+
+      <!-- SKILL -->
+      <div class="product-card reveal reveal-d4" style="--card-accent:var(--pink)">
+        <div class="pc-icon" style="background:rgba(236,72,153,0.08);color:var(--pink)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 01-1.3 1.3L3 12l5.8 1.9a2 2 0 011.3 1.3L12 21l1.9-5.8a2 2 0 011.3-1.3L21 12l-5.8-1.9a2 2 0 01-1.3-1.3L12 3z"/></svg>
+        </div>
+        <div class="pc-name">SKILL</div>
+        <p class="pc-desc">一条命令为 AI 注入完整金融知识库。自动识别股票代码，智能调用分析和交易。</p>
+        <div class="pc-cmd"><span class="ps">$</span>npx skills add longbridge/developers -g -y</div>
+        <a href="#" class="pc-link">Docs &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DETAIL: OpenAPI -->
+<section class="detail" style="--card-accent:var(--brand)">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="dt-badge api">OpenAPI</span>
+      <h2 class="dt-title">程序化行情交易接口</h2>
+      <p class="dt-desc">通过统一接口获取港股、美股、A 股及新加坡市场的实时行情与历史数据，执行多种订单类型的交易操作。支持 HTTP REST 和 WebSocket 二进制长连接协议。</p>
+      <ul class="dt-features">
+        <li><strong>完整市场覆盖</strong> — 港股（窝轮、牛熊证）、美股（OPRA 期权）、A 股通、新加坡。L1/L2 深度、逐笔成交、资金流向。</li>
+        <li><strong>多层次交易</strong> — 限价单、市价单、条件单、跟踪止盈止损。完整订单生命周期。</li>
+        <li><strong>6 种 SDK</strong> — Python、Node.js、Rust、Go、Java、C++。内置频率控制，开箱即用。</li>
+        <li><strong>历史数据</strong> — 分钟到月线 K 线、财报、盈利预测、机构评级、内部人交易。</li>
+      </ul>
+      <a href="#" class="dt-link">查看 OpenAPI 文档 &rarr;</a>
+    </div>
+    <div class="reveal reveal-d2">
+      <div class="dt-code">
+        <div class="dt-code-bar"><span style="background:#ff5f57"></span><span style="background:#febc2e"></span><span style="background:#28c840"></span></div>
+        <div class="dt-code-tabs">
+          <button class="dt-code-tab active" onclick="switchLang(this,'python')">Python</button>
+          <button class="dt-code-tab" onclick="switchLang(this,'nodejs')">Node.js</button>
+          <button class="dt-code-tab" onclick="switchLang(this,'rust')">Rust</button>
+        </div>
+        <div class="dt-code-body" id="code-python"><span class="kw">from</span> longbridge.openapi <span class="kw">import</span> QuoteContext, Config
+
+<span class="cm"># Initialize</span>
+config = Config.from_env()
+ctx = QuoteContext(config)
+
+<span class="cm"># Get real-time quotes</span>
+resp = ctx.quote([<span class="str">"TSLA.US"</span>, <span class="str">"700.HK"</span>])
+<span class="kw">for</span> q <span class="kw">in</span> resp:
+    print(<span class="kw">f</span><span class="str">"{q.symbol}: {q.last_done}"</span>)
+
+<span class="cm"># Subscribe to push</span>
+ctx.subscribe([<span class="str">"TSLA.US"</span>], SubType.Quote)</div>
+        <div class="dt-code-body" id="code-nodejs" style="display:none"><span class="kw">import</span> { Config, QuoteContext } <span class="kw">from</span> <span class="str">'longbridge'</span>
+
+<span class="kw">const</span> config = Config.fromEnv()
+<span class="kw">const</span> ctx = <span class="kw">await</span> QuoteContext.open(config)
+
+<span class="cm">// Get real-time quotes</span>
+<span class="kw">const</span> quotes = <span class="kw">await</span> ctx.quote([<span class="str">"TSLA.US"</span>, <span class="str">"700.HK"</span>])
+quotes.forEach(q =&gt; {
+    console.log(<span class="str">`${q.symbol}: ${q.lastDone}`</span>)
+})</div>
+        <div class="dt-code-body" id="code-rust" style="display:none"><span class="kw">use</span> longbridge::quote::QuoteContext;
+<span class="kw">use</span> longbridge::Config;
+
+<span class="kw">let</span> config = Config::from_env()?;
+<span class="kw">let</span> (ctx, _) = QuoteContext::try_new(config).<span class="kw">await</span>?;
+
+<span class="cm">// Get real-time quotes</span>
+<span class="kw">let</span> quotes = ctx.quote([<span class="str">"TSLA.US"</span>]).<span class="kw">await</span>?;
+<span class="kw">for</span> q <span class="kw">in</span> quotes {
+    println!(<span class="str">"{}: {}"</span>, q.symbol, q.last_done);
+}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DETAIL: MCP -->
+<section class="detail reverse" style="--card-accent:var(--purple)">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="dt-badge mcp">MCP</span>
+      <h2 class="dt-title">让 AI 助手直接调用行情与交易</h2>
+      <p class="dt-desc">托管的 HTTP MCP 服务。Claude Code、Cursor、Zed 等 AI 工具一行命令接入，OAuth 2.1 授权，无需配置 API 密钥。</p>
+      <ul class="dt-features">
+        <li><strong>零密钥配置</strong> — OAuth 2.1 一键浏览器授权，凭证自动刷新，随时可撤销。</li>
+        <li><strong>完整能力</strong> — 实时行情、K 线历史、账户持仓、下单改单撤单。</li>
+        <li><strong>多客户端</strong> — Claude Code · Cursor · Zed · ChatGPT · Codex · Cherry Studio。</li>
+      </ul>
+      <a href="#" class="dt-link">查看 MCP 文档 &rarr;</a>
+    </div>
+    <div class="reveal reveal-d2">
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:28px">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--fg3);margin-bottom:6px">MCP Endpoint</div>
+        <div style="font-family:var(--mono);font-size:14px;color:var(--brand);font-weight:600;background:var(--brand-dim);padding:10px 14px;border-radius:6px;margin-bottom:18px;word-break:break-all">https://openapi.longbridge.com/mcp</div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--fg3);margin-bottom:6px">Supported AI Tools</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px">
+          <span style="font-size:11px;font-weight:600;padding:5px 12px;border-radius:5px;background:var(--bg);border:1px solid var(--border);color:var(--fg2)">Claude Code</span>
+          <span style="font-size:11px;font-weight:600;padding:5px 12px;border-radius:5px;background:var(--bg);border:1px solid var(--border);color:var(--fg2)">Cursor</span>
+          <span style="font-size:11px;font-weight:600;padding:5px 12px;border-radius:5px;background:var(--bg);border:1px solid var(--border);color:var(--fg2)">Zed</span>
+          <span style="font-size:11px;font-weight:600;padding:5px 12px;border-radius:5px;background:var(--bg);border:1px solid var(--border);color:var(--fg2)">ChatGPT</span>
+          <span style="font-size:11px;font-weight:600;padding:5px 12px;border-radius:5px;background:var(--bg);border:1px solid var(--border);color:var(--fg2)">Codex</span>
+          <span style="font-size:11px;font-weight:600;padding:5px 12px;border-radius:5px;background:var(--bg);border:1px solid var(--border);color:var(--fg2)">Cherry Studio</span>
+        </div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--fg3);margin-bottom:6px">Quick Setup</div>
+        <div style="font-family:var(--mono);font-size:12px;color:var(--fg2);background:var(--bg);padding:10px 14px;border-radius:6px;border:1px solid var(--border);word-break:break-all"><span style="color:var(--brand)">$</span> claude mcp add --transport http longbridge https://openapi.longbridge.com/mcp</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DETAIL: CLI -->
+<section class="detail" style="--card-accent:var(--amber)">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="dt-badge cli">CLI</span>
+      <h2 class="dt-title">AI-native 命令行全功能终端工具</h2>
+      <p class="dt-desc">覆盖全部 Longbridge 端点。行情查询、财报分析、技术诊断、订单管理、选股筛选——一条命令搞定。<code style="background:var(--bg3);padding:2px 6px;border-radius:3px;font-size:12px">--format json</code> 输出供 AI 代理消费。</p>
+      <ul class="dt-features">
+        <li><strong>全功能行情</strong> — 实时报价、L2 盘口、K 线、逐笔成交、资金流向、市场温度。</li>
+        <li><strong>深度财务</strong> — 财报（利润表/资产负债表/现金流）、估值对标、EPS 预测、机构评级、内幕交易。</li>
+        <li><strong>跨市场选股</strong> — 港美 A 股按市值+PE+技术信号筛选。MACD/KDJ/RSI 诊断。</li>
+      </ul>
+      <a href="#" class="dt-link">查看 CLI 文档 &rarr;</a>
+    </div>
+    <div class="reveal reveal-d2">
+      <div class="dt-code">
+        <div class="dt-code-bar"><span style="background:#ff5f57"></span><span style="background:#febc2e"></span><span style="background:#28c840"></span></div>
+        <div class="dt-code-body">
+<span class="cm">$</span> longbridge quote TSLA.US AAPL.US NVDA.US
+
+<table class="term-table">
+<tr class="hdr"><td>Symbol</td><td>Last</td><td>Change</td><td>Change%</td><td>Volume</td></tr>
+<tr><td>TSLA.US</td><td>248.50</td><td class="up">+5.30</td><td class="up">+2.18%</td><td class="dim">42.1M</td></tr>
+<tr><td>AAPL.US</td><td>195.20</td><td class="dn">-1.40</td><td class="dn">-0.71%</td><td class="dim">58.3M</td></tr>
+<tr><td>NVDA.US</td><td>875.30</td><td class="up">+12.80</td><td class="up">+1.48%</td><td class="dim">31.7M</td></tr>
+</table>
+
+<span class="cm">$</span> longbridge insider-trades NVDA.US
+
+<table class="term-table">
+<tr class="hdr"><td>Date</td><td>Name</td><td>Type</td><td>Shares</td><td>Price</td></tr>
+<tr><td class="dim">2026-04-08</td><td>Jensen Huang</td><td class="dn">Sell</td><td class="dim">120,000</td><td class="dim">$871.50</td></tr>
+<tr><td class="dim">2026-04-05</td><td>Colette Kress</td><td class="dn">Sell</td><td class="dim">25,000</td><td class="dim">$865.20</td></tr>
+</table></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DETAIL: SKILL -->
+<section class="detail reverse" style="--card-accent:var(--pink)">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="dt-badge skill">SKILL</span>
+      <h2 class="dt-title">AI 助手的金融能力扩展包</h2>
+      <p class="dt-desc">一条命令为 Claude、Cursor 等 AI 助手注入完整的 Longbridge 知识库。AI 自动识别股票代码和市场分析需求，智能调用行情、财务分析、选股和交易。</p>
+      <ul class="dt-features">
+        <li><strong>智能识别</strong> — 提到 AAPL.US、700.HK 等代码时自动激活。支持 /longbridge 前缀强制触发。</li>
+        <li><strong>全栈分析</strong> — 跨市场选股、MACD/KDJ/RSI 诊断、财报对标、SEC 13F 机构追踪。</li>
+        <li><strong>完整参考</strong> — CLI 全集、Python/Rust SDK API、类型定义、枚举值。</li>
+      </ul>
+      <a href="#" class="dt-link">查看 SKILL 文档 &rarr;</a>
+    </div>
+    <div class="reveal reveal-d2">
+      <div class="dt-code">
+        <div class="dt-code-bar"><span style="background:#ff5f57"></span><span style="background:#febc2e"></span><span style="background:#28c840"></span></div>
+        <div class="dt-code-body"><span class="cm">User:</span> <span class="str">"帮我从美股里筛出市值 500 亿以上、PE 低于 25、</span>
+<span class="str">       近期 MACD 出现金叉的科技股"</span>
+
+<span style="color:var(--up)">&#10003; Longbridge SKILL activated</span>
+
+<span class="cm">AI: 正在执行跨市场选股...</span>
+<span class="fn">$ longbridge screener --market us \</span>
+<span class="fn">    --sector technology --min-market-cap 50B \</span>
+<span class="fn">    --max-pe 25 --signal macd-golden-cross</span>
+
+<span class="cm">找到 3 只符合条件的标的：</span>
+INTC.US  PE: 22.1  <span style="color:var(--up)">MACD 金叉 (2d ago)</span>
+CSCO.US  PE: 16.8  <span style="color:var(--up)">MACD 金叉 (1d ago)</span>
+ORCL.US  PE: 24.3  <span style="color:var(--up)">MACD 金叉 (today)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET & SDK -->
+<section class="market-section reveal">
+  <div class="wrap">
+    <h2>市场覆盖与 SDK</h2>
+    <p>股票、ETF、期权、窝轮、牛熊证，四大市场统一接口。开户免费获取港股 LV2 及 A 股 LV1 行情。</p>
+    <div class="market-row">
+      <div class="market-pill"><div class="market-dot" style="background:#FF3A9D"></div>香港 · 股票 ETF 窝轮 牛熊证</div>
+      <div class="market-pill"><div class="market-dot" style="background:#2A99FE"></div>美国 · 股票 ETF 期权</div>
+      <div class="market-pill"><div class="market-dot" style="background:#FF3A3A"></div>A 股通 · 股票 ETF</div>
+      <div class="market-pill"><div class="market-dot" style="background:#3AD8FF"></div>新加坡 · 股票 ETF</div>
+    </div>
+    <div class="sdk-row">
+      <span class="sdk-pill">Python</span>
+      <span class="sdk-pill">Node.js</span>
+      <span class="sdk-pill">Rust</span>
+      <span class="sdk-pill">Go</span>
+      <span class="sdk-pill">Java</span>
+      <span class="sdk-pill">C++</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-links"><a href="#">Longbridge</a><a href="#">Download</a><a href="#">Terms</a><a href="#">Privacy</a></div>
+    <div class="footer-links"><a href="#">OpenAPI</a><a href="#">MCP</a><a href="#">CLI</a><a href="#">SKILL</a><a href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></div>
+  </div>
+</footer>
+
+<script>
+// Blur-in title
+!function(){const t=document.getElementById('hero-title'),x=t.textContent;t.innerHTML='';[...x].forEach((c,i)=>{const s=document.createElement('span');s.className='char';s.textContent=c===' '?'\u00A0':c;s.style.animationDelay=i*0.03+'s';t.appendChild(s)})}();
+
+// Typing animation
+const cmds=[
+  'pip install longbridge',
+  'longbridge quote TSLA.US AAPL.US NVDA.US',
+  'claude mcp add longbridge https://openapi.longbridge.com/mcp',
+  'longbridge financial-report AAPL.US --format json',
+  'npx skills add longbridge/developers -g -y',
+  'longbridge insider-trades NVDA.US',
+  'ctx.quote(["TSLA.US", "700.HK", "AAPL.US"])',
+  'longbridge screener --market us --sector technology',
+];
+let ci=0,el=document.getElementById('typing-text'),timer;
+function typeLoop(){
+  const cmd=cmds[ci];let i=0;el.textContent='';
+  function step(){
+    if(i<cmd.length){el.textContent=cmd.slice(0,++i);timer=setTimeout(step,25+Math.random()*15)}
+    else{timer=setTimeout(()=>{delLoop()},2800)}
+  }
+  step();
+}
+function delLoop(){
+  const t=el.textContent;
+  if(t.length>0){el.textContent=t.slice(0,-1);timer=setTimeout(delLoop,12)}
+  else{ci=(ci+1)%cmds.length;timer=setTimeout(typeLoop,250)}
+}
+setTimeout(typeLoop,800);
+
+// Code language tabs
+function switchLang(btn,lang){
+  const p=btn.closest('.dt-code');
+  p.querySelectorAll('.dt-code-tab').forEach(t=>t.classList.remove('active'));
+  p.querySelectorAll('.dt-code-body').forEach(b=>b.style.display='none');
+  btn.classList.add('active');
+  document.getElementById('code-'+lang).style.display='block';
+}
+
+// Scroll reveal
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');ro.unobserve(x.target)}})},{threshold:0.08,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.reveal').forEach(e=>ro.observe(e));
+</script>
+</body>
+</html>
