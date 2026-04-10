@@ -42,7 +42,10 @@ const openApiCodeTabs = [
     <!-- OpenAPI -->
     <ProductSection accent="brand">
       <template #content>
-        <span class="ps-badge ps-badge--brand">OpenAPI</span>
+        <div class="ps-header">
+          <span class="ps-badge ps-badge--brand">API</span>
+          <div class="ps-product-name ps-product-name--brand">OpenAPI</div>
+        </div>
         <h2 class="ps-title">{{ t('home.openapi.title') }}</h2>
         <p class="ps-desc">{{ t('home.openapi.desc') }}</p>
         <ul class="ps-features">
@@ -61,7 +64,10 @@ const openApiCodeTabs = [
     <!-- MCP -->
     <ProductSection accent="purple" reverse>
       <template #content>
-        <span class="ps-badge ps-badge--purple">MCP</span>
+        <div class="ps-header">
+          <span class="ps-badge ps-badge--purple">AI</span>
+          <div class="ps-product-name ps-product-name--purple">MCP</div>
+        </div>
         <h2 class="ps-title">{{ t('home.mcp.title') }}</h2>
         <p class="ps-desc">{{ t('home.mcp.desc') }}</p>
         <ul class="ps-features">
@@ -79,7 +85,10 @@ const openApiCodeTabs = [
     <!-- CLI -->
     <ProductSection accent="amber">
       <template #content>
-        <span class="ps-badge ps-badge--amber">CLI</span>
+        <div class="ps-header">
+          <span class="ps-badge ps-badge--amber">Terminal</span>
+          <div class="ps-product-name ps-product-name--amber">CLI</div>
+        </div>
         <h2 class="ps-title">{{ t('home.cli.title') }}</h2>
         <p class="ps-desc">{{ t('home.cli.desc') }}</p>
         <ul class="ps-features">
@@ -117,7 +126,10 @@ const openApiCodeTabs = [
     <!-- SKILL -->
     <ProductSection accent="pink" reverse>
       <template #content>
-        <span class="ps-badge ps-badge--pink">SKILL</span>
+        <div class="ps-header">
+          <span class="ps-badge ps-badge--pink">AI Agent</span>
+          <div class="ps-product-name ps-product-name--pink">SKILL</div>
+        </div>
         <h2 class="ps-title">{{ t('home.skill.title') }}</h2>
         <p class="ps-desc">{{ t('home.skill.desc') }}</p>
         <ul class="ps-features">
@@ -156,17 +168,22 @@ const openApiCodeTabs = [
 </template>
 
 <style>
+/* Product section header: badge + product name + title */
+.ps-header {
+  margin-bottom: 16px;
+}
+
 .ps-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 5px 12px;
-  border-radius: 6px;
-  margin-bottom: 16px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
 }
 
 .ps-badge--brand { background: var(--brand-5); color: var(--brand-color); }
@@ -174,12 +191,26 @@ const openApiCodeTabs = [
 .ps-badge--amber { background: rgba(245, 158, 11, 0.1); color: var(--product-cli); }
 .ps-badge--pink { background: rgba(236, 72, 153, 0.1); color: var(--product-skill); }
 
-.ps-title {
-  font-size: 28px;
+.ps-product-name {
+  font-family: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
+  font-size: var(--text-2xl, 2.25rem);
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.ps-product-name--brand { color: var(--brand-color); }
+.ps-product-name--purple { color: var(--product-mcp); }
+.ps-product-name--amber { color: var(--product-cli); }
+.ps-product-name--pink { color: var(--product-skill); }
+
+.ps-title {
+  font-size: var(--text-lg, 1.25rem);
+  font-weight: var(--weight-semibold, 600);
+  letter-spacing: -0.01em;
   margin-bottom: 12px;
-  line-height: 1.2;
+  line-height: var(--leading-snug, 1.3);
   color: var(--text-color-1);
 }
 
