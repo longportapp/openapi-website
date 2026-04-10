@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useScrollReveal } from '../../composables/useScrollReveal'
 import HeroSection from './HeroSection.vue'
-import ProductGrid from './ProductGrid.vue'
 import PlatformStats from './PlatformStats.vue'
 import ProductSection from './ProductSection.vue'
 import CodeBlockTabs from './CodeBlockTabs.vue'
@@ -38,7 +37,6 @@ const openApiCodeTabs = [
 <template>
   <div ref="rootRef">
     <HeroSection />
-    <ProductGrid />
     <PlatformStats />
 
     <!-- OpenAPI -->
