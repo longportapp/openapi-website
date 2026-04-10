@@ -3,6 +3,7 @@ id: changelog
 title: Changelog
 slug: changelog
 sidebar_position: 7
+sidebar_icon: newspaper
 ---
 
 ## 2026-04-09

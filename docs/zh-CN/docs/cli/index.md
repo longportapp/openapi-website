@@ -2,7 +2,7 @@
 title: 'Longbridge CLI'
 sidebar_label: '概述'
 sidebar_position: 1
-sidebar_icon: terminal
+sidebar_icon: book_open
 ---
 
 # Longbridge CLI
@@ -39,11 +39,11 @@ longbridge quote TSLA.US NVDA.US --format json
 
 标的代码采用 `代码.市场` 格式：
 
-| 示例          | 市场               |
-| ------------- | ------------------ |
-| `TSLA.US`     | 美股               |
-| `700.HK`      | 港股               |
-| `600519.SH`   | A 股（上交所）      |
-| `000568.SZ`   | A 股（深交所）      |
-| `D05.SG`      | 新加坡             |
-| `BTCUSD.HAS`  | 加密货币（Longbridge 专属）|
+| 示例         | 市场                        |
+| ------------ | --------------------------- |
+| `TSLA.US`    | 美股                        |
+| `700.HK`     | 港股                        |
+| `600519.SH`  | A 股（上交所）              |
+| `000568.SZ`  | A 股（深交所）              |
+| `D05.SG`     | 新加坡                      |
+| `BTCUSD.HAS` | 加密货币（Longbridge 专属） |

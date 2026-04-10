@@ -2,6 +2,7 @@
 title: 'tui'
 sidebar_label: 'TUI'
 sidebar_position: 99
+sidebar_icon: sparkles
 ---
 
 # longbridge tui

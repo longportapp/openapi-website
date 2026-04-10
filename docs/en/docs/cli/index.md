@@ -2,7 +2,7 @@
 title: 'Longbridge CLI'
 sidebar_label: 'Overview'
 sidebar_position: 1
-sidebar_icon: terminal
+sidebar_icon: book_open
 ---
 
 # Longbridge CLI

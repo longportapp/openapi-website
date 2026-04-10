@@ -62,7 +62,7 @@ title: 'Page Title'
 id: category_filename # 例：quote_pull-static
 slug: '/quote/pull/static' # 以 / 开头，对应 URL 路径
 sidebar_position: 3 # 数字越小越靠前
-sidebar_icon: book # 可选：book | zap | cpu | terminal | sparkles
+sidebar_icon: book # 可选：book_open | book | zap | cpu | terminal | sparkles
 ---
 ```
 
