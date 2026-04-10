@@ -15,6 +15,10 @@ management, live candlestick charts, portfolio view, and stock search. Vim-style
 longbridge tui
 ```
 
+<a href="https://asciinema.org/a/785102" target="_blank">
+  <img src="https://asciinema.org/a/785102.svg" alt="longbridge tui demo" />
+</a>
+
 ## Examples
 
 ### Monitor a watchlist in real time

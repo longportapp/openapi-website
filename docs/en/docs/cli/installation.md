@@ -8,6 +8,8 @@ sidebar_position: 2
 
 Install the CLI and authenticate with your Longbridge account.
 
+Source code and release binaries: [longbridge/longbridge-terminal](https://github.com/longbridge/longbridge-terminal){target="_blank"}
+
 ## Install
 
 <Tabs groupId="cli-install">
