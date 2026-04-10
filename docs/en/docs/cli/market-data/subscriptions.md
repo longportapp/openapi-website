@@ -4,7 +4,7 @@ sidebar_label: 'subscriptions'
 sidebar_position: 14
 ---
 
-# subscriptions
+# longbridge subscriptions
 
 List your current active real-time quote subscriptions.
 

@@ -4,7 +4,7 @@ sidebar_label: 'security-list'
 sidebar_position: 12
 ---
 
-# security-list
+# longbridge security-list
 
 List US securities that are eligible for overnight trading on Longbridge.
 

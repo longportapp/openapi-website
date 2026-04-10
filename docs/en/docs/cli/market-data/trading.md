@@ -4,7 +4,7 @@ sidebar_label: 'trading'
 sidebar_position: 11
 ---
 
-# trading
+# longbridge trading
 
 Look up trading session schedules and trading day calendars for any market.
 

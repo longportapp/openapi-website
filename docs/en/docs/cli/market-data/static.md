@@ -4,7 +4,7 @@ sidebar_label: 'static'
 sidebar_position: 7
 ---
 
-# static
+# longbridge static
 
 Get static reference data for any symbol — name, exchange, currency, lot size, shares outstanding, EPS, BPS, and dividend yield.
 

@@ -4,7 +4,7 @@ sidebar_label: 'depth'
 sidebar_position: 2
 ---
 
-# depth
+# longbridge depth
 
 View the Level 2 order book for a symbol — the top 10 bid and ask prices with order counts and volumes.
 

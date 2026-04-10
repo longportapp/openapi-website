@@ -4,7 +4,7 @@ sidebar_label: 'intraday'
 sidebar_position: 5
 ---
 
-# intraday
+# longbridge intraday
 
 Get today's minute-by-minute price and volume data (intraday line) for any symbol.
 

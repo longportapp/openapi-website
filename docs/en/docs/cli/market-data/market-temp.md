@@ -4,7 +4,7 @@ sidebar_label: 'market-temp'
 sidebar_position: 10
 ---
 
-# market-temp
+# longbridge market-temp
 
 Get the Longbridge market temperature index — a composite 0–100 sentiment gauge combining valuation and market sentiment. Higher = more bullish.
 

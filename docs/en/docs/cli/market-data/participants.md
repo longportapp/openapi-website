@@ -4,7 +4,7 @@ sidebar_label: 'participants'
 sidebar_position: 13
 ---
 
-# participants
+# longbridge participants
 
 Get the complete broker/participant directory for the HK market — maps broker IDs to firm names, letting you decode the `brokers` command output.
 

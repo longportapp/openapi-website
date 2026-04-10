@@ -4,7 +4,7 @@ sidebar_label: 'capital'
 sidebar_position: 9
 ---
 
-# capital
+# longbridge capital
 
 Track intraday capital flow — see where large, medium, and small money is moving minute by minute (`flow` subcommand) or as a snapshot distribution (`dist` subcommand).
 

@@ -4,7 +4,7 @@ sidebar_label: 'calc-index'
 sidebar_position: 8
 ---
 
-# calc-index
+# longbridge calc-index
 
 Compute financial indexes for any symbol — P/E, P/B, dividend yield, turnover rate, options greeks, and more.
 

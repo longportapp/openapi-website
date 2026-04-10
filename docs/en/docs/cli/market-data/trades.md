@@ -4,7 +4,7 @@ sidebar_label: 'trades'
 sidebar_position: 4
 ---
 
-# trades
+# longbridge trades
 
 Fetch recent tick-by-tick trade records for a symbol, including price, volume, time, and trade direction.
 

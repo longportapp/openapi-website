@@ -4,7 +4,7 @@ sidebar_label: 'quote'
 sidebar_position: 1
 ---
 
-# quote
+# longbridge quote
 
 Get real-time quotes for one or more symbols — price, volume, change from previous close, and extended-hours data for US stocks.
 
