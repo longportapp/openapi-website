@@ -6,7 +6,7 @@ sidebar_position: 3
 
 # longbridge investors
 
-Browse active institutional fund managers ranked by AUM (from SEC 13F filings), and drill into any manager's current holdings.
+Browse active institutional fund managers ranked by AUM (from [SEC 13F filings](https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&type=13F&dateb=&owner=include&count=40)), and drill into any manager's current holdings.
 
 ## Basic Usage
 
@@ -29,7 +29,7 @@ longbridge investors
 
 ### Browse top fund managers
 
-Lists the largest institutional investors ranked by AUM, with their CIK identifier, name, reported AUM, and the period of the latest 13F filing.
+Lists the largest institutional investors ranked by AUM, with their CIK identifier, name, reported AUM, and the period of the latest [13F filing](https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&type=13F&dateb=&owner=include&count=40).
 
 ### View a fund manager's holdings
 

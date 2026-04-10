@@ -6,7 +6,7 @@ sidebar_position: 2
 
 # longbridge filing
 
-Browse regulatory filings and disclosure documents for a symbol. For US-listed stocks, this includes SEC EDGAR filings such as Form 4 insider transactions, 8-K current reports, and 10-K annual reports. HK-listed stocks return exchange disclosure filings from the Hong Kong Stock Exchange.
+Browse regulatory filings and disclosure documents for a symbol. For US-listed stocks, this includes [SEC EDGAR](https://www.sec.gov/cgi-bin/browse-edgar) filings such as [Form 4](https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&type=4&dateb=&owner=include&count=40) insider transactions, [8-K](https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&type=8-K&dateb=&owner=include&count=40) current reports, and [10-K](https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&type=10-K&dateb=&owner=include&count=40) annual reports. HK-listed stocks return exchange disclosure filings from the [Hong Kong Stock Exchange](https://www.hkexnews.hk/).
 
 ## Basic Usage
 

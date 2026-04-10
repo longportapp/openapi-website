@@ -6,7 +6,7 @@ sidebar_position: 2
 
 # longbridge insider-trades
 
-View SEC Form 4 insider transaction history for any US-listed stock — purchases, sales, and option exercises by company insiders.
+View [SEC Form 4](https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&type=4&dateb=&owner=include&count=40) insider transaction history for any US-listed stock — purchases, sales, and option exercises by company insiders.
 
 ## Basic Usage
 
@@ -46,4 +46,4 @@ Use `--count` to retrieve more Form 4 filings and cover a broader time window. U
 
 ## Notes
 
-US market only. Data sourced from SEC Form 4 filings.
+US market only. Data sourced from [SEC EDGAR Form 4 filings](https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&type=4&dateb=&owner=include&count=40).
