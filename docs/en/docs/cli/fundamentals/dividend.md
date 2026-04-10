@@ -56,4 +56,4 @@ The `detail` subcommand shows the full distribution scheme — useful when a div
 longbridge dividend AAPL.US --format json
 </CliCommand>
 
-Returns structured JSON with payment date, ex-dividend date, amount, and dividend type — suitable for piping into scripts or tracking tools.
+Returns structured JSON with `ex_date`, `payment_date`, `record_date`, and a `desc` field containing the dividend amount description (e.g., `"每股派息 0.26 USD"`) — suitable for piping into scripts or tracking tools.

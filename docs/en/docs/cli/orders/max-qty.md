@@ -36,4 +36,4 @@ Returns the maximum number of shares you can sell, based on your current holding
 
 ## Requirements
 
-OAuth trade permission is required to query maximum order quantities.
+OAuth trade or account permission is required to query maximum order quantities. See [Trade Permissions](/docs/trade/) for setup details.

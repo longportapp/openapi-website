@@ -24,3 +24,7 @@ longbridge exchange-rate --format json
 </CliCommand>
 
 Displays bid, offer, and average rates for all currency pairs available in your account (e.g., HKD/USD, HKD/CNH). All rates are expressed with HKD as the base currency.
+
+## Requirements
+
+No login is required. This command is available without authentication.

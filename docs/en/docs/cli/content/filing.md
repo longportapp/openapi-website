@@ -6,7 +6,7 @@ sidebar_position: 2
 
 # longbridge filing
 
-Browse SEC filings and regulatory documents for a symbol — Form 4 insider transactions, 8-K current reports, 10-K annual reports, and more.
+Browse regulatory filings and disclosure documents for a symbol. For US-listed stocks, this includes SEC EDGAR filings such as Form 4 insider transactions, 8-K current reports, and 10-K annual reports. HK-listed stocks return exchange disclosure filings from the Hong Kong Stock Exchange.
 
 ## Basic Usage
 
@@ -24,7 +24,7 @@ longbridge filing TSLA.US
 longbridge filing TSLA.US --format json
 </CliCommand>
 
-Lists the most recent filings for the symbol with titles, form types, and publication dates. The `file_urls` field in JSON output contains direct download links to the filing documents on SEC EDGAR.
+Lists the most recent filings for the symbol with titles, form types, and publication dates. The `file_urls` field in JSON output contains direct download links to the filing documents.
 
 ### Read a full filing
 
