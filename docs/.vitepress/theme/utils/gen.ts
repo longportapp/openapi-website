@@ -26,18 +26,24 @@ interface CategoryConfig {
 }
 
 type MSidebar = DefaultTheme.SidebarItem & { position?: number }
+
+interface GenOptions {
+  exclude?: string[]
+  debug?: boolean
+}
+
 /**
  * Generate navigation items by reading markdown files from a directory
  * @param lang Language code (e.g., 'en', 'zh-CN')
  * @param basePath Base path to read files from (e.g., 'docs')
  * @returns Function that returns an array of navigation items
  */
-export function genMarkdowDocs(lang: string, basePath: string, debug = false) {
+export function genMarkdowDocs(lang: string, basePath: string, options: GenOptions = {}) {
   return function (): DefaultTheme.SidebarItem[] {
     const docsRoot = path.resolve(process.cwd(), 'docs')
     const rootDir = path.join(docsRoot, lang, basePath)
-    const fc = generateSidebarItems(rootDir, `/${basePath}`, `/${basePath}`, 0, docsRoot)
-    if (debug) {
+    const fc = generateSidebarItems(rootDir, `/${basePath}`, `/${basePath}`, 0, docsRoot, options.exclude)
+    if (options.debug) {
       fs.writeFileSync(path.resolve(__dirname, `./${lang}_sidebar.json`), JSON.stringify(fc, null, 2))
     }
     return fc
@@ -85,7 +91,8 @@ function generateSidebarItems(
   relativePath: string,
   rootPath: string,
   depth = 0,
-  docsRoot?: string
+  docsRoot?: string,
+  excludeDirs?: string[]
 ): DefaultTheme.SidebarItem[] {
   const items: DefaultTheme.SidebarItem[] = []
 
@@ -138,10 +145,11 @@ function generateSidebarItems(
     const dirItems: MSidebar[] = []
 
     for (const dir of directories) {
+      if (depth === 0 && excludeDirs?.includes(dir)) continue
       const subDirPath = path.join(dirPath, dir)
       const subRelativePath = path.join(relativePath, dir)
       const subCategoryConfig = readCategoryConfig(subDirPath)
-      const subItems = generateSidebarItems(subDirPath, subRelativePath, rootPath, depth + 1, docsRoot)
+      const subItems = generateSidebarItems(subDirPath, subRelativePath, rootPath, depth + 1, docsRoot, excludeDirs)
 
       if (subItems.length > 0) {
         const dirTitle = subCategoryConfig?.label || formatDirName(dir)
