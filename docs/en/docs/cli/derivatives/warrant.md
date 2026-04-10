@@ -24,9 +24,9 @@ longbridge warrant 700.HK --format json
 
 ```json
 [
-  { "expiry": "2026-06-30", "last": "0.65", "leverage_ratio": "7.7846153846153845", "name": "UBTENCT@EP2606B", "symbol": "24760.HK", "type": "Call" },
-  { "expiry": "2026-06-30", "last": "0.65", "leverage_ratio": "7.7846153846153845", "name": "JPTENCT@EP2606A", "symbol": "24687.HK", "type": "Call" },
-  { "expiry": "2026-06-30", "last": "0.64", "leverage_ratio": "7.90625", "name": "GJTENCT@EP2606B", "symbol": "25228.HK", "type": "Call" }
+  { "expiry": "2026-06-30", "last": "0.65", "leverage_ratio": "7.7846153846153845", "name": "UBTENCT@EP2606B", "symbol": "24760.HK", "type": "Put" },
+  { "expiry": "2026-06-30", "last": "0.65", "leverage_ratio": "7.7846153846153845", "name": "JPTENCT@EP2606A", "symbol": "24687.HK", "type": "Put" },
+  { "expiry": "2026-06-30", "last": "0.64", "leverage_ratio": "7.90625", "name": "GJTENCT@EP2606B", "symbol": "25228.HK", "type": "Put" }
 ]
 ```
 
@@ -65,4 +65,4 @@ Lists all active warrant issuers in the HK market with their IDs and names.
 
 ## Requirements
 
-Warrant market data permission is required. Warrant data covers the HK market only.
+Warrant market data permission is required. Warrant data covers the HK market only. See [Quote Subscriptions](/docs/quote/) for permission details.

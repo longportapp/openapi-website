@@ -18,10 +18,6 @@ longbridge option chain AAPL.US
 
 ### Browse the option chain for a stock
 
-<CliCommand>
-longbridge option chain AAPL.US
-</CliCommand>
-
 Without `--date`, this returns all available expiry dates for AAPL options. Pick an expiry date, then pass it with `--date` to see the strikes.
 
 ### View strikes for a specific expiry
@@ -43,10 +39,27 @@ Each row shows the call and put symbols for that strike. Copy a symbol from `cal
 ### Get a real-time quote for an option contract
 
 <CliCommand>
-longbridge option quote AAPL260417C190000.US
+longbridge option quote AAPL260417C190000.US --format json
 </CliCommand>
 
-Returns the latest bid, ask, last price, implied volatility, and greeks for the given contract.
+```json
+[
+  {
+    "symbol": "AAPL260417C190000.US",
+    "last": "12.35",
+    "bid": "12.30",
+    "ask": "12.40",
+    "open_interest": "4821",
+    "implied_volatility": "0.2341",
+    "delta": "0.4812",
+    "gamma": "0.0231",
+    "theta": "-0.0512",
+    "vega": "0.1843"
+  }
+]
+```
+
+Returns the latest bid, ask, last price, implied volatility, and greeks (delta, gamma, theta, vega) for the given contract.
 
 ## Requirements
 
