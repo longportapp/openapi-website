@@ -177,7 +177,7 @@ onUnmounted(clear)
 /* Terminal */
 .hero__terminal {
   max-width: 640px; margin: 0 auto 28px;
-  background: var(--code-bg); border-radius: 10px;
+  background: var(--code-bg); border-radius: 6px;
   overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.18); text-align: left;
 }
 

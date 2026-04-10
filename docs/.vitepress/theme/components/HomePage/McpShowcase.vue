@@ -27,7 +27,7 @@ const setupCmd = `claude mcp add --transport http longbridge ${endpoint}`
 .mcp-showcase {
   background: var(--home-bg-color-1);
   border: 1px solid var(--border-color);
-  border-radius: 10px;
+  border-radius: 6px;
   padding: 24px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }

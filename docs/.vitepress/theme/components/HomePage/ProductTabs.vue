@@ -75,7 +75,7 @@ const activeCommand = computed(() => {
   display: inline-flex;
   gap: 3px;
   background: rgba(0, 0, 0, 0.04);
-  border-radius: 9px;
+  border-radius: 6px;
   padding: 3px;
   margin-bottom: 24px;
   position: relative;
@@ -122,7 +122,7 @@ const activeCommand = computed(() => {
   max-width: 620px;
   margin: 0 auto 32px;
   background: var(--home-bg-color-1);
-  border-radius: 10px;
+  border-radius: 6px;
   padding: 20px 24px;
   text-align: left;
   position: relative;

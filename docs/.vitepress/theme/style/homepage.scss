@@ -25,6 +25,22 @@
   --weight-bold: 800;
 }
 
+// LBUS shadow tokens (mapped from longbridge-websites)
+:root {
+  --hp-shadow-card: 0px 2px 8px 0px rgba(0, 0, 0, 0.08);
+  --hp-shadow-dropdown: 0px 4px 12px 0px rgba(0, 0, 0, 0.12);
+  --hp-shadow-hover: 0px 4px 12px 0px rgba(0, 0, 0, 0.12);
+  --hp-radius-md: 6px;
+  --hp-radius-lg: 12px;
+  --hp-radius-sheet: 18px;
+}
+
+.dark {
+  --hp-shadow-card: 0px 2px 8px 0px rgba(0, 0, 0, 0.24);
+  --hp-shadow-dropdown: 0px 4px 12px 0px rgba(0, 0, 0, 0.32);
+  --hp-shadow-hover: 0px 4px 12px 0px rgba(0, 0, 0, 0.32);
+}
+
 // Terminal/code block palette (always dark, not theme-switched)
 :root {
   --code-bg: #1b1b1f;

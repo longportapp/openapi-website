@@ -19,7 +19,7 @@ defineProps<{ title?: string }>()
 <style scoped>
 .terminal {
   background: var(--code-bg);
-  border-radius: 10px;
+  border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }

@@ -86,7 +86,7 @@ const products = [
 .pg-card {
   background: var(--home-bg-color);
   border: 1px solid var(--border-color);
-  border-radius: 8px; padding: 24px;
+  border-radius: 6px; padding: 24px;
   text-decoration: none; color: inherit;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative; overflow: hidden; display: block;
@@ -107,7 +107,7 @@ const products = [
 .pg-card:hover::before { opacity: 1; }
 
 .pg-icon {
-  width: 36px; height: 36px; border-radius: 8px;
+  width: 36px; height: 36px; border-radius: 6px;
   display: flex; align-items: center; justify-content: center;
   margin-bottom: 14px;
 }
