@@ -76,59 +76,44 @@ const openApiCodeTabs = [
       </template>
     </ProductSection>
 
-    <!-- CLI -->
-    <ProductSection accent="amber">
-      <template #content>
-        <span class="ps-badge ps-badge--amber">CLI</span>
-        <h2 class="ps-title">{{ t('home.cli.title') }}</h2>
-        <p class="ps-desc">{{ t('home.cli.desc') }}</p>
-        <ul class="ps-features">
-          <li><strong>{{ t('home.cli.feat1.title') }}</strong> — {{ t('home.cli.feat1.desc') }}</li>
-          <li><strong>{{ t('home.cli.feat2.title') }}</strong> — {{ t('home.cli.feat2.desc') }}</li>
-          <li><strong>{{ t('home.cli.feat3.title') }}</strong> — {{ t('home.cli.feat3.desc') }}</li>
-        </ul>
-        <a href="/docs/cli" class="ps-link">{{ t('home.cli.link') }} &rarr;</a>
-      </template>
-      <template #visual>
-        <TerminalPreview>
-          <div style="color:#6b7280">$ longbridge quote TSLA.US AAPL.US NVDA.US</div>
-          <br />
-          <table style="width:100%;border-collapse:collapse;font-size:12px">
-            <tr style="color:#6b7280"><td>Symbol</td><td>Last</td><td>Change</td><td>Volume</td></tr>
-            <tr><td>TSLA.US</td><td>248.50</td><td style="color:#34d399">+2.18%</td><td style="color:#6b7280">42.1M</td></tr>
-            <tr><td>AAPL.US</td><td>195.20</td><td style="color:#f87171">-0.71%</td><td style="color:#6b7280">58.3M</td></tr>
-            <tr><td>NVDA.US</td><td>875.30</td><td style="color:#34d399">+1.48%</td><td style="color:#6b7280">31.7M</td></tr>
-          </table>
-        </TerminalPreview>
-      </template>
-    </ProductSection>
+    <!-- CLI + SKILL: compact 2-column cards -->
+    <section class="homepage-section homepage-section--alt">
+      <div class="homepage-container">
+        <div class="compact-grid reveal">
+          <!-- CLI -->
+          <div class="compact-card">
+            <span class="ps-badge ps-badge--amber">CLI</span>
+            <h3 class="compact-title">{{ t('home.cli.title') }}</h3>
+            <p class="compact-desc">{{ t('home.cli.desc') }}</p>
+            <TerminalPreview>
+              <div style="color:var(--code-dim)">$ longbridge quote TSLA.US AAPL.US</div>
+              <br />
+              <table style="width:100%;border-collapse:collapse;font-size:11px">
+                <tr style="color:var(--code-dim)"><td>Symbol</td><td>Last</td><td>Change</td></tr>
+                <tr><td>TSLA.US</td><td>248.50</td><td style="color:var(--code-up)">+2.18%</td></tr>
+                <tr><td>AAPL.US</td><td>195.20</td><td style="color:var(--code-down)">-0.71%</td></tr>
+              </table>
+            </TerminalPreview>
+            <a href="/docs/cli" class="ps-link" style="margin-top:16px">{{ t('home.cli.link') }} &rarr;</a>
+          </div>
 
-    <!-- SKILL -->
-    <ProductSection accent="pink" reverse>
-      <template #content>
-        <span class="ps-badge ps-badge--pink">SKILL</span>
-        <h2 class="ps-title">{{ t('home.skill.title') }}</h2>
-        <p class="ps-desc">{{ t('home.skill.desc') }}</p>
-        <ul class="ps-features">
-          <li><strong>{{ t('home.skill.feat1.title') }}</strong> — {{ t('home.skill.feat1.desc') }}</li>
-          <li><strong>{{ t('home.skill.feat2.title') }}</strong> — {{ t('home.skill.feat2.desc') }}</li>
-          <li><strong>{{ t('home.skill.feat3.title') }}</strong> — {{ t('home.skill.feat3.desc') }}</li>
-        </ul>
-        <a href="/skill" class="ps-link">{{ t('home.skill.link') }} &rarr;</a>
-      </template>
-      <template #visual>
-        <TerminalPreview title="AI Assistant with SKILL">
-          <div style="color:#6b7280">User: <span style="color:#7dd3fc">"帮我从美股里筛出市值 500 亿以上、PE 低于 25、近期 MACD 金叉的科技股"</span></div>
-          <br />
-          <div style="color:#34d399">&#10003; Longbridge SKILL activated</div>
-          <br />
-          <div style="color:#6b7280">Found 3 matching securities:</div>
-          <div>INTC.US &nbsp;PE: 22.1 &nbsp;<span style="color:#34d399">MACD golden cross (2d ago)</span></div>
-          <div>CSCO.US &nbsp;PE: 16.8 &nbsp;<span style="color:#34d399">MACD golden cross (1d ago)</span></div>
-          <div>ORCL.US &nbsp;PE: 24.3 &nbsp;<span style="color:#34d399">MACD golden cross (today)</span></div>
-        </TerminalPreview>
-      </template>
-    </ProductSection>
+          <!-- SKILL -->
+          <div class="compact-card">
+            <span class="ps-badge ps-badge--pink">SKILL</span>
+            <h3 class="compact-title">{{ t('home.skill.title') }}</h3>
+            <p class="compact-desc">{{ t('home.skill.desc') }}</p>
+            <TerminalPreview title="AI + SKILL">
+              <div style="color:var(--code-dim)">User: <span style="color:var(--code-str)">"筛出 PE&lt;25 的美股科技股"</span></div>
+              <br />
+              <div style="color:var(--code-up)">&#10003; SKILL activated</div>
+              <div>INTC.US PE:22.1 <span style="color:var(--code-up)">MACD 金叉</span></div>
+              <div>CSCO.US PE:16.8 <span style="color:var(--code-up)">MACD 金叉</span></div>
+            </TerminalPreview>
+            <a href="/skill" class="ps-link" style="margin-top:16px">{{ t('home.skill.link') }} &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <MarketCoverage />
     <Footer />
@@ -150,9 +135,9 @@ const openApiCodeTabs = [
 }
 
 .ps-badge--brand { background: var(--brand-5); color: var(--brand-color); }
-.ps-badge--purple { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
-.ps-badge--amber { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
-.ps-badge--pink { background: rgba(236, 72, 153, 0.1); color: #ec4899; }
+.ps-badge--purple { background: rgba(139, 92, 246, 0.1); color: var(--product-mcp); }
+.ps-badge--amber { background: rgba(245, 158, 11, 0.1); color: var(--product-cli); }
+.ps-badge--pink { background: rgba(236, 72, 153, 0.1); color: var(--product-skill); }
 
 .ps-title {
   font-size: 28px;
@@ -200,4 +185,39 @@ const openApiCodeTabs = [
 }
 
 .ps-link:hover { gap: 10px; }
+
+/* Compact 2-column for CLI + SKILL */
+.compact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.compact-card {
+  background: var(--home-bg-color-1);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.compact-title {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  color: var(--text-color-1);
+}
+
+.compact-desc {
+  font-size: 13px;
+  color: var(--text-color-1-supplement);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+  .compact-grid { grid-template-columns: 1fr; }
+}
 </style>

@@ -1,6 +1,23 @@
 // Homepage styles
 // All colors use CSS variables from css-var.scss — no hardcoded values.
 
+// Terminal/code block palette (always dark, not theme-switched)
+:root {
+  --code-bg: #1b1b1f;
+  --code-fg: #e5e7eb;
+  --code-dim: #6b7280;
+  --code-accent: #00d4b8;
+  --code-kw: #c084fc;
+  --code-str: #7dd3fc;
+  --code-fn: #fbbf24;
+  --code-up: #34d399;
+  --code-down: #f87171;
+  // Product accent colors
+  --product-mcp: #8b5cf6;
+  --product-cli: #f59e0b;
+  --product-skill: #ec4899;
+}
+
 // ---------------------------------------------------------------------------
 // Layout
 // ---------------------------------------------------------------------------

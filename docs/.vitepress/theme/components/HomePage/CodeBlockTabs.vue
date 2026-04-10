@@ -37,7 +37,7 @@ const activeTab = ref(props.tabs[0]?.key || '')
 
 <style scoped>
 .cbt {
-  background: #1b1b1f;
+  background: var(--code-bg);
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -55,7 +55,7 @@ const activeTab = ref(props.tabs[0]?.key || '')
   padding: 8px 16px;
   font-size: 12px;
   font-weight: 500;
-  color: #6b7280;
+  color: var(--code-dim);
   border: none;
   background: none;
   cursor: pointer;
@@ -65,12 +65,12 @@ const activeTab = ref(props.tabs[0]?.key || '')
 }
 
 .cbt__tab--active {
-  color: #e5e7eb;
+  color: var(--code-fg);
   border-bottom-color: var(--brand-color);
 }
 
 .cbt__tab:hover {
-  color: #e5e7eb;
+  color: var(--code-fg);
 }
 
 .cbt__body {
@@ -83,6 +83,6 @@ const activeTab = ref(props.tabs[0]?.key || '')
   font-family: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
   font-size: 12.5px;
   line-height: 1.8;
-  color: #e5e7eb;
+  color: var(--code-fg);
 }
 </style>

@@ -120,14 +120,17 @@ onUnmounted(clear)
 
       <div class="hero__terminal hero-fade-up" style="animation-delay:0.7s">
         <!-- Tab bar -->
-        <div ref="tabsRef" class="ht-bar">
+        <div ref="tabsRef" class="ht-bar" role="tablist" aria-label="Products">
           <div class="ht-ind" :style="indicatorStyle" />
           <button
             v-for="(p, i) in products" :key="p.key" :data-idx="i"
+            role="tab"
+            :aria-selected="activeIdx === i"
+            :tabindex="activeIdx === i ? 0 : -1"
             class="ht-tab" :class="{ active: activeIdx === i }"
             @click="switchTo(i)"
           >{{ p.label }}</button>
-          <button class="ht-copy" @click="copy">
+          <button class="ht-copy" aria-label="Copy install command" @click="copy">
             {{ copied ? $t('api.copied') : $t('api.copy') }}
           </button>
         </div>
@@ -167,7 +170,7 @@ onUnmounted(clear)
 /* Terminal */
 .hero__terminal {
   max-width: 640px; margin: 0 auto 28px;
-  background: #1b1b1f; border-radius: 10px;
+  background: var(--code-bg); border-radius: 10px;
   overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.18); text-align: left;
 }
 
@@ -185,37 +188,37 @@ onUnmounted(clear)
 
 .ht-tab {
   padding: 10px 18px; font-size: 13px; font-weight: 600;
-  border: none; background: none; color: #6b7280;
+  border: none; background: none; color: var(--code-dim);
   cursor: pointer; font-family: inherit; transition: color 0.2s;
   position: relative; z-index: 1;
 }
 
-.ht-tab.active { color: #00d4b8; }
-.ht-tab:hover { color: #e5e7eb; }
+.ht-tab.active { color: var(--code-accent); }
+.ht-tab:hover { color: var(--code-fg); }
 
 .ht-copy {
   margin-left: auto; padding: 4px 12px; font-size: 11px; font-weight: 500;
   border: 1px solid rgba(255,255,255,0.12); border-radius: 4px;
-  background: transparent; color: #6b7280; cursor: pointer;
+  background: transparent; color: var(--code-dim); cursor: pointer;
   font-family: inherit; transition: all 0.2s;
 }
 
-.ht-copy:hover { color: #e5e7eb; border-color: rgba(255,255,255,0.25); }
+.ht-copy:hover { color: var(--code-fg); border-color: rgba(255,255,255,0.25); }
 
 /* Command area */
 .ht-cmd {
   padding: 18px 22px;
   font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
-  font-size: 14.5px; line-height: 1.6; color: #e5e7eb;
+  font-size: 14.5px; line-height: 1.6; color: var(--code-fg);
   display: flex; align-items: center; min-height: 58px;
 }
 
-.ht-ps { color: #00d4b8; user-select: none; margin-right: 10px; font-weight: 700; }
+.ht-ps { color: var(--code-accent); user-select: none; margin-right: 10px; font-weight: 700; }
 .ht-text { word-break: break-all; }
 
 /* Product hint */
 .ht-hint {
-  padding: 10px 22px; font-size: 12px; color: #6b7280;
+  padding: 10px 22px; font-size: 12px; color: var(--code-dim);
   border-top: 1px solid rgba(255,255,255,0.06);
   background: rgba(255,255,255,0.02);
 }

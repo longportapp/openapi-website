@@ -18,7 +18,7 @@ defineProps<{ title?: string }>()
 
 <style scoped>
 .terminal {
-  background: #1b1b1f;
+  background: var(--code-bg);
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -45,7 +45,7 @@ defineProps<{ title?: string }>()
 
 .terminal__title {
   font-size: 12px;
-  color: #6b7280;
+  color: var(--code-dim);
   margin-left: 8px;
   font-family: 'SF Mono', ui-monospace, monospace;
 }
@@ -54,7 +54,7 @@ defineProps<{ title?: string }>()
   padding: 16px 20px;
   font-family: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
   font-size: 12px;
-  color: #e5e7eb;
+  color: var(--code-fg);
   line-height: 1.9;
   overflow-x: auto;
 }
