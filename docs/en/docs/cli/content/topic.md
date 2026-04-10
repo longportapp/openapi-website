@@ -50,7 +50,7 @@ Stats:    42 likes  7 comments  0 views
 Created:  2026-04-09T11:32:03Z
 URL:      https://longbridge.cn/topics/39798312
 
-In the prior piece 'AI竞赛终局：电力说了算？', Dolphin Research argued that
+In the prior piece on AI infrastructure, Dolphin Research argued that
 the U.S. power shortfall is not a cyclical mismatch but a structural conflict
 between surging AI compute and long-lagging energy and grid build-out...
 ```
