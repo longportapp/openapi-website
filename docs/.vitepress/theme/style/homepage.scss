@@ -1,6 +1,30 @@
 // Homepage styles
 // All colors use CSS variables from css-var.scss — no hardcoded values.
 
+// ---------------------------------------------------------------------------
+// Type scale (1.25 ratio, rem-based)
+// ---------------------------------------------------------------------------
+// xs(11) → sm(13) → base(16) → lg(20) → xl(28) → 2xl(36) → 3xl(52)
+:root {
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.25rem;
+  --text-3xl: clamp(2.125rem, 1.5rem + 2.5vw, 3.25rem); // 34px → 52px fluid
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.3;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 800;
+}
+
 // Terminal/code block palette (always dark, not theme-switched)
 :root {
   --code-bg: #1b1b1f;

@@ -158,13 +158,13 @@ onUnmounted(clear)
 .hero { text-align: center; padding: 80px 0 48px; }
 
 .hero__title {
-  font-size: 52px; font-weight: 900; letter-spacing: -0.035em;
-  line-height: 1.05; margin-bottom: 16px; color: var(--text-color-1);
+  font-size: var(--text-3xl); font-weight: var(--weight-bold); letter-spacing: -0.035em;
+  line-height: var(--leading-tight); margin-bottom: 1rem; color: var(--text-color-1);
 }
 
 .hero__desc {
-  font-size: 16px; color: var(--text-color-2); margin-bottom: 36px;
-  white-space: pre-line; line-height: 1.6;
+  font-size: var(--text-base); color: var(--text-color-2); margin-bottom: 2.25rem;
+  white-space: pre-line; line-height: var(--leading-relaxed);
 }
 
 /* Terminal */
@@ -187,7 +187,7 @@ onUnmounted(clear)
 }
 
 .ht-tab {
-  padding: 10px 18px; font-size: 13px; font-weight: 600;
+  padding: 0.625rem 1.125rem; font-size: var(--text-sm); font-weight: var(--weight-semibold);
   border: none; background: none; color: var(--code-dim);
   cursor: pointer; font-family: inherit; transition: color 0.2s;
   position: relative; z-index: 1;
@@ -197,7 +197,7 @@ onUnmounted(clear)
 .ht-tab:hover { color: var(--code-fg); }
 
 .ht-copy {
-  margin-left: auto; padding: 4px 12px; font-size: 11px; font-weight: 500;
+  margin-left: auto; padding: 0.25rem 0.75rem; font-size: var(--text-xs); font-weight: var(--weight-medium);
   border: 1px solid rgba(255,255,255,0.12); border-radius: 4px;
   background: transparent; color: var(--code-dim); cursor: pointer;
   font-family: inherit; transition: all 0.2s;
