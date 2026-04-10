@@ -2,7 +2,7 @@
 sidebar_position: -999
 title: 平台介紹
 id: getting_started_introduce
-sidebar_icon: book
+sidebar_icon: book_open
 ---
 
 Longbridge Developers 為有研發能力的投資者提供程序化行情交易接口，助力投資者根據自身投資策略搭建交易或行情策略分析工具。覆蓋以下類別功能：

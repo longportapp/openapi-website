@@ -1,8 +1,8 @@
 ---
 sidebar_position: -999
-title: Platform Introduction
-id: getting_started_introduce
-sidebar_icon: book
+title: Overview
+id: overview
+sidebar_icon: book_open
 ---
 
 Longbridge Developers provides programmatic quote trading interfaces for investors with research and development capabilities and assists them to build trading or quote strategy analysis tools based on their own investment strategies. The functions fall into the following categories:

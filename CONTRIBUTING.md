@@ -66,10 +66,10 @@ Every `.md` file requires frontmatter:
 ```yaml
 ---
 title: 'Page Title'
-id: category_file-name          # e.g., quote_pull-static
-slug: '/quote/pull/static'      # must start with /, matches the URL path
-sidebar_position: 3             # lower = higher in sidebar
-sidebar_icon: book              # optional: book | zap | cpu | terminal | sparkles
+id: category_file-name # e.g., quote_pull-static
+slug: '/quote/pull/static' # must start with /, matches the URL path
+sidebar_position: 3 # lower = higher in sidebar
+sidebar_icon: book # optional: book_open | book | zap | cpu | terminal | sparkles
 ---
 ```
 
@@ -96,9 +96,11 @@ The sidebar is **auto-generated** from the filesystem by `docs/.vitepress/theme/
 
 ```markdown
 <!-- Wrong -->
+
 ![diagram](../../static/diagram.png)
 
 <!-- Correct -->
+
 ![diagram](https://pub.pbkrs.com/files/xxx/diagram.png)
 ```
 
@@ -106,14 +108,14 @@ The sidebar is **auto-generated** from the filesystem by `docs/.vitepress/theme/
 
 These components are globally registered and can be used directly in any `.md` file:
 
-| Component | Purpose |
-|-----------|---------|
-| `<Tabs>` / `<TabItem>` | Code group tabs |
-| `<TipContainer>` | Callout/tip boxes |
-| `<TryIt>` | Interactive API playground |
-| `<SDKLinks>` / `<SDK>` | SDK download links |
-| `<Skill>` | AI Skill feature showcase |
-| `<HomePage>` | Homepage layout |
+| Component              | Purpose                    |
+| ---------------------- | -------------------------- |
+| `<Tabs>` / `<TabItem>` | Code group tabs            |
+| `<TipContainer>`       | Callout/tip boxes          |
+| `<TryIt>`              | Interactive API playground |
+| `<SDKLinks>` / `<SDK>` | SDK download links         |
+| `<Skill>`              | AI Skill feature showcase  |
+| `<HomePage>`           | Homepage layout            |
 
 To add a new component: create the Vue file in `docs/.vitepress/theme/components/` and export it from `index.ts`.
 
@@ -159,6 +161,7 @@ skills/longbridge/SKILL.md
 ### When to update the Skill
 
 Update `SKILL.md` when:
+
 - A new API endpoint is added or an existing one changes
 - A new SDK language is supported
 - New features are added to the CLI or MCP server
@@ -167,6 +170,7 @@ Update `SKILL.md` when:
 ### Skill structure
 
 The Skill is a self-contained Markdown document that gives an AI agent everything needed to call Longbridge APIs correctly. It includes:
+
 - Authentication and environment setup
 - All major API endpoints with parameters and response shapes
 - Common workflows (quote → order → confirm)
@@ -180,11 +184,11 @@ Keep the Skill accurate and current — AI agents may invoke it instead of readi
 
 ### Locale configuration
 
-| Locale | Directory | URL prefix | Config path |
-|--------|-----------|------------|-------------|
-| English | `docs/en/` | `/` (root) | `docs/.vitepress/locales/en/` |
-| Simplified Chinese | `docs/zh-CN/` | `/zh-CN/` | `docs/.vitepress/locales/zh-CN/` |
-| Traditional Chinese | `docs/zh-HK/` | `/zh-HK/` | `docs/.vitepress/locales/zh-HK/` |
+| Locale              | Directory     | URL prefix | Config path                      |
+| ------------------- | ------------- | ---------- | -------------------------------- |
+| English             | `docs/en/`    | `/` (root) | `docs/.vitepress/locales/en/`    |
+| Simplified Chinese  | `docs/zh-CN/` | `/zh-CN/`  | `docs/.vitepress/locales/zh-CN/` |
+| Traditional Chinese | `docs/zh-HK/` | `/zh-HK/`  | `docs/.vitepress/locales/zh-HK/` |
 
 ### Adding nav items
 
@@ -209,6 +213,7 @@ docs/.vitepress/theme/locales/zh-HK.json
 ### Route rewriting
 
 The `docs/.vitepress/utils.ts` `rewriteMarkdownPath` function handles URL generation. The `slug` frontmatter field overrides the default path:
+
 - An absolute `slug` like `/trade-order-create` replaces the entire path segment
 - A relative `slug` resolves relative to the file's directory
 
@@ -231,11 +236,13 @@ git submodule update --remote --merge
 Contains the canonical OpenAPI specification and multi-language SDK source code (Python, Rust, Go, Node.js, Java, C++).
 
 **Sync when:**
+
 - An API endpoint is added, removed, or its parameters/response shape changes
 - A new SDK language is added
 - An existing SDK method is renamed or its signature changes
 
 **What to change:**
+
 - `openapi/openapi.yaml` — the authoritative API spec; all other changes derive from this
 - SDK source files for any affected method across all languages
 
@@ -244,11 +251,13 @@ Contains the canonical OpenAPI specification and multi-language SDK source code 
 The official Go SDK. Method names, parameter types, and response structs must stay consistent with what is documented in `docs/{lang}/` and defined in `openapi/openapi.yaml`.
 
 **Sync when:**
+
 - An API method signature changes (parameter added/removed/renamed)
 - A new endpoint is added that needs a Go implementation
 - Response struct fields change
 
 **What to change:**
+
 - Go struct definitions and method signatures in `openapi-go/`
 - Ensure Go method names in `SDKLinks` component (`docs/.vitepress/theme/components/SDKLinks.vue`) match
 
@@ -257,11 +266,13 @@ The official Go SDK. Method names, parameter types, and response structs must st
 The `longbridge` CLI distributed via Homebrew. CLI docs (`docs/{lang}/docs/cli.md`) and `<CliCommand>` examples in API docs must reflect the actual CLI behavior.
 
 **Sync when:**
+
 - A new CLI command or flag is added
 - A command's output format or behavior changes
 - A command is deprecated or removed
 
 **What to change:**
+
 - CLI source in `longbridge-terminal/`
 - `docs/{lang}/docs/cli.md` in all three locales
 - Any `<CliCommand>` blocks in docs that use the affected command

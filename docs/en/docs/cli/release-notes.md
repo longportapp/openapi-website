@@ -2,6 +2,7 @@
 title: 'Release Notes'
 sidebar_label: 'Release Notes'
 sidebar_position: 100
+sidebar_icon: newspaper
 ---
 
 # Release Notes

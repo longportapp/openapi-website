@@ -9,7 +9,7 @@ x-pages:
   - id: overview
     title: Overview
     x-title-zh: 概览
-    x-icon: lock
+    x-icon: book
     content: |
       This page is reorganized as a practical **OAuth 2.0 access flow** for new integrations.
 

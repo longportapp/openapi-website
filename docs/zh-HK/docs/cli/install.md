@@ -2,7 +2,7 @@
 title: '安裝'
 sidebar_label: '安裝'
 sidebar_position: 2
-sidebar_icon: cpu
+sidebar_icon: arrow-down-to-line
 ---
 
 # 安裝

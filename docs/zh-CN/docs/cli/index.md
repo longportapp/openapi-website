@@ -2,7 +2,7 @@
 title: 'Longbridge CLI'
 sidebar_label: '概述'
 sidebar_position: 1
-sidebar_icon: terminal
+sidebar_icon: book_open
 ---
 
 # Longbridge CLI
@@ -13,7 +13,7 @@ Longbridge CLI（`longbridge`）是面向 Longbridge OpenAPI 全端点的 AI 原
 
 ## 快速开始
 
-参见[安装说明](/zh-CN/docs/cli/installation)了解平台安装方式与鉴权配置。安装后可直接运行任意命令：
+参见[安装说明](/zh-CN/docs/cli/install)了解平台安装方式与鉴权配置。安装后可直接运行任意命令：
 
 ```bash
 # 查询实时行情
@@ -39,11 +39,11 @@ longbridge quote TSLA.US NVDA.US --format json
 
 标的代码采用 `代码.市场` 格式：
 
-| 示例          | 市场               |
-| ------------- | ------------------ |
-| `TSLA.US`     | 美股               |
-| `700.HK`      | 港股               |
-| `600519.SH`   | A 股（上交所）      |
-| `000568.SZ`   | A 股（深交所）      |
-| `D05.SG`      | 新加坡             |
-| `BTCUSD.HAS`  | 加密货币（Longbridge 专属）|
+| 示例         | 市场                        |
+| ------------ | --------------------------- |
+| `TSLA.US`    | 美股                        |
+| `700.HK`     | 港股                        |
+| `600519.SH`  | A 股（上交所）              |
+| `000568.SZ`  | A 股（深交所）              |
+| `D05.SG`     | 新加坡                      |
+| `BTCUSD.HAS` | 加密货币（Longbridge 专属） |

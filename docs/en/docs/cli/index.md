@@ -2,7 +2,7 @@
 title: 'Longbridge CLI'
 sidebar_label: 'Overview'
 sidebar_position: 1
-sidebar_icon: terminal
+sidebar_icon: book_open
 ---
 
 # Longbridge CLI
@@ -15,7 +15,7 @@ scripting, AI-agent tool-calling, and daily workflows from the terminal.
 
 ## Quick Start
 
-See [Installation](/docs/cli/installation) for platform-specific install instructions and authentication setup. After installing, try any command:
+See [Installation](/docs/cli/install) for platform-specific install instructions and authentication setup. After installing, try any command:
 
 ```bash
 # Check real-time price
