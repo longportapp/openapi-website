@@ -42,7 +42,7 @@ longbridge kline history NVDA.US --start 2025-01-01 --end 2025-12-31
 | ∟ date         | string | No       | Query date, in `YYYYMMDD` format, for example: 20231016. Default value: latest trading day of the underlying market.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | ∟ minute       | string | No       | Query time, in `HHMM` format, for example: 09:35, only valid when querying minute-level data                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ∟ count        | int32  | No       | Count of cancdlestick, valid range:`[1,1000]`. Default value: `10`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| trade_session  | int32  | No       | Trading session, 0: intraday, 100: All (pre, intraday, post, overnight)<br/><br/>Note: Overnight data requires purchasing the "LV1 Real-time Quote (OpenAPI)" quote card. US stocks only.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| trade_session  | int32  | No       | Trading session, 0: intraday, 100: All (pre, intraday, post, overnight)<br/><br/>Note: Overnight data requires purchasing the "LV1 Real-time Quote (OpenAPI)" quote card. US stocks only.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
 ### Protobuf
 
@@ -129,14 +129,34 @@ if __name__ == "__main__":
   <TabItem value="nodejs" label="Node.js">
 
 ```javascript
-const { Config, QuoteContext, OAuth, Period, AdjustType, TradeSessions, NaiveDatetime, NaiveDate, Time } = require('longbridge')
+const {
+  Config,
+  QuoteContext,
+  OAuth,
+  Period,
+  AdjustType,
+  TradeSessions,
+  NaiveDatetime,
+  NaiveDate,
+  Time,
+} = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
+  })
   const config = Config.fromOAuth(oauth)
   const ctx = QuoteContext.new(config)
   const datetime = new NaiveDatetime(new NaiveDate(2023, 1, 1), new Time(0, 0, 0))
-  const resp = await ctx.historyCandlesticksByOffset("700.HK", Period.Day, AdjustType.NoAdjust, true, datetime, 10, TradeSessions.Intraday)
+  const resp = await ctx.historyCandlesticksByOffset(
+    '700.HK',
+    Period.Day,
+    AdjustType.NoAdjust,
+    true,
+    datetime,
+    10,
+    TradeSessions.Intraday
+  )
   console.log(resp)
 }
 main().catch(console.error)
@@ -273,7 +293,6 @@ func main() {
 
   </TabItem>
 </Tabs>
-
 
 ## Response
 

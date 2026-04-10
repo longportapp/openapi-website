@@ -80,12 +80,12 @@ if __name__ == "__main__":
 const { Config, QuoteContext, OAuth } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => {
-    console.log("Open this URL to authorize: " + url)
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
   })
   const config = Config.fromOAuth(oauth)
   const ctx = QuoteContext.new(config)
-  const resp = await ctx.quote(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"])
+  const resp = await ctx.quote(['700.HK', 'AAPL.US', 'TSLA.US', 'NFLX.US'])
   for (const obj of resp) {
     console.log(obj.toString())
   }
@@ -237,43 +237,43 @@ func main() {
 
 ### Response Properties
 
-| Name                | Type     | Description                                                                          |
-| ------------------- | -------- | ------------------------------------------------------------------------------------ |
-| secu_quote          | object[] | Securities quote                                                                     |
-| ∟ symbol            | string   | Security code                                                                        |
-| ∟ last_done         | string   | Latest price                                                                         |
-| ∟ prev_close        | string   | Yesterday's close                                                                    |
-| ∟ open              | string   | Open                                                                                 |
-| ∟ high              | string   | High                                                                                 |
-| ∟ low               | string   | Low                                                                                  |
-| ∟ timestamp         | int64    | Time of latest price                                                                 |
-| ∟ volume            | int64    | Volume                                                                               |
-| ∟ turnover          | string   | Turnover                                                                             |
-| ∟ trade_status      | int32    | Security trading status, see [TradeStatus](../objects#tradestatus---security-status) |
-| ∟ pre_market_quote  | object   | Quote of US pre market                                                               |
-| ∟∟ last_done        | string   | Latest price                                                                         |
-| ∟∟ timestamp        | int64    | Time of latest price                                                                 |
-| ∟∟ volume           | int64    | Volume                                                                               |
-| ∟∟ turnover         | string   | Turnover                                                                             |
-| ∟∟ high             | string   | High                                                                                 |
-| ∟∟ low              | string   | Low                                                                                  |
-| ∟∟ prev_close       | string   | Close of the last trade session                                                      |
-| ∟ post_market_quote | object   | Quote of US post market                                                              |
-| ∟∟ last_done        | string   | Latest price                                                                         |
-| ∟∟ timestamp        | int64    | Time of latest price                                                                 |
-| ∟∟ volume           | int64    | Volume                                                                               |
-| ∟∟ turnover         | string   | Turnover                                                                             |
-| ∟∟ high             | string   | High                                                                                 |
-| ∟∟ low              | string   | Low                                                                                  |
-| ∟∟ prev_close       | string   | Close of the last trade session                                                      |
+| Name                | Type     | Description                                                                                                                                                                                                 |
+| ------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| secu_quote          | object[] | Securities quote                                                                                                                                                                                            |
+| ∟ symbol            | string   | Security code                                                                                                                                                                                               |
+| ∟ last_done         | string   | Latest price                                                                                                                                                                                                |
+| ∟ prev_close        | string   | Yesterday's close                                                                                                                                                                                           |
+| ∟ open              | string   | Open                                                                                                                                                                                                        |
+| ∟ high              | string   | High                                                                                                                                                                                                        |
+| ∟ low               | string   | Low                                                                                                                                                                                                         |
+| ∟ timestamp         | int64    | Time of latest price                                                                                                                                                                                        |
+| ∟ volume            | int64    | Volume                                                                                                                                                                                                      |
+| ∟ turnover          | string   | Turnover                                                                                                                                                                                                    |
+| ∟ trade_status      | int32    | Security trading status, see [TradeStatus](../objects#tradestatus---security-status)                                                                                                                        |
+| ∟ pre_market_quote  | object   | Quote of US pre market                                                                                                                                                                                      |
+| ∟∟ last_done        | string   | Latest price                                                                                                                                                                                                |
+| ∟∟ timestamp        | int64    | Time of latest price                                                                                                                                                                                        |
+| ∟∟ volume           | int64    | Volume                                                                                                                                                                                                      |
+| ∟∟ turnover         | string   | Turnover                                                                                                                                                                                                    |
+| ∟∟ high             | string   | High                                                                                                                                                                                                        |
+| ∟∟ low              | string   | Low                                                                                                                                                                                                         |
+| ∟∟ prev_close       | string   | Close of the last trade session                                                                                                                                                                             |
+| ∟ post_market_quote | object   | Quote of US post market                                                                                                                                                                                     |
+| ∟∟ last_done        | string   | Latest price                                                                                                                                                                                                |
+| ∟∟ timestamp        | int64    | Time of latest price                                                                                                                                                                                        |
+| ∟∟ volume           | int64    | Volume                                                                                                                                                                                                      |
+| ∟∟ turnover         | string   | Turnover                                                                                                                                                                                                    |
+| ∟∟ high             | string   | High                                                                                                                                                                                                        |
+| ∟∟ low              | string   | Low                                                                                                                                                                                                         |
+| ∟∟ prev_close       | string   | Close of the last trade session                                                                                                                                                                             |
 | ∟ over_night_quote  | object   | Quote of US overnight market<br/><br/>Note: Requires purchasing the "LV1 Real-time Quote (OpenAPI)" quote card in the Longbridge App and enabling the `enable_overnight` parameter. Returns null otherwise. |
-| ∟∟ last_done        | string   | Latest price                                                                         |
-| ∟∟ timestamp        | int64    | Time of latest price                                                                 |
-| ∟∟ volume           | int64    | Volume                                                                               |
-| ∟∟ turnover         | string   | Turnover                                                                             |
-| ∟∟ high             | string   | High                                                                                 |
-| ∟∟ low              | string   | Low                                                                                  |
-| ∟∟ prev_close       | string   | Close of the last trade session                                                      |
+| ∟∟ last_done        | string   | Latest price                                                                                                                                                                                                |
+| ∟∟ timestamp        | int64    | Time of latest price                                                                                                                                                                                        |
+| ∟∟ volume           | int64    | Volume                                                                                                                                                                                                      |
+| ∟∟ turnover         | string   | Turnover                                                                                                                                                                                                    |
+| ∟∟ high             | string   | High                                                                                                                                                                                                        |
+| ∟∟ low              | string   | Low                                                                                                                                                                                                         |
+| ∟∟ prev_close       | string   | Close of the last trade session                                                                                                                                                                             |
 
 ### Protobuf
 

@@ -90,7 +90,9 @@ if __name__ == "__main__":
 const { Config, TradeContext, OAuth } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
+  })
   const config = Config.fromOAuth(oauth)
   const ctx = TradeContext.new(config)
   const resp = await ctx.todayOrders({})
@@ -229,7 +231,6 @@ func main() {
   </TabItem>
 </Tabs>
 
-
 ## Response
 
 ### Response Headers
@@ -323,6 +324,6 @@ func main() {
 | ∟ currency          | string   | true     | Currency                                                                                                                                                                                                                                            |
 | ∟ outside_rth       | string   | true     | Enable or disable outside regular trading hours<br/> Default is `UnknownOutsideRth` when the order is not a US stock<br/><br/> **Enum Value:**<br/> `RTH_ONLY` - Regular trading hour only<br/> `ANY_TIME` - Any time<br/> `OVERNIGHT` - Overnight" |
 | ∟ remark            | string   | true     | Remark                                                                                                                                                                                                                                              |
-| ∟ limit_depth_level | int32    | true     | Specifies the bid/ask depth level   |
-| ∟ monitor_price     | string   | true     | Monitoring price                    |
-| ∟ trigger_count     | int32    | true     | Number of triggers                  |
+| ∟ limit_depth_level | int32    | true     | Specifies the bid/ask depth level                                                                                                                                                                                                                   |
+| ∟ monitor_price     | string   | true     | Monitoring price                                                                                                                                                                                                                                    |
+| ∟ trigger_count     | int32    | true     | Number of triggers                                                                                                                                                                                                                                  |

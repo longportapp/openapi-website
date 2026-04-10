@@ -31,19 +31,19 @@ longbridge replace 693664675163312128 --qty 200 --price 255.00
 
 > Content-Type: application/json; charset=utf-8
 
-| Name             | Type   | Required | Description                                                                                    |
-| ---------------- | ------ | -------- | ---------------------------------------------------------------------------------------------- |
-| order_id         | string | YES      | Order ID                                                                                       |
-| quantity         | string | YES      | Replaced quantity, example: `100`                                                              |
-| price            | string | NO       | Replaced price, example: `388.5`<br/><br/> `LO` / `ELO` / `ALO` / `ODD` / `LIT` Order Required |
-| trigger_price    | string | NO       | Trigger price, example: `388.5`<br/><br/> `LIT` / `MIT` Order Required                         |
-| limit_offset     | string | NO       | Limit offset amount<br/><br/> `TSLPAMT` / `TSLPPCT` Order Required when`limit_depth_level` is set to 0 |
-| trailing_amount  | string | NO       | Trailing amount<br/><br/> `TSLPAMT` Order Required                                             |
-| trailing_percent | string | NO       | Trailing percent<br/><br/> `TSLPPCT` Order Required                                            |
-| remark           | string | NO       | Remark (Maximum 64 characters)                                                                 |
-| limit_depth_level | int32  | NO      | Specifies the bid/ask depth level. `TSLPAMT` / `TSLPPCT` Order Required                        |
-| monitor_price     | string | NO      | Monitoring price. `TSLPAMT` / `TSLPPCT` Order Required                                         |
-| trigger_count     | int32  | NO      | Number of triggers. `LIT` / `MIT` / `TSLPAMT` / `TSLPPCT` Order Required                       |
+| Name              | Type   | Required | Description                                                                                            |
+| ----------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------ |
+| order_id          | string | YES      | Order ID                                                                                               |
+| quantity          | string | YES      | Replaced quantity, example: `100`                                                                      |
+| price             | string | NO       | Replaced price, example: `388.5`<br/><br/> `LO` / `ELO` / `ALO` / `ODD` / `LIT` Order Required         |
+| trigger_price     | string | NO       | Trigger price, example: `388.5`<br/><br/> `LIT` / `MIT` Order Required                                 |
+| limit_offset      | string | NO       | Limit offset amount<br/><br/> `TSLPAMT` / `TSLPPCT` Order Required when`limit_depth_level` is set to 0 |
+| trailing_amount   | string | NO       | Trailing amount<br/><br/> `TSLPAMT` Order Required                                                     |
+| trailing_percent  | string | NO       | Trailing percent<br/><br/> `TSLPPCT` Order Required                                                    |
+| remark            | string | NO       | Remark (Maximum 64 characters)                                                                         |
+| limit_depth_level | int32  | NO       | Specifies the bid/ask depth level. `TSLPAMT` / `TSLPPCT` Order Required                                |
+| monitor_price     | string | NO       | Monitoring price. `TSLPAMT` / `TSLPPCT` Order Required                                                 |
+| trigger_count     | int32  | NO       | Number of triggers. `LIT` / `MIT` / `TSLPAMT` / `TSLPPCT` Order Required                               |
 
 ### Request Example
 
@@ -95,11 +95,13 @@ if __name__ == "__main__":
 const { Config, TradeContext, OAuth, Decimal } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
+  })
   const config = Config.fromOAuth(oauth)
   const ctx = TradeContext.new(config)
-  await ctx.replaceOrder({ orderId: "701276261045858304", quantity: new Decimal(400), price: new Decimal(60) })
-  console.log("replaced")
+  await ctx.replaceOrder({ orderId: '701276261045858304', quantity: new Decimal(400), price: new Decimal(60) })
+  console.log('replaced')
 }
 main().catch(console.error)
 ```
@@ -241,7 +243,6 @@ func main() {
 
   </TabItem>
 </Tabs>
-
 
 ## Response
 

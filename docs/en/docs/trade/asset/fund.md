@@ -75,7 +75,9 @@ if __name__ == "__main__":
 const { Config, TradeContext, OAuth } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
+  })
   const config = Config.fromOAuth(oauth)
   const ctx = TradeContext.new(config)
   const resp = await ctx.fundPositions()
@@ -211,7 +213,6 @@ func main() {
 
   </TabItem>
 </Tabs>
-
 
 ## Response
 

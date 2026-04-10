@@ -74,11 +74,13 @@ if __name__ == "__main__":
 const { Config, QuoteContext, OAuth } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
+  })
   const config = Config.fromOAuth(oauth)
   const ctx = QuoteContext.new(config)
   await ctx.deleteWatchlistGroup(1)
-  console.log("deleted")
+  console.log('deleted')
 }
 main().catch(console.error)
 ```
@@ -210,7 +212,6 @@ func main() {
 
   </TabItem>
 </Tabs>
-
 
 ## Response
 

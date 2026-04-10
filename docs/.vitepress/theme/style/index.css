@@ -145,34 +145,56 @@ html:root {
 }
 
 /* CLI Command block */
-.vp-cli-command h2 {
-  display: flex;
-  align-items: center;
+.vp-cli-command .language-bash {
+  border-radius: 0 0 8px 8px;
+  margin-top: 0;
 }
 
-.vp-cli-links {
+.vp-cli-command .language-bash .lang {
+  display: none;
+}
+
+.vp-cli-header {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px 6px 14px;
+  border-radius: 8px 8px 0 0;
+  border-bottom: 1px solid var(--vp-code-block-divider-color, rgba(128,128,128,0.15));
+  background-color: var(--vp-code-block-bg);
+}
+
+.vp-cli-badge {
   display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-3);
+  user-select: none;
+}
+
+.vp-cli-actions {
+  display: flex;
   align-items: center;
   gap: 2px;
   margin-left: auto;
 }
 
-.vp-cli-usage-link,
-.vp-cli-install-link {
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1;
-  color: var(--vp-c-text-2) !important;
+.vp-cli-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 5px;
+  color: var(--vp-c-text-3);
   text-decoration: none !important;
-  transition: color 0.15s;
+  transition: color 0.15s, background-color 0.15s;
 }
 
-.vp-cli-usage-link:hover,
-.vp-cli-install-link:hover {
-  color: var(--vp-c-text-1) !important;
-}
-
-.vp-cli-link-sep {
-  font-size: 12px;
-  color: var(--vp-c-divider);
+.vp-cli-action:hover {
+  color: var(--vp-c-text-1);
+  background-color: var(--vp-c-default-soft);
 }

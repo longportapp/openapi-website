@@ -107,10 +107,12 @@ if __name__ == "__main__":
 const { Config, QuoteContext, OAuth, WarrantSortBy, SortOrderType } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
+  })
   const config = Config.fromOAuth(oauth)
   const ctx = QuoteContext.new(config)
-  const resp = await ctx.warrantList("700.HK", WarrantSortBy.LastDone, SortOrderType.Ascending)
+  const resp = await ctx.warrantList('700.HK', WarrantSortBy.LastDone, SortOrderType.Ascending)
   console.log(resp)
 }
 main().catch(console.error)
@@ -245,7 +247,6 @@ func main() {
 
   </TabItem>
 </Tabs>
-
 
 ## Response
 

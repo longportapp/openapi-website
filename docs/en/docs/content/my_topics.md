@@ -40,13 +40,13 @@ longbridge topic mine
 <Tabs groupId="request-example">
   <TabItem value="cli" label="CLI" default>
 
-```bash
+<CliCommand>
 longbridge topic mine                           # All types (default: 50 per page)
 longbridge topic mine --type article            # Articles only
 longbridge topic mine --type post --size 10     # Short posts, 10 per page
 longbridge topic mine --page 2                  # Page 2
 longbridge topic mine --format json             # JSON output for scripting
-```
+</CliCommand>
 
   </TabItem>
   <TabItem value="python" label="Python">

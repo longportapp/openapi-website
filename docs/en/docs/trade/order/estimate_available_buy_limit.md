@@ -89,10 +89,18 @@ if __name__ == "__main__":
 const { Config, TradeContext, OAuth, OrderType, OrderSide, Decimal } = require('longbridge')
 
 async function main() {
-  const oauth = await OAuth.build("your-client-id", (_, url) => { console.log("Open this URL to authorize: " + url) })
+  const oauth = await OAuth.build('your-client-id', (_, url) => {
+    console.log('Open this URL to authorize: ' + url)
+  })
   const config = Config.fromOAuth(oauth)
   const ctx = TradeContext.new(config)
-  const resp = await ctx.estimateMaxPurchaseQuantity({ symbol: "700.HK", orderType: OrderType.LO, side: OrderSide.Buy, price: new Decimal("400"), fractionalShares: false })
+  const resp = await ctx.estimateMaxPurchaseQuantity({
+    symbol: '700.HK',
+    orderType: OrderType.LO,
+    side: OrderSide.Buy,
+    price: new Decimal('400'),
+    fractionalShares: false,
+  })
   console.log(resp)
 }
 main().catch(console.error)
@@ -237,7 +245,6 @@ func main() {
 
   </TabItem>
 </Tabs>
-
 
 ## Response
 
