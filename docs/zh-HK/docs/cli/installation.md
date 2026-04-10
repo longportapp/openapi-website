@@ -8,6 +8,8 @@ sidebar_position: 2
 
 安裝 CLI 並完成 Longbridge 帳戶鑑權。
 
+原始碼與發佈版本：[longbridge/longbridge-terminal](https://github.com/longbridge/longbridge-terminal){target="_blank"}
+
 ## 安裝
 
 <Tabs groupId="cli-install">
