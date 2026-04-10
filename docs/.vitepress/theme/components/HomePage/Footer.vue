@@ -64,10 +64,10 @@ const leftLinks = computed(() => [
 ])
 
 const rightLinks = [
-  { href: '/sdk', label: 'SDK' },
+  { href: '/docs/getting-started', label: 'OpenAPI' },
   { href: '/docs/mcp', label: 'MCP' },
   { href: '/docs/cli', label: 'CLI' },
-  { href: '/docs/llm', label: 'LLM' },
+  { href: '/skill', label: 'SKILL' },
 ]
 </script>
 
