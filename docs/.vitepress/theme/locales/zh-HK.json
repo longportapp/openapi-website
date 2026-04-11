@@ -58,5 +58,16 @@
   "pABA78lHD--FSi39tpzwf": "行情",
   "tryIt.backToDoc": "返回文檔",
   "breadcrumb.home": "主頁",
-  "authorization.autoFill": "已為你自動填入模擬賬戶授權信息"
+  "authorization.autoFill": "已為你自動填入模擬賬戶授權信息",
+  "hero.title.prefix": "Longbridge",
+  "hero.title.accent": "Developers",
+  "hero.powering": "驅動",
+  "hero.subtitle": "即時行情、交易和金融數據 — 透過 {sdk}、{cli}、{skill}、{mcp} 和 {openapi} 交付給全球開發者。",
+  "hero.keyword.sdk": "SDK",
+  "hero.keyword.cli": "CLI",
+  "hero.keyword.skill": "AI Skill",
+  "hero.keyword.mcp": "MCP",
+  "hero.keyword.openapi": "OpenAPI",
+  "hero.cta.getStarted": "快速開始",
+  "hero.cta.readDocs": "閱讀文檔"
 }

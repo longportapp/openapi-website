@@ -1,5 +1,6 @@
 // https://vitepress.dev/guide/custom-theme
 import type { Theme } from 'vitepress'
+import './style/tailwind.css'
 import './style/index.css'
 import 'virtual:group-icons.css' //代码组样式
 import 'virtual:uno.css'
