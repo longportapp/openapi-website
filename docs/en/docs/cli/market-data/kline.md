@@ -40,11 +40,11 @@ longbridge kline TSLA.US --period 1h --count 48
 
 Use `--period` to switch granularity (e.g. `1m`, `5m`, `15m`, `30m`, `1h`, `day`, `week`, `month`, `year`) and `--count` to control how many bars are returned.
 
-### Historical range
+### Historical date range
 
 ```bash
-longbridge kline TSLA.US --period day --start 2025-01-01 --end 2025-03-31
-longbridge kline TSLA.US --period day --start 2025-01-01 --end 2025-03-31 --format json
+longbridge kline history TSLA.US --period day --start 2025-01-01 --end 2025-03-31
+longbridge kline history TSLA.US --period day --start 2025-01-01 --end 2025-03-31 --format json
 ```
 
-Fetch candles for a specific date window using `--start` and `--end` (format: `YYYY-MM-DD`). The `time` field in JSON output represents the candle open time — for US daily candles, this is US Eastern midnight expressed in UTC.
+Use the `history` subcommand with `--start` and `--end` (format: `YYYY-MM-DD`) to fetch candles for a specific date window. `--adjust forward` applies forward-adjusted prices. The `time` field in JSON output represents the candle open time — for US daily candles, this is US Eastern midnight expressed in UTC.

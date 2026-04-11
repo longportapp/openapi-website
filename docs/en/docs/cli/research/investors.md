@@ -54,3 +54,26 @@ Portfolio: 42 positions, total value ~$274.16B
 ```
 
 Pass a CIK to see the full list of equity positions reported by that fund manager. CIK `0001067983` is Berkshire Hathaway.
+
+### Compare position changes between filings
+
+```bash
+# Changes between the two most recent filings
+longbridge investors changes 0001067983
+# Compare against a specific base period
+longbridge investors changes 0001067983 --from 2024-09-30
+```
+
+```
+BERKSHIRE HATHAWAY INC — changes vs 2024-09-30
+
+| action  | company                | shares_change | value_change | current_shares | current_value |
+|---------|------------------------|---------------|--------------|----------------|---------------|
+| NEW     | CONSTELLATION BRANDS   | +5.21M        | +$1.24B      | 5.21M          | $1.24B        |
+| ADDED   | SIRIUS XM HOLDINGS INC | +57.83M       | +$1.52B      | 144.42M        | $3.80B        |
+| REDUCED | CHEVRON CORP NEW       | -12.50M       | -$1.93B      | 130.16M        | $19.84B       |
+| EXITED  | FLOOR & DECOR HLDGS    | -3.97M        | -$414.30M    | 0              | $0            |
+...
+```
+
+Shows NEW positions, ADDED (increased), REDUCED (decreased), and EXITED positions between two filing periods. Defaults to comparing the latest filing against the previous one.
