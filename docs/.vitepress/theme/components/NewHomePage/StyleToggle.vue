@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface Props {
-  options: [string, string]
+  options: string[]
   modelValue: string
   size?: 'sm' | 'md'
 }

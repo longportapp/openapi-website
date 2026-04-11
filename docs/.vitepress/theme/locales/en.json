@@ -76,6 +76,12 @@
   "stats.endpoints.detail": "Quote, Trade, Content, WebSocket",
   "stats.sdks": "SDK Languages",
   "stats.sdks.detail": "Python, Node.js, Rust, Java, C, C++, Go",
+  "arch.title": "Platform Architecture",
+  "arch.subtitle": "One gateway, every access method — from SDK to real-time WebSocket streams",
+  "arch.gateway": "API Gateway",
+  "arch.quote": "Quote API",
+  "arch.trade": "Trade API",
+  "arch.content": "Content API",
   "stats.ainative": "AI Native Tools",
   "stats.ainative.detail": "MCP, AI Skill, CLI JSON output, llms.txt"
 }

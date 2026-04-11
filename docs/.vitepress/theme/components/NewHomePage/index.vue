@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HeroSection from './HeroSection.vue'
 import PlatformStats from './PlatformStats.vue'
+import ArchSection from './ArchSection.vue'
 // import ArchSection from './ArchSection.vue'
 // import CapSection from './CapSection.vue'
 // import CoreFeaturesSection from './CoreFeaturesSection.vue'
@@ -16,7 +17,7 @@ import PlatformStats from './PlatformStats.vue'
   <div class="new-home-page">
     <HeroSection />
     <PlatformStats />
-    <!-- <ArchSection /> -->
+    <ArchSection />
     <!-- <CapSection /> -->
     <!-- <CoreFeaturesSection /> -->
     <!-- <ProductCLI /> -->

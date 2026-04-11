@@ -76,6 +76,12 @@
   "stats.endpoints.detail": "行情、交易、內容、WebSocket",
   "stats.sdks": "SDK 語言",
   "stats.sdks.detail": "Python, Node.js, Rust, Java, C, C++, Go",
+  "arch.title": "平台架構",
+  "arch.subtitle": "統一閘道，多種接入方式 — 從 SDK 到即時 WebSocket 數據流",
+  "arch.gateway": "API 閘道",
+  "arch.quote": "行情 API",
+  "arch.trade": "交易 API",
+  "arch.content": "內容 API",
   "stats.ainative": "AI 原生",
   "stats.ainative.detail": "MCP、AI Skill、CLI JSON 輸出、llms.txt"
 }

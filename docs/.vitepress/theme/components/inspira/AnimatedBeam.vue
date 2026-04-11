@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { cn } from '@inspira-ui/plugins'
-import { computed, onBeforeUnmount, ref, watchEffect } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 interface AnimatedBeamProps {
   class?: string
@@ -39,71 +39,77 @@ const props = withDefaults(defineProps<AnimatedBeamProps>(), {
 })
 
 const id = `beam-${Math.random().toString(36).substring(2, 10)}`
+const pathD = ref('')
+const svgDimensions = ref({ width: 0, height: 0 })
 const isVertical = ref(false)
 const isRightToLeft = ref(false)
 const isBottomToTop = ref(false)
 
 const x1 = computed(() => {
-  const direction = props.reverse ? !isRightToLeft.value : isRightToLeft.value
-  return direction ? '90%; -10%;' : '10%; 110%;'
+  const dir = props.reverse ? !isRightToLeft.value : isRightToLeft.value
+  return dir ? '90%; -10%;' : '10%; 110%;'
 })
 const x2 = computed(() => {
-  const direction = props.reverse ? !isRightToLeft.value : isRightToLeft.value
-  return direction ? '100%; 0%;' : '0%; 100%;'
+  const dir = props.reverse ? !isRightToLeft.value : isRightToLeft.value
+  return dir ? '100%; 0%;' : '0%; 100%;'
 })
 const y1 = computed(() => {
-  const direction = props.reverse ? !isBottomToTop.value : isBottomToTop.value
-  return direction ? '90%; -10%;' : '10%; 110%;'
+  const dir = props.reverse ? !isBottomToTop.value : isBottomToTop.value
+  return dir ? '90%; -10%;' : '10%; 110%;'
 })
 const y2 = computed(() => {
-  const direction = props.reverse ? !isBottomToTop.value : isBottomToTop.value
-  return direction ? '100%; 0%;' : '0%; 100%;'
+  const dir = props.reverse ? !isBottomToTop.value : isBottomToTop.value
+  return dir ? '100%; 0%;' : '0%; 100%;'
 })
 
-const pathD = ref('')
-const svgDimensions = ref<{ width: number; height: number }>({ width: 0, height: 0 })
+function updatePath() {
+  if (!props.containerRef || !props.fromRef || !props.toRef) return
+
+  const containerRect = props.containerRef.getBoundingClientRect()
+  const rectA = props.fromRef.getBoundingClientRect()
+  const rectB = props.toRef.getBoundingClientRect()
+
+  svgDimensions.value = { width: containerRect.width, height: containerRect.height }
+
+  const startX = rectA.left - containerRect.left + rectA.width / 2 + props.startXOffset
+  const startY = rectA.top - containerRect.top + rectA.height / 2 + props.startYOffset
+  const endX = rectB.left - containerRect.left + rectB.width / 2 + props.endXOffset
+  const endY = rectB.top - containerRect.top + rectB.height / 2 + props.endYOffset
+
+  isVertical.value = Math.abs(endY - startY) > Math.abs(endX - startX)
+  isRightToLeft.value = endX < startX
+  isBottomToTop.value = endY < startY
+
+  const controlY = startY - props.curvature
+  pathD.value = `M ${startX},${startY} Q ${(startX + endX) / 2},${controlY} ${endX},${endY}`
+}
 
 let resizeObserver: ResizeObserver | undefined
 
-const { stop: stopEffect } = watchEffect(effect)
+onMounted(() => {
+  // Initial path calculation after layout settles
+  requestAnimationFrame(() => {
+    updatePath()
+  })
 
-function effect() {
-  if (resizeObserver === undefined && props.containerRef != null) {
+  // Watch for container resize
+  if (props.containerRef) {
     resizeObserver = new ResizeObserver(() => updatePath())
     resizeObserver.observe(props.containerRef)
-    stopEffect()
   }
-}
+})
 
-function updatePath() {
-  if (props.containerRef && props.fromRef && props.toRef) {
-    const containerRect = props.containerRef.getBoundingClientRect()
-    const rectA = props.fromRef.getBoundingClientRect()
-    const rectB = props.toRef.getBoundingClientRect()
-    const svgWidth = containerRect.width
-    const svgHeight = containerRect.height
-    svgDimensions.value = { width: svgWidth, height: svgHeight }
-
-    const startX = rectA.left - containerRect.left + rectA.width / 2 + (props.startXOffset ?? 0)
-    const startY = rectA.top - containerRect.top + rectA.height / 2 + (props.startYOffset ?? 0)
-    const endX = rectB.left - containerRect.left + rectB.width / 2 + (props.endXOffset ?? 0)
-    const endY = rectB.top - containerRect.top + rectB.height / 2 + (props.endYOffset ?? 0)
-
-    isVertical.value = Math.abs(endY - startY) > Math.abs(endX - startX)
-    isRightToLeft.value = endX < startX
-    isBottomToTop.value = endY < startY
-
-    const controlY = startY - (props.curvature ?? 0)
-    const d = `M ${startX},${startY} Q ${(startX + endX) / 2},${controlY} ${endX},${endY}`
-    pathD.value = d
-  }
-}
+// Re-calculate if refs change
+watch(() => [props.fromRef, props.toRef, props.containerRef], () => {
+  requestAnimationFrame(() => updatePath())
+})
 
 onBeforeUnmount(() => resizeObserver?.disconnect())
 </script>
 
 <template>
   <svg
+    v-if="pathD"
     fill="none"
     :width="svgDimensions.width"
     :height="svgDimensions.height"
@@ -118,17 +124,66 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
       :stroke-opacity="pathOpacity"
       stroke-linecap="round"
     />
-    <path :d="pathD" :stroke-width="pathWidth" :stroke="`url(#${id})`" stroke-opacity="1" stroke-linecap="round" />
+    <path
+      :d="pathD"
+      :stroke-width="pathWidth"
+      :stroke="`url(#${id})`"
+      stroke-opacity="1"
+      stroke-linecap="round"
+    />
     <defs>
-      <linearGradient :id="id" gradientUnits="userSpaceOnUse" x1="0%" x2="0%" y1="0%" y2="0%">
+      <linearGradient
+        :id="id"
+        gradientUnits="userSpaceOnUse"
+        x1="0%"
+        x2="0%"
+        y1="0%"
+        y2="0%"
+      >
         <stop :stop-color="gradientStartColor" stop-opacity="0" />
         <stop :stop-color="gradientStartColor" />
         <stop offset="32.5%" :stop-color="gradientStopColor" />
         <stop offset="100%" :stop-color="gradientStopColor" stop-opacity="0" />
-        <animate v-if="!isVertical" attributeName="x1" :values="x1" :dur="`${duration}s`" keyTimes="0; 1" keySplines="0.16 1 0.3 1" calcMode="spline" repeatCount="indefinite" />
-        <animate v-if="!isVertical" attributeName="x2" :values="x2" :dur="`${duration}s`" keyTimes="0; 1" keySplines="0.16 1 0.3 1" calcMode="spline" repeatCount="indefinite" />
-        <animate v-if="isVertical" attributeName="y1" :values="y1" :dur="`${duration}s`" keyTimes="0; 1" keySplines="0.16 1 0.3 1" calcMode="spline" repeatCount="indefinite" />
-        <animate v-if="isVertical" attributeName="y2" :values="y2" :dur="`${duration}s`" keyTimes="0; 1" keySplines="0.16 1 0.3 1" calcMode="spline" repeatCount="indefinite" />
+        <animate
+          v-if="!isVertical"
+          attributeName="x1"
+          :values="x1"
+          :dur="`${duration}s`"
+          keyTimes="0; 1"
+          keySplines="0.16 1 0.3 1"
+          calcMode="spline"
+          repeatCount="indefinite"
+        />
+        <animate
+          v-if="!isVertical"
+          attributeName="x2"
+          :values="x2"
+          :dur="`${duration}s`"
+          keyTimes="0; 1"
+          keySplines="0.16 1 0.3 1"
+          calcMode="spline"
+          repeatCount="indefinite"
+        />
+        <animate
+          v-if="isVertical"
+          attributeName="y1"
+          :values="y1"
+          :dur="`${duration}s`"
+          keyTimes="0; 1"
+          keySplines="0.16 1 0.3 1"
+          calcMode="spline"
+          repeatCount="indefinite"
+        />
+        <animate
+          v-if="isVertical"
+          attributeName="y2"
+          :values="y2"
+          :dur="`${duration}s`"
+          keyTimes="0; 1"
+          keySplines="0.16 1 0.3 1"
+          calcMode="spline"
+          repeatCount="indefinite"
+        />
       </linearGradient>
     </defs>
   </svg>

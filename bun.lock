@@ -11,6 +11,8 @@
         "@jsonforms/vue": "^3.5.1",
         "@jsonforms/vue-vanilla": "^3.5.1",
         "@tailwindcss/postcss": "^4.2.2",
+        "@vue-flow/background": "^1.3.2",
+        "@vue-flow/core": "^1.48.2",
         "@vueuse/core": "^14.2.1",
         "cheerio": "^1.1.0",
         "fs-extra": "^11.3.0",
@@ -474,6 +476,10 @@
     "@unocss/vite": ["@unocss/vite@66.3.3", "https://registry.yarnpkg.com/@unocss/vite/-/vite-66.3.3.tgz", { "dependencies": { "@ampproject/remapping": "^2.3.0", "@unocss/config": "66.3.3", "@unocss/core": "66.3.3", "@unocss/inspector": "66.3.3", "chokidar": "^3.6.0", "magic-string": "^0.30.17", "pathe": "^2.0.3", "tinyglobby": "^0.2.14", "unplugin-utils": "^0.2.4" }, "peerDependencies": { "vite": "^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0 || ^6.0.0-0 || ^7.0.0-0" } }, "sha512-uu3smeEW6q36ri6vydRx2GiTGF5O/J80Fr4GLmLiwfpt2YnPHraO7XHVR5/mwG2Oz5Kov0uGvxVsdgxZABKRgw=="],
 
     "@vitejs/plugin-vue": ["@vitejs/plugin-vue@6.0.5", "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-6.0.5.tgz", { "dependencies": { "@rolldown/pluginutils": "1.0.0-rc.2" }, "peerDependencies": { "vite": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0", "vue": "^3.2.25" } }, "sha512-bL3AxKuQySfk1iGcBsQnoRVexTPJq0Z/ixFVM8OhVJAP6ZXXXLtM7NFKWhLl30Kg7uTBqIaPXbh+nuQCuBDedg=="],
+
+    "@vue-flow/background": ["@vue-flow/background@1.3.2", "", { "peerDependencies": { "@vue-flow/core": "^1.23.0", "vue": "^3.3.0" } }, "sha512-eJPhDcLj1wEo45bBoqTXw1uhl0yK2RaQGnEINqvvBsAFKh/camHJd5NPmOdS1w+M9lggc9igUewxaEd3iCQX2w=="],
+
+    "@vue-flow/core": ["@vue-flow/core@1.48.2", "", { "dependencies": { "@vueuse/core": "^10.5.0", "d3-drag": "^3.0.0", "d3-interpolate": "^3.0.1", "d3-selection": "^3.0.0", "d3-zoom": "^3.0.0" }, "peerDependencies": { "vue": "^3.3.0" } }, "sha512-raxhgKWE+G/mcEvXJjGFUDYW9rAI3GOtiHR3ZkNpwBWuIaCC1EYiBmKGwJOoNzVFgwO7COgErnK7i08i287AFA=="],
 
     "@vue/compiler-core": ["@vue/compiler-core@3.5.17", "https://registry.yarnpkg.com/@vue/compiler-core/-/compiler-core-3.5.17.tgz", { "dependencies": { "@babel/parser": "^7.27.5", "@vue/shared": "3.5.17", "entities": "^4.5.0", "estree-walker": "^2.0.2", "source-map-js": "^1.2.1" } }, "sha512-Xe+AittLbAyV0pabcN7cP7/BenRBNcteM4aSDCtRvGw0d9OL+HG1u/XHLY/kt1q4fyMeZYXyIYrsHuPSiDPosA=="],
 
@@ -1149,6 +1155,8 @@
 
     "vue": ["vue@3.5.17", "https://registry.yarnpkg.com/vue/-/vue-3.5.17.tgz", { "dependencies": { "@vue/compiler-dom": "3.5.17", "@vue/compiler-sfc": "3.5.17", "@vue/runtime-dom": "3.5.17", "@vue/server-renderer": "3.5.17", "@vue/shared": "3.5.17" }, "peerDependencies": { "typescript": "*" }, "optionalPeers": ["typescript"] }, "sha512-LbHV3xPN9BeljML+Xctq4lbz2lVHCR6DtbpTf5XIO6gugpXUN49j2QQPcMj086r9+AkJ0FfUT8xjulKKBkkr9g=="],
 
+    "vue-demi": ["vue-demi@0.14.10", "", { "peerDependencies": { "@vue/composition-api": "^1.0.0-rc.1", "vue": "^3.0.0-0 || ^2.6.0" }, "optionalPeers": ["@vue/composition-api"], "bin": { "vue-demi-fix": "bin/vue-demi-fix.js", "vue-demi-switch": "bin/vue-demi-switch.js" } }, "sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg=="],
+
     "vue-flow-layout": ["vue-flow-layout@0.1.1", "https://registry.yarnpkg.com/vue-flow-layout/-/vue-flow-layout-0.1.1.tgz", { "peerDependencies": { "vue": "^3.4.37" } }, "sha512-JdgRRUVrN0Y2GosA0M68DEbKlXMqJ7FQgsK8CjQD2vxvNSqAU6PZEpi4cfcTVtfM2GVOMjHo7GKKLbXxOBqDqA=="],
 
     "vue-i18n": ["vue-i18n@11.1.9", "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-11.1.9.tgz", { "dependencies": { "@intlify/core-base": "11.1.9", "@intlify/shared": "11.1.9", "@vue/devtools-api": "^6.5.0" }, "peerDependencies": { "vue": "^3.0.0" } }, "sha512-N9ZTsXdRmX38AwS9F6Rh93RtPkvZTkSy/zNv63FTIwZCUbLwwrpqlKz9YQuzFLdlvRdZTnWAUE5jMxr8exdl7g=="],
@@ -1208,6 +1216,8 @@
     "@unocss/postcss/tinyglobby": ["tinyglobby@0.2.14", "https://registry.yarnpkg.com/tinyglobby/-/tinyglobby-0.2.14.tgz", { "dependencies": { "fdir": "^6.4.4", "picomatch": "^4.0.2" } }, "sha512-tX5e7OM1HnYr2+a2C/4V0htOcSQcoSTH9KgJnVvNm5zm/cyEWKJ7j7YutsH9CxMdtOkkLFy2AHrMci9IM8IPZQ=="],
 
     "@unocss/vite/tinyglobby": ["tinyglobby@0.2.14", "https://registry.yarnpkg.com/tinyglobby/-/tinyglobby-0.2.14.tgz", { "dependencies": { "fdir": "^6.4.4", "picomatch": "^4.0.2" } }, "sha512-tX5e7OM1HnYr2+a2C/4V0htOcSQcoSTH9KgJnVvNm5zm/cyEWKJ7j7YutsH9CxMdtOkkLFy2AHrMci9IM8IPZQ=="],
+
+    "@vue-flow/core/@vueuse/core": ["@vueuse/core@10.11.1", "", { "dependencies": { "@types/web-bluetooth": "^0.0.20", "@vueuse/metadata": "10.11.1", "@vueuse/shared": "10.11.1", "vue-demi": ">=0.14.8" } }, "sha512-guoy26JQktXPcz+0n3GukWIy/JDNKti9v6VEMu6kV2sYBsWuGiTU8OWdg+ADfUbHg3/3DlqySDe7JmdHrktiww=="],
 
     "@vue/compiler-core/@vue/shared": ["@vue/shared@3.5.17", "https://registry.yarnpkg.com/@vue/shared/-/shared-3.5.17.tgz", {}, "sha512-CabR+UN630VnsJO/jHWYBC1YVXyMq94KKp6iF5MQgZJs5I8cmjw6oVMO1oDbtBkENSHSSn/UadWlW/OAgdmKrg=="],
 
@@ -1300,6 +1310,12 @@
     "@unocss/vite/tinyglobby/fdir": ["fdir@6.4.6", "https://registry.yarnpkg.com/fdir/-/fdir-6.4.6.tgz", { "peerDependencies": { "picomatch": "^3 || ^4" }, "optionalPeers": ["picomatch"] }, "sha512-hiFoqpyZcfNm1yc4u8oWCf9A2c4D3QjCrks3zmoVKVxpQRzmPNar1hUJcBG2RQHvEVGDN+Jm81ZheVLAQMK6+w=="],
 
     "@unocss/vite/tinyglobby/picomatch": ["picomatch@4.0.2", "https://registry.yarnpkg.com/picomatch/-/picomatch-4.0.2.tgz", {}, "sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg=="],
+
+    "@vue-flow/core/@vueuse/core/@types/web-bluetooth": ["@types/web-bluetooth@0.0.20", "", {}, "sha512-g9gZnnXVq7gM7v3tJCWV/qw7w+KeOlSHAhgF9RytFyifW6AF61hdT2ucrYhPq9hLs5JIryeupHV3qGk95dH9ow=="],
+
+    "@vue-flow/core/@vueuse/core/@vueuse/metadata": ["@vueuse/metadata@10.11.1", "", {}, "sha512-IGa5FXd003Ug1qAZmyE8wF3sJ81xGLSqTqtQ6jaVfkeZ4i5kS2mwQF61yhVqojRnenVew5PldLyRgvdl4YYuSw=="],
+
+    "@vue-flow/core/@vueuse/core/@vueuse/shared": ["@vueuse/shared@10.11.1", "", { "dependencies": { "vue-demi": ">=0.14.8" } }, "sha512-LHpC8711VFZlDaYUXEBbFBCQ7GS3dVU9mjOhhMhXP6txTV4EhYQg/KGnQuvt/sPAtoUKq7VVUnL6mVtFoL42sA=="],
 
     "cytoscape-fcose/cose-base/layout-base": ["layout-base@2.0.1", "https://registry.yarnpkg.com/layout-base/-/layout-base-2.0.1.tgz", {}, "sha512-dp3s92+uNI1hWIpPGH3jK2kxE2lMjdXdr+DH8ynZHpd6PUlH6x6cbuXnoMmiNumznqaNO31xu9e79F0uuZ0JFg=="],
 
