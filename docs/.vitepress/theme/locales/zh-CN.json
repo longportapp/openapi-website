@@ -69,5 +69,13 @@
   "hero.keyword.mcp": "MCP",
   "hero.keyword.openapi": "OpenAPI",
   "hero.cta.getStarted": "快速开始",
-  "hero.cta.readDocs": "阅读文档"
+  "hero.cta.readDocs": "阅读文档",
+  "stats.markets": "全球市场",
+  "stats.markets.detail": "港股、美股、A 股 (沪/深)、新加坡、加密货币",
+  "stats.endpoints": "API 端点",
+  "stats.endpoints.detail": "行情、交易、内容、WebSocket",
+  "stats.sdks": "SDK 语言",
+  "stats.sdks.detail": "Python, Node.js, Rust, Java, C, C++, Go",
+  "stats.ainative": "AI 原生",
+  "stats.ainative.detail": "MCP、AI Skill、CLI JSON 输出、llms.txt"
 }

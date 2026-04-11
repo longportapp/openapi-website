@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import HeroSection from './HeroSection.vue'
-// Sections will be imported as they're implemented
-// import PlatformStats from './PlatformStats.vue'
+import PlatformStats from './PlatformStats.vue'
 // import ArchSection from './ArchSection.vue'
 // import CapSection from './CapSection.vue'
 // import CoreFeaturesSection from './CoreFeaturesSection.vue'
@@ -16,8 +15,7 @@ import HeroSection from './HeroSection.vue'
 <template>
   <div class="new-home-page">
     <HeroSection />
-    <!-- Sections will be uncommented as implemented -->
-    <!-- <PlatformStats /> -->
+    <PlatformStats />
     <!-- <ArchSection /> -->
     <!-- <CapSection /> -->
     <!-- <CoreFeaturesSection /> -->

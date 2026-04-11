@@ -69,5 +69,13 @@
   "hero.keyword.mcp": "MCP",
   "hero.keyword.openapi": "OpenAPI",
   "hero.cta.getStarted": "Get Started",
-  "hero.cta.readDocs": "Read Docs"
+  "hero.cta.readDocs": "Read Docs",
+  "stats.markets": "Global Markets",
+  "stats.markets.detail": "HK, US, CN (SH/SZ), SG, Crypto",
+  "stats.endpoints": "API Endpoints",
+  "stats.endpoints.detail": "Quote, Trade, Content, WebSocket",
+  "stats.sdks": "SDK Languages",
+  "stats.sdks.detail": "Python, Node.js, Rust, Java, C, C++, Go",
+  "stats.ainative": "AI Native Tools",
+  "stats.ainative.detail": "MCP, AI Skill, CLI JSON output, llms.txt"
 }
