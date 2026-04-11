@@ -54,3 +54,26 @@ Portfolio: 42 positions, total value ~$274.16B
 ```
 
 传入 CIK 可查看该基金经理申报的完整股票持仓列表。CIK `0001067983` 为伯克希尔·哈撒韦。
+
+### 对比两期持仓变动
+
+```bash
+# 对比最近两期申报的变动
+longbridge investors changes 0001067983
+# 指定基准期对比
+longbridge investors changes 0001067983 --from 2024-09-30
+```
+
+```
+BERKSHIRE HATHAWAY INC — changes vs 2024-09-30
+
+| action  | company                | shares_change | value_change | current_shares | current_value |
+|---------|------------------------|---------------|--------------|----------------|---------------|
+| NEW     | CONSTELLATION BRANDS   | +5.21M        | +$1.24B      | 5.21M          | $1.24B        |
+| ADDED   | SIRIUS XM HOLDINGS INC | +57.83M       | +$1.52B      | 144.42M        | $3.80B        |
+| REDUCED | CHEVRON CORP NEW       | -12.50M       | -$1.93B      | 130.16M        | $19.84B       |
+| EXITED  | FLOOR & DECOR HLDGS    | -3.97M        | -$414.30M    | 0              | $0            |
+...
+```
+
+展示两期申报之间的新增（NEW）、加仓（ADDED）、减仓（REDUCED）和清仓（EXITED）持仓变动。默认对比最新一期与前一期的变化。

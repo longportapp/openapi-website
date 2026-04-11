@@ -40,11 +40,11 @@ longbridge kline TSLA.US --period 1h --count 48
 
 使用 `--period` 切换粒度（如 `1m`、`5m`、`15m`、`30m`、`1h`、`day`、`week`、`month`、`year`），用 `--count` 控制返回的 K 线条数。
 
-### 历史区间
+### 历史日期范围
 
 ```bash
-longbridge kline TSLA.US --period day --start 2025-01-01 --end 2025-03-31
-longbridge kline TSLA.US --period day --start 2025-01-01 --end 2025-03-31 --format json
+longbridge kline history TSLA.US --period day --start 2025-01-01 --end 2025-03-31
+longbridge kline history TSLA.US --period day --start 2025-01-01 --end 2025-03-31 --format json
 ```
 
-用 `--start` 和 `--end` 指定日期窗口（格式：`YYYY-MM-DD`）获取历史 K 线。JSON 输出中的 `time` 字段表示 K 线开盘时间——美股日线以 UTC 时间表示美东时间零点。
+使用 `history` 子命令配合 `--start` 和 `--end`（格式：`YYYY-MM-DD`）获取指定日期窗口的 K 线。`--adjust forward` 可获取前复权价格。JSON 输出中的 `time` 字段表示 K 线开盘时间——美股日线以 UTC 时间表示美东时间零点。
