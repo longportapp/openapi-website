@@ -2,8 +2,7 @@
 import HeroSection from './HeroSection.vue'
 import PlatformStats from './PlatformStats.vue'
 import ArchSection from './ArchSection.vue'
-// import ArchSection from './ArchSection.vue'
-// import CapSection from './CapSection.vue'
+import CapSection from './CapSection.vue'
 // import CoreFeaturesSection from './CoreFeaturesSection.vue'
 // import ProductCLI from './ProductCLI.vue'
 // import ProductSkill from './ProductSkill.vue'
@@ -18,7 +17,7 @@ import ArchSection from './ArchSection.vue'
     <HeroSection />
     <PlatformStats />
     <ArchSection />
-    <!-- <CapSection /> -->
+    <CapSection />
     <!-- <CoreFeaturesSection /> -->
     <!-- <ProductCLI /> -->
     <!-- <ProductSkill /> -->

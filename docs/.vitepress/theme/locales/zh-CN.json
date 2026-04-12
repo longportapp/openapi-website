@@ -82,6 +82,18 @@
   "arch.quote": "行情 API",
   "arch.trade": "交易 API",
   "arch.content": "内容 API",
+  "cap.title": "API 能力",
+  "cap.subtitle": "构建交易和行情应用所需的一切",
+  "cap.quote": "行情数据",
+  "cap.quote.desc": "实时行情、盘口深度、K 线、分时、资金流向和推送订阅",
+  "cap.trade": "交易下单",
+  "cap.trade.desc": "提交、修改、撤销订单，跟踪持仓、余额和成交记录",
+  "cap.derivatives": "衍生品",
+  "cap.derivatives.desc": "完整期权链含 Greeks、窝轮列表和实时衍生品行情",
+  "cap.research": "基本面研究",
+  "cap.research.desc": "财务报表、估值指标、分红历史、EPS 预测和分析师评级",
+  "cap.content": "资讯内容",
+  "cap.content.desc": "实时新闻、社区讨论、话题帖子和互动数据",
   "stats.ainative": "AI 原生",
   "stats.ainative.detail": "MCP、AI Skill、CLI JSON 输出、llms.txt"
 }

@@ -82,6 +82,18 @@
   "arch.quote": "Quote API",
   "arch.trade": "Trade API",
   "arch.content": "Content API",
+  "cap.title": "API Capabilities",
+  "cap.subtitle": "Everything you need to build trading and market data applications",
+  "cap.quote": "Market Data",
+  "cap.quote.desc": "Real-time quotes, order depth, candlestick, intraday, capital flow, and push subscriptions",
+  "cap.trade": "Trading & Orders",
+  "cap.trade.desc": "Submit, replace, and withdraw orders. Track positions, balance, and execution history",
+  "cap.derivatives": "Derivatives",
+  "cap.derivatives.desc": "Full option chains with Greeks, warrants listing, and real-time derivative quotes",
+  "cap.research": "Financial Research",
+  "cap.research.desc": "Financial statements, valuation metrics, dividend history, EPS forecasts, and analyst ratings",
+  "cap.content": "Content & News",
+  "cap.content.desc": "Real-time news feeds, community discussions, topics, and engagement metrics",
   "stats.ainative": "AI Native Tools",
   "stats.ainative.detail": "MCP, AI Skill, CLI JSON output, llms.txt"
 }
