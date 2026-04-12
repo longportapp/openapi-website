@@ -7,7 +7,7 @@ import CoreFeaturesSection from './CoreFeaturesSection.vue'
 import ProductCLI from './ProductCLI.vue'
 import ProductSkill from './ProductSkill.vue'
 import ProductMCP from './ProductMCP.vue'
-// import ProductOpenAPI from './ProductOpenAPI.vue'
+import ProductOpenAPI from './ProductOpenAPI.vue'
 // import GetStarted from './GetStarted.vue'
 // import MarketCoverage from './MarketCoverage.vue'
 </script>
@@ -22,7 +22,7 @@ import ProductMCP from './ProductMCP.vue'
     <ProductCLI />
     <ProductSkill />
     <ProductMCP />
-    <!-- <ProductOpenAPI /> -->
+    <ProductOpenAPI />
     <!-- <GetStarted /> -->
     <!-- <MarketCoverage /> -->
   </div>
