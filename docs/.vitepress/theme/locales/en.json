@@ -169,5 +169,22 @@
   "cap.content": "Content & News",
   "cap.content.desc": "Real-time news feeds, community discussions, topics, and engagement metrics",
   "stats.ainative": "AI Native Tools",
-  "stats.ainative.detail": "MCP, AI Skill, CLI JSON output, llms.txt"
+  "stats.ainative.detail": "MCP, AI Skill, CLI JSON output, llms.txt",
+  "getStarted.title": "Start Building in Minutes",
+  "getStarted.subtitle": "Set up your environment, authenticate, and make your first API call — everything you need to go from zero to live data.",
+  "getStarted.auth.title": "Authentication Setup",
+  "getStarted.auth.desc": "Register an OAuth 2.0 client, obtain credentials, and configure your SDK with automatic token management.",
+  "getStarted.auth.cta": "Setup Guide",
+  "getStarted.api.title": "API Reference",
+  "getStarted.api.desc": "Browse 100+ endpoints for quotes, trading, portfolio, and content. Try requests directly in the browser.",
+  "getStarted.api.cta": "Explore APIs",
+  "getStarted.cli.title": "Install CLI",
+  "getStarted.cli.desc": "One-line install for macOS, Linux, and Windows. 50+ commands with interactive TUI and JSON output.",
+  "getStarted.cli.cta": "Install Now",
+  "market.title": "Global Market Coverage",
+  "market.subtitle": "Real-time data and trading across major financial markets",
+  "market.hk.name": "Hong Kong",
+  "market.us.name": "United States",
+  "market.cn.name": "China A-Shares",
+  "market.sg.name": "Singapore"
 }

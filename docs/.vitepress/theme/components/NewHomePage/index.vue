@@ -8,8 +8,8 @@ import ProductCLI from './ProductCLI.vue'
 import ProductSkill from './ProductSkill.vue'
 import ProductMCP from './ProductMCP.vue'
 import ProductOpenAPI from './ProductOpenAPI.vue'
-// import GetStarted from './GetStarted.vue'
-// import MarketCoverage from './MarketCoverage.vue'
+import GetStarted from './GetStarted.vue'
+import MarketCoverage from './MarketCoverage.vue'
 </script>
 
 <template>
@@ -23,8 +23,8 @@ import ProductOpenAPI from './ProductOpenAPI.vue'
     <ProductSkill />
     <ProductMCP />
     <ProductOpenAPI />
-    <!-- <GetStarted /> -->
-    <!-- <MarketCoverage /> -->
+    <GetStarted />
+    <MarketCoverage />
   </div>
 </template>
 

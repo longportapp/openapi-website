@@ -169,5 +169,22 @@
   "cap.content": "資訊內容",
   "cap.content.desc": "即時新聞、社區討論、話題帖子和互動數據",
   "stats.ainative": "AI 原生",
-  "stats.ainative.detail": "MCP、AI Skill、CLI JSON 輸出、llms.txt"
+  "stats.ainative.detail": "MCP、AI Skill、CLI JSON 輸出、llms.txt",
+  "getStarted.title": "幾分鐘內開始構建",
+  "getStarted.subtitle": "配置環境、完成認證、發起第一個 API 調用 — 從零到獲取即時數據所需的一切。",
+  "getStarted.auth.title": "認證配置",
+  "getStarted.auth.desc": "註冊 OAuth 2.0 客戶端，獲取憑證，配置 SDK 自動令牌管理。",
+  "getStarted.auth.cta": "配置指南",
+  "getStarted.api.title": "API 參考",
+  "getStarted.api.desc": "瀏覽 100+ 行情、交易、持倉和內容端點。直接在瀏覽器中嘗試請求。",
+  "getStarted.api.cta": "探索 API",
+  "getStarted.cli.title": "安裝 CLI",
+  "getStarted.cli.desc": "macOS、Linux 和 Windows 一行命令安裝。50+ 命令，互動式 TUI 和 JSON 輸出。",
+  "getStarted.cli.cta": "立即安裝",
+  "market.title": "全球市場覆蓋",
+  "market.subtitle": "跨主要金融市場的即時數據和交易",
+  "market.hk.name": "香港市場",
+  "market.us.name": "美國市場",
+  "market.cn.name": "A 股市場",
+  "market.sg.name": "新加坡市場"
 }
