@@ -5,6 +5,7 @@ import ArchSection from './ArchSection.vue'
 import CapSection from './CapSection.vue'
 import CoreFeaturesSection from './CoreFeaturesSection.vue'
 import ProductCLI from './ProductCLI.vue'
+import ProductSkill from './ProductSkill.vue'
 // import ProductSkill from './ProductSkill.vue'
 // import ProductMCP from './ProductMCP.vue'
 // import ProductOpenAPI from './ProductOpenAPI.vue'
@@ -20,7 +21,7 @@ import ProductCLI from './ProductCLI.vue'
     <CapSection />
     <CoreFeaturesSection />
     <ProductCLI />
-    <!-- <ProductSkill /> -->
+    <ProductSkill />
     <!-- <ProductMCP /> -->
     <!-- <ProductOpenAPI /> -->
     <!-- <GetStarted /> -->
