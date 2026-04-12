@@ -4,8 +4,7 @@ import PlatformStats from './PlatformStats.vue'
 import ArchSection from './ArchSection.vue'
 import CapSection from './CapSection.vue'
 import CoreFeaturesSection from './CoreFeaturesSection.vue'
-// import CoreFeaturesSection from './CoreFeaturesSection.vue'
-// import ProductCLI from './ProductCLI.vue'
+import ProductCLI from './ProductCLI.vue'
 // import ProductSkill from './ProductSkill.vue'
 // import ProductMCP from './ProductMCP.vue'
 // import ProductOpenAPI from './ProductOpenAPI.vue'
@@ -20,7 +19,7 @@ import CoreFeaturesSection from './CoreFeaturesSection.vue'
     <ArchSection />
     <CapSection />
     <CoreFeaturesSection />
-    <!-- <ProductCLI /> -->
+    <ProductCLI />
     <!-- <ProductSkill /> -->
     <!-- <ProductMCP /> -->
     <!-- <ProductOpenAPI /> -->
