@@ -41,12 +41,12 @@ const markets = [
 
 <template>
   <section class="mc-section">
-    <div class="mc-header">
-      <h2 class="mc-title">{{ $t('market.title') }}</h2>
-      <p class="mc-subtitle">{{ $t('market.subtitle') }}</p>
-    </div>
-
     <div class="mc-grid">
+      <!-- Title as inline label in grid -->
+      <div class="mc-label-cell">
+        <span class="mc-label-tag">{{ $t('market.title') }}</span>
+        <p class="mc-label-desc">{{ $t('market.subtitle') }}</p>
+      </div>
       <div v-for="m in markets" :key="m.key" class="mc-card">
         <div class="mc-card-top">
           <span class="mc-flag" v-html="m.flag" />
@@ -76,17 +76,37 @@ const markets = [
 <style scoped>
 .mc-section { padding: 3rem 0 4rem; background: var(--vp-c-bg-soft); }
 
-.mc-header { text-align: center; margin-bottom: 2rem; padding: 0 1.5rem; }
-.mc-title { font-size: 1.5rem; font-weight: 700; color: var(--vp-c-text-1); letter-spacing: -0.02em; }
-.mc-subtitle { margin-top: 0.25rem; font-size: 0.875rem; color: var(--vp-c-text-2); }
-
 .mc-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr repeat(4, 1fr);
   gap: 0.75rem;
   max-width: 56rem;
   margin: 0 auto;
   padding: 0 1.5rem;
+  align-items: center;
+}
+
+/* Label cell — replaces centered header */
+.mc-label-cell {
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.mc-label-tag {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+  letter-spacing: -0.01em;
+}
+
+.mc-label-desc {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--vp-c-text-3);
+  line-height: 1.5;
 }
 
 .mc-card {
@@ -127,8 +147,10 @@ const markets = [
 
 @media (max-width: 768px) {
   .mc-grid { grid-template-columns: repeat(2, 1fr); }
+  .mc-label-cell { grid-column: span 2; grid-row: span 1; text-align: center; }
 }
 @media (max-width: 480px) {
   .mc-grid { grid-template-columns: 1fr; }
+  .mc-label-cell { grid-column: span 1; }
 }
 </style>

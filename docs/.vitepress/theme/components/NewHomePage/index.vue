@@ -9,22 +9,22 @@ import ProductSkill from './ProductSkill.vue'
 import ProductMCP from './ProductMCP.vue'
 import ProductOpenAPI from './ProductOpenAPI.vue'
 import GetStarted from './GetStarted.vue'
-import MarketCoverage from './MarketCoverage.vue'
+// import MarketCoverage from './MarketCoverage.vue'
 </script>
 
 <template>
   <div class="new-home-page">
     <HeroSection />
     <PlatformStats />
-    <ArchSection />
     <CapSection />
+    <ArchSection />
     <CoreFeaturesSection />
     <ProductCLI />
     <ProductSkill />
     <ProductMCP />
     <ProductOpenAPI />
     <GetStarted />
-    <MarketCoverage />
+    <!-- <MarketCoverage /> -->
   </div>
 </template>
 

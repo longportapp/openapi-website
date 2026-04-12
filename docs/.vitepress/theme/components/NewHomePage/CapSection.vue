@@ -60,18 +60,18 @@ function handleSpotlight(e: MouseEvent) {
 
 <template>
   <section class="cap-section">
-    <div class="cap-header">
-      <h2 class="cap-title">{{ $t('cap.title') }}</h2>
-      <p class="cap-subtitle">{{ $t('cap.subtitle') }}</p>
-    </div>
-
     <div class="cap-grid">
+      <!-- Title as first grid cell -->
+      <div class="cap-intro cap-col-2">
+        <h2 class="cap-title">{{ $t('cap.title') }}</h2>
+        <p class="cap-subtitle">{{ $t('cap.subtitle') }}</p>
+      </div>
       <a
         v-for="(cap, index) in caps"
         :key="cap.key"
         :href="cap.link"
         class="cap-card"
-        :class="{ 'cap-col-4': index < 2, 'cap-col-2': index >= 2 }"
+        :class="'cap-col-2'"
         :style="{ '--delay': `${index * 0.08}s` }"
         @mousemove="handleSpotlight"
       >
@@ -120,14 +120,16 @@ function handleSpotlight(e: MouseEvent) {
   background: var(--vp-c-bg-soft);
 }
 
-.cap-header {
-  text-align: center;
-  margin-bottom: 2.5rem;
-  padding: 0 1.5rem;
+/* Intro cell — title embedded in grid */
+.cap-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5rem;
 }
 
-.cap-title { font-size: 2rem; font-weight: 700; color: var(--vp-c-text-1); letter-spacing: -0.02em; }
-.cap-subtitle { margin-top: 0.5rem; font-size: 1.05rem; color: var(--vp-c-text-2); }
+.cap-title { font-size: 1.5rem; font-weight: 700; color: var(--vp-c-text-1); letter-spacing: -0.02em; }
+.cap-subtitle { margin-top: 0.375rem; font-size: 0.82rem; color: var(--vp-c-text-3); line-height: 1.5; }
 
 .cap-grid {
   display: grid;
@@ -138,7 +140,6 @@ function handleSpotlight(e: MouseEvent) {
   padding: 0 1.5rem;
 }
 
-.cap-col-4 { grid-column: span 3; }
 .cap-col-2 { grid-column: span 2; }
 
 /* Card: Spotlight + Expand combined */
@@ -234,6 +235,6 @@ function handleSpotlight(e: MouseEvent) {
 /* Responsive */
 @media (max-width: 768px) {
   .cap-grid { grid-template-columns: 1fr; }
-  .cap-col-4, .cap-col-2 { grid-column: span 1; }
+  .cap-col-2, .cap-intro { grid-column: span 1; }
 }
 </style>
