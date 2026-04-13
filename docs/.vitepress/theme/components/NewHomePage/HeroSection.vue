@@ -9,8 +9,12 @@ const { t } = useI18n()
 
 // Brand color scheme from lbus design tokens
 const brandColors = [
-  'var(--brand-100)', 'var(--brand-80)', 'var(--brand-60)',
-  'var(--cyan-100)', 'var(--cyan-80)', 'var(--cyan-60)',
+  'var(--brand-100)',
+  'var(--brand-80)',
+  'var(--brand-60)',
+  'var(--cyan-100)',
+  'var(--cyan-80)',
+  'var(--cyan-60)',
 ]
 
 // Cycle through product names
@@ -46,8 +50,7 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
           :square-size="3"
           :grid-gap="14"
           :flicker-chance="0.25"
-          :max-opacity="0.45"
-        />
+          :max-opacity="0.45" />
       </ClientOnly>
       <div class="hero-bg-fade" />
     </div>
@@ -68,8 +71,7 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
               :text="currentProduct"
               :duration="0.3"
               :colors="brandColors"
-              start-color="var(--vp-c-text-1)"
-            />
+              start-color="var(--vp-c-text-1)" />
           </span>
         </ClientOnly>
       </div>
@@ -100,16 +102,14 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
             :text="ctaGetStarted"
             dot-color="#fff"
             hover-text-color="var(--brand-color)"
-            class="hero-btn-primary"
-          />
+            class="hero-btn-primary" />
         </a>
         <a href="/docs/" class="hero-link">
           <InteractiveHoverButton
             :text="ctaReadDocs"
             dot-color="var(--brand-color)"
-            hover-text-color="var(--vp-c-text-1)"
-            class="hero-btn-secondary"
-          />
+            hover-text-color="#fff"
+            class="hero-btn-secondary" />
         </a>
       </div>
     </div>
@@ -139,15 +139,21 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
 .hero-bg-gradient {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse 80% 50% at 50% 0%, color-mix(in srgb, #00b8b8 8%, transparent) 0%, transparent 70%),
+  background: radial-gradient(
+      ellipse 80% 50% at 50% 0%,
+      color-mix(in srgb, #00b8b8 8%, transparent) 0%,
+      transparent 70%
+    ),
     radial-gradient(ellipse 60% 40% at 20% 100%, color-mix(in srgb, #66d5c2 6%, transparent) 0%, transparent 60%),
     radial-gradient(ellipse 60% 40% at 80% 100%, color-mix(in srgb, #00b8b8 5%, transparent) 0%, transparent 60%);
 }
 
 :root.dark .hero-bg-gradient {
-  background:
-    radial-gradient(ellipse 80% 50% at 50% 0%, color-mix(in srgb, #00b8b8 15%, transparent) 0%, transparent 70%),
+  background: radial-gradient(
+      ellipse 80% 50% at 50% 0%,
+      color-mix(in srgb, #00b8b8 15%, transparent) 0%,
+      transparent 70%
+    ),
     radial-gradient(ellipse 60% 40% at 20% 100%, color-mix(in srgb, #00b8b8 10%, transparent) 0%, transparent 60%),
     radial-gradient(ellipse 60% 40% at 80% 100%, color-mix(in srgb, #66d5c2 8%, transparent) 0%, transparent 60%);
 }
@@ -164,13 +170,11 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
 .hero-bg-fade {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse 70% 60% at center, transparent 0%, transparent 40%, #f6fafb 90%);
+  background: radial-gradient(ellipse 70% 60% at center, transparent 0%, transparent 40%, #f6fafb 90%);
 }
 
 :root.dark .hero-bg-fade {
-  background:
-    radial-gradient(ellipse 70% 60% at center, transparent 0%, transparent 40%, #0a1419 90%);
+  background: radial-gradient(ellipse 70% 60% at center, transparent 0%, transparent 40%, #0a1419 90%);
 }
 
 /* Content */
@@ -194,11 +198,15 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
 }
 
 @media (min-width: 640px) {
-  .hero-title { font-size: 3.5rem; }
+  .hero-title {
+    font-size: 3.5rem;
+  }
 }
 
 @media (min-width: 1024px) {
-  .hero-title { font-size: 4rem; }
+  .hero-title {
+    font-size: 4rem;
+  }
 }
 
 .hero-title-accent {
@@ -221,7 +229,9 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
 }
 
 @media (min-width: 640px) {
-  .hero-powering-label { font-size: 1.5rem; }
+  .hero-powering-label {
+    font-size: 1.5rem;
+  }
 }
 
 .hero-product-text {
@@ -233,7 +243,10 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
 }
 
 @media (min-width: 640px) {
-  .hero-product-text { font-size: 1.5rem; min-width: 120px; }
+  .hero-product-text {
+    font-size: 1.5rem;
+    min-width: 120px;
+  }
 }
 
 /* Subtitle */
@@ -242,24 +255,10 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  font-size: 1.1rem;
-  line-height: 1.9;
+  font-size: 1.05rem;
+  line-height: 1.8;
   color: var(--vp-c-text-2);
   font-weight: 400;
-}
-
-@media (min-width: 640px) {
-  .hero-subtitle {
-    font-size: 1.15rem;
-    line-height: 1.85;
-  }
-}
-
-@media (min-width: 1024px) {
-  .hero-subtitle {
-    font-size: 1.2rem;
-    line-height: 1.8;
-  }
 }
 
 /* Keywords */
@@ -302,10 +301,11 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
 
 .hero-btn-primary:hover,
 .hero-btn-secondary:hover {
-  border-color: var(--brand-color) !important;
+  border: 1.5px solid var(--vp-c-border) !important;
 }
 
 .hero-btn-secondary:hover {
-  background: var(--vp-c-bg-soft) !important;
+  background: var(--brand-color) !important;
+  color: #fff !important;
 }
 </style>

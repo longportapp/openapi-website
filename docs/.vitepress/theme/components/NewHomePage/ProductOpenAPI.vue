@@ -437,7 +437,7 @@ function copyInstall() {
 
 .sdk-header { text-align: center; margin-bottom: 2.5rem; padding: 0 1.5rem; max-width: 48rem; margin-left: auto; margin-right: auto; }
 .sdk-title { font-size: 1.75rem; font-weight: 700; color: var(--vp-c-text-1); letter-spacing: -0.02em; }
-.sdk-subtitle { margin-top: 1.5rem; font-size: 0.95rem; color: var(--vp-c-text-2); font-weight: 600; line-height: 1.4; }
+.sdk-subtitle { margin-top: 0.5rem; font-size: 0.95rem; color: var(--vp-c-text-2); font-weight: 600; line-height: 1.4; }
 .sdk-desc { margin-top: 0.5rem; font-size: 0.875rem; line-height: 1.6; color: var(--vp-c-text-2); }
 
 /* Bento Grid */
@@ -554,8 +554,8 @@ function copyInstall() {
 
 .sdk-cell-icon { display: flex; align-items: center; gap: 0.375rem; margin-bottom: 0.5rem; }
 .sdk-cell-icon svg { width: 1.125rem; height: 1.125rem; color: var(--brand-color); }
-.sdk-cell-title { font-size: 0.875rem; font-weight: 700; color: var(--vp-c-text-1); margin-bottom: 0.25rem; }
-.sdk-cell-desc { font-size: 0.875rem; color: var(--vp-c-text-3); line-height: 1.5; }
+.sdk-cell-title { font-size: 0.82rem; font-weight: 700; color: var(--vp-c-text-1); margin-bottom: 0.25rem; }
+.sdk-cell-desc { font-size: 0.75rem; color: var(--vp-c-text-3); line-height: 1.5; }
 
 .sdk-tags { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.375rem; }
 .sdk-tag { padding: 0.2rem 0.5rem; border-radius: 0.25rem; font-size: 0.68rem; font-weight: 700; background: color-mix(in srgb, var(--brand-color) 10%, transparent); color: var(--brand-color); }

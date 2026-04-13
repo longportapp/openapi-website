@@ -61,7 +61,7 @@
   "authorization.autoFill": "已为你自动填入模拟账户授权信息",
   "hero.title.prefix": "Longbridge",
   "hero.title.accent": "Developers",
-  "hero.powering": "驱动",
+  "hero.powering": "接入",
   "hero.subtitle": "实时行情、交易和金融数据 — 通过 {skill}、{cli}、{mcp}、{sdk} 及 {openapi} 交付给全球开发者。",
   "hero.keyword.sdk": "SDK",
   "hero.keyword.cli": "CLI",

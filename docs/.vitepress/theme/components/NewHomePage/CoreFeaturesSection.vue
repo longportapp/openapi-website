@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import GlowBorder from '../inspira/GlowBorder.vue'
 
 const { t } = useI18n()
 
@@ -23,8 +22,12 @@ const tags: Record<string, string[]> = {
 }
 
 const links: Record<string, string> = {
-  cli: '/docs/cli', skill: '/skill', mcp: '/docs/mcp',
-  sdk: '/sdk', paper: '/docs/getting-started', llm: '/docs/llm',
+  cli: '/docs/cli',
+  skill: '/skill',
+  mcp: '/docs/mcp',
+  sdk: '/sdk',
+  paper: '/docs/getting-started',
+  llm: '/docs/llm',
 }
 
 const products = ['skill', 'cli', 'mcp', 'sdk', 'paper', 'llm']
@@ -39,9 +42,6 @@ const products = ['skill', 'cli', 'mcp', 'sdk', 'paper', 'llm']
 
     <div class="core-grid">
       <a v-for="key in products" :key="key" :href="links[key]" class="core-card">
-        <ClientOnly>
-          <GlowBorder :border-radius="12" :color="['var(--brand-color)', 'var(--cyan-60)']" :border-width="2" :duration="8" />
-        </ClientOnly>
         <div class="core-card-inner">
           <div class="core-card-top">
             <span class="core-icon" v-html="icons[key as keyof typeof icons]" />
@@ -58,25 +58,73 @@ const products = ['skill', 'cli', 'mcp', 'sdk', 'paper', 'llm']
 </template>
 
 <style scoped>
-.core-section { padding: 4rem 0; background: var(--vp-c-bg); }
-.core-header { text-align: center; margin-bottom: 2.5rem; padding: 0 1.5rem; }
-.core-title { font-size: 2rem; font-weight: 700; color: var(--vp-c-text-1); letter-spacing: -0.02em; }
-.core-subtitle { margin-top: 1.5rem; font-size: 1.05rem; color: var(--vp-c-text-2); }
+.core-section {
+  padding: 4rem 0;
+  background: var(--vp-c-bg);
+}
+.core-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding: 0 1.5rem;
+}
+.core-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+  letter-spacing: -0.02em;
+}
+.core-subtitle {
+  margin-top: 24px;
+  color: var(--vp-c-text-2);
+}
 
-.core-icon { display: flex; width: 1.5rem; height: 1.5rem; color: var(--brand-color); flex-shrink: 0; }
-.core-icon :deep(svg) { width: 100%; height: 100%; }
+.core-icon {
+  display: flex;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--brand-color);
+  flex-shrink: 0;
+}
+.core-icon :deep(svg) {
+  width: 100%;
+  height: 100%;
+}
 
-.core-tags { display: flex; flex-wrap: wrap; gap: 0.25rem; }
-.core-tag { padding: 0.15rem 0.5rem; border-radius: 0.25rem; font-size: 0.72rem; font-weight: 600; font-family: var(--vp-font-family-mono); background: color-mix(in srgb, var(--brand-color) 10%, transparent); color: var(--brand-color); }
+.core-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+.core-tag {
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  font-family: var(--vp-font-family-mono);
+  background: color-mix(in srgb, var(--brand-color) 10%, transparent);
+  color: var(--brand-color);
+}
 
-/* Glow Border — show on hover only */
-.core-card :deep(.glow-border) { opacity: 0; transition: opacity 0.3s; }
-.core-card:hover :deep(.glow-border) { opacity: 1; }
 
 /* Grid */
-.core-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
-@media (max-width: 900px) { .core-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .core-grid { grid-template-columns: 1fr; } }
+.core-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+@media (max-width: 900px) {
+  .core-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .core-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 .core-card {
   position: relative;
@@ -85,12 +133,41 @@ const products = ['skill', 'cli', 'mcp', 'sdk', 'paper', 'llm']
   background: var(--vp-c-bg);
   text-decoration: none !important;
   overflow: hidden;
-  transition: transform 0.25s, box-shadow 0.25s;
+  transition: border-color 0.2s, transform 0.2s;
 }
-.core-card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px color-mix(in srgb, var(--brand-color) 8%, transparent); }
+:root.dark .core-card {
+  background: var(--vp-c-bg-soft);
+  border-color: color-mix(in srgb, var(--vp-c-divider) 80%, transparent);
+}
+.core-card:hover {
+  border-color: var(--brand-color);
+  transform: translateY(-2px);
+}
 
-.core-card-inner { position: relative; z-index: 1; padding: 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; min-height: 12rem; }
-.core-card-top { display: flex; align-items: center; gap: 0.625rem; }
-.core-card-title { font-size: 1.05rem; font-weight: 700; color: var(--vp-c-text-1); }
-.core-card-desc { font-size: 0.875rem; line-height: 1.6; color: var(--vp-c-text-2); margin: 0; flex: 1; }
+.core-card-inner {
+  position: relative;
+  z-index: 1;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 12rem;
+}
+.core-card-top {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+.core-card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+}
+.core-card-desc {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--vp-c-text-2);
+  margin: 0;
+  flex: 1;
+}
 </style>

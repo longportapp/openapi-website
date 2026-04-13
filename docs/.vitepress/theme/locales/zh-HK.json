@@ -61,7 +61,7 @@
   "authorization.autoFill": "已為你自動填入模擬賬戶授權信息",
   "hero.title.prefix": "Longbridge",
   "hero.title.accent": "Developers",
-  "hero.powering": "驅動",
+  "hero.powering": "接入",
   "hero.subtitle": "即時行情、交易和金融數據 — 透過 {skill}、{cli}、{mcp}、{sdk} 及 {openapi} 交付給全球開發者。",
   "hero.keyword.sdk": "SDK",
   "hero.keyword.cli": "CLI",

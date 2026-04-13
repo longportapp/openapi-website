@@ -363,8 +363,7 @@ function copyCli() {
   letter-spacing: -0.02em;
 }
 .skill-subtitle {
-  margin-top: 1.5rem;
-  font-size: 0.95rem;
+  margin-top: 24px;
   color: var(--vp-c-text-2);
   font-weight: 600;
   line-height: 1.4;

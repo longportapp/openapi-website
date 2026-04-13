@@ -8,7 +8,10 @@ const { t } = useI18n()
 // SDK data — code from docs/en/docs/quote/pull/quote.md, installs from getting-started.md
 const sdks = [
   {
-    id: 'python', label: 'Python', version: '3.8+', lang: 'python',
+    id: 'python',
+    label: 'Python',
+    version: '3.8+',
+    lang: 'python',
     installs: [
       { runtime: 'pip', cmd: 'pip3 install longbridge' },
       { runtime: 'conda', cmd: 'conda install -c conda-forge longbridge' },
@@ -23,7 +26,10 @@ resp = ctx.quote(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"])
 print(resp)`,
   },
   {
-    id: 'nodejs', label: 'Node.js', version: '10+', lang: 'javascript',
+    id: 'nodejs',
+    label: 'Node.js',
+    version: '10+',
+    lang: 'javascript',
     installs: [
       { runtime: 'bun', cmd: 'bun add longbridge' },
       { runtime: 'npm', cmd: 'npm install longbridge' },
@@ -40,10 +46,11 @@ const resp = await ctx.quote(['700.HK', 'AAPL.US', 'TSLA.US', 'NFLX.US'])
 console.log(resp[0].toString())`,
   },
   {
-    id: 'rust', label: 'Rust', version: '1.89+', lang: 'rust',
-    installs: [
-      { runtime: 'Cargo.toml', cmd: 'longbridge = "4.0.5"' },
-    ],
+    id: 'rust',
+    label: 'Rust',
+    version: '1.89+',
+    lang: 'rust',
+    installs: [{ runtime: 'Cargo.toml', cmd: 'longbridge = "4.0.5"' }],
     code: `use std::sync::Arc;
 use longbridge::{oauth::OAuthBuilder, quote::QuoteContext, Config};
 
@@ -56,10 +63,11 @@ let resp = ctx.quote(["700.HK", "AAPL.US"]).await?;
 println!("{:?}", resp);`,
   },
   {
-    id: 'go', label: 'Go', version: 'latest', lang: 'go',
-    installs: [
-      { runtime: 'go get', cmd: 'go get github.com/longbridge/openapi-go' },
-    ],
+    id: 'go',
+    label: 'Go',
+    version: 'latest',
+    lang: 'go',
+    installs: [{ runtime: 'go get', cmd: 'go get github.com/longbridge/openapi-go' }],
     code: `o := oauth.New("your-client-id").
     OnOpenURL(func(url string) { fmt.Println("Open:", url) })
 o.Build(context.Background())
@@ -70,7 +78,10 @@ quotes, _ := qctx.Quote(ctx, []string{"700.HK", "AAPL.US"})
 fmt.Printf("%+v\\n", quotes[0])`,
   },
   {
-    id: 'java', label: 'Java', version: '11+', lang: 'java',
+    id: 'java',
+    label: 'Java',
+    version: '11+',
+    lang: 'java',
     installs: [
       { runtime: 'Maven', cmd: 'io.github.longbridge:openapi-sdk:4.0.5' },
       { runtime: 'Gradle', cmd: "implementation 'io.github.longbridge:openapi-sdk:4.0.5'" },
@@ -88,10 +99,11 @@ try (OAuth oauth = new OAuthBuilder("your-client-id")
 }`,
   },
   {
-    id: 'cpp', label: 'C++', version: 'C++17', lang: 'cpp',
-    installs: [
-      { runtime: 'CMake', cmd: 'find_package(longbridge REQUIRED)' },
-    ],
+    id: 'cpp',
+    label: 'C++',
+    version: 'C++17',
+    lang: 'cpp',
+    installs: [{ runtime: 'CMake', cmd: 'find_package(longbridge REQUIRED)' }],
     code: `#include <longbridge.hpp>
 using namespace longbridge;
 using namespace longbridge::quote;
@@ -110,8 +122,6 @@ OAuthBuilder("your-client-id").build(
     });`,
   },
 ]
-
-
 </script>
 
 <template>
@@ -125,7 +135,6 @@ OAuthBuilder("your-client-id").build(
     <ClientOnly>
       <ArchCanvas />
     </ClientOnly>
-
   </section>
 </template>
 
@@ -142,15 +151,14 @@ OAuthBuilder("your-client-id").build(
 }
 
 .arch-title {
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 700;
   color: var(--vp-c-text-1);
   letter-spacing: -0.02em;
 }
 
 .arch-subtitle {
-  margin-top: 1.5rem;
-  font-size: 1.05rem;
+  margin-top: 24px;
   color: var(--vp-c-text-2);
 }
 

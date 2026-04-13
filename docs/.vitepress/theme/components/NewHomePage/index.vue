@@ -16,12 +16,12 @@ import GetStarted from './GetStarted.vue'
   <div class="new-home-page">
     <HeroSection />
     <PlatformStats />
-    <CapSection />
     <ArchSection />
     <CoreFeaturesSection />
     <ProductCLI />
     <ProductSkill />
     <ProductMCP />
+    <CapSection />
     <ProductOpenAPI />
     <GetStarted />
     <!-- <MarketCoverage /> -->

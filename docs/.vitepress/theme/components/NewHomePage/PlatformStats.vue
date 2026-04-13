@@ -195,7 +195,7 @@ const stats = computed(() => [
 }
 
 .hc-item {
-  display: flex; align-items: center; gap: 0.4rem;
+  display: flex; align-items: flex-start; gap: 0.4rem;
   padding: 0.35rem 0.375rem; border-radius: 0.3rem;
   text-decoration: none !important; transition: background 0.15s;
 }
@@ -204,7 +204,7 @@ const stats = computed(() => [
 .hc-item-icon {
   display: flex; align-items: center; justify-content: center;
   width: 1.25rem; height: 1.25rem; flex-shrink: 0;
-  color: var(--vp-c-text-3);
+  color: var(--brand-color);
 }
 .hc-item-icon svg { width: 100%; height: 100%; border-radius: 50%; overflow: hidden; }
 
