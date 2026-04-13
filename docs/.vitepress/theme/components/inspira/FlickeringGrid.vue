@@ -83,8 +83,6 @@ function setupCanvas(canvas: HTMLCanvasElement, w: number, h: number): GridParam
   const dpr = window.devicePixelRatio || 1
   canvas.width = w * dpr
   canvas.height = h * dpr
-  canvas.style.width = `${w}px`
-  canvas.style.height = `${h}px`
 
   const step = squareSize.value + gridGap.value
   const cols = Math.floor(w / step)
@@ -110,8 +108,6 @@ function resizeCanvas(canvas: HTMLCanvasElement, w: number, h: number, p: GridPa
   const dpr = window.devicePixelRatio || 1
   canvas.width = w * dpr
   canvas.height = h * dpr
-  canvas.style.width = `${w}px`
-  canvas.style.height = `${h}px`
 
   const step = squareSize.value + gridGap.value
   const newCols = Math.floor(w / step)
@@ -246,9 +242,15 @@ onBeforeUnmount(() => {
   <div ref="containerRef" :class="cn('h-full w-full', props.class)">
     <canvas
       ref="canvasRef"
-      class="pointer-events-none"
-      :width="canvasSize.width"
-      :height="canvasSize.height"
+      class="pointer-events-none flicker-canvas"
     />
   </div>
 </template>
+
+<style scoped>
+.flicker-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+</style>
