@@ -6,7 +6,7 @@ sidebar_position: 5
 
 # longbridge intraday
 
-Get today's minute-by-minute price and volume data (intraday line) for any symbol.
+Get minute-by-minute price and volume data (intraday line) for any symbol — today's live data or a historical date.
 
 ## Basic Usage
 
@@ -60,3 +60,12 @@ longbridge intraday AAPL.US --session all
 ```
 
 `--session all` includes pre-market bars starting from approximately 8:00 AM ET, as well as post-market bars after 4:00 PM ET.
+
+### Historical intraday data
+
+```bash
+longbridge intraday TSLA.US --date 20260401
+longbridge intraday AAPL.US --date 20260401 --format json
+```
+
+Use `--date YYYYMMDD` to retrieve intraday data for a past trading date instead of today's live data.

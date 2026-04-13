@@ -535,6 +535,9 @@ function copyCli() {
   object-fit: contain;
   flex-shrink: 0;
 }
+:root.dark .skill-agent-logo {
+  filter: brightness(0) invert(1);
+}
 
 .skill-agent-name {
   font-size: 0.875rem;

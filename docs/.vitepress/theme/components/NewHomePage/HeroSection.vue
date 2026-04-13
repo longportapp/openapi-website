@@ -130,11 +130,7 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
 .hero-section {
   position: relative;
   overflow: hidden;
-  background: #f7faf9;
-}
-
-:root.dark .hero-section {
-  background: #0a1419;
+  background: var(--vp-c-bg);
 }
 
 /* Tech-style layered background */
@@ -180,11 +176,7 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
 .hero-bg-fade {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 70% 60% at center, transparent 0%, transparent 40%, #f7faf9 90%);
-}
-
-:root.dark .hero-bg-fade {
-  background: radial-gradient(ellipse 70% 60% at center, transparent 0%, transparent 40%, #0a1419 90%);
+  background: radial-gradient(ellipse 70% 60% at center, transparent 0%, transparent 40%, var(--vp-c-bg) 90%);
 }
 
 /* Content */
@@ -269,6 +261,9 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
   line-height: 1.8;
   color: var(--vp-c-text-2);
   font-weight: 400;
+  background: color-mix(in srgb, var(--vp-c-bg) 75%, transparent);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
 }
 
 /* Keywords */

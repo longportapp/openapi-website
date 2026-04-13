@@ -140,7 +140,10 @@ html:root {
 }
 
 .aside-container {
-  height: calc(100vh - 100px) !important;
+  max-height: calc(100vh - 100px) !important;
+  height: auto !important;
+  overflow-y: visible !important;
+  overflow: visible !important;
 }
 
 .aside-curtain {
@@ -154,14 +157,14 @@ html:root {
   overflow: hidden;
 }
 
-.vp-cli-command div[class*="language-"].vp-adaptive-theme {
+.vp-cli-command div[class*='language-'].vp-adaptive-theme {
   border-radius: 0 !important;
   box-shadow: none !important;
   padding-top: 0 !important;
   margin: 0 !important;
 }
 
-.vp-cli-command div[class*="language-"].vp-adaptive-theme::before {
+.vp-cli-command div[class*='language-'].vp-adaptive-theme::before {
   display: none;
 }
 
@@ -170,7 +173,7 @@ html:root {
   align-items: center;
   padding: 6px 10px 6px 14px;
   border-radius: 8px 8px 0 0;
-  border-bottom: 1px solid var(--vp-code-block-divider-color, rgba(128,128,128,0.15));
+  border-bottom: 1px solid var(--vp-code-block-divider-color, rgba(128, 128, 128, 0.15));
   background-color: var(--vp-code-block-bg);
 }
 
@@ -202,7 +205,9 @@ html:root {
   border-radius: 5px;
   color: var(--vp-c-text-3);
   text-decoration: none !important;
-  transition: color 0.15s, background-color 0.15s;
+  transition:
+    color 0.15s,
+    background-color 0.15s;
 }
 
 .vp-cli-action:hover {

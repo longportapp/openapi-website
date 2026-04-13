@@ -7,6 +7,37 @@ sidebar_icon: newspaper
 
 # Release Notes
 
+### [v0.16.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.16.0)
+
+**新增：公司与基本面**
+
+- `company` — 公司概览（成立日期、员工数、IPO 价格、地址等）
+- `executive` — 公司高管与核心人员
+- `industry-valuation` — 行业估值对比（PE/PB/EPS/股息率）；`dist` 子命令查看行业百分位排名
+- `operating` — 经营评述：财务指标表 + 管理层评论
+- `corp-action` — 公司行动（拆股、分红、配股等）
+- `invest-relation` — 投资关系（子公司/母公司结构）
+
+**新增：行情与市场**
+
+- `constituent` — 指数/ETF 成分股，支持排序 + 涨跌统计
+- `market-status` — 各交易所开市/休市状态
+- `broker-holding` — 港股券商持仓（大户/明细/每日变动）
+- `ah-premium` — AH 溢价率 K 线与分时数据（仅限 A+H 双重上市股票）
+- `trade-stats` — 成交统计（按价格区间分布的成交量）
+- `anomaly` — 行情异动 / 市场异常波动
+
+**新增：账户**
+
+- `alert` — 价格提醒（查看/添加/删除）
+- `profit-analysis` — 盈亏总览 + 逐只股票分析；`detail` 查看单只股票盈亏明细与交易流水；`by-market` 按市场筛选
+
+**增强**
+
+- `update` — 跨平台自更新，新增 Windows 支持和 CDN 加速；`--release-notes` 查看更新日志；版本变更后首次运行自动显示
+- `intraday --date` — 支持查询历史日期的分时数据
+- 支持 `BROWSER` 环境变量自定义登录时使用的浏览器
+
 ### [v0.15.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.15.0)
 
 - **新增：`portfolio` 命令** — 显示总盈亏、各市场资产分布（美股/港股/A 股/新加坡/现金）、持仓明细和现金余额

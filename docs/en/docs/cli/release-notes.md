@@ -7,6 +7,37 @@ sidebar_icon: newspaper
 
 # Release Notes
 
+### [v0.16.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.16.0)
+
+**New: Company & Fundamentals**
+
+- `company` — company overview (founding date, employees, IPO price, address)
+- `executive` — company executives and key personnel
+- `industry-valuation` — industry valuation comparison with peers (PE/PB/EPS/DY); `dist` subcommand for percentile ranking
+- `operating` — operating reviews: financial indicators table + management review
+- `corp-action` — corporate actions (splits, dividends, rights, etc.)
+- `invest-relation` — investment relations (subsidiary/parent companies)
+
+**New: Market & Quotes**
+
+- `constituent` — index/ETF constituent stocks with sorting + rise/fall stats
+- `market-status` — market open/close status for each exchange
+- `broker-holding` — broker holding positions for HK stocks (top/detail/daily)
+- `ah-premium` — A/H premium ratio kline and intraday data for dual-listed stocks
+- `trade-stats` — trade statistics (price distribution by volume)
+- `anomaly` — quote anomalies / unusual market movements
+
+**New: Account**
+
+- `alert` — price alerts (list/add/delete)
+- `profit-analysis` — P&L summary + per-stock breakdown; `detail` for individual stock P&L with transaction flows; `by-market` for market-filtered view
+
+**Enhancements**
+
+- `update` — cross-platform self-update with Windows support and CDN acceleration; `--release-notes` to view changelog; auto-shows release notes on version change
+- `intraday --date` — retrieve historical intraday data for a past date
+- `BROWSER` env var support for custom browser selection during login
+
 ### [v0.15.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.15.0)
 
 - **New: `portfolio` command** — total P/L, asset distribution by market (US/HK/CN/SG/Cash), holdings, and cash balances

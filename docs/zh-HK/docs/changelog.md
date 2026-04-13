@@ -6,6 +6,15 @@ sidebar_position: 7
 sidebar_icon: newspaper
 ---
 
+## 2026-04-13
+
+### CLI v0.16.0
+
+- **新增 21+ 個命令** — `company`、`executive`、`industry-valuation`、`operating`、`corp-action`、`invest-relation`、`constituent`、`market-status`、`broker-holding`、`ah-premium`、`trade-stats`、`anomaly`、`alert`、`profit-analysis`
+- **`profit-analysis`** — 盈虧分析：總覽、逐隻股票分析、單隻明細與交易流水、按市場篩選
+- **`update`** — 跨平台自更新，新增 Windows 支援和 CDN 加速；`--release-notes` 查看更新日誌
+- **`intraday --date`** — 支援查詢歷史日期的分時數據
+
 ## 2026-04-09
 
 ### CLI v0.15.0
