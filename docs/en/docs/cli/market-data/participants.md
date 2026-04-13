@@ -15,14 +15,14 @@ longbridge participants
 ```
 
 ```
-| Broker ID  | Name EN                          | Name CN        |
-|------------|----------------------------------|----------------|
-| 6596       | WE                               | 维恩证券        |
+| Broker ID  | Name EN                          | Name CN                 |
+|------------|----------------------------------|-------------------------|
+| 6596       | WE                               | WE Securities           |
 | 3014       | DRW (Hong Kong) Limited          | DRW (Hong Kong) Limited |
-| 7707, 7708 | Ark Securities (Hong Kong) Ltd   | 同舟证券        |
-| 724        | UTR8 Hong Kong Limited           | UTR8 Hong Kong Limited |
-| 1142       | Wanhai Securities (HK) Limited   | 万海证券(香港)   |
-| 6409       | Standard Chartered(HK)           | 渣打(香港)      |
+| 7707, 7708 | Ark Securities (Hong Kong) Ltd   | Ark Securities          |
+| 724        | UTR8 Hong Kong Limited           | UTR8 Hong Kong Limited  |
+| 1142       | Wanhai Securities (HK) Limited   | Wanhai Securities (HK)  |
+| 6409       | Standard Chartered(HK)           | Standard Chartered (HK) |
 ...
 ```
 

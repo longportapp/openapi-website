@@ -19,8 +19,8 @@ longbridge fund-holder AAPL.US
 |----------------------------------------|---------|----------|--------|-------------|
 | T-Rex 2X Long Apple Daily Target ETF   | AAPX.US | USD      | 67.62% | 2026.04.03  |
 | Global X PureCap MSCI Infor Tech ETF   | GXPT.US | USD      | 19.58% | 2026.04.06  |
-| AAPL 周收益 ETF - Roundhill             | AAPW.US | USD      | 16.76% | 2026.04.06  |
-| 信息科技 ETF - Vanguard                 | VGT.US  | USD      | 15.84% | 2026.02.28  |
+| Roundhill Apple Weekly Income ETF       | AAPW.US | USD      | 16.76% | 2026.04.06  |
+| Vanguard Information Technology ETF     | VGT.US  | USD      | 15.84% | 2026.02.28  |
 ...
 ```
 

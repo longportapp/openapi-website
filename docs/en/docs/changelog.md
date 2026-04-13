@@ -6,6 +6,15 @@ sidebar_position: 7
 sidebar_icon: newspaper
 ---
 
+## 2026-04-13
+
+### CLI v0.16.0
+
+- **21+ new commands** — `company`, `executive`, `industry-valuation`, `operating`, `corp-action`, `invest-relation`, `constituent`, `market-status`, `broker-holding`, `ah-premium`, `trade-stats`, `anomaly`, `alert`, `profit-analysis`
+- **`profit-analysis`** — full P&L analysis: summary, per-stock breakdown, individual stock detail with transaction flows, and market-filtered views
+- **`update`** — cross-platform self-update with Windows support and CDN acceleration; `--release-notes` to view changelog
+- **`intraday --date`** — historical intraday data for a past date
+
 ## 2026-04-09
 
 ### CLI v0.15.0

@@ -107,6 +107,10 @@ const { t } = useI18n()
             <span class="ab-svc-name">{{ $t('arch.quote') }}</span>
             <span class="ab-svc-count">30+</span>
           </a>
+          <a href="/docs/cli/fundamentals/company" class="ab-svc">
+            <span class="ab-svc-name">{{ $t('arch.fundamentals') }}</span>
+            <span class="ab-svc-count">13+</span>
+          </a>
           <a href="/docs/trade/overview" class="ab-svc">
             <span class="ab-svc-name">{{ $t('arch.trade') }}</span>
             <span class="ab-svc-count">14+</span>

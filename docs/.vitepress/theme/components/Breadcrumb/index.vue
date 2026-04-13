@@ -30,7 +30,7 @@ const { breadcrumbItems } = useBreadcrumb()
 
 <style scoped>
 .breadcrumb-container {
-  @apply mb-4 pb-2 border-b border-gray-200 dark:border-gray-700;
+  @apply mb-4 pb-2;
 }
 
 .breadcrumb {

@@ -7,6 +7,40 @@ sidebar_icon: newspaper
 
 # Release Notes
 
+### [v0.16.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.16.0)
+
+新增 21 個命令，涵蓋公司基本面、行情數據和帳戶功能。
+
+**新增：公司與基本面**
+
+- `company` — 公司概覽（成立日期、員工數、IPO 價格、地址等）
+- `executive` — 公司高管與核心人員
+- `industry-valuation` — 行業估值對比（PE/PB/EPS/股息率）；`dist` 子命令查看行業百分位排名
+- `operating` — 經營評述：財務指標表 + 管理層評論
+- `corp-action` — 公司行動（拆股、分紅、配股等）
+- `invest-relation` — 投資關係（子公司/母公司結構）
+
+**新增：行情與市場**
+
+- `constituent` — 指數/ETF 成分股，支援排序 + 漲跌統計
+- `market-status` — 各交易所開市/休市狀態
+- `broker-holding` — 港股券商持倉（大戶/明細/每日變動）
+- `ah-premium` — AH 溢價率 K 線與分時數據（僅限 A+H 雙重上市股票）
+- `trade-stats` — 成交統計（按價格區間分佈的成交量）
+- `anomaly` — 行情異動 / 市場異常波動
+
+**新增：帳戶**
+
+- `alert` — 價格提醒（查看/新增/刪除）
+- `profit-analysis` — 盈虧總覽 + 逐隻股票分析；`detail` 查看單隻股票盈虧明細與交易流水；`by-market` 按市場篩選
+
+**增強**
+
+- `update` — 跨平台自更新，新增 Windows 支援和 CDN 加速；`--release-notes` 查看更新日誌；版本變更後首次運行自動顯示
+- `intraday --date` — 支援查詢歷史日期的分時數據
+- TUI：按 `/` 搜尋自選股，或直接輸入 symbol 快速跳轉到任意股票
+- 支援 `BROWSER` 環境變數自訂登入時使用的瀏覽器
+
 ### [v0.15.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.15.0)
 
 - **新增：`portfolio` 命令** — 顯示總盈虧、各市場資產分佈（美股/港股/A 股/新加坡/現金）、持倉明細和現金餘額

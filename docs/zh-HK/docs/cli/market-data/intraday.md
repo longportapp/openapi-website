@@ -6,7 +6,7 @@ sidebar_position: 5
 
 # longbridge intraday
 
-取得任意標的今日逐分鐘的價格和成交量數據（分時線）。
+取得任意標的逐分鐘的價格和成交量數據（分時線）——今日即時數據或歷史日期的數據。
 
 ## 基本用法
 
@@ -60,3 +60,12 @@ longbridge intraday AAPL.US --session all
 ```
 
 `--session all` 包含從美東時間約早上 8:00 開始的盤前數據，以及下午 4:00 之後的盤後數據。
+
+### 查看歷史分時數據
+
+```bash
+longbridge intraday TSLA.US --date 20260401
+longbridge intraday AAPL.US --date 20260401 --format json
+```
+
+使用 `--date YYYYMMDD` 取得指定過往交易日的分時數據，而非今日的即時數據。

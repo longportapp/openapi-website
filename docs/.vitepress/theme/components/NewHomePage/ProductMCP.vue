@@ -446,6 +446,9 @@ function copyCmd() {
   flex-shrink: 0;
   border-radius: 2px;
 }
+:root.dark .mcp-client-logo {
+  filter: brightness(0) invert(1);
+}
 
 /* Client nodes */
 .mcp-n-client {
@@ -538,6 +541,9 @@ function copyCmd() {
   object-fit: contain;
   flex-shrink: 0;
   border-radius: 2px;
+}
+:root.dark .mcp-tab-logo {
+  filter: brightness(0) invert(1);
 }
 .mcp-config-tab:hover {
   color: var(--vp-c-text-2);
