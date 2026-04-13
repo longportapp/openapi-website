@@ -9,6 +9,8 @@ sidebar_icon: newspaper
 
 ### [v0.16.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.16.0)
 
+21 new commands covering company fundamentals, market data, and account features.
+
 **New: Company & Fundamentals**
 
 - `company` — company overview (founding date, employees, IPO price, address)
@@ -36,6 +38,7 @@ sidebar_icon: newspaper
 
 - `update` — cross-platform self-update with Windows support and CDN acceleration; `--release-notes` to view changelog; auto-shows release notes on version change
 - `intraday --date` — retrieve historical intraday data for a past date
+- TUI: press `/` to search watchlist or type a symbol to jump directly to any stock
 - `BROWSER` env var support for custom browser selection during login
 
 ### [v0.15.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.15.0)

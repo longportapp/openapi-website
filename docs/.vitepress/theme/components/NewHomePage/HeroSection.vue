@@ -110,15 +110,15 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
         <a href="https://open.longbridge.com/account" class="hero-link">
           <InteractiveHoverButton
             :text="ctaGetStarted"
-            dot-color="#fff"
-            hover-text-color="var(--brand-color)"
+            dot-color="var(--brand-10)"
+            hover-text-color="var(--brand-100)"
             class="hero-btn-primary" />
         </a>
         <a href="/docs/" class="hero-link">
           <InteractiveHoverButton
             :text="ctaReadDocs"
-            dot-color="var(--brand-color)"
-            hover-text-color="#fff"
+            dot-color="var(--brand-100)"
+            hover-text-color="var(--brand-10)"
             class="hero-btn-secondary" />
         </a>
       </div>
@@ -145,21 +145,15 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
 .hero-bg-gradient {
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-      ellipse 80% 50% at 50% 0%,
-      color-mix(in srgb, #00d4a8 10%, transparent) 0%,
-      transparent 70%
-    ),
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, color-mix(in srgb, #00d4a8 10%, transparent) 0%, transparent 70%),
     radial-gradient(ellipse 50% 35% at 15% 100%, color-mix(in srgb, #ffe000 4%, transparent) 0%, transparent 60%),
     radial-gradient(ellipse 60% 40% at 85% 100%, color-mix(in srgb, #00dbb6 6%, transparent) 0%, transparent 60%);
 }
 
 :root.dark .hero-bg-gradient {
-  background: radial-gradient(
-      ellipse 80% 50% at 50% 0%,
-      color-mix(in srgb, #00dbb6 18%, transparent) 0%,
-      transparent 70%
-    ),
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, color-mix(in srgb, #00dbb6 18%, transparent) 0%, transparent 70%),
     radial-gradient(ellipse 50% 35% at 15% 100%, color-mix(in srgb, #ffe000 6%, transparent) 0%, transparent 60%),
     radial-gradient(ellipse 60% 40% at 85% 100%, color-mix(in srgb, #00d4a8 10%, transparent) 0%, transparent 60%);
 }
@@ -293,25 +287,14 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
 }
 
 .hero-btn-primary {
-  border: 1.5px solid var(--brand-color) !important;
-  background: var(--brand-color) !important;
-  color: #fff !important;
-}
-
-.hero-btn-primary:hover {
-  border: 1.5px solid var(--brand-color) !important;
-  background: var(--brand-color) !important;
-  color: #fff !important;
+  border: 1.5px solid var(--brand-100);
+  background: var(--brand-100);
+  color: var(--brand-10);
 }
 
 .hero-btn-secondary {
-  background: #fff;
-  border: 1.5px solid var(--brand-color) !important;
-  color: var(--brand-color) !important;
-}
-
-.hero-btn-secondary:hover {
-  border: 1.5px solid var(--brand-color) !important;
-  color: var(--brand-color) !important;
+  background: var(--brand-10);
+  border: 1.5px solid var(--brand-100);
+  color: var(--brand-100);
 }
 </style>

@@ -322,7 +322,7 @@ function copyCli() {
     </ClientOnly>
 
     <div class="skill-cta-wrap">
-      <a href="/skill/install" class="skill-cta">
+      <a href="skill/install" class="skill-cta">
         {{ $t('product.skill.cta') }}
         <svg
           width="16"
@@ -461,7 +461,9 @@ function copyCli() {
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
   cursor: pointer;
-  transition: color 0.2s, border-color 0.2s;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
 }
 .skill-install-tab:hover {
   color: var(--vp-c-text-2);
@@ -719,7 +721,9 @@ function copyCli() {
 }
 
 .skill-stream-line-enter-active {
-  transition: opacity 0.3s, transform 0.3s;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
 }
 .skill-stream-line-enter-from {
   opacity: 0;

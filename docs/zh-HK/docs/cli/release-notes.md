@@ -9,6 +9,8 @@ sidebar_icon: newspaper
 
 ### [v0.16.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.16.0)
 
+新增 21 個命令，涵蓋公司基本面、行情數據和帳戶功能。
+
 **新增：公司與基本面**
 
 - `company` — 公司概覽（成立日期、員工數、IPO 價格、地址等）
@@ -36,6 +38,7 @@ sidebar_icon: newspaper
 
 - `update` — 跨平台自更新，新增 Windows 支援和 CDN 加速；`--release-notes` 查看更新日誌；版本變更後首次運行自動顯示
 - `intraday --date` — 支援查詢歷史日期的分時數據
+- TUI：按 `/` 搜尋自選股，或直接輸入 symbol 快速跳轉到任意股票
 - 支援 `BROWSER` 環境變數自訂登入時使用的瀏覽器
 
 ### [v0.15.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.15.0)
