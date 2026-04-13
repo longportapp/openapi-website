@@ -30,22 +30,18 @@ const { t } = useI18n()
             <a href="/skill" class="ab-tool">
               <span class="ab-tool-name">{{ $t('arch.skill.label') }}</span>
               <span class="ab-tool-desc">{{ $t('arch.skill.desc') }}</span>
-              <code class="ab-tool-code">npx skills add longbridge/developers</code>
             </a>
             <a href="/docs/cli" class="ab-tool">
               <span class="ab-tool-name">{{ $t('arch.cli.label') }}</span>
-              <code class="ab-tool-code">{{ $t('arch.cli.desc') }}</code>
               <span class="ab-tool-desc">50+ commands, TUI dashboard, JSON output</span>
             </a>
             <a href="/docs/mcp" class="ab-tool">
               <span class="ab-tool-name">{{ $t('arch.mcp.label') }}</span>
               <span class="ab-tool-desc">{{ $t('arch.mcp.desc') }}</span>
-              <code class="ab-tool-code">claude mcp add longbridge</code>
             </a>
             <a href="/sdk" class="ab-tool">
               <span class="ab-tool-name">{{ $t('arch.sdk.label') }}</span>
               <span class="ab-tool-desc">{{ $t('arch.sdk.desc') }}</span>
-              <code class="ab-tool-code">pip install longbridge</code>
             </a>
           </div>
         </div>

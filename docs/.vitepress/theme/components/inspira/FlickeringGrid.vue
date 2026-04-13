@@ -1,12 +1,18 @@
 <script lang="ts" setup>
 import { cn } from '@inspira-ui/plugins'
-import { computed, onBeforeUnmount, onMounted, ref, toRefs } from 'vue'
+import { onBeforeUnmount, onMounted, ref, toRefs, computed } from 'vue'
+
+interface ColorEntry {
+  color: string
+  weight: number
+}
 
 interface FlickeringGridProps {
   squareSize?: number
   gridGap?: number
   flickerChance?: number
   color?: string
+  colors?: ColorEntry[]
   width?: number
   height?: number
   class?: string
@@ -23,7 +29,7 @@ const props = withDefaults(defineProps<FlickeringGridProps>(), {
   shape: 'square',
 })
 
-const { squareSize, gridGap, flickerChance, color, maxOpacity, width, height, shape } = toRefs(props)
+const { squareSize, gridGap, flickerChance, color, colors, maxOpacity, width, height, shape } = toRefs(props)
 
 const containerRef = ref<HTMLDivElement>()
 const canvasRef = ref<HTMLCanvasElement>()
@@ -31,82 +37,170 @@ const context = ref<CanvasRenderingContext2D>()
 const isInView = ref(false)
 const canvasSize = ref({ width: 0, height: 0 })
 
-const computedColor = computed(() => {
-  const c = color.value
-  // Handle rgb() format
+// Parse color string → "rgba(r,g,b," prefix
+function parseColor(c: string): string {
   const rgbMatch = c.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/)
-  if (rgbMatch) {
-    return `rgba(${rgbMatch[1]}, ${rgbMatch[2]}, ${rgbMatch[3]},`
-  }
-  // Handle hex format
+  if (rgbMatch) return `rgba(${rgbMatch[1]}, ${rgbMatch[2]}, ${rgbMatch[3]},`
   const hex = c.replace(/^#/, '')
-  const bigint = Number.parseInt(hex, 16)
-  const r = (bigint >> 16) & 255
-  const g = (bigint >> 8) & 255
-  const b = bigint & 255
+  const full = hex.length === 3 ? hex.split('').map(x => x + x).join('') : hex
+  const r = parseInt(full.slice(0, 2), 16)
+  const g = parseInt(full.slice(2, 4), 16)
+  const b = parseInt(full.slice(4, 6), 16)
   return `rgba(${r}, ${g}, ${b},`
+}
+
+// Resolved colors with cumulative weights
+const resolvedColors = computed(() => {
+  const list = colors.value && colors.value.length > 0
+    ? colors.value
+    : [{ color: color.value, weight: 1 }]
+  const total = list.reduce((s, c) => s + c.weight, 0)
+  let acc = 0
+  return list.map(e => ({ rgba: parseColor(e.color), cumulative: (acc += e.weight / total) }))
 })
 
-function setupCanvas(canvas: HTMLCanvasElement, w: number, h: number) {
+function pickColorIndex(): number {
+  const rand = Math.random()
+  const cl = resolvedColors.value
+  for (let k = 0; k < cl.length; k++) {
+    if (rand <= cl[k].cumulative) return k
+  }
+  return cl.length - 1
+}
+
+interface GridParams {
+  cols: number
+  rows: number
+  squares: Float32Array
+  colorIndices: Uint8Array
+  dpr: number
+  offsetX: number
+  offsetY: number
+}
+
+// Initial setup — creates all dot data
+function setupCanvas(canvas: HTMLCanvasElement, w: number, h: number): GridParams {
   const dpr = window.devicePixelRatio || 1
   canvas.width = w * dpr
   canvas.height = h * dpr
   canvas.style.width = `${w}px`
   canvas.style.height = `${h}px`
-  const cols = Math.floor(w / (squareSize.value + gridGap.value))
-  const rows = Math.floor(h / (squareSize.value + gridGap.value))
-  const squares = new Float32Array(cols * rows)
-  for (let i = 0; i < squares.length; i++) {
+
+  const step = squareSize.value + gridGap.value
+  const cols = Math.floor(w / step)
+  const rows = Math.floor(h / step)
+  const count = cols * rows
+
+  const squares = new Float32Array(count)
+  const colorIndices = new Uint8Array(count)
+  for (let i = 0; i < count; i++) {
     squares[i] = Math.random() * maxOpacity.value
+    colorIndices[i] = pickColorIndex()
   }
-  return { cols, rows, squares, dpr }
+
+  return {
+    cols, rows, squares, colorIndices, dpr,
+    offsetX: ((w - cols * step) / 2) * dpr,
+    offsetY: ((h - rows * step) / 2) * dpr,
+  }
 }
 
-function updateSquares(squares: Float32Array, deltaTime: number) {
+// Resize — preserves existing dot data, only fills new slots
+function resizeCanvas(canvas: HTMLCanvasElement, w: number, h: number, p: GridParams): GridParams {
+  const dpr = window.devicePixelRatio || 1
+  canvas.width = w * dpr
+  canvas.height = h * dpr
+  canvas.style.width = `${w}px`
+  canvas.style.height = `${h}px`
+
+  const step = squareSize.value + gridGap.value
+  const newCols = Math.floor(w / step)
+  const newRows = Math.floor(h / step)
+  const offsetX = ((w - newCols * step) / 2) * dpr
+  const offsetY = ((h - newRows * step) / 2) * dpr
+
+  // If grid dimensions unchanged, just update offsets
+  if (newCols === p.cols && newRows === p.rows) {
+    p.offsetX = offsetX
+    p.offsetY = offsetY
+    return p
+  }
+
+  // Rebuild arrays, preserving data for overlapping region
+  const newCount = newCols * newRows
+  const newSquares = new Float32Array(newCount)
+  const newColorIndices = new Uint8Array(newCount)
+
+  for (let i = 0; i < newCols; i++) {
+    for (let j = 0; j < newRows; j++) {
+      const newIdx = i * newRows + j
+      if (i < p.cols && j < p.rows) {
+        // Preserve existing dot
+        const oldIdx = i * p.rows + j
+        newSquares[newIdx] = p.squares[oldIdx]
+        newColorIndices[newIdx] = p.colorIndices[oldIdx]
+      }
+      else {
+        // Newly visible area — initialise fresh
+        newSquares[newIdx] = Math.random() * maxOpacity.value
+        newColorIndices[newIdx] = pickColorIndex()
+      }
+    }
+  }
+
+  return { cols: newCols, rows: newRows, squares: newSquares, colorIndices: newColorIndices, dpr, offsetX, offsetY }
+}
+
+// Flicker: only update opacity; re-roll color so brand positions shift randomly
+function updateSquares(squares: Float32Array, colorIndices: Uint8Array, deltaTime: number) {
   for (let i = 0; i < squares.length; i++) {
     if (Math.random() < flickerChance.value * deltaTime) {
       squares[i] = Math.random() * maxOpacity.value
+      colorIndices[i] = pickColorIndex()
     }
   }
 }
 
-function drawGrid(
-  ctx: CanvasRenderingContext2D,
-  w: number,
-  _h: number,
-  cols: number,
-  rows: number,
-  squares: Float32Array,
-  dpr: number,
-) {
-  ctx.clearRect(0, 0, w, _h)
+function drawGrid(ctx: CanvasRenderingContext2D, w: number, h: number, p: GridParams) {
+  ctx.clearRect(0, 0, w, h)
+  const dpr = p.dpr
   const size = squareSize.value * dpr
   const step = (squareSize.value + gridGap.value) * dpr
   const radius = size / 2
-  for (let i = 0; i < cols; i++) {
-    for (let j = 0; j < rows; j++) {
-      const opacity = squares[i * rows + j]
-      ctx.fillStyle = `${computedColor.value}${opacity})`
-      const x = i * step
-      const y = j * step
+  const cl = resolvedColors.value
+
+  for (let i = 0; i < p.cols; i++) {
+    for (let j = 0; j < p.rows; j++) {
+      const idx = i * p.rows + j
+      const opacity = p.squares[idx]
+      const { rgba } = cl[p.colorIndices[idx]] ?? cl[0]
+      ctx.fillStyle = `${rgba}${opacity})`
+      const x = p.offsetX + i * step
+      const y = p.offsetY + j * step
       if (shape.value === 'circle') {
         ctx.beginPath()
         ctx.arc(x + radius, y + radius, radius, 0, Math.PI * 2)
         ctx.fill()
-      } else {
+      }
+      else {
         ctx.fillRect(x, y, size, size)
       }
     }
   }
 }
 
-const gridParams = ref<ReturnType<typeof setupCanvas>>()
+const gridParams = ref<GridParams>()
 
 function updateCanvasSize() {
   const newWidth = width.value || containerRef.value!.clientWidth
   const newHeight = height.value || containerRef.value!.clientHeight
   canvasSize.value = { width: newWidth, height: newHeight }
-  gridParams.value = setupCanvas(canvasRef.value!, newWidth, newHeight)
+  if (!gridParams.value) {
+    gridParams.value = setupCanvas(canvasRef.value!, newWidth, newHeight)
+  }
+  else {
+    gridParams.value = resizeCanvas(canvasRef.value!, newWidth, newHeight, gridParams.value)
+  }
 }
 
 let animationFrameId: number | undefined
@@ -118,16 +212,9 @@ function animate(time: number) {
   if (!isInView.value) return
   const deltaTime = (time - lastTime) / 1000
   lastTime = time
-  updateSquares(gridParams.value!.squares, deltaTime)
-  drawGrid(
-    context.value!,
-    canvasRef.value!.width,
-    canvasRef.value!.height,
-    gridParams.value!.cols,
-    gridParams.value!.rows,
-    gridParams.value!.squares,
-    gridParams.value!.dpr,
-  )
+  const p = gridParams.value!
+  updateSquares(p.squares, p.colorIndices, deltaTime)
+  drawGrid(context.value!, canvasRef.value!.width, canvasRef.value!.height, p)
   animationFrameId = requestAnimationFrame(animate)
 }
 

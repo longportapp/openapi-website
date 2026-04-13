@@ -87,7 +87,7 @@
   "arch.skill.label": "AI Skill",
   "arch.skill.desc": "適配任何 AI 平台的投資分析 Agent",
   "arch.cli.label": "CLI",
-  "arch.cli.desc": "longbridge quote AAPL.US --format json",
+  "arch.cli.desc": "longbridge quote AAPL.US",
   "arch.mcp.label": "MCP Client",
   "arch.mcp.desc": "Claude, Cursor, Codex, Zed, Cherry Studio",
   "arch.sdk.label": "SDK",

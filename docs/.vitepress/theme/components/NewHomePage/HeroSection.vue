@@ -17,6 +17,15 @@ const brandColors = [
   'var(--cyan-60)',
 ]
 
+// Flicker grid: LB logo colors (7-10%) + gray (rest)
+// Logo colors: #ffe000 (yellow), #00dbb6 (teal), #fc5200 (orange)
+const flickerColors = [
+  { color: '#a8b8be', weight: 91.5 }, // muted blue-gray for both light/dark
+  { color: '#ffe000', weight: 3 }, // LB yellow
+  { color: '#00dbb6', weight: 3 }, // LB teal
+  { color: '#fc5200', weight: 2.5 }, // LB orange
+]
+
 // Cycle through product names
 const products = ['Skill', 'CLI', 'MCP', 'SDK', 'OpenAPI']
 const currentProduct = ref(products[0])
@@ -42,16 +51,17 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
     <!-- Tech-style background with flicker grid -->
     <div class="hero-bg-wrapper">
       <div class="hero-bg-gradient" />
-      <ClientOnly>
-        <FlickeringGrid
-          class="hero-bg-flicker"
-          color="rgb(0, 184, 184)"
-          shape="circle"
-          :square-size="3"
-          :grid-gap="14"
-          :flicker-chance="0.25"
-          :max-opacity="0.45" />
-      </ClientOnly>
+      <div class="hero-bg-flicker">
+        <ClientOnly>
+          <FlickeringGrid
+            shape="circle"
+            :colors="flickerColors"
+            :square-size="5"
+            :grid-gap="10"
+            :flicker-chance="0.25"
+            :max-opacity="0.5" />
+        </ClientOnly>
+      </div>
       <div class="hero-bg-fade" />
     </div>
 
@@ -97,7 +107,7 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
 
       <!-- CTA Buttons -->
       <div class="hero-cta">
-        <a href="/docs/getting-started" class="hero-link">
+        <a href="https://open.longbridge.com/account" class="hero-link">
           <InteractiveHoverButton
             :text="ctaGetStarted"
             dot-color="#fff"
@@ -120,7 +130,7 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
 .hero-section {
   position: relative;
   overflow: hidden;
-  background: #f6fafb;
+  background: #f7faf9;
 }
 
 :root.dark .hero-section {
@@ -141,21 +151,21 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
   inset: 0;
   background: radial-gradient(
       ellipse 80% 50% at 50% 0%,
-      color-mix(in srgb, #00b8b8 8%, transparent) 0%,
+      color-mix(in srgb, #00d4a8 10%, transparent) 0%,
       transparent 70%
     ),
-    radial-gradient(ellipse 60% 40% at 20% 100%, color-mix(in srgb, #66d5c2 6%, transparent) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 100%, color-mix(in srgb, #00b8b8 5%, transparent) 0%, transparent 60%);
+    radial-gradient(ellipse 50% 35% at 15% 100%, color-mix(in srgb, #ffe000 4%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 85% 100%, color-mix(in srgb, #00dbb6 6%, transparent) 0%, transparent 60%);
 }
 
 :root.dark .hero-bg-gradient {
   background: radial-gradient(
       ellipse 80% 50% at 50% 0%,
-      color-mix(in srgb, #00b8b8 15%, transparent) 0%,
+      color-mix(in srgb, #00dbb6 18%, transparent) 0%,
       transparent 70%
     ),
-    radial-gradient(ellipse 60% 40% at 20% 100%, color-mix(in srgb, #00b8b8 10%, transparent) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 100%, color-mix(in srgb, #66d5c2 8%, transparent) 0%, transparent 60%);
+    radial-gradient(ellipse 50% 35% at 15% 100%, color-mix(in srgb, #ffe000 6%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 85% 100%, color-mix(in srgb, #00d4a8 10%, transparent) 0%, transparent 60%);
 }
 
 /* Layer 2: Flicker grid */
@@ -170,7 +180,7 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
 .hero-bg-fade {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 70% 60% at center, transparent 0%, transparent 40%, #f6fafb 90%);
+  background: radial-gradient(ellipse 70% 60% at center, transparent 0%, transparent 40%, #f7faf9 90%);
 }
 
 :root.dark .hero-bg-fade {
@@ -288,24 +298,25 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
 }
 
 .hero-btn-primary {
-  border-color: var(--brand-color) !important;
+  border: 1.5px solid var(--brand-color) !important;
+  background: var(--brand-color) !important;
+  color: #fff !important;
+}
+
+.hero-btn-primary:hover {
+  border: 1.5px solid var(--brand-color) !important;
   background: var(--brand-color) !important;
   color: #fff !important;
 }
 
 .hero-btn-secondary {
-  border: 1.5px solid var(--vp-c-border) !important;
-  background: var(--vp-c-bg) !important;
-  color: var(--vp-c-text-1) !important;
-}
-
-.hero-btn-primary:hover,
-.hero-btn-secondary:hover {
-  border: 1.5px solid var(--vp-c-border) !important;
+  background: #fff;
+  border: 1.5px solid var(--brand-color) !important;
+  color: var(--brand-color) !important;
 }
 
 .hero-btn-secondary:hover {
-  background: var(--brand-color) !important;
-  color: #fff !important;
+  border: 1.5px solid var(--brand-color) !important;
+  color: var(--brand-color) !important;
 }
 </style>

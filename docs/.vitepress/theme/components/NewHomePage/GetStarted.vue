@@ -30,12 +30,7 @@ const entries = [
       <p class="gs-subtitle">{{ $t('getStarted.subtitle') }}</p>
 
       <div class="gs-cards">
-        <a
-          v-for="e in entries"
-          :key="e.key"
-          :href="e.href"
-          class="gs-card"
-        >
+        <a v-for="e in entries" :key="e.key" :href="e.href" class="gs-card">
           <div class="gs-card-header">
             <span class="gs-card-icon" v-html="e.icon" />
             <h3 class="gs-card-title">{{ $t(`getStarted.${e.key}.title`) }}</h3>
@@ -43,7 +38,18 @@ const entries = [
           <p class="gs-card-desc">{{ $t(`getStarted.${e.key}.desc`) }}</p>
           <span class="gs-card-link">
             {{ $t(`getStarted.${e.key}.cta`) }}
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
           </span>
         </a>
       </div>
@@ -62,7 +68,8 @@ const entries = [
 .gs-bg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg,
+  background: linear-gradient(
+    135deg,
     color-mix(in srgb, var(--brand-color) 8%, var(--vp-c-bg-soft)) 0%,
     var(--vp-c-bg-soft) 40%,
     color-mix(in srgb, var(--cyan-60, #66d5c2) 6%, var(--vp-c-bg-soft)) 100%
@@ -137,7 +144,10 @@ const entries = [
   color: var(--vp-c-text-3);
   transition: color 0.25s, transform 0.25s;
 }
-.gs-card-icon :deep(svg) { width: 100%; height: 100%; }
+.gs-card-icon :deep(svg) {
+  width: 100%;
+  height: 100%;
+}
 .gs-card:hover .gs-card-icon {
   color: var(--brand-color);
   transform: scale(1.15);
@@ -155,6 +165,7 @@ const entries = [
   color: var(--vp-c-text-3);
   line-height: 1.5;
   flex: 1;
+  text-align: left;
 }
 
 .gs-card-link {
@@ -175,6 +186,8 @@ const entries = [
 }
 
 @media (max-width: 768px) {
-  .gs-cards { grid-template-columns: 1fr; }
+  .gs-cards {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

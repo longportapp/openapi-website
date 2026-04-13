@@ -374,7 +374,7 @@ function copyInstall() {
           </button>
         </div>
         <ClientOnly>
-          <BorderBeam :duration="6" :size="120" color-from="#00b8b8" color-to="#66d5c2" />
+          <BorderBeam :duration="6" :size="120" color-from="#00d4a8" color-to="#66e8c8" />
         </ClientOnly>
       </div>
 
@@ -555,7 +555,7 @@ function copyInstall() {
 .sdk-cell-icon { display: flex; align-items: center; gap: 0.375rem; margin-bottom: 0.5rem; }
 .sdk-cell-icon svg { width: 1.125rem; height: 1.125rem; color: var(--brand-color); }
 .sdk-cell-title { font-size: 0.82rem; font-weight: 700; color: var(--vp-c-text-1); margin-bottom: 0.25rem; }
-.sdk-cell-desc { font-size: 0.75rem; color: var(--vp-c-text-3); line-height: 1.5; }
+.sdk-cell-desc { font-size: 0.75rem; color: var(--vp-c-text-2); line-height: 1.5; }
 
 .sdk-tags { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.375rem; }
 .sdk-tag { padding: 0.2rem 0.5rem; border-radius: 0.25rem; font-size: 0.68rem; font-weight: 700; background: color-mix(in srgb, var(--brand-color) 10%, transparent); color: var(--brand-color); }

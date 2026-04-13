@@ -18,7 +18,7 @@ const tags: Record<string, string[]> = {
   mcp: ['OAuth 2.1', 'Hosted'],
   sdk: ['Python', 'Rust', 'Go', '+ 4'],
   paper: ['Sandbox', 'Zero Cost'],
-  llm: ['llms.txt', 'RAG'],
+  llm: ['Markdown', 'llms.txt'],
 }
 
 const links: Record<string, string> = {
@@ -104,7 +104,6 @@ const products = ['skill', 'cli', 'mcp', 'sdk', 'paper', 'llm']
   background: color-mix(in srgb, var(--brand-color) 10%, transparent);
   color: var(--brand-color);
 }
-
 
 /* Grid */
 .core-grid {

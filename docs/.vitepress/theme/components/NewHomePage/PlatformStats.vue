@@ -172,7 +172,7 @@ const stats = computed(() => [
 .stats-item:hover .stats-suffix {
   transform: scale(1.1);
 }
-.stats-label { margin-top: 0.25rem; font-size: 0.875rem; font-weight: 500; color: var(--vp-c-text-3); text-transform: uppercase; letter-spacing: 0.05em; }
+.stats-label { margin-top: 0.25rem; font-size: 0.875rem; font-weight: 500; color: var(--vp-c-text-2); text-transform: uppercase; letter-spacing: 0.05em; }
 </style>
 
 <style>
