@@ -32,12 +32,14 @@ const clients = [
   {
     id: 'zed',
     name: 'Zed',
+    logo: 'https://assets.lbctrl.com/uploads/3418077a-9766-4514-bc8e-eef076309689/zed.svg',
     type: 'json' as const,
     json: { mcpServers: { longbridge: { url: 'https://openapi.longbridge.com/mcp' } } },
   },
   {
     id: 'cherry',
     name: 'Cherry Studio',
+    logo: 'https://assets.lbctrl.com/uploads/df8f9467-91a5-4bdb-8dde-5127441f0b04/cherrystudio.svg',
     type: 'ui' as const,
     steps: ['Settings', 'MCP Servers', 'Add'],
     fields: { URL: 'https://openapi.longbridge.com/mcp' },
