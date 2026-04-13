@@ -105,11 +105,11 @@ const { t } = useI18n()
         <div class="ab-group-box ab-box-svc">
           <a href="/docs/quote/overview" class="ab-svc">
             <span class="ab-svc-name">{{ $t('arch.quote') }}</span>
-            <span class="ab-svc-count">20+</span>
+            <span class="ab-svc-count">30+</span>
           </a>
           <a href="/docs/trade/overview" class="ab-svc">
             <span class="ab-svc-name">{{ $t('arch.trade') }}</span>
-            <span class="ab-svc-count">11+</span>
+            <span class="ab-svc-count">14+</span>
           </a>
           <a href="/docs/content/news" class="ab-svc">
             <span class="ab-svc-name">{{ $t('arch.content') }}</span>
