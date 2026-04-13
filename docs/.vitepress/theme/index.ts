@@ -1,5 +1,6 @@
 // https://vitepress.dev/guide/custom-theme
 import type { Theme } from 'vitepress'
+import './style/tailwind.css'
 import './style/index.css'
 import 'virtual:group-icons.css' //代码组样式
 import 'virtual:uno.css'
@@ -27,6 +28,11 @@ export default {
   Layout,
   async enhanceApp({ app }) {
     app.use(i18n)
+    if (!import.meta.env.SSR) {
+      const FloatingVue = await import('floating-vue')
+      await import('floating-vue/dist/style.css')
+      app.use(FloatingVue.default)
+    }
     for (const component of Object.keys(components)) {
       app.component(component, components[component])
     }
