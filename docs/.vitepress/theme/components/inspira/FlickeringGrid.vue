@@ -11,6 +11,7 @@ interface FlickeringGridProps {
   height?: number
   class?: string
   maxOpacity?: number
+  shape?: 'square' | 'circle'
 }
 
 const props = withDefaults(defineProps<FlickeringGridProps>(), {
@@ -19,9 +20,10 @@ const props = withDefaults(defineProps<FlickeringGridProps>(), {
   flickerChance: 0.3,
   color: 'rgb(0, 0, 0)',
   maxOpacity: 0.3,
+  shape: 'square',
 })
 
-const { squareSize, gridGap, flickerChance, color, maxOpacity, width, height } = toRefs(props)
+const { squareSize, gridGap, flickerChance, color, maxOpacity, width, height, shape } = toRefs(props)
 
 const containerRef = ref<HTMLDivElement>()
 const canvasRef = ref<HTMLCanvasElement>()
@@ -78,16 +80,22 @@ function drawGrid(
   dpr: number,
 ) {
   ctx.clearRect(0, 0, w, _h)
+  const size = squareSize.value * dpr
+  const step = (squareSize.value + gridGap.value) * dpr
+  const radius = size / 2
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
       const opacity = squares[i * rows + j]
       ctx.fillStyle = `${computedColor.value}${opacity})`
-      ctx.fillRect(
-        i * (squareSize.value + gridGap.value) * dpr,
-        j * (squareSize.value + gridGap.value) * dpr,
-        squareSize.value * dpr,
-        squareSize.value * dpr,
-      )
+      const x = i * step
+      const y = j * step
+      if (shape.value === 'circle') {
+        ctx.beginPath()
+        ctx.arc(x + radius, y + radius, radius, 0, Math.PI * 2)
+        ctx.fill()
+      } else {
+        ctx.fillRect(x, y, size, size)
+      }
     }
   }
 }

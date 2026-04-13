@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import StyleToggle from './StyleToggle.vue'
-import InteractiveGridPattern from '../inspira/InteractiveGridPattern.vue'
 import FlickeringGrid from '../inspira/FlickeringGrid.vue'
 import ColourfulText from '../inspira/ColourfulText.vue'
 import InteractiveHoverButton from '../inspira/InteractiveHoverButton.vue'
 
 const { t } = useI18n()
-
-const bgStyle = ref<'Grid' | 'Flicker'>('Grid')
 
 // Brand color scheme from lbus design tokens
 const brandColors = [
@@ -39,33 +35,21 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
 
 <template>
   <section class="hero-section">
-    <!-- Background -->
+    <!-- Tech-style background with flicker grid -->
     <div class="hero-bg-wrapper">
+      <div class="hero-bg-gradient" />
       <ClientOnly>
-        <InteractiveGridPattern
-          v-if="bgStyle === 'Grid'"
-          class-name="opacity-60 dark:opacity-30"
-          squares-class-name="hover:fill-blue-500/20 dark:hover:fill-blue-400/20"
-          :width="36"
-          :height="36"
-          :squares="[42, 24]"
-        />
         <FlickeringGrid
-          v-else
-          class="h-full w-full"
-          color="rgb(99, 102, 241)"
-          :square-size="5"
-          :grid-gap="5"
-          :flicker-chance="0.4"
-          :max-opacity="0.25"
+          class="hero-bg-flicker"
+          color="rgb(0, 184, 184)"
+          shape="circle"
+          :square-size="3"
+          :grid-gap="14"
+          :flicker-chance="0.25"
+          :max-opacity="0.45"
         />
       </ClientOnly>
       <div class="hero-bg-fade" />
-    </div>
-
-    <!-- Toggle: Background Style -->
-    <div class="hero-bg-toggle">
-      <StyleToggle v-model="bgStyle" :options="['Grid', 'Flicker']" />
     </div>
 
     <!-- Content -->
@@ -136,10 +120,17 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
 .hero-section {
   position: relative;
   overflow: hidden;
-  background: var(--vp-c-bg);
+  background: #f6fafb;
+  min-height: 40rem;
+  display: flex;
+  align-items: center;
 }
 
-/* Background */
+:root.dark .hero-section {
+  background: #0a1419;
+}
+
+/* Tech-style layered background */
 .hero-bg-wrapper {
   position: absolute;
   inset: 0;
@@ -147,17 +138,42 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
   pointer-events: none;
 }
 
+/* Layer 1: subtle tech gradient with brand hue */
+.hero-bg-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, color-mix(in srgb, #00b8b8 8%, transparent) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 20% 100%, color-mix(in srgb, #66d5c2 6%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, color-mix(in srgb, #00b8b8 5%, transparent) 0%, transparent 60%);
+}
+
+:root.dark .hero-bg-gradient {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, color-mix(in srgb, #00b8b8 15%, transparent) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 20% 100%, color-mix(in srgb, #00b8b8 10%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, color-mix(in srgb, #66d5c2 8%, transparent) 0%, transparent 60%);
+}
+
+/* Layer 2: Flicker grid */
+.hero-bg-flicker {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Layer 3: fade edges to keep content readable */
 .hero-bg-fade {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, transparent 25%, var(--vp-c-bg) 75%);
+  background:
+    radial-gradient(ellipse 70% 60% at center, transparent 0%, transparent 40%, #f6fafb 90%);
 }
 
-.hero-bg-toggle {
-  position: absolute;
-  right: 1.5rem;
-  top: 1rem;
-  z-index: 20;
+:root.dark .hero-bg-fade {
+  background:
+    radial-gradient(ellipse 70% 60% at center, transparent 0%, transparent 40%, #0a1419 90%);
 }
 
 /* Content */
@@ -166,8 +182,9 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
   z-index: 10;
   max-width: 48rem;
   margin: 0 auto;
-  padding: 5rem 1.5rem 4rem;
+  padding: 6rem 1.5rem;
   text-align: center;
+  width: 100%;
 }
 
 /* Title */
