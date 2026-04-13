@@ -19,14 +19,14 @@ interface SdkItem {
 
 const props = defineProps<{ sdks: SdkItem[] }>()
 
-// Language logos
+// Language logos (CDN URLs)
 const logos: Record<string, string> = {
-  python: `<svg viewBox="0 0 32 32" fill="none"><path d="M15.885 2.1c-7.1 0-6.651 3.079-6.651 3.079l.008 3.19h6.773v.958H5.558S2 8.88 2 16.04s3.107 6.907 3.107 6.907h1.855v-3.323s-.1-3.107 3.056-3.107h5.26s2.96.048 2.96-2.862V8.147S18.69 2.1 15.885 2.1zm-2.928 3.478a.95.95 0 110 1.9.95.95 0 010-1.9z" fill="#3776AB"/><path d="M16.115 29.9c7.1 0 6.651-3.079 6.651-3.079l-.008-3.19h-6.773v-.958h10.457S30 23.12 30 15.96s-3.107-6.907-3.107-6.907h-1.855v3.323s.1 3.107-3.056 3.107h-5.26s-2.96-.048-2.96 2.862v5.508S13.31 29.9 16.115 29.9zm2.928-3.478a.95.95 0 110-1.9.95.95 0 010 1.9z" fill="#FFD43B"/></svg>`,
-  nodejs: `<svg viewBox="0 0 32 32" fill="none"><path d="M16 2.5a1.5 1.5 0 00-.75.2L5.25 8.45a1.5 1.5 0 00-.75 1.3v11.5a1.5 1.5 0 00.75 1.3l10 5.75a1.5 1.5 0 001.5 0l10-5.75a1.5 1.5 0 00.75-1.3V9.75a1.5 1.5 0 00-.75-1.3L16.75 2.7a1.5 1.5 0 00-.75-.2z" fill="#339933"/><path d="M16 9v14" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M10 12l6-3 6 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 20l6 3 6-3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  rust: `<svg viewBox="0 0 32 32" fill="none"><path d="M16 2.5l1.3 4.2 3.7-2.3-.7 4.3 4.3-.6-2.4 3.6 4.2 1.4-3.6 2.5 3.6 2.5-4.2 1.4 2.4 3.6-4.3-.6.7 4.3-3.7-2.3L16 29.5l-1.3-4.2-3.7 2.3.7-4.3-4.3.6 2.4-3.6-4.2-1.4 3.6-2.5-3.6-2.5 4.2-1.4-2.4-3.6 4.3.6-.7-4.3 3.7 2.3z" fill="#000" stroke="#000" stroke-width="0.5"/><circle cx="16" cy="16" r="5.5" fill="#000" stroke="#fff" stroke-width="1.5"/><text x="16" y="19.5" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff" font-family="sans-serif">R</text></svg>`,
-  go: `<svg viewBox="0 0 32 32" fill="none"><ellipse cx="11" cy="14" rx="5" ry="6" fill="#00ADD8"/><ellipse cx="21" cy="14" rx="5" ry="6" fill="#00ADD8"/><ellipse cx="11" cy="13.5" rx="2" ry="2.5" fill="#fff"/><ellipse cx="21" cy="13.5" rx="2" ry="2.5" fill="#fff"/><circle cx="11.5" cy="13" r="1" fill="#000"/><circle cx="21.5" cy="13" r="1" fill="#000"/><path d="M13 20c1 1.5 5 1.5 6 0" stroke="#00ADD8" stroke-width="1.5" stroke-linecap="round"/></svg>`,
-  java: `<svg viewBox="0 0 32 32" fill="none"><path d="M12.3 23.7s-1.5.9.9 1.2c3 .3 4.5.3 7.7-.3 0 0 .9.5 2 1-7.1 3-16-.6-10.6-1.9zm-.9-4.3s-1.6 1.2.8 1.5c3.1.3 5.7.3 10-.5 0 0 .6.6 1.5.9-8.6 2.5-18.1.2-12.3-1.9z" fill="#5382A1"/><path d="M18.3 13.4c1.8 2-0.5 3.9-0.5 3.9s4.5-2.3 2.4-5.2c-1.9-2.7-3.4-4 4.6-8.6 0 0-12.6 3.1-6.5 9.9z" fill="#E76F00"/><path d="M25.6 25.9s1 .9-1.2 1.6c-4.2 1.3-17.4 1.7-21.1.1-1.3-.6 1.2-1.4 2-1.5.8-.2 1.3-.1 1.3-.1-1.5-1-9.4 3-4 4.3 14.6 3.5 26.6-1.6 23-4.4zM13 17.2s-6.7 1.6-2.4 2.2c1.8.2 5.5.2 8.9-.1 2.8-.2 5.6-.8 5.6-.8s-1 .4-1.7.9c-6.8 1.8-19.9 1-16.1-.9 3.2-1.5 5.7-1.3 5.7-1.3z" fill="#5382A1"/></svg>`,
-  cpp: `<svg viewBox="0 0 32 32" fill="none"><path d="M16 2L4 9v14l12 7 12-7V9L16 2z" fill="#00599C"/><text x="16" y="21" text-anchor="middle" font-size="12" font-weight="bold" fill="white" font-family="sans-serif">C++</text></svg>`,
+  python: 'https://assets.lbctrl.com/uploads/50244d9f-f886-4dc5-8ee5-4983d0ecb169/python.svg',
+  nodejs: 'https://assets.lbctrl.com/uploads/1729711f-90d8-4b4d-9047-63a8adabdf20/nodejs.svg',
+  rust: 'https://assets.lbctrl.com/uploads/f777c482-71bb-45a4-a2fe-5e639bd510cb/rust.svg',
+  go: 'https://assets.lbctrl.com/uploads/37a78e80-f177-4931-a7b3-a12692c478ad/go.svg',
+  java: 'https://assets.lbctrl.com/uploads/f5d96da9-8cba-43e4-8eed-f704e52cb413/java.svg',
+  cpp: 'https://assets.lbctrl.com/uploads/14e521de-8f43-4042-aa4d-659d7b645da4/cplusplus.svg',
 }
 
 const activeSdk = ref<string | null>(null)
@@ -130,7 +130,7 @@ watch([expanded, highlighter], () => updateHighlight())
           @click="select(sdk.id)"
         >
           <div class="sdk-mq-top">
-            <span v-if="logos[sdk.id]" class="sdk-mq-logo" v-html="logos[sdk.id]" />
+            <img v-if="logos[sdk.id]" class="sdk-mq-logo" :src="logos[sdk.id]" :alt="sdk.label" />
             <span class="sdk-mq-name">{{ sdk.label }}</span>
             <span class="sdk-mq-ver">{{ sdk.version }}</span>
           </div>
@@ -146,7 +146,7 @@ watch([expanded, highlighter], () => updateHighlight())
         <!-- Header: Logo + Name + Version + Nav -->
         <div class="mq-panel-header">
           <div class="mq-panel-title">
-            <span v-if="logos[expanded.id]" class="mq-panel-logo" v-html="logos[expanded.id]" />
+            <img v-if="logos[expanded.id]" class="mq-panel-logo" :src="logos[expanded.id]" :alt="expanded.label" />
             <span class="mq-panel-name">{{ expanded.label }}</span>
             <span class="mq-panel-ver">{{ expanded.version }}</span>
           </div>
@@ -196,7 +196,7 @@ watch([expanded, highlighter], () => updateHighlight())
 
 <style scoped>
 .sdk-marquee-wrap {
-  max-width: 56rem;
+  max-width: 64rem;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
@@ -234,8 +234,7 @@ watch([expanded, highlighter], () => updateHighlight())
 }
 
 .sdk-mq-top { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.375rem; }
-.sdk-mq-logo { display: flex; width: 1.25rem; height: 1.25rem; flex-shrink: 0; }
-.sdk-mq-logo :deep(svg) { width: 100%; height: 100%; }
+.sdk-mq-logo { width: 1.25rem; height: 1.25rem; flex-shrink: 0; object-fit: contain; }
 .sdk-mq-name { font-size: 0.95rem; font-weight: 700; color: var(--vp-c-text-1); }
 .sdk-mq-ver { font-size: 0.7rem; font-weight: 500; color: var(--vp-c-text-3); margin-left: auto; }
 
@@ -284,8 +283,7 @@ watch([expanded, highlighter], () => updateHighlight())
 }
 
 .mq-panel-title { display: flex; align-items: center; gap: 0.5rem; }
-.mq-panel-logo { display: flex; width: 1.5rem; height: 1.5rem; flex-shrink: 0; }
-.mq-panel-logo :deep(svg) { width: 100%; height: 100%; }
+.mq-panel-logo { width: 1.5rem; height: 1.5rem; flex-shrink: 0; object-fit: contain; }
 .mq-panel-name { font-size: 1rem; font-weight: 700; color: var(--vp-c-text-1); }
 .mq-panel-ver { font-size: 0.75rem; font-weight: 500; color: var(--vp-c-text-3); }
 
@@ -340,13 +338,13 @@ watch([expanded, highlighter], () => updateHighlight())
   display: inline-flex; align-items: center; justify-content: center;
   width: 1.75rem; height: 1.75rem; border-radius: 0.375rem;
   color: var(--vp-c-text-3); background: transparent;
-  border: 1px solid var(--vp-c-divider); cursor: pointer;
+  border: none; cursor: pointer;
   transition: all 0.2s; flex-shrink: 0;
 }
-.mq-copy-sm:hover { border-color: var(--brand-color); color: var(--brand-color); }
-.mq-copy-sm:active { transform: scale(0.9); }
+.mq-copy-sm:hover { color: var(--brand-color); background: color-mix(in srgb, var(--brand-color) 8%, transparent); }
+.mq-copy-sm:active { transform: scale(0.8); }
 .mq-copy-sm svg { transition: all 0.2s; }
-.mq-copy-sm:has(polyline) { border-color: var(--brand-color); color: var(--brand-color); }
+.mq-copy-sm:has(polyline) { color: var(--brand-color); }
 
 /* Code section */
 .mq-code-section { }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -7,45 +7,70 @@ const activeClient = ref(0)
 
 const clients = [
   {
-    name: 'Claude Code',
+    id: 'claude', name: 'Claude Code',
+    logo: 'https://assets.lbctrl.com/uploads/6932dfac-0f9c-4577-bdd8-fc3d22d4223a/claude.svg',
     type: 'shell' as const,
     cmd: 'claude mcp add --transport http longbridge https://openapi.longbridge.com/mcp',
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12l2 2 4-4"/></svg>`,
   },
   {
-    name: 'Codex',
+    id: 'codex', name: 'Codex',
+    logo: 'https://assets.lbctrl.com/uploads/88eb58fe-b3bb-4875-90c7-c97e6d8fcc9e/openai.svg',
     type: 'ui' as const,
     steps: ['Settings', 'MCP Servers', 'Add Server'],
     fields: { Name: 'longbridge', Type: 'Streamable HTTP', URL: 'https://openapi.longbridge.com/mcp' },
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>`,
   },
   {
-    name: 'Cursor',
+    id: 'cursor', name: 'Cursor',
+    logo: 'https://assets.lbctrl.com/uploads/f694478e-201b-4e74-a7b6-023639a27805/cursor.svg',
     type: 'ui' as const,
     steps: ['Settings', 'MCP Servers', 'Add Remote MCP Server'],
     fields: { URL: 'https://openapi.longbridge.com/mcp' },
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 9-14 9V3z"/></svg>`,
   },
   {
-    name: 'Zed',
+    id: 'zed', name: 'Zed',
     type: 'json' as const,
     json: { mcpServers: { longbridge: { url: 'https://openapi.longbridge.com/mcp' } } },
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>`,
   },
   {
-    name: 'Cherry Studio',
+    id: 'cherry', name: 'Cherry Studio',
     type: 'ui' as const,
     steps: ['Settings', 'MCP Servers', 'Add'],
     fields: { URL: 'https://openapi.longbridge.com/mcp' },
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>`,
   },
 ]
 
-const tools = [
-  { key: 'tool1', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>` },
-  { key: 'tool2', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>` },
-  { key: 'tool3', icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>` },
+// Diagram node layout (SVG coordinate space)
+const clientNodes = [
+  { name: 'Claude Code',     x: 8,   w: 108, clickIdx: 0 },
+  { name: 'Codex',           x: 124, w: 68,  clickIdx: 1 },
+  { name: 'Cursor',          x: 200, w: 72,  clickIdx: 2 },
+  { name: 'Zed',             x: 280, w: 50,  clickIdx: 3 },
+  { name: 'Cherry Studio',   x: 338, w: 118, clickIdx: 4 },
+  { name: 'Any MCP Client',  x: 464, w: 130, clickIdx: -1 },
 ]
+
+const toolPositions = [
+  { x: 8,   w: 160 },
+  { x: 240, w: 160 },
+  { x: 472, w: 160 },
+]
+
+// Layout constants
+const SVG_W = 640
+const SVG_H = 300
+const CLIENT_H = 34
+const BUS_TOP_Y = 82
+const HUB_X = 240, HUB_Y = 108, HUB_W = 160, HUB_H = 40
+const HUB_CX = HUB_X + HUB_W / 2  // 320
+const BUS_BOT_Y = 192
+const TOOL_Y = 218, TOOL_H = 78
+
+const clientCenters = clientNodes.map(c => c.x + c.w / 2)
+const toolCenters = toolPositions.map(t => t.x + t.w / 2)
+
+function selectClient(idx: number) {
+  if (idx >= 0) activeClient.value = idx
+}
 
 const currentClient = computed(() => clients[activeClient.value])
 const copyText = computed(() => {
@@ -60,97 +85,6 @@ const formattedJson = computed(() => {
   return ''
 })
 
-// Refs
-const hubRef = ref<HTMLElement>()
-const containerRef = ref<HTMLElement>()
-const clientRefs = ref<HTMLElement[]>([])
-const toolRefs = ref<HTMLElement[]>([])
-const moreRef = ref<HTMLElement>()
-
-function setClientRef(el: any, idx: number) {
-  if (el) clientRefs.value[idx] = el as HTMLElement
-}
-function setToolRef(el: any, idx: number) {
-  if (el) toolRefs.value[idx] = el as HTMLElement
-}
-
-// SVG seamless tree connector
-const svgW = ref(0)
-const svgH = ref(0)
-const leftLines = ref<{ d: string; faded: boolean }[]>([])
-const rightLines = ref<{ d: string }[]>([])
-const ready = ref(false)
-
-function calcPaths() {
-  if (!containerRef.value || !hubRef.value) return
-  const cr = containerRef.value.getBoundingClientRect()
-  svgW.value = cr.width
-  svgH.value = cr.height
-
-  const hub = hubRef.value.getBoundingClientRect()
-  const hubLX = hub.left - cr.left
-  const hubRX = hub.right - cr.left
-  const hubCY = hub.top - cr.top + hub.height / 2
-
-  // Trunk X positions: right at the hub edges (seamless)
-  const trunkLX = hubLX
-  const trunkRX = hubRX
-
-  // === LEFT: each node draws a seamless L-shaped path to hub ===
-  const allLeftEls = [...clientRefs.value]
-  if (moreRef.value) allLeftEls.push(moreRef.value)
-
-  const ll: { d: string; faded: boolean }[] = []
-  allLeftEls.forEach((el, i) => {
-    if (!el) return
-    const rect = el.getBoundingClientRect()
-    const sx = rect.right - cr.left
-    const sy = rect.top - cr.top + rect.height / 2
-    // Seamless: horizontal from node → trunk X, then vertical to hubCY, ending at hub left edge
-    if (Math.abs(sy - hubCY) < 2) {
-      // Same Y as hub: straight horizontal line
-      ll.push({ d: `M ${sx},${sy} L ${trunkLX},${hubCY}`, faded: i >= clients.length })
-    } else {
-      // L-shape: horizontal → vertical (meet at trunkLX)
-      ll.push({
-        d: `M ${sx},${sy} L ${trunkLX},${sy} L ${trunkLX},${hubCY}`,
-        faded: i >= clients.length,
-      })
-    }
-  })
-  leftLines.value = ll
-
-  // === RIGHT: hub → each tool node (seamless L-shape) ===
-  const rl: { d: string }[] = []
-  toolRefs.value.forEach(el => {
-    if (!el) return
-    const rect = el.getBoundingClientRect()
-    const ex = rect.left - cr.left
-    const ey = rect.top - cr.top + rect.height / 2
-    if (Math.abs(ey - hubCY) < 2) {
-      rl.push({ d: `M ${trunkRX},${hubCY} L ${ex},${ey}` })
-    } else {
-      rl.push({ d: `M ${trunkRX},${hubCY} L ${trunkRX},${ey} L ${ex},${ey}` })
-    }
-  })
-  rightLines.value = rl
-}
-
-let ro: ResizeObserver | undefined
-onMounted(() => {
-  nextTick(() => {
-    requestAnimationFrame(() => {
-      calcPaths()
-      ready.value = true
-    })
-  })
-  if (containerRef.value) {
-    ro = new ResizeObserver(() => calcPaths())
-    ro.observe(containerRef.value)
-  }
-})
-onBeforeUnmount(() => ro?.disconnect())
-
 const copiedCmd = ref(false)
 function copyCmd() {
   navigator.clipboard.writeText(copyText.value)
@@ -162,100 +96,112 @@ function copyCmd() {
 <template>
   <section class="mcp-section">
     <div class="mcp-header">
-      <div class="mcp-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m-7-3.5l5.2-3m1.6-1l5.2-3M5 6.5l5.2 3m1.6 1l5.2 3"/></svg>
-        <span>Model Context Protocol</span>
-      </div>
       <h2 class="mcp-title">{{ $t('product.mcp.title') }}</h2>
       <p class="mcp-subtitle">{{ $t('product.mcp.subtitle') }}</p>
       <p class="mcp-desc">{{ $t('product.mcp.desc') }}</p>
     </div>
 
+    <!-- Bus-topology SVG diagram (replaces VueFlow) -->
     <ClientOnly>
-      <div ref="containerRef" class="mcp-hub">
-        <!-- Left: AI Clients -->
-        <div class="mcp-col mcp-col-left">
-          <div
-            v-for="(client, idx) in clients"
-            :key="client.name"
-            :ref="(el) => setClientRef(el, idx)"
-            class="mcp-node"
-            :class="{ active: activeClient === idx }"
-            @click="activeClient = idx"
-          >
-            <span class="mcp-node-icon" v-html="client.icon" />
-            <span class="mcp-node-label">{{ client.name }}</span>
-          </div>
-          <div ref="moreRef" class="mcp-node mcp-node-more">
-            <span class="mcp-node-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-            </span>
-            <span class="mcp-node-label mcp-more-label">Any MCP Client</span>
-          </div>
-        </div>
-
-        <!-- Center: Hub -->
-        <div class="mcp-col mcp-col-center">
-          <div ref="hubRef" class="mcp-hub-box">
-            <span class="mcp-hub-label">Longbridge MCP</span>
-          </div>
-        </div>
-
-        <!-- Right: Tools -->
-        <div class="mcp-col mcp-col-right">
-          <div
-            v-for="(tool, idx) in tools"
-            :key="tool.key"
-            :ref="(el) => setToolRef(el, idx)"
-            class="mcp-node mcp-node-tool"
-          >
-            <span class="mcp-node-icon" v-html="tool.icon" />
-            <div class="mcp-tool-text">
-              <span class="mcp-node-label">{{ $t(`product.mcp.${tool.key}`) }}</span>
-              <span class="mcp-tool-desc">{{ $t(`product.mcp.${tool.key}.desc`) }}</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- SVG Seamless Connectors -->
+      <div class="mcp-diagram-wrap">
         <svg
-          v-if="ready"
-          class="mcp-svg-overlay"
-          :width="svgW"
-          :height="svgH"
-          :viewBox="`0 0 ${svgW} ${svgH}`"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+          class="mcp-diagram-svg"
+          :viewBox="`0 0 ${SVG_W} ${SVG_H}`"
+          preserveAspectRatio="xMidYMid meet"
         >
-          <!-- Left lines: node → hub (seamless L-shapes) -->
-          <template v-for="(l, i) in leftLines" :key="'ll-' + i">
-            <path :d="l.d" stroke="#00b8b8" stroke-width="1.5" :stroke-opacity="l.faded ? 0.1 : 0.2" stroke-linejoin="round" />
-            <circle r="2" fill="#00b8b8" :opacity="l.faded ? 0.25 : 0.7">
-              <animateMotion :dur="`${2.2 + i * 0.3}s`" repeatCount="indefinite" :path="l.d" />
-            </circle>
-          </template>
+          <!-- Top horizontal bus line (background) -->
+          <line
+            class="mcp-edge"
+            :x1="clientCenters[0]" :y1="BUS_TOP_Y"
+            :x2="clientCenters[clientCenters.length - 1]" :y2="BUS_TOP_Y"
+          />
+          <!-- Active bus segment: active client → hub center (highlighted overlay) -->
+          <line
+            class="mcp-edge mcp-edge-hi"
+            :x1="clientCenters[activeClient]" :y1="BUS_TOP_Y"
+            :x2="HUB_CX" :y2="BUS_TOP_Y"
+          />
 
-          <!-- Right lines: hub → tool (seamless L-shapes) -->
-          <template v-for="(l, i) in rightLines" :key="'rl-' + i">
-            <path :d="l.d" stroke="#00b8b8" stroke-width="1.5" stroke-opacity="0.2" stroke-linejoin="round" />
-            <circle r="2" fill="#00b8b8" opacity="0.7">
-              <animateMotion :dur="`${2.5 + i * 0.4}s`" repeatCount="indefinite" :path="l.d" />
-            </circle>
-          </template>
+          <!-- Client stubs: each client bottom → top bus -->
+          <line
+            v-for="(cx, i) in clientCenters" :key="`cs-${i}`"
+            :class="['mcp-edge', { 'mcp-edge-hi': activeClient === i && i < clients.length }]"
+            :style="i === clientNodes.length - 1 ? { opacity: 0.4 } : {}"
+            :x1="cx" :y1="CLIENT_H"
+            :x2="cx" :y2="BUS_TOP_Y"
+          />
+
+          <!-- Hub spine: top bus → hub top -->
+          <line class="mcp-edge mcp-edge-hi" :x1="HUB_CX" :y1="BUS_TOP_Y" :x2="HUB_CX" :y2="HUB_Y" />
+
+          <!-- Hub spine: hub bottom → bottom bus -->
+          <line class="mcp-edge mcp-edge-hi" :x1="HUB_CX" :y1="HUB_Y + HUB_H" :x2="HUB_CX" :y2="BUS_BOT_Y" />
+
+          <!-- Bottom horizontal bus line (branded) -->
+          <line
+            class="mcp-edge mcp-edge-down"
+            :x1="toolCenters[0]" :y1="BUS_BOT_Y"
+            :x2="toolCenters[toolCenters.length - 1]" :y2="BUS_BOT_Y"
+          />
+
+          <!-- Tool stubs: bottom bus → each tool top (branded) -->
+          <line
+            v-for="(tx, i) in toolCenters" :key="`ts-${i}`"
+            class="mcp-edge mcp-edge-down"
+            :x1="tx" :y1="BUS_BOT_Y"
+            :x2="tx" :y2="TOOL_Y"
+          />
+
+          <!-- Client nodes -->
+          <foreignObject
+            v-for="(node, i) in clientNodes" :key="`c-${i}`"
+            :x="node.x" :y="0" :width="node.w" :height="CLIENT_H"
+          >
+            <div
+              :class="['mcp-n', 'mcp-n-client', { active: activeClient === i, more: node.clickIdx < 0 }]"
+              @click="selectClient(node.clickIdx)"
+            >
+              <img
+                v-if="node.clickIdx >= 0 && clients[node.clickIdx]?.logo"
+                class="mcp-client-logo"
+                :src="clients[node.clickIdx].logo"
+              />
+              {{ node.name }}
+            </div>
+          </foreignObject>
+
+          <!-- Hub node -->
+          <foreignObject :x="HUB_X" :y="HUB_Y" :width="HUB_W" :height="HUB_H">
+            <div class="mcp-n mcp-n-hub">Longbridge MCP</div>
+          </foreignObject>
+
+          <!-- Tool nodes -->
+          <foreignObject
+            v-for="(pos, i) in toolPositions" :key="`t-${i}`"
+            :x="pos.x" :y="TOOL_Y" :width="pos.w" :height="TOOL_H"
+          >
+            <div class="mcp-n mcp-n-tool">
+              <span class="mcp-n-tool-title">{{ $t(`product.mcp.tool${i + 1}`) }}</span>
+              <span class="mcp-n-tool-desc">{{ $t(`product.mcp.tool${i + 1}.desc`) }}</span>
+            </div>
+          </foreignObject>
         </svg>
       </div>
     </ClientOnly>
 
-    <!-- Config -->
+    <!-- Config panel -->
     <div class="mcp-config">
       <div class="mcp-config-tabs">
         <button
           v-for="(client, idx) in clients"
-          :key="client.name"
+          :key="client.id"
           class="mcp-config-tab"
           :class="{ active: activeClient === idx }"
           @click="activeClient = idx"
-        >{{ client.name }}</button>
+        >
+          <img v-if="client.logo" class="mcp-tab-logo" :src="client.logo" :alt="client.name" />
+          {{ client.name }}
+        </button>
       </div>
 
       <div v-if="currentClient.type === 'shell'" class="mcp-config-panel">
@@ -309,89 +255,147 @@ function copyCmd() {
 </template>
 
 <style scoped>
-.mcp-section { padding: 4rem 0; background: var(--vp-c-bg-soft); }
+.mcp-section { padding: 4rem 1rem; background: var(--vp-c-bg-soft); overflow: hidden; }
 
-.mcp-header { text-align: center; margin-bottom: 2rem; padding: 0 1.5rem; max-width: 40rem; margin-left: auto; margin-right: auto; }
-.mcp-badge { display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.25rem 0.75rem; border-radius: 9999px; border: 1px solid var(--vp-c-divider); background: var(--vp-c-bg); font-size: 0.75rem; font-weight: 600; color: var(--vp-c-text-3); margin-bottom: 1rem; }
+.mcp-header { text-align: center; margin-bottom: 2rem; padding: 0 1.5rem; max-width: 48rem; margin-left: auto; margin-right: auto; box-sizing: border-box; width: 100%; }
 .mcp-title { font-size: 1.75rem; font-weight: 700; color: var(--vp-c-text-1); letter-spacing: -0.02em; }
-.mcp-subtitle { margin-top: 0.25rem; font-size: 0.95rem; color: var(--brand-color); font-weight: 600; line-height: 1.4; }
-.mcp-desc { margin-top: 0.5rem; font-size: 0.875rem; line-height: 1.6; color: var(--vp-c-text-2); }
+.mcp-subtitle { margin-top: 1.5rem; font-size: 0.875rem; color: var(--vp-c-text-2); font-weight: 500; line-height: 1.4; }
+.mcp-desc { margin-top: 0.375rem; font-size: 0.78rem; line-height: 1.6; color: var(--vp-c-text-3); }
 
-/* Hub layout */
-.mcp-hub {
-  position: relative;
-  max-width: 56rem;
-  min-width: 48rem;
+/* Diagram */
+.mcp-diagram-wrap {
+  width: 100%;
+  max-width: 64rem;
   margin: 0 auto 2rem;
-  padding: 2rem 1.5rem;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+.mcp-diagram-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* Edges — dash style, muted by default */
+.mcp-edge {
+  stroke: var(--vp-c-text-3);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 3;
+  fill: none;
+  stroke-opacity: 0.5;
+  transition: stroke 0.2s, stroke-opacity 0.2s;
+}
+.mcp-edge-hi {
+  stroke: var(--brand-color);
+  stroke-opacity: 0.6;
+  animation: mcp-dash 0.8s linear infinite;
+}
+.mcp-edge-down {
+  stroke: var(--brand-color);
+  stroke-opacity: 0.35;
+  stroke-dasharray: 5 3;
+}
+@keyframes mcp-dash { to { stroke-dashoffset: -8; } }
+
+/* Base node */
+.mcp-n {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3.5rem;
+  gap: 0.3rem;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg);
+  font-family: var(--vp-font-family-base);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* Client logo in SVG node */
+.mcp-client-logo {
+  width: 13px;
+  height: 13px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+
+/* Client nodes */
+.mcp-n-client {
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  font-size: 0.68rem;
+}
+.mcp-n-client:hover:not(.more) { border-color: var(--brand-color); }
+.mcp-n-client.active {
+  border-color: var(--brand-color);
+  background: color-mix(in srgb, var(--brand-color) 6%, var(--vp-c-bg));
+  color: var(--brand-color);
+}
+.mcp-n-client.more {
+  border-style: dashed;
+  opacity: 0.55;
+  cursor: default;
+  color: var(--vp-c-text-3);
+  font-weight: 500;
+}
+
+/* Hub node */
+.mcp-n-hub {
+  border: 1.5px solid var(--brand-color);
+  background: color-mix(in srgb, var(--brand-color) 6%, var(--vp-c-bg));
+  color: var(--brand-color);
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: default;
+}
+
+/* Tool nodes */
+.mcp-n-tool {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  cursor: default;
+  white-space: normal;
+}
+.mcp-n-tool-title { font-size: 0.78rem; font-weight: 700; color: var(--vp-c-text-1); line-height: 1.3; }
+.mcp-n-tool-desc {
+  font-size: 0.65rem;
+  color: var(--vp-c-text-3);
+  line-height: 1.4;
+  width: 100%;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.mcp-svg-overlay { position: absolute; top: 0; left: 0; pointer-events: none; z-index: 1; }
-
-.mcp-col { display: flex; flex-direction: column; gap: 0.5rem; z-index: 5; }
-.mcp-col-left { align-items: flex-end; }
-.mcp-col-right { align-items: flex-start; }
-.mcp-col-center { flex-shrink: 0; }
-
-/* Nodes */
-.mcp-node {
-  display: flex; align-items: center; gap: 0.5rem;
-  padding: 0.375rem 0.75rem; border-radius: 0.5rem;
-  border: 1px solid var(--vp-c-divider); background: var(--vp-c-bg);
-  cursor: pointer; transition: all 0.2s; white-space: nowrap;
-}
-.mcp-node:hover { border-color: var(--brand-color); }
-.mcp-node.active { border-color: var(--brand-color); color: var(--brand-color); background: color-mix(in srgb, var(--brand-color) 6%, transparent); box-shadow: 0 0 0 1px var(--brand-color); }
-
-.mcp-node-icon { display: flex; width: 1rem; height: 1rem; color: var(--vp-c-text-3); flex-shrink: 0; }
-.mcp-node-icon :deep(svg) { width: 100%; height: 100%; }
-.mcp-node.active .mcp-node-icon { color: var(--brand-color); }
-.mcp-node-label { font-size: 0.78rem; font-weight: 600; color: var(--vp-c-text-1); }
-.mcp-node.active .mcp-node-label { color: var(--brand-color); }
-
-.mcp-node-more { cursor: default; border-style: dashed; opacity: 0.55; }
-.mcp-node-more:hover { border-color: var(--vp-c-divider); opacity: 0.75; }
-.mcp-more-label { color: var(--vp-c-text-3) !important; font-weight: 500 !important; }
-
-.mcp-node-tool { cursor: default; }
-.mcp-node-tool .mcp-node-icon { color: var(--brand-color); }
-.mcp-tool-text { display: flex; flex-direction: column; }
-.mcp-tool-desc { font-size: 0.68rem; color: var(--vp-c-text-3); white-space: normal; max-width: 13rem; }
-
-/* Hub box */
-.mcp-hub-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  border: 1.5px solid var(--brand-color);
-  background: color-mix(in srgb, var(--brand-color) 6%, var(--vp-c-bg));
-  box-shadow: 0 0 16px color-mix(in srgb, var(--brand-color) 10%, transparent);
-  z-index: 5;
-  flex-shrink: 0;
-  white-space: nowrap;
-}
-
-.mcp-hub-label {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--brand-color);
-}
-
-/* Config */
-.mcp-config { max-width: 40rem; margin: 0 auto; padding: 0 1.5rem; }
+/* Config panel */
+.mcp-config { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
 .mcp-config-tabs { display: flex; gap: 0.25rem; margin-bottom: 0.5rem; overflow-x: auto; }
 .mcp-config-tab {
+  display: inline-flex; align-items: center; gap: 0.3rem;
   padding: 0.3rem 0.625rem; border-radius: 0.375rem;
   font-size: 0.75rem; font-weight: 600; color: var(--vp-c-text-3);
   background: transparent; border: 1px solid transparent;
   cursor: pointer; white-space: nowrap; transition: all 0.2s;
+}
+
+.mcp-tab-logo {
+  width: 1rem;
+  height: 1rem;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 2px;
 }
 .mcp-config-tab:hover { color: var(--vp-c-text-2); }
 .mcp-config-tab.active { color: var(--brand-color); background: var(--vp-c-bg); border-color: var(--vp-c-divider); }
@@ -415,24 +419,29 @@ function copyCmd() {
 .mcp-field-key { font-weight: 600; color: var(--vp-c-text-3); min-width: 3rem; font-family: var(--vp-font-family-mono); font-size: 0.7rem; }
 .mcp-field-value { font-family: var(--vp-font-family-mono); font-size: 0.7rem; color: var(--brand-color); word-break: break-all; }
 
-.mcp-copy-btn { display: flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border-radius: 0.25rem; color: var(--vp-c-text-3); background: transparent; border: 1px solid var(--vp-c-divider); cursor: pointer; transition: all 0.2s; flex-shrink: 0; }
-.mcp-copy-btn:hover { border-color: var(--brand-color); color: var(--brand-color); }
-.mcp-copy-btn:active { transform: scale(0.9); }
+.mcp-copy-btn { display: flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border-radius: 0.25rem; color: var(--vp-c-text-3); background: transparent; border: none; cursor: pointer; transition: all 0.2s; flex-shrink: 0; }
+.mcp-copy-btn:hover { color: var(--brand-color); background: color-mix(in srgb, var(--brand-color) 8%, transparent); }
+.mcp-copy-btn:active { transform: scale(0.8); }
 
-.mcp-config-note { margin-top: 0.5rem; font-size: 0.75rem; color: var(--vp-c-text-3); text-align: center; }
+.mcp-config-note { margin-top: 0.5rem; font-size: 0.72rem; color: var(--vp-c-text-3); text-align: center; }
 
 .mcp-cta-wrap { text-align: center; margin-top: 1.5rem; }
 .mcp-cta { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.9rem; font-weight: 600; color: var(--brand-color); text-decoration: none !important; transition: gap 0.2s; }
 .mcp-cta:hover { gap: 0.625rem; }
 
 @media (max-width: 768px) {
-  .mcp-hub { min-width: unset; flex-direction: column; gap: 2rem; padding: 1.5rem 1rem; }
-  .mcp-svg-overlay { display: none; }
-  .mcp-col-left { align-items: center; flex-direction: row; flex-wrap: wrap; justify-content: center; }
-  .mcp-col-right { align-items: center; }
-  .mcp-tool-desc { max-width: none; }
+  .mcp-section { padding: 3rem 0.75rem; }
+  .mcp-diagram-wrap { padding: 0 0.5rem; }
+  .mcp-header { padding: 0 0.5rem; }
+  .mcp-config { padding: 0 0.5rem; }
+  .mcp-title { font-size: 1.5rem; }
+  .mcp-subtitle { font-size: 0.82rem; }
+  .mcp-desc { font-size: 0.78rem; }
 }
 
-/* Ensure horizontal scroll on very narrow screens */
-.mcp-section { overflow-x: auto; }
+@media (max-width: 480px) {
+  .mcp-title { font-size: 1.25rem; }
+  .mcp-subtitle { font-size: 0.75rem; }
+  .mcp-desc { font-size: 0.72rem; }
+}
 </style>

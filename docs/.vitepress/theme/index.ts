@@ -28,6 +28,11 @@ export default {
   Layout,
   async enhanceApp({ app }) {
     app.use(i18n)
+    if (!import.meta.env.SSR) {
+      const FloatingVue = await import('floating-vue')
+      await import('floating-vue/dist/style.css')
+      app.use(FloatingVue.default)
+    }
     for (const component of Object.keys(components)) {
       app.component(component, components[component])
     }

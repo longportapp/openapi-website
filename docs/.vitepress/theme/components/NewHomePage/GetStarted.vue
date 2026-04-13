@@ -36,8 +36,10 @@ const entries = [
           :href="e.href"
           class="gs-card"
         >
-          <span class="gs-card-icon" v-html="e.icon" />
-          <h3 class="gs-card-title">{{ $t(`getStarted.${e.key}.title`) }}</h3>
+          <div class="gs-card-header">
+            <span class="gs-card-icon" v-html="e.icon" />
+            <h3 class="gs-card-title">{{ $t(`getStarted.${e.key}.title`) }}</h3>
+          </div>
           <p class="gs-card-desc">{{ $t(`getStarted.${e.key}.desc`) }}</p>
           <span class="gs-card-link">
             {{ $t(`getStarted.${e.key}.cta`) }}
@@ -71,7 +73,7 @@ const entries = [
 .gs-content {
   position: relative;
   z-index: 1;
-  max-width: 56rem;
+  max-width: 64rem;
   margin: 0 auto;
   padding: 0 1.5rem;
   text-align: center;
@@ -85,7 +87,7 @@ const entries = [
 }
 
 .gs-subtitle {
-  margin-top: 0.5rem;
+  margin-top: 1.5rem;
   font-size: 0.9rem;
   color: var(--vp-c-text-2);
   line-height: 1.5;
@@ -120,27 +122,36 @@ const entries = [
   transform: translateY(-2px);
 }
 
-.gs-card-icon {
+.gs-card-header {
   display: flex;
-  width: 2rem;
-  height: 2rem;
-  padding: 0.375rem;
-  border-radius: 0.5rem;
-  background: color-mix(in srgb, var(--brand-color) 10%, transparent);
-  color: var(--brand-color);
+  align-items: center;
+  gap: 0.5rem;
   margin-bottom: 0.75rem;
 }
+
+.gs-card-icon {
+  display: flex;
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--vp-c-text-3);
+  transition: color 0.25s, transform 0.25s;
+}
 .gs-card-icon :deep(svg) { width: 100%; height: 100%; }
+.gs-card:hover .gs-card-icon {
+  color: var(--brand-color);
+  transform: scale(1.15);
+}
 
 .gs-card-title {
   font-size: 0.9rem;
   font-weight: 700;
   color: var(--vp-c-text-1);
-  margin-bottom: 0.25rem;
+  margin: 0;
 }
 
 .gs-card-desc {
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   color: var(--vp-c-text-3);
   line-height: 1.5;
   flex: 1;
@@ -150,13 +161,18 @@ const entries = [
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
+  align-self: flex-end;
   margin-top: 0.75rem;
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  color: var(--brand-color);
-  transition: gap 0.2s;
+  color: var(--vp-c-text-3);
+  white-space: nowrap;
+  transition: gap 0.2s, color 0.2s;
 }
-.gs-card:hover .gs-card-link { gap: 0.5rem; }
+.gs-card:hover .gs-card-link {
+  gap: 0.5rem;
+  color: var(--brand-color);
+}
 
 @media (max-width: 768px) {
   .gs-cards { grid-template-columns: 1fr; }

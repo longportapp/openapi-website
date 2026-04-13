@@ -15,6 +15,7 @@
         "@vue-flow/core": "^1.48.2",
         "@vueuse/core": "^14.2.1",
         "cheerio": "^1.1.0",
+        "floating-vue": "^5.2.2",
         "fs-extra": "^11.3.0",
         "glob": "^11.0.3",
         "gray-matter": "^4.0.3",
@@ -146,6 +147,12 @@
     "@esbuild/win32-ia32": ["@esbuild/win32-ia32@0.27.4", "https://registry.yarnpkg.com/@esbuild/win32-ia32/-/win32-ia32-0.27.4.tgz", { "os": "win32", "cpu": "ia32" }, "sha512-DAyGLS0Jz5G5iixEbMHi5KdiApqHBWMGzTtMiJ72ZOLhbu/bzxgAe8Ue8CTS3n3HbIUHQz/L51yMdGMeoxXNJw=="],
 
     "@esbuild/win32-x64": ["@esbuild/win32-x64@0.27.4", "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.27.4.tgz", { "os": "win32", "cpu": "x64" }, "sha512-+knoa0BDoeXgkNvvV1vvbZX4+hizelrkwmGJBdT17t8FNPwG2lKemmuMZlmaNQ3ws3DKKCxpb4zRZEIp3UxFCg=="],
+
+    "@floating-ui/core": ["@floating-ui/core@1.7.5", "", { "dependencies": { "@floating-ui/utils": "^0.2.11" } }, "sha512-1Ih4WTWyw0+lKyFMcBHGbb5U5FtuHJuujoyyr5zTaWS5EYMeT6Jb2AuDeftsCsEuchO+mM2ij5+q9crhydzLhQ=="],
+
+    "@floating-ui/dom": ["@floating-ui/dom@1.1.1", "", { "dependencies": { "@floating-ui/core": "^1.1.0" } }, "sha512-TpIO93+DIujg3g7SykEAGZMDtbJRrmnYRCNYSjJlvIbGhBjRSNTLVbNeDQBrzy9qDgUbiWdc7KA0uZHZ2tJmiw=="],
+
+    "@floating-ui/utils": ["@floating-ui/utils@0.2.11", "", {}, "sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg=="],
 
     "@headlessui/vue": ["@headlessui/vue@1.7.23", "https://registry.yarnpkg.com/@headlessui/vue/-/vue-1.7.23.tgz", { "dependencies": { "@tanstack/vue-virtual": "^3.0.0-beta.60" }, "peerDependencies": { "vue": "^3.2.0" } }, "sha512-JzdCNqurrtuu0YW6QaDtR2PIYCKPUWq28csDyMvN4zmGccmE7lz40Is6hc3LA4HFeCI7sekZ/PQMTNmn9I/4Wg=="],
 
@@ -727,6 +734,8 @@
 
     "fill-range": ["fill-range@7.1.1", "https://registry.yarnpkg.com/fill-range/-/fill-range-7.1.1.tgz", { "dependencies": { "to-regex-range": "^5.0.1" } }, "sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg=="],
 
+    "floating-vue": ["floating-vue@5.2.2", "", { "dependencies": { "@floating-ui/dom": "~1.1.1", "vue-resize": "^2.0.0-alpha.1" }, "peerDependencies": { "@nuxt/kit": "^3.2.0", "vue": "^3.2.0" }, "optionalPeers": ["@nuxt/kit"] }, "sha512-afW+h2CFafo+7Y9Lvw/xsqjaQlKLdJV7h1fCHfcYQ1C4SVMlu7OAekqWgu5d4SgvkBVU0pVpLlVsrSTBURFRkg=="],
+
     "focus-trap": ["focus-trap@7.8.0", "https://registry.yarnpkg.com/focus-trap/-/focus-trap-7.8.0.tgz", { "dependencies": { "tabbable": "^6.4.0" } }, "sha512-/yNdlIkpWbM0ptxno3ONTuf+2g318kh2ez3KSeZN5dZ8YC6AAmgeWz+GasYYiBJPFaYcSAPeu4GfhUaChzIJXA=="],
 
     "foreground-child": ["foreground-child@3.3.1", "https://registry.yarnpkg.com/foreground-child/-/foreground-child-3.3.1.tgz", { "dependencies": { "cross-spawn": "^7.0.6", "signal-exit": "^4.0.1" } }, "sha512-gIXjKqtFuWEgzFRJA9WCQeSJLZDjgJUOMCMzxtvFq/37KojM1BFGufqsCy0r4qSQmYLsZYMeyRqzIWOMup03sw=="],
@@ -1160,6 +1169,8 @@
     "vue-flow-layout": ["vue-flow-layout@0.1.1", "https://registry.yarnpkg.com/vue-flow-layout/-/vue-flow-layout-0.1.1.tgz", { "peerDependencies": { "vue": "^3.4.37" } }, "sha512-JdgRRUVrN0Y2GosA0M68DEbKlXMqJ7FQgsK8CjQD2vxvNSqAU6PZEpi4cfcTVtfM2GVOMjHo7GKKLbXxOBqDqA=="],
 
     "vue-i18n": ["vue-i18n@11.1.9", "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-11.1.9.tgz", { "dependencies": { "@intlify/core-base": "11.1.9", "@intlify/shared": "11.1.9", "@vue/devtools-api": "^6.5.0" }, "peerDependencies": { "vue": "^3.0.0" } }, "sha512-N9ZTsXdRmX38AwS9F6Rh93RtPkvZTkSy/zNv63FTIwZCUbLwwrpqlKz9YQuzFLdlvRdZTnWAUE5jMxr8exdl7g=="],
+
+    "vue-resize": ["vue-resize@2.0.0-alpha.1", "", { "peerDependencies": { "vue": "^3.0.0" } }, "sha512-7+iqOueLU7uc9NrMfrzbG8hwMqchfVfSzpVlCMeJQe4pyibqyoifDNbKTZvwxZKDvGkB+PdFeKvnGZMoEb8esg=="],
 
     "web-resource-inliner": ["web-resource-inliner@6.0.1", "https://registry.yarnpkg.com/web-resource-inliner/-/web-resource-inliner-6.0.1.tgz", { "dependencies": { "ansi-colors": "^4.1.1", "escape-goat": "^3.0.0", "htmlparser2": "^5.0.0", "mime": "^2.4.6", "node-fetch": "^2.6.0", "valid-data-url": "^3.0.0" } }, "sha512-kfqDxt5dTB1JhqsCUQVFDj0rmY+4HLwGQIsLPbyrsN9y9WV/1oFDSx3BQ4GfCv9X+jVeQ7rouTqwK53rA/7t8A=="],
 

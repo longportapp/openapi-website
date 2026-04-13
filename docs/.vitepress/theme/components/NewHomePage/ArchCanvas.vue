@@ -1,280 +1,234 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { VueFlow, Position, useVueFlow } from '@vue-flow/core'
-import { Background } from '@vue-flow/background'
-import '@vue-flow/core/dist/style.css'
-import '@vue-flow/core/dist/theme-default.css'
-
-const nodeDefaults = {
-  sourcePosition: Position.Bottom,
-  targetPosition: Position.Top,
-}
-
-const nodes = ref([
-  // Layer 1: Client
-  {
-    id: 'dev',
-    type: 'custom',
-    position: { x: 300, y: 0 },
-    data: { label: 'Developer App', layer: 'CLIENT' },
-    ...nodeDefaults,
-  },
-  // Layer 2: Auth
-  {
-    id: 'oauth',
-    type: 'custom',
-    position: { x: 300, y: 100 },
-    data: { label: 'OAuth 2.0', layer: 'AUTH' },
-    ...nodeDefaults,
-  },
-  // Layer 3: Access
-  {
-    id: 'sdk',
-    type: 'custom',
-    position: { x: 50, y: 220 },
-    data: { label: 'SDK' },
-    ...nodeDefaults,
-  },
-  {
-    id: 'cli',
-    type: 'custom',
-    position: { x: 190, y: 220 },
-    data: { label: 'CLI' },
-    ...nodeDefaults,
-  },
-  {
-    id: 'mcp',
-    type: 'custom',
-    position: { x: 310, y: 220 },
-    data: { label: 'MCP' },
-    ...nodeDefaults,
-  },
-  {
-    id: 'http',
-    type: 'custom',
-    position: { x: 430, y: 220 },
-    data: { label: 'HTTP' },
-    ...nodeDefaults,
-  },
-  {
-    id: 'ws',
-    type: 'custom',
-    position: { x: 550, y: 220 },
-    data: { label: 'WebSocket' },
-    ...nodeDefaults,
-  },
-  // Layer 4: Gateway
-  {
-    id: 'gateway',
-    type: 'gateway',
-    position: { x: 250, y: 350 },
-    data: { label: 'API Gateway' },
-    ...nodeDefaults,
-  },
-  // Layer 5: Services
-  {
-    id: 'quote',
-    type: 'service',
-    position: { x: 80, y: 470 },
-    data: { label: 'Quote API', protocol: 'WebSocket + HTTP' },
-    ...nodeDefaults,
-    targetPosition: Position.Top,
-    sourcePosition: Position.Bottom,
-  },
-  {
-    id: 'trade',
-    type: 'service',
-    position: { x: 280, y: 470 },
-    data: { label: 'Trade API', protocol: 'WebSocket + REST' },
-    ...nodeDefaults,
-    targetPosition: Position.Top,
-    sourcePosition: Position.Bottom,
-  },
-  {
-    id: 'content',
-    type: 'service',
-    position: { x: 480, y: 470 },
-    data: { label: 'Content API', protocol: 'REST' },
-    ...nodeDefaults,
-    targetPosition: Position.Top,
-    sourcePosition: Position.Bottom,
-  },
-])
-
-// Responsive: re-fit view on resize
-const { fitView } = useVueFlow()
-let resizeObserver: ResizeObserver | undefined
-const wrapRef = ref<HTMLElement>()
-
-onMounted(() => {
-  if (wrapRef.value) {
-    resizeObserver = new ResizeObserver(() => {
-      setTimeout(() => fitView({ padding: 0.15 }), 50)
-    })
-    resizeObserver.observe(wrapRef.value)
-  }
-})
-
-onBeforeUnmount(() => resizeObserver?.disconnect())
-
-const edgeDefaults = {
-  animated: true,
-  style: { stroke: 'var(--brand-color)', strokeWidth: 2 },
-}
-
-const edges = ref([
-  { id: 'e-dev-oauth', source: 'dev', target: 'oauth', ...edgeDefaults },
-  { id: 'e-oauth-sdk', source: 'oauth', target: 'sdk', ...edgeDefaults },
-  { id: 'e-oauth-cli', source: 'oauth', target: 'cli', ...edgeDefaults },
-  { id: 'e-oauth-mcp', source: 'oauth', target: 'mcp', ...edgeDefaults },
-  { id: 'e-oauth-http', source: 'oauth', target: 'http', ...edgeDefaults },
-  { id: 'e-oauth-ws', source: 'oauth', target: 'ws', ...edgeDefaults },
-  { id: 'e-sdk-gw', source: 'sdk', target: 'gateway', ...edgeDefaults },
-  { id: 'e-cli-gw', source: 'cli', target: 'gateway', ...edgeDefaults },
-  { id: 'e-mcp-gw', source: 'mcp', target: 'gateway', ...edgeDefaults },
-  { id: 'e-http-gw', source: 'http', target: 'gateway', ...edgeDefaults },
-  { id: 'e-ws-gw', source: 'ws', target: 'gateway', ...edgeDefaults },
-  { id: 'e-gw-quote', source: 'gateway', target: 'quote', ...edgeDefaults },
-  { id: 'e-gw-trade', source: 'gateway', target: 'trade', ...edgeDefaults },
-  { id: 'e-gw-content', source: 'gateway', target: 'content', ...edgeDefaults },
-])
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 </script>
 
 <template>
-  <div ref="wrapRef" class="arch-flow-wrap">
-    <VueFlow
-      :nodes="nodes"
-      :edges="edges"
-      :fit-view-on-init="true"
-      :nodes-draggable="false"
-      :nodes-connectable="false"
-      :zoom-on-scroll="false"
-      :zoom-on-pinch="false"
-      :pan-on-drag="false"
-      :prevent-scrolling="false"
-      :min-zoom="0.3"
-      :max-zoom="2"
-    >
-      <Background :gap="20" :size="1" />
+  <div class="ab">
+    <div class="ab-flow">
 
-      <!-- Custom node: default -->
-      <template #node-custom="{ data }">
-        <div class="flow-node">
-          <span class="flow-node-label">{{ data.label }}</span>
+      <!-- Col 1: User & Tools -->
+      <div class="ab-group">
+        <div class="ab-group-label">{{ $t('arch.user') }}</div>
+        <div class="ab-group-box">
+          <div class="ab-app">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="15" height="15" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+            <span>{{ $t('arch.yourApp') }}</span>
+          </div>
+          <div class="ab-via">{{ $t('arch.accessVia') }}</div>
+          <div class="ab-tools">
+            <a href="/skill" class="ab-tool">
+              <span class="ab-tool-name">{{ $t('arch.skill.label') }}</span>
+              <span class="ab-tool-desc">{{ $t('arch.skill.desc') }}</span>
+              <code class="ab-tool-code">npx skills add longbridge/developers</code>
+            </a>
+            <a href="/docs/cli" class="ab-tool">
+              <span class="ab-tool-name">{{ $t('arch.cli.label') }}</span>
+              <code class="ab-tool-code">{{ $t('arch.cli.desc') }}</code>
+              <span class="ab-tool-desc">50+ commands, TUI dashboard, JSON output</span>
+            </a>
+            <a href="/docs/mcp" class="ab-tool">
+              <span class="ab-tool-name">{{ $t('arch.mcp.label') }}</span>
+              <span class="ab-tool-desc">{{ $t('arch.mcp.desc') }}</span>
+              <code class="ab-tool-code">claude mcp add longbridge</code>
+            </a>
+            <a href="/sdk" class="ab-tool">
+              <span class="ab-tool-name">{{ $t('arch.sdk.label') }}</span>
+              <span class="ab-tool-desc">{{ $t('arch.sdk.desc') }}</span>
+              <code class="ab-tool-code">pip install longbridge</code>
+            </a>
+          </div>
         </div>
-      </template>
+      </div>
 
-      <!-- Gateway node -->
-      <template #node-gateway="{ data }">
-        <div class="flow-node flow-node-gw">
-          <span class="flow-node-label">{{ data.label }}</span>
+      <!-- Arrow: User → Platform -->
+      <div class="ab-arrow">
+        <span class="ab-arrow-label">{{ $t('arch.proto.in') }}</span>
+        <div class="ab-arrow-line">
+          <div class="ab-arrow-shaft" />
+          <div class="ab-arrow-head" />
         </div>
-      </template>
+        <svg class="ab-arrow-dir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><path d="M5 12h14m-4-4 4 4-4 4"/></svg>
+      </div>
 
-      <!-- Service node -->
-      <template #node-service="{ data }">
-        <div class="flow-node flow-node-svc">
-          <span class="flow-node-label">{{ data.label }}</span>
-          <span class="flow-node-proto">{{ data.protocol }}</span>
+      <!-- Col 2: Longbridge Platform -->
+      <div class="ab-group ab-group-brand">
+        <div class="ab-group-label ab-label-brand">{{ $t('arch.platform') }}</div>
+        <div class="ab-group-box ab-box-brand">
+          <div class="ab-gw">
+            <span class="ab-gw-title">{{ $t('arch.gateway') }}</span>
+          </div>
         </div>
-      </template>
-    </VueFlow>
+      </div>
+
+      <!-- Arrow: Platform → Services -->
+      <div class="ab-arrow">
+        <span class="ab-arrow-label">{{ $t('arch.proto.out') }}</span>
+        <div class="ab-arrow-line">
+          <div class="ab-arrow-shaft" />
+          <div class="ab-arrow-head" />
+        </div>
+        <svg class="ab-arrow-dir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><path d="M5 12h14m-4-4 4 4-4 4"/></svg>
+      </div>
+
+      <!-- Col 3: Services -->
+      <div class="ab-group">
+        <div class="ab-group-label">{{ $t('arch.services') }}</div>
+        <div class="ab-group-box ab-box-svc">
+          <a href="/docs/quote/overview" class="ab-svc">
+            <span class="ab-svc-name">{{ $t('arch.quote') }}</span>
+            <span class="ab-svc-count">20+</span>
+          </a>
+          <a href="/docs/trade/overview" class="ab-svc">
+            <span class="ab-svc-name">{{ $t('arch.trade') }}</span>
+            <span class="ab-svc-count">11+</span>
+          </a>
+          <a href="/docs/content/news" class="ab-svc">
+            <span class="ab-svc-name">{{ $t('arch.content') }}</span>
+            <span class="ab-svc-count">8+</span>
+          </a>
+          <div class="ab-svc ab-svc-more">
+            <span class="ab-svc-name">{{ $t('arch.more') }}</span>
+            <span class="ab-svc-dots">···</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.arch-flow-wrap {
-  width: 100%;
-  max-width: 56rem;
-  height: 36rem;
-  margin: 0 auto;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 0.75rem;
-  overflow: hidden;
+.ab { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
+
+@media (max-width: 900px) {
+  .ab { padding: 2rem 1.5rem; }
 }
 
-/* Node styles */
-.flow-node {
-  padding: 0.5rem 1.25rem;
-  border-radius: 0.5rem;
-  border: 1.5px solid var(--vp-c-divider);
-  background: var(--vp-c-bg);
-  text-align: center;
-  min-width: 5rem;
+.ab-flow { display: flex; align-items: stretch; gap: 0; }
+
+/* Groups */
+.ab-group { display: flex; flex-direction: column; gap: 0.375rem; min-width: 0; }
+.ab-group-brand { flex: 0 0 auto; min-width: 10rem; }
+
+.ab-group-label { font-size: 0.62rem; font-weight: 700; color: var(--vp-c-text-3); text-transform: uppercase; letter-spacing: 0.06em; }
+.ab-label-brand { color: var(--brand-color); }
+
+.ab-group-box {
+  border: 1.5px solid var(--vp-c-divider); border-radius: 0.625rem;
+  padding: 0.875rem; background: var(--vp-c-bg);
+  display: flex; flex-direction: column; gap: 0.5rem; flex: 1;
+}
+.ab-box-brand {
+  border-color: color-mix(in srgb, var(--brand-color) 30%, var(--vp-c-divider));
+  background: color-mix(in srgb, var(--brand-color) 2%, var(--vp-c-bg));
+  justify-content: center;
+  align-items: center;
 }
 
-.flow-node:hover {
-  border-color: var(--brand-color);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-color) 8%, transparent);
+/* App entry */
+.ab-app {
+  display: flex; align-items: center; gap: 0.375rem;
+  padding: 0.5rem 0.75rem; border-radius: 0.375rem;
+  background: var(--vp-c-bg-soft);
+  font-size: 0.85rem; font-weight: 700; color: var(--vp-c-text-1);
 }
+.ab-app svg { color: var(--vp-c-text-3); flex-shrink: 0; }
 
-.flow-node-label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--vp-c-text-1);
-  white-space: nowrap;
+.ab-via { font-size: 0.55rem; font-weight: 600; color: var(--vp-c-text-3); text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* Tool cards with descriptions */
+.ab-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 0.375rem; }
+
+.ab-tool {
+  display: flex; flex-direction: column; gap: 0.125rem;
+  padding: 0.4rem 0.625rem; border-radius: 0.375rem;
+  background: var(--vp-c-bg-soft); text-decoration: none !important;
+  transition: background 0.15s;
+}
+.ab-tool:hover { background: color-mix(in srgb, var(--brand-color) 8%, transparent); }
+
+.ab-tool-name { font-size: 0.75rem; font-weight: 700; color: var(--vp-c-text-1); }
+.ab-tool-desc { font-size: 0.58rem; color: var(--vp-c-text-3); line-height: 1.4; }
+.ab-tool-code {
+  font-size: 0.55rem; color: var(--brand-color); font-family: var(--vp-font-family-mono);
+  background: color-mix(in srgb, var(--brand-color) 5%, transparent);
+  padding: 0.1rem 0.25rem; border-radius: 0.125rem; width: fit-content;
 }
 
 /* Gateway */
-.flow-node-gw {
-  border-color: var(--brand-color);
-  background: color-mix(in srgb, var(--brand-color) 6%, var(--vp-c-bg));
-  padding: 0.625rem 2rem;
-}
+.ab-gw { display: flex; align-items: center; justify-content: center; padding: 1rem 0; }
+.ab-gw-title { font-size: 0.85rem; font-weight: 700; color: var(--brand-color); white-space: nowrap; }
 
-.flow-node-gw .flow-node-label {
-  color: var(--brand-color);
-  font-weight: 700;
-  font-size: 1rem;
-}
 
-/* Service */
-.flow-node-svc {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  padding: 0.5rem 1rem;
-}
+/* Services box — vertically centered */
+.ab-box-svc { justify-content: center; }
 
-.flow-node-proto {
-  font-size: 0.65rem;
-  font-weight: 600;
-  color: var(--vp-c-text-3);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+/* Services */
+.ab-svc {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.5rem 0.75rem; border-radius: 0.375rem;
+  background: var(--vp-c-bg-soft); text-decoration: none !important;
+  transition: background 0.15s; min-width: 9rem;
 }
+.ab-svc:hover { background: color-mix(in srgb, var(--brand-color) 8%, transparent); }
+.ab-svc-name { font-size: 0.78rem; font-weight: 700; color: var(--vp-c-text-1); }
+.ab-svc-count { font-size: 0.65rem; font-weight: 700; color: var(--brand-color); font-family: var(--vp-font-family-mono); }
 
-/* Override vue-flow theme for our design */
-:deep(.vue-flow__node) {
-  border: none !important;
-  box-shadow: none !important;
-  background: transparent !important;
-  padding: 0 !important;
+.ab-svc-more {
+  border: 1.5px dashed var(--vp-c-divider);
+  background: transparent;
+  cursor: default;
+  opacity: 0.55;
 }
+.ab-svc-more:hover { background: transparent; }
+.ab-svc-more .ab-svc-name { color: var(--vp-c-text-3); font-weight: 500; }
+.ab-svc-dots { font-size: 0.78rem; color: var(--vp-c-text-3); letter-spacing: 0.1em; font-family: var(--vp-font-family-mono); }
 
-:deep(.vue-flow__edge-path) {
-  stroke: var(--brand-color) !important;
-  stroke-width: 1.5 !important;
+/* Arrows */
+.ab-arrow {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0.25rem; padding: 0 0.375rem; flex-shrink: 0; min-width: 4.5rem;
+  align-self: center;
 }
-
-:deep(.vue-flow__edge.animated path) {
-  stroke-dasharray: 5 !important;
-  animation: flow-dash 1s linear infinite !important;
+.ab-arrow-label { font-size: 0.55rem; font-weight: 600; color: var(--vp-c-text-3); font-family: var(--vp-font-family-mono); white-space: nowrap; }
+.ab-arrow-line { display: flex; align-items: center; width: 100%; }
+.ab-arrow-shaft {
+  flex: 1; height: 1.5px;
+  background: repeating-linear-gradient(90deg, var(--brand-color) 0px, var(--brand-color) 5px, transparent 5px, transparent 8px);
+  animation: ab-dash 0.6s linear infinite;
 }
+@keyframes ab-dash { to { background-position: -8px 0; } }
+.ab-arrow-head { width: 0; height: 0; border-left: 6px solid var(--brand-color); border-top: 4px solid transparent; border-bottom: 4px solid transparent; flex-shrink: 0; }
+.ab-arrow-dir { color: var(--vp-c-text-3); opacity: 0.4; }
 
-@keyframes flow-dash {
-  to {
-    stroke-dashoffset: -10;
+/* Responsive: vertical stack */
+@media (max-width: 900px) {
+  .ab-flow { flex-direction: column; gap: 0; }
+  .ab-arrow {
+    flex-direction: row; padding: 0.75rem 0; min-width: auto;
+    align-self: center; gap: 0.5rem;
   }
-}
-
-:deep(.vue-flow__background) {
-  --vf-dot: var(--vp-c-divider);
-}
-
-@media (max-width: 640px) {
-  .arch-flow-wrap {
-    height: 28rem;
+  .ab-arrow-line {
+    width: 0; height: 2.5rem;
+    flex-direction: column;
   }
+  .ab-arrow-shaft {
+    width: 1.5px; height: 100%; flex: 1;
+    background: repeating-linear-gradient(180deg, var(--brand-color) 0px, var(--brand-color) 5px, transparent 5px, transparent 8px);
+    animation: ab-dash-v 0.6s linear infinite;
+  }
+  .ab-arrow-head {
+    border-left: 4px solid transparent; border-right: 4px solid transparent;
+    border-top: 6px solid var(--brand-color); border-bottom: none;
+  }
+  .ab-arrow-dir { transform: rotate(90deg); }
+  .ab-tools { grid-template-columns: repeat(2, 1fr); }
+}
+
+@keyframes ab-dash-v { to { background-position: 0 -8px; } }
+
+@media (max-width: 480px) {
+  .ab-tools { flex-direction: column; }
+  .ab-tool { min-width: auto; }
 }
 </style>

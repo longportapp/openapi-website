@@ -126,28 +126,6 @@ OAuthBuilder("your-client-id").build(
       <ArchCanvas />
     </ClientOnly>
 
-    <!-- SDK Section -->
-    <div class="sdk-header">
-      <h3 class="sdk-title">Quick Start with Any SDK</h3>
-      <div class="sdk-alt-actions">
-        <a href="/docs/api" class="sdk-alt-link">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14L21 3"/><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/></svg>
-          <span>Try Online</span>
-        </a>
-        <a href="/docs/cli" class="sdk-alt-link">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-          <span>CLI</span>
-        </a>
-        <a href="/docs/mcp" class="sdk-alt-link">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m-7-3.5l5.2-3m1.6-1l5.2-3M5 6.5l5.2 3m1.6 1l5.2 3"/></svg>
-          <span>MCP</span>
-        </a>
-      </div>
-    </div>
-
-    <ClientOnly>
-      <SdkMarquee :sdks="sdks" />
-    </ClientOnly>
   </section>
 </template>
 
@@ -171,7 +149,7 @@ OAuthBuilder("your-client-id").build(
 }
 
 .arch-subtitle {
-  margin-top: 0.5rem;
+  margin-top: 1.5rem;
   font-size: 1.05rem;
   color: var(--vp-c-text-2);
 }
@@ -182,7 +160,7 @@ OAuthBuilder("your-client-id").build(
   justify-content: space-between;
   margin: 2.5rem auto 1.5rem;
   padding: 0 1.5rem;
-  max-width: 56rem;
+  max-width: 64rem;
 }
 
 .sdk-title {

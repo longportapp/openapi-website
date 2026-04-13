@@ -14,7 +14,7 @@ const brandColors = [
 ]
 
 // Cycle through product names
-const products = ['CLI', 'Skill', 'MCP', 'OpenAPI']
+const products = ['Skill', 'CLI', 'MCP', 'SDK', 'OpenAPI']
 const currentProduct = ref(products[0])
 let productInterval: ReturnType<typeof setInterval> | undefined
 let productIndex = 0
@@ -121,9 +121,6 @@ const ctaReadDocs = computed(() => t('hero.cta.readDocs'))
   position: relative;
   overflow: hidden;
   background: #f6fafb;
-  min-height: 40rem;
-  display: flex;
-  align-items: center;
 }
 
 :root.dark .hero-section {
