@@ -12,7 +12,11 @@ sidebar_icon: newspaper
 **Enhancements**
 
 - `option quote` — now returns all fields from the OptionQuote API (added `timestamp`, `trade_status`, `open_interest`, `historical_volatility`, `contract_multiplier`, `contract_size`, `direction`, `underlying_symbol`); JSON output uses proper typed values instead of table-column strings
-- `calc-index` — Theta, Vega, and Rho values are now normalized (÷100) to standard per-share conventions; auto-detects option symbols and switches to Greeks fields when stock defaults return empty
+- `calc-index` — Theta, Vega, and Rho values are now normalized (÷100) to standard per-share conventions; auto-detects option symbols and switches to Greeks default fields when stock defaults return empty
+- `capital` — improved argument handling
+- `market-status` — fixed incorrect `trade_status` mapping (105 = afternoon trading session); JSON output now returns human-readable market and status labels instead of raw API codes
+- Parameter standardization: `--adjust none/forward` (was `no_adjust/forward_adjust`), `--tif day/gtc/gtd` (was `Day/GoodTilCanceled/GoodTilDate`), `--format table` as default name (alias: `pretty`), `finance-calendar --start/--end` (was `--date/--end-date`), `statement --start-date` now accepts `YYYY-MM-DD` format
+- TUI: fixed watchlist sort jumping and made scrollbar more subtle
 
 ### [v0.16.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.16.0)
 
