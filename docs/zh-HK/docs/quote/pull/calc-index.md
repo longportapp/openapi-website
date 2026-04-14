@@ -267,9 +267,9 @@ func main() {
 | ∟ open_interest            | int64    | 未平倉數                                     |
 | ∟ delta                    | string   | Delta                                        |
 | ∟ gamma                    | string   | Gamma                                        |
-| ∟ theta                    | string   | Theta                                        |
-| ∟ vega                     | string   | Vega                                         |
-| ∟ rho                      | string   | Rho                                          |
+| ∟ theta                    | string   | Theta，原始值需除以 100 得到標準的每股每天值    |
+| ∟ vega                     | string   | Vega，原始值需除以 100 得到標準的每股每 1% IV 值 |
+| ∟ rho                      | string   | Rho，原始值需除以 100 得到標準的每股每 1% 利率值  |
 
 ### Protobuf
 
