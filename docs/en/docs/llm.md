@@ -25,8 +25,8 @@ Each of our documents is also available in Markdown format. When accessing them,
 
 For example:
 
-- https://open.longbridge.com/docs/getting-started.md
-- https://open.longbridge.com/docs/quote/pull/static.md
+- <https://open.longbridge.com/docs/getting-started.md>
+- <https://open.longbridge.com/docs/quote/pull/static.md>
 
 ## Longbridge.com Markdown Access (AI-friendly)
 
@@ -39,7 +39,7 @@ You can get markdown content in either way:
 
 Examples:
 
-- `https://longbridge.com/en/pricing.md`
+- [https://longbridge.com/en/topics.md](https://longbridge.com/en/topics.md)
 - `curl -H "Accept: text/markdown" https://longbridge.com/quote/TSLA.US`
 
 This is useful for LLM crawlers, RAG indexing, and tool-based content ingestion while keeping page structure clean.
