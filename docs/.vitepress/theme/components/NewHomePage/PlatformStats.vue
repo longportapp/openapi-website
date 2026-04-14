@@ -346,7 +346,7 @@ const stats = computed(() => [
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 0.75rem;
+  padding: 0.625rem 0.875rem;
   border-bottom: 1px solid var(--vp-c-divider);
 }
 .hc-title {
@@ -367,16 +367,16 @@ const stats = computed(() => [
 .hc-items {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
-  padding: 0.375rem 0.5rem;
-  gap: 0.125rem;
+  padding: 0.5rem 0.75rem;
+  gap: 0.25rem;
 }
 
 .hc-item {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.375rem;
-  border-radius: 0.3rem;
+  gap: 0.5rem;
+  padding: 0.375rem 0.5rem;
+  border-radius: 0.375rem;
 }
 
 .hc-item-icon {
@@ -420,7 +420,7 @@ const stats = computed(() => [
   align-items: center;
   justify-content: center;
   gap: 0.25rem;
-  padding: 0.4rem 0.75rem;
+  padding: 0.5rem 0.875rem;
   border-top: 1px solid var(--vp-c-divider);
   font-size: 0.65rem;
   font-weight: 600;

@@ -71,7 +71,7 @@ oauth = OAuthBuilder("your-client-id").build(
 config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 
-resp = ctx.quote(["700.HK", "AAPL.US", "TSLA.US", "NFLX.US"])
+resp = ctx.quote(["AAPL.US", "TSLA.US", "NVDA.US", "GOOG.US"])
 print(resp)`,
     nodejs: `const { Config, QuoteContext, OAuth } = require('longbridge')
 
@@ -80,10 +80,10 @@ async function main() {
     (_, url) => console.log('Open:', url))
   const config = Config.fromOAuth(oauth)
   const ctx = QuoteContext.new(config)
-  const resp = await ctx.quote(['700.HK', 'AAPL.US', 'TSLA.US'])
+  const resp = await ctx.quote(['AAPL.US', 'TSLA.US', 'NVDA.US', 'GOOG.US'])
   for (const obj of resp) console.log(obj.toString())
 }
-main()`,
+main().catch(console.error)`,
     rust: `use std::sync::Arc;
 use longbridge::{oauth::OAuthBuilder, quote::QuoteContext, Config};
 
@@ -93,26 +93,29 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build(|url| println!("Open: {url}")).await?;
     let config = Arc::new(Config::from_oauth(oauth));
     let (ctx, _) = QuoteContext::new(config);
-    let resp = ctx.quote(["700.HK", "AAPL.US"]).await?;
+    let resp = ctx.quote(["AAPL.US", "TSLA.US"]).await?;
     println!("{:?}", resp);
     Ok(())
 }`,
     go: `conf, _ := config.New(config.WithOAuthClient(o))
 qctx, _ := quote.NewFromCfg(conf)
 defer qctx.Close()
-resp, _ := qctx.Quote(context.Background(),
-  []string{"700.HK", "AAPL.US", "TSLA.US"})
-for _, q := range resp { fmt.Println(q) }`,
+quotes, _ := qctx.Quote(context.Background(),
+  []string{"AAPL.US", "TSLA.US", "NVDA.US"})
+fmt.Printf("%+v\\n", quotes[0])`,
     java: `try (Config config = Config.fromOAuth(oauth);
      QuoteContext ctx = QuoteContext.create(config)) {
     SecurityQuote[] resp = ctx.getQuote(
-        new String[]{"700.HK", "AAPL.US"}).get();
+        new String[]{"AAPL.US", "TSLA.US"}).get();
     for (SecurityQuote q : resp) System.out.println(q);
 }`,
-    cpp: `auto config = Config::from_oauth(oauth);
-auto [ctx, recv] = QuoteContext::new(config);
-auto resp = ctx.quote({"700.HK", "AAPL.US"}).get();
-for (auto& q : resp) std::cout << q << std::endl;`,
+    cpp: `Config config = Config::from_oauth(oauth);
+QuoteContext ctx = QuoteContext::create(config);
+ctx.quote({"AAPL.US", "TSLA.US"}, [](auto res) {
+    for (const auto& q : *res)
+        std::cout << q.symbol << " "
+                  << (double)q.last_done << std::endl;
+});`,
   },
   trade: {
     python: `from decimal import Decimal
@@ -126,9 +129,9 @@ config = Config.from_oauth(oauth)
 ctx = TradeContext(config)
 
 resp = ctx.submit_order(
-    "700.HK", OrderType.LO, OrderSide.Buy,
-    Decimal(500), TimeInForceType.Day,
-    submitted_price=Decimal(50))
+    "AAPL.US", OrderType.LO, OrderSide.Buy,
+    Decimal(100), TimeInForceType.Day,
+    submitted_price=Decimal(250))
 print(resp)`,
     nodejs: `const { Config, TradeContext, OAuth, OrderType,
   OrderSide, TimeInForceType, Decimal } = require('longbridge')
@@ -139,42 +142,55 @@ async function main() {
   const config = Config.fromOAuth(oauth)
   const ctx = TradeContext.new(config)
   const resp = await ctx.submitOrder({
-    symbol: '700.HK', orderType: OrderType.LO,
-    side: OrderSide.Buy, submittedQuantity: new Decimal(500),
-    submittedPrice: new Decimal(50),
+    symbol: 'AAPL.US', orderType: OrderType.LO,
+    side: OrderSide.Buy, submittedQuantity: new Decimal(100),
+    submittedPrice: new Decimal(250),
     timeInForce: TimeInForceType.Day })
   console.log(resp)
 }
-main()`,
-    rust: `use longbridge::trade::*;
+main().catch(console.error)`,
+    rust: `use std::sync::Arc;
+use longbridge::{oauth::OAuthBuilder, Config,
+    trade::{TradeContext, SubmitOrderOptions,
+            OrderType, OrderSide, TimeInForceType}};
 use rust_decimal::Decimal;
 
-let (ctx, _) = TradeContext::new(config);
-let resp = ctx.submit_order(
-    SubmitOrderOptions::new("700.HK", OrderType::LO,
-        OrderSide::Buy, Decimal::from(500),
-        TimeInForceType::Day)
-        .submitted_price(Decimal::from(50))
-).await?;
-println!("{:?}", resp);`,
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let oauth = OAuthBuilder::new("your-client-id")
+        .build(|url| println!("Open: {url}")).await?;
+    let config = Arc::new(Config::from_oauth(oauth));
+    let (ctx, _) = TradeContext::new(config);
+    let resp = ctx.submit_order(
+        SubmitOrderOptions::new("AAPL.US", OrderType::LO,
+            OrderSide::Buy, Decimal::from(100),
+            TimeInForceType::Day)
+            .submitted_price(Decimal::from(250))
+    ).await?;
+    println!("{:?}", resp);
+    Ok(())
+}`,
     go: `tctx, _ := trade.NewFromCfg(conf)
 orderID, _ := tctx.SubmitOrder(ctx, &trade.SubmitOrder{
-    Symbol: "700.HK", OrderType: trade.OrderTypeLO,
-    Side: trade.OrderSideBuy, SubmittedQuantity: 500,
-    SubmittedPrice: decimal.NewFromFloat(50),
+    Symbol: "AAPL.US", OrderType: trade.OrderTypeLO,
+    Side: trade.OrderSideBuy, SubmittedQuantity: 100,
+    SubmittedPrice: decimal.NewFromFloat(250),
     TimeInForce: trade.TimeTypeDay })
 fmt.Println("order_id:", orderID)`,
     java: `SubmitOrderResponse resp = ctx.submitOrder(
-    new SubmitOrderOptions("700.HK", OrderType.LO,
-        OrderSide.Buy, new BigDecimal("500"),
+    new SubmitOrderOptions("AAPL.US", OrderType.LO,
+        OrderSide.Buy, new BigDecimal("100"),
         TimeInForceType.Day)
-        .setSubmittedPrice(new BigDecimal("50"))).get();
+        .setSubmittedPrice(new BigDecimal("250"))).get();
 System.out.println(resp.orderId);`,
-    cpp: `auto resp = ctx.submit_order(
-    SubmitOrderOptions("700.HK", OrderType::LO,
-        OrderSide::Buy, Decimal(500), TimeInForceType::Day)
-        .submitted_price(Decimal(50))).get();
-std::cout << resp.order_id << std::endl;`,
+    cpp: `Config config = Config::from_oauth(oauth);
+TradeContext ctx = TradeContext::create(config);
+SubmitOrderOptions opts{"AAPL.US", OrderType::LO,
+    OrderSide::Buy, 100, TimeInForceType::Day,
+    Decimal(250.0)};
+ctx.submit_order(opts, [](auto res) {
+    std::cout << "order_id: " << res->order_id << std::endl;
+});`,
   },
   subscribe: {
     python: `from time import sleep
@@ -188,7 +204,7 @@ oauth = OAuthBuilder("your-client-id").build(
 config = Config.from_oauth(oauth)
 ctx = QuoteContext(config)
 ctx.set_on_quote(on_quote)
-ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote])
+ctx.subscribe(["AAPL.US", "TSLA.US"], [SubType.Quote])
 sleep(30)`,
     nodejs: `const { Config, QuoteContext, OAuth, SubType } = require('longbridge')
 
@@ -198,32 +214,43 @@ async function main() {
   const config = Config.fromOAuth(oauth)
   const ctx = QuoteContext.new(config)
   ctx.setOnQuote((event) => console.log(event))
-  await ctx.subscribe(["700.HK", "AAPL.US"], [SubType.Quote], true)
+  await ctx.subscribe(["AAPL.US", "TSLA.US"], [SubType.Quote], true)
   await new Promise(r => setTimeout(r, 30000))
 }
-main()`,
-    rust: `use longbridge::quote::{QuoteContext, SubFlags};
+main().catch(console.error)`,
+    rust: `use std::sync::Arc;
+use longbridge::{oauth::OAuthBuilder, Config,
+    quote::{QuoteContext, SubFlags}};
 
-let (ctx, _) = QuoteContext::new(config);
-ctx.subscribe(
-    vec!["700.HK".into(), "AAPL.US".into()],
-    SubFlags::quote(), true,
-).await?;
-tokio::time::sleep(std::time::Duration::from_secs(30)).await;`,
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let oauth = OAuthBuilder::new("your-client-id")
+        .build(|url| println!("Open: {url}")).await?;
+    let config = Arc::new(Config::from_oauth(oauth));
+    let (ctx, _) = QuoteContext::new(config);
+    ctx.subscribe(
+        vec!["AAPL.US".into(), "TSLA.US".into()],
+        SubFlags::quote(), true,
+    ).await?;
+    tokio::time::sleep(std::time::Duration::from_secs(30)).await;
+    Ok(())
+}`,
     go: `qctx, _ := quote.NewFromCfg(conf)
 qctx.OnQuote(func(e *quote.PushQuote) {
     fmt.Println(e.Symbol) })
-qctx.Subscribe(ctx, []string{"700.HK", "AAPL.US"},
+qctx.Subscribe(ctx, []string{"AAPL.US", "TSLA.US"},
     []quote.SubType{quote.SubTypeQuote}, true)
 select {}`,
     java: `ctx.setOnQuote(event -> System.out.println(event));
-ctx.subscribe(new String[]{"700.HK", "AAPL.US"},
+ctx.subscribe(new String[]{"AAPL.US", "TSLA.US"},
     new SubType[]{SubType.Quote}, true).get();
 Thread.sleep(30000);`,
-    cpp: `ctx.set_on_quote([](auto event) {
-    std::cout << event << std::endl; });
-ctx.subscribe({"700.HK", "AAPL.US"},
-    SubFlags::Quote, true).get();`,
+    cpp: `Config config = Config::from_oauth(oauth);
+QuoteContext ctx = QuoteContext::create(config);
+ctx.set_on_quote([](auto e) {
+    std::cout << e->symbol << std::endl; });
+ctx.subscribe({"AAPL.US", "TSLA.US"},
+    SubFlags::QUOTE(), true, [](auto) {});`,
   },
   portfolio: {
     python: `from longbridge.openapi import TradeContext, Config, OAuthBuilder
@@ -244,20 +271,34 @@ async function main() {
   const resp = await ctx.accountBalance()
   for (const obj of resp) console.log(obj.toString())
 }
-main()`,
-    rust: `use longbridge::trade::TradeContext;
+main().catch(console.error)`,
+    rust: `use std::sync::Arc;
+use longbridge::{oauth::OAuthBuilder, trade::TradeContext, Config};
 
-let (ctx, _) = TradeContext::new(config);
-let resp = ctx.account_balance(None).await?;
-println!("{:?}", resp);`,
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let oauth = OAuthBuilder::new("your-client-id")
+        .build(|url| println!("Open: {url}")).await?;
+    let config = Arc::new(Config::from_oauth(oauth));
+    let (ctx, _) = TradeContext::new(config);
+    let resp = ctx.account_balance(None).await?;
+    println!("{:?}", resp);
+    Ok(())
+}`,
     go: `tctx, _ := trade.NewFromCfg(conf)
-resp, _ := tctx.AccountBalance(ctx)
+resp, _ := tctx.AccountBalance(ctx,
+    &trade.GetAccountBalance{})
 for _, b := range resp { fmt.Println(b) }`,
     java: `AccountBalance[] resp = ctx.getAccountBalance().get();
 for (AccountBalance obj : resp)
     System.out.println(obj);`,
-    cpp: `auto resp = ctx.account_balance().get();
-for (auto& b : resp) std::cout << b << std::endl;`,
+    cpp: `Config config = Config::from_oauth(oauth);
+TradeContext ctx = TradeContext::create(config);
+ctx.account_balance([](auto res) {
+    for (const auto& b : *res)
+        std::cout << b.currency << " "
+                  << (double)b.available << std::endl;
+});`,
   },
 }
 
