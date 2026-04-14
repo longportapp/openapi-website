@@ -131,7 +131,8 @@ export default defineConfig(
         text: 'Edit',
       },
       logo: {
-        src: 'https://assets.wbrks.com/assets/logo/logo-without-title-lb.svg',
+        light: 'https://assets.wbrks.com/assets/logo/light/logo.svg',
+        dark: 'https://assets.wbrks.com/assets/logo/dark/logo.svg',
         width: 48,
         height: 48,
       },
