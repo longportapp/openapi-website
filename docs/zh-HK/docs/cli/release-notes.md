@@ -7,6 +7,17 @@ sidebar_icon: newspaper
 
 # Release Notes
 
+### v0.16.1
+
+**改進**
+
+- `option quote` — 完整輸出 OptionQuote API 全部字段（新增 `timestamp`、`trade_status`、`open_interest`、`historical_volatility`、`contract_multiplier`、`contract_size`、`direction`、`underlying_symbol`）；JSON 輸出使用正確的類型值
+- `calc-index` — Theta、Vega、Rho 值已標準化（÷100）為標準的每股單位；自動檢測期權合約並切換為 Greeks 默認字段
+- `capital` — 改進命令參數處理
+- `market-status` — 修復 `trade_status` 映射錯誤（105 = 午盤交易）；JSON 輸出改為人類可讀的市場和狀態標籤
+- 參數標準化：`--adjust none/forward`（原 `no_adjust/forward_adjust`）、`--tif day/gtc/gtd`（原 `Day/GoodTilCanceled/GoodTilDate`）、`--format table` 作為默認名稱（別名：`pretty`）、`finance-calendar --start/--end`（原 `--date/--end-date`）、`statement --start-date` 支持 `YYYY-MM-DD` 格式
+- TUI：修復自選列表排序跳動問題，優化滾動條顯示
+
 ### [v0.16.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.16.0)
 
 新增 21 個命令，涵蓋公司基本面、行情數據和帳戶功能。
