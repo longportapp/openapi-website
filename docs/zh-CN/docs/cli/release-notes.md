@@ -7,6 +7,13 @@ sidebar_icon: newspaper
 
 # Release Notes
 
+### v0.16.1
+
+**改进**
+
+- `option quote` — 完整输出 OptionQuote API 全部字段（新增 `timestamp`、`trade_status`、`open_interest`、`historical_volatility`、`contract_multiplier`、`contract_size`、`direction`、`underlying_symbol`）；JSON 输出使用正确的类型值
+- `calc-index` — Theta、Vega、Rho 值已标准化（÷100）为标准的每股单位；自动检测期权合约并切换为 Greeks 默认字段
+
 ### [v0.16.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.16.0)
 
 新增 21 个命令，覆盖公司基本面、行情数据和账户功能。

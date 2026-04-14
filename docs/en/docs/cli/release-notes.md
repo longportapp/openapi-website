@@ -7,6 +7,13 @@ sidebar_icon: newspaper
 
 # Release Notes
 
+### v0.16.1
+
+**Enhancements**
+
+- `option quote` — now returns all fields from the OptionQuote API (added `timestamp`, `trade_status`, `open_interest`, `historical_volatility`, `contract_multiplier`, `contract_size`, `direction`, `underlying_symbol`); JSON output uses proper typed values instead of table-column strings
+- `calc-index` — Theta, Vega, and Rho values are now normalized (÷100) to standard per-share conventions; auto-detects option symbols and switches to Greeks fields when stock defaults return empty
+
 ### [v0.16.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.16.0)
 
 21 new commands covering company fundamentals, market data, and account features.

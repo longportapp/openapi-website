@@ -281,9 +281,9 @@ func main() {
 | ∟ open_interest            | int64    | Open interest                                                                            |
 | ∟ delta                    | string   | Delta                                                                                    |
 | ∟ gamma                    | string   | Gamma                                                                                    |
-| ∟ theta                    | string   | Theta                                                                                    |
-| ∟ vega                     | string   | Vega                                                                                     |
-| ∟ rho                      | string   | Rho                                                                                      |
+| ∟ theta                    | string   | Theta. Raw value needs to be divided by 100 to get the standard per-share per-day value  |
+| ∟ vega                     | string   | Vega. Raw value needs to be divided by 100 to get the standard per-share per-1%-IV value |
+| ∟ rho                      | string   | Rho. Raw value needs to be divided by 100 to get the standard per-share per-1%-rate value |
 
 ### Protobuf
 
