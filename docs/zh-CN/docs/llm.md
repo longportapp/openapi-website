@@ -25,8 +25,8 @@ OpenAPI 文档遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https
 
 例如：
 
-- https://open.longbridge.com/docs/getting-started.md
-- https://open.longbridge.com/docs/quote/pull/static.md
+- <https://open.longbridge.com/docs/getting-started.md>
+- <https://open.longbridge.com/docs/quote/pull/static.md>
 
 ## longbridge.com 页面 Markdown 获取（AI 友好）
 
@@ -39,7 +39,7 @@ OpenAPI 文档遵循 [LLMs 文本](https://llmstxt.org/) 提供 [llms.txt](https
 
 示例：
 
-- `https://longbridge.com/en/pricing.md`
+- [https://longbridge.com/en/topics.md](https://longbridge.com/en/topics.md)
 - `curl -H "Accept: text/markdown" https://longbridge.com/quote/TSLA.US`
 
 这个能力适合 LLM 抓取、RAG 建索引、以及工具化读取页面内容，并且能保持页面结构清晰。

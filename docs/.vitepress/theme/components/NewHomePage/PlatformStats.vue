@@ -199,18 +199,16 @@ const stats = computed(() => [
                   <span class="hc-count">{{ stat.value }}{{ stat.suffix }}</span>
                 </div>
                 <div class="hc-items">
-                  <a
+                  <div
                     v-for="item in stat.card.items"
                     :key="item.name"
-                    :href="item.link"
-                    class="hc-item"
-                    :class="{ 'hc-item-link': !!item.link }">
+                    class="hc-item">
                     <span class="hc-item-icon" v-html="item.icon" />
                     <div class="hc-item-text">
                       <span class="hc-item-name">{{ item.name }}</span>
                       <span class="hc-item-desc">{{ item.desc }}</span>
                     </div>
-                  </a>
+                  </div>
                 </div>
                 <a :href="stat.link" class="hc-footer">
                   Learn more
@@ -375,15 +373,10 @@ const stats = computed(() => [
 
 .hc-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.4rem;
   padding: 0.35rem 0.375rem;
   border-radius: 0.3rem;
-  text-decoration: none !important;
-  transition: background 0.15s;
-}
-.hc-item-link:hover {
-  background: color-mix(in srgb, var(--vp-c-text-3) 6%, transparent);
 }
 
 .hc-item-icon {
