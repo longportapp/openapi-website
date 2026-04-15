@@ -7,6 +7,11 @@ sidebar_icon: newspaper
 
 # Release Notes
 
+### v0.17.0
+
+- **`auth` subcommand group** — `longbridge auth login`, `auth logout`, `auth status`; `auth status` shows token validity, expiry, account info, and quote level locally without network
+- **`alert enable` / `alert disable`** — toggle price alerts on/off without deleting them
+
 ### v0.16.1
 
 **Enhancements**

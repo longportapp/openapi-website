@@ -6,6 +6,13 @@ sidebar_position: 7
 sidebar_icon: newspaper
 ---
 
+## 2026-04-15
+
+### CLI v0.17.0
+
+- **`auth` 子命令群組** — `longbridge auth login` / `auth logout` / `auth status`；`auth status` 本機查看 Token 有效性和帳戶資訊，無需網路
+- **`alert enable` / `alert disable`** — 切換到價提醒啟用狀態，無需刪除重建
+
 ## 2026-04-13
 
 ### CLI v0.16.0

@@ -6,6 +6,13 @@ sidebar_position: 7
 sidebar_icon: newspaper
 ---
 
+## 2026-04-15
+
+### CLI v0.17.0
+
+- **`auth` subcommand group** — `longbridge auth login` / `auth logout` / `auth status`; new `auth status` shows token validity, expiry, and account info locally without network
+- **`alert enable` / `alert disable`** — toggle alerts on/off without deleting them
+
 ## 2026-04-13
 
 ### CLI v0.16.0

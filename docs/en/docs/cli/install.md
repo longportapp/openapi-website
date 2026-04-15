@@ -44,18 +44,40 @@ iwr https://open.longbridge.com/longbridge/longbridge-terminal/install.ps1 | iex
   </TabItem>
 </Tabs>
 
-## login
+## auth
+
+Manage authentication — login, logout, and check token status.
+
+### auth login
 
 Authenticate via OAuth 2.0 device authorization flow — works in any environment including SSH
 and headless servers.
 
 ```bash
-longbridge login
+longbridge auth login
 ```
 
-Running `login` prints a URL and a short code. Open the URL in any browser, enter the code,
+Running `auth login` prints a URL and a short code. Open the URL in any browser, enter the code,
 and authorize. The token is saved to `~/.longbridge/openapi/tokens/<client_id>` and reused
 automatically by all subsequent commands.
+
+### auth logout
+
+Clears the stored OAuth token. The next command or TUI launch will trigger re-authentication.
+
+```bash
+longbridge auth logout
+```
+
+### auth status
+
+Shows token validity locally — no network required. Displays expiry time, login time, account
+info, and current quote level.
+
+```bash
+longbridge auth status
+longbridge auth status --format json
+```
 
 ## check
 
@@ -74,12 +96,4 @@ release.
 
 ```bash
 longbridge update
-```
-
-## logout
-
-Clears the stored OAuth token. The next command or TUI launch will trigger re-authentication.
-
-```bash
-longbridge logout
 ```

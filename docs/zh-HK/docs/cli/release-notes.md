@@ -7,6 +7,11 @@ sidebar_icon: newspaper
 
 # Release Notes
 
+### v0.17.0
+
+- **`auth` 子命令群組** — `longbridge auth login`、`auth logout`、`auth status`；`auth status` 本機查看 Token 有效性、到期時間、帳戶資訊和行情權限，無需網路
+- **`alert enable` / `alert disable`** — 切換到價提醒的啟用狀態，無需刪除重建
+
 ### v0.16.1
 
 **改進**

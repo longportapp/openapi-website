@@ -6,6 +6,13 @@ sidebar_position: 7
 sidebar_icon: newspaper
 ---
 
+## 2026-04-15
+
+### CLI v0.17.0
+
+- **`auth` 子命令组** — `longbridge auth login` / `auth logout` / `auth status`；`auth status` 本地查看 Token 有效性和账户信息，无需网络
+- **`alert enable` / `alert disable`** — 切换价格提醒启用状态，无需删除重建
+
 ## 2026-04-13
 
 ### CLI v0.16.0

@@ -50,6 +50,15 @@ longbridge alert add TSLA.US --price 300 --direction rise
 longbridge alert add AAPL.US --price 150 --direction fall
 ```
 
+### Enable / Disable an alert
+
+```bash
+# Disable an alert (keeps it without deleting)
+longbridge alert disable 112326
+# Re-enable a disabled alert
+longbridge alert enable 112326
+```
+
 ### Delete an alert
 
 ```bash
