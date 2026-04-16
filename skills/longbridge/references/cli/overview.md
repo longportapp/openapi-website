@@ -51,9 +51,9 @@ curl -sSL https://open.longbridge.com/longbridge/longbridge-terminal/install | s
 Uses OAuth 2.0 — no manual token or key management needed:
 
 ```bash
-longbridge login    # Opens browser OAuth flow; token saved to
-                    # ~/.longbridge/terminal/.openapi-session
-longbridge logout   # Clear saved session token
+longbridge auth login    # Opens browser OAuth flow; token saved to
+                         # ~/.longbridge/terminal/.openapi-session
+longbridge auth logout   # Clear saved session token
 longbridge check    # Verify connectivity and token (no auth required)
 ```
 
@@ -67,7 +67,7 @@ longbridge check    # Verify connectivity and token (no auth required)
 
 ```bash
 # Run any command against the staging environment
-LONGBRIDGE_ENV=staging longbridge login
+LONGBRIDGE_ENV=staging longbridge auth login
 LONGBRIDGE_ENV=staging longbridge statement list
 
 # Or export for the entire shell session

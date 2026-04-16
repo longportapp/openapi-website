@@ -119,4 +119,4 @@ Posts a reply to a community topic. Use `--reply-to` with a reply ID (from `topi
 
 ## Requirements
 
-A valid OAuth login is required for `mine`, `create`, and `create-reply`. Run `longbridge login` if you have not yet authenticated.
+A valid OAuth login is required for `mine`, `create`, and `create-reply`. Run `longbridge auth login` if you have not yet authenticated.

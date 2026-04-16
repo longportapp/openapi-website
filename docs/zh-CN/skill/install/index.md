@@ -73,7 +73,7 @@ iwr https://open.longbridge.com/longbridge/longbridge-terminal/install.ps1 | iex
 ```
 
 ```bash
-longbridge login
+longbridge auth login
 ```
 
 > 详细安装说明及完整命令列表参见 [CLI 文档](/zh-CN/docs/cli)。
@@ -134,7 +134,7 @@ https://openapi.longbridge.com/mcp
 
 **查询数据时需要授权**
 
-在终端中运行 `longbridge login` 完成 OAuth 授权即可，无需配置 API Key。
+在终端中运行 `longbridge auth login` 完成 OAuth 授权即可，无需配置 API Key。
 
 **交易操作无法执行**
 

@@ -119,4 +119,4 @@ longbridge topic create-reply 39798312 --body "同意" --reply-to 50012345
 
 ## 前置条件
 
-`mine`、`create` 和 `create-reply` 需要有效的 OAuth 登录。如未认证请先执行 `longbridge login`。
+`mine`、`create` 和 `create-reply` 需要有效的 OAuth 登录。如未认证请先执行 `longbridge auth login`。

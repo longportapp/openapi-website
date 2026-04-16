@@ -84,4 +84,4 @@ longbridge statement export --file-key stmt_daily_20260410_abc123 --section equi
 
 ## 前置条件
 
-需要有效的 OAuth 登录。如未认证请先执行 `longbridge login`。
+需要有效的 OAuth 登录。如未认证请先执行 `longbridge auth login`。

@@ -39,6 +39,6 @@ your watchlist.
 
 ## Notes
 
-- Requires a valid `longbridge login` session
+- Requires a valid `longbridge auth login` session
 - The TUI shares the same token as CLI commands
 - Press `q` or `Ctrl+C` to quit

@@ -28,6 +28,7 @@ sidebar_icon: newspaper
 
 - **`portfolio` 命令** — 组合总损益、各市场资产分布、持仓及现金明细
 - **`investors` 命令** — 基于 SEC 13F 数据的主动基金经理排行榜，按 CIK 查询指定投资者持仓（含实时价格）
+
   ```
   $ longbridge investors
   | #  | name                                        | AUM      | period      | cik        |
@@ -58,7 +59,9 @@ sidebar_icon: newspaper
   | KRAFT HEINZ CO               | $7.90B   | 325.63M | 2.9%   |
   | ALPHABET INC                 | $5.59B   | 17.85M  | 2.0%   |
   ```
+
 - **`insider-trades`** — 查看任意标的的内部人士交易记录（SEC Form 4）
+
   ```
   $ longbridge insider-trades TSLA.US
   Fetching 20 Form 4 filings...
@@ -72,6 +75,7 @@ sidebar_icon: newspaper
 
   Source: SEC EDGAR Form 4 — TSLA
   ```
+
 - **`watchlist pin/unpin`** — 将标的置顶至自选股分组顶部
 - **`assets` 命令** — 原 `balance` 更名，展示完整资产概览：净资产、购买力、保证金、风险等级及分币种现金明细
 
@@ -85,12 +89,12 @@ sidebar_icon: newspaper
 
 ### CLI v0.14.1
 
-- **CN 区域登录** — `longbridge login` 支持中国大陆区域路由
+- **CN 区域登录** — `longbridge auth login` 支持中国大陆区域路由
 - **`-v` 标志** — 快速查看版本号
 
 ### CLI v0.14.0
 
-- **Device Auth** — Longbridge Developers 平台现已支持 OAuth Device Auth 授权流程；`longbridge login` 显示验证 URL 和 Code，可在任意设备完成授权，支持 SSH 和无头环境
+- **Device Auth** — Longbridge Developers 平台现已支持 OAuth Device Auth 授权流程；`longbridge auth login` 显示验证 URL 和 Code，可在任意设备完成授权，支持 SSH 和无头环境
 - **订单增强** — 支持追踪止损和 AO 订单类型；订单命令新增 `--expire-date`、`--outside-rth`、`--remark` 参数
 - **修复** — Linux 预构建二进制改为 musl，修复在部分发行版的 Segfault
 

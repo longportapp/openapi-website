@@ -71,12 +71,12 @@ sidebar_icon: newspaper
 
 ### [v0.14.1](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.14.1)
 
-- **新增：中国区登录** — `longbridge login` 现在支持中国区路由
+- **新增：中国区登录** — `longbridge auth login` 现在支持中国区路由
 - **新增：`-v` 参数** — 无需输入完整命令即可查看版本号
 
 ### [v0.14.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.14.0)
 
-- **新增：设备授权登录** — `longbridge login` 改用 OAuth 设备流程；显示 URL 和授权码，可在任意设备上完成授权，支持 SSH 和无头环境；移除了 `--headless` 参数
+- **新增：设备授权登录** — `longbridge auth login` 改用 OAuth 设备流程；显示 URL 和授权码，可在任意设备上完成授权，支持 SSH 和无头环境；移除了 `--headless` 参数
 - **新增：订单增强** — 新增追踪止损和 AO 订单类型；订单命令新增 `--expire-date`、`--outside-rth`、`--remark` 参数
 - **修复：Linux 段错误** — 预编译 Linux 二进制文件改用 musl，修复在部分发行版上的崩溃问题
 
