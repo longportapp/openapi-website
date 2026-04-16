@@ -7,10 +7,12 @@ sidebar_icon: newspaper
 
 # Release Notes
 
-### v0.17.0
+### v0.16.3
 
 - **`auth` 子命令群組** — `longbridge auth login`、`auth logout`、`auth status`；`auth status` 本機查看 Token 有效性、到期時間、帳戶資訊和行情權限，無需網路
 - **`alert enable` / `alert disable`** — 切換到價提醒的啟用狀態，無需刪除重建
+- **修正：美股指數 symbol** — `.DJI.US`、`.VIX.US` 等美股指數 symbol 現已正確解析；美股指數需要前置點號（如 `.DJI.US`，而非 `DJI.US`）
+- **「您是否想查詢…」提示** — 查詢無結果時，CLI 會提示正確的 symbol 格式：缺少市場後綴 → `TSLA.US` / `700.HK`；缺少前置點號 → `.DJI.US`
 
 ### v0.16.1
 

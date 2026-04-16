@@ -6,12 +6,14 @@ sidebar_position: 7
 sidebar_icon: newspaper
 ---
 
-## 2026-04-15
+## 2026-04-16
 
-### CLI v0.17.0
+### CLI v0.16.3
 
 - **`auth` subcommand group** — `longbridge auth login` / `auth logout` / `auth status`; new `auth status` shows token validity, expiry, and account info locally without network
 - **`alert enable` / `alert disable`** — toggle alerts on/off without deleting them
+- **Fix: US index symbols** — `.DJI.US`, `.VIX.US` now parse correctly; US indexes require a leading dot
+- **"Did you mean?" hints** — symbol format suggestions when a query returns no data
 
 ## 2026-04-13
 
