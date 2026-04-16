@@ -80,7 +80,7 @@ iwr https://open.longbridge.com/longbridge/longbridge-terminal/install.ps1 | iex
 **Connect your Longbridge account:**
 
 ```bash
-longbridge login
+longbridge auth login
 ```
 
 That's it. The AI can now call `longbridge` commands on your behalf.
@@ -141,7 +141,7 @@ Some clients require a restart or a new conversation to load the Skill. Confirm 
 
 **Prompted for authorization when querying data**
 
-Run `longbridge login` in your terminal and complete the OAuth flow — no API Key required.
+Run `longbridge auth login` in your terminal and complete the OAuth flow — no API Key required.
 
 **Trading operations not working**
 

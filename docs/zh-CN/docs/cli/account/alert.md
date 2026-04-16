@@ -50,6 +50,15 @@ longbridge alert add TSLA.US --price 300 --direction rise
 longbridge alert add AAPL.US --price 150 --direction fall
 ```
 
+### 启用 / 停用提醒
+
+```bash
+# 停用提醒（保留设置，不删除）
+longbridge alert disable 112326
+# 重新启用已停用的提醒
+longbridge alert enable 112326
+```
+
 ### 删除提醒
 
 ```bash

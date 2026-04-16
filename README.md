@@ -35,13 +35,13 @@ Longbridge Developers is the official developer platform for Longbridge — prov
 
 ## Access methods
 
-| Method                                                  | Best for                                             |
-| ------------------------------------------------------- | ---------------------------------------------------- |
-| [SDK](https://open.longbridge.com/sdk)                  | Python, Rust, Node.js, Go, Java, C++ apps            |
+| Method                                                       | Best for                                             |
+| ------------------------------------------------------------ | ---------------------------------------------------- |
+| [SDK](https://open.longbridge.com/sdk)                       | Python, Rust, Node.js, Go, Java, C++ apps            |
 | [HTTP / WebSocket API](https://open.longbridge.com/docs/api) | Any language, custom integrations                    |
 | [CLI](https://open.longbridge.com/docs/cli) (`longbridge`)   | Terminal workflows, scripting, AI tool-calling       |
 | [MCP](https://open.longbridge.com/docs/mcp)                  | AI coding assistants (Cursor, Claude, ChatGPT, etc.) |
-| [Skill](https://open.longbridge.com/skill)              | Give any AI direct knowledge of Longbridge APIs      |
+| [Skill](https://open.longbridge.com/skill)                   | Give any AI direct knowledge of Longbridge APIs      |
 
 ## Quick start
 
@@ -59,7 +59,7 @@ Log in to [open.longbridge.com](https://open.longbridge.com), complete developer
 
 ```bash
 brew install --cask longbridge/tap/longbridge-terminal
-longbridge login
+longbridge auth login
 longbridge quote TSLA.US NVDA.US 700.HK
 ```
 

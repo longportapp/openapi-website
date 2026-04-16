@@ -6,6 +6,13 @@ sidebar_position: 7
 sidebar_icon: newspaper
 ---
 
+## 2026-04-15
+
+### CLI v0.17.0
+
+- **`auth` 子命令群組** — `longbridge auth login` / `auth logout` / `auth status`；`auth status` 本機查看 Token 有效性和帳戶資訊，無需網路
+- **`alert enable` / `alert disable`** — 切換到價提醒啟用狀態，無需刪除重建
+
 ## 2026-04-13
 
 ### CLI v0.16.0
@@ -21,6 +28,7 @@ sidebar_icon: newspaper
 
 - **`portfolio` 指令** — 組合總損益、各市場資產分布、持倉及現金明細
 - **`investors` 指令** — 基於 SEC 13F 資料的主動基金經理排行榜，按 CIK 查詢指定投資者持倉（含即時價格）
+
   ```
   $ longbridge investors
   | #  | name                                        | AUM      | period      | cik        |
@@ -51,7 +59,9 @@ sidebar_icon: newspaper
   | KRAFT HEINZ CO               | $7.90B   | 325.63M | 2.9%   |
   | ALPHABET INC                 | $5.59B   | 17.85M  | 2.0%   |
   ```
+
 - **`insider-trades`** — 查看任意標的的內部人士交易記錄（SEC Form 4）
+
   ```
   $ longbridge insider-trades TSLA.US
   Fetching 20 Form 4 filings...
@@ -65,6 +75,7 @@ sidebar_icon: newspaper
 
   Source: SEC EDGAR Form 4 — TSLA
   ```
+
 - **`watchlist pin/unpin`** — 將標的置頂至自選股分組頂部
 - **`assets` 指令** — 原 `balance` 更名，展示完整資產概覽：淨資產、購買力、保證金、風險等級及分幣種現金明細
 
@@ -78,12 +89,12 @@ sidebar_icon: newspaper
 
 ### CLI v0.14.1
 
-- **CN 區域登入** — `longbridge login` 支援中國大陸區域路由
+- **CN 區域登入** — `longbridge auth login` 支援中國大陸區域路由
 - **`-v` 標誌** — 快速查看版本號
 
 ### CLI v0.14.0
 
-- **Device Auth** — Longbridge Developers 平台現已支援 OAuth Device Auth 授權流程；`longbridge login` 顯示驗證 URL 和 Code，可在任意裝置完成授權，支援 SSH 和無頭環境
+- **Device Auth** — Longbridge Developers 平台現已支援 OAuth Device Auth 授權流程；`longbridge auth login` 顯示驗證 URL 和 Code，可在任意裝置完成授權，支援 SSH 和無頭環境
 - **訂單增強** — 支援追蹤止損和 AO 訂單類型；訂單指令新增 `--expire-date`、`--outside-rth`、`--remark` 參數
 - **修復** — Linux 預建二進位改為 musl，修復在部分發行版的 Segfault
 

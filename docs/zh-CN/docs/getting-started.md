@@ -104,7 +104,7 @@ iwr https://open.longbridge.com/longbridge/longbridge-terminal/install.ps1 | iex
 ### 登录
 
 ```bash
-longbridge login
+longbridge auth login
 ```
 
 浏览器会自动打开授权页面，完成后 Token 自动保存，后续无需重复操作。

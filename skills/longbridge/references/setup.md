@@ -23,7 +23,7 @@ iwr https://open.longbridge.com/longbridge/longbridge-terminal/install.ps1 | iex
 Authenticate:
 
 ```bash
-longbridge login
+longbridge auth login
 ```
 
 ## CLI Update

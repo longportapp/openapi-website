@@ -99,4 +99,4 @@ Permanently deletes a watchlist group and all its securities. Run `longbridge wa
 
 ## Requirements
 
-A valid OAuth login is required. Run `longbridge login` if you have not yet authenticated.
+A valid OAuth login is required. Run `longbridge auth login` if you have not yet authenticated.

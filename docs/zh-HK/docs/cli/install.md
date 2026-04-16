@@ -44,15 +44,36 @@ iwr https://open.longbridge.com/longbridge/longbridge-terminal/install.ps1 | iex
   </TabItem>
 </Tabs>
 
-## login
+## auth
+
+管理鑑權——登入、登出和查看 Token 狀態。
+
+### auth login
 
 通過 OAuth 2.0 裝置授權流完成鑑權，適用於任何環境，包括 SSH 和無介面伺服器。
 
 ```bash
-longbridge login
+longbridge auth login
 ```
 
-執行 `login` 後會印出一個 URL 和短碼。在任意瀏覽器中開啟該 URL，輸入短碼並授權。Token 儲存至 `~/.longbridge/openapi/tokens/<client_id>`，後續所有命令自動複用。
+執行 `auth login` 後會印出一個 URL 和短碼。在任意瀏覽器中開啟該 URL，輸入短碼並授權。Token 儲存至 `~/.longbridge/openapi/tokens/<client_id>`，後續所有命令自動複用。
+
+### auth logout
+
+清除已儲存的 OAuth Token。下次執行命令或啟動 TUI 時將重新觸發鑑權。
+
+```bash
+longbridge auth logout
+```
+
+### auth status
+
+本機查看 Token 狀態，無需網路。顯示到期時間、登入時間、帳戶資訊和目前行情權限。
+
+```bash
+longbridge auth status
+longbridge auth status --format json
+```
 
 ## check
 
@@ -69,12 +90,4 @@ longbridge check --format json
 
 ```bash
 longbridge update
-```
-
-## logout
-
-清除已儲存的 OAuth Token。下次執行命令或啟動 TUI 時將重新觸發鑑權。
-
-```bash
-longbridge logout
 ```

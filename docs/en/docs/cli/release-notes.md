@@ -7,6 +7,11 @@ sidebar_icon: newspaper
 
 # Release Notes
 
+### v0.17.0
+
+- **`auth` subcommand group** — `longbridge auth login`, `auth logout`, `auth status`; `auth status` shows token validity, expiry, account info, and quote level locally without network
+- **`alert enable` / `alert disable`** — toggle price alerts on/off without deleting them
+
 ### v0.16.1
 
 **Enhancements**
@@ -66,12 +71,12 @@ sidebar_icon: newspaper
 
 ### [v0.14.1](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.14.1)
 
-- **New: CN region login** — `longbridge login` now supports China region routing
+- **New: CN region login** — `longbridge auth login` now supports China region routing
 - **New: `-v` flag** — show version without entering the full command
 
 ### [v0.14.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.14.0)
 
-- **New: Device auth login** — `longbridge login` now uses OAuth device flow; displays a URL and code to authorize on any device, works in SSH and headless environments; `--headless` flag removed
+- **New: Device auth login** — `longbridge auth login` now uses OAuth device flow; displays a URL and code to authorize on any device, works in SSH and headless environments; `--headless` flag removed
 - **New: Order enhancements** — trailing stop and AO order types; `--expire-date`, `--outside-rth`, `--remark` added to order commands
 - **Fix: Linux segfault** — prebuilt Linux binary now uses musl to fix crash on some distributions
 

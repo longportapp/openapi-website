@@ -76,7 +76,7 @@ const features = [
     key: 'feat4',
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>`,
     terminal: [
-      { type: 'cmd', text: '$ longbridge login' },
+      { type: 'cmd', text: '$ longbridge auth login' },
       { type: 'blank', text: '' },
       { type: 'comment', text: '  Visit this URL in your browser:' },
       { type: 'data', text: '  https://open.longbridge.com/oauth/device' },
@@ -428,7 +428,9 @@ function copyInstall() {
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
   cursor: pointer;
-  transition: color 0.2s, border-color 0.2s;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
 }
 .cli-install-tab:hover {
   color: var(--vp-c-text-2);
@@ -500,7 +502,9 @@ function copyInstall() {
 .cli-terminal {
   border-radius: 0.75rem;
   overflow: hidden;
-  transition: background 0.3s, border-color 0.3s;
+  transition:
+    background 0.3s,
+    border-color 0.3s;
 }
 
 /* Dark theme (original) */
@@ -642,7 +646,9 @@ function copyInstall() {
   white-space: pre;
   opacity: 0;
   transform: translateY(4px);
-  transition: opacity 0.12s, transform 0.12s;
+  transition:
+    opacity 0.12s,
+    transform 0.12s;
 }
 .cli-line.visible {
   opacity: 1;

@@ -6,6 +6,13 @@ sidebar_position: 7
 sidebar_icon: newspaper
 ---
 
+## 2026-04-15
+
+### CLI v0.17.0
+
+- **`auth` subcommand group** — `longbridge auth login` / `auth logout` / `auth status`; new `auth status` shows token validity, expiry, and account info locally without network
+- **`alert enable` / `alert disable`** — toggle alerts on/off without deleting them
+
 ## 2026-04-13
 
 ### CLI v0.16.0
@@ -21,6 +28,7 @@ sidebar_icon: newspaper
 
 - **`portfolio` command** — total P/L, asset distribution by market, holdings, and cash balances
 - **`investors` command** — active fund manager rankings from SEC 13F data; view any investor's holdings by CIK with live prices
+
   ```
   $ longbridge investors
   | #  | name                                        | AUM      | period      | cik        |
@@ -51,7 +59,9 @@ sidebar_icon: newspaper
   | KRAFT HEINZ CO               | $7.90B   | 325.63M | 2.9%   |
   | ALPHABET INC                 | $5.59B   | 17.85M  | 2.0%   |
   ```
+
 - **`insider-trades`** — SEC Form 4 insider transaction history for any symbol
+
   ```
   $ longbridge insider-trades TSLA.US
   Fetching 20 Form 4 filings...
@@ -65,6 +75,7 @@ sidebar_icon: newspaper
 
   Source: SEC EDGAR Form 4 — TSLA
   ```
+
 - **`watchlist pin/unpin`** — pin securities to the top of a watchlist group
 - **`assets` command** — renamed from `balance`; full asset overview: net assets, buying power, margin, risk level, and per-currency cash breakdown
 
@@ -78,12 +89,12 @@ sidebar_icon: newspaper
 
 ### CLI v0.14.1
 
-- **CN region login** — `longbridge login` now supports China region routing
+- **CN region login** — `longbridge auth login` now supports China region routing
 - **`-v` flag** — quick version check
 
 ### CLI v0.14.0
 
-- **Device auth** — the Longbridge Developers platform now supports OAuth Device Authorization Flow; `longbridge login` displays a verification URL and code to authorize from any device, including SSH and headless environments
+- **Device auth** — the Longbridge Developers platform now supports OAuth Device Authorization Flow; `longbridge auth login` displays a verification URL and code to authorize from any device, including SSH and headless environments
 - **Order enhancements** — trailing stop and AO order types; `--expire-date`, `--outside-rth`, `--remark` added to order commands
 - **Fix** — prebuilt Linux binary now uses musl to fix segfault on some distributions
 

@@ -99,4 +99,4 @@ longbridge watchlist delete 2630
 
 ## 权限要求
 
-需要有效的 OAuth 登录。未登录时请先运行 `longbridge login`。
+需要有效的 OAuth 登录。未登录时请先运行 `longbridge auth login`。
