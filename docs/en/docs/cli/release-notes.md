@@ -7,10 +7,12 @@ sidebar_icon: newspaper
 
 # Release Notes
 
-### v0.17.0
+### v0.16.3
 
 - **`auth` subcommand group** — `longbridge auth login`, `auth logout`, `auth status`; `auth status` shows token validity, expiry, account info, and quote level locally without network
 - **`alert enable` / `alert disable`** — toggle price alerts on/off without deleting them
+- **Fix: US index symbols** — `.DJI.US`, `.VIX.US` and other US index symbols now parse correctly; US indexes require a leading dot (e.g. `.DJI.US`, not `DJI.US`)
+- **"Did you mean?" hints** — when a query returns no data, the CLI suggests the correct symbol format: missing market suffix → `TSLA.US` / `700.HK`; missing leading dot → `.DJI.US`
 
 ### v0.16.1
 
