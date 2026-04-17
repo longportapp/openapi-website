@@ -7,6 +7,15 @@ sidebar_icon: newspaper
 
 # Release Notes
 
+### [v0.17.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.17.0)
+
+- **`dca` 指令** — 定期定額完整生命週期管理：建立、更新、暫停、恢復、停止、查看交易記錄、統計概覽、確認標的是否支援定投、計算下次交易日；港股及新加坡帳戶建立計劃前須同意條款與條件（`--agree-terms` 可跳過互動提示）
+- **`sharelist` 指令** — 社群股票清單：查看自己建立和訂閱的清單、瀏覽熱門清單（`popular`）、建立/刪除清單，以及新增/移除/排序成分股
+- **`short-positions`** — 美股放空資料：空頭比例、空頭股數、日均成交量、平倉天數及收盤價；FINRA 每兩週更新；`--count` 1–100
+- **`option volume`** — 即時認購/認沽成交量快照（含 P/C 比）；`daily` 子指令查看歷史每日成交量及持倉量
+- **`option chain`** — 不帶 `--date` 時只返回到期日清單；加 `--date` 才返回對應到期日的行使價
+- **`profit-analysis`** — 彙總指令新增 `--start`/`--end` 日期範圍篩選；Simple Yield 和 TWR 改為百分比格式；「Stock P&L Breakdown」更名為「P&L Breakdown」（包含基金和貨幣基金）
+
 ### v0.16.3
 
 - **`auth` 子命令群組** — `longbridge auth login`、`auth logout`、`auth status`；`auth status` 本機查看 Token 有效性、到期時間、帳戶資訊和行情權限，無需網路

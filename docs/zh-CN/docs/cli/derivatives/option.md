@@ -6,7 +6,7 @@ sidebar_position: 1
 
 # longbridge option
 
-查询美股期权合约的实时行情，或浏览任意标的的完整期权链。
+查询美股期权合约的实时行情、浏览完整期权链，以及查看认购/认沽成交量统计。
 
 ## 基本用法
 
@@ -15,13 +15,16 @@ longbridge option chain AAPL.US
 ```
 
 ```
-| Strike | Call Symbol          | Put Symbol           | Standard |
-|--------|----------------------|----------------------|----------|
-| 180    | AAPL260406C180000.US | AAPL260406P180000.US | true     |
-| 185    | AAPL260406C185000.US | AAPL260406P185000.US | true     |
-| 190    | AAPL260406C190000.US | AAPL260406P190000.US | true     |
-| 195    | AAPL260406C195000.US | AAPL260406P195000.US | true     |
-| 200    | AAPL260406C200000.US | AAPL260406P200000.US | true     |
+| Expiry Date |
+|-------------|
+| 2026-04-17  |
+| 2026-04-22  |
+| 2026-04-24  |
+| 2026-05-01  |
+| 2026-05-15  |
+| 2026-06-18  |
+| 2026-07-17  |
+| 2026-09-18  |
 ...
 ```
 
@@ -29,7 +32,7 @@ longbridge option chain AAPL.US
 
 ### 浏览股票期权链
 
-不加 `--date` 时，返回 AAPL 期权所有可用的到期日。选择一个到期日后，使用 `--date` 参数查看对应的行权价列表。
+不加 `--date` 时，返回该标的所有可用到期日。选择到期日后，使用 `--date` 参数查看对应的行权价列表。
 
 ### 查看指定到期日的行权价
 
@@ -72,9 +75,43 @@ longbridge option quote AAPL260417C190000.US --format json
 
 返回该合约的最新买卖价、最新成交价、隐含波动率及希腊值（delta、gamma、theta、vega）。
 
+### 期权成交量
+
+查看今日实时认购/认沽成交量快照：
+
+```bash
+longbridge option volume AAPL.US
+```
+
+```
+Option Volume Stats — AAPL.US
+
+| call_vol | put_vol | pc_ratio |
+|----------|---------|----------|
+| 910,397  | 296,578 | 0.3258   |
+```
+
+查看历史每日认购/认沽成交量及持仓量：
+
+```bash
+longbridge option volume daily AAPL.US
+longbridge option volume daily AAPL.US --count 60
+```
+
+```
+Option Volume Daily — AAPL.US
+
+| date       | total_vol | call_vol | put_vol | pc_vol   | call_oi   | put_oi    | pc_oi    |
+|------------|-----------|----------|---------|----------|-----------|-----------|----------|
+| 2026-04-16 | 1,205,125 | 909,133  | 295,992 | 0.325576 | 2,719,025 | 1,913,086 | 0.703593 |
+| 2026-04-15 | 1,611,875 | 1,250,894| 360,981 | 0.288578 | 2,684,251 | 1,914,190 | 0.713119 |
+```
+
+`pc_vol` 为认沽/认购成交量比；`pc_oi` 为认沽/认购持仓量比。
+
 ## 权限要求
 
-`option quote` 需要期权账户及期权行情权限；`option chain` 需要一级行情权限。参见[行情订阅](/zh-CN/docs/quote/)了解权限详情。
+`option quote` 需要期权账户及期权行情权限；`option chain` 和 `option volume` 需要一级行情权限。参见[行情订阅](/zh-CN/docs/quote/)了解权限详情。
 
 ## 说明
 

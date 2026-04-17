@@ -6,6 +6,16 @@ sidebar_position: 7
 sidebar_icon: newspaper
 ---
 
+## 2026-04-17
+
+### CLI v0.17.0
+
+- **`dca`** — full recurring investment lifecycle: create plans (daily/weekly/fortnightly/monthly), pause/resume/stop, view trade history, check symbol eligibility, and calculate next trade date
+- **`sharelist`** — browse and manage community stock lists; discover trending sharelists with `popular`
+- **`short-positions`** — US stock short interest data: short ratio, days-to-cover, and share counts (FINRA bi-monthly)
+- **`option volume`** — real-time call/put volume and put/call ratio; `daily` subcommand for historical data
+- **`option chain`** fix: without `--date` now lists expiry dates (not strikes)
+
 ## 2026-04-16
 
 ### CLI v0.16.3
