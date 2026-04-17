@@ -7,6 +7,15 @@ sidebar_icon: newspaper
 
 # Release Notes
 
+### [v0.17.0](https://github.com/longbridge/longbridge-terminal/releases/tag/v0.17.0)
+
+- **`dca` command** — recurring investment plans: create, update, pause, resume, stop, view trade history, stats summary, check symbol eligibility, and calculate next trade date; HK/SG accounts must agree to Terms and Conditions before creating a plan (`--agree-terms` to skip the interactive prompt)
+- **`sharelist` command** — community stock lists: list own and subscribed sharelists, browse trending lists (`popular`), create/delete sharelists, and add/remove/reorder constituent stocks
+- **`short-positions`** — US stock short selling data: short ratio, short shares, average daily volume, days-to-cover, and close price; updated bi-monthly by FINRA; `--count` 1–100
+- **`option volume`** — real-time call/put volume snapshot with put/call ratio; `daily` subcommand for historical call/put volume and open interest
+- **`option chain`** — without `--date` now returns expiry dates only; pass `--date` to see strikes for a specific expiry
+- **`profit-analysis`** — added `--start`/`--end` date filtering for the summary command; Simple Yield and TWR now shown as percentages; breakdown renamed from "Stock P&L Breakdown" to "P&L Breakdown" (includes funds and MMF)
+
 ### v0.16.3
 
 - **`auth` subcommand group** — `longbridge auth login`, `auth logout`, `auth status`; `auth status` shows token validity, expiry, account info, and quote level locally without network

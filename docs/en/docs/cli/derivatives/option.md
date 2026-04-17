@@ -6,7 +6,7 @@ sidebar_position: 1
 
 # longbridge option
 
-Look up real-time quotes for US option contracts and browse the full option chain for any underlying symbol.
+Look up real-time quotes for US option contracts, browse the full option chain, and view call/put volume statistics.
 
 ## Basic Usage
 
@@ -15,13 +15,16 @@ longbridge option chain AAPL.US
 ```
 
 ```
-| Strike | Call Symbol          | Put Symbol           | Standard |
-|--------|----------------------|----------------------|----------|
-| 180    | AAPL260406C180000.US | AAPL260406P180000.US | true     |
-| 185    | AAPL260406C185000.US | AAPL260406P185000.US | true     |
-| 190    | AAPL260406C190000.US | AAPL260406P190000.US | true     |
-| 195    | AAPL260406C195000.US | AAPL260406P195000.US | true     |
-| 200    | AAPL260406C200000.US | AAPL260406P200000.US | true     |
+| Expiry Date |
+|-------------|
+| 2026-04-17  |
+| 2026-04-22  |
+| 2026-04-24  |
+| 2026-05-01  |
+| 2026-05-15  |
+| 2026-06-18  |
+| 2026-07-17  |
+| 2026-09-18  |
 ...
 ```
 
@@ -29,7 +32,7 @@ longbridge option chain AAPL.US
 
 ### Browse the option chain for a stock
 
-Without `--date`, this returns all available expiry dates for AAPL options. Pick an expiry date, then pass it with `--date` to see the strikes.
+Without `--date`, returns all available expiry dates for the underlying. Pick an expiry date, then pass it with `--date` to see strike prices.
 
 ### View strikes for a specific expiry
 
@@ -72,9 +75,43 @@ longbridge option quote AAPL260417C190000.US --format json
 
 Returns the latest bid, ask, last price, implied volatility, and greeks (delta, gamma, theta, vega) for the given contract.
 
+### Option volume
+
+Real-time call/put volume snapshot for today:
+
+```bash
+longbridge option volume AAPL.US
+```
+
+```
+Option Volume Stats — AAPL.US
+
+| call_vol | put_vol | pc_ratio |
+|----------|---------|----------|
+| 910,397  | 296,578 | 0.3258   |
+```
+
+Historical daily call/put volume and open interest:
+
+```bash
+longbridge option volume daily AAPL.US
+longbridge option volume daily AAPL.US --count 60
+```
+
+```
+Option Volume Daily — AAPL.US
+
+| date       | total_vol | call_vol | put_vol | pc_vol   | call_oi   | put_oi    | pc_oi    |
+|------------|-----------|----------|---------|----------|-----------|-----------|----------|
+| 2026-04-16 | 1,205,125 | 909,133  | 295,992 | 0.325576 | 2,719,025 | 1,913,086 | 0.703593 |
+| 2026-04-15 | 1,611,875 | 1,250,894| 360,981 | 0.288578 | 2,684,251 | 1,914,190 | 0.713119 |
+```
+
+`pc_vol` is the put/call volume ratio; `pc_oi` is the put/call open interest ratio.
+
 ## Requirements
 
-`option quote` requires an options account and options market data permission. `option chain` works with Level 1 quote access. See [Quote Permissions](/docs/quote/) for subscription details.
+`option quote` requires an options account and options market data permission. `option chain` and `option volume` work with Level 1 quote access. See [Quote Permissions](/docs/quote/) for subscription details.
 
 ## Notes
 

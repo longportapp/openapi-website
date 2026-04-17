@@ -6,6 +6,16 @@ sidebar_position: 7
 sidebar_icon: newspaper
 ---
 
+## 2026-04-17
+
+### CLI v0.17.0
+
+- **`dca`** — 完整定投生命周期：创建计划（日/周/双周/月频）、暂停/恢复/停止、查看交易历史、检查标的是否支持定投、计算下次交易日
+- **`sharelist`** — 社区股票列表：管理自己的列表，通过 `popular` 发现热门列表
+- **`short-positions`** — 美股做空数据：空头比例、平仓天数、空头股数（FINRA 双月更新）
+- **`option volume`** — 实时认购/认沽成交量及 P/C 比；`daily` 子命令查看历史数据
+- **`option chain`** 修复：不带 `--date` 时只返回到期日列表
+
 ## 2026-04-16
 
 ### CLI v0.16.3

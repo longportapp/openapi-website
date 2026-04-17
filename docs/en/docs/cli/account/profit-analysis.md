@@ -15,32 +15,40 @@ longbridge profit-analysis
 ```
 
 ```
-P&L Summary (USD)  2023-12-04 ~ 2026-04-13
+P&L Summary (USD)  2023-12-04 ~ 2026-04-17
 
 Total Asset          125413.01
 Initial Asset        0.00
+Ending Asset         125413.01
 Invest Amount        76997.11
 Total P&L            48415.89
-Total P&L Rate       0.6288
+Stocks Traded        12
+Simple Yield         62.88%
+TWR                  58.41%
 
-Stock P&L Breakdown
+Stock P&L            47203.15
+Fund P&L             1212.74
+MMF P&L              0.00
 
-| Symbol  | Name       | Market | P&L     |
-|---------|------------|--------|---------|
-| 9988.HK | Alibaba    | HK     | 18406.9 |
-| AAPL.US | Apple      | US     | 6498.14 |
+P&L Breakdown
+
+| Symbol  | Name    | Market | P&L     |
+|---------|---------|--------|---------|
+| 9988.HK | Alibaba | HK     | 18406.9 |
+| AAPL.US | Apple   | US     | 6498.14 |
 ```
 
 ## Examples
 
-### P&L summary with stock breakdown
+### P&L summary with date range
 
 ```bash
 longbridge profit-analysis
+longbridge profit-analysis --start 2026-01-01 --end 2026-04-17
 longbridge profit-analysis --format json
 ```
 
-Shows overall P&L summary and a breakdown table of all stocks with their profit/loss.
+Without `--start`/`--end`, shows the full account history. With a date range, filters the P&L summary and breakdown to that period. Simple Yield and TWR are shown as percentages.
 
 ### Individual stock P&L detail
 

@@ -15,31 +15,40 @@ longbridge profit-analysis
 ```
 
 ```
-P&L Summary (USD)  2023-12-04 ~ 2026-04-13
+P&L Summary (USD)  2023-12-04 ~ 2026-04-17
 
 Total Asset          125413.01
+Initial Asset        0.00
+Ending Asset         125413.01
 Invest Amount        76997.11
 Total P&L            48415.89
-Total P&L Rate       0.6288
+Stocks Traded        12
+Simple Yield         62.88%
+TWR                  58.41%
 
-Stock P&L Breakdown
+Stock P&L            47203.15
+Fund P&L             1212.74
+MMF P&L              0.00
 
-| Symbol  | Name        | Market | P&L     |
-|---------|-------------|--------|---------|
+P&L Breakdown
+
+| Symbol  | Name       | Market | P&L     |
+|---------|------------|--------|---------|
 | 9988.HK | 阿里巴巴-W | HK     | 18406.9 |
-| AAPL.US | 苹果        | US     | 6498.14 |
+| AAPL.US | 苹果       | US     | 6498.14 |
 ```
 
 ## 示例
 
-### 盈亏概览和个股分拆
+### 指定日期范围的盈亏概览
 
 ```bash
 longbridge profit-analysis
+longbridge profit-analysis --start 2026-01-01 --end 2026-04-17
 longbridge profit-analysis --format json
 ```
 
-展示整体盈亏概览以及所有股票的盈亏分拆表。
+不加 `--start`/`--end` 时，展示完整账户历史。指定日期范围后，汇总数据和明细均按该范围筛选。Simple Yield 和 TWR 以百分比显示。
 
 ### 单只股票盈亏详情
 
